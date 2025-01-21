@@ -1,0 +1,247 @@
+
+
+
+
+next →
+← prev
+
+LRU Cache in Python
+In this tutorial, we will learn about the LRU cache in Python. We will learn the caching strategies and how to implement them using the Python decorators, the LRU strategy, and how it works. We will also discuss how to improve performance by caching with the @lru_cache decorator. This tutorial consists of a deeper understanding of how caching works and how to get benefit from it in Python. First, let's understand what caching is and its uses.
+Caching and Its Uses
+Caching is the best technique of memory management, which restores the most recent or often data in the memory so that we can access faster or computationally cheaper than their actual source.
+The LRU cache follows the First in First Out format. Let's take a real life example to understand it in better way.
+Suppose we are creating a website that fetches the articles from the different sites. As user clicks on the particular list, the application downloads the articles and shows to the screen.
+What happen when users decide to move back the visited articles? If our application is not facilitates with the caching technique then it will download the same content again and again. That would make the application's system very slow and put extra pressure on the server hosting the articles.
+The application would store the content locally after fetching each article to overcome such a situation. The next time user decided to open the article, the application would fetch content from the locally stored copy instead of going back to the resource. This technique is known as caching. 
+What is LRU Caching?
+The LRU Caching is known as the Least Recently Used, which is a common caching strategy to define the policy to evict elements and make place for new elements. It discards the least recently used items first when the cache is full. In the LRU, there are two references used -
+
+Page hit - If the reference page is found in the main memory, it is a page hit.
+Page Fault - It is just opposite the page hit. The page fault occurs if the reference page is not found in the memory.
+
+Implementing a Cache Using a Python Dictionary
+We can implement a caching solution using a Python dictionary. Let's take the articles reference; instead of visiting the direct to the server, we can check it in the cache and return it to the server. Let's understand the following example.
+Example -
+
+import requests
+
+cache = dict()
+
+def download_article_from_server(url):
+    print("Fetching article from server...")
+    response = requests.get(url)
+    return response.text
+
+def get_article(url):
+    print("Getting article...")
+    if url not in cache:
+        cache[url] = download_article_from_server(url)
+
+    return cache[url]
+
+get_article("https://www.javatpoint.com/python-applications/")
+get_article("https://www.javatpoint.com/how-to-install-python/")
+
+Output:
+Getting article...
+Fetching article from server...
+Getting article...
+Fetching article from server...
+
+Explanation -
+In the above code, we can see that we get the string "Fetching article from server" because after accessing the article for the first time, we put its URL and content in the cache dictionary. When we run the code second time, we don't need to fetch the item from the server again.
+Various Caching Strategies
+We need to have the proper strategy to decide to make the application more efficient. In our application, when the user downloads more articles, it keeps storing them in the memory, which can lead to an application crash.
+A suitable strategy can resolve such an issue using algorithms that focus on managing the cache information and which item to remove to make room for the new item. There are various strategies that can be used to expel the cache and make the space for the new one. Let's see the popular caching strategies below.
+
+
+Strategy
+Eviction Policy
+Use case
+
+
+First-In/First-Out (FIFO)
+It evicts the oldest of the entries.
+Newer entries are most likely to be reused.
+
+
+Last-In/First-Out (LIFO)
+It evicts the latest of the entries.
+ Older entries are most likely to be reused
+
+
+Least Recently Used (LRU)
+It evicts the least recently used entry
+It evicts the least recently used entry
+
+
+Most Recently Used (MRU)
+It Evicts the most recently used entry.
+The least recently used entries are most likely to be reused.
+
+
+Least Frequently Used (LFU)
+Evicts the least often accessed entry
+Entries with a lot of hits are more likely to be reused
+
+
+We will use Python's @lru_cache decorator functools module in the upcoming section.
+LRU (Least Recent Used) Caching Strategy
+The LRU strategy is popularly known for organizing its items to use. The LRU algorithm moves the entry at the top of the cache when we try to access it. And this is how the algorithm identifies the entry that's gone unused by checking the bottom of the list.
+When the new entry comes, it pushes the first entry down the list. This algorithm assumes that the more likely it will be needed in the future if an object has been used.
+Create LRU Cache in Python
+In this section, we will create the simple LRU cache implementation using Python's features. Python comes with the hash table known as the OrderedDict that keeps the order of the insertion of the keys. We use the following strategy to achieve it.
+
+We create the get() function that removes the dictionary and adds it at the end of the ordered keys.
+We create the put() function that checks the space; if the space is filled, the first entry in the ordered keys is replaced with the latest entry. It works because every get() moves an item to the end of the ordered keys; hence, the first item is the least recently used.
+
+Example - 
+
+from collections import OrderedDict
+ 
+class LRUCacheImplement:
+  def __init__(self, size):
+    self.size = size
+    self.lru_cache = OrderedDict()
+ 
+  def get(self, key):
+    try:
+      value = self.lru_cache.pop(key)
+      self.lru_cache[key] = value
+      return value
+    except KeyError:
+      return -1
+ 
+  def put(self, key, value):
+    try:
+      self.lru_cache.pop(key)
+    except KeyError:
+      if len(self.lru_cache) >= self.size:
+        self.lru_cache.popitem(last=False)
+    self.lru_cache[key] = value
+ 
+  def show_entries(self):
+    print(self.lru_cache)
+ 
+# Create an LRU Cache with a size of 3
+cache = LRUCacheImplement(3)
+ 
+ 
+cache.put("1","1")
+cache.put("2","2")
+cache.put("3","3")
+ 
+cache.get("1")
+cache.get("3")
+ 
+cache.put("4","4") 
+cache.show_entries() 
+cache.put("5","5") 
+cache.show_entries()
+
+Output:
+OrderedDict([('1', '1'), ('3', '3'), ('4', '4')])
+OrderedDict([('3', '3'), ('4', '4'), ('5', '5')])
+
+Explanation
+Let's breakdown the code -
+
+We created a cache that can hold the three items.
+The cache.put('1', '1') function stored 1 at last in OrderedDict and same cache.put('2', '2') and cache.put('3', '3'). Now the elements are stored as [1, 2, 3].
+When the cache.get('1') is called, 1 is removed from the front and added to last. Now the elements are stored as [2, 3, 1].
+When the cache.get('1') is called, 1 is removed from the front and added to last. Now the elements are stored as [2, 1, 3].
+When we called cache.put('4', '4'), removed from the front and added in back, now the elements are stored as [1, 3, 4].
+When we called cache.put('5', '5'), removed from the front and added in back, finally, the elements are stored as [3, 4, 5].
+
+Create LRU Cache in Python Using functools
+Here we will use the @lru_cache decorator of the functools module. However, @lru_cache uses it behind the scene. We can apply this decorator to any function which takes a potential key as an input and returns the corresponding data object. The advantage is that when the function is called again, the decorator will not execute the function statements if the data corresponding is already present in the cache. 
+Let's understand the following example.
+Example -
+
+from functools import lru_cache
+ 
+@lru_cache(maxsize=4)
+def get_value(key):
+  print("Cache miss with "+key)
+  return key + ":value"
+ 
+print(get_value("1"))
+print(get_value("2"))
+print(get_value("3"))
+print(get_value("4"))
+print(get_value("4"))
+print(get_value("3"))
+print(get_value("1"))
+print(get_value("7"))
+print(get_value("6"))
+print(get_value("3"))
+print(get_value("1"))
+
+Output:
+Cache miss with 1
+1: value
+Cache miss with 2
+2: value
+Cache miss with 3
+3: value
+Cache miss with 4
+4: value
+4: value
+3: value
+1: value
+Cache miss with 7
+7: value
+Cache miss with 6
+6: value
+3: value
+1: value
+
+Evicting Cache Entries Based on Both Time and Space
+The @lru_cache decorator expels existing entries only when there are no space stores more entries. If the entries are sufficient, they will live last long and never get a refresh. So we can implement such functionality to update the cache system, so it expires after a specific time.
+We can implement it using the @lru_cache, as we discussed earlier. If the caller tries to access an item past its lifetime, the cache won't return its content and force the caller to fetch the result directly from the network.
+Let's understand the following example -
+Example -
+
+from functools import lru_cache, wraps
+from datetime import datetime, timedelta
+
+def timed_lru_cache(seconds: int, maxsize: int = 128):
+    def wrapper_cache(func):
+        func = lru_cache(maxsize=maxsize)(func)
+        func.lifetime = timedelta(seconds=seconds)
+        func.expiration = datetime.utcnow() + func.lifetime
+
+        @wraps(func)
+        def wrapped_func(*args, **kwargs):
+            if datetime.utcnow() >= func.expiration:
+                func.cache_clear()
+                func.expiration = datetime.utcnow() + func.lifetime
+
+            return func(*args, **kwargs)
+
+        return wrapped_func
+
+    return wrapper_cache
+
+Let's breakdown the code -
+
+The @timed_lru_decorator used to support the lifetime of the entries in the cache and the maximum size of the cache.
+In the wrap_cache function, the lru_cache implement the same functionalities and remaining two lines instrument the decorator function with two attributes representing the lifetime of the cache and actual data when it expire.
+In the wrapped_func function, the decorator checks whether the current is past the expiration date. If it happens, it removes all entries from the cache and recomputes the lifetime and expiration date.
+
+We can implement this strategy more sophisticatedly by evicting the entries based on their individual lifetimes.
+Conclusion
+Caching is an important strategy for improving the performance of any software system. We have explained some important concepts related to the LRU and how we can implement it using various techniques such as - @lru_cache and OrderDict. It also includes the measure the runtime of the code using the timeit module.
+
+
+Next TopicPython List Comprehension vs. Generator Expression
+
+
+
+
+← prev
+next →
+
+
+
+

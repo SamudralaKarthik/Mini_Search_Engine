@@ -1,0 +1,272 @@
+
+
+
+
+next →
+← prev
+
+Double Underscores in Python
+In the following tutorial, we will discuss the Double Underscores and its use in the Python programming language. But before we get to that, let us briefly discuss some aspects of the underscore as well.
+Understanding the Python Underscore
+The character underscore (_) is not simple in Python. There are many languages that use the underscores to name the functions and variables in the snake case only; however, Python has a much more important use of it. Most probably, most of us might be familiar with the following syntax:
+
+for _ in range(20)
+__init__(self)
+_ = 10
+
+The underscore (_) character conveys different meanings in different conditions.
+There are several uses of Underscore (_) that are stated below:
+
+Using the Underscore in interpreter
+Using the Underscore to ignore values
+Using the Underscore in loops
+Using the Underscore to separate digits of numbers
+Using the Underscore for naming purpose
+
+However, we will only be covering the naming conventions used with double underscores only.
+These naming conventions are classified into two types:
+
+Double-leading Underscore: __var
+Double-leading and trailing Underscore: __var__
+
+Thus, let's get started.
+Understanding Double-leading Underscore
+Double-leading underscore is utilized for the mangling of the name.
+The syntax for the Double-leading Underscore is shown below:
+Syntax:
+
+__var
+
+Double-leading underscore tells the interpreter of Python to rewrite the name of the attribute of subclasses in order to avoid any conflicts in naming.
+Name Mangling: Python interpreter alters the name of the variable in a technique that is challenging to clatter during the inheritance of the class.
+Let us consider an example based on this functionality.
+Example: 1
+
+# defining a class
+class mySample():
+    # using the __init__() function
+    def __init__(self):
+        self.first = 10
+        self._second = 15
+        self.__third = 20
+
+# instantiating the class
+myObj = mySample()
+# printing the directory of the object
+print(dir(myObj))
+
+Output:
+ ['__class__',
+'__delattr__',
+'__dict__',
+'__dir__',
+'__doc__',
+'__eq__',
+'__format__',
+'__ge__',
+'__getattribute__',
+'__gt__',
+'__hash__',
+'__init__',
+'__init_subclass__',
+'__le__',
+'__lt__',
+'__module__',
+'__ne__',
+'__new__',
+'__reduce__',
+'__reduce_ex__',
+'__repr__',
+'__setattr__',
+'__sizeof__',
+'__str__',
+'__subclasshook__',
+'__weakref__',
+'_mySample__third',
+'_second',
+'first']
+
+Explanation:
+In the above snippet of code, we have defined a class as mySample() and used the initializing function to declare some values. We have then instantiated the class using the myObj object. At last, we have printed the directory of the object.
+As a result, the above code block returns every attribute of the class object. Now, let us observe the variables in the list of attributes.
+The variable self.first appears in the list without any alterations.
+The variable self._second also appears in the list without any alterations.
+However, we can observe some alterations in the case of the variable self.__third.
+If we observe the list of attributes, we will notice an attribute known as _mySample__third. This is the case of name mangling. It happens to avoid the overriding of the variable in subclasses.
+Let us understand the working of overriding using another example, where we have created another class that inherits the functionalities of the mySample class.
+Example: 
+
+# defining a class
+class mySample():
+    # using the __init__() function
+    def __init__(self):
+        self.first = 10
+        self._second = 15
+        self.__third = 20
+# defining a child class
+class AnotherClass(mySample):
+    def __init__(self):
+        super().__init__()
+        self.first = "Variable Overridden"
+        self._second = "Variable Overridden"
+        self.__third = "Variable Overridden"
+# instantiating the child class
+myobj = AnotherClass()
+# printing the values of variables
+print(myobj.first)
+print(myobj._second)
+print(myobj.__third)
+
+Output:
+ Variable Overridden
+Variable Overridden
+Traceback (most recent call last):
+  File "D:\Python\ternarypy.py", line 24, in 
+    print(myobj.__third)
+AttributeError: 'AnotherClass' object has no attribute '__third'
+
+Explanation:
+In the above snippet of code, we have defined a class as mySample() and used the initializing function to declare some variables. We have then defined a child class for the mySample() class, where we used the super() function to inherit the variables from the parent class and overrode them. At last, we have instantiated the child class and print the values of overrode variables.
+As a result, the messages of the first two variables are printed successfully; however, the program raised an exception in the case of the "__third" variable. This happens due to the name mangling, which changed the myObj.__third to _AnotherClass__third.
+Let us consider another example in order to print that element with the help of a modified Attribute.
+Example: 2
+
+# defining a class
+class mySample():
+    # using the __init__() function
+    def __init__(self):
+        self.first = 10
+        self._second = 15
+        self.__third = 20
+# defining a child class
+class AnotherClass(mySample):
+
+    def __init__(self):
+        super().__init__()
+        self.first = "Variable Overridden"
+        self._second = "Variable Overridden"
+        self.__third = "Variable Overridden"
+# instantiating the child class
+myobj = AnotherClass()
+# printing the value(s) of variable(s)
+print(myobj._AnotherClass__third)
+
+Output:
+ Variable Overridden
+
+Explanation:
+In the above snippet of code, we can observe that we have used the "_AnotherClass__third" variable instead of the "__third" variable to access the variable's value.
+We can access the Double-leading Underscore variables with the help of methods in the class. Let us consider an example based on this functionality.
+Example: 3
+
+# defining the class
+class myClass:
+    # initializing function
+    def __init__(self):
+        self.__myVar = "Welcome"
+    # defining another method to return the variable
+    def get_Var(self):
+        return self.__myVar
+# instantiating the class
+myObj = myClass()
+# it returns the "Welcome" which is a __var
+print(myObj.get_Var())
+# here, an error is raised as stated before. It alters the variable's name
+print(myObj.__myVar)
+
+Output:
+ Welcome
+Traceback (most recent call last):
+  File "D:\Python\ternarypy.py", line 15, in 
+    print(myObj.__myVar)
+AttributeError: 'myClass' object has no attribute '__myVar'
+
+Explanation:
+In the above snippet of code, we defined a class and used the initializing function to declare a variable. We have then defined a method to return the value of the variable. At last, we have instantiated the class and print the value of the variable using both ways. As a result, the program returns the "Welcome" statement while printing the method. However, it also raised an exception for another method as it alters the name of the variable.
+We can also utilize the Double-leading Underscore for the method names. Let us consider an example based on this functionality.
+Example: 4
+
+# defining a class
+class myClass:
+    # defining a double-leading underscore function
+    def __myfunction(self):
+        return "Welcome"
+    # defining a function to call the above function
+    def call_function(self):
+        return self.__myfunction()
+# instantiating the class
+myObj = myClass()
+# printing the value within the function
+print(myObj.call_function())
+# raised an error
+print(myObj.__myfunction())
+
+Output:
+ Welcome
+Traceback (most recent call last):
+  File "D:\Python\ternarypy.py", line 14, in 
+    print(myObj.__myfunction())
+AttributeError: 'myClass' object has no attribute '__myfunction'
+
+Explanation:
+In the above snippet of code, we have defined a function followed by the double-leading underscore within a class. We have then defined another function to call the from that function and printed the result for the user.
+Now, let us understand another way of name mangling. First of all, we will declare a variable with the name _myClass__myVar, and we will attempt to access that variable using the Double-leading Underscore name.
+Let us consider the following example:
+Example: 5
+
+# declaring a variable
+_myClass__myVar = "Welcome"
+# defining a class
+class myClass:
+    # defining a function to return the declared variable
+    def call_function(self):
+        return __myVar
+# instantiating the class
+myObj = myClass()
+# printing the value of the variable
+print(myObj.call_function())
+
+Output:
+Welcome
+
+Explanation:
+In the above snippet of code, we have declared a variable and defined a class. We have then defined a function to return the value of the declared variable. At last, we have instantiated the class and called the function to print the value of that variable.
+Understanding Double-leading and trailing Underscore
+In a Programming language like Python, we will discover various names which begin and end with the double underscore. These naming conventions are known as Magic methods or Dunder methods.
+The syntax for the Double-leading and trailing Underscore is shown below:
+Syntax:
+
+__var__
+
+Let us consider an example based on the magic methods.
+Example:
+
+# defining a class
+class myClass:
+    # using a magic method
+    def __init__(self):
+        # using a magic method as variable name
+        self.__myNum__ = 10
+# instantiating the class
+myObj = myClass()
+# printing the value of the variable
+print(myObj.__myNum__)
+
+Output:
+10
+
+Explanation:
+In the above snippet of code, we have defined a class. We have defined a magic method as the __init__() function within the class, also known as initializing function. We have then declared the variable as __num__. At last, we have instantiated the class and print the value of the variable. As a result, this program works and yields a required output. However, it is not a good practice to use magic methods as the names of the variables as this will lead us to clashes. Thus, it is better to stay away from them.
+
+
+Next Topic#
+
+
+
+
+← prev
+next →
+
+
+
+

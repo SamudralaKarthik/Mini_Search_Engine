@@ -1,0 +1,245 @@
+
+
+
+
+next →
+← prev
+
+Python os.chdir() Method
+The os module in Python includes the chdir() function. The current working directory is used to utilize the default path for command execution, directory creation, and file creation. The current working directory is frequently used for commands and functions in command-line interfaces like bash, MS-DOS, and PowerShell. To change the current working directory, use the chdir() technique.
+About os module:
+When working with Python, there are many moments when we'd like to take advantage of the underlying operating system's features. This is made possible by the python os module, which allows us to communicate with the underlying operating system in various ways and provides a portable mechanism to employ operating system-dependent functionality. Python's built-in operating system dependant modules are designed so that they all utilize the same interface as long as the same functionality is accessible.
+The os module also provides extensions specific to a given operating system, although utilizing them ultimately compromises portability. All functions that take path or file names accept both bytes and string objects as input, and the output is also an object of the same type if a path or file name is returned. When incorrect or unavailable file names and paths, or other parameters that have the right type but are not recognized by the operating system, all methods in the python os module raise the OSError (or subclasses thereof).
+The os module allows you to use operating system-dependent functions on the go. If you only want to read or write a file, use open(), the os.path module if you want to change paths, and the file input module if you want to read all the lines in all the files on the command line. The tempfile module may be used to create temporary files and directories, while the shutil module can handle high-level file and directory operations.
+Notes on these functionalities' availability:
+
+All of Python's built-in operating system dependant modules are designed such that they utilize the same interface as long as the same capability is available; for example, the function os.stat(path) provides stat information about the path in the same manner (which happens to have originated with the POSIX interface).
+The os module also provides extensions specific to a given operating system; however, utilizing them compromises portability.
+If a path or file name is supplied, all functions handling path or file names accept both bytes and string objects and return an object of the same kind.
+popen, os.fork, os.execv, and os.spawn*p* are not supported on VxWorks.
+
+Code:
+
+# a sample python code to show the usage of chdir() method provided by the OS library of the python 
+
+# importing the required libraries 
+import os
+import sys
+
+#  a class is written that will have its member functions which will perform various operations like Changing of the current directory to another directory which will be specified as a parameter to that function and listing the content of a particular directory
+class NirnayOSClass:
+
+    def __init__(self):
+        pass
+    # this function is used to to print the  the current working directory of the program execution there is no parameter to this function and it also doesn't return any value it will just print the current working directory
+    def print_current_working_directory(self):
+        cwd = os.getcwd()
+        print("The present working directory is {}".format(cwd))
+
+    #  this function is used to change the current working directory to the new directory which is specified as a parameter to this function this function performs the the operation of changing the present working directory there is one parameter to this function that holds the path to the new current working directory to which we want to change the return type of this function is Boolean that means it returns true on the successful change of directory to the new current working directory and on the other hand if the specified path to which we want to change is invalid or there is some issue while changing the current working directory the return type of this function will be changed to false
+    def changed_current_working_directory(self,path_to_new_dir):
+        cwd = os.getcwd()
+        return_code = os.chdir(path_to_new_dir)
+
+        print("Directory changed from {} to {}.".format(cwd,path_to_new_dir))
+    
+    #  this function is used to list the contents of a particular directory this function performs a similar task as of LS command in Linux there is one parameter to this function which is the part of the directory whose content we want to list  the directory which is passed as a parameter to this function will be considered as the current working directory of the program executions and all the files and directories inside that particular directory are listed.
+    def list_files_in_the_directory(self,dir_path_to_list):
+        dir_path_to_list = os.getcwd()
+        list_of_contents = os.listdir(dir_path_to_list)
+        print("The contents in the current directory are::")
+
+        for file_or_folder_name in list_of_contents:
+            print(file_or_folder_name,end="\t")
+        print()
+
+# the main function is used to create the object of the above-written class and call various functions that will perform different operations like printing the current working directory changing the current working directory to a new directory which is specified as a parameter to that function and in the last listing all the contents of a particular directory 
+def main():
+
+    while(True):
+        print("Please choose one of the appropriate options::")
+        print("1. To check the current directory of the code execution. (using the getcwd() function)")
+        print("2. To change the current directory of the    code execution. (using the chdir() function)")
+        print("3. To list the contents of the directory of the code execution. (using the listdir() function)")
+        print("4. To exit from the code execution.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        dir_entity = NirnayOSClass()
+
+        # If the user chooses the first option which is printing the current working directory so once the user chooses the first option the user is displayed with the complete absolute path of the current working directory in which the code is getting executed right now
+        if menu_choice == 1:
+            dir_entity.print_current_working_directory()
+
+        #  on the selection of the second choice which is changing of the current working directory of the code execution first of all the user is asked for the complete absolute path of the new directory to which we want to change the current working directory so once the user provides the new   absolute path the user is prompted with the message saying that it the current working directory of the code execution has been changed successfully on the successful change of director
+        elif menu_choice == 2:
+            print(">Enter the absolute path to the new directory to which we want to change::")
+            input_str = input()
+            dir_entity.changed_current_working_directory(input_str)
+            
+
+        #  if the user Third option which is listing the contents of the current working directory all the contents of the current working directory in which the code is getting executed are listed incase if the user has changed the current working directory the content of the latest directory to which the user has moved are displayed 
+        elif menu_choice == 3:
+            input_str = ""
+            dir_entity.list_files_in_the_directory(input_str)
+        
+        print("Do you want to continue or exit the code execution?[y/n]")
+        continue_or_exit = input()
+
+        #After the completion of one round a question is prompted to the user asking whether you want to continue the code execution or you want to exit the code depending upon the input provided by the user further actions are taken if the user wants to continue the code execution and perform further operations related to dir and listing of the dir, the code is continued whereas on the other hand if the user wants to exit the code execution the exit function is called and the program is ended
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+if __name__ == '__main__':
+    main()
+
+Output:
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+1
+The present working directory is /
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+2
+>Enter the absolute path to the new directory to which we want to change::
+level_1_dir
+Directory changed from / to level_1_dir.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+1
+The present working directory is /level_1_dir
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+3
+The contents in the current directory are::
+level_2_dir_1	level_2_dir_2	level_2_dir_3	
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+2
+>Enter the absolute path to the new directory to which we want to change::
+level_2_dir_1
+Directory changed from /level_1_dir to level_2_dir_1.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+1
+The present working directory is /level_1_dir/level_2_dir_1
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+3
+The contents in the current directory are::
+test_files_1_2_1_no4	test_files_1_2_1_no9	test_files_1_2_1_no8	test_files_1_2_1_no1	test_files_1_2_1_no7	test_files_1_2_1_no6	test_files_1_2_1_no10	test_files_1_2_1_no2	test_files_1_2_1_no3	test_files_1_2_1_no5	
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+2
+>Enter the absolute path to the new directory to which we want to change::
+/level_1_dir/level_2_dir_3
+Directory changed from /level_1_dir/level_2_dir_1 to /level_1_dir/level_2_dir_3.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+1
+The present working directory is /level_1_dir/level_2_dir_3
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+3
+The contents in the current directory are::
+test_files_1_2_3_no7	test_files_1_2_3_no8	test_files_1_2_3_no3	test_files_1_2_3_no5	test_files_1_2_3_no10	level_3_dir	test_files_1_2_3_no9	test_files_1_2_3_no6	test_files_1_2_3_no2	test_files_1_2_3_no4	test_files_1_2_3_no1	
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+2
+>Enter the absolute path to the new directory to which we want to change::
+level_3_dir
+Directory changed from /level_1_dir/level_2_dir_3 to level_3_dir.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+1
+The present working directory is /level_1_dir/level_2_dir_3/level_3_dir
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To check the current directory of the code execution. (using the getcwd() function)
+2. To change the current directory of the code execution. (using the chdir() function)
+3. To list the contents of the directory of the code execution. (using the listdir() function)
+4. To exit from the code execution.
+3
+The contents in the current directory are::
+test_file1	test_file8	test_file2	test_file4	test_file3	test_file5	test_file7	test_file6	test_file9	test_file10	
+Do you want to continue or exit the code execution?[y/n]
+n
+
+Explanation:
+Now let's look at the output of the above-written code. In the code written above, we have created different functions for the different functionalities related to the directories. This functionality is like printing the current working directory of the code execution and changing the current working directory to a new working directory for the code execution. The last and another functionality is to list all the contents in the current working directory. And in the last, a menu-driven code is written, which is used for providing the user all these three functionalities as options.
+In the execution, we have executed the code in the root directory. After that, we have to change the current working directory of the code execution to the level one directory, which consists of three more directories which we have confirmed by opting for the third option, which prints all the contents of level 1 direct now our current working directory of the code execution is the level 1 direct and now we have opted the option to and change the current working directory to the level 2 directory 1. And then, we have listed the contents of this directory by selecting the options that list all the contents within the current working directory. We perform these steps a couple of times and end with the code execution by selecting the option when the code asks whether we want to continue the code execution or hold the code execution.
+So in this article, we have seen how we can use the chdir() method provided by the OS module of python. We have also understood the various use case scenarios for users of this function and understood the actual implementation with the help of a sample code.
+
+
+Next TopicBalancing Parentheses in Python
+
+
+
+
+← prev
+next →
+
+
+
+

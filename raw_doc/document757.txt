@@ -1,0 +1,308 @@
+
+
+
+
+next →
+← prev
+
+Python pdb Tutorial - Python pdb
+In this tutorial, we will learn about the Python debugging tool with pdb. Debugging applications are the unwelcomed activity when developer is being busy working under a time crunch and he/she want it to work. We will show the basics of the using pdb, Python's interactive source code debugger. We will also walk through the some common use of pdb.
+It is a good practice to tracking down the bugs and allows fixing faulty code more quickly and reliably. Let's have an introduction to Python pdb module.
+Python pdb Module
+Python pdb module is used to do the debugging in the Python which comes built-in to the Python standard library. The pdb is defined as class Pdb which internally makes use of bdb (basic debugger functions) and cmd (support for line-oriented command interpreters) modules.
+It provides the advantage of running on the command line thereby making it great for debugging code on remote server.
+The pdb module supports the setting breakpoints, stepping through code, viewing stack traces, and source code listing.
+Starting Python Debugger
+Python provides the many ways to invoke a debugger.
+We need to insert import pdb, pdb.set_trace() commands to start debugging within the program. If we define the breakpoint in the program, our script will stop its execution on that breakpoint automatically. Python provides the breakpoint() function which works in the same as we define manually. Let's understand the following example.
+Example - 1: Adding of two numbers
+Intentional Error - The input() function returns the string program concatenates those strings instead of adding input numbers.
+
+import pdb
+
+def add(a, b):
+    ans = a + b
+    return ans
+
+pdb.set_trace()
+x = input("Enter first number : ")
+y = input("Enter second number : ")
+sum = add(x, y)
+print(sum)
+
+Output:
+> d:\python project\test_pdb.py(8)()
+-> x = input("Enter first number : ")
+(Pdb) &
+*** SyntaxError: invalid syntax
+
+Explanation -
+In the above output, first line is a directory path of the executable file, line number where our breaking point is located, and <module>. It means that we have a breakpoint in test_pdd.py file on line number 8 it is appearing inside <>. The next line is indicating the code line where our execution is stopped. That line is not executed yet. Then we have the pdb prompt which can be used to navigate the code using the below command.
+
+
+Command
+Function
+
+
+help
+It is used to display all commands.
+
+
+where
+It is used to display the stack trace and line number of the current line.
+
+
+next
+It executes the current line and move to the next line ignoring function calls.
+
+
+step
+It steps into functions called at current line.
+
+
+For example, when we run the help command in pdb prompt it shows -
+
+(Pdb) & "C:/Users/User/.virtualenvs/Django-ExvyqL3O/Scripts/python.exe" "d:/Python Project/test_pdb.py"
+ (Pdb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF    c          d        h         list      q        rv       undisplay
+a      cl         debug    help      ll        quit     s        unt
+alias  clear      disable  ignore    longlist  r        source   until
+args   commands   display  interact  n         restart  step     up
+b      condition  down     j         next      return   tbreak   w
+break  cont       enable   jump      p         retval   u        whatis
+bt     continue   exit     l         pp        run      unalias  where
+
+Miscellaneous help topics:
+==========================
+exec  pdb
+(Pdb)
+
+Now we can check the type of the variable whatis and variable name. Let's see the following example.
+Example -
+
+> d:\python project\test_pdb.py(884)<module>()->None
+-> print(sum)
+(Pdb) whatis x
+<class 'str'>
+
+When we use the next command -
+
+(Pdb) next
+Enter first number : 4
+> d:\python project\test_pdb.py(882)<module>()
+-> y = input("Enter second number : ")
+(Pdb) next
+Enter second number : 6
+> d:\python project\test_pdb.py(883)<module>()
+-> sum = add(x, y)
+(Pdb) next
+> d:\python project\test_pdb.py(884)<module>()
+-> print(sum)
+(Pdb) next
+46
+--Return--
+
+Printing Expression
+The print command evaluates the passing expression. If we pass a variable name, pdb prints its current value. However, we can perform several operations to identify the state of our running application.
+Let's understand the following example. We get the file path using the get_path() method. To inspect the program process, we call pdb.set_trace() to pause the execution.
+Example -
+
+import os
+
+def get_path(filename):
+    """Return file's path or empty string if no path."""
+    head, tail = os.path.split(filename)
+    import pdb; pdb.set_trace()
+    return head
+
+filename = __file__
+print(f'path = {get_path(filename)}')
+
+
+Output:
+> d:\python project\test_pdb.py(891)get_path()
+-> return head
+(Pdb)
+
+So what is happening in above code -
+
+We have file test_pdb.py on the line 8 in the function get_path(). This is the frame of reference the p command will use to resolve variable names i.e. the current scope of context.
+Our program has stopped at return head on line 8 in the function get_path() from the above line.
+
+Now let's print some expression to get the current state of the application.
+
+(Pdb) ll
+     def get_path(filename):
+         """Return file's path or empty string if no path."""
+         head, tail = os.path.split1(filename)
+         import pdb; pdb.set_trace()
+  ->     return head
+(Pdb) p head, tail
+('d:/Python Project', 'test_pdb.py')
+(Pdb) p get_path
+<function get_path at 0x000002F24F306160>
+(Pdb) p getattr(get_path, '__doc__')
+"Return file's path or empty string if no path."
+(Pdb) step
+--Return--
+> d:\python project\test_pdb.py(891)get_path()->'d:/Python Project'
+-> return head
+
+We can pass the valid evaluation expression to p command.
+These expressions are very helpful when we are debugging the program and want to use the test alternative implementation directly. The pp (pretty-print) command can also be used. It is useful when we want to print a variable with a large amount of output.
+Post-mortem Debugging
+The post-mortem debugging refers to entering debug mode after the program is finished with the execution process. The pdb module provides the pm() and post_morterm() functions. This function directly targets the line which causes to the error. Let's understand the below example -
+Example -
+
+import pdb
+def mul(a, b):
+    answer = a * b
+    return answer
+  
+  
+x = input("Enter first number : ")
+y = input("Enter second number : ")
+result = mul(x, y)
+print(result)
+
+Output:
+Enter first number : 34
+Enter second number : 65
+Traceback (most recent call last):
+  File "d:/Python Project/test_pdb.py", line 9, in 
+    result = mul(x, y)
+  File "d:/Python Project/test_pdb.py", line 3, in mul
+    answer = a * b
+TypeError: can't multiply sequence by non-int of type 'str'
+
+Checking Variable Stack
+All the variables used by the program local or global are maintained on the stack. We can use the args(or use a) to print all the argument of the function which is currently active. We can use the p command to evaluate an expression given as an argument and prints the result. Let's see the following debugging.
+Example -
+
+> d:\python project\test_pdb.py(7)<module>()
+-> x = input("Enter first number : ")
+(Pdb) next
+Enter first number : 65
+> d:\python project\test_pdb.py(8)<module>()
+-> y = input("Enter second number : ")
+(Pdb) next
+Enter second number : 21
+> d:\python project\test_pdb.py(9)<module>()
+-> result = mul(x, y)
+(Pdb) step
+--Call--
+> d:\python project\test_pdb.py(2)mul()
+-> def mul(a, b):
+(Pdb) args
+a = '65'
+b = '21'
+(Pdb) next
+> d:\python project\test_pdb.py(3)mul()
+-> answer = a * b
+(Pdb) p b
+'21'
+
+Displaying Expression
+The pdb module provides other commands apart from p and pp to tell pdb to display the value of an expression, if it changed, when execution stops. Let's understand the below syntax and description of commands.
+
+
+Command
+Syntax
+Description
+
+
+display
+display [expression]
+It displays the value of expression if it changed, each time execution stops in the current frame. It displays expression of the current frame if expression is not provided.
+
+
+undisplay
+undisplay[expression]
+It doesn't display expression any more in the current frame. It removes all the expression for the current frame if expression is not provided.
+
+
+Python Pdb Breakpoint
+The breakpoints play essential role when we work with the large program. We often want to add the number of breakpoints where we know error might occur. The pdb module provides the break command to do so. Let's see the following syntax.
+Syntax -
+
+b(reak) [ ([filename:]lineno | function) [, condition] ]
+
+If filename is not given, the line number lineno, then the current source file is used. The second argument condition is very powerful and important. Using this, we can apply the break point only if condition existed. If we pass the second argument, pdb will break when the expression evaluates true.
+Let's understand the following example -
+Example -
+
+import pdb
+def mul(a, b):
+    answer = a * b
+    return answer
+  
+pdb.set_trace()
+x = input("Enter first number : ")
+y = input("Enter second number : ")
+result = mul(x, y)
+print(result)
+
+Output:
+> d:\python project\test_pdb.py(7)()
+-> x = input("Enter first number : ")
+(Pdb) break test_pdb.py:7
+Breakpoint 1 at d:\python project\test_pdb.py:7
+(Pdb) break test_pdb.py:8
+Breakpoint 2 at d:\python project\test_pdb.py:8
+(Pdb) break 
+Num Type         Disp Enb   Where
+1   breakpoint   keep yes   at d:\python project\test_pdb.py:7
+2   breakpoint   keep yes   at d:\python project\test_pdb.py:8
+
+Managing Breakpoints
+We can also manage the breakpoints using the enable, disable and remove command. The disable allows debugger not to stop when the breakpoint is reached while enable activates the disable breakpoints.
+Let's understand the following example -
+Example -
+
+import pdb
+def concate(a, b):
+    answer = a + b
+    return answer
+  
+pdb.set_trace()
+x = input("Enter first string : ")
+y = int(input("Enter second string : "))
+res = concate(x, y)
+print(res)
+
+Output:
+> d:\python project\test_pdb.py(7)()
+-> x = input("Enter first string : ")
+(Pdb) break test_pdb.py:7
+Breakpoint 1 at d:\python project\test_pdb.py:7
+(Pdb) break test_pdb.py:8
+Breakpoint 2 at d:\python project\test_pdb.py:8
+(Pdb) break   
+Num Type         Disp Enb   Where
+1   breakpoint   keep yes   at d:\python project\test_pdb.py:7
+2   breakpoint   keep yes   at d:\python project\test_pdb.py:8
+(Pdb) disable 2
+Disabled breakpoint 2 at d:\python project\test_pdb.py:8
+(Pdb) break
+Num Type         Disp Enb   Where
+1   breakpoint   keep yes   at d:\python project\test_pdb.py:7
+2   breakpoint   keep no    at d:\python project\test_pdb.py:8
+
+Conclusion
+In this tutorial, we have covered basic and common concepts of the pdb module. We have learned printing expression, pdb commands, how to use breakpoints, displaying expressions and implemented some example. Debugging helps the programmer to analyze program line by line. Python comes with the default debugger that is easy to import and use. The pdb module play essential role in debugging especially when we work with the large program.
+
+
+Next TopicPython Program to Move all the zeros to the end of Array
+
+
+
+
+← prev
+next →
+
+
+
+

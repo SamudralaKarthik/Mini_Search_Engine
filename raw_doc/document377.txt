@@ -1,0 +1,272 @@
+
+
+
+
+next →
+← prev
+
+Dateutil module in Python
+An Introduction to the Python dateutil module
+Whenever we start working with scripts that need real-time data, we have to use the dateutil module in order to retrieve or schedule data at a specific time or input data with the timestamp of retrieval.
+It could be a daunting activity to work with a lot of scripts and try to manipulate formats of date and time with the help of the default datetime module, considering the number of changes to the data retrieved we have to make.
+Providentially, the developers created the dateutil module to deliver the functionality to make life easier.
+In the following tutorial, we will understand the Python dateutil module in depth. Python modules are files that consist of certain definitions and statements. We can use these modules to break down a large program into small segments, and they are imported into programs to avail their functions. The dateutil module is among these predefined modules in the Python programming language utilized when we have to perform work associated with a certain date and time.
+So, let's get begun.
+Understanding the Python dateutil module
+There is a core module available in the Python programming language known as the datetime module. We use this module for the manipulation of dates and times from simpler to complex methods. Even though this module is adequate for a specific number of instances, the Python dateutil module offers particular powerful extensions to the datetime module.
+Chief Characteristics of the Python dateutil module
+The chief characteristics of the dateutil module in Python are as follows:
+
+The dateutil module supports the parsing of dates in any string format.
+This module provides internal up-to-date world time zone details.
+This module helps in computing the relative deltas
+This module also helps in computing the dates based on pretty flexible rules of recurrence.
+
+How to install the dateutil module in Python?
+Before we start working with the dateutil module, the primary objective is to install the module on the system. So, let's get to the installation procedure.
+We will be using the pip installer in order to install the required module by typing the following command in a terminal:
+Syntax:
+
+$ pip install python-dateutil
+
+Verifying the Installation
+In order to check whether the module has been installed in the system properly or not, we can try importing the module and execute the program.
+Once the installation is complete, create a new Python file and type the following syntax in it.
+Example:
+
+# importing the required module
+import dateutil
+
+Now, save the file and run the file using the following command in the command prompt.
+Syntax:
+
+$ python <file-name>.py
+
+If the program runs without raising any import error, the module is installed properly. Else it is recommended to reinstall the module and refer to its official documentation.
+Working with the Python dateutil module
+Now, let us proceed to work with the dateutil module in the Python programming language.
+The dateutil module and its subclasses
+The dateutil module is split into several subclasses as shown below:
+
+easter,
+parser,
+relativedelta,
+rrule,
+
+tz,
+and many more.
+
+
+This module does not contain so many subclasses; however, we will only be exploring the functions of some of them in this tutorial.
+Importing the necessary modules
+Since we have installed the module properly, now is the time to put the methods into action and retrieve the outputs.
+In order to start working with the Python dateutil module and some, we just have to import them first.
+The following syntax shows the importing of the required modules.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+
+Explanation:
+In the above snippet of code, we have imported the datetime module to import methods. We have then imported some methods from the dateutil subclasses.
+The datetime functionality
+Before we get to the coding part of the dateutil module, we must understand that the module relies on the datetime module.
+The Python dateutil module works along with the datetime objects, and this implies that we will have to create the datetime objects before we start working with them.
+Thus, it becomes necessary for the importing of the datetime module. Now, let's begin working with some of the methods in the dateutil module.
+Datetime and relativedelta
+The relativedelta subclass extends off the datetime module, offering the programmers features to work with dates and times relative to the retrieved details.
+This statement signifies that we can insert days, months, or even years to the presently used datetime object. It also enables the programmers to work with intervals in time, with the datetime objects.
+Let us consider the following example to understand the concept properly.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+# Creating some datetime objects
+present_datetime = datetime.datetime.now()
+print("The Present datetime:", present_datetime)
+present_date = datetime.date.today()
+print("The Present date:", present_date)
+
+Output:
+The Present datetime: 2021-10-20 12:38:19.319256
+The Present date: 2021-10-20    
+
+Explanation:
+In the above snippet of code, we have imported the required modules and created the objects of the datetime module to retrieve details for present date and time. We have then printed those details for the users.
+Now, let us work with getting information with the help of the relative dates.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime 
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+# Creating some datetime objects
+present_datetime = datetime.datetime.now()
+present_date = datetime.date.today()
+# Next month
+print("Next month:", present_datetime + relativedelta(months =+ 1)) 
+# Next month, and a week
+print("Next month, and a week:", present_datetime + relativedelta(months =+ 1, weeks =+ 1)) 
+# Next month, and a week, at 4 PM
+print("Next month, plus one week, at 4 PM:", present_datetime + relativedelta(months =+ 1, weeks =+ 1, hour = 16))
+# Next Friday
+print("Next Friday:", present_date + relativedelta(weekday = FR))
+
+Output:
+Next month: 2021-11-20 12:54:38.805725
+Next month, and a week: 2021-11-27 12:54:38.805725
+Next month, plus one week, at 4 PM: 2021-11-27 16:54:38.805725
+Next Friday: 2021-10-22   
+
+Explanation:
+In the above snippet of code, we have imported the required modules and used the values of present date and time to find the information in respect to the relative deltas like date and time of next month, a month and a week, a month and a week at 4 PM and the date of upcoming Friday.
+A more applicable utilization of this module would be to find out the information with the help of some small operations.
+Let us consider the following example to understand the same.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+# Creating some datetime objects
+present_datetime = datetime.datetime.now()
+present_date = datetime.date.today()
+# Finding out the last Monday in the month
+print("Last Monday:",present_date + relativedelta(day = 31, weekday = MO(-1)))
+# We can also work with datetime objects directly
+# Example: Age of David 
+david_birthday = datetime.datetime(1983, 5, 23, 12, 0)
+print("David's Age:", relativedelta(present_datetime, david_birthday).years)
+
+Output:
+Last Monday: 2021-10-25
+David's Age: 38    
+
+Explanation:
+In the above snippet of code, we have imported the required modules. We have then used the value of present date and time in order to find the information regarding any last day in the month or someone's age according to their birthday.
+Datetime and easter
+The easter subclass is utilized to estimate date and time with generic easter calendars, allowing programmers to calculate the datetime objects with respect to a variety of calendars.
+The subclass is pretty small, and there is only one parameter with three options that define the whole module.
+The Julian Calendar, EASTER_JULIAN = 1
+The Gregorian Calendar, EASTER_ORTHODOX = 2
+The Western Calendar, EASTER_WESTERN = 3
+Let us consider the following example to understand the working of the calendars as mentioned above.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime 
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+# The Julian Calendar
+print("Julian Calendar:", easter(1335, 1))
+# The Gregorian Calendar
+print("Gregorian Calendar:", easter(1335, 2)) 
+# The Western Calendar
+print("Western Calendar:", easter(1335, 3))
+
+Output:
+Julian Calendar: 1335-04-16
+Gregorian Calendar: 1335-04-26
+Western Calendar: 1335-04-17    
+
+Explanation:
+In the above snippet of code, we have imported the required modules and used the easter subclass to print the date in different Calendars formats.
+Datetime and parser
+The parser subclass is used as a superior date and time string parser. This subclass is able to parse more than one known format depicting a date or a time.
+Let us consider the following example to understand the same.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime 
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+# The parser subclass
+print(parse("Thu Oct 25 11:36:28 BRST 2005")) 
+# We can also ignore the timezone which is set to default locally
+print(parse("Thu Oct 25 11:36:28 BRST 2005", ignoretz = True)) 
+# We can also not provide a timezone, or a year
+# This allows for it to return the current year, with no timezone inclusion.
+print(parse("Thu Oct 25 11:36:28"))
+# We can also provide variables which consist of the information, as values.
+DEFAULT = datetime.datetime(2021, 10, 23)
+print(parse("11:36", default = DEFAULT))
+
+Output:
+2005-10-25 11:36:28
+2005-10-25 11:36:28
+2021-10-25 11:36:28
+2021-10-23 11:36:00    
+
+Explanation:
+In the above snippet of code, we have imported the required modules again and used the parser subclass to parse the date and time strings.
+There are many choices we can offer, including the time zones, locally or explicitly.
+We can use the variables passed into the function as default parameters to extract details in order to deliver the time zones, year and time.
+Datetime and rrule
+The rrule subclass is used to gather information regarding the recurrence of a datetime object and the datetime objects, respectively.
+Let us consider the following example to understand the same.
+Example:
+
+# importing methods from the datetime module as a base.
+import datetime
+# importing several methods from the dateutil subclasses.
+from dateutil.relativedelta import *
+from dateutil.easter import *
+from dateutil.parser import *
+from dateutil.rrule import *
+# The rrule subclass
+# Daily repetition for 15 occurrences
+print(list(rrule(DAILY, count = 15, dtstart = parse("20210925T091000"))))
+# Repeating based on the interval
+print(list(rrule(DAILY, interval = 8, count = 4, dtstart = parse("20210925T091000"))))
+# Weekly repetition
+print(list(rrule(WEEKLY, count = 5, dtstart = parse("20210925T091000")))) 
+# Monthly repetition
+print(list(rrule(MONTHLY, count = 5, dtstart = parse("20210925T091000"))))
+# Yearly repetition
+print(list(rrule(YEARLY, count = 5, dtstart = parse("20210925T091000"))))
+
+Output:
+[datetime.datetime(2021, 9, 25, 9, 10), datetime.datetime(2021, 9, 26, 9, 10), datetime.datetime(2021, 9, 27, 9, 10), datetime.datetime(2021, 9, 28, 9, 10), datetime.datetime(2021, 9, 29, 9, 10), datetime.datetime(2021, 9, 30, 9, 10), datetime.datetime(2021, 10, 1, 9, 10), datetime.datetime(2021, 10, 2, 9, 10), datetime.datetime(2021, 10, 3, 9, 10), datetime.datetime(2021, 10, 4, 9, 10), datetime.datetime(2021, 10, 5, 9, 10), datetime.datetime(2021, 10, 6, 9, 10), datetime.datetime(2021, 10, 7, 9, 10), datetime.datetime(2021, 10, 8, 9, 10), datetime.datetime(2021, 10, 9, 9, 10)]
+[datetime.datetime(2021, 9, 25, 9, 10), datetime.datetime(2021, 10, 3, 9, 10), datetime.datetime(2021, 10, 11, 9, 10), datetime.datetime(2021, 10, 19, 9, 10)]
+[datetime.datetime(2021, 9, 25, 9, 10), datetime.datetime(2021, 10, 2, 9, 10), datetime.datetime(2021, 10, 9, 9, 10), datetime.datetime(2021, 10, 16, 9, 10), datetime.datetime(2021, 10, 23, 9, 10)]
+[datetime.datetime(2021, 9, 25, 9, 10), datetime.datetime(2021, 10, 25, 9, 10), datetime.datetime(2021, 11, 25, 9, 10), datetime.datetime(2021, 12, 25, 9, 10), datetime.datetime(2022, 1, 25, 9, 10)]
+[datetime.datetime(2021, 9, 25, 9, 10), datetime.datetime(2022, 9, 25, 9, 10), datetime.datetime(2023, 9, 25, 9, 10), datetime.datetime(2024, 9, 25, 9, 10), datetime.datetime(2025, 9, 25, 9, 10)]    
+
+Explanation:
+In the above snippet of code, we have again imported the required module. We have then used the rrule subclass to collect information regarding the recurrence of a datetime object.
+A great ability of the dateutil module is that this subclass could allow programmers to work with multiple scheduling tasks and calendar storage innovations.
+
+
+Next TopicGetpass module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

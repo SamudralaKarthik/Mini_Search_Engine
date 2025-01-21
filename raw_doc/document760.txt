@@ -1,0 +1,106 @@
+
+
+
+
+next →
+← prev
+
+Topology Sorting in Python
+In this tutorial, we will learn about one of the important applications of Depth-first Search. We will understand the concept of topology sorting, how it works and implements it using the Python programming language. Lastly, we will learn the time complexity of the algorithm and the application of the topology sort. Let's have an introduction to topology sorting.
+What is Topology Sorting?
+Topology sort is a one of the important applications of the graph used to solve many real-life problems. It is an algorithm which takes a direct acyclic graph and returns the sequence of the nodes. Every node will appear before other nodes that points to. A direct acyclic graph is kind of graph that has directed edge between one node to other without creating any cycle. It is remember that the topology sorting won't work if graph is not directed acyclic. The ordering of the nodes in the array is called topological ordering.
+Suppose we have a set of tasks and each task is dependent on others. We want to schedule the set of tasks in such way that dependency relation should not be violated. Any task that comes later in a chain of tasks is always performed only after all the tasks before it has finished.
+Topology sorting of graph helps us to maintain this kind of order.
+Every graph can have more than one topological sorting possible. It depends on the in-degree of the node in the graph. This algorithm starts from the in-degree as 0 a node with no incoming edges.
+Algorithm
+Below is the algorithm of topological sort.
+
+First step is to identify the node that has no in-degree (no incoming edges) and select that node as the source node of the graph.
+Now delete the source node that has zero in-degree and its associated edges. The deleted vertex will be added in the result array.
+Update the in-degree of the adjacent nodes after deleting the outgoing edges.
+The above steps will be repeated until the graph is empty.
+
+The result array that we will get the end of the process is known as the topological ordering of the directed graph. If some node left but they have incoming edges, that mean graph is not acyclic. If given graph is not acyclic, topological ordering doesn't exist.
+Python Code for Topological Sort
+
+from collections import defaultdict
+class Graph:
+
+    def __init__(self,n):
+
+        self.graph = defaultdict(list)
+
+        self.N = n
+
+    def addEdge(self,m,n):
+
+        self.graph[m].append(n)
+
+    def sortUtil(self,n,visited,stack):
+
+        visited[n] = True
+
+        for element in self.graph[n]:
+
+            if visited[element] == False:
+
+                self.sortUtil(element,visited,stack)
+
+        stack.insert(0,n)
+
+    def topologicalSort(self):
+
+        visited = [False]*self.N
+
+        stack =[]
+
+        for element in range(self.N):
+
+            if visited[element] == False:
+
+                self.sortUtil(element,visited,stack)
+
+        print(stack)
+
+graph = Graph(5)
+graph.addEdge(0,1)
+graph.addEdge(0,3)
+graph.addEdge(1,2)
+graph.addEdge(2,3)
+graph.addEdge(2,4)
+graph.addEdge(3,4)
+
+print("The Topological Sort Of The Graph Is:  ")
+graph.topologicalSort()
+
+Output:
+The Topological Sort Of The Graph Is:  
+[0, 1, 2, 3, 4]
+
+Topological Sort Time Complexity
+The time complexity of the topology sorting is O(M +N) where M is the number of edges in the graph and N is the number of nodes in the graph.
+Application
+Topology sorting provides many types of real-life solution -
+
+It is used in course scheduling problems to schedule jobs.
+It is used to dependency resolution.
+It is very beneficial to find sentence ordering in very fewer efforts.
+It is helpful to identify there exists cycle in the graph or not.
+It is used for ordering the cell evaluation while recomputing formula values in excel or spreadsheet.
+Topological sort helpful to find the deadlock condition in an operating system.
+
+Conclusion
+This tutorial included the concept of the Topological sorting algorithm and its implementation. Topological sorting has own importance in the real life application. It plays essential role while exploring and working trees and graphs. Topological sort makes the process easier and efficient and hence very much recommended to clearly understand it.
+
+
+Next TopicTqdm Integration with Pandas
+
+
+
+
+← prev
+next →
+
+
+
+

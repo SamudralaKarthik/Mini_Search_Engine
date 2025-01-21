@@ -1,0 +1,114 @@
+
+
+
+
+next →
+← prev
+
+How to Plot Rays on a Graph using Bokeh in Python
+Bokeh is a Python library which is used for data visualization. It creates its plots using HTML and JavaScript languages, and it also targets modern website browsers to provide presentation elegant, concise construction of novel graphics good high-performance interactivity.
+In this tutorial, we will learn how to plot rays on a graph. To plot rays on a graph we can use the ray() function of the bokeh.plotting module.
+plotting.figure.ray()
+Syntax:
+The syntax for ray() function is:
+
+ray(parameters)
+
+Parameters:
+The parameters of ray() function are:
+
+x: It takes x-coordinate values of the starting points of the rays.
+y: It takes y-coordinate values of the starting points of the rays
+length: It takes value of ray length as input.
+length_units: It takes unit of the length of the rays.
+
+Returns:
+The return of ray() function is:
+An object of class GlyphRenderer
+Example 1:
+In this example we will be using the default values for plotting the graph.
+Code:
+
+# First, we will import all the required modules
+import numpy as nmp 
+from bokeh.plotting import figure as fig
+from bokeh.plotting import output_file as OF
+from bokeh.plotting import show 
+
+# Here, we will create a file for saving the model 
+OF("javaTpoint.html") 
+        
+# Now, we will instantiate the figure object 
+graph_1 = fig(title = "Rays on Graph using Bokeh") 
+      
+# the points to be plotted
+x = 0
+y = 0
+
+# Here, we will plot the graph 
+graph_1.ray(x, y)
+
+# To display the model 
+show(graph_1)
+
+Output:
+
+Example 2:
+In this example we will be plotting multiple rays with various other parameters.
+Code:
+
+# First, we will import all the required modules
+import numpy as nmp 
+from bokeh.plotting import figure as fig
+from bokeh.plotting import output_file as OF
+from bokeh.plotting import show 
+from bokeh.palettes import magma as MG
+
+  
+# Here, we will create a file for saving the model 
+OF("javaTpoint.html") 
+        
+# Now, we will instantiate the figure object 
+graph_1 = fig(title = "Rays on Graph using Bokeh") 
+  
+# Name of the x-axis 
+graph_1.xaxis.axis_label = "x-axis of Graph"
+       
+# Name of the y-axis 
+graph_1.yaxis.axis_label = "y-axis of Graph"
+      
+# The points to be plotted
+x = [0] * 254
+y = [0] * 254
+  
+# Now, we will instantiate angles of the rays
+angle = nmp.linspace(0.00, 6.28, num = 254).tolist()
+  
+# color of the rays
+color = MG(254)
+  
+# Here, we will plot the graph 
+graph_1.ray(x, y,
+          angle = angle,
+          color = color)
+      
+# To display the model
+show(graph_1)
+
+Output:
+
+Conclusion
+In this tutorial, we discussed how to plot rays on Graph using the bokeh library in Python.
+
+
+Next TopicImage Steganography using Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,191 @@
+
+
+
+
+next →
+← prev
+
+How to Iterate through a List in Python
+Lists are one of the most used data structures in Python. We keep using lists in many different applications, from solving simple problems to complex problems. In Python, lists replace arrays with advantages like:
+
+Dynamic in size
+Can store items of different data types in a single list
+
+We can access the data simply from lists as ordered; unlike in sets, the data will be unordered. To access the data, we can use several ways to iterate through each element inside a list. This tutorial covers all the ways with examples.
+1. Loops
+
+Using while loop:
+
+
+list1 = [3, 5, 7, 2, 4]
+count = 0
+while (count < len(list1)):
+    print (list1 [count])
+    count = count + 1
+
+Output:
+
+Understanding:
+We created a list with a few elements. Initially, count = 0. We're printing the element at the 'count' index and incrementing the count in the while loop. When the count reaches the length of the list, the loop will be terminated, and all the elements will already be accessed.
+Mechanism:
+
+
+count = 0
+list1 [0]
+3
+
+
+count = 1
+list1 [1]
+5
+
+
+count = 2
+list1 [2]
+7
+
+
+count = 3
+list1 [3]
+2
+
+
+count = 4
+list1 [4]
+4
+
+
+count = 5 = len (list1)
+-
+-
+
+
+
+Using for loop:
+
+
+list1 = [3, 5, 7, 2, 4]
+for i in list1:
+    print (i)
+
+Output:
+
+Understanding:
+Using for-in, we accessed all the i's, the elements inside the list.
+
+Using for and range:
+
+
+list1 = [3, 5, 7, 2, 4]
+length = len (list1)
+for i in range (0, len (list1)):
+    print (list1 [i])
+
+Output:
+
+Understanding:
+The range function helps the 'for' loop to iterate from 0 to the given list's length.
+Mechanism:
+
+
+the range gives - 0
+list1 [0]
+3
+
+
+the range gives - 1
+list1 [1]
+5
+
+
+the range gives - 2
+list1 [2]
+7
+
+
+the range gives - 3
+list1 [3]
+2
+
+
+the range gives - 4
+list1 [4]
+4
+
+
+
+The range function doesn't give the last element specified - len (list1) = 5 is not given.
+
+2. Using List Comprehension
+This is the simple and suggested way to iterate through a list in Python.
+Code:
+
+list1 = [3, 5, 7, 2, 4]
+[print (i) for i in list1]
+print ("\n")
+[print (list1 [i]) for i in range (0, len (list1))]
+print ("\n")
+
+Output:
+
+Understanding:
+We can use for loops inside a list comprehension. We used the same for loops we used in the above examples but inside a list in a single line. This way, we can reduce the length of the code and also list comprehension is a very subtle and efficient way to put loops in lists.
+3. Using enumerate():
+The enumerate function converts the given list into a list of tuples. Another important fact about this function is that it keeps count of the iterations. This is a built-in function in Python.
+Code:
+
+list1 = [3, 5, 7, 2, 4]
+for i, j in enumerate (list1):
+    print ("index = ", i, "value: ", j)
+
+Output:
+
+4. Using lambda function and map():
+These are anonymous functions. There is a function map () in Python that can accept a function as an argument, and it calls the function with every element in the iterable, and a new list with all the elements from the iterable will be returned.
+Code:
+
+list1 = [3, 6, 1, 8, 7]
+result = list (map (lambda num: num, list1))
+print (result)
+
+Output:
+
+Understanding:
+The lambda num: num is given as an input to the map function along with the list. The function will take every single element in the list, accept it, and then return it. The map () function will pass the list elements one by one to the lambda function to return the elements.
+What if we want to Iterate Multi-dimensional Lists?
+There is an inbuilt module in Python designed to perform operations on multi-dimensional lists.
+1. To get numpy:
+Check if Python and pip are installed by opening the cmd via search and typing the commands:
+Python -version
+Pip --version
+If both Python and PIP are present in our system, it is now time to install our library:
+2. Open cmd from the start menu
+3. Type the command
+pip install numpy
+
+All the library packages, data, and sub-packages will be installed one after the other.
+Code:
+
+import numpy
+list1 = numpy. arange (9)
+list1 = list1. reshape (3, 3)
+for x in numpy. nditer (list1):
+    print (x)
+
+Output:
+
+Understanding:
+We imported the numpy module. Using the arrange method, we created an array with 9 elements. We accessed the list by reshaping it to 3 * 3 (rows * columns) using the reshape. Using the nditer function, we printed each element in the list.
+
+
+Next TopicHow to Learn Python Online
+
+
+
+
+← prev
+next →
+
+
+
+

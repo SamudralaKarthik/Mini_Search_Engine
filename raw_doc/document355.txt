@@ -1,0 +1,135 @@
+
+
+
+
+next →
+← prev
+
+Remove Multiple Characters from a String in Python
+We already know that strings are defined as a sequence of characters, and we can perform a variety of operations on them.
+In this tutorial, we will learn one more interesting task that can be accomplished using strings in Python.
+Here we will see how we can remove multiple characters from it.
+We have listed below the methods that we will learn to meet our objective.
+
+Using nested replace()
+Using translate() & maketrans()
+Using subn()
+Using sub()
+
+Using nested replace()
+In the program given below, we will see how replace() is used to remove multiple characters from the string.
+
+#initializing the string
+string_val = 'learnpythonlearn'
+#displaying the string value
+print("The initialized string is ", string_val)
+#using nested replace()
+res_str = string_val.replace('l', '%temp%').replace('l', 'e').replace('%temp%', 'e')
+#printing the resultant string
+print ("The string after replacing the characters is ", res_str)
+
+Output:
+The initialized string is  learnpythonlearn
+The string after replacing the characters is  eearnpythoneearn
+
+Explanation-
+
+In the first step, we have initialized the string whose characters we would like to replace.
+After this, we have displayed the original string so that we can easily understand the difference between this and the expected output.
+Now we have used replace() and specified the characters that we wish to remove or change.
+On executing the program, the desired output is displayed.
+
+In the second program, we will see how translate() and maketrans() can be used to do the same. The users must keep this thing in their mind that it only works in Python 2.
+Using translate() and maketrans()
+The following program shows how it can be done.
+
+import string
+#initializing the string
+string_val='learnpythonlearn'
+#displaying the string value
+print("The initialized string is ",string_val)
+#using translate() & maketrans()
+res_str=string_val.translate(string.maketrans('le','el'))
+#printing the resultant string
+print("The string after replacing the characters is ",res_str)
+
+Output:
+The initialized string is  learnpythonlearn
+The string after replacing the characters is  eearnpythoneearn
+
+Explanation-
+
+In the first step, we have initialized the string whose characters we would like to replace.
+After this, we have displayed the original string so that we can easily understand the difference between this and the expected output.
+Now we have used replace() and specified the characters that we wish to remove or change.
+On executing the program, the desired output is displayed.
+
+Now we will discuss how re.subn() can become an aid for this. The subn() returns a new string with the total number of replacements.
+Using re.subn()
+The program given below shows how it can be done.
+
+#importing the re module
+import re
+#initializing the string value
+string_val = "To get the result 100, we can multiply 10 by 10"
+#defining the function
+def pass_str(string_val):
+    string_val, n = re.subn('[0-9]', 'A', string_val)
+    print (string_val)
+#displaying the resultant value
+pass_str(string_val)
+
+Output:
+To get the result AAA, we can multiply AA by AA
+
+Explanation-
+
+In the first step, we have imported the re module that will help us to use the required functions.
+After this, we have initialized the string whose characters we would like to replace or remove.
+The next step is to define a function that takes the string value as its parameter.
+In the function definition, we have used subn() that takes three parameters. The first parameter is the pattern that we wish to replace, the second is with what element or number we want to replace it and the third is the string.
+Finally, the print statement at the end shows that the processed string is displayed.
+We have passed this string at the end so that we get the expected output.
+
+In the last program, we will do the same thing using sub()
+Using re.sub()
+The following program illustrates how it can be done-
+
+#importing the re module
+import re
+#initializing the string value
+string_val = "To get the result 100, we can multiply 10 by 10"
+#defining the function
+def pass_str(string_val):
+    string_val = re.sub('[0-9]', 'Z', string_val)
+    print(string_val)
+#displaying the resultant value
+pass_str(string_val)
+
+Output:
+To get the result ZZZ, we can multiply ZZ by ZZ
+
+Explanation-
+
+In the first step, we have imported the re module that will help us to use the required functions.
+After this, we have initialized the string whose characters we would like to replace or remove.
+The next step is to define a function that takes the string value as its parameter.
+In the function definition, we have used sub() that takes three parameters. The first parameter is the pattern that we wish to replace, the second is with what element or number we want to replace it and the third is the string.
+Finally, the print statement at the end shows that the processed string is displayed.
+We have passed this string at the end so that we get the expected output.
+
+Conclusion
+In this tutorial, we learned how we can remove multiple characters from a string using Python.
+
+
+Next TopicShuffle in Python
+
+
+
+
+← prev
+next →
+
+
+
+

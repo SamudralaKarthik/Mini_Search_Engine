@@ -1,0 +1,131 @@
+
+
+
+
+next →
+← prev
+
+The info() Function in Python
+In this tutorial, we will learn about the Python pandas method df.info() Method. Pandas is a very popular library to analyze data in easy and effective.
+It is an important and widely used method of Python. This Method prints the information or summary of the dataframe. It prints the various information of the Dataframe such as index type, dtype, columns, non-values, and memory usage. It gives a quick overview of the dataset.
+Let's see the syntax of using it.
+Syntax:
+
+DataFrame.info(verbose=None, buf=None, max_cols=None, memory_usage=None, show_counts=None, null_counts=None)
+
+Parameters -
+
+verbose - It is used to print the full summary of the dataset.
+buf - It is a writable buffer, default to sys.stdout.
+max_cols - It specifies whether a half summary or full summary is to be printed.
+memory_usage - It specifies whether total memory usage of the DatFrame elements (including index) should be displayed.
+null_counts - It is used to show the non-null counts.
+
+Now, let's understand it usage in Pandas Dataframe.
+Usage of info() Method
+We are using the Iris dataframe to perform some operations. It can be downloaded at www.kaggle.com.
+Example - 1:
+
+# importing pandas as pd
+import pandas as pd
+ 
+# Creating the dataframe
+df = pd.read_csv("iris.csv")
+ 
+# Print the dataframe
+print(df)
+
+Output:
+      Id  SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm         Species
+0      1            5.1           3.5            1.4           0.2     Iris-setosa
+1      2            4.9           3.0            1.4           0.2     Iris-setosa
+2      3            4.7           3.2            1.3           0.2     Iris-setosa
+3      4            4.6           3.1            1.5           0.2     Iris-setosa
+4      5            5.0           3.6            1.4           0.2     Iris-setosa
+..   ...            ...           ...            ...           ...             ...
+145  146            6.7           3.0            5.2           2.3  Iris-virginica
+146  147            6.3           2.5            5.0           1.9  Iris-virginica
+147  148            6.5           3.0            5.2           2.0  Iris-virginica
+148  149            6.2           3.4            5.4           2.3  Iris-virginica
+149  150            5.9           3.0            5.1           1.8  Iris-virginica
+
+Now we will print the summary of the dataframe.
+
+print("The dataframe details is:\n")
+print(df.info())
+
+Output:
+The dataframe details is:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 6 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Id             150 non-null    int64
+ 1   SepalLengthCm  150 non-null    float64
+ 2   SepalWidthCm   150 non-null    float64
+ 3   PetalLengthCm  150 non-null    float64
+ 4   PetalWidthCm   150 non-null    float64
+ 5   Species        150 non-null    object
+dtypes: float64(4), int64(1), object(1)
+memory usage: 7.2+ KB
+
+Explanation -
+As we can see that, the info() method printed the complete summary of the given dataframe. The summary includes the list of all columns with their data types and the number of non-values in each column.
+Example - 2: Print the short summary of Dataframe
+To print the short summary of the dataframe, we need to pass the verbose parameter as False in the info() method. Let's understand the following example.
+Example -
+
+print("The short summary of dataframe is:")
+print(df.info(verbose=False))
+
+Output:
+The short summary of dataframe is:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 150 entries, 0 to 149
+Columns: 6 entries, Id to Species
+dtypes: float64(4), int64(1), object(1)
+memory usage: 7.2+ KB
+
+The above summary is concise. It is helpful when we have 1000s of attributes in dataframe.
+Example - 3: Exclude the null count values
+We can omit the null value count parameter by passing False. Let's understand the following example.
+Example -
+
+ # Print the dataframe
+print("The short summary of dataframe is:")
+print(df.info(null_counts=False))
+
+Output:
+The short summary of dataframe is:
+d:/Python Project/listproblems.py:333: FutureWarning: null_counts is deprecated. Use show_counts instead
+  print(df.info(null_counts=False))
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 6 columns):
+ #   Column         Dtype
+---  ------         -----
+ 0   Id             int64
+ 1   SepalLengthCm  float64
+ 2   SepalWidthCm   float64
+ 3   PetalLengthCm  float64
+ 4   PetalWidthCm   float64
+ 5   Species        object
+dtypes: float64(4), int64(1), object(1)
+memory usage: 7.2+ KB
+
+Conclusion
+We have discussed the importance of the info() method and its index. We have passed the various parameters and printed the various format of the summary.
+
+
+Next TopicTwo Sum Problem: Python Solution of Two sum problem of Given List
+
+
+
+
+← prev
+next →
+
+
+
+

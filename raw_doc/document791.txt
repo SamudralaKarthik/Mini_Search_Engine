@@ -1,0 +1,143 @@
+
+
+
+
+next →
+← prev
+
+How to combine two dataframe in Python - Pandas
+Pandas
+Pandas is an inbuilt library in Python which is used to work with relational data in the Python programming language. It has a lot of functions and data structures which help in the operations of relational data.
+If the data is stored in the form of rows and columns or two-dimensional data is generally called dataframes in pandas.
+If we have two dataframes, then with the help of pandas, we can combine them or merge them into a single dataframe. Pandas provide the set logic to combine the data of two different dataframes as well as logic to compare them.
+1. Using concat() function
+In python, we can concatenate the two dataframes with the help of the concat() function of Pandas. We can concatenate the data either row-wise or column-wise. This function merges the data on one axis (row or column) and performs the set logic on another axis (another index).
+Example:
+
+import pandas as pd
+from IPython.display import display
+
+# First DataFrame
+dataFrame1 = pd.DataFrame({'id': ['A1', 'A2', 'A3', 'A4'],
+                    'Name': ['ABC', 'PQR', 'DEF', 'GHI'],
+                    'Marks':[65,69,96,89]})
+
+# Second DataFrame
+dataFrame2 = pd.DataFrame({'id': ['B1', 'B2', 'B3', 'B4'],
+                    'Name': ['XYZ', 'TUV', 'MNO', 'JKL'],
+                    'Marks':[56,96,69,98]})
+
+
+frames = [dataFrame1, dataFrame2]
+
+result = pd.concat(frames)
+display(result)
+
+Output:
+
+Explanation:
+In the above code, we have first imported the Pandas library in the file. Then, we created the two dataframes where each dataframe contains three columns and four rows. Then we used the concat function, which concatenates these two dataframes row-wise, and with the display function, we printed this on the screen.
+2. Using joins in pandas
+We have understood the concept of joins in the database where we join the two tables based on some common attribute. The same method is applicable in the concatenation of dataframes. In the simple concat() method, we merged all the rows on one another and created the new dataframe. In the join, we define which type of join we want to perform on the table, whether it is an inner join or an outer join. Whatever type of join either inner join (intersection) or outer join (union), will be defined in the join attribute.
+Example:
+
+import pandas as pd
+from IPython.display import display
+
+
+dataFrame1 = pd.DataFrame({'id': ['A1', 'A2', 'A3', 'A4'],
+					'Name': ['ABC', 'PQR', 'TUV', 'JKL']})
+
+dataFrame2 = pd.DataFrame({'City': ['NOIDA', 'JAIPUR', 'MANALI', 'DELHI'],
+					'Age': ['11', '10', '12', '17']})
+
+# the default behaviour is join='outer'
+# inner join
+
+result = pd.concat([dataFrame1, dataFrame2], axis=1, join='inner')
+display(result)
+
+Output:
+
+Explanation:
+In the above code, we have two daraframes which both contain two columns and four rows. Both dataframe have different column names, and in the concat() function, we have used the inner join, which takes the intersection part.
+In the axis attribute, we have initialized value one, so we got the whole data.
+Example:
+
+import pandas as pd
+from IPython.display import display
+
+
+dataFrame1 = pd.DataFrame({'id': ['A1', 'A2', 'A3', 'A4'],
+					'Name': ['ABC', 'PQR', 'TUV', 'JKL']})
+
+dataFrame2 = pd.DataFrame({'id': ['A1', 'A2', 'A3', 'A4'],'City': ['NOIDA', 'JAIPUR', 'MANALI', 'DELHI'],
+					'Age': ['11', '10', '12', '17']})
+
+# the default behaviour is join='outer'
+# inner join
+
+result = pd.concat([dataFrame1, dataFrame2], axis=0, join='inner')
+display(result)
+
+Output:
+
+Since there is no common attribute and the inner join was applied, then we got an empty dataframe as output. If there is a common attribute in both dataframes:
+Example:
+
+import pandas as pd
+from IPython.display import display
+
+dataFrame1 = pd.DataFrame({'id': ['A1', 'A2', 'A3', 'A4'],
+					'Name': ['ABC', 'PQR', 'TUV', 'JKL']})
+
+dataFrame2 = pd.DataFrame({'id': ['B1', 'B2', 'B3', 'B4'],
+                           'City': ['NOIDA', 'JAIPUR', 'MANALI', 'DELHI'],
+                           'Age': ['11', '10', '12', '17']})
+
+# the default behaviour is join='outer'
+# inner join
+
+result = pd.concat([dataFrame1, dataFrame2], axis=0, join='inner')
+display(result)
+
+Output:
+
+Explanation:
+In the above code, we have one attribute, 'id', that is common so the dataframe is created based on only common attributes.
+3. Using append() method
+Instead of the concat() method, we can use the append() method. This append() method is applied to one of the dataframes.
+Example:
+
+import pandas as pd
+from IPython.display import display
+
+# First DataFrame
+dataFrame1 = pd.DataFrame({'id': ['A1', 'A2', 'A3', 'A4'],
+					'City': ['JAIPUR', 'MANALI', 'NOIDA', 'LUCKNOW']})
+
+# Second DataFrame
+dataFrame2 = pd.DataFrame({'id': ['B1', 'B2', 'B3', 'B4'],
+					'City': ['MUMBAI', 'UDAIPUR', 'RISHIKESH', 'KASHMIR']})
+
+# append method
+result = dataFrame1.append(dataFrame2)
+display(result)
+
+Output:
+
+Explanation:
+In the above code, we have merged two dataframes using the append method.
+
+
+Next TopicHow to make a Python auto clicker
+
+
+
+
+← prev
+next →
+
+
+
+

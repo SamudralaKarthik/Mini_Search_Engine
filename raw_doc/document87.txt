@@ -1,0 +1,56 @@
+
+
+
+
+next →
+← prev
+
+How to read CSV file in Python?
+The CSV file stands for a comma-separated values file. It is a type of plain text file where the information is organized in the tabular form. It can contain only the actual text data. The textual data don't need to be separated by the commas (,). There are also many separator characters such as tab (\t), colon(:), and semi-colon(;), which can be used as a separator. Let's understand the following example.
+Here, we have an example.txt file.
+
+name, rollno, Department
+Peter Parker, 009001, Civil
+Tony Stark, 009002, Chemical
+
+Example -
+
+# Read CSV file example
+# Importing the csv module
+import csv
+# open file by passing the file path.
+with open(r'C:\Users\DEVANSH SHARMA\Desktop\example.csv') as csv_file:
+    csv_read = csv.reader(csv_file, delimiter=',')  #Delimeter is comma 
+    count_line = 0 
+    # Iterate the file object or each row of the file
+    for row in csv_read:
+        if count_line == 0:
+            print(f'Column names are {", ".join(row)}')
+            count_line += 1
+        else:
+            print(f'\t{row[0]} roll number is:  {row[1]} and department is: {row[2]}.')
+            count_line += 1
+    print(f'Processed {count_line} lines.') # This line will print number of line fro the file
+
+Output:
+Column names are name, rollnu, Department
+	Peter Parker roll number is:  009001 and department is: Civil.
+	Tony Stark roll number is:  009002 and department is: Chemical.
+Processed 3 lines.
+
+Explanation:
+In the above code, we imported the csv module to read the example.csv file. To read the csv, we pass our file's full path in the open() method. We used the built-in function csv.reader(), it takes two argument file object and delimiter. We initialized the count_line variable with 0. It counts the number of line from the csv file.
+Now, we iterated the each row of the csv file object. The data is returned by removing the delimiters. The first row returned which contains the column names.
+
+
+Next TopicHow to run Python Program
+
+
+
+
+← prev
+next →
+
+
+
+

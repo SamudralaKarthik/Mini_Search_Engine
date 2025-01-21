@@ -1,0 +1,255 @@
+
+
+
+
+next →
+← prev
+
+Python Data Analytics
+Data Analysis can help us to obtain useful information from data and can provide a solution to our queries. Further, based on the observed patterns we can predict the outcomes of different business policies.
+Understanding the basic of Data Analytics
+Data
+The kind of data on which we work during the analysis is mostly of the csv (comma separated values) format. Usually, the first row in the csv files represents as headers.
+Packages Available
+There's a diversity of libraries available in Python packages that can facilitate easy implementation without writing a long code.
+Examples of some of the packages are-
+
+Scientific computing libraries such as NumPy, Pandas & SciPy.
+Visualization libraries such as Matplotlib and seaborn.
+Algorithm libraries such as scikit-learn and statsmodels.
+
+Importing & Exporting Datasets
+The two essential things that we must take care of while importing the datasets are-
+
+Format- It refers to the way a file is encoded. The examples of prominent formats are .csv,.xlsx,.json, etc.
+Path of File- The path of the file refers to the location of the file where it is stored. It can be available either in any of the drives or some online source.
+
+It can be done in the following way-
+Example -
+
+import pandas as pd
+path=" "
+df = pd.read_csv(path)
+
+If the dataset doesn't contain a header, we can specify it in the following way-
+
+df = pd.read_csv(path,header=None)
+
+To look at the first five and last five rows of the dataset, we can make use of df.head() and df.tail() respectively.
+Let's have a look at how we can export the data, if we have a file present in the .csv format then,
+
+path = " "
+df.to_excel(path)
+
+Data Wrangling
+Data wrangling is a process of converting the data from a raw format to the one in which it can be used for analysis
+Let us see what this part encompasses-
+How to deal with missing values?
+Missing values - Some entries are left blank because of the unavailability of information. It is usually represented with NaN, ? or 0.
+Let us discuss how we can deal with them-
+The best option is to replace the numerical variable with their average and the categorical variable with the mode.
+Sometimes a situation might occur, when we have to drop the missing value, it can be done using-
+
+df.dropna() 
+
+If we want to drop a row, we have to specify the axis as 0. If we want to drop a column, we have to specify the axis as 1.
+Moreover, if we want these changes to directly occur in the dataset, we will specify one more parameter inplace = True.
+Now let's see how the values can be replaced-
+The syntax is -
+
+df.replace(missing value, new value)
+
+Here we will make a variable and store the mean of the attribute (whose value we want to replace) in it
+
+mean=df["attribute name"].mean()
+df["attribute name"].replace(np.nan,mean)
+
+How to proceed with data formatting?
+It refers to the process of bringing the data in a comprehensible format. For example - Changing a variable name to make it understandable.
+Normalization of Data
+The features present in the dataset have values that can result in a biased prediction. Therefore, we must bring them to a range where they are comparable.
+To do the same, we can use the following techniques on an attribute-
+
+Simple Feature Scaling Xn=Xold/Xmax
+Min-Max approach Xn=Xold-Xmin/Xmax-Xmin
+Z-score Xn=Xold-µ/Ꝺ
+µ - average value
+Ꝺ-standard deviation
+
+How to convert categorical variables into numeric variables?
+Under this, we proceed with a process called "One-Hot Encoding", let's say there's an attribute that holds categorical values. We will make dummy variables from the possibilities and assign them 0 or 1 based on their occurrence in the attribute.
+To convert categorical variables to dummy variables 0 or 1, we will use
+
+pandas.get_dummies(df["attribute-name"])
+This will generate the expected results.
+
+Binning in Python
+It refers to the process of converting numeric variables into categorical variables.
+Let's say we have taken an attribute 'price' from a dataset. We can divide its data into three categories based on the range and then denote them with names such as low-price, mid-price, and high price.
+We can obtain the range using linspace() method
+
+bin = np.linspace(min(df["attribute-name"]),max(df["attribute-name"]),4)
+cat_names=["low-price","mid-price","high-price"]
+df["bin_name"]=pd.cut(df["attribute-name"],bin,labels=cat_names)
+
+Exploratory Data Analysis
+Statistics
+We can find out the statistical summary of our dataset using describe() method. It can be used as df.describe(). The categorical variables can be summarized using value_counts() method.
+Using GroupBy
+The groupby() method of pandas can be applied to categorical variables. It groups the subsets based on different categories. It can involve single or multiple variables.
+Let us have a look at an example that would help us to understand how it can be used in Python.
+
+df_att=df[['attribute1', 'attribute2', 'attribute3']]
+df_g=df_att.groupby(['attribute1', 'attribute2'], as_index=False).mean()
+df_g
+
+Correlation
+Correlation measures the scope to which two variables are interdependent.
+A visual idea of checking what kind of a correlation exists between the two variables. We can plot a graph and interpret how does a rise in the value of one attribute affects the other attribute.
+Concerning statistics, we can obtain the correlation using Pearson Correlation. It gives us the correlation coefficient and the P-value.
+Let us have a look at the criteria-
+
+
+CORRELATION COEFFICIENT
+RELATIONSHIP
+
+
+1. Close to +1
+Large Positive
+
+
+2. Close to -1
+Large Negative
+
+
+3. Close to 0
+No relationship exists
+
+
+
+
+P-VALUE
+CERTAINITY
+
+
+P-value<0.001
+Strong
+
+
+P-value<0.05
+Moderate
+
+
+P-value<0.1
+Weak
+
+
+P-value>0.1
+No
+
+
+We can use it in our piece of code using scipy stat package.
+Let's say we want to calculate the correlation between two attributes, attribute1 and attribute2-
+
+pearson_coef,p_value=stats.pearsonr(df["attribute1"],df["attribute2"]).
+
+Further to check the correlation between all the variables, we can create a heatmap.
+Relationship between two categorical variables
+The relationship between two categorical variables can be calculated using the chi-square method.
+
+scipy.stats.chi2_contingency(cont_table, correction=True)
+
+How to Develop a Model?
+First, let us understand what is a model?
+A model can refer to an equation that helps us to predict the outcomes.
+
+Linear Regression & Multiple Linear Regression
+
+Linear Regression - As the name suggests, it involves only a single independent variable to make a prediction.
+Multiple Regression - It involves multiple independent variables to make a prediction.
+The equation for a simple linear regression can be represented as-
+y=b0x+b1
+Here,
+y-dependent variable
+x - independent variable
+b0-slope
+b1-intercept
+To implement Linear Regression in Python-
+
+from sklearn.linear_model import LinearRegression
+lm=LinearRegression()
+X=df["attribute-name1"]
+Y=df["attribute-name1"]
+lm.fit(X,Y)
+yp=lm.predict(X)
+
+Using Visualization to evaluate our model
+Creating plots is a good practice since they show the strength of correlation and whether the direction of the relationship is positive or negative.
+Let us have a look at the different plots that can help us to evaluate our model-
+1. Using Regression Plot
+
+import seaborn as sns
+sns.regplot(x="attribute1",y="attribute2",data=df)
+plt.ylim(0,)
+
+2. Using Residual Plot
+
+import seaborn as sns
+sns.residplot(df["attribute1"],df["attribute2"])
+
+In Sample Evaluation
+Here, we will discuss how we can evaluate our model numerically, the two ways of doing the same are-
+1. Mean Square Error(MSE)
+This method takes the difference between the actual and predicted value, squares it, and then finally calculates their average.
+We can implement the same in Python using-
+
+from sklearn.metrics 
+import mean_squared_error
+mean_squared_error(df['target-variable'],Y_predict_simple_fit)
+
+2. R-squared
+R-squared is also known as the coefficient of determination. It shows the closeness of data with the fitted regression line. It can be used in Python using the score() method.
+
+X=df["attribute-1"]
+Y=df["attribute-2"]
+lm.fit(X,Y)
+lm.score(X,Y)
+
+Decision Making
+In a nutshell, we have to take care of the following things when we are evaluating a model-
+
+Use visualization
+Use numerical evaluation methods.
+
+How to Evaluate a Model?
+Evaluating our model is an integral element since it tells how perfectly our data fits the model. Now, we will discuss how we can use the training data to predict the results.
+The key idea is to split our dataset into training and testing. The training dataset is used to build our model and the testing dataset is used to assess the performance of our model.
+It can be implemented in Python using-
+
+ from sklearn.model_selection import train_test_split
+x_train,y_train,x_test,y_test=train_test_split(x_data,y_data,test_size=' ',random_state=' ')
+
+Overfitting and Underfitting
+Overfitting- It is the condition when the model is quite simple to fit the data.
+Underfitting - It is the condition when the model easily adjusts the noise factor rather than the function.
+Ridge Regression
+This is used when we are dealing with the variables of tenth degree. Here we introduced a factor called alpha. Let us see how we can implement this in Python.
+
+from sklearn.linear_model import Ridge
+RModel=Ridge(alpha=0.1)
+RModel.fit(X,Y)
+Yp=RModel.predict(X)
+
+
+
+Next TopicPython seek() Method
+
+
+
+
+← prev
+next →
+
+
+
+

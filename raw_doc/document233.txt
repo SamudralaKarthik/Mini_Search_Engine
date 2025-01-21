@@ -1,0 +1,325 @@
+
+
+
+
+next →
+← prev
+
+Metaprogramming with Metaclasses in Python
+Metaprogramming might sound new, but if the user has ever worked with Decorators or metaclasses, they have used metaprogramming in their projects. Therefore, we can say that metaprogramming is the program that is used for manipulating the program.
+In this tutorial, we will discuss the metaclasses and their uses and what their alternatives are. As this is an advanced topic of Python, the users are advised to revise the basic concepts of "Decorators in Python" and "OOPS concepts in Python" before starting this tutorial.
+Metaclasses
+In Python, every module or function is associated with some type. For example, if a user has a variable that has the integer value, then it is associated with an "int" type. The user can know the type of anything by using the type() method.
+Example:
+
+number = 13
+print("Type of number is:", type(num))
+ 
+list = [3, 7, 8]
+print("Type of list is:", type(list))
+ 
+name = "Mark Jackson"
+print("Type of name is:", type(name))
+
+Output:
+Type of number is: <class 'int'>
+Type of list is: <class 'list'>
+Type of name is: <class 'str'>
+
+Explanation -
+Every type in Python is defined by class. Therefore, in the above example, they are the object of 'int,' 'list' or 'str' class type, unlike C language or Java language in which int, char, and float are the primary data types. The users can create the new type by creating the class of that type. For example, we can create a new type of Object by City class.
+Example:
+
+class City:
+    pass
+City_object = City()
+ 
+# now, we will print the type of object of City class
+print("Type of City_object is:", type(City_object))
+
+Output:
+Type of City_object is: <class '__main__.City'>
+
+The class in Python is also an object, and therefore, like other objects, it is an instance of Metaclass. The metaclass is a special class type which is responsible for creating classes and Class object. So, for example, if the user wants to find the type of the "City" class, they will find out that it is "type."
+Example:
+
+class City:
+    pass
+ 
+# now, we will print the type of the City class
+print("Type of City class is:", type(City))
+
+Output:
+Type of City class is: <class 'type'>
+
+As the classes are also an object, we can modify them. For example, the user can add or subtract fields or functions in the class as we do with other objects.
+Example:
+
+# First, we will define the class without any using any class methods or variables.
+class City:
+    pass
+ 
+# now, we will define the method variables
+City.a = 65
+ 
+# we will now, define the class methods
+City.foo = lambda self: print('Pune')
+ 
+# then, we will create the object
+userobject = City()
+ 
+print(userobject.a)
+userobject.foo()
+
+Output:
+65
+Pune
+
+We can summarize the whole metaclass as:
+Metaclass is used for creating Classes, and these classes can create the objects.
+
+The metaclass is responsible for creating the classes so the user can write their customized metaclasses by inserting code or extra actions for modifying the way classes are created. Usually, the user does not need the customized metaclass, but in exceptional cases, it is necessary.
+There are some issues that can be resolved by using metaclass or non-metaclass, but there are some cases in which the only metaclass is used for resolving them.
+How to Create Customized Metaclass
+For creating the customized metaclass, the user customized metaclass has to inherit type metaclass and usually override, such as:
+
+__new__(): The __new__() function is classes before __int__() function. this is used for creating the object and return it. The user can override this function for controlling how the objects are created. 
+__int__(): The __int__() function is used for initializing the created object which is passed as the parameter.
+
+The users can create the classes by using the type() method directly. The type() method can be called in the following ways:
+
+As shown in the previous example, the user can call it with one argument, and it will return the type.
+The user can call it in three parameters. It will create the class. The following arguments are passed in it:
+
+Name of class
+Pass the tuple which has base classes inherited by class
+Class dictionary: This will be served as the local namespace for class, which is populated with functions and variables.
+
+
+Example:
+
+def City_method(self):
+    print("This is City class method!")
+ 
+# we will create the base class
+class Base:
+    def userfunction(self):
+        print("This is a inherited method!")
+ 
+# we will create the city class dynamically by using
+# type() function.
+City = type('City', (Base, ), dict(a = "Mark Jackson", user_method = City_method))
+ 
+# now, we will print the type of City
+print("The Type of City class: ", type(City))
+ 
+# we will create the instance of City class
+City_object = City()
+print(" The Type of City_object: ", type(City_object))
+ 
+# we will now call the inherited method
+City_object.userfunction()
+ 
+# we will call the City class method
+City_object.user_method()
+ 
+# at last we will print the variable
+print(City_object.a)
+
+Output:
+The Type of City class:  <class 'type'>
+ The Type of City_object:  <class '__main__.City'>
+This is a inherited method!
+This is City class method!
+Mark Jackson
+
+Now, let's see how to create a metaclass without using the type() function directly. For example, we will create the metaclass called MultiBases, which will check if the class being created has inherited from more than one base class. If so, it will raise an error.
+Example:
+
+# Inside the metaclass
+class MultiBases(type):
+    # we will override the __new__() function
+    def __new__(city, city_name, bases, citydict):
+        # if the number of base classes are greator than 1
+        # it will raise an error
+        if len(bases)>1:
+            raise TypeError("There are inherited multiple base classes!!!")
+         
+        # else it will execute the __new__() function of super class, that is
+        # it will call the __init__() function of type class
+        return super().__new__(city, city_name, bases, citydict)
+ 
+# the metaclass can be specified by using 'metaclass' keyword argument
+# now we will use the MultiBase class for creating classes
+# this will be propagated to all subclasses of Base
+class Base(metaclass = MultiBases):
+    pass
+ 
+# this will raise no error
+class P(Base):
+    pass
+ 
+# this will raise no error
+class Q(Base):
+    pass
+# this will raise no error
+class R(Base):
+    pass
+# This will raise an error!
+class S(P, Q, R):
+    pass
+
+Output:
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-2-409c90c285d5> in <module>
+     29     pass
+     30 # This will raise an error!
+---> 31 class S(P, Q, R):
+     32     pass
+
+<ipython-input-2-409c90c285d5> in __new__(city, city_name, bases, citydict)
+      6         # it will raise an error
+      7         if len(bases)>1:
+----> 8             raise TypeError("There are inherited multiple base classes!!!")
+      9 
+     10         # else it will execute the __new__() function of super class, that is
+
+TypeError: There are inherited multiple base classes!!!
+
+How to Solve the Problem with Metaclass
+There are some problems that users can solve by using metaclass and decorators. But there are some problems whose solution can be found only by using metaclass. Such as, the user wants to debug the class function, what they want is that whenever the class function is executed, it will print their full qualified name before executing their body.
+Example:
+
+from functools import wraps
+ 
+def debugg(funct):
+    '''decorator for debugging passed function'''
+     
+    @wraps(funct)
+    def wrapperr(*args, **kwargs):
+        print("The full name of this Function:", funct.__qualname__)
+        return funct(*args, **kwargs)
+    return wrapperr
+ 
+def debug_methods(clas):
+    '''class decorator make use of debug decorator
+       for debuging the class functions '''
+     
+    # now we will check in the class dictionary for any callable(function)
+    # if there is any, replace it with debugged version
+    for key, value in vars(clas).items():
+        if callable(value):
+            setattr(clas, key, debugg(value))
+    return clas
+ 
+# sample class
+@debugmethods
+class Calculator:
+    def add(self, p, q):
+        return p+q
+    def mul(self, p, q):
+        return p*q
+    def div(self, p, q):
+        return p/q
+     
+user_cal = Calculator()
+print(user_cal.add(5, 8))
+print(user_cal.mul(6, 7))
+print(user_cal.div(21, 7))
+
+Output:
+The full name of this method: Calculator.add
+13
+The full name of this method: Calculator.mul
+42
+The full name of this method: Calculator.div
+3.0
+
+Explanation -
+The above solution is working fine, but there is one problem, which is the user wants to apply the decorator method to all the subclasses which have inherited the "Calculator" class. So in that scenario, the user has to apply the decorator method separately to each subclass, just like we did in the above example for the Calculator class.
+Now, the actual problem is there can be loads of subclasses of the class, and applying the decorator method individually to each subclass is challenging and a time consuming process. So, to resolve this problem, the user must make sure that each subclass has this debug property, they should look for the metaclass based solution.
+Example:
+We will create the class normally and then immediately we will wrap up by using the debug method decorator:
+
+from functools import wraps
+ 
+def debugg(funct):
+    '''decorator for debugging passed function'''
+     
+    @wraps(funct)
+    def wrapperr(*args, **kwargs):
+        print("The full name of this Function:", funct.__qualname__)
+        return funct(*args, **kwargs)
+    return wrapperr
+ 
+def debug_methods(clas):
+    '''class decorator will make use of the debug decorator
+       to the debug class '''
+     
+    for key, value in vars(clas).items():
+        if callable(value):
+            setattr(clas, key, debugg(value))
+    return clas
+ 
+class debug_Meta(type):
+    '''meta class which feed created class object
+       to debug_method for getting debug functionality
+       enabled objects'''
+     
+    def __new__(clas, clasname, bases, clasdict):
+        object = super().__new__(clas, clasname, bases, clasdict)
+        object = debug_methods(object)
+        return object
+     
+# the base class with metaclass 'debug_Meta'
+# now all the subclass of this will have the applied debugging function
+class Base(metaclass = debug_Meta):pass
+ 
+# now, we will inherite the Base
+class Calculator(Base):
+    def add(self, p, q):
+        return p+q
+     
+#and then, we will inherite the Calculator
+class Calculator_adv(Calculator):
+    def mult(self, p, q):
+        return p*q
+
+ 
+# Now Calculator_adv object will show
+# the behaviour og debugging
+
+user_cal = Calculator_adv()
+print(user_cal.add(3, 7))
+user_cal = Calculator_adv()
+print(user_cal.mult(3, 7))
+
+Output:
+The full name of this Function: Calculator.add
+10
+The full name of this Function: Calculator_adv.mult
+21
+
+When the user should use Metaclass
+Users don't use metaclass most often, as metaclasses are mainly used for complicated situations. But there are few cases where the users can use the metaclass:
+
+As shown in the above example, Metaclass is used for generating down the inheritance hierarchies. This will affect all the subclasses also. If the user has such situations, then they can use the metaclass.
+If the user wants to change the class automatically, they can use a metaclass when it is created.
+If the user is an application programming interface developer, they can use metaclasses for that purpose. 
+
+Conclusion
+In this tutorial, we have discussed metaclasses, how to customize the metaclass, and how users can use them to solve problems and complicated programming and their alternatives.
+
+
+Next TopicPrecision Handling in Python
+
+
+
+
+← prev
+next →
+
+
+
+

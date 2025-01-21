@@ -1,0 +1,145 @@
+
+
+
+
+next →
+← prev
+
+vif in Python
+Before discussing about the vif, it is essential to understand first what is multicollinearity in linear regression?
+The situation of multicollinearity arises when two independent variables have a strong correlation.
+Whenever we perform exploratory data analysis, the objective is to obtain a significant parameter that affects our target variable.
+Therefore, correlation is the major step that helps us to understand the linear relationship that exists between two variables.
+What is Correlation?
+Correlation measures the scope to which two variables are interdependent.
+A visual idea of checking what kind of a correlation exists between the two variables. We can plot a graph and interpret how does a rise in the value of one attribute affects the other attribute.
+Concerning statistics, we can obtain the correlation using Pearson Correlation. It gives us the correlation coefficient and the P-value.
+Let us have a look at the criteria-
+
+
+CORRELATION COEFFICIENT
+RELATIONSHIP
+
+
+1. Close to +1
+Large Positive
+
+
+2. Close to -1
+Large Negative
+
+
+3. Close to 0
+No relationship exists
+
+
+
+
+P-VALUE
+CERTAINITY
+
+
+P-value<0.001
+Strong
+
+
+P-value<0.05
+Moderate
+
+
+P-value<0.1
+Weak
+
+
+P-value>0.1
+No
+
+
+Since now we have a detailed idea of correlation, we now understood that if a strong correlation exists between two independent variables of a dataset, it leads to multicollinearity.
+Let's discuss what kind of issues can occur because of multicollinearity-
+
+Since there is a strong relationship, determining the significant variables would be a difficult task.
+The coefficients that we will obtain for the variables can be unstable and as a consequence, the interpretation of a model would be a tedious job.
+Overfitting might occur and the accuracy of the model would change with the dataset.
+
+Checking Multicollinearity
+The two methods of checking the multicollinearity are-
+
+Plotting a heatmap to comprehend the correlation
+Use Variance Inflation Factor
+
+Plotting a heatmap to comprehend the correlation
+Taking a dataset, and plotting a heatmap will help us to infer which attribute has the most significant value of correlation. This value will tell us the extent of influence between the dependent variable and the independent variable.
+Let us have a look at a program that shows how it can be implemented.
+Example -
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+  
+# importing the data
+df = pd.read_csv("/content/SampleSuperstore.csv")
+
+print(df.corr())
+  
+# plotting the correlation heatmap
+df_plot = sns.heatmap(df.corr(), cmap="YlGnBu", annot=True)
+  
+# displaying the heatmap
+plt.show()
+
+Output:
+
+Use Variance Inflation Factor
+The Variance Inflation Factor is the measure of multicollinearity that exists in the set of variables that are involved in multiple regressions.
+Generally, the vif value above 10 indicates that there is a high correlation with the other independent variables.
+Let us have a look at a program that shows how it can be implemented.
+Example -
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from statsmodels.tools.tools import add_constant
+import pandas as pd
+
+df = pd.DataFrame(
+    {'x': [2, 2, 4, 1, 3],
+     'y': [1, 1, 2, 3, 2],
+     'z': [7, 4, 8, 6, 9],
+     'w': [5, 4, 3, 4, 5]}
+)
+
+X = add_constant(df)
+ds=pd.Series([variance_inflation_factor(X.values, i) 
+               for i in range(X.shape[1])], 
+              index=X.columns)
+print(ds)
+
+Output:
+
+
+Different ways to resolve the issue of Multicollinearity-
+
+Selection of Variables
+
+The variables should be selected in a way that the ones which are highly correlated are removed and we make use of only the significant variables.
+
+Transformation of Variables
+
+Transformation of variables is an integral step and here the motive is to maintain the feature but performing a transformation can give us a range that won't produce a biased result.
+
+Principal Component Analysis
+
+Principal Component Analysis is dimensionality reductions technique through which we can obtain the significant features of a dataset that strongly influence our target variable.
+One thing that we must take care of while implementing PCA is that we should not lose the essential features and try to reduce them in a way that we gather the maximum possible information.
+
+
+Next Topic__add__ Method in Python
+
+
+
+
+← prev
+next →
+
+
+
+

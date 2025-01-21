@@ -1,0 +1,214 @@
+
+
+
+
+next →
+← prev
+
+Shallow Copy and Deep Copy in Python
+In this tutorial, we will learn how we can create shallow copy and deep copy using the Python script. Generally, we use the = (assignment operator) to create a copy of the Python object. Let's understand the full concept related to creating copies in Python.
+Copy in Python
+As we all know, the assignment operator is used to create the copy of the Python object, but this is not true; it only create the binding between a target and object. When we use the assignment operator, instead of creating a new object, it creates a new variable that shares the old object's reference.
+The copies are helpful when a user wants to make changes without modifying the original object at the same time. A user also prefers to create a copy to work with mutable objects.
+Let's understand the following example.
+Example -
+
+list1 = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
+list2 = list1
+
+list2[1][2] = 4
+
+print('Old List:', list1)
+print('ID of Old List:', id(list1))
+
+print('New List:', list2)
+print('ID of New List:', id(list2))
+
+Output:
+Old List: [[1, 2, 3], [4, 5, 4], [7, 8, 'a']]
+ID of Old List: 1909447368968
+New List: [[1, 2, 3], [4, 5, 4], [7, 8, 'a']]
+ID of New List: 1909447368968
+
+Explanation -
+In the above output, we can see that both variable list1 and list2 share the same id 1909447368968.
+If we make any changes in any value in list1 or list2, the change will reflect in both.
+Types of Copies in Python
+The main motive is to create a copy of Python object that we can modify the copy without changing the original data. In Python, there are two methods to create copies.
+
+Shallow Copy
+Deep Copy
+
+We will use the copy module to create the above copies.
+The copy Module
+The copy module is used to create the shallow copy and deep copy. Let's see the each method.
+Shallow Copy
+A shallow copy is a copy of an object that stores the reference of the original elements. It creates the new collection object and then occupying it with reference to the child objects found in the original.
+It makes copies of the nested objects' reference and doesn't create a copy of the nested objects. So if we make any changes to the copy of the object will reflect in the original object. We will use the copy() function to implement it.
+Example -
+
+# importing "copy" for copy operations 
+import copy 
+
+# initializing list 1 
+list1 = [1, 7, [3,5], 8] 
+
+# using copy to shallow copy 
+list2 = copy.copy(list1) 
+
+# original elements of list 
+print ("The original elements before shallow copying") 
+for i in range(0,len(list1)): 
+   print (list1[i],end=" ") 
+
+print("\r") 
+
+# adding and element to new list 
+list2[2][0] = 10
+
+# checking if change is reflected 
+print ("The original elements after shallow copying") 
+for i in range(0,len( list1)): 
+   print (list1[i],end=" ") 
+
+Output:
+The original elements before shallow copying
+1 7 [3, 5] 8 
+The original elements after shallow copying
+1 7 [10, 5] 8
+
+In the above code, we made chance in the list1 that reflected in the other list.
+Example - 2
+
+import copy
+
+list1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+list2 = copy.copy(list1)
+
+list1.append([13, 14,15])
+
+print("Old list:", list1)
+print("New list:", list2)
+
+Output:
+Old list: [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15]]
+New list: [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+
+Explanation -
+In the above code, we have created a shallow copy of list1. The newly created list2 contains the reference of the original nested object stored in list1. We have then appended the [13, 14, 15] into the old list and sublist not copied in the new list.
+Deep Copy in Python
+A deep copy is a process where we create a new object and add copy elements recursively. We will use the deecopy() method which present in copy module. The independent copy is created of original object and its entire object. Let's understand the following example.
+Example -
+
+import copy
+x = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+z = copy.deepcopy(xs)
+print(x)
+prin(z)
+
+Output:
+[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+Explanation -
+In the above output, we can see that z is a clone of x that we have created using the deecopy() method. If we make change to one of child won't affect the original object.
+Both objects are fully independent in the deep copy. The list x was cloned recursively, including all of its child objects.
+
+import copy
+x = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+z = copy.deepcopy(x)
+
+x[2][2] = 'Hello'
+print(x)
+
+Example - 2:
+
+import copy 
+
+list1 = [0, [1, 2], [3,5], 4] 
+
+# using deepcopy to deep copy 
+list2 = copy.deepcopy(list1) 
+
+# original elements of list 
+print ("The original list: ")
+for i in range(0,len(list1)): 
+   print (list1[i],end=" ") 
+
+print("\r") 
+
+# adding and element to new list 
+list2[1][0] = 8
+
+# Change is reflected in l2 
+print ("The new list after deep copying: ")
+for i in range(0,len( list1)): 
+   print (list2[i],end=" ") 
+
+print("\r") 
+
+# Change is NOT reflected in original list 
+# as it is a deep copy 
+print ("The original elements:")
+for i in range(0,len( list1)): 
+   print (list1[i],end=" ") 
+
+Output:
+The original list: 
+0 [1, 2] [3, 5] 4 
+The new list after deep copying: 
+0 [8, 2] [3, 5] 4 
+The original elements:
+0 [1, 2] [3, 5] 4
+
+Copying Arbitrary Python Objects
+We can also copy the arbitrary Python objects including custom classes using copy method. The copy.copy() and copy.deepcopy() method can be used to duplicate any objects.
+Let's understand the following example.
+Example -
+
+import copy
+class Func_New:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+      return 'Func_new(%r, %r)' % (self.x, self.y)
+
+a = Func_New(50, 56)
+b = copy.copy(a)
+
+print(a)
+print(b)
+
+print(a is b)
+print(b is a)
+
+Output:
+Func_new(50, 56)
+Func_new(50, 56)
+False
+False
+
+Explanation -
+In the above code, we have created a user define class named Func_new and we defined the __repr__() to inspect objects. Next, we created the shallow copy using the copy module. We instantiated the class and check whether the both original and its shallow copy.
+Points to Remember
+The compound objects are the main difference between the shallow and deep copy. The objects that contain other objects, such as a list or class instance, are called list or class instances.
+
+A shallow copy creates a new compound object and then adds a reference to the object found in the original.
+A deep copy creates a new compound object and then adds a reference to the object found in the original.
+We can copy arbitrary objects (including custom classes) with the copy module.
+
+
+
+Next TopicAtom Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,361 @@
+
+
+
+
+next →
+← prev
+
+Types of Constant in Python | Importance of Constant in Python
+In this tutorial, we will learn about the constant types and how they help improve code readability. If you are unfamiliar, the constants are the names representing values that don't change during the program's execution. They are the most common fundamental concept in programming. However, Python doesn't have a dedicated syntax for defining constants. In general, Python constants are variable that never changes. We will have a detailed discussion on the Python constant in the upcoming section.
+What are Constants?
+Generally, a constant term is used in Mathematics, a value or quantity that never changes. In programming, a constant refers to the name associated with a value that never changes during the programming execution. Programming constant is different from other constants, and it consists of two things - a name and an associated value. The name will describe what the constant is all about, and the value is the concrete expression of the constant itself.
+Once we define the constant, we can only access its value but cannot change it over time. However, we can modify the value of the variable. A real-life example is - The speed of light, the number of minutes in an hour, and the name of a project's root folder.
+Why Use Constant?
+In programming languages, Constants allow us to protect from accidentally changing their value which can cause hard-to-debug errors. It is also helpful to make code more readable and maintainable. Let's see some advantages of constant.
+
+Improved Readability - It helps to improve the readability of the code. For example, it is easier to read and understand a constant named MAX_SPEED than the substantial speed value itself.
+Clear communication of intent - Most developers consider the 3.14 as the pi constant. However, the Pi, pi, or PI name will communicate intent more clearly. This practice will allow another developer to understand our code.
+Better Maintainability - Constants allow us to use the same value throughout your code. Suppose we want to update the constant's value; we don't need to change every instance.
+Low risk of errors - A constant representing a given value throughout a program is less error-prone. If we want to change the precision in the calculations, replacing the value can be risky. Instead of replacing it, we can create different constants for different precision levels and change the code where we needed.
+Thread-safe data storage - A constants are thread-safe objects, meaning several threads can simultaneously use a constant without risking losing data.
+
+User-Defined Constants
+We need to use the naming convention in Python to define the constant in Python. We should write the name in capital letters with underscores separating words.
+Following are the example of the user-defined Python constants -
+
+PI = 3.14
+MAX_SPEED = 300
+DEFAULT_COLOR = "\033[1;34m"
+WIDTH = 20
+API_TOKEN = "567496396372"
+BASE_URL = "https://api.example.com"
+DEFAULT_TIMEOUT = 5
+BUILTINS_METHODS = ("sum", "max", "min", "abs")
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    ...
+] 
+
+We have used the same way as we create variables in Python. So we can assume that Python constants are just variables, and the only distinction is that the constant uses uppercase letters only.
+Using uppercase letters makes the constant stand out from our variables and is a useful or preferred practice.
+Above we discussed the user-defined users; Python also provides several internal names that can consider and should treat as constants.
+Important Constants in Python
+In this section, we will learn about some internal constants which are used to make Python code more readable. Let's understand some important constants.
+Built-in Constants
+In the official documentation, the True and False are listed as the first constant. These are Python Boolean values and are the instance of the int. A True has a value of 1, and False has a value 0.
+Example -
+
+>>> True
+True
+>>> False
+False
+
+>>> isinstance(True, int)
+True
+>>> isinstance(False, int)
+True
+
+>>> int(True)
+1
+>>> int(False)
+0
+
+>>> True = 42
+    ...
+SyntaxError: cannot assign to True
+
+>>> True is True
+True
+>>> False is False
+True
+
+Remember that True and False names are strict constants. In other words, we cannot reassign them, and if we try to reassign them, we will get a syntax error. These two values are singleton objects in Python, meaning only one instance exists.
+Internal Dunder Names
+Python also has many internal dunder names that we can consider constants. There are several of these unique names, we will learn about __name__ and __file__ in this section.
+The __name__ attribute is related to how to run a given piece of code. When importing a module, Python internal set the __name__ to a string containing the name of the module.
+new_file.py
+
+print(f"The type of __name__ is: {type(__name__)}")
+print(f"The value of __name__ is: {__name__}")
+
+In the command-line and type the following command - 
+
+python -c "import new_file"
+
+The -c is used to execute a small piece of code of Python at the command line. In the above example, we imported the new_file module, which displays some messages on the screen.
+Output -
+The type of __name__ is: <class 'str'>
+The value of __name__ is: timezone
+
+As we can see that the __name__ stores the __main__ string, indicates that we can run the executable files directly as Python program.
+On the other hand, the __file__ attribute has the file that Python is currently importing or executing. If we use the __file__ attribute inside the file, we will get the path to the module itself.
+Let's see the following example -
+Example -
+
+print(f"The type of __file__ is: {type(__file__)}")
+print(f"The value of __file__ is: {__file__}")
+
+Output:
+The type of __file__ is: <class 'str'>
+The value of __file__ is: D:\Python Project\new_file.py 
+
+We can also run directly and will get the same result.
+Example -
+
+print(f"The type of __file__ is: {type(__file__)}")
+print(f"The value of __file__ is: {__file__}")
+
+Output:
+python new_file.py
+The type of __file__ is: <class 'str'>
+The value of __file__ is: timezone.py
+
+Useful String and Math Constants
+There are many valuable constants in the standard library. Some are strictly connected to specific modules, functions, and classes; many are generic, and we can use them in several scenarios. In the below example, we will use the math and string-related modules math and string, respectively.
+Let's understand the following example -
+Example -
+
+>>> import math
+>>> math.pi
+3.141592653589793
+>>> math.tau
+6.283185307179586
+>>> math.nan
+nan 
+>>> math.inf
+inf
+>>> math.sin(30)
+-0.9880316240928618
+>>> math.cos(60)
+-0.9524129804151563
+>>> math.pi
+3.141592653589793
+
+These constants will play a vital role when we write math-related code or perform some specific computations.
+Let's understand the following example -
+Example -
+
+import math
+
+class Sphere:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return math.pi * self.radius**2
+
+    def perimeter(self):
+        return 2 * math.pi * self.radius
+
+    def projected_volume(self):
+        return 4/3 * math.pi * self.radius**3
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(radius={self.radius})"
+
+In the above code, we have used the math.pi instead of custom PI constants. The math-related constant provides the more contexts to the program. The advantage of using math.pi constant is that if we are using an older version of Python, we will get a 32-bit version of Pi. If we use the above program in modern version of Python, we will get a 64-bit version of pi. So our program will self-adapt of its concrete execution environment.
+The string module also provides some useful built-in string constants. Below is the table of the name and value of each constant.
+
+
+Name
+Value
+
+
+ascii_lowercase
+Abcdefghijklmnopqrstuvwxyz
+
+
+ascii_uppercase
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+
+ascii_letters
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+
+
+digits
+0123456789
+
+
+hexdigits
+0123456789abcdefABCDEF
+
+
+octdigits
+01234567
+
+
+We can use these string-related constants in regular expressions, processing natural language, with the lot of string processing, and more.
+Type-Annotating Constants
+Since Python 3.8, the typing module includes a Final class that allows us to type-annotate constants. If we use the Final class to define the constants in the program, we will get the static type error that the mypy checker checks and it will show that we cannot reassign to the Final name. Let's understand the following example.
+Example -
+
+from typing import Final
+
+MAX_Marks: Final[int] = 300
+MAX_Students: Final[int] = 500
+
+MAX_Marks = 450 # Cannot assign to final name "MAX_SPEED" mypy(error)
+
+We specified the constant variable with the Final Class that indicated the type error to report an error if a declared name is reassigned. However, it gets a report of a type checker's error; Python does change the value of MAX_SPEED. So, Final doesn't prevent constant accidental reassignment at runtime.
+String Constants
+As discussed in the earlier section, Python doesn't support strict constants; it just has variables that never change. Therefore, the Python community follows the naming convention of using the uppercase letter to identify the constant variables.
+It can be an issue if we work on a large Python project with many programmers at different levels. So it would be good practice to have a mechanism that allows us to use strict constants. As we know, Python is a dynamic language, and there are several ways to make constants unchangeable. In this section, we will learn about some of these ways.
+The .__slots__ Attributes
+Python classes provide the facility to use the __slots__ attributes. The slot has the special mechanism to reduce the size of the objects. It is a concept of memory optimization on objects. If we use the __slots__ attribute in the class, we won't be able to add the new instance, because it doesn't use __dict__ attributes. Additionally, not having a .__dict__ attribute implies an optimization in terms of memory consumption. Let's understand the following example.
+Example - Without using __slots__ attributes
+
+class NewClass(object):
+      def __init__(self, *args, **kwargs):
+                self.a = 1
+                self.b = 2
+  
+if __name__ == "__main__":
+     instance = NewClass()
+     print(instance.__dict__)
+
+Output -
+{'a': 1, 'b': 2}
+
+Every object in Python contains a dynamic dictionary that allows adding attributes. Dictionaries consume lots of memory, and using __slots__ reduces the wastage of space and memory. Let's see another example.
+Example -
+
+class ConstantsName:
+    __slots__ = ()
+    PI = 3.141592653589793
+    EULER_NUMBER = 2.718281828459045
+    
+constant = ConstantsName()
+print(constant.PI)
+print(constant.EULER_NUMBER)
+constant.PI = 3.14
+print(constant.PI)
+
+Output -
+3.141592653589793
+2.718281828459045
+Traceback (most recent call last):
+  File "<string>", line 10, in <module>
+AttributeError: 'ConstantsName' object attribute 'PI' is read-only
+
+In the above code, we initialized the class attributes with the slots attributes. The variable has a constant value, if we try to reassign the variable, we will get an error.
+The @property Decorator
+We can also use @property decorator to create a class that works as a namespace for constants. We just need to define the constants property without providing them with a setter method. Let's understand the following example.
+Example -
+
+class ConstantsName:
+    @property
+    def PI(self):
+        return 3.141592653589793
+    @property
+    def EULER_NUMBER(self):
+        return 2.718281828459045
+    
+constant = ConstantsName()
+print(constant.PI)
+print(constant.EULER_NUMBER)
+constant.PI = 3.14
+print(constant.PI)
+
+Output -
+3.141592653589793
+2.718281828459045
+Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+AttributeError: can't set attribute
+
+They are just read-only properties, if we try to reassign, we will get an AttributeError.
+The namedtuple() Factory Function
+Python's collection module comes with the factory function called namedtuple(). Using the namedtuple() function, we can use the named fields and the dot notation to access their items. We know that tuples are immutable, which means we cannot modify an existing named tuple object in place.
+Let's understand the following example.
+Example -
+
+from collections import namedtuple
+ConstantsName = namedtuple(
+    "ConstantsName", ["PI", "EULER_NUMBER"]
+)
+    
+constant = ConstantsName(3.141592653589793, 2.718281828459045)
+print(constant.PI)
+print(constant.EULER_NUMBER)
+constant.PI = 3.14
+print(constant.PI)
+
+Output -
+3.141592653589793
+2.718281828459045
+Traceback (most recent call last):
+  File "<string>", line 17, in <module>
+AttributeError: can't set attribute
+
+The @dataclass Decorator
+As its name suggests, the data class holds data, they can consist of methods, but it is not their primary goal. We need to use the @dataclass decorator to create the data classes. We can also create the strict constants. The @dataclass decorator takes a frozen argument that allows us to mark our data class as immutable. The advantages of using @dataclass decorator, we cannot modify its instance attribute.
+Let's understand the following example.
+Example -
+
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class ConstantsName:
+    PI = 3.141592653589793
+    EULER_NUMBER = 2.718281828459045
+    
+constant = ConstantsName()
+print(constant.PI)
+print(constant.EULER_NUMBER)
+constant.PI = 3.14
+print(constant.PI)
+
+Output -
+3.141592653589793
+2.718281828459045
+Traceback (most recent call last):
+  File "<string>", line 19, in <module>
+File "<string>", line 4, in __setattr__
+dataclasses.FrozenInstanceError: cannot assign to field 'PI'
+
+Explanation -
+In the above code, we have imported the @dataclass decorator. We used this decorator to ConstantsName to make it a data class. We set the frozen argument to True to make the data class immutable. We created the instance of the data class, and we can access all the constants but cannot modify them.
+The .__setattr__() Special Method
+Python allows us to use a special method called .__setattr__(). Using this method, we can customize the attribute assignment process because Python automatically calls the method on every attribute assignment. Let's understand the following example -
+Example -
+
+class ConstantsName:
+    PI = 3.141592653589793
+    EULER_NUMBER = 2.718281828459045
+    
+    def __setattr__(self, name, value):
+        raise AttributeError(f"can't reassign constant '{name}'")
+    
+constant = ConstantsName()
+print(constant.PI)
+print(constant.EULER_NUMBER)
+constant.PI = 3.14
+print(constant.PI)
+
+Output -
+3.141592653589793
+2.718281828459045
+Traceback (most recent call last):
+  File "<string>", line 22, in <module>
+File "<string>", line 17, in __setattr__
+AttributeError: can't reassign constant 'PI'
+
+The __setattr__() method doesn't allow to perform any assignment operation on the class's attributes. If we try to reassign, it just raise an AttributeError.
+Conclusion
+Constants are most used in concept in programming especially in mathematical term. In this tutorial, we have learned about the important concepts of the constants and its flavors. Python community uses uppercase letter as a name convention to identify the constants. However, we have discussed some advance ways to use the constants in Python. We have discussed how to improve code's readability, reusability and maintainability with constants. We mentioned how to apply various techniques to make our Python constants strictly constant.
+
+
+Next TopicWrite a Python Program to Sort an Odd-Even sort or Odd even transposition Sort
+
+
+
+
+← prev
+next →
+
+
+
+

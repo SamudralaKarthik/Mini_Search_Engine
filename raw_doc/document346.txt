@@ -1,0 +1,146 @@
+
+
+
+
+next →
+← prev
+
+How to Remove Decimal in Python
+We have worked with different kind of numbers in Python and modified their type as per our need.
+In this tutorial, we will discuss how we can remove decimal in Python.
+Let's start with a simple program,
+
+a = 24
+print(type(a))
+b = 19.4
+print(type(b))
+c = 3+4j
+print(type(c))
+
+Output:
+<class 'int'>
+<class 'float'>
+<class 'complex'>
+
+Explanation:
+In the above program, we have declared a,b and c as 24, 19.4, and 3+4j respectively.
+On checking their type, we came to know a belongs to class 'int', b belongs to class 'float' and c belongs to class 'complex'.
+Here we have to work on the float numbers, so let's list out the different methods of removing decimals from numbers.
+
+Using trunc() function
+Using int()
+Using split()
+
+Let's discuss each one of them in detail-
+Using trunc() Function
+In the first program, we will make use of trunc() function and remove the decimal present in the numbers.
+The following program illustrates the same-
+
+import math
+num_value1 = math.trunc(523.771)
+print (num_value1)
+print (type(num_value1))
+num_value2 = math.trunc(21.67)
+print (num_value2)
+print (type(num_value2))
+num_value3 = math.trunc(182.33)
+print (num_value3)
+print (type(num_value3))
+num_value4 = math.trunc(211.54)
+print (num_value4)
+print (type(num_value4))
+num_value5 = math.trunc(19.1)
+print (num_value5)
+print (type(num_value5))
+
+Output:
+523
+<class 'int'>
+21
+<class 'int'>
+182
+<class 'int'>
+211
+<class 'int'>
+19
+<class 'int'>
+
+Explanation:
+Let's have a look at the explanation of the above program-
+
+Since we have to use the trunc() function, we have imported the math module.
+We have provided five different decimal values to five variables and checked their type after they are passed in the trunc() function.
+On executing the program, it displays the required output.
+
+Using int()
+It's time to know the second approach which is removing decimal using int().
+The program given below shows how it can be done-
+
+num_value1 = 523.771
+num_value2 = 21.67
+num_value3 = 182.33
+print (type(num_value1))
+print (type(num_value2))
+print (type(num_value3))
+new_value1 = int(num_value1)
+new_value2 = int(num_value2)
+new_value3 = int(num_value3)
+print (new_value1)
+print (new_value2)
+print (new_value3)
+print (type(new_value1))
+
+Output:
+<class 'float'>
+<class 'float'>
+<class 'float'>
+523
+21
+182
+<class 'int'>
+
+Explanation:
+Let's understand what we have done here-
+
+In the first step, we have provided float values to three variables and checked their type.
+After this, we have passed each variable to int() and stored them to a new variable.
+Finally, we have printed the values stored in these variables.
+On executing this program, the expected output is displayed.
+
+Using split()
+Finally, in the last approach, we will use the interesting split() to obtain the integer values.
+The following program illustrates the same-
+
+num_values=[523.771,21.67,182.33,211.54,19.1]
+sp_lst = []
+for ele in num_values:
+	sp_lst.append(str(ele).split('.')[0])
+res_list = [int(i) for i in sp_lst]
+print("The resultant list is: ",res_list)
+
+Output:
+The resultant list is: [523, 21, 182, 211, 19]
+
+Explanation:
+Let's have a look at the explanation of the above program-
+
+In the first step, we have created a list that contains all the decimal values.
+After this, we have declared an empty list and appended the values in it.
+In the next step, we have taken each element from that list and passed it into an int().
+Finally, we have displayed the resultant list that contains the numbers without decimal.
+
+Conclusion
+In this Tutorial, we started with a general idea of the type of numbers we use in Python and then learned the various methods of removing decimals from the numbers.
+
+
+Next TopicPython Closure
+
+
+
+
+← prev
+next →
+
+
+
+

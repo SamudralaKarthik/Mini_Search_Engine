@@ -1,0 +1,133 @@
+
+
+
+
+next →
+← prev
+
+Nested Tuples in Python
+A nested tuple is a Python tuple that has been placed inside of another tuple. Let's have a look at the following 8-element tuple.
+
+tuple = (12, 23, 36, 20, 51, 40, (200, 240, 100))
+
+This last element, which consists of three items enclosed in parenthesis, is known as a nested tuple since it is contained inside another tuple. The name of the main tuple with the index value, tuple[index], can be used to obtain the nested tuple, and we can access each item of the nested tuple by using tuple[index-1][index-2].
+Example of a Nested Tuple
+Code
+
+# Python program to create a nested tuple
+
+# Creating a nested tuple of one element only
+employee = ((10, "Itika", 13000),)
+print(employee)
+
+# Creating a multiple-value nested tuple
+employee = ((10, "Itika", 13000), (24, "Harry", 15294), (15, "Naill", 20001), (40, "Peter", 16395))
+print(employee)
+
+Output:
+((10, 'Itika', 13000),)
+((10, 'Itika', 13000), (24, 'Harry', 15294), (15, 'Naill', 20001), (40, 'Peter', 16395))
+
+Some Operations of Nested Tuples
+We will see two necessary operations of nested tuples.
+Concatenating Tuples to Nested Tuples
+When dealing with tuples, it's occasionally necessary to turn separate records into a nested group while keeping them as independent elements. Tuples are often added by adding the contents, which flattens the resulting container, which is typically undesirable. Let's talk about some approaches to solving this issue.
+Using the + operator and "," during initialization
+In this technique, we add tuple members as we do, but when initializing tuples, we append a comma after each tuple to prevent flattening during addition.
+Code
+
+# Python program to concatenate tuples to make a nested tuple
+
+# initializing the tuples
+tup1 = (5, 4),
+tup2 = (1, 6),
+
+# printing the original tuples
+print("Tuple 1 : " + str(tup1))
+print("Tuple 2 : " + str(tup2))
+
+# Concatenating the two tuples to a nested tuple using the + operator
+nested = tup1 + tup2
+
+# printing the result
+print("The nested tuple : " + str(nested))
+
+Output:
+Tuple 1 : ((5, 4),)
+Tuple 2 : ((1, 6),)
+The nested tuple : ((5, 4), (1, 6))
+
+Using the "," Operator
+This task can be performed by applying the "," operator during concatenation. It can perform safe concatenation. 
+Code
+
+# Python program to concatenate tuples to make a nested tuple
+
+# initializing the tuples
+tup1 = (5, 4)
+tup2 = (1, 6)
+
+# printing the original tuples
+print("Tuple 1 : " + str(tup1))
+print("Tuple 2 : " + str(tup2))
+
+# Concatenating the tuples by using the ", "operator after tuples
+nested = ((tup1, ) + (tup2, ))
+
+# printing result
+print("The nested tuple " + str(nested))
+
+Output:
+Tuple 1 : (5, 4)
+Tuple 2 : (1, 6)
+The nested tuple ((5, 4), (1, 6))
+
+Sorting Nested Tuples
+We can use the sorted() method to sort a given tuple. By default, this method sorts the tuple in ascending order. For instance, print(sorted(employee)) will arrange the tuple "employee" according to the identification number that appears as the 0th member of all the nested tuples. We can use a lambda function to sort our tuple depending on the other elements of the nested tuple, like the employee name or the count, which is the first and the second member of the nested tuples: print(sorted(employee, key = lambda x: x[1])).
+In this case, the key tells the sorted() function, according to which elements we should sort the tuple. The lambda expression: lambda x: x[1] implies that the key, which is the index one element, should be considered for sorting. We can write the lambda expression as lambda x: x[2] to sort our tuple according to the word count.
+Code
+
+# Python program to sort the nested tuple using the sorted() function
+
+# Creating a nested tuple
+employee = ((10, "Itika", 13000), (24, "Harry", 15294), (15, "Naill", 20001), (40, "Peter", 16395))
+
+# Sorting the tuple by default on the id
+print(sorted(employee))
+
+# Sorting the tuple on id in reverse order
+print(sorted(employee, reverse = True))
+
+# Sorting the tuple on name using lambda function
+print(sorted(employee, key = lambda x: x[1]))
+
+# Sorting the tuple on the name in reverse order
+print(sorted(employee, key = lambda x: x[1], reverse = True))
+
+# Sorting the tuple on the word count
+print(sorted(employee, key = lambda x: x[2]))
+
+# Sorting the tuple on the word count in reverse
+print(sorted(employee, key = lambda x: x[2], reverse = True))
+
+Output:
+[(10, 'Itika', 13000), (15, 'Naill', 20001), (24, 'Harry', 15294), (40, 'Peter', 16395)]
+[(40, 'Peter', 16395), (24, 'Harry', 15294), (15, 'Naill', 20001), (10, 'Itika', 13000)]
+[(24, 'Harry', 15294), (10, 'Itika', 13000), (15, 'Naill', 20001), (40, 'Peter', 16395)]
+[(40, 'Peter', 16395), (15, 'Naill', 20001), (10, 'Itika', 13000), (24, 'Harry', 15294)]
+[(10, 'Itika', 13000), (24, 'Harry', 15294), (40, 'Peter', 16395), (15, 'Naill', 20001)]
+[(15, 'Naill', 20001), (40, 'Peter', 16395), (24, 'Harry', 15294), (10, 'Itika', 13000)]
+
+
+
+Next TopicGUI Assistant using Wolfram Alpha API in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,154 @@
+
+
+
+
+next →
+← prev
+
+Second Largest Number in Python
+When we have a lot of elements in our list, the thought of finding the highest or lowest element can come to our mind and Python has made it much easier for us.
+In this article, we shall how we can use to find the second largest number in Python from a list.
+
+Sorting the list and then print the second last number.
+Removing the maximum element.
+Finding the maximum element.
+Traversing the list.
+
+Let us have a look at the first approach-
+Sorting the list and then print the second last number
+The following program illustrates how we can do it in Python-
+Example -
+
+#program to find the second largest number of list
+# declaring the list
+list_val = [20, 30, 40, 25, 10]
+# sorting the list
+list_val.sort()
+#displaying the second last element of the list
+print("The second largest element of the list is:", list_val[-2])
+
+Output:
+The second largest element of the list is: 30
+
+It's time to go for the explanation part-
+
+We have declared the list from which we want to take out the second last element.
+After this, we used the sort method so that all the elements of our list are arranged in ascending order.
+Now we make use of negative indexing since the second-largest number will come at the second last position.
+
+The second method is to obtain the second largest element of the list by removing the maximum element.
+Let us see how we can do it.
+Removing the maximum element
+Example -
+
+#program to find the second largest number of list
+
+# declaring the list
+list_val = [20, 30, 40, 25, 10]
+
+# new_list is a set of list1
+res_list = set(list_val)
+
+#removing the maximum element
+res_list.remove(max(res_list))
+
+#printing the second largest element 
+print(max(res_list))
+
+Output:
+30
+
+Explanation -
+Let us understand what we have done in the above program-
+
+We have declared the list from which we want to take out the second last element.
+After this, we used the set method to take all the unique elements of the list.
+Now we make use of max() to get the maximum value from the list and then remove it.
+After this, we print the maximum of the resultant list which will give us the second-largest number.
+
+In the third method, we will use for loop and find the second largest number from the list.
+Example -
+
+# declaring empty list
+list_val = []
+
+# user provides the number of elements to be added in the list
+num_list = int(input("Enter number of elements in list: "))
+
+
+for i in range(1, num_list + 1):
+	element = int(input("Enter the elements: "))
+	list_val.append(element)
+
+
+# sort the list
+list_val.sort()
+	
+# print second largest element
+print("Second largest element is:", list_val[-2])
+
+Output:
+Enter number of elements in list: 5
+
+Enter the elements: 10
+
+Enter the elements: 20
+
+Enter the elements: 30
+
+Enter the elements: 40
+
+Enter the elements: 50
+The second largest element is: 40
+
+Explanation -
+Let us have a glance at what we have done here-
+
+We have declared an empty list in which we will insert the elements.
+After this, we ask the user to provide us the number of elements we would like to add to our list.
+After this, we use the sort method so that all the elements of our list are arranged in ascending order.
+Now we make use of negative indexing since the second-largest number will come at the second last position.
+
+Traversing the list
+In the last program, we will traverse the list to find out the largest number and then make use of conditional statements to find the second largest number from the list.
+The following program illustrates the same-
+Example -
+
+def calc_largest(arr):
+	second_largest = arr[0]
+	largest_val = arr[0]
+	for i in range(len(arr)):
+		if arr[i] > largest_val:
+			largest_val = arr[i]
+
+	for i in range(len(arr)):
+		if arr[i] > second_largest and arr[i] != largest_val:
+			second_largest = arr[i]
+
+	return second_largest
+print(calc_largest([20, 30, 40, 25, 10]))
+
+Output:
+30
+
+Explanation -
+Let us understand what we have done in the above program-
+
+The first step is to create a function that checks the largest number from the list by traversing it.
+In the next for loop, we traverse the list again for finding the highest number but this time excludes the previous one since here our objective is to find the second largest function.
+Finally, we pass our list in the function.
+
+So, in this article, we got the chance to think out of the box and discover some new ways to develop the logic for finding the second largest number in Python.
+
+
+Next TopicDefaultdict in Python
+
+
+
+
+← prev
+next →
+
+
+
+

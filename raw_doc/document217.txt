@@ -1,0 +1,222 @@
+
+
+
+
+next →
+← prev
+
+Flatten List in Python
+An Introduction
+A List is considered as one of the most flexible data structures in the Python programming language. On the other hand, a two-dimensional list, or 2D List, which is generally termed as a list of lists, is an object of a list where each element is a list itself. For example: [[19, 18, 17], [16, 15, 14], [13, 12, 11]].
+Flattening a list of lists is a process of transforming a two-Dimensional list into a One-Dimensional list by un-nesting every list element kept in the list of lists, that is, transforming [[9, 8, 7], [6, 5, 4], [3, 2, 1]] to [9, 8, 7, 6, 5, 4, 3, 2, 1].
+We can perform the flattening process with the help of the nested for loops, recursion, list comprehensions, core functions, or importing the libraries or packages in the Python on the depth and regularity of the nested lists.
+In this tutorial, we will be working out on various methods in order to flatten the nested lists using the Python Programming Language. But before we get started, let us understand the types of Nested Lists.
+What are the types of Nested Lists?
+As we know, Python is a weakly typed programming language. Therefore, we can encounter two types of List of Lists. These List of Lists or Nested Lists are as follows:
+
+Regular List of Lists
+Irregular List of Lists
+
+Regular List of Lists
+Each item in the Regular List of lists is referred to as a Sub-List, thus observing the uniformity of the type of the element. For Instance: [[9, 8, 7], [6, 5, 4], [3, 2, 1]] is a regular list of lists as [9, 8, 7], [6, 5, 4], [3, 2, 1] is of the list type.
+Irregular List of Lists
+Each item in the Irregular List of lists is either referred to as a Sub-List or a Non-list element (For instance, a string or an integer). Thus, there is an irregularity in terms of the type of element. For instance: [[9, 8, 7], [6, 5], 4, 3] is an irregular list of lists as [9, 8, 7] and [6, 5] are of the list types, whereas 4 and 3 are of the int type.
+Flattening the List of Lists using the Nested for Loops
+Flattening the List of Lists with the Nested for Loops' help is considered a brute force approach to obtain a flat list. We can perform this method by selecting each item from the Two-Dimensional List and arranging it in a One-Dimensional List.
+Let us consider the following example that works for both regular as well as irregular lists of lists.
+Example:
+
+# defining the function
+def flattenlist(_2dlist):
+    # defining an empty list
+    flatlist = []
+    # Iterating through the outer list
+    for item in _2dlist:
+        if type(item) is list:
+            # If the item is of the list type, iterating through the sub-list
+            for element in item:
+                flatlist.append(element)
+        else:
+            flatlist.append(item)
+    return flatlist
+
+# defining the nested list
+nestedlist = [[10, 20, 30, 40], [50, 60, 70], [80, 90, 100]]
+print('Genuine List:', nestedlist)
+print('Converted Flat List:', flattenlist(nestedlist))
+
+Output:
+Genuine List: [[10, 20, 30, 40], [50, 60, 70], [80, 90, 100]]
+Converted Flat List: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+Explanation:
+In the above example, we have defined a function as flattenlist that takes in a parameter as _2dlist. We have then used for loop to iterate the elements of the nested list and append them to generate a flattened list. We have then defined the nested list and implement the flattenlist function. As a result, the nested list has successfully transformed into the flattened list.
+Flattening the Nested List using a List Comprehension
+Flattening the list of lists with the help of a List Comprehension is considered an elegant approach to obtain a flat list depending on a Two-Dimensional existing list. However, this approach offers a less intuitive solution.
+Let us consider the following example.
+Example:
+
+# defining the nested list
+nestedlist = [[10, 20, 30, 40], [50, 60, 70], [80, 90]]
+# list comprehension
+flatlist = [element for sub_list in nestedlist for element in sub_list]
+print('Genuine list:', nestedlist)
+print('Converted list:', flatlist)
+
+Output:
+Genuine list: [[10, 20, 30, 40], [50, 60, 70], [80, 90]]
+Converted list: [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+Explanation:
+In the above example, we have defined a nested list and list comprehension. We have then printed them for the users. As a result, the nested list has been transformed into the flattened list successfully.
+Flattening the List of Lists using the Recursive method
+We can also use the recursive method to flatten the Two-Dimensional list. Let us consider the following example implementing the recursive method in order to flatten the list of lists. This implementation works well for regular as well as an irregular list of lists.
+Example:
+
+# defining a function
+def flattenlist(nestedlist):
+    if len(nestedlist) == 0:
+        return nestedlist
+    if isinstance(nestedlist[0], list):
+        return flattenlist(nestedlist[0]) + flattenlist(nestedlist[1:])
+    return nestedlist[:1] + flattenlist(nestedlist[1:])
+
+print(flattenlist([[10, 20, 30, 40], [50, 60, 70], [80, 90], 100]))
+
+Output:
+[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+Explanation:
+In the above example, we have defined a function and used an if statement stating if the length of the nested list equals zero, then return the nested list.
+If the data element on the zeroth index is an instance of a list, then the list index goes into the function again and adds to the following index of the list and so on. Else the function will return the elements and so on. At last, we have defined the nested list and executed the function. As a result, the list of lists has flattened recursively.
+Utilizing Libraries of Python
+We can also utilize some of the Python programming language libraries to flatten the list of lists. The Implementation of these libraries are described below:
+Flattening the List of Lists using the functools and operator libraries
+The operator library provides the iconcat() function to perform the fundamental operation like concatenation. We can apply this function cumulatively to the data elements of a nested list, from left to right, resulting in the reduction of the nested list to a flattened list.
+Let us consider the following example to understand its Implementation.
+Example:
+
+# importing the required libraries
+import operator
+import functools
+regularlist = []
+
+# Converting the list of lists into a flattened one.
+def convo(nestedlist):
+    for element in nestedlist:
+        if type(element) is list:
+            regularlist.append(element)
+        else:
+            regularlist.append([element])
+    return regularlist
+
+twoDlist = [[10, 20, 30, 40], [50, 60, 70], [80, 90, 100], 110]
+regular2Dlist = convo(twoDlist)
+print('Given List:', twoDlist)
+print('Converted list:', functools.reduce(operator.iconcat, regular2Dlist, []))
+
+Output:
+Given List: [[10, 20, 30, 40], [50, 60, 70], [80, 90, 100], 110]
+Converted list: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+
+Explanation:
+In the above example, we have imported the functools library along with the operator library. We have then defined an empty list as the regularlist. We have then defined a function as convo to transform the list of lists to a flattened list. In this function, we have used the for loop where the elements from the nested list are appended to the empty list we defined earlier. Later we have defined the nested list and executes the function. As a result, the list of lists is converted into a flattened list successfully.
+Flattening the List of Lists using the itertools library
+The itertools library provides the chain() function that allows us to transform a nested list into a single flattened list ideally. This function treats consecutive series as a single series by iterating them via the iterable passed as the parameter in a serial way.
+Let us consider the following example:
+Example:
+
+# importing the itertools library
+import itertools
+
+# defining the nested list
+nestedlist = [[10, 20, 30, 40], [50, 60, 70], [80, 90, 100]]
+flattenlist = list(itertools.chain(*nestedlist))
+
+print('The nested list:', nestedlist)
+print('The flattened list:', flattenlist
+
+Output:
+The nested list: [[10, 20, 30, 40], [50, 60, 70], [80, 90, 100]]
+The flattened list: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+Explanation:
+In the above example, we have imported the itertools library and generated a nested list. We have then used the chain() function to convert the given nested list to the flattened list. At last, we have returned the result to the users. As a result, the list of lists is flattened successfully.
+Flattening the List of Lists using the NumPy library
+The NumPy library provides various everyday operations, including the concatenation of Two-Dimensional regular Arrays column-wise or row-wise. We will use the attribute known as flat in order to get a One-Dimensional Iterator over the array to conquer the target. Let us consider the following example to understand the use of the concatenate function and the flat attribute.
+Example:
+
+# importing the library
+import numpy
+
+# defining the nested list
+nestedlist = [[10, 20, 30, 40], [50, 60, 70], [80, 90]]
+
+# using the concatenate function along with the flat attribute
+flattenlist = list(numpy.concatenate(nestedlist).flat)
+
+print('The Nested list:', nestedlist)
+print('The Flattened list:', flattenlist)
+
+Output:
+The Nested list: [[10, 20, 30, 40], [50, 60, 70], [80, 90]]
+The Flattened list: [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+Explanation:
+In the above example, we have imported the numpy library and defined a nested list. We have then used the concatenate function of the numpy library along with its flat attribute to flatten the elements of the nested list and concatenate them to a new flattened list. At last, we have printed the result for the users. Thus, the list of lists is flattened successfully.
+Utilizing Core Functions
+We can also perform the flattening task by utilizing some core functions that the Python programming language provides.
+Flattening the List of Lists using the sum function
+We can consider summing over inner lists as another solution to the problem. We pass two arguments to the sum function: The first parameter is iterable, which is a nested list, and the second parameter is start which is a void list for the following case that serves as the initial flat list where the data elements of the inner sub-lists will add.
+We can say that this approach is pretty convenient since we do not have to import anything. However, it is slower than the itertools() and chain() functions when there is a large number of sub-lists present in the nested list.
+Let us consider the following example:
+Example:
+
+# defining a nested list
+nestedlist = [[10, 20, 30, 40], [50, 60, 70], [80, 90]]
+
+# using the sum function
+flattenlist = sum(nestedlist, [])
+
+print('The Nested list:', nestedlist)
+print('The Flattened list:', flattenlist)
+
+Output:
+The Nested list: [[10, 20, 30, 40], [50, 60, 70], [80, 90]]
+The Flattened list: [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+Explanation:
+In the above example, we have defined the nested list. We have then used the sum() function and flattened the nested list into a One-Dimensional list, and printed the resultant list for the users. As a result, we have transformed the list of lists into a flat list successfully.
+Flattening the List of Lists using Lambda keyword
+We can define an anonymous function using the keyword lambda. We can pass the regular/irregular list as the parameter to this anonymous function. The evaluation of the expression is done in order to obtain a flat One-Dimensional List.
+Let us consider the following example:
+Example:
+
+# Defining the nested list
+nestedlist = [[10, 20, 30], [30, 50, 60], [40, 60, 70], 70]
+
+# Using lambda parameters: expression
+flattenlist = lambda nestedlist:[item for element in nestedlist for item in flattenlist(element)] if type(nestedlist) is list else [nestedlist]
+
+print("The Nested list:", nestedlist)
+print("The Flattened List:", flattenlist(nestedlist))
+
+Output:
+The Nested list: [[10, 20, 30], [30, 50, 60], [40, 60, 70], 70]
+The Flattened List: [10, 20, 30, 30, 50, 60, 40, 60, 70, 70]
+
+Explanation:
+In the above example, we have defined a nested list. We have then used the lambda keyword along with an argument defining an expression for list comprehension. We have then printed them for the users. As a result, we have successfully converted the Two-Dimensional irregular List into the flattened List.
+
+
+Next TopicPair Plot in Python
+
+
+
+
+← prev
+next →
+
+
+
+

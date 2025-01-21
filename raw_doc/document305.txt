@@ -1,0 +1,81 @@
+
+
+
+
+next →
+← prev
+
+String to Binary in Python
+In this article, we will learn how we convert a string to its binary equivalent in Python.
+We know that strings are a sequence of strings and are denoted with inverted commas.
+Binary numbers are in the form 0s and 1s, the information is always encoded in the binary format since this is what the computer understands.
+The methods of converting a string to the binary that we will use here are using join(), ord(), format() and bytearray().
+We should take of the corresponding ASCII values of the characters that are present in the string and convert them into binary.
+Let us have a look at the description of the functions that we have taken in our toolbox-
+
+join()- It takes all the items and joins them to make a single entity(results in a single string).
+ord()- This method takes a character and converts it into the corresponding UNICODE value.
+format()- This method takes a value and inserts it where the placeholders are present, it is also used to merge the parts of a string at specified intervals.
+bytearray()- It returns an array of bytes.
+
+The following program shows how it can be done-
+Example -
+
+# declaring the string
+str_to_conv = "Let's learn Python"
+# printing the string that will be converted
+print("The string that we have taken is ",str_to_conv)
+# using join() + ord() + format() to convert into binary
+bin_result = ''.join(format(ord(x), '08b') for x in str_to_conv)
+# printing the result
+print("The string that we obtain binary conversion is ",bin_result)
+
+Output-
+The string that we have taken is  Let's learn Python
+The string that we obtain binary conversion is  010011000110010101110100001001110111001100100000011011000110010101100001011100100110111000100000010100000111100101110100011010000110111101101110
+
+Explanation -
+Let us understand what we have done in the above program-
+
+First of all, we have declared the string that needs to be converted in binary with the value 'Let's learn Python'.
+The next step is to display the string we have created so that it is easy to comprehend with the help of output which one is our string and what is its binary equivalent.
+Then, we have used the format() method and specified its parameters as ord() and '08b' that takes each character from our string using the for loop and convert them into binary.
+The overall result is stored in the variable bin_result and finally, we display its value.
+
+In the next example, we will do the same thing by using bytearray().
+Example - 2
+
+# declaring the string
+str_to_conv = "Let's learn Python"
+# printing the string that will be converted
+print("The string that we have taken is ",str_to_conv)
+# using join(), format() and bytearray() to convert into binary
+bin_result = ''.join(format(x,'08b') for x in bytearray(str_to_conv,'utf-8'))
+# printing the result
+print("The string that we obtain binary conversion is ",bin_result)
+
+Output-
+The string that we have taken is  Let's learn Python
+The string that we obtain binary conversion is  010011000110010101110100001001110111001100100000011011000110010101100001011100100110111000100000010100000111100101110100011010000110111101101110  
+
+Example -
+Let us see how different the above approach was-
+
+First of all, we have declared the string that needs to be converted in binary with the value 'Let's learn Python'.
+The next step is to display the string we have created so that it is easy to comprehend with the help of output which one is our string and what is its binary equivalent.
+Then we have used the bytearray() function, in which each character from the string is taken using for loop and converted into binary.
+The overall result is stored in the variable bin_result and finally, we display its value.
+
+
+
+Next TopicWhat is script mode in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,68 @@
+
+
+
+
+next →
+← prev
+
+Python Write Excel File
+The Python write excel file is used to perform the multiple operations on a spreadsheet using the xlwt module. It is an ideal way to write data and format information to files with .xls extension.
+If you want to write data to any file and don't want to go through the trouble of doing everything by yourself, then you can use a for loop to automate the whole process a little bit.
+Write Excel File Using xlsxwriter Module
+We can also write the excel file using the xlsxwriter module. It is defined as a Python module for writing the files in the XLSX file format. It can also be used to write text, numbers, and formulas to multiple worksheets. Also, it supports features such as charts, formatting, images, page setup, auto filters, conditional formatting, and many others.
+We need to use the following command to install xlsxwriter module:
+
+pip install xlsxwriter   
+
+Note- Throughout XlsxWriter, rows, and columns are zero-indexed. The first cell in a worksheet is listed as, A1 is (0,0), B1 is (0,1), A2 is (1,0), B2 is (1,1)......,and so on.
+Write Excel File Using openpyxl Module
+It is defined as a package which is generally recommended if you want to read and write .xlsx, xlsm, xltx, and xltm files. You can check it by running type(wb).
+The load_workbook() function takes an argument and returns a workbook object, which represents the file. Make sure that you are in the same directory where your spreadsheet is located. Otherwise, you will get an error while importing.
+You can easily use a for loop with the help of the range() function to help you to print out the values of the rows that have values in column 2. If those particular cells are empty, you will get None.
+Writing data to Excel files with xlwt
+You can use the xlwt package, apart from the XlsxWriter package to create the spreadsheets that contain your data. It is an alternative package for writing data, formatting information, etc. and ideal for writing the data and format information to files with .xls extension. It can perform multiple operations on the spreadsheet.
+It supports features such as formatting, images, charts, page setup, auto filters, conditional formatting, and many others.
+Pandas have excellent methods for reading all kinds of data from excel files. We can also import the results back to pandas.
+Writing Files with pyexcel
+You can easily export your arrays back to a spreadsheet by using the save_as() function and pass the array and name of the destination file to the dest_file_name argument.
+It allows us to specify the delimiter and add dest_delimiter argument. You can pass the symbol that you want to use as a delimiter in-between " ".
+Code
+
+# import xlsxwriter module   
+import xlsxwriter   
+    
+book = xlsxwriter.Book('Example2.xlsx')   
+sheet = book.add_sheet()   
+     
+# Rows and columns are zero indexed.   
+row = 0  
+column = 0  
+    
+content = ["Parker", "Smith", "John"]   
+    
+# iterating through the content list   
+for item in content :   
+    
+    # write operation perform   
+    sheet.write(row, column, item)   
+    
+    # incrementing the value of row by one with each iterations.   
+    row += 1  
+        
+book.close()   
+
+Output:
+
+
+
+Next TopicPython Assert Keyword
+
+
+
+
+← prev
+next →
+
+
+
+

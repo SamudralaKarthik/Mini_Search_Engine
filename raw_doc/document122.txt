@@ -1,0 +1,158 @@
+
+
+
+
+next →
+← prev
+
+How to Convert Text to Speech in Python
+In this tutorial, we will learn how to convert the human language text into human-like speech.
+Sometimes we prefer listening to the content instead of reading. We can do multitasking while listening to the critical file data. Python provides many APIs to convert text to speech. The Google Text to Speech API is popular and commonly known as the gTTS API.
+It is very easy to use the tool and provides many built-in functions which used to save the text file as an mp3 file.
+We don't need to use a neural network and train the model to covert the file into speech, as it is also hard to achieve. Instead, we will use these APIs to complete a task.
+The gTTS API provides the facility to convert text files into different languages such as English, Hindi, German, Tamil, French, and many more. We can also play the audio speech in fast or slow mode.
+However, as its latest update we cannot change the speech file; it will generate by the system and not changeable.
+To convert text files into, we will use another offline library called pyttsx3.
+Installation of gTTS API
+Type the following command in the terminal to install the gTTS API.
+
+pip install gTTS
+
+Then, install the additional module to work with the gTTS.
+
+pip install playsound
+
+and then install pyttsx3.
+
+pip install pyttsx3
+
+Let's understand the working of gTTS API
+
+import gtts
+from playsound import playsound
+
+As we can see that, it is very easy to use; we need to import it and pass the gTTS object that is an interface to the Google Translator API.
+
+# make a request to google to get synthesis
+t1 = gtts.gTTS("Welcome to javaTpoint")
+
+In the above line, we have sent the data in text and received the actual audio speech. Now, save this an audio file as welcome.mp3.
+
+# save the audio file
+t1.save("welcome.mp3") 
+
+It will save it into a directory, we can listen this file as follow:
+
+# play the audio file
+playsound("welcome.mp3")
+
+Output:
+
+Please turn on the system volume, listen the text as we have saved earlier.
+Now, we will define the complete Python program of text into speech.
+Python Program
+
+# Import the gTTS module for text
+# to speech conversion
+from gtts import gTTS
+
+# This module is imported so that we can
+# play the converted audio
+
+from playsound import playsound
+
+# It is a text value that we want to convert to audio
+text_val = 'All the best for your exam.'
+
+# Here are converting in English Language
+language = 'en'
+
+# Passing the text and language to the engine,
+# here we have assign slow=False. Which denotes
+# the module that the transformed audio should
+# have a high speed
+obj = gTTS(text=text_val, lang=language, slow=False)
+
+#Here we are saving the transformed audio in a mp3 file named
+# exam.mp3
+obj.save("exam.mp3")
+
+# Play the exam.mp3 file
+playsound("exam.mp3")
+
+Output:
+
+Explanation:
+In the above code, we have imported the API and use the gTTS function. The gTTS() function which takes three arguments -
+
+The first argument is a text value that we want to convert into a speech.
+The second argument is a specified language. It supports many languages. We can convert the text into the audio file.
+The third argument represents the speed of the speech. We have passed slow value as false; it means the speech will be at normal speed.
+
+We saved this file as exam.py, which can be accessible anytime, and then we have used the playsound() function to listen the audio file at runtime.
+The list of available languages
+To get the available languages, use the following functions -
+Output:
+{'af': 'Afrikaans', 'sq': 'Albanian', 'ar': 'Arabic', 'hy': 'Armenian', 'bn': 'Bengali', 'bs': 'Bosnian', 'ca': 'Catalan', 'hr': 'Croatian', 'cs': 'Czech', 'da': 'Danish', 'nl': 'Dutch', 'en': 'English', 'et': 'Estonian', 'tl': 'Filipino', 'fi': 'Finnish', 'fr': 'French', 'de': 'German', 'el': 'Greek', 'en-us': 'English (US)','gu': 'Gujarati', 'hi': 'Hindi', 'hu': 'Hungarian', 'is': 'Icelandic', 'id': 'Indonesian', 'it': 'Italian', 'ja': 'Japanese', 'en-ca': 'English (Canada)', 'jw': 'Javanese', 'kn': 'Kannada', 'km': 'Khmer', 'ko': 'Korean', 'la': 'Latin', 'lv': 'Latvian', 'mk': 'Macedonian', 'ml': 'Malayalam', 'mr', 'en-in': 'English (India)'}
+
+We have mentioned few important languages and their code. You can find almost every language in this library.
+Offline API
+We have used the Google API, but what if we want to convert text to speech using offline. Python provides the pyttsx3 library, which looks for TTS engines pre-installed in our platform.
+Let's understand how to use pyttsx3 library:
+Example -
+
+import pyttsx3
+# initialize Text-to-speech engine
+engine = pyttsx3.init()
+# convert this text to speech
+text = "Python is a great programming language"
+engine.say(text)
+# play the speech
+engine.runAndWait()
+
+In the above code, we have used the say() method and passed the text as an argument. It is used to add a word to speak to the queue, while the runAndWait() method runs the real event loop until all commands queued up.
+It also provides some additional properties that we can use according to our needs. Let's get the details of speaking rate:
+
+# get details of speaking rate
+rate = engine.getProperty("rate")
+print(rate)
+
+Output:
+200
+
+
+We can change rate of speed as we want:
+# setting new voice rate (faster)
+engine.setProperty("rate", 300)
+engine.say(text)
+engine.runAndWait()
+
+If we pass the 100 then it will be slower.
+
+engine.setProperty("rate", 100)
+engine.say(text)
+engine.runAndWait()
+
+Now, we can hear the text file in the voices.
+
+# get details of all voices available
+voices = engine.getProperty("voices")
+print(voices)
+
+Output:
+[<pyttsx3.voice.Voice object at 0x000002D617F00A20>, <pyttsx3.voice.Voice object at 0x000002D617D7F898>, <pyttsx3.voice.Voice object at 0x000002D6182F8D30>]
+
+In this tutorial, we have discussed the transformation of text file into speech using the third-party library. We also discussed the offline library. By using this, we can build own virtual assistance.
+
+
+Next TopicBubble Sort in Python
+
+
+
+
+← prev
+next →
+
+
+
+

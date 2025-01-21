@@ -1,0 +1,332 @@
+
+
+
+
+next →
+← prev
+
+How to handle Time zones in Python
+In this tutorial, we will define how we can work with the different timezones in Python. We will also learn about the local time zone of Python. Timezone can be described as the geographical area where standard time is observed. Let's have a brief introduction of the timezone. We will use Python's pytz library to work with the timezone.
+What is the Timezone?
+Timezone is defined as the standard time depending on the geographical representation of that place. In other words, timezone refers to the local time of a particular region based on the earth's rotation. It is defined in UTC (Coordinated Universal Time), the standard against which the world's region-based time is coordinated.
+Note - It is recommended to use the UTC as your base timezone.
+For Example - UTC in Singapore is 2.5 hours ahead of India or timezone in the North and is either 5 or 6 hours behind and represented as UTC-5 or UTC-6 based on the day light. Let's see the following table of different timezones across the world.
+Python pytz Library
+Python pytz the Olson tz database into Python and supports almost all timezones. This module allows us to with the date-time conversion functionalities and serve international base of the client. We can also perform the calculations as per project requirement and we can also create the timezone aware datetime instances. It can also solve the problem of ambiguous times at the end of the day light.
+Installation
+We need to install it in our system to work with the timezone. We can install it using the below command.
+
+pip install pytz
+
+The above command will install the pytz on your machine. It is recommended to install in the virtual environment.
+Python comes with the DateTime.tzinfo() abstract base class. This class allows us to handle the timezone. But it is not good practice to instantiate directly. To get the information about the particular time zone, we need to create the subclass of the DateTime.tzinfo().
+The pytz library overcomes this demerits, it has implanted a timzone class for handling arbitrary fixed offset from timezones and UTC.
+For Example - To get the current time in Python, we use the datetime.now() functions. However, this method doesn't return the any timzone. Using timezone, we can pass the timezone in this function and it will return current datetime in the given timezone.
+The pytz Attributes
+The pytz provides the three attributes and methods to work with the timezone in Python.
+
+pytz.utc
+pytz.timezone('region')
+pytz.astimezone()
+
+How to get the current time?
+To get the current time, we use the time module. We can use the following functions of the time module.
+
+localtime()- It allows to get the current local time.
+strftime("%H:%M:%S", t)- it allows to define the format of the time to be used to display the time.
+
+Example -
+
+import time
+
+current_time = time.localtime()
+current_clock = time.strftime("%H:%M:%S", current_time)
+
+print("The current timezone is:", current_clock)
+
+
+Output:
+The current timezone is: 21:22:41
+
+We get the current time zone of the region and standard UTC.
+Create Timezone Naïve Datetime Object
+A data object can be defined with or without timezones in Python. This object is also known as Aware or Naïve. If it holds the timezone value, it is an aware
+A data object can be defined with or without timezones in Python. This object is also known as Aware or Naïve. If it holds the timezone value, it is an aware Datetime object; in others, it is a naïve object by default.
+Let's understand the following example of creating a timezone object.
+Example -
+
+from datetime import datetime
+import pytz
+
+# Get the current Datetime
+unaware_object = datetime.now()
+print('Timezone naive:', unaware_object)
+
+# Standard UTC timezone aware Datetime
+aware_object = datetime.now(pytz.utc)
+print('Timezone Aware:', aware_object)
+
+# US/Central timezone datetime
+aware_us_central = datetime.now(pytz.timezone('US/Central'))
+print('US Central DateTime', aware_us_central)
+
+Output:
+Timezone naive: 2022-05-08 11:38:01.362134
+Timezone Aware: 2022-05-08 06:08:01.363137+00:00
+US Central DateTime 2022-05-08 01:08:11.323668-05:00
+
+Explanation -
+In the above code, we have used the pytz.utc as the parameter to the datetime.now() function. The offset at the end is +0.00 which is the standard UTC offset. In another line, we used the 'US/Central' region to create the timezone. The offset at the end -05:00 is the UTC offset of the CDT region.
+The pytz library has the large lists of the timezone, we can print the timezones using the below code.
+
+import pytz
+
+for timezone in pytz.all_timezones:
+
+    print(timezone)
+
+Output:
+['Africa/Abidjan', 'Africa/Accra', 'Africa/Addis_Ababa', 'Africa/Algiers', 'Africa/Asmara', 'Africa/Asmera', 'Africa/Bamako', 'Africa/Bangui', 'Africa/Banjul', 'Africa/Bissau', 'Africa/Blantyre', 'Africa/Brazzaville', 'Africa/Bujumbura', 'Africa/Cairo', 'Africa/Casablanca', 'Africa/Ceuta', 'Africa/Conakry', 'Africa/Dakar', 'Africa/Dar_es_Salaam', 'Africa/Djibouti', 'Africa/Douala', 'Africa/El_Aaiun', 'Africa/Freetown', 'Africa/Gaborone', 'Africa/Harare', 'Africa/Johannesburg', 'Africa/Juba', 'Africa/Kampala', 'Africa/Khartoum', 'Africa/Kigali', 'Africa/Kinshasa', 
+'Canada/Pacific', 'Canada/Saskatchewan', 'Canada/Yukon', 'Chile/Continental', 'Chile/EasterIsland', 'Cuba', 'EET', 'EST', 'EST5EDT', 'Egypt', 'Eire', 'Etc/GMT', 'Etc/GMT+0', 'Etc/GMT+1', 'Etc/GMT+10', 'Etc/GMT+11', 'Etc/GMT+12', 'Etc/GMT+2', 'Etc/GMT+3', 'Etc/GMT+4', 'Etc/GMT+5', 'Etc/GMT+6', 'Etc/GMT+7', 'Etc/GMT+8', 'Etc/GMT+9', 'Etc/GMT-0', 'Etc/GMT-1', 'Etc/GMT-10', 'Etc/GMT-11', 'Etc/GMT-12', 'Etc/GMT-13', 'Etc/GMT-14', 'Etc/GMT-2', 'Etc/GMT-3', 'Etc/GMT-4', 'Etc/GMT-5', 'Etc/GMT-6', 'Etc/GMT-7', 'Etc/GMT-8', 'Etc/GMT-9', 'Etc/GMT0', 'Etc/Greenwich', 'Etc/UCT', 'Etc/UTC', 'Etc/Universal', 'Etc/Zulu', 'Europe/Amsterdam', 'Europe/Andorra', 'Europe/Astrakhan', 'Europe/Athens', 'Europe/Belfast', 'Europe/Belgrade', 'Europe/Berlin', 'Europe/Bratislava', 'Europe/Brussels', 'Europe/Bucharest', 'Europe/Budapest', 'Europe/Busingen', 'Europe/Chisinau', 'Europe/Copenhagen', 'Europe/Dublin', 'Europe/Gibraltar', 'Europe/Guernsey', 'Europe/Helsinki', 'Europe/Isle_of_Man', 'Europe/Istanbul', 'Europe/Jersey', 'Europe/Kaliningrad', 'Europe/Kiev', 'Europe/Kirov', 'Europe/Lisbon', 'Europe/Ljubljana', 'Europe/London', 'Europe/Luxembourg', 'Europe/Madrid', 'Europe/Malta', 'Europe/Mariehamn', 'Europe/Minsk', 'Europe/Monaco', 'Europe/Moscow', 'Europe/Nicosia', 'Europe/Oslo', 'Europe/Paris', 'Europe/Podgorica', 'Europe/Prague', 'Europe/Riga', 'Europe/Rome', 'Europe/Samara', 'Europe/San_Marino', 'Europe/Sarajevo', 'Europe/Saratov', 'Europe/Simferopol', 'Europe/Skopje', 'Europe/Sofia', 'Europe/Stockholm', 'Europe/Tallinn', 'Europe/Tirane', 'Europe/Tiraspol', 'Europe/Ulyanovsk', 'Europe/Uzhgorod', 'Europe/Vaduz', 'Europe/Vatican', 'Europe/Vienna', 'Europe/Vilnius', 'Europe/Volgograd', 'Europe/Warsaw', 'Europe/Zagreb', 'Europe/Zaporozhye', 'Europe/Zurich', 'GB', 'GB-Eire', 'GMT', 'GMT+0', 'GMT-0', 'GMT0', 'Greenwich', 'HST', 'Hongkong', 'Iceland', 'Indian/Antananarivo', 'Indian/Chagos', 'Indian/Christmas', 'Indian/Cocos', 'Indian/Comoro', 'Indian/Kerguelen', 'Indian/Mahe', 'Indian/Maldives', 'Indian/Mauritius', 'Indian/Mayotte', 'Indian/Reunion', 'Iran', 'Israel', 'Jamaica', 'Japan', 'Kwajalein', 'Libya', 'MET', 'MST', 'MST7MDT', 'Mexico/BajaNorte', 'Mexico/BajaSur', 'Mexico/General', 'NZ', 'NZ-CHAT', 'Navajo', 'PRC',..............
+'Pacific/Efate', 'Pacific/Enderbury', 'Pacific/Fakaofo', 'Pacific/Fiji', 'Pacific/Funafuti', 'Pacific/Galapagos', 'Pacific/Gambier', 'Pacific/Guadalcanal', 'Pacific/Guam', 'Pacific/Honolulu', 'Pacific/Johnston', 'Pacific/Kiritimati', 'Pacific/Kosrae', 'Pacific/Kwajalein', 'Pacific/Majuro', 'Pacific/Marquesas', 'Pacific/Midway', 'Pacific/Nauru', 'Pacific/Niue', 'Pacific/Norfolk', 'Pacific/Noumea', 'Pacific/Pago_Pago', 'Pacific/Palau', 'Pacific/Pitcairn', 'Pacific/Pohnpei', 'Pacific/Ponape', 'Pacific/Port_Moresby', 'Pacific/Rarotonga', 'Pacific/Saipan', 'Pacific/Samoa', 'Pacific/Tahiti', 'Pacific/Tarawa', 'Pacific/Tongatapu', 'Pacific/Truk', 'Pacific/Wake', 'Pacific/Wallis', 'Pacific/Yap', 'Poland', 'Portugal', 'ROC', 'ROK', 'Singapore', 'Turkey', 'UCT', 'US/Alaska', 'US/Aleutian', 'US/Arizona', 'US/Central', 'US/East-Indiana', 
+'US/Eastern', 'US/Hawaii', 'US/Indiana-Starke', 'US/Michigan', 'US/Mountain', 'US/Pacific', 'US/Samoa', 'UTC', 'Universal', 'W-SU', 'WET', 'Zulu']
+
+Get Current Time in Different Timezone
+The pytz module allows us to get the current date and time of any timezone using the below method.
+Syntax -
+
+datetime.now(pytz.timezone('timezone name'))
+
+First, we create the timezone object using the pytz.timezone('region name') function, the pass this object to datetime.now(timezone_obj) to get the current datetime of the given timezone.
+Using the above list of timezone, we will get the current the timezone of various timzones.
+Example - 1:
+
+from datetime import datetime
+import pytz
+
+dt_us_Buenos = datetime.now(pytz.timezone('America/Argentina/Buenos_Aires'))
+print("US Buenos DateTime:", dt_us_Buenos.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_us_adak = datetime.now(pytz.timezone('America/Adak'))
+print("US Adak timezone DateTime:", dt_us_adak.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_us_anchorage = datetime.now(pytz.timezone('America/Anchorage'))
+print("US Eastern timezone DateTime:", dt_us_anchorage.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_us_chihuahua = datetime.datetime.now(pytz.timezone('America/Chihuahua'))
+print("US Chihuahua timezone DateTime:", dt_us_chihuahua.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_us_belam = datetime.now(pytz.timezone('America/Belem'))
+print("US Belam timezone DateTime:", dt_us_belam.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+Output:
+US Buenos DateTime: 2022:05:08 03:52:13 -03 -0300
+US Adak timezone DateTime: 2022:05:07 21:52:13 HDT -0900
+US Eastern timezone DateTime: 2022:05:07 22:52:13 AKDT -0800
+US Michigan timezone DateTime: 2022:05:08 02:52:13 EDT -0400
+US Belam timezone DateTime: 2022:05:08 03:52:13 -03 -0300
+
+Explanation -
+In the above code, we have gotten the current time of the different regions of America.
+Example - 2: Get the Timezone of a Different Country
+
+from datetime import datetime
+import pytz
+
+dt_israel = datetime.now(pytz.timezone('Israel'))
+print("Israel DateTime:", dt_israel.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_rome = datetime.now(pytz.timezone('Europe/Rome'))
+print("Rome DateTime:", dt_rome.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_amsterdam = datetime.now(pytz.timezone('Europe/Amsterdam'))
+print("Amsterdam DateTime:", dt_amsterdam.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_hongkong = datetime.now(pytz.timezone('Hongkong'))
+print("Hongkong DateTime:", dt_hongkong.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_jamaica = datetime.now(pytz.timezone('Jamaica'))
+print("Jamaica DateTime:", dt_jamaica.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+dt_turkey = datetime.now(pytz.timezone('Turkey'))
+print("Turkey: DateTime:", dt_turkey.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+Output:
+Israel DateTime: 2022:05:08 10:16:46 IDT +0300
+Rome DateTime: 2022:05:08 09:16:46 CEST +0200
+Amsterdam DateTime: 2022:05:08 09:16:46 CEST +0200
+Hongkong DateTime: 2022:05:08 15:16:46 HKT +0800
+Jamaica DateTime: 2022:05:08 02:16:46 EST -0500
+Turkey: DateTime: 2022:05:08 10:16:46 +03 +0300
+
+When we run the code, it returns current timezone of the various countries.
+Get Timezone Information Using tzinfo
+Using the DateTime.tzinfo class, we can get information about the date or time. The tzinfo generally has the following information.
+
+The timezone of the datetime.
+The Daylight saving
+Offset from the UTC.
+
+The tzinfo class is abstract class which class provides the following methods to get the timezone information.
+
+utcoffset(dt) - It returns the total offset from the UTC, which should be a timedelta object. If the time delta is east of UTC, the time delta value will be positive. If the time delta is west of UTC, the time delta value will be negative. The local timezone has both timezone and DST values. Therefore, the range of the time delta is between timedelta hours=24 to timedelta(hours=24).
+tzname(dt) - This method returns the time zone name corresponding to datetime object.
+utcoffset(dt) - This method is used to get the DST offset in the zones where DST is in effect. If the DST is not in effect, it will return only timedelta(0).The DTC information is already part of the UTC offset.
+
+Let's understand the following example.
+Example - 1:
+
+from datetime import datetime
+import pytz
+
+# timezone: US Central Time
+dt_eur_london = datetime.now(pytz.timezone('Europe/London'))
+print("Europe London DateTime:", dt_eur_london.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+# Get current TimeZone name
+print(dt_eur_london.tzname())
+
+# Get UTC Offset
+print(dt_eur_london.utcoffset())
+
+# Get the daylight saving time (DST offset) adjustment
+print(dt_eur_london.dst())
+
+Output:
+Europe London DateTime: 2022:05:08 09:12:09 BST +0100
+BST
+1:00:00
+1:00:00
+
+Converting Between Timezones
+We can convert the datetime from one timezone to another timezone using the datetime.astimezone() method. This method takes the datetime object as a parameter and returns a new datetime of a given timezone. Let's understand the following example.
+Example -
+
+import datetime
+import pytz
+
+# UTC timezone Datetime
+dt_local = datetime.datetime.now(pytz.utc)
+print("UTC DateTime:", dt_local.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+# convert UTC timezone to 'US/Central'
+dt_us_hawaii = dt_local.astimezone(pytz.timezone('US/Hawaii'))
+print("US Hawaii DateTime:", dt_us_hawaii.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+# Convert 'US/Mountain' timezone to US/Central
+dt_us_central = dt_us_hawaii.astimezone(pytz.timezone('US/Mountain'))
+print("US Mountain DateTime:", dt_us_central.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+# Convert US/Central timezone to IST (India) timezone
+dt_ind = dt_us_central.astimezone(pytz.timezone('Asia/Kolkata'))
+print("India DateTime:", dt_ind.strftime("%Y:%m:%d %H:%M:%S %Z %z"))
+
+Output:
+UTC DateTime: 2022:05:08 08:23:21 UTC +0000
+US Hawaii DateTime: 2022:05:07 22:23:21 HST -1000
+US Mountain DateTime: 2022:05:07 22:23:21 HST -1000
+India DateTime: 2022:05:08 13:53:21 IST +0530
+
+Working with Local Timezones
+In the above section, we have mentioned that the naïve datetime to an aware datetime instance. We can pass the timezone value set to local standardized value.
+The pytz module provides the localize() method that is used to convert a naïve to local time. It takes the arguments, namely the datetime object to localize and an optional is_dst flag.
+The tzinfo has a method dst() which will return the Daylight Saving Time (DST) information if the flag is set to true.
+Let's understand the following example.
+Example -
+
+from datetime import datetime
+import pytz
+
+date_format = '%Y-%m-%d %H:%M:%S %Z%z'
+
+# Indian Standard Time
+timezone_ind= pytz.timezone('Asia/Kolkata')
+ist_local = timezone_ind.localize(datetime.now())
+print("Indian Standard Time::", ist_local.strftime(date_format))
+
+# Europe/Amsterdam Time
+amdam_tz = pytz.timezone('Europe/Amsterdam')
+dt = datetime(1997, 12, 3, 2, 0, 0)
+cest_local = amdam_tz.localize(dt, is_dst=True)
+print("Amsterdam with daylight saving time::", cest_local.strftime(date_format))
+
+# Day Light Saving
+print("Daylight saving time in amsterdam on 3/8/83::", cest_local.tzinfo.dst(cest_local))
+
+Output:
+Indian Standard Time:: 2022-05-08 14:28:37 IST+0530
+Amsterdam with daylight saving time:: 1997-12-03 02:00:00 CET+0100
+Daylight saving time in amsterdam on 3/8/83:: 0:00:00
+
+Example - 2: Converting UTC format to IST format
+
+from datetime import datetime
+import pytz
+
+UTC = pytz.utc
+
+timezone_Kol = pytz.timezone('Asia/Kolkata')
+dt_Kl = datetime.now(timezone_Kol)
+utc_Kl = dt_Kl.astimezone(UTC)
+
+timezone_New = pytz.timezone('America/New_York')
+dt_Ny = datetime.now(timezone_New)
+utc_Ny = dt_Ny.astimezone(UTC)
+
+timezone_Mase = pytz.timezone('Africa/Maseru')
+dt_Ma = datetime.now(timezone_Mase)
+utc_Ma = dt_Ma.astimezone(UTC)
+
+timezone_central = pytz.timezone('US/Central')
+dt_Ce = datetime.now(timezone_central)
+utc_Ce = dt_Ce.astimezone(UTC)
+
+timezone_athens= pytz.timezone('Europe/Athens')
+dt_At = datetime.now(timezone_athens)
+utc_At = dt_At.astimezone(UTC)
+
+print("UTC Format \t\t\t IST Format")
+
+print(utc_Kl.strftime('%Y-%m-%d %H:%M:%S %Z %z'),
+    "\t ",
+    dt_Kl.strftime('%Y-%m-%d %H:%M:%S %Z %z'))
+
+print(utc_Ny.strftime('%Y-%m-%d %H:%M:%S %Z %z'),
+    "\t ",
+    dt_Kl.strftime('%Y-%m-%d %H:%M:%S %Z %z'))
+
+print(utc_Ma.strftime('%Y-%m-%d %H:%M:%S %Z %z'),
+    "\t ",
+    dt_Kl.strftime('%Y-%m-%d %H:%M:%S %Z %z'))
+
+print(utc_Ce.strftime('%Y-%m-%d %H:%M:%S %Z %z'),
+    "\t ",
+    dt_Kl.strftime('%Y-%m-%d %H:%M:%S %Z %z'))
+
+print(utc_At.strftime('%Y-%m-%d %H:%M:%S %Z %z'),
+    "\t ",
+    dt_Kl.strftime('%Y-%m-%d %H:%M:%S %Z %z'))
+
+Output:
+UTC Format                       			IST Format
+2022-05-08 09:05:46 UTC +0000     2022-05-08 14:35:46 IST +0530
+2022-05-08 09:05:46 UTC +0000     2022-05-08 14:35:46 IST +0530
+2022-05-08 09:05:46 UTC +0000     2022-05-08 14:35:46 IST +0530
+2022-05-08 09:05:46 UTC +0000     2022-05-08 14:35:46 IST +0530
+2022-05-08 09:05:46 UTC +0000     2022-05-08 14:35:46 IST +0530
+
+Conclusion
+This tutorial has covered the essential methods of the pytz library. Timezones play essential roles in software development/web development, and we have discussed how we can get the current time and timezone. This tutorial will help you get familiar with the pytz library and timezones.
+
+
+Next TopicPython Secret Module | Generate Secure Random Numbers
+
+
+
+
+← prev
+next →
+
+
+
+

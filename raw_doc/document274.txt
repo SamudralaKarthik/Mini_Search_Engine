@@ -1,0 +1,190 @@
+
+
+
+
+next →
+← prev
+
+Difference between Class Variable and Instance
+Variable in Python
+Object-oriented programming lets the developers use variables at the class level or the instance level. Variables are necessary symbols standing in for a value we are utilizing in a program.
+Variables at the class level are known as class variables, whereas variables at the instance level are known as instance variables.
+Whenever we expect that the variables are about to be consistent across instances, or whenever we have to initialize a variable, then that variable can be defined at the class level. Whenever we look forward to the variables that will alter significantly across instances, then that variable can be defined at the instance level.
+Among various principles of software development is the principle of DRY, which is abbreviated for Don't Repeat Yourself. This principle is focused towards restrictive replication within the code, and object-oriented programming obeys the DRY principle since it decreases redundancy.
+In the following tutorial, we will understand the class as well as instance variables in Object-Oriented Programming in the Python programming language. We will also discuss the fundamental differences between these two variables.
+So, let's get begun.
+Understanding the Class Variables
+Class Variables are declared inside the construction of class. Since these variables are owned by the class itself, they are shared by all class instances. They, therefore, will usually have the equivalent value for each instance unless we are utilizing the class variable in order to initialize a variable.
+Class Variables are defined outside of all the methods by convention, classically placed right under the header class and before the method of constructor and other functions.
+Let us consider the following syntax of a class variable.
+Syntax:
+
+# defining the class
+class Class_name:
+    # declaring the variable in the class
+    var = "xyz"
+
+The "var" variable is assigned the "xyz" value in the above snippet of code.
+We can define an object of the Class_name class (we will call it "myObj") and print the variable with the help of the dot notation:
+Syntax:
+
+# defining the class
+class Class_name:
+    # declaring the variable in the class
+    var = "xyz"
+# instantiating the class
+myObj = Class_name()
+
+Let us consider the following example based on the concept of Class Variable.
+Example:
+
+# defining a class
+class Animal:
+    # declaring the class variable
+    Terrestrial = "Lion"
+# instantiating the class
+my_Animal = Animal()
+# printing the values
+print("Name of the Animal:", my_Animal.Terrestrial)
+
+Output:
+Name of the Animal: Lion
+
+Explanation:
+In the above snippet of code, we have defined a class as "Animal" and declared the class variable. We have then instantiated the class with the my_Animal object and printed the final value for the users. As a result, the program returns the value of the class variable.
+Let us try adding multiple class variables to the class and print their values.
+Example:
+
+# defining a class
+class Animal:
+    # declaring some class variables
+    Terrestrial = "Lion"
+    Location = "Jungle"
+    Type = "Carnivore"
+    Population = 20000
+# instantiating the class
+my_Animal = Animal()
+# printing the values
+print("Name of the Animal:", my_Animal.Terrestrial)
+print("This Animal is found in:", my_Animal.Location)
+print("This Animal is a:", my_Animal.Type)
+print("Population of this Animal:", my_Animal.Population, "approx.")
+
+Output:
+Name of the Animal: Lion
+This Animal is found in: Jungle
+This Animal is a: Carnivore
+Population of this Animal: 20000 approx. 
+
+Explanation:
+In the above snippet of code, we have defined a class and declared some variables to the class. We have then instantiated the class and printed the required output for the users. We can observe that these class variables can contain any data type available to us in Python. As in the above program, we have strings and an integer.
+Moreover, we can also observe that the object of myAnimal is accessible to all the variables in the class and print them out when we execute the program.
+Class variables enable us to define variables upon the construction of the class. These variables and their corresponding values are then accessible to every object of the class.
+Understanding the Instance Variables
+Variables that are owned by the class instances are known as instance variables. This statement implies that for every instance or object of a class, the instance variables are unlike.
+Different from class variables, instance variables are defined within the functions.
+The syntax to use the instance variables is shown below.
+Syntax:
+
+# defining the class
+class Class_name:
+    # using the initializing function
+    def __init__(self, var1, var2):
+        self.var1 = var1
+        self.var2 = var2
+
+In the above snippet of code, var1 and var2 are instance variables.
+Let us consider an example based on Instance Variables
+Example:
+
+# defining the class
+class Student:
+    # using the initializing function
+    def __init__(self, id, name, age):
+        self.id = id
+        self.name = name
+        self.age = age
+
+#  instantiating the class
+dBase = Student(102, "Sam", 13)
+# printing the required values
+print("Roll Number of the Student:", dBase.id)
+print("Name of the Student:", dBase.name)
+print("Age of the Student:", dBase.age)
+
+Output:
+Roll Number of the Student: 102
+Name of the Student: Sam
+Age of the Student: 13
+
+Explanation:
+In the above snippet of code, we have defined a Student class and defined some variables as id, name, and age passed as arguments within the constructor method. We have then instantiated the class and print the values of the instance variables for the users.
+As a result, we will obtain a made-up of the values of the variables initialized for the Instance of dBase.
+Instance variables, owned by the class objects, enable the developers to store different values in each instance assigned to those variables.
+Understanding the difference between the Class Variable and Instance Variable
+Since we have understood the basic concepts of both the variables and how these variables are used in the class, let us understand how class variable differs from the instance variable. The major differences between these two variables are described in the tabular format shown below:
+
+
+S. No.
+Class Variable
+Instance Variable
+
+
+1
+A class variable is a variable that defines a particular property or attribute for a class.
+An instance variable is a variable whose value is specified to the Instance and shared among different instances.
+
+
+2
+We can share these variables between class and its subclasses.
+We cannot share these variables between classes. However, they only fit in a particular class.
+
+
+3
+It generally supports a single shared value for every instance of class even if there is no instance object present in the class.
+It generally stores memory for data required by the class.
+
+
+4
+It is usually defined whenever we begin the execution of the program.
+It is usually defined whenever we create an instance of the class.
+
+
+5
+It generally recollects the values until the program ends.
+It generally recollects the values as long as the object exists.
+
+
+6
+It has only one replica of the class variable, so it is shared between various class objects.
+It has multiple replicas, so each object has its replica of the instance variable.
+
+
+7
+We can access these variables by calling with the class name.
+We can access these variables directly by calling variable names within the class.
+
+
+8
+We have to declare these variables with the help of the static keyboard.
+We have to declare these variables without utilizing the static keyword.
+
+
+9
+Whatever alterations we made to these variables via one object will be replicated in another object.
+Whatever alterations we made to these variables via one object will not be replicated in another object.
+
+
+
+
+Next TopicPerfect Number in Python
+
+
+
+
+← prev
+next →
+
+
+
+

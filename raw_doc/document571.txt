@@ -1,0 +1,178 @@
+
+
+
+
+next →
+← prev
+
+How does Tokenizing Text, Sentence, Words Works?
+Natural Language Processing (NLP) is an area of computer science, along with artificial intelligence, information engineering, and human-computer interaction. The focus of this field is computers can be programmed for processing and analysing huge quantities of data from natural languages. It's not easy to do since the process of understanding and reading languages is much more intricate than appears at first.
+Tokenization is the process of breaking a text string into an array of tokens. The users can think of tokens as distinct parts like a word can be a token in the sentence, while the sentence is a token within the form of a paragraph.
+The Key Elements of this Tutorial:
+
+Text into sentences. Tokenization
+Words into sentences tokenization
+Sentences using tokenization of regular expressions
+
+
+Sentence Tokenization
+Sentence Tokenization is use for splitting the sentences in the paragraph
+Code 1:
+
+from nltk.tokenize import sent_tokenize as ST
+  
+text1 = "Hello everyone. Welcome to Javatpoint. We are studying NLP Tutorial"
+ST(text1)
+
+Output:
+['Hello everyone.', 'Welcome to Javatpoint.', 'We are studying NLP Tutorial']
+
+How "sent_tokenize" Works?
+The sent_tokenize function use the PunktSentenceTokenizer instance from the nltk.tokenize.punkt module, which is trained already and therefore it is very well known for marking the beginning and end of sentence at the characters and punctuation.
+PunktSentenceTokenizer -
+PunktSentenceTokenizer is mostly used for small data, cause it's hard for it to deal with massive amount of data.
+Code 2:
+
+import nltk.data as ND
+
+# Here, we will load the PunktSentenceTokenizer by using English pickle file
+tokenizer1 = ND.load('tokenizers/punkt/english.pickle')
+
+tokenizer1.tokenize(text1)
+
+Output:
+['Hello everyone.', 'Welcome to Javatpoint.', 'We are studying NLP Tutorial']
+
+Tokenize sentence of different language
+We can tokenize the sentence in various languages by using pickle file of any other language than English.
+Code 3:
+
+import nltk.data as ND
+
+spanish_tokenizer1 = ND.load('tokenizers/punkt/spanish.pickle')
+
+text1 = 'Hola a todos. Bienvenido a JavatPoint. Estamos estudiando PNL Tutorial'
+spanish_tokenizer1.tokenize(text1)
+
+Output:
+['Hola a todos.',
+ 'Bienvenido a JavatPoint.',
+ 'Estamos estudiando PNL Tutorial']
+
+Word Tokenization
+Word Tokenization is used for splitting the words in a sentence.
+Code 4:
+
+from nltk.tokenize import word_tokenize as WT
+
+text1 = "Hello everyone. Welcome to Javatpoint. We are studying NLP Tutorial"
+WT(text1)
+
+Output:
+['Hello',
+ 'everyone',
+ '.',
+ 'Welcome',
+ 'to',
+ 'Javatpoint',
+ '.',
+ 'We',
+ 'are',
+ 'studying',
+ 'NLP',
+ 'Tutorial']
+
+How "word_tokenize" Works?
+The word_tokenize() function is basically the wrapper function which is used for calling the tokenize() function that is an instance of the TreebankWordTokenizer class.
+Using TreebankWordTokenizer
+Code 5:
+
+from nltk.tokenize import TreebankWordTokenizer as TWT
+
+tokenizer1 = TWT()
+tokenizer1.tokenize(text1)
+
+Output:
+['Hello',
+ 'everyone.',
+ 'Welcome',
+ 'to',
+ 'Javatpoint.',
+ 'We',
+ 'are',
+ 'studying',
+ 'NLP',
+ 'Tutorial']
+
+These tokenizers operate by separating the words by punctuation and spaces. This allows the user to choose how to deal with punctuations during processing. As we can see in the outputs of the code above, it doesn't eliminate punctuation.
+PunktWordTokenizer
+PunktWordTokenizer does not separates the punctuation from the words.
+Code 6:
+
+from nltk.tokenize import PunktWordTokenizer as PWT
+  
+tokenizer1 = PWT()
+tokenizer1.tokenize("Let's see how it's working.")
+
+Output:
+['Let', "'s", 'see', 'how', 'it', "'s", 'working', '.']
+
+WordPunctTokenizer
+WordPunctTokenizer is used for separating the punctuation from the words.
+Code 7:
+
+from nltk.tokenize import WordPunctTokenizer as WPT
+  
+tokenizer1 = WPT()
+tokenizer1.tokenize("Hello everyone. Welcome to Javatpoint. We are studying NLP Tutorial")
+
+Output:
+['Hello',
+ 'everyone',
+ '.',
+ 'Welcome',
+ 'to',
+ 'Javatpoint',
+ '.',
+ 'We',
+ 'are',
+ 'studying',
+ 'NLP',
+ 'Tutorial']
+
+Using Regular Expression
+Code 8:
+
+from nltk.tokenize import RegexpTokenizer as RT
+  
+tokenizer1 = RT("[\w']+")
+text1 = ("Hello everyone. Welcome to Javatpoint. We are studying NLP Tutorial")
+tokenizer1.tokenize(text1)
+
+Output:
+['Hello',
+ 'everyone',
+ 'Welcome',
+ 'to',
+ 'Javatpoint',
+ 'We',
+ 'are',
+ 'studying',
+ 'NLP',
+ 'Tutorial']
+
+Conclusion:
+In this tutorial, we have discussed different functions and modules of the NLTK library for tokenizing the sentence and words of English as well as different languages using the pickle method.
+
+
+Next TopicHow to Import Datasets using sklearn in PyBrain
+
+
+
+
+← prev
+next →
+
+
+
+

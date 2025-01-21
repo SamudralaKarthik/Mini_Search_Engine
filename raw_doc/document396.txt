@@ -1,0 +1,235 @@
+
+
+
+
+next →
+← prev
+
+How to Connect Wi-Fi using Python?
+Finding a computer without an active internet connection nowadays is nearly impossible. In the 21st Century, the Internet has been of supreme significance. There are various ways one can use to connect their system to the Internet. The first is the use of traditional cables, i.e., the Ethernet, and the other is the use of the modern Wireless Fidelity Systems, also known as Wi-Fi. Wi-Fi has made our lives much easier and faster. With a click of the mouse and a touch of the thumb, we get connected to a boundless ocean of data and resources nearly immediately. In the following tutorial, we will understand how to connect Wi-Fi using a high-level programming language, like Python.
+So, let's get started.
+Establishing a connection with a Known Wi-Fi Network
+In the following section, we will discuss the procedure of connecting to a previously connected Wi-Fi network. In order to accomplish this task, we will follow the methodology described below:
+The Methodology:
+We will follow a simple procedure for this program:
+Step 1: First of all, we will import the required libraries.
+Step 2: Secondly, we will scan and display all the available SSIDs using the cmd commands and a Python library known as OS.
+Step 3: We will then select the known Wi-Fi network to connect to and wait until it connects successfully.
+Since we have understood the procedure, let's begin the coding section. We will make utilization of some of the commands of the Windows Command Prompt in order to access the list of available Wi-Fi networks and connect to a known Wi-Fi network. However, how we can write and execute the commands of the Windows Command Prompt in a Python script.
+The Python programming language offers a built-in library known as the OS library. This library provides the users the ability to communicate with the Operating System directly through Python script using various methods such as path(), getcwd(), system(), and a lot more. We can even execute the cmd commands with the help of the functions of the OS library.
+Let us consider the following implementation to understand the above statement.
+Example:
+
+# importing the os library
+import os
+# scanning the available Wi-Fi networks
+os.system('cmd /c "netsh wlan show networks"')
+# providing the Wi-Fi name as input
+router_name = input('Input Name/SSID of the Wi-Fi network we would like to connect: ')
+# connecting to the provided Wi-Fi network
+os.system(f'''cmd /c "netsh wlan connect name = {router_name}"''')
+print("If the system is not connected yet, try reconnecting to an earlier connected SSID!")
+
+Output:
+Interface name : Wi-Fi
+There are 11 networks currently visible. 
+SSID 1 : Benny
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 2 : Honest
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 3 : Sushii
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 4 : Amazon
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 5 : Unagi91
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 6 : Printer.5G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 7 : Printer 2.4G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 8 : Willett
+    Network type            : Infrastructure
+    Authentication          : WPA-Personal
+    Encryption              : CCMP
+SSID 9 : MARK1
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 10 : Disconnect
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 11 : MARK1_5G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+Input Name/SSID of the Wi-Fi network we would like to connect: MARK1_5G  
+Connection request was completed successfully.
+If the system is not connected yet, try reconnecting to an earlier connected SSID! 
+
+Explanation:
+In the above snippet of code, we have imported the OS library using the import keyword. We have then used the os.system() method in order to execute the following cmd command:
+Command:
+
+'cmd /c "netsh wlan show networks"'
+
+The above command helps scanning all the available SSIDs and displays them as output along with their Infrastructure, Authentication, and Encryption type. We have then defined a variable as router_name that store the SSID value input by the user as a string.
+This string variable is then replaced with another cmd command where we are supposed to provide the SSID's name.
+Command:
+
+f'''cmd /c "netsh wlan connect name = {router_name}"'''
+
+We will now be connected to the specific SSID successfully.
+Establishing the connection to a New Wi-Fi Network
+In the following section, we will discuss the method for establishing the connection with a new Wi-Fi network in a few simple steps. Moreover, it is also important to add a new Wi-Fi network profile to the system with the help of an XML file in order to connect to a new network. This will make the Wi-Fi network a known SSID, and we will be able to connect to it successfully with the help of the following steps:
+The Methodology:
+Step 1: We will begin by importing the required library, that is, the OS library.
+Step 2: We will then set up the XML configuration of the new Wi-Fi Network.
+Step 3: Once the configuration is set, we will select the Wi-Fi Network.
+Step 4: We will then add the profile of the Wi-Fi Network to the system.
+Step 5: At last, we will get connected to the Wi-Fi Network.
+Let us see the above procedure in action in the following example:
+Example:
+
+# importing the os module
+import os
+# defining the function to establish a new connection
+def create_new_connection(name, SSID, password):
+    config = """<?xml version=\"1.0\"?>
+<WLANProfile xmlns = "http://www.microsoft.com/networking/WLAN/profile/v1">
+    <name>""" + name + """</name>
+    <SSIDConfig>
+        <SSID>
+            <name>""" + SSID + """</name>
+        </SSID>
+    </SSIDConfig>
+    <connectionType> ESS </connectionType>
+    <connectionMode> auto </connectionMode>
+    <MSM>
+        <security>
+            <authEncryption>
+                <authentication> WPA2PSK </authentication>
+                <encryption> AES </encryption>
+                <useOneX> false </useOneX>
+            </authEncryption>
+            <sharedKey>
+                <keyType> passPhrase </keyType>
+                <protected> false </protected>
+                <keyMaterial>""" + password + """</keyMaterial>
+            </sharedKey>
+        </security>
+    </MSM>
+</WLANProfile>"""
+    wlan_command = "netsh wlan add profile filename =\"" + name + ".xml\"" + " interface = Wi-Fi"
+    with open(name + ".xml", 'w') as file:
+        file.write(config)
+    os.system(wlan_command)
+# defining function to connect to a network
+def wlan_connect(name, SSID):
+    wlan_command = "netsh wlan connect name =\"" + name + "\" ssid =\"" + SSID + "\" interface = Wi-Fi"
+    os.system(wlan_command)
+# defining function to display avavilabe Wi-Fi networks   
+def display_available_networks():
+    wlan_command = "netsh wlan show networks interface = Wi-Fi"
+    os.system(wlan_command)
+# displaying the available netwroks
+display_available_networks()
+# inputing the Wi-Fi name and password
+name = input("Enter the Name of Wi-Fi: ")
+password = input("Enter the Password: ") 
+# establishing a new connection
+create_new_connection(name, name, password)
+# connecting to the Wi-Fi network
+wlan_connect(name, name)
+print("If the system is not connected to this network, try connecting with the correct password!")
+
+Output:
+Interface name : Wi-Fi
+There are 11 networks currently visible. 
+SSID 1 : Benny
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 2 : Honest
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 3 : Sushii
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 4 : Amazon
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 5 : Unagi91
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 6 : Printer.5G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 7 : Printer 2.4G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 8 : Willett
+    Network type            : Infrastructure
+    Authentication          : WPA-Personal
+    Encryption              : CCMP
+SSID 9 : MARK1
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 10 : Disconnect
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+SSID 11 : MARK1_5G
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP
+Enter the Name of Wi-Fi: MARK1_5G
+Enter the Password: Thereisnopassword.
+Connection request was completed successfully.
+If the system is not connected to this network, try connecting with the correct password!   
+
+Explanation:
+In the above snippet of code, we have imported the OS module and defined the create_new_connection function, which accepts the arguments as name, SSID, and password. These arguments are all strings that we have to complete in order to config variables. The config variable is a string that allows the programmers to define the XML configuration for a new Wi-Fi Network.
+We have then accepted the input from the user for the SSID name and password. They are then fed into the XML code, which is then included as a profile with the help of the following lines of code:
+Syntax:
+
+my_command = "netsh wlan add profile filename =\"" + name + ".xml\"" + " interface = Wi-Fi"
+with open(name+".xml", 'w') as file:
+    file.write(config)
+os.system(my_command)
+
+We can now connect to the Wi-Fi with the help of the same commands we utilized before in the tutorial and connect to the network as if it was a known one.
+
+
+Next TopicBest Python Libraries used for Ethical Hacking
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,250 @@
+
+
+
+
+next →
+← prev
+
+Currying in Python
+In this tutorial, we will learn about currying in Python, which is a new concept in Python. Most of the developers won't be familiar with this topic. We will explain the concept of currying, its use cases, and how to implement it in Python. Let's have an introduction to currying in Python.
+What is Currying?
+In mathematical and computer science, currying is breaking down a function that takes multiple arguments into a single argument function. Here, let's us make it clear. The term "curry" comes from the name of the mathematician Haskell Curry, not a spicy Dish.
+Currying is transforming a function with multiple arguments into a sequence of single-argument functions. We can say that converting a function f(a, b, c, …..) into a function like this f(a)(b)(c)……
+Currying is also used in theoretical computer science because it is often easier to transform multiple argument models into single argument models.
+Composition of Functions
+We define the composition h of two function f and g.
+
+h(x) = g(f(x))
+
+So it will define the same as we define the decorators in Python; the inner function's output becomes the outer function's input.
+
+def compose(g, f):
+    def h(x):
+        return g(f(x))
+    return h
+
+We will use this function in the upcoming example. Now let's understand another example.
+Suppose we have a thermometer which is not working accurately. The correct temperature can be calculated by using the function temp_correction function. We convert our temperature value from Celsius to Fahrenheit. We can do this by applying to compose to both functions.
+Example -
+
+def celsius2fahrenheit(t):
+    return 1.8 * t + 32
+def temp_correction(t):
+    return 0.9 * t - 0.5
+convert = compose(temp_correction, celsius2fahrenheit)
+print(convert(10), celsius2fahrenheit(10))
+
+Output:
+44.5 50.0
+
+The composition of two functions is generally not commutative, i.e. compose (celsius2fahrenheit, readjust) is different from compose(readjust, celsius2fahrenheit)
+
+convert2 = compose(celsius2fahrenheit, temp_correction)
+print(convert2(10), celsius2fahrenheit(10))
+
+Output:
+47.3 50.0
+
+The Convert2 is not a solution to our problem because it does not readjusting the actual temperatures of our thermometer but the transformed Fahrenheit values.
+Mathematical Representation of Currying
+f(x, y) = (x*x*x) + (y*y*y)
+h(x) = (x*x*x)
+h(y) = (y*y*y)
+h(x)(y) = h(x)+h(y)
+f(x, y) = h(x)(y)
+Curry f = h(x)(y)
+It will take the chaining the composition of the function as below.
+Example - 1: a(x) = b(c(d(x)))
+
+def change(b, c, d):
+    def a(x):
+        return b(c(d(x)))
+    return a
+
+Example - 2: v(a, b, c, d, e) = w(x(y(z(a, b, c, d, e))))
+
+# Currying in Python - Many to Single Argument
+ def curry_change(a):
+    def w(b):
+        def x(c):
+            def y(d):
+                def z(e):
+                    print(a, b, c, d, e)
+                return z
+            return y
+        return x
+    return w
+curry_change(20)(30)(50)(60)
+
+Output:
+20 30 50 60
+
+It will be complex when there is huge chaining of the function. There by simplifying one huge block of manipulation to similar sequence blocks. Let's understand the following example.
+Example -
+
+def change(b, c, d):
+	def a(x):
+		return b(c(d(x)))
+	return a
+	
+def kilometer2meter(dist):
+	""" It will convert km to m. """
+	return dist * 1000
+	
+def meter2centimeter(dist):
+	""" It will convert m to cm. """
+	return dist * 100
+	
+def centimeter2feet(dist):
+	""" It will convert cm to ft. """
+	return dist / 30.48
+change_val= change(centimeter2feet, meter2centimeter, kilometer2meter )
+e = change_val(160)
+print(e)
+
+Output:
+524934.3832020997
+
+In the next example, we will transform time and define the chaining of the functions.
+Example - 2:
+
+def change(b, c, d):
+	def a(x):
+		return b(c(d(x)))
+	return a
+	
+def daystohour(time):
+	""" It converts days to hours. """
+	return time * 24
+	
+def hourstominutes(time):
+	""" It converts hours to minutes. """
+	return time * 60
+	
+def minutestoseconds(time):
+	""" It converts minutes to seconds. """
+	return time * 60
+	
+change_val = change(minutestoseconds, hourstominutes, daystohour)
+e = change_val(20)
+print(e)
+
+Output:
+1728000
+
+Currying Function with an Arbitrary Number of Arguments
+Here is the question arise, how a curry a function across an arbitrary and unknown numbers of parameters?
+We can use the nested function to "curry" the arguments. We need a way to tell the function calculate and return the value. The functions that are called with the arguments will be curried. If we call the function without arguments it will tell the Python function that we finally want to the result.
+Let's understand the following example.
+Example -
+
+def mean_val(*args):
+    return sum(args) / len(args)
+def curry_func(func):
+    # to keep the name of the curried function:
+    curry_func.__curried_func_name__ = func.__name__
+    f_args, f_kwargs = [], {}
+    def f(*args, **kwargs):
+        nonlocal f_args, f_kwargs
+        if args or kwargs:
+            f_args += args
+            f_kwargs.update(kwargs)
+            return f
+        else:
+            result = func(*f_args, *f_kwargs)
+            f_args, f_kwargs = [], {}
+            return result
+    return f
+curried_mean_res = curry_func(mean_val)
+curried_mean_res(2)(5)(9)(4, 5)
+# it will keep on curry_funcing:
+curried_mean_res(5, 9)
+print(curried_mean_res())
+# calculating the arithmetic mean of 3, 4, and 7
+print(curried_mean_res(3)(4)(7)())
+# calculating the arithmetic mean of 4, 3, and 7
+print(curried_mean_res(4)(3, 7)())
+
+Output:
+5.571428571428571
+4.333333333333333
+4.333333333333333
+
+Let's print some important arguments that will help us to understand in better way.
+Example -
+
+def mean_val(*args):
+    return sum(args) / len(args)
+def curry(func):
+    # to keep the name of the curried function:
+    curry.__curried_func_name__ = func.__name__
+    f_args, f_kwargs = [], {}
+    def f(*args, **kwargs):
+        nonlocal f_args, f_kwargs
+        if args or kwargs:
+            print("Calling curried function with:")
+            print("args: ", args, "kwargs: ", kwargs)
+            f_args += args
+            f_kwargs.update(kwargs)
+            print("Currying the values:")
+            print("f_args: ", f_args)
+            print("f_kwargs:", f_kwargs)
+            return f
+        else:
+            print("Calling " + curry.__curried_func_name__ + " with:")
+            print(f_args, f_kwargs)
+            result = func(*f_args, *f_kwargs)
+            f_args, f_kwargs = [], {}
+            return result
+    return f
+curried_mean_val = curry(mean_val)
+curried_mean_val(2)(5)(9)(4, 5)
+# it will keep on currying:
+curried_mean_val(5, 9)
+print(curried_mean_val())
+
+Output:
+Calling curried function with:
+args:  (2,) kwargs:  {}
+Currying the values:
+f_args:  [2]
+f_kwargs: {}
+Calling curried function with:
+args:  (5,) kwargs:  {}
+Currying the values:
+f_args:  [2, 5]
+f_kwargs: {}
+Calling curried function with:
+args:  (9,) kwargs:  {}
+Currying the values:
+f_args:  [2, 5, 9]
+f_kwargs: {}
+Calling curried function with:
+args:  (4, 5) kwargs:  {}
+Currying the values:
+f_args:  [2, 5, 9, 4, 5]
+f_kwargs: {}
+Calling curried function with:
+args:  (5, 9) kwargs:  {}
+Currying the values:
+f_args:  [2, 5, 9, 4, 5, 5, 9]
+f_kwargs: {}
+Calling mean_val with:
+[2, 5, 9, 4, 5, 5, 9] {}
+5.571428571428571
+
+Conclusion
+Currying can be helpful in many situations, but it is important to note its limitation.
+
+
+Next TopicHow to Find the User's Location using Geolocation API
+
+
+
+
+← prev
+next →
+
+
+
+

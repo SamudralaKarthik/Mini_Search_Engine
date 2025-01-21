@@ -1,0 +1,127 @@
+
+
+
+
+next →
+← prev
+
+Difference between Materialized View and View
+Views are the most important concept of the database management system. In the interview, it is a popular and commonly asked question, much like truncate vs. delete, correlated, correlated vs. noncorrelated subquery, or primary key vs. unique key. This tutorial will learn about the difference between view and materialized view.
+The original table is stored in the physical memory of the database. In which we can access all attributes by running queries. But sometimes, we have to restrict the user to fetch some data from the table and allow them to get only permitted attributes. Suppose we have a student table, and the user can search for student names, marks, branches, ages, and other information about the student. But the user must not be allowed to fetch the student's mobile numbers and addresses.
+In such cases, it is a good way to create a view that can show the data of the required attributes of the table. We can achieve such functionality by creating a virtual table or view and Materialized view.
+Let's understand the concepts of the views.
+What is View?
+Views are the virtual table of the database that acts as an actual relation. It is not part of the logical relational model of the database system. They are created using the select query, but the result is not stored in the physical memory. Every time we fire the query to the view, the view returns the updated and latest data from the original table. It means the views are generated every time the view is accessed. In this view, the query definition is stored in the database itself. We can create as many views as we want.
+The point is to remember that when we make any change in the virtual table, it will reflect in the original table. If we make any changes in the original or base table, the changes will be reflected in the view. This makes the query performance very slow. For example - we create a view from the join of the two more tables. In this case, we have to resolve the joins and create them every time we try to fetch the data.
+However, it provides some advantages, such as it doesn't require memory to store the data. We can create the view using the below syntax.
+Syntax -
+
+Create view as <select query expression>
+
+Note - Views that are created using the DISTINCT clause, Group By clause, check constraint, read only option can't be modified.
+Advantages of View
+The following are some important advantages of the views.
+
+Views can simply the base table that consists of a huge amount of data. We can define a virtual table as per the data requirements.
+Views can easily define by joining one of more tables.
+Views can hide the complexity of the data.
+Views can limit its degree of exposure for underlying tables to the outer world.
+
+What is Materialized View?
+Materialized views are also known as virtual tables, but the result of the query expression is saved in physical memory. The query definition is also stored in the database. We can also consider them a Physical copy of the original base tables. It is primarily used in the context of warehousing of data. There is no standard view to define materialized view in SQL. However, few database management systems offer custom extensions to use materialized views. Unlike the normal view, they are not updated each time they are used. Instead, we need to update it manually or with the help of the trigger. The process of updating the Materialized view is known as Materialized View Maintenance.
+It stores the result in the physical memory, it responds faster than the normal view because the normal view is created whenever we run the query. It is mainly used for summarizing, pre-computing, replicating and distributing data, etc.
+Let's understand the syntax of the materialized view.
+
+Create Materialized View view_name
+Build [clause] Refresh [ type]
+ON [trigger ]
+As <query expression>
+
+In the above syntax, the Build clause decides when to populate the materialized view. It contains two options -
+
+IMMEDIATE - It populate the materialized view immediately.
+DEFFERED - Need to refresh materialized view manually at least once.
+
+Refresh type define the how to update the materialized view. There are three options -
+
+FAST - The materialized view logs is required against the source table in advance, without logs, the creation fails. A fast refresh is attempted. A fast refresh is attempted.
+COMPLETE - The table segment supporting the materialized view is truncated and repopulated completely using the associated query.
+FORCE - The materialized logs is not required. A fast refresh is attempted.
+
+On trigger defines when to update the materialized view. The refresh can be triggered in the two ways -
+
+ON COMMIT - When the data change is committed in one of the dependent tables. The refresh is triggered.
+ON DEMAND - A refresh happens when we schedule task or a manual request.
+
+We have discussed the basic concept of the normal view and materialized view. Now, let's see the difference between normal view and materialized view.
+Advantages of Materialized View
+The following are the some important advantages of the materialized view.
+
+Materialized view optimizes the query performance, using the same sub-query results every time.
+The data is not updated frequent in the materialized view, user needs to update data manually or using the trigger clause. It reduces the chances of any error and returns the efficient outcome.
+Materialized views are transparent and automatically maintained with the help of snowflake, which is a background services.
+
+Difference between View and Materialized View
+The following are the important difference between the view and materialized view.
+
+
+Sr. No.
+View
+Materialized View
+
+
+1.
+Views are the virtual projection of the base table. The query expressions are stored in the database but not the resulting data of query expression.
+The resulting data and query expression both are saved in the physical memory (database system).
+
+
+2.
+Views are generally created by joining one or more tables.
+Materialized views are primary used for the warehousing of data.
+
+
+3.
+A view is virtual table that is based on the select query
+It is also known as snapshot view of the data which provides access to duplicate, physical data in a separate table.
+
+
+4.
+DML commands cannot be used if they are created using the multiple tables.
+DML commands can be used in materialized view no matter how they are created.
+
+
+5.
+There is no updation cost involve in normal view.
+It does have the updation cost associated with it.
+
+
+6.
+Views respond slowly. It causes the query performances.
+Materialized view responds faster. Because it store data in the database.
+
+
+7.
+Views are defined according to the fixed design architecture approach which is based on the SQL standard defining a view.
+There is no predefined SQL standard to defining it, the database provides the functionality in the form of the extension.
+
+
+8.
+Views are more effective when the data is accessed infrequently and data in table get updated on frequent basis.
+Materialized views are mostly used when data is accessed more frequently and data is not updated frequently.
+
+
+Conclusion
+Views are played a crucial role in data retrieval. In this tutorial, we have covered the definition of the views and materialized view and its few important advantages. We have defined both views with a suitable example. Here you can understand the primary difference between both views and can choose according to your requirements.
+
+
+Next TopicNamespace in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,221 @@
+
+
+
+
+next →
+← prev
+
+Scatter() plot pandas in Python
+A data visualization method that displays the relationship between two numerical variables is called a scatter plot. In Python, there is a class named DataFrame that can be used to plot to scatter plots using pandas, and this class's member is called plot. By using the scatter() function on the plot component, a pandas DataFrame plot is drawn between two variables or two columns.
+Utilizing a Pandas DataFrame for a scatter plot
+
+The plot is a member of the Python pandas DataFrame class.
+Drawing a scatter plot between two specified columns of a pandas DataFrame requires calling the scatter() function on the plot component.
+Multiple columns are possible in a pandas DataFrame.
+The scatter() method's X and Y inputs can be any two columns.
+
+Syntax
+Here, the syntax shows how to write code for the scatter() method:
+
+DataFrame.plot.scatter(x_axis, y_axis, s = none, c = none)
+
+The following are the syntax parameters for the scatter() method:
+
+X_axis value - An array holding the scatter plot's x-axis data.
+Y_ axis value - a data array for the y-axis.
+S stands for the marker's size (can be scalar or array of size equal to the size of x or y)
+c- the order of the markers' colors
+
+Examples
+Here are various examples of scatter plots of pandas with different parameters. We can see the many scatter plots with a given size, color, and other functions.
+Example1: the following example shows a scatter plot using the pandas. We can see the plot values in the x and y-axis position with essential tuples.
+
+# Example to draw a scatter plot in pandas
+# use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value = [(3, 5),
+        (25, 30),
+       (7, 4),
+        (14, 15)]
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value, columns = ['x_axis', 'y_axis']);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'x_axis', y = 'y_axis', title = "Scatter plot pandas variable for X and Y axis");
+plot.show();
+
+Output
+The following image shows a scatter plot of the pandas.
+
+Example2: the following example shows a scatter plot using the pandas dataframe. Here, we use string and numerical values for scatter plots.
+
+# Example to draw a scatter plot in pandas
+# use two columns to create a scatter plot in pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value ={'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis");
+plot.show(); 
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example3: the following example shows a scatter plot using Python. Here, we use color to the tuple of the scatter plot.
+
+# Example to draw a scatter plot in pandas
+# use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value ={'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis", c = 'red');
+plot.show(); 
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example4: the following example shows a scatter plot using Python. Here, we use the required size of the tuple of the scatter plot.
+
+# Example to draw a scatter plot in pandas
+# Use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value = {'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis", c = 'red', s = 200);
+plot.show();
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example5: the following example shows a scatter plot using Python. Here, we use the required size of the tuple of the scatter plot with edge color.
+
+# Example to draw a scatter plot in pandas
+# Use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value = {'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis", c = 'red', s = 100);
+plot.show();
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example6: the following example shows a scatter plot using Python. Here, we use the required size of the tuple of the scatter plot with edge color and line width.
+
+# Example to draw a scatter plot in pandas
+# use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value ={'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis", 
+c = 'red', s = 100, edgecolor = 'green', linewidth = 2);
+plot.show();
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example7: the following example shows a scatter plot using Python. Here, we use the required size of the tuple of the scatter plot with a different color.
+
+# Example to draw a scatter plot in pandas
+# Use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value = {'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48],
+'color':['red', 'orange', 'yellow', 'black', 'blue', 'pink']}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis", c = 'color', s = 100);
+plot.show();
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example8: the following example shows a scatter plot using Python. Here, we use the required size of the tuple of the scatter plot with different colors and sizes
+
+# Example to draw a scatter plot in pandas
+# Use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value = {'Name':['Radha', 'Sita', 'Rutuja',
+              'Samnta', 'Pooja', 'Sakshi'],
+      'Age':[25, 30, 35, 40, 45, 48],
+'color':['red', 'orange', 'yellow', 'black', 'blue', 'pink'],
+'size':[205, 130, 370, 240, 105, 348]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis", c = 'color', s = 'size');
+plot.show();
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Example9: the following example shows a scatter plot using Python. Here, we use two bar-type scatter plots in different colors for comparison purposes.
+
+# Example to draw a scatter plot in pandas
+# Use two columns to create a scatter plot pandas DataFrame
+import pandas as pd
+import matplotlib.pyplot as plot
+# List of values
+data_value = {'Name':[10, 22, 35, 30, 50, 20],
+      'Age':[25, 30, 35, 40, 45, 48]}
+# Load input data in the pandas DataFrame       
+dataFrame = pd.DataFrame(data = data_value);
+# Draw a scatter plot using pandas
+dataFrame.plot.scatter(x = 'Name', y = 'Age', title = "Scatter plot pandas variable for X and Y axis");
+dataFrame.plot(kind = 'hist')
+plot.show();
+
+Output
+The following image shows a scatter plot with value in Python.
+
+Conclusion
+The scatter plot in pandas shows multiple types of graphs using python language. Here, we can create, display, and compare large-size data on a single page. It is a user-friendly, easy, simple, and sorted method to display data using scatter plots in Pandas.
+
+
+Next TopicScatter() plot matplotlib in Python
+
+
+
+
+← prev
+next →
+
+
+
+

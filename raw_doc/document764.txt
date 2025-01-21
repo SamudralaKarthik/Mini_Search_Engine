@@ -1,0 +1,224 @@
+
+
+
+
+next →
+← prev
+
+Difference between Property and Attributes in Python
+In this tutorial, we will understand the difference between property and attributes in Python. Everything in Python is an object, and each class has attributes, methods, or functions. When we work with the object-oriented programming language, we encounter the terms - Attributes and Properties. In terms of English, properties and attributes can be utilized similarly, but in terms of programming, both are different.
+So we will discuss some critical differences between them. Let's move on to the introduction to attributes.
+Attributes in Python
+Attributes are defined by the data variables such as name, age, height, etc. In Python, there are two types of attributes - 
+
+Class Attributes
+Instance Attributes
+
+Class Attributes
+Class attributes are the attributes that are created inside the class definition and belong to class it. These attributes are shared between all other objects of the same class. Let's understand the following example -
+Example -
+
+# declare a class
+class Student:
+	
+	# class attribute
+	count = 0	
+		
+	# define a method
+	def increment(self):
+		Student.count += 1
+	
+# create an Student
+# class object
+a1 = Student()
+
+# calling object's method
+a1.increment()
+
+# print value of class attribute
+print(a1.count)
+a2 = Student()
+
+a2.increment()
+print(a2.count)
+print(Student.count)
+
+Output:
+1
+2
+2
+
+Explanation -
+In the above code, we have created a class named Student, and assigned class attributes to count. We can access it using the instance of the class or class name itself.
+Instance Attribute
+An object is nothing but an instance of the class in Python. Instance Attributes are unique to each instance, and every object/instance contains its attributes and can be changed without modifying other instances. Let's understand the following example.
+Example -
+
+# create a class
+class Student:
+	
+	# constructor
+	def __init__(self):
+		
+		# instance attribute
+		self.name = 'JavaTpoint'
+		self.salary = 50000
+	
+	# define a method
+	def show(self):
+		print(self.name)
+		print(self.salary)
+
+# create an object of
+# Student class
+x = Student()
+
+# method calling
+x.show()
+
+Output:
+JavaTpoint
+50000
+
+Now we have a brief idea about idea attributes; let's understand the example.
+Properties in Python
+Properties are unique attributes that contain getter, setter, and deleter methods such as __get__, __set__, and __delete__ methods. Python provides the @property decorator, which can be used to define properties in Python code. A decorator changes the behaviour of a wrapped function without changing its actual definition.
+Let's understand the following example -
+Example -
+
+# create a class
+class PropertyDeco:
+	
+# constructor
+	def __init__(self, message):
+		self._message = message
+			
+	# getting the messages
+	@property			
+	def message(self):
+		print('Getting message')
+		return self._message
+			
+	# setting the messages	
+	@message.setter
+	def message(self, message):
+		print('Setting message to ' + message)
+		self._message = message
+			
+	# deleting the messages
+	@message.deleter
+	def message(self):
+		print('Deleting message')
+		del self._message
+	
+	
+# create an object of class
+x = PropertyDeco('Welcome to JavaTpoint')
+print(x.message)
+	
+x.message = 'Happy Learning!'
+	
+# deleting the message
+del x.message
+
+Output:
+Getting message
+Welcome to JavaTpoint
+Setting message to Happy Learning!
+Deleting message
+
+Explanation -
+In the above code, we created a class that will display the message. First, we initialized the message attribute and defined the property using the @property decorator. Then we explained the setter method that will set the method when we modify the message. Then we described the deleter method. These are the unique attributes of the property decorator.
+We can also define the properties using the property() method.
+Example -
+
+# create a class
+class PropertyDeco:
+	
+# constructor
+	def __init__(self, message):
+		self._message = message
+			
+	# getting the messages
+	@property			
+	def getter(self):
+		print('Getting message')
+		return self._message
+			
+	# setting the messages	
+	def setter(self, message):
+		print('Setting message to ' + message)
+		self._message = message
+			
+	# deleting the messages
+	def deleter(self):
+		print('Deleting message')
+		del self._message
+		
+	message = property(getter, setter, deleter, ) 
+	
+	
+# create an object of class
+x = PropertyDeco('Welcome to JavaTpoint')
+print(x.message)
+	
+x.message = 'Happy Learning!'
+	
+# deleting the message
+del x.message
+
+Output:
+Getting message
+Welcome to JavaTpoint
+Setting message to Happy Learning!
+Deleting message
+
+The above code is similar to the previous code. The only difference is that, we created the getter, setter, and deleter() methods instead of a decorator.
+Attributes V/s Property
+Below is the table of the attributes and properties.
+
+
+Attribute
+Property
+
+
+
+
+
+
+
+Attributes are defined by data variables like name, age, height etc.
+Properties are special type of attributes.
+
+
+There are two types of attributes -
+
+Class attributes
+Instance attributes
+
+Property method comes with the getter, setter and delete methods like __get__, __set__, and __delete__ methods.
+
+
+Class attributes are defined in the class body not in the functions.
+We can define getters, setters, and delete methods with the property() function.
+
+
+Instance attributes are defined in the class body using the self keyword usually it the __init__() method.
+To read the property, we can use the @property decorator which can be added above our method.
+
+
+Conclusion
+Thus, in this tutorial, we learned the significant difference between attributes and properties in Python. This tutorial included the types of attributes in Python and what are the properties in Python. It will help to grasp the object-oriented programming concepts in a better way.
+
+
+Next TopicDraw Great Indian Flag using Python Code
+
+
+
+
+← prev
+next →
+
+
+
+

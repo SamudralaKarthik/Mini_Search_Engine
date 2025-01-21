@@ -1,0 +1,86 @@
+
+
+
+
+next →
+← prev
+
+Program of Cumulative sum in python
+What is the cumulative sum?
+The cumulative sum means "how much so far". The definition of the cumulative sum is the sum of a given sequence that is increasing or getting bigger with more additions. The real example of a cumulative sum is the increasing amount of water in a swing pool.
+Example:
+
+Input: 10, 15, 20, 25, 30
+Output: 10, 25, 45, 70, 100
+
+Input: 1, 2, 3, 4, 5 6, 7 ,8, 9, 10
+Output: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55
+
+Program: 1
+
+# Cumulative sum
+def Cumulative_sum(lists): 
+	cum_list = [] 
+	length = len(lists) 
+	cum_list = [sum(lists[0:x:1]) for x in range(0, length+1)] 
+	return cum_list[1:]
+
+lists = [10, 15, 20, 25, 30] 
+print (Cumulative_sum(lists))
+
+Output:
+10, 25, 45, 70, 100
+
+Program: 2
+
+list=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+cum_list=[] 
+y = 0
+for x in range(0,len(list)):
+	y+=list[x]
+	cum_list.append(y) 
+	
+print(cum_list) 
+
+Output:
+1, 3, 6, 10, 15, 21, 28, 36, 45, 55
+
+Program 3: User define program
+
+i = []
+n = int(input("enter the no of elements in list:"))
+for x in range(0,n):
+    element=int(input("enter the element" + str(x+1) + ":"))
+    i.append(element)
+j=[sum(i[0:x+1]) for x in range(0,len(i))]
+print("Original list is: ",i)
+print("Cumulative sum list is: ",j)
+
+Output:
+enter the no of elements in list: 10
+enter the element1: 2
+enter the element2: 3
+enter the element3: 8
+enter the element4: 6
+enter the element5: 45
+enter the element6: 32
+enter the element7: 56
+enter the element8: 32
+enter the element9: 14
+enter the element10: 25
+Original list is: [2, 3, 8, 6, 45, 32, 56, 32, 14, 25]
+Cumulative sum list is: [2, 5, 13, 19, 64, 96, 152, 184, 198, 223]
+
+
+
+Next TopicMerge Sort in Python
+
+
+
+
+← prev
+next →
+
+
+
+

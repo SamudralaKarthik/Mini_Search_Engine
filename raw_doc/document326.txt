@@ -1,0 +1,121 @@
+
+
+
+
+next →
+← prev
+
+Convert string to JSON in Python
+Before taking a deep dive into the topic, let us have a glance on what strings are and what is JSON?
+Strings: are a sequence of characters that are denoted using inverted commas ''. They are immutable which means they cannot be changed once declared.
+JSON: stands for "JavaScript Object Notation", the JSON files consist of text that can be easily read by humans and is present in the form of attribute-value pairs.
+The extension of JSON files is ".json"
+Let us have a look at the first approach of converting a string to json in Python.
+The following program illustrates the same.
+
+# converting string to json
+import json
+
+# initialize the json object
+i_string = {'C_code': 1, 'C++_code' : 26,
+      'Java_code' : 17, 'Python_code' : 28}
+
+# printing initial json
+i_string = json.dumps(i_string)
+print ("The declared dictionary is ", i_string)
+print ("It's type is ", type(i_string))
+
+# converting string to json
+res_dictionary = json.loads(i_string)
+
+# printing the final result
+print ("The resultant dictionary is ", str(res_dictionary))
+print ("The type of resultant dictionary is", type(res_dictionary))
+
+Output:
+The declared dictionary is {'C_code': 1, 'C++_code' : 26,
+      'Java_code' : 17, 'Python_code' : 28}
+It's type is <class 'str'>
+The resultant dictionary is {'C_code': 1, 'C++_code' : 26,
+      'Java_code' : 17, 'Python_code' : 28}
+The type of resultant dictionary is <class 'dict'>
+
+Explanation:
+It's time to see the explanation so that our logic becomes clear-
+
+Since here the objective is to convert a string to json file we will first import the json module.
+The next step is to initialize the json object in which we have the subject name as keys and then their corresponding values are specified.
+After this, we have used dumps() to convert a Python object to a json string.
+Finally, we will use loads() to parse a JSON string and convert it into a dictionary.
+
+Using eval()
+
+# converting string to json
+import json
+
+# initialize the json object
+i_string = """ {'C_code': 1, 'C++_code' : 26,
+      'Java_code' : 17, 'Python_code' : 28}
+"""
+
+# printing initial json
+print ("The declared dictionary is ", i_string)
+print ("Its type is ", type(i_string))
+
+# converting string to json
+res_dictionary = eval(i_string)
+
+# printing the final result
+print ("The resultant dictionary is ", str(res_dictionary))
+print ("The type of resultant dictionary is ", type(res_dictionary))
+
+Output:
+The declared dictionary is   {'C_code': 1, 'C++_code' : 26,
+			'Java_code' : 17, 'Python_code' : 28}
+
+Its type is  <class 'str'>
+The resultant dictionary is  {'C_code': 1, 'C++_code': 26, 'Java_code': 17, 'Python_code': 28}
+The type of resultant dictionary is  <class 'dict'>
+
+Explanation:
+Let us understand what we have done in the above program.
+
+Since here the objective is to convert a string to json file we will first import the json module.
+The next step is to initialize the json object in which we have the subject name as keys and then their corresponding values are specified.
+After this, we have used eval() to convert a Python string to json.
+On executing the program, it displays the desired output.
+
+Fetching values
+Finally, in the last program we will fetch the values after the conversion of string to json.
+Let's have a look at it.
+
+import json
+i_dict = '{"C_code": 1, "C++_code" : 26, "Java_code":17, "Python_code":28}'
+res = json.loads(i_dict)
+print(res["C_code"])
+print(res["Java_code"])
+
+Output:
+1
+17
+
+We can observe the following things in the output-
+
+We have converted the string to json using json.loads().
+After this we have used the keys "C_code" & "Java_code" to fetch their corresponding values.
+
+Conclusion
+In this Tutorial, we learned how to convert a string to json using Python.
+
+
+Next TopicDBSCAN algorithm in Python
+
+
+
+
+← prev
+next →
+
+
+
+

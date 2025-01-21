@@ -1,0 +1,309 @@
+
+
+
+
+next →
+← prev
+
+Python Optparse Module
+Command-line arguments and parsing input arguments is important aspect of programming and development. A command-line argument is nothing but an argument specified in the system's command line after the program's name. When we pass values in these command-line arguments, these values are directly passed into the program's arguments, and that's how the value of the argument or variable is stored in the program's memory. The command-line argument is given in the command prompt shell of the system after the program's name, for which we are passing these arguments.
+All these arguments are passed inside the main() function of the program, and it usually contains only two following arguments:
+
+The number of arguments should be passed in the program
+The list of command-line arguments passed in the program
+
+These two categories of arguments are used inside the main() function, and the second type of argument is taken from the command line argument. Parsing an argument means that how the command line argument passed by us is handled in the program. Also, all the command line arguments or arguments which we pass inside the command prompt shell are handled only by the main() function of the program. These command-line arguments are very helpful when we have to pass dynamic data and when multiple values are passed at a single time. When multiple arguments are passed in a single command-line call, the values will be assigned to the respective variable of the program according to the data type and functionality of the variables and functions. That makes it easy for us to pass multiple values simultaneously, and we don't even have to assign all values to their particular variables and functions.
+All programming languages offer different types of functions for command-line arguments and parsing these arguments but talking specifically about Python offers us many in-built functions as well as multiple packages to perform these tasks. One such Python package is the Optparse module of Python, which we can use to set command line arguments and parse these arguments using a Python program. That's why we will learn about the Python optparse module in this tutorial, and we will pass command line arguments & parse them using functions of this module.
+Introduction to Optparse Module in Python
+The optparse module of Python is a very good option to replace the getopt package, and it has become a modern alternate option to handle and parse command-line arguments in a Python program. This module is used to pass command-line arguments and parse them in a Python program using the functions of this module. Optparse module is a very good option over the getopt package because many features which were not available previously in the getopt package are now available in this module. Many functions such as automatic help generation, option callbacks, and type conversion were not previously available in the getopt package, but now these options are available to us in the optparse module. That's why the optparse module is becoming more popular and preferable over the getopt package to parse command-line arguments. Other than the functions not previously available in the getopt package, the optparse module has introduced many new features. In this tutorial, we will only discuss some basic functions and features of this module. In this tutorial, we will use some example programs to demonstrate some of the basic capabilities of the optparse module.
+Optparse Module of Python: Advantages
+Following are some advantages of the optparse module of Python over other packages:
+
+optparse module makes it very easy for us to use command-line arguments and parse them through a Python program.
+This module has all the previously lacking features in the getopt package of Python.
+optparse module made it easy for us to handle dynamic input data, and it also provides the option to change the output according to dynamic input data.
+Besides this, it also provides us with some very new features which are helpful in smoothly handling all the command-line arguments.
+
+These are some common advantages of using the optparse module of Python, and we can get an idea from these advantages that why this module is very popular and preferable over all other packages of Python for command-line arguments.
+Optparse Module of Python: Installation
+The optparse module is in-built of Python, and that's why we don't have to perform any installation process to work with this module. We can directly start working with the optparse module by importing this module into the example Python programs. To import this module in a Python program, we can use the following line of code:
+
+# Importing optparse module
+import optparse
+
+After this, we can use the functions of this module in the program and work with the command-line arguments using this module.
+Working with the Optparse Module
+Here, in this part, we will discuss multiple functions and options available in the optparse module, which we can use to parse command-line arguments very easily. We will also use example programs in this part to understand the implementation of the optparse module in a better way. But first, we will learn to create an option parser object because this object will parse the command-line arguments passed for the main() function of the program.
+Creating an OptionParser Object
+We can parse a command-line argument by optparse module through the following two phases:
+
+First, we have to create an OptionParser instance in the program to handle the command-line arguments, and it should be configured and constructed with the expected options or values that can be given in command-line arguments.
+After that, a sequence of options or values is given from the command-line arguments and processed in the program.
+
+Therefore, first, we have to create an OptionParser instance in the program, and we can do this using the optionparser() function of the optparse module. We can create an OptionParser instance, having the optionparser properties to parse command-line arguments, using the following line of codes in any Python program:
+
+# Importing the optparse module
+import optparse as opt
+# Creating an OptionParser instance
+opInstance = opt.optionparser()
+
+As we can see, we have imported the optparse module as opt, and after that, we have used the optionparser() function to create an instance for OptionParser and named it 'opInstance.'
+All the optparse options used in the program are implicitly added to the parser instance once the OptionParser instance is created. It also provides us the information about what we can do when the defined option is encountered on the command line. The OptionParser instance also provides us functions from which it is possible to pass a list of options to the OptionParser constructor in the program. But it should be noted that this form of using options from the OptionParser instance is not used as frequently.
+Defining Options
+While we are defining options in the OptionParser instance of the program, we should remember that the options should be added one at a time. Each option instance defined in the program represents a set of synonymous command-line option strings. We can define options in the program using the add_options() function, which will be implicitly added to the OptionParser instance. At the beginning of the argument, we can use any unnamed string arguments, which are treated as option instance names. We can create aliases for an option we are defining, i.e., to have both long and short forms of the same option we have defined, by simply passing multiple names for it.
+We have two methods to create an option instance in the program with the OptionParser. Following are the two ways which we can use in our program to create option instances with OptionParser:
+Way 1: Only Giving Option Argument:
+In this method, we will give the option argument in the add_option() argument and use the following line of code to create option instances:
+
+# Creating an option instance
+oiVaribale = opInstance.add_option(option)
+
+Way 2: Giving String and Value Arguments:
+In this method, we will give value arguments in the attribute option of the function and an optional string in the add_option() while defining the options instance. We can use the following line of code to define option instance by this method:
+
+# Creating an option instance
+oiVaribale = opInstance.add_option(*opt_str, attr = userValue, ...)
+
+We can use the defined option instance in both long and short forms in both these methods.
+If we want to define options for only short options string and long option string, then we have to use two separate methods (One for short options string and the second for long option string). Thus, the options defined through these two methods will only take either short options string value or long option string value depending on the function we used to define the option. Following are two functions that we can use to define either short options string or long option string:
+1) Defining Option only for Long Option String:
+We can use the following method with add_option() function to define an option only for long option string values:
+
+# Option instance for long option string
+losInstance = opInstance.add_option("--foo", attr = userValue, ...)
+
+As we can see, we have to give the "--foo" value in the place of the optional argument in the add_option() function to define an option instance for a long option string.
+2) Defining Option Instance for Short Option String:
+We can use the following line of codes with add_option() function to define an option instance for the short option string values:
+
+# An option instance for short option string value
+sosVariable = opInstance.add_option("-f", attr = userValue, ...)
+
+As we can see, we have to give the "-f" argument in the place of the optional argument in the add_option() function to define an option instance for the short options string.
+That's how we can define an option instance specifically for either long option string or short options string, and the output produced by these option instances are only in either long or short string form depending upon the method we have used.
+Standard Actions for Option Instance:
+The option instances we have defined in the program with the OptionParser constructor have some standard action options. These standard option actions are used to carry out several functions and store a specific type of input value in them. We can use these option actions to set which type of value we want to store in these option instances depending on the function of the program and the expected output. Following are the standard option actions that are available for the option instances:
+
+"append": This action is used to append the option's argument of this option instance to a list
+"store": The "store" action is used to store the option's argument of the option instance, and it is default set in the add_option() function
+"store_false": This option is used to store false argument in the option instance
+"store_true": This option is used to store true argument in the option instance
+"append_const": The "append_const" action is used in the option instance to append a constant value from the option instance to a list
+"store_const": This option is used in the option instance to store a constant value in the instance
+
+These are the standard option actions available for all the option instances defined using the add_option function with the optionparser constructor. We can use one or multiple of them to set which value is stored or/and appended while parsing the command-line arguments.
+Standard Option Attributes:
+The Option instances we defined also have several attributes that define the functionality and working of these options instances in the program. These attributes are used as a value to take some specific argument while parsing input commands or perform some particular function in the program.
+Following are the standard option attributes for the option instances we have defined using the add_option() function:
+
+optionInstance.default: The value used with this attribute in the option instance is used for the destination of this option instance when this option instance is not seen on the command line
+optionInstance.dest: It is a default attribute for the option instance, and it is derived from the option strings provided as input arguments
+optionInstance.type: This attribute is used to set the data type of the value which is taken by this option instance, and by default, it is set to "strings"
+optionInstance.action: This attribute is used in the option instance to set what action will be performed on the value given in the option instance, and by default, this attribute is set to "store" action
+
+We can use these attributes available for the option instance to set which data-type values will be taken by these options instances and what actions will be performed on these values in the program.
+Optparse Module in Python: Implementation
+In this part, we will understand the implementation of the optparse module of Python through some example programs where we will parse command-line arguments. We will understand the implementation of this module by performing multiple functions such as taking input value in the command line argument, using the classes and functions of this module. We will understand the working of these example programs through the output they yield and explanation of them.
+Look at the following example programs to understand the working of the optparse module:
+Implementation 1: Using both long and short option values in an option instance:
+In this implementation part, we will understand the working of optionparser and option instances by defining them in an example program. We will define options instances for both long option string and short option string and call them one by one while executing them from the system's command shell. Look at the following example program to understand this implementation part of the optparse module.
+Example 1: Look at the following Python program where we defined both long & short option instances:
+
+# Importing the optparse module
+import optparse as opt
+# Import the sys module
+import sys
+# Printing the argv value
+print('ARGV value for option instances    :', sys.argv[1:])
+# Creating an optionparser constructor for option instances
+opConst = opt.OptionParser()
+# Defining an option instance with both short & long instance
+opConst.add_option('-s', '--long', 
+                                 dest = "output_filename",
+                                 default = "default.out",
+                                 )                                 
+# Creating another option instances with several arguments
+opConst.add_option('-v', '--verbose',
+                                 dest = "verbose",
+                                 default = False,
+                                 action = "store_true",
+                                )
+opConst.add_option('--version',
+                                dest = "version", 
+                                default = 1.0,
+                                type = "float",
+                                )                              
+# Creating parser arguments for options and remainder instances
+oInstance, rInstance = opConst.parse_args()
+# Printing values in the output
+print('VERSION of the input string   :', oInstance.version)
+print('VERBOSE for the input value   :', oInstance.verbose)
+print('OUTPUT with respect to input string    :', oInstance.output_filename)
+print('REMAINING for remainder is the function :', rInstance)
+
+Output:
+While calling with the short option string argument:
+C:\Users\Manish\Downloads>python code.py -s sample3.txt
+ARGV value for option instances    : ['-s', 'sample3.txt']
+VERSION of the input string   : 1.0
+VERBOSE for the input value   : False
+OUTPUT with respect to input string    : sample3.txt
+REMAINING for remainder is the function : []
+While calling with the long option string argument:
+python code.py --long sample4.txt
+ARGV value for option instances    : ['--long', 'sample4.txt']
+VERSION of the input string   : 1.0
+VERBOSE for the input value   : False
+OUTPUT with respect to input string    : sample4.txt
+REMAINING for remainder is the function : []
+While calling with a custom argument for the option instance:
+python code.py --lon sample4.txt
+ARGV value for option instances    : ['--lon', 'sample4.txt']
+VERSION of the input string   : 1.0
+VERBOSE for the input value   : False
+OUTPUT with respect to input string    : sample4.txt
+REMAINING for remainder is the function : [] 
+
+As we can see, we have called both the long option string and short option in an option instance using the long or short keyword argument in the function. We have also given a custom argument for the option instances, and the option instance is also called with the custom argument, and that's how it stores these values. That's how we can use the optparse module's function to create both long & short option string instances.
+Explanation:
+We have first imported the optparse and sys module in the program to use the functions of these modules. After that, we have used the argv function of the sys module in the print statement to print the option instance, which is called from the program. Then, we created the optionparser constructor using the OptionParser() function and named the constructor variable as 'opConst.' After that, we used this variable optionparser constructor to create option instances in the program using the add_opions() function. Then, we created three option instances in the program, and in these option instances, we have given the long or short option string arguments to define the type of the option instance. After that, we used the parse_args() function of the optparse module to parse the command-line arguments. Lastly, we used these args variables of the optparse module in the print statement to print several specific information from the option instances. After parsing the command-line arguments, we defined the information category before printing this information.
+Implementation 2: Passing Values in the Option Instances:
+In this implementation part, we will pass values for the arguments we have defined inside the option instances. After the command-line arguments are parsed in the program, these values we have passed in the program will be printed in the output. We should remember that the data type of the values we are passing should be the same as the data type we are defining in the option instance; otherwise, it will produce an error in the output. Look at the following example program to understand this implementation part of the optparse module.
+Example 2: Look at the following program where we passed values for the option instances:
+
+# Importing the optparse module
+import optparse as opt
+# Creating an optionparser constructor for option instances
+opConst = opt.OptionParser()
+# Defining multiple option instances with different data types
+opConst.add_option('-a', action = "store", type = "int")
+opConst.add_option('-b', action = "store", type = "float")
+opConst.add_option('-c', action = "store", type = "long")
+opConst.add_option('-d', action = "store", type = "complex")
+opConst.add_option('-s', action = "store", type = "string")
+# Parsing options instance to show input given values
+parsedOptions, args = opConst.parse_args()
+# Printing input string values with the respective option instances
+print(The int data type input value for the first option : %-16r %s' % (type(parsedOptions.a), parsedOptions.a))
+print(The float data type input value for the second option : %-16r %s' % (type(parsedOptions.b), parsedOptions.b))
+print(The long data type input value for the third option : %-16r %s' % (type(parsedOptions.c), parsedOptions.c))
+print(The complex data type input value for the fourth option : %-16r %s' % (type(parsedOptions.d), parsedOptions.d))
+print(The string data type input value for the last option : %-16r %s' % (type(parsedOptions.s), parsedOptions.s))
+
+Output:
+code.py -a 5 -b 31.26 -c 24260000 -d 24+26j -s max
+The int data type input value for the first option : <class 'int'>    5
+The float data type input value for the second option : <class 'float'>  31.26
+The long data type input value for the third option : <class 'int'>    24260000
+The complex data type input value for the fourth option : <class 'complex'> (24+26j)
+The string data type input value for the last option : <class 'str'>    max
+
+As we can see, after giving input values with different data types, these input values are assigned to the respective data type option instances. That's how we can give different data type input values and parse them to the defined option instances using the command-line shell.
+Explanation:
+After defining the optionparser constructor, we have defined multiple option instances in the program. These option instances are defined with the action argument set to "store" so that given input values will be stored for these option instances. Also, these option instances are set to take different data types so that when a particular data-type value is given in the input, it will be stored to that particular option instance only. Lastly, we printed the input values, which are parsed and stored to a particular option instance using the parsedOptions constructor in the print statement. We have also printed the data-type pf the value in the result with the value.
+Note: It should be noted that while giving input values for an option instance if we give a different data-type input value other than what is defined in the option instance, an error will occur, and an error message will be displayed in the output. To demonstrate this, we will run the Python code and give a different data-type value, other than the data-type of the option instance. Look at the following example program to understand this concept of option instances:
+
+# Importing the optparse module
+import optparse as opt
+# Creating an optionparser constructor for option instances
+opConst = opt.OptionParser()
+# Defining multiple option instances with different data types
+opConst.add_option('-a', action = "store", type = "int")
+# Parsing options instance to show input given values
+parsedOptions, args = opConst.parse_args()
+# Printing input string values with the respective option instances
+print(The int data type input value for the first option : %-16r %s' % (type(parsedOptions.a), parsedOptions.a))
+
+Output:
+code.py -a c
+Usage: code.py [options]
+
+code.py: error: option -a: invalid integer value: 'c'  
+
+As we can see, an error message is displayed in the output when we give different data-type input values for the option instance.
+Implementation 3: Parsing Command-line Arguments to Print a Table:
+Till now, we have understood the working and implementation of both option instances and optionparser constructor. Now, we will use the optparse module and its functions to print a table in the command-line shell from the input value. We will use for loop in the program to loop over the input value and, thus, print the table in the command shell with the functions of the optparse module. This will help us better understand the working and practical implementation of parsing command-line arguments using the optparse module. Look at the following example program where we have printed the table in the command shell:
+Example 4: Look at the following Python program to understand the practical implementation of the optparse module:
+
+# Importing the optparse module
+import optparse as opt
+
+# Define a function to print table of n
+def tablePrint(num, destCheak):
+        # Using for loop to print the table
+	for a in range(1,11):
+		table = a * num
+		# Using if to check if destination input given is other than 0
+		if destCheak:
+			print(table)	
+	return table
+
+# Define main function to add options for taking input value
+def Main():
+	# Create the OptionParser constructor
+	opConst = opt.OptionParser()
+	
+	# Adding multiple option instances with specific functions
+	opConst.add_option('-m', dest = 'num',
+					type = 'int',
+					help = 'specify the nth table number to print table in the output') # Using help argument to show help message in the case of error
+	opConst.add_option('-c', dest = 'out',
+					type = 'string',
+					help = 'specify an output file for the input value (Optional)')
+	opConst.add_option("-b", "--all",
+					action = "store_true",
+					dest = "prin",
+					default = False,
+					help = "print all numbers up to N from the print table function")
+	# Adding parsed options constructor
+	(optionParsed, args) = opConst.parse_args()
+	if (optionParsed.num == None):
+			print (opConst.usage)
+			exit(0)
+	else:
+			number = optionParsed.num	
+	# Calling the print table function
+	result = tablePrint(number, optionParsed.prin)
+	# Printing the last term of table in the result
+	print ("This is the table of given input value number with last term:" + str(result))
+        # Checking if given input value is not 0
+	if (optionParsed.out != None):
+		# Opening a file in append mode to print table
+		func = open(optionParsed.out, "a")		
+		# Writing in the file we appended
+		func.write(str(result) + '\n')
+
+# Driver code to call main function
+if __name__ == '__main__':
+	# Calling the main function
+	Main()
+
+Output:
+python code.py -m 7 -b
+7
+14
+21
+28
+35
+42
+49
+56
+63
+70
+This is the table of given input value number with last term:70   
+
+As we can see, the table of '7', which is also the input value in the command shell, is printed in the output after the command-line arguments are parsed in the program.
+That's how we can use this optparse module of Python to parse the command-line arguments and work with them through a Python program.
+
+
+Next Topicint object is not iterable
+
+
+
+
+← prev
+next →
+
+
+
+

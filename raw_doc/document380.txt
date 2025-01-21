@@ -1,0 +1,194 @@
+
+
+
+
+next →
+← prev
+
+Generate a QR Code using Python
+Understanding the QR Code
+
+QR code is a machine-readable barcode designed in two-dimensional pixelated form.
+The QR code can be used to store a range of data.
+QR in QR code is abbreviated for Quick Response.
+QR code was invented in the year 1994 by Masahiro Hara, a Japanese engineer from Automobile Manufacturer Denso Wave, in order to track the movement of car parts.
+The popularity of the QR code has increased in the later 2010s with improvement in optical proficiencies of Mobile Phones and their extensive acceptance.
+At the moment, QR codes are being utilized for a wide range of applications such as making online payments, checking hotel menus, sharing Wi-Fi passwords, obtaining cost and other information of products, and a lot more.
+QR codes have become so famous that now every new smartphone comes with a built-in QR code reader.
+
+In the following tutorial, we will learn to generate and read a QR code using the Python programming language.
+So, let's get started.
+Generating QR Code using Python
+Python is a programming language that provides different modules and packages that allow us to generate a QR code. For this tutorial, we will be working with the qrcode package in order to generate the code.
+However, in order to start working with the package, we have to install it.
+Installing the Python qrcode package
+We can install the qrcode package with the help of the pip installer using the following command:
+Syntax:
+
+$ pip install qrcode
+
+The package will be installed in the system as the version of Python and pip.
+Verifying the Installation
+In order to check whether the package has been installed in the system properly or not, we can try importing the package and execute the program.
+Once the installation is complete, create a new Python file and type the following syntax in it.
+Example:
+
+# importing the required module
+import qrcode
+
+Now, save the file and run the file using the following command in the command prompt.
+Syntax:
+
+$ python <file-name>.py
+
+If the program runs without raising any import error, the module is installed properly. Else it is recommended to reinstall the package and refer to its official documentation.
+Now, let us understand start working with the qrcode library.
+Generating a Simple QR Code
+We can generate a simple QR code using the make function of qrcode and pass the data as its parameter.
+Let us consider the following example that produces a QR code that reads "Welcome to Javatpoint".
+Example:
+
+# importing the qrcode library
+import qrcode
+# generating a QR code using the make() function
+qr_img = qrcode.make("Welcome to Javatpoint.")
+# saving the image file
+qr_img.save("qr-img.jpg")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the qrcode library and defined a variable that uses the make() function of the qrcode library to generate a QR code. We have then saved the code using the save() function in the directory.
+We can use the smartphone in order to read the above QR code.
+Caution: Do not use the smartphone to read random QR codes because they may contain malicious code/links.
+Generating an Advanced QR Code
+The programmers can customize a QR code using a QRCode object which consists of the parameters shown in the following table:
+
+
+S.No.
+Parameter
+Description
+
+
+1
+version
+There are forty (40) versions of the QR code, which regulates the size of the code. Version 1 is the smallest, whereas version 40 is the largest. Version 1 will generate a 21x21 matrix QR code.
+
+
+2
+error_correction
+
+This parameter is used to control the Error Correction utilized for the QR code. This varies from 7% to 30% correction of the errors as below:
+
+ERROR_CORRECT_L: up to 7%
+ERROR_CORRECT_M: up to 15%
+ERROR_CORRECT_Q: up to 25%
+ERROR_CORRECT_H: up to 30%
+
+
+
+
+3
+box_size
+This parameter is used to regulate the number of pixels in the individual block of the QR code.
+
+
+4
+border
+This parameter is used to control the thickness of the border. The default border is 4 pixels thick.
+
+
+We can use the following functions of the QRCode object in order to create a QR code.
+
+
+S.No.
+Functions
+Description
+
+
+1
+add_data()
+We can pass the content of the QR code as a parameter to this function.
+
+
+2
+make()
+
+In case where we are not sure about which version of QR code to utilize, we can set automatically the version by:
+
+Setting version argument to None, and
+Setting fit argument of the make() function to True.
+
+
+
+
+3
+make_image()
+This function is used to generate the QR code. We can also use it in order to set the fill color and background color of the QR code with the help of the fill_color and back_color parameters.
+
+
+Let us consider the following example in order to generate a QR code which points towards the Python tutorial.
+Example:
+
+# importing the qrcode module
+import qrcode
+# creating a QRCode object
+obj_qr = qrcode.QRCode(
+    version = 1,
+    error_correction = qrcode.constants.ERROR_CORRECT_L,
+    box_size = 10,
+    border = 4,
+)
+# using the add_data() function
+obj_qr.add_data("https://www.javatpoint.com/python-tutorial")
+# using the make() function
+obj_qr.make(fit = True)
+# using the make_image() function
+qr_img = obj_qr.make_image(fill_color = "cyan", back_color = "black")
+# saving the QR code image
+qr_img.save("qr-img1.png")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the qrcode library. We have then created an instance of the QRCode class of the qrcode library. We have used different parameters in order to customize the QR code. We have then used the add_data() function to include the information for the QR code. We have also used the make() and make_image() functions to generate the QR code image. At last, we have saved the image file in the directory using the save() function.
+How to read a QR Code?
+We will utilize the OpenCV library in order to read the QR code. If the package is not installed in the system, we can use the following command in order to install it using the pip installer:
+Syntax:
+
+$ pip install cv2
+
+Once the installation is done, we can head onto the decoding section of the QR code. In order to decode the code, we will be using the detectAndDecode function of QRCodeDetector object of OpenCV.
+Let us consider the snippet of code for the same.
+Example:
+
+# importing the OpenCV library
+import cv2
+# reading the image
+qr_img = cv2.imread("qr-img1.png")
+# using the QRCodeDetector() function
+qr_det = cv2.QRCodeDetector()
+# using the detectAndDecode() function
+val, pts, st_code = qr_det.detectAndDecode(qr_img)
+# printing the value
+print("Information:", val)
+
+Output:
+Information: https://www.javatpoint.com/python-tutorial  
+
+Explanation:
+In the above snippet of code, we have imported the cv2 library. We have then used the imread() function to read the image from the directory and the QRCodeDectector() function to detect the QR code in the image. We have then used the detectAndDecode() function and printed the value for the users.
+As a result, the detectAndDecode function returns the content of the QR code, coordinates of the corners of the box, and binarized QR code.
+
+
+Next TopicBest Python PDF Library
+
+
+
+
+← prev
+next →
+
+
+
+

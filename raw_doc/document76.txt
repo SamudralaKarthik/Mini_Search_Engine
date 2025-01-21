@@ -1,0 +1,101 @@
+
+
+
+
+next →
+← prev
+
+Creating new databases
+In this section of the tutorial, we will create the new database PythonDB.
+Getting the list of existing databases 
+We can get the list of all the databases by using the following MySQL query.
+
+>  show databases;
+
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    dbs = cur.execute("show databases")
+except:
+    myconn.rollback()
+for x in cur:
+    print(x)
+myconn.close()
+
+Output:
+('EmployeeDB',)
+('Test',)
+('TestDB',)
+('information_schema',)
+('javatpoint',)
+('javatpoint1',)
+('mydb',)
+('mysql',)
+('performance_schema',)
+('testDB',)
+
+Creating the new database
+The new database can be created by using the following SQL query.
+
+>  create database <database-name>  
+
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #creating a new database
+    cur.execute("create database PythonDB2")
+
+    #getting the list of all the databases which will now include the new database PythonDB
+    dbs = cur.execute("show databases")
+    
+except:
+    myconn.rollback()
+
+for x in cur:
+        print(x)
+        
+myconn.close()
+
+Output:
+('EmployeeDB',)
+('PythonDB',)
+('Test',)
+('TestDB',)
+('anshika',)
+('information_schema',)
+('javatpoint',)
+('javatpoint1',)
+('mydb',)
+('mydb1',)
+('mysql',)
+('performance_schema',)
+('testDB',)
+
+
+Next TopicCreating Tables
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,158 @@
+
+
+
+
+next →
+← prev
+
+Grammar and Spell Checker in Python
+In the following tutorial, we will discuss a Python package called LanguageTool and understand how to create a simple grammar and spell checker using the Python programming language.
+So, let's get begun.
+Understanding the LanguageTool library in Python
+LanguageTool is an open-source tool used for grammar and spell-checking purposes, and it is also known as the spellchecker for OpenOffice. This package allows programmers to detect grammatical and spelling mistakes through a Python code snippet or a Command-line Interface (CLI).
+How to Install the LanguageTool library?
+To install the Python library, we need 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the LanguageTool library using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ pip install language-tool-python
+
+The language_tool_python library will download a LanguageTool server as a JAR file by default and execute that in the background to detect grammatical errors locally. But LanguageTool also provides a Public HTTP Proofreading API that is supported; however, there is a limitation in the number of calls.
+Verifying the Installation
+Once the library is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import language_tool_python
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the library is installed properly. However, in the case where an exception is raised, try reinstalling the library, and it is also recommended to refer to the official documentation of the module.
+Working with the Python LanguageTool library
+In the following section, we will understand the working of the LanguageTool library in Python using a practical example. The following Python script demonstrates the detection of grammatical mistakes and correcting them as well. We will work with the following text:
+Text:
+LanguageTool provides utility to check grammar and spelling errors. We just have to paste the text here and click the 'Check Text' button. Click the colored phrases for for information on potential errors. or we can use this text too see an some of the issues that LanguageTool can dedect. Whot do someone thinks of grammar checkers? Please not that they are not perfect. Style problems get a blue marker: It is 7 P.M. in the evening. The weather was nice on Monday, 22 November 2021
+The above text contains some grammatical and spelling errors highlighted in bold. Let us consider the following Python script to understand the working of the LanguageTool utility:
+Example:
+
+# importing the package
+import language_tool_python
+
+# using the tool
+my_tool = language_tool_python.LanguageTool('en-US')
+
+# given text
+my_text = """LanguageTool provides utility to check grammar and spelling errors. We just have to paste the text here and click the 'Check Text' button. Click the colored phrases for for information on potential errors. or we can use this text too see an some of the issues that LanguageTool can dedect. Whot do someone thinks of grammar checkers? Please not that they are not perfect. Style problems get a blue marker: It is 7 P.M. in the evening. The weather was nice on Monday, 22 November 2021""" 
+ 
+# getting the matches
+my_matches = my_tool.check(my_text)
+
+# printing matches
+print(my_matches)
+
+Output:
+[Match({'ruleId': 'ENGLISH_WORD_REPEAT_RULE', 'message': 'Possible typo: you repeated a word', 'replacements': ['for'], 'offsetInContext': 43, 'context': "...Text' button. Click the colored phrases for for information on potential errors. or we ...", 'offset': 165, 'errorLength': 7, 'category': 'MISC', 'ruleIssueType': 'duplication', 'sentence': 'Click the colored phrases for for information on potential errors.'}), Match({'ruleId': 'UPPERCASE_SENTENCE_START', 'message': 'This sentence does not start with an uppercase letter.', 'replacements': ['Or'], 'offsetInContext': 43, 'context': '...or for information on potential errors. or we can use this text too see an some of...', 'offset': 206, 'errorLength': 2, 'category': 'CASING', 'ruleIssueType': 'typographical', 'sentence': 'or we can use this text too see an some of the issues that LanguageTool can dedect.'}), Match({'ruleId': 'TOO_TO', 'message': 'Did you mean "to see"?', 'replacements': ['to see'], 'offsetInContext': 43, 'context': '...tential errors. or we can use this text too see an some of the issues that LanguageTool...', 'offset': 230, 'errorLength': 7, 'category': 'CONFUSED_WORDS', 'ruleIssueType': 'misspelling', 'sentence': 'or we can use this text too see an some of the issues that LanguageTool can dedect.'}), Match({'ruleId': 'EN_A_VS_AN', 'message': 'Use "a" instead of 'an' if the following word doesn't start with a vowel sound, e.g. 'a sentence', 'a university'.', 'replacements': ['a'], 'offsetInContext': 43, 'context': '...errors. or we can use this text too see an some of the issues that LanguageTool ca...', 'offset': 238, 'errorLength': 2, 'category': 'MISC', 'ruleIssueType': 'misspelling', 'sentence': 'or we can use this text too see an some of the issues that LanguageTool can dedect.'}), Match({'ruleId': 'MORFOLOGIK_RULE_EN_US', 'message': 'Possible spelling mistake found.', 'replacements': ['detect', 'defect', 'deduct', 'deject'], 'offsetInContext': 43, 'context': '...ome of the issues that LanguageTool can dedect. Whot do someone thinks of grammar chec...', 'offset': 282, 'errorLength': 6, 'category': 'TYPOS', 'ruleIssueType': 'misspelling', 'sentence': 'or we can use this text too see an some of the issues that LanguageTool can dedect.'}), Match({'ruleId': 'MORFOLOGIK_RULE_EN_US', 'message': 'Possible spelling mistake found.', 'replacements': ['Who', 'What', 'Shot', 'Whom', 'Hot', 'WHO', 'Whet', 'Whit', 'Whoa', 'Whop', 'WHT', 'Wot', 'W hot'], 'offsetInContext': 43, 'context': '...he issues that LanguageTool can dedect. Whot do someone thinks of grammar checkers? ...', 'offset': 290, 'errorLength': 4, 'category': 'TYPOS', 'ruleIssueType': 'misspelling', 'sentence': 'Whot do someone thinks of grammar checkers?'}), Match({'ruleId': 'PLEASE_NOT_THAT', 'message': 'Did you mean "note"?', 'replacements': ['note'], 'offsetInContext': 43, 'context': '...eone thinks of grammar checkers? Please not that they are not perfect. Style proble...', 'offset': 341, 'errorLength': 3, 'category': 'TYPOS', 'ruleIssueType': 'misspelling', 'sentence': 'Please not that they are not perfect.'}), Match({'ruleId': 'PM_IN_THE_EVENING', 'message': 'This is redundant. Consider using "P.M."', 'replacements': ['P.M.'], 'offsetInContext': 43, 'context': '...yle problems get a blue marker: It is 7 P.M. in the evening. The weather was nice on Monday, 22 Nov...', 'offset': 414, 'errorLength': 19, 'category': 'REDUNDANCY', 'ruleIssueType': 'style', 'sentence': 'Style problems get a blue marker: It is 7 P.M. in the evening.'})]
+
+Explanation:
+In the above snippet of code, we have imported the required library and defined a tool that uses the LanguageTool utility to check the grammar and spelling errors in the text. We have then defined another string variable that stores the text passage we wanted to check. We have then retrieved the match using the check() function and printed them for the users.
+As a result, we can observe that we have a detailed dictionary that displays the ruleId, message, replacements, offsetInContext, context, offset, and a lot more. We can find a detailed explanation of every rule ID in the LanguageTool Community.
+Since we have detected the mistakes, it is time for us to correct them. Let us consider the following Python script demonstrating the same:
+Example:
+
+# importing the package
+import language_tool_python
+
+# using the tool
+my_tool = language_tool_python.LanguageTool('en-US')
+
+# given text
+my_text = """LanguageTool provides utility to check grammar and spelling errors. We just have to paste the text here and click the 'Check Text' button. Click the colored phrases for for information on potential errors. or we can use this text too see an some of the issues that LanguageTool can dedect. Whot do someone thinks of grammar checkers? Please not that they are not perfect. Style problems get a blue marker: It is 7 P.M. in the evening. The weather was nice on Monday, 22 November 2021""" 
+ 
+# getting the matches
+my_matches = my_tool.check(my_text)
+
+# defining some variables
+myMistakes = []
+myCorrections = []
+startPositions = []
+endPositions = []
+
+# using the for-loop
+for rules in my_matches:
+    if len(rules.replacements) > 0:
+        startPositions.append(rules.offset)
+        endPositions.append(rules.errorLength + rules.offset)
+        myMistakes.append(my_text[rules.offset : rules.errorLength + rules.offset])
+        myCorrections.append(rules.replacements[0])
+
+# creating new object
+my_NewText = list(my_text) 
+
+# rewriting the correct passage
+for n in range(len(startPositions)):
+    for i in range(len(my_text)):
+        my_NewText[startPositions[n]] = myCorrections[n]
+        if (i > startPositions[n] and i < endPositions[n]):
+            my_NewText[i] = ""
+
+my_NewText = "".join(my_NewText)
+
+# printing the text
+print(my_NewText)
+
+Output:
+LanguageTool provides utility to check grammar and spelling errors. We just have to paste the text here and click the 'Check Text' button. Click the colored phrases for information on potential errors. Or we can use this text to see a some of the issues that LanguageTool can detect. Who do someone thinks of grammar checkers? Please note that they are not perfect. Style problems get a blue marker: It is 7 P.M.. The weather was nice on Monday, 22 November 2021
+
+Explanation:
+We have included some new variables to address mistakes, corrections, starting positions, and ending positions in the above snippet of code. We have then used the for-loop to iterate through the rules in my_matches and replace the mistakes with their corrections. We have then stored these corrected texts in a list. At last, we have again used the for-loop to iterate through the string elements in the list, join them together, and print the resulting text for the users.
+Hence, we have successfully corrected the mistakes that we find out in the previous snippet of code.
+Now, let us observe the mistakes that we captured earlier along with their respective corrections using the following Python script:
+Example:
+
+print(list(zip(myMistakes, myCorrections)))
+
+Output:
+[('for for', 'for'), ('or', 'Or'), ('too see', 'to see'), ('an', 'a'), ('dedect', 'detect'), ('Whot', 'Who'), ('not', 'note'), ('P.M. in the evening', 'P.M.')]
+
+Explanation:
+In the above snippet of code, we have printed the list of the mistakes in the Text with their respective corrections.
+Applying Suggestions to the Text automatically
+Let us consider a simple example demonstrating how we can apply suggestions automatically to the Text using the LanguageTool library in Python.
+Example:
+
+# importing the library
+import language_tool_python
+
+# creating the tool
+my_tool = language_tool_python.LanguageTool('en-US')
+
+# given text
+my_text = 'A quick broun fox jumpps over a a little lazy dog.'
+
+# correction
+correct_text = my_tool.correct(my_text)
+
+# printing some texts
+print("Original Text:", my_text)
+print("Text after correction:", correct_text)
+
+Output:
+Original Text: A quick broun fox jumpps over a a little lazy dog.
+Text after correction: A quick brown fox jumps over a little lazy dog.
+
+Explanation:
+In the above snippet of code, we have imported the required library and defined the tool for LanguageTool specifying the language as US English. We have then defined a string variable and stored some text to it. We have then used the correct() function of the tool to automatically correct the mistake in the text and print the resultant text for the users.
+
+
+Next TopicConverting HTML to PDF files using Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,125 @@
+
+
+
+
+next →
+← prev
+
+Wordcloud Package in Python
+Wordcloud package helps us to know the frequency of a word in textual content using visualization.
+To implement this we need to install some packages first, like pandas, matplotlib, and Wordcloud.
+Let us have a look at the steps of the installation of each-
+Installation of Pandas
+Pandas is a great tool to implement data analysis and visualizations in Jupyter Notebook. It can be imported into our source code in the following way-
+
+import pandas as pd 
+
+The pd refers to the process of aliasing with the help of which data frames can be created and it makes the readability of code easier.
+Pandas can be installed using two ways-
+1. Using Command Prompt
+First, let's see how we can work on our objective using command prompt.
+
+Open Command Prompt
+Type the given command-
+pip install pandas
+On clicking 'Enter', the packages will start downloading in our system.
+
+The same command can be used in Linux in the terminal to install pandas in our system.
+2. Using Anaconda Navigator
+The second way to install pandas in our system is using Anaconda Navigator
+
+Open Anaconda Navigator.
+Click on the 'Environment' tab and go to the create option to set up pandas in your system.
+Click on create a button for the Pandas environment.
+In the list of packages, select 'All' to get the filters.
+Go to the search bar and look for 'Pandas' and select the 'Pandas package'.
+Right-click on the checkbox and go to 'Mark for specific version installation'.
+Select the version we want to install and click the 'Apply' button to install the packages.
+
+
+Installation of Matplotlib
+Matplotlib is a vast and interesting library for people who are enthusiastic about inferring results from the data and there are scatterplots, histograms, boxplots, and a lot more which makes it easy for us to comprehend.
+Matplotlib can be installed by following the given steps-
+
+Using Command Prompt
+
+Matplotlib can be installed in our system by using the given command in the Command Prompt-
+
+pip install matplotlib
+
+
+Using Anaconda
+
+We can install matplotlib using Anaconda by typing the following command in the Anaconda Prompt-
+
+conda install matplotlib 
+
+
+
+Verifying the Installation
+We can verify that matplotlib has been successfully installed in our system or not by typing the given program in the terminal-
+
+import matplotlib
+matplotlib.__version__
+
+Installation of Wordcloud
+As discussed earlier, it gives us an idea of the most occurred words in a text with the help of a visual.
+Let us have a look at the steps of installation-
+WordCloud can be installed by following the given steps-
+
+Using Command Prompt
+
+WordCloud can be installed in our system by using the given command in the command prompt.
+
+pip install wordcloud
+
+
+Using Anaconda
+
+We can install wordcloud using Anaconda by typing the following command in the Anaconda Prompt.
+
+conda install -c conda-forge wordcloud
+
+Now let us have a look at the simple program that shows how wordcloud can be used in Python.
+We have taken this piece of text from a website and save as sunflowers1.txt file.
+sunflowers1.txt
+
+"Sunflowers are heliotropic, which means that they turn their flowers to follow the movement of the Sun across the sky east to west, and then returns at night to face the east, ready again for the morning sun. Heliotropism happens during the earlier stages before the flower grows heavy with seeds.
+There are tons of varieties of sunflowers available today, so there's bound to be one that fits your garden. Choose between those with branching stems or single stems, those that produce ample pollen for pollinators or are pollen-free (best for bouquets), those that stay small or tower above the rest of the garden, or those that produce edible seeds! "
+
+Code Implementation
+
+import re
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS
+text = open("/content/sunflowers1.txt", "r").read()
+# Clean text
+text = re.sub(r'==.*?==+', '', text)
+text = text.replace('\n', '')
+# Define a function to plot word cloud
+def plot_cloud(wordcloud):
+    # Set figure size
+    plt.figure(figsize=(40, 30))
+    # Display image
+    plt.imshow(wordcloud) 
+    # No axis details
+    plt.axis("off")
+# Generate word cloud
+wordcloud = WordCloud(width = 3000, height = 2000, random_state=1, background_color='salmon', colormap='Pastel1', collocations=False, stopwords = STOPWORDS).generate(text)
+plot_cloud(wordcloud)
+
+Output:
+
+
+
+Next TopicConvert dataframe into list
+
+
+
+
+← prev
+next →
+
+
+
+

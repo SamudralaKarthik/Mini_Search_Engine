@@ -1,0 +1,75 @@
+
+
+
+
+next →
+← prev
+
+How to clear Python shell
+Sometimes working with the Python shell, we got haphazard output or wrote unnecessary statements, and we want to clear the screen for some other reason.
+The "cls" and "clear" commands are used to clear a terminal (terminal window). If, you are using the shell within IDLE, which won't be affected by such things. Unfortunately, there is no way to clear the screen in IDLE. The best you could do is to scroll the screen down lots of lines.
+For example -
+
+print("/n" * 100)
+
+Though you could put this in a function:
+
+def cls():
+         print("/n" * 100)
+
+And then call it when needed as cls() function. It will clear the console; all previous command will be vanished and screen start from the beginning.
+If you are using a Linux, then -
+
+Import os
+# Type
+os.system('clear')
+
+If you're using Windows-
+
+Import os
+#Type
+os.system('CLS')
+
+We can also do it using the Python script. Consider the following example.
+Example -
+
+# import os module 
+from os import system, name 
+
+# sleep module to display output for some time period 
+from time import sleep 
+
+# define the clear function 
+def clear(): 
+
+	# for windows 
+	if name == 'nt': 
+		_ = system('cls') 
+
+	# for mac and linux(here, os.name is 'posix') 
+	else: 
+		_ = system('clear') 
+
+# print out some text 
+print('Hello\n'*10) 
+
+# sleep time 2 seconds after printing output 
+sleep(5) 
+
+# now call function we defined above 
+clear() 
+
+Note - An underscore variable is used because Python shell always stores its last output in the underscore.
+
+
+Next TopicHow to create a DataFrames in Python
+
+
+
+
+← prev
+next →
+
+
+
+

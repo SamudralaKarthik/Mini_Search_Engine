@@ -1,0 +1,153 @@
+
+
+
+
+next →
+← prev
+
+How to Plot Histogram in Python?
+What is Histogram?
+A histogram is a visual depiction of a frequency distribution table with continuous divisions that have been grouped. A series of rectangles with foundations equal to the distances between class bounds and areas proportionate to the frequency in the associated classes make up the area diagram. Since the ground in such representations spans the spaces between class bounds, every rectangle is adjacent. Rectangle altitudes are inversely correlated with comparable frequencies for similar groups and inversely correlated with frequency densities for other classes.
+In other terms, a histogram is a figure with rectangles whose breadth is equal to the class spacing and whose area is directly related to the frequency of the variable.
+When to Use Histogram?
+The histogram diagram is employed in specific circumstances. As follows:
+
+The data must be quantitative.
+To examine the form of the data distribution, we use a histogram.
+Used to determine if a process evolves from one time period to the next.
+Used to assess whether the outcome differs when two or more procedures are involved.
+Used to determine whether the specified process satisfies the customer's needs.
+
+Types of Histogram
+The histogram could be divided into many forms depending on the data's frequency distribution. There are various distributions, including the gaussian distribution, the bimodal distribution, the skewed distribution, the comb distribution, the edge peak distribution, the multimodal distribution, the dog food distribution, and so on. The histogram can represent these multiple sorts of distributions. The various histogram types are:
+
+Uniform Histogram: A uniform distribution indicates too few groups. Each group contains the same number of entries in it. It might include distribution with many peaks, with all peaks having the same heights.
+Symmetric Histogram: A bell-shaped histogram is another name for a symmetric histogram. The histogram is considered symmetrical when the opposing sides are the same shape and size if a vertical line is drawn down the center of the histogram.
+Bimodal Histogram: A histogram is categorized as bimodal if it contains two peaks. When a data collection contains observations on two distinct types of people or merged groups, and the centers of the two different histograms are sufficiently distant from the variance in both data sets, bimodality is present.
+Probability Histogram: This histogram depicts a discontinuous probability distribution in the form of a visual image. A rectangle represents every value of x. The area of every rectangle is directly proportional to the likelihood that the corresponding value will occur.
+
+Plotting Histogram using Matplotlib
+Bins are defined as successive, non-overlapping ranges of variables. The matplotlib.pyplot.hist() method is used to calculate and generate the histogram of the variable x. Creating bins of the complete range is the first stage in creating a histogram. In the next step, distribute the entire range of numbers into the series of intervals created in the first step, and count the values that drop into every interval.
+Let's construct a simple histogram using some arbitrary values. The simple histogram made using the code below has some random values:
+Code
+
+# Python program to create a histogram using the matplotlib function
+
+# Importing the required libraries 
+import numpy as np
+from matplotlib import pyplot as plt
+
+# Creating a sample dataset
+array = np.array([23, 56, 87, 87, 98,
+             12, 76, 98, 34, 87,
+             67, 23, 87, 56, 34,
+             26, 85, 47, 35, 86,
+             76, 45, 86, 34, 37])
+ 
+# Creating a histogram using .hist() function
+figure, axis = plt.subplots(figsize = (8, 3))
+axis.hist(array, bins = [20, 40, 60, 80, 100])
+ 
+# Showing the plot 
+plt.show()
+
+Output:
+
+Modifying the Histogram in Matplotlib
+A variety of techniques are available in Matplotlib to personalize the histogram. The matplotlib.pyplot.hist() method offers many attributes we can use to customize a histogram. The hist() method offers a patches object that provides accessibility to the produced objects' properties, allowing us to change the plot as we see fit.
+Code
+
+# Python program to create a normal histogram using random normal data points
+
+# Importing the required libraries
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+# Creating a sample dataset
+np.random.seed(23685736)
+N_samples = 100000
+no_bins = 25
+ 
+# Creating a random normal distribution using randn() method
+x_axis = np.random.randn(N_samples)
+y_axis = .6 ** x_axis + x_axis * np.random.randn(100000) + 90
+ 
+# Creating the histogram using the above data
+figure, axis = plt.subplots(figsize = (8, 3), tight_layout = True)
+ 
+axis.hist(x_axis, bins = no_bins)
+ 
+# Showing the plot
+plt.show()
+
+Output:
+
+The histogram generated above is modified using the code below for a clearer view and more precise readings. 
+Code
+
+# Python program to modify the histogram
+
+# Importing the required libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter
+from matplotlib import colors
+
+# Removing the splines of axes
+for s in ['bottom', 'top', 'right', 'left']:
+    axis.spines[s].set_visible(False)
+
+# Removing the x and y ticks
+axis.xaxis.set_ticks_position('none')
+axis.yaxis.set_ticks_position('none')
+   
+# Adding the padding feature between the axis and labels
+axis.xaxis.set_tick_params(pad = 6)
+axis.yaxis.set_tick_params(pad = 11)
+
+# Adding the x and y gridlines
+axis.grid(visible = True, color = 'grey',
+        linestyle = '-.', linewidth = 0.6,
+        alpha = 0.5)
+
+# Adding a Text as a watermark
+figure.text(1.0, 0.16, 'Javatpoint',
+         fontsize = 10,
+         color ='green',
+         ha ='right',
+         alpha = 1.0)
+
+# Creating the histogram having the above modifications
+N, bins, patche = axis.hist(x_axis, bins = no_bins)
+
+# Setting the color of the histogram columns
+frac = ((N**(1 / 5)) / N.max())
+normal = colors.Normalize(frac.min(), frac.max())
+
+for f, s in zip(frac, patche):
+    color = plt.cm.magma(normal(f))
+    s.set_facecolor(color)
+
+# Adding these extra features to the histogram
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.title('Modified histogram')
+
+# Show plot
+plt.show()
+
+Output:
+
+
+
+Next TopicHow to Plot Multiple Linear Regression in Python
+
+
+
+
+← prev
+next →
+
+
+
+

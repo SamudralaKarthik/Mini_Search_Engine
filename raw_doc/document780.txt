@@ -1,0 +1,164 @@
+
+
+
+
+next →
+← prev
+
+Python Tkinter-Top level Widget
+Tkinter is a Python module designed to develop the GUI of any project from an app to a website. GUI stands for Graphical User Interface. Tkinter is one of the most widely used modules to create GUI faster. The functionality of the module makes the work of the designer easier.
+Whenever we try to install any software on our pc, a dialog box appears on the screen asking for permissions for the software. The window stops the entire background work until it receives input, appearing on top of everything on the console. This is an example of a top-level widget.
+This tutorial explains how to create a top-level widget using the Python Tkinter module.
+A Top-level widget acts like a window and is managed by the window manager. It is generally used to get more than one dialog box for extra project information.
+Function used: Toplevel()
+Syntax:
+
+Toplevel(root, bg, fg, bd, height, width, font, cursor…)
+
+1. root: root window(the first window on the screen on which all the other windows are opened)(optional parameter).
+2. bg: Background color of the widget
+Example:
+
+from tkinter import *
+obj = Toplevel(bg = 'yellow')
+obj.mainloop()
+
+Output:
+
+3. fg: foreground color of the widget
+4. bd: width of the widget's border. The default value is taken as 0.
+5. height, width: Dimensions of the widget
+Example:
+
+from tkinter import *
+obj = Toplevel(bg = 'yellow', height = 23, width = 25)
+obj.mainloop()
+
+Output:
+
+6. font: The font type to be used for the text in the window
+7. cursor: The type of cursor appears when we take our mouse pointer into the window. The names of different types of cursors are predefined.
+Example:
+
+from tkinter import *
+obj = Toplevel(bg = 'yellow', height = 23, width = 25, cursor = 'hand1')
+obj.mainloop()
+
+Output:
+
+There are still more optional parameters specifying several other options for the window appearance.
+Methods in the module for top-level widget:
+1. mainloop(): It is used to run an event loop. We call this method when opening a window, which blocks every other code from execution until the window is closed.
+Using only this method, we can create a simple top-level window:
+
+import tkinter as t
+obj = t.Toplevel()
+obj.mainloop()
+
+Output:
+
+2. iconify(): It removes the window from the screen and minimizes it into the taskbar as an icon.
+
+import tkinter as t
+obj = t.Tk()
+obj.iconify()
+obj.mainloop()
+
+Output:
+
+3. deiconify(): It converts the converted icon back to a window
+4. windraw(): It removes the window from the console. It won't destroy the window but hides it. To undo the method, deiconify() or iconify() can be used.
+5. title(): To give a title to the window
+6. state(): Returns the state of the created window Eg: Iconic, Withdrawn, etc.
+7. frame(): It creates a rectangular region for arrangement and padding all the widgets inside the window.
+8. relief(): Sets certain simulated 3D effects on the window/ widget. These options are all predefined.
+Let us now create a root window and top-level window on top of it:
+Code:
+
+import tkinter as t
+
+root_window = t.Tk()
+label = t.Label(root_window, text = "Root window")
+root_window.geometry("400x400")
+root_window.title("Top")
+
+top_window = t.Toplevel()
+label2 = t.Label(top_window, text = "Top-level window")
+top_window.geometry("400x400")
+top_window.title("Top")
+
+label.grid()
+label2.grid()
+top_window.mainloop()
+
+Output:
+
+Tkinter also allows multiple top-level windows on one root window. Here is an example program that executed one root window with two top-level windows when the user clicks on buttons:
+
+from tkinter import *
+root = Tk()
+root.title("Root window")
+label = Label(root, text = "This is the root window")
+root.geometry("600x600");
+def toplvl2():
+    top2 = Toplevel()
+    top2.title("Second top level window")
+    top2.geometry("400x400")
+    label2 = Label(top2, text = "This is the second top level window")
+    button2 = Button(top2, text = "CLOSE", command = top2.destroy)
+    label2.pack()
+    button2.pack()
+    top2.mainloop()
+def toplvl1():
+    top1 = Toplevel(root)
+    top1.title("First top level window")
+    top1.geometry("500x500")
+    label1 = Label(top1, text = "This is the first top level window")
+    button1 = Button(top1, text = "EXIT", command = top1.destroy)
+    button2 = Button(top1, text = "Open another Top window", command = toplvl2)
+    label1.pack()
+    button2.pack()
+    button1.pack()
+    top1.mainloop()
+button = Button(root, text = "open top window", command = toplvl1)
+label.pack()
+button.place(x = 250, y = 250)
+root.mainloop()
+
+Output:
+
+With the knowledge gained till now, let us create a simple project called "Secret message". We'll now implement a program that opens a top-level window with a secret labeled message on a button click:
+
+from tkinter import *
+root = Tk()
+root.title("Secret message")
+root.geometry("400x400")
+root.config(bg = "black")
+def top_level():
+    top = Toplevel()    
+    top.title("Here it comes")
+    label = Label(top, text = "Congratulations on the result, we're so proud of you")
+    label.pack()
+    top.mainloop()
+button = Button(root, text = "Click", command = top_level)
+button.place(x = 600, y = 600)
+button.pack()
+root.mainloop()
+
+Output:
+
+It is simple. Isn't it?
+Tkinter is a GUI application with many features, and a Top level widget is one of the primary ones.
+
+
+Next TopicRemove First Character from String in Python
+
+
+
+
+← prev
+next →
+
+
+
+

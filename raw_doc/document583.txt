@@ -1,0 +1,108 @@
+
+
+
+
+next →
+← prev
+
+Lemmatization and Tokenize with TextBlob
+Lemmatization is the process of joining the different inflected terms to be considered as one thing. Lemmatization is similar to stemming. However, it offers contextual meaning to the terms. It also links words that share the same meaning and are considered one word. Text pre-processing includes stemming and Lemmatization. There are instances when people get confused with the two terms, and they are often viewed as being the same. However, Lemmatization is more advantageous than stemming because it permits the study of morphology in words.
+Applications of Lemmatization:
+
+In comprehensive retrieval systems such as search engines.
+Utilized in small indexing.
+
+Examples of lemmatization:
+
+painters: painter
+birds: bird
+worst: bad
+
+The main difference between stemming and lemmatizing is that lemmatize requires the speech part parameters, "pos" If not provided, the default will be "noun." Below is the way to implement lemmatization with TextBlob.
+Code:
+
+# from textblob library we will import Word module
+from textblob import Word as WD
+
+# here, we will create a Word object.
+P = WD("painters")
+
+# here, we will apply lemmatization.
+print("painters:", P.lemmatize())
+
+# here, we will create a Word object again.
+Q = WD("birds")
+
+# here, we will apply lemmatization.
+print("birds:", Q.lemmatize())
+
+# here, we willcreate a Word object.
+R = WD("worst")
+
+# Now, we will apply lemmatization with
+# parameter "a", "a" denotes adjective.
+print("worst:", R.lemmatize("a"))
+
+Output:
+painters: painter
+birds: bird
+worst: bad
+
+Tokenize Text using TextBlob
+TextBlob module is a Python library that offers an API that is simple to use its methods and perform simple NLP tasks. This module is developed on the base of the NLTK module.
+Install TextBlob by using the following commands on the terminal:
+
+!pip3 install textblob
+from textblob import download_corpora
+
+It will then enable TextBlob in addition to downloading the needed NLTK corpora. The above process can take a long time due to a large number of tokenizers, chunkers, various algorithms, and the entire corpus to download.
+The terms that are commonly used include:
+
+Corpus: Body of text singular. Corpora can be the plural for this.
+Lexicon: Meanings of words as well as their definitions.
+Token: Every "entity" that is a part of something else was divided according to rules. In this case, every word is a token when a sentence has been "tokenized" into words. A sentence can also be a token when you tokenize the sentences of the paragraph.
+
+Code:
+
+# First, we will import TextBlob method from textblob library
+from textblob import TextBlob as Txb
+
+text1 = ("There were three friends name, Jemmy, Jacky, Kenny.  " +
+	"They have been friends forever since pre school." +
+	"but somehow Jemmy's bestfriend is Jacky and whenever jemmy and kenny lefts alone, they endup being quite." +
+	"One day they all decided to plan a trip together after graduation. " +
+	"They all went to Kashmire" +
+	"Kashmire trip was really good, they all created lifetime memories together. " +
+	"After that trip they have to focus on there future. " +
+	"Which stream they have to choose and career path they should choose for future.")
+
+    
+# Now, we will create a TextBlob object
+blob_object1 = Txb(text1)
+  
+# Here, we will tokenize the paragraph into words.
+print(" Word Tokenize from paragraph:\n", blob_object1.words)
+  
+# tokenize paragraph into sentences.
+print("\n Sentence Tokenize from paragraph:\n", blob_object1.sentences)
+
+Output:
+Word Tokenize from paragraph:
+ ['There', 'were', 'three', 'friends', 'name', 'Jemmy', 'Jacky', 'Kenny', 'They', 'have', 'been', 'friends', 'forever', 'since', 'pre', 'school.but', 'somehow', 'Jemmy', "'s", 'bestfriend', 'is', 'Jacky', 'and', 'whenever', 'jemmy', 'and', 'kenny', 'lefts', 'alone', 'they', 'endup', 'being', 'quite.One', 'day', 'they', 'all', 'decided', 'to', 'plan', 'a', 'trip', 'together', 'after', 'graduation', 'They', 'all', 'went', 'to', 'KashmireKashmire', 'trip', 'was', 'really', 'good', 'they', 'all', 'created', 'lifetime', 'memories', 'together', 'After', 'that', 'trip', 'they', 'have', 'to', 'focus', 'on', 'there', 'future', 'Which', 'stream', 'they', 'have', 'to', 'choose', 'and', 'career', 'path', 'they', 'should', 'choose', 'for', 'future']
+
+ Sentence Tokenize from paragraph:
+ [Sentence("There were three friends name, Jemmy, Jacky, Kenny."), Sentence("They have been friends forever since pre school.but somehow Jemmy's bestfriend is Jacky and whenever jemmy and kenny lefts alone, they endup being quite.One day they all decided to plan a trip together after graduation."), Sentence("They all went to KashmireKashmire trip was really good, they all created lifetime memories together."), Sentence("After that trip they have to focus on there future."), Sentence("Which stream they have to choose and career path they should choose for future.")]
+
+
+
+Next TopicHow to Round Numbers in Python
+
+
+
+
+← prev
+next →
+
+
+
+

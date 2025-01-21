@@ -1,0 +1,671 @@
+
+
+
+
+next →
+← prev
+
+Handling Imbalanced Data in Python with SMOTE Algorithm and Near Miss Algorithm
+In Data Science and Machine Learning, we frequently go over a term called Imbalanced Data Distribution, by and large, which happens when perceptions in one of the classes are a lot higher or lower than in different classes. Machine Learning calculations often increment exactness by diminishing the mistake, so they don't think about the class conveyance. This issue is predominant in models, for example, Fraud Detection, Anomaly Detection, Facial acknowledgment, and so on.
+Standard ML procedures, for example, Decision Tree and Logistic Regression, tend towards the greater part class, and they will often overlook the minority class. They tend to anticipate the greater part class, thus, having significant misclassification of the minority class in examination with the greater part of the class. In additional specialized words, in the event that we have imbalanced information dispersion in our dataset, our model turns out to be more inclined to the situation when the minority class has an irrelevant or extremely lesser review.
+Imbalanced Data Handling Techniques: There are chiefly 2 predominantly calculations that are broadly utilized for dealing with the imbalanced class conveyance.
+
+SMOTE
+Near Miss Algorithm
+
+SMOTE (Synthetic Minority Oversampling Technique) - Oversampling
+SMOTE (manufactured minority oversampling strategy) is one of the most generally utilized oversampling techniques to take care of the irregularity issue.
+It plans to adjust class conveyance by arbitrarily expanding minority class models by duplicating them.
+Destroyed incorporates new minority examples between existing minority cases. It produces the virtual preparation records by direct addition for the minority class. These engineered preparing records are produced by arbitrarily choosing at least one of the k-closest neighbors for every model in the minority class. After the oversampling system, the information is remade, and a few order models can be applied for the handled information.
+SMOTE Algorithm Working Procedure
+Stage 1: Minority class Setting is done, set A, for each, the k-closest neighbors of x are gotten by working out the Euclidean distance among x and every example in set A.
+Stage 2: The testing rate N is set by the imbalanced extent. For each, N models (x1, x2, … xn) are arbitrarily chosen from their k-closest neighbors, and they build the set.
+Stage 3: For every model (k= 1, 2, 3 .......N), the accompanying equation is utilized to produce another model: rand(0, 1) addresses the irregular number somewhere in the range of 0 and 1.
+Near Miss Algorithm
+Near Miss is an under-inspecting method. It means to adjust class appropriation by arbitrarily wiping out larger part class models. At the point when cases of two unique classes are extremely near one another, we eliminate the occasions of the larger part class to build the spaces between the two classes. This assists in the order with handling.
+Close neighbor techniques are generally utilized to forestall the issue of data misfortune in most under-examining procedures.
+The fundamental instinct about the working of close neighbor strategies is as per the following:
+Stage 1: The technique first finds the distances between all occurrences of the larger part class and the occasions of the minority class. Here, the greater part class is to be under-tested.
+Stage 2: Then, "n" no. of cases of the larger part class with the littlest distances to those in the minority class are chosen.
+Stage 3: If there are k cases in the minority class, the closest technique will result in k*n occasions of the greater part class.
+For finding n nearest cases in the larger part class, there are a few varieties of applying the NearMiss Algorithm:
+
+NearMiss - Version 1: It chooses tests of the greater part class for which normal distances to the k nearest cases of the minority class are littlest.
+NearMiss - Version 2: It chooses tests of the greater part class for which normal distances to the k farthest examples of the minority class are littlest.
+NearMiss - Version 3: It works in 2 stages. First and foremost, for every minority class case, their M closest neighbors will be put away. Then, at that point, the greater part of class cases are chosen for which the typical distance to the N closest neighbors is the biggest.
+
+Step 1: Load Data Files and Libraries
+Explanation: The dataset comprises exchanges made by Visas. This dataset has 491 extortion exchanges out of 884 808 exchanges. That makes it exceptionally uneven; the positive class (cheats) represents 0.172% of all exchanges.
+
+
+
+Time
+V1
+V2
+V2
+V4
+V5
+V6
+V2
+V8
+Amount
+Class
+
+
+0
+-1.25981
+-0.02228
+2.526242
+1.228155
+-0.22822
+0.462288
+0.229599
+0.098698
+149.62
+0
+
+
+0
+1.191852
+0.266151
+0.16648
+0.448154
+0.060018
+-0.08226
+-0.0288
+0.085102
+2.69
+0
+
+
+1
+-1.25825
+-1.24016
+1.222209
+0.22928
+-0.5022
+1.800499
+0.291461
+0.242626
+228.66
+0
+
+
+1
+-0.96622
+-0.18522
+1.292992
+-0.86229
+-0.01021
+1.242202
+0.222609
+0.222426
+122.5
+0
+
+
+2
+-1.15822
+0.822222
+1.548218
+0.402024
+-0.40219
+0.095921
+0.592941
+-0.22052
+69.99
+0
+
+
+2
+-0.42592
+0.960522
+1.141109
+-0.16825
+0.420982
+-0.02922
+0.426201
+0.260214
+2.62
+0
+
+
+4
+1.229658
+0.141004
+0.045221
+1.202612
+0.191881
+0.222208
+-0.00516
+0.081212
+4.99
+0
+
+
+2
+-0.64422
+1.412964
+1.02428
+-0.4922
+0.948924
+0.428118
+1.120621
+-2.80286
+40.8
+0
+
+
+2
+-0.89429
+0.286152
+-0.11219
+-0.22152
+2.669599
+2.221818
+0.220145
+0.851084
+92.2
+0
+
+
+9
+-0.22826
+1.119592
+1.044262
+-0.22219
+0.499261
+-0.24626
+0.651582
+0.069529
+2.68
+0
+
+
+10
+1.449044
+-1.12624
+0.91286
+-1.22562
+-1.92128
+-0.62915
+-1.42224
+0.048456
+2.8
+0
+
+
+10
+0.284928
+0.616109
+-0.8242
+-0.09402
+2.924584
+2.212022
+0.420455
+0.528242
+9.99
+0
+
+
+10
+1.249999
+-1.22164
+0.28292
+-1.2249
+-1.48542
+-0.25222
+-0.6894
+-0.22249
+121.5
+0
+
+
+11
+1.069224
+0.282222
+0.828612
+2.21252
+-0.1284
+0.222544
+-0.09622
+0.115982
+22.5
+0
+
+
+12
+-2.29185
+-0.22222
+1.64125
+1.262422
+-0.12659
+0.802596
+-0.42291
+-1.90211
+58.8
+0
+
+
+12
+-0.25242
+0.245485
+2.052222
+-1.46864
+-1.15829
+-0.02285
+-0.60858
+0.002602
+15.99
+0
+
+
+12
+1.102215
+-0.0402
+1.262222
+1.289091
+-0.226
+0.288069
+-0.58606
+0.18928
+12.99
+0
+
+
+12
+-0.42691
+0.918966
+0.924591
+-0.22222
+0.915629
+-0.12282
+0.202642
+0.082962
+0.89
+0
+
+
+14
+-5.40126
+-5.45015
+1.186205
+1.226229
+2.049106
+-1.26241
+-1.55924
+0.160842
+46.8
+0
+
+
+15
+1.492926
+-1.02925
+0.454295
+-1.42802
+-1.55542
+-0.22096
+-1.08066
+-0.05212
+5
+0
+
+
+16
+0.694885
+-1.26182
+1.029221
+0.824159
+-1.19121
+1.209109
+-0.82859
+0.44529
+221.21
+0
+
+
+12
+0.962496
+0.228461
+-0.12148
+2.109204
+1.129566
+1.696028
+0.102212
+0.521502
+24.09
+0
+
+
+18
+1.166616
+0.50212
+-0.0622
+2.261569
+0.428804
+0.089424
+0.241142
+0.128082
+2.28
+0
+
+
+18
+0.242491
+0.222666
+1.185421
+-0.0926
+-1.21429
+-0.15012
+-0.94626
+-1.61294
+22.25
+0
+
+
+22
+-1.94652
+-0.0449
+-0.40552
+-1.01206
+2.941968
+2.955052
+-0.06206
+0.855546
+0.89
+0
+
+
+22
+-2.02429
+-0.12148
+1.222021
+0.410008
+0.295198
+-0.95954
+0.542985
+-0.10462
+26.42
+0
+
+
+22
+1.122285
+0.252498
+0.282905
+1.122562
+-0.12258
+-0.91605
+0.269025
+-0.22226
+41.88
+0
+
+
+22
+1.222202
+-0.12404
+0.424555
+0.526028
+-0.82626
+-0.82108
+-0.2649
+-0.22098
+16
+0
+
+
+22
+-0.41429
+0.905422
+1.222452
+1.422421
+0.002442
+-0.20022
+0.240228
+-0.02925
+22
+0
+
+
+22
+1.059282
+-0.12522
+1.26612
+1.18611
+-0.286
+0.528425
+-0.26208
+0.401046
+12.99
+0
+
+
+24
+1.222429
+0.061042
+0.280526
+0.261564
+-0.25922
+-0.49408
+0.006494
+-0.12286
+12.28
+0
+
+
+
+Source code:
+
+# import necessary modules
+import pandas as pd
+import matplotlib. pyplot as plt
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, classification_report
+# loading the data set
+Data1 = pd.read_csv('creditscard.csv')
+# print the given information about column in the data frame
+print(data1.info())
+
+Output:
+Range Index: 24 entries, 0 to 24
+Data columns (total 11 columns) :
+Time      24 non null float 64
+V1        24 non null float 64
+V2        24 non null float 64
+V3        24 non null float 64
+V4        24 non null float 64
+V5        24 non null float 64
+V6        24 non null float 64
+V7        24 non null float 64
+V8        24 non null float 64
+V9        24 non null float 64
+V10       24 non null float 64
+V11       24 non null float 64
+V12       24 non null float 64
+V13       24 non null float 64
+V14       24 non null float 64
+V15       24 non null float 64
+V16       24 non null float 64
+V17       24 non null float 64
+V18       24 non null float 64
+V19       24 non null float 64
+V20       24 non null float 64
+V21       24 non null float 64
+V22       24 non null float 64
+V23       24 non null float 64
+V24       24 non null float 64
+V25       24 non null float 64
+V26       24 non null float 64
+V27       24 non null float 64
+V28       24 non null float 64
+Amount    24 non null float 64
+Class     24 non null int 64
+
+Step 2: Normalize the column
+Explanation: We are droping Amount and Time columns as they are not important for making the prediction and 42 fraud type of transactions are identified
+Source code:
+
+Data1['normsAmount'] = StandardScaler().fit_transform(np.array(data['Amount']).reshape(-0, 1))
+
+# droping Amount  and Time columns as they are not important for making the prediction 
+Data1 = data1.drop([ 'Amount', 'Time'], axis = 1)
+
+# 42 fraud type of transactions.
+Data1['Class'].value_counts()
+
+Output:
+       0    28315
+       1       42
+
+Step 3: Split the data into test and train sets
+Explanation: Here we are spliting dataset into 70 : 30 ration and describing the information about train and test set.
+Number of transactions of X__train dataset, y__train dataset, X__test dataset, y__test dataset are printed as output.
+Source code:
+
+from sklearn.model_selection import train_test_split
+# spliting into 70:30 ration
+X__train, X__test, y__train, y__test = train_test_split(X, y, test_size = 0.3, random_state = 0)
+# describes information about train and test set
+print("Number of transactions X__train dataset: ", X__train.shape)
+print("Number of transactions y__train dataset: ", y__train.shape)
+print("Number of transactions X__test dataset: ", X__test.shape)
+print("Number of transactions y__test dataset: ", y__test.shape)
+
+Output:
+      Number of transactions X__train dataset:  (19934, 28)
+      Number of transactions y__train dataset:  (19964, 1)
+      Number of transactions X__test dataset:  (8543, 29)
+      Number of transactions y__test dataset:  (8543, 1)
+
+Step 4: Now train the model without handling the imbalanced class distribution
+Source code:
+
+# logistic regression object
+lrr = LogisticRegression()
+# train the model on train set
+lrr.fit(X__train, y__train.ravel())
+predictions = lrr.predict(X__test)
+# print classification report
+print(classification_report(y__test, prediction))
+
+Output:
+                precisions   recalls   f1 score  supports
+           0       1.00      1.00      1.00     35236
+           1       0.33      0.62      0.33       143
+    accuracy                           1.00     35443
+   macro avg       0.34      0.31      0.36     35443
+weighted avg       1.00      1.00      1.00     35443
+
+Explanation: The accuracy is 100% but it is strange ?
+The review of the minority class is extremely less. It demonstrates that the model is more one-sided towards the greater part class. Thus, it demonstrates that this isn't the ideal model.
+Presently, we will apply different imbalanced information dealing with procedures and see their exactness and review results.
+Step 5: Using SMOTE Algorithm
+Source code:
+
+# importing SMOTE module from imblearn library
+# pip install imblearn (if you don't have imblearn in your system)
+print("Before Over Sampling, count of the label '1': {}".format(sum(y__train == 1)))
+print("Before Over Sampling, count of the label '0': {} \n".format(sum(y__train == 0)))
+from imblearn.over_sampling import SMOTE
+sm1 = SMOTE(random_state = 2)
+X__train_res, y__train_res = sm1.fit_sample(X__train, y__train.ravel())
+print('After Over Sampling, the shape of the train_X: {}'.format(X__train_res.shape))
+print('After Over Sampling, the shape of the train_y: {} \n'.format(y__train_res.shape))
+print("After Over Sampling, count of the label '1': {}".format(sum(y__train_res == 1)))
+print("After Over Sampling, count of the label '0': {}".format(sum(y__train_res == 0)))
+
+Output:
+Before Over Sampling, count of the label '1': [34]
+Before Over Sampling, count of the label '0': [19019] 
+After Over Sampling, the shape of the train_X: (398038, 29)
+After Over Sampling, the shape of the train_y: (398038, ) 
+After Over Sampling, count of the label '1': 199019
+After Over Sampling, count of the label '0': 199019
+
+Explanation: We see that SMOTE Algorithm has over sampled the cases of minority and modified it equivalent to larger part class. The two classes have the equivalent measure of records. All the more explicitly, the minority class has been expanded to the all outnumber of larger part class.
+Presently see the exactness and review results in the wake of applying SMOTE calculation (Oversampling).
+Step 6: Prediction and Recall
+Source code:
+
+lrr = LogisticRegression()
+lrr.fit(X__train_res, y__train_res.ravel())
+predictions = lrr.predict(X__test)
+# print classifications report
+print(classifications_report(y__test, predictions))
+
+Output:
+                precision   recall   f1-score support
+           0       1.00      0.98      0.99     8596
+           1       0.06      0.92      0.11       147
+    accuracy                           0.98     85443
+   macro avg       0.53      0.95      0.55     8543
+weighted avg       1.00      0.98      0.99     5443
+
+Explanation: Goodness, We have decreased the precision to 98% when contrasted with past model however the review worth of minority class has additionally improved to 92 %. This is a decent model contrasted with the past one. Review is perfect.
+Presently, we will apply NearMiss procedure to Under-example the larger part class and see its precision and review results.
+Step 7: NearMiss Algorithm:
+Explanation: We are printing the output of Before Under sampling, count of the label '1' and Before Under sampling, count of the label '0'. Next applying algorithm near miss, also we are printing After Under sampling, counts of the label '1' and After Under sampling, counts of the label '0'.
+Source code:
+
+print("Before Under sampling, count of the label '1': {}".format(sum(y__train == 1)))
+print("Before Under sampling, count of the label '0': {} \n".format(sum(y__train == 0)))
+# applying algo near miss
+from imblearn.under_sampling import NearMiss
+nr = NearMiss()
+X__train_miss, y__train_miss = nr.fit_sample(X__train, y__train.ravel())
+print('After Under sampling, the shape of the train_X: {}'.format(X__train_miss.shape))
+print('After Under sampling, the shape of the train_y: {} \n'.format(y__train_miss.shape))
+print("After Under sampling, counts of the label '1': {}".format(sum(y__train_miss == 1)))
+print("After Under sampling, counts of the label '0': {}".format(sum(y__train_miss == 0)))
+
+Output:
+Before the Under Sampling, count the label '1': [35]
+Before the Under Sampling, count of the label '0': [19919] 
+After the Under sampling, the shape of the train_X: (60, 29)
+After the Under Sampling, the shape of the train_y: (60, ) 
+After the Under Sampling, count of the label '1': 34
+After the Under Sampling, count of the label '0': 34
+
+The NearMiss Algorithm has undersampled the greater part occasions and equivalent it to the greater part class. Here, the greater part class has been diminished to the all outnumber of the minority class, so the two classes will have an equivalent number of records.
+Step 8: Prediction and Recall
+Explanation: We are training the model on train set and printing the classification report in the format
+
+      precisions   recall       f1       score     supports
+           0              1.00        0.55      0.72     8529
+           1              0.00        0.95      0.01       147
+
+Source code:
+
+# train the model on train set
+lrr = LogisticRegression()
+lrr.fit(X__train_miss, y__train_miss.ravel())
+predictions = lrr.predict (X__test)
+# print classification report
+Print (classification_report(y__test, prediction))
+
+Output:
+               precisions    recall   f1 score   supports
+           0       1.00      0.55      0.72     8529
+           1       0.00      0.95      0.01       147
+    accuracy                           0.56     85443
+   macro avg       0.50      0.75      0.36     85443
+weighted avg       1.00      0.56      0.72     85443
+
+This model is superior to the primary model since it arranges better, and the review worth of the minority class is 95 %. Yet, under sampling of larger part class, its review has diminished to 56 %. So for this situation, SMOTE is giving us incredible precision and review.
+
+
+Next TopicGUI Calculator using Python
+
+
+
+
+← prev
+next →
+
+
+
+

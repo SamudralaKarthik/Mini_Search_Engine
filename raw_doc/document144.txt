@@ -1,0 +1,420 @@
+
+
+
+
+next →
+← prev
+
+Pointer in Python | Why Python doesn't support pointer
+In this tutorial, we will learn about pointer in Python and see why Python doesn't support pointer concepts.
+We will also understand how we can simulate the pointer in Python. Below is the introduction of the pointer for those who don't have any about it.
+We will also understand how we can simulate the pointer in Python. Below is the introduction of pointer for those who don't have any about it.
+What is Pointer?
+Pointer is a very popular and useful tool to store the address of the variable. If someone has ever worked with a low-level language such as C. C++, he/she would probably be familiar with pointers. It manages the code very efficiently. It can be slightly tough for beginners, but it is a one of the important concept of the program. However, it can lead to various memory management bugs. Thus, the definition of pointers -
+"Pointers are the variables that hold the memory address of another variable. Pointer variables are represented by asterisk (*)."
+Let's see the following example of the pointer in C programming language.
+Example - How to use pointer in C
+
+#include <stdio.h>
+int main()
+{
+   int* po, o;
+   
+   0 = 10;
+   printf("Address of c: %p\n", &c);
+   printf("Value of c: %d\n\n", c);  
+   
+   o = &0;
+   printf("Address of pointer pc: %p\n", o);
+   printf("Content of pointer pc: %d\n\n", *o);   
+   0 = 11;
+   printf("Address of pointer pc: %p\n", p0);
+   printf("Content of pointer pc: %d\n\n", *p0);   
+   *po = 2;
+   printf("Address of c: %p\n", &o);
+   printf("Value of c: %d\n\n", o);
+   return 0;
+}
+
+Output:
+Address of o: 2686784
+Value of o: 22
+
+Address of pointer po: 2686784
+Content of pointer po: 22
+
+Address of pointer po: 2686784
+Content of pointer po: 11
+
+Address of o: 2686784
+Value of o: 2
+
+Besides being useful, pointers are not used in Python. In this topic, we will discuss Python's object model and learn why pointers in Python doesn't exist. We will also learn different ways to simulate pointers in Python. First, let's discuss why Python doesn't support Pointers.
+Why Doesn't Python Support Pointers
+The exact reason for not supporting the pointer is not clear. Could pointer in Python exist natively? The main concept of Python is its simplicity, but pointer violated the Zen of Python. Pointers are mainly encouraged implicit changes rather than explicit ones. They are also complex, especially for beginners.
+Pointers tend to create complexity in the code, where Python mainly focuses on usability rather than speed. As a result, Python doesn't support pointer. However, Python gives some benefits of using the pointer.
+Before understanding the pointer in Python, we need to have the basic idea of the following points.
+
+Immutable vs. mutable objects
+Python variables/names
+
+Objects in Python
+In Python, everything is an object, even class, functions, variables, etc. Each object contains at least three pieces of data.
+
+Reference count
+Type
+Value
+
+Let's discuss one by one.
+Reference Count - It is used for memory management. To get more information regarding Python memory management, read Memory Management in Python.
+Type - The CPython layer is used as the type to make sure type safety during runtime. Finally, there is a value, which is the actual value associated with the object.
+If we go depth in this object, we will find not all objects are the same, though. The important distinction between the types of object is immutable and mutable. First of all, we need to understand the difference between the types of object because it explores the pointer in Python.
+Immutable vs. Mutable Objects
+Immutable objects cannot be modified, where Mutable objects can be modified. Let's see the following table of common types and whether or not they are mutable or not.
+
+
+Objects
+Type
+
+
+Int
+Immutable
+
+
+Float
+Immutable
+
+
+Bool
+Immutable
+
+
+List
+Mutable
+
+
+Set
+Mutable
+
+
+Complex
+Mutable
+
+
+Tuple
+Immutable
+
+
+Frozenset
+Immutable
+
+
+Dict
+Mutable
+
+
+We can check the type of the above objects using the id() method. This method returns the object's memory address.
+We are typing the below lines in a REPL environment.
+
+x = 5
+id(x)
+
+Output:
+140720979625920
+
+In the above code, we have assigned the value 10 to x. if we modified this value with substitution, we would get the new objects.
+
+x-=1
+id(x)
+
+Output:
+140720979625888
+
+As we can see, we modify the above code and get new objects as a response. Let's take another example of str.
+
+s = "java"
+print(id(s))
+
+s += "Tpoint"
+print(s)
+
+id(s)
+
+Output:
+2315970974512
+JavaTpoint
+1977728175088
+
+Again, we modify the value of x by adding a new string, and we get the new memory address. Let's try to add string directly in s.
+
+s = 'java'
+s[0] = T
+print(id(s))
+
+Output:
+Traceback (most recent call last):
+  File "C:/Users/DEVANSH SHARMA/PycharmProjects/MyPythonProject/python1.py", line 34, in 
+    s[0] = T
+NameError: name 'T' is not defined
+
+Above code returns error, it means string doesn't support the mutation. So str is the immutable objects.
+Now, we will see the mutable object such as list.
+
+my_list = [3, 4, 8]
+print(id(my_list))
+
+my_list.append(4)
+print(my_list)
+
+print(id(my_list))
+
+Output:
+2571132658944
+[3, 4, 8, 4]
+2571132658944
+
+As we can see in the above code, the my_list has the id originally, and we have appended with 5 to the list; my_list has the same id because the list supports the mutability.
+Understanding Python Variables
+The way of defining variables in Python is much different than the C or C++. Python variable doesn't define the data type. In fact, Python has names, not variables.
+So we need to understand the difference between variables and names and especially true when we are navigating the tricky subject of pointers in Python.
+Let's understand how the variable works in C and how the name works in Python.
+Variables in C
+In C language, a variable is that it holds value or store value. It is defined with the data type. Let's see the following code that defines the variable.
+
+int x = 286;
+
+
+Allocate enough memory for an integer.
+We assign the value 286 to that memory location.
+The x represents that value.
+
+If we represent the view of memory -
+
+As we can see, the x has a memory location for the value 286. Now, we will assign the new value to x.
+x = 250
+This new value overwrites the previous value. It means that the variable x is mutable.
+The value location of x is same, but the value changed. It is a significant point indicating that x is the memory location, not just its name.
+Now, we introduce the new variable that takes the x, then the y creates the new memory box.
+
+int y = x;
+
+The variable y creates new box called y copies the value of from x into the box.
+
+Names in Python
+As we discussed earlier Python doesn't have the variables. It has names, and we use this term as the variables. But there is a difference between variables and names. Let's see the following example.
+
+x = 289
+
+The above code is broken down during execution.
+
+Create a PyObject
+Set the typecode to integer for the PyObject
+Set the value to 289 for the PyObject
+Create a name called x
+Point x to the new PyObject
+Increase the refcount of the PyObject by 1
+
+It will look like as below.
+
+We can understand the internal working of a variable in Python. The variable x points to the reference of the object and it doesn't have the memory space as before. It also shows x = 289 is binding the name x to a reference.
+Now, we introduce new variable and assign x to it.
+
+y = x
+
+In Python, The variable y will not create the new object; it is just a new name pointing to the same object. The object refcount also increased by one. We can confirm it as follows.
+
+y is x
+
+Output:
+True
+
+If we increase the value of y by one, it will no longer refer to the same object.
+
+y + =1
+y is x
+
+That means, in Python, we don't assign variables. Instead, we bind names to reference.
+Simulating Pointers in Python
+As we have discussed, Python doesn't support pointer, but we can get the benefits of using a pointer. Python provides alternative ways to use the pointer in Python. These two ways are given below.
+
+Using mutable types as pointers
+Using custom Python objects
+
+Let's understand the given points.
+Using Mutable Types as Pointer
+In the previous section, we have defined the mutable type objects; we can treat them as if they were pointers to simulate pointer behavior. Let's understand the following example.
+C
+
+void add_one(int *a) {
+    *a += 1;
+}
+
+In the above code, we defined pointer *a, then we increment the value by one. Now, we will implement it with the main() function.
+
+#include <stdio.h>
+
+int main(void) {
+    int y = 233;
+    printf("y = %d\n", y);
+    add_one(&y);
+    printf("y = %d\n", y);
+    return 0;
+}
+
+Output:
+y = 233
+y = 234
+
+We can simulate this type of behavior by using the Python mutable type. Understand the following example.
+
+def add_one(x):
+    x[0] += 1
+
+y = [2337]
+add_one(y)
+y[0]
+
+The above function accesses the first element of the list and increments its value by one. When we execute the above program, it prints the modified value of y. It means we can replicate the pointer using the mutable object. But if we try to simulate pointer using immutable object.
+
+z = (2337,)
+add_one(z)
+
+Output:
+Traceback (most recent call last):
+  File "", line 1, in 
+  File "", line 2, in add_one
+TypeError: 'tuple' object does not support item assignment
+
+We used the tuple in the above code, an immutable object, so it returned the error. We can also use the dictionary to simulate the pointer in Python.
+Let's understand the following example where we will count every operation that occurs in the program. We can use dict to achieve this.
+Example -
+
+count = {"funcCalls": 0}
+def car():
+    count["funcCalls"] += 1
+
+def foo():
+    count["funCcalls"] += 1
+    car()
+
+foo()
+count["funcCalls"]
+
+Output:
+2
+
+Explanation - 
+In the above example, we have used the count dictionary, which kept track of the number of function calls. When the foo() function is called, the counter is increased 2 because dict is mutable.
+Using Python Objects
+In the previous example, we have used dict to emulate the pointer in Python, but sometimes it becomes difficult to remember all used key names. We can use the Python custom class in place of the dictionary. Let's understand the following example.
+Example -
+
+class Pointer(object):
+    def __init__(self):
+        self._metrics = {
+            "funCalls": 0,
+            "catPictures": 0,
+        }
+
+In the above code, we have defined the Pointer class. This class used dict for holding actual data in the _metrics member variable. It will provide mutability to our program. We can do this as follows.
+
+class Pointer(object):
+    # ...
+
+    @property
+    def funCalls(self):
+        return self._metrics["func_calls"]
+
+    @property
+    def catPictures_served(self):
+        return self._metrics["cat_pictures_served"]
+
+We have used @property decorator. If you don't familiar with decorators, visit our Python decorator tutorial. The @property decorator will access funCalls and catPicture_served. Now, we will create an object of the Pointer class.
+
+pt = Pointer()
+pt.funCalls()
+pt.catPicture_served
+
+Here we need to increment these values.
+
+class Pointer(object):
+    # ...
+
+    def increament(self):
+        self._metrices["funCalls"] += 1
+
+    def cat_pics(self):
+        self._metrices["catPictures_served"] += 1
+
+We have defined two new methods - increment(), and cat_pics(). We have modified the values using these functions in the matrices dict. Here, we can change the class the same as we are modifying the pointer.
+
+pt = Pointer()
+pt.increment()
+pt.increment()
+pt.funCalls()
+
+Python ctypes Module
+Python ctypes module allows us to create a C-type pointer in Python. This module is helpful if we want to make a function call to a C library that requires a pointer. Let's understand the following example.
+Example - C Language
+
+void incr_one(int *x) {
+    *x += 1;
+}
+
+In the above function, we have incremented the value of x by one. Suppose we save the above file named incrPointer.c and the type following command in the terminal.
+
+$ gcc -c -Wall -Werror -fpic incrPointer.c
+$ gcc -shared -o libinc.so incrPointer.o
+
+The first command compiles incrPointer.c into an object called incrPointer.o. The second command accepts object file and produce libinic.so to collaborate with ctypes.
+
+import ctypes
+##  libinc.so library should be same directory as this program
+lib = ctypes.CDLL("./libinc.so")
+lib.increment
+
+Output:
+<_FuncPtr object at 0x7f46bf6e0750>
+
+In the above code, the ctypes.CDLL returns a shared object called libinic.so. It contains the incrPointer() function. If we need to specify the pointer to the functions we define in a shared object, we have to specify it using the ctypes. Let's see the below example.
+
+inc = lib.increment 
+## defining the argtypes 
+inc.argtypes = [ctypes.POINTER(ctypes.c_int)]
+
+If we call the function using different type, it will through an error.
+
+incrPointer(10)
+
+Output:
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ctypes.ArgumentError: argument 1: <class 'TypeError'>: expected LP_c_int instance instead of int
+
+This is because the incrPointer requires a pointer and ctypes is a way of passing pointer in Python.
+
+v = ctypes.c_int(10)
+
+v is a C variable. The ctypes provides the method called byref() which used to pass the variable reference.
+
+inc(ctypes.byref(a)) 
+a
+
+Output:
+c_int(11)
+
+We have increased the value using the reference variable.
+Conclusion
+We have discussed that pointer is not present in the Python, but we can implement the same behavior with the *mutable object. We also discussed the ctypes modules that can define C pointer in Python. We have defined a few excellent ways to simulate pointer in Python.
+
+
+Next TopicPython 2D array
+
+
+
+← prev
+next →
+
+
+
+

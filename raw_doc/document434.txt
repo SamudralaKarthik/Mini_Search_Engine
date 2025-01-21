@@ -1,0 +1,97 @@
+
+
+
+
+next →
+← prev
+
+Collections.UserString in Python
+Strings are the bytes that represent Unicode characters. Characters are strings that are of length one. The problem is that Python doesn't support this data type character.
+Example:
+
+# First, we will create a String with a single Quotes
+String_1 = 'JavaTpoint is the best platform to learn Python'
+print("String with the use of Single Quotes: ")
+print(String_1)
+   
+# Now, we will create a String with double Quotes
+String_2 = "JavaTpoint is the best platform to learn Python"
+print("\n String with the use of Double Quotes: ")
+print(String_2)
+
+Output
+String with the use of Single Quotes: 
+JavaTpoint is the best platform to learn Python
+
+ String with the use of Double Quotes: 
+JavaTpoint is the best platform to learn Python
+
+Collections.UserString
+Python provides a String as a container, referred to as UserString, included in the collection module. This class functions as an additional class that wraps around string objects. This class is helpful in the case of creating strings of their own that have been modified or even with new features. It is an option to create new features to the string. This class can be used to take any argument that could be converted into strings and create a simulation of an unstructured string with its contents stored in a regular string. The string can be accessed via its data attribute.
+Syntax:
+The syntax for UserString is:
+
+collections.UserString(seq)
+
+Example 1: (User dictionary with value and empty)
+
+from collections import UserString as US
+P = 123546
+ 
+# Here, we will create an UserDict
+user_string = US(P)
+print("UserString 1: ", user_string.data)
+# Now, we will create an empty UserDict
+user_string = US("")
+print("UserString : ", user_string.data)
+
+Output
+UserString 1:  123546
+UserString :  
+
+Example 2: Mutable String (Append function and Remove function)
+
+from collections import UserString as US
+# Here, we will create a Mutable String
+class User_string(US):
+     
+    # Function to append to string
+    def append(self, s):
+        self.data += s
+         
+    # Function to remove from string
+    def remove(self, s):
+        self.data = self.data.replace(s, "")
+     
+# Driver's code
+s_1 = User_string("JavaTpoint")
+print("The Original String: ", s_1.data)
+ 
+# Here, we will Append to string
+s_1.append("ing")
+print("String After Appending: ", s_1.data)
+ 
+# Here, we will Remove from string
+s_1.remove("a")
+print("String after Removing: ", s_1.data)
+
+Output
+The Original String:  JavaTpoint
+String After Appending:  JavaTpointing
+String after Removing:  JvTpointing
+
+Conclusion
+In this tutorial, we have discussed how to use UserString function of "collections" module in Python.
+
+
+Next TopicHow to Customize Legends with Matplotlib
+
+
+
+
+← prev
+next →
+
+
+
+

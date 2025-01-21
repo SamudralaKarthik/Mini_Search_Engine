@@ -1,0 +1,78 @@
+
+
+
+
+next →
+← prev
+
+Performing Transactions
+Transactions ensure the data consistency of the database. We have to make sure that more than one applications must not modify the records while performing the database operations. The transactions have the following properties.
+
+Atomicity
+Either the transaction completes, or nothing happens. If a transaction contains 4 queries then all these queries must be executed, or none of them must be executed.
+Consistency
+The database must be consistent before the transaction starts and the database must also be consistent after the transaction is completed. 
+Isolation 
+Intermediate results of a transaction are not visible outside the
+current transaction.
+Durability 
+Once a transaction was committed, the effects are persistent,
+even after a system failure.
+
+Python commit() method
+Python provides the commit() method which ensures the changes made to
+the database consistently take place.
+The syntax to use the commit() method is given below.
+
+conn.commit() #conn is the connection object 
+
+All the operations that modify the records of the database do not take place until the commit() is called.
+
+Python rollback() method
+The rollback() method is used to revert the changes that are done to the database. This method is useful in the sense that, if some error occurs during the database operations, we can rollback that transaction to maintain the database consistency. 
+The syntax to use the rollback() is given below.
+
+Conn.rollback()
+
+
+Closing the connection
+We need to close the database connection once we have done all the operations regarding the database. Python provides the close() method. The syntax to use the close() method is given below.
+
+conn.close() 
+
+In the following example, we are deleting all the employees who are working for the CS department.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    cur.execute("delete from Employee where Dept_id = 201")
+    myconn.commit()
+    print("Deleted !")
+except:
+    print("Can't delete !")
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+Deleted !
+
+
+Next TopicPython Tkinter
+
+
+
+
+← prev
+next →
+
+
+
+

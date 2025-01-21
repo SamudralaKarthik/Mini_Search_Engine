@@ -1,0 +1,179 @@
+
+
+
+
+next →
+← prev
+
+Method Resolution Order in Python
+In this tutorial, we will learn about method resolution order, which is also known as the MRO. It is an essential concept of Python inheritance.
+Method resolution order describes the search path of the class which Python uses to get the appropriate method in classes that contain the multi-inheritance.
+Introduction
+As we know that, a class that being inherited is called the Subclass or Parent class, while the class that inherits is known as a child class or subclass. In the multi-inheritance, a class can consist of many functions, so the method resolution order technique is used to search the order in which the base class is executed.
+In simple words - "The method or attributes is explored in the current class, if the method is not present in the current class, the search moves to the parent classes, and so on". This is an example of a depth-first search.
+It plays an essential role in multiple inheritance where the same method can be found in the multiple superclasses.
+To understand it in a better way, let's see how we can use it.
+Example -
+
+class A:
+    def myname(self):
+        print("I am a class A")
+
+class B(A):
+    def myname(self):
+        print("I am a class B")
+
+class C(A):
+    def myname(self):
+        print("I am a class C") 
+c = C()
+print(c.myname())
+
+Output:
+ I am a class C
+
+Explanation -
+There is a multiple inheritance in the above code. We have defined three-class called A, B, and C, and these classes have the same name method called myname(). We created an object class C. The object invoked class C, not the class, while class C inherited the class A method.
+The order is followed in the above code is class B - > class A. This technique is known as MRO (method resolution order).
+Let's understand another example of multiple inheritance.
+Example -
+
+class A:
+	def myname(self):
+		print(" I am a class A")
+class B(A):
+	def myname(self):
+		print(" I am a class B")
+class C(A):
+	def myname(self):
+		print("I am a class C")
+
+# classes ordering
+class D(B, C):
+	pass	
+d = D()
+d.myname()
+
+Output:
+I am a class B
+
+Explanation -
+In the above code, we have created another D class without defining class attributes that inherited B and C class. When we invoked the method myname(), it goes to class D and searches for the myname() function. But class D doesn't have any declaration. Hence, the search transfers to class B, gets the myname() function, and returns the result. The search will take place as follows.
+
+Class D -> Class B -> Class C -> Class A
+
+If class B wouldn't have a method, it will invoke the class C method.
+Here, we are suggesting you remove the class B method and check what happens. By doing this, you will get an idea of how the method resolution works.
+Old and New Style Order
+In the Older version of Python (2.1), we are restricted to use the old classes but Python (2.2 & continue), we can use the new classes. By default, Python 3 has original (new) classes. The new style class's first parent inherits from Python root 'object' class. Let's see the following example -
+Example -
+
+# Old style class
+class OldStyleClass:
+	pass
+
+# New style class
+class NewStyleClass(object):
+	pass
+
+The declaration style of both classes is different. In the method resolution, old-style classes follow the depth-first left to the right algorithm (DLR), whereas new style classes use the C3 Linearization algorithm while performing multiple inheritance.
+DLR Algorithm
+Python creates a list of classes while implementing the multiple inheritance between the classes. That list is used to determine which method has to be called one is invoked by instances.
+We can assume working by its name as method resolution will search depth-first, and then go left to right. Below is the example.
+Example -
+
+class A:
+	pass
+class B:
+	pass
+class C(A, B):
+	pass
+class D(B, A):
+	pass
+class E(C,D):
+	pass
+
+First, the algorithm will search in the instance class for the invoked method. If not found, it goes into the first parents, if there is also not found. It will look into the parent of the parent. This will continue till the end of inheriting classes.
+In the above example, the method resolution order will be -
+
+class D -> class B -> class A -> class C -> class A
+
+But, A cannot be twice present so -
+
+class D -> class B -> class A -> class C ->
+
+This algorithm shows the strange behavior at the time. Let's see the below example.
+Example -
+
+class A: 
+    pass
+
+class B:
+    pass
+
+
+class C(A, B): 
+    pass
+
+class D(B, A): 
+    pass
+
+class E(C,D):
+    pass
+
+According to DLR Algorithm, the order will be E, C, D, B, A. There is the interchange of classes A & B in class C, which is very ambiguous. It means the algorithm doesn't preserve the monotonicity property.
+Samuele Perdoni was the first person who discovered an inconsistency between the MRO algorithms.
+C3 Linearization Algorithm
+The C3 Linearization Algorithm is a better version of DLR algorithm because it removes the inconsistency. This algorithm has some restrictions that are given below.
+
+Children must precede their parents.
+If a particular class inherits from the one or more classes, they are saved in the order specified in the tuple of the base class.
+
+Rules of C3 Linearization Algorithm
+
+The structure of method resolution order defines by the inheritance graph.
+User must visit the super class only after the methods of the local classes are visited.
+Preserve Monotonicity
+
+Method for Method Resolution class
+Python provides two ways to get the method resolution order of a class - __mro__ attribute or mro() method. With the help of these methods, we can display the order of method in which they are resolved.
+Let's understand the following example.
+Example -
+
+class A:
+	def myname(self):
+		print(" I am a class A")
+class B(A):
+	def myname(self):
+		print(" I am a class B")
+class C(A):
+	def myname(self):
+		print("I am a class C")
+
+# classes ordering
+class D(B, C):
+	pass	
+
+
+# it prints the lookup order
+print(D.__mro__)
+print(C.mro())
+
+Output:
+(<class '__main__.D'>, <class '__main__.B'>, <class '__main__.C'>, <class '__main__.A'>, <class 'object'>)
+[<class '__main__.C'>, <class '__main__.A'>, <class 'object'>]
+
+As we can see in the above output, we get the order of the method resolution order. In such a way, C3 linearization algorithm work for multiple inheritance.
+
+
+Next TopicMonkey Patching in Python
+
+
+
+
+← prev
+next →
+
+
+
+

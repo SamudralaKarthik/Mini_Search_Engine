@@ -1,0 +1,195 @@
+
+
+
+
+next →
+← prev
+
+Scatter() plot matplotlib in Python
+Matplotlib is a Python library that lets you make deterministic, animated, and engaging visualizations.
+It is used to make plots in Python, such as bar charts, scatter plots, pie charts, histograms, line plots, 3-D plots, and many more. The matplotlib library contains the information about the scatter plot.
+matplotlib.pyplot.scatter()
+Scatter plots are utilized to see how different variables are related to each other. The dots on the plot shows how the variables are related. A scatter plot is made with the matplotlib library's scatter() method.
+People often use scatter plots to show the relationship between two or more variables and how a change in one affects the other.
+Syntax
+Here's how to write code for the scatter() method:
+matplotlib.pyplot.scatter (x_axis_value, y_axis_value, s = None, c = None, vmin = None, vmax = None, marker = None, cmap = None, alpha = None, linewidths = None, edgecolors = None)
+The following are the syntax parameters for the scatter() method:
+
+x_axis_value - An array containing x-axis data for scatter in the plot.
+y_axis_value - an array with y-axis data.
+s - it is the size of the marker (can be scalar or array of size equal to the size of the x-axis or y-axis)
+c- the order of the colors of the markers
+marker- marker style for scatter plot in the python.
+cmap - cmap name for scatter plot in the python.
+Linewidths - these are the size of the marker border for scatter in the plot.
+edgecolor: the border color of a marker for scatter in the plot.
+Alpha - blending value for scatter fucntion, between 0 and 1 (transparent to opaque)
+
+All of the parameters except x-axis data and y-axis data are optional, and their default value is None. 
+Examples
+Here are many examples of scatter plots in matplotlib with different parameters. We can see the different types of scatter plots with size, color, and other functions.
+Example1: the following example shows a scatter plot using Python. We can see the plot values in the x and y-axis position.
+
+import matplotlib.pyplot as plt
+x_axis_value =[6, 7, 9, 8, 2, 16, 3, 6,
+	4, 14, 13, 4, 1]
+y_axis_value =[98, 87, 84, 86, 99, 85,
+	102, 89, 96, 78, 77, 83, 81]
+#plot basic scatter in python
+plt.scatter(x_axis_value, y_axis_value)
+# To show the scatter plot 
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example2: the following example shows a scatter plot using python. Here, we use the numpy package to compare two plots.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+#plot basic scatter value in python
+plt.scatter(x_axis_value, y_axis_value)
+x_axis_value  = np.array([5, 12, 8, 11, 16, 8, 2, 18, 7, 3, 21, 14, 17, 24, 12])
+y_axis_value  = np.array([101, 106, 85, 105, 90, 98, 90, 95, 94, 99, 78, 118, 99, 88, 85])
+#plot basic scatter value in python
+plt.scatter(x_axis_value, y_axis_value)
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example3: the following example shows a scatter plot using python. Here, again we used the numpy package to compare two plots with different colors.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+#plot basic scatter function with color in python
+plt.scatter(x_axis_value, y_axis_value, color = 'red')
+x_axis_value  = np.array([5, 12, 8, 11, 16, 8, 2, 18, 7, 3, 21, 14, 17, 24, 12])
+y_axis_value  = np.array([101, 106, 85, 105, 90, 98, 90, 95, 94, 99, 78, 118, 99, 88, 85])
+plt.scatter(x_axis_value, y_axis_value, color = 'green')
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example4: the following example shows a scatter plot using python. Here, we use a different color for each plotted value. We can use the "c" to assign a color variable.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+colors_value = np.array(["red", "cyan", "green", "yellow", "blue", "pink", "orange", "black", "purple", "beige", "magenta", "brown", "gray"])
+plt.scatter(x_axis_value, y_axis_value, c = colors_value)
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example5: the following example shows a scatter plot using Python. Here, we use a different color for each plotted value. We can use the "c" and "cmap" to assign color variables and color bars, respectively.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+colors_value = np.array(["red", "cyan", "green", "yellow", "blue", "pink", "orange", "black", "purple",
+"beige", "magenta", "brown", "gray"])
+plt.scatter(x_axis_value, y_axis_value, c = colors_value, cmap='flag')
+plt.colorbar()
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example6: the following example shows a scatter plot using Python. Here, we can use different sizes of the plot value.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+size_value = np.array([90, 80, 189, 88, 101, 812, 1002, 80, 391, 76, 77, 788, 660])
+plt.scatter(x_axis_value, y_axis_value, s = size_value)
+plt.colorbar()
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example7: the following example shows a scatter plot using python. Here we use different sizes and opacity of the plot value.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+size_value = np.array([90, 80, 189, 88, 101, 812, 1002, 80, 391, 76, 77, 788, 660])
+plt.scatter(x_axis_value, y_axis_value, s = size_value, alpha = 0.6)
+plt.colorbar()
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example8: the following example shows a scatter plot using python. Here, we use a different color for each plotted value. We can use scatter plots with different colors, sizes, and opacity.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21, 19, 4, 11, 22, 18, 6])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102, 80, 91, 76, 77, 88, 66])
+size_value = np.array([90, 80, 189, 88, 101, 812, 1002, 80, 391, 76, 77, 788, 660])
+colors_value = np.array(["red", "cyan", "green", "yellow", "blue", "pink", "orange", "black", "purple", "beige", "magenta", "brown", "gray"])
+plt.scatter(x_axis_value, y_axis_value, c = colors_value, s = size_value, alpha = 0.6)
+plt.colorbar()
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example9: the following example shows a scatter plot using python. Here, we use a different color for each plotted value. We can use random scatter plots with different colors, sizes, and opacity.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_val = np.random.randint(50, size = (50))
+y_axis_val = np.random.randint(50, size = (50))
+colors_value = np.random.randint(50, size = (50))
+sizes_val = 10 * np.random.randint(50, size = (50))
+plt.scatter(x_axis_val, y_axis_val, c = colors_value, s = sizes_val, alpha = 0.6, cmap = 'nipy_spectral')
+plt.colorbar()
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Example10: the following example shows a scatter plot using Python. Here, we use a different color for each plotted value. We can use scatter with different colors, sizes, edges, and line widths of the border.
+
+import matplotlib.pyplot as plt
+import numpy as np
+x_axis_value  = np.array([4, 9, 6, 7, 12, 13, 21])
+y_axis_value = np.array([90, 80, 89, 88, 101, 82, 102])
+plt.scatter(x_axis_value, y_axis_value, color = 'orange', s = 150, edgecolor = 'blue', linewidth = 2)
+x_axis_value  = np.array([5, 12, 8, 11, 16, 8])
+y_axis_value  = np.array([101, 106, 85, 105, 90, 98])
+plt.scatter(x_axis_value, y_axis_value, color = 'red', s = 300, edgecolor = 'green', linewidth = 1)
+plt.show()
+
+Output
+The following image shows a scatter plot with value in python.
+
+Conclusion
+The matplotlib displays plot figures using Python language. The scatter function in python shows a different type of figures in the graph. The figure shows different sizes, and opacities in python.
+
+
+Next TopicData Analysis Project Ideas in Python
+
+
+
+
+← prev
+next →
+
+
+
+

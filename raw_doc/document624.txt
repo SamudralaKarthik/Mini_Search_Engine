@@ -1,0 +1,189 @@
+
+
+
+
+next →
+← prev
+
+Introspection in Python
+In this tutorial, we will learn about introspection which is a greatest strength of the Python programming language. Let's have a brief introduction to the introspection.
+What is Introspection?
+Introspection is a technique to determine the type of an object at runtime. As we know, everything in Python is an object and has wide support for various introspection methods. It is a code that inspects other modules and functions in memory as objects, getting information about them and manipulating them. It provides the facility to get familiar with an object's properties and attributes. By using introspection, we can dynamically inspect Python objects.
+Python is a dynamic, object-oriented, introspection support language that runs deep and wide throughout. The introspection feature makes it a more powerful language than others.
+Python provides several functions and utilities for code introspection. We can also define call functions and reference functions with the no-name.
+The dir() Function
+The dir() function returns a sorted list of the attributes and methods belonging to an object. Let's understand the following example, which uses the dir() function to return the names of all methods that can be used in a given program.
+Example -
+
+myList = [1,2,3,4,5]
+print(dir(myList))
+
+Output:
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+The dir() function returns all the methods and attributes used by the list object.
+Example - 2:
+
+print("The methods and attributes is used with integer: ")
+num = 5
+print(dir(num))
+print("The methods and attributes is used with string: ")
+string = 'javatpoint'
+print(dir(string))
+
+Output:
+The methods and attributes are used with integer: 
+['__abs__', '__add__', '__and__', '__bool__', '__ceil__', '__class__', '__delattr__', '__dir__', '__divmod__', '__doc__', '__eq__', '__float__', '__floor__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__gt__', '__hash__', '__index__', '__init__', '__init_subclass__', '__int__', '__invert__', '__le__', '__lshift__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'as_integer_ratio', 'bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator', 'real', 'to_bytes']
+The methods and attributes are used with string: 
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+
+Python type() function
+The type() function returns the type of the object. Let's understand the following example.
+Example -
+
+num = 5
+print(type(num))
+
+string = 'javatpoint'
+print(type(string))
+
+Output:
+<class 'int'>
+<class 'str'>
+
+Example - 2:
+
+import sys
+def function(): 
+    pass
+
+class MyClass(object):
+    
+   def __init__(self):
+      pass
+
+obj = MyObject()
+
+print(type(1))
+print(type(""))
+print(type([]))
+print(type({}))
+print(type(()))
+print(type(object))
+print(type(function))
+print(type(MyClass))
+print(type(obj))
+print(type(sys))
+
+Output:
+<class 'int'>
+<class 'str'>
+<class 'list'>
+<class 'dict'>
+<class 'tuple'>
+<class 'type'>
+<class 'function'>
+<class 'type'>
+<class '__main__.MyClass'>
+<class 'module'>
+
+Python hasattr() Function
+The hasattr() function checks if the object has an attribute. Depending upon the result, it returns either true or false if the object has a given attribute. Let's understand the following example.
+Example -
+
+class student: 
+    name = "Tony"
+    age = 25  
+obj = student()
+print(hasattr(obj, 'name')) 
+print(hasattr(obj, 'gpa'))
+
+Output:
+True
+False
+
+Python id() Function
+The id() function returns the special id of an object. Let's understand the following example.
+Example -
+
+import sys
+def function(): 
+    pass
+
+class MyClass(object):
+    
+   def __init__(self):
+      pass
+
+obj = MyClass()
+
+print("The integer id is: ", id(1))
+print("The string id is: ", id(""))
+print("The list id is: ",id([]))
+print("The set id is: ",id({}))
+print("The list id is: ",id(()))
+print("The object id is: ",id(object))
+print("The functio id is: ",id(function))
+print("The MyClass id is: ",id(MyClass))
+print("The obj id is: ",id(obj))
+print("The sys module id is: ",id(sys))
+
+Output:
+The integer id is:  140736928548512
+The string id is:  2423227163376
+The list id is:  2423232862400
+The set id is:  2423232820480
+The list id is:  2423226957888
+The object id is:  140736928328528
+The functio id is:  2423231111520
+The MyClass id is:  2423225796064
+The obj id is:  2423232892640
+The sys module id is:  2423227235840
+
+Python sys Module
+The sys module allows us to interaction with the system specific variables and function used or maintained by the interpreter and to function that interact strongly with the interpreter. Let's understand the following example.
+Example -
+
+import sys
+print(sys.version)
+print(sys.platform)
+print(sys.path)
+
+Output:
+3.8.6 (tags/v3.8.6:db45529, Sep 23 2020, 15:52:53) [MSC v.1927 64 bit (AMD64)]
+win32
+['d:\\Python Project', 'D:\\python_project\\Myfirstdjangoproject\\Hello', 'c:\\users\\User\\appdata\\local\\programs\\python\\python38\\python38.zip', 'c:\\users\\User\\appdata\\local\\programs\\python\\python38\\DLLs', 'c:\\users\\User\\appdata\\local\\programs\\python\\python38\\lib', 'c:\\users\\User\\appdata\\local\\programs\\python\\python38', 'C:\\Users\\User\\.virtualenvs\\Django-ExvyqL3O', 'C:\\Users\\User\\.virtualenvs\\Django-ExvyqL3O\\lib\\site-packages']
+
+We inspect the Python version, platform, and search path locations in the above code.
+Some Other Introspection Methods
+There are some other important introspection methods which are given below.
+
+vars() - It contains all instance variable (name and value) as a dictionary. It is equivalent to mycar.__dict__.*
+isinstance() - It checks if an object is of a specified class.
+getsizeof() - It is a part of the sys module; it contains the size of the object in bytes.
+help() - It obtains help on an object's interface based on docstrings.
+callable() - It checks whether or not an object is callable.
+
+Introspection Attributes in Python
+We are going to discuss some attributes that give useful information about objects. Let's see some important introspection attribute.
+
+__name__ - It shows the original name of the class, function or method.
+__qualname__ - The qualified name of the class function or method. It is often useful where class/function/method definitions are nested.
+__doc__ - It is a documentation string, which can also be retrieved by calling built-in function help()
+__self__ - It is a instance to which a method is found.
+
+Conclusion
+We have discussed what introspection is and how it is important. We have seen some important methods and examples. To learn more about introspection, you can check the Python inspect module.
+
+
+Next TopicClass Decorator in Python
+
+
+
+
+← prev
+next →
+
+
+
+

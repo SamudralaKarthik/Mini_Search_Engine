@@ -1,0 +1,122 @@
+
+
+
+
+next →
+← prev
+
+datetime.timedelta() Function of Python
+The 'timedelta()' function of Python is present in the datetime library, which is usually used to calculate differences in given dates. We can also use it to manipulate dates in Python, and this function makes it very easy for users to manipulate dates.
+Syntax:
+
+Datetime.timedelta(days = 0, seconds = 0, microseconds = 0, milliseconds = 0, minutes = 0, hours = 0, weeks = 0)
+Return: Date
+
+For better understanding, we will show how to use the "datetime.timedelta()" function the following example:
+Example 1:
+In this example, we will print the future dates of three years and three days:
+
+from datetime import datetime as D_T, timedelta as T_D
+  
+  
+# Using current time
+initializing_time_for_now = D_T.now()
+  
+# To print initial date
+print ("Initial Date: ", str(initializing_time_for_now))
+  
+# For Calculating the future dates of three years
+Future_Date_After_THREE_yrs = initializing_time_for_now + \
+                        T_D(days = 1095)
+  # For Calculating the future dates of three days
+Future_Date_After_THREE_days = initializing_time_for_now + \
+                         T_D(days = 2)
+  
+# Now, we will print the calculated future dates
+print('Future Date after Three years: ', str(Future_Date_After_THREE_yrs))
+print('Future Date after Three days: ', str(Future_Date_After_THREE_days))
+
+Output:
+Initial Date: 2021-10-14 00:09:43.611036
+Future Date after Two years: 2023-10-15 00:09:43.611036
+Future Date after Two days: 2021-10-17 00:09:43.611036
+
+Example 2:
+In this example, we will see how we can print the past dates of two years and two hours:
+
+from datetime import datetime as D_T, timedelta as T_D
+  
+# Using current time
+initializing_time_for_now = D_T.now()
+  
+# To print initial date
+print ("Initial Date:", str(initializing_time_for_now))
+  
+  
+# For Calculating the past dates of two year
+Past_Date_Before_TWO_yrs = initializing_time_for_now - \
+                       timedelta(days = 730)
+  
+# For Calculating the past dates of two hours
+Past_Date_Before_TWO_hours = initializing_time_for_now - \
+                        timedelta(hours = 2)
+  
+  
+# Now, we will print the calculated Past Dates
+print('Past date before two years: ', str(Past_Date_Before_TWO_yrs))
+print('Past date before two hours: ', str(Past_Date_Before_TWO_hours))
+
+Output:
+Initial Date: 2021-10-14 00:19:18.449629
+Past date before two years: 2019-10-15 00:19:18.449629
+Past date before two hours: 2021-10-13 22:19:18.449629
+
+Example 3:
+In this example, we will calculate the difference between the two different dates:
+
+from datetime import datetime as D_T, timedelta as T_D
+  
+  
+# Using current time
+initializing_time_for_now = D_T.now()
+  
+# To print initial date
+print ("Initial Date:", str(initializing_time_for_now))
+  
+# Some another datetime
+New_time = initializing_time_for_now + \
+                 T_D(days = 7, hours = 6, milliseconds = 55, seconds = 12)
+  
+New_time_1 = initializing_time_for_now + \
+                 T_D(days = 12, hours = 64, milliseconds = 215, seconds = 90)
+# We will print the new time
+print ("New calculated time: ", str(New_time))
+  
+  
+# Now, we will print the time difference between the two Dates:
+print('Time difference between the given dates is:', str(New_time - \
+                            initializing_time_for_now))
+print('Time difference between the initial Date and New_time_1 is:', str(New_time_1 - \
+                            initializing_time_for_now))
+
+Output:
+Initial Date: 2021-10-14 00:31:13.920503
+New calculated time:  2021-10-21 06:31:25.975503
+Time difference between the given dates is: 7 days, 6:00:12.055000
+Time difference between the initial Date and New_time_1 is: 14 days, 16:01:30.215000
+
+Conclusion
+In this tutorial, we learned about the 'datetime.timedelta()' function of the datetime library in Python. We have also discussed various examples for better understanding the concept of manipulating dates and calculating the difference between two dates.
+
+
+Next TopicPython Bio Module
+
+
+
+
+← prev
+next →
+
+
+
+

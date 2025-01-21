@@ -1,0 +1,418 @@
+
+
+
+
+next →
+← prev
+
+Python Matrix
+In this tutorial, we will learn about Python matrices. In Python, a matrix object is similar to nested lists as they are multi-dimensional. We will see how to create a matrix using Numpy arrays. Following this, we will see various matrix operations methods and examples for better understanding.
+What is a Matrix in Python?
+A matrix in Python is a rectangular Numpy array. This array has to be two-dimensional. It contains data stored in the array's rows and columns. In a Python matrix, the horizontal series of items are referred to as "rows," while the vertical series of items are referred to as "columns." The rows and columns are stacked over each other just like a nested list. If a matrix contains r number of rows and c number of columns, where r and c are positive integers, then r x c determines the order of this matrix object.
+We can store strings, integers, and objects of other data types in a matrix. Data is stored in the stacks of rows and columns in a matrix. The matrix is a crucial data structure for calculations in mathematics and science. In Python, we consider a list of lists or a nested list as a matrix since Python doesn't include any built-in type for a matrix object.
+In the course of this tutorial, we will go through the following list of matrix operation methods.
+
+Matrix addition
+Matrix multiplication
+Matrix multiplication operator
+Matrix multiplication without Numpy
+Matrix inverse
+Matrix transpose
+Matrix to array
+
+How do Matrices in Python work?
+We write data in a two-dimensional array to create a matrix. It is done as follows:
+Example
+
+[ 2 3 5 7 6
+  3 2 6 7 2
+  5 7 2 6 1 ]
+
+It displays a matrix having 3 rows and 5 columns, so its dimension is 3×5. Integer data type objects make up the data in this matrix. Row1, the first row, has values (2, 3, 5, 7, 6), while Row2 has values (3, 2, 6, 7, 2) and Row3 has values 5, 7, 2, 6, 1. Regarding columns, Column1 has values (2, 3, 5), Column2 has values (3, 2, 7), and so on.
+Example
+
+[ 0, 0, 1
+  0, 1, 0
+  1, 0, 0 ]
+
+It displays a matrix having 3 rows and 3 columns, so its dimension is 3×3. Such matrices having equal rows and columns are called square matrices.
+Similarly, Python allows users to store their data within an m x n dimensional matrix. We can perform the addition of matrices, multiplication, transposition, and other operations on a matrix-like structure.
+The implementation of a matrix object in Python is not straightforward. We can create a Python matrix by using arrays and similarly use them.
+NumPy Array
+The scientific computing software NumPy supports a robust N-dimensional array object. Installing NumPy is a prerequisite to using it in our program.
+NumPy can be used and imported after installation. Knowing the basics of Numpy Array will be helpful in understanding matrices.
+Arrays having multiple dimensions of items are provided by NumPy. Here's an illustration:
+Code
+
+# Python program to show how to create a Numpy array
+
+# Importing numpy
+import numpy as np
+
+# Creating a numpy array
+
+array = np.array([4, 6, "Harry"])
+print(array)               
+print("Data type of array object: ", type(array))
+
+Output:
+['4' '6' 'Harry']
+Data type of array object:  <class 'numpy.ndarray'>
+
+As we can see, Numpy arrays belong to the ndarray class.
+Example to Create a Matrix using Numpy Array
+Think about the scenario where we create a record of students' marks. We will record the student's name and marks in two subjects, Python programming, and Matrix. We will create a two-dimensional matrix using a numpy array and then reshape it.
+Code
+
+# Python program to create a matrix using numpy array
+
+# Importing numpy
+import numpy as np
+
+# Creating the matrix
+record = np.array( [['Itika', 89, 91],
+                                   ['Aditi', 96, 82],
+                                   ['Harry', 91, 81],
+                                   ['Andrew', 87, 91],
+                                   ['Peter', 72, 79]])
+
+matrix = np.reshape(record, (5,3))
+print("The matrix is: \n", matrix)
+
+Output:
+The matrix is: 
+ [['Itika' '89' '91']
+ ['Aditi' '96' '82']
+ ['Harry' '91' '81']
+ ['Andrew' '87' '91']
+ ['Peter' '72' '79']]
+
+Example to Create a Matrix using Numpy Matrix Method
+We can use the numpy.matrix to create a 2D matrix.
+Code
+
+# Python program to show how to create a matrix using the matrix method
+
+# importing numpy
+import numpy as np
+
+# Creating a matrix
+matrix = np.matrix('3,4;5,6')
+print(matrix)
+
+Output:
+[[3 4]
+ [5 6]]
+
+Accessing Values of a Matrix
+The indices of a matrix can be used to access the elements stored in it. Data stored in a matrix is accessible using the same approach we use for a two-dimensional array.
+Code
+
+# Python program to access elements of a matrix
+
+# Importing numpy
+import numpy as np
+
+# Creating the matrix
+record = np.array( [['Itika', 89, 91],
+                   ['Aditi', 96, 82],
+                   ['Harry', 91, 81],
+                   ['Andrew', 87, 91],
+                   ['Peter', 72, 79]])
+
+matrix = np.reshape(record, (5,3))
+
+# Accessing record of Itika
+print( matrix[0] )
+
+# Accessing marks in the matrix subject of Andrew
+print( "Andrew's marks in Matrix subject: ", matrix[3][2] )
+
+Output:
+['Itika' '89' '91']
+Andrew's marks in Matrix subject:  91
+
+Methods to Create a 2-D Numpy Array or a Matrix
+There are several methods to create a two-dimensional NumPy array and hence a matrix. Providing entries for the rows and columns
+We can provide integers, floats, or even complex numbers. Using the dtype attribute of the array method, we can specify the data type we want.
+Code
+
+# Python program to show how to create a Numpy array
+
+# Importing numpy
+import numpy as np
+
+# Creating numpy arrays
+array1 = np.array([[4, 2, 7, 3], [2, 8, 5, 2]])
+print("Array of data type integers: \n", array1)
+
+array2 = np.array([[1.5, 2.2, 3.1], [3, 4.4, 2]], dtype = "float")
+print("Array of data type float: \n", array2)
+
+array3 = np.array([[5, 3, 6], [2, 5, 7]], dtype = "complex")
+print("Array of data type complex numbers: \n", array3)
+
+Output:
+Array of data type integers: 
+ [[4 2 7 3]
+ [2 8 5 2]]
+Array of data type float: 
+ [[1.5 2.2 3.1]
+ [3.  4.4 2. ]]
+Array of data type complex numbers: 
+ [[5.+0.j 3.+0.j 6.+0.j]
+ [2.+0.j 5.+0.j 7.+0.j]]
+
+Array having Zeros and Ones
+Code
+
+# Python program to show how to create a Numpy array having zeroes and ones
+
+# Importing numpy
+import numpy as np
+
+# Creating numpy arrays
+zeores_array = np.zeros( (3, 2) )
+print(zeores_array)
+
+ones_array = np.ones( (2, 4), dtype=np.int64 )
+print(ones_array)
+
+Output:
+[[0. 0.]
+ [0. 0.]
+ [0. 0.]]
+[[1 1 1 1]
+ [1 1 1 1]]
+
+Here, we have specified dtype to 64 bits.
+Using the arange() and shape() Methods
+Code
+
+# Python program to show how to create Numpy array using arrange() and shape() methods
+
+# Importing numpy
+import numpy as np
+
+# Creating numpy arrays
+array1 = np.arange( 5 )
+print(array1)
+
+array2 = np.arange( 6 ).reshape( 2, 3 )
+print(array2)
+
+Output:
+[0 1 2 3 4]
+[[0 1 2]
+ [3 4 5]]
+
+Python Matrix Operations
+Python Matrix Addition
+We will add the two matrices and use the nested for loop through the given matrices.
+Code
+
+# Python program to add two matrices without using numpy
+
+# Creating matrices in the form of nested lists
+matrix1 = [[23, 43, 12],   
+           [43, 13, 55],   
+           [23, 12, 13]]  
+ 
+matrix2 = [[4, 2, -1],  
+           [5, 4, -34],   
+           [0, -4, 3]]  
+  
+matrix3  = [[0,1,0],  
+            [1,0,0],  
+            [0,0,1]] 
+
+matrix4  = [[0,0,0],  
+            [0,0,0],  
+            [0,0,0]]
+
+matrices_length = len(matrix1)  
+  
+#Adding the three matrices using nested loops  
+for row in range(len(matrix1)):  
+    for column in range(len(matrix2[0])):  
+        matrix4[row][column] = matrix1[row][column] + matrix2[row][column] + matrix3[row][column] 
+#Printing the final matrix  
+print("The sum of the matrices is = ", matrix4)
+
+Output:
+The sum of the matrices is =  [[27, 46, 11], [49, 17, 21], [23, 8, 17]]
+
+Python Matrix Multiplication
+Python Matrix Multiplication Operator
+In Python @ is known as the multiplication operator. Let us see an example where we will use this operator to multiply two matrices.
+Code
+
+# Python program to show how to create a matrix using the matrix method.
+
+# importing numpy
+import numpy as np
+
+# Creating the matrices
+matrix1 = np.matrix('3,4;5,6')
+matrix2 = np.matrix('4,6;8,2')
+
+# Usng multiplication operator to multiply two matrices
+print(matrix1 @ matrix2)
+
+Output:
+[[44 26]
+ [68 42]]
+
+Python Matrix Multiplication without using Numpy
+Another way of multiplying two matrices is using nested loops. Here is an example to show.
+Code
+
+# Python program to show how to create a matrix using the matrix method
+
+# importing numpy
+import numpy as np
+
+# Creating two matrices
+matrix1 = [[4, 6, 2],
+     [7, 4, 8],
+     [6, 2, 7]]
+
+matrix2 = [[4, 6, 8, 2],
+           [6, 5, 3, 7],
+           [7, 3, 7, 6]]
+# Result will be a 3x4 matrix
+output = [[0,0,0,0],
+         [0,0,0,0],
+         [0,0,0,0]]
+
+# Iterating through the rows of matrix1
+for i in range(len(matrix1)):
+   # iterating through the columns of matrix2
+   for j in range(len(matrix2[0])):
+       # iterating through the rows of matrix2
+       for k in range(len(matrix2)):
+            output[i][j] += matrix1[i][k] * matrix2[k][j]
+
+for row in output:
+    print(row)
+
+Output:
+[66, 60, 64, 62]
+[108, 86, 124, 90]
+[85, 67, 103, 68]
+
+Python Matrix Inverse
+When an equation needs to be solved to get the value of an unknown variable that satisfies the equations, the inverse of a matrix, which is just the reciprocal of the matrix as we would in regular mathematics, is calculated. A matrix's inverse is the matrix that gives the identity matrix when we multiply with the original matrix. Only a non-singular matrix can have an inverse. A non-singular matrix has a non-zero determinant.
+Code
+
+# Python program to show how to calculate the inverse of a matrix
+  
+# Importing the required library
+import numpy as np
+  
+# Creating a matrix
+A = np.matrix("3, 4, 6; 6, 2, 7; 6, 4, 6")
+
+# Calculating the inverse of A
+print(np.linalg.inv(A))
+
+Output:
+[[-3.33333333e-01 -7.40148683e-17  3.33333333e-01]
+ [ 1.25000000e-01 -3.75000000e-01  3.12500000e-01]
+ [ 2.50000000e-01  2.50000000e-01 -3.75000000e-01]]
+
+Python Matrix Transpose
+Python Matrix Transpose without Numpy
+A matrix's transposition involves switching the rows and columns. It has the symbol X'. We will put the object in row i and column j of matrix X in row j and column i of matrix X'. Consequently, X' will become a 4x3 matrix if the original matrix X is a 3x4 matrix.
+Code
+
+# Python program to find the transpose of a matrix using nested loops
+
+# Creating a matrix
+matrix = [[4, 6, 7, 8],
+          [3, 7, 2, 7],
+          [7, 3, 7, 5]]
+
+result = [[0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0]]
+
+# iterating through the rows
+for i in range(len(matrix)):
+   # iterating through the columns
+   for j in range(len(matrix[0])):
+        result[j][i] = matrix[i][j]
+
+for row in result:
+    print(row)
+
+Output:
+[4, 3, 7]
+[6, 7, 3]
+[7, 2, 7]
+[8, 7, 5]
+
+Python Matrix Transpose using Numpy
+We can use the matrix.transpose() method in Numpy to get the matrix's transpose.
+Code
+
+# Python program to find the transpose of a matrix
+
+# importing the required module
+import numpy as np
+              
+# Creating a matrix using matrix method
+matrix = np.matrix('[5, 7, 6; 4, 2, 4]')
+              
+#finding transpose using matrix.transpose method
+transpose = matrix.transpose()
+    
+print(transpose)
+
+Output:
+[[5 4]
+ [7 2]
+ [6 4]]
+
+Converting Python Matrix to Array
+We can use ravel and flatten functions to convert a Python matrix to a Python array.
+Code
+
+# Python program to convert a matrix to an array
+
+# importing the required module
+import numpy as np
+
+# Creating a matrix using numpy
+matrix = np.matrix("[4, 6, 7; 5, 2, 6; 6, 3, 6]")
+
+# Using ravel() function to covert matrix to array
+array = matrix.ravel()
+print(array)
+
+# Using flatten() function to covert matrix to array
+array = np.asarray(matrix).flatten()
+print(array)
+
+# Using reshape() function to covert matrix to array
+array = (np.asarray(matrix)).reshape(-1)
+print(array)
+
+Output:
+[[4 6 7 5 2 6 6 3 6]]
+[4 6 7 5 2 6 6 3 6]
+[4 6 7 5 2 6 6 3 6]
+
+
+
+Next TopicPython Unit Testing
+
+
+
+← prev
+next →
+
+
+
+

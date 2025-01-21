@@ -1,0 +1,140 @@
+
+
+
+
+next →
+← prev
+
+Balancing Parentheses in Python | Balanced Parenthesis Problem in Python
+In this tutorial, we will learn how to check the balance of the given parentheses in Python. It is a basic interview question where you are asked to find whether a given string (of brackets) is balanced or not. It is a commonly asked technical interview question in product-based companies. A string can consist of different types or brackets such as (), [], {}.
+The parenthesizes are primarily used to simplify the expression in computer science. A parenthesis is said to be balanced if each left parenthesis has a right parenthesis. In other words, the parenthesis should be in pairs; otherwise, these are not balanced.
+Let's understand the valid parenthesis problem and how we can solve this problem using Python.
+What is Balance Parenthesis Problem?
+First we get the string as an input containing the characters (', ')', '{', '}', '[', and ']', to check if the given string is valid or not.
+The input string is valid if it follows the below constraints -
+
+The left bracket must have corresponding right bracket.
+The open bracket must be closed in the correct order.
+
+Let's understand the approach to solve this problem.
+Check Valid Parenthesis
+We can solve this problem using the below methods.
+Approach - 1: Using brute force approach
+In the brute force algorithm, we can use the conditional statement, recursion, and loop to match the parenthesis. If the parentheses are balanced, it returns true otherwise false.
+Let's see the following snippet of code.
+Code -
+
+def paraCheck( seq ):
+   while True:
+       if '()' in seq :
+           seq = seq.replace ( '()' , '' )
+       elif '{}' in seq :
+           seq = seq.replace ( '{}' , '' )
+       elif '[]' in seq :
+           seq = seq.replace ( '[]' , '' )
+       else :
+           return not seq
+
+seq = '{[()]}'
+print(f'Is {seq} valid ? : {paraCheck(seq)}')
+seq1 = '{[()]}{]{}}'
+print(f'Is {seq1} valid ? : {paraCheck (seq1)}')
+
+Output:
+Is {[()]}} valid ? : False
+Is {[()]}{]{}} valid ? : False
+
+Explanation -
+In the above code, we have used the while loop to check the given sequence. The while loop will be executed until the given string become empty or no element is present. First, we checked if () brackets were present, then replaced with the empty string, checked [] bracket and replaced with the empty string, and did the same operation with the other brackets. If there is no pair present, then returns the True otherwise False.
+Let's try to solve this problem with a different approach.
+Approach -2 - Using For loop
+In this program, we will use for loop and counter value to check whether a given string of parenthesis is valid or not.
+Let's understand the following code.
+Example -
+
+def checkBalance(str1):
+    count= 0
+    ans=False
+    for i in str1:
+        if i == "(" or i == "{" or i == "[":
+            count += 1
+        elif i == ")" or i == "}" or i == "]":
+            count-= 1
+        if count < 0:
+            return ans
+    if count==0:
+        return not ans
+    return ans
+str1=input("Enter a string of brackets: ") 
+print("Given string is balanced :",checkBalance(str1))
+
+Output:
+Enter a string of brackets: {[()]}
+Given string is balanced : True
+Enter a string of brackets: {[()]}]
+Given string is balanced : False
+
+Explanation -
+In the above code, we have initialized a count variable with zero. In if condition, if there are open brackets in the given string, increase the value by one, and if there are closing brackets corresponding in the open bracket, decrease the value by one. Finally, we checked if the count's value is equal to zero return True otherwise, False.
+Approach - 3: Using Stack
+The stack is a linear data structure that stores data in the LIFO (Last in First Out) manner. We traverse the string and push the open brackets inside the stack. We keep doing this process until all the opening brackets are pushed inside the stack and move the pointer forward.
+When the pointer reaches the closing bracket, check the top of the stack if the corresponding to opening bracket. If matches pop the opening brackets from the stack, keep repeating until the pointer visits each closing bracket.
+If all elements popped out from the bracket, it means the given string contains the valid parenthesis, and if there is any single bracket left out in the bracket, then the given string is not balanced.
+Example -
+
+def checkBalance(expr):
+    stack = []
+    for char in expr:
+        if char in ["(", "{", "["]:
+            stack.append(char)
+        else:
+
+            # Here we check if the current character is not opening
+            # bracket, then it must be closing.
+            # So stack cannot be empty at this point.
+            if not stack:
+                return False
+            curr_char = stack.pop()
+            if curr_char == '(':
+                if char != ")":
+                    return False
+            if curr_char == '{':
+                if char != "}":
+                    return False
+            if curr_char == '[':
+                if char != "]":
+                    return False
+
+    # Here we check empty stack
+    if stack:
+        return False
+    return True
+
+
+expr = "{[()]}"
+
+if checkBalance(expr):
+    print("The given string is balanced")
+else:
+    print("The given string is not balanced")
+
+Output:
+The given string is balanced
+
+Time Complexity
+The time complexity of checking the parenthesis bracket is an optimal O(n). Here n is the total number of brackets in string. The searching of brackets in the given string will be linear every time since the space complexity is 0(n) as we need a stack of size 'n' to store the character of the expression.
+Conclusion
+Python brackets are not primarily used to define blocks but play an essential role in other programming languages. In Python, they are used to define dictionaries, tuples, set, list, and much other data structure. The interviewer asks this problem to test the candidate's knowledge of problem-solving. In this tutorial, we have discussed three important approaches to check whether a given string is a valid parenthesis. We also implemented the solution using Python code. It is highly recommended to practice such questions if you look for a high-paying job in a product-based company.
+
+
+Next TopicHow to Provide Multiple Constructors in Python Classes
+
+
+
+
+← prev
+next →
+
+
+
+

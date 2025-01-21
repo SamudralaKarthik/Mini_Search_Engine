@@ -1,0 +1,68 @@
+
+
+
+
+next →
+← prev
+
+Broken Pipe Error in Python
+Nowadays, Python is considered a mature programming language that has been used popularly by data scientists and Artificial Intelligence (AI) engineers because of its simplicity and easy-to-read syntax. Apart from this, the vague errors of the programming language generally make new programmers pull their hair out to debug.
+In the following tutorial, we will discuss [Errno 32] Broken pipe, a famous error message we have often seen while interacting with the file system. We will also understand the cause of this, along with the methods to avoid it and fix it in the code.
+What causes "[Errno 32] Broken pipe" in Python?
+"Broken pipe" is usually considered an IOError (short for Input/Output Error) error, which occurred at the Linux system level. It is generally raised while reading and writing files, or in other terms, performing file input/output or network input/output (through sockets).
+The equivalent Linux system error is EPIPE, excerpted from GNU libc error codes.
+Macro: int EPIPE
+"Broken pipe." there is no process reading from the other end of a pipe. Every function of the library raising error code also produces a SIGPIPE signal; this signal terminates the program if not handled or blocked. Hence, the program will never actually display EPIPE until it has handled or blocked SIGPIPE.
+From the above statement, we can conclude that the system sending SIGPIPE signal causes the [Errno 32] Broken pipe error, an inter-process communication mechanism of Linux.
+For instance, the Linux system uses another signal called SIGINT internally. In Linux, the command Ctrl+C will send a SIGINT signal in order to end the process, or we can utilize the kill command in order to achieve the same effect.
+Python does not disregard SIGPIPE by default. However, it translates the signal into an exception and raises an error - IOError: [Errno 32] Broken pipe every time it receives a SIGPIPE.
+Broken Pipe error when piping results in Linux terminal
+Whenever we encounter [Errno 32] Broken pipe error while attempting to pipe the output of a Python script to another program, such as shown in the following example:
+Example:
+
+$ python file_name.py | head
+
+Explanation:
+The above syntax of the pipeline will create a process sending data upstream and a process reading data downstream. When the downstream does not have to read upstream data, it will send a SIGPIPE signal to the process of upstream.
+When does downstream not have to read upstream data? Let us understand this with an example. The head command in the example only has to read enough lines in order to tell the upstream that we no longer have to read it, and it will send the SIGPIPE signal to the process of upstream.
+Whenever the upstream process is a Python program, an error like IOError: [Errno 32] Broken pipe will happen.
+How to avoid Broken pipe errors?
+If we do not care about properly catching SIGPIPE and have to get things running rapidly, insert the following snippet of code to the top of the Python program.
+Syntax:
+
+from signal import signal, SIGPIPE, SIG_DFL 
+#Ignore SIG_PIPE and don't throw exceptions on it... (http://docs.python.org/library/signal.html)
+signal(SIGPIPE,SIG_DFL) 
+
+Explanation:
+In the above snippet of code, we have redirected the SIGPIPE signals to the default SIG_DFL, which the system generally ignore.
+However, it is advised to beware of the Python manual on the signal library to warn against this handling SIGPIPE.
+Properly catching IOError to avoid Broken pipe error
+As a Broken pipe error is an IOError error, we can place a try/catch block in order to catch it, as shown in the following snippet of code:
+Syntax:
+
+import sys, errno
+try:
+    ### IO operation ###
+except IOError as e:
+    if e.errno == errno.EPIPE:
+        ### Handle the error ###
+
+Explanation:
+In the above snippet of code, we have imported the sys and errno module and placed the try/catch block in order to catch the raised exception and handle it.
+A possible solution for Broken pipe error in the multi-process program
+In programs that utilize worker processes to speed up processing and make utilization of multi-core CPUs, we can attempt to reduce the count of the worker processes to check whether the error remains or not.
+A large number of worker processes may conflict with each other while trying to take control of resources of the system or the permission in order to write into the disk.
+
+
+Next TopicCode Template for Creating Objects in Python
+
+
+
+
+← prev
+next →
+
+
+
+

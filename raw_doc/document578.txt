@@ -1,0 +1,393 @@
+
+
+
+
+next →
+← prev
+
+Rock Paper Scissors Game in Python
+Python is a programming language that can serve different purposes, and one can do anything with it. Python can also be utilized for developing games. Developing a game is a great way to learn how to code a program.
+In the following tutorial, we will learn how to create a simple "Rock Paper Scissors" game without using any external game libraries like PyGame in the Python programming language.
+But before we get started, let us briefly understand what the "Rock Paper Scissors" game is.
+What is the "Rock Paper Scissors" game?
+Most of us may have played rock paper scissors before. Rock Paper Scissors is often used as a fair selection method between two people or more in order to settle a dispute or make an unbiased group decision. This method is similar to flipping a coin, drawing straws, or throwing dice.
+If someone is unfamiliar, a rock paper scissors game is considered a hand game between two or more players. Participants say "Rock, Paper, Scissors!" and then form their hands into the shape of a rock (a fist), a piece of paper (palm facing downward), or a pair of scissors (two fingers extended) in a simultaneous manner.
+The rules of this game are simple:
+Rule 1: Rock smashes scissors, so rock wins
+Rule 2: Paper covers rock, so paper wins
+Rule 3: Scissors cut paper, so scissors win
+Now that we have understood what the rock paper scissors game is and its rule, we can begin thinking about how these rules might translate to the Python code.
+In the following Python project, players will select anyone from rock, paper, and scissors. Then they will click on the play button to display the game's result.
+Prerequisites for the Project
+We will use the fundamental concept of the Python programming language with the Tkinter library and the random module in order to implement the rock paper scissors project.
+Tkinter library: The Tkinter library is a standard Graphical User Interface (GUI) library which is among the easiest methods to build a GUI application.
+random module: The random module allows programmers to generate random numbers.
+We can install these libraries using the Python pip installer command on the command prompt or terminal as shown below:
+Syntax:
+
+$ pip install tkinter
+$ pip install random
+
+Structure of the Python project
+The following are the steps that we will follow to build a fully functional Rock Paper Scissors game with GUI using Python:
+Step 1: Importing the required libraries
+Step 2: Creating the GUI for the application
+Step 3: Writing code for the user selection
+Step 4: Writing code for the computer selection
+Step 5: Defining the functions
+Step 6: Defining the buttons
+We will now discuss these steps in detail. So, let's get started.
+Importing the required libraries
+The first step of every project is to import all the libraries and modules we will need throughout the project. In this case, we will require to import the Tkinter library and the random module.
+Let us consider the following snippet of code illustrating the same:
+File: rockPaperScissors.py
+
+# importing the required libraries and modules
+from tkinter import *
+import random
+
+Explanation:
+In the above snippet of code, we have imported the Tkinter library along with the random module.
+Creating the GUI for the application
+Once we are done importing the required libraries and modules, we will initialize a window using the Tk() class of the Tkinter library and provide some details to this window.
+Let us consider the following snippet of code demonstrating the same:
+File: rockPaperScissors.py
+
+# creating the GUI for the application
+guiWindow = Tk()
+guiWindow.title("The Rock Paper Scissors Game")
+guiWindow.geometry("480x480")
+guiWindow.config(bg = "#87BDD8")
+guiWindow.resizable(width = False, height = False)
+
+Explanation:
+In the above snippet of code, we have initialized a window with the help of the Tk() class of the Tkinter library. We have then used the title() method to set the title of the window. We have also used the geometry() method to set the width and height of the window. We have then specified the window's background colour in the bg parameter in the config() method. At last, we have fixed the size of the window by setting the width and height parameters to False in the resizable() method.
+Now, we will add a label to the window using the Label() widget class. The following snippet of code is the implementation of the Label() widget.
+File: rockPaperScissors.py
+
+# adding a label to the window using the Label() widget
+heading = Label(
+    guiWindow,
+    text = 'Let\'s play Rock Paper Scissors',
+    font = 'arial 18 bold',
+    bg = '#588C7E',
+    fg = 'white'
+    ).pack()
+
+Explanation:
+In the above snippet of code, we have used the Label() widget in order to display text that users cannot change. Within this widget, we have specified the name of the window, i.e., guiWindow. We have also defined the text displayed on the label as the title of that label. We have also provided the font in which style the text should be written. We have also specified the background color using the bg argument and the foreground color using the fg argument. We have then used the pack function to organize the widget in the form of a block.
+Creating the Column for User Selection
+Now that we have created a window successfully, it is time for us to create the column where the player can input their selection.
+Let us consider the following snippet of code demonstrating the same:
+File: rockPaperScissors.py
+
+# creating column for user selection
+userInput = StringVar()
+
+subHeading = Label(
+    guiWindow,
+    text = 'Select any ONE from rock, paper, scissors',
+    font = 'calibri 14 bold',
+    bg = '#96ceb4'
+    ).place(
+        x = 35,
+        y = 110
+        )
+
+Entry(
+    guiWindow,
+    font = 'calibri 14',
+    textvariable = userInput,
+    bg = '#FBEFCC'
+    ).place(
+        x = 110,
+        y = 160
+        )
+
+Explanation:
+In the above snippet of code, we have used the StringVar() class to store the player's selection in the userInput variable. We have then created a label to display some texts for the player. At last, we have used the Entry() widget to create an input text field. Within this widget, we have used the textvariable parameter in order to retrieve the text to the Entry() widget. We have also used the place() function to place widgets at specific coordinates.
+Code for Computer selection
+We will now use the randint() function of the random module for the computer to choose its preference. Let us consider the following snippet of code demonstrating the same.
+File: rockPaperScissors.py
+
+# code for computer selection
+compSelection = random.randint(1, 3)
+
+if compSelection == 1:
+    compSelection = 'rock'
+elif compSelection == 2:
+    compSelection = 'paper'
+else:
+    compSelection = 'scissors'
+
+Explanation:
+In the above snippet of code, we have used the randint() function of the random module to randomly pick any number from the given range. We have then used the if-elif-else conditional statements to play rock paper scissors.
+If the computer picks 1, the rock will set to the compSelection variable.
+If the computer picks 2, the paper will set to the compSelection variable.
+If the computer picks 3, the scissors will set to the compSelection variable.
+Creating a function to begin the Game
+Once we get the values from the user's selection and the computer's choice, we will write a function to start the Game. This function will check the value from the userSelection variable and compare it with the value from the compSelection variable and return the required statements.
+File: rockPaperScissors.py
+
+# creating function to begin the game
+res = StringVar()
+
+def letsPlay():
+    userSelection = userInput.get()
+    if userSelection == compSelection:
+        res.set("It's a Tie! You made a same choice as computer.")
+    elif userSelection == 'rock' and compSelection == 'paper':
+        res.set("Oops! You Lose. Computer selected Paper.")
+    elif userSelection == 'rock' and compSelection == 'scissors':
+        res.set("Congrats! You Win. Computer selected Scissors.")
+    elif userSelection == 'paper' and compSelection == 'scissors':
+        res.set("Oops! You Lose. Computer selected Scissors.")
+    elif userSelection == 'paper' and compSelection == 'rock':
+        res.set("Congrats! You Win. Computer selected Rock.")
+    elif userSelection == 'scissors' and compSelection == 'rock':
+        res.set("Oops! You Lose. Computer selected Rock.")
+    elif userSelection == 'scissors' and compSelection == 'paper':
+        res.set("Congrats! You Win. Computer selected Paper.")
+    else:
+        res.set("Looks like an invalid input! Consider selecting from - rock, paper & scissors")
+
+Explanation:
+In the above snippet of code, we have created an object of the StringVar() class. We have then defined a function as letsPlay(). Within this function, we have used the if-elif-else conditional statements to compare the input value from the user with the value selected by the computer and used the set() function to store the corresponding statements as per the result of the comparison. In this rock paper scissors game, a player who selects rock will win over another player who selects scissors but lose to the player who selects paper; a player who selects paper will lose to the player with the scissors. If both select the same them, the game will tie.
+Defining a function to Reset the game
+We will now create a function that will reset the game. This function will set all the variables to an empty string.
+Let us consider the following snippet of code demonstrating the same:
+File: rockPaperScissors.py
+
+# defining a function to reset the game
+def resetGame():
+    res.set("")
+    userInput.set("")
+
+Explanation:
+In the above snippet of code, we have defined a function as resetGame(). Within this function, we have set the value of the variables like res and userInput to the empty strings.
+Defining a function to Exit the game
+We will now define a function that quit the rock paper scissors program by stopping the execution of the mainloop() method.
+Let us consider the following snippet of code demonstrating the same:
+File: rockPaperScissors.py
+
+# defining a function to exit the game
+def exitGame():
+    guiWindow.destroy()
+
+Explanation:
+In the above snippet of code, we have used the destroy() method to stop the execution of the mainloop() method and exit the program.
+Defining the Buttons for the window
+Let us now define some buttons to execute the processing on the window. These buttons will include Play, Reset, and Exit.
+Let us consider the following snippet of code illustrating the definition for these buttons.
+File: rockPaperScissors.py
+
+displayResult = Label(
+    guiWindow,
+    textvariable = res,
+    font = 'calibri 12 bold',
+    bg = '#96CEB4'
+    ).place(
+        x = 20,
+        y = 240
+    )
+
+playButton = Button(
+    guiWindow,
+    font = 'calibri 10 bold',
+    text = 'PLAY',
+    padx = 5,
+    bg = 'white',
+    command = letsPlay
+    ).place(
+        x = 100,
+        y = 300
+        )
+
+resetButton = Button(
+    guiWindow,
+    font = 'calibri 10 bold',
+    text = 'RESET',
+    padx = 5,
+    bg = 'white',
+    command = resetGame
+    ).place(
+        x = 200,
+        y = 300
+        )
+
+exitButton = Button(
+    guiWindow,
+    font = 'calibri 10 bold',
+    text = 'EXIT',
+    padx = 5,
+    bg = 'white',
+    command = exitGame
+    ).place(
+        x = 300,
+        y = 300
+        )
+
+guiWindow.mainloop()
+
+Explanation:
+We have created a label in the above snippet of code to display the result. We have then used the Button() widget multiple times to create different buttons to play, reset and exit the game. We have used the command parameter within these widgets to call the specified function when clicking the button. At last, we have called the mainloop() method to execute the program.
+Thus, the rock paper scissors game using the Tkinter library in Python is complete. We can now save the file and run the program to see if it works.
+To run the program, we can type the following command in the command-line shell or terminal:
+Command:
+
+$ python rockPaperScissors.py
+
+But before we see the output, here is a complete project code.
+The Complete Project Code
+The following program file is a complete code for the 'Rock Paper Scissors game' project.
+File: rockPaperScissors.py
+
+# importing the required libraries and modules
+from tkinter import *
+import random
+
+# creating the GUI for the application
+guiWindow = Tk()
+guiWindow.title("The Rock Paper Scissors Game")
+guiWindow.geometry("480x480")
+guiWindow.config(bg = "#588C7E")
+guiWindow.resizable(width = False, height = False)
+
+# adding a label to the window using the Label() widget
+heading = Label(
+    guiWindow,
+    text = 'Let\'s play Rock Paper Scissors',
+    font = 'arial 18 bold',
+    bg = '#588C7E',
+    fg = 'white'
+    ).pack()
+
+# creating column for user selection
+userInput = StringVar()
+
+subHeading = Label(
+    guiWindow,
+    text = 'Select any ONE from rock, paper, scissors',
+    font = 'calibri 14 bold',
+    bg = '#96CEB4'
+    ).place(
+        x = 35,
+        y = 110
+        )
+
+Entry(
+    guiWindow,
+    font = 'calibri 14',
+    textvariable = userInput,
+    bg = '#FBEFCC'
+    ).place(
+        x = 110,
+        y = 160
+        )
+
+# code for computer selection
+compSelection = random.randint(1, 3)
+
+if compSelection == 1:
+    compSelection = 'rock'
+elif compSelection == 2:
+    compSelection = 'paper'
+else:
+    compSelection = 'scissors'
+
+# creating function to begin the game
+res = StringVar()
+
+def letsPlay():
+    userSelection = userInput.get()
+    if userSelection == compSelection:
+        res.set("It's a Tie! You made a same choice as computer.")
+    elif userSelection == 'rock' and compSelection == 'paper':
+        res.set("Oops! You Lose. Computer selected Paper.")
+    elif userSelection == 'rock' and compSelection == 'scissors':
+        res.set("Congrats! You Win. Computer selected Scissors.")
+    elif userSelection == 'paper' and compSelection == 'scissors':
+        res.set("Oops! You Lose. Computer selected Scissors.")
+    elif userSelection == 'paper' and compSelection == 'rock':
+        res.set("Congrats! You Win. Computer selected Rock.")
+    elif userSelection == 'scissors' and compSelection == 'rock':
+        res.set("Oops! You Lose. Computer selected Rock.")
+    elif userSelection == 'scissors' and compSelection == 'paper':
+        res.set("Congrats! You Win. Computer selected Paper.")
+    else:
+        res.set("Looks like an invalid input! Consider selecting from - rock, paper & scissors")
+
+# defining a function to reset the game
+def resetGame():
+    res.set("")
+    userInput.set("")
+
+# defining a function to exit the game
+def exitGame():
+    guiWindow.destroy()
+
+displayResult = Label(
+    guiWindow,
+    textvariable = res,
+    font = 'calibri 12 bold',
+    bg = '#96CEB4'
+    ).place(
+        x = 20,
+        y = 240
+    )
+
+playButton = Button(
+    guiWindow,
+    font = 'calibri 10 bold',
+    text = 'PLAY',
+    padx = 5,
+    bg = 'white',
+    command = letsPlay
+    ).place(
+        x = 100,
+        y = 300
+        )
+
+resetButton = Button(
+    guiWindow,
+    font = 'calibri 10 bold',
+    text = 'RESET',
+    padx = 5,
+    bg = 'white',
+    command = resetGame
+    ).place(
+        x = 200,
+        y = 300
+        )
+
+exitButton = Button(
+    guiWindow,
+    font = 'calibri 10 bold',
+    text = 'EXIT',
+    padx = 5,
+    bg = 'white',
+    command = exitGame
+    ).place(
+        x = 300,
+        y = 300
+        )
+
+guiWindow.mainloop()
+
+Output:
+
+The Conclusion
+In the end, we can conclude that we have successfully developed the rock paper scissors game using the Python programming language. We utilized the Tkinter library in order for us to render graphics. We also made use of the random module to generate random choices. From this project, we learned the way to create different widgets like labels, text fields, and buttons. We have also seen how to call the functions with the help of buttons. Hence, in the following way, we were able to create a rock paper scissors game in Python.
+
+
+Next TopicCheck if a Given Linked List is Circular Linked List
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,67 @@
+
+
+
+
+next →
+← prev
+
+List All Functions from a Python Module
+We all must be familiar with the Python Modules and how they work, and we also must be aware that how we can use Python Modules inside a program to use some particular functions. Sometimes many of us wonder how many functions are present in the Python Modules which we have installed in our system. This is a common question that normally comes into everyone's mind while using a particular, and answering this question is not as complex as it looks.
+There can be multiple functions present inside a Python Module depending upon the size and functionality of the module. If we go and read the documentation regarding every particular module of Python to find out how many functions are present inside Python Modules, then it will be going to take a lot of effort from us and will waste our time. Therefore, there must be some other ways through which we can find out whether how many functions are inside a Python Module, and we are going to learn about these methods in this tutorial. We will learn the ways in this tutorial through which we can easily find out how many functions there are in a given Python Module.
+List All Functions of a Python Module
+Before we learn about the methods from which we can list down all the functions present in a Python module, we have to understand where and why we need to know how many functions are present in the module. Answering this question not only will solve the doubt which is coming to mind of most of us, but it will also make us keener for learning the methods. Therefore, first, we will see the reasons that are given below, for which we need to check out the functions present in a Python module:
+
+Sometimes, we have to check the module which is installed in our system has all the functions which we require to perform a specific task or a task for which we have installed the system.
+Many times, we don't want to update the module installed in our system, and therefore we have to look that all the functions which are required to us are present in the current version or not.
+Other than this, sometimes we don't know how many different types of functions are present in a module, and we want to know about all of these functions present in a Python module.
+
+These are the main reasons for which one thinks of checking all the functions present in a Python module, but there can be other reasons too that depend from person to person. Now, we will talk about the methods from which we can check the list of all the functions present in a Python module.
+Following are the methods which will help us in looking for all the functions present in a Python module:
+
+By dir() method
+By Inspect module
+
+Now, we will learn about both methods and find out how we can implement this method to list down all the functions from a Python module.
+Method 1: Using the dir() Function:
+We can list down all the functions present in a Python module by simply using the dir() method in the Python shell or in the command prompt shell. We have first to import the module in the Python shell, and then we have to write the module name in the dir() method, and it will return the list of all functions present in a particular Python module. Let's understand the implementation of this method through the following example program.
+Example 1:
+Look at the following Python program where we have used the statistics module in the dir() function:
+
+# Import the statistics Module
+import statistics
+# Use statistics inside dir() method
+dir(statistics)
+
+Output:
+['Counter', 'Decimal', 'Fraction', 'NormalDist', 'StatisticsError', '__all__', '__builtins__', ????, 'quantiles', 'random', 'sqrt', 'stdev', 'tau', 'variance']
+
+As we can see, when we have used the statistics module inside the dir() method after importing it in the Python shell, the Python shell has listed all the functions present in the statistics module.
+Method 2: Using Inspect Module:
+In this method, we will use isfunction and getmembers function from the inspect module (A build-in module of Python) to list down all the functions present in a Python module. We will loop over the module which functions we want to list out using the for loop. One thing we should note here is that we can't list out functions of built-in modules of Python using this method as the type of functions present in any built-in module is not considered as a function for the inspect module. Let's understand the implementation of this method through the following example:
+Example 2:
+Look at the following Python program where we have used the Numpy module inside the inspect module's functions:
+
+# Import the getmembers and isfunction from the Inspect module
+from inspect import getmembers, isfunction
+# Import the Numpy Module
+import numpy
+# Use for loop on the Numpy Module with isfunction() and getmembers() function
+print(a for a in getmembers(numpy) if isfunction(a[1]))
+
+Output:
+['ALLOW_THREADS', 'AxisError', 'BUFSIZE', 'CLIP', 'ComplexWarning', 'DataSource', 'ERR_CALL', 'ERR_DEFAULT', 'ERR_IGNORE', ???., 'version', 'void', 'void0', 'vsplit', 'vstack', 'warnings', 'where', 'who', 'zeros', 'zeros_like']
+
+As we can see, that Python shell has listed all the functions present in the numpy module.
+
+
+Next TopicPython list of Dictionaries
+
+
+
+
+← prev
+next →
+
+
+
+

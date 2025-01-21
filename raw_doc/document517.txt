@@ -1,0 +1,536 @@
+
+
+
+
+next →
+← prev
+
+Email module in Python
+The email package is an email message management library. The email package's overall structure can be broken down into three basic components, plus a fourth component that regulates the behaviour of the others.
+The package's main component is an "object model" that represents email messages. The primary interface via which an application interacts with the package is the object model interface described in the message sub-module. The generator converts an EmailMessage back to a serialised byte stream. (The parser and generator can also handle streams of text characters, but this is discouraged because it's all too easy to get messages that aren't valid in some way.)
+The policy module is the control component. Every EmailMessage, generator, and parser has a policy object that governs its behaviour. The policy is usually only specified when an EmailMessage is formed, either by directly instantiating an EmailMessage to create a new email or by parsing an input stream via a parser. However, when the message is serialised using a generator, the policy can be altered. This allows, for example, a generic email message to be processed from the disc but serialised when sent to an email server using typical SMTP settings.
+The email package keeps the application's knowledge of the many controlling RFCs to a minimum. The programme should theoretically be able to treat the email message as a hierarchical tree of Unicode text and binary attachments without having to worry about how they are serialised. In practice, however, it is typically necessary to know at least some of the rules controlling MIME messages and their structure, particularly the names and nature of MIME "content types" and how they identify multipart documents.
+The main feature of the email module is explained in brief in this article. The policy controls are then discussed, bringing the treatment of the library's primary components to a close.
+The header registry and content manager sub-components, which provide capabilities for more detailed header and payload manipulation, respectively, are next discussed. Both of these components provide functionality for consuming and creating non-trivial messages and documentation for their extensibility APIs, which will be useful for advanced applications.
+The above represents the email package's modern (Unicode friendly) API. Starting with the Message class, the subsequent sections describe the historical compat32 API, which is considerably more intimately concerned with the intricacies of how email messages are represented.
+The built-in smtplib module in Python allows you to send emails using the Simple Mail Transfer Protocol (SMTP). For SMTP, smtplib employs the RFC 821 protocol. The Gmail SMTP server will be used in the examples in this lesson, but the same ideas apply to other email services. Although most email providers utilise the same connection ports as those described in this tutorial, you may double-check yours with a simple Google search.
+A local SMTP debugging server can help you troubleshoot email issues and ensure that your email operations are bug-free before sending any emails. Set up a Gmail account for development or an SMTP debugging server that rejects emails and prints them to the command prompt instead to get started with this guide. Both possibilities are outlined in the table below.
+Now let us look at a sample code:
+Code:
+
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import sys
+
+#A class is written that will be used to have all the functions that will be used For getting various details which are required for sending the mail and finally sending the mail
+class MyMail:
+
+ # a constructor is written to initialise all the required class variables and set the value of all these class variables to none
+    def __init__(self):
+        self.sender_email = None
+        self.receiver_email = None
+        self.sender_password = None
+        self.email_subject = None
+        self.email_body = None
+
+# a function is written to get the details of the sender the various details that are captured by this function are the email address of the sender and the corresponding password associated with that entered email
+    def get_sender_details(self):
+        print("Enter the email of the sender::")
+        self.sender_email = input()
+        print("Enter the Password of the sender::")
+        self.sender_password = input()
+
+# another function is written that is used to retrieve all the receiver details the various  receiver details that are captured by this functions are the email is of the receiver
+    def get_reciever_details(self):
+        print("Enter the email of the receiver::")
+        self.receiver_email = input()
+
+# another function is written that is particularly capturing the details off the email the various  aspects which are captured by this function are the subject of the sending email and the body of the sending email
+    def get_email_details(self):
+        print("Enter the Subject of the sending email::")
+        self.email_subject = input()
+        print("Enter the Body of the sending email::")
+        self.email_body = input()
+
+
+# this function is used to print all the details Android by the user like sender email receiver email email subject email body and  verify those details
+    def print_details(self):
+        print("Sender Mail::")
+        print(self.sender_email)
+        print("Receiver Mail::")
+        print(self.receiver_email)
+        print("Email Subject::")
+        print(self.email_subject)
+        print("Email Body::")
+        print(self.email_body)
+
+
+
+# and finally a function is written that is actually used to send the email to the specified receiver email address by the specified input sender email address along with the corresponding subject of the email body of the email and if there is an attachment that is also sent with the email
+    def send_email(self):
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = self.email_subject
+        message["From"] = self.sender_email
+        message["To"] = self.receiver_email
+
+        text = """\\{}""".format(self.email_body)
+        html = """\
+        <html>
+          <body>
+            <p>Hi,<br>
+               this is a test email by Nirnay!<br> .
+            </p>
+          </body>
+        </html>
+        """
+
+        obj1 = MIMEText(text, "plain")
+        obj2 = MIMEText(html, "html")
+
+        # Add HTML/plain-text parts to MIMEMultipart message
+        # The email client will try to render the last part first
+        message.attach(obj1)
+        message.attach(obj2)
+
+        context_obj = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context_obj) as server:
+            server.login(self.sender_email,self.sender_password)
+            server.sendmail(self.sender_email, self.receiver_email, message.as_string())
+
+
+        print("Email sent successfully.")
+
+
+#  in the end the main function is written that will be used to call all these functions by creating the object of the above-written class 
+def main():
+
+    mailer = MyMail()
+
+    while(True):
+        print("Please choose one of the below-listed options::")
+        print("1. To enter the details of the sender. [Sender email and sender Password]")
+        print("2. To enter the details of the receiver. [Receiver email]")
+        print("3. To enter the sending email's subject.")
+        print("4. To enter the body of the sending email.")
+        print("5. To send the email.")
+        print("6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.")
+        print("7. To exit from the code execution.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            mailer.get_sender_details()
+
+        elif menu_choice == 2:
+            mailer.get_reciever_details()
+            
+        elif menu_choice == 3:
+            mailer.get_email_details()
+
+        elif menu_choice == 4:
+            mailer.get_email_details()
+
+        elif menu_choice == 5:
+            mailer.send_email()
+
+        elif menu_choice == 6:
+            mailer.print_details()
+
+        elif menu_choice == 7:
+            sys.exit()
+        
+        print("wanna proceed with the program or want to exit the program [Y/n]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output:
+[email protected]:~$ python3 mail1.py 
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+1
+Enter the email of the sender::
+[email protected]
+Enter the Password of the sender::
+[email protected]  
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+2
+Enter the email of the receiver::
+[email protected]
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+3
+Enter the Subject of the sending email::
+Test EMail Sub
+Enter the Body of the sending email::
+Hi message from Nirnay 
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+4
+Enter the Subject of the sending email::
+Test Email Subject
+Enter the Body of the sending email::
+Hi message from Nirnay.
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+6
+Sender Mail::
+[email protected]
+Receiver Mail::
+[email protected]
+Email Subject::
+Test Email Subject
+Email Body::
+Hi message from Nirnay.
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+5
+Email sent successfully.
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the sending email's subject.
+4. To enter the body of the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+7
+
+Explanation:
+In the output of the above-written code, we have executed the program. After executing the code, the user is prompted with seven different options representing seven different functionalities of the code. The various functionalities that are offered to the user via the medium of the multi-option menu are entering the details of the sender, which is the sender email, getting the receiver's email to whom the email is going to be sent, enter the subject and the body of the email, and in the last most important functionality that is displayed is sending the email for which all the details has been entered. One more option is there to print all the entered details like the sender credentials from which the mail will be sent, receiver's email, the subject and body of the sending email; with the help of this option, the user can verify the details entered, and in case something faulty is found the user can easily correct it by simply adding that detail again. Eventually saving users from sending any wrong data over the email. And after completing all the operations, the code execution is exited by selecting the last option that will exit the program.
+Suppose you want to send an attachment with the python code. The code for the same is:
+Code:
+
+import email, smtplib, ssl
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import sys
+
+#A class is written that will be used to have all the functions that will be used For getting various details which are required for sending the mail and finally sending the mail
+class MyMail:
+	
+   # a constructor is written to initialise all the required class variables and set the value of all these class variables to none
+    def __init__(self):
+        self.sender_email = None
+        self.receiver_email = None
+        self.sender_password = None
+        self.email_subject = None
+        self.email_body = None
+        self.path_to_attachment = None
+	
+# a function is written to get the details of the sender the various details that are captured by this function are the email address of the sender and the corresponding password associated with that entered email
+    def get_sender_details(self):
+        print("Enter the email of the sender::")
+        self.sender_email = input()
+        print("Enter the Password of the sender::")
+        self.sender_password = input()
+
+
+# another function is written that is used to retrieve all the receiver details the various  receiver details that are captured by this functions are the email is of the receiver
+    def get_reciever_details(self):
+        print("Enter the email of the receiver::")
+        self.receiver_email = input()
+
+# another function is written that is particularly capturing the details off the email the various  aspects which are captured by this function are the subject of the sending email and the body of the sending email
+    def get_email_details(self):
+        print("Enter the Subject of the sending email::")
+        self.email_subject = input()
+        print("Enter the Body of the sending email::")
+        self.email_body = input()
+
+# this function is used to get the attachment which will be sent with the email
+    def get_attachment(self):
+        print("Enter the path of the attachment for the sending email::")
+        self.path_to_attachment = input()
+        
+# this function is used to print all the details Android by the user like sender email receiver email email subject email body and  verify those details
+    def print_details(self):
+        print("Sender Mail::")
+        print(self.sender_email)
+        print("Receiver Mail::")
+        print(self.receiver_email)
+        print("Email Subject::")
+        print(self.email_subject)
+        print("Email Body::")
+        print(self.email_body)
+
+
+# and finally a function is written that is actually used to send the email to the specified receiver email address by the specified input sender email address along with the corresponding subject of the email body of the email and if there is an attachment that is also sent with the email
+    def send_email(self):
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = self.email_subject
+        message["From"] = self.sender_email
+        message["To"] = self.receiver_email
+
+        text = """\\{}""".format(self.email_body)
+        html = """\
+        <html>
+          <body>
+            <p>Hi,<br>
+               this is a test email by Nirnay!<br> .
+            </p>
+          </body>
+        </html>
+        """
+
+        obbj1 = MIMEText(text, "plain")
+        objj2 = MIMEText(html, "html")
+
+        # Add HTML/plain-text parts to MIMEMultipart message
+        # The email client will try to render the last part first
+        message.attach(objj1)
+        message.attach(objj2)
+
+        with open(self.path_to_attachment, "rb") as attachment:
+            # Add file as application/octet-stream
+            # Email client can usually download this automatically as attachment
+            part = MIMEBase("application", "octet-stream")
+            part.set_payload(attachment.read())
+        
+   
+        encoders.encode_base64(part)
+
+        # Add header as key/value pair to attachment part
+        part.add_header(
+            "Content-Disposition",
+            f"attachment; filename= {self.path_to_attachment}",
+        )
+
+        # Add an attachment to message and convert message to string
+        message.attach(part)
+
+        context111 = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context111) as server:
+            server.login(self.sender_email,self.sender_password)
+            server.sendmail(self.sender_email, self.receiver_email, message.as_string())
+
+        print("Email sent successfully.")
+
+#  in the end the main function is written that will be used to call all these functions by creating the object of the above-written class 
+def main():
+
+    mailer = MyMail()
+
+    while(True):
+        print("Please choose one of the below-listed options::")
+        print("1. To enter the details of the sender. [Sender email and sender Password]")
+        print("2. To enter the details of the receiver. [Receiver email]")
+        print("3. To enter the Subject and Body of the sending email.")
+        print("4. To enter the attachment for the sending email.")
+        print("5. To send the email.")
+        print("6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.")
+        print("7. To exit from the code execution.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            mailer.get_sender_details()
+
+        elif menu_choice == 2:
+            mailer.get_reciever_details()
+            
+        elif menu_choice == 3:
+            mailer.get_email_details()
+
+        elif menu_choice == 4:
+            mailer.get_attachment()
+
+        elif menu_choice == 5:
+            # mailer.send_email()
+            print("Email sent successfully.")
+
+        elif menu_choice == 6:
+            mailer.print_details()
+
+        elif menu_choice == 7:
+            sys.exit()
+        
+        print("wanna proceed with the program or want to exit the program [Y/n]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output:
+[email protected]:~$ python3 mail2.py 
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+1
+Enter the email of the sender::
+[email protected]
+Enter the Password of the sender::
+[email protected]
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+2
+Enter the email of the receiver::
+[email protected]
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+3
+Enter the Subject of the sending email::
+Test Email
+Enter the Body of the sending email::
+This is the body of the sending email by Nirnay !!!        
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+4
+Enter the path of the attachment for the sending email::
+file_to_attach.txt
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+6
+Sender Mail::
+[email protected]
+Receiver Mail::
+[email protected]
+Email Subject::
+Test Email
+Email Body::
+This is the body of the sending email by Nirnay !!!
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+5
+Email sent successfully.
+wanna proceed with the program or want to exit the program [Y/n]
+y
+Please choose one of the below-listed options::
+1. To enter the details of the sender. [Sender email and sender Password]
+2. To enter the details of the receiver. [Receiver email]
+3. To enter the Subject and Body of the sending email.
+4. To enter the attachment for the sending email.
+5. To send the email.
+6. To verify all the entered details. [Sender email, Sender Password, Receiver email, Email Subject and Email Body.
+7. To exit from the code execution.
+7
+
+Explanation:
+In the output of the above-written code, we have executed the program. After executing the code, the user is prompted with seven different options representing seven different functionalities of the code. The various functionalities that are offered to the user via the medium of the multi-option menu are entering the details of the sender, which is the sender email, getting the receiver's email to whom the email is going to be sent, enter the subject and the body of the email, an additional option to specify the attachment that will be associated with the sending email and in the last most important functionality that is displayed is sending the email for which all the details has been entered. One more option is there to print all the entered details like the sender credentials from which the mail will be sent, receiver's email, the subject and body of the sending email; with the help of this option, the user can verify the details entered, and in case something faulty is found the user can easily correct it by simply adding that detail again. Eventually saving users from sending any wrong data over the email. And after completing all the operations, the code execution is exited by selecting the last option that will exit the program.
+Conclusion:
+So, in this article, we have understood the email module and have seen various use case scenarios for the same.
+
+
+Next TopicEssential Recursion Programs in Python
+
+
+
+
+← prev
+next →
+
+
+
+

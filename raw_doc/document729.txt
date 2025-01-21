@@ -1,0 +1,248 @@
+
+
+
+
+next →
+← prev
+
+Spell Corrector GUI using Tkinter in Python
+When we write letters, emails, etc., we all commit spelling errors, or what we call typos. Even while writing this piece, many errors were made. To aid that, in these situations, we rely on the assistants or some applications. Do you know that using Python, you can create a system to fix your spelling by going through a few easy steps? In this Python Spell Corrector Application, we will follow this example only. A Python programme called Spell Corrector, often known as Spell Checker, determines if a word has the right spelling or not. In this Python project, we'll build a spell checker and corrector that can input a word and produce a term that sounds close to it. Python provides a variety of choices for GUI development (Graphical User Interface). Tkinter is the approach used the most frequently among all GUI approaches. The fastest and simplest approach to construct GUI apps is with Python and Tkinter. This article will provide a step-by-step tutorial on how to develop a GUI Spell Corrector application using Tkinter. Let's get going!
+The Spell Corrector Application :
+The goal of Spell Corrector is to identify terms that are similar to a word that is entered. A list of terms that most closely resemble the input word is shown by a spell checker entry box. The same term is shown if the input word is correct. We may locate terms that are comparable to the input words by clicking a button present on the screen.
+Details about the Python Spell Checker project :
+The application's goal will be to develop a spell-correcting application. There will be a GUI for the programme. We'll include a place for entering the term in the GUI. When a button is pressed, the terms that is most similar to the input word will be displayed in the entry box.
+Requisites of the Project :
+We'll be utilising the Python TextBlob and Tkinter libraries to develop this project. The GUI for gathering the user's input and displaying the output depending on the entered spelling is built using the Tkinter module. And we'll use the TextBlob module to do this check.
+When creating this module, previous Python and Tkinter module expertise would be beneficial. The following commands can be used to install the two modules as it is shown just below.
+
+pip install tkinter
+pip install textblob
+
+Steps to be followed to develop the Python Spell Corrector GUI :
+Every project needs a step-by-step flow from the developer to make the work easier. We will now talk about how this Python project flows.
+
+We import the TextBlob and Tkinter modules first.
+Next, we develop the GUI and incorporate the necessary widgets.
+Finally, we create the function that verifies the spelling and outputs the appropriate results.
+
+So, let's get started.
+Importing Tkinter and TextBlob modules :
+
+# importing all the required modules into our program 
+from tkinter import *
+from textblob import TextBlob
+
+The Tkinter and the TextBlob modules were imported from the standard Python library to be used in our code. Tkinter module will be used for creating the GUI window and adding widgets to our application and the TextBlob module will be used correcting the incorrect word provided by user.
+Creating the functions that verifies the spelling and outputs correct result :
+
+# Creating a method to clear all the data from the entry boxes
+def clrAll() :
+ 
+ # Deleting all the data inside the entry boxes
+ word1_place.delete(0, END)
+ word2_place.delete(0, END)
+
+Here, we first created the clrAll() method to clear all the text from the entry box containing texts from the previous entries. This was done using the delete() method on the entry boxes word1_place and word2_place, for emptying the entry boxes.
+
+# Creating a new method to get the corrected word in the box
+def crction() :
+
+ # getting the word as input from the user in the entry box
+ input_wrd = word1_place.get()
+
+ # creating a new TextBlob obj.
+ blob_objct = TextBlob(input_wrd)
+
+ # getting the corrected word for the incorrect word
+ crctd_word = str(blob_objct.correct())
+
+ # applying the insert method for the insertion of any value into
+ # the data entry box.
+ word2_place.insert(10, crctd_word)
+
+Then, we created a function called crction() in order to display the correct word in an entry box. Along with that, the input word from the user was stored in the input_wrd variable. Then using a TextBlob object was created and stored in the variable blob_objct. Next, the blob_objct was used to correct the wrong word and was stored in the variable crctd_word. And finally, the corrected word was displayed in the entry box allotted for it by the help of the insert() method.
+Develop the GUI and incorporate the necessary widgets :
+
+# Main code
+if __name__ == "__main__" :
+
+ # Creating a new Graphical User Interface (GUI) window with Tkinter instance
+ base = Tk()
+
+ # Setting the colour of the background for the GUI window
+ base.configure(background = 'light green')
+ 
+ # Setting the dimensions of the GUI window as < Width x Height >
+ base.geometry("400x150")
+
+ # Alotting a name to the GUI window
+ base.title("Spell Corrector")
+
+Then, we created the GUI window, by creating an instance or object of the Tkinter module. Then we used the configure() method in order to set colour of the background of the window to light green. We also used the geometry() method which helped to set the dimensions of the window to be displayed on the screen. Lastly, with the help of the title() method, we were able to give a title to our window created as "Spell Corrector" .
+
+# Creating the heading label as Welcome to Spell Corrector Application :
+ headlbl = Label(base , text = 'Welcome to Spell Corrector Application' ,
+     fg = 'black' , bg = "red")
+ 
+# Creating another label for the word to be entered, as "Input Word" :
+ lbl1 = Label(base , text = "Input Word" ,
+    fg = 'black' , bg = 'dark green')
+  
+ # Creating another label for the corrected word to be shown, as "Corrected Word" :
+ lbl2 = Label(base , text = "Corrected Word" ,
+    fg = 'black' , bg = 'dark green')
+
+Next, we started creating the labels. First of all, we created a heading label for the application using the label() method and was stored in the variable headlbl. The various specifications of this label were set using the keyword text to provide display text, fg to give text colour as black and bg to give background colour as red. Then, we created another label, for the input of a word using the label() method and that was stored in the variable lbl1. The various specifications of this label also were set using the keyword text, fg and bg similar to the previous label. And lastly, we created another label, for the corrected word to be displayed, using the label() method and that was stored in the variable lbl2. The various specifications of this label also were set using the keyword text, fg and bg similar to the previous label.
+
+# grid functions is used for positioning
+ # the widgets at certain places
+ # in a tabular arrangement .
+ # padx keyword is used for setting the padding along x-axis .
+ headlbl.grid(row = 0 , column = 1)
+ lbl1.grid(row = 1 , column = 0)
+ lbl2.grid(row = 3 , column = 0 , padx = 10)
+
+  
+ # Creating the entry boxes for entering the words
+ # or the required text .
+ word1_place = Entry()
+ word2_place = Entry()
+  
+ # padx keyword is used for setting the padding along x-axis .
+ # pady keyword is used for setting the padding along y-axis .
+ word1_place.grid(row = 1, column = 1, padx = 10, pady = 10)
+ word2_place.grid(row = 3, column = 1, padx = 10, pady = 10)
+
+Then, we used the grid() method in order to position the created labels appropriately, by mention row, col, and padx, the padding along the x-axis. After that, we created two entry boxes word1_place and word2_place using the Entry() method. Here, word1_place was used for entering a word by the user and the word2_place was used to display the corrected word for the user entered word. These boxes were also positioned appropriately using the grid() method along with its keywords row, col, padx and pady.
+
+# Creating a new variable for the Correction Button to work on 
+# getting clicked by calling the correction method as event trigger
+ btn1 = Button(base , text = "Correction" , bg = "red" , fg = "black" ,
+        command = crction)
+  
+ btn1.grid(row = 2 , column = 1)
+ 
+ # Creating another button to clear the existing text by being 
+ # called using the clrAll method
+ btn2 = Button(base , text = "Clear" , bg = "red" ,
+     fg = "black" , command = clrAll)
+ 
+ btn2.grid(row = 4 , column = 1)
+
+Next, we created two buttons, btn1 and btn2, to act as event triggers. The btn1 was used to show the corrected word for the user entered word and the btn2 was used to clear all the entry boxes before entering a new word. Both of these buttons were positioned using the grid() method along with its keywords like text, bg, fg and command. The command keyword was used to call a previously created function after the clicking of the buttons, i.e triggering a function.
+Complete Code :
+
+#Python program to create a Spell Corrector GUI using Tkinter 
+# in Python
+# importing all the required modules into our program 
+from tkinter import *
+from textblob import TextBlob
+
+# Creating a method to clear all the data from the entry boxes
+def clrAll() :
+ 
+ # Deleting all the data inside the entry boxes
+ word1_place.delete(0, END)
+ word2_place.delete(0, END)
+
+# Creating a new method to get the corrected word in the box
+def crction() :
+
+ # getting the word as input from the user in the entry box
+ input_wrd = word1_place.get()
+
+ # creating a new TextBlob obj.
+ blob_objct = TextBlob(input_wrd)
+
+ # getting the corrected word for the incorrect word
+ crctd_word = str(blob_objct.correct())
+
+ # applying the insert method for the insertion of any value into
+ # the data entry box.
+ word2_place.insert(10, crctd_word)
+
+
+# Main code
+if __name__ == "__main__" :
+
+ # Creating a new Graphical User Interface(GUI) window with Tkinter instance
+ base = Tk()
+
+ # Setting the colour of the background for the GUI window
+ base.configure(background = 'light green')
+ 
+ # Setting the dimensions of the GUI window as < Width x Height >
+ base.geometry("400x150")
+
+ # Alotting a name to the GUI window
+ base.title("Spell Corrector")
+ 
+ # Creating the heading label as Welcome to Spell Corrector Application :
+ headlbl = Label(base , text = 'Welcome to Spell Corrector Application' ,
+     fg = 'black' , bg = "red")
+ 
+# Creating another label for the word to be entered, as "Input Word" :
+ lbl1 = Label(base , text = "Input Word" ,
+    fg = 'black' , bg = 'dark green')
+  
+ # Creating another label for the corrected word to be shown, as "Corrected Word" :
+ lbl2 = Label(base , text = "Corrected Word" ,
+    fg = 'black' , bg = 'dark green')
+ 
+ 
+ # grid functions is used for positioning
+ # the widgets at certain places
+ # in a tabular arrangement .
+ # padx keyword is used for setting the padding along x-axis .
+ headlbl.grid(row = 0 , column = 1)
+ lbl1.grid(row = 1 , column = 0)
+ lbl2.grid(row = 3 , column = 0 , padx = 10)
+
+  
+ # Creating the entry boxes for entering the words
+ # or the required text .
+ word1_place = Entry()
+ word2_place = Entry()
+  
+ # padx keyword is used for setting the padding along x-axis .
+ # pady keyword is used for setting the padding along y-axis .
+ word1_place.grid(row = 1, column = 1, padx = 10, pady = 10)
+ word2_place.grid(row = 3, column = 1, padx = 10, pady = 10)
+
+  
+# Creating a new variable for the Correction Button to work on 
+# getting clicked y calling the correction method
+ btn1 = Button(base , text = "Correction" , bg = "red" , fg = "black" ,
+        command = crction)
+  
+ btn1.grid(row = 2 , column = 1)
+ 
+ # Creating another button to clear the existing text by being 
+ # called using the clrAll method
+ btn2 = Button(base , text = "Clear" , bg = "red" ,
+     fg = "black" , command = clrAll)
+ 
+ btn2.grid(row = 4 , column = 1)
+ 
+ # Running the GUI
+ base.mainloop()
+
+Output :
+The screenshots of the output of the above created Spell Corrector Application are attached below.
+1. The initial window when it is first loaded or after we click the Clear button.
+
+2. View of the window after we enter a word and click the Correction button.
+
+
+
+Next TopicData Structures and Algorithms in Python
+
+
+
+
+← prev
+next →
+
+
+
+

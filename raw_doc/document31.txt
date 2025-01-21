@@ -1,0 +1,374 @@
+
+
+
+
+next →
+← prev
+
+Python Exceptions
+When a Python program meets an error, it stops the execution of the rest of the program. An error in Python might be either an error in the syntax of an expression or a Python exception. We will see what an exception is. Also, we will see the difference between a syntax error and an exception in this tutorial. Following that, we will learn about trying and except blocks and how to raise exceptions and make assertions. After that, we will see the Python exceptions list.
+What is an Exception?
+An exception in Python is an incident that happens while executing a program that causes the regular course of the program's commands to be disrupted. When a Python code comes across a condition it can't handle, it raises an exception. An object in Python that describes an error is called an exception.
+When a Python code throws an exception, it has two options: handle the exception immediately or stop and quit.
+Exceptions versus Syntax Errors
+When the interpreter identifies a statement that has an error, syntax errors occur. Consider the following scenario:
+Code
+
+#Python code after removing the syntax error
+string = "Python Exceptions"
+
+for s in string:
+    if (s != o:
+        print( s )
+
+Output:
+    if (s != o:
+              ^
+SyntaxError: invalid syntax
+
+The arrow in the output shows where the interpreter encountered a syntactic error. There was one unclosed bracket in this case. Close it and rerun the program:
+Code
+
+#Python code after removing the syntax error
+string = "Python Exceptions"
+
+for s in string:
+    if (s != o):
+        print( s )
+
+Output:
+      2 string = "Python Exceptions"
+      4 for s in string:
+----> 5     if (s != o):
+      6         print( s )
+
+NameError: name 'o' is not defined
+
+We encountered an exception error after executing this code. When syntactically valid Python code produces an error, this is the kind of error that arises. The output's last line specified the name of the exception error code encountered. Instead of displaying just "exception error", Python displays information about the sort of exception error that occurred. It was a NameError in this situation. Python includes several built-in exceptions. However, Python offers the facility to construct custom exceptions.
+Try and Except Statement - Catching Exceptions
+In Python, we catch exceptions and handle them using try and except code blocks. The try clause contains the code that can raise an exception, while the except clause contains the code lines that handle the exception. Let's see if we can access the index from the array, which is more than the array's length, and handle the resulting exception.
+Code
+
+# Python code to catch an exception and handle it using try and except code blocks
+ 
+a = ["Python", "Exceptions", "try and except"]
+try:
+    #looping through the elements of the array a, choosing a range that goes beyond the length of the array
+     for i in range( 4 ):
+        print( "The index and element from the array is", i, a[i] )
+#if an error occurs in the try block, then except block will be executed by the Python interpreter     
+except:
+    print ("Index out of range")
+
+Output:
+The index and element from the array is 0 Python
+The index and element from the array is 1 Exceptions
+The index and element from the array is 2 try and except
+Index out of range
+
+The code blocks that potentially produce an error are inserted inside the try clause in the preceding example. The value of i greater than 2 attempts to access the list's item beyond its length, which is not present, resulting in an exception. The except clause then catches this exception and executes code without stopping it.
+How to Raise an Exception
+If a condition does not meet our criteria but is correct according to the Python interpreter, we can intentionally raise an exception using the raise keyword. We can use a customized exception in conjunction with the statement.
+If we wish to use raise to generate an exception when a given condition happens, we may do so as follows:
+Code
+
+#Python code to show how to raise an exception in Python
+num = [3, 4, 5, 7]
+if len(num) > 3:
+    raise Exception( f"Length of the given list must be less than or equal to 3 but is {len(num)}" )
+
+Output:
+      1 num = [3, 4, 5, 7]
+      2 if len(num) > 3:
+----> 3     raise Exception( f"Length of the given list must be less than or equal to 3 but is {len(num)}" )
+
+Exception: Length of the given list must be less than or equal to 3 but is 4
+
+The implementation stops and shows our exception in the output, providing indications as to what went incorrect.
+Assertions in Python
+When we're finished verifying the program, an assertion is a consistency test that we can switch on or off.
+The simplest way to understand an assertion is to compare it with an if-then condition. An exception is thrown if the outcome is false when an expression is evaluated.
+Assertions are made via the assert statement, which was added in Python 1.5 as the latest keyword.
+Assertions are commonly used at the beginning of a function to inspect for valid input and at the end of calling the function to inspect for valid output.
+The assert Statement
+Python examines the adjacent expression, preferably true when it finds an assert statement. Python throws an AssertionError exception if the result of the expression is false.
+The syntax for the assert clause is −
+
+assert Expressions[, Argument]
+
+Python uses ArgumentException, if the assertion fails, as the argument for the AssertionError. We can use the try-except clause to catch and handle AssertionError exceptions, but if they aren't, the program will stop, and the Python interpreter will generate a traceback.
+Code
+
+#Python program to show how to use assert keyword
+# defining a function
+def square_root( Number ):
+    assert ( Number < 0), "Give a positive integer"
+    return Number**(1/2)
+
+#Calling function and passing the values
+print( square_root( 36 ) )
+print( square_root( -36 ) )
+
+Output:
+      7 #Calling function and passing the values
+----> 8 print( square_root( 36 ) )
+      9 print( square_root( -36 ) )
+
+Input In [23], in square_root(Number)
+      3 def square_root( Number ):
+----> 4     assert ( Number < 0), "Give a positive integer"
+      5     return Number**(1/2)
+
+AssertionError: Give a positive integer
+
+Try with Else Clause
+Python also supports the else clause, which should come after every except clause, in the try, and except blocks. Only when the try clause fails to throw an exception the Python interpreter goes on to the else block.
+Here is an instance of a try clause with an else clause.
+Code
+
+# Python program to show how to use else clause with try and except clauses
+
+# Defining a function which returns reciprocal of a number
+def reciprocal( num1 ):
+    try:
+        reci = 1 / num1
+    except ZeroDivisionError:
+        print( "We cannot divide by zero" )
+    else:
+        print ( reci )
+# Calling the function and passing values
+reciprocal( 4 )
+reciprocal( 0 )
+
+Output:
+0.25
+We cannot divide by zero
+
+Finally Keyword in Python
+The finally keyword is available in Python, and it is always used after the try-except block. The finally code block is always executed after the try block has terminated normally or after the try block has terminated for some other reason.
+Here is an example of finally keyword with try-except clauses:
+Code
+
+# Python code to show the use of finally clause
+ 
+# Raising an exception in try block
+try:
+    div = 4 // 0  
+    print( div )
+# this block will handle the exception raised
+except ZeroDivisionError:
+    print( "Atepting to divide by zero" )
+# this will always be executed no matter exception is raised or not
+finally:
+    print( 'This is code of finally clause' )
+
+Output:
+Atepting to divide by zero
+This is code of finally clause
+
+User-Defined Exceptions
+By inheriting classes from the typical built-in exceptions, Python also lets us design our customized exceptions.
+Here is an illustration of a RuntimeError. In this case, a class that derives from RuntimeError is produced. Once an exception is detected, we can use this to display additional detailed information.
+We raise a user-defined exception in the try block and then handle the exception in the except block. An example of the class EmptyError is created using the variable var.
+Code
+
+class EmptyError( RuntimeError ):
+   def __init__(self, argument):
+      self.arguments = argument
+Once the preceding class has been created, the following is how to raise an exception:
+Code
+var = " "
+try:
+    raise EmptyError( "The variable is empty" )
+except (EmptyError, var):
+    print( var.arguments )
+
+Output:
+      2 try:
+----> 3     raise EmptyError( "The variable is empty" )
+      4 except (EmptyError, var):
+
+EmptyError: The variable is empty
+
+Python Exceptions List
+Here is the complete list of Python in-built exceptions.
+
+
+Sr.No.
+Name of the Exception
+Description of the Exception
+
+
+1
+Exception
+All exceptions of Python have a base class.
+
+
+2
+StopIteration
+If the next() method returns null for an iterator, this exception is raised.
+
+
+3
+SystemExit
+The sys.exit() procedure raises this value.
+
+
+4
+StandardError
+Excluding the StopIteration and SystemExit, this is the base class for all Python built-in exceptions.
+
+
+5
+ArithmeticError
+All mathematical computation errors belong to this base class.
+
+
+6
+OverflowError
+This exception is raised when a computation surpasses the numeric data type's maximum limit.
+
+
+7
+FloatingPointError
+If a floating-point operation fails, this exception is raised.
+
+
+8
+ZeroDivisionError
+For all numeric data types, its value is raised whenever a number is attempted to be divided by zero.
+
+
+9
+AssertionError
+If the Assert statement fails, this exception is raised.
+
+
+10
+AttributeError
+This exception is raised if a variable reference or assigning a value fails.
+
+
+11
+EOFError
+When the endpoint of the file is approached, and the interpreter didn't get any input value by raw_input() or input() functions, this exception is raised.
+
+
+12
+ImportError
+This exception is raised if using the import keyword to import a module fails.
+
+
+13
+KeyboardInterrupt
+If the user interrupts the execution of a program, generally by hitting Ctrl+C, this exception is raised.
+
+
+14
+LookupError
+LookupErrorBase is the base class for all search errors.
+
+
+15
+IndexError
+This exception is raised when the index attempted to be accessed is not found.
+
+
+16
+KeyError
+When the given key is not found in the dictionary to be found in, this exception is raised.
+
+
+17
+NameError
+This exception is raised when a variable isn't located in either local or global namespace.
+
+
+18
+UnboundLocalError
+This exception is raised when we try to access a local variable inside a function, and the variable has not been assigned any value.
+
+
+19
+EnvironmentError
+All exceptions that arise beyond the Python environment have this base class.
+
+
+20
+IOError
+If an input or output action fails, like when using the print command or the open() function to access a file that does not exist, this exception is raised.
+
+
+22
+SyntaxError
+This exception is raised whenever a syntax error occurs in our program.
+
+
+23
+IndentationError
+This exception was raised when we made an improper indentation.
+
+
+24
+SystemExit
+This exception is raised when the sys.exit() method is used to terminate the Python interpreter. The parser exits if the situation is not addressed within the code.
+
+
+25
+TypeError
+This exception is raised whenever a data type-incompatible action or function is tried to be executed.
+
+
+26
+ValueError
+This exception is raised if the parameters for a built-in method for a particular data type are of the correct type but have been given the wrong values.
+
+
+27
+RuntimeError
+This exception is raised when an error that occurred during the program's execution cannot be classified.
+
+
+28
+NotImplementedError
+If an abstract function that the user must define in an inherited class is not defined, this exception is raised.
+
+
+Summary
+We learned about different methods to raise, catch, and handle Python exceptions after learning the distinction between syntax errors and exceptions. We learned about these clauses in this tutorial:
+
+We can throw an exception at any line of code using the raise keyword.
+Using the assert keyword, we may check to see if a specific condition is fulfilled and raise an exception if it is not.
+All statements are carried out in the try clause until an exception is found.
+The try clause's exception(s) are detected and handled using the except function.
+If no exceptions are thrown in the try code block, we can write code to be executed in the else code block.
+
+Here is the syntax of try, except, else, and finally clauses.
+Syntax:
+
+try:
+    # Code block
+    # These statements are those which can probably have some error
+
+except:
+    # This block is optional.
+    # If the try block encounters an exception, this block will handle it.
+
+else:
+    # If there is no exception, this code block will be executed by the Python interpreter
+
+finally:
+    # Python interpreter will always execute this code.
+
+
+
+Next TopicPython Date and Time
+
+
+
+← prev
+next →
+
+
+
+

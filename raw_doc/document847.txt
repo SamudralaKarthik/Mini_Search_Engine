@@ -1,0 +1,76 @@
+
+
+
+
+next →
+← prev
+
+Python descriptors
+Introduction: In this article, we are discussing python descriptors. Python descriptors are created to manage attributes of numerous training that take items by way of reference. The descriptor used three extraordinary strategies: __getters__(), __setter__(), and __delete__(). while this method is described on an object, we will name it a descriptor.
+Typically, Python uses techniques together with getters and setters to alter the values of attributes without doing any special processing. An easy storage gadget. Every so often, validating the price assigned to a cost is necessary. Descriptors are the mechanism at the back of homes, techniques, static strategies, and class methods().
+Descriptors are a Python-unique feature that complements a lot of the magic hidden in the language. Suppose you have the notion of Python descriptors ever had been a complicated topic with few sensible uses.
+In that case, this tutorial is the proper device to help you understand this effective function. You will apprehend why Python descriptors are such a thrilling topic and what use cases they follow to.
+What is a python descriptor?
+A descriptor is a Python object that implements the methods of the descriptor protocol. This allows you to create objects that exhibit special behavior when accessed as attributes of other objects. The correct definition of the descriptor protocol is:
+
+__get__(self, obj, type=None) -> object
+__set__(self, obj, value) -> None
+__delete__(self, obj) -> None
+__set_name__(self, owner, name)
+
+If a descriptor only implements .__get__(), it is said to be a non-data descriptor. If they implement .__set__() or .__delete__() they are called data descriptors. Note that this difference is not only in name but also in behavior.
+This is because the data descriptor takes precedence during the search process.
+Why do we use python descriptors?
+Now, what Python descriptors are and how Python itself uses them to guide features which include methods and properties. We also saw a way to create Python descriptors while fending off some commonplace pitfalls.
+All should be clean by using now, but you can nevertheless wonder why you must use them.
+In my experience, I know many superior Python developers who've yet to use this option earlier and do not want it. That is quite every day, as few use cases require Python descriptors. However, this does not imply that Python descriptors are merely an academic topic for advanced users. There are still some incredible use cases that justify the rate of mastering a way to use them.
+Protocol of the descriptors in python: In other programming languages, descriptors are called setters and getters and use public features to get and set private variables. Python has no idea of personal variables, and the descriptor protocol can be seen as Python's manner of achieving something comparable.
+Descriptors are a brand-new way to put in force training in Python without having to inherit anything from a particular item. To put in force descriptors in Python effortlessly, you need to use at least one of the techniques described above.
+The word that the following example returns the item whose attributes had been accessed, and the owner is the class to which the descriptor became assigned as an attribute. Python descriptors have three protocols for setters, getters, and delete methods.
+Note the following important points:
+
+descriptors are called by the __getattribute__() method.
+Overriding __getattribute__() prevents the automatic calling of descriptors.
+__getattribute__() and type.__getattribute__() call __get__() differently.
+Data descriptor always overrides instance dictionary.
+An instance dictionary can override a non-data descriptor.
+
+Example: Now we give an example of a python descriptor. The example is given below -
+
+class Descriptor(object):
+  
+ def __init__(self, name =''):
+        self.name = name
+   
+def __get__(self, obj, objtype):
+        return "{}for{}".format(self.name, self.name)
+   
+def __set__(self, obj, name):
+        if isinstance(name, str):
+            self.name = name
+        else:
+            raise TypeError("The name is should be a string")       
+class XYZ(object):
+   
+name = Descriptor()
+a = XYZ()
+a.name = "Javatpoint"
+print(a.name)
+
+Output: Now we compile the above program and the above program. Then the result is given below -
+Javatpoint
+
+Conclusion: In this article, we briefly discuss the python descriptor. Now that you understand how Python uses descriptors to support some of its niceties, you can become a more conscious developer who understands why some Python features were implemented the way they are.
+
+
+Next TopicPython false
+
+
+
+
+← prev
+next →
+
+
+
+

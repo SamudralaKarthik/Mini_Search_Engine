@@ -1,0 +1,371 @@
+
+
+
+
+next →
+← prev
+
+The strftime() function in Python
+In this tutorial, we will understand the working of the strftime() function in the Python programming language along with its variations.
+So, let us begin.
+As we already know, there are a variety of modules provided by Python that contain clusters of functions in order to implement different types of functionalities on the data. The time module of Python is utilized to implement manipulations based on the various timestamp all over.
+Moreover, the strftime() function of Python accepts the time in different formats and returns a string with the time representing in the standard form.
+Using Python strftime() function to get the present time
+We can use the Python strftime() function together with the datetime module in order to fetch the present timestamp in a proper format as per the format codes.
+The syntax for the same is shown below.
+Syntax:
+
+datetime.now().strftime('format codes')
+
+Here, the parameter of the strftime() function, format codes, are actually the predefined codes utilized in order to represent the timestamp in a standard and proper way. We will understand much more about the format codes in detail throughout this tutorial.
+But before that, let us consider an example.
+Example:
+
+# importing the datetime module
+from datetime import datetime
+
+# storing the value of current timestamp
+cur_timestamp = datetime.now()
+
+# using the strftime() function to represent
+# timestamp into proper and standard format
+the_time = cur_timestamp.strftime( "%H : %M : %S" )
+the_date = cur_timestamp.strftime( "%d - %m - %Y" )
+
+# printing the values
+print("Present Time:", the_time)
+print("Present Date:", the_date)
+
+Output:
+Present Time: 18 : 06 : 17
+Present Date: 01 - 06 - 2021
+
+Explanation:
+In the above example, we have imported the datetime module from the datetime library. We have then defined a variable storing the value of the current date and time. We have then used the strftime() function to represent the current date and time into the specified standard format and printed them to the users. As a result, the current date and time have been printed successfully in the proper and standard format.
+Using Python strftime() function along with a predefined timestamp
+Sometimes it happens when we want to show the date and time of the past datasets. We can perform the same with the help of the strftime() function in Python.
+The fromtimestamp() method of the datetime module helps the user to fetch the predefined timestamp. Moreover, we can use the strftime() function in order to represent that fetched timestamp in a standard format using the different format codes as explained earlier.
+We can see the syntax for the usage of the strftime() function as follows:
+Syntax:
+
+datetime.fromtimestamp(timestamp).strftime('format code')
+
+Now, let us consider an example illustrating the working of the strftime() function together with a predefined timestamp.
+Example:
+
+# importing the datetime module
+from datetime import datetime
+
+# provided timestamp
+provided_timestamp = 114579923
+
+# storing the value of provided timestamp
+my_timestamp = datetime.fromtimestamp(provided_timestamp)
+
+# using the strftime() function to represent
+# timestamp into proper and standard format
+the_time = my_timestamp.strftime( "%H : %M : %S" )
+the_date = my_timestamp.strftime( "%d - %m - %Y" )
+
+# printing the values
+print("Time as per the provided Timestamp:", the_time)
+print("Date as per the provided Timestamp:", the_date)
+
+Output:
+Time as per the provided Timestamp: 09 : 15 : 23
+Date as per the provided Timestamp: 19 - 08 - 1973
+
+Explanation:
+In the above example, we have then defined the variable storing the value of the predefined timestamp. We have then used the fromtimestamp() method to fetch the stored value and the strftime() function to represent the fetched timestamp into a proper and standard format. We have then printed the resultant values for the users. As a result, the timestamp has been represented in the proper specified format successfully.
+Using various Format codes with Python strftime() function
+Python strftime() function utilizes different format codes in order to represent date and time in a maintained and standard form. Moreover, these format codes can be used to segregate hours, days, weeks, and a lot more from the timestamp and show the same.
+Let us consider an example representing the usage of Format code.
+Example:
+
+# importing the strftime function
+from time import strftime
+
+# using "%A" as the format code
+# "%A" displays the current day of the local time
+the_day = strftime( "%A" )
+
+# printing the values
+print("Present Day:", the_day)
+
+Output:
+Present Day: Tuesday
+
+Explanation:
+In the above example, we have imported the strftime function from the time module. We have then defined a variable that uses the strftime() function along with the parameter "%A" as the format code for the current day of the local time. We have then printed the values for the user. As a result, the program has printed the full name of the day accordingly.
+Now let us consider some more examples using other Format codes.
+1. Using "%c" as a format code in order to show the current local time in the following format:
+Day Month Date hours:minutes:seconds Year
+Example:
+
+# importing the strftime function
+from time import strftime
+
+# using "%c" as the format code
+# "%c" displays the current local time
+the_timestamp = strftime( "%c" )
+
+# printing the values
+print("Present Timestamp:", the_timestamp)
+
+Output:
+Present Timestamp: Wed Jun  2 16:06:41 2021
+
+Explanation:
+In the above program, we have again carried out the equivalent procedure we did earlier. However, we have used "%c" as the format code. As a result, the program has printed the current timestamp in the format code specified above.
+2. Using "%R" as a format code in order to represent the time in a 24-hour format.
+Example:
+
+# importing the strftime function
+from time import strftime
+
+# using "%R" as the format code
+# "%R" displays the current time in 24-hour format
+the_24hour = strftime( "%R" )
+
+# printing the values
+print("Present Time in 24-hour format:", the_24hour)
+
+Output:
+Present Time in 24-hour format: 16:14
+
+Explanation:
+We have again followed the same syntax in the above program, but we include the format code "%R" to display the current time in 24-hour format.
+3. Using "%r" as a format code in order to represent the time in 12-hour format or Hours:Minutes:Seconds format along with the AM or PM notation.
+Example:
+
+# importing the strftime function
+from time import strftime
+
+# using "%r" as the format code
+# "%r" displays the current local time in H:M:S format
+the_time = strftime( "%r" )
+
+# printing the values
+print("Present Time in 12-hour format:", the_time)
+
+Output:
+Present Time in 12-hour format: 04:33:12 PM
+
+Explanation:
+Similar to what we have done earlier, we have added the "%r" as the parameter for the strftime() function to print the current time in 12-hour format.
+4. Using multiple format codes in a single function.
+Example:
+
+# importing the strftime function
+from time import strftime
+
+# using multiple format code
+# "%x" displays the current date
+# "%X" displays the current time in 24-hour format
+# "%p" provides discriptions for current time i.e., AM or PM
+the_timestamp = strftime( "%x -- %X %p" )
+
+# printing the values
+print("Present Timestamp:", the_timestamp)
+
+Output:
+Present Timestamp: 06/02/21 -- 16:44:11 PM
+
+Explanation:
+In the above example, we have used the format code "%x" in order to show the date from the local timestamp. We have also utilized the format code "%X" in order to display the current time in 24-hour format along with the format code "%p" in order to provide the notation for the current time, i.e., AM or PM.
+Apart from the above format codes, there are many format codes available. These format codes are listed below:
+
+
+S. No.
+Format Code
+Description
+
+
+1
+%a
+Weekday name in short
+
+
+2
+%A
+Complete weekday name
+
+
+3
+%b
+Name of the month in short
+
+
+4
+%B
+Complete month name
+
+
+5
+%c
+Chosen date and time representation
+
+
+6
+%C
+Number of the Century (the year divided by 100, ranging from 00 to 99)
+
+
+7
+%d
+Month day (ranging from 01 to 31)
+
+
+8
+%D
+Similar function as %m / %d / %y
+
+
+9
+%e
+Month day (ranging from 1 to 31)
+
+
+10
+%g
+Similar function as %G; however, the value is printed without the century
+
+
+11
+%G
+4-digit year equivalent to the ISO week number (refer %V)
+
+
+12
+%h
+Similar function as %b
+
+
+13
+%H
+Hour, utilizing a 24-hour clock (ranging from 00 to 23)
+
+
+14
+%I
+Hour, utilizing a 12-hour clock (ranging from 01 to 12)
+
+
+15
+%j
+Year day (ranging from 001 to 366)
+
+
+16
+%m
+Month (ranging from 01 to 12)
+
+
+17
+%M
+Minute
+
+
+18
+%n
+Newline character
+
+
+19
+%p
+Either AM or PM as per the provided time value
+
+
+20
+%r
+Time in AM and PM notation
+
+
+21
+%R
+Time in 24-hour notation
+
+
+22
+%S
+Second
+
+
+23
+%t
+Tab character
+
+
+24
+%T
+Current time, equal to "%H:%M:%S" format
+
+
+25
+%u
+Days of Week represented as a number (ranging from 1 to 7) where Monday is considered as 1. Warning: In Sun Solaris Sunday is considered as 1.
+
+
+26
+%U
+week number of the current year, beginning with the first Sunday as the first day of the first week.
+
+
+27
+%V
+The ISO 8601-week number of the current year (ranging from 01 to 53), where week 1 is the first week that has at least four days in the current year, and with Monday is considered as the first week day
+
+
+28
+%w
+Day of the week as a decimal, where Sunday is considered as 0.
+
+
+29
+%W
+Week number of the current year, beginning with the first Monday as the first day of the first week.
+
+
+30
+%x
+Chosen depiction of date without the time
+
+
+31
+%X
+Chosen depiction of time without the date
+
+
+32
+%y
+The Year lacking a century (ranging from 00 to 99)
+
+
+33
+%Y
+The Year together with the century
+
+
+34
+%z or %Z
+Time zone or name or abbreviation
+
+
+35
+%%
+An actual % character
+
+
+
+
+Next TopicVerbose Flag in Python Regex
+
+
+
+
+← prev
+next →
+
+
+
+

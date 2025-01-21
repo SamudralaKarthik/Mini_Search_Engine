@@ -1,0 +1,145 @@
+
+
+
+
+next →
+← prev
+
+Append (key: value) Pair to Dictionary
+Dictionary is one of the most used data types in Python. It is an unordered collection of key: value pairs. Every value has a corresponding key that identifies it. A dictionary is a mutable collection, meaning we can modify the values. One factor that makes a dictionary unique among other data types is that it stores the mapping of key: value pairs while other data types store a single value as an element.
+Example:
+
+dictionary = {101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+print(dictionary)
+print(dictionary[101])
+print(dictionary[102])
+print(dictionary[103])
+
+Output:
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+Ramya
+Sanya
+Sree
+
+Given that a dictionary is mutable, we should be able to alter the values of existing keys and add new key: value pairs to the dictionary. This tutorial discusses how we can add a new key: value pair, into a dictionary.
+1. The Traditional way of using the key Subscripts:
+We can assign the existing keys with the values we want. Python forgets the old value and updates the new value to the key. Using the same way, we can assign values to new keys, thus appending new pairs.
+Example:
+
+dictionary = {101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+print(dictionary)
+dictionary[102] = "Priyanka"
+dictionary[103] = "Ujjwala"
+dictionary[104] = "Sanya"
+dictionary[105] = "Sree"
+print(dictionary)
+
+Output:
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+{101: 'Ramya', 102: 'Priyanka', 103: 'Ujjwala', 104: 'Sanya', 105: 'Sree'}
+
+2. update() Method:
+It is an inbuilt dictionary method designed to modify a dictionary. The method takes the {key: value} pair as an argument and adds it to the dictionary.
+
+We can also update the values of pre-existing keys using this method.
+The method can accept any number of arguments, which means it can append a dictionary with any number of {key: value} pairs at once.
+
+Example:
+
+dictionary = {101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+print(dictionary)
+dictionary.update({102: 'Priyanka'})
+dictionary.update({103: 'Ujjwala'})
+dictionary.update({104: 'Sanya'})
+dictionary.update({105: 'Sree'})
+print(dictionary)
+
+Output:
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+{101: 'Ramya', 102: 'Priyanka', 103: 'Ujjwala', 104: 'Sanya', 105: 'Sree'}
+
+
+In the above example, the dictionary is modified 4 times using the update method. The first two statements updated the values of already existing keys, while the next two added two new pairs to the dictionary.
+
+What if we want to add thousands of new key: value pairs?
+
+We can't keep adding individual pairs one after the other. It takes a lot of time, making the code complex and lengthy.
+The simple way is to create a new dictionary with all the new pairs we want to add and then append/ merge it into the dictionary.
+
+Example:
+
+dictionary = {101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+print("The original dictionary: ")
+print(dictionary)
+print("New key: value pairs: ")
+append = {104: 'Jeevani', 105: 'Rishitha', 106: 'Nikitha'}
+print(append)
+dictionary.update(append)
+print("The updated dictionary: ")
+print(dictionary)
+
+Output:
+The original dictionary: 
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+New key: value pairs: 
+{104: 'Jeevani', 105: 'Rishitha', 106: 'Nikitha'}
+The updated dictionary: 
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree', 104: 'Jeevani', 105: 'Rishitha', 106: 'Nikitha'}
+
+3. The OOPS Way:
+
+We use the OOPS nature of Python to create a function capable of adding new key: value pairs into the dictionary.
+The logic is the same traditional way, but the difference is we create an object for the dictionary, and the user can input the key: value pairs to add or modify the dictionary.
+
+Example:
+
+class append(dict):
+    def __init__(self, dictionary):
+        self.dictionary = dictionary
+    def add(self, key, value):
+        self.dictionary[key] = value
+dictionary = {101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+print(dictionary)
+obj = append(dictionary)
+obj.key = int(input("Enter the key you want to modify: "))
+obj.value = input("Enter the value to update: ")
+obj.add(obj.key, obj.value)
+print(obj.dictionary)
+
+Output:
+#updating existing key:
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+Enter the key you want to modify: 102
+Enter the value to update: Priyanka
+{101: 'Ramya', 102: 'Priyanka', 103: 'Sree'}
+
+#adding new key:value pair:
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree'}
+Enter the key you want to modify: 104
+Enter the value to update: Sanya
+{101: 'Ramya', 102: 'Sanya', 103: 'Sree', 104: 'Sanya'}
+
+
+Rather than using an existing dictionary, by using dict(), we can create a dictionary only from the inputs of the user.
+
+Example:
+
+class append(dict):
+    def __init__(self):
+        self = dict()
+    def add(self, key, value):
+        self[key] = value
+
+
+
+Next Topicany() in Python
+
+
+
+
+← prev
+next →
+
+
+
+

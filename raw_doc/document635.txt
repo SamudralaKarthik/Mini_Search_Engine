@@ -1,0 +1,123 @@
+
+
+
+
+next →
+← prev
+
+10 Python Image Manipulation Tools
+In this tutorial we will discuss the Python libraries which offer a simple and intuitive method to convert images and comprehend the data behind them.
+The world of today is brimming with data, and images are the bulk of this data. But in order to be utilized in any way, the digital images need to be processed and analysed to enhance the quality of their images or gain information that could be utilized.
+Common image processing tasks comprise display; simple manipulations such as flipping, cropping, etc. Image segmentation, feature extractions, classification images restoration, also image recognition. Python is a great option for these kinds of tasks in image processing because of its rising popularity as a science-based programming language, as well as the open access to a variety of state-of-the-art image processing tools within its library.
+This article examines the top 10 most frequently utilized Python libraries to perform image manipulation tasks. These libraries offer a simple and intuitive method to alter images and comprehend the data behind them.
+1. scikit-image
+Scikit-image can be described as an open-source Python program that uses NumPy arrays. It is a tool for implementing algorithms and utilities that can be used in research, education as well as industrial applications. It's an easy and simple library, even for those unfamiliar with the Python ecosystem. The code is of high-quality that and has been peer-reviewed and written by a large group of volunteers.
+Resources
+Scikit-image is thoroughly explained with plenty of examples and real-world use instances.
+Usage
+It is loaded in the skimage, and the majority of functions are contained in submodules.
+
+import matplotlib.pyplot as mplot  
+%matplotlib inline
+       
+from skimage import data
+from skimage import filters
+       
+image1 = data.coins()   # ... or any other NumPy array!  
+edges1 = filters.sobel(image)  
+mplot.imshow(edges, cmap = 'gray')
+
+Output:
+
+Template matching using the match_template function:
+
+2. NumPy
+NumPy is one of the most important libraries used in Python programming. It also supports arrays. An image is essentially an array of NumPy that is standard and contains the pixels that makeup data. Thus, by using standard NumPy techniques, like cutting, masking, or fancy indexing, it is possible to alter the pixel values in an image. It can also be loaded with the skimage program and displayed with Matplotlib.
+Usage
+Use Numpy to mask images:
+
+import numpy as nmp
+from skimage import data 
+import matplotlib.pyplot as mplot
+%matplotlib inline
+   
+image1 = data.camera()  
+type(image1)
+nmp.ndarray 
+#Image is a NumPy array: 
+
+mask = image < 87  
+image[mask] = 255  
+mplot.imshow(image1, cmap ='gray')
+
+Output:
+
+3. SciPy
+SciPy SciPy is another one of Python's primary science modules (like NumPy) and can be utilized to perform basic operations on images and for processing. Particularly it is a submodule called scipy.ndimage (in SciPy v1.1.0) that provides functions that operate on the n-dimensional NumPy arrays. The package is currently stocked with functions for non-linear and linear filtering, B-spline interpolation, binary morphology as well as the measurement of objects.
+Usage
+Make use of SciPy to blur the image by using a Gaussian filter:
+
+4. PIL/Pillow
+PIL (Python Imaging Library) is a library that is free for Python. It is a library for Python programming language that provides support for opening, manipulating and saving various formats for images. However, its development has slowed, and its last release was in 2009. There is, however, an alternative, Pillow, which is an actively developed alternative to PIL, which is simpler to install, works on all the major platforms, and also supports Python 3. The library provides basic image processing functions that include points, filters, the convolution kernels built-in, as well as colour space conversions.
+Usage
+Enhancing images by putting them in a Pillow by using ImageFilter
+
+5. OpenCV-Python
+The OpenCV (Open Source Computer Vision Library) is among the most frequently used programs for computers using computer vision. OpenCV-Python is the Python API for OpenCV. OpenCV-Python isn't only efficient because the background is composed of code that is written using C/C++. However, it is also simple to program and implement (due to the Python wrapper, which is present in the foreground). This makes it an excellent choice for running computationally intensive computer vision applications.
+Usage
+Making use of Blending of Images using Pyramids within OpenCV Python, you can create the "Orapple":
+
+6. SimpleCV
+SimpleCV is a different open-source framework for creating applications for computer vision. It provides access to a variety of powerful computer vision software libraries like OpenCV, but you don't need to know bit depths and colour spaces, file formats, as well as colour spaces. The learning curve of SimpleCV is significantly less than that of OpenCV and (as its tagline states), "its computer vision made easy." A few advantages of SimpleCV include:
+
+Even novice programmers can write basic machine vision tests.
+Cameras, video files, videos, and images are all interoperable.
+
+Usage
+
+7. Mahotas
+Mahotas can be described as yet another software for image and computer vision available for Python. It has traditional image processing tools like filtering and morphological processes in addition to modern computer vision tools for feature computation, including interest point detection and local descriptors. The interface is Python which is suitable for development speed. However, the algorithms are written using C++ and tuned to speed. Mahotas library is extremely fast, with minimal code and minimal dependencies. Read the official publication to gain more insight.
+Resources
+This documentation includes installation instructions as well as examples and some guides to help you start using Mahotas quickly.
+Usage
+The Mahotas library relies on simple code to complete tasks. For instance, it does an excellent job of solving the finding Wally problem, using only a small quantity of programming.
+Solutions to this Finding Wally problem:
+
+
+
+8. SimpleITK
+ITK (Insight Segmentation and Registration Toolkit) is "open-source, cross-platform software that offers developers an extensive collection of tools to aid in the analysis of images. SimpleITK is an esoteric layer built on the top of ITK designed to ease quick prototyping and education and [andinterpreters." The toolkit also includes image analysis, with various components supporting general filtering functions such as image segmentation, image filtering, and registration. SimpleITK was written in C++, but it's compatible with a vast number of programming languages like Python.
+Resources
+There are many Jupyter Notebooks showing how SimpleITK can be used in research and education. Notebooks show how to use SimpleITK to perform interactive image analysis with it Python as well as R Programming languages.
+Usage
+Visualization of a strict CT/MR registration procedure created with Python and SimpleITK. Python:
+
+9. pgmagick
+The pgmagick is a Python-based wrapper that is compatible with the GraphicsMagick library. It is the GraphicsMagick imaging processing system is often described as"the Swiss Army Knife in the field of processing images. Its reliable and powerful collection of libraries and tools allows reading, writing and manipulating images in more than 88 formats, which include DPX, GIF, JPEG, JPEG-2000, PNG, PDF, PNM, and TIFF.
+Resources
+Pgmagick's GitHub repository includes installation instructions as well as specifications. It also has a comprehensive user guide.
+Usage
+Image Scale:
+
+Edge extraction:
+
+10. Pycairo
+Pycairo Pycairo HTML0 is an array of Python bindings for the Cairo graphics library. Cairo is a 2D graphics library that allows the creation of vector graphics. Vector graphics are attractive since they don't lose clarity when resized or altered. Pycairo can invoke Cairo commands using Python.
+Resources
+Its Pycairo GitHub repository is a useful resource that provides detailed instructions regarding installation and use. It also has a starting guide that includes an overview of Pycairo.
+Usage
+The drawing of lines and basic forms and radial gradients using Pycairo:
+
+
+
+Next TopicHow to insert current_timestamp into Postgres via Python
+
+
+
+
+← prev
+next →
+
+
+
+

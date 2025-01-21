@@ -1,0 +1,342 @@
+
+
+
+
+next →
+← prev
+
+How to develop a game in Python
+Python is the most versatile language, and it makes its presence almost in every field including Web-development, Machine Learning, Artificial Intelligence, GUI Application as well as Game Development.
+Python provides a built-in library called pygame, which used to develop the game. Once we understand the basic concepts of Python programming, we can use the pygame library to make games with attractive graphics, suitable animation, and sound.
+Pygame is a cross-platform library that is used to design video games. It includes computer graphics and sound libraries to give the standard game experience to the user.
+It is developed by Pete Shinners to replace PySDL.
+Prerequisites for Pygame
+To learn the pygame, we must have an understanding of Python programming language.
+Installing Pygame
+Open command-line terminal and type the following command to install pygame.
+
+pip install pygame
+
+We can also install it through IDE. For further installation guide, visit our complete pygame tutorial (https://www.javatpoint.com/pygame). Here you will find all the essential pygame explanations.
+Simple Pygame Example
+Here is the following example of creating a simple pygame window.
+
+import pygame  
+  
+pygame.init()  
+screen = pygame.display.set_mode((400,500))  
+done = False  
+  
+while not done:  
+    for event in pygame.event.get():  
+        if event.type == pygame.QUIT:  
+            done = True  
+    pygame.display.flip()  
+
+Output:
+
+All graphics will draw in the pygame window.
+Let's understand the basic syntax of the above program.
+import pygame - It is the module which allows us to work with all function of pygame.
+pygame.init() - It is used to initialize all the required modules of the pygame.
+pygame.display.set_mode((width, height)) - It is used to resized the window size. It will return the surface object. The surface object is used to perform graphical operations.
+pygame.event.get() - It makes the event queue empty. If we do not call it, the window messages will start to pile up and, the game will become unresponsive in the opinion of the operating system.
+pygame.QUIT - It is used to dismiss the event when we click on the cross button at the corner of the window.
+pygame.display.flip() - It is used to reflect any update to the game. If we make any change then we need to call the display.flip() function.
+We can draw any shape to the pygame surface includes adding images, attractive font. Pygame provides many built-in functions to draw the geometrical shape to the screen. These shapes are initial stage of developing a game.
+Let's understand the following example of shape drawing to the screen.
+Example -
+
+import pygame  
+from math import pi  
+pygame.init()  
+# size variable is using for set screen size  
+size = [400, 300]  
+screen = pygame.display.set_mode(size)  
+pygame.display.set_caption("Example program to draw geometry")  
+# done variable is using as flag   
+done = False  
+clock = pygame.time.Clock()  
+while not done:  
+    # clock.tick() limits the while loop to a max of 10 times per second.  
+        clock.tick(10)  
+  
+    for event in pygame.event.get():  # User did something  
+        if event.type == pygame.QUIT:  # If user clicked on close symbol   
+            done = True  # done variable that we are complete, so we exit this loop  
+  
+    # All drawing code occurs after the for loop and but  
+    # inside the main while done==False loop.  
+  
+    # Clear the default screen background and set the white screen background  
+    screen.fill((0, 0, 0))  
+  
+    # Draw on the screen a green line which is 5 pixels wide.  
+    pygame.draw.line(screen, (0, 255, 0), [0, 0], [50, 30], 5)  
+    # Draw on the screen a green line which is 5 pixels wide.  
+    pygame.draw.lines(screen, (0, 0, 0), False, [[0, 80], [50, 90], [200, 80], [220, 30]], 5)  
+  
+    # Draw a rectangle outline  
+    pygame.draw.rect(screen, (0, 0, 0), [75, 10, 50, 20], 2)  
+  
+    # Draw a solid rectangle  
+    pygame.draw.rect(screen, (0, 0, 0), [150, 10, 50, 20])  
+  
+    # This draw an ellipse outline, using a rectangle as the outside boundaries  
+    pygame.draw.ellipse(screen, (255, 0, 0), [225, 10, 50, 20], 2)  
+  
+    # This draw a solid ellipse, using a rectangle as the outside boundaries  
+    pygame.draw.ellipse(screen, (255, 0, 0), [300, 10, 50, 20])  
+  
+    # Draw a triangle using the polygon function  
+    pygame.draw.polygon(screen, (0, 0, 0), [[100, 100], [0, 200], [200, 200]], 5)  
+  
+    # This draw a circle  
+    pygame.draw.circle(screen, (0, 0, 255), [60, 250], 40)  
+  
+    # This draw an arc  
+    pygame.draw.arc(screen, (0, 0, 0), [210, 75, 150, 125], 0, pi / 2, 2)  
+  
+    # This function must write after all the other drawing commands.  
+    pygame.display.flip()  
+  
+# Quite the execution when clicking on close  
+pygame.quit()  
+
+Output:
+
+Explanation -
+In the above example, we have drawn different shapes such as triangle, straight-line, rectangle, ellipse, circle, arc, filled circle, and oval. We have used the pygame.draw function according to the shape with suitable arguments.
+Example - Developing Snake Game Using Pygame
+Program -
+
+# Snake Tutorial Using Pygame 
+
+import math
+import random
+import pygame
+import tkinter as tk
+from tkinter import messagebox
+
+
+class cube(object):
+    rows = 20
+    w = 500
+
+    def __init__(self, start, dirnx=1, dirny=0, color=(255, 0, 0)):
+        self.pos = start
+        self.dirnx = 1
+        self.dirny = 0
+        self.color = color
+
+    def move(self, dirnx, dirny):
+        self.dirnx = dirnx
+        self.dirny = dirny
+        self.pos = (self.pos[0] + self.dirnx, self.pos[1] + self.dirny)
+
+    def draw(self, surface, eyes=False):
+        dis = self.w // self.rows
+        i = self.pos[0]
+        j = self.pos[1]
+
+        pygame.draw.rect(surface, self.color, (i * dis + 1, j * dis + 1, dis - 2, dis - 2))
+        if eyes:
+            centre = dis // 2
+            radius = 3
+            circleMiddle = (i * dis + centre - radius, j * dis + 8)
+            circleMiddle2 = (i * dis + dis - radius * 2, j * dis + 8)
+            pygame.draw.circle(surface, (0, 0, 0), circleMiddle, radius)
+            pygame.draw.circle(surface, (0, 0, 0), circleMiddle2, radius)
+
+# This class is defined for snake design and its movement
+class snake(object):
+    body = []
+    turns = {}
+
+    def __init__(self, color, pos):
+        self.color = color
+        self.head = cube(pos)
+        self.body.append(self.head)
+        self.dirnx = 0
+        self.dirny = 1
+
+    def move(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            keys = pygame.key.get_pressed()
+            # It will manage the keys movement for the snake
+            for key in keys:
+                if keys[pygame.K_LEFT]:
+                    self.dirnx = -1
+                    self.dirny = 0
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_RIGHT]:
+                    self.dirnx = 1
+                    self.dirny = 0
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_UP]:
+                    self.dirnx = 0
+                    self.dirny = -1
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+
+                elif keys[pygame.K_DOWN]:
+                    self.dirnx = 0
+                    self.dirny = 1
+                    self.turns[self.head.pos[:]] = [self.dirnx, self.dirny]
+        # Snake when hit the boundary wall
+        for i, c in enumerate(self.body):
+            p = c.pos[:]
+            if p in self.turns:
+                turn = self.turns[p]
+                c.move(turn[0], turn[1])
+                if i == len(self.body) - 1:
+                    self.turns.pop(p)
+            else:
+                if c.dirnx == -1 and c.pos[0] <= 0:
+                    c.pos = (c.rows - 1, c.pos[1])
+                elif c.dirnx == 1 and c.pos[0] >= c.rows - 1:
+                    c.pos = (0, c.pos[1])
+                elif c.dirny == 1 and c.pos[1] >= c.rows - 1:
+                    c.pos = (c.pos[0], 0)
+                elif c.dirny == -1 and c.pos[1] <= 0:
+                    c.pos = (c.pos[0], c.rows - 1)
+                else:
+                    c.move(c.dirnx, c.dirny)
+
+    def reset(self, pos):
+        self.head = cube(pos)
+        self.body = []
+        self.body.append(self.head)
+        self.turns = {}
+        self.dirnx = 0
+        self.dirny = 1
+# It will add the new cube in snake tail after every successful score
+    def addCube(self):
+        tail = self.body[-1]
+        dx, dy = tail.dirnx, tail.dirny
+
+        if dx == 1 and dy == 0:
+            self.body.append(cube((tail.pos[0] - 1, tail.pos[1])))
+        elif dx == -1 and dy == 0:
+            self.body.append(cube((tail.pos[0] + 1, tail.pos[1])))
+        elif dx == 0 and dy == 1:
+            self.body.append(cube((tail.pos[0], tail.pos[1] - 1)))
+        elif dx == 0 and dy == -1:
+            self.body.append(cube((tail.pos[0], tail.pos[1] + 1)))
+
+        self.body[-1].dirnx = dx
+        self.body[-1].dirny = dy
+
+    def draw(self, surface):
+        for i, c in enumerate(self.body):
+            if i == 0:
+                c.draw(surface, True)
+            else:
+                c.draw(surface)
+
+
+def drawGrid(w, rows, surface):
+    sizeBtwn = w // rows
+
+    x = 0
+    y = 0
+    for l in range(rows):
+        x = x + sizeBtwn
+        y = y + sizeBtwn
+        # draw grid line
+        pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, w))
+        pygame.draw.line(surface, (255, 255, 255), (0, y), (w, y))
+
+# This class define for draw game surface
+def redrawWindow(surface):
+    global rows, width, s, snack
+    # This is used to grid surface
+    surface.fill((0, 0, 0))
+    s.draw(surface)
+    snack.draw(surface)
+    drawGrid(width, rows, surface)
+    pygame.display.update()
+
+
+def randomSnack(rows, item):
+    positions = item.body
+
+    while True:
+        x = random.randrange(rows)
+        y = random.randrange(rows)
+        if len(list(filter(lambda z: z.pos == (x, y), positions))) > 0:
+            continue
+        else:
+            break
+
+    return (x, y)
+
+# Using Tkinter function to display message
+def message_box(subject, content):
+    root = tk.Tk()
+    root.attributes("-topmost", True)
+    root.withdraw()
+    messagebox.showinfo(subject, content)
+    try:
+        root.destroy()
+    except:
+        pass
+
+# main() function
+def main():
+    global width, rows, s, snack
+    width = 500
+    rows = 20
+    win = pygame.display.set_mode((width, width))
+    s = snake((255, 0, 0), (10, 10))
+    snack = cube(randomSnack(rows, s), color=(0, 255, 0))
+    flag = True
+
+    clock = pygame.time.Clock()
+
+    while flag:
+        pygame.time.delay(50)
+        clock.tick(10)
+        s.move()
+        if s.body[0].pos == snack.pos:
+            s.addCube()
+            snack = cube(randomSnack(rows, s), color=(0, 255, 0))
+
+        for x in range(len(s.body)):
+            if s.body[x].pos in list(map(lambda z: z.pos, s.body[x + 1:])):
+                print('Score: \n', len(s.body))
+                message_box('You Lost!\n', 'Play again...\n')
+                s.reset((10, 10))
+                break
+
+        redrawWindow(win)
+
+    pass
+
+
+main()
+
+Output:
+
+If the snake touches itself then it will terminate the game and display the following message.
+
+We can play again by clicking on the OK button. We can see our score in Pycharm terminal (We have used Pycharm IDE; you can use any Python IDE).
+
+Copy the above code and paste it into your IDE and have fun. To understand the concepts of Pygame, visit our full pygame tutorial.
+
+
+Next TopicHow to install Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,115 @@
+
+
+
+
+next →
+← prev
+
+Python continue Statement
+In this tutorial, we'll look at how to use Python continue keyword to skip the remaining statements of the current loop and go to the next iteration. Also, the difference between continue and pass keywords.
+Application of the Continue Statement
+In Python, loops repeat processes on their own in an efficient way. However, there might be occasions when we wish to leave the current loop entirely, skip iteration, or dismiss the condition controlling the loop. We use Loop control statements in such cases. The continue keyword is a loop control statement that allows us to change the loop's control.
+The continue Keyword
+In Python, the continue keyword return control of the iteration to the beginning of the Python for loop or Python while loop. All remaining lines in the prevailing iteration of the loop are skipped by the continue keyword, which returns execution to the beginning of the next iteration of the loop.
+Both Python while and Python for loops can leverage the continue statements.
+Example of Python Continue Statements in For Loop
+Assume the following scenario: we want to develop a program that returns numbers from 10 to 20 but not 15. It is mentioned that we must perform this with a 'for' loop. Here's when the continue keyword comes into play. We will execute a loop from 10 to 20 and test the condition that the iterator is equal to 15. If it equals 15, we'll employ the continue statement to skip to the following iteration displaying any output; otherwise, the loop will print the result.
+The following code is an example of the above scenario:
+Code
+
+# Python code to show example of continue statement
+ 
+# looping from 10 to 20
+for iterator in range(10, 21):
+ 
+    # If iterator is equals to 15, loop will continue to the next iteration
+    if iterator == 15:
+        continue
+    # otherwise printing the value of iterator
+    print( iterator )
+
+Output:
+10
+11
+12
+13
+14
+16
+17
+18
+19
+20
+
+Now will repeat the above code, but this time with a string. We will take a string "Javatpoint" and print each letter of the string except "a". This time we will use Python while loop to do so. Until the value of the iterator is less than the string's length, the while loop will keep executing.
+Code
+
+# Creating a string
+string = "JavaTpoint"
+# initializing an iterator
+iterator = 0
+ 
+# starting a while loop                 
+while iterator < len(string):
+    # if loop is at letter a it will skip the remaining code and go to next iteration
+    if string[iterator] == 'a':  
+        continue  
+    # otherwise it will print the letter
+    print(string[ iterator ])
+    iterator += 1
+
+Output:
+J
+v
+T
+p
+o
+i
+n
+t
+
+Python Continue vs. Pass
+Usually, there is some confusion in the pass and continue keywords. So here are the differences between these two.
+
+
+Headings
+continue
+pass
+
+
+Definition
+The continue statement is utilized to skip the current loop's remaining statements, go to the following iteration, and return control to the beginning.
+The pass keyword is used when a phrase is necessary syntactically to be placed but not to be executed.
+
+
+Action
+It takes the control back to the start of the loop.
+Nothing happens if the Python interpreter encounters the pass statement.
+
+
+Application
+It works with both the Python while and Python for loops.
+It performs nothing; hence it is a null operation.
+
+
+Syntax
+It has the following syntax: -: continue
+Its syntax is as follows:- pass
+
+
+Interpretation
+It's mostly utilized within a loop's condition.
+During the byte-compile stage, the pass keyword is removed.
+
+
+
+
+Next TopicPython Pass
+
+
+
+← prev
+next →
+
+
+
+

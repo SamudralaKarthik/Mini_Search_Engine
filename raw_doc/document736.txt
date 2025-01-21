@@ -1,0 +1,257 @@
+
+
+
+
+next →
+← prev
+
+First Unique Character in a String Python
+This tutorial will show various approaches to finding the first unique character in a given string. For instance, the result should be "n" if the given string is "stringstutorial," and "S" if the given string is "StringsTutorial".
+Explanation
+Input: "stringstutorial"
+Explanation:
+Step 1: Creating a frequency list of the characters for the given string
+freq['s'] = 2
+freq['t'] = 3
+freq['r'] = 2
+freq['i'] = 2
+freq['n'] = 1
+freq['g'] = 1
+freq['u'] = 1
+freq['o'] = 1
+freq['a'] = 1
+freq['l'] = 1
+Step 2: Find the first character having a unit frequency.
+Creating a Frequency Hash Map
+If a character only appears once in the given string, it is considered a non-repeating character. Calculating the frequency of each letter in the string sequence and determining which letter has a frequency of 1 are the steps in locating such unique characters. A hash map, which maps characters to their corresponding frequencies and allows us to concurrently modify the frequency of the characters we have already encountered in constant time, is an effective tool for this work. In the ASCII system, 256 unique characters are the limit. So, the maximum length of a hash map is 256. Reread the string, and the 1st letter whose frequency is equal to one is the solution.
+Algorithm:
+
+Create a hash map to associate each character with its frequency.
+Use a pointer to navigate the input string.
+Modify the number of characters now present in the hash map.
+Next, go through the string once more to determine whether the present character has frequency = 1.
+Resume the traverse if the frequency exceeds 1.
+If not, end the loop and output the present character as the solution.
+
+Code
+
+# Python implementation of the hash map algorithm to find the first unique character
+
+max_chars = 256
+
+# Defining a function to give a list of length 256 containing the frequency of the characters of the string
+def CharFreq(string):
+    freq = [0] * max_chars
+    # Iterating over the string and updating the frequency
+    for _ in string:
+        freq[ord(_)] += 1
+    return freq
+
+# Defining a function to return the first unique letter of the string
+def firstUnique(string):
+    freq = CharFreq(string)
+    # Initializing index as -1 for no unique character case
+    idx = -1
+    k = 0
+
+    for _ in string:
+        if freq[ord(_)] == 1:
+            idx = k
+            break
+        k += 1
+
+    return idx
+
+# Driver code for the above methods
+string = "stringstutorial"
+idx = firstUnique(string)
+if idx == -1:
+    print ("The given string has no unique character or empty string is given")
+else:
+    print ("The first unique character is", string[idx])
+
+Output
+The first unique character is n
+
+Finding the Unique Character by Traversing the String Only Once
+The primary method requires O(n) runtime, although we can make it faster in the application. The count array is constructed in the first step of the procedure by iteratively traversing the text in O(n) runtime. This step makes sense. However, the second portion, where we replay the string's initial non-repeater, isn't a good idea.
+The string is anticipated much longer than our character set in actual circumstances. Consider DNA sequences, which may contain billions of letters and only have a four-letter alphabet. What transpires if the unique character is at the string's end? Then, it would require a lengthy scan.
+Creating Hash Map and Traversing String Once
+Instead of using the hash map, create a frequency array with the length of the character list as 256. By adding to the frequency array, we may store not only frequency but also the position of the letter's first appearance, such as (5, 36) for the letter, which indicates that it was recorded five times and originally appeared at position 36. To locate the first unique character, we only need to scan the frequency array rather than the string. Below is the implementation of this idea.
+Code
+
+# Python program to find the first unique character by traversing only once
+import sys
+
+max_chars = 256
+
+# Defining a function to give the index of the first unique letter of the given string
+def firstUnique(string):
+
+    listt = [[] for _ in range(max_chars)]
+    for _ in range(max_chars):
+        listt[_] = [0,0]
+
+    for _ in range(len(string)):
+       
+listt[ord(string[_])][0] += 1
+       
+listt[ord(string[_])][1] = _
+
+    # Initialising the result as sys.maxsize for no unique character case
+    r = sys.maxsize
+    for _ in range(max_chars):
+        # If the current character's frequency is one and is present before the current r value, then modify r
+        if (listt[_][0] == 1):
+            r = min(r, listt[_][1])
+
+    return r
+
+# Driver code for the above function
+string = "stringstutorial"
+idx = firstUnique(string)
+if (idx == sys.maxsize):
+    print("The given string has no unique character or empty string is given")
+else:
+    print("First unique character is ",string[idx])
+
+Output
+First unique character is n
+
+Creating a Frequency List and Looping Only Once
+Creating a frequency list of a maximum of 256 characters. We can initialize all the items in this list to -1. We will iterate over the string's characters and examine if the list elements with this particular character have an index of 1 or not. If it turns out to be -1, we will change it to j; if it does not turn out to be -1, this indicates that the character has already been used; in that case, we will change it to -2.
+All repeated characters will eventually be altered to -2, while all unique characters will still retain the index at which they first appeared. We can quickly discover the least or the initial index by iterating all the unique characters.
+Code
+
+# Python program to find the first unique character 
+import sys
+
+# Creating a function to find the index of the first unique character
+# If no character is unique, the function will return -1
+def firstUnique(string):
+   freq = [-1 for j in range(256)]
+   
+   # Setting all non-unique elements to -2 and the unique elements store the index at which they occur in the string
+   for j in range(len(string)):
+   
+     if(freq[ord(string[j])] == -1):
+       freq[ord(string[j])] = j
+     else:
+       freq[ord(string[j])] = -2
+     
+   result = sys.maxsize
+
+   for j in range(256):
+     # If the current character does not have the value -1 or -2, then the character must be present only once in the string.
+     # So, we will find the minimum index of all characters uniquely present in the string. This value is the index we need.
+     if(freq[j] >= 0):
+       result = min(result, freq[j])
+   
+   # if the result remains int_max, that implies there are no unique characters in the string
+   if(result == sys.maxsize):
+     return -1
+   else:
+     return result
+
+   # Drivers code for the above method
+string = "stringstutorial"
+idx = firstUnique(string)
+
+if (firstUnique == -1):
+   print("The given string has no unique character, or empty string is given")
+else:
+   print("The first unique character is "+ str(string[idx]))
+
+Output
+The first unique character is n
+
+Using in-built Functions of Python
+Utilize the Counter() function to determine the frequency of all characters.
+Go over the string and find which elements have frequency 1. Printing the unique character and breaking the loop there.
+Code
+
+# Python program to find the first unique character of string using the Counter function of Python
+from collections import Counter
+
+# Defining the function to give the unique character
+def printUnique(string):
+
+   # Computing frequency of characters using Counter function
+   freq = Counter(string)
+
+   # Looping over the string
+   for j in string:
+     if(freq[j] == 1):
+       print("The first unique character is: ", j)
+       break
+
+# Drivers code for the above method
+string = "stringstutorial"
+
+# Giving the function above string
+printUnique(string)
+
+Output
+The first unique character is: n
+
+Using the find() Function of Strings
+After the current letter, look up each subsequent letter. If it returns -1, it signifies that the letter only appears once, which is the present index.
+Code
+
+# Python program to find the unique character of string using the find function
+
+def FirstUnique(string):
+
+   for _ in string:
+
+     if (string.find(_,(string.find(_)+1))) == -1:
+       print("The first unique character is: ", _)
+       break
+
+   return
+
+# Drivers code 
+
+s = 'stringstutorial'
+
+FirstUnique(string)
+
+Output
+The first unique character is: n
+
+Using the count() Function
+If a character's count() within a string is 1, it indicates that the character is unique and not repeated. We will break the loop and print the first unique character we find.
+Code
+
+# Python program to find the first unique character of the string using the count() function
+
+string = "stringstutorial"
+idx = -1
+freq = ""
+for _ in string:
+   if string.count(_) == 1:
+     freq += _
+     break
+   else:
+     idx += 1
+if idx == 1:
+   print ("The given string has no unique character, or empty string is given")
+else:
+   print ("The first unique character is", freq)
+
+Output
+The first unique character is n
+
+
+
+Next TopicUsing Python Create Own Movies Recommendation Engine
+
+
+
+
+← prev
+next →
+
+
+
+

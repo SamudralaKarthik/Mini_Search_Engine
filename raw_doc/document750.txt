@@ -1,0 +1,211 @@
+
+
+
+
+next →
+← prev
+
+Python Output Formatting
+In this tutorial, we will learn to format the output. Formatting and output refer to presenting the output of a program. We can format the output in the human-readable form or write the data into a file and some other specified form. Sometimes we need to control the coming output so we can format it according to our requirements. Users can handle strings by using string slicing and concatenation operations to create any layout.
+There are various ways to format output.
+
+We can use the f string method to format the string literals.
+The format() method of strings helps a user create a fancier output.
+We can also perform the string concatenation operations to create any layout we want. The string class also has some methods that perform useful operations for padding strings to given column width. 
+
+Formatting Output using String Modulo Operator (%)
+The % operator helps us to format the string. It interprets the left argument like printf() format string applied to the right argument. Python doesn't provide the printf() function. For this purpose, the modulo operator is overloaded by the string class to perform string formatting. It is also known as the String Modulo operator. 
+The string modulo operator is still available in Python (3.x), and it is widely used, but nowadays, the old formatting style is removed from the language. 
+Let's understand the following example -
+Example -
+
+#integer and float value
+print("integer : % 2d, float : % 5.2f" %(1, 05.333))  
+#integer value
+print("Total Player : % 3d, Batsman : % 2d" %(24, 12)) 
+#octal value
+print("% 5.3o"% (50)) 
+#exponential value
+print("% 10.2E"% (456.1458))
+
+Output:
+integer :  1, float :  5.33
+Total Player :  24, Batsman :  12
+  062
+  4.56E+02
+
+Explanation -
+In the above code, "%2d" is a placeholder that uses the first element of the tuple. It prints the two characters. For the format description of the float number, "%5.2f" is used. It is also introduced with character % like other placeholders. It shows the total number of strings it can contain. The decimal part of the number or the precision is set to 2, the number following "." in the placeholder. The last character, "f" shows a float number.
+Formatting Output Using the Format Method
+The format() method takes more manual effort than other methods. We use {} to mark the substitution of variables and provide detailed formatting directives, but we also need to provide the formatted information. We can use the number in the brackets as positional formatting. Let's understand the following example.
+Example -
+
+# using format() method 
+print('{} {}'.format('Hello', 'World')) 
+  
+# using format() method and referring  
+# a position of the object 
+print('{0} to {1}'.format('Welcome', 'JavaTpoint')) 
+print('{1} to {0}'.format('Welcome', 'JavaTpoint'))
+
+Output:
+Hello World
+Welcome to JavaTpoint
+JavaTpoint to Welcome
+
+The brackets and characters within the item are called format fields which are replaced with the object passed into the format() method. A number in the brackets can be used to refer to the object's position passed into the format() method. 
+Let's understand another example -
+Example -
+
+print('Number one position is {0}, {1}, and {other}.'
+     .format('Java', 'T', other ='Point'))
+ 
+# using format() method with number
+print("Java :{0:2d}, Tpoint :{1:8.2f}".
+      format(12, 00.546))
+ 
+# Changing positional argument
+print("Second argument: {1:3d}, first one: {0:7.2f}".
+      format(47.42, 11))
+ 
+print("Java: {a:5d},  Tpoint: {p:8.2f}".
+     format(a = 453, p = 59.058))
+
+Output:
+Number one position is Java, T, and Point.
+Java :12, Tpoint :    0.55
+Second argument:  11, first one:   47.42
+Java:   453,  Tpoint:    59.06
+
+Example - 3:
+
+tab = {'Java': 4127, 'T': 4098, 'point': 8637678}
+ 
+# using format() in dictionary
+print('Java: {0[Java]:d}; For: {0[T]:d}; '
+    'Java: {0[Java]:d}'.format(tab))
+ 
+data = dict(fun ="JavaTpoint", adj ="Website")
+ 
+# using format() in dictionary
+print("I love {fun} {adj}".format(**data))
+
+Output:
+Java: 4127; For: 4098; Java: 4127
+I love JavaTpoint Website
+
+Formatting output using the String Method
+We can also format the output using the string slicing and concatenation operations. The string type has some methods that help format output in a fancier way. Few methods which helps to formatting an output - str.ljust(), str.rjust(), and str.centre(). Let's understand the following example - 
+Example -
+
+str1 = "I love JavaTpoint" 
+# Printing the center aligned 
+# string with fillchr
+print ("Center aligned string with fillchr: ")
+print (str1.center(30, '$'))
+ 
+# Printing the left aligned 
+# string with "-" padding 
+print ("The left aligned string is : ")
+print (str1.ljust(40, '&'))
+ 
+# Printing the right aligned string
+# with "-" padding 
+print ("The right aligned string is : ")
+print (str1.rjust(40, '-'))
+
+Output:
+Center aligned string with fillchr: 
+$$$$$$I love JavaTpoint$$$$$$$
+The left aligned string is: 
+I love JavaTpoint&&&&&&&&&&&&&&&&&&&&&&&
+The right aligned string is : 
+-----------------------I love JavaTpoint
+
+Format Conversion Rule in Python
+Below is the table of the conversion and its meaning.
+
+
+Conversion
+Meaning
+
+
+d
+It represents a Signed integer decimal.
+
+
+i
+It represents a Signed integer decimal.
+
+
+o
+It represents Unsigned octal.
+
+
+u
+It represents Obsolete and equivalent to'd', i.e. signed integer decimal.
+
+
+x
+It represents an Unsigned hexadecimal (lowercase).
+
+
+X
+It represents an Unsigned hexadecimal (uppercase).
+
+
+e
+It represents Floating point exponential format (lowercase).
+
+
+E
+It represents Floating point exponential format (uppercase).
+
+
+f
+It represents a Floating point decimal format.
+
+
+F
+It represents a Floating point decimal format.
+
+
+g
+It represents Same as "e" if exponent is greater than -4 or less than precision, "f" otherwise.
+
+
+G
+It represents Same as "E" if exponent is greater than -4 or less than precision, "F" otherwise.
+
+
+c
+It represents Single character (accepts integer or single character string).
+
+
+r
+It represents String (converts any python object using repr()).
+
+
+s
+It represents String (converts any python object using str()).
+
+
+%
+It represents No argument is converted, results in a "%" character in the result.
+
+
+Conclusion
+We have discussed how to format the output in Python. We have described the various techniques along with examples. Python provides the facility to modify the output according to the requirements. Users can use string or format() methods with positional arguments. This tutorial also included the conversion rules table. 
+
+
+Next TopicPython Property Decorator
+
+
+
+
+← prev
+next →
+
+
+
+

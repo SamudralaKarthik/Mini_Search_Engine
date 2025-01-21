@@ -1,0 +1,343 @@
+
+
+
+
+next →
+← prev
+
+Python Property Decorator
+In this tutorial, we will learn about the property decorator in Python. Previously, we have discussed decorators in Python; if you are familiar with decorators, you should read this tutorial before moving forward.
+Let's have an introduction to property decorators.
+Python @property Decorator
+Let's understand it by an example - Suppose we have a class Employee who has three properties first_name, last_name, and department_name. And we have another function email() function that generates an email address for an employee using its first_name and last_name. Let's see the following code.
+Example -
+
+class Student:
+    def __init__(self, first_name, last_name, full_name):
+        self.first_name =first_name
+        self.last_name = last_name
+        self.department_name = full_name
+
+    # generate email using first and last name
+    def email(self):
+        return '{}.{}@avenger.com'.format(self.first_name, self.last_name)
+
+Now create the object of class and call the email() function.
+
+obj = Employee('Bruce', 'Banner', 'Bruce Banner')
+
+print("First Name is:", obj.first_name)
+print("Last Name is:", obj.last_name)
+print("Depatement Name is", obj.full_name)
+
+print(obj.email())
+
+Output:
+First Name is: Bruce
+Last Name is: Banner
+Full Name is: Bruce Banner
+[email protected]
+
+In the above code, we have defined the three attributes first_name, last_name, and department_name and email() are the derived attributes.
+The full_name is declared as the variable and email() is declared as a function. When we run the program, we get the first_name, last_name, and full_name. The full_name is derived from the first_name and the last_name so email is. Now, let's make some changes in the program.
+
+obj.first_name='Natasha'
+print("Full Name is", obj.full_name)
+print(obj.email())
+
+Changing the first_name to Natasha and printing the full_name and email will give the following output.
+Output:
+Full Name is Bruce Banner
+[email protected]
+
+We can see that the first name is changed, and the email changes automatically. Still, the full_name doesn't change despite using the first_name attribute because email() is a function called when we want the email to be returned, while first_name is set at the time of initialization of the object. We can fix this problem by creating another function of the full_name we created for the email().
+Example -
+
+class Employee:
+    def __init__(self, first_name, last_name):
+        self.first_name =first_name
+        self.last_name = last_name
+        
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
+
+    # generate email using first and last name
+    def email(self):
+        return '{}.{}@avenger.com'.format(self.first_name, self.last_name)
+
+obj = Employee('Bruce', 'Banner')
+
+print("First Name is:", obj.first_name)
+print("Last Name is:", obj.last_name)
+
+print(obj.full_name())
+print(obj.email())
+
+print('After changing the first name:')
+obj.first_name='Natasha'
+print(obj.full_name())
+print(obj.email())
+
+Output:
+First Name is: Bruce
+Last Name is: Banner
+Bruce Banner
+[email protected]
+After changing the first name:
+Natasha Banner
+[email protected]
+
+We get changed full_name and updated email, but it is not a Pythonic way of solving this problem. Here the @property decorator comes into play to resolve such a problem.
+Using @property Decorator
+The property decorator returns the property attributes of a class from the stated getter and setter and deletes them as a parameter. We will use the @property decorator to solve this problem. Now let's see the above example using the @property decorator.
+Example -
+
+class Employee:
+    def __init__(self, first_name, last_name):
+        self.first_name =first_name
+        self.last_name = last_name
+    
+    @property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
+
+    # generate email using first and last name
+    def email(self):
+        return '{}.{}@avenger.com'.format(self.first_name, self.last_name)
+
+obj = Employee('Bruce', 'Banner')
+
+print("First Name is:", obj.first_name)
+print("Last Name is:", obj.last_name)
+
+print("Full Name is:", obj.full_name)
+print("Email is:", obj.email())
+
+print('After changing the first name:')
+obj.first_name='Natasha'
+print("Full Name is:", obj.full_name)
+print("Email is:", obj.email())
+
+Output:
+First Name is: Bruce
+Last Name is: Banner
+Full Name is: Bruce Banner
+Email is: [email protected]
+After changing the first name:
+Full Name is: Natasha Banner
+Email is: [email protected]
+
+Explanation -
+In the above code, the @property decorator is used on the full_name function, and now this function changed into the attribute and can also work as a getter because of the @property decorator.
+Use setter and deleter methods with @property Decorator
+The function that applies the @property decorator is known as the getter. In the previous example, the full_name acts a getter. In this section, we will understand the getter and setter.
+As the name suggests, the setter method set the value of the attributes and deleter method deleter method removes the attributes from memory. Let's implement a setter and getter method for full_name attributes.
+Example -
+
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        if value <= 0:
+            raise ValueError('Please Enter the Positive Number')
+        self._age = value
+
+    @age.deleter
+    def age(self):
+        self.age = None
+        print("The age is deleted")
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if value.strip() == '':
+            raise ValueError('Please Enter the Valid String')
+        self._name = value
+
+    @name.deleter
+    def name(self):
+        self.name = None
+        print("The name is deleted")    
+
+s1 = Student('Rishabh Pant', 21)
+print(s1.age)
+print(s1.name)
+s1.name = 'KL Rahul'
+print(s1.name )
+s1.name = ''
+print(s1.name)
+
+Output:
+21
+Rishabh Pant
+KL Rahul
+Traceback (most recent call last):
+  File "d:/Python Project/property.py", line 557, in 
+    s1.name = ''
+  File "d:/Python Project/bubble_sort.py", line 544, in name
+    raise ValueError('Please Enter the Valid String')
+ValueError: Please Enter the Valid String
+
+Explanation - 
+In the above code, we have initialized a class Student where we passed name and age in the constructor. First, we created the age() method that applied the @property decorator; it will get the age and returns. Then we created the setter method for the age where we checked if the user entered the value as negative then raised an error. Then we created the deleter method for the age. The same thing we have done with the name attributes. In the setter method, we checked if the user enters the name as an empty string raises an error otherwise, set the given name.
+Example - 2
+
+class Employee:
+    def __init__(self, first_name, last_name):
+        self.first_name =first_name
+        self.last_name = last_name
+    
+    @property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
+
+    #setter for the full_name
+    @full_name.setter
+    def full_name(self, name):
+        # split the name from space
+        first_name, last_name = name.split(" ")
+        self.first = first_name
+        self.last = last_name
+
+    #deleter for full_name
+    @full_name.deleter
+    def full_name(self):
+        self.first = None
+        self.last = None
+        print('Deleted the full_name')
+
+    # generate email using first and last name
+    def email(self):
+        return '{}.{}@avenger.com'.format(self.first_name, self.last_name)
+
+obj = Employee('Steve', 'Rogers')
+print('Fullname is:', obj.full_name)
+print('Email address is: ', obj.email())
+
+# now updating the obj object's first name
+obj.first_name = 'Bruce'
+print('Fullname of obj is: ', obj.full_name)
+print('And email address:', obj.email())
+
+#setting new value of full_name
+obj.full_name = 'Hello World'
+print('New Fullname of obj is:', obj.full_name)
+
+#deleting the full_name
+del obj.full_name
+
+Output:
+Fullname is: Steve Rogers
+Email address is:  [email protected]
+Fullname of obj is:  Bruce Rogers
+And email address: [email protected]
+New Fullname of obj is: Peter Parker
+Deleted the full_name
+
+In the above code, we have created the getter, setter, and deleter using the property decorator.
+The property() Function
+We can use the property() function to create getters, setters, and deleter in-place of @property decorator. The syntax is given below.
+Syntax - 
+
+property(fget=None, fset=None, fdel=None, doc)
+
+Parameters -
+
+fget() - It is used to get the attribute's value the same as the getters.
+
+
+fset() - It is used to set the value of the attributes the same as the setters.
+fdel() - It is used to delete the attribute value.
+doc() - It represents the string that contains the documentation (docstring) for the attributes.
+
+It returns a property attribute from the given getter, setter, and deleter.
+Let's understand the following example.
+Example -
+
+class Employee:
+    
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.full_name = first_name+' '+last_name
+
+    def full_name_getter(self):
+        return self.first_name +' '+ self.last_name
+    
+    def full_name_setter(self,name):
+        firstname, lastname = name.split()
+        self.first_name = firstname
+        self.last_name = lastname
+
+    def full_name_deleter(self):
+        self.first_name = None
+        self.last_name = None
+        print('Deleted the full_name.')
+        
+    def email(self):
+        return '{}.{}@email.com'.format(self.first_name, self.last_name)
+    
+    full_name = property()
+    full_name = full_name.getter(full_name_getter)
+    full_name = full_name.setter(full_name_setter)
+    full_name = full_name.deleter(full_name_deleter)
+
+    # this can be done in a single line too
+    # full_name = property(full_name_getter, full_name_setter, full_name_deleter)
+
+obj = Employee('Nick', 'Fury')
+print('Full Name is: ', obj.full_name)
+print('Email Address: ', obj.email())
+
+# now updating the obj object's first name
+obj.first = 'Oddin'
+print('Full Name is:  ', obj.full_name)
+print('Email Address: ', obj.email())
+
+#setting new value of full_name
+obj.full_name = 'Bruce Banner'
+print('New Full Name is: ', obj.full_name)
+
+#deleting the full_name
+del obj.full_name
+
+Output:
+Full Name is:  Nick Fury
+Email Address:  [email protected]
+Full Name is:   Nick Fury
+Email Address:  [email protected]
+New Full Name is:  Bruce Banner
+Deleted the full_name.
+
+We can also implement these methods using the single line of code. 
+full_name = property(full_name_getter, full_name_setter, full_name_deleter)
+
+Important Tips
+We don't need to create all three methods for every property in the code. We can define read-only properties by only including a getter method. We can also avoid the deleter method and use getter and setter. We can avoid the setter method if we want to set the attribute when the instance is created or if it should be modified within the class.
+The users are free to choose any method depending on their working context.
+Conclusion
+This tutorial has covered property decorators and their examples in detail. The property() method helps create getter, setter, and deleter methods. We can define the properties with the @property decorator syntax, which is more compatible and straightforward. It is considered the 'pythonic' way to define getters, setters, and deleter. 
+Using the properties, we can modify the class's internal implementation without affecting it. The getter, setter, and deleter help avoid accessing or modifying the data directly.
+
+
+Next TopicDFS (Depth First Search) in Python
+
+
+
+
+← prev
+next →
+
+
+
+

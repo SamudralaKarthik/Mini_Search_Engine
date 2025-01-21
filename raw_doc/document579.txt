@@ -1,0 +1,173 @@
+
+
+
+
+next →
+← prev
+
+Check if a Given Linked List is Circular Linked List
+In this tutorial, we will write the Python program to check whether a given linked list is a circular linked list or not. We will understand the various efficient methods to determine a circular linked list. It is understood that you are familiar with the basic concept of the linked list and the Circular linked list (can skip introduction part). If you are not familiar with linked list, let's briefly overview the linked list.
+What is Linked List?
+The linked list is a linear data structure that stores the address of the next element. Each element is known as node, and a node consists of data and the memory address of the next element. We can access the linked list's element through the pointer, and the first node is known as the head.
+A linked list provides the advantage over the array because it stores the element dynamically where the array has a fixed size. In the linked list, we can insert and delete the element easily.
+Circular Linked List
+A circular linked list is one type of linked list which last following pointer field has a reference to one of the elements in the list. On the other hand, the next pointer field of the pointer element has the null value. A loop exists in a linked list when no NULL is reached as we traverse the entire linked list.
+
+How can we check the Given Linked list is Circular?
+As per the definition of both linked lists, we can find out easily when we traverse the linked list.
+
+If a no node is pointing to null.
+If any node in the linked list points towards the head or starting node, then the linked list is circular.
+
+Let's understand the solution.
+Solution - 1:
+Follow the below steps to check whether a given list is a circular or not.
+
+Traverse the entire linked list.
+Check if the node is pointing to the head.
+If it returns true, it means a given linked list is circular.
+
+Let's understand the below code.
+Example -
+
+class Node:
+
+    # Function to initialise the current object
+    def __init__(self, data):
+        self.data = data 
+        self.next = None 
+
+# Linked List class contains a current object
+class LinkedList:
+
+    # Function to initialize head
+    def __init__(self):
+        self.head = None
+
+def Circular(head):
+    if head==None:
+        return True
+        
+    # Next of head
+    current = head.next
+    i = 0
+    
+    # This loop would stop in both cases (1) If
+    # Circular (2) Not circular
+    while((current is not None) and (current is not head)):
+        i = i + 1
+        current = current.next
+    
+    return(current==head)
+
+
+node = LinkedList()
+node.head = Node(1)
+second =  Node(2)
+third =  Node(3)
+fourth = Node(4)
+
+node.head.next = second;
+second.next = third;
+third.next = fourth
+
+if (Circular(node.head)):
+    print('The given linked list is a circular list')
+else:
+    print('The given linked list is not a circular list')
+
+fourth.next = node.head
+
+if (Circular(node.head)):
+    print('The given linked list is a circular list')
+else:
+    print('The given linked list is not a circular list')
+
+Output:
+The given linked list is not a circular list
+The given linked list is a circular list
+
+Explanation -
+In the above code, we have created a Node class to initialize the node of the linked list. Then we created a LinkedList class that will point to the head node of the linked list; initially, it is none. Finally, we defined the CircularList function that determines whether a given linked list is circular or not.
+In this function, we checked if a head is equal to none. If true, then it returns True. If the head is not none, assign the head's next element to the current and set i as zero. Then we define the while loop, which will run until the current is not none and the current is not head. If the loop terminates the conditions, the return current is equal to the head.
+Solution -2: Two Pointer Solution
+We can use the two pointers with the different speed to determine whether a given linked list is a circular linked list or not. We define a slow pointer and a fast pointer. We use these pointers to traverse the linked list. The slow pointer moves one step at a time and a fast pointer moves two steps at a time.
+If a linked list is not a circular, the fast pointer will reach at the end of the element whose next pointer is null.
+Let's understand the approach.
+
+Check if head is null, returns false.
+If not, create two pointers slow, and fast => slow=head, fast = head.next.
+Run a loop, while slow is not equal to fast.
+Inside the loop, if fast is null or next is null then return false.
+If not then assign => slow = slow.next, fast = fast.next.next.
+Returns true.
+
+Let's implement the above approach into the Python code.
+Example -
+
+class Node:
+
+    # Function to initialise the current object
+    def __init__(self, data):
+        self.data = data 
+        self.next = None 
+
+# Linked List class contains a current object
+class LinkedList:
+
+    # Function to initialize head
+    def __init__(self):
+        self.head = None
+
+def circular_list(head):
+    if head is None:
+        return "The Given list is a circular list"
+    slow = head
+    fast = head.next
+
+    while slow != fast:
+        if fast is None or fast.next is None:
+            return "The Given list is a circular list"
+
+        slow = slow.next
+        head = fast.next.next
+
+    return "The Given list is a circular list"
+
+
+node = LinkedList()
+node.head = Node(1)
+second =  Node(2)
+third =  Node(3)
+fourth = Node(4)
+
+node.head.next = second;
+second.next = third;
+third.next = fourth
+
+print(circular_list(node.head))
+
+Output:
+The Given list is a circular list
+
+Explanation -
+We have created the Node and LinkedList classes to initialize the node and head in the above code. Then we created the circular_list() function, which takes the head as an argument. There is no linked list if the head is none; otherwise, we assigned a slow pointer as the head and a fast pointer as the head next element. Then iterate the linked list if the till slow is not equal to the fast. In the loop, we checked fast pointer is None or the fast's next element is None; if the condition is true, we returned the linked list is not a circular linked list. Otherwise, we assigned slow.next element to slow pointer and fast.next.next element to the fast pointer. If the slow and fast pointer became equal, it means the given linked list is a circular linked list. The loop is finished and returns true to indicate a circular linked list.
+Complexity Analysis of the Two Pointer Solution
+If the linked list doesn't have the cycle, the fast pointer will reach the end. Therefore the time complexities will be the O (n) in this case. If the linked list has a cycle, we need to calculate the number of steps to make the fast pointer catch the slow pointer. Let's understand the movement of both pointers.
+The slow pointer requires K steps to enter the cycle where the fast pointer has already in the cycle and element apart from the slow pointer in the linked list direction.
+The total run time will be 0 (K+D), where K is the number of elements between the head and the start element of the cycle. The D represents the distance between the two pointers when the slow pointer reaches the cycle. The space complexity is O (1).
+Conclusion
+In this tutorial, we have learned about how we can check a linked list is a circular linked list. We have discussed the two solutions, the first is a brute-force approach, and the second is a two-pointer solution. The two-pointer solution is easy to implement and also more efficient.
+
+
+Next TopicReverse the Linked List in Python
+
+
+
+
+← prev
+next →
+
+
+
+

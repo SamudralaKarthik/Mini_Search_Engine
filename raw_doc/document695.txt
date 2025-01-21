@@ -1,0 +1,176 @@
+
+
+
+
+next →
+← prev
+
+Filter List in Python
+While using shopping apps, suppose we want to buy a T-shirt; we type it in the search bar, and hundreds of results appear. We'll have some criteria in our mind on what we want to choose like the amount of money we want to spend on the T-shirt, colour etc. Hence, shopping apps provide a 'filter' option using which we can only view the results that already satisfy our pre-defined criteria.
+In the same way, while working on huge amounts of data, we'll sometimes have to filter the data based on some criteria. For example, In the 3 billion population of India, if we want information about only people of a certain age group, we can filter the 3 billion profiles based on age group.
+This tutorial discusses how to filter the data stored in a list based on the need in the program with examples.
+First, a list is a built-in data structure in Python in which we can store data of different types.
+
+Students = ["Jeevani", "Ramya", "Sanya"]
+
+Example 1:
+Suppose we have a list with marks of 60 students in a particular subject, and we want to filter out the marks less than 20. So here, the criterion is to eliminate all the values less than 20.
+Code:
+
+marks = [30, 40, 56, 54, 34, 12, 13, 18]
+res = []
+for i in marks:
+    if(i > 20):
+        res.append(i)
+    else:
+        continue
+print(res)
+
+Output
+[30, 40, 56, 54, 34]
+
+Example 2:
+Suppose we have some characters in a list, and we want to filter all the consonants out of the list.
+
+characters = ['a', 't', 'e', 'j', 'i', 'o', 'l']
+vowels = ['a', 'e', 'i', 'o', 'u']
+res = []
+for i in characters:
+    if(i in vowels):
+        res.append(i)
+    else:
+        continue
+print(res)
+
+Output
+['a', 'e', 'i', 'o']
+
+In both the above examples, we created a new list and appended the elements from the original list that satisfied the criteria we wanted.
+Another Approach:
+We can also create a copy of the original list and delete the elements that do not satisfy the criteria.
+Example:
+
+characters = ['a', 't', 'e', 'j', 'i', 'o', 'k']
+copy = characters
+vowels = ['a', 'e', 'i', 'o', 'u']
+for i in copy:
+    if(i in vowels):
+        continue
+    else:
+        copy.remove(i)
+print(copy)
+
+Output
+['a', 'e', 'i', 'o']
+
+
+The above code creates a copy of the original characters list and removes the elements if they don't exist in the vowels list.
+
+Python's built-in Function:
+These are the general approaches, but Python is a language that makes everything simpler. It provides a built-in function called filter() that filters the lists based on the criterion we give.
+Syntax:
+
+filter(criterion, sequence)
+
+criterion: The testing standard we provide to filter the list. The function checks if every sequence element returns True when tested with the criterion.
+sequence: The data structure we provide can be a list, tuple, set or any other iterable data type.
+
+The function returns the filtered sequence.
+
+Let us take the two examples we used earlier and see how filter() works:
+
+#Filtering marks:
+def criterion(orig):
+        if(orig > 20):
+            return True
+        else:
+            return False
+    
+marks = [30, 40, 56, 54, 34, 12, 13, 18]
+print(filter(criterion, marks))
+res = list(filter(criterion, marks))
+print(res)
+
+Output
+
+[30, 40, 56, 54, 34]
+
+
+In Python 3.x, filter() returns an object. Hence, we need to use the list() to convert the object into a list.
+In the above code, we created a function criterion that checks if the given variable is greater than 20. Now, we can use filter() with the criterion on any data we want with a single line.
+
+Example:
+
+#Filtering consonants
+def criterion(orig):
+    vowels = ['a', 'e', 'i', 'o', 'u']
+    if(orig in vowels):
+        return True
+    else:
+        return False
+characters = ['a', 't', 'e', 'j', 'i', 'o', 'k']
+res = list(filter(criterion, characters))
+print(res)
+
+Output
+['a', 'e', 'i', 'o']
+
+Lambda Function + filter():
+Creating a function every time we need the filter() can be tiring, mostly if we won't need it any other time. Hence, we mostly use lambda functions with the function.
+If you don't know about lambda functions, here is a small promo:
+A lambda function is a function without a name-an anonymous function. It can take any number of arguments and permits a single expression. We use the lambda function to create a function needed for a short time without much long-term significance.
+Syntax:
+
+lambda arguments : expression
+
+Example:
+
+x = lambda a, b : a + b
+print(x(3, 2))
+
+Output
+5
+
+Here are the same two examples we used earlier made easier using the lambda functions:
+
+#Filtering marks
+marks = [30, 40, 56, 54, 34, 12, 13, 18]
+res = list(filter(lambda i : i>20, marks))
+print(res)
+
+Output
+[30, 40, 56, 54, 34]
+
+
+
+#Filtering consonants
+characters = ['a', 't', 'e', 'j', 'i', 'o', 'k']
+res = list(filter(lambda i: i in ['a', 'e', 'i', 'o', 'u'], characters))
+print(res)
+
+Output
+['a', 'e', 'i', 'o']
+
+Filtering the List of Lists:
+Suppose we are doing an investigation and we have a list of possible criminals. We know that the age of the accused is between 20 and 30. Now, we need to filter the lists:
+
+criminals = [["Andy", 34], ["Roberto", 23], ["Joseph", 37], ["Ross", 21], ["Chandler", 23], ["Joey", 27]]
+filtered = list(filter(lambda i : i[1] <= 30 and i[1] >= 20, criminals))
+print(filtered)
+
+Output
+[['Roberto', 23], ['Ross', 21], ['Chandler', 23], ['Joey', 27]]
+
+
+
+Next TopicPYTHON PROJECTS IN NETWORKING
+
+
+
+
+← prev
+next →
+
+
+
+

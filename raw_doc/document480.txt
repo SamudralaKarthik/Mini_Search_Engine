@@ -1,0 +1,134 @@
+
+
+
+
+next →
+← prev
+
+Python Bz2 Module
+In computer science or engineering terms, the language understandable for computers is totally different from the language we use in our daily life, like English, Chinese, French, Hindi, and many others. Then, the question comes how does computer understand and presents output in the language in which we give input commands. While it seems a very complex process, actually, it is not that complex to understand and learn. The input command which we are providing in computer or other electronic devices in any language is converted into the computer-readable form (machine language), and then, the computer performs operations according to the converted command in machine language. After that, the result is also yielded by the computer in machine language, and finally, this result is again converted in human-readable form and presented to us as the output of the operation. Along with the operations, which we expect computers to perform according to the given input command, this conversion of commands into machine language & again into human-readable form happens at the same time. There are many other processes where conversion of commands is required for executing a process.
+This conversion of commands is also explained by the compression and decompression of commands or files. When we transfer data from one device to another, it is compressed into computer-readable form, and then again, it is decompressed into human-readable form. And this process of compression and decompression is quite similar to the conversion process of commands and files, and that's why these terms are also used interchangeably. In our daily life, there are many instances when we are performing this compression and decompression of files or texts unknowingly. For example, when we send messages or texts to someone, it is first compressed, and after being received by the recipient, this message again decompressed, and that's how communication happens between two devices. In the world of programming and development, many programming languages provide us the option for performing the operation of compression and decompression of texts or files. Talking about Python only, it also has multiple libraries which we can use to compress and decompress a given text or file. We can use functions of these libraries or packages in a Python program to compress or decompress a given text or file. The bz2 module of Python is one such module that we can use in Python programs to compress or decompress a given text or file. Therefore, we will learn about this bz2 module of Python in this tutorial and learn how we can perform compression and decompression operations on given texts & files using functions of this module.
+Introduction to Bz2 Module of Python
+The bz2 module of Python is specifically designed to perform the operations of decompression and compression of given texts & files in the program. It is one of those Python modules which we can use to carry out the compression and decompression operations on given texts and files very smoothly. The bz2 module of Python is based on the bzip2 compression algorithm, an algorithm specifically designed to perform the operations of compression & decompression of texts and files. We can either directly provide texts or a text file into the program for performing compression or decompression operations, according to this bzip2 compression algorithm. Since, in Python, we don't have char data type; therefore, the bz2 module is designed for performing the compression or decompression operations on the input strings or text files opened in the program. This module comes with lots of functions that are used to perform multiple operations related to the compression and decompression of strings & text files. We will learn about all these functions of the bz2 module in later parts of this tutorial and understand their implementation by using them in the example Python programs. But before using these functions in the example programs, we will learn their working and how we can use them.
+Bz2 Module in Python: Installation
+The bz2 module is an in-built module, which means this module comes pre-installed with the installation of Python. Therefore, if we are using the latest versions of Python, we don't need to perform any kind of installation process for installing this bz2 module, and we can directly start working with this module. We can even verify that this module is present in our system when we start working with the functions of this module and execute them. We only have to use the following import statement to use the functions of the bz2 module in a given Python program:
+
+# Importing the in-built bz2 compression module
+import bz2
+
+Therefore, we can directly proceed with the implementation part of this module and understand the implementation of functions of this module.
+Bz2 Module in Python: Important Functions
+Before we move ahead with the implementation part of this module, we will learn some important functions of this module. These functions are important to learn because using these functions; we will be able to perform compression & decompression and opening, closing, and saving a compressed or decompressed text file in a Python program.
+Following are some important functions of the bz2 module with their brief explanation:
+(1) open(): The open function of the bz2 module is used for opening a text file (compressed text file as well), in a Python program so that further compression operations can be performed on it. Following is the syntax for using the open() function of this module:
+
+>> bz2.open(nameOfFile, mode = 'rb', compresslevel = 9, encoding = None, errors = None, newline = None)
+
+As we can see in the syntax given above, the open() function of the bz2 module takes multiple arguments, but all these arguments are not compulsory arguments. Apart from the name of the file, other arguments are either optional or should be used while opening a compressed text file.
+Following is the description of the arguments provided in this open() function:
+(i) nameOfFile: It is the name of the file (if present in the same directory of the program) that we want to open in the program, and if the file is not present in the same directory, we have to provide the complete directory path of the file.
+(ii) mode: The mode is used to define the mode of the file that we are opening in the program, and it is different for normal text files & compressed text files. For the text mode, 'at', 'xt', 'wt', & 'rt' whereas, for binary mode, 'ab', 'a', 'xb', 'x', 'wb', 'w', 'rb', & 'r' mode options are available. These different mode options are used for defining different types of operations that we can perform on the opened file. If we don't define any mode argument with the filename in the function, it will 'rb' as the default argument.
+(iii) compresslevel: This argument is an optional argument and is only used in the cases when we are opening the compressed file using the open() function. We have to define the compress level of the compressed file in integer form, ranging from 1 to 9 according to the compression level of the file.
+(iv) encoding: We have to provide that if there is any kind of encoding format is used on the file we are opening. We don't have to provide this argument in the open() function compulsorily.
+(v) errors: This is also an optional argument of the open() function, which is used to define if any errors are present in the file or not.
+(vi) newline: This is an optional argument of the open() function which is used to define if there are any newlines present in the opened file.
+This is the description of all the arguments that can be provided in the open() function.
+(2) BZ2File(): The BZ2File() function of the bz2 module works similar to the open() function, but it is only used for opening the bz2 compressed files in the binary format. Following is the syntax for using the BZ2File() function of the bz2 module for opening a compressed bz2 format file:
+
+>> bz2.BZ2File(nameOfFile, mode = 'w', *, compresslevel = 1)
+
+As we can see, the arguments provided in this function are the same as the arguments we have to provide inside the open() function. But the BZ2FILE() function takes only three optional arguments.
+(3) BZ2Compressor(): The BZ2Compressor() function of the bz2 module is used to create a compression object in the program, which we can use for compressing the opened file in the program. Following is the syntax for using the BZ2Compressor() function of the bz2 module for creating a compression object:
+
+>> BZ2Compressor(compresslevel = 1)
+
+As we can see, this function takes only compresslevel as an argument inside it, and this argument is the mandatory argument of the function. We have to provide the compresslevel, according to which opened files will be compressed in the program.
+(4) peek(): The peek function of the bz2 module is used for returning the buffered data from the text file that we have opened in the program. This is not a commonly used function of the bz2 module, but we have to use this peek() function when we are performing high-level compression & decompression on the files.
+(5) compress(): The compress() function of the bz2 module is used for compressing string and text file provided as the input source in the program. We can provide the file name, input string given, or variable that is defined for holding this data as an argument of the function. Following is the syntax for using the compress() function in a program for compressing strings or text files:
+
+>> bz2.compress('File or String')
+
+As we can see, this compress() function takes only one argument and compress the file or string, which is provided as an input argument.
+(6) flush(): We have to use this function when we are compressing a file by using the compress() function with the compression object. The flush() function of the bz2 module is used for saving and closing the compressing process after the text file is compressed successfully. When we are using this function, we don't have to use an exit compression object after this function in the program. This function returns the compressed data of the file returned in the internal buffers of the server.
+(7) decompress(): The decompress() function of the bz2 module is used for decompressing a compressed string and text file provided as the input source in the program. We can provide the compressed file name, input string given, or the variable name defined for holding this data as an argument of the function. Following is the syntax for using the decompress() function in a program for decompressing the compressed strings or text files:
+
+>> bz2.decompress('File or String')
+
+As we can see, this function takes only one argument, and decompress the compressed files or strings, provided as an input argument.
+This is the complete description of the important functions of the bz2 module, which we can use in a Python program for compressing or decompressing a text file or input string. With the help of these functions, we can carry out the compression or decompression operations on any input string or text file very easily.
+Bz2 Module in Python: Implementation
+We have learned basic details of all the important functions of the bz2 module, but the only way through which we can understand how they will work is by using them inside a Python program. When we use these functions in the example programs, we will better understand and learn how these functions are actually working on the input text files or strings. But in this tutorial, we will only work with the input strings provided by the user or given in the program, and therefore, we will use the compress and decompress function of the bz2 module in this part. The working of other functions is also very similar, and if we understand how these two functions work, it will be very easy for us to work with other functions of this module. In this part, we will look at some examples in which either we take a user input string and compress it or provide input compressed string and decompress it. Look at the following example programs to understand the working of the compress() and decompress() function of the bz2 module:
+Example 1: Compressing an input string provided in the program:
+In this example program, we will provide an input string in the program and then compress it. Look at the following Python program where we have given an input string in the program and compressed it in the program using the compress() function:
+
+# Importing the in-built bz2 module
+import bz2
+# Providing a string as an input in the program
+inStr = b'This is a string provided by the user of the JavaTpoint to compress!'
+# Compressing the string given as an input
+compRes = bz2.compress(inStr)
+# Printing the result of the compression of input string
+print('The compressed form of the input string provided in the program is: ')
+print(compRes)
+
+Output:
+The compressed form of the input string provided in the program is: 
+b'BZh91AY&SY\xd75MP\x00\x00\x07\x17\x80`\x00\x00\x10\x04\x00?\xe3\xdf  \x00H\x88\x1a\x8f&\xa7\x93A\xa4)\xea\r\x01\xa6\x80\xd0\xb4oM.[\xbc?n\x8d\xda\xb4\xc3\xcd\xec\x1c\xf0\xf8P\xcf\xc2(tT\x02\x18\xe1^\x05\nBl\xc2\xc4\x906\x02\xe6\xbf\x17rE8P\x90\xd75MP'
+
+As we can see, the compressed form of the input string is printed in the output as a result of the program. That's how we can compress any input string or text file in the program by using the compress() function of the bz2 module.
+Example 2: Decompressing a compressed string given in the program:
+In the following example program, we will decompress an input given compressed string using the decompress() function, and after that, we will print the decompressed string in the output. Look at the following Python program to understand the working of the decompress() function of the bz2 module for decompressing a text file or string:
+
+# Importing the in-built bz2 module
+import bz2
+# Taking a string as an input in the program
+inStr = b'Welcome to JavaTpoint! This is an input string which will first compressed and then decompressed in the program'
+# Compressing the string given as an input
+compRes = bz2.compress(inStr)
+# Now decompressing the compressed input string
+deStr = bz2.decompress(compRes)
+# Printing the result of the decompression in the output
+print('The decompressed form of the compressed input string provided in the program is: ')
+print(deStr)
+
+Output:
+The decompressed form of the compressed input string provided in the program is: 
+b'Welcome to JavaTpoint! This is an input string which will first compressed and then decompressed in the program'
+
+As we can see, we have provided a compressed input string in the program using the compress() function, and then we have printed the decompressed form of this compressed in the program. We can see that decompressed form of the compressed input string is successfully printed in the output as a result of the program. That's how we can decompress any input compressed string or text file in the program by using the decompress() function of the bz2 module.
+Example 3: Compressing or Decompressing an input string together in a program:
+
+# Importing the in-built bz2 module
+import bz2
+# Taking a string as an input from the user
+inStr = b'Welcome to JavaTpoint! We hope that you are now able to understand and work with the functions of the bz2 module to carry out compression and decompression operations'
+# Compressing the string given as an input
+compRes = bz2.compress(inStr)
+# Printing the result of the compression of the file
+print('The compressed form of the input string provided in the program is: ')
+print(compRes)
+# Now decompressing the compressed input string
+deStr = bz2.decompress(compRes)
+# Printing the result of the decompression in the output
+print('The decompressed form of the compressed input string provided in the program is: ')
+print(deStr)
+
+Output:
+The compressed form of the input string provided in the program is: 
+b"BZh91AY&SY~\x8f\xa2\x97\x00\x00\x10\x1f\x80`\x00\x10\x00\x00\x10\x04\x80?o\xdf\xb0 \x00\x89\rL\x93C\xd2i\xa1\xb5\x07\xa4\xf4\x1a\t\xea\xa7\xa7\xa9\x1e\nhz'\xa5\x8e\xebF\xaem\x94B\x13i\xfcl\xa7\x04\xf1&\x1f\x85*9\xc8\xa1\xee\xcf\xde\xb2\x17*\xf4\x03-\xb6\x19\x8dj\x06\x0c\x98\x89\[email protected]\xb8q\x93L\xff\x9e\xca\x03\xdd\x15\xdcj\x12\xd2\xa7\[email protected]\xc4\xa9\xcbq\xb8\xd6\xe2\xd5\xf4\x0b=\xe60\x1c=\xc95\xf2\x96,\x91\xef\xa7y)\x89\x92\xe0]\xc9\x14\xe1BA\xfa>\x8a\\"
+The decompressed form of the compressed input string provided in the program is: 
+b'Welcome to JavaTpoint! We hope that you are now able to understand and work with the functions of the bz2 module to carry out compression and decompression operations'
+
+
+
+Next TopicPython IPaddress Module
+
+
+
+
+← prev
+next →
+
+
+
+

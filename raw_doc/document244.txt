@@ -1,0 +1,111 @@
+
+
+
+
+next →
+← prev
+
+Dictionary Comprehension in Python
+In this tutorial, we will discuss about dictionary comprehension in Python, and we will learn how we can use it and also understand some examples.
+In Python, dictionaries are the data types in which the users can store the data in a pair of key/value.
+Example:
+
+dict1 = {"x": 12, "r": 31, "l": 1, "v": 54}
+
+What is Dictionary Comprehension?
+Dictionary comprehension is the method used for transferring one dictionary into another dictionary. Throughout the process of transferring the dictionary into another, the user can also include the data of the original dictionary into the new dictionary, and each data can be transferred as per need.
+Just like list comprehension, Python also allows the user to perform dictionary comprehensions. The user can create the dictionary by using the simple expression of the built-in method.
+The dictionary comprehension is created in the following form:
+
+{key: 'value' (value for (key, value) in iterable form)
+
+Example 1: (Method 1)
+
+# let's assume the user have two lists named Key and values
+key = ['p', 'q', 'r', 's', 't']
+value = [56, 67, 43, 12, 6]  
+# the following method is used for comprehensiong the dictionary
+user_Dict = { X:Y for (X,Y) in zip(key, value)}   
+print ("user_Dict: ", user_Dict)
+
+Output:
+user_Dict: {'p': 56, 'q': 67, 'r': 43, 's': 12, 't': 6}
+
+Example 2: (Method 2)
+
+# The user can also user the below method
+key_1 = ['j', 'k', 'l', 'm', 'n', 'o']
+value_1 = [34, 54, 13, 76, 98, 74]
+user_Dict_1 = dict (zip (key_1, value_1))
+print ("user_Dict_1: ", user_Dict_1) 
+
+Output:
+user_Dict_1: {'j': 34, 'k': 54, 'l': 13, 'm': 76, 'n': 98, 'o': 74}
+
+The user can also create the dictionary from a list by using comprehension.
+Example 3: (Method 3)
+
+user_Dict2 = {q: q**2 for q in [56, 67, 43, 12, 6]}
+print ("user_Dict2: ", user_Dict2)
+
+Output:
+user_Dict2: {56: 3136, 67: 4489, 43: 1849, 12: 144, 6: 36}
+
+Example 4: (Method 4)
+
+user_Dict3 = {q.upper(): q*3 for q in 'JavaTpoint is the Best learning Website'}
+print ("user_Dict: ", user_Dict3)
+
+Output:
+user_Dict: {'J': 'JJJ', 'A': 'aaa', 'V': 'vvv', 'T': 'ttt', 'P': 'ppp', 'O': 'ooo', 'I': 'iii', 'N': 'nnn', ' ': '   ', 'S': 'sss', 'H': 'hhh', 'E': 'eee', 'B': 'bbb', 'L': 'lll', 'R': 'rrr', 'G': 'ggg', 'W': 'WWW'}
+
+The user can also create Dictionary comprehension by using if and else statements.
+Example 5: (Method 5)
+
+user_dict4 = {q: q**3 for q in range (30) if q**3 % 4 == 0}
+print ("user_dict4: ", user_dict4)
+
+Output:
+user_dict4: {0: 0, 2: 8, 4: 64, 6: 216, 8: 512, 10: 1000, 12: 1728, 14: 2744, 16: 4096, 18: 5832, 20: 8000, 22: 10648, 24: 13824, 26: 17576, 28: 21952}
+
+Example 6: (Method 6)
+
+user_dict5 = dict()
+for numm in range(3, 20):
+    user_dict5 [numm] = numm*numm
+print("user_dict5: ", user_dict5)
+
+Output:
+user_dict5: {3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100, 11: 121, 12: 144, 13: 169, 14: 196, 15: 225, 16: 256, 17: 289, 18: 324, 19: 361}
+
+How to use Dictionary Comprehension
+Let's understand the following example.
+Example -
+
+#food_item price are in dollars
+old_price_1 = {'milk per litter': 2.12, 'coffee per cup': 3.60, 'bread per packet': 1.51}
+print ("old_price_1: ", old_price_1)
+convert_dollar_to_pound = 0.71
+new_price_1 = {food_item: values*convert_dollar_to_pound for (food_item, values) in old_price_1.items()}
+print ("new_price_1: ", new_price_1)
+
+In the above example, the user has used dictionary comprehension for converting the dollar value into pound value.
+Output:
+old_price_1: {'milk per litter': 2.12, 'coffee per cup': 3.6, 'bread per packet': 1.51}
+new_price_1:  {'milk per litter': 1.5052, 'coffee per cup': 2.556, 'bread per packet': 1.0721}
+
+Conclusion
+In this tutorial, we have explained the different methods of creating dictionary comprehension in Python by using different parameters and methods. We also showed an example of how the user can use dictionary comprehension for converting the dollar value into pound value.
+
+
+Next TopicPython Data Analytics
+
+
+
+
+← prev
+next →
+
+
+
+

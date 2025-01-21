@@ -1,0 +1,263 @@
+
+
+
+
+next →
+← prev
+
+Building a Telegram bot using Python
+Chatbots are generally touted as a revolution in the manner users interact with technology and businesses. They have a simpler interface compared with traditional applications, as they only need users to chat. The chatbots are meant to understand and perform the tasks the user demands from them, at least in theory.
+Many industries are shifting their customer service to chatbot systems because of the huge drop in the cost compared to actual human beings and the robustness and constant availability. Chatbots provide a degree of user support without substantial additional cost.
+In the present day, chatbots are utilized in multiple scenarios, ranging from menial activities like displaying time and weather data to more complex operations like rudimentary medical diagnosis and customer communication/support. We can devise a chatbot that supports the customers when they ask specific questions about the product. We can build a personal assistant chatbot that can handle fundamental activities and work as a reminder to remind different day-to-day activities like time to head to a meeting or the exercise.
+There are various options available to us when it comes to where we can deploy the chatbot, and one of the most common utilizations is social media platforms, as most people utilize them on a general basis. The same can be said of instant messaging applications, though with some caveats.
+Telegram is among the more famous Instant Messaging (IM) platforms these days, as it enables us to store messages on the cloud instead of just the device, and it boasts good multi-platform support, as we can have Telegram on Android, iOS, Windows, and just about any other platform that can support the web version. Building a chatbot on Telegram is quite easy and requires steps that take a little time to complete. We can integrate the chatbot in Telegram groups and channels, and it also works on its own.
+In the following tutorial, we will understand how to create a telegram bot with the help of the Python programming language. But before we get started, let us understand the basic requirement for the project.
+Requirements
+
+A Telegram Account: If we do not have the Telegram application installed, we can download it from the Google Play Store or Apple Store. Once downloaded, we have to create an account using the mobile number, just like WhatsApp.
+python-telegram-bot module: For this project, we will need a module known as python-telegram-bot. This library offers a pure Python interface for the Telegram Bot API. It is compatible with Python version 3.6.8+. In addition to the pure API implementation, this library features several high-level classes to make the development of bots easy and simple. These classes are stored in the "telegram.ext" submodule. For more information, we can check their official GitHub repo.
+
+How to Install the python-telegram-bot Module?
+In order to install the Python module, we need 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the python-telegram-bot module using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ python.exe -m pip install python-telegram-bot
+
+Verifying the Installation
+Once the module is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import telegram
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the module, and it is also recommended to refer to the official documentation of the module.
+Steps to create the first bot
+We will follow some steps in order to create our first bot that is shown below:
+Step 1: After creating an account on Telegram, we will go to the search bar and search for the "Botfather".
+
+
+
+Step 2: Now, we will click on the "BotFather" (first result) and type command /newbot.
+
+Step 3: We will then give a unique name to the bot. Once we name it, BotFather will ask for its username.
+
+Then also give a unique name BUT remember the username of the bot must end with the bot. For example, telebot, mybot, welcomebot, etc.
+Step 4: After providing a unique name and if it gets accepted, we will get a message something like the following:
+
+In the above image, the token will be different for everyone; we will utilize this token in the Python code in order to make changes in the bot and make it just like we need, and different commands in it.
+Understanding the Stepwise implementation in Python code
+In the following section, we will understand the stepwise implementation of the telegram bot in the Python programming language. These steps include:
+Step 1: Importing required libraries
+Step 2: Defining the functions for operation
+Step 3: Adding the Handlers to handle the messages and commands
+Step 4: Running the bot
+Importing the required libraries
+We will start by importing the libraries and functions required to create the telegram bot. The brief usage of these functions are as follows:
+
+Updater - This function will consist of the API key we received from BotFather to specify the bot to which we are adding the functionalities with the help of the Python code.
+Update - This function will help us invoke every time a bot receives an update, i.e., message or command, and send the user a message.
+CallbackContext - We will not utilize the functionality of this function directly in the code; however, it is required while adding the dispatcher (and it will work internally).
+CommandHandler - This Handler class is utilized in order to handle any command sent by the user to the bot, and the command must begin with "/". For example, "/start", "/help" and many more.
+MessageHandler - This Handler class is utilized in order to handle any normal message sent by the user to the bot.
+Filters - This function will allow us to filter the normal text, commands, images, etc., from a sent message.
+
+Let us consider the following snippet of code demonstrating the same:
+File: teleBot.py
+
+# importing the required libraries and functions
+from telegram.ext.updater import Updater
+from telegram.update import Update
+from telegram.ext.callbackcontext import CallbackContext
+from telegram.ext.commandhandler import CommandHandler
+from telegram.ext.messagehandler import MessageHandler
+from telegram.ext.filters import Filters
+
+Explanation:
+We have imported the required libraries and functions in the above snippet of code.
+Defining the functions for the operation
+
+Start function: This function will show the first conversation; we may name it something else; however, the message inside it will be sent to the user whenever they press "start" at the very beginning.
+In general, we should add something like "Hello! Welcome to the Bot.", etc. in the start message.
+Help function: Generally, in this function, we should add any kind of help the user might require, i.e., all the commands the bot understands, the information associated with the bot, and many more).
+
+Let us now consider the following snippet of code demonstrating the same:
+File: teleBot.py
+
+the_updater = Updater("provide API token got from BotFather",
+                use_context = True)
+
+def the_start(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Hello sir, Welcome to the TelePy. Please write /help to see the commands available."
+        )
+
+def the_help(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        """Available Commands :
+        /youtube - To get the youtube URL
+        /linkedin - To get the LinkedIn profile URL
+        /gmail - To get gmail URL
+        /jtp - To get the JavaTpoint.com URL""")
+
+Explanation:
+In the above snippet of code, we have used the Updater() function and provided the API token received from BotFather. We have then defined two functions as the_start and the_help, including the messages to be displayed for the user.
+We will now add some more functionalities to the Bot.
+Let us consider the following snippet of code demonstrating the same:
+File: teleBot.py
+
+def gmailURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "provide the gmail address here (For example, example@gmail.com)"
+        )
+
+def youtubeURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Link for the YouTube => https://www.youtube.com/"
+        )
+
+def linkedInURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "URL to the LinkedIn Profile => https://www.linkedin.com/username/"
+        )
+
+def jtpURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "URL to the official website => https://www.javatpoint.com/"
+        )
+
+def unknownCommmand(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Sorry '%s' is an invalid command" % update.message.text
+        )
+
+def unknownText(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Unfortunately, the system cannot recognize you, you said '%s'" % update.message.text
+        )
+
+Explanation:
+In the above snippet of code, we have added different functions. These functions include the one to open Gmail, the one for YouTube, one to open LinkedIn Profile, and the last one for Javatpoint.com official website. These are not MANDATORY functions, and one can add any kind of functions and their reply_text as their preferences; these are only for illustrating. Here, we have also defined a function as unknownText that will send the message written inside it whenever it receives some unknown messages. We have also added the function as unknownCommand that will allow us to filter out all the unknown commands sent by the user and reply to the message written within it.
+Adding the Handlers to handle the messages and commands
+Now we will be using the add_handler() function to handle different commands of the bot. Here is the following snippet of code that demonstrates the same:
+File: teleBot.py
+
+# adding the handler to handle the messages and commands
+the_updater.dispatcher.add_handler(CommandHandler('start', the_start))
+the_updater.dispatcher.add_handler(CommandHandler('youtube', youtubeURL))
+the_updater.dispatcher.add_handler(CommandHandler('help', the_help))
+the_updater.dispatcher.add_handler(CommandHandler('linkedin', linkedInURL))
+the_updater.dispatcher.add_handler(CommandHandler('gmail', gmailURL))
+the_updater.dispatcher.add_handler(CommandHandler('jtp', jtpURL))
+the_updater.dispatcher.add_handler(MessageHandler(Filters.text, unknownCommmand))
+ # Filtering out unknown commands
+the_updater.dispatcher.add_handler(MessageHandler(Filters.command, unknownCommmand))
+# Filtering out unknown messages
+the_updater.dispatcher.add_handler(MessageHandler(Filters.text, unknownText))
+
+Explanation:
+We have used the add_handler() function in the above snippet of code. Within this function, we have used the CommandHandler() function that gets the command from the user, and in return, a reply is generated with the message enclosed within the function.
+Running the bot
+We will use the start_polling() function to run the bot. Let us consider the following snippet of code demonstrating the same:
+File: teleBot.py
+
+# running the bot
+the_updater.start_polling()
+
+Explanation:
+We have used the start_polling() function in the above snippet of code. Whenever we start polling, the bot will be active, and it will look for any new message sent by any of the users, and if it matches the command specified there, it will reply accordingly.
+Now, before we see the output of the project, a complete code is provided in the next section.
+A Complete Python Code
+The complete Python code to create a Telegram bot is shown below:
+File: teleBot.py
+
+# importing the required libraries and functions
+from telegram.ext.updater import Updater
+from telegram.update import Update
+from telegram.ext.callbackcontext import CallbackContext
+from telegram.ext.commandhandler import CommandHandler
+from telegram.ext.messagehandler import MessageHandler
+from telegram.ext.filters import Filters
+
+# adding different functions to the bot
+the_updater = Updater("provide API token got from BotFather",
+                use_context = True)
+
+def the_start(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Hello sir, Welcome to the TelePy. Please write /help to see the commands available."
+        )
+
+def the_help(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        """Available Commands :
+        /youtube - To get the youtube URL
+        /linkedin - To get the LinkedIn profile URL
+        /gmail - To get gmail URL
+        /jtp - To get the JavaTpoint.com URL""")
+
+def gmailURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "provide the gmail address here (For example, example@gmail.com)"
+        )
+
+def youtubeURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Link for the YouTube => https://www.youtube.com/"
+        )
+
+def linkedInURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "URL to the LinkedIn Profile => https://www.linkedin.com/username/"
+        )
+
+def jtpURL(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "URL to the official website => https://www.javatpoint.com/"
+        )
+
+def unknownCommmand(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Sorry '%s' is an invalid command" % update.message.text
+        )
+
+def unknownText(update: Update, context: CallbackContext):
+    update.message.reply_text(
+        "Unfortunately, the system cannot recognize you, you said '%s'" % update.message.text
+        )
+
+# adding the handler to handle the messages and commands
+the_updater.dispatcher.add_handler(CommandHandler('start', the_start))
+the_updater.dispatcher.add_handler(CommandHandler('youtube', youtubeURL))
+the_updater.dispatcher.add_handler(CommandHandler('help', the_help))
+the_updater.dispatcher.add_handler(CommandHandler('linkedin', linkedInURL))
+the_updater.dispatcher.add_handler(CommandHandler('gmail', gmailURL))
+the_updater.dispatcher.add_handler(CommandHandler('jtp', jtpURL))
+the_updater.dispatcher.add_handler(MessageHandler(Filters.text, unknownCommmand))
+ # Filtering out unknown commands
+the_updater.dispatcher.add_handler(MessageHandler(Filters.command, unknownCommmand))
+
+# Filtering out unknown messages
+the_updater.dispatcher.add_handler(MessageHandler(Filters.text, unknownText))
+
+# running the bot
+the_updater.start_polling()
+
+Output:
+
+
+
+Next TopicWeb2py Framework in Python
+
+
+
+
+← prev
+next →
+
+
+
+

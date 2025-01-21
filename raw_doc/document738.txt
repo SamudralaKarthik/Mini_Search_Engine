@@ -1,0 +1,173 @@
+
+
+
+
+next →
+← prev
+
+Find Hotel Price Using the Hotel Price Comparison API using Python
+In this tutorial, we will write the program to find the hotel price using the hotel price comparison API using Python programming language. We will use the Makcorpse hotel API.
+This API is used to get the JSON data, and helpful to compare Hotel prices, ratings, and reviews from more than 1500 websites like oyo.com, Hotels.com, Agoda.com, Expedia and more. It is beneficial to retrieve the information of the any hotel or any city regarding prices, ratings, reviews, historical prices and many other things.
+We need to get the API key to use it our local machine, which we can get from https://www.makcorps.com/
+Note - User must be created on makcorps.com then, only register user can use the APIs.
+We have registered and we will use the sign in credentials to connect with the APIs.
+Module Require
+We need the requests module to work with the makcorps API. If you don't have requests module, type the following command in the terminal.
+pip install requests
+Getting Started with MakCorps API
+This API is designed to provide the data such as reviews, prices, ratings, etc from than 200 vendors such as Booking.com, Agoda.com, Expedia, and Hotels.com. We need to remember the following steps before implementation -
+
+Each request should include a JWT token. A JWT token will help us to identify the account.
+If you exceed your plan connection limit, the API will respond with a 429 status code, this can be solved by subscribing again.
+If you have free plan, you make 420 requests per 30 days. If you exceed the limit, you will receive 403 error.
+Each GET request will return JSON response with a 200 response code.
+You can also subscribe to the premium plan.
+
+How to get JWT Token?
+To get the JWT token, the API expose /auth endpoint. We need to pass the username and password in the body.
+
+curl --request POST \
+         --url 'https://api.makcorps.com/auth' \
+         --header 'Content-Type: application/json' \
+         --data '{
+              "username":"franklin",
+              "password":"franklin@123"
+      }'
+
+Implementation
+We need to provide the city name to the API to search the hotel prices. Suppose, we search city Delhi, the output JSON will be a price comparison of different hotels in that city from different vendors along with their name. Following is the implementation of the code.
+Example -
+
+# import required modules
+import requests, json
+  
+# req_url variable to store url
+req_url = "https://api.makcorps.com/free/"
+  
+# enter city name here
+city = "London"
+  
+complete_url = req_url + city
+  
+# Declaring headers needed
+headers = {
+    'Authorization': 'Your API Key',
+}
+  
+# get method of requests module
+# return response object
+response_ob = requests.get(complete_url, headers=headers)
+  
+
+result = response_ob.json()
+  
+
+if response_ob.status_code == 200:
+  
+    #  name is extracting from
+    # the result variable data
+    print("price comparison data for a random date of city london is:")
+    print(result)
+else:
+    print("record is not found for given request")
+
+Output:
+price comparison data for a random date of city london is:        
+{'comparison':
+  [
+    {
+     'vendor1-price': 'US$217',
+     'vendor3-price': 'US$246',
+     'vendor2-price': 'US$217',
+     'vendor3': 'travelup.com',
+     'vendor1': 'Travelocity',
+     'Hotel': 'Park Plaza Westminster Bridge London',
+     'Best-price': 'US$\xa0246US$\xa0215Booking.com',
+     'vendor2': 'Orbitz.com'
+    }, 
+
+    {
+     'vendor1-price': '',
+     'vendor3-price': '',
+     'vendor2-price': '',
+     'vendor3': 'Travelocity',
+     'vendor1': 'Expedia.com',
+     'Hotel': 'Travelodge London Covent Garden',
+     'Best-price': 'US$\xa074Travelodge',
+     'vendor2': 'Hotels.com'
+    }, 
+
+    {
+     'vendor1-price': 'US$167',
+     'vendor3-price': 'US$183',
+     'vendor2-price': 'US$171',
+     'vendor3': 'Nustay.com', 
+     'vendor1': 'ParkGrandLondon',
+     'Hotel': 'Park Grand London Kensington',
+     'Best-price': 'US$\xa0170Booking.com', 
+     'vendor2': 'Travelocity'
+    }, 
+
+    {
+     'vendor1-price': '',
+     'vendor3-price': '',
+     'vendor2-price': '',
+     'vendor3': 'Orbitz.com',
+     'vendor1': 'Expedia.com',
+     'Hotel': 'Travelodge London City hotel',
+     'Best-price': 'US$\xa056Travelodge',
+     'vendor2': 'Nustay.com'
+    }, 
+
+    {
+     'vendor1-price': 'US$205',
+     'vendor3-price': 'US$232',
+     'vendor2-price': 'US$185',
+     'vendor3': 'ZenHotels.com', 
+     'vendor1': 'Booking.com',
+     'Hotel': 'The Tower Hotel',
+     'Best-price': 'US$\xa0206Orbitz.com',
+     'vendor2': 'Trip.com'
+    },
+
+    {
+     'vendor1-price': 'US$77',
+     'vendor3-price': 'US$94',
+     'vendor2-price': 'US$87',
+     'vendor3': 'Nustay.com', 
+     'vendor1': 'Official Site',
+     'Hotel': 'Point A Hotel, London Kings Cross St Pancras',
+     'Best-price': 'US$\xa087Orbitz.com',
+     'vendor2': 'Booking.com'
+    },
+
+    {
+     'vendor1-price': 'US$224',
+     'vendor3-price': 'US$242',
+     'vendor2-price': 'US$217',
+     'vendor3': 'travelup.com', 
+     'vendor1': 'Orbitz.com',
+     'Hotel': 'Strand Palace Hotel',
+     'Best-price': 'US$\xa0223Booking.com',
+     'vendor2': 'ZenHotels.com'
+    }
+  ]
+}
+
+Explanation -
+In the above code, we have imported the requests module and assigned the request URL to the req_url variable. We also assigned city name that to search in city variable. Then we complete the URL address and store in the complete_url variable. We call the get method on the given URL and pass the header. The header must include the JWT token that we get from /auth API. The API return the response that we convert JSON format data into Python format code. Now we check the value of the status code is equal to 200 or not, if equal that means record is found otherwise record is not found. Hence we returned the fetched result.
+Conclusion
+In this tutorial, we have learned the how to fetch the prices of the hotels and compare. The Makcorps API will help to choose the lowest price hotels in the searched city.
+
+
+Next TopicGet Started with RabbitMQ and Python
+
+
+
+
+← prev
+next →
+
+
+
+

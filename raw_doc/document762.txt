@@ -1,0 +1,210 @@
+
+
+
+
+next →
+← prev
+
+Bisect Module in Python
+In this tutorial, we will learn about the bisect algorithm, which is written in Python. Its source code is written within 80 lines. Let's go through the introduction to the bisect module.
+Introduction
+It is basically a bisection algorithm to find the insertion point for adding a given element in the sorted list. However, it is crucial to remember that its functions take the sorted list as an argument. The list must be sorted in ascending order. If the passed list is not in ascending order, the function will not throw an error, but the result might be unexpected. Now let's understand its methods.
+Important Methods
+Let's understand some essential methods of bisect methods.
+
+bisect_left(a, x, lo=0, hi=None) -
+
+It returns the index i where must be inserted the value x such that given restore its order. If value x already appears in the list, the index i would be just before the leftmost x value is already there. Let's understand the following example.
+Example -
+
+import bisect # import module
+a = [23, 40, 61, 82, 100, 12, 14] # list of integers in ascending order
+x = 45 # number to insort
+i = bisect.bisect_left(a, x) # call method
+print("The element to be inserted at place:", i)
+
+Output:
+The element to be inserted at place:  2
+
+Explanation -
+In the above code, we have defined the list a, and we want to insert 45. We want to insert 45 so that a is kept ordered. We called the bisect_left() method, which returned the 2; it is where the given value must be inserted. 
+Considering the above snippet, we try to insert x value in the list a by calling the insert() method of the object list.
+Example - 2:
+
+a = [23, 40, 61, 82, 100, 12, 14] # list of integers in ascending order
+x = 45 # number to insert
+i = bisect.bisect_left(a, x) 
+a.insort(i, x) # insort "x" in the list "a" at the index "i"
+print(a)
+
+Output:
+[23, 40, 45, 61, 82, 100, 12, 14]
+
+Explanation -
+As shown in the above code, we have inserted a value at index 3. Let's see another example where we will use the bisects that the Bisect Module provides. 
+Now, we will insert the element that is already present in the list.
+Additionally, we will use the lo and hi parameters. Let's understand the following example - 
+Example - 3:
+
+import bisect # import module
+a = [23, 40, 61, 82, 100, 12, 14] # list of integers in ascending order
+
+x = 82 # number to insort
+i = bisect.bisect_left(a, x) 
+
+print("The element is to be insorted at:", i)
+a.insort(i, x) # insort "x" in the list "a" at the index "i"
+print(a)
+
+Output:
+The element is to be insorted at: 3
+[23, 40, 61, 82, 82, 100, 12, 14]
+
+Explanation - 
+As we mentioned earlier, the bisect_left method corresponds to the list's first match of the value x (82). The lo and hi parameters are used to specify the starting and ending index of the list that we want to consider. If we don't pass these parameters, the whole list is considered, as seen in the earlier example. Let's understand the example of lo and hi.
+Example - 4:
+
+import bisect # import module
+a = [23, 40, 61, 82, 100, 12, 14] # list of integers in ascending order
+
+x = 82 # number to insort
+i = bisect.bisect_left(a, x, lo=2, hi=7) 
+
+print("The element is to be inserted at:", i)
+a.insort(i, x) # insert "x" in the list "a" at the index "i"
+print(a)
+
+Output:
+The element is to be inserted at: 3
+[23, 40, 61, 82, 82, 100, 12, 14]
+
+Explanation - 
+As lo and hi were passed to bisect_left() method the list to consider it would be a[2:7] what corresponds to [23, 40, 61, 82, 82, 100, 12, 14]. The bisect_left finds the index i in this slice and then returns el index based on the whole list.
+
+insort_right(a, x, lo=0, hi=None)
+
+It works the same as the insort_left(), except that it uses the bisect_right() function to find where the x value needs to be inserted. Let's understand the following example.
+Example -
+
+import bisect
+
+a = [10, 20, 30, 40, 40, 70, 60]
+x = 40
+bisect.insort_right(a, x)
+print(a)
+
+Output:
+[10, 20, 30, 40, 40, 40, 70, 60]
+
+If we use the bisect_right method, we will get the same result.
+It is the best way to use the function of the Bisect Module. It is essential to specify that the time complexity of the bisect_left and bisect_right is O(log(n)) since their implementation uses Binary Search Algorithm. 
+However, the time complexity of the insort_left and insort_right depends on the complexity of the insert method. The time complexity of these methods is O(n).
+In the above examples, we have used the integers, but we can also use the list of floats or strings.
+But what if we use a tuple or a string? We can use the bisect_right() and bisect_left(). But if we try to use the insort_left and insort_right on a string or tuple, we will get an error. Because the tuples and strings are immutable objects, these objects do not have implemented the insert method, which modifies one immutable object as a list in place. 
+The bisect_right and insort_right have aliases, so bisect_right can be called bisect and insort_right as insort.
+Problems Related to Bisect Module
+Let's solve some interesting problems using the bisect module.
+Problem - Write the Python program to find three integers which gives the sum of zero in a given array using the Binary Search (bisect)
+Example -
+
+from bisect import bisect, bisect_left
+from collections import Counter
+class Solution:
+    def triplet_sum(self, nums):
+        triplets = []
+        if len(nums) < 3:
+            return triplets
+        num_freq = Counter(nums)
+        nums = sorted(num_freq)  # Sorted unique numbers
+        max_num = nums[-1]
+        for i, v in enumerate(nums):
+            if num_freq[v] >= 2:
+                comp =  -2 * v
+                if comp in num_freq:
+                    if comp != v or num_freq[v] >= 3:
+                        triplets.append([v] * 2 + [comp])
+
+            # When all 3 numbers are different.
+            if v < 0:  # Only when v is the smallest
+                two_sum = -v
+
+                # Lower/upper bound of the smaller of remainingtwo.
+                lb = bisect_left(nums, two_sum - max_num, i + 1)
+                ub = bisect(nums, two_sum // 2, lb)                       
+                for u in nums[lb : ub]:
+                    comp = two_sum - u
+                    if comp in num_freq and u != comp:
+                        triplets.append([v, u, comp])
+        return triplets
+nums = [-20, 0, 20, 40, -20, -40, 80]
+s = Solution()
+result = s.triplet_sum(nums)
+print(result)
+nums = [1, 2, 3, 4, 5, -6]
+result = s.triplet_sum(nums)
+print(result)
+
+Output:
+[[-40, 0, 40], [-20, -20, 40], [-20, 0, 20]]
+[[-6, 1, 5], [-6, 2, 4]]
+
+Problem -2: Write a Python program to find the first occurrence of a given number in a sorted list using Binary Search (bisect).
+Solution
+
+import bisect # import module
+def Binary_Search(a, x): 
+    i = bisect.bisect_left(a, x) 
+    if i != len(a) and a[i] == x: 
+        return i 
+    else: 
+        return -1
+
+nums = [1, 2, 3, 3, 4, 8, 8, 10, 12] 
+x = 3 
+num_position = Binary_Search(nums, x) 
+if num_position == -1: 
+    print(x, "is not present.") 
+else: 
+    print("First occurrence of", x, "is present at index", num_position)
+
+Output:
+First occurrence of 3 is present at index 2
+
+Problem - 3: Write a Python program to find the index position of the last occurrence of a given number in a sorted list using Binary Search (bisect).
+Example -
+
+import bisect # import module
+
+def Binary_Search(a, x): 
+    i = bisect.bisect_right(a, x) 
+    if i != len(a)+1 and a[i-1] == x: 
+        return (i-1) 
+    else: 
+        return -1 
+
+nums = [1, 2, 3, 3, 4, 8, 8, 10, 12] 
+x = 3 
+num_position = Binary_Search(nums, x) 
+if num_position == -1: 
+    print(x, "is not present.") 
+else: 
+    print("First occurrence of", x, "is present at index", num_position)
+
+Output:
+Last occurrence of 3 is present at index 3
+
+Conclusion
+In the above tutorial, we have a detailed discussion over the bisect module and its methods. We have seen some examples and learned about the bisect_right and bisect_left methods. This module is used to solve binary search-related problems.
+
+
+Next TopicBoruvka's Algorithm - Minimum Spanning Trees
+
+
+
+
+← prev
+next →
+
+
+
+

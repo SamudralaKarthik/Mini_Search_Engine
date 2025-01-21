@@ -1,0 +1,40 @@
+
+
+
+
+next →
+← prev
+
+KMP Algorithm - Implementation of KMP Algorithm using Python
+In this tutorial, we will learn about the KMP algorithm using the Python programming language. This algorithm is primarily used to search pattern or a sub-string with O(n) complexity.
+This algorithm can be asked in the technical interviews to test the developer's abilities.
+KMP Algorithm
+KMP stands for Knuth-Morris-Prat and it is pattern searching algorithm. This is used to solve the string matching problem. This simple problem has a lot of application in the areas of Information Security, Pattern Recognition, Document Matching, Bioinformatics, and etc. It is developed by the Donald-Knuth and Vaughan Pratt conceiving a linear time solution in 1970 by thoroughly analyzing the na�ve approach.
+The Partial Match Table
+The Partial match table is a key of the KMP. To understand the KMP, we need to grasp the concept of the partial match table. In this section, we will explain the partial match table in the simple words.
+Let's see the following example -
+
+char:   | a | b | a | b | a | b | c | a |
+index: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 
+value: | 0 | 0 | 1 | 2 | 3 | 4 | 0 | 1 |
+
+If we have a string of eight-character pattern, the partial match table will have eight cells. If we use the seventh cell in the table, it means we are only interesting in first seven characters in the pattern. The eighth one ("a") is irrelevant. The same will happen with the sixth cell.
+Now, to talk about the meaning, we need to know about proper prefix and proper suffixes. Let's see what are these term.
+Proper prefix - All the characters in a string, with one or more cut off the end. "T", "Ti", "Tig", "Tige", and "Tiger" are all the proper prefix of "Tiger".
+Proper suffix: All the characters in a string, with one or more cut off the beginning. "arry", "rry", "rr", "ry", and "y" are all proper suffixes of "Harry".
+The length of the longest proper prefix in the sub(pattern) that matches a proper suffix in the same (sub)pattern.
+Let's understand it using the example. Suppose we are looking in the third cell, it means we are only interested in the first three characters ("aba"). In "aba", there are two proper prefixes ("a" and "ab") and two proper suffixes ("a" and "ba"). As we can see that proper prefix "ab" doesn't match either of the two proper suffixes. However, the proper prefix "a" matches the proper suffix "a". Thus, the length of the longest proper prefix that matches a proper suffix in this case is 1.
+Now let's check the cell five, which concerns "ababa" which have proper prefixes ('a', 'ab', 'aba', and 'abab') and four proper prefixes ('a', 'ba', 'aba', and 'baba'). Now we get the proper prefixes and proper suffixes. Since aba is longer than a, it wins, and cell fives gets value 3.
+
+
+Next TopicNew Features in Python 3.10
+
+
+
+
+← prev
+next →
+
+
+
+

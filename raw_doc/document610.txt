@@ -1,0 +1,320 @@
+
+
+
+
+next →
+← prev
+
+Sympy module in python
+SymPy is a symbolic computation Python package that is open-source. It may be used as a standalone program, a library for other applications, or as a live online application called SymPy Live or SymPy Gamma. Because SymPy is written purely in Python and has minimal dependencies, it is straightforward to install and investigate. SymPy is a computer algebra system with a low entry barrier thanks to its simplicity of use and a simple and extendable codebase written in a well-known language. From elementary symbolic arithmetic through calculus, algebra, discrete mathematics, and quantum physics, SymPy has it all. It has the ability to format the results of computations into LaTeX code.
+To begin with, SymPy is entirely free. It is open-source and released under the permissive BSD license, allowing you to change and even sell the source code. This stands out from popular commercial systems such as Maple or Mathematica, which cost hundreds of dollars in software, and licenses. SymPy is open-source software released under the New BSD license. Ondrej Ertk and Aaron Meurer are the principal developers. It was founded by Ondrej Erik in 2005.
+Symbolic computing is concerned with the symbolic calculation of mathematical objects. This implies that mathematical objects are represented precisely rather than roughly and that mathematical equation with unevaluated variables are left in symbolic form. Second, SymPy is written in Python. The vast majority of computer algebra systems create their own language.
+Not with SymPy. SymPy is fully written in Python and is totally run in Python. This implies that if you already know Python, getting started with SymPy is significantly easier because you already know the syntax (and if you don't, Python is quite simple to learn). Python is already a well-designed and battle-tested language. The developers of SymPy feel confident in their skills to write mathematical software, but designing computer languages is a whole different matter. We may concentrate on the important aspects of mathematics by utilizing an existing language.
+Sage is another computer algebra system that employs Python as its programming language. Sage, on the other hand, is big, requiring a download of over a gigabyte. SymPy has the benefit of being lightweight. It is not only tiny, but it also has no dependencies other than Python, allowing it to be used practically everywhere. Furthermore, the aims of Sage and SymPy are not the same.
+Sage aspires to be a full-featured mathematics system, combining all of the main open-source mathematical systems into a single package. When you use a Sage function, such as integrate, it uses one of the open-source packages that it provides. SymPy is, in fact, included in Sage. SymPy, on the other hand, aspires to be a self-contained system with all functionality implemented within the framework. SymPy may also be used as a library, which is a significant feature. Many computer algebra systems are designed to be used in interactive situations, but automating or extending them is challenging. You may use SymPy in an interactive Python environment or import it into your own Python program with ease. SymPy also has APIs that allow it simple to add your own custom functions.
+Some key features:
+
+Substitution: Substitution is one of the most frequent things you would wish to perform with a mathematical equation. Substitution changes the meaning of all instances of something in a phrase. The subs approach is used to do this.
+Converting Strings to SymPy Expressions: The simplify function (that's simplified, not to be confused with simplify) can be used to convert strings into SymPy expressions.
+Lambdify: Subs and evolve are useful for simple evaluations, but more efficient techniques exist to evaluate an expression at several locations. If you were to evaluate an expression at a thousand points, for example, SymPy would be considerably slower than necessary, especially if machine accuracy is all that matters. Instead, you should utilize NumPy and SciPy packages. The modify function is the simplest way to transform a SymPy expression into a numerically evaluate the able expression. modify is similar to a lambda function, but it translates SymPy names to the names of the numerical library being used, which is generally NumPy.
+Printing: There are several printers available in SymPy. The most common ones are
+
+str
+srepr
+ASCII pretty-printer
+Unicode pretty-printer
+LaTeX
+MathML
+Dot
+
+
+
+Now let us have a look at the code of the sympy module in python.
+Code:
+
+# This is a sample Python program to demonstrate the use case of the Sympy module in Python,  and how this particular model can be used in various forms to perform various advanced mathematical operations such as using advanced trigonometric functions,  calculating derivative of one or multiple variables,  calculations of the integration of root multi-root variables,  and we can also use this module to create equations and these equations can be of any form that these equations can be of the linear type or quadratic or to the power 3.  so all these operations and some other operations are explained in the form of functions in this below-written example,  this Python program covers the broad capability of this Python module to perform the wide variety of Advanced mathematical operations let's have a look at that.
+
+
+# all the required modules are important in the beginning so that we can use the various library methods and variables provided by these modules later throughout the program.
+from sympy import *
+import sys
+
+# 
+class SympyExample:
+
+	def __init__(self):
+		pass
+	
+	#This is a  sample Function which will be used to calculate the square root of a integer value,  this function ask the user for input and then calculate the square root of that particular integer value,  and the results of the calculation of stored in a variable and then that variable is printed as a result to the user. 
+	def square_root_example(self):
+
+		print("enter the integer whose square root you want to calculate")
+		input_value = input()
+		int_coverted = int(input_value)
+
+		root1 = sqrt(int_coverted)
+		root2 = sqrt(int_coverted) 
+
+		#printing results
+
+		pprint(Mul(root1,root2, evaluate=False))
+		print('equals to')
+		pprint(root1 * root2)
+
+# In mathematics expressions form a very important role,  so in this function, we will see how we can create simple expressions with the help of this Python module,  in this function, first of all, we have defined two variables named var1 and var2,  these two variables are then used to create a linear expression along with some constant values,  the expression is created and can be further evaluated by putting the value of these two variables,  so with the help of this we can use a simple Python object as a variable and in result, those variables can be used performer equation or expression,  in this example, we have created a linear expression but the user can create an expression of any degree and we have also used only two variables but any and number of variables can be used according to the need of the user.
+	def generate_expression(self):
+
+		var1 = Symbol('var1')
+		var2 = Symbol('var2')
+
+		print("enter the exprression(linear) that you want to form with two variables")
+		input_expr = input()
+
+		expr  = 2*var1 + 5*var2 - 18*var1 + 34*var2
+
+		print("Expression is {}".format(expr))
+
+
+#  this is an extension where we will be calculating the derivative of the trigonometric expressions,  so for this first of all we have to form a trigonometric expression and then use that expression for calculating its respective derivative,  first of all, we have created two variables,  and then these two variables are used to create a trigonometric expression so once the automatic expression is created we are storing that into a variable,  and that variable is used to perform the derivative operation,  and the resultant is presented to the user as a derivative of the trigonometric expression
+	def derivate_and_trigonometric_expressions(self):
+
+		var1 = Symbol('var1')
+		var2 = Symbol('var2')
+
+		#
+		trigno_expr = sin(var1) * exp(var1)
+		print("The trigno expression is {}".format(trigno_expr))
+
+		differential_expr = diff(trigno_expr,var1)
+		print("The differential expression is {}".format(differential_expr))
+
+
+#  similar to the above function in this function firstly we are also creating and trigonometric expression and that trigonometric expression is then used for integration,  so in this case, we have also created one variable and that variable is used to create a Technometrics expression so once we have a trigonometric expression that trigonometric expression is used to calculate the integration and the resultant of the integration is presented to the user as a  resultant value.
+	def integration_and_trigonometric_expressions(self):
+
+		var2 = Symbol('var2')
+
+		trigno_expr_for_int = exp(var2)*sin(var2) + exp(var2)*cos(var2)
+		print("The trigno expression is {}".format(trigno_expr_for_int))
+
+		integration_expr = diff(trigno_expr_for_int,var2)
+		print("The integration expression is {}".format(integration_expr))
+
+#  this is another function that represents another use case scenario of this module in Python,  in this function we are finding the eigenvalues of a matrix, So to calculate these values first step is to create a matrix so for creating a matrix we have created a list and pass that list the matrix function of this Python module the returning value of this metric function is a matrix that can be used to calculate this value so once we have a matrix with the help of the function provided by this Python module we can easily calculate the eigenvalues of this matrix. 
+	def find_eigenvalues_of_matrix(self):
+
+		print("Enter the values for the 2X2 matrix")
+		print("Enter values for the first row")
+		r1 = int(input())
+		r2 = int(input())
+		print("Enter values for the second row")
+		r3 = int(input())
+		r4 = int(input())
+
+		matrix_obj =  Matrix([[r1,r2],[r3,r4]])
+		print("Matrix is {}".format(matrix_obj))
+		eigenvals_vals = matrix_obj.eigenvals()
+		print("Eigenvals of the matrix are {}".format(eigenvals_vals))
+
+
+
+#  in the end the main function is written In which the object of the above return class is created, and with the help of this newly created object,  we have called the different functions which we have written each of which is representing a different use case scenario of this module provided by Python The user is asked for the input wherever a particular input is required from the user side and then some operations are performed on that input data provided by the user and the resultant data is printed to the user as a return type or resulted value of that particular function the operation which is performed on the input data provided by the user depends upon the type of operation for which that data has been taken as an input. 
+def main():
+	
+	sympy_obj =  SympyExample()
+	while(True):
+		print("please choose any one of the operations from the listed below the list of operations::")
+		print("1. To use the sympy module for calculation of the square root.")
+		print("2. To use the sympy module for generating dynamic expressions.")
+		print("3. To use the sympy module to calculate the derivative of the trigonometric expressions.")
+		print("4. To use the sympy module to calculate the integration of the trigonometric expressions.")
+		print("5. To use the sympy module to calculate the eigenvalues of a matrix.")
+		print("6. To exit from the code execution.")
+		
+		menu_choice = input()
+		menu_choice = int(menu_choice)
+		if menu_choice == 1:
+			sympy_obj.square_root_example()
+		elif menu_choice == 2:
+			sympy_obj.generate_expression()
+		elif menu_choice == 3:
+			sympy_obj.derivate_and_trigonometric_expressions()
+		elif menu_choice == 4:
+			sympy_obj.integration_and_trigonometric_expressions()
+		elif menu_choice == 5:
+			sympy_obj.find_eigenvalues_of_matrix()
+		elif menu_choice == 6:
+			sys.exit()
+		
+		print("To continue with code execution, type [y] otherwise [n].")
+		continue_or_exit = input()
+
+		if continue_or_exit == 'y' or continue_or_exit == 'Y':
+			pass
+		elif continue_or_exit == 'n' or continue_or_exit == 'N':
+			sys.exit()
+
+		
+
+if __name__ == '__main__':
+	main()
+
+Output:
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+1
+enter the integer whose square root you want to calculate
+7
+?7??7
+equals to
+7
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+2
+enter the expression(linear) that you want to form with two variables
+2*x + 5*y - 18*x + 34*y
+Expression is -16*var1 + 39*var2
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+3
+The trigno expression is exp(var1)*sin(var1)
+The differential expression is exp(var1)*sin(var1) + exp(var1)*cos(var1)
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+4
+The trigno expression is exp(var2)*sin(var2) + exp(var2)*cos(var2)
+The integration expression is 2*exp(var2)*cos(var2)
+To continue with code execution, type [y] otherwise [n].
+y
+
+
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+5
+Enter the values for the 2X2 matrix
+Enter values for the first row
+3
+8
+Enter values for the second row
+5
+9
+Matrix is Matrix([[3, 8], [5, 9]])
+Eigenvalues of the matrix are {13: 1, -1: 1}
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+5
+Enter the values for the 2X2 matrix
+Enter values for the first row
+1
+9
+Enter values for the second row
+4
+2
+Matrix is Matrix([[1, 9], [4, 2]])
+Eigenvals of the matrix are {3/2 - sqrt(145)/2: 1, 3/2 + sqrt(145)/2: 1}
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+1
+enter the integer whose square root you want to calculate
+98
+7??2?7??2
+equals to
+98
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivative of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+5
+Enter the values for the 2X2 matrix
+Enter values for the first row
+500
+600
+Enter values for the second row
+700
+800
+Matrix is Matrix([[500, 600], [700, 800]])
+Eigenvals of the matrix are {650 - 50*sqrt(177): 1, 650 + 50*sqrt(177): 1}
+To continue with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To use the sympy module for calculation of the square root.
+2. To use the sympy module for generating dynamic expressions.
+3. To use the sympy module to calculate the derivate of the trigonometric expressions.
+4. To use the sympy module to calculate the integration of the trigonometric expressions.
+5. To use the sympy module to calculate the eigenvalues of a matrix.
+6. To exit from the code execution.
+6
+
+In the above-written code, we have called the different functions which we have written each of which is representing a different use case scenario of this module provided by Python The user is asked for the input wherever a particular input is required from the user side and then some operations are performed on that input data provided by the user and the resultant data is printed to the user as a return type or resulted value of that particular function the operation which is performed on the input data provided by the user depends upon the type of operation for which that data has been taken as an input.
+Advantages:
+
+To begin with, SymPy is entirely free. It is open-source and released under the permissive BSD license, allowing you to change and even sell the source code. This is in contrast to popular commercial systems like Maple or Mathematica, which have license fees of hundreds of dollars.
+Second, SymPy is written in Python. The vast majority of computer algebra systems create their own language. Not with SymPy. SymPy is fully written in Python and is totally run in Python. This implies that if you already know Python, getting started with SymPy is significantly easier because you already know the syntax (and if you don't, learning Python is really simple). Python is already a well-designed and battle-tested language. The developers of SymPy feel confident in their skills to write mathematical software, but designing computer languages is a whole different matter. We may concentrate on the important aspects of mathematics by utilizing an existing language.
+Sage, another computer algebra system, is written in Python. Sage, on the other hand, is rather huge, requiring over a gigabyte to download. SymPy has the benefit of being light. It may be used practically everywhere because it is tiny and has no requirements other than Python. Furthermore, Sage's and SymPy's objectives are not the same. Sage aspires to be a complete mathematics system, combining all of the main open-source mathematical systems into one. Sage uses one of the open-source packages it contains when you use a function, such as integrated. Sage includes SymPy by default. In contrast, SymPy. Sage aspires to be a full-featured mathematics system, combining all of the main open-source mathematical systems into a single package. When you use a Sage function, such as integrate, it uses one of the open-source packages that it provides. SymPy is, in fact, included in Sage. SymPy, on the other hand, aspires to be a self-contained system with all functionality implemented within the framework.
+SymPy may also be used as a library, which is a significant feature. Many computer algebra systems are designed to be used in interactive situations, but automating or extending them is challenging. You may use SymPy in an interactive Python environment or import it into your own Python program with ease. SymPy also has APIs that allow it simple to add your custom functions.
+Maxima was the standard general-purpose, free-software computer algebra system for many years. Even though many practitioners still prefer Python, the relatively new SymPy has grown in popularity over the last decade. This is owing to a variety of causes, including its incorporation in other packages, such as Sage, a huge system that bundles and gives a common interface to numerous numerical, graphical, and symbolic software products.
+
+So, in this article, we have understood the usage of the Sympy module in python and understood the use cases where we can use this module to perform various mathematical operations.
+
+
+Next TopicSmote Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,172 @@
+
+
+
+
+next →
+← prev
+
+How to change the size of figure drawn with matplotlib?
+In this tutorial, we will discuss how to adjust the size of figures created with matplotlib in Python. Matplotlib library is widely used for creating graphs.
+Introduction
+Matplotlib is popular for creating figures for representing data. We can populate the figure with all different types of data, including axes, a graph plot, a geometric shape, etc. We can perform various operations on a matplotlib generated graph where adjusting the sizing is a common task. Sometimes, we require setting the size of the figure to a specific size. The graph can be wider in size, taller in height, etc.
+The matplotlib. figure() provides the figsize attribute that specifies the width and height of a figure in-unit inches. Let's understand the following syntax.
+Syntax:
+
+import matplotlib.pyplot as plt
+figure_name = plt.figure(figsize=(width, height))
+
+The figsize is an optional parameter of figure() method. By default, the figure has the dimensions as (6.4, 4.8).
+Generally, each unit inch is 80 x 80 pixels. However, we can change the pixel per unit inch using the dpi parameter, which can be specified in the same function. 
+We will follow the below approach.
+
+We will define a variable val_1, and set it equal to plt.figure(figsize=(6,3)).
+It will create a figure object with a width of 6 inches and 3 inches in height.
+The figsize attribute has a value tuple of 2 values.
+
+Let's understand the following example.
+Example -
+
+# We start by importing matplotlib
+import matplotlib.pyplot as plt
+
+# Plotting a figure of width 6 and height 3
+plot_1 = plt.figure(figsize=(6, 3))
+
+# Let's plot the equation y=2*x
+x = [1, 2, 3, 4, 5, 6,7]
+
+# y = [2,4,6,8,10, 12, 14]
+y = [x*2 for x in x]
+
+# plt.plot() specifies the arguments for x-axis
+# and y-axis to be plotted
+plt.plot(x, y)
+
+# To show this figure object, we use the line,
+# fig.show()
+plt.show()
+
+Output:
+
+Example - 2:
+
+# importing matplotlib library
+import matplotlib.pyplot as plt
+
+# Now we plot a figure of width 7 and height 12
+plt_1 = plt.figure(figsize=(2, 5))
+
+# Using the equation y=3*x
+x = [1, 2, 3, 4, 5]
+
+# y = [3,8,27,64,125]
+y = [x*2 for x in x]
+
+# plt.plot() determines the arguments for
+# x-axis and y-axis to be plotted
+plt.plot(x, y)
+
+# To show this figure object, we use the line,
+# fig.show()
+plt.show()
+
+Output:
+
+In the above code, we have increased the height as compare to width and changed the graph plot.
+We can also set the size of the subplots using the same method. Let's understand the following example.
+Example -
+
+import matplotlib.pyplot as plt
+
+fig, axes= plt.subplots(nrows=2, ncols=1,figsize=(8,4))
+
+x= [1,2,3,4,5]
+
+y=[x**3 for x in x]
+
+axes[0].plot(x,y)
+axes[1].plot(x,y)
+
+plt.tight_layout()
+
+plt.show()
+
+Output:
+
+Set the Height and Width of a Figure in Matplotlib
+We can also set the figure's height and width without using the figsize argument. It can be done using the set() function with the figheight and figwidth arguments. The set_figheight() and set_figwidth() functions are also used to set height and width.
+Let's understand the following example.
+Example -
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.arange(0, 20, 0.2)
+y = np.sin(x)
+z = np.cos(x)
+
+fig = plt.figure()
+
+fig.set_figheight(4)
+fig.set_figwidth(8)
+
+# Adds subplot on position 1
+ax = fig.add_subplot(121)
+# Adds subplot on position 2
+ax2 = fig.add_subplot(122)
+
+ax.plot(x, y)
+ax2.plot(x, z)
+plt.show()
+
+Output:
+
+On the other hand, we can also use the set_size_inches(). Below is the example.
+Example - 2:
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig = plt.figure()
+
+fig.set_size_inches(10, 5)
+
+# Adds subplot on position 1
+ax = fig.add_subplot(121)
+# Adds subplot on position 2
+ax2 = fig.add_subplot(122)
+
+ax.plot(x, y)
+ax2.plot(x, z)
+plt.show()
+
+Output:
+
+Modifying the Graph
+It is another way to modify the graph attributing without using the figure environment. We can also update matplotlib.rcParams, an instance of RcParams for handling default matplotlib values.
+Let's understand the following example.
+Example -
+
+import matplotlib.pyplot as plt
+plt.rcParams['figure.figsize'] = (6, 12)
+x = y = range(2, 20)
+plt.plot(x, y)
+plt.show()
+
+Output:
+
+Conclusion
+We have discussed several ways to change the size of a figure in matplotlib. These figures are very useful for data visualization. You can use any option that suit your requirement.
+
+
+Next TopicKeyboard Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

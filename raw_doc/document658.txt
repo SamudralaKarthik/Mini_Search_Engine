@@ -1,0 +1,443 @@
+
+
+
+
+next →
+← prev
+
+Python Execute Shell Command
+Automating repetitive jobs is a great idea. Developers and system administrators frequently use shell scripts to automate recurring processes like health checks and file backups. However, shell scripts could become more difficult to maintain as those activities get more complicated. Thankfully, Python can be used for automation instead of shell scripts. The same capability as those shell scripts is available in Python through methods for running shell commands. Python's ability to execute shell commands opens the door for us to systematic, scalable automation of computer processes.
+Here are a few examples of how using Python to run shell commands is advantageous:
+
+Importing necessary modules is simple and interactive in Python.
+These techniques may be used to launch any external file, such as an.exe, or any program.
+Python provides programmers with more flexibility and power. It aids in process automation. Python shell scripts may be used to accomplish numerous monotonous chores that lack originality and productivity in developers' lives, such as disc scanning, deleting unneeded cache files, backup, recovery, and many more.
+
+Understanding Shell:
+A phrase that is frequently misused is a shell. A shell in computing is a piece of software that offers a user interface for using the features of the operating system.
+Based on the features and fundamental functioning of the device, the operating system's shell may be either a GUI (Graphical User Interface) or a CLI (Command Line Interface). The shell in Windows is a program that enables you to communicate with the operating system through a "command line," sometimes referred to as a terminal in Linux and Mac. You may access the Unix system using a Shell. You provide input, and it uses that input to run programs. The output of a program is shown once it has completed running. We may execute our commands, programs, and shell scripts in the shell environment. Similar to how there are several operating systems, there are numerous shell variations. Each type of shell has a unique collection of widely used commands and features. A command-line interpreter, sometimes referred to as a shell, enables Linux and Unix users to manage their operating systems using command-line interfaces. Shells provide users the ability to interface with their operating systems effectively and directly.
+Despite not being a single language, shell scripting is simple to learn even for those without a background in programming since it employs certain commands from everyday English. To plan more intricate tasks, shells require a lot of skill because each dialect of shell scripting is regarded as a language. One of the easiest methods for establishing automation is shell scripting. Shell scripting allows data scientists, DevOps, and TechOps professionals to repeat operations using conditional and loop control structures using Linux or Unix commands. There are several names for shell scripts. Shell scripts include Bash (the most popular), csh, and tesh. Shell scripts are known as EXEC in IBM's VM operating system, but batch files are what shell scripts are known as in DOS. The command-line shell and the graphical shell are the two types of shells. Command-line interfaces are used to access command-line shells, which are used to show output when computers receive input in the form of human-readable instructions.
+Graphical shells use a graphical user interface (GUI) to carry out interactions and crucial tasks including opening, closing, and saving files. Shell is widely used on almost every OS due to its effectiveness and simplicity of updating. It does routine backups and system monitoring for your computer without you having to worry about it. Because the shell's syntaxes and commands are the same as those placed in the command line, there is no need to move between them. Shell scripts may also be created fast and easily since they run rapidly and are simple to troubleshoot.
+Using os.system to Run a Command
+Using the os.system() method in Python, we can instantly run a shell command that is saved in a string. This module offers a portable method of using functionality that is dependent on the operating system. Open() may be used to simply read or write a file, the os.path module can be used to change paths, and the file input module can be used to read every line in every command-line file. The tempfile module should be used to create temporary files and directories, and the shutil module should handle high-level file and directory operations.
+Regardless matter whether it is a Windows Platform, Macintosh, or Linux, we can act on underlying Operating System chores thanks to the features the OS module offers. We will go through these functions and what we can accomplish with them in this lesson.
+Code:
+
+#A Sample python code that will be used to execute operating system commands or batch commands with the help of the OS module provided by Python. 
+
+import os
+import sys
+
+class ExecuteCommand:
+
+# Constructor is written that will be used to initialize the various class variables which are getting used across the various functions
+    def __init__(self):
+        self.command_to_run = None
+
+#  this function is used to get the name of the operating system on which those particular commands are getting executed
+    def get_os_name(self):
+        os_name = os.name
+        print("The name of the OS is {}".format(os_name))
+
+#  this is the get command function the main role of this function is to get the command from the user which needs to be executed the user can provide the various arguments which are present for that command if the augments provided are valid those will get executed successfully otherwise an exception can occur
+    def get_command(self):
+        print("Enter the command that you want to execute::")
+        cmd = input()
+        self.command_to_run = cmd
+
+#  this is the actual function that actually  executes the particular command, The command that is entered by the user in the previous function is executed in this function if the execution of that command is successful then the result of that command is stored on the other hand if the command execution faced an exception or error then the user is printed with the particular error message that the command execution has been failed due to that exception
+    def execute_command(self):
+        try:
+            command = "{} > output.txt".format(self.command_to_run)
+            os.system(command)
+            print("Command executed successfully")
+        except Exception:
+            print("Command execution faced an exception.")
+
+#  this is the get output function the main role of this function is to print the output which is obtained as a result of the command which is executed in the previous function. 
+    def get_output_of_command(self):
+
+        with open("output.txt", "r") as reader:
+            output = reader.read()
+        print("Output of the {} command is {}".format(
+            self.command_to_run, output))
+
+
+
+#, In the end, the mean function is written,  in this main function the user is printed with the menu showing different options,  the various options that are printed in this menu that the user can select from are like to print the name of the operating system on which the program is getting executed,  to enter the shell command that the user wants to execute,  to actually execute the command which is entered by the user,  and then to print the result obtained from the execution of the particular command.  all these options are listed to represent a different function that is written inside the above-written class,  an object of the above-written class is created and that object is used to call the various functions. 
+
+def main():
+    shell_handler = ExecuteCommand()
+    while(True):
+
+        # from the listed below the list of operations select any one of the operations
+        print("Go on selecting any one of the options")
+        print("0. To print the name of the Operating System on which the program is getting executed.")
+        print("1. To enter the shell command that you want to execute.")
+        print("2. To execute the command entered in the previous step.")
+        print("3. To print the output of the previously executed command.")
+        print("4. To exit from the code execution.")
+
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 0:
+            shell_handler.get_os_name()
+        elif menu_choice == 1:
+            shell_handler.get_command()
+        elif menu_choice == 2:
+            shell_handler.execute_command()
+        elif menu_choice == 3:
+            shell_handler.get_output_of_command()
+        elif menu_choice == 4:
+            sys.exit()
+
+        print(
+            "For printing again the choice menu enter y if want to halt enter [n]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output:
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+0
+The name of the OS is nt
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+1
+Enter the command that you want to execute::
+dir
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+2
+Command executed successfully.
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+3
+The output of the dir command is  
+
+07/10/2022  11:12 PM              .
+07/10/2022  11:12 PM              ..
+07/10/2022  08:22 PM                 0 batch.bat
+07/10/2022  08:22 PM                 0 clean.sh
+07/10/2022  08:21 PM             2,304 code.py
+07/10/2022  08:22 PM                 0 file_src.cpp
+07/10/2022  11:12 PM                 0 output.txt
+07/10/2022  08:22 PM                 0 program_c1.c
+07/10/2022  08:22 PM                 0 program_c2.c
+07/10/2022  08:22 PM                 0 program_c3.c
+07/10/2022  08:22 PM                 0 program_c4.c
+07/10/2022  11:12 PM                 0 sou.srt
+07/10/2022  08:22 PM                 0 src.pdf
+              11 File(s)          2,304 bytes
+               2 Dir(s)  396,554,895,360 bytes free
+
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+1
+Enter the command that you want to execute::
+date
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+2
+
+Command executed successfully
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+3
+The output of the date command is The current date is: Sun 07/10/2022
+Enter the new date: (mm-dd-yy)
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+4
+
+Explanation:
+So, in the above-written code, we have written the main function the user is printed with the menu showing different options, the various options that are printed in this menu that the user can select from are like to print the name of the operating system on which the program is getting executed, to enter the shell command that the user wants to execute, to actually execute the command which the user enters, and then to print the result obtained from the execution of the particular command. all these options are listed to represent a different function that is written inside the above-written class, an object of the above-written class is created and that object is used to call the various functions.
+Using subprocess module:
+You can launch new processes using the subprocess module, connect to their input/output/error pipes, and get their return codes. Using library functions like those in the OS or subprocess modules like os.fork(), subprocess.Popen(), etc., a program can start new processes. These processes, referred to as subprocesses, operate independently of one another, each having its own private system state and primary thread of execution. A subprocess runs simultaneously with the main process since it is autonomous. In other words, while the subprocess works on its own tasks in the background, the main process can continue working on other tasks. The subprocess module enables developers to launch processes or applications directly from Python. In other words, you may use the subprocess module to launch apps and provide inputs to them. To replace the os module's collection of os.popen, os.spawn, and os.system functions as well as popen2 and the previous commands module, the subprocess module was first introduced in Python 2.4.
+Code:
+
+#A Sample python code that will be used to execute operating system commands or batch commands with the help of the subprocess module provided by Python. 
+import subprocess
+import os
+import sys
+
+class ExecuteCommand:
+# Constructor is written that will be used to initialize the various class variables which are getting used across the various functions
+    def __init__(self):
+        self.command_to_run = list()
+        self.output = None
+
+#  this function is used to get the name of the operating system on which those particular commands are getting executed
+    def get_os_name(self):
+        os_name = os.name
+        print("The name of the OS is {}".format(os_name))
+
+#  this is the get command function the main role of this function is to get the command from the user which needs to be executed the user can provide the various arguments which are present for that command if the augments provided are valid those will get executed successfully otherwise an exception can occur
+    def get_command(self):
+        print("Enter the command that you want to execute::")
+        cmd = input()
+        self.command_to_run.append(cmd)
+        
+        print("Are there any parameters for {} command? [y/n]".format(cmd))
+        args_flag = input()
+        
+        if args_flag == 'y':
+            print("Enter the args for {} command".format(cmd))
+            args = input()
+            self.command_to_run.append(args)
+
+#  this is the actual function that actually  executes the particular command, The command that is entered by the user in the previous function is executed in this function if the execution of that command is successful then the result of that command is stored on the other hand if the command execution faced an exception or error then the user is printed with the particular error message that the command execution has been failed due to that exception
+    def execute_command(self):
+        try:
+            command = self.command_to_run
+            op = subprocess.run(command)
+            self.output = op.stdout
+            print("Command executed successfully")
+        except Exception as e:
+            print(e)
+            print("Command execution faced an exception.")
+
+#  this is the get output function the main role of this function is to print the output which is obtained as a result of the command which is executed in the previous function
+    def get_output_of_command(self):
+
+        print("Output of the {} command is {}".format(
+            self.command_to_run, self.output))
+
+
+
+#, In the end, the mean function is written,  in this main function the user is printed with the menu showing different options,  the various options that are printed in this menu that the user can select from are like to print the name of the operating system on which the program is getting executed,  to enter the shell command that the user wants to execute,  to actually execute the command which the user enters,  and then to print the result obtained from the execution of the particular command.  all these options are listed to represent a different function that is written inside the above-written class,  an object of the above-written class is created and that object is used to call the various functions. 
+
+def main():
+
+    shell_handler = ExecuteCommand()
+
+    while(True):
+
+        # from the listed below the list of operations select any one of the operations
+        print("Go on selecting any one of the options")
+        print("0. To print the name of the Operating System on which the program is getting executed.")
+        print("1. To enter the shell command that you want to execute.")
+        print("2. To execute the command entered in the previous step.")
+        print("3. To print the output of the previously executed command.")
+        print("4. To exit from the code execution.")
+
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 0:
+            shell_handler.get_os_name()
+        elif menu_choice == 1:
+            shell_handler.get_command()
+        elif menu_choice == 2:
+            shell_handler.execute_command()
+        elif menu_choice == 3:
+            shell_handler.get_output_of_command()
+        elif menu_choice == 4:
+            sys.exit()
+
+        print(
+            "For printing again the choice menu enter y if want to halt enter [n]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output:
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+0
+The name of the OS is nt
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+1
+Enter the command that you want to execute::
+dir
+Are there any parameters for dir command? [y/n]
+y
+Enter the args for dir command
+/L
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+2
+Command executed successfully
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+3
+Output of the ['dir', '/L'] command is 
+
+07/12/2022  07:06 PM    <DIR>          .
+07/12/2022  07:06 PM    <DIR>          ..
+07/10/2022  08:22 PM                 0 batch.bat
+07/10/2022  08:22 PM                 0 clean.sh
+07/12/2022  07:06 PM             2,635 code.py
+07/10/2022  08:22 PM                 0 file_src.cpp
+07/10/2022  11:13 PM                69 output.txt
+07/10/2022  08:22 PM                 0 program_c1.c
+07/10/2022  08:22 PM                 0 program_c2.c
+07/10/2022  08:22 PM                 0 program_c3.c
+07/10/2022  08:22 PM                 0 program_c4.c
+07/10/2022  11:12 PM                 0 sou.srt
+07/10/2022  08:22 PM                 0 src.pdf
+              11 File(s)          2,704 bytes
+               2 Dir(s)  396,486,488,064 bytes free
+
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+1
+Enter the command that you want to execute::
+dir
+Are there any parameters for dir command? [y/n]
+n
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+2
+Command executed successfully
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+3
+Output of the ['dir', '/L', 'dir'] command is 
+
+07/10/2022  11:12 PM    <DIR>          .
+07/10/2022  11:12 PM    <DIR>          ..
+07/10/2022  08:22 PM                 0 batch.bat
+07/10/2022  08:22 PM                 0 clean.sh
+07/10/2022  08:21 PM             2,304 code.py
+07/10/2022  08:22 PM                 0 file_src.cpp
+07/10/2022  11:12 PM                 0 output.txt
+07/10/2022  08:22 PM                 0 program_c1.c
+07/10/2022  08:22 PM                 0 program_c2.c
+07/10/2022  08:22 PM                 0 program_c3.c
+07/10/2022  08:22 PM                 0 program_c4.c
+07/10/2022  11:12 PM                 0 sou.srt
+07/10/2022  08:22 PM                 0 src.pdf
+              11 File(s)          2,304 bytes
+               2 Dir(s)  396,554,895,360 bytes free
+
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To print the name of the Operating System on which the program is getting executed.
+1. To enter the shell command that you want to execute.
+2. To execute the command entered in the previous step.
+3. To print the output of the previously executed command.
+4. To exit from the code execution.
+4
+
+Explanation:
+So, in the above-written code, we have written the main function the user is printed with the menu showing different options, the various options that are printed in this menu that the user can select from are like to print the name of the operating system on which the program is getting executed, to enter the shell command that the user wants to execute, to actually execute the command which the user enters, and then to print the result obtained from the execution of the particular command. all these options are listed to represent a different function that is written inside the above-written class, an object of the above-written class is created and that object is used to call the various functions.
+Conclusion:
+So, in this article, we have understood how to execute a shell command using various modules provided by python and we have also implemented code for two modules presenting those functionalities.
+
+
+Next TopicFile Explorer using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

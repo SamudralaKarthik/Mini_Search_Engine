@@ -1,0 +1,168 @@
+
+
+
+
+next →
+← prev
+
+Dispatch Decorators in Python
+Decorators are useful tool of the Python as they are used to modify the behavior of the function without permanently changing it. We have explained decorators in details in our decorator in Python tutorial. In this tutorial, we will learn about the dispatch decorators and its basic implementation. Before dive deep into this, let's have a simple example of the decorators.
+Example -
+
+# defining a decorator
+def message_decorator(func):
+	# The inner function can access the outer local
+	def inner():
+		print("Hello, Message before Execution")
+	
+		# Here we are calling the actual function
+		# inside the wrapper function.
+		func()
+		print("Hello, Message After Execution")
+			
+	return inner
+	
+# We define a function, to be called inside wrapper
+def new_function():
+	print("We declare inside the function !!")
+	
+	
+# Now we pass 'new_function()' inside the
+# decorator to control its behavior
+new_function = message_decorator(new_function)
+		
+# calling the function
+new_function()
+
+Output:
+Hello, Message Before Execution
+We declare inside the function!!
+Hello, Message After Execution
+
+The above code is an example of the normal decorator in Python.
+The Nested Decorators has some problems, these are as below.
+
+The decorator becomes complicated to understand if the numbers of cases are increased. We have to compromise with the readability of the decorators for the complex implementation.
+We have to implement the new cases explicitly. The precludes pluggable cases from external modules, and also adds mental loads.
+If the cases are difficult, the whole thing rapidly becomes difficult to reason about.
+
+Now, let's understand how the dispatch decorator is different from the dispatch decorator.
+Dispatch Decorators
+Dispatch decorators or functions are mechanism for performing different things based on signature, or list of types. It is used to select between different implementation of the same abstract method based on the signature, integer, string, or list of data types.
+As we know that, Python is a dynamically typed, so we need to specify that a function only takes some precise types as an argument.
+Let's understand the following example.
+Example -
+
+from multipledispatch import dispatch
+@dispatch(int)
+def func(x):
+	return x * 2
+
+@dispatch(float)
+def func(x):
+	return x / 2
+	
+@dispatch(str)
+def func(x):
+    return 'Hello' + n + '!'
+print(func(2))
+print(func(2.0))
+print(func('Andrew'))
+
+Output:
+4
+1.0
+Hello Andrew!
+
+Explanation -
+In the above code, we imported the dispatch decorator from the multipledispatch module. The @dispatch(int) decorator specifies that the dispatcher 'func' is the value and allocates it to the ith index in the namespace (dictionary). Here is the new term comes Namespace, let's see what the namespace is?
+Namespace
+A namespace is a dictionary that is used by the dispatch decorator. The dispatch decorator creates the dispatch object along with dispatch function and saves the object as the key-value pair. The dispatch decorator uses this dictionary to map a function as Dispatcher('func').
+The namespace is used the global namespace in multipledispatch.core.global_namespace. We can also make own namespace using a dictionary. Let's understand the following example.
+Example -
+
+from multipledispatch import dispatch
+new_namespace = {}
+
+@dispatch(int, namespace = new_namespace)
+def func(x):
+    return x * 2
+
+@dispatch(float, namespace = new_namespace)
+def func(x):
+    return x / 2
+
+# Driver code
+print(func(2))
+print(func(2.0))
+print(new_namespace)
+
+Output:
+4
+1.0
+{'func': <dispatched func>}
+
+Note - To work with the dispatch decorator, we need to install the multiplesearch module using the below command.
+
+pip install multipledispatch
+
+Single Dispatch Decorator
+The single dispatch decorator transforms a function into a single-dispatch generic function. When this is called, it:
+
+Identify the type of the first argument.
+Check its registry for that type.
+Execute the function registered for its type.
+If the typed wasn't registered, the original function is executed.
+
+Let's understand the following example for get its concept in better way.
+Example -
+
+from functools import singledispatch
+
+singledispatch
+def dispatch_on_type(x):
+    # some default logic
+    print("The default function implementation.")
+    
+@dispatch_on_type.register(str)
+def _(x):
+    # some stringy logic
+    print(f"'{x}' is a string.")
+    
+@dispatch_on_type.register(int)
+def _(x):
+    # some integer logic
+    print(f"{x} is an integer.")
+    
+@dispatch_on_type.register(list)
+def _(x):
+    # some list logic
+    print(f"{x} is a list.")
+
+dispatch_on_type(set())
+dispatch_on_type("Marry")
+dispatch_on_type(1337)
+dispatch_on_type([1,3,3,7])
+
+Output:
+I am the default implementation.
+'STRING' is a string.
+1337 is an integer.
+[1, 3, 3, 7] is a list.
+
+It is different from other decorators and we can do many things using the single dispatcher function.
+Conclusion
+This tutorial has covered one of the important types of the decorator - dispatch decorator. We have discussed its example and how it is different from the regular decorators. We used the multipledispatch and functools module. We need to install the multipledispatch module using the pip command. We mentioned some basic examples of dispatch however it can perform much complex tasks.
+
+
+Next TopicIntrospection in Python
+
+
+
+
+← prev
+next →
+
+
+
+

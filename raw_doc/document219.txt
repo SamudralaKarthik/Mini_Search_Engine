@@ -1,0 +1,75 @@
+
+
+
+
+next →
+← prev
+
+Data Hiding in Python
+What is Data Hiding?
+Data hiding is a part of object-oriented programming, which is generally used to hide the data information from the user. It includes internal object details such as data members, internal working. It maintained the data integrity and restricted access to the class member. The main working of data hiding is that it combines the data and functions into a single unit to conceal data within a class. We cannot directly access the data from outside the class.
+This process is also known as the data encapsulation. It is done by hiding the working information to user. In the process, we declare class members as private so that no other class can access these data members. It is accessible only within the class.
+Data Hiding in Python
+Python is the most popular programming language as it applies in every technical domain and has a straightforward syntax and vast libraries. In the official Python documentation, Data hiding isolates the client from a part of program implementation. Some of the essential members must be hidden from the user. Programs or modules only reflected how we could use them, but users cannot be familiar with how the application works. Thus it provides security and avoiding dependency as well.
+We can perform data hiding in Python using the __ double underscore before prefix. This makes the class members private and inaccessible to the other classes.
+Let's understand the following example.
+Example -
+
+class CounterClass:
+   __privateCount = 0
+   def count(self):
+      self.__privateCount += 1
+      print(self.__privateCount)
+counter = CounterClass()
+counter.count()
+counter.count()
+print(counter.__privateCount)
+
+Output:
+1
+2
+Traceback (most recent call last):
+  File "<string>", line 17, in <module>
+AttributeError: 'CounterClass' object has no attribute '__privateCount'
+
+However we can access the private member using the class name. 
+
+print(counter.CounterClass__privatecounter)
+
+Output:
+1
+2
+2 
+
+Advantages of Data Hiding
+Below are the main advantages of the data hiding.
+
+The class objects are disconnected from the irrelevant data.
+It enhances the security against hackers that are unable to access important data.
+It isolates object as the basic concept of OOP.
+It helps programmer from incorrect linking to the corrupt data.
+We can isolate the object from the basic concept of OOP.
+It provides the high security which stops damage to violate data by hiding it from the public.
+
+Disadvantages of Data Hiding
+Every coin has two sides if there are advantages then there will be disadvantage as well. Here are the some disadvantages are given below.
+
+Sometimes programmers need to write the extra lien of the code.
+The data hiding prevents linkage that act as link between visible and invisible data makes the object faster.
+It forces the programmers to write extra code to hide the important data from the common users.
+
+Conclusion
+Data hiding is an important aspect when it comes to privacy and security to particularly within the application. It plays an essential role in preventing unauthorized access. It has some disadvantages, but these are avoidable in front of its advantages.
+
+
+Next TopicPython Program to Find Intersection of Two Lists
+
+
+
+
+← prev
+next →
+
+
+
+

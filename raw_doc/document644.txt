@@ -1,0 +1,252 @@
+
+
+
+
+next →
+← prev
+
+Python OR Operator
+Logical OR
+Programming is a mixture of mathematics, logic, and many more domains. To solve any problem in mathematics, from textbook to real-time, we need addition, subtraction, multiplication and division operators. These are the fundamental operators needed in mathematics. In similar way, to perform any operation on variables or values, Python has 7 types of operators, and each is useful. Among these, "OR" is one of the operators in Python, and it belongs to Logical operators.
+Logical operators mainly deal with decision-making needs. There are three operators under logical operators:
+
+Logical AND
+Logical OR
+Logical XOR
+
+This article discusses the OR operator with examples for a clear understanding.
+Basic:
+In languages like C and Java, "||" represents the OR operator, but in Python, we say "or" without using any special symbol.
+Syntax: a or b
+Return value: This operator either returns "True" or "False", depending on the operands.
+
+If both the operands/expressions on either side of the operator are false, it returns False.
+If at least one of the operands is true or if both are true, it returns True.
+
+Truth tale for "OR" Operator:
+
+
+Expression 1
+Expression 2
+(Expression 1 and Expression 2) returns:
+
+
+True
+True
+True
+
+
+True
+False
+True
+
+
+False
+True
+True
+
+
+False
+False
+False
+
+
+Need for OR operator:
+Suppose we need a number; if it is positive, it has to be greater than 20; if it is negative, it has to be less than -20. To meet these conditions, if we write the code using conditional statements:
+
+num = int (input ("Enter a number: "))
+if (num < -20):
+    print ("True")
+elif (num > 20):
+    print ("True")
+else:
+    print ("False")
+
+Output:
+
+Understanding:
+In the above code,
+
+First, we check if the number is negative and less than -20. If it is true, one condition is true, then we don't need to check the next condition, so we print "True".
+If it is not true, then the elif block will be executed, checking if the number is positive and greater than 20. If this condition is true, then it prints "True".
+If both if and elif are false, then else block will be executed to print "False".
+
+
+Writing the above code using just the "OR" operator:
+
+We can check both the conditions at one go in one line.
+If at least one condition is true, it immediately returns "True".
+If both the conditions are false, it returns "False".
+
+
+
+num = int (input ("Enter a number: "))
+if (num < -20 or num > 20):
+    print ("True")
+else:
+    print ("False")
+
+Output:
+
+
+Using "or" makes the code simple, readable, and decreases the length of the code.
+
+Let us take another example with a real-time application:
+Suppose you are organizing a coding competition for b-tech and m-tech students; for any student to take part, he should either be a b-tech or an m-tech student. Any person who is neither a b.tech or m.tech student is not allowed to enter the competition. So, we need to check if at least one condition is true.
+Code:
+
+name = input ("Please enter the participant's name: ")
+course = input ("Please enter the course the participant's studying\nPlease   	 		        enter the name of the course in capital letters without spaces 			        or other characters in between like BTECH and MTECH: ")
+if (course == "BTECH" or course == "MTECH"):
+    print ("Congratulations!, You are eligible for the competition")
+else:
+    print ("Only students in B-Tech and M-Tech are allowed to the competition. 	  	    Sorry! We can't enroll you in")
+
+Output:
+
+"or" with just two numbers:
+Let us now see what happens if we give two decimal integers on both sides of the "or" operator:
+Pre-requisite: Generally, "or" checks if at least one operand is True. Any number greater than 0 represents True, and 0 represents False.
+
+num1 = int (input ("Enter a number: "))
+num2 = int (input ("Enter another number: "))
+print (num1 or num2)
+
+Sample outputs:
+
+Understanding:
+
+In the first case:
+
+Both the numbers are greater than the 0 - True or True condition. Hence, "or" returns True.
+The condition of "or" is that at least one operand must be True. Hence, after confirming that the first number- 4 (>0) is true, without checking the second number, it returned "True" with the first number.
+
+In the second case:
+
+The first number is 0-False; "or" checks the second number, which is 1 (>0) - False or True condition. Returns
+
+In the third case:
+
+The first number is 0-False; "or" checks the second number, which is 0 again - False or False. Returns False.
+
+
+
+The "or" operator searches the operands to find a "True". Once it finds a "True", it immediately returns True without checking the rest of the operands. This condition is called "The short circuit" or "Lazy evaluation."
+
+"or" with multiple operands:
+
+num1 = int (input ("Enter the first value: "))
+num2 = int (input ("Enter the second value: "))
+num3 = int (input ("Enter the third value: "))
+print (num1 or num2 or num3)
+
+Sample outputs:
+
+Understanding:
+It is the same as having two operands. "or" checks for a "True", and if it finds one, it returns "True", and if it doesn't find at least one True, it returns "False".
+Bitwise OR (|):
+There is another "or" operator in Python. It is a bitwise operator. We represent it as "|". Both are called "or" operators. Now, let us see the difference between the two operators:
+Binary language is the language of a computer. All the inner mechanisms happen concerning bits. Bitwise operators are the set of operators that allow the programmer to perform bitwise operations on integers. There are six bitwise operators:
+
+Bitwise AND
+Bitwise OR
+Bitwise NOT
+Bitwise XOR
+Bitwise right shift
+Bitwise left shift
+
+The difference between (logical or, bitwise or), (logical and, bitwise and), (logical not, bitwise not) lies in their names.
+
+If we use any bitwise operator, first, the integer is converted into binary bits, and then the operator will perform the operation bit-by-bit.
+Here, 1 represents True, and 0 represents False.
+After the operation, the binary number will be converted to decimal and returned as the output.
+
+The operation of bitwise or:
+The given integers are converted into bits (binary), and The operator will operate on every corresponding bit of the two numbers.
+
+
+Bit 1 (operand 1)
+Bit 2 (operand 2)
+Return value
+
+
+0
+0
+0
+
+
+1
+0
+1
+
+
+1
+1
+1
+
+
+0
+1
+1
+
+
+Let us take an example:
+If num1 = 3 and num2 = 4:
+3 -> 011
+4 -> 100
+Performing |:
+
+If we perform logical or on 3 and 4, we'll get True and 3 will be returned:
+
+num1= int (input ("Enter a number: "))
+num2 = int (input ("Enter another number: "))
+print (num1 or num2)
+print (num1 | num2)
+
+Output:
+
+These are the two "or" operators available to use in Python language.
+Logical OR vs Bitwise OR:
+
+
+Logical or
+Bitwise or
+
+
+Logical or is represented by "or."
+Bitwise or is represented by "|."
+
+
+It is defined only for Boolean values; even if we use expressions, they will be evaluated as True or False.
+It is defined for integer values as well as Boolean values
+Print (True | False) -> True
+
+
+It searches for a True value, and if it finds one, it doesn't evaluate the rest of the expression and returns "True". This phenomenon is called "Lazy evaluation".
+Even if the operator finds a True value, it continues evaluating the rest expressions.
+
+
+This operator is mostly used for decision-making and truth testing.
+Bitwise operators are designed for lower-level bit manipulations.
+
+
+Every number greater than 0 evaluated as "True" and every number == 0 or < 0 is evaluated as "False"
+1 represents "True", and 0 represents "False".
+
+
+In the operator hierarchy, Bitwise operators have higher precedence than the logical operators.
+
+
+
+
+Next TopicPython Bitwise XOR Operator
+
+
+
+
+← prev
+next →
+
+
+
+

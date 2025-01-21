@@ -1,0 +1,168 @@
+
+
+
+
+next →
+← prev
+
+Cos in Python
+In this tutorial, we are going to discuss the trigonometric cosine (cos) function in Python. We will talk about modules that we can use to implement the cos function in our Python program. We will also learn about plotting graphs using the cos function in the program. So, let's start by looking at the modules that we can import into the program to use the cos function.
+Python Modules for cos function
+In Python, we have a math module that we can use to import and implement cos function as well as other important mathematical operations in the program. Other than the math module, we can also use the numpy module of Python to implement the cos function in the program. We will learn the use of both modules, i.e., math module and numpy module, one after another, to implement the cos function in the program, respectively.
+Method 1: cos() function in the math module
+The math module of Python comes with a number of important mathematical values and operations, and the cos() function is one of them. We can use the cos() function of the math module to implement the trigonometric cos value in the program. The math.cos() function returns the trigonometric cosine value for the argument we give inside the function, i.e., the value of the degree in cosine. And, the value we are giving as the argument in the function should be in radians.
+Syntax -
+Following is the syntax for using math.cos() function in the Python program:
+
+math.cos(a)
+
+Parameters: Here, parameter a = value in radian.
+Return value: The math.cos() function returns the cosine value for the argument 'a' in radians that we have given inside the function.
+Let's understand the use of cos() function of math module in Python through following example program:
+Example -
+
+# Import math module
+import math
+# Define an input radian value
+x = math.pi / 12
+# Printing cosine value for respective input value
+print ("The cosine value of pi / 12 value as given is : ", end ="")  
+
+print (math.cos(x))
+
+Output:
+The cosine value of pi / 12 value as given is: 0.9659258262890683
+
+Method 2: cos() function in Numpy module
+Other than the math module, we can also use the numpy module for the implementation of trigonometric cosine value in the program. For this, we are provided with a cos() function inside the numpy module that gives us math cosine value in the output. Like math.cos() function, while using cos() function of numpy module, we have to give argument value in radians inside the function.
+Following is the syntax for using numpy.cos() function in the Python program:
+
+numpy.cos(a)
+
+Parameters: We can give 'a' as following parameter types inside the numpy.cos() function:
+
+We can give a single value argument in radians in the function.
+We can also give an array containing multiple radian values as an argument in the function.
+
+Return type: The numpy.cos() function will return the cosine values of the given number.
+Let's understand the use of numpy module's cos() function in Python through following example program:
+Example -
+
+# importing numpy module as jtp in program
+import numpy as jtp
+# defining multiple input values in a single array
+ValArray = [0, jtp.pi / 4, jtp.pi / 7, jtp.pi/9, jtp.pi/12, jtp.pi/5]
+# printing input array in output
+print ("Values given in the input array: \n", ValArray)
+# using cos() function to get cosine values
+CosArray = jtp.cos(ValArray)
+# printing cos values in output
+print ("\nRespective Cosine values for input array values: \n", CosArray)
+
+Output:
+Values given in the input array: 
+ [0, 0.7853981633974483, 0.4487989505128276, 0.3490658503988659, 0.2617993877991494, 0.6283185307179586]
+
+Respective Cosine values for input array values: 
+ [1.         0.70710678 0.90096887 0.93969262 0.96592583 0.80901699]
+
+Plotting Graphical representation for cosine value in the output
+We have learned the use of the cos() function of both numpy and math modules inside a Python program till now. Now, we will use both numpy and math modules, and with that, we will also use cos() function to plot a graphical representation of cosine values. We can do this graphical representation in the following two ways:
+
+Directly importing and implementing cos() function and numpy & math module
+Iterating over cos() function with numpy and math module
+
+Let's understand the implementation of both methods by using them in a Python program and plotting graphs with them in the output.
+Example - 1: Directly importing and implementing cos() function and numpy & math module
+
+# importing numpy module as jtp
+import numpy as jtp
+# importing matplotlib module as mlt
+import matplotlib.pyplot as mlt
+
+# Defining an array containing radian values
+RadValArray = jtp.linspace(-(2*jtp.pi), 2*jtp.pi, 20)
+# cosine values for respective array value
+CosValArray = jtp.cos(RadValArray)
+
+# printing values in output
+print("Radian values in the array: ", RadValArray)
+print("\nRespective cos values of array: ", CosValArray)
+
+# using plot() function with variables
+mlt.plot(RadValArray, CosValArray, color = 'blue', marker = "*")
+mlt.title("Graphical representation of cos function")
+mlt.xlabel("X-axis")
+mlt.ylabel("Y-axis")
+
+# plotting graph in output
+mlt.show()
+
+Output:
+Radian values in the array:  [-6.28318531 -5.62179738 -4.96040945 -4.29902153 -3.6376336  -2.97624567
+ -2.31485774 -1.65346982 -0.99208189 -0.33069396  0.33069396  0.99208189
+  1.65346982  2.31485774  2.97624567  3.6376336   4.29902153  4.96040945
+  5.62179738  6.28318531]
+
+Respective cos values of array:  [ 1.          0.78914051  0.24548549 -0.40169542 -0.87947375 -0.9863613
+ -0.67728157 -0.08257935  0.54694816  0.94581724  0.94581724  0.54694816
+ -0.08257935 -0.67728157 -0.9863613  -0.87947375 -0.40169542  0.24548549
+  0.78914051  1.        ]
+
+
+
+Example - 2: Iterating over cos() function with numpy and math module
+
+# importing math module
+import math
+# importing numpy module as jtp
+import numpy as jtp
+# importing matplotlib module as mlt
+import matplotlib.pyplot as mlt
+
+# Defining an array containing radian values
+RadValArray = jtp.linspace(-(2*jtp.pi), 2*jtp.pi, 20)
+# Empty array for cosine values
+CosValArray = []
+
+#Iterating over the cos values array
+for j in range(len(RadValArray)): 
+    CosValArray.append(math.cos(RadValArray[j])) 
+    j += 1
+
+# printing respective values in output
+print("Radian values in the array: ", RadValArray)
+print("\nRespective cos values of array: ", CosValArray)
+
+# using plot() function with variables
+mlt.plot(RadValArray, CosValArray, color = 'orange', marker = "+")
+mlt.title("Graphical representation of cos function")
+mlt.xlabel("X-axis")
+mlt.ylabel("Y-axis")
+
+# plotting graph in output
+mlt.show()
+
+Output:
+Radian values in the array:  [-6.28318531 -5.62179738 -4.96040945 -4.29902153 -3.6376336  -2.97624567
+ -2.31485774 -1.65346982 -0.99208189 -0.33069396  0.33069396  0.99208189
+  1.65346982  2.31485774  2.97624567  3.6376336   4.29902153  4.96040945
+  5.62179738  6.28318531]
+
+Respective cos values of array:  [1.0, 0.7891405093963934, 0.2454854871407988, -0.40169542465296987, -0.8794737512064891, -0.9863613034027223, -0.6772815716257412, -0.08257934547233249, 0.5469481581224268, 0.9458172417006346, 0.9458172417006346, 0.5469481581224268, -0.0825793454723316, -0.6772815716257405, -0.9863613034027223, -0.8794737512064893, -0.40169542465296987, 0.2454854871407988, 0.7891405093963934, 1.0]
+
+
+
+
+
+Next Topicvif in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,114 @@
+
+
+
+
+next →
+← prev
+
+Destructors in Python
+The users call Destructor for destroying the object. In Python, developers might not need destructors as much it is needed in the C++ language. This is because Python has a garbage collector whose function is handling memory management automatically.
+In this article, we will discuss how the destructors in Python works and when the users can use them.
+The __del__() function is used as the destructor function in Python. The user can call the __del__() function when all the references of the object have been deleted, and it becomes garbage collected.
+Syntax:
+
+def __del__(self):
+	# the body of destructor will be written here. 
+
+The users should also note that the reference to the objects is also deleted when the object goes out of the reference or when the code ends.
+In the following example, we will use the __del__() function and the del keyword for deleting all the references of the object so that the destructor will involve automatically.
+For example:
+
+# we will illustrate destructor function in Python program
+# we will create Class named Animals
+class Animals:
+  
+    #  we will initialize the class
+    def __init__(self):
+        print('The class called Animals is CREATED.')
+  
+    # now, we will Call the destructor
+    def __del__(self):
+        print('The destructor is called for deleting the Animals.')
+  
+object = Animals()
+del object 
+
+Output:
+The class called Animals is CREATED.
+The destructor is called for deleting the Animals.
+
+Explanation -
+In the above code, the destructor has called when the references to the object are deleted or after the program was ended. This means that the reference count for the object becomes zero and not when the object goes out of scope. We will explain this by showing the next example.
+We can also notice that the destructor is called after the ending of the program.
+Example:
+
+# We will create Class named Animals
+class Animals:
+  
+    #  Initialize the class
+    def __init__(self):
+        print('The class called Animals is CREATED.')
+  
+    # now, we will Call the destructor
+    def __del__(self):
+        print('The destructor is called for deleting the Animals.')
+  
+def Create_object():
+    print('we are creating the object')
+    object = Animals()
+    print('we are ending the function here')
+    return object
+  
+print('we are calling the Create_object() function now')
+object = Create_object()
+print('The Program is ending here')
+
+Output:
+we are calling the Create_object() function now
+we are creating the object
+The class called Animals is CREATED.
+we are ending the function here
+The Program is ending here
+The destructor is called for deleting the Animals.
+
+Now in the next example, we will see that when the function() is called, it will create the instance of class Zebra, which passes itself to class Lion, which will then set the reference to the class Zebra, and it will result in the circular reference.
+Example:
+
+class Animals:
+  
+    #  we will initialize the class
+    def __init__(self):
+        print(' The class called Animals is CREATED.')
+class Lion:
+    def __init__(self, zebraa):
+        self.zebra = zebraa
+class Zebra:
+    def __init__(self):
+        self.lion = Lion(self)
+    def __del__(self):
+        print("Zebra is dead")
+def function():
+    zebra = Zebra()
+  
+function()
+
+Output:
+Zebra is dead
+
+In general, the Garbage collector of Python, which is used for detecting these types of cyclic references, will also remove the reference. But, in the above example, the custom destructor is used for marking this item as uncollectable.
+In simple language, it means that the garbage collector does not know the order in which the object should be destroyed, so it leaves them. So, if the instances of the users are involved in this circular reference, they will remain stored in the memory for as long as the application will run.
+Conclusion
+In this article, we explained the function of Destructors in Python and how the users can use them for deleting the objects whose references are already removed from the memory.
+
+
+Next TopicCurve Fit in Python
+
+
+
+
+← prev
+next →
+
+
+
+

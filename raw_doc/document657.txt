@@ -1,0 +1,300 @@
+
+
+
+
+next →
+← prev
+
+Python Crontab Module
+Assuming that you've worked with the sched module or the datetime module, most would agree that you needed to plan a caution eventually in time.
+Assuming you've considered how the extension of such an element would persevere, you've likewise perhaps reached a conclusion where one could compose a script that can send a similar occasion ceaselessly and dully.
+Illustration example:
+
+Pause
+Unmute
+Loaded: 100.00%
+Remaining Time -0:12
+Fullscreen
+x
+
+Simplifying all that, you might've come to an idea, or a question, how about I automate my task?
+Well, good news.
+It's easily possible! Cron is a feature that allows for helping in running commands and thus scheduling commands at a particular time or interval.
+Working on all that, you might've come to a thought or an inquiry, could I automate my work?
+Indeed, yes.
+It's effectively conceivable! Cron is an element that helps in scheduling orders and, in this manner, helps run orders at a specific period.
+What is Cron?
+A feature in the UNIX-like operating system is the time-based job scheduler, cron.
+It's used in software development environments to order the pending jobs, which can run on intervals periodically, at fixed rates, or at times that you can set up easily with no help.
+Syntax of Python Crontab Module
+Cron would require a big tutorial to itself to make sense of; thus, here's a simple short article that can assist you with finding out about the thing we will work with here.
+We will work with crontabs, which has every one of the positions which we've planned or will be booking.
+Assuming that you face any issue with the formation of the cron task, you ought to evaluate a couple of online instruments that can assist you with sorting out the language structure.
+Python Module crontab Working
+The python module crontab considers the course of formation of cron responsibilities to get significantly less complex.
+It gives us a straightforward class taking direct contribution without us working with the cron syntax by any means.
+Installing python-crontab
+To work with cron and crontab in Python, we'll initially have to introduce the necessary module, and this should be possible with the pip bundle chief command in the python shell/ command prompt.
+
+pip install python-crontab
+
+This should naturally introduce the necessary module, and whenever you're finished with it, we ought to be prepared to work with it!
+Bug Reports and Development
+To Kindly report any issues, you can report to the GitLab issues tracker. If it's not too much trouble, use push and Git patches to the project code GitLab facilitating.
+Note: If the mistake got a startling watchword contention 'client' while utilizing CronTab, you have some unacceptable module introduced. You want to attempt again to introduce python-crontab and not crontab from PyPI or your neighborhood bundle supervisor.
+Description
+The crontab module for perusing and composing crontab documents, getting to the framework cron, and utilizing an immediate API.
+Contrasting the beneath outline, you will note that W, L, #, and ? images are not upheld as they are not standard Linux or SystemV crontab design.
+
+
+Field Name
+Mandatory
+Allowed Values
+Special Characters
+Extra Values
+
+
+Day of month
+Yes
+1-31
+* / , -
+< >
+
+
+Hours
+Yes
+0-23
+* / , -
+< >
+
+
+Day of week
+Yes
+0-6 or SUN-SAT
+* / , -
+< >
+
+
+Minutes
+Yes
+0-59
+* / , -
+< >
+
+
+Month
+Yes
+1-12 or JAN-DEC
+* / , -
+< >
+
+
+Additional Values are '<' for least worth, like 0 for minutes or 1 for a long time. Also,'>' for greatest worth, like 23 for a long time or 12 for a long time.
+Upheld exceptional cases permit crontab lines to not utilize fields. These are the upheld monikers which are not accessible in SystemV mode:
+
+
+Case
+Meaning
+
+
+@weekly
+0 0 * * 0
+
+
+@hourly
+0 * * * *
+
+
+@daily
+0 0 * * *
+
+
+@yearly
+0 0 1 1 *
+
+
+@monthly
+0 0 1 * *
+
+
+@midnight
+0 0 * * *
+
+
+@reboot
+Every boot
+
+
+@annually
+0 0 1 1 *
+
+
+How to Use the Module
+Here is a basic illustration of how python-crontab is regularly utilized. First, the CronTab class is utilized to launch a cron object; then, at that point, the cron object is utilized to definitively control the cron (producing a new position for this situation). Ultimately, pronounced changes get written to the crontab by calling compose on the item.
+
+from crontab import CronTab
+cron1 = CronTab(user='rootuser')
+job_obj = cron1.new(commands='echo hello_world')
+job_obj.minute.every(1)
+cron1.write()
+
+Alternatively, you can use the with context manager which will automatically call write on the cron1 object upon exit
+
+with CronTab(user='rootuser') as cron1:
+    job_obj = cron1.new(commands='echo hello_world')
+    job_obj.minute.every(1)
+print('cron1.write() was just executed')
+
+Note: Several users have reported their new cron tabs not saving automatically or that the module doesn't do anything. You MUST use write() if you want your edits to be saved. See below for full details on the use of the write function.
+Syntax: Creating a new job_obj is as simple as
+
+job_obj  = cron1.new(commands='/usr/bin/echo')
+
+Syntax: setting the job_obj's time restrictions
+
+job_obj.minute.during(5,50).every(5)
+job_obj.hour.every(5)
+job_obj.day.on(5, 5, 6)
+job_obj.dow.on('SUN')
+job_obj.dow.on('SUN', 'FRI')
+job_obj.month.during('APR', 'NOV')
+
+Syntax: Each time restriction will clear the previous restriction
+
+job_obj.hour.every(10) # Set to * */10 * * *
+job_obj.hour.on(2)     # Set to * 2 * * *
+
+Syntax: Appending restrictions is explicit
+
+job_obj.hour.every(10)  # Set to * */10 * * *
+job_obj.hour.also.on(2) # Set to * 2,*/10 * * *
+
+Syntax: Setting all time slices at once
+
+job_obj.setall(2, 10, '2-5', '*/2', None)
+job_obj.setall('2 10 * * *')
+
+Syntax: Setting the slice to a python date object
+
+job_obj.setall(time(10, 2))
+job_obj.setall(date(2000, 5, 2))
+job_obj.setall(datetime(2000, 5, 2, 10, 2))
+
+Syntax: Run a job_objs commands. Running the job_obj here will not effect it's existing schedule with another CronTab process
+
+job_obj_standard_output = job_obj.run()
+
+Syntax: Creating a job_obj with a comment
+
+job_obj = cron1.new(commands='/foo/bar', comment='SomeID')
+
+Syntax: Get the comment or commands for a job_obj
+
+commands = job_obj.commands
+comment = job_obj.comment
+
+Syntax: Modify the comment or commands on a job_obj
+
+job_obj.set_commands("new_script.sh")
+job_obj.set_comment("New ID or comment here")
+
+Syntax: Disabled or Enable Job_obj
+
+job_obj.enable()
+job_obj.enable(False)
+False is job_obj.is_enabled()
+
+Syntax: Validity Check
+
+True is job_obj.is_valid()
+
+Syntax: Use a special syntax
+
+job_obj.every_reboot()
+
+Syntax: Find an existing job_obj by commands sub-match or regular expression
+
+iter_obj = cron1.find_commands('bar') # matches foobar1
+iter_obj = cron1.find_commands(re.compile(r'b[ab]r$'))
+
+Syntax: Find an existing job_obj by comment exact match or regular expression
+
+iter_obj = cron1.find_comment('ID or some text')
+iter_obj = cron1.find_comment(re.compile(' or \w'))
+
+Syntax: Find an existing job_obj by schedule
+
+iter_obj = cron1.find_time(2, 10, '2-5', '*/2', None)
+iter_obj = cron1.find_time("*/2 * * * *")
+
+Syntax: Clean a job_obj of all rules
+
+job_obj.clear()
+
+Syntax: Iter_objate through all job_objs, this includes disabled (commented out)
+
+cron1 job_objs:
+for job_obj in cron1:
+    print(job_obj)
+
+Syntax: Iter_objate through all lines; this includes all comments and empty lines
+
+for line in cron1.lines:
+    print(line)
+
+Syntax: Remove Items
+
+cron1.remove( job_obj )
+cron1.remove_all('echo')
+cron1.remove_all(comment='foo')
+cron1.remove_all(time='*/2')
+
+Syntax: Clear entire cron of all job_objs
+
+cron1.remove_all()
+
+Syntax: Write CronTab back to system or filename
+
+cron1.write()
+
+Syntax: Write CronTab to new filename
+
+cron1.write( 'output.tab' )
+
+Syntax: Write to this client's CronTab (unix only)
+
+cron1.write_to_user( user=True )
+
+Syntax: Write to some other client's CronTab
+
+cron1.write_to_user( user='bob' )
+
+Syntax: Validate a cron time string
+
+from CronTab import Cron1Slices
+bool = Cron1Slices.is_valid('0/2 * * * *')
+
+Syntax: Compare list of cron1 objects against another and return the difference
+
+difference = set([Cron1Item11, Cron1Item22, Cron1Item2]) - set([Cron1Item22, Cron1Item2])
+
+Syntax: Compare two Cron Items for equality
+
+Cron1Item11 = CronTab(tab="* * * * * COMMANDS # Example Job_obj")
+Cron1Item22 = CronTab(tab="10 * * * * COMMANDS # Example Job_obj 2")
+if Cron1Item11 != Cron1Item22:
+    print("Cron1job_objs do not match")
+
+
+
+Next TopicPython Execute Shell Command
+
+
+
+
+← prev
+next →
+
+
+
+

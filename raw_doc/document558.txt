@@ -1,0 +1,83 @@
+
+
+
+
+next →
+← prev
+
+'and' vs '&' in Python
+In the following tutorial, we will understand the difference between 'and' and '&' in the Python programming language.
+Understanding the difference between 'and' and '&' in Python
+These are some of the operators that we utilize in Python; however, there is a fundamental difference between the two. The 'and' operator is used to test whether both the expressions utilized are TRUE (in a logical way). On the other hand, the '&' operator, when utilized with False/True values, tests whether both are TRUE.
+In the Python programming language, the empty built-in objects get treated typically as logically False. However, in this case, the non-empty built-in objects are always logically True. Consequently, it facilitates a case of usual utilization when a user wants to perform something when a list is not empty and wants to perform something else when the list is empty.
+Let us now learn more about both the operators discussed above.
+
+'and' Operator in Python: The 'and' operator is a Logical AND that returns in a TRUE form whenever both the operands are also TRUE.
+'&' Operator in Python: The '&' operator is a bitwise operator utilized in the Python language. It fundamentally acts on different bits and performs operations bit after bit.
+
+Note: Whenever an integer value is 0, we consider it False. However, whenever we utilize it logically, we consider it True. It is because the 'and' operator tests whether both these expressions are True (in a logical way) - whereas the '&' operator performs different bitwise AND operations on the results acquired from both the statements.
+Let us now consider some examples demonstrating the use of these operators.
+Example 1:
+
+e examples demonstrating the use of these operators.
+Example 1:
+# declaring two variables
+p = 18
+q = 6
+
+# printing the result of 'q and p' and 'q & p'
+print(q and p)	# first statement
+print(q & p)		# second statement
+
+Output:
+18
+2
+
+Explanation:
+In the above snippet of code, we have declared two variables and performed operations using the 'and' and '&' operators. As a result, there is a difference between the operations' output. This happens because 'and' tests if both expressions are logically True, whereas '&' performs bitwise AND operation on the output of both statements.
+The compiler checks if the first expression is True in the first statement. If the first expression is False, it does not test the second expression and returns False immediately. This process is known as "lazy evaluation". If the first expression is True, then the second expression is tested, and as per the rules of AND operations, True is the outcome only if both the statements are True. In the above example, the compiler tests the first expression, True, as the value of q is 6. The compiler moves towards the second expression, which is also True because the value of p is 18. Hence, the output is also 18.
+In the second statement, the compiler is performing a bitwise & operation of the outputs of the expressions. Here, the statement is getting evaluated as follows:
+
+Binary value of 6 = 0000 0110
+Binary value of 18 = 0001 0010
+
+On performing bitwise & operation, we will get:
+
+0000 0110
+&	=	0000 0010 (Binary value of 2)
+0001 0010
+
+Hence, the output is 2.
+Let us consider another example to elaborate on this.
+Example 2:
+
+# declaring two variables
+p, q = 11, 12 
+
+# printing the results
+print(p & q)  # first statement
+print(p and q)    # second statement
+
+Output:
+8
+12
+
+Explanation:
+In the above snippet of code, we have declared two variables and printed the results of both operations.
+The first statement performs bitwise AND operation on both the variables and the second statement evaluates the statement inside print and printing answer.
+In the first statement, a = 1011, b = 1100, Performing & on a and b gives us 1000, which is the binary value of decimal value 8.
+In the second statement, the expression 'a and b' first evaluates a; if a is False (or zero), its value is returned immediately because of the "lazy evaluation" explained above; else, b is evaluated. If b is also non-zero, then the resulting value is returned. The value of b is returned because it is the last value where the check ends for the truthfulness of the statement.
+Thus, the user of Boolean and 'and' is recommended in a loop.
+
+
+Next TopicCryptography package in Python
+
+
+
+
+← prev
+next →
+
+
+
+

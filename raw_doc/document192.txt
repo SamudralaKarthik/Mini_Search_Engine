@@ -1,0 +1,204 @@
+
+
+
+
+next →
+← prev
+
+Python Modulus Operator
+Like other programming languages, the Python modulus operator does the same work to find the modulus of the given number. The operator is a mathematical symbol used to perform different operations such as (+, -, * /) addition, subtraction, multiplication, and division on the given two numbers to return the result in the form of an integer as well as the float number. An operator tells the compiler to perform certain actions based on the passed operator symbol to the given number.
+
+Modulus Operator
+Python Modulus Operator is an inbuilt operator that returns the remaining numbers by dividing the first number from the second. It is also known as the Python modulo. In Python, the modulus symbol is represented as the percentage (%) symbol. Hence, it is called the remainder operator.
+Syntax 
+Following are the syntax to get the remainder by dividing the first number from the second.
+
+Rem = X % Y 
+
+Here X and Y are two integer numbers, and the modulus (%) is used in between to get the remainder where the first number (X) is divided by the second number (Y).
+For example, we have two numbers, 24 and 5. And we can get the remainder by using the modulus or modulo operator between the numbers 24 % 5. Here 24 is divided by 5 that returns 4 as the remainder, and 4 as the quotient. When the first number is completely divisible by another number without leaving any remainder, the result will be 0.
+Get the modulus of two integers numbers using while loop
+Let's write a program to get the remainder of two numbers using the while loop and modulus (%) operator in Python.
+Get_rem.py
+
+while True: # if the while condition is true if block is executed
+    a = input ('Do you want to continue or not (Y / N)? ')
+    if a.upper() != 'Y':  # If the user pass 'Y', the following statement is executed.
+        break
+
+    a = int(input (' First number is: ')) # first number
+    b = int(input (' Second number is: ')) # second number
+    print(a, ' % ', b, ' = ', a % b) # perform a % b	
+    print(b, ' % ', a, ' = ', b % a) # perform b % a
+
+Output:
+Do you want to continue or not (Y / N)? Y
+First number is: 37
+Second number is: 5
+37 % 5 = 2
+5 % 37 = 5
+
+Do you want to continue or not (Y / N)? Y
+First number is: 37
+Second number is: 5
+24 % 5 = 4
+5 % 24 = 5
+
+Do you want to continue or not (Y / N)? Y
+First number is: 37
+Second number is: 5
+28 % 5 = 3
+5 % 28 = 5
+
+Get the modulus of two float numbers
+Let's write a program to find the remainder of two integer number using the modulus operator in Python.
+Mod.py
+
+x = float(input ('First number: '))
+y = float(input (' Second number: '))
+
+res = x % y # store the remainder in res variable
+print("Modulus of two float number is: ", x, "%", y, " = ", res, sep = " ")
+
+Output:
+First number: 40.5
+ Second number: 20.5
+Modulus of two float number is:  40.5 % 20.5 = 20.0
+
+Get the modulus of a negative number
+Let's write a program to get the remainder of two negative number using while loop and modulus (%) operator in Python.
+Mod.py
+
+while True:
+    x = input(' Do you want to continue (Y / N)? ')
+    if x.upper() != 'Y':
+        break
+   
+    # input two integer number and store it into x and y
+    x = int(input (' First number: '))
+    y = int(input (' Second number: '))
+
+    print("Modulus of negative number is: ", x, "%", y, " = ", x % y, sep = " ")
+    print("Modulus of negative number is: ", y, "%", x, " = ", y % x, sep = " ")
+
+Output:
+First number: -10
+Second number: 3
+Modulus of negative number is:  -10 % 3  =  2
+Modulus of negative number is:  3 % -10  =  -7
+ Do you want to continue (Y / N)? N
+
+Get the modulus of two numbers using fmod() function
+Let's write a program to get the remainder of two float number using fmod() function in Python.
+Fmod.py
+
+import math    # import math package to use fmod() function.
+res = math.fmod(25.5, 5.5) # pass the parameters
+print ("Modulus using fmod() is:", res)
+ft = math.fmod(75.5, 15.5)
+print (" Modulus using fmod() is:", ft)
+# take two integer from the user
+x = int( input( "First number is"))
+y = int (input ("Second number is "))
+out = math.fmod(x, y) # pass the parameters 
+print("Modulus of two numbers using fmod() function is", x, " % ", y, " = ", out)  
+
+Output:
+Modulus using fmod() is: 3.5
+ Modulus using fmod() is: 13.5
+First number is 24
+Second number is 5
+Modulus of two numbers using fmod() function is 24  %  5  =  4.0
+
+Get the modulus of n numbers using function
+Let's write a Python program to find the modulus of n number using function and for loop.
+getRemainder.py
+
+def getRemainder(n, k):
+    for i in range(1, n + 1):
+        # Store remainder in the rem variable when i is divided by k number
+        rem = i % k   
+        print(i, " % ", k, " = ", rem, sep = " ")	
+
+# use _name_ driver code
+if __name__ == "__main__":
+
+    # define the first number for displaying the number up to desired number.  
+    n = int(input ("Define a number till that you want to display the remainder "))
+    k = int( input (" Enter the second number ")) # define the divisor 
+
+    # call the define function
+    getRemainder(n, k)  
+
+Output:
+Define a number till that you want to display the remainder 7
+ Enter the second number 5
+1 % 5 = 1
+2 % 5 = 2
+3 % 5 = 3
+4 % 5 = 4
+5 % 5 = 0
+6 % 5 = 1
+7 % 5 = 2
+
+Get the modulus of given array using mod() function
+Let's write a program to demonstrate the mod() function in Python.
+Mod_fun.py
+
+import numpy as np # import numpy package
+x = np.array([40, -25, 28, 35]) # define first array
+y = np.array([20, 4, 6, 8]) # define second array
+# call mod() function and pass x and y as the parameter
+print("The modulus of the given array is ", np.mod (x, y))
+
+Output:
+The modulus of the given array is [0 3 4 3]
+
+As we can see in the above program, x and y variables hold the arrays. After that, we use the mod() function to pass x and y as the array parameter that divides the first array(x) by the second array(y) and then returns the remainder of the numbers.
+Get the modulus of two numbers using numpy.
+Let's consider a program to import a numpy package from the Python library and then use the remainder function to get the modulus in Python.
+Num.py
+
+import numpy as np # import numpy package as np
+# declaration of the variables with their values
+num = 38 
+num2 = 8
+res = np.remainder(num, num2) # use np.remainder() function
+print( "Modulus is", num, " % ", num2, " = ", res) # display modulus num % num2
+
+Output:
+Modulus is 38 % 8 = 6
+
+Exceptions in Python Modulus operator
+In Python, when a number is divided by zero, it throws an exception, and the exception is called the ZeroDivisionError. In other words, it returns an exception when a number is divisible by a divisor that is zero. Therefore, if we want to remove the exception from the Python modulus operator, the divisor should not be zero.
+Let's write a program to demonstrate the Python Exception in Modulus operator.
+Except.py
+
+x = int(input (' The first number is: '))
+y = int(input (' The second number is: '))
+
+# display the exception handling
+try: # define the try
+    print (x, ' % ', y, ' = ', x % y)
+except ZeroDivisionError as err: # define the exception 
+    print ('Cannot divide a number by zero! ' + 'So, change the value of the right operand.' )    
+
+Output:
+The first number is: 24
+The second number is: 0
+Cannot divide a number by zero! So, change the value of the right operand.
+
+As we can see in the above result, it displays, "Cannot divide a number by zero! So, change the value of the right operand". Hence, we can say, when we divide the first number by zero, it returns an exception.
+
+
+Next TopicMATLAB vs. Python
+
+
+
+
+← prev
+next →
+
+
+
+

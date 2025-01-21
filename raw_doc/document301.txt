@@ -1,0 +1,163 @@
+
+
+
+
+next →
+← prev
+
+agg() function in Python
+Because of the fantastic ecosystem for the data-centric Python packages, Python is considered as one of the great programming languages for doing data analysis. Panda is one of such packages that is provided to us in Python, and it makes it very easy to import and analyze the data.
+In this tutorial, we are going to discuss the agg() function given to us in the panda series, and we will use it with series data given to us.
+Introduction: Pandas agg() function
+We use the agg() function of Pandas to pass a single function or list of functions that are to be applied on a given data series or sometimes even separately to each element of the data series. In the case where we pass a list of functions inside the agg() function, multiple results will be returned by it.
+Syntax
+In this section, we are going to look at the syntax and parameters that we have to use inside the agg() method and return type of the function.
+
+seriesGiven.agg(function_name, axis = 0)
+
+The seriesGiven is the data series given to us in the program.
+Parameters:
+We have to provide the following parameters inside the agg() method.
+
+Function_name: We have to provide a function, list of functions, or string that contains the name of functions to be called on the data series as a parameter inside the agg() method.
+axis: Axis works like defining the index for rows of data series. We can either give axis equals to 0 or provide 'index' for performing a row-wise operation on data series. Also, we can give either 1 or 'column' in the axis parameter to perform a column-wise operation on the data series.
+
+Return type
+The return type of agg() method is not fixed, and it always depends upon the return type of the function that we have passed as a parameter inside the agg() method.
+Working with agg() function
+Till now, we have learned about the introduction and syntax for using agg() function provided to us in Pandas. To learn about and understand the working of the agg() method, we will use this function in below examples.
+Passing a single function inside agg() method
+In this example, we will create a random array by numpy module, and then we will make it a data series using the Pandas function. After that, we will use the agg() function and pass a lambda function, as an argument inside it, and thus it will add 3 to each value given in the series. As we are applying the function to a series, the return type we get through the agg() function is also series. Now, let's understand this implementation through the following example.
+Example 1: Look at the following Python program:
+
+# Importing panda module as pnd
+import pandas as pnd 
+# Importing numpy module as nmp in program
+import numpy as nmp 
+# Creating random array of 20 elements with numpy random
+randomArray = nmp.random.randn(20) 
+# Creating series from array of random elements
+dataSeries = pnd.Series(randomArray) 
+# Calling agg() method for data series
+resultSeries = dataSeries.agg(lambda num : num + 3) # Lambda function as an argument 
+# Displaying before and after operation results
+print('Data series of elements before operation: \n', dataSeries, 
+    '\n\n Data series of elements after operation: \n', resultSeries)
+
+Output:
+Data series of elements before operation: 
+ 0    -0.510111
+1    -0.732670
+2    -0.451550
+3    -0.435085
+4     0.082848
+5    -1.051242
+6     0.203565
+7    -1.014079
+8    -0.232350
+9    -0.325640
+10    0.528320
+11   -1.472293
+12   -0.639487
+13   -2.490666
+14   -0.242837
+15    0.854955
+16    1.076247
+17    1.491347
+18   -1.767788
+19   -0.205003
+dtype: float64 
+
+ Data series of elements after operation: 
+ 0     2.489889
+1     2.267330
+2     2.548450
+3     2.564915
+4     3.082848
+5     1.948758
+6     3.203565
+7     1.985921
+8     2.767650
+9     2.674360
+10    3.528320
+11    1.527707
+12    2.360513
+13    0.509334
+14    2.757163
+15    3.854955
+16    4.076247
+17    4.491347
+18    1.232212
+19    2.794997
+dtype: float64    
+
+Explanation:
+First, we have imported pandas and numpy modules inside our program to use its functions.
+Then, we have a created an array of 20 elements that we have randomly generated using the randn() function of the numpy module. After that, we made the array into the series form using the series() function of the panda module.
+Then, we have used the agg() function on the series and passed the lambda function as an argument in it. We have passed an argument in the agg() method to add 3 to each value of the series. In last, we printed the data series in the output (both before the operation performed on it and after the operation performed on it).
+As we can see in the output, 3 is added to each value of the series after we have performed an operation on it.
+Passing a list of functions inside agg() method:
+In this example, after creating the data series, we will pass a list of functions as the arguments inside the agg() function instead of passing a single function parameter in it. When we pass a list of Python's default functions as arguments in the agg() method, multiple results are returned by it into multiple variables. Let's understand the implementation of this method through the following example.
+Example 2: Look at the following Python program:
+
+# Importing panda module as pnd
+import pandas as pnd 
+# Importing numpy module as nmp in program
+import numpy as nmp 
+# Creating random array of 20 elements with numpy random
+randomArray = nmp.random.randn(20) 
+# Creating series from array of random elements
+dataSeries = pnd.Series(randomArray) 
+# Creating a list having function names in it
+functionList = [min, max, sorted] 
+# Calling agg() method with list of functions 
+seriesResult1, seriesResult2, seriesResult3 = dataSeries.agg(functionList)  
+# Displaying elements of data series
+print('Data Series before operation: \n', dataSeries) 
+print('\nMinimum value in the data series = {}\n\nMaximum value in the data series = {},\
+      \n\nSorted data series after operation:\n{}'.format(seriesResult1, seriesResult2, seriesResult3)) 
+
+Output:
+ Data Series before operation: 
+ 0     1.324659
+1    -1.632943
+2    -0.451046
+3    -0.119475
+4    -1.476469
+5     1.550481
+6    -0.345283
+7    -0.391220
+8     1.183295
+9     0.945834
+10    0.426908
+11   -1.373141
+12   -1.360714
+13    1.029160
+14   -0.305868
+15    0.520776
+16    0.519891
+17    0.581810
+18   -0.200537
+19    2.175055
+dtype: float64
+Minimum value in the data series = -1.6329428122607905
+Maximum value in the data series = 2.175055294872539,      
+Sorted data series after operation:
+[-1.6329428122607905, -1.476468968840359, -1.3731412602339488, -1.3607141137838996, -0.45104603430414114, -0.3912204479169106, -0.34528253055365704, -0.3058683242351637, -0.20053665016862435, -0.1194753076622943, 0.4269084920204909, 0.519891496565306, 0.5207757216248261, 0.5818098237803292, 0.9458337130436504, 1.02915996695176, 1.1832945335240084, 1.324659481096391, 1.5504805147479754, 2.175055294872539]
+
+Explanation:
+After creating a data series as we did in the previous example, we have created a list where we have multiple functions' names in it. In this example, instead of giving a single function as an argument, we have passed multiple default functions inside the agg() function. After passing these functions as arguments, we have printed the data series before operation and after operation in the output.
+As we look at the output, we can see that multiple results have been returned by agg() function. This is because we have passed multiple functions as parameters inside it. The max(), min() and sorted() have been returned into different variables i.e., seriesResult1, seriesResult2 and seriesResult3 respectively.
+
+
+Next TopicAmicable Numbers in Python
+
+
+
+
+← prev
+next →
+
+
+
+

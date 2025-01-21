@@ -1,0 +1,135 @@
+
+
+
+
+next →
+← prev
+
+How to Find the User's Location using Geolocation API
+In this tutorial, we will learn to find the user's location by providing IP address to the Geolocation API. Geocoding is a technique of transforming a description of a location into the pair of latitude and longitude on the Earth's surface for the place.
+It also refers to modifying geographical coordinates to a description of a location.
+We will use the AbstractAPI IP Geolocation IP from their IP address. It is a simple REST API that takes an IP address string and returns a JSON object including the location, device information, carrier information and more.
+We follow the below steps to get the user information -
+Getting Started With the API
+Get an API key
+
+The first step is to visit the https://www.abstractapi.com/ip-geolocation-api#docs We can see an example of a JSON response object to the right. 
+There is a "Get Started" button on the left. When we click on the Get Started button, it will take us to create an account using email and password. You may be asked to log in if you have used Abstract before. 
+Once we sign up or log in, we will land on the homepage with a shows API key and tabs to view code for supported languages. 
+
+Making an IP Geolocation Request using Python
+Abstract API provides some sample code for the supported languages. We can easily plug the code and make the request from our Python code.
+
+Choose the Python tab API's home page. It will show the Python code in text box.
+Copy the Python code and paste it into a new function called find_geolocation_func. In this function, we will write the logic for sending and receiving our request to Abstract API.
+
+Example -
+
+api_url = "https: // ipgeolocation.abstractapi.com/v1/"
+api_key = YOUR_API_KEY
+
+def get_geolocation_info(validated_ip_address):
+   params = {
+       'api_key': api_key,
+       'ip_address': validated_ip_address
+   }
+  try:
+      response = requests.get(api_url, params=params)
+      print(response.content)
+  except requests.exceptions.RequestException as api_error:
+      print(f"There was an error contacting the Geolocation API: {api_error}")
+      raise SystemExit(api_error)
+
+As we can see above, we use the Python requests library to send a GET request to AbstractAPI Geolocation API URL, including the API key (unique for every user) and IP address as querystring parameters. We print the JSON response that we get from the API.
+Output:
+
+{
+    "ip_address": "XXX.XX.XXX.X",
+    "city": "City Name",
+    "city_geoname_id": ID_NUMBER,
+    "region": "Region",
+    "region_iso_code": "JAL",
+    "region_geoname_id": GEONAME_ID,
+    "postal_code": "postalcode",
+    "country": "Country",
+    "country_code": "CC",
+    "country_geoname_id": GEONAME_ID,
+    "country_is_eu": false,
+    "continent": "North America",
+    "continent_code": "NA",
+    "continent_geoname_id": GEONAME_ID,
+    "longitude": longitude,
+    "latitude": latitude,
+    "security": {
+        "is_vpn": false
+    },
+    "timezone": {
+        "name": "America/Timezone",
+        "abbreviation": "ABBR",
+        "gmt_offset": -5,
+        "current_time": "15:52:08",
+        "is_dst": true
+    },
+    "flag": {
+        "emoji": "??",
+        "unicode": "U+1F1F2 U+1F1FD",
+        "png": "https://static.abstractapi.com/country-flags/US_flag.png",
+        "svg": "https://static.abstractapi.com/country-flags/US_flag.svg"
+    },
+    "currency": {
+        "currency_name": "Dollar",
+        "currency_code": "USD"
+    },
+    "connection": {
+        "autonomous_system_number": NUMBER,
+        "autonomous_system_organization": "System Org.",
+        "connection_type": "Cellular",
+        "isp_name": "Isp",
+        "organization_name": "Org."
+    }
+}
+
+We write the valid IP address function to check whether a given IP is valid or not. We use the Regex in it.
+
+def validate_ip_regex(ip_address):
+   match = re.match(
+       r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", "127.0.0.1", ip_address)
+  
+   if not bool(match):
+       print(f"The IP address {ip_address} is not valid")
+       return False
+
+   bytes = ip_address.split(".")
+  
+   for ip_byte in bytes:
+       if int(ip_byte) < 0 or int(ip_byte) > 255:
+           print(f"The IP address {ip_address} is not valid")
+           return False
+   print(f"The IP address {ip_address} is valid")
+   return True
+
+We can also create the single function that uses our Regex validation function to validate the IP and then sends it to the Geolocation API.
+Example -
+
+def validate_ip_and_get_geolocation(ip_address):
+   is_valid_ip = validate_ip_regex(ip_address)
+   if is_valid_ip:
+       get_geolocation_info(ip_address)
+   else:
+       print("Invalid IP")
+
+Conclusion
+This includes the step-wise guide to getting the Geolocation info for IP addresses using the AbstractAPI Geolocation API.
+
+
+Next TopicLRU Cache in Python
+
+
+
+
+← prev
+next →
+
+
+
+

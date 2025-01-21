@@ -1,0 +1,173 @@
+
+
+
+
+next →
+← prev
+
+Principal Component Analysis (PCA) with Python
+Principal Component Analysis (PCA): is an algebraic technique for converting a set of observations of possibly correlated variables into the set of values of liner uncorrelated variables.
+All principal components are chosen to describe most of the available variance in the variable, and all principal components are orthogonal to each other. In all the sets of the principal component first principal component will always have the maximum variance.
+Different Uses of Principal Component Analysis:
+
+PCA can be used for finding interrelations between various variables in the data.
+PCA can be used for interpreting and visualizing the data sets.
+PCA can also be used for visualizing genetic distance and connection between populations.
+PCA also makes analysis simple with the decrease in the number of variables.
+
+Principal component analysations are usually executed on a square symmetric matrix, and this can be a pure sum of squares and cross products matrix or correlation matrix or covariance matrix. The correlation matrix is used if there is a major difference in the individual variance.
+What are the Objectives of Principal Component Analysis?
+The basic objectives of PCA are as follows:
+
+PCA is a nondependent method can be used for reducing attribute space from a larger number of variables of the set to a smaller number of factors.
+It is a dimension reducing technique but with no assurance whether the dimension would be interpretable.
+In PCA, the main job is selecting the subset of variables from a larger set, depending on which original variables will have the highest correlation with the principal amount.
+
+Principal Axis Method: Principal Component Analysis searches for the linear combination of the variable for extracting maximum variance from the variables. Once the PCA is done with the process, it will move forward to another linear combination which will explain the maximum ratio of the remaining variance, which would lead to orthogonal factors of the sets. This method is used for analysing total variance in the variables of the set.
+Eigen Vector: It is a nonzero vector that remains parallel after multiplying the matrix. Suppose 'V' is an eigen vector of dimension R of matrix K with dimension R * R. If KV and V are parallel. Then the user has to solve KV = PV where both V and P are unknown for solving eigen vector and eigen value.
+Eigen Value: It is also known as "characteristic roots" in PCA. This is used for measuring the variance in all the variables of the set, which is reported for by that factor. The proportion of eigen value is the ratio of descriptive importance of the factors concerning the variables. If the factor is low, then it subsidises less to the description of variables.
+Now, we will Discuss Principal Component Analysis with Python.
+Following are the Steps for Using PCA with Python:
+In this tutorial, we will use wine.csv Dataset.
+Step 1: We will import the libraries.
+
+import numpy as nmp
+import matplotlib.pyplot as mpltl
+import pandas as pnd
+
+Step 2: We will import the dataset (wine.csv)
+First, we will import the dataset and distribute it into X and Y components for data analysis.
+
+DS = pnd.read_csv('Wine.csv')
+ 
+# Now, we will distribute the dataset into two components "X" and "Y"
+
+X = DS.iloc[: , 0:13].values
+Y = DS.iloc[: , 13].values
+
+Step 3: In this step, we will split the dataset into the training set and testing set.
+
+from sklearn.model_selection import train_test_split as tts
+ 
+X_train, X_test, Y_train, Y_test = tts(X, Y, test_size = 0.2, random_state = 0)
+
+Step 4: Now, we will Feature Scaling.
+In this step, we will do the re-processing on the training and testing set, for example, fitting the standard scale.
+
+from sklearn.preprocessing import StandardScaler as SS
+SC = SS()
+ 
+X_train = SC.fit_transform(X_train)
+X_test = SC.transform(X_test)
+
+Step 5: Then, Apply the PCA function
+We will apply the PCA function into the training set and testing set for analysis.
+
+from sklearn.decomposition import PCA
+ 
+PCa = PCA (n_components = 1)
+ 
+X_train = PCa.fit_transform(X_train)
+X_test = PCa.transform(X_test)
+ 
+explained_variance = PCa.explained_variance_ratio_
+
+Step 6: Now, we will fit Logistic Regression for the training set
+
+from sklearn.linear_model import LogisticRegression as LR
+ 
+classifier_1 = LR (random_state = 0)
+classifier_1.fit(X_train, Y_train)
+
+Output:
+LogisticRegression(random_state=0)
+
+Step 7: Here, we will predict the testing set result:
+
+Y_pred = classifier_1.predict(X_test)
+
+Step 8: We will create the confusion matrix.
+
+from sklearn.metrics import confusion_matrix as CM
+ 
+c_m = CM (Y_test, Y_pred)
+
+Step 9: Then, predict the result of the training set.
+
+from matplotlib.colors import ListedColormap as LCM
+ 
+X_set, Y_set = X_train, Y_train
+X_1, X_2 = nmp.meshgrid(nmp.arange(start = X_set[:, 0].min() - 1,
+                     stop = X_set[: , 0].max() + 1, step = 0.01),
+                     nmp.arange(start = X_set[: , 1].min() - 1,
+                     stop = X_set[: , 1].max() + 1, step = 0.01))
+ 
+mpltl.contourf(X_1, X_2, classifier_1.predict(nmp.array([X_1.ravel(),
+             X_2.ravel()]).T).reshape(X_1.shape), alpha = 0.75,
+             cmap = LCM (('yellow', 'grey', 'green')))
+ 
+mpltl.xlim (X_1.min(), X_1.max())
+mpltl.ylim (X_2.min(), X_2.max())
+ 
+for s, t in enumerate(nmp.unique(Y_set)):
+    mpltl.scatter(X_set[Y_set == t, 0], X_set[Y_set == t, 1],
+                c = LCM (('red', 'green', 'blue'))(s), label = t)
+ 
+mpltl.title('Logistic Regression for Training set: ')
+mpltl.xlabel ('PC_1') # for X_label
+mpltl.ylabel ('PC_2') # for Y_label
+mpltl.legend() # for showing legend
+ 
+# show scatter plot
+mpltl.show()
+
+Output:
+
+Step 10: At last, we will visualize the result of the testing set.
+
+from matplotlib.colors import ListedColormap as LCM
+ 
+X_set, Y_set = X_test, Y_test
+ 
+X_1, X_2 = nmp.meshgrid(nmp.arange(start = X_set[: , 0].min() - 1,
+                     stop = X_set[: , 0].max() + 1, step = 0.01),
+                     nmp.arange(start = X_set[: , 1].min() - 1,
+                     stop = X_set[: , 1].max() + 1, step = 0.01))
+ 
+mpltl.contourf(X_1, X_2, classifier_1.predict(nmp.array([X_1.ravel(),
+             X_2.ravel()]).T).reshape(X_1.shape), alpha = 0.75,
+             cmap = LCM(('pink', 'grey', 'aquamarine')))
+ 
+mpltl.xlim(X_1.min(), X_1.max())
+mpltl.ylim(X_2.min(), X_2.max())
+ 
+for s, t in enumerate(nmp.unique(Y_set)):
+    mpltl.scatter(X_set[Y_set == t, 0], X_set[Y_set == t, 1],
+                c = LCM(('red', 'green', 'blue'))(s), label = t)
+ 
+# title for scatter plot
+mpltl.title('Logistic Regression for Testing set')
+mpltl.xlabel ('PC_1') # for X_label
+mpltl.ylabel ('PC_2') # for Y_label
+mpltl.legend()
+ 
+# show scatter plot
+mpltl.show()
+
+Output:
+
+Conclusion
+In this tutorial, we have learned about principal component analysis with Python, its uses, and objects and how to use it on the data set to analyse the data's testing and training sets.
+
+
+Next TopicPython Program to Find Number of Days Between Two Given Dates
+
+
+
+
+← prev
+next →
+
+
+
+

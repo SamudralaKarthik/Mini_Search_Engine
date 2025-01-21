@@ -1,0 +1,84 @@
+
+
+
+
+next →
+← prev
+
+How to convert list to dictionary in Python
+Lists and Dictionaries are two data structure which is used to store the Data. List stores the heterogeneous data type and Dictionary stores data in key-value pair. Here, we are converting the Python list into dictionary. Since list is ordered and dictionary is unordered so output can differ in order. Python list stores the element in the following way.
+
+student_marks = [56, 78, 96, 37, 85]
+
+On the other hand, Dictionary is unordered, and stores the unique data. It stores the data in key value pair where each key is associated with it value. Python Dictionary stores the data in following way.
+
+student_dict = {'Abhinay': 56, 'Sharma': 78, 'Himanshu': 96, 'Peter': 37}
+
+In this tutorial, we will learn the conversion Python list to dictionary.
+Sample Input:
+
+Input : ['Name', 'Abhinay', 'age', 25, 'Marks', 90]
+Output : {'Name', 'Abhinay', 'age', 25, 'Marks', 90}
+
+Input : ['a', 10, 'b', 42, 'c', 86]
+Output : {'a', 10, 'b', 42, 'c', 86}
+
+Let's understand the following methods.
+Method - 1 Using Dictionary Comprehension
+We can convert the list into dictionary using the dictionary comprehension. Let's understand the following code.
+Example -
+
+student = ["James", "Abhinay", "Peter", "Bicky"]
+
+student_dictionary = { stu : "Passed" for stu in student }
+
+print(student_dictionary)
+
+Output:
+{'James': 'Passed', 'Abhinay': 'Passed', 'Peter': 'Passed', 'Bicky': 'Passed'}
+
+Explanation -
+In the above code, we have created a student list to be converted into the dictionary. Using the dictionary compression, we converted the list in dictionary in a single line. The list elements tuned into key and passed as a value.
+Let's understand another example.
+Example - 2
+
+list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+square_dict = {n: n*n for n in list1}
+print(square_dict)
+
+Output:
+{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
+
+Explanation:
+In the above code, we have created square_dict with number-square key/value pair.
+Method - 2 Using zip() function
+The zip() function is used to zip the two values together. First, we need to create an iterator and initialize to any variable and then typecast to the dict() function.
+Let's understand the following example.
+Example -
+
+def Convert_dict(a):
+    init = iter(list1)
+    res_dct = dict(zip(init, init))
+    return res_dct
+
+
+# Driver code
+list1 = ['x', 1, 'y', 2, 'z', 3]
+print(Convert_dict(list1))
+
+Output:
+{'x': 1, 'y': 2, 'z': 3}
+
+
+
+Next TopicHow to declare a global variable in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,450 @@
+
+
+
+
+next →
+← prev
+
+Advance Concepts of Python for Python Developer
+In the journey of learning Python, we go through a lot of practice and try to have a deep understanding of the Python core concepts. Implementing the learned topic will take a lot of effort and dedication. Here we are mentioning some essential and advanced Python concepts that will help you gain more efficiency as a Python developer.
+Once you get hands-on experience on these topics, you can implement the complex solution. Below is the list of the Advance topics in Python.
+
+How is Everything Object in Python?
+Comprehension
+Closure and Decorator
+Generator and Iterators Protocol
+Context Managers
+Extended Keyword Arguments (*args, **kwargs)
+@staticmethod and @classmethod
+Inheritance and Encapsulation
+Operator Overloading
+Python Packages and Program layout
+
+Let's move to our first topic.
+How everything in Python is Object?
+As we all read in the official documentation of Python - "Everything in Python is an object." Strings are objects, lists are objects, functions are objects, and even modules are objects. Everything is an object because it can be assigned to a variable or passed as an argument to a function. Anything you can place on the right-hand side of the equals sign is (or creates) an object in Python.
+Example -
+
+def hello():
+	print("say hello")
+hi = hello()
+"say hello"
+hello()
+"say hello"
+
+Objects
+The object has two qualities -
+
+An Identity (id)
+A value (mutable and immutable)
+
+Mutable - When we modify the item, the id won't change. For example - Dictionary, List, set.
+Immutable - We can't alter the element. For example - String, Integer, Tuple.
+Comprehension
+Comprehensions in Python allow us to write a concise line to create new sequences (such as lists, set, dictionary etc.) using sequences which have already been defined. Python provides the following four types of comprehensions:
+
+List Comprehensions
+Dictionary Comprehensions
+Set Comprehensions
+Generator Comprehensions
+
+List Comprehensions
+List Comprehension is a well-designed way to define new lists. Below is the basic structure of a list comprehension.
+Syntax -
+
+[ expr(item) for item in iterable ]
+
+Example - Without list comprehension
+
+given_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+output = []
+# Using loop for constructing output list
+for i in given_list:
+    if i % 2 == 0:
+        output.append(i) 
+print("Output List using for loop:", output)
+
+Output:
+Output List using for loop: [2, 4, 6, 8, 10]
+
+Example - With list comprehension
+
+given_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list_comp_example = [i for i in given_list if i % 2 == 0]
+print("Output List using list comprehensions:", list_comp_example)
+
+Output:
+Output List using list comprehensions: [2, 4, 6, 8, 10]
+
+Dictionary Comprehension
+Python also allows us to use the comprehension with the dictionary as the list comprehensions; we can also create a dictionary using dictionary comprehensions. The syntax of a dictionary comprehension looks like below.
+Example -
+
+{ key_expr:value_expr for item in iterable }
+
+Example - Without Dictionary Comprehension
+
+given_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+output = {}
+# Using loop for constructing output list
+for i in given_list:
+    if i % 2 == 0:
+        output[i] = i ** 3
+print("Output List using for loop:", output)
+
+Output:
+Output List using for loop: {2: 8, 4: 64, 6: 216, 8: 512, 10: 1000}
+
+Set Comprehensions
+Set comprehensions are quite similar to list comprehensions. The only difference between them is that set comprehensions use curly brackets { }. Let's look at the following example to understand set comprehensions.
+Example - Without Set Comprehension
+
+given_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+output = set()
+# Using loop for constructing output list
+for i in given_list:
+    if i % 2 == 0:
+        output.add(i)
+print("Output List using for loop:", output)
+
+Output:
+Output List using for loop: {2, 4, 6, 8, 10}
+
+Example - With Set Comprehension
+
+given_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+output = set()
+set_using_comp = {var for var in given_list if var % 2 == 0}
+print("Output Set using set comprehensions:",
+                              set_using_comp)
+
+Output:
+Output Set using set comprehensions: {2, 4, 6, 8, 10}
+
+Generator Comprehension
+Generator Comprehensions are very similar to list comprehension. One difference is that generator comprehensions use circular brackets, whereas list comprehensions use square brackets.
+Let's look at the following example to understand generator comprehension.
+Example -
+
+given_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+output_gen = (var for var in given_list if var % 2 == 0)
+  
+for var in output_gen:
+    print(var, end = ' ')
+
+Output:
+2
+4
+6
+8
+10
+
+Multiple Comprehensions
+
+values = [(x,y) for x in range(5) for y in range(3)]
+values = []
+for x in range(5):
+    for y in range(3):
+        values.append((x,y))
+
+Nested Comprehension
+
+values = [[y*3 for y in range(x)] for x in range(10)]
+	
+	values = []
+	for x in range(10):
+	    inner = []
+	    for y in range(x):
+	        inner.append(y*3)
+	    values.append(inner)
+
+Extended Keyword Arguments
+We use the arguments to call the function in Python. Sometimes we need to use keyword arguments or positional arguments, and Keyword arguments can often be used to make function calls more explicit.
+
+Extended Format Argument Syntax
+
+Arguments at the function definition side -
+Example -
+
+def hyper(*lengths):
+    i = iter(lengths)
+    v = next(i)
+    for length in i:
+        v *= length
+    return v
+print(hyper(1, 2, 3, 4, 5))
+
+Output:
+672
+
+
+Extended Actual Arguments Syntax 
+
+Argument at the function calls side.
+Example -
+
+argument = (1, 2, 3, 4, 5)
+def print_args(arg1, arg2, *args):
+    print(arg1)
+    print(arg2)
+    print(args)
+print_args(*argument)
+
+Output:
+1
+2
+(3, 4, 5)
+
+Closure and Decorators
+To get an understanding of the closure and decorators, we should know about local functions -
+Local Function
+It is a function inside a function and value for specialized, one-off functions. It is similar to lambdas but more general and aid in the code organization and readability.
+Scope resolution via LEGB rule:
+In Python, the LEGB rule is used to decide the order in which the namespaces are to be searched for scope resolution.
+The scopes are listed below in terms of hierarchy (highest to lowest/narrowest to broadest):
+
+Local (L) - It defines inside function/class.
+Enclosed (E) - It define inside enclosing functions (Nested function concept).
+Global (G) - It defines at the uppermost level.
+Built-in (B) - It reverses names in Python built-in modules.
+
+Let's understand the following example -
+Example -
+
+def func():    
+    def local_func():
+        a = 'hello, '
+        b = 'world'
+        return a + b
+    x = 1
+    y = 2
+    return x + y
+
+
+Returning Function
+
+
+def outer():
+    def inner():
+        print('inner')
+    return inner
+
+
+Closures
+
+It maintains references to object from earlier scopes. Let's understand the following example -
+Example -
+
+def outer_function(x):
+    def inner_function(y):
+        return x+y
+    return inner_funtion
+add_plus= outer_function(30)
+add_plus(20)
+
+Output:
+50
+
+
+Decorators
+
+Decorators are an essential, powerful and useful tool in Python since it allows programmers to modify the behaviour of a function or class without changing the actual definition. Decorators allow us to wrap another function to extend the behaviour of the wrapped function without permanently modifying it. Let's understand the following example - 
+Example -
+
+def change_upper(f):
+    print("change_upper")
+    def wrap(*args, **kwargs):
+        print("wrap")
+        x = f(*args, **kwargs)
+        return x.upper()
+    return wrap
+@change_upper
+def my_name(name):
+    print("my_name")
+    return name
+
+Output:
+change_upper
+
+Generator and Iterable Protocol
+
+Iterable - The object can be passed to the built-in iter() function to get an iterator.
+Iterator - The object can be passed to the built-in next() function to fetch the next item.
+
+Example -
+
+iterator = iter(iterable)
+item = next(iterator)
+
+
+Generators
+
+A generator function is defined like a regular function, but it does so with the yield keyword rather than return whenever it needs to generate a value. If the body of a def contains yield, the function automatically becomes a generator function. 
+The yield statement is used to define the generator; the yield keyword is different from the return because it suspends the function execution, returns the value, saves all states, and later continues on successive calls.
+Example -
+
+def my_gen():
+    n = 1
+    print('This is printed first')
+    # Generator function contains yield statements
+    yield n
+
+    n += 1
+    print('This is printed second')
+    yield n
+
+    n += 1
+    print('This is printed at last')
+    yield n
+
+# Using for loop
+for item in my_gen():
+    print(item)  
+
+Why are generators used in Python?
+
+Easy to Implement
+Memory Efficient
+Represent Infinite Stream
+Pipelining Generators
+
+Example -
+
+def PowTwoGen(max = 0):
+    n = 0
+    while n < max:
+        yield 2 ** n
+        n += 1
+
+Context Manager
+Context managers are used to manage resources. The usage of resources like file operations or database connections is widespread. Resources are minimal, so we need to manage them. Therefore, the main problem lies in making sure to release these resources after usage. It would be very beneficial if users had a mechanism for the automatic setup and breakdown of resources. In Python, it can be attained by using context managers, simplifying the proper handling of resources. The most common way to execute file operations is by using the keyword shown below.
+Example -
+
+# Python program showing
+# a use of with keyword
+with open("test.txt") as f:
+	data = f.read()
+
+@staticmethod @classmethod
+The @classmethod allows us to access class attributes. If you don't need to use the cls object, use the @static method.
+Python static method can be overridden in a subclass. Below is the difference between the static method and the class method.
+Example -
+
+
+Class Method
+Static Method
+
+
+The class method takes cls (class) as first argument.
+The static method does not take any specific parameter.
+
+
+Class method can access and modify the class state.
+Static Method cannot access or modify the class state.
+
+
+The class method takes the class as parameter to know about the state of that class.
+Static methods do not know about class state. These methods are used to do some utility tasks by taking some parameters.
+
+
+@classmethod decorator is used here.
+@staticmethod decorator is used here.
+
+
+Example -
+
+from datetime import date as dt
+class Employee:
+   def __init__(self, name, age):
+      self.name = name
+      self.age = age
+   
+   @staticmethod
+   def isAdult(age):
+      if age > 18:
+         return True
+      else:
+         return False
+   @classmethod
+   def emp_from_year(emp_class, name, year):
+      return emp_class(name, dt.today().year - year)
+   def __str__(self):
+      return 'Employee Name: {} and Age: {}'.format(self.name, self.age)
+e1 = Employee('Joshep', 29)
+print(e1)
+e2 = Employee.emp_from_year('Peter', 1997)
+print(e2)
+print(Employee.isAdult(25))
+print(Employee.isAdult(16))
+
+Output:
+Employee Name: Joshep and Age: 29
+Employee Name: Peter and Age: 25
+True
+False
+
+Inheritance and Encapsulation
+Inheritance is a technique in which one class takes the property of another class. For example, a child inherits some the characteristics of his/her parents. With inheritance, we can reuse the fields and methods of the existing class. Hence, inheritance simplifies Reusability and is an important concept of OOPs.
+
+single inheritance:
+
+The subclass will acquire all functionality of parent class and it can also adapt and enhance. The subclass initializer wants to call base class initializer to make sense that the full object is initialized.
+
+class SubClass(BaseClass):
+
+
+Multiple Inheritance:
+
+It defines a class with more than one base class. Let's see the following syntax - Example - 
+
+Class SubClass(Base1, Base2, …):
+
+Operator Overloading
+Python Operator works for built-in classes. But the same operator performs contrarily with different types. For example, the + operator will, achieve arithmetic addition on two numbers, merge two lists and concatenate two strings. Let's understand the following example -
+Example -
+
+class Point:
+    def __init__(self, x = 0, y = 0):
+        self.x = x
+        self.y = y
+    
+    def __str__(self):
+        return "({0},{1})".format(self.x,self.y)
+    def __add__(self,other):
+        x = self.x + other.x
+        y = self.y + other.y
+        return Point(x,y)
+p1 = Point(2,3)
+p2 = Point(-1,2)
+print(p1 + p2)
+
+Output:
+(1, 5)
+
+Python Package and Program Layout
+A Package is a module which can contain other modules. PYTHONPATH Environment variable listing paths added to sys.path.
+
+Packages are modules that contain other modules.
+Packages are generally implemented as directories containing a special
+__init__.py file.
+The __init__.py file is executed when the package is imported.
+Packages can contain sub-packages that themselves are implemented
+with __init__.py files in directories.
+The module objects for packages have a __path__ attribute.
+
+absolute imports: imports that use a full path to the module.
+Conclusion
+In this tutorial, we discussed some essential Python concepts which are pretty valuable for development. By practicing these topics, you can gain write effective and efficient code, and these topics make Python a beneficial and popular programming language.
+
+
+Next TopicPycricbuzz Library - Cricket API for Python
+
+
+
+
+← prev
+next →
+
+
+
+

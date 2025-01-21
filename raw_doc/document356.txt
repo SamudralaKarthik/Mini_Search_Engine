@@ -1,0 +1,144 @@
+
+
+
+
+next →
+← prev
+
+Shuffle in Python
+Shuffling refers to the rearranging of elements in a random order which means no specific sequence is considered while arranging the elements.
+In this tutorial, we will learn how we can shuffle the elements of a list using Python.
+The different approaches that we will use to shuffle the elements are as follows-
+
+Using Fisher-Yates shuffle algorithm
+Using shuffle()
+Using sample()
+Random selection of elements and then appending them in a list
+
+We will discuss each method in detail.
+So, let's begin with the first one,
+Using Fisher-Yates Shuffle Algorithm
+
+# using Fisher-Yates shuffle Algorithm to shuffle a list
+import random
+# initializing the list
+list_values1 = [11,20,19,43,22,10]
+# Printing the list
+print ("The initialized list is: ",(list_values1))
+for i in range(len(list_values1)-1, 0, -1):
+	
+	# choosing a random index from 0 to i
+	k = random.randint(0, i + 1)
+	list_values1[i], list_values1[k] = list_values1[k], list_values1[i]
+	
+# Printing the shuffled list
+print ("The shuffled list is : ",(list_values1))
+
+Output:
+The initialized list is :  [11, 20, 19, 43, 22, 10]
+The shuffled list is :  [11, 43, 20, 19, 10, 22]
+
+Explanation
+Let's understand what we have done in the above program.
+
+In the first step, we have imported the random module.
+After this, we have an initialized list that contains different numeric values.
+In the next step, we used the for loop and then randomly selected an element and then swapped it with the element at random index.
+Finally, we have displayed the shuffled list in the output.
+
+Using shuffle()
+In the second method, we will see how shuffle() can be used to shuffle the elements of our list.
+Consider the program given below-
+
+import random
+# initializing the list
+list_values1 = [11,20,19,43,22,10]
+# Printing the list
+print ("The initialized list is : ",(list_values1))
+#using shuffle()
+random.shuffle(list_values1)
+# Printing the shuffled list
+print ("The shuffled list is : ",(list_values1))
+
+Output:
+The initialized list is :  [11, 20, 19, 43, 22, 10]
+The shuffled list is :  [22, 10, 20, 11, 19, 43]
+
+Explanation
+Let's understand what we have done in the above program,
+
+In the first step, we have imported the random module.
+After this, we have an initialized list that contains different numeric values.
+In the next step, we used the shuffle() and passed 'list_values1' as a parameter.
+Finally, we have displayed the shuffled list in the output.
+
+Using random.sample()
+In the third approach, we will use random.sample() to do the same.
+The following program illustrates how it can be done-
+
+import random
+# initializing the list
+list_values1 = [11,20,19,43,22,10]
+# Printing the list
+print ("The initialized list is : ",(list_values1))
+#using random.sample()
+res_list=random.sample(list_values1,len(list_values1))
+# Printing the shuffled list
+print ("The shuffled list is : ",(res_list))
+
+Output:
+The initialized list is :  [11, 20, 19, 43, 22, 10]
+The shuffled list is :  [43, 20, 19, 11, 10, 22]
+
+Explanation
+It's time to understand the above program-
+
+In the first step, we have imported the random module.
+After this, we have an initialized list that contains different numeric values.
+In the next step, we used the sample() and passed 'list_values1' and the length of the list as its parameters.
+Finally, we have displayed the shuffled list in the output.
+
+Finally, it's time to discuss the last approach, it's indeed an interesting one, let's see how….
+Random Selection of Elements and then Appending them in a list
+
+import random
+# initializing the list
+list_values1 = [11,20,19,43,22,10]
+# Printing the list
+print ("The initialized list is: ",(list_values1))
+len_list=len(list_values1)
+for i in range(len_list):
+    k=random.randint(0,len_list-1)
+    e=list_values1.pop(k)
+    list_values1.append(e)
+# Printing the shuffled list
+print ("The shuffled list is : ",(list_values1))
+
+Output:
+The initialized list is :  [11, 20, 19, 43, 22, 10]
+The shuffled list is :  [19, 22, 20, 43, 10, 11]
+
+Explanation
+Now, let's see the explanation of this code,
+
+In the first step, we have imported the random module.
+After this, we have an initialized list that contains different numeric values and then calculated the length of the list.
+In the next step, we used the sample() and passed 'list_values1' and the length of the list as its parameters.
+Now we have used for loop that randomly selects an element, removes it, and then appends it to the list.
+Finally, we have displayed the shuffled list in the output.
+
+Conclusion
+In this tutorial, we learned the different methods of shuffling the elements of a list in Python.
+
+
+Next Topicfloor() and ceil() Functions in Python
+
+
+
+
+← prev
+next →
+
+
+
+

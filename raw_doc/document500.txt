@@ -1,0 +1,330 @@
+
+
+
+
+next →
+← prev
+
+Python pyautogui Library | Automation Testing Using
+We humans get bored when we do the same work multiple times. And we always look for the way that can overcome it. So a solution has come before us: we can create something that can do this kind of task with a single click.
+Automation plays a huge role in our lives, and it allows us to do one more task during the process.
+Python provides many useful and advanced libraries that make a Python programmer's life easier. The pyautogui library is one of the extensive collections of the useful methods. In this tutorial, we will learn about the pyautogui library and implement into the code by using its features. So, without further delay, let's briefly introduce the pyautogui Library.
+What is the pyautogui Library?
+Python pyautogui library is an automation library that allows mouse and keyboard control. Or we can say that it facilitates us to automate the movement of the mouse and keyboard to establish the interaction with the other application using the Python script. It provides many features, and a few are given below.
+
+We can move the mouse and click in the other applications' window.
+We can send the keystrokes to the other applications. For example - filling out the form, typing the search query to browser, etc.
+We can also take snapshots and give an image.
+It allows us to locate a window of the application, and move, maximize, minimize, resizes, or close it.
+Display alert and message boxes.
+
+Installation of pyautogui Library
+Windows Operating System
+It is third-party library so we need to install in it before using it. We can install it using the pip command. You can create a virtual environment or install it globally. Open the command prompt and type the following command.
+
+pip install pyautogui
+
+Mac Operating System
+
+pip3 install pyobjc-core
+pip3 install pyobjc
+pip3 install pyautogui
+
+Linux Operating System
+
+pip3 install python3-xlib
+pip3 install pyautogui
+
+Once the installation is completed, we are good to explore its properties.
+Pyautogui Basic Functions
+In this section, we will cover some basic functions of the pyautogui library. First, create a new file and import the pyautogui library.
+
+import pyautogui 
+
+
+The size() method - It returns the size of the primary monitor. Let's see the following example.
+
+Example -
+
+import pyautogui
+screenWidth, screenHeight = pyautogui.size() # returns the monitor size
+print("The Screen Width is: ", screenWidth)
+print("The Screen Height is: ", screenHeight) 
+
+Output:
+The Screen Width is:  1366
+The Screen Height is:  768
+
+
+The position() method - It returns the XY coordinate of the mouse. Let's understand the following example.
+
+Example -
+
+currentMouseX, currentMouseY = pyautogui.position()
+print("X Cordinate is: ", currentMouseX)
+print("Y Cordinate is: ", currentMouseY) 
+
+Output:
+X Cordinate is:  839
+Y Cordinate is:  635
+
+
+The onscreen() Method - This method returns the Boolean value whether the points with the coordinates x and y exists on the screen. Let's understand the following example.
+
+Example -
+
+print(pyautogui.onScreen(500, 600)) 
+print(pyautogui.onScreen(0, 1500))  
+
+Output:
+True
+False
+
+We have provided the 0 to 1500 which is beyond the screen's dimension that's why it returned the False.
+Basic Mouse Functions
+This section will cover how to automate the mouse using the pyautogui library. Below are some commonly used mouse manipulation methods like moving the cursor from one point to another and automatically clicking buttons. Let's see the following methods.
+The moveTo() Method -
+It moves the mouse to the XY coordinate. It takes the three parameters - X, Y coordinates, and duration (set the duration in the given duration).
+
+pyautogui.moveTo(100, 150, duration = 10) 
+
+The cursor moves to the mentioned coordinates according to the given time duration when running the above function. The duration is time in seconds. We passed the ten seconds means the cursor will take ten seconds to locate the coordinates.
+While using this method, the following error can be encountered.
+Note - Possible Error
+
+Traceback (most recent call last):
+  File "gui.py", line 23, in <module>
+  File "D:\PythonWithKafka\new\lib\site-packages\pyautogui\__init__.py", line 598, in wrapper
+    returnVal = wrappedFunction(*args, **kwargs)
+  File "D:\PythonWithKafka\new\lib\site-packages\pyautogui\__init__.py", line 1283, in moveTo
+    _mouseMoveDrag("move", x, y, 0, 0, duration, tween)
+  File "D:\PythonWithKafka\new\lib\site-packages\pyautogui\__init__.py", line 1509, in _mouseMoveDrag
+  File "D:\PythonWithKafka\new\lib\site-packages\pyautogui\__init__.py", line 1722, in failSafeCheck
+    raise FailSafeException(
+pyautogui.FailSafeException: PyAutoGUI fail-safe triggered from mouse moving to a corner of the screen. To disable this fail-safe, set pyautogui.FAILSAFE to False. DISABLING FAIL-SAFE IS NOT RECOMMENDED.
+
+If such error occurred, it means that your computer's fail-safe is enabled. To overcome this error, we need to disable the fail-safe. So include the below line at the start of the your code.
+
+pyautogui.FAILSAFE=False
+
+The moveRel() Function
+The moveRel() function allows us to move the cursor relative to the current mouse position. Suppose the cursor is located at (100, 100) on the screen, and we call the moveRel() function with the parameter (100, 100, 3) the new position will be the (300, 300).
+
+pyautogui.moveRel(100, 100, 3)
+
+The above line will move the cursor 100 points to the right and 100 to the left in the 3 seconds.
+The click() Function
+The click() method works same as the mouse's click button. Below is the syntax of the click() method. The syntax is given below.
+
+pyautogui.click(x, y, clicks, interval, button)
+
+Parameters -
+
+x - It is the x-coordinate of the point to reach.
+y - It is the y-coordinate of the point to reach.
+clicks - It represents the number of clicks when the cursor moves to the screen.
+Interval - It define the interval between each mouse click.
+button - It specifies the button that we would to press when the cursor gets to the point on screen. We can pass right, left, and middle values.
+
+We can use it as below.
+
+pyautogui.click(100, 100, 5, 2, 'right')
+
+The following functions can also be used to move mouse.
+
+pyautogui.rightClick(x, y)
+pyautogui.doubleClick(x, y)
+pyautogui.tripleClick(x, y)
+pyautogui.middleClick(x, y)
+
+This library also allows us to take more control over mouse clicks by specifying when to press the mouse down, and when to release it up. The mouseDown and mouseUp methods help us to do that.
+Below is the example.
+Example -
+
+x = 100
+y = 100
+# These methods are equivalent to the click(x,y)
+pyautogui.mouseDown(x=x, y=y, button='left')
+pyautogui.mouseUp(x=x, y=y, button='left')
+
+The scroll() Function
+The scroll() is one of the most important function, as its name suggest that it is used to scroll in up and down direction. The syntax is given below.
+Syntax -
+
+pyautogui.scroll(amount_to_scroll, x =x_movement, y=y_movement)
+
+The positive value is used to define amount_to_scroll parameter to scroll up, and to scroll down, we need to specify a negative value. Below is the example.
+
+pyautogui.scroll(100, 200, 120) 
+
+So, we have discussed almost every function to control the mouse. Using these method, we can perform any operations same as we do with the physical mouse. In the next section, we will cover how to cover the keyboard using various functions. There are many functions available but we will discuss some important ones.
+Common Keyboard Operations
+The pyautogui library provides the facility to press the keyboard keys using the Python script. Let's run the following to code to check the available keys.
+
+pyautogui.KEYBOARD_KEYS
+
+Output:
+['\t', '\n', '\r', ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', 'accept', 'add', 'alt', 'altleft', 'altright', 'apps', 'backspace', 'browserback', 'browserfavorites', 'browserforward', 'browserhome', 'browserrefresh', 'browsersearch', 'browserstop', 'capslock', 'clear', 'convert', 'ctrl', 'ctrlleft', 'ctrlright', 'decimal', 'del', 'delete', 'divide', 'down', 'end', 'enter', 'esc', 'escape', 'execute', 'f1', 'f10', 'f11', 'f12', 'f13', 'f14', 'f15', 'f16', 'f17', 'f18', 'f19', 'f2', 'f20', 'f21', 'f22', 'f23', 'f24', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'final', 'fn', 'hanguel', 'hangul', 'hanja', 'help', 'home', 'insert', 'junja', 'kana', 'kanji', 'launchapp1', 'launchapp2', 'launchmail', 'launchmediaselect', 'left', 'modechange', 'multiply', 'nexttrack', 'nonconvert', 'num0', 'num1', 'num2', 'num3', 'num4', 'num5', 'num6', 'num7', 'num8', 'num9', 'numlock', 'pagedown', 'pageup', 'pause', 'pgdn', 'pgup', 'playpause', 'prevtrack', 'print', 'printscreen', 'prntscrn', 'prtsc', 'prtscr', 'return', 'right', 'scrolllock', 'select', 'separator', 'shift', 'shiftleft', 'shiftright', 'sleep', 'space', 'stop', 'subtract', 'tab', 'up', 'volumedown', 'volumemute', 'volumeup', 'win', 'winleft', 'winright', 'yen', 'command', 'option', 'optionleft', 'optionright']
+
+The typewrite() Function
+The typewrite() function is used to write the something in a text field. The syntax is given below.
+Syntax -
+
+pyautogui.typewrite(text, interval)
+
+The text parameter is a text to be provided and interval is a time in seconds between each key stroke. Below is the example.
+Example -
+
+pyautogui.typewrite('Sachin Kumar', 2)
+
+The Sachin Kumar will be written in the text field and take the pause of 2 second between each key press.
+We can pass the sequence of the keys that we want to press. To do so, we can use the following code.
+
+pyautogui.typewrite(['S', 'a', 'c', 'h', 'i', 'n', 'z', 'backspace', 'enter'])
+
+The above code will enter the text Sachin following by the removal of the trailing e.
+The hotkey() Function
+Most of the time, we use the keys in the pairs of keys to perform specific tasks like control + C for the copy text. But we cannot pass as the ['ctrl' + c] to the typewrite() function. It can press the button one after one but not simultaneously same as we press C while holding the Control key to copy something. To do so, we use the hotkey() function that helps us press two or more keys simultaneously. To do so, we use the hotkey() function that helps us to press two or more keys at same time. Let's see the following example.
+Example -
+
+pyautogui.hotkey('shift', 'enter')
+pyautogui.hotkey('ctrl', '2' ) # For the @ symbol
+pyautogui.hotkey('ctrl', 'c')  # To copy
+
+The screenshot() Function
+The screenshot() function is used to take the screenshot of the screen at any instance. The syntax is given below.
+Syntax -
+
+pyautogui.hotkey()
+
+It will store a PIL object containing the image in a variable. We can also store the screenshot at the desired path as below.
+
+pyautogui.screenshot(your_path/file_name.png)
+
+Message Box Functions
+These functions are used to pause/delay the program until the user clicks on OK or something and is also used to display a message to the user.
+The alert() Function
+It is used to display message box with the some text message and OK button. Let's see the following example.
+Example -
+
+import pyautogui
+pyautogui.alert(text='Hello I am a message box', title='JavaTpoint', button='OK')
+
+Output:
+
+When we click on the OK button, it returns button text.
+'OK'
+
+The confirm() Function
+This method is used to display the multiple options or we can say that OK and Cancel buttons. Number and text can be customized. It returns the text of the button clicked on. Let's see the below example.
+Example -
+
+pyautogui.confirm(text='Hello I am a message box', title='JavaTpoint', buttons=['OK', 'Cancel'])
+
+Output:
+
+
+'Cancel'
+
+We can also add more buttons as we need. We just need to pass it into the buttons list.
+
+
+'Not Sure'
+
+The prompt() Function
+It is used to display the message box with the text input and OK and Cancel Buttons and returns the text entered. Let's see the following example.
+Example -
+
+import pyautogui
+pyautogui.password(text='Please Enter Your First Name', title='', default='', mask='*')
+
+Output:
+
+The alert() Function
+As its name suggests, it is used to display an alert message to the screen. Let's see the following example.
+Example -
+
+import pyautogui
+pyautogui.alert('To Continue, Click OK to continue')
+
+Output:
+
+The password() Function
+It displays the message box with text input and typed characters shows as *. Let's see the following example.
+Example -
+
+import pyautogui
+pyautogui.password('Enter password (text will be hidden)')
+
+Output:
+
+Some Example of Pyautogui Library
+Example - 1: In the below code, we automates the opening chrome using the pyautogui library. Copy the below code and run it into your IDE.
+Code -
+
+import pyautopyautogui, time
+def crometest():
+    screenWidth, screenHeight = pyautogui.size()
+    pyautogui.moveTo(0,screenHeight)
+    pyautogui.click()
+    pyautogui.typewrite('Chrome', interval=0.25)
+    pyautogui.press('enter')
+    time.sleep(2)
+    pyautogui.keyDown('alt')
+    pyautogui.press(' ')
+    pyautogui.press('x')
+    pyautogui.keyUp('alt')
+    pyautogui.click(250,22)
+    pyautogui.click(371,51)
+    pyautogui.typewrite('https://javatpoint.com/python-tutorial')
+    pyautogui.press('enter')
+def identifyloc():
+    while True:
+        currentMouseX, currentMouseY = pyautogui.position()
+        print(currentMouseX,currentMouseY)
+        time.sleep(3)
+crometest()
+
+Example - 2:
+
+import pyautogui as gui
+import time
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+ 
+Tk().withdraw()
+filename = askopenfilename()
+# It prints the filename that to be opened
+print(filename)
+
+timeDelay = int(input("Enter the number of seconds for the delay to open the file : ").split()[0])
+
+# In case the input time is designed to break the delay function, we can reset the timeDelay back to 1.
+if timeDelay < 1:
+    timeDelay = 1
+ 
+time.sleep(5)
+ 
+f = open(filename, "r")
+# To read the each charater of file and type them
+for w in f:
+    time.sleep(timeDelay)
+    gui.typewrite(w)
+    gui.press("enter")
+
+When we execute the above code, it opens the windows where we can select any file that to be opened. Finally, we select the file, terminal prints the selected file name and open it after the given number of seconds.
+Conclusion
+In this tutorial, we have covered the pyautogui Library and its important method. These methods help us to create automation in Python. We have also discussed its installation in the different operating systems. You can use this library to do automate your regular tasks.
+
+
+Next TopicHow to Draw the Mandelbrot Set in Python
+
+
+
+
+← prev
+next →
+
+
+
+

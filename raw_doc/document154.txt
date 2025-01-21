@@ -1,0 +1,253 @@
+
+
+
+
+next →
+← prev
+
+Permutation and Combination in Python
+In this tutorial, we will learn how to get the permutation and combination of a given data using Python. We will use Python inbuilt package to find the permutation and combination of a given number.
+Permutation and combination are an essential part in mathematics. Python provides the itertools library that has the in-built functions to calculate permutation and combination.
+Importing the Required library
+To calculate the permutation and combination, we need to import the itertools library. We can import it using the below command.
+
+import itertools
+
+The above statement will import the itertools library and forms a pathway to its function.
+Now, we need to create the list of a sequence as an input. This list of input will return the tuple which consists of permutation and combination. We can also set the length of the permutation and combination.
+Permutation
+A permutation is an arrangement of a set where order does matter. Python itertools module provide inbuilt permutation() method to find the permutation. Let's understand the following example.
+Example -
+
+from itertools import permutations
+seq = permutations(['1','2','3'])
+print(seq)
+for p in list(seq):
+   print(p)
+
+Output:
+
+('1', '2', '3')
+('1', '3', '2')
+('2', '1', '3')
+('2', '3', '1')
+('3', '1', '2')
+('3', '2', '1')
+
+In the above code, we have imported the itertools module. We called the permutation() method which takes string as an argument and provides an itertools object. It is necessary to use for loop to get the each permutation.
+Let's take two sets of permutation.
+Example - 2
+
+from itertools import permutations
+seq = permutations(['A','B'])
+for p in list(seq):
+   print(p)
+
+Output:
+('A', 'B')
+('A', 'C')
+('B', 'C')
+
+Example - 3
+
+from itertools import permutations
+list1 = [1, 2, 3, 4]
+seq = permutations(list1)
+print(seq)
+for p in list(seq):
+   print(p)
+
+Output:
+(1, 2, 3, 4)
+(1, 2, 4, 3)
+(1, 3, 2, 4)
+(1, 3, 4, 2)
+(1, 4, 2, 3)
+(1, 4, 3, 2)
+(2, 1, 3, 4)
+(2, 1, 4, 3)
+(2, 3, 1, 4)
+(2, 3, 4, 1)
+(2, 4, 1, 3)
+(2, 4, 3, 1)
+(3, 1, 2, 4)
+(3, 1, 4, 2)
+(3, 2, 1, 4)
+(3, 2, 4, 1)
+(3, 4, 1, 2)
+(3, 4, 2, 1)
+(4, 1, 2, 3)
+(4, 1, 3, 2)
+(4, 2, 1, 3)
+(4, 2, 3, 1)
+(4, 3, 1, 2)
+(4, 3, 2, 1)
+
+In the above code, we have got the combination of the multiple integer number.
+Permutation of the fixed length
+We can calculate the permutation of the fixed length set where we only take a specified number of each element permutation. Let's understand the following example.
+Example -
+
+from itertools import permutations
+seq = permutations(['H', 'e', 'l', 'l', 'o'], 3)
+for p in list(seq):
+   print(p)
+
+Output:
+('H', 'e')
+('H', 'l')
+('H', 'l')
+('H', 'o')
+('e', 'H')
+('e', 'l')
+('e', 'l')
+('e', 'o')
+('l', 'H')
+('l', 'e')
+('l', 'l')
+('l', 'o')
+('l', 'H')
+('l', 'e')
+('l', 'l')
+('l', 'o')
+('o', 'H')
+('o', 'e')
+('o', 'l')
+('o', 'l')
+
+In the above code, we have calculated the fixed permutation by passing length as two.
+Combination of String
+Combination is a collection of the element where the order doesn't matter. Python itertools module provides the combination() method to calculate the combination of given data. We can calculate the combination of a string. Let's understand the following example.
+Example -
+
+import itertools
+  
+seq = "ABC"
+  
+com_seq = itertools.combinations(seq, 2)
+  
+for c in com_seq:
+    print(c)
+
+Output:
+('A', 'B')
+('A', 'C')
+('B', 'C')
+
+Combination with Replacement
+The itertools module consists of another method called combination_with_replacement() which takes under consideration the combination of a number itself as well. Let's understand its example.
+Combination of Numeric Set
+
+from itertools import combinations_with_replacement
+
+com = combinations_with_replacement(['J', 'a', 'v', 'a', 't', 'p', 'o', 'i', 'n', 't'], 2)
+#Print the list of combinations
+
+for c in list(com):
+   print(c)
+
+Output:
+('J', 'J')
+('J', 'a')
+('J', 'v')
+('J', 'a')
+('J', 't')
+('J', 'p')
+ ('J', 'o')
+('J', 'i')
+('J', 'n')
+('J', 't')
+('a', 'a')
+('a', 'v')
+('a', 'a')
+('a', 't')
+('a', 'p')
+('a', 'o')
+('a', 'i')
+('a', 'n')
+('a', 't')
+('v', 'v')
+('v', 'a')
+('v', 't')
+('v', 'p')
+('v', 'o')
+('v', 'i')
+('v', 'n')
+('v', 't')
+('a', 'a')
+('a', 't')
+('a', 'p')
+('a', 'o')
+('a', 'i')
+('a', 'n')
+('a', 't')
+('t', 't')
+('t', 'p')
+('t', 'o')
+('t', 'i')
+('t', 'n')
+('t', 't')
+('p', 'p')
+('p', 'o')
+('p', 'i')
+('p', 'n')
+('p', 't')
+('o', 'o')
+('o', 'i')
+('o', 'n')
+('o', 't')
+('i', 'i')
+('i', 'n')
+('i', 't')
+('n', 'n')
+('n', 't')
+('t', 't')
+
+Combination of Numeric Set
+If the given input is in the sorted order, the combination tuples will be returned in sorted order. Let's understand the following example.
+Example -
+
+import itertools
+v = [1, 2, 3, 4]
+  
+com_seq = itertools.combinations_with_replacement(v, 3)
+  
+for i in com_seq:
+    print(i)
+
+Output:
+(1, 1, 1)
+(1, 1, 2)
+(1, 1, 3)
+(1, 1, 4)
+(1, 2, 2)
+(1, 2, 3)
+(1, 2, 4)
+(1, 3, 3)
+(1, 3, 4)
+(1, 4, 4)
+(2, 2, 2)
+(2, 2, 3)
+(2, 2, 4)
+(2, 3, 3)
+(2, 3, 4)
+(2, 4, 4)
+(3, 3, 3)
+(3, 3, 4)
+(3, 4, 4)
+(4, 4, 4)
+
+In this tutorial, we have discussed the itertools module to find the permutation and combination of the given data using the Python script.
+
+
+Next TopicGetopt module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

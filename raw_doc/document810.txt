@@ -1,0 +1,149 @@
+
+
+
+
+next →
+← prev
+
+__future__ module in Python
+What is the __future__ module?
+In Python, as we know that there are a lot of inbuilt modules which have a lot of functions to increase the efficiency of the code and increase productivity. In the same way, the __future__ module is the inbuilt module in Python, which has a lot of additional functions for Python code which is not present in the current version of Python. These functions will be integrated into Python in the future, but with the help of __future module, we can use these functions in the current version of Python.
+We will import the future module in our code, and we will use all the following functions or features:
+
+division
+generator
+absolute_import
+with_statement
+print_function
+unicode_literals
+annotations
+generator_stop
+nested_scopes
+
+There are basically nine main features mentioned in the above list, which are implemented using the __future__ module. We will see the examples of each feature with their respective Python code:
+Example:
+
+#importing the module
+import __future__
+
+#printing the list of all features
+print(__future__.all_feature_names)
+
+Output:
+
+Explanation:
+In the above code, we first imported the future module into our file. Then we printed the features of the future module using its attribute all_feature_names into a list.
+__future__ module with print_function:
+In python 2 or lesser versions, we have a different way of using the print statement.
+Python2 Code:
+
+print "Hello Javatpoint"
+
+Output:
+
+But in python or using a future module, we changed the print statement.
+Example 1:
+
+# Code in Python2  version
+from __future__ import print_function
+
+print("Hello and welcome to the world of Javatpoint")
+
+Output:
+
+Explanation:
+In the above code, using the future module, we have changed the way of print statements in Python 2. We wrote the statement using parentheses, and this works fine.
+Example 2:
+
+#python 2 code
+print("Hello welcome to the javatpoint",end=";")
+
+Output:
+
+Explanation:
+In the above code, we used the end attribute of the print function without importing the future module in Python 2, and we got the syntax error as it is invalid to use this way of the print statement.
+Example3:
+
+#python 2 code
+from __future__ import print_function
+print("Hello welcome to the javatpoint",end=";")
+
+Output:
+
+Explanation:
+In the above code, we have imported the future module in the file, and then we use the end attribute of the print function. This attribute is used to append any character or string of characters at the end of our statement, and it works fine in the python version2 using the future module.
+Example 4:
+
+#python 2 code
+print('Welcome ', ' Javatpoint world', sep = ' To ')
+
+Output:
+
+Explanation:
+In the above, we use the "sep" attribute, which is defined in the Python 3, and if we write into the compiler of Python 2, then it will give the syntax error.
+Example 5:
+
+#python 2 code
+from __future__ import print_function
+print('Welcome ', ' Javatpoint world', sep = ' To ')
+
+Output:
+
+Explanation:
+In the above code, we have imported the future module in our file and used the sep attribute. This attribute is used to separate the two statements from the third statement, which it takes as input.
+So this code works fine in python 2 because of the __future__ module.
+__future__ module with Unicode literals
+In Python 2, strings are considered as bytes strings, but in python 3, strings are considered to be a Unicode string, so we can use the Unicode literals in Python 2 alsom using the future module.
+Example 6:
+
+#python 2 code
+print(type("welcome to javatpoint world"))
+
+Output:
+
+Explanation:
+In the above code, we have checked the type of the variable using the type function, and it was of type str.
+Example 7:
+
+#python 2 code
+from __future__ import unicode_literals
+print(type("welcome to javatpoint world"))
+
+Output:
+
+Explanation:
+In the above code, we have checked the type of string using the type function in the python2 compiler. We got the type as Unicode because we imported the future module in the code, and in python 3 strings are taken as Unicode literals.
+Example 8:
+
+# encoding: utf-8
+name = 'hell� w�rld from jtp'
+print name.encode('utf8')
+
+Output:
+
+Explanation:
+In the above code, we have taken a byte string and encoded it into the utf-8, so we got the error.
+Example 9:
+
+# encoding: utf-8
+from __future__ import unicode_literals
+name = 'hell� w�rld from jtp'
+print name.encode('utf8')
+
+Output:
+
+Explanation:
+In the above code, we have imported the __future__ module, and then we used the utf-8 encoding, which works absolutely fine.
+
+
+Next TopicApplying Lambda functions to Pandas Dataframe
+
+
+
+
+← prev
+next →
+
+
+
+

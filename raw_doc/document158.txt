@@ -1,0 +1,229 @@
+
+
+
+
+next →
+← prev
+
+Static in Python
+The static variable and static method are the widely used programming concepts in various languages such as C++, PHP, Java, etc. These variables and methods belong to the class and the objects. In this section, we will learn how we create static variables and methods in Python.
+Python Static Variable
+When we declare a variable inside a class, but outside the method, it is called a static or class variable. It can be called directly from a class but not through the instances of a class. However, the static variables are quite different from the other member, and it does not conflict with the same variable name in the Python program.
+Let's consider a program to demonstrate the use of static variables in the Python.
+Static.py
+
+class Employee: # create Employee class name
+    dept = 'Information technology'  # define class variable
+    def __init__(self, name, id):
+        self.name = name       # instance variable
+        self.id = id             # instance variable
+
+# Define the objects of Employee class
+emp1 = Employee('John', 'E101')        
+emp2 = Employee('Marcus', 'E105')
+
+print (emp1.dept) 
+print (emp2.dept) 
+print (emp1.name) 
+print (emp2.name) 
+print (emp1.id)  
+print (emp2.id) 
+
+# Access class variable using the class name
+print (Employee.dept) # print the department
+
+# change the department of particular instance
+emp1.dept = 'Networking'
+print (emp1.dept) 
+print (emp2.dept) 
+
+# change the department for all instances of the class
+Employee.dept = 'Database Administration'
+print (emp1.dept) 
+print (emp2.dept)
+
+Output:
+Information technology
+Information technology
+John
+Marcus
+E101
+E105
+Information technology
+Networking
+Information technology
+Networking
+Database Administration
+
+In the above example, the dept is a class variable defined outside of the class methods and inside the class definition. Where name and id are the instance variable that is defined inside a method.
+Access the static variable using the same class object
+We can directly access a static variable in Python using the same class object with a dot operator.
+Let's consider a program to access the static variable in Python using the same class object.
+staticVar.py
+
+class Car:
+    # define the class variable or static variable of class Car
+    num = 7
+    msg = 'This is a good Car.'
+
+# create the object of the class
+obj = Car()
+
+# Access a static variable num using the class name with a dot operator.
+print ("Lucky No.", Car.num)
+print (Car.msg)
+
+Output:
+Lucky No. 7
+This is a good Car
+
+Static Method
+Python has a static method that belongs to the class. It is just like a static variable that bounds to the class rather than the class's object. A static method can be called without creating an object for the class. It means we can directly call the static method with the reference of the class name. Furthermore, a static method is constrained with a class; hence it cannot change the state of an object.
+Features of static methods
+Following are the features of the static method:
+
+A static method in Python related to the class.
+It can be called directly from the class by reference to a class name.
+It cannot access the class attributes in the Python program.
+It is bound only to the class. So it cannot modify the state of the object
+It is also used to divide the utility methods for the class.
+It can only be defined inside a class but not to the objects of the class.
+All the objects of the class share only one copy of the static method.
+
+There are the two ways to define a static method in Python:
+
+Using the staticmethod() Method
+Using the @staticmethod Decorator
+
+Using the staticmethod() Method
+A staticmethod() is a built-in function in Python that is used to return a given function as a static method.
+Syntax:
+
+staticmethod (function)
+
+A staticmethod() takes a single parameter. Where the passed parameter is a function that needs to be converted to a static method.
+Let's consider a program to create a function as a static method using staticmethod() in Python.
+staticMethod.py
+
+class Marks:
+    def Math_num(a, b): # define the static Math_num() function
+        return a + b
+
+    def Sci_num(a, b): # define the static Sci_num() function
+        return a +b
+
+    def Eng_num(a, b):  # define the static Eng_num() function
+        return a +b
+# create Math_num as static method
+Marks.Math_num = staticmethod(Marks.Math_num)
+
+# print the total marks in Maths
+print (" Total Marks in Maths" , Marks.Math_num(64, 28)) 
+
+# create Sci_num as static method
+Marks.Sci_num = staticmethod(Marks.Sci_num)
+
+# print the total marks in Science
+print (" Total Marks in Science" , Marks.Sci_num(70, 25)) 
+
+# create Eng_num as static method
+Marks.Eng_num = staticmethod(Marks.Eng_num)
+
+# print the total marks in English
+print (" Total Marks in English" , Marks.Eng_num(65, 30))
+
+Output:
+Total Marks in Maths 92
+ Total Marks in Science 95
+ Total Marks in English 95
+
+In the above program, we declared the Math_num method, Sci_num method, and Eng_num method as static method outside the class using staticmethod() function. After that, we can call the static method directly using the class name Marks.
+Using the @staticmethod Decorator
+A @staticmethod is an inbuilt decorator that defines the static method inside the class. It does not receive any argument as a reference to a class instance or a class calling the static method itself.
+Syntax:
+
+class Abc:
+@staticmethod
+def function_name (arg1, arg2, ?):
+# Statement to be executed
+Returns: a static method for function function_name
+
+Note: A @staticmethod is a modern approach to define a method as a static method, and most of the programmer uses this approach in Python programming.
+Let's create a program to define the static method using the @staticmethod decorator in Python.
+staticFun.py
+
+class Marks:
+    @staticmethod
+    def Math_num(a, b): # define the static Math_num() function
+        return a + b
+
+    @staticmethod
+    def Sci_num(a, b): # define the static Sci_num() function
+        return a +b
+
+    @staticmethod
+    def Eng_num(a, b):  # define the static Eng_num() function
+        return a +b
+
+# print the total marks in Maths
+print (" Total Marks in Maths" , Marks.Math_num(64, 28)) 
+
+# print the total marks in Science
+print (" Total Marks in Science" , Marks.Sci_num(70, 25))
+
+# print the total marks in English
+print (" Total Marks in English" , Marks.Eng_num(65, 30))
+
+Output:
+Total Marks in Maths 92
+ Total Marks in Science 95
+ Total Marks in English 95
+
+Access a static method using the same class object
+Consider a program to access the static method of the class using the @staticmethod in Python.
+Test.py
+
+class Test:
+    # define a static method using the @staticmethod decorator in Python.
+    @staticmethod
+    def beg():
+        print ("Welcome to the World!! ")
+
+# create an  object of the class Test
+obj = Test()
+# call the static method 
+obj.beg()
+
+Output:
+Welcome to the World!!
+
+Function returns a value using the static method
+Let's write a program to return a value using the @staticmethod in Python.
+Static_method.py
+
+class Person: 
+    @staticmethod
+    def Age (age):
+        if (age <= 18): # check whether the Person is eligible to vote or not.
+            print ("The person is not eligible to vote.")
+        else:
+            print ("The person is eligible to vote.")
+
+Person.Age(17) 
+
+Output:
+The person is not eligible to vote.
+
+
+
+Next TopicHow to get the current date in Python
+
+
+
+
+← prev
+next →
+
+
+
+

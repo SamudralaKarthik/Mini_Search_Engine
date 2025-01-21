@@ -1,0 +1,137 @@
+
+
+
+
+next →
+← prev
+
+Camelcase in Python
+What Does Camelcase Mean?
+Camelcase is a naming protocol for giving file or attribute names that contain more than one word joined that all start with a capital letter. Camelcase is a programming language that allows you to name files or functions without breaking the underlying language's naming rules.
+The name camelcase comes from its look, which resembles the back of a camel. Many programming languages that do not allow space in file names use it. Camelcase allows developers to create more distinctive and meaningful titles for them.
+HelloWorld, Helloworld, and helloWorld, for example, are considerably easier to read than helloworld.
+Ways to Convert String in Camelcase
+Naive Method
+These are the steps we'll take to solve it. Make a blank string first. Then we'll make the initial letter of each word in the string uppercase and the rest lowercase, and afterward, concatenate the words with s. Then, by lowering the initial letter, return the final string.
+Code
+
+def camelcase(list_words):
+    converted = "".join(word[0].upper() + word[1:].lower() for word in list_words)
+    return converted[0].lower() + converted[1:]
+
+words = ["Hello", "Welcome", "To", "Python", "Programming", "In", "Javatpoint"]
+print(camelcase(words))
+
+Output:
+helloWelcomeToPythonProgrammingInJavatpoint
+
+Using re Module
+In this, we will use sub of the re module
+Code
+
+# importing the module
+from re import sub
+
+# creating a function which will convert string to camelcase
+def convert_to_camelCase(my_string):
+    my_string = sub(r"(_|-)+", " ", my_string).title().replace(" ", "")
+    return my_string[0].lower() + my_string[1:]
+
+# taking example strings 
+s1 = "Python javatpoint"
+s2 = "Python,javatpoint"
+s3 = "Python_javatpoint"
+s4 = "python_javatpoint.tutorial-camelcase"
+
+print("original s1: ", s1)
+print("camelCase of s1: ", convert_to_camelCase(s1))
+print()
+
+print("original s2: ", s2)
+print("camelCase of s2: ", convert_to_camelCase(s2))
+print()
+
+print("original s3: ", s3)
+print("camelCase of s3: ", convert_to_camelCase(s3))
+print()
+
+print("original s4: ", s4)
+print("camelCase of s3: ", convert_to_camelCase(s4))
+print()
+
+Output:
+original s1:  Python javatpoint
+camelCase of s1:  pythonJavatpoint
+
+original s2:  Python,javatpoint
+camelCase of s2:  python,Javatpoint
+
+original s3:  Python_javatpoint
+camelCase of s3:  pythonJavatpoint
+
+original s4:  python_javatpoint.tutorial-camelcase
+camelCase of s3:  pythonJavatpoint.TutorialCamelcase
+
+By Using split(), join(), title() and Generator Expression
+This problem can be solved using a mix of the preceding functions. We divide all underscores initially; next, we will append the first word to the final string. We will proceed by title-cased words using the generator expression i.e. a for loop and title() function.
+Code
+
+# This code will use split(), join(), title() and a generator expression to convert a given string to camelcase
+  
+# creating a string
+string = 'javatpoint_is_best_for_coding_tutorials'
+  
+# printing initial string
+print("The original string is : " + string)
+  
+# ssplitting string from underscores
+split = string.split('_')
+  
+# joining each part by capitalizing first letter 
+camelcase = split[0] + ''.join(word.title() for word in split[1:])
+      
+# printing result 
+print("The camelcase of the string created is : " + camelcase)
+
+Output:
+The original string is : javatpoint_is_best_for_coding_tutorials
+The camelcase of the string created is : javatpointIsBestForCodingTutorials
+
+By Using split(), join(), title() and map()
+This problem can be solved using a mix of the preceding functions. Using map(), we accomplish the goal of applying logic to full strings.
+Code
+
+# This code will use split(), join(), title() and map() to convert a given string to camelcase
+  
+# creating a string
+string = 'javatpoint_is_best_for_coding_tutorials'
+  
+# printing initial string
+print("The original string is : " + string)
+  
+# storing the first and rest using split()
+initial, *rest = string.split('_')
+  
+# using map() to titeling all the splitted words except the first one
+camelcase = ''.join([initial.lower(), *map(str.title, rest)])
+      
+# printing result 
+print("The camelcase of the  created string is : " + camelcase)
+
+Output:
+The original string is : javatpoint_is_best_for_coding_tutorials
+The camelcase of the created string is : javatpointIsBestForCodingTutorials
+
+
+
+Next TopicDifference between Python and Scala
+
+
+
+
+← prev
+next →
+
+
+
+

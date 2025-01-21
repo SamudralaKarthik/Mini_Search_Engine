@@ -1,0 +1,805 @@
+
+
+
+
+next →
+← prev
+
+Data Structures and Algorithms in Python
+This lesson serves as a simple introduction to Python's data structures and algorithms. With the aid of practical and thoroughly explained illustrations, we will go over the built-in data structures like lists, sets, dictionaries, tuples, etc., as well as a few other user-defined data structures like linked trees, lists, and graphs, as well as some commonly used algorithms.
+Lists
+Likewise, arrays in other computer languages and lists in Python are collections of items arranged in any manner. It permits many data types of elements in the list. Python's version of lists is comparable to C++'s vectors or Java's array lists. As all the components must be relocated, adding or removing a member from the list's head is the most expensive operation. If the pre-allocated memory is all used up, insertion and deletion of an element at the end of the list may also become costly.
+Code
+
+# Python program to show how to create a Python List and some of its operations
+
+# Creating a Python list
+List = ["Python", "Data", "Structures", "Tutorial"]
+print("The created Python list is: ")
+print(List)
+  
+# Creating a multi-dimensional list using nested lists (list inside a list)
+List_ = [["Python", "Data"], ["Structures", "Tutorial"]]
+print("The multi-Dimensional list is: ")
+print(List_)
+  
+# We can access the list of elements using the index of the element
+print("Single element: ", List[1])
+print("Multiple elements (slicing): ", List[0:2])
+print("For nested lists: ", List_[1][0])
+  
+# We can access elements using negative indices also
+      
+# printing the last element of the list
+print("Last element: ", List_[-1])
+      
+# Slicing the list using negative indexing
+print("Last two elements: ", List[-1:-3:-1]) # Last first order
+
+Output
+The created Python list is: 
+['Python', 'Data', 'Structures', 'Tutorial']
+The multi-Dimensional list is: 
+[['Python', 'Data'], ['Structures', 'Tutorial']]
+Single element:  Data
+Multiple elements (slicing):  ['Python', 'Data']
+For nested lists:  Structures
+Last element:  ['Structures', 'Tutorial']
+Last two elements:  ['Tutorial', 'Structures']
+
+Tuple
+Lists and Python tuples are equivalent, but unlike lists, tuples are immutable, meaning that once formed, we cannot change them. A Tuple can include components of several types, just like a List.
+Python tuples are made by grouping together a series of values. These values are delimited by a "comma", regardless of whether or not the parenthesis is used.
+Code
+
+# Python program to show how to create a Python Tuple and to access its elements
+
+# Creating a Python tuple
+Tuple = ("Python", "Data", "Structures", "Tutorial")
+print("The Python tuple is: ")
+print(Tuple)
+      
+# Create a tuple using a Python list
+list = [3, 6, 2, 7, 4, 5, 3]
+print("Tuple using a List: ")
+Tuple_ = tuple(list)
+
+# Accessing tuple elements using indices
+print("Single element: ", Tuple[1])
+print("Multiple elements (slicing): ", Tuple[0:2])
+  
+# Using negative indexing
+      
+# printing the last element of the list
+print("Last element: ", Tuple[-1])
+      
+# Trying to modify a tuple
+try:
+    Tuple[1] = "Tuple"
+    print(Tuple)
+except Exception as e:
+    print("Exception raised: ", e
+
+Output
+The Python tuple is: 
+('Python', 'Data', 'Structures', 'Tutorial')
+Tuple using a List: 
+Single element:  Data
+Multiple elements (slicing):  ('Python', 'Data')
+Last element:  Tutorial
+Exception raised:  'tuple' object does not support item assignment
+
+Set
+A Python set data structure is a non-duplicate data collection that is modifiable. Sets are mainly used for membership screening and removing redundant entries. These processes use the Hashing data structure, a popular method for traversal, insertion, and deletion of elements that typically takes O(1) time.
+Code
+
+# Python program to show how to create a Python Set and its operations
+
+# Creating a Python set
+Set = {"Python", "Data", "Structures", "Tutorial"}
+print("The Python Set is: ")
+print(Set)
+  
+# Accessing the set elements
+for ind, i in enumerate(Set):
+    print(ind, i)
+
+# Finding the intersection of two sets
+Set_ = {1, 2, "Python", "Data"}
+print("Intersection: ", Set.intersection(Set_))
+
+# Union of two sets
+print("Union: ", Set.union(Set_))
+
+Output
+The Python Set is: 
+{'Python', 'Data', 'Tutorial', 'Structures'}
+0 Python
+1 Data
+2 Tutorial
+3 Structures
+Intersection:  {'Python', 'Data'}
+Union:  {1, 2, 'Structures', 'Python', 'Tutorial', 'Data'}
+
+Dictionary
+A key-value pair-formatted data collection called a Python dictionary is used to store data. The temporal complexity of this data structure is O(1), much like hash tables in other coding languages. The Python Dictionary is indexed with the help of the keys. The values of keys can be of any type, i.e., a constant item like a string, integer, sequence, etc. We can build a dictionary using curly brackets {} or dictionary comprehension.
+Code
+
+# Python program to show how to create a Python Dictionary and its operations
+
+# Creating a Python Dictionary
+Dict = {"1": "Python", "2": "Data", "3": "Structures", "4": "Tutorial"}
+print("The Python Dictionary is: ")
+print(Dict)
+  
+# accessing the dictionary element using the keys
+print("Value of key 2 is: ", Dict["2"])
+  
+# accessing the elements using the built-in get method
+print("Using the get method: ", Dict.get("2"))
+
+Output
+The Python Dictionary is: 
+{'1': 'Python', '2': 'Data', '3': 'Structures', '4': 'Tutorial'}
+Value of key 2 is:  Data
+Using the get method:  Data
+
+Linked List
+A linear data structure called a linked list has elements that are not kept in consecutive locations in memory. A linked list's elements are connected via pointers.
+A pointer to the first node of the linked list serves as the representation of a linked list. The head refers to the top node. The head's value is NULL if the linked list is empty. In a list, each node has at least two components:
+
+Data
+Pointer (Or Reference) to the next node
+
+Code
+
+# Python program to show the implementation of the linked list
+
+# Creating a node class
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+# Creating a linked list class
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+# Initializing a linked list
+list_ = LinkedList()
+
+# Creating the nodes
+list_.head = Node("Python")
+second_node = Node("Tutorial")
+third_node = Node("Data Structures")
+
+# Connecting the nodes
+list_.head.next = second_node
+second_node.next = third_node
+
+# Printing the linked list
+while list_.head != None:
+    print(list_.head.value, end = "\n")
+    list_.head = list_.head.next
+
+OutputPython
+Tutorial
+Data Structures
+
+Linked lists are important data structures. Here are a few essential operations of the linked list.
+Code
+
+# Python programs to show linked list operations 
+
+# Creating a node class
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+# Creating a linked list class
+class Linked_List:
+    def __init__(self):
+        self.head = None
+
+    # Inserting a node at the beginning of the list
+    def insertInBeginning(self, value):
+        insertion_node = Node(value)
+        insertion_node.next = self.head
+        self.head = insertion_node
+
+    # Inserting a node after a particular node
+    def insertAfterNode(self, previous_node, value):
+        if previous_node is None:
+            print("There is no previous node. Make a new head.")
+            return
+
+        insertion_node = Node(value)
+        insertion_node.next = previous_node.next
+        previous_node.next = insertion_node
+
+    # Inserting the node at the end of the list
+    def insertInEnd(self, value):
+        insertion_node = Node(value)
+
+        if self.head is None:
+            self.head = insertion_node
+            return
+
+        last_node = self.head
+        while (last_node.next):
+            last_node = last_node.next
+
+        last_node.next = insertion_node
+
+    # Deleting a particular node 
+    def deleteANode(self, pos):
+
+        if self.head is None:
+            return
+
+        temporary = self.head
+
+        if pos == 0:
+            self.head = temporary.next
+            temporary = None
+            return
+
+        # Finding the key which is to be deleted
+        for i in range(pos - 1):
+            temporary = temporary.next
+            if temporary is None:
+                break
+
+        # If the key is not in the list
+        if temporary is None:
+            return
+
+        if temporary.next is None:
+            return
+
+        next_ = temporary.next.next
+
+        temporary.next = None
+
+        temporary.next = next_
+
+    # Searching an element in the list
+    def search(self, key):
+
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.value == key:
+                return True
+
+            current_node = current_node.next
+
+        return False
+
+    # Sorting the linked list
+    def sortList(self, head):
+        current_node = head
+        index_node = Node(None)
+
+        if head is None:
+            return
+        else:
+            while current_node is not None:
+                index_node = current_node.next
+
+                while index_node is not None:
+                    if current_node.value > index_node.value:
+                        current_node.value, index_node.value = index_node.value, current_node.value
+
+                    index_node = index_node.next
+                current_node = current_node.next
+
+    # Printing the linked list
+    def printLinkedList(self):
+        temporary = self.head
+        while (temporary):
+            print(str(temporary.value) + " ", end = "")
+            temporary = temporary.next
+
+
+if __name__ == '__main__':
+
+    listt = Linked_List()
+    listt.insertInEnd(7)
+    listt.insertInBeginning(4)
+    listt.insertInBeginning(9)
+    listt.insertInEnd(2)
+    listt.insertAfterNode(listt.head.next, 8)
+
+    print('Linked list:')
+    listt.printLinkedList()
+
+    print("\nAfter deleting a node:")
+    listt.deleteANode(2)
+    listt.printLinkedList()
+
+    value_to_find = 4
+    if listt.search(value_to_find):
+        print("\n", value_to_find, "is found in the list")
+    else:
+        print("\n", value_to_find, " is not found in the list")
+
+    listt.sortList(listt.head)
+    print("Sorted Linked List: ")
+    listt.printLinkedList()
+
+Output
+Linked list:
+9 4 8 7 2 
+After deleting a node:
+9 4 7 2 
+ 4 is found in the list
+Sorted Linked List: 
+2 4 7 9 
+
+Stack
+A stack is a linear data structure that uses either first-in and last-out (FILO) or last-in and first-out (LIFO) ordering to store objects. In a stack, an item is deleted only from one end while a new item is put to the other. Push and pop are common names for the actions of insert and deletion.
+Basic Operations of Stack
+We may carry out various activities on a stack using a few fundamental operations.
+Push: This method adds an item to the top of the stack
+Pop: This method will remove an item from the top of the stack
+IsEmpty: This method checks whether the stack is empty or not.
+IsFull: This method checks whether the stack is full or not.
+Peek: This method will return the top element but not remove it.
+Code
+
+# Python program to show how to create a stack and implement the operations
+
+# Creating a stack
+def create():
+    new_stack = []
+    return new_stack
+
+# To check if it is an empty stack
+def check(stack):
+    if len(stack) == 0:
+        return True
+    else:
+        return False
+
+
+# Adding new elements to the stack
+def push(stack, value):
+    stack.append(value)
+    print("New stack after pushing: ", stack)
+
+
+# Eleminating an item from the stack
+def pop(stack):
+    if (check(stack)):
+        return "Given Stack is Empty."
+    stack.pop()
+    print("New stack after popping: ", stack)
+    
+# Peeking into the stack
+def peek(stack):
+    print("Last element of the stack: ", stack[-1])
+
+# Driver code for the above methods
+stack = create()
+push(stack, 2)
+push(stack, 5)
+push(stack, 3)
+push(stack, 1)
+pop(stack)
+peek(stack)
+
+Output
+New stack after pushing:  [2]
+New stack after pushing:  [2, 5]
+New stack after pushing:  [2, 5, 3]
+New stack after pushing:  [2, 5, 3, 1]
+New stack after popping:  [2, 5, 3]
+Last element of the stack:  3
+
+Queue
+The queue, which holds objects in a First In First Out (FIFO) order, is another linear data structure similar to a stack. A queue removes items in the order that we most recently added them. Any line of users waiting to access a service where the user who arrived first is serviced first is an excellent illustration of a queue.
+Operations Linked to the Queue Include:
+Enqueue: Adds a piece of content to the queue. Overflow conditions are defined as when the queue is filled. The time complexity of adding an element to a queue: O(1)
+Dequeue: Takes something out of the queue. The things are popped in the same sequence that the values are enqueued. It's called an underflow condition if a queue is empty. Getting the first item of the queue has an O(1) time complexity.
+Rear: Obtain the last item in the queue. The time complexity to get the last item of the queue is O(1).
+Code
+
+# Python program to create a queue and implement operations of a queue
+
+# Creating a class for queue
+class Queue:
+    # Initializing a queue
+    def __init__(self):
+        self.queue = []
+
+    # Adding an element to the queue
+    def enqueue(self, element):
+        self.queue.append(element)
+        print("New queue after enqueuing: ", self.queue)
+        
+    # Removing an element to the queue
+    def dequeue(self):
+        if len(self.queue) == 0:
+            return None
+        else: return self.queue.pop(0)
+        print("New queue after dequeuing: ", self.queue)
+        
+    def rear(self):
+        print("Last element: ", self.queue[-1])
+
+# Drivers code for the above methods
+queue = Queue()
+queue.enqueue(6)
+queue.enqueue(3)
+queue.dequeue()
+queue.enqueue(9)
+queue.rear()
+
+Output
+New queue after enqueuing:  [6]
+New queue after enqueuing:  [6, 3]
+New queue after enqueuing:  [3, 9]
+Last element:  9
+
+Heap
+The heap data structure, which is mainly designed to describe a priority queue, is provided by the Python heapq module. The characteristic of the heap data structure is that anytime an item is popped, it always returns the smallest item (min-heap). Items are always pushed or popped while the heap structure is preserved. Additionally, the heap[0] item consistently returns the smallest value. It enables O(log n)-time retrieval and insertion of the lowest value element.
+Heaps often come in two varieties:
+Max-Heap: Max-Heap data structure's root node's key must rank highest amongst its child's keys. The same condition should be recursively true for every sub-tree in a Binary Tree.
+Min-Heap: Min-Heap's root node's key should be the least common key of all of its child's keys. The same condition should be recursively true for every sub-tree in a Binary Tree.
+Code
+
+# Python program to implement a heap data structure in Python
+
+# Defining a method to create a heap
+def heapify(array, n, j):
+    largest = j
+    a = 2 * j + 1
+    b = 2 * j + 2 
+    
+    if a < n and array[j] < array[a]:
+        largest = a
+    
+    if b < n and array[largest] < array[b]:
+        largest = b
+    
+    if largest != j:
+        array[j],array[largest] = array[largest], array[j]
+        heapify(array, n, largest)
+
+def insert_element(array, value):
+    s = len(array)
+    if s == 0:
+        array.append(value)
+    else:
+        array.append(value);
+        for j in range((s//2)-1, -1, -1):
+            heapify(array, s, j)
+
+def delete(array, value):
+    s = len(array)
+    for j in range(0, s):
+        if s == array[j]:
+            break
+        
+    array[j], array[s - 1] = array[s - 1], array[j]
+
+    array.remove(value)
+    
+    for j in range((len(array)//2)-1, -1, -1):
+        heapify(array, len(array), j)
+
+# Drivers code for the above methods
+heap = []
+
+insert_element(heap, 3)
+insert_element(heap, 6)
+insert_element(heap, 5)
+insert_element(heap, 4)
+insert_element(heap, 8)
+
+print("Heap array: ", heap)
+
+delete(heap, 5)
+print("After deleting an item: ", heap)
+
+Output
+Heap array:  [6, 4, 5, 3, 8]
+After deleting an item:  [8, 4, 6, 3]
+
+Binary Tree
+A nonlinear hierarchy data structure called a tree comprises nodes and edges.
+A Python tree data structure known as a binary tree allows each parent node to have a maximum of two children. A binary tree has three components at each node:
+
+A data element
+An address of the left child
+An address of the right child
+ 
+Code
+
+# Python program to show how to create a binary tree and traverse it in Python
+
+# Creating a class for a Node of the tree
+class Node:
+    def __init__(self, value):
+        self.left = None
+        self.val = value
+        self.right = None
+
+    # Method to transverse in a pre-order manner
+    def traverseAsPreOrder(self):
+        print(self.val, end = ' ')
+        if self.left != None:
+            self.left.traverseAsPreOrder()
+        if self.right != None:
+            self.right.traverseAsPreOrder()
+
+    # Method to transverse in an in-order manner
+    def traverseAsInOrder(self):
+        if self.left != None:
+            self.left.traverseAsInOrder()
+        print(self.val, end = ' ')
+        if self.right != None:
+            self.right.traverseAsInOrder()
+
+    # Method to transverse in an post-order manner
+    def traverseAsPostOrder(self):
+        if self.left != None:
+            self.left.traverseAsPostOrder()
+        if self.right != None:
+            self.right.traverseAsPostOrder()
+        print(self.val, end = ' ')
+
+# Drivers code for the above binary tree class
+root_node = Node(4)
+
+root_node.left = Node(5)
+root_node.right = Node(7)
+root_node.right.left = Node(2)
+root_node.right.left.right = Node(9)
+root_node.left.right = Node(0)
+root_node.left.left = Node(10)
+root_node.left.left.right = Node(1)
+
+# Transferring the tree
+print("Pre-order traversal of the tree: ", end = "")
+root_node.traverseAsPreOrder()
+print("\nIn-order traversal of the tree: ", end = "")
+root_node.traverseAsInOrder()
+print("\nPost-order traversal of the tree: ", end = "")
+root_node.traverseAsPostOrder()
+
+Output
+Pre-order traversal of the tree: 4 5 10 1 0 7 2 9 
+In-order traversal of the tree: 10 1 5 0 4 2 9 7 
+Post-order traversal of the tree: 1 10 0 5 9 2 7 4 
+
+Bubble Sort Algorithm
+A sorting method known as bubble sort analyses two nearby items and swaps those until the desired order is achieved.
+Each item of the list moves to the end of the list in each iteration. This is similar to the behaviour of the air bubbles in the liquid that come to the surface. Consequently, it is known as a bubble sort.
+Code
+
+# Python program to implement Bubble Sort Algorithm 
+
+# Creating a method to perform bubble sort
+def bubbleSort(listt):
+    
+  # looping over each element of the list
+  for c in range(len(listt)):
+
+    # looping over remaining elements to compare with the current element
+    for n in range(0, len(listt) - c - 1):
+
+        # comparing the two adjacent elements
+        # we are sorting in descending order 
+        if listt[n] < listt[n + 1]:
+
+            # Swapping the two elements if they are not in the correct order
+            temporary = listt[n]
+            listt[n] = listt[n + 1]
+            listt[n + 1] = temporary
+
+# Drivers code for the above method
+listt = [3, 7, 9, 2, 5, 0]
+
+bubbleSort(listt)
+
+print('Sorted List in Descending Order:')
+print(listt)
+
+Output
+Sorted List in Descending Order:
+[9, 7, 5, 3, 2, 0] 
+
+Selection Sort Algorithm
+A sorting algorithm known as selection sort chooses the maximum element of an unsorted list for every iteration and inserts it at the start of the list.
+Code
+
+# Python program to implement Selection Sort 
+
+# Defining a method to perform Selection Sort
+def selectionSort(listt, size):
+   
+    for s in range(size):
+        max_index = s
+
+        for i in range(s + 1, size):
+         
+            # We are sorting in descending order
+            # Selecting the maximum element of the listt
+            if listt[i] > listt[max_index]:
+                max_index = i
+         
+        # putting the maximum value at the beginning of the list
+        (listt[s], listt[max_index]) = (listt[max_index], listt[s])
+
+# Drivers code
+listt = [20, 35, 29, 85, 23, 97]
+size = len(listt)
+selectionSort(listt, size)
+print('Sorted List in Descending Order:')
+print(listt)
+
+Output
+Sorted List in Descending Order:
+[97, 85, 35, 29, 23, 20]
+
+Quicksort Algorithm
+An array is split into smaller arrays using the divide-and-conquer strategy in the sorting algorithm known as Quicksort (item taken from the array).
+When splitting the given array, the pivot component should be set so that items of value greater than the pivot component are located on the right side, and components with a value less than the pivot value are stored on the left side.
+The same method is used to divide the right and left subarrays. This procedure is repeated until only one element remains in each subarray.
+The elements have already been sorted at this point. The combination of the items creates a sorted array at the end.
+Code
+
+# Python program to perform Quick Sort Algorithm
+
+# Defining a function to search for the pivoting position
+def pivot(listt, low, high):
+
+  # selecting the right-most element as a pivot
+  pivot = listt[high]
+
+  # the greater item
+  g = low - 1
+
+  # transversing through all the elements
+  for i in range(low, high):
+    if listt[i] <= pivot:
+      # if the value of j is smaller, we will swap it with the pointer g
+      g = g + 1
+
+      # swap the elements at g and i
+      (listt[g], listt[i]) = (listt[i], listt[g])
+
+  # swapping the pivot with the element of greater value
+  (listt[g + 1], listt[high]) = (listt[high], listt[g + 1])
+
+  # returning the position from where the pivot is done
+  return g + 1
+
+# defining a function to perform Quick Sort
+def quickSortAlgo(listt, low, high):
+    if low < high:
+
+        # searching the pivot for which elements on its left are smaller and elements on its right are greater
+        p = pivot(listt, low, high)
+
+        # calling left pivot recursively
+        quickSortAlgo(listt, low, p - 1)
+
+        # calling right pivot recursively
+        quickSortAlgo(listt, p + 1, high)
+
+# Drivers code
+listt = [3, 7, 2, 4, 9, 1, 0, 8]
+
+size = len(listt)
+
+quickSortAlgo(listt, 0, size - 1)
+
+print('Sorted List in Ascending Order:')
+print(listt)
+
+Output
+Sorted List in Ascending Order:
+[0, 1, 2, 3, 4, 7, 8, 9]
+
+Counting Sort Algorithm
+A sorting method known as counting sort arranges the given array of elements according to the number of times every distinct element appears in the given array. Sorting is done by mapping the count of the elements of the array as an index of another array made by us. This array stores the count of elements.
+Code
+
+# Python program to perform Counting Sort
+
+# Defining a function to perform Counting Sort
+def countingSort(listt):
+    s = len(listt)
+    o = [0] * size
+
+    # Initializing the counting list
+    c = [0] * 10
+
+    # Creating a list of counts of the elements
+    for i in range(0, s):
+        c[listt[i]] += 1
+
+    # Storing the cumulative count
+    for j in range(1, 10):
+        c[j] += c[j - 1]
+
+    # Finding the indices of every item of the initial list in the count list
+    # placing the elements in the counting list
+    j = s - 1
+    while j >= 0:
+        o[c[listt[j]] - 1] = listt[j]
+        c[listt[j]] -= 1
+        j -= 1
+
+    # Copying the sorted list elements into the original list
+    for k in range(0, s):
+        listt[k] = o[k]
+
+# Drivers code
+listt = [3, 7, 9, 2, 4, 7, 2, 8]
+countingSort(listt)
+print("Sorted list: ")
+print(listt)
+
+Output
+Sorted list: 
+[2, 2, 3, 4, 7, 7, 8, 9]
+
+Binary Search Algorithm
+Binary Search is a searching algorithm for finding an element's position in a sorted array.
+In this approach, the element is always searched in the middle of a portion of an array.
+Code
+
+# Python program to perform the Binary Search
+
+# Defining a function to perform Binary Search
+def binarySearch(listt, e, l, h):
+
+    # We will use two pointers iteration to find the element
+    while l <= h:
+
+        mid_element = l + (h - l)//2
+
+        if listt[mid_element] == e:
+            return mid_element
+
+        elif listt[mid_element] < e:
+            l = mid_element + 1
+
+        else:
+            h = mid_element - 1
+
+    return -1
+
+# Drivers code
+listt = [4, 2, 7, 6, 7, 8, 1, 9, 0, 5]
+e = 7
+
+index = binarySearch(listt, e, 0, len(listt)-1)
+
+if index != -1:
+    print("The element we searched for is present at: " + str(index))
+else:
+    print("Not found")
+
+Output
+The element we searched for is present at: 4
+
+
+
+Next TopicGUI to Shut Down, Restart, and Log off the computer using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

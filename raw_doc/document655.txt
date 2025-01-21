@@ -1,0 +1,174 @@
+
+
+
+
+next →
+← prev
+
+Accuracy_Score in Sklearn
+A crucial stage in the data science workflow is to measure our model's accuracy using the appropriate metric. In this tutorial, we'll learn two methods for calculating the source sample's predicted class accuracy: manually and using Python's scikit-learn library.
+Here is a rundown of the topics we have discussed in this tutorial.
+
+Manually calculating accuracy_score
+Calculating accuracy_score using scikit learn
+Scikit learn accuracy_score's examples
+How does scikit learn accuracy_score work?
+
+What is Accuracy?
+One of the widely used metrics that computes the performance of classification models is accuracy. The percentage of labels that our model successfully predicted is represented by accuracy. For instance, if our model accurately classified 80 of 100 labels, its accuracy would be 0.80.
+Creating Function to Compute Accuracy Score
+Let's create a Python function to compute the predicted values accuracy score, given that we already have the sample's true labels and the labels predicted the model.
+Code
+
+# Python program to define a function to compute accuracy score of model's predicted class
+
+# Defining a function which takes true values of the sample and values predicted by the model
+def compute_accuracy(Y_true, Y_pred):
+    correctly_predicted = 0
+    # iterating over every label and checking it with the true sample
+    for true_label, predicted in zip(Y_true, Y_pred):
+        if true_label == predicted:
+            correctly_predicted += 1
+    # computing the accuracy score
+    accuracy_score = correctly_predicted / len(Y_true)
+    return accuracy_score
+
+The above function accepts values for the classification model's predicted labels and true labels of the sample as its arguments and computes the accuracy score. Here, we iterate through each pair of true and predicted labels in parallel to record the number of correct predictions. We then divide that number by the total number of labels to compute the accuracy score.
+We will apply the function on a sample now. 
+Code
+
+# Python program to compute accuracy score using the function compute_accuracy
+
+# Importing the required libraries
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.datasets import load_iris
+
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)
+
+# Splitting the dataset in training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 0)
+
+# Training the model using the Support Vector Classification class of sklearn
+svc = SVC()
+svc.fit(X_train, Y_train)
+
+# Computing the accuracy score of the model
+Y_pred = svc.predict(X_test)
+score = compute_accuracy(Y_test, Y_pred)
+print(score)
+
+Output:
+0.9777777777777777
+
+We get 0.978 as the accuracy score for the Support Vector Classification model's predictions.
+Note that using numpy arrays to vectorize the equality computation can make the code mentioned above more efficient.
+Accuracy using Sklearn's accuracy_score()
+The accuracy_score() method of sklearn.metrics, accept the true labels of the sample and the labels predicted by the model as its parameters and computes the accuracy score as a float value, which can likewise be used to obtain the accuracy score in Python. There are several helpful functions to compute typical evaluation metrics in the sklearn.metrics class. Let's use sklearn's accuracy_score() function to compute the Support Vector Classification model's accuracy score using the same sample dataset as earlier.
+sklearn.metrics.accuracy_score(y_true, y_pred, *, normalize=True, sample_weight=None)
+We use this for computing the accuracy score of classification. This method calculates subgroup accuracy in multi-label classification; a dataset's predicted subset of labels must precisely match the actual dataset of labels in y_true.
+Parameters
+
+y_true (1d array-like, or array indicating label / sparse matrix): These are the true labels for a given sample.
+y_pred (1d array-like, or array indicating label / sparse matrix): Predicted labels that a classification model has returned.
+normalize (bool, default = True): It gives the number of successfully classified predicted samples if the answer is False. Returns the proportion of correctly classified predicted samples if True.
+sample_weight (array-like of shape (n,), default = None): Sample weights.
+
+Returns
+
+score (float): It gives the ratio of successfully classified samples (float) if normalise == True; otherwise, it returns the count of successfully classified predicted samples (int). 1 is 100% accuracy for normalise == True and the count of samples provided with normalise == False.
+
+Example of Accuracy_score
+Code
+
+# Python program to compute accuracy score using the function accuracy_score
+
+# Importing the required libraries
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score 
+from sklearn.svm import SVC
+from sklearn.datasets import load_iris
+
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)
+
+# Splitting the dataset in training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3, random_state = 0)
+
+# Training the model using the Support Vector Classification class of sklearn
+svc = SVC()
+svc.fit(X_train, Y_train)
+
+# Computing the accuracy_score of the model
+Y_pred = svc.predict(X_test)
+score = accuracy_score(Y_test, Y_pred)
+print(score)
+
+Output:
+0.9777777777777777
+
+When using binary label indicators with multiple labels:
+Code
+
+# Python program to show how to calculate accuracy score for multi-label data
+import numpy as np
+accuracy_score(np.array([[1, 1], [2, 1]]), np.ones((2, 2)))
+
+Output:
+0.5
+
+How scikit learn accuracy_score works
+The accuracy_score method of the sklearn.metrics package assigns subset accuracy in multi-label classification.
+It is required that the labels the model has predicted for the given sample and the true labels of the sample match exactly.
+Accuracy describes the model's behaviour across all classes. If all of the classes are comparably significant, it is helpful.
+The ratio of the count of accurate predictions to the total number of samples or the total number of predictions is used to determine the model's accuracy.
+Code:
+
+The code below imports two libraries. We are importing sklearn.metrics for predicting model accuracy and numpy libraries.
+The true values of the sample is y_true = ["1", "1", "0", "0", "1", "1", "0"].
+["1", "1", "0", "0", "1", "1", "0"] these are the model's predicted values for the sample data.
+Accuracy = ( matrix[0][0] + matrix[-1][-1] ) / numpy.sum(matrix) is used to get the classification model's accuracy score.
+The accuracy score is displayed as the output using print(accuracy).
+
+Code
+
+# Pythpn program to show how accuracy_score works
+
+# import libraries 
+import numpy as np 
+import sklearn.metrics
+
+# Creating a true and predicted sample
+Y_true = ["1", "1", "0", "0", "1", "1", "0"] 
+Y_pred = ["1", "0", "1", "1", "0", "1", "1"] 
+
+# finding a confusion matrix
+matrix = sklearn.metrics.confusion_matrix(Y_true, Y_pred) 
+matrix = np.flip(matrix) 
+print("Confusion Matrix: \n", matrix)
+accuracy = (matrix[0][0] + matrix[-1][-1]) / np.sum(matrix) 
+print(accuracy)
+
+Output:
+Confusion Matrix: 
+ [[2 2]
+ [3 0]]
+0.2857142857142857
+
+So, in this tutorial, we learnt scikit-learn accuracy_score in Python and examined some implementation examples.
+
+
+Next TopicK-Fold Cross-Validation in Sklearn
+
+
+
+
+← prev
+next →
+
+
+
+

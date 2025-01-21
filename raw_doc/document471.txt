@@ -1,0 +1,398 @@
+
+
+
+
+next →
+← prev
+
+How to Generate UUID in Python
+In this tutorial, we will discuss how to generate the UUID in Python using the uuid module. Before diving into this topic, let's understand the basic concept of the UUID.
+Introduction
+UUID is an abbreviation name of universally unique identifiers also known as GUID, i.e., Globally Unique Identifier. It is a 128 bits long ID number to uniquely define documents, users, resources, or information. There are various versions of UUIDs; we will discuss all of them in upcoming section.
+
+The UUID is used to define unique identifiers across space and time. Space and time mean that once the UUID is generated according to the standard, identifiers cannot be duplicate existing resources.
+The UUID is the most suitable option when uniqueness is required.
+It plays an essential role in cryptography and hashing application.
+
+When to use UUID
+The UUID module can be used in the following scenarios.
+In Web Application -
+
+The UUID helps us to manage the state by generating a unique session id.
+Generally, we use the auto-increment values to generate user ids. It is quite a straightforward approach and easy to guess. However, UUIDs are difficult to guess because they are not created consecutively.
+
+In Database System
+
+It provides a significant advantage in the database because UUID is environment-independent. It means we can create a UUID on any machine using any application.
+Most applications depend upon the database server to generate the unique or primary key. UUID is a good option to generate a unique database key which helps us change the key generation approach in the database.
+The UUID is a real value, not a pseudo value like a number in an SQL table.
+
+Python uuid Module
+Python uuid module is implemented as per RFC 4122, a standard and Copyright © of the internet society. With the help of the Python UUID module, we can generate UUIDs in various types such as 1, 3, 4, and 5 version UUIDs. Python module supports the following versions of UUID.
+
+UUID1 - It generates the unique number using the MAC address and current time component.
+UUID4 - It uses pseudo-random number generators to generate UUIDs, and such types UUIDs are good to use for the safety purpose.
+UUID3 and UUID5 - It uses cryptographic hashing and application-provided text strings to generate UUID.
+
+Generate UUID using Python UUID Module
+Let's generates the UUIDs of various versions using the Python uuid module.
+Using uuid1() - To generate the uuid, we must import uuid module and then call uuid1() method. Let's understand the following example.
+Example - 1
+
+import uuid
+# Printing random id using uuid1()
+print ("The random generated uuid is : ", uuid.uuid1())
+
+Output:
+The random id using uuid1() is :  ab2d0fc0-7224-11ec-8ef2-b658b885fb3
+
+Structure of UUID
+As we can see that there are five components in the above UUID and each component has the same length. The structure of UUID is in the format of "8-4-4-4-12".
+The UUID string representation is given below -
+
+UUID = time_low "-" time_mid "-"time_high_and_version " "clock_seq_and_reserved_And_clock_seq_low"-" Node.
+
+Let's break down the above fields of UUIDs
+
+time_low - It is a first 32 bits of id.
+time_mid - It is next 16 bits of id.
+time_high_and_version - It is a next 16 bits of id.
+clock_seq_hi_variant :It is a next 8 bits of id.
+clock_seq_low :It is a next 8 bits of id.
+node :It is a last 48 bits of id.
+time :It is a time component field of id.
+clock_seq :It is a 14 bit sequence number.
+
+Let's understand another example of generating UUID in various formats such as bytes, int, and hex.
+Example - 2:
+
+import uuid
+  
+id = uuid.uuid1()
+  
+# Representations of uuid1()
+print ("The byte Representations of uuid1() are : ")
+print (repr(id.bytes))
+  
+print ("Integer Value Representation: ",end="")
+print(id.int)
+  
+print ("hex Value Representation : ",end="")
+print (id.hex)
+  
+print("\n")
+  
+# The components of uuid1()
+print ("The components of uuid1() are : ")
+print ("Version  : ",end="")
+print (id.version)
+  
+print ("Variant : ",end="")
+print (id.variant)
+  
+print("\n")
+  
+# Fields of uuid1()
+print ("The Fields of uuid1() are : ")
+print ("Fields  : ",end="")
+print (id.fields)
+print('UUID.fields  :', id.fields)
+print("Prining each field seperately")
+print('UUID.time_low            : ', id.time_low)
+print('UUID.time_mid            : ', id.time_mid)
+print('UUID.time_hi_version     : ', id.time_hi_version)
+print('UUID.clock_seq_hi_variant: ', id.clock_seq_hi_variant)
+print('UUID.clock_seq_low       : ', id.clock_seq_low)
+print('UUID.node                : ', id.node)
+print('UUID.time                : ', id.time)
+print('UUID.clock_seq           : ', id.clock_seq)
+print('UUID.SafeUUID           : ', id.is_safe)
+print("\n")
+# The time Component of uuid1()
+print ("The time Component of uuid1() is : ")
+print ("Time component  : ",end="")
+print (id.node)
+
+Output:
+The byte Representations of uuid1() are : 
+b'\xb9\xea\xb88s\x0e\x11\xec\xbfv\x86\xa0;\xe4`\x12'
+int Representation : 247125913120858544596828814248071421970
+hex Representation : b9eab838730e11ecbf7686a03be46012
+The Components of uuid1() are : 
+Version  : 1
+Variant : specified in RFC 4122
+The Fields of uuid1() are : 
+Fields  : (3119167544, 29454, 4588, 191, 118, 148022757711890)
+The time Component of uuid1() is : 
+Time component  : 148022757711890
+UUID.time_mid            :  29460
+UUID.time_hi_version     :  4588
+UUID.clock_seq_hi_variant:  186
+UUID.clock_seq_low       :  100
+UUID.node                :  90979746151630
+UUID.time                :  138612218401246920
+UUID.clock_seq           :  14948
+UUID.SafeUUID           :  SafeUUID.unsafe
+
+Disadvantages of UUID1
+The UUID1 is associated with the computer's MAC address and hence can be a threat to privacy. However, it provides complete uniqueness.
+Method 2: using uuid4()
+This method generates the random numbers with the guarantee to secure privacy. Let's understand the following example.
+Example -
+
+import uuid
+id = uuid.uuid4()
+  
+# Id generated using uuid4()
+print ("The id generated using uuid4() : ",end="")
+print (id)
+
+Output:
+The id generated using uuid4() : 53967be6-71e9-4ee9-9912-60d02d2d9b0a
+
+uuid1() vs uuid4
+The uuid1() provides the assurance not to produce any collision. We can create duplicates of UUIDs by creating more than 16384 uuid1 in less than 100ns. It doesn't provide the guarantee to secure privacy. The uuid1() is not recommended if you don't wish to visible your machine's MAC addresses.
+The uuid4() method generates random UUID by using the cryptographically generated secure number generators. It generates more secure UUIDs. It is recommended when UUIDs require generating on separate machines.
+UUID 3 and UUID 5 to Create a Name-Based UUID
+The name-based UUID means we can generate UUIDs using version 3 or 5 UUID.
+We can use names and namespaces to create a series of unique UUIDs. Version 3 and 5 is hashing namespace identifier with a name.
+The uuid3() method generates a UUID that based on the MD5 hash of namespace identifier and a string. On the other hand, the uuid5() method generates UUID based on the SHA-1 hashing technique of a namespace identifier.
+Below are the namespaces identifiers defined by the uuid3() or uuid5().
+
+NAMESPACE_DNS - It represents a traditional domain name. For example, https://javatpoint.com.
+NAMESPACE_URL - It represents a URL.
+NAMESPACE_OID - This namespace is specified the string ISO OID.
+NAMESPACE_X500 - When this namespace is specified, the name string is an X.500 DN in DER or a text output format.
+
+Let's understand the following example to generate UUID3 and UUID5 using the various hostname and namespace.
+Example -
+
+import uuid
+
+host_names = ['javatpoint.com', 'tutorialandexample.com']
+
+for host in host_names:
+    print('Generate uuid 3 version using name as',host,' and namespace as uuid.NAMESPACE_DNS')
+    print(uuid.uuid3(uuid.NAMESPACE_DNS, host))
+    print('Generate uuid 5 version using name as', host, ' and namespace as uuid.NAMESPACE_DNS'),
+    print(uuid.uuid5(uuid.NAMESPACE_DNS, host))
+    print()
+
+Output:
+Generate uuid 3 version using name as javatpoint.com  and namespace as uuid.NAMESPACE_DNS
+98bbe92a-b38f-3289-a4b4-80ec1cfdf8cb
+Generate uuid 5 version using name as javatpoint.com  and namespace as uuid.NAMESPACE_DNS
+0fc2d4dd-7194-5200-8050-f0ca1dd04b3d
+Generate uuid 3 version using name as tutorialandexample.com  and namespace as uuid.NAMESPACE_DNS
+6f6fe445-1c4c-3874-854e-c79f617effe5
+Generate uuid 5 version using name as tutorialandexample.com  and namespace as uuid.NAMESPACE_DNS
+781c3cc9-4965-5fdc-9c40-89bb0ea8ec0d
+
+Example - 2: Generate UUID 3and UUID 5 using a different namespace
+
+import uuid
+name_spaces = [uuid.NAMESPACE_DNS, uuid.NAMESPACE_URL, uuid.NAMESPACE_OID, uuid.NAMESPACE_X500]
+host_name = 'pynative.com'
+print("Generate uuid using namespace")
+
+for namespace in name_spaces:
+    print('uuid 3 is', uuid.uuid3(namespace, host_name))
+    print('uuid 5 is', uuid.uuid5(namespace, host_name))
+    print()
+
+Output:
+Generate uuid using namespace
+uuid 3 is 6ddc8513-dc7b-3b37-b21b-a1ca9440fe14
+uuid 5 is 8d6a1314-170a-559c-afe7-b68d1d7ee9ac
+
+uuid 3 is 5dcfef3e-bcc9-38bc-b989-4a7516a05974
+uuid 5 is 3a4a6c31-8d6a-5583-8497-d2ed90b1f13a
+
+uuid 3 is 84d9730f-330f-3634-9542-4acfcdcd6c60
+uuid 5 is 899f3d4b-6095-5ee6-9805-68e0c51dcb39
+
+uuid 3 is b140fa3b-983a-3efe-85ef-92f07d5e09a0
+uuid 5 is 73b723ef-5c5e-5eb4-8fcc-aabb5c4e7803
+
+The Behavior of uuid3 and uuid5
+
+Despite the same namespace and same name are similar, UUIDs generated at a different times.
+Two different namespace in the same namespace are different, it generates the unique Ids.
+
+Example - 3
+
+import uuid
+print('Generate version 3 uuid using name as pynative.com and namespace as uuid.NAMESPACE_DNS')
+print(uuid.uuid3(uuid.NAMESPACE_DNS, "javatpoint.com"))
+
+print('Generate version 3 uuid using name as pynative.com and namespace as uuid.NAMESPACE_DNS')
+print(uuid.uuid3(uuid.NAMESPACE_DNS, "javatpoint.com"))
+
+Output:
+Generate version 3 uuid using name as pynative.com and namespace as uuid.NAMESPACE_DNS
+98bbe92a-b38f-3289-a4b4-80ec1cfdf8cb
+Generate version 3 uuid using name as pynative.com and namespace as uuid.NAMESPACE_DNS
+98bbe92a-b38f-3289-a4b4-80ec1cfdf8cb
+
+How to convert string to UUID and UUID to string in Python?
+The uuid.uuid1() method returns the instance of UUID class. We can get string representation of UUID using the str() method. The corresponding string format can be used in comparison or manipulation. Let's understand the following example.
+Example -
+
+import uuid
+UUID1_VAL = uuid.uuid1()
+print("The version 1 UUID is ", UUID1_VAL)
+# convert a UUID to a string of hex digits in standard form
+print("The version 1 UUID in String format", str(UUID1_VAL))
+# Use replace() method to remove dashes from string
+uuidString = str(UUID1).replace("-", "")
+print("Version 1 UUID in String removing dashes", uuidString)
+
+Output:
+The version 1 UUID is  cdca7930-7488-11ec-a0c4-4984d2946471
+UUID of version 1 in String format cdca7930-7488-11ec-a0c4-4984d2946471
+Version 1 UUID in String format cdca7930-7488-11ec-a0c4-4984d2946471
+Version 1 UUID in String removing dashes cdca7930748811eca0c44984d2946471
+
+Now, we will create UUID from String.
+Sometimes, we get the UUID in string format. And our application needs to convert it in the UUID class instance for some applications. Let's understand the following example to convert string formatted UUID.
+Example -
+
+import uuid
+import uuid
+UUIDStrings = ["{c7c9de0a-d676-11e8-8d62-ccaf789d94a0}", "018c168c-d509-11e8-b096-ccaf789d94a0", "urn:uuid:e5e9394c-daed-498e-b9f3-69228b44fbfa"]
+for string in UUIDStrings:
+    # make a UUID from a string of hex digits (braces and hyphens ignored)
+    myUUID = uuid.UUID(string)
+    print("My UUID is", myUUID)
+    print("My UUID time component is", myUUID.time)
+    print()
+
+Output:
+UUID is c7c9de0a-d676-11e8-8d62-ccaf789d94a0
+Time component is 137595594281180682
+
+UUID is 018c168c-d509-11e8-b096-ccaf789d94a0
+Time component is 137594023292180108
+
+UUID is e5e9394c-daed-498e-b9f3-69228b44fbfa
+Time component is 688728508333635916
+
+Example - 2:
+
+import uuid
+def display(message, l):
+    print(message)
+    for v in l:
+        print(v)
+    print()
+
+string_uuids = [ 
+    'urn:uuid:f2f84497-b3bf-493a-bba9-7c68e6def80b',
+    '{417a5ebb-01f7-4ed5-aeac-3d56cd5037b0}',
+    '2115773a-5bf1-11dd-ab48-001ec200d9e0',
+    ]
+
+display('string UUID', string_uuids)
+
+uuids = [ uuid.UUID(s) for s in string_uuids ]
+display('converted to uuids', uuids)
+
+uuids.sort()
+display('sorted value', uuids)
+
+Output:
+string UUID
+urn:uuid:f2f84497-b3bf-493a-bba9-7c68e6def80b
+{417a5ebb-01f7-4ed5-aeac-3d56cd5037b0}
+2115773a-5bf1-11dd-ab48-001ec200d9e0
+
+converted to uuids
+f2f84497-b3bf-493a-bba9-7c68e6def80b
+417a5ebb-01f7-4ed5-aeac-3d56cd5037b0
+2115773a-5bf1-11dd-ab48-001ec200d9e0
+
+sorted value
+2115773a-5bf1-11dd-ab48-001ec200d9e0
+417a5ebb-01f7-4ed5-aeac-3d56cd5037b0
+f2f84497-b3bf-493a-bba9-7c68e6def80b
+
+Generate Reproducible UUIDs
+As we mentioned earlier, UUID has various attributes. We can use the same UUID using any of its attributes. Using the uuid module, we can generate the same uuid anytime using the seed value. The seed value can also be used to generate the same UUID. Let's understand both concepts.
+The following inputs can be used to create UUID instance.
+
+String
+Bytes
+Bytes_le
+Fields
+int
+
+Using any of above value, the UUID can be generated. Let's see the following example where we use all these value of the same UUID.
+Example -
+
+import uuid
+
+print("Generating UUID from int")
+UUID_x = uuid.UUID(int=236357465324988601727440242910546465952)
+print("UUID is", UUID_x)
+
+print("UUID from URN")
+UUID_x1 = uuid.UUID('urn:uuid:b1d0cac0-d50d-11e8-b57b-ccaf789d94a0')
+print("UUID is", UUID_x1)
+
+print("UUID from bytes")
+UUID_x2 = uuid.UUID(bytes=b'\xb1\xd0\xca\xc0\xd5\r\x11\xe8\xb5{\xcc\xafx\x9d\x94\xa0')
+print("UUID is", UUID_x2)
+
+print("UUID from bytes_len")
+UUID_x3 = uuid.UUID(bytes_le=b'\xc0\xca\xd0\xb1\r\xd5\xe8\x11\xb5{\xcc\xafx\x9d\x94\xa0')
+print("UUID is", UUID_x3)
+
+print("UUID from fields")
+UUID_x4 = uuid.UUID(fields=(2983250624, 54541, 4584, 181, 123, 225054014936224))
+print("UUID is", UUID_x4)
+
+Output:
+Generating UUID from int
+UUID is b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+UUID from URN
+UUID is b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+UUID from bytes
+UUID is b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+UUID from bytes_len
+UUID is b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+UUID from fields
+UUID is b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+
+Reproduce UUID with seed
+As its name suggests, the Faker module generates fake data for us. We have used the faker module to generate the same UUID repeatedly. Let's understand the following example.
+Example -
+
+import uuid
+from faker import Faker
+
+fake_obj = Faker()
+fake_obj.seed(8754)
+print(faker_obj.uuid4())
+
+fake_obj.seed(8754)
+print(fake_obj.uuid4())
+
+Output:
+b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+b1d0cac0-d50d-11e8-b57b-ccaf789d94a0
+
+Conclusion
+In this tutorial, we have discussed uuid module in details and understand how we can generate the various UUIDs. UUIDs help us to define the uniqueness in the application/database and also help to define identifiers for documents, hosts, application, clients, and other situation.
+
+
+Next TopicPython Top 10 Libraries to Learn in 2022
+
+
+
+
+← prev
+next →
+
+
+
+

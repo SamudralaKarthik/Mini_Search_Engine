@@ -1,0 +1,106 @@
+
+
+
+
+next →
+← prev
+
+Locating and Executing the Modules in Python
+In this article, we will discuss how the users can locate the modules in Python and what functions of Python used for executing the modules.
+Locating the Modules in Python
+When the modules are imported by the users, the Python interpreter will search for the module in the current directory. If the module is not found in the directory, the interpreter will search every directory present in the shell variable known as PYTHONPATH. If the interpreter is unable to find it in the shell, then it will check the default path. In UNIX, this default path is: /usr/local/lib/python/.
+The search path of the module is stored in the system module sys as the sys.path variable. This variable contains the current directory, that is, PYTHONPATH, and the installation-dependent default.
+The PYTHONPATH Variable
+The PYTHONPATH variable is a Platform based variable, which is consists of the list of directories. Its syntax is the same as the PATH of the shell variable.
+PYTHONPATH from the windows system:
+
+set PYTHONPATH = c: \\python3\\lib;
+
+PYPTHONPATH from the UNIX system
+
+set PYTHONPATH = /usr/local/lib/python
+
+Executing Modules in Python
+From the command-line options, the -m option is used for locating the path of the given module, and it executed the module as the __main__ module of the program. The runpy module is the standard module of Python, which is used for internally supporting this mechanism. The runpy module allows a script to be located by using the namespace of the Python module instead filesystem.
+The runpy module defines two functions:
+
+run_module()
+run_path()
+
+run_module()
+The run_module() function is used for executing the code containing the specific module, and it will return the result of the module globals dictionary.
+The module_name argument should be the actual module name. Suppose the name of the module referred to any package instead of the normal module. In that case, that package will be imported, and the __main__ submodule inside the package will be executed, and it will return the result of the module globals dictionary.
+The special global variables, that is, __name__, __spec__, __file__, __cached__, __loader__ and __package__ are set in the globals dictionary before the execution of module.
+__name__ is set to module_name +'.__main__', if the module which is named is the package; otherwise, it will be set to module_name argument.
+And __file__, __cached__, __loader__ and __package__ are set as normal based on the module spec.
+run_path()
+The run_path() function is used for executing the program in the file at the given path, and it will return the module globals dictionary as a result. The given path can refer to the Python source file, a compiled bytecode file, or a valid sys.path entry that contains the __main__ module, such as a zipfile including the top-level __main__.py file.
+The special global variables, that is, __name__, __spec__, __file__, __cached__, __loader__ and __package__ are set in the globals dictionary before the execution of module.
+__name__ variable is set to run_name if this optional argument is not equal to None; otherwise, it will be set to <run_path>.
+Example:
+Let's see an example of runpy module:
+First, the user has to save the following file as the script named runpy_example.py.
+
+def add(p, q, r, s, t):
+   return p + q + r + s + t
+def main():
+ p = 4
+ q = 6
+ r = 2
+ s = 8
+ t = 7
+ print ("sum of p, q, r, s, t = ")
+ print (add(p,q,r,s,t))
+ return
+if __name__=='__main__':
+   main()
+
+And then, the user will execute the above file using the following command:
+
+import runpy_example as runp
+runp.main()
+
+Output:
+sum of p, q, r, s, t = 
+27
+
+Although, the user can execute the above file without importing it:
+
+import runpy
+runpy.run_module('runpy_example', run_name='__main__')
+
+Output:
+sum of p, q, r, s, t = 
+27
+
+
+
+The user can also user run_path() function:
+
+runpy.run_path('runpy_example.py', run_name='__main__')
+
+Output:
+sum of p, q, r, s, t = 
+27
+
+
+
+As discussed earlier, the runpy also supports the -m switch of the Python command line:
+
+C:\python37>python -m runpy_example
+
+Conclusion
+In this article, we have discussed how the users can locate the modules and execute them using the functions of the runpy module of the standard module of Python.
+
+
+Next TopicFlatten List in Python
+
+
+
+
+← prev
+next →
+
+
+
+

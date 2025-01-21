@@ -1,0 +1,246 @@
+
+
+
+
+next →
+← prev
+
+K-Fold Cross-Validation in Sklearn
+Creating datasets to train and validate our model from data collection is the most common machine learning approach to increase the model's performance. The split ratio of the dataset could be 70 : 30 or 80 : 20. The holdout approach is the most common cross-validation approach.
+The issue with this approach is that we are unsure whether a good validation accuracy score of the model denotes a good model. What if the portion of the dataset we used for validation was successful? If we used a distinct portion of the dataset as a validation dataset, would our model still give high accuracy score? The K-fold CV provides solutions to some of these queries.
+What is Cross-Validation?
+When we have to train a machine learning model with a good performance score, dividing the dataset into a training and validation dataset is a fundamental and essential operation. We must test our model on an unseen dataset (Validation dataset) to assess whether it is overfitted or not.
+A particular model will give a low-performance score when supplied with actual live data if the model does not have a good accuracy score for the validation dataset. Given this idea, cross-validation is perhaps one of the most crucial machine learning concepts that guarantee the robustness of our model.
+Cross-Validation is essentially a procedure that simply sets aside a portion of the dataset to be used for the validation and testing of our model. In contrast, the remaining dataset is utilized for the model to train.
+Benefits of using Cross-Validation
+
+It assists us in evaluating the model and determining its accuracy.
+Essential to figure out whether the model is successfully generalized to data.
+To determine whether the model is over- or under-fitted.
+Lastly, it allows us to select the model with the best performance.
+
+Many types of Cross-Validation
+
+K-Fold cross-validation
+Stratified k-fold cross-validation
+Leave P Out cross-validation
+Leave One Out cross-validation
+Time Series cross-validation
+Shuffle Split cross-validation
+
+What is K-Fold Cross-Validation?
+The k-fold cross-validation method is widely used for calculating how well a machine learning model performs on a validation dataset.
+Although 10 is a typical choice for k, how can we be confident that this fold is suitable for the dataset and model?
+One method is investigating the impact of various k choices on the estimated model performance and comparing it with the ideal test condition. This can aid in selecting the correct number of folds.
+Once a k-value is determined, we can use it to assess various models on the dataset. We may then contrast the pattern of the scores to the scores of an analysis of the same model under the ideal test scenario to see whether or not they are strongly correlated. If the results are correlated, it is confirmed that the selected configuration is a reliable approximation of the ideal test setting.
+This tutorial will teach the reader how to set up and assess k-fold cross-validation settings.
+Procedure of K-Fold Cross-Validation Method
+As a general procedure, the following happens:
+
+Randomly shuffle the complete dataset.
+The algorithm then divides the dataset into k groups, i.e., k folds of data
+For every distinct group:
+Use the dataset as a holdout dataset to validate the model.
+The rest of the groups' datasets are used to train the model.
+Fit a model onto the training dataset, then assess it on the holdout or validation dataset.
+Keep the evaluation result but throw away the model generated.
+Using the results of the model evaluation scores, summarise the model's performance.
+
+It's significant that every item in the dataset is given a unique group and remains there throughout the process. This indicates that each data sample has the k number of chances to be a part of the training dataset and the k number of times in the holdout or validation dataset.
+All data preparation done before fitting the model must take place on the loop's CV-assigned training dataset rather than the more extensive data set. This also holds for any hyper-parameter tuning. Data leakage and an exaggerated assessment of the model's skill may occur from failing to carry out these procedures within the loop.
+Example of K-Fold Cross Validation Test
+Code
+
+# Python program to perform kfold cross-validation test on breast cancer dataset
+
+#Importing required libraries
+from sklearn.datasets import load_breast_cancer
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import KFold 
+from sklearn.metrics import accuracy_score
+ 
+#Loading the dataset
+data = load_breast_cancer(as_frame = True)
+df = data.frame
+
+# Segregating dependent and independent features
+X = df.iloc[:,:-1] 
+Y = df.iloc[:,-1]
+ 
+#Implementing k-fold cross-validation
+ 
+k = 5
+k_fold = KFold(n_splits = k, random_state = None)
+Lr = LogisticRegression(solver = 'liblinear')
+ 
+acc_scores = []
+
+# Looping over each split to get the accuracy score of each split
+for training_index, testing_index in k_fold.split(X):
+    X_train, X_test = X.iloc[training_index,:], X.iloc[testing_index,:]
+    Y_train, Y_test = Y.iloc[training_index] , Y.iloc[testing_index]
+    
+    # Fitting training data to the model
+    Lr.fit(X_train,Y_train)
+    
+    # Predicting values for the testing dataset
+    Y_pred = Lr.predict(X_test)
+    
+    # Calculatinf accuracy score using in-built sklearn accuracy_score method 
+    acc = accuracy_score(Y_pred , Y_test)
+    acc_scores.append(acc)
+    
+# Calculating mean accuracy score
+mean_acc_score = sum(acc_scores) / k
+ 
+print("Accuracy score of each fold: ", acc_scores)
+print("Mean accuracy score: ", mean_acc_score)
+
+Output:
+Accuracy score of each fold:  [0.9122807017543859, 0.9473684210526315, 0.9736842105263158, 0.9736842105263158, 0.9557522123893806]
+Mean accuracy score:  0.952553951249806
+
+Cross Validation Using cross_val_score()
+We can shorten the above code using the cross_val_score class method
+Code
+
+# Python program to perform kfold cross-validation test on breast cancer dataset
+
+#Importing required libraries
+from sklearn.datasets import load_breast_cancer
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import KFold 
+from sklearn.model_selection import cross_val_score
+ 
+#Loading the dataset
+data = load_breast_cancer(as_frame = True)
+df = data.frame
+
+# Segregating dependent and independent features
+X = df.iloc[:,:-1] 
+Y = df.iloc[:,-1]
+ 
+#Implementing k-fold cross validation
+k = 5
+k_fold = KFold(n_splits = k, random_state = None)
+Lr = LogisticRegression(solver = 'liblinear')
+Lr.fit(X, Y)
+
+# Finding accuracy scores using cross_val_score methods
+score = cross_val_score(Lr, X, Y, cv = k_fold)
+
+# Calculating mean accuracy score
+mean_acc_score = sum(score) / len(score)
+ 
+print("Accuracy score of each fold: ", acc_scores)
+print("Mean accuracy score: ", mean_acc_score)
+
+Output:
+Accuracy score of each fold:  [0.9122807017543859, 0.9473684210526315, 0.9736842105263158, 0.9736842105263158, 0.9557522123893806]
+Mean accuracy score:  0.952553951249806
+
+The K-fold cross-validation method helps train our model on smaller datasets. If our data collection is extensive, K-fold cross-validation may not be necessary. The rationale is that our validation dataset has sufficient records to allow us to verify the performance of our machine learning model. Utilizing the K-fold cross-validation test on a vast dataset requires much time.
+Furthermore, utilizing more folds to validate our model uses even more computer power. The model will take more time to train for the larger values of K. If K is 5, the model undergoes five separate training runs using five distinct folds of the validation dataset. The model runs ten times if K = 10.
+Sensitivity Analysis for k
+The most important tuning parameter for the k-fold cross-validation test is the value of k, which specifies how many folds to divide a given dataset.
+Typical values chosen for an average size dataset are k=3, k=5, and k=10. It is observed that k=10 is used most widely among all the values to evaluate the performance of our trained model. The reason for taking this specific value is because research has shown that k=10 offers a reasonable balance between low computing expense and moderate bias in assessing model performance.
+When testing our models on a sample of our dataset, how can we determine what figure of k to use?
+Although k=10 is an option, how can we ensure it does justice to our dataset?
+One way to respond to this query is to run a sensitivity analysis for various k numbers. In other words, compare the results of the same model trained on the same dataset but with different values of k.
+It is hypothesized that small values of k will produce a noisy prediction of model performance, while big values of k will produce a less noisy prediction.
+Yet noisy in comparison to what?
+We lack access to the model's true performance when we pass the unseen data through it. We could apply it to the model's assessment if we knew it.
+However, we can select a test condition as an "ideal" or as close to an ideal estimate as we can predict the model's performance.
+One strategy is to train the model using every piece of data that is accessible and then estimate its performance using a different, large sample hold-out dataset. The performance on the hold-out data would indicate the "actual" performance of the model. In contrast, any cross-validation scores on the training dataset would be an estimate of this true score. The approach we mentioned is rarely feasible since we frequently lack the data to put aside a portion of the primary dataset for the test dataset. 
+The leave-one-out cross-validation procedure (LOOCV) is a computationally intensive modification of cross-validation where k = N, N is the total number of samples in the training dataset. We can use it to simulate this condition alternatively. In other words, a single sample from the training dataset is provided for each set in the validation dataset. Given the appropriate data, it can generate a decent estimation of model performance, but it is rarely utilised for large datasets due to the high computational cost.
+Then, using the same dataset with LOOCV, we can assess the average classification accuracy for the LOOCV procedure with the average classification accuracy of various k values. The discrepancy between the scores provides a rough approximation for determining how closely a k value resembles the ideal model performance test condition.
+Let's look at how to perform a k-fold cross-validation procedure sensitivity analysis.
+
+Let's develop a function to build the dataset first. This gives us the option, if we'd want, to substitute with any dataset.
+We can then define the dataset for building the model to be evaluated. Once more, this distinction enables us to customise the model to suit our needs.
+After that, we may create a function that uses a test condition to validate the model on the validation dataset. The test condition might be an example of LeaveOneOut that depicts our ideal test condition, or it could be an object of the KFold parameterized with a certain k-value. The function delivers the folds' minimum and maximum classification accuracy values in addition to the mean classification accuracy. The range of scores can be summed up using the minimum and maximum.
+We will then use the LOOCV approach to calculate the model performance.
+We can then define the k values for the analysis. We will test numbers within 2 to 20 in this example. Then, we can analyze each value individually and record the outcomes.
+
+Code
+
+# Python program to perform kfold cross-validation sensitivity analysis
+from numpy import mean
+from sklearn.datasets import make_classification
+from sklearn.model_selection import LeaveOneOut, KFold, cross_val_score
+from sklearn.linear_model import LogisticRegression
+ 
+# creating the dataset
+def get_dataset(number_samples=1000):
+	X, Y = make_classification(n_samples=number_samples, n_features=27, n_informative=20, n_redundant=6, random_state=10)
+	return X, Y
+
+# getting the model object to be used for evaluation
+def get_model():
+    model = LogisticRegression()
+    return model
+ 
+# evaluating the model performance using a test condition
+def evaluate_model_performance(cv_method):
+    # getting the dataset
+    X, Y = get_dataset()
+    # getting the model
+    model = get_model()
+    # evaluating the model
+    scores = cross_val_score(model, X, Y, scoring='accuracy', cv=cv_method, n_jobs=-1)
+    # returning the mean, minimum and maximum scores
+    return round(mean(scores), 2), round(scores.min(), 2), round(scores.max(), 2)
+ 
+# calculating the ideal test condition
+ideal_score, _, _ = evaluate_model_performance(LeaveOneOut())
+print("Ideal score: ", ideal_score)
+
+# defining the number of folds to test
+folds = range(2, 21)
+
+# calculation accuracy for each k value in the defined range
+for k in folds:
+    # defining the test condition
+    cv_method = KFold(n_splits=k, shuffle=True, random_state=10)
+    # evaluating the k value
+    mean_k, min_k, max_k = evaluate_model_performance(cv_method)
+    # printing the performance of each k value
+    print(f"Folds={k}, accuracy={mean_k} ({min_k},{max_k})")
+
+Output:
+Ideal score:  0.83
+Folds=2, accuracy=0.81 (0.81,0.81)
+Folds=3, accuracy=0.83 (0.79,0.85)
+Folds=4, accuracy=0.84 (0.8,0.86)
+Folds=5, accuracy=0.83 (0.78,0.88)
+Folds=6, accuracy=0.83 (0.77,0.88)
+Folds=7, accuracy=0.83 (0.76,0.89)
+Folds=8, accuracy=0.83 (0.77,0.88)
+Folds=9, accuracy=0.83 (0.75,0.9)
+Folds=10, accuracy=0.82 (0.74,0.9)
+Folds=11, accuracy=0.83 (0.77,0.9)
+Folds=12, accuracy=0.83 (0.7,0.9)
+Folds=13, accuracy=0.82 (0.77,0.91)
+Folds=14, accuracy=0.82 (0.66,0.93)
+Folds=15, accuracy=0.82 (0.76,0.92)
+Folds=16, accuracy=0.83 (0.67,0.92)
+Folds=17, accuracy=0.83 (0.73,0.93)
+Folds=18, accuracy=0.83 (0.68,0.93)
+Folds=19, accuracy=0.82 (0.68,0.92)
+Folds=20, accuracy=0.82 (0.66,0.96)
+
+
+
+Next TopicPython Projects on ML Applications in Finance
+
+
+
+
+← prev
+next →
+
+
+
+

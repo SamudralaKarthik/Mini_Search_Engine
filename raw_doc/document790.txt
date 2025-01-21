@@ -1,0 +1,223 @@
+
+
+
+
+next →
+← prev
+
+How to Check Nan Values in Pandas
+Null values are described as missing values in the original pandas manual. Since most programmers do, we may designate the null or missing data in pandas as NaN.
+NaN, which means Not A Number, is one of the usual methods to show a value missing from a data set. It is a unique floating-point object and can only be changed to the floating-point datatype.
+One of the main issues in data processing is the NaN value. Dealing with NaN is crucial if you want to fulfill your objectives.
+Programmers can display empty entries in the dataframe by using either the NaN or None Python keywords. The fact that the pandas handle NaN and None equally is its most attractive feature. If the cell contains NaN or None, pandas.notnull will yield False to determine whether a component is missing. We can also use .isnull(), which is opposite to the .notnull function; hence it will return True if the value is null or NaN.
+Therefore, we shall examine several techniques in this tutorial to determine if a particular cell or series or an entire dataframe contains the null value or not (NaN or None).
+The several approaches that we'll talk about include:
+
+isnull
+isnan
+isna
+notnull
+
+Using the .isnull Function
+We can check which cell null values are present using this function. An example is shown below.
+Code
+
+# Python program to check if a cell contains a null value or not
+
+# Importng the required libraries
+import pandas as pd
+import numpy as np
+
+# Creating a dataframe
+data = {'numbers': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan]}
+dframe = pd.DataFrame(data)
+
+# Checking the null values
+print(dframe.isnull())
+
+Output:
+    numbers
+0     False
+1     False
+2     False
+3     False
+4     False
+5     False
+6      True
+7     False
+8     False
+9      True
+10    False
+11    False
+12    False
+13     True
+
+Also, using isnull.values.any(), we can check if a series of data frames contain any null value. It will give us a Boolean result.
+Code
+
+# Python program to check if a series contains a null value or not
+
+# importing the required libraries
+import pandas as pd
+import numpy as np
+ 
+# Create the dataframe
+data = {'numbers': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan, 6, 3]}
+dframe = pd.DataFrame(data)
+
+# Checking the null values in a series
+check_nan = dframe['numbers'].isnull().values.any()
+print(check_nan)
+
+Output:
+True
+
+Using the same isnull() function, we can also get the sum of null values present in a series of the dataframe.
+Code
+
+# Python program to print the sum of null values present in a column
+
+# importing the required libraries
+import pandas as pd
+import numpy as np
+ 
+# Creating a data frame
+data = {'numbers': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan]}
+dframe = pd.DataFrame(data)
+ 
+# Counting the sum of null values
+nan = dframe['numbers'].isnull().sum()
+ 
+# printing the sum of null values present in a column
+print('The sum of NaN entries present in a series: ' + str(nan))
+
+Output:
+The sum of NaN entries present in a series: 3
+
+Using the following code, you can calculate the NaN values across the whole DataFrame.
+Code
+
+# Python program to print the sum of null values in the entire data frame
+
+# importing the required libraries
+import pandas as pd
+import numpy as np
+
+# Creating a data frame
+data = {'numbers1': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan, 8],
+        'numbers2': [4, 6, np.nan, 5, 8, np.nan,1, 6, np.nan, np.nan, 17, np.nan, 19, 7, 3]}
+dframe = pd.DataFrame(data)
+
+# Total number of null values
+nan = dframe.isnull().sum().sum()
+print ('The sum of Nan values in the data frame: ' + str(nan))
+
+Output:
+The sum of Nan values in the data frame: 8
+
+Using the isnan() Method
+Using the pandas.isnull function, we verified the NaN entries in the instance above. We will now employ a different technique termed isnan. This function is an in-built function of the numpy library. The code below shows an example of how to check the nan value in a particular cell.
+Code
+
+# Python program to check for the nan value in a cell using isnan function of numpy
+
+# Importing the required libraries
+import numpy as np
+import pandas as pd
+
+# Creating a data frame
+data = {'numbers1': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan, 8],
+        'numbers2': [4, 6, np.nan, 5, 8, np.nan,1, 6, np.nan, np.nan, 17, np.nan, 19, 7, 3]}
+dframe = pd.DataFrame(data)
+
+value = dframe.at[6, 'numbers1']  #nan
+
+nan = np.isnan(value)
+print("The particular value of the data frame is nan:", nan)
+
+Output:
+The particular value of the data frame is nan: True
+
+In the preceding example, we looked for the NaN object in the cell of our dataframe. Additionally, we can determine whether a cell value in the pandas series is NaN or not. Let's look at how we can put it into practice.
+Code
+
+# Python program to check for nan values in the cell of a series
+
+# Importing the required libraries
+import numpy as np
+import pandas as pd
+
+series = pd.Series([4, 7, np.nan, 7, 25])
+
+# Checking for nan value
+value = series[3]  #nan
+nan = np.isnan(value)
+
+
+print("The value at series[3] is NaN:", nan)
+
+Output:
+The value at series[3] is NaN: False
+
+Using .isna Function of Pandas
+We will show how to use .isna function of Pandas.
+Code
+
+# Python program to check for nan values using .isna function
+
+# Importing the required libraries
+import numpy as np
+import pandas as pd
+
+# Creating a data frame
+data = {'numbers1': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan, 8],
+        'numbers2': [4, 6, np.nan, 5, 8, np.nan,1, 6, np.nan, np.nan, 17, np.nan, 19, 7, 3]}
+dframe = pd.DataFrame(data)
+
+print("checking for NaN value in the series numbers2 at the 6th index")
+pd.isna(dframe.iloc[6,0])
+
+Output:
+checking for NaN value in the series numbers2 at the 6th index
+True
+
+Using .notnull Method
+The notnull function is another way to determine whether a cell is NaN or a dataframe contains a null value. According to the program below, this function will give a boolean result of False if the given cell value is NaN or null.
+Code
+
+# Python program to check for nan values using .notnull function
+
+# Importing the required libraries
+import numpy as np
+import pandas as pd
+
+# Creating a data frame
+data = {'numbers1': [3, 6, 9, 2, 6, 8, np.nan, 1, 3, np.nan, 8, 9, 10, np.nan, 8],
+        'numbers2': [4, 6, np.nan, 5, 8, np.nan,1, 6, np.nan, np.nan, 17, np.nan, 19, 7, 3]}
+dframe = pd.DataFrame(data)
+
+# checking NaN value in the cell, series and entire dataframe
+print("The cell does not has a null value: ", pd.notnull(dframe.iloc[6,0]))
+print("The series does has not null value: ", pd.notnull(dframe['numbers2']).values.any())
+print("Number of no null value in the series of the dataframe: ", pd.notnull(dframe).sum())
+
+Output:
+The cell does not has a null value:  False
+The series does has not null value:  True
+Number of no null value in the series of the dataframe:  numbers1    12
+numbers2    10
+dtype: int64
+
+
+
+Next TopicHow to combine two dataframe in Python - Pandas
+
+
+
+
+← prev
+next →
+
+
+
+

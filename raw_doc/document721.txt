@@ -1,0 +1,192 @@
+
+
+
+
+next →
+← prev
+
+Python String equals
+A string is a succession of characters. A person is just an image. For instance, the English language has 26 characters. PCs don't manage characters; they manage numbers (twofold). Despite the fact that you might see characters on your screen, inside, it is put away and controlled as a mix of 0s and 1s. This transformation of character to a number is called encoding, and the converse interaction is interpreting. ASCII and Unicode are a portion of the famous encodings utilized.
+How to make a string in Python? Strings can be made by encasing characters inside a solitary statement or twofold statements. Indeed, even triple statements can be utilized in Python but, by and large, used to address multiline strings and docstrings.
+Example
+
+# defining strings in Python
+# all of the following are equivalent
+my_str = 'Hello'
+print(my_str)
+my_str = "Hello"
+print(my_str)
+my_str = '''Hello'''
+print(my_str)
+# triple quotes string can extend multiple lines
+my_str = """Hello, welcome to
+           the world of Python"""
+print(my_str)
+
+Output:
+Hello
+Hello
+''Hello
+Hello, welcome to 
+           the world of Python
+
+We can get to individual characters utilizing ordering and the scope of characters utilizing cutting. The list begins from 0. Attempting to get a person out of list reach will raise an IndexError. The file ought to be an integer. We cannot use floating or other types; doing so will cause a TypeError. Python's arrangements support negative ordering. The reference in file 1 is to the final item, in file 2 to the second, keep the continuing item, etc. Through the use of the cutting administrator, we can reach a variety of objects in a string: (colon).
+Example
+
+#Accessing string characters in Python
+str = 'appleshake'
+print('str = ', str)
+#first character
+print('str[0] = ', str[0])
+#last character
+print('str[-1] = ', str[-1])
+#slicing 2nd to 5th character
+print('str[1:5] = ', str[1:5])
+#slicing 6th to 2nd last character
+print('str[5:-2] = ', str[5:-2])
+
+Output:
+str =  appleshake
+str[0] =  a
+str[-1] =  e
+str[1:5] =  pple
+str[5:-2] =  sha
+
+String correlation is fundamentally the examination of two strings. For example, it is the technique through which we check for the balance of strings by looking at the strings character-by-character.
+Strategy 1: Python '==' administrator to look at the uniformity of two strings
+Python Comparison administrators can be utilized to look at two strings and check for their uniformity for a delicate situation way. For example, capitalized letters and lowercase letters would be dealt with in an unexpected way. Python '==' administrator looks at the string in a person-by-character way and returns True in the event that the two strings are equivalent. In any case, it gets back False.
+Syntax
+
+string1 == string2
+
+Example
+
+s1 = "Python"
+s2 = "Python"
+s3 = "Java"
+print(s1 == s2)
+print(s1 == s3)
+
+Output:
+True
+False
+
+Strategy 2: Python '!=' administrator for String examination
+Python '!=' administrator can likewise be utilized to play out a string rises to really look at in python. The '!=' administrator thinks about two strings and returns True on the off chance that the strings are inconsistent, in any case, it gets back False.
+Syntax
+
+string1 != string2
+
+Example:
+
+s1 = "Python" 
+s2 = "Python" 
+s3 = "Java" 
+if(s1 != s3):
+    print("s1 is not equal to s3")
+if(s1 != s2):
+    print("s1 is not equal to s2")
+else:
+    print("s1 is equal to s2")
+
+Output:
+s1 is not equal to s3
+s1 is equal to s2
+
+Strategy 3: Python 'is' administrator to perform string rises to actually take a look at in python 
+Python "is" administrator can be utilized to proficiently check for the uniformity of two string objects. The administrator returns True assuming that the two factors highlight similar information objects. Else, it gets back False.
+Syntax:
+
+variable1 is variable2
+
+Example:
+
+s1 = "Python"
+s2 = "Python" 
+s3 = "Java" 
+if(s1 is s3):
+ print("s1 is equal to s3")
+else:
+ print("s1 is not equal to s3")
+if(s1 is s2):
+ print("s1 is equal to s2")
+else:
+ print("s1 is not equal to s2")
+
+Output:
+s1 is not equal to s3
+s1 is equal to s2
+
+Strategy 4: The __eq__() capability to perform string approaches actually looked at in python
+Python's in-assembled __eq__() strategy can be utilized to look at two-string objects. The __eq__() technique essentially thinks about two articles and returns True whenever seen as equivalent. In any case, it gets back False.
+Syntax:
+
+string1.__eq__(string2)
+
+Example:
+
+s1 = "Python" 
+s2 = "Python" 
+s3 = "Java" 
+if(s1.__eq__(s3)):
+ print("s1 is equal to s3")
+else:
+ print("s1 is not equal to s3") 
+if(s1.__eq__(s2)):
+ print("s1 is equal to s2")
+else:
+ print("s1 is not equal to s2")
+
+Output:
+s1 is not equal to s3
+s1 is equal to s2
+
+String equals check in Python : caseless comparison
+Example 1
+
+s1 = "Python" 
+s2 = "PYTHON" 
+if(s1.__eq__(s2)):
+ print("s1 is equal to s2")
+else:
+ print("s1 is not equal to s2"
+
+Output:
+s1 is not equal to s3
+
+As found in the above model, the outcome ends up being FALSE, in light of the fact that the examination is Case-touchy. To have a caseless string examination, for example, for a situation coldhearted way, then, at that point, we can utilize Python string.casefold() capability to fill the need. The string.casefold() technique switches the string over completely to lowercase immediately. In the situation of string examination, we can pass both of the info strings to the casefold() capability. Consequently, both string would be changed over completely to lowercase, and subsequently, we can have a caseless examination.
+Syntax:
+
+string.casefold()
+
+Example 2
+
+s1 = "Python" 
+s2 = "PYTHON" 
+s3 = "PYthoN" 
+if((s1.casefold()).__eq__(s2.casefold())):
+ print("s1 is equal to s2")
+else:
+ print("s1 is not equal to s2")
+ if((s1.casefold()) == (s3.casefold())):
+ print("s1 is equal to s3")
+else:
+ print("s1 is not equal to s3")
+
+Output:
+s1 is equal to s2
+s1 is equal to s3
+
+
+
+Next TopicControl Statements in Python
+
+
+
+
+← prev
+next →
+
+
+
+

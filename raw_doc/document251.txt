@@ -1,0 +1,156 @@
+
+
+
+
+next →
+← prev
+
+Python super() Function
+As we all know that, Python is an object-oriented programming language. Therefore, Python follows all the concepts of OOPs, and one of such concepts is inheritance.
+While using the inheritance concept, we can refer to a parent class with the use of super() function inside the inherited or child class. The super() function we use in the child class returns a temporary created object of the superclass, that allow us to access all of its method present in the child class.
+Benefits of super() function:
+Following are the benefits of using a super() function in child class:
+
+We don't need to remember the parent's class name while using the super() function. This is because we don't have to specify the name of the parent class to access the methods present in it.
+We can use the super() function with the single inheritance and multiple inheritances.
+The super() function in Python implements code reusability and modularity as there is no need for us to rewrite the whole function again and again.
+The super() function in Python is known as dynamical function, as we all know that Python is a dynamically typed programming language.
+
+Constraints of using super() function:
+Following are three constraints that we must have to follow to use the super() function in a Python program:
+
+The arguments are given in the super() function and the arguments in the function that we have called should match.
+Every occurrence of the method that we are using should include the super() keyword after we use it.
+We have to specify the class and methods present in it, which are referred to by the super() function.
+
+Now, as we know that, we can use the super() function in both types of inheritances in Python, i.e., single as well as multiple inheritances. Therefore, we will learn about using the super() function in both types of inheritance separately and with an example.
+Using super() function in single inheritance in Python
+In this example, we will use animals as the reference for a single inheritance example.
+Cats, horses, cows, dogs, etc., all are part of class animalia. They all share some common characteristics also:
+
+They all are pet animals.
+They all have four legs and a tail.
+As part of class animalia, they all are mammals as well.
+
+So, we can say that the class cats, class horses, and class dogs are the subclasses of the class animalia. This is an example of single inheritance because all the subclasses (class cats, class horses, and class dogs) are inherited from a single parent class only, i.e., class animalia. Now, look at the following program.
+Example -
+
+# Define parent class animalia
+class Animalia:
+	
+	# define construcors for parent animalia class
+	def __init__(self):
+		self.Legs = 4
+		self.adomestic = True
+		self.atail = True
+		self.amammals = True
+
+	# define mammal class as child class
+	def aMammal(self):
+		if self.amammals: 
+			print("The given animal is a mammal type .")
+
+	# define domestic class as child class
+	def aDomestic(self):
+		if self.adomestic:
+			print("The given animal is a domestic animal type.")
+# define dog class 	
+class Dog(Animalia):
+	def __init__(self):
+		super().__init__() # using super() function to access class methods
+
+	def isMammal(self):
+		super().aMammal() # using mammal class
+
+# define cat class
+class Cat(Animalia):
+	def __init__(self):
+		super().__init__()
+
+	def isMammal(self):
+		super().aDomestic() # using domestic class
+
+# define horse class
+class Horse(Animalia):
+	def __init__(self):
+		super().__init__()
+
+	def TailandLegs(self): # using tail and legs class
+		if self.atail and self.Legs == 4:
+			print("The given animal has four legs and a tail")
+
+# Taking the driver's code for defined classes
+Tommy = Dog()
+Tommy.aMammal()
+Tom = Cat()
+Tom.aDomestic()
+Burno = Horse()
+Burno.TailandLegs()
+
+Output:
+The given animal is a mammal type.
+The given animal is a domestic animal type.
+The given animal has four legs and a tail.
+
+Explanation:
+In the above code, we have defined animalia as parent class and inherited domestic, tail & legs, and mammal class from it. After that, we have defined the cat, horse, and dog class and used super function in it. With the help of super() function in these classes, we have accessed methods of animalia class in cat, horse & dog class.
+Using super() function in multiple inheritances in Python
+In this example, we will use a parent class, i.e., mammal class. Then, we will inherit the 'Can Fly' and 'Can Swim' classes from the mammal class.
+These classes will represent if a given mammal can fly or not and can swim or not. We will define an animal class after that, and it will inherit from both 'Can Fly' and 'Can Swim' class and return us that given animal have the defined characteristics or not.
+So, we can see that the animal class we are using here is inherited from multiple base classes, and therefore, it is an example of multiple inheritances in Python. Now, look at the following program.
+Example
+
+# Define Mammal class as parent class
+class aMammals():
+	
+	def __init__(self, name):
+		print(name, "Is a mammal of animalia class")
+
+# define can fly as child class		
+class FlyCapable(aMammals):
+	
+	def __init__(self, FlyCapable_name):
+		print(FlyCapable_name, "is not capable of flying")
+		
+		# Calling Parent class Constructor
+		super().__init__(FlyCapable_name)
+# define can swim as child class				
+class SwimCapable(aMammals):
+	
+	def __init__(self, SwimCapable_name):
+		
+		print(SwimCapable_name, "is not capable of swimming")
+			
+		super().__init__(SwimCapable_name)
+
+# Inherit animalia class from both fly and swim class		
+class animalia(FlyCapable, SwimCapable):
+	
+	def __init__(self, name):
+		
+		super().__init__(name) # using super() function
+
+
+# Taking driver Code for animalia class
+Burno = animalia("Cat")
+
+Output:
+Cat is not capable of flying
+Cat is not capable of swimming
+Cat Is a mammal of animalia class
+
+Explanation:
+In the above code, we defined mammal as a parent class. After that, we inherited can fly & can swim classes from the mammal class. We used the methods of both can fly & can swim inside the animalia class with the help of super() function. The animalia class is inherited from both the can swim and can fly class.
+
+
+Next Topicmax() function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

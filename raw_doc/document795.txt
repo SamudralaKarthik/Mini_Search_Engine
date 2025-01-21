@@ -1,0 +1,144 @@
+
+
+
+
+next →
+← prev
+
+Create a GUI Calendar using PyQt5 in Python
+A calendar GUI can be created in python using PyQt5 module widget QCalendar.
+The most recent version of Riverbank Computing's GUI widget toolkit is PyQt5. Qt, one of the most effective and well-liked cross-platform GUI libraries, has a Python interface. The Python programming language and the Qt library are combined in PyQt5. You may use PyQt to build graphical apps with the aid of this basic tutorial.
+Date picking controls and quality are the reasons that makes the QCalendar widget more helpful. It offers a month-based perspective. With today's date as the default, the user may choose the date using the mouse or keyboard. You may specify a calendar's date range as well.
+The class QCalendarWidget, which is part of the QWidgets class, offers a monthly-based calendar widget that lets the user choose a date. To organise days for social, religious, business, or administrative objectives, we use calendars. This is accomplished by providing names to discrete time intervals, most often days, weeks, months, and years. In such a system, a date designates a single, particular day.
+Here are some of this class's useful methods which will be used in the code :
+setDateRange() : This establishes the lower and upper dates that can be chosen.
+setFirstDayOfWeek() : The setFirstDayOfWeek() determines the day of the first column in the calendar. And present day constants are :
+
+Monday - For setting the day as Monday.
+Tuesday - For setting the day as Tuesday.
+Wednesday - For setting the day as Wednesday.
+Thursday - For setting the day as Thursday.
+Friday - For setting the day as Friday.
+Saturday - For setting the day as Saturday.
+Sunday - For setting the day as Sunday.
+
+setMinimumDate() : This is used to set the lower date for selection.
+setMaximumDate() : This establishes the deadline for selection.
+setSelectedDate() : This establishes a QDate object as the chosen date.
+showToday() : This displays the current month.
+selectedDate() : We can Retrievr the chosen date using this.
+setGridvisible() : This helps in controlling the Calendar grid visibility.
+Walking through the code :
+
+# importing all the required modules
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+First of all, we will import all the modules that we will be needing to create this GUI. These modules include QtWidgets, QtCore, QtGui and sys.
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the window title
+		self.setWindowTitle("Python ")
+
+		# set the window geometry
+		self.setGeometry(100, 100, 600, 400)
+
+		# calling the components func.
+		self.UiComp()
+
+		# Displaying all the present widgets
+		self.show()
+
+Then, we will create the class Window to set up our window. After initialization, we set the title, geometry of the window and will display the widgets. Also, we will call the function for introducing Uicomponents.
+
+# function for the various components
+	def UiComp (self):
+
+		# Defining a new QCalendarWidget object
+		clndr = QCalendarWidget(self)
+
+		# set the geometry of the calendar
+		clndr.setGeometry(10, 10, 580, 380)
+
+Then, we defined the function Uicomp() which includes the QCalendarWidget which will display a calendar and then we will set its geometry too.
+
+# creating the pyqt5 gui application
+Base = QApplication(sys.argv)
+
+# creating the instance of the Window made
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Ultimately, we will create the application by creating an instance of the object and executing the application using the exit method.
+Complete code :
+
+# Python program to create a GUI calendar using PyQt5
+# importing all the required modules
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the window title
+		self.setWindowTitle("Python ")
+
+		# set the window geometry
+		self.setGeometry(100, 100, 600, 400)
+
+		# calling the components func.
+		self.UiComp()
+
+		# Displaying all the present widgets
+		self.show()
+
+	# function for the various components
+	def UiComp (self):
+
+		# Defining a new QCalendarWidget object
+		clndr = QCalendarWidget(self)
+
+		# set the geometry of the calendar
+		clndr.setGeometry(10, 10, 580, 380)
+
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating the instance of the Window made
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Output:
+The user may view the different months in a window with a QCalendarWidget and choose any day. The output of the above implemented code has been attached here as a screenshot.
+
+
+
+Next TopicSnake Game using PyGame in Python
+
+
+
+
+← prev
+next →
+
+
+
+

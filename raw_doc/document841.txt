@@ -1,0 +1,220 @@
+
+
+
+
+next →
+← prev
+
+How to Rename Column Names in Python?
+Let's see how to modify a Pandas DataFrame's column titles. In this tutorial, we'll go through six different methods for changing the column names in a pandas DataFrame. Records are kept in a Pandas DataFrame, a rectangular matrix. A dataFrame makes it easy to visualize and work with data. It has both rows and columns.
+Each column contains an array of data for a particular characteristic or attribute, and each row indicates an observation of a singular event. Every Pandas Dataframe column holds homogenous records throughout a particular column. However, Dataframe rows can still have heterogeneous or homogeneous record datatypes throughout any specific row. Unlike a two-dimensional Python array, a Dataframe of pandas has marked axes.
+Ways to Renaming Columns in Python
+Using rename() Function
+Applying the rename() method is one technique to rename the columns of a Dataframe. When we want to rename a few specific columns, this approach comes in handy because we need to supply data for the columns that need to be changed. 
+Example 1: Rename a single column
+Code
+
+# Python program to change the name of a column using rename() function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the Data frame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+# Before changing the name of the column
+print("Original dataframe: \n", df_pd.columns)
+  
+df_pd.rename(columns = {'2':'Changed'}, inplace = True)
+  
+# After changing the name of the column
+print("\nAfter changing the name:\n", df_pd.columns)
+
+Output:
+Original dataframe: 
+ Index(['1', '2', '3'], dtype='object')
+
+After changing the name:
+ Index(['1', 'Changed', '3'], dtype='object')
+
+Example 2: Rename multiple columns
+Code
+
+# Python program to change the name of a column using rename() function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the Data frame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+# Before changing the name of the column
+print("Original dataframe: \n", df_pd.columns)
+  
+df_pd.rename(columns = {'1': 'Changed_1', '2':'Changed_2'}, inplace = True)
+  
+# After changing the name of the column
+print("\nAfter changing the name:\n", df_pd.columns)
+
+Output:
+Original dataframe: 
+ Index(['1', '2', '3'], dtype='object')
+
+After changing the name:
+ Index(['Changed_1', 'Changed_2', '3'], dtype='object')
+
+By Assigning a New List of Different Column Names
+The column names can also be changed by directly changing the titles of the columns by defining a list with alternative names to the dataframe column attributes. The drawback of this approach is that, although we only wish to rename some specific columns of the dataframe, we must offer new identifiers for all of them. 
+Code
+
+# Python program to change the name of a column by giving a new list of column names
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the Data frame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+# Before changing the name of the column
+print("Original dataframe: \n", df_pd.columns)
+  
+df_pd.columns = ['Changed_1', 'Changed_2', 'Changed_3']
+  
+# After changing the name of the column
+print("\nAfter changing the name:\n", df_pd.columns)
+
+Output:
+Original dataframe: 
+ Index(['1', '2', '3'], dtype='object')
+
+After changing the name:
+ Index(['Changed_1', 'Changed_2', 'Changed_3'], dtype='object')
+
+Rename Column Names using DataFrame.set_axis() Function
+In this instance, we'll change the column's name by employing the set_axis method. As an argument, we'll provide the updated column name and the axis that needs to change its name in the column.
+Code
+
+# Python program to change the name of a column using set_axis() function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the Dataframe
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+# Before changing the name of the column
+print("Original dataframe: \n", df_pd.columns)
+  
+df_pd.set_axis(['Changed_1', 'Changed_2', 'Changed_3'], axis = 'columns', inplace = True)
+  
+# After changing the name of the column
+print("\nAfter changing the name:\n", df_pd.columns)
+
+Output:
+Original dataframe: 
+ Index(['1', '2', '3'], dtype='object')
+
+After changing the name:
+ Index(['Changed_1', 'Changed_2', 'Changed_3'], dtype='object')
+
+Rename Column Names Using DataFrame.add_prefix() and DataFrame.add_suffix() Functions
+By using the add Suffix and add Prefix functions, we will change the column name in this instance. We will provide the prefix and a suffix that need to be attached to the column's initial and final names.
+Code
+
+# Python program to change the name of a column using add_axis() and add_prefix() function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the Dataframe
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+# Before changing the name of the column
+print("Original dataframe: \n", df_pd.columns)
+  
+df_pd = df_pd.add_prefix('s')
+df_pd = df_pd.add_suffix('_p')
+
+  
+# After changing the name of the column
+print("\nAfter changing the name:\n", df_pd.columns)
+
+Output:
+Original dataframe: 
+ Index(['1', '2', '3'], dtype='object')
+
+After changing the name:
+ Index(['s1_p', 's2_p', 's3_p'], dtype='object')
+
+Replace Specific Texts of Column Names Using Dataframe.columns.str.replace Function
+In this example, we'll use the replace method to change the column's name. As an argument for the column, we'll pass the original and new names.
+Code
+
+# Python program to change the name of a column using add_axis() and add_prefix() function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the Dataframe
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+# Before changing the name of the column
+print("Original dataframe: \n", df_pd.columns)
+  
+df_pd.columns = df_pd.columns.str.replace('1', 'Col_1')
+df_pd.columns = df_pd.columns.str.replace('2', 'Col_2')
+df_pd.columns = df_pd.columns.str.replace('3', 'Col_3')
+  
+# After changing the name of the column
+print("\nAfter changing the name:\n", df_pd.columns)
+
+Output:
+Original dataframe: 
+ Index(['1', '2', '3'], dtype='object')
+
+After changing the name:
+ Index(['Col_1', 'Col_2', 'Col_3'], dtype='object')
+
+
+
+Next TopicLooping Through DataFrame in Python
+
+
+
+
+← prev
+next →
+
+
+
+

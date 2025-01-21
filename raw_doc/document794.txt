@@ -1,0 +1,172 @@
+
+
+
+
+next →
+← prev
+
+Create a Table using PyQt5 in Python
+We will learn how to add and use a table in our PyQt5 application in this tutorial. A table is a row-and-column data layout that is often used in data analysis, research, and communication. QTableWidget allows us to add one or more tables to our PyQt application.
+We will use the example of wanting to display the name and city of several persons in a table in our application to further illustrate the concept. From a database, JSON file, or any other type of storage system, we may extract the data.
+Before beginning the project, a few fundamental PyQt5 requirements :
+The most efficient way to manage dependencies in Python is by utilising a virtual environment. A virtual environment is, to put it simply, a local directory that contains the libraries required for a certain project. A system-wide installation of those libraries, on the other hand, would affect all of your projects.
+One instance of QApplication must be present in every GUI programme; this is a Qt requirement. Several Qt components cannot be used until the import line has been executed. It will thus be necessary in practically every PyQt programme you write.
+Buttons, labels, windows, conversation boxes, progress bars, and other widgets are all instances of PyQt apps. Like HTML components, widgets are often nested. A window, which may also have a label, may contain a button, for example.
+One of the benefits of Qt is its support for custom styles. There are several ways you may change the way your application looks and feels.
+Along with the aforementioned, style sheets let you change how your application looks. This is Qt's rendition of CSS.
+Walking through the code :
+
+import sys
+from PyQt5.QtWidgets import *
+
+First of all, we will import all the required files into our program from the standard python library. These files include sys and QtWidgets.
+
+#Main Window
+class App(QWidget):
+    def __init__(self):
+        super().__init__()
+        # Setting the title
+        self.title = 'PyQt5 Table - Python'
+        # Setting the Position
+        self.left = 0
+        self.top = 0
+        self.width = 400
+        self.height = 250
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+
+Then, we will create a new class for our program. In that we will set the title for the window and set the geometry for the same.
+
+        # introducing a table
+        self.creatingTable()
+
+        # Adding Widgets
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.tableNew)
+        self.setLayout(self.layout)
+
+        # Displaying the window
+        self.show()
+
+    #Creating the table
+    def creatingTable(self):
+        self.tableNew = QTableWidget()
+
+        # Giving the count for the Row 
+        self.tableNew.setRowCount(4)
+
+        # Giving the count for the Column
+        self.tableNew.setColumnCount(2)
+
+        self.tableNew.setItem(0, 0, QTableWidgetItem("Cell(1,1)"))
+        self.tableNew.setItem(0, 1, QTableWidgetItem("Cell(1,2)"))
+        self.tableNew.setItem(1, 0, QTableWidgetItem("Cell(2,1)"))
+        self.tableNew.setItem(1, 1, QTableWidgetItem("Cell(2,2)"))
+        self.tableNew.setItem(2, 0, QTableWidgetItem("Cell(3,1)"))
+        self.tableNew.setItem(2, 1, QTableWidgetItem("Cell(3,2)"))
+        self.tableNew.setItem(3, 0, QTableWidgetItem("Cell(4,1)"))
+        self.tableNew.setItem(3, 1, QTableWidgetItem("Cell(4,2)"))
+
+    # Adjusting the horizontal fir of the table
+        self.tableNew.horizontalHeader().setStretchLastSection(True)
+        self.tableNew.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Stretch)
+
+Then, we will add the table widget and start to create a table. Next, we will define the rows and columns of the table and lastly, we will make the adjustments to the table.
+
+if __name__ == '__main__':
+
+    # creating the pyqt5 application    
+    base = QApplication(sys.argv)
+
+    # creating an instance of the created Window
+    window = App()
+
+    # starting the application 
+    sys.exit(base.exec_())
+
+Finally, we will create the application base, create an instance of the window and will execute the program.
+Complete code :
+
+import sys
+from PyQt5.QtWidgets import *
+                    
+
+#Main Window
+class App(QWidget):
+    def __init__(self):
+        super().__init__()
+        # Setting the title
+        self.title = 'PyQt5 Table - Python'
+        # Setting the Position
+        self.left = 0
+        self.top = 0
+        self.width = 400
+        self.height = 250
+
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+        
+        # introducing a table
+        self.creatingTable()
+
+        # Adding Widgets
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.tableNew)
+        self.setLayout(self.layout)
+
+        # Displaying the window
+        self.show()
+
+    #Creating the table
+    def creatingTable(self):
+        self.tableNew = QTableWidget()
+
+        # Giving the count for the Row 
+        self.tableNew.setRowCount(4)
+
+        # Giving the count for the Column
+        self.tableNew.setColumnCount(2)
+
+        self.tableNew.setItem(0, 0, QTableWidgetItem("Cell(1,1)"))
+        self.tableNew.setItem(0, 1, QTableWidgetItem("Cell(1,2)"))
+        self.tableNew.setItem(1, 0, QTableWidgetItem("Cell(2,1)"))
+        self.tableNew.setItem(1, 1, QTableWidgetItem("Cell(2,2)"))
+        self.tableNew.setItem(2, 0, QTableWidgetItem("Cell(3,1)"))
+        self.tableNew.setItem(2, 1, QTableWidgetItem("Cell(3,2)"))
+        self.tableNew.setItem(3, 0, QTableWidgetItem("Cell(4,1)"))
+        self.tableNew.setItem(3, 1, QTableWidgetItem("Cell(4,2)"))
+
+    # Adjusting the horizontal fir of the table
+        self.tableNew.horizontalHeader().setStretchLastSection(True)
+        self.tableNew.horizontalHeader().setSectionResizeMode(
+            QHeaderView.Stretch)
+
+if __name__ == '__main__':
+
+    # creating the pyqt5 application    
+    base = QApplication(sys.argv)
+
+    # creating an instance of the created Window
+    window = App()
+
+    # starting the application 
+    sys.exit(base.exec_())
+
+Output:
+The output of the code mentioned above is attached below in the form of a screenshot.
+
+
+
+Next TopicCreate a GUI Calendar using PyQt5 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

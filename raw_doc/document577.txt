@@ -1,0 +1,318 @@
+
+
+
+
+next →
+← prev
+
+Alarm Clock with GUI in Python
+This is not a wonder that an alarm clock has always been useful to warn us while we sleep, take a brief nap, or remind us about some important days that we might forget.
+An alarm clock is a clock that is created in order to alert us at a specified time. The primary function of these clocks is to awaken people from their night's sleep or short naps; they are sometimes used for other reminders.
+In the following tutorial, we will develop a basic Alarm Clock using the Tkinter library in the Python programming language.
+An Introduction to the Python Project
+In this Python project, we will consider using some Python libraries, namely, Tkinter and datetime. We will be using the current date and time in this project along with a feature of setting the alarm as per the current date and time found.
+Let us now start building the Alarm Clock using Tkinter.
+Building the GUI Alarm Clock
+The procedure for this Python project is divided into several steps.
+Step 1: Importing the required modules
+Step 2: Creating a function for the alarm
+Step 3: Creating the Tkinter window
+We will now understand these steps in detail.
+Importing the required modules
+Before we start building any project, the primary step is to import all the important libraries and modules that we need for the project. In this case, we will need the Tkinter library along with the datetime, time and winsound modules.
+
+Tkinter library:This library will allow us to create a window for the user in order to use the application.
+Datetime and time modules:These modules will allow us to handle dates and times and help us manipulate them whenever required.
+winsound module:This module will allow us to generate sounds for the alarm clock.
+
+Let us now consider the following snippet of code illustrating the importing of the required modules.
+File: alarmClock.py
+
+# importing the required modules
+from tkinter import *
+import datetime as dt
+import time
+import winsound as ws
+
+Explanation:
+In the above snippet of code, we have imported the required modules.
+Creating a function for the alarm
+Once the importing is done, we will move on to the next step, which includes the creation of the functions for the alarm clock.
+Let us consider the following snippet of code demonstrating the same.
+File: alarmClock.py
+
+# defining the function for the alarm clock
+def alarm(setAlarmTimer):
+    while True:
+        time.sleep(1)
+        actualTime = dt.datetime.now()
+        currentTime = actualTime.strftime("%H : %M : %S")
+        currentDate = actualTime.strftime("%d / %m / %Y")
+        the_message = "Current Time: " + str(currentTime)
+        print(the_message)
+        if currentTime == setAlarmTimer:
+            ws.PlaySound("sound.wav", ws.SND_ASYNC)
+            break
+
+def getAlarmTime():
+    alarmSetTime = f"{hour.get()} : {minute.get()} : {second.get()}"
+    alarm(alarmSetTime)
+
+Explanation:
+In the above snippet of code, we have defined a function as an alarm with a parameter as setAlarmTimer. Within this function, we have used the while loop for True. Inside this loop, we have used the sleep function of the time module to stop the execution of the program until it gets the time values entered by the user. We have then gotten the current date and time using the help of datetime.now() function of the datetime module and stored it in a variable. We have then stored the time and date into separate variables with the specific format using the strftime function. We have then printed a message representing the current time. We have then used the if conditional statement to check if the current time is equivalent to the set alarm timer and play the sound for the same using the winsound module, or else the timer continues. We have then defined another function as getAlarmTime(), which accepts the time from the user to be set for alarm and passes it to the previous function.
+Creating the Tkinter Window
+Now that we have created the function for the alarm clock, let us head onto the final step of creating the main window of the application with all the widgets and features defined.
+Let us consider the following snippet of code demonstrating the same:
+File: alarmClock.py
+
+# creating the GUI for the application
+guiWindow = Tk()
+guiWindow.title("The Alarm Clock")
+guiWindow.geometry("464x200")
+guiWindow.config(bg = "#87BDD8")
+guiWindow.resizable(width = False, height = False)
+ 
+timeFormat = Label(
+    guiWindow,
+    text = "Remember to set time in 24-hour format!",
+    fg = "white",
+    bg = "#36486B",
+    font = ("Arial", 15)
+    ).place(
+        x = 0,
+        y = 160
+        )
+ 
+add_time = Label(
+    guiWindow,
+    text = "Hour     Minute     Second",
+    font = 60,
+    fg = "white",
+    bg = "#87BDD8"
+    ).place(
+        x = 220,
+        y = 10
+        )
+
+setAlarm = Label(
+    guiWindow,
+    text = "Set Time for Alarm: ",
+    fg = "white",
+    bg = "#034F84",
+    relief = "solid",
+    font = ("Helevetica", 13, "bold")
+    ).place(
+        x = 5,
+        y = 50
+        )
+ 
+hour = StringVar()
+minute = StringVar()
+second = StringVar()
+ 
+hourTime = Entry(
+    guiWindow,
+    textvariable = hour,
+    bg = "#FEFBD8",
+    width = 4,
+    font = (20)
+    ).place(
+        x = 220,
+        y = 53
+        )
+minuteTime = Entry(
+    guiWindow,
+    textvariable = minute,
+    bg = "#FEFBD8",
+    width = 4,
+    font = (20)
+    ).place(
+        x = 297,
+        y = 53
+        )
+secondTime = Entry(
+    guiWindow,
+    textvariable = second,
+    bg = "#FEFBD8",
+    width = 4,
+    font = (20)
+    ).place(
+        x = 390,
+        y = 53
+        )
+ 
+submit = Button(
+    guiWindow,
+    text = "Set The Alarm",
+    fg = "white",
+    bg = "#82B74B",
+    width = 15,
+    command = getAlarmTime,
+    font = (20)
+    ).place(
+        x = 140,
+        y = 100
+        )
+ 
+guiWindow.mainloop()
+
+Explanation:
+We have created a GUI window using the Tk() class in the above snippet of code. We have then set the title for the window and specified the dimensions using the title() and geometry() methods. We have then used the bg attribute in the config() method and set the background color to #87BDD8. We have also fixed the window's geometry by setting width and height to False in the resizable() method. We have then defined different labels using the Label class that will display the texts on the window and provided some parameters to decorate the texts. We have then defined some variables that hold the value of Strings. We have then added three text boxes using the Entry class, where we will enter the time for the alarm and provide some parameters to decorate them. We added a button using the Button class linked to the getAlarmTime() function we created earlier and used some parameters to decorate it. At last, we have used the mainloop() method to display the window.
+The coding of the 'Alarm Clock with GUI' project is finally completed. We can now save the file and run the program to see if it works.
+To run the program, we can type the following command in the command-line shell or terminal:
+Command:
+
+$ python alarmClock.py
+
+But before we see the output, here is a complete project code.
+The Complete Project Code
+The following program file is a complete code for the 'GUI Alarm Clock' project.
+File: alarmClock.py
+
+# importing the required modules
+from tkinter import *
+import datetime as dt
+import time
+import winsound as ws
+
+# defining the function for the alarm clock
+def alarm(setAlarmTimer):
+    while True:
+        time.sleep(1)
+        actualTime = dt.datetime.now()
+        currentTime = actualTime.strftime("%H : %M : %S")
+        currentDate = actualTime.strftime("%d / %m / %Y")
+        the_message = "Current Time: " + str(currentTime)
+        print(the_message)
+        if currentTime == setAlarmTimer:
+            ws.PlaySound("sound.wav", ws.SND_ASYNC)
+            break
+
+def getAlarmTime():
+    alarmSetTime = f"{hour.get()} : {minute.get()} : {second.get()}"
+    alarm(alarmSetTime)
+
+# creating the GUI for the application
+guiWindow = Tk()
+guiWindow.title("The Alarm Clock")
+guiWindow.geometry("464x200")
+guiWindow.config(bg = "#87BDD8")
+guiWindow.resizable(width = False, height = False)
+ 
+timeFormat = Label(
+    guiWindow,
+    text = "Remember to set time in 24-hour format!",
+    fg = "white",
+    bg = "#36486B",
+    font = ("Arial", 15)
+    ).place(
+        x = 0,
+        y = 160
+        )
+ 
+add_time = Label(
+    guiWindow,
+    text = "Hour     Minute     Second",
+    font = 60,
+    fg = "white",
+    bg = "#87BDD8"
+    ).place(
+        x = 220,
+        y = 10
+        )
+
+setAlarm = Label(
+    guiWindow,
+    text = "Set Time for Alarm: ",
+    fg = "white",
+    bg = "#034F84",
+    relief = "solid",
+    font = ("Helevetica", 13, "bold")
+    ).place(
+        x = 5,
+        y = 50
+        )
+ 
+hour = StringVar()
+minute = StringVar()
+second = StringVar()
+ 
+hourTime = Entry(
+    guiWindow,
+    textvariable = hour,
+    bg = "#FEFBD8",
+    width = 4,
+    font = (20)
+    ).place(
+        x = 220,
+        y = 53
+        )
+minuteTime = Entry(
+    guiWindow,
+    textvariable = minute,
+    bg = "#FEFBD8",
+    width = 4,
+    font = (20)
+    ).place(
+        x = 297,
+        y = 53
+        )
+secondTime = Entry(
+    guiWindow,
+    textvariable = second,
+    bg = "#FEFBD8",
+    width = 4,
+    font = (20)
+    ).place(
+        x = 390,
+        y = 53
+        )
+ 
+submit = Button(
+    guiWindow,
+    text = "Set The Alarm",
+    fg = "white",
+    bg = "#82B74B",
+    width = 15,
+    command = getAlarmTime,
+    font = (20)
+    ).place(
+        x = 140,
+        y = 100
+        )
+ 
+guiWindow.mainloop()
+
+Output:
+Current Time: 16 : 23 : 46
+Current Time: 16 : 23 : 47
+Current Time: 16 : 23 : 48
+Current Time: 16 : 23 : 49
+Current Time: 16 : 23 : 50
+Current Time: 16 : 23 : 51
+Current Time: 16 : 23 : 52
+Current Time: 16 : 23 : 53
+Current Time: 16 : 23 : 54
+Current Time: 16 : 23 : 55
+Current Time: 16 : 23 : 56
+Current Time: 16 : 23 : 57
+Current Time: 16 : 23 : 58
+Current Time: 16 : 23 : 59
+Current Time: 16 : 24 : 00
+*ALARM*
+
+
+
+
+
+Next TopicRock Paper Scissors Game in Python
+
+
+
+
+← prev
+next →
+
+
+
+

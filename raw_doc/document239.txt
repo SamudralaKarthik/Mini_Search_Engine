@@ -1,0 +1,186 @@
+
+
+
+
+next →
+← prev
+
+Sentiment Analysis in Python
+In this article, we will discuss sentiment analysis in Python. This application proves again that how versatile this programming language is. But before starting sentiment analysis, let us see what is the background that all of us must be aware of-
+So, here we'll discuss-
+
+What is Natural Language Processing?
+What is Natural Language Processing Toolkit?
+Na�ve Bayes Algorithm
+Sentiment Analysis
+
+Let us start with Natural Language Processing-
+To put it in simple words we can say that computers can understand and process the human language. The objective here is to obtain useful information from the textual data. The raw data which is given as an input undergoes various stages of processing so that we perform the required operations on it.
+In the stage of data cleaning, we obtain a list of words which is called clean text. Some of the steps involved in this are tokenization, stop word removal, stemming, and vectorization (processing of converting words into numbers), and then finally we perform classification which is also known as text tagging or text categorization, here we classify our text into well-defined groups.
+So, this was all about Natural Language Processing, now let us see how the open-source tool Natural Language Processing Toolkit can help us.
+This is a platform that we use to write Python programs that can be applied for implementing all the pre-processing stages of natural language processing.
+Now, the next task is to classify our text which can be done using the Na�ve Bayes Algorithm, so let us understand how does it work?
+The principle of this supervised algorithm is based on Bayes Theorem and we use this theorem to find the conditional probability.
+The Bayes theorem is represented by the given mathematical formula-
+P(A|B) = P(B|A)*P(A)/P(B)
+P(A|B)(Posterior Probability) - Probability of occurrence of event A when event B has already occurred.
+P(B|A)(Likelihood Probability) - Probability of occurrence of event B when event A has already occurred
+P(A)(Prior)- Probability of occurrence of event A.
+P(B)(Marginal)-Probability of occurrence of event B.
+Sentiment Analysis
+After knowing the pre-requisites let's try to understand in detail that what sentiment analysis is all about and how we can implement this in Python?
+Sentiment analysis is used to detect or recognize the sentiment which is contained in the text.
+This analysis helps us to get the reference of our text which means we can understand that the content is positive, negative, or neutral.
+Looking at the current scenario, all the business tycoons need to have a lucid idea of what kind of response their product is receiving from the customers and how the changes can be incorporated based on the arising demands.
+Following are the steps involved in the process of sentiment analysis-
+
+
+Importing the dataset.
+The dataset can be obtained from the authentic resources and can be imported into our code editor using read_csv.
+
+The next crucial step is to find out the features that influence the sentiment of our objective.
+Once we draw the conclusion based on the visualization, we can move on to the next step which is creating a 'wordclouds'.
+The next step is to classify the reviews into positive and negative.
+Now we will create wordclouds for both the reviews.
+The amount of obtained wordclouds in the dataset can be understood with the help of bar graphs.
+
+The model can be built using-
+
+First, clean the data and make sure all the preprocessing stages are followed.
+The next step is to split the data frame which contains only the required features.
+Create a bag of words which means go for vectorization where text can be converted into integer matrix.
+Now we will import logistic regression which will implement regression with a categorical variable.
+Now let's split our data into independent variable and target.
+Let's take the training dataset and fit it into the model.
+Next, we can take the test dataset and make the prediction.
+The final task is to test the accuracy of our model using evaluation metrics.
+
+
+
+Let us understand this with the help of an example-
+Here we have taken some sentences in our training dataset(x_train) and values 0 and 1 in y_train where 1 denotes positive and 0 denotes negative.
+Code
+
+X_train=["JavaTpoint provides best tutorial for students",
+      "It is a great platform to start off your IT career",
+     "Concepts are explained very well",
+     "The articles have some interesting examples",
+     "Some tutorials are bad",
+    "Their content can confuse students"]
+y_train=[1,1,1,1,0,0] #1-Positive, 0 -Negative 
+X_train
+
+Output
+
+2. The next step is to import the required libraries that will help us to implement the major processes involved in natural language processing.
+Let us understand what the processes Tokenization, Stemming & Stopwords-
+
+Tokenization- It is the process in which our text data is split into smaller parts such as words and phrases.
+Stemming- We know that all the root base words can produce new words by adding prefix and suffix to them and sometimes this can change the real meaning of the root word so stemming is the process where we disintegrate these additions on our root word.
+Stopwords - In the process of stopword removal, we remove the words that are used in forming a sentence and make it sensible and easy to understand for readers. We perform this on our text to obtain the required keywords that help us to analyze the sentiment.
+
+Code
+
+from nltk.tokenize import RegexpTokenizer
+from nltk.stem.porter import PorterStemmer
+from nltk.corpus import stopwords
+import nltk
+nltk.download('stopwords')
+
+Output
+
+3. The next step is to create objects of tokenizer, stopwords, and PortStemmer.
+We want to concatenate the words so we will use regex and pass \w+ as a parameter.
+Since we are using the English language, we will specify 'english' as our parameter in stopwords.
+Code
+
+tokenizer=RegexpTokenizer(r'\w+')
+en_stopwords=set(stopwords.words('english'))
+ps=PorterStemmer()
+
+Output
+
+4. The next step is to create a function that will clean our data.
+We will convert our text into lower case and then implement tokenization.
+In the given function, we are performing tokenization and stopword removal at the same time. (token for token in tokens if token not in en_stopwords)
+The next thing is to perform stemming and then join the stemmed tokens.
+Code
+
+def getCleanedText(text):
+  text=text.lower()
+  #tokenize
+  tokens=tokenizer.tokenize(text)
+  new_tokens=[token for token in tokens if token not in en_stopwords]
+  stemmed_tokens=[ps.stem(tokens) for tokens in new_tokens]
+  clean_text=" ".join(stemmed_tokens)
+  return clean_text 
+
+Output
+
+5. Following is our x_test data which will be used for cleaning purposes.
+Code
+
+X_test=["The tutorial that was suggested to me was good", "Rest of the tutorials were bad"]
+X_test
+
+Output
+
+6. In this step, we have taken our data from X_train and X_test and cleaned it.
+Code
+
+X_clean=[getCleanedText(j) for j in X_train]
+Xt_clean=[getCleanedText(j) for j in X_test]
+
+Output
+
+7. When we want to check how our clean data looks, we can do it by typing X_clean-
+Code
+
+X_clean
+
+Output
+
+8. Before going for classification, it is important to perform vectorization to get the desired format. For that, we have to import some libraries.
+Code
+
+from sklearn.feature_extraction.text import CountVectorizer
+cv=CountVectorizer(ngram_range=(1,2))
+X_vect=cv.fit_transform(X_clean).toarray()
+X_vect
+
+Output
+
+9. Feature Names help us to know that what the values 0 and 1 represent. It can be done using-
+Code
+
+print(cv.get_feature_names())
+Xt_vect=cv.transform(Xt_clean).toarray()
+
+Output
+
+10. Now to perform text classification, we will make use of Multinomial Na�ve Bayes-
+Code
+
+from sklearn.naive_bayes import MultinomialNB
+mlb=MultinomialNB()
+mlb.fit(X_vect,y_train
+y_pred=mlb.predict(Xt_vect)
+           y_pred
+
+Output
+
+On prediction, it gives us the result in the form of array[1,0] where 1 denotes positive in our test set and 0 denotes negative.
+So, in this article, we discussed the pre-requisites for understanding Sentiment Analysis and how it can be implemented in Python.
+
+
+Next Topic#
+
+
+
+
+← prev
+next →
+
+
+
+

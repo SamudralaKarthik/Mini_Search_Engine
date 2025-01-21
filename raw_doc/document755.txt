@@ -1,0 +1,387 @@
+
+
+
+
+next →
+← prev
+
+Python IMDbPY - A library for Movies
+One of the reasons for the popularity of Python is that it comes with vast libraries used to simplify complex tasks. Python IMDB is one of them and may be helpful for movie lovers.
+Python IMDbPY library is used to retrieve and manage the data of the IMDB. If you are not familiar with the IMDB, it is an online database of information related to worldwide entertainment such as films, television programs, home videos, video games and streaming content online - including their cast, direction, production crew, and biographies. The users can review and give ratings to the movies and also find the article of the acclaimed reviewer.
+To use this library, we need to install it in the system using the below command.
+
+pip install IMDbPY
+
+Let's understand the following example to get the movie names.
+Example - Get all movies which includes "Harry" in title
+
+# importing imdb the module
+import imdb
+
+# creating instance of IMDb
+movie_obj = imdb.IMDb()
+
+# movie name
+name = "Harry"
+
+# searching the movie
+search = movie_obj .search_movie(name)
+
+# printing the result
+for i in search:
+    print(i)
+
+Output:
+Harry
+Harry
+Harry
+Bosch
+Harry Potter and the Sorcerer's Stone
+Harry Potter and the Goblet of Fire
+Harry Potter and the Deathly Hallows: Part 1
+Harry Potter and the Chamber of Secrets
+Barry
+Mrs Harris Goes to Paris
+The Quarry
+Marry Me
+Harry Wild
+Harry Potter and the Prisoner of Azkaban
+When Harry Met Sally...
+Harry Potter and the Order of the Phoenix
+Dirty Harry
+Harry Potter and the Deathly Hallows: Part 2
+Harry Potter and the Half-Blood Prince
+Harrow
+
+Let's see another example -
+Example -
+
+import imdb
+
+# creating instance of IMDb
+movie_obj = imdb.IMDb()
+
+# movie name
+name = "Pushpa"
+
+# searching the movie
+search = movie_obj .search_movie(name)
+
+# printing the result
+for i in search:
+    print(i)
+
+Output:
+Pushpa: The Rise - Part 1
+Pushpa
+Pushpa: The Rule - Part 2
+Pushpaka Vimana
+Pushpavalli
+Pushpa Impossible
+Pushpak Vimaan
+Agni Pushpam
+Gold Rush: Parker's Trail
+Pushpanjali
+Pushpaka Vimana
+Push Part 1
+Pushpaka Vimanam
+O Pushpa I Hate Tears
+Pushpadhanu
+Pushpanjali
+Panneer Pushpangal
+Push! Push!
+Hempushpa TVC
+Pushpa Ka Plan
+
+Get Movie ID from Searched Movie
+In this section, we will learn how to find the movie id from the searched movie. Movies id is a unique id assigned to each film as the movie name can be identical, but the id will be distinct. We use the search_movie() method to search movies with the same name. Let's understand the following syntax.
+Syntax -
+
+movies[0].movieID
+
+Here movies is the list of movies returned by search_movie, and movies[0] refer to the first element in the list.
+Argument: It takes no argument.
+Return: It returns a string which is Movie ID.
+Let's understand the following example -
+Example -
+
+import imdb
+
+# creating instance of IMDb
+movie_obj = imdb.IMDb()
+
+# movie name
+name = "Pushpa"
+
+# searching the movie
+search = movie_obj .search_movie(name)
+
+# printing the result
+for i in range(len(search)):
+     # getting the id
+    id = search[i].movieID
+      
+    # printing it
+    print(search[i]['title'] + " : " + id )
+
+Output:
+Pushpa: The Rise - Part 1 : 9389998
+Pushpa : 6925604
+Pushpa: The Rule - Part 2 : 16539454
+Pushpaka Vimana : 0251355
+Pushpavalli : 7675948
+Pushpa Impossible : 20872936
+Pushpak Vimaan : 8785380
+Agni Pushpam : 0280405
+Gold Rush: Parker's Trail : 6639066
+Pushpanjali : 0268555
+Pushpaka Vimana : 5762180
+Push Part 1 : 16961116
+Pushpaka Vimanam : 14244714
+O Pushpa I Hate Tears : 11261918
+Pushpadhanu : 0237623
+Pushpanjali : 0258061
+Panneer Pushpangal : 0279310
+Push! Push! : 0145418
+Hempushpa TVC : 6035774
+Pushpa Ka Plan : 11248374
+
+Let's understand the another example -
+Example - 2
+
+# importing imdb the module
+import imdb
+
+# creating instance of IMDb
+movie_obj = imdb.IMDb()
+
+# movie name
+name = "John Wick"
+
+# searching the movie
+search = movie_obj .search_movie(name)
+
+# printing the result
+for i in range(len(search)):
+     # getting the id
+    id = search[i].movieID
+      
+    # printing it
+    print(search[i]['title'] + " : " + id )
+
+Output:
+John Wick : 2911666
+The Continental : 6486762
+John Wick : 4151952
+John Wick: Chapter 4 : 10366206
+John Wick: Chapter 3 - Parabellum : 6146586
+John Wick: Chapter 2 : 4425200
+John Wick: Chapter 5 : 12844100
+John Wick: Chapter 3 - Parabellum: HBO First Look : 10275370
+John Wick Hex : 11056052
+Training 'John Wick' : 7161856
+John Wick: Don't F*#% with John Wick : 5278630
+John Wick 2 : 7043700
+John Wick : 20859452
+John Wick : 12297370
+John Wick : 5457768
+John Wick : 6512986
+John Wick : 7046010
+John Wick (2019) (Podcast Episode)  - Season 1 | Episode 14  - Al Cine con las Amikas: El Podcast : 19402404
+John Wick 3: 13764284
+John Wick : 7229466
+
+Note - The IMDbPY module is renamed as cinemagoer. The users can also use cinemagoer instead of IMDbPY. 
+Get Other Information of Movie
+Let's print the names of the director, cast, and genre of the given movie.
+Example -
+
+from imdb import Cinemagoer
+
+# create an instance of the Cinemagoer class
+ia = Cinemagoer()
+
+# get a movie
+movie = ia.get_movie('0133093')
+
+print('Movie Name: ')
+print(movie['title'])
+
+full_cast = movie['cast']
+print('Movie Cast:')
+for person in full_cast:
+    print(person['name'])
+
+print('Directors:')
+for director in movie['directors']:
+    print(director['name'])
+
+print('Genres:')
+for genre in movie['genres']:
+    print(genre)
+
+Output:
+Movie Name: 
+The Matrix
+Movie Cast:
+Keanu Reeves
+Laurence Fishburne
+Carrie-Anne Moss
+Hugo Weaving
+Gloria Foster
+Joe Pantoliano
+Marcus Chong
+Julian Arahanga
+Matt Doran
+Belinda McClory
+Anthony Ray Parker
+Paul Goddard
+Robert Taylor
+David Aston
+Marc Aden Gray
+Ada Nicodemou
+Deni Gordon
+Rowan Witt
+Eleanor Witt
+Tamara Brown
+Janaya Pender
+Adryn White
+Natalie Tjen
+Bill Young
+David O'Connor
+Jeremy Ball
+Fiona Johnson
+Harry Lawrence
+Steve Dodd
+Luke Quinton
+Lawrence Woodward
+Michael Butcher
+Bernard Ledger
+Robert Simper
+Chris Pattinson
+Nigel Harbach
+Mike Duncan
+Nash Edgerton
+Rana Morrison
+Steve Rutherford
+Cody Zacharias
+Directors:
+Lana Wachowski
+Lilly Wachowski
+Genres:
+Action
+Sci-Fi
+
+Get Top 50 Movies
+Let's understand the following example -
+Example -
+
+from imdb import Cinemagoer
+
+# create an instance of the Cinemagoer class
+ia = Cinemagoer()
+top = ia.get_top250_movies()
+for i in range(1, 51):
+    print(i, ':', top[i]['title'])
+
+Output:
+1 : The Godfather
+2 : The Dark Knight
+3 : The Godfather Part II
+4 : 12 Angry Men
+5 : Schindler's List
+6 : The Lord of the Rings: The Return of the King
+7 : Pulp Fiction
+8 : The Lord of the Rings: The Fellowship of the Ring
+9 : The Good, the Bad and the Ugly
+10 : Forrest Gump
+11 : Fight Club
+12 : Inception
+13 : The Lord of the Rings: The Two Towers
+14 : Star Wars: Episode V - The Empire Strikes Back
+15 : The Matrix
+16 : Goodfellas
+17 : One Flew Over the Cuckoo's Nest
+18 : Se7en
+19 : Seven Samurai
+20 : It's a Wonderful Life
+21 : The Silence of the Lambs
+22 : City of God
+23 : Saving Private Ryan
+24 : Life Is Beautiful
+25 : The Green Mile
+26 : Interstellar
+27 : Star Wars
+28 : Terminator 2: Judgment Day
+29 : Back to the Future
+30 : Spirited Away
+31 : Psycho
+32 : The Pianist
+33 : L�on: The Professional
+34 : Parasite
+35 : The Lion King
+36 : Gladiator
+37 : American History X
+38 : The Usual Suspects
+39 : The Departed
+40 : The Prestige
+41 : Casablanca
+42 : Whiplash
+43 : The Intouchables
+44 : Harakiri
+45 : Modern Times
+46 : Top Gun: Maverick
+47 : Grave of the Fireflies
+48 : Once Upon a Time in the West
+49 : Rear Window
+50 : Alien
+
+Same as we can get the 50 bottom movies. 
+
+from imdb import Cinemagoer
+
+# create an instance of the Cinemagoer class
+ia = Cinemagoer()
+bottom = ia.get_bottom100_movies()
+for i in range(90, 100):
+    print(i, ':', bottom[i]['title'])
+
+Output:
+90 : In the Name of the King: A Dungeon Siege Tale
+91 : The Flintstones in Viva Rock Vegas
+92 : The Avengers
+93 : The Hungover Games
+94 : Street Fighter: The Legend of Chun-Li
+95 : Stan Helsing
+96 : Speed 2: Cruise Control
+97 : The Human Centipede 2 (Full Sequence)
+98 : Ballistic: Ecks vs. Sever
+99 : Teen Wolf Too
+
+Handling Exception
+If the program throws an error, it can be caught by checking for the imdb.IMDB exception. Let's understand the following example.
+Example -
+
+from imdb import Cinemagoer, IMDbError
+
+try:
+    ia = Cinemagoer()
+    people = ia.search_person('Mel Gibson')
+except IMDbError as e:
+    print(e)
+
+Conclusion
+This tutorial included almost every important method of IMDbPY, aka Cinemagoer library. If you are a movie enthusiast working on a project requiring movie-related information, then this library will be beneficial.
+
+
+Next TopicPython Packing and Unpacking Arguments in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,226 @@
+
+
+
+
+next →
+← prev
+
+InfluxDB in Python
+While searching for monitoring the infrastructure or third-party applications, the built-in plugins of Telegraph become a great choice for us. Or we are searching at system resources such as disk and network utilization or the performance of the MySQL database.
+What if we are creating an application, nonetheless, where we like to store the data from the user in a Time Series Database? Maybe we can consider it an Internet of Things (IoT) or application based on smart home, and every user requires access to readings from, for example, their smart toothbrush. We want to store the time and duration of every session of brushing, we can send out alerts reminding the kids to brush their teeth and keep track of things such as the health of the battery, and the duration of the existing brush head has been in use.
+Collecting custom data, whether for a user-facing application or an infrastructure requirement that plugins of Telegraf do not already cover, is probably going to need writing a new block of code.
+Let us consider an example based on the smart toothbrush, where we have a base station that runs embedded Linux and communicates with the toothbrush with the help of Bluetooth. We have already written up the block of code listening to the incoming data, and it seems to be working well; now, we want to get it into InfluxDB.
+One way would be to run Telegraf together with the application and send the data over a UDP, Unix, or TCP socket, letting Telegraf handle the connection to InfluxDB and batching and writing points.
+This method is absolutely fine if all we require is the data collection; however, if we want to query and get that data for the users, we will probably need to take benefit of one of the libraries of InfluxDB available in different languages in order to handle the interaction with InfluxDB within the application itself.
+There are multiple languages out there that already have libraries of InfluxDB, many of them managed by its community. We will understand the use of the influxdb-python library.
+So, let's get started.
+Understanding the InfluxDB Python Client Library
+InfluxDB is an open-source time-series database or TSDB, designed and developed by the company named InfluxData. It is written in the Go programming language to store and retrieve the time series data in fields like operations monitoring, Internet of Things sensor data, application metrics, and real-time analytics. It also provides support to data processing from Graphite.
+The Influxdb-python library acts as a Python client interacting with InfluxDB. The library is hosted by the GitHub account of InfluxDB and maintained by a trio of community volunteers.
+Installing the library
+We can use the pip installer that is also the simplest way to install the libraries in Python. The syntax to install the influxdb library is shown below:
+Syntax:
+
+$ pip install influxdb
+
+Once the installation is completed, we can verify it by simply creating a new Python program file and typing the following snippet of code.
+Syntax:
+
+from influxdb import InfluxDBClient
+
+Now, let us save the file and try executing it. If no error is raised, the library is installed properly. However, in case of any exception, try reinstalling or consider taking help from the official documentation.
+Creating the Connection
+In the next step, we will create a new instance of the InfluxDBClient, using the information regarding the server that we have to access. We can use the following snippet of code that will replace the values of host and port with the appropriate URL/IP address and port of the host of InfluxDB. In the following case, we are running locally on the default port:
+Example:
+
+# importing the required module
+from influxdb import InfluxDBClient
+# defining the host and port
+my_Client = InfluxDBClient(host = 'localhost', port = 8086)
+
+Explanation:
+In the above snippet of code, we have imported the InfluxDBClient module from the influxdb library. We have then defined the host and port for the variable named my_Client using the InfluxDBClient() function, where we have defined the values of the parameters such as host and port, respectively.
+Some other parameters are also available to the InfluxDBClient constructor, involving username and password, which database needs to be connected, whether or not to utilize SSL, timeout, and UDP parameters.
+If we have to connect to a remote host at somedomain.com on port 8086 with username (say, anonymous) and password (say, somepass) and with the help of SSL, we could utilize the following snippet of code instead enabling SSL and SSL verification with two other parameters, ssl = True and ssl_verify = True:
+Example:
+
+# importing the required module
+from influxdb import InfluxDBClient
+# defining different entities
+my_Client = InfluxDBClient(
+    host = 'somedomain.com',
+    port = 8086,
+    username = 'anonymous',
+    password = "somepass",
+    ssl = True,
+    verify_ssl = True
+    )
+
+Explanation:
+In the above snippet of code, we have imported the InfluxDBClient module from the influxdb library. We have then used the module to define the host, port, username, password, ssl, and verify_ssl, and stored the values to the my_Client variable.
+Now, let us build a new database named mydatabase in order to the data as shown below:
+Example:
+
+# importing the required module
+from influxdb import InfluxDBClient
+# defining the host and port
+my_Client = InfluxDBClient(
+    host = 'somedomain.com',
+    port = 8086,
+    username = 'anonymous',
+    password = "somepass",
+    ssl = True,
+    verify_ssl = True
+    )
+# creating a database
+my_Client.create_database('mydatabase')
+
+Explanation:
+In the above snippet of code, we have created a new database named mydatabase using the create_database of the my_Client.
+We can check whether the database is created with the help of the get_list_database() function of the my_Client, as shown below:
+Example:
+
+# importing the required module
+from influxdb import InfluxDBClient
+# defining the host and port
+my_Client = InfluxDBClient(
+    host = 'somedomain.com',
+    port = 8086,
+    username = 'anonymous',
+    password = "somepass",
+    ssl = True,
+    verify_ssl = True
+    )
+# creating a database
+my_Client.create_database('mydatabase')
+# verifying if the database is created or not
+my_Client.get_list_database()
+
+Output:
+[{'name': 'telegraf'}, {'name': '_internal'}, {'name': 'mydatabase'}]
+
+Explanation:
+In the above snippet of code, we have used the get_list_database() function to verify whether the database is created or not. As a result, we can observe that the database named mydatabase is present along with the telegraf and _internal databases we have on the install.
+Finally, we can set the client to use this database using the following snippet of code:
+Example:
+
+# importing the required module
+from influxdb import InfluxDBClient
+# defining the host and port
+my_Client = InfluxDBClient(
+    host = 'somedomain.com',
+    port = 8086,
+    username = 'anonymous',
+    password = "somepass",
+    ssl = True,
+    verify_ssl = True
+    )
+# creating a database
+my_Client.create_database('mydatabase')
+# setting client to use specified database
+my_Client.switch_database('mydatabase')
+
+Explanation:
+In the above snippet of code, we have used the switch_database to set the client to use the specified database, i.e., mydatabase.
+Inserting the Data
+Now that we have a database to write data to and the client properly configured, it is time to add some data. We are going to utilize the write_points() method of the client to do so. This method accepts a list of points and some other parameters involving "batch size", which provides us the ability to insert data in batches as opposed to all at once. We can use this to insert a large amount of data.
+The write_points() method has a parameter known as my_points, a list of dictionaries and consists of the points that need to be written to the database. Let us create some sample data now, and insert it. First of all, let us insert three points in JSON format to a variable known as json_body, as shown in the following snippet of code:
+Example:
+
+json_body = [
+    {
+        "measurement": "brushEvents",
+        "tags": {
+            "user": "Derek",
+            "brushId": "6a89f539-71c6-490d-a28d-6c5d84c0ee2f"
+        },
+        "time": "2021-08-04T8:01:00Z",
+        "fields": {
+            "duration": 147
+        }
+    },
+    {
+        "measurement": "brushEvents",
+        "tags": {
+            "user": "Derek",
+            "brushId": "6a89f539-71c6-4xx90d-a28d-6c5d84c0ee2f"
+        },
+        "time": "2021-08-05T8:04:00Z",
+        "fields": {
+            "duration": 131
+        }
+    },
+    {
+        "measurement": "brushEvents",
+        "tags": {
+            "user": "Derek",
+            "brushId": "6a89f539-71c6-490d-a28d-6c5d84c0ee2f"
+        },
+        "time": "2021-08-06T8:02:00Z",
+        "fields": {
+            "duration": 124
+        }
+    }
+]
+
+Explanation:
+The above snippet of code indicates the "brush events" for the smart toothbrush; each one occurs around eight o'clock in the morning, is tagged with the username of the person utilizing the toothbrush and an ID of the brush itself (which helps us track the duration of using the same brush head), and has a field containing the duration of the user using the brush, in seconds.
+As we already have the database set, and the default input for the write_points() is JSON, we can invoke the method with the help of the json_body variable as the only parameter, as shown below:
+Example:
+
+my_Client.write_points(json_body)
+
+Output:
+True
+
+Explanation:
+In the above snippet of code, we have used the write_points() with the help of the json_body variable as the parameter. As a result, we get a response in terms of a Boolean value which is true, by the function if the write operation has been successful. If we create an application, we would need this data collection to be automatic, inserting points to the database each time a user tries to interact with the toothbrush.
+Querying Data
+Once we have the data in the database, we can try working with some queries in order to get it back out. We will utilize the same client object as we utilized to write data, except this time we will execute a query on InfluxDB and get back the results utilize with the query() function of the client.
+Example:
+
+my_Client.query('SELECT "duration" FROM "mydatabase"."autogen"."brushEvents" WHERE time > now() - 4d GROUP BY "user"')
+
+Explanation:
+In the above snippet of code, we have used the query() function returning a ResultSet object containing all the data of the output together with some convenience methods. Our query is requesting all the measurements in the mydatabase database, grouped by user. We can utilize the parameter called .raw in order to access the raw JSON response from InfluxDB.
+Example:
+
+results.raw
+
+Output:
+{'statement_id': 0, 'series': [{'name': 'brushEvents', 'tags': {'user': 'Derek'}, 'columns': ['time', 'duration'], 'values': [['2021-08-04T08:01:00Z', 147], ['2021-08-05T08:04:00Z', 131], ['2018-08-06T08:02:00Z', 124]]}]}
+
+Explanation:
+In the above snippet of code, we have used the raw parameter in order to access the raw JSON response from InfluxDB. In most cases, we won't have to access the JSON directly. Instead, we can utilize the get_points() method of the ResultSet to get the measurements from the request, filtering by tag or field. If we wanted to iterated through all of Derek's brushing sessions; we could get all the points that are grouped under the tag "user" with the value "Derek", utilizing the following command:
+Example:
+
+my_points = results.get_points(tags = {'user':'Derek'})
+
+Explanation:
+In the above example, the my_points variable is a Python Generator, which is a function working similarly to an Iterator; we can iterate over it utilizing a for x in y loop, as shown below:
+Example:
+
+my_points = results.get_points(tags = {'user': 'Derek'})
+for my_point in my_points:
+    print("Time: %s, Duration: %i" % (my_point['time'], my_point['duration']))
+
+Output:
+Time: 2021-08-04T08:01:00Z, Duration: 147
+Time: 2021-08-05T08:04:00Z, Duration: 131
+Time: 2021-08-06T08:02:00Z, Duration: 124
+
+Explanation:
+In the above snippet of code, we have used the for loop to print the time and duration of each brushing time of a user. Depending on the application, we might iterate through these points in order to compute the average brushing time for the user or just to verify that there has been X number of brushing events per day.
+
+
+Next TopicKafka Tutorial in Python
+
+
+
+
+← prev
+next →
+
+
+
+

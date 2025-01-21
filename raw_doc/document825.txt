@@ -1,0 +1,109 @@
+
+
+
+
+next →
+← prev
+
+AttributeError in Python
+What is an Error?
+In programming languages, if we execute some code in an invalid way, the execution of the program will be stopped with a message and this message is called an error or exception. There are certain types of errors in a programming language due to different reasons. Some of them are as follows:
+AssertionError:
+This type of error occurs when assertion conditions or statements fail in the code.
+ImportError:
+This error occurs when we import some module in the file and if that module does not exist.
+IndexError:
+It occurs when for any sequence, its index is out of the range.
+KeyError:
+This error is raised in Python when we can't find any key in the dictionary.
+NameError:
+This error can occur when we do not find any variable in the local or global scope.
+RuntimeError:
+This error will be raised when the error cannot be categorized in any type.
+IndentationError:
+When we use the wrong indentation in the Python code, then IndentationError will occur.
+SystemError:
+When there is an internal error, then SystemError will be raised by the interpreter.
+UnicodeError:
+When there is an encoding or decoding error related to Unicode and UnicodeError will be raised.
+ValueError:
+When in a function, we pass the correct argument according to the data type, but the value is not proper, then the error that occurred is called ValueError.
+ZeroDivisionError:
+As we know, in math, we cannot divide any number by zero because the result tends to infinity. So if we have written any statement regarding division by zero or modulo by zero, then the error raised will be ZeroDivisionError.
+EOFError:
+When we use the input() function to get the input from a file, and we reach at the end of the file, then this error will be raised to indicate that we have reached the end of the file, and now we cannot take any input from the file.
+This article is mainly dedicated to AttributeError.
+What is AttributeError?
+This error occurs in the program when there is a conditioning failure in the attribute assignment. For example, if we assign an integer variable some value and if we try to use any string function from that variable, then it will raise the AttributeError.
+We can understand the reason for AttributeError in Python by the following examples:
+Example 1:
+When we apply a function on a different data type which is not possible
+
+a=15
+a.append("javatpoint")
+
+Output:
+
+Explanation:
+In the above code, we have one integer variable, and we have initialized it with the value 15. Now, if we use the append function on the variable a, then it will give the AttributeError, which says that there is no attribute as append in the integer data type.
+Example2:
+There are chances of AttributeError in the wrong spelling of the attribute.
+
+string = "you will learn each coding tutorial from ".fst("Javatpoint")
+print(string)
+
+Output:
+
+Explanation:
+In the above code, we have a string attribute, and we apply the fst attribute, so there will be AttributeError that this attribute does not exist for the variable.
+Example3:
+We can get the AttributeError if we try to make a wrong reference for any class variable.
+
+class Javatpoint():
+	
+	def __init__(self):
+		self.var1 = 'This is for JavatPoint'
+		
+obj = Javatpoint()
+
+print(obj.var1)
+print(obj.var2)
+
+Output:
+
+Explanation:
+In the above code, we have a class, and there is a variable named var1. We create the object of the class, and by mistake, we reference the wrong variable var2 of that class which even does not exist, so there will definitely be an AttributeError.
+The solution to tackle the error or exception:
+In Python or in any programming language, we can use exception or error handling using try and except statements.
+Example 4:
+
+class Javatpoint():
+	
+	def __init__(self):
+		self.var1 = 'This is for javatpoint'
+
+obj = Javatpoint()
+try:
+	print(obj.var1)
+	print(obj.var2)
+	
+except AttributeError:
+	print("There is no such attribute")
+
+Output:
+
+Explanation:
+In the above code, we have a class and a variable named var1. In the try statement, we try to reference the var1 and var2. We will be able to dereference the var1, and we will print the statement for it, but we will get the AttributeError for referencing the var2. So, the program will go into except block, and we will print the statement, which is written only for the error condition.
+
+
+Next TopicMatplotlib.figure.Figure.add_subplot() in Python
+
+
+
+
+← prev
+next →
+
+
+
+

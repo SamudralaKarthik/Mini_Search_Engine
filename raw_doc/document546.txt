@@ -1,0 +1,355 @@
+
+
+
+
+next →
+← prev
+
+Functools Module in Python
+The functools module, which is included in Python's standard library, provides essential functionality for working with high-order functions (a function that returns a function or takes another function as an argument ). You can reuse or enhance the utility of your functions or callable objects without having to rewrite them using these capabilities. This simplifies the process of building reusable and maintainable code.
+The functools module has 11 functions in the current stable release, Python 3.8 series, although some of these may not be accessible or work differently in prior or later editions. They are as follows:
+
+reduce()
+lru_cache()
+partial()
+partialmethod()
+singledispatch()
+singledispatchmethod()
+cached_property()
+total_ordering()
+update_wrapper()
+wraps()
+cmp_to_key()
+
+Reduce():
+We'll start with a classic. A function and an iterable are passed to the reduce(function, sequence) function. It applies the supplied function to all members of the iterable in a cumulative manner from left to right before returning a single value.
+Simply said, it first applies the argument function to the iterable's first two items, and the value returned by this initial call becomes the function's first argument, while the third element of the iterable becomes the second argument. This method is done until the iterable has run out of tables.
+lru_cache():
+lru cache() is a decorator that wraps a function in a memoizing callable that saves up to maximize the results of a function call and returns the stored value when the function is called again with the same inputs. When an expensive or I/O bound function is called repeatedly with the same arguments, it can save time.
+It primarily employs two data structures: a dictionary to map a function's parameters to its output and a linked list to maintain track of the function's call history.
+LRU Cache stands for Least-Recently-Utilized Cache in full, and it refers to a cache that eliminates the least recently used element when the maximum number of entries is reached. If maxsize is set to None, the LRU feature is disabled, and if typed is True, the LRU feature caches arguments of various data types separately, e.g., f(3) and f(3.0) will be cached separately.
+In general, the LRU cache should only be used when previously computed values need to be reused. As a result, caching functions that produce different mutable objects on each call isn't a good idea. The positional and keyword inputs to the function must also be hashable, as a dictionary is required to cache the results.
+partial():
+Partial functions are derived functions with some input parameters that have already been assigned. If a function takes two parameters, say "a" and "b," a partial function with "a" as a prefilled argument can be built from it, and it can then be called with "b" as the only parameter. The partial() method in Functool is used to construct partial functions/objects, which is an important feature because it allows for:
+
+Replication of existing functions with some parameters already set.
+In a well-documented manner, create a newer version of an existing function.
+
+The partial function also has valuable characteristics that can be used to track partial functions and objects. These are some of them:
+
+args - Returns the preassigned positional arguments to the partial function.
+keywords - Returns the pre-assigned keyword arguments to the partial function.
+func - Returns the name of the parent function as well as its location.
+
+partialmethod():
+The partialmethod() method provides a new partial method descriptor, which is similar to partial but is intended to be used as a method specification rather than a callable method. You can think of it as a method's partial().
+singledispatch():
+Before we get into detail about this function, it's crucial to first review two key concepts:
+The first is a generic function, which is a function made up of numerous functions that all perform the same task for different types. The dispatch algorithm determines which implementation will be utilized during a call.
+The second is the Single dispatch, which is a type of generic function dispatch in which the implementation is determined by a single argument's type.
+With this in mind, the singledispatch decorator in the functool converts a basic function into a generic function whose behavior is determined by the type of its first parameter. It is used for function overloading in plain English.
+singledispatchmethod():
+It's a decorator that works in the same way as @singledispatch, but for methods instead of functions.
+cached_property():
+The cached property() decorator changes a class method into a property whose value is calculated only once and then cached as a normal attribute throughout the life of the instance, as the name suggests. Except for the caching functionality, it's comparable to @property. It's handy for attributes of instances that are normally functionally permanent but are computationally expensive.
+total_ordering():
+Given a class that defines one or more rich comparison ordering methods (equivalent to, =, >, >=, and ==), such as __lt__(), __le__(), __gt__(), __ge__(), or __eq__()). You can define a few comparison methods, and @total ordering will supply the rest based on the definitions you provide. It's critical that the class includes a __eq__() method.
+If you want to make a class that compares different numbers, for example. All of the rich comparison methods would almost certainly need to be implemented. However, because this is likely to be tiresome and unnecessary, you can just implement the __eq__ and __gt__ methods and rely on @total ordering to fill in the gaps.
+update_wrapper():
+It makes a wrapper function's metadata look like the wrapped function. In the case of partial functions, update wrapper(partial, parent) will update the partial function's documentation( doc ) and name( name ) to match the parent function's.
+wraps():
+It's just a shortcut for calling update wrapper() on the decorated function. It's the same as calling partial(update wrapper, wrapped=wrapped, assigned=assigned, updated=updated, wrapped=wrapped).
+cmp_to_key();
+It converts a key function from an old-style comparison function. Any callable that accepts two parameters, compares them and returns a negative number for less-than, zero for equality, or a positive number for greater-than is referred to as a comparison function. The operator.itemgetter() key function is an example of a callable that accepts one argument and returns another value to be used as the sort key. Tools like sorted(), min(), max(), and itertools.groupby use key functions ().
+cmp to key() is mostly used as a transition aid for Python 2 scripts with comparison functions.
+Let us look at the code:
+Code:
+
+# A sample program to understand the use case scenario of various functions which are offered by this Python module,  in this program we have written a class in which you have separate functions out of which some of the functions or the main caller functions represent the various use case scenarios of the different functions which are provided by this Python module.  these different functions are used to represent a particular use case scenario of these functions but the uses of these functions can vary according to the need or requirement of the user.  the functions which are actually called to showcase the scenario actually calling the inbuilt functions of this module that actually implements the functionality of those functions 
+
+#All the required functions are imported from the package so that we can use those functions at the later section of the code
+from functools import lru_cache, singledispatch
+from time import time
+from functools import singledispatchmethod
+from functools import reduce
+import sys
+from functools import partial
+
+# this is a sample class in which you have a number of the function representing different use case in areas of the multiple methods which are provided by this module,  each function if required prompts the user for the appropriate input and perform the respective calculations on the provided data and prints the output.
+class my_functools_class:
+
+	#  a sample constructor is written that can be used to initialize the class variable of the above-written class.
+	def __init__(self):
+		pass
+
+	#  this is the first function that explains how we can use the least recently used cache registers to actually change our sequential execution of code to parallel execution. In this function, we are calling two different functions the first function that we are calling is implemented with the inbuilt least recently used cache register functionality with the use of this inbuilt function the code execution time is reduced drastically whereas on the other hand side we are calling another function which is not using this inbuilt functionality so in the other function which we are calling the execution time will be much greater as compared to the first one. Both of these called functions are performing the operation of calculating the Fibonacci series the difference between both of these functions is that the first function is implemented with the inbuilt least recently used cache register functionality whereas, on the other hand, the second function is just a normal function.  both of these functions are also making use of recursion.  the user is asked for each of these functions for how many iterations he wants to run.  on entering the number of iterations the calculations are performed and the specific time difference is also displayed between the time taken by both of these functions.
+	def use_lru_cache(self):
+		start_time = time()
+		result = 0
+		print("For how many iterations you want to calculate::")
+		iters = int(input())
+		for i in range(iters):
+			result = result + self.calculate_with_lru_cache(i)
+		print("Function with lru_cache took {} seconds to calculate fibonacci for {} iterations.".format(
+    	    start_time-time(), iters))
+
+		start_time = time()
+		result = 0
+		for i in range(iters):
+			result = result + self.calculate_without_lru_cache(i)
+		print("Function without lru_cache took {} seconds to calculate fibonacci for {} iterations.".format(
+    	    start_time-time(), iters))
+
+
+#This is a function that is making the use of the least recently used cache resistor functionality which is provided by this Python module,  with the help of this functionality the code execution time is reduced drastically we can observe this reduction in time when printing the time taken by this function to calculate the Fibonacci series. 
+	@lru_cache(maxsize=128)
+	def calculate_with_lru_cache(self, num):
+		if num <= 1:
+			return num
+		else:
+			return(self.calculate_with_lru_cache(num-1) + self.calculate_with_lru_cache(num-2))
+
+
+# Where is on the other hand side this is a simple function that is simply making the use of recursion to calculate the Fibonacci series since there are no registers used in this function the time taken by this function to calculate the Fibonacci series is comparatively very high as compared to what we have seen in our last function.
+	def calculate_without_lru_cache(self,num):
+		if num <= 1:
+			return num
+		else:
+			return(self.calculate_without_lru_cache(num-1) + self.calculate_without_lru_cache(num-2))
+
+
+
+#  this is a simple function that prints the division of two numbers which are of integer type and the return type of the result is of float type.  the only condition for calling this function is that both the parameters that are passed as arguments to  this function must be of integer type and after performing the division on these two input parameters the result is returned back as a floating value
+	@singledispatchmethod
+	def divide_the_numbers(self,number_1:int,number_2:int)->float:
+	    return number_1/number_2
+
+#  this function is a kind of exception handling for the above Return function which actually takes the input of two strings as a number and returns a string as output the main difference between the above Return function and this function is that the input parameters of the above Return function are of integer type and the input parameters of this functions are of string type and the returning value of the above Return function is a floating value whereas in this function the returning value is also a string
+	@divide_the_numbers.register(str)
+	def _(self,number_1:str,number_2:str)->str:
+	    return f"{number_1}/{number_2}"
+
+
+# this is the caller function for the above written to functions for the division operation in this function first of all we are calling the divide the numbers  function with integer parameters so we can see that the resultant value that is received is a floating value and that is printed to the use and after calling this we are calling the same function but now this time the parameters of the same function are of string type,  on passing the string parameters as input arguments to this function we can see that  the returning value of this function has been changed to a string value and we can verify this observation by comparing the result of both the function calls with different input parameters one with integer types and other with strings
+	def use_single_dispatch(self):
+		print("calling the divide function with the integer parameters( divide_the_numbers(6/4) ), the result is :: ")
+		print(self.divide_the_numbers(6,4))
+		print("calling the divide function with the string parameters( divide_the_numbers('12'/'7') ), the result is :: ")
+		print(self.divide_the_numbers('12','7'))
+  
+
+
+
+# In this function we will see the usage of reduced functionality offered by this Python module in this function first of all the user is asked for the length of the list,  on entering the length of the list the user is asked for the elements of the list on entering all the elements of the list the user is printed with the list elements which the user has entered now we are using the reduce function to print the sum of all the elements of the entered list the resultant sum it stored in a variable and is printed to the user,  after calculating the sum of all the elements of a list next we are calculating the maximum element present in the entered list the resultant of the maximum element is stored in a variable and is printed to the user.  the point to be noted in this function is that for two different operations like the calculation of the sum of all the elements and finding the maximum element from the entered list we are using the same reduce function which is offered by the Python module just by changing the parameters to this same function we are getting different results for different operations 
+	def use_reduce(self):
+		print("Enter length of list ::")
+		lens = int(input())
+		list_obj = list()
+		for _ in range(lens):
+			list_obj.append(int(input()))
+
+		print("entered list is {}".format(list_obj))
+
+		print("Using reduce to find the sum of all the elements of the list:: ")
+		resultant_sum = reduce(lambda x,y: x+y, list_obj)
+		print("Result of the sum is {}".format(resultant_sum))
+  
+		print("Using reduce to find the maximum among all the elements of the list:: ")
+		maxer = reduce(max, list_obj)
+		print("Max element is {}".format(maxer))
+  
+
+# This is a simple function which accepts two string parameters where first parameter is occupation and the second parameter is the articles or gadgets used by that occupation,  and this function simply prints a string saying that a particular set off gadgets are used by this occupation
+	def print_occupation_and_gadgets(self,occupation,used_gadgets):
+		print("{} are used by the {}".format(used_gadgets,occupation))
+	
+
+# this is the caller function which represents a use case scenario of the partial function which is offered by this Python module,  so in this function, we are calling the above-written function which is having two string parameters,  so for calling this above-written function each time we have to pass to string variables but with the help of partial function or functionality which is offered by this Python module, we can fix one of the two input parameters which are required by this function.  in this function first of all were calling the power button function without the use of the partial function so in this case the user is asked for the occupation and the gadgets twice.  after this, we are calling the above-written function with the help of partial show with the help of partial first of all we are fixing the occupation parameter of the above-written functions,  so we are asking the user for the occupation only once and call this function is given two times by just taking the gadgets as the input device.  the main difference between needs to observe here is that during the first call we need to take input two times for both the occupation and gadgets,  whereas with the help of partial function we need to take input for the gadget twice but for occupation, only one input was good which we have fixed with the help of the partial function which is offered by this Python module. 
+	def use_of_partial(self):
+		print("Calling the function twice without the use of partial")
+		for _ in range(2):
+			print("Enter the occupation::")
+			occ = input()
+			print("Enter the gadgets used::")
+			gads = input()
+			self.print_occupation_and_gadgets(occ,gads)
+		
+		print("Calling the function twice with the use of partial")
+		print("Enter the occupation::")
+		occ = input()
+		new_caller_obj = partial(self.print_occupation_and_gadgets,occ)
+		for _ in range(2):
+			print("Enter the gadgets used::")
+			gads = input()
+			new_caller_obj(gads)
+   
+
+
+After writing the function definitions we have written the main function that is used to call all the above-written functions. An object of the above-written class is created which is used to call all the different functions written in this class.  first of all the user is printed with five options from which he can select which operation or functionality of this module he wants to test and observe,  on entering the appropriate choice the respective function is called with the help of the class object created,  similarly, this operation is performed in a recursive manner till the user wants to exit the code or there is some unhandled exception encountered.	
+def main():
+    class_obj = my_functools_class()
+    while(True):
+        print("Enter your choice according to the below-listed options::")
+        print("1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().")
+        print("2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().")
+        print("3. To use the reduce() function understand the various use-cases of the reduce().")
+        print("4. To use the partial() function and compare the usage of the functions with and without the partial().")
+        print("5. To exit from the code execution.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+ 
+        if menu_choice == 1:
+            class_obj.use_lru_cache()
+        elif menu_choice == 2:
+            class_obj.use_single_dispatch()
+        elif menu_choice == 3:
+            class_obj.use_reduce()
+        elif menu_choice == 4:
+            class_obj.use_of_partial()
+        elif menu_choice == 5:
+            sys.exit()
+ 
+        print("To move ahead with code execution enter [y] else [n]")
+        continue_or_exit = input()
+ 
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+ 
+ 
+if __name__ == '__main__':
+    main()
+
+Output:
+Enter your choice according to the below-listed options::
+1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().
+2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().
+3. To use the reduce() function understand the various use-cases of the reduce().
+4. To use the partial() function and compare the usage of the functions with and without the partial().
+5. To exit from the code execution.
+1
+For how many iterations do you want to calculate::
+33
+Function with lru_cache took -2.7494192123413086 seconds to calculate Fibonacci for 33 iterations.
+Function without lru_cache took -1.7327818870544434 seconds to calculate Fibonacci for 33 iterations.
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().
+2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().
+3. To use the reduce() function understand the various use-cases of the reduce().
+4. To use the partial() function and compare the usage of the functions with and without the partial().
+5. To exit from the code execution.
+2
+calling the divide function with the integer parameters( divide_the_numbers(6/4) ), the result is ::
+1.5
+calling the divide function with the string parameters( divide_the_numbers('12'/'7') ), the result is ::
+12/7
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().
+2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().
+3. To use the reduce() function understand the various use-cases of the reduce().
+4. To use the partial() function and compare the usage of the functions with and without the partial().
+5. To exit from the code execution.
+3
+Enter the length of the list::
+5
+100
+234
+665
+230
+874
+entered list is [100, 234, 665, 230, 874]
+Using reduce to find the sum of all the elements of the list::
+The result of the sum is 2103
+Using reduce to find the maximum among all the elements of the list::
+Max element is 874
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().
+2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().
+3. To use the reduce() function understand the various use-cases of the reduce().
+4. To use the partial() function and compare the usage of the functions with and without the partial().
+5. To exit from the code execution.
+4
+Calling the function twice without the use of partial
+Enter the occupation::
+Driver
+Enter the gadgets used::
+Cars
+Cars are used by the Driver
+Enter the occupation::
+Electrician
+Enter the gadgets used::
+Screwdriver
+Screwdrivers are used by the Electrician
+Calling the function twice with the use of partial
+Enter the occupation::
+Teacher
+Enter the gadgets used::
+Books
+Books are used by the Teacher
+Enter the gadgets used::
+Pens
+Pens are used by the Teacher
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().
+2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().
+3. To use the reduce() function understand the various use-cases of the reduce().
+4. To use the partial() function and compare the usage of the functions with and without the partial().
+5. To exit from the code execution.
+3
+Enter the length of the list::
+4
+87732
+34853
+3421
+45214
+entered list is [87732, 34853, 3421, 45214]
+Using reduce to find the sum of all the elements of the list::
+The result of the sum is 171220
+Using reduce to find the maximum among all the elements of the list::
+Max element is 87732
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To use the lru_cache() function and compare the time difference between the function with and without the lru_cache().
+2. To use the singledispatch() function and compare the time usage of the functions with and without the singledispatch().
+3. To use the reduce() function understand the various use-cases of the reduce().
+4. To use the partial() function and compare the usage of the functions with and without the partial().
+5. To exit from the code execution.
+5
+
+A sample program to understand the use case scenario of various functions which are offered by this Python module, in this program we have written a class in which you have separate functions out of which some of the functions or the main caller functions represent the various use case scenarios of the different functions which are provided by this Python module. these different functions are used to represent a particular use case scenario of these functions but the uses of these functions can vary according to the need or requirement of the user. the functions which are actually called to showcase the scenario actually calling the inbuilt functions of this module that actually implements the functionality of those functions
+Let us have a look at some of the advantages of the Functools Module in Python:
+Caching:
+Let's start with the functools module's most basic yet most powerful functions. lru cache, cache, and cached property are caching functions (and also decorators). The first is lru cache, which provides a least recently used cache of function results, or in other words, result memoization you want a bit more granular caching, you can use the typed=true argument, which caches arguments of different types individually.
+A function called cache is another caching decorator in functools. It's a simple wrapper on top of lru cache that omits the max size option, making it smaller and after it doesn't need to evict old data, it doesn't need to evict old values. You may also use cached property, which is another decorator for caching. This one is used for caching class attribute results, as you might expect. This is particularly beneficial if you have a property that is both expensive to compute and immutable. The advantage of the cached property is that it only executes on lookups, allowing us to change the attribute. The previously cached value will not be used after the attribute is updated; instead, a new value will be computed and cached. Clearing the cache is likewise possible; all we have to do is delete the attribute.
+Comparing and Ordering:
+You presumably already know that you can use __lt__, __gt__, or __eq__ to implement comparison operators like >=, or == in Python. It can be a pain to implement all of the __eq__, __lt__, __le__, __gt__, or __ge__ functions. Fortunately, the functools module offers the @total ordering decorator, which may assist us with this - all we have to do is implement __eq__ and one of the remaining methods, and the decorator will take care of the rest.
+Overloading:
+We were probably all taught that function overloading isn't feasible in Python, but it's actually quite simple to do so using two functions from the functools module: singledispatch and/or singledispatchmethod. These methods aid in the implementation of the Multiple Dispatch algorithm, which allows dynamically typed programming languages like Python to distinguish between types at runtime.
+Support for asynchronous operations:
+We all use a variety of external libraries and frameworks, and many of them have functions and interfaces that require us to pass in callback functions, such as asynchronous actions or event listeners. That's not new, but what if we also need to give in other arguments in addition to the callback function? This is where functools come in. partial is useful because it may be used to freeze some (or all) of the arguments of a function, resulting in a new object with a simpler function signature. We usually wish to iterate over lines when reading a file, but in the case of binary data, we might prefer to traverse over fixed-sized records instead. This may be accomplished by writing a partial callable that reads a defined chunk of data and passes it to iter, which generates an iterator from it. This iterator then executes the read method until the end of the file is reached, always accepting only the data indicated by the RECORD SIZE parameter. When the file's end is reached, the sentinel value (b") is returned, and the loop ends.
+Decorators:
+We've already discussed several decorators in prior parts, but not decorators for the purpose of constructing more decorators. functools.wraps are one such decorator.
+So, in this article, we have understood the Functools Module in Python.
+
+
+Next TopicPlotting Google Map using gmplot package in Python
+
+
+
+
+← prev
+next →
+
+
+
+

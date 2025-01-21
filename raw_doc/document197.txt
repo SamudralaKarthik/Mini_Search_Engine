@@ -1,0 +1,185 @@
+
+
+
+
+next →
+← prev
+
+Python heapq module
+An Introduction to Heaps and Priority Queues
+Priority Queues and Heaps are quite unpopular but astonishingly beneficial data structures. These data structures provide pretty easy to use and highly effective solutions for the problems like finding the best element in a dataset and a lot more. The heapq module of Python is the segment of its Standard Library. This module implements all the low-level heap operations and some common high-level utilization for heaps.
+The Data structure like a priority queue plays an essential role as a powerful tool in solving problems such as writing an e-mail scheduler, merging log files, or finding the shortest path on a map. As we know, Programming is full of problem optimization where the goal is to find the best element and Priority queues, and the functions in the Python heapq module can often serve as a solution for that.
+In the following tutorial, we will learn what heaps and priority queues are and how they associate with each other. We will also discover what type of problems can be resolved using a heap and how we can use the Python heapq module in order to solve these problems.
+Let us begin with understanding heaps.
+Understanding Heaps
+Heaps are the concrete data structures, while priority queues are the abstract data structures. A Concrete data structure expresses the implementation, whereas an abstract data structure governs the interface.
+We generally use heaps in order to implement priority queues. They are the most famous concrete data structure used to implement abstract data structures like priority queues.
+Concrete data structures also indicate performance guarantees. Performance guarantees ensure the relationship between the structure size and the time taken by the operations. These performance guarantees allow us to predict the time taken by the program as the input size change.
+Understanding the heapq module in Python
+As we know, the data structure 'heap' is generally utilized to represent a priority queue. We can perform this implementation using the heapq module in Python standard library. The property of heap data structure in Python is to pop the smallest heap element every time (min-heap). Whenever the data elements are popped or pushed, the heap structure is maintained. The heap[0] element also delivers the smallest data element every time.
+Let us understand some Operations on the heap:
+
+
+S. No.
+Operation or Function
+Description
+
+
+1
+heapify(iterable)
+The heapify() function is utilized for converting the iterable into a heap data structure.
+
+
+2
+heappush(heap, element)
+The heappush() function is utilized for inserting the data element specified in its parameters into a heap. The order can be adjusted to maintain the heap structure.
+
+
+3
+heappop(heap)
+The heappop() function is utilized for removing and returning the smallest data element from the heap. The order can also be adjusted to maintain the heap structure.
+
+
+4
+heappushpop(heap, element)
+The heappushpop() function is used to combine the working of both push and pop operations in a single statement that results in the increased efficiency. Once the operation is complete, the Heap order is maintained.
+
+
+5
+heapreplace(heap, element)
+The heapreplace() function is used to insert and pop data elements in a single statement; however, it differs from the function stated above. In this function, the data element is popped at first, and then the data element is pushed. Thus, the value of an element more prominent than the value of the pushed element can be returned. The heapreplace() function is used to genuinely return the smallest value in a heap regardless of the element pushed instead of the heappushpop() function.
+
+
+6
+nlargest(x, iterable, essential = fun)
+The nlargest() function is utilized for returning the most prominent elements x from the iterable determined that also satisfies the key if included.
+
+
+7
+nsmallest(x, iterable, key = fun)
+The nsmallest() function is utilized for returning the minor elements x from the iterable determined that also satisfies the key if included.
+
+
+Now, let us understand the working of these functions of the heapq module in the following sections.
+Creating a Heap
+We can create a heap by utilizing the data elements list with the help of the heapify() function. Let us consider an example to understand the working of the heapify() function, where a list of data elements is provided, and the function rearranges the data elements. It brings the smallest element to the first position.
+Example:
+
+# importing the heapq module
+import heapq
+
+# defining a list
+mylist = [14, 23, 4, 43, 34, 9, 18, 1, 25, 8]
+
+# Using the heapify() function to rearrange the data elements
+heapq.heapify(mylist)
+
+# printing the list
+print(mylist)
+
+Output:
+[1, 8, 4, 23, 14, 9, 18, 43, 25, 34]
+
+Explanation:
+In the above example, we have imported the heapq module and defined a list of data elements. We have then used the heapify() function to rearrange the data elements bring the smallest data element to the first position. At last, we have printed the list for the users. As a result, the data elements in the list are rearranged, and the smallest element has been brought to the first position.
+Now let us try inserting data elements into a heap.
+Insertion of data elements into a heap
+We can insert a data element into a heap using the heappush() function. The element inserted into the list always adds to the last index. However, we can use the heapify() function again in order to bring the newly inserted data element to the first index only if it appears to be the smallest in the value. Let us consider an example demonstrating the working of the heappush() function.
+Example:
+
+# importing the heapq module
+import heapq
+
+# defining a list
+mylist = [14, 23, 4, 43, 34, 9, 18, 1, 25, 8]
+
+# Using the heapify() function to rearrange the data elements
+heapq.heapify(mylist)
+
+# printing the list
+print(mylist)
+
+# inserting element to the list
+heapq.heappush(mylist, 20)
+
+# printing the final list
+print(mylist)
+
+Output:
+[1, 8, 4, 23, 14, 9, 18, 43, 25, 34]
+[1, 8, 4, 23, 14, 9, 18, 43, 25, 34, 20]
+
+Explanation:
+In the above example, we have again imported the heapq module and defined a list. We have then converted the list to a heap and printed the list to the user. We have then used the heappush() function to add a new element to the list and printed the final list for the user. As a result, the new data element is inserted at the last index of the list.
+Now, let us try removing the element from the heap.
+Removal of a data element from the heap
+We can remove the data element at the first index with the help of the heappop() function. Let us consider the following example to understand how the process of removing the data element is carried away.
+Example:
+
+# importing the heapq module
+import heapq
+
+# defining a list
+mylist = [14, 23, 4, 43, 34, 9, 18, 1, 25, 8]
+
+# Using the heapify() function to rearrange the data elements
+heapq.heapify(mylist)
+
+# printing the list
+print(mylist)
+
+# inserting element to the list
+heapq.heappop(mylist)
+
+# printing the final list
+print(mylist)
+
+Output:
+[1, 8, 4, 23, 14, 9, 18, 43, 25, 34]
+[4, 8, 9, 23, 14, 34, 18, 43, 25]
+
+Explanation:
+In the above example, we have again imported the heapq module, defined a list, and convert it to a heap. We have then used the heappop() function to remove the first index element from the list. As a result, the element is removed successfully.
+Now, let us understand how to replace an element in a heap
+Replacing a data element in a heap
+In order to replace a data element, we can use the heapreplace() function. This function always removes the smallest data element presenting in a heap and adds the new incoming element at some place not defined in the order.
+Let us consider an example to understand the concept of replacing an element in a heap.
+Example:
+
+# importing the heapq module
+import heapq
+
+# defining a list
+mylist = [14, 23, 4, 43, 34, 9, 18, 1, 25, 8]
+
+# Using the heapify() function to rearrange the data elements
+heapq.heapify(mylist)
+
+# printing the list
+print(mylist)
+
+# replacing element in the list
+heapq.heapreplace(mylist, 99)
+
+# printing the final list
+print(mylist)
+
+Output:
+[1, 8, 4, 23, 14, 9, 18, 43, 25, 34]
+[4, 8, 9, 23, 14, 99, 18, 43, 25, 34]
+
+Explanation:
+In the above example, we have again imported the heapq module, defined a list, and created the heap. We have then used the heapreplace() function to replace a data element in the list with the one we defined in the parameter. As a result, the smallest element is replaced successfully.
+
+
+Next TopicPython Substring
+
+
+
+
+← prev
+next →
+
+
+
+

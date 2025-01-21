@@ -1,0 +1,1017 @@
+
+
+
+
+next →
+← prev
+
+guppy/heapy in Python
+The guppy3 is a Python package that offers the user status of the current heap and objects available in a heap. This detail can support the developer with memory profiling and analysis. The guppy package consists of a sub-package named heapy. The heapy sub-package offers a list of significant methods and current heap status. When called for heap status, the guppy3 package provides a special C-nodesets object. This C-nodesets object consists of the heap status for each object available in the memory. The guppy3 package also consists of details associated with all reachable or unreachable objects available in a heap as a special type of list. It also provides details related to the number of objects, percentage of the memory occupied by the object, size in bytes, and type information. Apart from this, the guppy3 package offers a list of useful methods that allow us to access an individual element of the heap status, find the difference between heap statuses, find the size of objects in Bytes, and many other functionalities. We will understand the usage of the guppy3 package in order to gather information associated with memory usage in Python through different examples as a part of the following tutorial.
+So, let's get started.
+Understanding the guppy3 package
+The guppy3 package is a Python Programming Environment and Heap analysis toolset. This package consists of the following sub-packages:
+
+etc
+gsl
+heapy
+sets
+
+The descriptions for the above sub-packages are given below:
+1. etc - This sub-package supports modules consisting of the Glue protocol module.
+2. gsl - This sub-package contains the implementation of the Guppy Specification Language. This sub-package can be used to create documents and tests from a common source.
+3. heapy - This sub-package supports the heap analysis toolset. It can be utilized to find details associated with the objects in a heap and show the detail in different ways.
+4. sets - This sub-package supports the Bitsets and 'nodesets' implemented in the C language.
+The guppy3 package is a fork of Guppy-PE, created by Sverker Nilsson for Python 2.
+Requirements for the guppy3 package
+We should have a Python version of 3.6, 3.7, 3.8, or 3.9. The guppy3 package is CPython only; thus, PyPy and other Python implementations are not supported. We can obtain the support for Python 2 from guppy-pe by Sverker Nilsson, from which this package is forked.
+We can use the graphical browser of this package with the help of the Tkinter library. Moreover, threading is also required in order to utilize its remote monitoring feature.
+How to install the guppy3 package?
+We can install the guppy3 package either with the help of the pip installer or using conda. Both methods are shown below:
+Installation using pip
+
+$ pip install guppy3
+
+Installation using conda
+
+$ conda install -c conda-forge guppy3
+
+Verifying the Installation
+Once the module is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import guppy
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the module, and it is also recommended to refer to the official documentation of the module.
+Understanding some methods and attributes of the guppy3 package
+The following table consists of the methods and attributes available for us through the guppy3 package
+
+
+S. No.
+Methods & Attributes
+Description
+
+
+1
+guppy.hpy()
+The guppy module has a method named hpy(), which provides access to the heapy object. The heapy object also consists of a common interface for accessing heap status and performing other operations.
+
+
+2
+heap()
+This method offers a list of objects accessible from the root of the heap which are reachable and visible. We can access this method through the object we created by calling the hpy() method. The returned output is displayed in a table format. Note that it does not include objects utilized as a part of guppy.
+
+
+3
+setref()
+This method is also accessed through an object created by calling the hpy() method. It is utilized to set a reference point and all object created after this reference point will be available in the next call to the heap method for the heap status. It will not include all objects present in heap; however, only once created after the reference point.
+
+
+4
+heapu()
+We can access this method through an object created by calling the hpy() method of the guppy module. This method offers us heap status about the list of objects which are not reachable from the root of the heap. The object returned by the heapu() method is a status object (guppy.heapy.Part.Stat) which has stats about unreachable objects.
+
+
+5
+diff()
+This method is available as a segment of the heap status object, which accepts as input another heap status in order to find out the object's difference between two statuses. It returns an object of type guppy.heapy.Part.Stat.
+
+
+6
+disjoint()
+This method is accessible through a heap status object that accepts input from another heap status and returns True/False based on whether the two heap status is disjoint or not.
+
+
+7
+count
+This attribute of the heap status object is used to return an integer signifying a total number of objects available when the status was accepted.
+
+
+8
+size
+This attribute of the heap status object is used to return an integer signifying the total size of the heap when the status was accepted.
+
+
+9
+referents
+This attribute is used to return another heap status object with the only entry for objects referred to by other objects.
+
+
+10
+referrers
+This attribute is used to return another heap status object that only entries for the object referring to other objects.
+
+
+11
+stat
+This attribute is used to return the guppy.heapy.Part.Stat objects can be looped to get detail associated with the individual entry of the heap status.
+
+
+12
+dump()
+This method accepts a filename as an input to which heap status will be dumped.
+
+
+13
+load()
+This method accepts a filename as an input from which heap status will be loaded. It can be called over the object created by calling the hpy() method. It is used to return the guppy.heapy.Part.Stat object of the heap status present in the file.
+
+
+14
+bytype
+This attribute of the heap status object groups the heap status entries by the type of the object. All dict entries will be combined into one entry.
+
+
+15
+byrcs
+This attribute of the heap status object groups the heap status entries by the type of the referrers.
+
+
+16
+bymodule
+This attribute of the heap status object groups the heap status entries by the module.
+
+
+17
+bysize
+This attribute of the heap status object groups the heap status entries by the individual size of an object.
+
+
+18
+byunity
+This attribute of the heap status object groups the heap status entries by the total size.
+
+
+19
+byvia
+This attribute of the heap status object groups the heap status entries by the objects they are referred.
+
+
+20
+byidset
+This attribute of the heap status object groups the heap status entries by idset.
+
+
+21
+byid
+This attribute of the heap status object groups the heap status entries by the memory address.
+
+
+22
+iso()
+This method accepts a single object or multiple objects as an input and returns a status signifying the object size. It considers complex objects such as lists and dictionaries as one object.
+
+
+23
+idset()
+This method accepts single or multiple objects as an input and returns the status signifying the object size. It considers the complex object, such as a list dictionary, as a list of the individual object.
+
+
+Let us now consider some examples to understand the usage of the above methods and attributes of the guppy3 package for the purpose of profiling the memory usage in Python.
+Some examples based on the Python guppy3 package
+Example 1
+In the following example, we will understand the method of accessing the heap status using the guppy.hpy(), heap() and setref() methods of the guppy module.
+Code:
+
+import guppy
+from guppy import hpy
+import numpy as np
+
+the_heap = hpy()
+
+print("Heap Status At Starting : ")
+heapStatusOne = the_heap.heap()
+print("Heap Size : ", heapStatusOne.size, " bytes\n")
+print(heapStatusOne)
+
+the_heap.setref()
+
+print("\nHeap Status After Setting Reference Point : ")
+heapStatusTwo = the_heap.heap()
+print("Heap Size : ", heapStatusTwo.size, " bytes\n")
+print(heapStatusTwo)
+
+p = [n for n in range(1500)]
+q = "A"
+r = np.random.randint(1,150, (1500,))
+
+print("\nHeap Status After Creating Few Objects : ")
+heapStatusThree = the_heap.heap()
+print("Heap Size : ", heapStatusThree.size, " bytes\n")
+print(heapStatusThree)
+
+print("\nMemory Usage After Creation Of Objects : ", heapStatusThree.size - heapStatusTwo.size, " bytes")
+
+Output:
+Heap Status At Starting : 
+Heap Size :  12023800  bytes
+
+Partition of a set of 85790 objects. Total size = 12023800 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  25003  29  4135160  34   4135160  34 str
+     1  18832  22  1346584  11   5481744  46 tuple
+     2   6269   7  1107919   9   6589663  55 types.CodeType
+     3  12133  14   916798   8   7506461  62 bytes
+     4   5748   7   781728   7   8288189  69 function
+     5    863   1   734088   6   9022277  75 type
+     6    244   0   494712   4   9516989  79 dict of module
+     7    863   1   461784   4   9978773  83 dict of type
+     8   1319   2   415880   3  10394653  86 dict (no owner)
+     9    150   0   219792   2  10614445  88 set
+<282 more rows. Type e.g. '_.more' to view.>
+
+Heap Status After Setting Reference Point :
+Heap Size :  616  bytes
+
+Partition of a set of 3 objects. Total size = 616 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1  33      408  66       408  66 types.FrameType
+     1      1  33      136  22       544  88 function
+     2      1  33       72  12       616 100 builtins.weakref
+
+Heap Status After Creating Few Objects :
+Heap Size :  56632  bytes
+
+Partition of a set of 1333 objects. Total size = 56632 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0   1328 100    37184  66     37184  66 int
+     1      1   0    12728  22     49912  88 list
+     2      1   0     6104  11     56016  99 numpy.ndarray
+     3      1   0      408   1     56424 100 types.FrameType
+     4      1   0      136   0     56560 100 function
+     5      1   0       72   0     56632 100 builtins.weakref
+
+Memory Usage After Creation Of Objects :  56016  bytes
+
+Explanation:
+In the above snippet of code, we have explained the usage of the guppy.hpy(), heap() and setref() methods. We first collected the heap status at the start of the script. We have then set the reference point and retrieved the heap status again. We created some objects such as a list, string, and NumPy array of the random numbers. Once the creation of these objects is done, we have again called the heap() method to get the heap status which has the detail regarding these objects.
+The output shown above shows that it consists of the detail regarding the number of objects and the total size of the whole heap and object count, size, percentage of memory utilized by that object type, and type information. The second heap status does not show much information since nothing much has happened after setting up a reference point. The third heap status object has information regarding the objects created after setting a reference point.
+Example 2:
+In the following example, we will understand the method for accessing objects which are unreachable from the root of the heap using the heapu() method.
+Code:
+
+import guppy
+from guppy import hpy
+
+the_heap = hpy()
+
+print("GC Collectable Objects Which Are not Reachable from Root of Heap")
+
+the_stats = the_heap.heapu()
+
+print("Total Objects : ", the_stats.count)
+print("Total Size : ", the_stats.size, " Bytes")
+print("Number of Entries : ", the_stats.numrows)
+
+print("Entries : ")
+
+print("Index Count  Size  Cumulative Size         Object Name")
+for the_row in the_stats.get_rows():
+    print("%5d%5d%8d%8d%30s"% (the_row.index, the_row.count, the_row.size, the_row.cumulsize, the_row.name))
+
+print("\nFirst 5 Entries : ")
+print("Index Count  Size  Cumulative Size         Object Name")
+for the_row in the_stats.rows[:5]:
+    print("%5d%5d%8d%8d%30s"%(the_row.index, the_row.count, the_row.size, the_row.cumulsize, the_row.name))
+
+print("\nDirectly Printing Results Without Iteration")
+print(the_heap.heapu(stat = 0))
+
+print("\nMeasuring Unreachable Objects From This Reference Point Onwards")
+the_heap.setref()
+print(the_heap.heapu(stat = 0))
+
+Output:
+GC Collectable Objects Which Are not Reachable from Root of Heap
+Total Objects :  587
+Total Size :  82948  Bytes
+Number of Entries :  17
+Entries : 
+Index Count  Size  Cumulative Size         Object Name
+    0   56   29088   29088                          dict
+    1   46   18768   47856                          type
+    2  130    9360   57216   types.WrapperDescriptorType
+    3   92    4888   62104                         tuple
+    4   65    4160   66264    types.MemberDescriptorType
+    5    3    4072   70336                          list
+    6   93    3906   74242                         bytes
+    7   52    3744   77986    types.MethodDescriptorType
+    8   16    2610   80596                           str
+    9   21    1512   82108       types.BuiltinMethodType
+   10    6     384   82492    types.GetSetDescriptorType
+   11    1     160   82652                     sys.flags
+   12    2     144   82796types.ClassMethodDescriptorType
+   13    1      64   82860              types.MethodType
+   14    1      48   82908encodings.utf_8.IncrementalDecoder
+   15    1      24   82932        builtins.stderrprinter
+   16    1      16   82948                 Token.MISSING
+
+First 5 Entries :
+Index Count  Size  Cumulative Size         Object Name
+    0   56   29088   29088                          dict
+    1   46   18768   47856                          type
+    2  130    9360   57216   types.WrapperDescriptorType
+    3   92    4888   62104                         tuple
+    4   65    4160   66264    types.MemberDescriptorType
+
+Directly Printing Results Without Iteration
+Partition of a set of 725 objects. Total size = 99179 bytes.
+ Index  Count   %     Size   % Cumulative  % Type
+     0     66   9    34496  35     34496  35 dict
+     1     54   7    22032  22     56528  57 type
+     2    147  20    10584  11     67112  68 types.WrapperDescriptorType
+     3    113  16     6064   6     73176  74 tuple
+     4     74  10     5328   5     78504  79 types.MethodDescriptorType
+     5     66   9     4224   4     82728  83 types.MemberDescriptorType
+     6      3   0     4072   4     86800  88 list
+     7     93  13     3906   4     90706  91 bytes
+     8     22   3     3089   3     93795  95 str
+     9     40   6     2880   3     96675  97 types.BuiltinMethodType
+<39 more rows. Type e.g. '_.more' to view.>
+
+Measuring Unreachable Objects From This Reference Point Onwards
+Partition of a set of 725 objects. Total size = 99179 bytes.
+ Index  Count   %     Size   % Cumulative  % Type
+     0     66   9    34496  35     34496  35 dict
+     1     54   7    22032  22     56528  57 type
+     2    147  20    10584  11     67112  68 types.WrapperDescriptorType
+     3    113  16     6064   6     73176  74 tuple
+     4     74  10     5328   5     78504  79 types.MethodDescriptorType
+     5     66   9     4224   4     82728  83 types.MemberDescriptorType
+     6      3   0     4072   4     86800  88 list
+     7     93  13     3906   4     90706  91 bytes
+     8     22   3     3089   3     93795  95 str
+     9     40   6     2880   3     96675  97 types.BuiltinMethodType
+<39 more rows. Type e.g. '_.more' to view.>
+
+Explanation:
+In the above snippet of code, we have first retrieved a list of unreachable objects from the heap and then utilized different methods in order to access an individual row of status to retrieve information associated with the individual data type.
+Example 3:
+In the following example, we will understand the method of retrieving an individual entry from the whole heap status object.
+Code:
+
+import guppy
+from guppy import hpy
+import numpy as np
+
+the_heap = hpy()
+
+print("Heap Status At Starting : ")
+
+listOne = [n*n for n in range(1500)]
+listTwo = np.random.randint(1,150, (1500, 1500))
+
+heapStatusOne = the_heap.heap()
+
+print(heapStatusOne)
+
+print("\nAccessing Individual Element of Heap")
+
+print("\nFirst Element : ")
+print(heapStatusOne[0])
+
+print("\nSecond Element : ")
+print(heapStatusOne[1])
+
+print("\nThird Element : ")
+print(heapStatusOne.parts[2])
+
+def convertSize(the_size):
+    if the_size < 1024:
+        return the_size
+    elif (the_size >= 1024) and (the_size < (1024 * 1024)):
+        return "%.2f KB" %(the_size/1024)
+    elif (the_size >= (1024 * 1024)) and (the_size < (1024 * 1024 * 1024)):
+        return "%.2f MB" %(the_size/(1024 * 1024))
+    else:
+        return "%.2f GB" %(the_size/(1024 * 1024 * 1024))
+
+print("\nTotal Heap Size : ", convertSize(heapStatusOne.size), "\n")
+for n in range(15):
+    print("Size Of Object : %d - " %n, convertSize(heapStatusOne[n].size))
+
+Output:
+Heap Status At Starting : 
+Partition of a set of 87291 objects. Total size = 21079156 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0     69   0  9007150  43   9007150  43 numpy.ndarray
+     1  25008  29  4135434  20  13142584  62 str
+     2  18834  22  1346760   6  14489344  69 tuple
+     3   6270   7  1108095   5  15597439  74 types.CodeType
+     4  12135  14   916976   4  16514415  78 bytes
+     5   5748   7   781728   4  17296143  82 function
+     6    863   1   734088   3  18030231  86 type
+     7    244   0   494712   2  18524943  88 dict of module
+     8    863   1   461784   2  18986727  90 dict of type
+     9   1319   2   415880   2  19402607  92 dict (no owner)
+<282 more rows. Type e.g. '_.more' to view.>
+
+Accessing Individual Element of Heap
+
+First Element :
+Partition of a set of 69 objects. Total size = 9007150 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0     69 100  9007150 100   9007150 100 numpy.ndarray
+
+Second Element :
+Partition of a set of 25008 objects. Total size = 4135434 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     1  25008 100  4135434 100  13142584 318 str
+
+Third Element :
+Partition of a set of 18834 objects. Total size = 1346760 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     2  18834 100  1346760 100  14489344 1076 tuple
+
+Total Heap Size :  20.10 MB
+
+Size Of Object : 0 -  8.59 MB
+Size Of Object : 1 -  3.94 MB
+Size Of Object : 2 -  1.28 MB
+Size Of Object : 3 -  1.06 MB
+Size Of Object : 4 -  895.48 KB
+Size Of Object : 5 -  763.41 KB
+Size Of Object : 6 -  717.28 KB
+Size Of Object : 7 -  483.12 KB
+Size Of Object : 8 -  450.96 KB
+Size Of Object : 9 -  406.13 KB
+Size Of Object : 10 -  214.64 KB
+Size Of Object : 11 -  151.73 KB
+Size Of Object : 12 -  132.05 KB
+Size Of Object : 13 -  98.14 KB
+Size Of Object : 14 -  91.27 KB
+
+Explanation:
+We have retrieved the heap status after creating some lists in the above snippet of code. The individual object can also be accessed from the heap status object with the help of the list indexing. We have then printed different individual entries of the heap status. We have also created a simple method that accepts the size in bytes as input and returns the size in KB/MB/GB.
+Example 4:
+In the following example, we will understand how to find the difference between the two heap status to check the total number of objects created between two calls of the heap status. For this example, we will be using the diff() method and the disjoint() method.
+Code:
+
+import guppy
+from guppy import hpy
+import numpy as np
+
+the_heap = hpy()
+
+print("Heap Status At Starting : ")
+heapStatusOne = the_heap.heap()
+print("Heap Size : ", heapStatusOne.size, " bytes\n")
+print(heapStatusOne)
+
+p = [n for n in range(1500)]
+q = "B"
+r = np.random.randint(1, 150, (1500, ))
+
+print("\nHeap Status After Creating Few Objects : ")
+heapStatusTwo = the_heap.heap()
+print("Heap Size : ", heapStatusTwo.size, " bytes\n")
+print(heapStatusTwo)
+
+print("\nMemory Usage After Creation Of Objects : ", heapStatusTwo.size - heapStatusOne.size, " bytes")
+
+print("\nFinding Out Difference Between Two Heap Status : ")
+the_stats = heapStatusTwo.diff(heapStatusOne)
+
+print("Whether Two Heap Status Are Disjoint : ", heapStatusOne.disjoint(heapStatusTwo))
+print("Total Objects : ", the_stats.count)
+print("Total Size : ", the_stats.size, " Bytes")
+print("Number of Entries : ", the_stats.numrows)
+
+print("Entries : ")
+
+print("Index Count  Size  Cumulative Size         Object Name")
+for the_row in the_stats.get_rows():
+    print("%5d%5d%8d%8d%30s" % (the_row.index, the_row.count, the_row.size, the_row.cumulsize, the_row.name))
+
+Output:
+Heap Status At Starting : 
+Heap Size :  12024920  bytes
+
+Partition of a set of 85803 objects. Total size = 12024920 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  25016  29  4136028  34   4136028  34 str
+     1  18832  22  1346712  11   5482740  46 tuple
+     2   6269   7  1107919   9   6590659  55 types.CodeType
+     3  12133  14   916898   8   7507557  62 bytes
+     4   5748   7   781728   7   8289285  69 function
+     5    863   1   734088   6   9023373  75 type
+     6    244   0   494712   4   9518085  79 dict of module
+     7    863   1   461784   4   9979869  83 dict of type
+     8   1319   2   415880   3  10395749  86 dict (no owner)
+     9    150   0   219792   2  10615541  88 set
+<282 more rows. Type e.g. '_.more' to view.>
+
+Heap Status After Creating Few Objects :
+Heap Size :  12081288  bytes
+
+Partition of a set of 87135 objects. Total size = 12081288 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  25016  29  4136028  34   4136028  34 str
+     1  18832  22  1346712  11   5482740  45 tuple
+     2   6269   7  1108167   9   6590907  55 types.CodeType
+     3  12133  14   916898   8   7507805  62 bytes
+     4   5748   7   781728   6   8289533  69 function
+     5    863   1   734088   6   9023621  75 type
+     6    244   0   494712   4   9518333  79 dict of module
+     7    863   1   461784   4   9980117  83 dict of type
+     8   1319   2   415880   3  10395997  86 dict (no owner)
+     9    150   0   219792   2  10615789  88 set
+<282 more rows. Type e.g. '_.more' to view.>
+
+Memory Usage After Creation Of Objects :  56120  bytes
+
+Finding Out Difference Between Two Heap Status :
+Whether Two Heap Status Are Disjoint :  False
+Total Objects :  1332
+Total Size :  56368  Bytes
+Number of Entries :  8
+Entries :
+Index Count  Size  Cumulative Size         Object Name
+    0 1329   37216   37216                           int
+    1    1   12728   49944                          list
+    2    1    6104   56048                 numpy.ndarray
+    3    0     248   56296                types.CodeType
+    4    1      72   56368              builtins.weakref
+    5    0       0   56368          ctypes.CFunctionType
+    6    0       0   56368               ctypes._FuncPtr
+    7    0       0   56368       dict of ctypes._FuncPtr
+
+Explanation:
+In the above snippet of code, we first took heap status at the beginning. We have then created some lists of objects and string objects. Once these objects are created, we have again taken another heap status. We have then called the diff() method on the second heap status object, passing it the first heap status object in order to get the difference between two screenshots of the heap. We have then looped through the stats object and printed the difference of objects.
+Example 5:
+In the following example, we will understand the usage of some attributes like count, size, referents, referrers, and stat along with some methods like dump() and load().
+Code:
+
+import guppy
+from guppy import hpy
+import numpy as np
+
+the_heap = hpy()
+
+heapStatusOne = the_heap.heap()
+print("\nFew Important Properties/Methods of Heap Status Object(%s) : "%type(heapStatusOne))
+
+print("\nCount of Objects in Heap : ", heapStatusOne.count)
+print("\nHeap Size : ", heapStatusOne.size, " bytes")
+print("\nHeap 1st Entry : ")
+print(heapStatusOne.parts[0])
+
+print("\nSet of Objects Referred to By Any Objects : \n")
+print(heapStatusOne.referents)
+
+print("\nSet of Objects Directly Refer to Any Objects : \n")
+print(heapStatusOne.referrers)
+
+print("\nStat Object : ")
+print(heapStatusOne.stat)
+print("First 5 Entries : ")
+print("Index Count  Size  Cumulative Size         Object Name")
+for the_row in list(heapStatusOne.stat.get_rows())[:5]:
+    print("%5d%5d%8d%8d%30s" % (the_row.index, the_row.count, the_row.size, the_row.cumulsize, the_row.name))
+
+print("\nDumping Heap Status to a File : ")
+heapStatusOne.dump("guppy_heap_status.out")
+print(open("guppy_heap_status.out").readlines()[:5])
+
+loadedHeapStat = the_heap.load("guppy_heap_status.out")
+
+print("First 5 Entries From Loaded File : ")
+print("Index Count  Size  Cumulative Size         Object Name")
+for the_row in list(loadedHeapStat.get_rows())[:5]:
+    print("%5d%5d%8d%8d%30s" % (the_row.index, the_row.count, the_row.size, the_row.cumulsize, the_row.name))
+
+Output:
+Few Important Properties/Methods of Heap Status Object() :
+
+Count of Objects in Heap :  85798
+
+Heap Size :  12024638  bytes
+
+Heap 1st Entry :
+Partition of a set of 25016 objects. Total size = 4136095 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  25016 100  4136095 100   4136095 100 str
+
+Set of Objects Referred to By Any Objects :
+
+Partition of a set of 85796 objects. Total size = 12019590 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  25016  29  4136095  34   4136095  34 str
+     1  18830  22  1346552  11   5482647  46 tuple
+     2   6268   7  1107991   9   6590638  55 types.CodeType
+     3  12132  14   916913   8   7507551  62 bytes
+     4   5749   7   781864   7   8289415  69 function
+     5    863   1   734496   6   9023911  75 type
+     6    244   0   494712   4   9518623  79 dict of module
+     7    863   1   461784   4   9980407  83 dict of type
+     8   1315   2   410360   3  10390767  86 dict (no owner)
+     9    150   0   219792   2  10610559  88 set
+<282 more rows. Type e.g. '_.more' to view.>
+
+Set of Objects Directly Refer to Any Objects :
+
+Partition of a set of 44131 objects. Total size = 6711964 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  18826  43  1346712  20   1346712  20 tuple
+     1   6269  14  1108167  17   2454879  37 types.CodeType
+     2   5749  13   781864  12   3236743  48 function
+     3    864   2   735560  11   3972303  59 type
+     4    244   1   494712   7   4467015  67 dict of module
+     5    863   2   461784   7   4928799  73 dict of type
+     6    911   2   389432   6   5318231  79 dict (no owner)
+     7    136   0   216768   3   5534999  82 set
+     8   2158   5   155376   2   5690375  85 types.WrapperDescriptorType
+     9    491   1   113912   2   5804287  86 dict of function
+<241 more rows. Type e.g. '_.more' to view.>
+
+Stat Object :
+Partition of a set of 85798 objects. Total size = 12024638 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  25016  29  4136095  34   4136095  34 str
+     1  18830  22  1346552  11   5482647  46 tuple
+     2   6268   7  1107743   9   6590390  55 types.CodeType
+     3  12132  14   916913   8   7507303  62 bytes
+     4   5748   7   781728   7   8289031  69 function
+     5    863   1   734088   6   9023119  75 type
+     6    244   0   494712   4   9517831  79 dict of module
+     7    863   1   461784   4   9979615  83 dict of type
+     8   1319   2   415880   3  10395495  86 dict (no owner)
+     9    150   0   219792   2  10615287  88 set
+<282 more rows. Type e.g. '_.more' to view.>
+First 5 Entries :
+Index Count  Size  Cumulative Size         Object Name
+    025016 4136095 4136095                           str
+    118830 1346552 5482647                         tuple
+    2 6268 1107743 6590390                types.CodeType
+    312132  916913 7507303                         bytes
+    4 5748  781728 8289031                      function
+
+Dumping Heap Status to a File :
+['.loader: _load_stat\n', '.format: SetFormat\n', '.timemade: 1649769632.860880\n', '.count: 85798\n', '.size: 12024638\n']
+First 5 Entries From Loaded File : 
+Index Count  Size  Cumulative Size         Object Name
+    025016 4136095 4136095                           str
+    118830 1346552 5482647                         tuple
+    2 6268 1107743 6590390                types.CodeType
+    312132  916913 7507303                         bytes
+    4 5748  781728 8289031                      function
+
+Explanation:
+In the above snippet of code, we have explained the usage of the attributes like count, size, referents, referrers, and stat along with some methods like dump() and load().
+Example 6:
+In the following example, we will understand different attributes available through the heap status object, which allows us to group heap status entries on the basis of different attributes such as type, size, referrers, memory address, and more.
+Code:
+
+from guppy import hpy
+
+the_heap = hpy()
+heapStatusOne = the_heap.heap()
+
+print("=========== Heap Status At Starting : ============")
+print(heapStatusOne)
+
+print("\n============ Heap Status Grouped By Type : ==========")
+print(heapStatusOne.bytype)
+
+print("\n==== Heap Status Grouped By Referrers of kind(class/dict of class) : ===")
+print(heapStatusOne.byrcs)
+
+print("\n========== Heap Status Grouped By Module : ============")
+print(heapStatusOne.bymodule)
+
+print("\n========== Heap Status Grouped By Individual Size : ==============")
+print(heapStatusOne.bysize)
+
+print("\n========= Heap Status Grouped By Total Size : ============")
+print(heapStatusOne.byunity)
+
+print("\n======= Heap Status Grouped By Referred Via : =============")
+print(heapStatusOne.byvia)
+
+print("\n========= Heap Status Grouped By IDset : ============")
+print(heapStatusOne.byidset)
+
+print("\n======== Heap Status Grouped By Address : ==========")
+print(heapStatusOne.byid)
+
+Output:
+=========== Heap Status At Starting : ============
+Partition of a set of 42072 objects. Total size = 5086505 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0  12893  31  1168594  23   1168594  23 str
+     1   8414  20   582912  11   1751506  34 tuple
+     2    610   1   515280  10   2266786  45 type
+     3   2910   7   514056  10   2780842  55 types.CodeType
+     4   5565  13   396264   8   3177106  62 bytes
+     5   2669   6   362984   7   3540090  70 function
+     6    610   1   297456   6   3837546  75 dict of type
+     7    106   0   174272   3   4011818  79 dict of module
+     8     98   0   169136   3   4180954  82 set
+     9    377   1   134664   3   4315618  85 dict (no owner)
+<147 more rows. Type e.g. '_.more' to view.>
+
+============ Heap Status Grouped By Type : ==========
+Partition of a set of 42072 objects. Total size = 5086505 bytes.
+ Index  Count   %     Size   % Cumulative  % Type
+     0  12893  31  1168594  23   1168594  23 str
+     1   1766   4   736256  14   1904850  37 dict
+     2   8414  20   582912  11   2487762  49 tuple
+     3    610   1   515280  10   3003042  59 type
+     4   2910   7   514056  10   3517098  69 types.CodeType
+     5   5565  13   396264   8   3913362  77 bytes
+     6   2669   6   362984   7   4276346  84 function
+     7     98   0   169136   3   4445482  87 set
+     8   1170   3    84240   2   4529722  89 types.WrapperDescriptorType
+     9    941   2    67752   1   4597474  90 builtins.weakref
+<96 more rows. Type e.g. '_.more' to view.>
+
+==== Heap Status Grouped By Referrers of kind(class/dict of class) : ===
+Partition of a set of 42072 objects. Total size = 5087009 bytes.
+ Index  Count   %     Size   % Cumulative  % Referrers by Kind (class / dict of class)
+     0  11255  27   824572  16    824572  16 types.CodeType
+     1   5314  13   667128  13   1491700  29 function
+     2   5040  12   533219  10   2024919  40 dict of type
+     3   1972   5   410976   8   2435895  48 type
+     4   5191  12   365199   7   2801094  55 tuple
+     5   1480   4   247408   5   3048502  60 dict of module
+     6    207   0   186655   4   3235157  64 dict of module, tuple
+     7    718   2   181110   4   3416267  67 function, tuple
+     8     75   0   153856   3   3570123  70 dict of _frozen_importlib_external.FileFinder
+     9   2251   5   138361   3   3708484  73 set
+<546 more rows. Type e.g. '_.more' to view.>
+
+========== Heap Status Grouped By Module : ============
+Partition of a set of 42072 objects. Total size = 5087526 bytes.
+ Index  Count   %     Size   % Cumulative  % Module
+     0  41966 100  5079894 100   5079894 100 ~module
+     1      1   0       72   0   5079966 100 __main__
+     2      1   0       72   0   5080038 100 _abc
+     3      1   0       72   0   5080110 100 _ast
+     4      1   0       72   0   5080182 100 _bootlocale
+     5      1   0       72   0   5080254 100 _codecs
+     6      1   0       72   0   5080326 100 _collections
+     7      1   0       72   0   5080398 100 _ctypes
+     8      1   0       72   0   5080470 100 _functools
+     9      1   0       72   0   5080542 100 _heapq
+<97 more rows. Type e.g. '_.more' to view.>
+
+========== Heap Status Grouped By Individual Size : ==============
+Partition of a set of 42072 objects. Total size = 5087894 bytes.
+ Index  Count   %     Size   % Cumulative  % Individual Size
+     0   2809   7   494752  10    494752  10       176
+     1    401   1   426664   8    921416  18      1064
+     2   2734   6   371824   7   1293240  25       136
+     3   4836  11   348192   7   1641432  32        72
+     4   2709   6   173376   3   1814808  36        64
+     5   2919   7   163464   3   1978272  39        56
+     6    614   1   142448   3   2120720  42       232
+     7   2575   6   123600   2   2244320  44        48
+     8    184   0   117760   2   2362080  46       640
+     9     94   0   110544   2   2472624  49      1176
+<625 more rows. Type e.g. '_.more' to view.>
+
+========= Heap Status Grouped By Total Size : ============
+Partition of a set of 42072 objects. Total size = 5087931 bytes.
+ Index  Count   %     Size   % Cumulative  % 
+     0  42072 100  5087931 100   5087931 100 
+
+======= Heap Status Grouped By Referred Via : =============
+Partition of a set of 42072 objects. Total size = 5088145 bytes.
+ Index  Count   %     Size   % Cumulative  % Referred Via:
+     0   1359   3   506095  10    506095  10 '.__dict__'
+     1   2529   6   447756   9    953851  19 '.__code__'
+     2   2910   7   274420   5   1228271  24 '.co_code'
+     3   2230   5   180816   4   1409087  28 '.co_names'
+     4    698   2   179824   4   1588911  31 '.__doc__', '[0]'
+     5    595   1   175017   3   1763928  35 "['__doc__']"
+     6   2000   5   140714   3   1904642  37 '.__qualname__'
+     7   2264   5   139011   3   2043653  40 'list(_)[0]'
+     8   1701   4   121032   2   2164685  43 '.co_consts'
+     9   2618   6   120252   2   2284937  45 '.co_lnotab'
+<7259 more rows. Type e.g. '_.more' to view.>
+
+========= Heap Status Grouped By IDset : ============
+Partition of a set of 42072 objects. Total size = 5090746 bytes.
+ Index  Count   %     Size   % Cumulative  % by identity set
+     0      1   0    32984   1     32984   1 <1 set: 0x1df4279a2e0>
+     1      1   0    32984   1     65968   1 <1 set: 0x1df4279a4a0>
+     2      1   0     9312   0     75280   1 <1 dict (no owner): 0x1df422f3ec0*313>
+     3      1   0     9312   0     84592   2 <1 dict (no owner): 0x1df42518f40*326>
+     4      1   0     8408   0     93000   2 <1 set: 0x1df42388740>
+     5      1   0     8408   0    101408   2 <1 set: 0x1df423889e0>
+     6      1   0     8408   0    109816   2 <1 set: 0x1df42388c80>
+     7      1   0     8408   0    118224   2 <1 set: 0x1df42388e40>
+     8      1   0     8408   0    126632   2 <1 set: 0x1df4279ae40>
+     9      1   0     8408   0    135040   3 <1 set: 0x1df427b6120>
+<42062 more rows. Type e.g. '_.more' to view.>
+
+======== Heap Status Grouped By Address : ==========
+Set of 42072  objects. Total size = 5090834 bytes.
+ Index     Size   %   Cumulative  %   Brief
+     0    32984   0.6     32984   0.6 set: 0x1df4279a2e0
+     1    32984   0.6     65968   1.3 set: 0x1df4279a4a0
+     2     9312   0.2     75280   1.5 dict (no owner): 0x1df422f3ec0*320
+     3     9312   0.2     84592   1.7 dict (no owner): 0x1df42518f40*326
+     4     8408   0.2     93000   1.8 set: 0x1df42388740
+     5     8408   0.2    101408   2.0 set: 0x1df423889e0
+     6     8408   0.2    109816   2.2 set: 0x1df42388c80
+     7     8408   0.2    118224   2.3 set: 0x1df42388e40
+     8     8408   0.2    126632   2.5 set: 0x1df4279ae40
+     9     8408   0.2    135040   2.7 set: 0x1df427b6120
+<42062 more rows. Type e.g. '_.more' to view.>
+
+Explanation:
+In the above snippet of code, we have explained the usage of the attributes like bytype, byrcs, bymodule, bysize, byunity, byvia, byidset, and byid.
+Example 7:
+In the following example, we will understand the usage of two supporting methods available through the heap objects. These methods are iso() and idset().
+Code:
+
+import guppy
+from guppy import hpy
+import numpy as np
+
+the_heap = hpy()
+
+p = [n for n in range(1500000)]
+q = "P"
+r = "JAVATPOINT"
+
+print("============== ISO Method Examples ====================")
+print()
+print(the_heap.iso(p))
+print()
+print(the_heap.iso(q))
+print()
+print(the_heap.iso(r))
+print()
+print(the_heap.iso([]))
+print()
+print(the_heap.iso(""))
+
+print("\n============== IDSET Method Examples ===================")
+print()
+print(the_heap.idset(p))
+print()
+print(the_heap.idset(q))
+print()
+print(the_heap.idset(r))
+print()
+print(the_heap.idset([]))
+print()
+print(the_heap.idset(""))
+
+Output:
+============== ISO Method Examples ====================
+
+Partition of a set of 1 object. Total size = 12029656 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1 100 12029656 100  12029656 100 list
+
+Partition of a set of 1 object. Total size = 50 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1 100       50 100        50 100 str
+
+Partition of a set of 1 object. Total size = 59 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1 100       59 100        59 100 str
+
+Partition of a set of 1 object. Total size = 56 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1 100       56 100        56 100 list
+
+Partition of a set of 1 object. Total size = 49 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1 100       49 100        49 100 str
+
+============== IDSET Method Examples ===================
+
+Partition of a set of 1500000 objects. Total size = 41999996 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0 1500000 100 41999996 100  41999996 100 int
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      1 100       50 100        50 100 str
+
+Partition of a set of 8 objects. Total size = 400 bytes.
+ Index  Count   %     Size   % Cumulative  % Kind (class / dict of class)
+     0      8 100      400 100       400 100 str
+
+
+
+
+
+Explanation:
+In the above snippet of code, we have explained the usage of the iso() and idset() methods which accept single or multiple objects as input and return status specifying the object size. We can also observe the difference between the results of the two methods.
+Example 8:
+In the following example, we will understand the way of checking doc of specific methods/attributes of the objects available through guppy.
+Code:
+
+from guppy import hpy
+
+the_heap = hpy()
+
+heapStatusOne = the_heap.heap()
+
+print("============== Heap Documents ====================")
+print(the_heap.doc)
+
+print("Doc On Individual Method/Function/Class : ")
+print("\nISO Method Doc : \n")
+print(the_heap.doc.iso)
+
+print("\nRoot Class Doc : \n")
+print(the_heap.doc.Root)
+
+print("============= Heap Status Documents ================")
+print(heapStatusOne.doc)
+
+print("Doc On Individual Method/Function/Class : ")
+
+print("\nDoc on parts Property of Heap Status : \n")
+print(heapStatusOne.doc.parts)
+print("\nDoc on byrcs Property of Heap Status : \n")
+print(heapStatusOne.doc.byrcs)
+
+Output:
+============== Heap Documents ====================
+Top level interface to Heapy. Available attributes:
+Anything            Prod                Via                 iso
+Clodo               Rcs                 doc                 load
+Id                  Root                findex              monitor
+Idset               Size                heap                pb
+Module              Type                heapu               setref
+Nothing             Unity               idset               test
+Use eg: the_heap.doc. for info on .
+Doc On Individual Method/Function/Class :
+
+ISO Method Doc :
+
+iso( 0..*:node: Any+) -> IdentitySet[1]
+
+Create a set of objects based on identity.
+
+Argument
+    node: Any+
+        Any kind of objects are valid arguments.
+Note
+    This method is the same as idset[2] except for the argument.
+References
+    [0] heapy_Use.html#heapykinds.Use.iso
+    [1] heapy_UniSet.html#heapykinds.IdentitySet
+    [2] heapy_Use.html#heapykinds.Use.idset
+
+Root Class Doc :
+
+Root: RootStateType
+
+This attribute is a symbolic root containing attributes from which all
+reachable objects in the heap can be reached. It is the only value (a
+singleton) of its kind; see [1] for a description of its attributes.
+
+References
+        [0] heapy_Use.html#heapykinds.Use.Root
+        [1] heapy_RootState.html#heapykinds.RootStateType
+============= Heap Status Documents ================
+all                 byvia               get_render          pathsout
+biper               count               get_rp              prod
+brief               dictof              get_shpaths         referents
+by                  diff                imdom               referrers
+byclodo             disjoint            indisize            rp
+byid                doc                 kind                shpaths
+byidset             dominos             maprox              size
+bymodule            domisize            more                sp
+byprod              dump                nodes               stat
+byrcs               er                  owners              test_contains
+bysize              fam                 partition           theone
+bytype              get_ckc             parts
+byunity             get_examples        pathsin
+Doc On Individual Method/Function/Class :
+
+Doc on parts Property of Heap Status :
+
+An iterable object, that can be used to iterate over the 'parts' of
+self. The iteration order is determined by the sorting order the set
+has, in the table printed when partitioned.
+
+Doc on byrcs Property of Heap Status :
+
+A copy of self, but with 'Rcs' as the equivalence relation.
+
+Explanation:
+In the above snippet of code, we have accessed the document of the heap by calling the doc attribute of a heap object. It will display documentation for the whole heap object listing all the methods/attributes available through that object. We have also accessed the individual method/attribute document by calling that method attribute's name on the doc attribute. We have also accessed documentation of the heap status object.
+
+
+Next TopicMicroservices in Python | Python Microservices with gRPC
+
+
+
+
+← prev
+next →
+
+
+
+

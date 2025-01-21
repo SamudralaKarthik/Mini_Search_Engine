@@ -1,0 +1,139 @@
+
+
+
+
+next →
+← prev
+
+Create BMI Calculator using Python
+In the following tutorial, we will understand how to create a Body Mass Index (BMI) Calculator with the help of the Python programming language. But we get started creating one; let us briefly discuss what Body Mass Index (BMI) is.
+Understanding the Body Mass Index (BMI)
+BMI, short for Body Mass Index, is a measure of relative weight based on the mass and height of an individual. We generally use the Body Mass Index in order to categorize people on the basis of their height and weight. These categories are underweight, healthy, overweight, and even obesity. Moreover, it is also adopted by various countries in order to promote healthy eating.
+We can consider Body Mass Index (BMI) as a substitute for direct measurements of body fat. Besides, BMI is a low-cost and easy-to-perform method of screening for weight classes that may cause health-related problems.
+Understanding the working of BMI Calculator
+A BMI Calculator accepts the weight and height of an individual and calculates the Body Mass Index (BMI) of that person.
+For Example, if the height and weight of a person are 155 cm and 57 kg. The BMI of that person will be 23.73 (approx.), which signifies that the person is healthy.
+Body Mass Index (BMI) is a measure of body fat on the basis of height and weight, respectively.
+On the basis of the BMI of an individual, the calculator returns a statement stating the overall health of the person.
+The following table shows how the classification of BMI is done in order to identify the health status of a person.
+
+
+S. No.
+BMI
+Weight Status
+
+
+1
+Below 18.5
+Underweight
+
+
+2
+18.5 - 24.9
+Normal
+
+
+3
+25.0 - 29.9
+Overweight
+
+
+4
+30.0 and above
+Obese
+
+
+Now, let us begin coding the project.
+Creating BMI Calculator using Python
+As the first step, we will create a New Python program file and name it BMI_Calculator.py. Within this file, we will begin by creating a block of code to ask the user their height and weight. We can easily accomplish this using the input() function.
+File: BMI_Calculator.py
+
+# asking for input from the users
+the_height = float(input("Enter the height in cm: "))
+the_weight = float(input("Enter the weight in kg: "))
+
+Explanation:
+In the above snippet of code, we have defined two variables as the_height and the_weight which uses the input() function to accept input from the user. We have also included the float() function outside the input() function in order to convert the input string into the float data type so that we can perform calculations with it.
+Next, we will calculate the Body Mass Index.
+We will use the following formula in order to calculate BMI.
+
+Let us implement the above formula in the Python program.
+File: BMI_Calculator.py
+
+# defining a function for BMI
+the_BMI = the_weight / (the_height/100)**2
+
+Explanation:
+In the above snippet of code, we have defined a function for BMI using the above formula. We have divided the height by 100 to convert the centimeters into meters.
+Now, let us print the BMI.
+File: BMI_Calculator.py
+
+# printing the BMI
+print("Your Body Mass Index is", the_BMI)
+
+Explanation:
+In the above snippet of code, we have printed a statement stating BMI of the person.
+Now, we will print the statement stating the present health of the user based on their BMI. This block of code will be quite simplified for better understanding.
+We will use the if-elif-else conditions for classification.
+File: BMI_Calculator.py
+
+# using the if-elif-else conditions
+if the_BMI <= 18.5:
+    print("Oops! You are underweight.")
+elif the_BMI <= 24.9:
+    print("Awesome! You are healthy.")
+elif the_BMI <= 29.9:
+    the_print("Eee! You are overweight.")
+else:
+    print("Seesh! You are obese.")
+
+Explanation:
+In the above snippet of code, we have used the value of the variable the_BMI in the if-elif-else statement to check if the BMI of the person lies within one of the categories.
+The program will print the statement on the following basis:
+
+If BMI is less than or equal to 18.5 then the program returns the condition for underweight.
+If BMI is less than or equal to 24.9 then the program returns the condition for Healthy.
+If BMI is less than or equal to 29.9 then the program returns the condition for overweight.
+If none of the above conditions are True then the program returns the condition for obese.
+
+Hence, the program is completed.
+Let us see the complete source code for the program and output for the same.
+Source Code
+File: BMI_Calculator.py
+
+# asking for input from the users
+the_height = float(input("Enter the height in cm: "))
+the_weight = float(input("Enter the weight in kg: "))
+# defining a function for BMI
+the_BMI = the_weight / (the_height/100)**2
+# printing the BMI
+print("Your Body Mass Index is", the_BMI)
+# using the if-elif-else conditions
+if the_BMI <= 18.5:
+    print("Oops! You are underweight.")
+elif the_BMI <= 24.9:
+    print("Awesome! You are healthy.")
+elif the_BMI <= 29.9:
+    the_print("Eee! You are over weight.")
+else:
+    print("Seesh! You are obese.")
+
+Output:
+Enter the height in cm: 160
+Enter the weight in kg: 61
+Your Body Mass Index is 23.828124999999996
+Awesome! You are healthy.
+
+
+
+Next TopicString to Binary in Python
+
+
+
+
+← prev
+next →
+
+
+
+

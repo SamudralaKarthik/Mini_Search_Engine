@@ -1,0 +1,76 @@
+
+
+
+
+next →
+← prev
+
+Python MongoDB Connectivity
+To create connection between Python programming language and MongoDB database, we need to first install pymongo driver. Here, we are creating an example that connects to the database and performs basic database operations. 
+This example includes the following steps:
+1) Install Driver
+
+$ pip install pymongo
+
+
+2) Create Python File
+// connect.py
+
+from pymongo import MongoClient # import mongo client to connect
+import pprint
+# Creating instance of mongoclient
+client = MongoClient()
+# Creating database
+db = client.javatpoint
+employee = {"id": "101",
+"name": "Peter",
+"profession": "Software Engineer",
+}
+# Creating document
+employees = db.employees
+# Inserting data
+employees.insert_one(employee)
+# Fetching data
+pprint.pprint(employees.find_one())
+
+3) Execute Python Script
+This script prints the inserted record on the console. 
+
+4) Enter into Mongo Shell
+Now, enter into MongoDB database shell to see the created database and collection.
+We can use following command to enter into the database.
+
+$ mongo
+
+
+5) Check Databases
+The following command is used to show available databases.
+
+> show dbs
+
+
+6) Check Collection
+The following command is used to show available collection into the database.
+
+> show collections
+
+
+7) Access Records
+We can see the stored records in particular collection. The following command is used to show the record.
+
+> db.employees.find()
+
+
+
+
+Next TopicMongoDB Atlas
+
+
+
+
+← prev
+next →
+
+
+
+

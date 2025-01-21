@@ -1,0 +1,228 @@
+
+
+
+
+next →
+← prev
+
+Deque in Python
+The Queue is a core library that allows the users to define a list based on the FIFO (First In, First Out) principle. In contrast, the Deque in Python owns the opposite principle: LIFO (Last in, First Out) queue. In the following tutorial, we will only understand what Deque in Python is with some examples.
+So, let's get started.
+Understanding the Deque in Python
+A Deque, also known as a Double-ended queue, has the attribute of inserting and deleting data elements from either end. The deque module is a segment of the library known as collections. It contains the attributes to add and remove data elements that can be invoked directly with parameters. In order to declare a deque, we have to import the collections library first.
+Let us consider the following syntax to understand how the deque module works in Python.
+Syntax:
+
+# importing the deque module
+# from the collections library
+from collections import deque
+# declaring the deque
+list_name = deque()
+
+Explanation:
+In the above snippet of code, we have imported the deque module from the collections library and declared the deque by assigning the name of the list, i.e., list_name in the above case, to the deque() module. Here we can also observe that we do not need any class in order to implement these in-built methods. They can be implemented directly.
+Let us consider a simple example based on the deque module.
+Example:
+
+# importing the deque module
+# from the collections library
+from collections import deque
+
+# declaring the deque
+fruit_list = deque(['Apple', 'Mango', 'Peaches', 'Banana', 'Papaya'])
+
+# printing the deque
+print(fruit_list)
+
+Output:
+deque(['Apple', 'Mango', 'Peaches', 'Banana', 'Papaya'])
+
+Explanation:
+In the above example, we have imported the deque module from the collections library. We have then defined a fruit list as a deque using the deque module, specifying some of the fruit names. We have then printed the declared Deque for the users. As a result, the declared Deque containing a bunch of fruit names is printed successfully.
+Now, let us understand various Operations on Deque.
+Some Operations on Deque
+There are various Operations that can be used in Deque. Some of them are listed below with their descriptions:
+
+
+S. No.
+Operation
+Description
+
+
+1
+append()
+The append() function is utilized for the addition of the data element in its parameter to the right end of the deque.
+
+
+2
+appendleft()
+The appendleft() function is utilized for the addition of the data element in its parameter to the left end of the deque.
+
+
+3
+pop()
+The pop() function is utilized for the deletion of the data element from the right end of the deque.
+
+
+4
+popleft()
+The popleft() function is utilized for the deletion of the data element from the right end of the deque.
+
+
+5
+index(element, begin, end)
+The index() function is utilized to return the first index value specified in the parameters, start the search from begin till end index.
+
+
+6
+insert(i, x)
+The insert() function is utilized to insert the value described in the parameter 'x' at index number 'i' mentioned in parameters.
+
+
+7
+remove()
+The remove() function is utilized to remove the first occurrence of the value specified in the parameters.
+
+
+8
+count()
+The count() function is utilized to count the total number of occurrences of the value specified in the parameters.
+
+
+9
+extend(iterable)
+The extend() function is utilized to insert multiple data elements at the right end of the deque. The parameter passed is iterable.
+
+
+10
+extendleft(iterable)
+The extendleft() function is utilized to insert multiple data elements at the left end of the deque. The parameter passed is iterable. The Order is also reversed as an output of left appends.
+
+
+11
+reverse()
+The reverse() function is utilized to reverse the Order of deque data elements.
+
+
+12
+rotate()
+The rotate() function is utilized to rotate the deque by the number mentioned in parameters. If the mentioned number is a negative value, then the rotation occurs to the left. Else rotation is to the right.
+
+
+Now let us consider some examples based on the deque module.
+Example:
+
+# importing the collections library
+# for deque operations
+import collections
+
+# declaring the deque
+my_deque = collections.deque([10, 20, 30, 40, 50])
+
+# using the append() function to add 
+# data element at right end
+# inserting 60 at the end of the deque
+my_deque.append(60)
+
+# printing the resultant deque
+print( "The deque after appending at right: " )
+print( my_deque )
+
+# using the appendleft() function to add
+# data element at left end
+# inserting 70 at the starting of the deque
+my_deque.appendleft(70)
+
+# printing the resultant deque
+print( "The deque after appending at left: " )
+print( my_deque )
+
+# using the pop() function to remove
+# data element from the right end
+# removing 60 from the right end of deque
+my_deque.pop()
+
+# printing the resultant deque
+print( "The deque after removing from right: " )
+print( my_deque )
+
+# using the popleft() function to remove
+# data element from the left end
+# removing 70 from the left end of deque
+my_deque.popleft()
+
+# printing the resultant deque
+print("The deque after removing from left: " )
+print( my_deque )
+
+Output:
+The deque after appending at right: 
+deque([10, 20, 30, 40, 50, 60])
+The deque after appending at left:
+deque([70, 10, 20, 30, 40, 50, 60])
+The deque after removing from right:
+deque([70, 10, 20, 30, 40, 50])
+The deque after removing from left:
+deque([10, 20, 30, 40, 50])
+
+Explanation:
+In the above snippet of code, we have imported the collections library and declared a deque. We have then used the operations like append() and appendleft() in order to insert the some data elements to both ends of the deque and printed the modified deque for the users. Similarly, we have then used the operations such as pop() and popleft() in order to remove the data elements from both ends of the deque and printed the resultant deque for the users.
+Example:
+
+# importing the collections library
+import collections
+
+# declaring the deque
+my_deque = collections.deque(['Jan', 'Feb', 'Mar', 'Mar', 'Feb', 'April', 'Feb'])
+
+# using the index() function to print
+# the first occurrence of data element: Feb
+print( "The first occurs of 'Feb' at a position: " )
+print( my_deque.index('Feb', 2, 7) )
+
+# using the insert() function to insert
+# the data element 'Jan' at 4th position
+my_deque.insert(3,'Jan')
+
+# printing the resultant deque
+print( "The deque after inserting 'Jan' at 4th position: " )
+print( my_deque )
+
+# using the count() function to count
+# the occurrences of data element 'Feb'
+print( "The count of 'Feb' in deque: " )
+print( my_deque.count('Feb') )
+
+# using the remove() function to remove
+# the first occurrence of data element 'Mar'
+my_deque.remove('Mar')
+
+# printing the resultant deque
+print( "The deque after removing the first occurrence of 'Mar': " )
+print( my_deque )
+
+Output:
+The first occurs of 'Feb' at a position:
+4
+The deque after inserting 'Jan' at 4th position:
+deque(['Jan', 'Feb', 'Mar', 'Jan', 'Mar', 'Feb', 'April', 'Feb'])
+The count of 'Feb' in deque:
+3
+The deque after removing the first occurrence of 'Mar':
+deque(['Jan', 'Feb', 'Jan', 'Mar', 'Feb', 'April', 'Feb'])
+
+Explanation:
+In the above snippet of code, we have again imported the collections library and declared a deque. We have then used the index() operation in order to check the first occurrence of the data element 'Feb' between the index numbers 2 and 7, respectively. We have then used the insert() operation in order to insert the data element 'Jan' at the 4th position. We have then used the count() operation in order to count the occurrence of the data element 'Feb' in the deque. At last, we have used the remove() operation in order to remove the first occurrence of the data element 'Mar' from the deque and printed the resultant deque for the users.
+
+
+Next TopicDictionary Comprehension in Python
+
+
+
+
+← prev
+next →
+
+
+
+

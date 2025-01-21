@@ -1,0 +1,123 @@
+
+
+
+
+next →
+← prev
+
+Underscore (_) in Python
+In this article, we will discuss what the role of Single Underscore (_) is and Double Underscore (__).
+When the user writes code in Python, in some cases they use single Underscore (_) and in some cases they use double underscore (__).
+The following is the some of the cases where user uses underscore.
+
+If the user wants to store the value of last expression in the interpreter.
+If the user wants to declare the variable or function in the code.
+If the user wants to separate the digits of number lateral value.
+For ignoring some values.
+Underscore is also used as 'localization (l10n)' and 'Internationalization (i18n)' functions.
+
+Let's see some examples of these cases.
+Using in Interpreter
+The interpreter of Python will store the last expression value in the '_'.
+Example:
+
+print(47)
+47
+print(_)
+47
+print(_ + 13)
+60
+print(_)
+60
+print(_ - 10)
+50
+
+For Ignoring the Values
+Here, we will use Underscore (_) for ignoring the values.
+Example:
+
+A, B, C, D, _, E, F, G = (10, 20, 30, 40, 50, 60, 70, 80)
+
+Here,
+
+	A = 10
+	B = 20
+	C = 30
+	D = 40
+	E = 60
+	F = 70
+	G = 80
+
+And underscore (_) is used for ignoring value 50.
+Using Underscore (_) to Declare the Variable and Function
+Python language does not support private variables or functions, so, the users cannot force private variables and function of somethings but they can call them directly from the other modules.
+Example:
+
+using_single_underscore_
+
+The users can use the trailing underscore (_) for avoiding the conflicts with Python keywords and built-ins.
+Example:
+
+__double_leading_underscore
+
+The above double underscore (__) is used for avoiding the conflicts with attributes names between the names.
+If the users are writing the function name "__display" in the class, the name will then be modified in "_ClassName__display" form.
+Example:
+
+__double_leading_and_trailing_underscore__
+
+In some cases, users use this form as __init__.
+For Separating Digits of Number Lateral Value
+The underscore (_) can be used for separating the digits of number lateral value
+Example:
+
+decoder_base = 5_000_000
+print (decoder_base)
+
+Output:
+5000000
+
+As Localization (l10n) and International (i18n) functions
+This is just a principle and not any syntactic function. The underscore (_) is used for binding the i18n/l10n to the variable with underscore. Its concept is taken from C convention.
+Underscore Prefix with Python Variables Means?
+The names in the class, which have leading underscore (_) are for indicating to the other users that the attribute or function is intended to be private in the program.
+The users are recommended that they should use single underscore (_) for semiprivate and double underscore (__) for fully private variables.
+In the following example, we will show the difference between Single Underscore (_) and Double Underscore (__) prefixes.
+Example:
+
+class UserClass():
+     def __init__(self):
+             self.__fully_private = "JavaTpoint"
+             self.__fully_private = "to"
+             self._semi_private = "Hello"
+             self._semi_private = "Say"
+mc = UserClass()
+print(mc._semi_private)
+print(mc.__fully_private)
+
+Output:
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-10-4f3b78146b9f> in <module>
+      7 mc = UserClass()
+      8 print(mc._semi_private)
+----> 9 print(mc.__fully_private)
+
+AttributeError: 'UserClass' object has no attribute '__fully_private'
+
+In the above code, the user tried to access the fully private variables and in output, they will get the error saying that the UserClass does not have any attribute called '__fully_private'.
+Conclusion
+In this article, we have discussed the use of single underscore (_) and double underscore (__) in python with different example.
+
+
+Next TopicDifference between Set and List in Python
+
+
+
+
+← prev
+next →
+
+
+
+

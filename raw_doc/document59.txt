@@ -1,0 +1,151 @@
+
+
+
+
+next →
+← prev
+
+How to Calculate Distance between Two Points using GEOPY.
+The geopy is a Python library which helps to calculate geographical distance. In this tutorial, we will discuss different methods of how the user can calculate the distance between two places on the earth.
+First, the user has to install the geopy by using the following command:
+
+pip install geopy
+
+After successful installation, we are ready to work with the geopy library.
+Calculate Distance between Two Points
+Below are the important methods that used to calculate the distance between two points.
+Method 1: By using Geodesic Distance
+The geodesic distance is the length of the shortest path between two points on any surface of Earth. In the following example, we will show how the user can calculate the Geodesic Distance from the latitude and longitude data.
+Example:
+
+# First, import the geodesic module from the geopy library
+from geopy.distance import geodesic as GD
+  
+# Then, load the latitude and longitude data for New York & Texas
+New_York = (40.7128, 74.0060)
+Texas = (31.9686, 99.9018)
+  
+# At last, print the distance between two points calculated in kilo-metre
+print ("The distance between New York and Texas is: ", GD(New_York, Texas).km)
+
+Output:
+The distance between New York and Texas is:  2507.14797665193
+
+Method 2: By using Great Circle Distance
+The great circle distance is the shortest path between two points on the sphere. In this case, we will assume the earth is the perfect sphere. The following example shows how the user can calculate great circle distance by using longitude and latitude data of two points.
+Example:
+
+# First, import the great_circle module from the geopy library
+from geopy.distance import great_circle as GC
+  
+# Then, load the latitude and longitude data for New York & Texas
+New_York = (40.7128, 74.0060)
+Texas = (31.9686, 99.9018)
+  
+# At last, print the distance between two points calculated in kilo-metre
+print ("The distance between New York and Texas is: ", GC(New_York, Texas).km)
+
+Output:
+The distance between New York and Texas is:  2503.045970189156
+
+Method 3: By using Haversine Formula
+The orthodromic distance is used for calculating the shortest distance between two latitudes and longitudes points on the earth's surface.
+Using this method, the user needs to have the coordinates of two points (P and Q).
+First, they have to convert the values of latitude and longitude points from decimal degrees to radians and then divide the values of latitude and longitude by (180/π). The user should use the value of "π = 22/7". Then, the value of (180/π) will be "57.29577". If the user wants to calculate the distance in miles, they can use the value of the radius of Earth, that is, "3,963". And if the user wants to calculate the distance in Kilo-metre, they can use the value "6,378.80".
+Formulas:
+
+How to calculate the value of latitude in radians:
+The value of Latitude in Radian: Latitude (La1) = La1 / (180/?)
+OR
+The value of Latitude in Radian: Latitude (La1) = La1 / 57.29577
+How to calculate the value of longitude in radians:
+The value of Longitude in Radian: Longitude (Lo1) = Lo1 / (180/?)
+OR
+The value of Longitude in Radian: Longitude (Lo1) = Lo1 / 57.29577
+
+The user needs the coordinates of P point and Q points in terms of longitude and latitude, then using the above formula for converting them into radians.
+Now, calculate the distance between two points by using the following formula.
+Formula:
+For miles:
+
+Distance (D) = 3963.0 * arccos[(sin(La1) * sin(La2)) + cos(La1) * cos(La2) * cos(Lo2 - Lo1)]
+
+For kilometre:
+
+Distance (D) = 3963.0 * arccos[(sin(La1) * sin(La2)) + cos(La1) * cos(La2) * cos(Lo2 - Lo1)]
+
+Thus, the user can calculate the shortest distance between the two given points on Earth by using Haversine Formula.
+Example:
+
+from math import radians, cos, sin, asin, sqrt
+# For calculating the distance in Kilometres 
+def distance_1(La1, La2, Lo1, Lo2):
+     
+    # The math module contains the function name "radians" which is used for converting the degrees value into radians.
+    Lo1 = radians(Lo1)
+    Lo2 = radians(Lo2)
+    La1 = radians(La1)
+    La2 = radians(La2)
+      
+    # Using the "Haversine formula"
+    D_Lo = Lo2 - Lo1
+    D_La = La2 - La1
+    P = sin(D_La / 2)**2 + cos(La1) * cos(La2) * sin(D_Lo / 2)**2
+ 
+    Q = 2 * asin(sqrt(P))
+    
+    # The radius of earth in kilometres.
+    R_km = 6371
+      
+    # Then, we will calculate the result
+    return(Q * R_km)
+    
+          
+     
+# driver code
+La1 = 40.7128
+La2 = 31.9686
+Lo1 = -74.0060
+Lo2 = -99.9018
+print ("The distance between New York and Texas is: ", distance_1(La1, La2, Lo1, Lo2), "K.M")
+# For calculating the distance in Miles
+def distance_2(La1, La2, Lo1, Lo2):
+     
+    # The math module contains the function name "radians" which is used for converting the degrees value into radians.
+    Lo1 = radians(Lo1)
+    Lo2 = radians(Lo2)
+    La1 = radians(La1)
+    La2 = radians(La2)
+      
+    # Using the "Haversine formula"
+    D_Lo = Lo2 - Lo1
+    D_La = La2 - La1
+    P = sin(D_La / 2)**2 + cos(La1) * cos(La2) * sin(D_Lo / 2)**2
+ 
+    Q = 2 * asin(sqrt(P))
+    # The radius of earth in Miles.
+    R_Mi = 3963
+      
+    # Then, we will calculate the result
+    return(Q * R_Mi)
+print ("The distance between New York and Texas is: ", distance_2(La1, La2, Lo1, Lo2), "Miles")
+
+Output:
+The distance between New York and Texas is:  2503.04243426357 K.M
+The distance between New York and Texas is:  1556.985899699659 Miles
+
+Conclusion
+In this tutorial, we have discussed various methods for calculating the distance between two points on the earth's surface by using the geopy library. We have shown examples of each method.
+
+
+Next TopicGmail API in Python
+
+
+
+
+← prev
+next →
+
+
+
+

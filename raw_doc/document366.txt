@@ -1,0 +1,229 @@
+
+
+
+
+next →
+← prev
+
+Chatbot in Python
+In the past few years, chatbots in the Python programming language have become enthusiastically admired in the sectors of technology and business. These intelligent bots are so adept at imitating natural human languages and chatting with humans that companies across different industrial sectors are accepting them. From e-commerce industries to healthcare institutions, everyone appears to be leveraging this nifty utility to drive business advantages. In the following tutorial, we will understand the chatbot with the help of the Python programming language and discuss the steps to create a chatbot in Python.
+Understanding the Chatbot
+A Chatbot is an Artificial Intelligence-based software developed to interact with humans in their natural languages. These chatbots are generally converse through auditory or textual methods, and they can effortlessly mimic human languages to communicate with human beings in a human-like way. A chatbot is considered one of the best applications of natural languages processing.
+We can categorize the Chatbots into two primary variants: Rule-Based Chatbots and Self-Learning Chatbots.
+
+Rule-based Chatbots:The Rule-based approach trains a chatbot to answer questions based on a list of pre-determined rules on which it was primarily trained. These set rules can either be pretty simple or quite complex, and we can use these rule-based chatbots to handle simple queries but not process more complicated requests or queries.
+Self-learning Chatbots:Self-learning chatbots are chatbots that can learn on their own. These leverage advanced technologies such as Artificial Intelligence (AI) and Machine Learning (ML) to train themselves from behaviours and instances. Generally, these chatbots are quite smarter than rule-based bots. We can classify the Self-learning chatbots furtherly into two categories - Retrieval-based Chatbots and Generative Chatbots.
+
+Retrieval-based Chatbots:A retrieval-based chatbot works on pre-defined input patterns and sets responses. Once the question or pattern is inserted, the chatbot utilizes a heuristic approach to deliver the relevant response. The model based on retrieval is extensively utilized to design and develop goal-oriented chatbots using customized features such as the flow and tone of the bot in order to enhance the experience of the customer.
+Generative Chatbots:Unlike retrieval-based chatbots, generative chatbots are not based on pre-defined responses - they leverage seq2seq neural networks. This is constructed on the concept of machine translation, where the source code is converted from one language to another language. In the seq2seq approach, the input is changed into an output.
+
+
+The first chatbot named ELIZA was designed and developed by Joseph Weizenbaum in 1966 that could imitate the language of a psychotherapist in only 200 lines of code. But as the technology gets more advance, we have come a long way from scripted chatbots to chatbots in Python today.
+Chatbot in present Generation
+Today, we have smart Chatbots powered by Artificial Intelligence that utilize natural language processing (NLP) in order to understand the commands from humans (text and voice) and learn from experience. Chatbots have become a staple customer interaction utility for companies and brands that have an active online existence (website and social network platforms).
+With the help of Python, Chatbots are considered a nifty utility as they facilitate rapid messaging between the brand and the customer. Let us think about Microsoft's Cortana, Amazon's Alexa, and Apple's Siri. Aren't these chatbots wonderful? It becomes quite interesting to learn how to create a chatbot using the Python programming language.
+Fundamentally, the chatbot utilizing Python is designed and programmed to take in the data we provide and then analyze it using the complex algorithms for Artificial Intelligence. It then delivers us either a written response or a verbal one. Since these bots can learn from experiences and behavior, they can respond to a large variety of queries and commands.
+Although chatbot in Python has already started to rule the tech scenario at present, chatbots had handled approximately 85% of the customer-brand interactions by 2020 as per the prediction of Gartner.
+In light of the increasing popularity and adoption of chatbots in the industry, we can increase the market value by learning how to create a chatbot in Python - among the most extensively utilized programming languages globally.
+So, let's get begun!
+Understanding the ChatterBot Library
+ChatterBot is a Python library that is developed to provide automated responses to user inputs. It makes utilization of a combination of Machine Learning algorithms in order to generate multiple types of responses. This feature enables developers to construct chatbots using Python that can communicate with humans and provide relevant and appropriate responses. Moreover, the ML algorithms support the bot to improve its performance with experience.
+Another amazing feature of the ChatterBot library is its language independence. The library is developed in such a manner that makes it possible to train the bot in more than one programming language.
+Understanding the working of the ChatterBot library
+When a user inserts a particular input in the chatbot (designed on ChatterBot), the bot saves the input and the response for any future usage. This information (of gathered experiences) allows the chatbot to generate automated responses every time a new input is fed into it.
+The program picks the most appropriate response from the nearest statement that matches the input and then delivers a response from the already known choice of statements and responses. Over time, as the chatbot indulges in more communications, the precision of reply progresses.
+Creating a Chatbot using Python
+We will follow a step-by-step approach and break down the procedure of creating a Python chat.
+We will begin building a Python chatbot by importing all the required packages and modules necessary for the project. We will also initialize different variables that we want to use in it. Moreover, we will also be dealing with text data, so we have to perform data preprocessing on the dataset before designing an ML model.
+This is where tokenizing supports text data - it converts the large text dataset into smaller, readable chunks (such as words). Once this process is complete, we can go for lemmatization to transform a word into its lemma form. Then it generates a pickle file in order to store the objects of Python that are utilized to predict the responses of the bot.
+Another major section of the chatbot development procedure is developing the training and testing datasets.
+Now that we have understood the fundamental concepts of chatbot development we need in Python, let us start with the actual process!
+Preparing the Dependencies
+The initial step to create a chatbot in Python using the ChatterBot library is to install the library in the system. We can also use a new Python virtual environment for the library installation as a good practice. We can install the library using the pip installer with the help of the following command in a Command prompt or Python terminal:
+Syntax:
+
+$ pip install chatterbot
+$ pip install chatterbot_corpus
+
+We can also install the latest development version of the ChatterBot library directly from GitHub. For this, we will have to use the following command:
+Syntax:
+
+$ pip install git+git://github.com/gunthercox/ChatterBot.git@master
+
+If some of us would like to upgrade the library, we can use the following command
+Syntax:
+
+$ pip install --upgrade chatterbot_corpus
+$ pip install --upgrade chatterbot
+
+Now that the setup is ready, we can move on to the next step in order to create a chatbot using the Python programming language.
+Importing the Classes
+The second step in the Python chatbot development procedure is to import the required classes.
+Let us consider the following snippet of code to understand the same.
+File: my_chatbot.py
+
+# importing the required modules
+from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
+
+Explanation:
+In the above snippet of code, we have imported two classes - ChatBot from chatterbot and ListTrainer from chatterbot.trainers.
+Creating and Training the Chatbot
+The next step is to create a chatbot using an instance of the class "ChatBot" and train the bot in order to improve its performance. Training the bot ensures that it has enough knowledge, to begin with, particular replies to particular input statements.
+Let us consider the following snippet of code for the same.
+File: my_chatbot.py
+
+# creating a chatbot
+myBot = ChatBot(
+    name = 'Sakura',
+    read_only = True,
+    logic_adapters = [
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.BestMatch'
+        ]
+        )
+
+Explanation:
+In the above snippet of code, we have defined a variable that is an instance of the class "ChatBot". We have included various parameters within the class. The first parameter, 'name', represents the name of the Python chatbot. Another parameter called 'read_only' accepts a Boolean value that disables (TRUE) or enables (FALSE) the ability of the bot to learn after the training. We have also included another parameter named 'logic_adapters' that specifies the adapters utilized to train the chatbot.
+While the 'chatterbot.logic.MathematicalEvaluation' helps the chatbot solve mathematics problems, the ` helps it select the perfect match from the list of responses already provided.
+Since we have to provide a list of responses, we can perform it by specifying the lists of strings that we can use to train the Python chatbot and find the perfect match for a certain query. Let us consider the following example of responses we can train the chatbot using Python to learn.
+File: my_chatbot.py
+
+# training the chatbot
+small_convo = [
+    'Hi there!',
+    'Hi',
+    'How do you do?',
+    'How are you?',
+    'I\'m cool.',
+    'Always cool.',
+    'I\'m Okay',
+    'Glad to hear that.',
+    'I\'m fine',
+    'I feel awesome',
+    'Excellent, glad to hear that.',
+    'Not so good',
+    'Sorry to hear that.',
+    'What\'s your name?',
+    ' I\'m Sakura. Ask me a math question, please.'
+    ]
+
+math_convo_1 = [
+    'Pythagorean theorem',
+    'a squared plus b squared equals c squared.'
+    ]
+
+math_convo_2 = [
+    'Law of Cosines',
+    'c**2 = a**2 + b**2 - 2*a*b*cos(gamma)'
+    ]
+
+Explanation:
+In the above snippet of code, we have defined some list of responses in order to train the chatbot. We can also create and train the chatbot by simple typing an instance of "ListTrainer" and providing it with a list of strings as shown below:
+File: my_chatbot.py
+
+# using the ListTrainer class
+list_trainee = ListTrainer(myBot)
+for i in (small_convo, math_convo_1, math_convo_2):
+    list_trainee.train(i)
+
+Explanation:
+In the above snippet of code, we have created an instance of the ListTrainer class and used the for-loop to iterate through each item present in the lists of responses.
+Now, the Python chatbot is ready to communicate.
+Communicating with the Python chatbot
+We can use the get_response() function in order to interact with the Python chatbot. Let us consider the following execution of the program to understand it.
+Output:
+# starting a conversation
+>>> print(myBot.get_response("Hi, there!"))
+Hi
+>>> print(myBot.get_response("What's your name?"))
+I'm Sakura. Ask me a math question, please.
+>>> print(myBot.get_response("Do you know Pythagorean theorem"))
+a squared plus b squared equals c squared.
+>>> print(myBot.get_response("Tell me the formula of law of cosines"))
+c**2 = a**2 + b**2 - 2*a*b*cos(gamma)
+
+Explanation:
+The above execution of the program tells us that we have successfully created a chatbot in Python using the chatterbot library. However, it is also necessary to understand that the chatbot using Python might not know how to answer all the queries. Since its knowledge and training are still very limited, we have to provide it time and give more training data to train it further.
+Training the Python Chatbot using a Corpus of Data
+As we move to the final step of creating a chatbot in Python, we can utilize a present corpus of data to train the Python chatbot even further.
+Let us consider the following example of training the Python chatbot with a corpus of data given by the bot itself.
+File: my_chatbot.py
+
+from chatterbot.trainers import ChatterBotCorpusTrainer
+corpus_trainee = ChatterBotCorpusTrainer(myBot)
+corpus_trainee.train('chatterbot.corpus.english')
+
+Explanation:
+In the above snippet of code, we have imported the ChatterBotCorpusTrainer class from the chatterbot.trainers module. We created an instance of the class for the chatbot and set the training language to English.
+Moreover, from the last statement, we can observe that the ChatterBot library provides this functionality in multiple languages. Thus, we can also specify a subset of a corpus in a language we would prefer. Hence, our chatbot in Python has been created successfully.
+A complete code for the Python chatbot project is shown below.
+Complete Project Code
+File: my_chatbot.py
+
+# importing the required modules
+from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer
+
+# creating a chatbot
+myBot = ChatBot(
+    name = 'Sakura',
+    read_only = True,
+    logic_adapters = [
+        'chatterbot.logic.MathematicalEvaluation',
+        'chatterbot.logic.BestMatch'
+        ]
+        )
+
+# training the chatbot
+small_convo = [
+    'Hi there!',
+    'Hi',
+    'How do you do?',
+    'How are you?',
+    'I\'m cool.',
+    'Always cool.',
+    'I\'m Okay',
+    'Glad to hear that.',
+    'I\'m fine',
+    'I feel awesome',
+    'Excellent, glad to hear that.',
+    'Not so good',
+    'Sorry to hear that.',
+    'What\'s your name?',
+    ' I\'m Sakura. Ask me a math question, please.'
+    ]
+
+math_convo_1 = [
+    'Pythagorean theorem',
+    'a squared plus b squared equals c squared.'
+    ]
+
+math_convo_2 = [
+    'Law of Cosines',
+    'c**2 = a**2 + b**2 - 2*a*b*cos(gamma)'
+    ]
+
+# using the ListTrainer class
+list_trainee = ListTrainer(myBot)
+for i in (small_convo, math_convo_1, math_convo_2):
+    list_trainee.train(i)
+
+# using the ChatterBotCorpusTrainer class
+corpus_trainee = ChatterBotCorpusTrainer(myBot)
+corpus_trainee.train('chatterbot.corpus.english')
+
+
+
+Next TopicHow to Convert float to int in Python
+
+
+
+
+← prev
+next →
+
+
+
+

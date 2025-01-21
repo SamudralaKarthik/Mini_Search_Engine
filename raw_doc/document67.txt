@@ -1,0 +1,79 @@
+
+
+
+
+next →
+← prev
+
+Python SimpleImputer module
+In this tutorial, we are going to learn about the SimpleImputer module of the Sklearn library, and it was previously known as impute module but updated in the latest versions of the Sklearn library. We will discuss the SimpleImputer class and how we can use it to handle missing data in a dataset and replace the missing values inside the dataset using a Python program.
+SimpleImputer class
+A scikit-learn class that we can use to handle the missing values in the data from the dataset of a predictive model is called SimpleImputer class. With the help of this class, we can replace NaN (missing values) values in the dataset with a specified placeholder. We can implement and use this module class by using the SimpleImputer() method in the program.
+Syntax for SimpleImputer() method:
+To implement the SimpleImputer() class method into a Python program, we have to use the following syntax:
+
+SimpleImputer(missingValues, strategy)
+
+Parameters: Following are the parameters which has to be defined while using the SimpleImputer() method:
+
+ missingValues: It is the missing values placeholder in the SimpleImputer() method which has to be imputed during the execution, and by default, the value for missing values placeholder is NaN.
+ strategy: It is the data that is going to replace the missing values (NaN values) from the dataset, and by default, the value method for this parameter is 'Mean'. The strategy parameter of the SimpleImputer() method can take 'Mean', 'Mode', Median' (Central tendency measuring methods) and 'Constant' value input in it.
+ fillValue: This parameter is used only in the strategy parameter if we give 'Constant' as replacing value method. We have to define the constant value for the strategy parameter, which is going to replace the NaN values from the dataset.
+
+SimpleImputer class is the module class of Sklearn library, and to use this class, first we have to install the Sklearn library in our system if it is not present already.
+Installation of Sklearn library:
+We can install the Sklearn by using the following command inside the command terminal prompt of our system:
+
+pip install sklearn
+
+After pressing the enter key, the sklearn module will start installing in our device, as we can see below:
+
+Now, the Sklearn module is installed in our system, and we can move ahead with the SimpleImputer class function.
+Handling NaN values in the dataset with SimpleImputer class
+Now, we will use the SimpleImputer class in a Python program to handle the missing values present in the dataset (that we will use in the program). We will define a dataset in the example program while giving some missing values in it, and then we use the SimpleImputer class method to handle those values from the dataset by defining its parameters. Let's understand the implementation of this through an example Python program.
+Example 1: Look at the following Python program with a dataset having NaN values defined in it:
+
+# Import numpy module as nmp
+import numpy as nmp
+# Importing SimpleImputer class from sklearn impute module
+from sklearn.impute import SimpleImputer
+# Setting up imputer function variable
+imputerFunc = SimpleImputer(missing_values = nmp.nan, strategy ='mean')
+# Defining a dataset
+dataSet = [[32, nmp.nan, 34, 47], [17, nmp.nan, 71, 53], [19, 29, nmp.nan, 79], [nmp.nan, 31, 23, 37], [19, nmp.nan, 79, 53]]
+# Print original dataset
+print("The Original Dataset we defined in the program: \n", dataSet)
+# Imputing dataset by replacing missing values
+imputerFunc = imputerFunc.fit(dataSet)
+dataSet2 = imputerFunc.transform(dataSet)
+# Printing imputed dataset
+print("The imputed dataset after replacing missing values from it: \n", dataSet2)
+
+Output:
+The Original Dataset we defined in the program: 
+ [[32, nan, 34, 47], [17, nan, 71, 53], [19, 29, nan, 79], [nan, 31, 23, 37], [19, nan, 79, 53]]
+The imputed dataset after replacing missing values from it: 
+ [[32.   30.   34.   47.  ]
+ [17.   30.   71.   53.  ]
+ [19.   29.   51.75 79.  ]
+ [21.75 31.   23.   37.  ]
+ [19.   30.   79.   53.  ]]
+
+Explanation:
+We have firstly imported the numpy module (to define a dataset) and sklearn module (to use the SimpleImputer class method) into the program. Then, we defined the imputer to handle the missing values using the SimpleImputer class method, and we used the 'mean' strategy to replace the missing values from the dataset. After that, we have defined a dataset in the program using the numpy module function and gave some missing values (NaN values) in the dataset. Then, we printed the original dataset in the output. After that, we have imputed and replaced the missing values from the dataset with the imputer that we have defined earlier in the program with SimpleImputer class. After imputing the dataset and replacing the missing values from it, we have printed the new dataset as a result.
+As we can see in the output, the imputed value dataset having mean values in the place of missing values, and that's how we can use the SimpleImputer module class to handle NaN values from a dataset.
+Conclusion
+We have read about the SimpleImputer class method in this method, and we learned how we could use it to handle the NaN values present in a dataset. We learned about the strategy value parameter, which we use to define the method for replacing the NaN values of the dataset. We have also learned about the installation of the Sklearn library, and then last, we used the SimpleImputer class method in an example to impute the dataset.
+
+
+Next TopicSecond Largest Number in Python
+
+
+
+
+← prev
+next →
+
+
+
+

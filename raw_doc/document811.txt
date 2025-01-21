@@ -1,0 +1,123 @@
+
+
+
+
+next →
+← prev
+
+Applying Lambda functions to Pandas Dataframe
+What are Dataframes?
+If the data is stored in the form of rows and columns or two-dimensional data then it is generally called data frames in Pandas. In Pandas, we can add any function to any row or column with the help of the lambda function.
+Syntax:
+
+lambda_Argument : expression
+
+Example1:
+Using Dataframe.assign(), we can apply the lambda function to any single column.
+
+import pandas as pd
+from IPython.display import display
+
+values= [['Ayush',455],['Gopal',250],['Ankit',495],
+		['Neha',400],['Nitin',350],['Shivani',450]]
+
+dataFrame = pd.DataFrame(values,columns=['Name','MarksObtained'])
+dataFrame = dataFrame.assign(Percentage = lambda x: (x['MarksObtained'] /500 * 100))
+display(dataFrame)
+
+Output:
+
+Explanation:
+In the above code, we have one dataframe where there are two columns with six rows where one column represents the name of the student, and another column represents the marks obtained. Using the assign() function, we have added a new column name percentage, and the values in this column are defined using lambda functions. We inserted the percentage by dividing the marks by 500 and multiplying by 100. we have applied the lambda function on the single column of marks obtained only.
+Example 2:
+Applying the lambda function to more than one column:
+
+import pandas as pd
+from IPython.display import display
+
+valuesList = [[13, 3.5, 100], [19, 4.6, 40], [23, 4.2, 69],
+			[54, 8.5, 84], [32, 3.6, 70], [14, 4.6, 56],
+			[15, 8.3, 109]]
+
+dataFrame = pd.DataFrame(valuesList, columns=['Column1', 'Column2', 'Column3'])
+dataFrame = dataFrame.assign(ProductOfColumns=lambda x: (x['Column1'] * x['Column2'] * x['Column3']))
+display(dataFrame)
+
+Output:
+
+Explanation:
+In the above code, we have three columns which represent some values. With the assign() function, we added one new column, and the values in the column are calculated using the lambda function by multiplying the values of all three columns.
+So we can use multiple columns at a time using the lambda function.
+Example3:
+As we have applied the lambda function on columns, we can apply the lambda function on rows also. With apply() function, we can apply the lambda function on a single row.
+
+import pandas as pd
+from IPython.display import display
+import numpy as np
+
+valuesList = [[13, 3.5, 100], [19, 4.6, 40], [23, 4.2, 69],
+			[54, 8.5, 84], [32, 3.6, 70], [14, 4.6, 56],
+			[15, 8.3, 109]]
+
+dataFrame = pd.DataFrame(valuesList, columns=['Column1', 'Column2', 'Column3'],index=['a','b','c','d','e','f','g'])
+dataFrame = dataFrame.apply(lambda x: np.square(x) if x.name == 'e' else x, axis=1)
+display(dataFrame)
+
+Output:
+
+Explanation:
+In the above code, we have a dataframe which contains six rows. We have assigned index names to each row. Using the lambda function, we are taking a square of the values whose index value is 'e'. So, if we run the code, the values in the fifth column are squared.
+Example 4:
+As we have applied the lambda function to a single row, we can apply it to multiple rows at a time. We will apply the function to implement the lambda function.
+
+import pandas as pd
+from IPython.display import display
+import numpy as np
+
+valuesList = [[13, 3.5, 100], [19, 4.6, 40], [23, 4.2, 69],
+			[54, 8.5, 84], [32, 3.6, 70], [14, 4.6, 56],
+			[15, 8.3, 109]]
+
+dataFrame = pd.DataFrame(valuesList, columns=['Column1', 'Column2', 'Column3'],index=['a','b','c','d','e','f','g'])
+dataFrame = dataFrame.apply(lambda x: np.square(x) if x.name in ['a', 'e', 'g'] else x, axis=1)
+display(dataFrame)
+
+Output:
+
+Explanation:
+In the above code, we have applied the lambda function on multiple rows using DataFrame.apply() function. We squared the values of the rows whose index value is 'a', 'e' and 'g'. So in the output, we got these three rows as their square values.
+Example 5:
+As far as we have seen, we have applied the lambda function on either row or the columns. But we can also apply the lambda function on both rows and columns simultaneously using the function apply() and assign().
+
+import pandas as pd
+from IPython.display import display
+import numpy as np
+
+valuesList = [[13, 3.5, 100], [19, 4.6, 40], [23, 4.2, 69],
+			[54, 8.5, 84], [32, 3.6, 70], [14, 4.6, 56],
+			[15, 8.3, 109]]
+
+dataFrame = pd.DataFrame(valuesList, columns=['Column1', 'Column2', 'Column3'],index=['a','b','c','d','e','f','g'])
+dataFrame = dataFrame.apply(lambda x: np.square(x) if x.name in ['a', 'b', 'g'] else x, axis=1)
+dataFrame = dataFrame.assign(Sum=lambda x: (x['Column1'] + x['Column2'] + x['Column3']))
+
+display(dataFrame)
+
+Output:
+
+Explanation:
+In the above code, we have applied a lambda function on rows and columns on a single dataframe. In the code, first, we have applied a lambda function on rows using the apply() function, which will square the values of some rows. Then we applied the lambda function on three columns using the assign() function, which will add a new column sum which contains the sum of all the columns.
+So first, the values will be squared, and then they will be added to the fourth column.
+
+
+Next TopicBox Plot in Python using Matplotlib
+
+
+
+
+← prev
+next →
+
+
+
+

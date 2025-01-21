@@ -1,0 +1,543 @@
+
+
+
+
+next →
+← prev
+
+How to Process XML in Python - Element Tree Library
+In this tutorial, we will learn how we can parse XML using Python, modifying and populating XML files with the Python ElementTree package. To understand the data, we will also learn about the XPath expression and XML trees.
+Let's have a brief introduction to XML. If you are familiar with the XML concept, you can skip this section and start from the next section.
+What is XML?
+XML is an abbreviation name of "Extensible Markup Language". It is used to understand data dynamically by the XML framework. It is primarily focused on creating web pages where the data has a specific structure.
+A page is created using the XML known as the XML document. XML generates a tree-like structure that is straightforward and supports hierarchy. Let's understand some important properties of the XML.
+
+XML documents have sections known as elements enclosed within the beginning < and > ending tags. The characters between the start and ending tag are the element's content. The element can consist of markup, including other elements, the "child elements". The top-level element is known as the root that has all other documents.
+The start-tag or empty elements contain the name-value pair known as Attributes.
+
+Below is the sample structure of the XML file.
+XML
+
+<?xml version="1.0"?>
+<catalog>
+   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre> 
+      <price>44.95</price>
+      <publish_date>2000-10-01</publish_date>
+      <description>An in-depth look at creating applications 
+      with XML.</description>
+   </book>
+   <book id="bk102">
+      <author>Ralls, Kim</author>
+      <title>Midnight Rain</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-12-16</publish_date>
+      <description>A former architect battles corporate zombies, 
+      an evil sorceress, and her own childhood to become queen 
+      of the world.</description>
+   </book>
+   <book id="bk103">
+      <author>Corets, Eva</author>
+      <title>Maeve Ascendant</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-11-17</publish_date>
+      <description>After the collapse of a nanotechnology 
+      society in England, the young survivors lay the 
+      foundation for a new society.</description>
+   </book>
+   <book id="bk104">
+      <author>Corets, Eva</author>
+      <title>Oberon's Legacy</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2001-03-10</publish_date>
+      <description>In post-apocalypse England, the mysterious 
+      agent known only as Oberon helps to create a new life 
+      for the inhabitants of London. Sequel to Maeve 
+      Ascendant.</description>
+   </book>
+   <book id="bk105">
+      <author>Corets, Eva</author>
+      <title>The Sundered Grail</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2001-09-10</publish_date>
+      <description>The two daughters of Maeve, half-sisters, 
+      battle one another for control of England. Sequel to 
+      Oberon's Legacy.</description>
+   </book>
+   <book id="bk106">
+      <author>Randall, Cynthia</author>
+      <title>Lover Birds</title>
+      <genre>Romance</genre>
+      <price>4.95</price>
+      <publish_date>2000-09-02</publish_date>
+      <description>When Carla meets Paul at an ornithology 
+      conference, tempers fly as feathers get ruffled.</description>
+   </book>
+   <book id="bk107">
+      <author>Thurman, Paula</author>
+      <title>Splish Splash</title>
+      <genre>Romance</genre>
+      <price>4.95</price>
+      <publish_date>2000-11-02</publish_date>
+      <description>A deep sea diver finds true love twenty 
+      thousand leagues beneath the sea.</description>
+   </book>
+   <book id="bk108">
+      <author>Knorr, Stefan</author>
+      <title>Creepy Crawlies</title>
+      <genre>Horror</genre>
+      <price>4.95</price>
+      <publish_date>2000-12-06</publish_date>
+      <description>An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.</description>
+   </book>
+   <book id="bk109">
+      <author>Kress, Peter</author>
+      <title>Paradox Lost</title>
+      <genre>Science Fiction</genre>
+      <price>6.95</price>
+      <publish_date>2000-11-02</publish_date>
+      <description>After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems 
+      of being quantum.</description>
+   </book>
+</catalog>
+
+As we can see in the above XML sample file -
+
+The <catlog> is single root element, that contain all the other elements such as <book_id> or <title>.
+The child elements or sub elements are inside the <catlog> and we can see that they are nested.
+The <book> element contains multiple "attributes" such as author, title, etc.
+
+Note - The child elements can contain their own child elements, also known as the "sub-child" element.
+Now, let's move to the ElementTree library.
+What is ElementTree?
+The XML tree structure allows us to makes modification, navigations, and removal in simple manner. Python comes with the ElementTree library that provides several functions to read and manipulate the XMLs. It is used to parse (read information from a file and spit it into pieces). Below is the table representation of the XML data structure.
+
+
+Property
+Description
+
+
+Tag
+It represents the data being stored. It is basically a string.
+
+
+Attributes
+It contains a number of attributes stored as dictionaries
+
+
+Text String
+It is a text string consisting of information that needs to be displayed.
+
+
+Tail String
+It can also have tail strings if necessary
+
+
+Child Elements
+It consists of a number of child elements stored as sequences
+
+
+To use the ElementTree module, we need to import it into our program as below.
+
+import xml.etree.ElementTree as ET
+
+Parsing XML Data
+The primary objective of this tutorial is to read and understand the file using Python. There are many book details in our sample xml file, but the data is messed. Anybody can enter the data in their way into the file, leading to inconsistency in data.
+Let's see the following example.
+Example -
+
+import xml.etree.ElementTree as ET
+tree = ET.parse('book.xml')
+root = tree.getroot()
+print(root)
+
+Output:
+<Element 'catalog' at 0x000001FAD52C44A0>
+
+We have initialized the tree in the above code and printed the XML root object. Now, we can print each part of the tree to understand the tree structure easily.
+As discussed earlier, every part of the tree contains a tag that determines the element. Elements may contain attributes that play a significant role in validating values entered for that tag. Let's print the root tag of the XML.
+
+print(root.tag)
+
+Output:
+catalog
+
+If we observe the XML file at the top level, this XML is rooted in the collection tag. Let's see the root's attributes.
+
+print("Attributes are:",root.attrib)
+
+Output:
+Attributes are: {}
+
+As we can see that, there are no attributes in the root.
+Parsing Using For Loop
+We can iterate over the sub-elements or children in the root using the for loop. Let's understand the following example.
+Example -
+
+import xml.etree.ElementTree as ET
+tree = ET.parse('book.xml')
+root = tree.getroot()
+
+for ch in root:
+    print(ch.tag, ch.attrib)
+
+Output:
+Iterating root using for loop
+book {'id': 'bk101'}
+book {'id': 'bk102'}
+book {'id': 'bk103'}
+book {'id': 'bk104'}
+book {'id': 'bk105'}
+book {'id': 'bk106'}
+book {'id': 'bk107'}
+book {'id': 'bk108'}
+book {'id': 'bk109'}
+
+As we can see that, all book attributes are the children of root catalog. The id attribute designated the book attribute. There are various books from the different id's.
+It is quite helpful to get information of elements in entire tree. Now we use the root.iter() method in for loop, which returns the number element we have. However, it doesn't show the attributes or level in the tree.
+Example -
+
+import xml.etree.ElementTree as ET
+tree = ET.parse('book.xml')
+root = tree.getroot()
+
+print("Iterating root using for loop:")
+tags = [elem.tag for elem in root.iter()]
+print(tags)
+
+Output:
+['catalog', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description', 'book', 'author', 'title', 'genre', 'price', 'publish_date', 'description']
+
+Since ElementTree is a powerful library, we can print the whole document using the .tostring() method. We need to pass the root into this method with the encoding and decoding of the document. For XMLs, it uses 'utf98'.
+Let's understand the following code snippet.
+Example -
+
+print(ET.tostring(root, encoding='utf8').decode('utf8'))
+
+Output:
+<?xml version='1.0' encoding='utf8'?>
+<catalog>   
+   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+      <price>44.95</price>
+      <publish_date>2000-10-01</publish_date>
+      <description>An in-depth look at creating applications
+      with XML.</description>
+   </book>
+   <book id="bk102">
+      <author>Ralls, Kim</author>
+      <title>Midnight Rain</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-12-16</publish_date>
+      <description>A former architect battles corporate zombies,
+      an evil sorceress, and her own childhood to become queen
+      of the world.</description>
+   </book>
+   <book id="bk103">
+      <author>Corets, Eva</author>
+      <title>Maeve Ascendant</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-11-17</publish_date>
+      <description>After the collapse of a nanotechnology
+      society in England, the young survivors lay the
+      foundation for a new society.</description>
+   </book>
+   <book id="bk104">
+      <author>Corets, Eva</author>
+      <title>Oberon's Legacy</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2001-03-10</publish_date>
+      <description>In post-apocalypse England, the mysterious
+      agent known only as Oberon helps to create a new life
+      for the inhabitants of London. Sequel to Maeve
+      Ascendant.</description>
+   </book>
+   <book id="bk105">
+      <author>Corets, Eva</author>
+      <title>The Sundered Grail</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2001-09-10</publish_date>
+      <description>The two daughters of Maeve, half-sisters,
+      battle one another for control of England. Sequel to
+      Oberon's Legacy.</description>
+   </book>
+   <book id="bk106">
+      <author>Randall, Cynthia</author>
+      <title>Lover Birds</title>
+      <genre>Romance</genre>
+      <price>4.95</price>
+      <publish_date>2000-09-02</publish_date>
+      <description>When Carla meets Paul at an ornithology
+      conference, tempers fly as feathers get ruffled.</description>
+   </book>
+   <book id="bk107">
+      <author>Thurman, Paula</author>
+      <title>Splish Splash</title>
+      <genre>Romance</genre>
+      <price>4.95</price>
+      <publish_date>2000-11-02</publish_date>
+      <description>A deep sea diver finds true love twenty
+      thousand leagues beneath the sea.</description>
+   </book>
+   <book id="bk108">
+      <author>Knorr, Stefan</author>
+      <title>Creepy Crawlies</title>
+      <genre>Horror</genre>
+      <price>4.95</price>
+      <publish_date>2000-12-06</publish_date>
+      <description>An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.</description>
+   </book>
+   <book id="bk109">
+      <author>Kress, Peter</author>
+      <title>Paradox Lost</title>
+      <genre>Science Fiction</genre>
+      <price>6.95</price>
+      <publish_date>2000-11-02</publish_date>
+      <description>After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems
+      of being quantum.</description>
+   </book>
+</catalog>
+
+The root.iter() method helps us find particular interest elements. This method will give all the subelements under the root matching the specified element. Let's see the following code.
+Example -
+
+for book in root.iter('book'):
+    print(book.attrib)
+
+Output:
+{'id': 'bk101'}
+{'id': 'bk102'}
+{'id': 'bk103'}
+{'id': 'bk104'}
+{'id': 'bk105'}
+{'id': 'bk106'}
+{'id': 'bk107'}
+{'id': 'bk108'}
+{'id': 'bk109'}
+
+XPath Expressions
+Sometime, the elements do not have attributes, and only have text content. We can use the .text attribute to print the text content. Let's understand the following example.
+Example -
+
+import xml.etree.ElementTree as ET
+tree = ET.parse('book.xml')
+root = tree.getroot()
+
+print("Desctiption Values:")
+for description in root.iter('description'):
+    print(description.text)
+
+Output:
+An in-depth look at creating applications 
+      with XML.
+A former architect battles corporate zombies, 
+      an evil sorceress, and her own childhood to become queen 
+      of the world.
+After the collapse of a nanotechnology
+      society in England, the young survivors lay the
+      foundation for a new society.
+In post-apocalypse England, the mysterious
+      agent known only as Oberon helps to create a new life
+      for the inhabitants of London. Sequel to Maeve
+      Ascendant.
+The two daughters of Maeve, half-sisters,
+      Oberon's Legacy.
+When Carla meets Paul at an ornithology
+      conference, tempers fly as feathers get ruffled.
+A deep sea diver finds true love twenty
+      thousand leagues beneath the sea.
+An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.
+After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems
+      of being quantum.
+(Django) PS D:\Python Project> & "C:/Users/DEVANSH SHARMA/.virtualenvs/Django-ExvyqL3O/Scripts/python.exe" "d:/Python Project/sellshares.py"
+Desctiption Values:
+An in-depth look at creating applications 
+      with XML.
+A former architect battles corporate zombies,
+      an evil sorceress, and her own childhood to become queen
+      of the world.
+After the collapse of a nanotechnology
+      society in England, the young survivors lay the
+      foundation for a new society.
+In post-apocalypse England, the mysterious
+      agent known only as Oberon helps to create a new life
+      for the inhabitants of London. Sequel to Maeve
+      Ascendant.
+The two daughters of Maeve, half-sisters,
+      battle one another for control of England. Sequel to
+      Oberon's Legacy.
+When Carla meets Paul at an ornithology
+      conference, tempers fly as feathers get ruffled.
+A deep sea diver finds true love twenty
+      thousand leagues beneath the sea.
+An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.
+After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems
+      of being quantum.
+
+Using the .text attribute, we can get any attribute's content.
+Example - 2
+
+print("Title Values:")
+for title in root.iter('title'):
+    print(title.text)
+
+Output:
+Title Values:
+XML Developer's Guide
+Midnight Rain
+Maeve Ascendant
+Oberon's Legacy
+The Sundered Grail
+Lover Birds
+Splish Splash
+Creepy Crawlies
+Paradox Lost
+
+This method of printing XML files is not recommended. However, XPath is the most used and recommended way. It stands for XML Path language and is a query language used to search through an XML quickly and easily. It has a path-like syntax to identify and navigate nodes in an XML document.
+ElementTree comes with the findall() method that traverses the immediate children of the referenced element.
+Let's understand the following example.
+Example -
+
+import xml.etree.ElementTree as ET
+tree = ET.parse('book.xml')
+root = tree.getroot()
+
+for val in root.findall("./book/[price='5.95']"):
+    print(val.attrib)
+
+Output:
+{'id': 'bk102'}
+{'id': 'bk103'}
+{'id': 'bk104'}
+{'id': 'bk105'}
+
+There are three books whose prices are equal to 5.95. This method is effective and fast to find a specific result in a large XML file. Now, we find the books whose genre is Romance.
+Example - 2:
+
+for val in root.findall("./book/[genre='Romance']"):
+    print(val.attrib)
+
+Output:
+{'id': 'bk106'}
+{'id': 'bk107'}
+
+Modifying an XML
+We can modify the XML file according to requirement. Let's have a look on below example.
+Example - Printing out the title of the books again
+
+for title in root.iter('title'):
+    print(title.text)
+
+Output:
+XML Developer's Guide
+Midnight Rain
+Maeve Ascendant
+Oberon's Legacy
+The Sundered Grail
+Lover Birds
+Splish Splash
+Creepy Crawlies
+Paradox Lost
+
+Now we will replace the 'Midnight Rain' title to the Alchemist.
+
+mod_title = root.find("./book/[title='Midnight Rain']")
+print(mod_title)
+
+mod_title.attrib["title"] = "The Alchemist"
+print(mod_title.attrib)
+
+Output:
+<Element 'book' at 0x0000024822762770>
+{'id': 'bk102', 'title': 'The Alchemist'}
+
+Once we modify the XML file, we will write this change back to the XML. Let's understand the following example.
+Example -
+
+tree.write("book.xml")
+
+tree = ET.parse('book.xml')
+root = tree.getroot()
+
+for title in root.iter('title'):
+    print(title.attrib)
+
+Output:
+XML Developer's Guide
+The Alchemist
+Maeve Ascendant
+Oberon's Legacy
+The Sundered Grail
+Lover Birds
+Splish Splash
+Creepy Crawlies
+Paradox Lost
+
+Example - 2:
+
+for description in root.iter('description'):
+     new_desc = str(description.text)+'This is a author view'
+     description.text = str(new_desc)
+     description.set('updated', 'yes')
+
+tree.write('book.xml')
+
+Output:
+<catalog>
+   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+      <price>44.95</price>
+      <publish_date>2000-10-01</publish_date>
+      <description>An in-depth look at creating applications 
+      with XML.</description>
+   </book>
+   <book id="bk102">
+      <author>Ralls, Kim</author>
+      <title>Midnight Rain</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-12-16</publish_date>
+      <description>A former architect battles corporate zombies, 
+      an evil sorceress, and her own childhood to become queen 
+      of the world.</description>
+   </book>
+
+The above code will add the new description to the book.xml file. We have taken only two books for showing output but it will be reflected on the whole file data.
+Conclusion
+In this tutorial, we have explained a few important concepts. XML file follows the tree structure built by the tags, and they designate what values should be defined there. Smart structuring helps us to read and write to an XML easily. Using opening and closing brackets, tags represent parent and children relationship.
+Attributes further describe how to validate a tag or allow for Boolean labels. As discussed in the tutorial, ElementTree is a powerful Python library that allows us to parse and navigate an XML document. This library breaks down the XML document in a tree structure that provides a straightforward way to work with the XML document. Now we can use this library in the project and parse the document.
+
+
+Next TopicBisect Algorithm Functions in Python
+
+
+
+
+← prev
+next →
+
+
+
+

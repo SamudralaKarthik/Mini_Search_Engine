@@ -1,0 +1,119 @@
+
+
+
+
+next →
+← prev
+
+Python Sending Email using SMTP
+Simple Mail Transfer Protocol (SMTP) is used as a protocol to handle the email transfer using Python. It is used to route emails between email servers. It is an application layer protocol which allows to users to send mail to another. The receiver retrieves email using the protocols POP(Post Office Protocol) and IMAP(Internet Message Access Protocol).
+
+When the server listens for the TCP connection from a client, it initiates a connection on port 587.
+Python provides a smtplib module, which defines an the SMTP client session object used to send emails to an internet machine. For this purpose, we have to import the smtplib module using the import statement.
+
+$ import smtplib
+
+The SMTP object is used for the email transfer. The following syntax is used to create the smtplib object.
+
+import smtplib   
+smtpObj = smtplib.SMTP(host, port, local_hostname)    
+
+It accepts the following parameters. 
+
+host: It is the hostname of the machine which is running your SMTP server. Here, we can specify the IP address of the server like (https://www.javatpoint.com) or localhost. It is an optional parameter.
+port: It is the port number on which the host machine is listening to the SMTP connections. It is 25 by default.
+local_hostname: If the SMTP server is running on your local machine, we can mention the hostname of the local machine.
+
+The sendmail() method of the SMTP object is used to send the mail to the desired machine. The syntax is given below.
+
+smtpObj.sendmail(sender, receiver, message)  
+
+Example
+
+#!/usr/bin/python3  
+import smtplib  
+sender_mail = 'sender@fromdomain.com'  
+receivers_mail = ['reciever@todomain.com']  
+message = """From: From Person %s 
+To: To Person %s 
+Subject: Sending SMTP e-mail  
+This is a test e-mail message. 
+"""%(sender_mail,receivers_mail)  
+try:  
+   smtpObj = smtplib.SMTP('localhost')  
+   smtpObj.sendmail(sender_mail, receivers_mail, message)  
+   print("Successfully sent email")  
+except Exception:  
+   print("Error: unable to send email")  
+
+Sending email from gmail 
+There are cases where the emails are sent using the Gmail SMTP server. In this case, we can pass Gmail as the SMTP server instead of using the localhost with the port 587.
+Use the following syntax.
+
+$ smtpObj = smtplib.SMTP("gmail.com", 587)   
+
+Here, we need to login to the Gmail account using Gmail user name and password. For this purpose, the smtplib provide the login() method, which accepts the username and password of the sender.
+This may make your Gmail ask you for access to less secure apps if you're using Gmail. You will need to turn this ON temporarily for this to work.
+
+Consider the following example.
+Example
+
+#!/usr/bin/python3  
+import smtplib  
+sender_mail = 'sender@gmail.com'  
+receivers_mail = ['reciever@gmail.com']  
+message = """From: From Person %s 
+To: To Person %s 
+Subject: Sending SMTP e-mail  
+This is a test e-mail message. 
+"""%(sender_mail,receivers_mail)  
+try:  
+   password = input('Enter the password');  
+   smtpObj = smtplib.SMTP('gmail.com',587)  
+   smtpobj.login(sender_mail,password)  
+   smtpObj.sendmail(sender_mail, receivers_mail, message)  
+   print("Successfully sent email")  
+except Exception:  
+   print("Error: unable to send email")  
+
+Sending HTML in email 
+We can format the HTML in the message by specifying the MIME version, content-type, and character set to send the HTML.
+Consider the following example.
+Example
+
+#!/usr/bin/python3  
+import smtplib  
+sender_mail = 'sender@fromdomain.com'  
+receivers_mail = ['reciever@todomain.com']  
+message = """From: From Person %s 
+To: To Person %s 
+ 
+MIME-Version:1.0 
+Content-type:text/html 
+ 
+ 
+Subject: Sending SMTP e-mail  
+ 
+<h3>Python SMTP</h3> 
+<strong>This is a test e-mail message.</strong> 
+"""%(sender_mail,receivers_mail)  
+try:  
+   smtpObj = smtplib.SMTP('localhost')  
+   smtpObj.sendmail(sender_mail, receivers_mail, message)  
+   print("Successfully sent email")  
+except Exception:  
+   print("Error: unable to send email")  
+
+
+
+Next TopicPython read csv file
+
+
+
+
+← prev
+next →
+
+
+
+

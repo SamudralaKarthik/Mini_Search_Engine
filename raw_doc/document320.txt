@@ -1,0 +1,190 @@
+
+
+
+
+next →
+← prev
+
+Defaultdict in Python
+The dictionary is an unordered collection of data values in Python used for storing data values such as maps. The dictionary holds key-value pairs instead of holding a single value as an element like other data types. The key implemented in the dictionary must be unique and immutable. That is, the Python tuple can be a key, but the Python list cannot be a key in the dictionary. We can create a dictionary by placing a sequence of elements inside the curly brackets {}, a comma "," can separate the values.
+Example 1:
+
+Dict_1 = {1: 'A', 2: 'B', 3: 'C', 4: 'D'}
+print ("Dictionary: ")
+print (Dict_1)
+print ("key pair 1: ", Dict_1[1])
+print ("key pair 3: ", Dict_1[3])
+
+Output:
+Dictionary: 
+{1: 'A', 2: 'B', 3: 'C', 4: 'D'}
+key pair 1: A
+key pair 3: C
+
+But if we try to print the 5th key value then, we will get the error because "Dict_1" does not contain the 5th key value.
+Example 2:
+
+Dict_1 = {1: 'A', 2: 'B', 3: 'C', 4: 'D'}
+print ("Dictionary: ")
+print (Dict_1)
+print ("key pair 5: ", Dict_1[5])
+
+Output:
+Dictionary: 
+{1: 'A', 2: 'B', 3: 'C', 4: 'D'}
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+ in 
+      2 print ("Dictionary: ")
+      3 print (Dict_1)
+----> 4 print ("key pair 5: ", Dict_1[5])
+
+KeyError: 5
+
+Whenever the keyError is raised, it may become a problem for the users. We can overcome this error by using another dictionary of Python, which is like a container known as Defaultdict. The users can find this dictionary inside the 'collections' module.
+defaultdict
+The defaultdict is a dictionary of Python, which is like a container present inside the 'collections' module. It is a sub-class of the dictionary class which is used for returning the dictionary-like object. Both defaultdict and dictionary have the same functionality, except defaultdict never raise any KeyError as it provides a default value for the Key, which does not exist in the dictionary created by the user.
+Syntax:
+
+defaultdict(default_factory)
+
+Parameters:
+
+default_factory: The default_factory() function returns the default value set by the user for the dictionary defined by them. If this argument is absent, then the dictionary will raise the KeyError.
+
+Example:
+
+from collections import defaultdict as DD
+# Function for returning a default values for the
+# keys which are not present in the dictionary
+def default_value():
+    return "This key is not present"
+     
+# Now, we will define the dict
+dict_1 = DD(default_value)
+dict_1["ABC"] = 1
+dict_1["DEF"] = 2
+dict_1["GHI"] = 3
+dict_1["JKL"] = 4
+print ("Dictionary: ")
+print (dict_1)
+print ("key pair 1: ", dict_1["ABC"])
+print ("key pair 3: ", dict_1["GHI"])
+print ("key pair 5: ", dict_1["MNO"])
+
+Output:
+Dictionary: 
+defaultdict(, {'ABC': 1, 'DEF': 2, 'GHI': 3, 'JKL': 4})
+key pair 1:  1
+key pair 3:  3
+key pair 5:  This key is not present
+
+Inner Working of defaultdict
+When we use defaultdict, we get an additional writable instance variable and one method in addition to the standard dictionary operations. The writable instance variable is the default_factory parameter and __missing__ is the method.
+
+default_factory: The default_factory() function returns the default value set by the user for the dictionary defined by them.
+
+Example:
+
+from collections import defaultdict as DD
+dict_1 = DD(lambda: "This key is not present")
+dict_1["ABC"] = 1
+dict_1["DEF"] = 2
+dict_1["GHI"] = 3
+dict_1["JKL"] = 4
+print ("Dictionary: ")
+print (dict_1)
+print ("key value 1: ", dict_1["ABC"])
+print ("key value 3: ", dict_1["GHI"])
+print ("key value 5: ", dict_1["MNO"])
+
+Output:
+Dictionary: 
+defaultdict( at 0x0000019EFC4B58B0>, {'ABC': 1, 'DEF': 2, 'GHI': 3, 'JKL': 4})
+key value 1:  1
+key value 3:  3
+key value 5:  This key is not present
+
+
+__missing__(): The __missing__() function is used for providing the default value to the dictionary. The __missing__() function takes default_factory as an argument, and if the argument is set to None, a KeyError will raise; otherwise, it will provide a default value for the given key. This method is essentially called by the __getitem__() function of the dict class when the requested key is not found. The __getitem__() function raise or return the value which is present in the __missing__() function.
+
+Example:
+
+from collections import defaultdict as DD
+dict_1 = DD(lambda: "This key is not present")
+dict_1["ABC"] = 1
+dict_1["DEF"] = 2
+dict_1["GHI"] = 3
+dict_1["JKL"] = 4
+print ("Dictionary: ")
+print (dict_1)
+print ("key value 1: ", dict_1.__missing__('ABC'))
+print ("key value 4: ", dict_1["JKL"])
+print ("key value 5: ", dict_1.__missing__('MNO'))
+
+Output:
+Dictionary: 
+defaultdict( at 0x0000019EFC4B5670>, {'ABC': 1, 'DEF': 2, 'GHI': 3, 'JKL': 4})
+key value 1:  This key is not present
+key value 4:  4
+key value 5:  This key is not present
+
+How to Use "List" as default_factory
+We can pass a list class as the default_factory argument, and it will create a defaultdict with the values that are set in list format.
+Example:
+
+from collections import defaultdict as DD
+# Defining a dictionary
+dict_1 = DD(list)
+ 
+for k in range(7, 12):
+    dict_1[k].append(k)
+     
+print ("Dictionary with values as list:")
+print (dict_1)
+
+Output:
+Dictionary with values as list:
+defaultdict(<class 'list'>, {7: [7], 8: [8], 9: [9], 10: [10], 11: [11]})
+
+How to Use "int" as default_factory
+We can pass the int class as the default_factory argument, and it will create a defaultdict with the default value set as zero.
+Example:
+
+from collections import defaultdict as DD
+  
+  
+# Defining the dict
+dict_1 = DD(int)
+  
+J = [1, 2, 3, 4, 2, 4, 1, 2]
+  
+# Now, we will iterate through the list "J"
+# for keeping the count
+for k in J:
+      
+    # As, The default value is 0
+    # so we do not need to
+    # enter the key first
+    dict_1[k] += 1
+      
+print(dict_1)
+
+Output:
+defaultdict(<class 'int'>, {1: 2, 2: 3, 3: 1, 4: 2})
+
+Conclusion
+In this tutorial, we have discussed defaultdict in Python and how we can perform different operations on defaultdict by using the default_factory parameter.
+
+
+Next TopicOperator Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

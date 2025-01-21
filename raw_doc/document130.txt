@@ -1,0 +1,203 @@
+
+
+
+
+next →
+← prev
+
+Stack in Python
+In this tutorial, we will learn the basics of the stack and implement it using the Python code.
+What is a Stack?
+A stack is a linear data structure where data is arranged objects on over another. It stores the data in LIFO (Last in First Out) manner. The data is stored in a similar order as plates are arranged one above another in the kitchen. The simple example of a stack is the Undo feature in the editor. The Undo feature works on the last event that we have done.
+We always pick the last plate from the stack of the plate. In stack, the new element is inserted at the one end and an element can be removed only that end.
+We can perform the two operations in the stack - PUSH and POP. The PUSH operation is when we add an element and the POP operation is when we remove an element from the stack.
+Methods of Stack
+Python provides the following methods that are commonly used with the stack.
+
+empty() - It returns true, it the stack is empty. The time complexity is O(1).
+size() - It returns the length of the stack. The time complexity is O(1).
+top() - This method returns an address of the last element of the stack. The time complexity is O(1).
+push(g) - This method adds the element 'g' at the end of the stack - The time complexity is O(1).
+pop() - This method removes the topmost element of the stack. The time complexity is O(1).
+
+Implementation of Stack
+Python offers various ways to implement the stack. In this section, we will discuss the implementation of the stack using Python and its module.
+We can implement a stack in Python in the following ways.
+
+List
+dequeu
+LifeQueue
+
+Implementation Using List
+Python list can be used as the stack. It uses the append() method to insert elements to the list where stack uses the push() method. The list also provides the pop() method to remove the last element, but there are shortcomings in the list. The list becomes slow as it grows.
+The list stores the new element in the next to other. If the list grows and out of a block of memory then Python allocates some memory. That's why the list become slow. Let's understand the following example -
+
+# initial empty stack
+my_stack = []
+
+# append() function to push 
+# element in the my_stack 
+my_stack.append('x')
+my_stack.append('y')
+my_stack.append('z')
+
+
+print(my_stack)
+
+# pop() function to pop 
+# element from my_stack in  
+# LIFO order 
+print('\nElements poped from my_stack:')
+print(my_stack.pop())
+print(my_stack.pop())
+print(my_stack.pop())
+
+print('\nmy_stack after elements are poped:')
+print(my_stack) 
+
+Output:
+['x', 'y', 'z']
+
+Elements poped from my_stack:
+z
+y
+x  
+
+my_stack after elements are poped:
+[]
+Traceback (most recent call last):
+  File "C:/Users/DEVANSH SHARMA/PycharmProjects/Hello/Stack.py", line 21, in <module>
+    print(my_stack.pop())
+IndexError: pop from empty list
+
+Explanation - 
+In the above code, we have defined an empty list. We inserted the elements one by one using the append() method. That is similar to the push() method. We also removed the elements using the pop() method. The pop() method returns the last element of the list.
+Implementation using collection.deque
+The collection module provides the deque class, which is used to creating Python stacks. The deque is pronounced as the "deck" which means "double-ended queue". The deque can be preferred over the list because it performs append and pop operation faster than the list. The time complexity is O(1), where the list takes O(n).
+Let's understand the following example -
+Example
+
+from collections import deque
+
+my_stack = deque()
+
+# append() function is used to push 
+# element in the my_stack 
+my_stack.append('a')
+my_stack.append('b')
+my_stack.append('c')
+
+print('Initial my_stack:')
+print(my_stack)
+
+# pop() function is used to pop 
+# element from my_stack in  
+# LIFO order 
+print('\nElements poped from my_stack:')
+print(my_stack.pop())
+print(my_stack.pop())
+print(my_stack.pop())
+
+print('\nmy_stack after elements are poped:')
+print(my_stack) 
+
+Output:
+Initial my_stack:
+deque(['a', 'b', 'c'])
+Elements poped from my_stack:
+c
+b
+a
+my_stack after elements are poped:
+deque([])
+
+Explanation:
+The above code is almost similar to the previous example. However, the only difference is that, we have imported the deque from the collection module.
+Deque Vs. list
+The list stores the element right next to each other and uses the contiguous memory. This is most effective for the several operations, like indexing into the list. For example - Getting list1[2] is fast as Python knows the exact position of a particular element. The contiguous memory also allows slice to work well on the lists.
+The list consumes extra time to append() some objects than others. If the block of contiguous memory is full, it will get another block that can take much a longer time than a normal append() function.
+Implementation Using queue module
+The queue module has the LIFO queue, which is the same as the stack. Generally, the queue uses the put() method to add the data and the () method to take the data.
+Below are a few methods that available in the queue.
+
+empty() - If queue empty, returns true; otherwise return false.
+maxsize() - This method is used to set the maximum number of elements allowed in the queue.
+get() - It returns and removes the element from the queue. Sometime. The queue can be empty; it waits until element is available.
+full() - It returns True if the queue is full. The queue is defined as maxsize = 0 by default. In this case, it will not return True.
+put(item) - It adds the element to the queue; if the queue is full, wait until space is available.
+put_nowait(item) - It adds the element into the queue without delaying.
+qsize() - It returns the size of the queue.
+
+Let's understand the following example of the queue module.
+Example -
+
+# Implementing stack using the queue module
+from queue import LifoQueue 
+
+# Initializing a my_stack stack with maxsize
+my_stack = LifoQueue(maxsize = 5)
+
+# qsize() display the number of elements
+# in the my_stack 
+print(my_stack.qsize()) 
+
+# put() function is used to push
+# element in the my_stack 
+my_stack.put('x')
+my_stack.put('y')
+my_stack.put('z')
+
+print("Stack is Full: ", my_stack.full()) 
+print("Size of Stack: ", my_stack.qsize()) 
+
+# To pop the element we used get() function
+# from my_stack in 
+# LIFO order 
+print('\nElements poped from the my_stack') 
+print(my_stack.get()) 
+print(my_stack.get()) 
+print(my_stack.get()) 
+
+print("\nStack is Empty: ", my_stack.empty())
+
+Output:
+0
+Stack is Full:  False
+Size of Stack:  3
+
+Elements poped from the my_stack
+z
+y
+x
+
+Stack is Empty:  True
+
+Explanation -
+In the above, we have imported the queue module that is a LIFOqueue. It works the same as the stack but this module includes some additional functions mentioned above. We defined a stack with the maxsize that means it can hold maximum five values in it.
+The initial array size is zero; we pushed three elements in the stack using the put() method. Now, again we checked whether a stack is empty and size of the stack. We have three elements in the stack. We popped the element using the get() method. It removes the last added element first. After removing the entire elements, we get an empty stack.
+Python Stacks and Threading
+We can also use Python stack in the multi-threaded program. It is an advanced topic but not frequently used so you can skip this section if you are not interested in threading.
+The list and deque behave differently if we are using threading in our program. Using a list in multi-threading programming can be dangerous because it is not thread-safe.
+On the other hand, the deque is a little bit complex because its append() and pop() methods are atomic, which means they will not interrupt by other thread.
+We can build the multithreading program using the deque, but it may cause few complexities in the future.
+Now the question arises, how we can build a program of Python stack with threading.
+The answer is that we can use the LIFOqueue and we know that what LIFO stands for - Last In First Out. It uses the put() and gets() to add and remove the stack element.
+Which Implementation of Stack Should Consider?
+We have mentioned three methods of implement the stack in Python. The above methods have their own advantages or disadvantages.
+Let us cleat the confusion; we are using stack with the threading, you should use the Lifoqueue but make sure about its performance for popping and pushing elements. But if you are not using threading, use a deque.
+We can also use the list to implement the stack but the list can have potential memory reallocation issues. The list and deque are same in the interface, but the deque doesn't memory allocation issues.
+Conclusion
+We have defined a stack and its implementation in brief. Python stack can be used in real-life programs. We can choose either implement the method according to our requirements. We have also defined the Python stack with threading environment.
+
+
+Next TopicHeap Sort in Python
+
+
+
+
+← prev
+next →
+
+
+
+

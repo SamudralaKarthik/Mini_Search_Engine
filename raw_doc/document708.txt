@@ -1,0 +1,319 @@
+
+
+
+
+next →
+← prev
+
+Sklearn Clustering
+One method for learning about anything, like music, is to look for significant groupings or collections. While our friends may arrange music by decade, we may arrange music by genre, and our choice of groups aids in understanding the distinct elements.
+What is Clustering?
+One of the unsupervised machine learning techniques, called clustering, is a means to find connections and patterns among datasets. The dataset samples are then organized into classes based on characteristics that have a lot of similarities. Because it guarantees the natural clustering of the available unlabelled data, clustering is essential.
+It is defined as an algorithm for categorizing data points into different classes according to their similarity. The objects that might be comparable are maintained in a cluster that bears little to no resemblance to another cluster.
+This is done by finding similar trends in an un-labelled dataset, such as the activity, size, colour, and shape, and then classifying the data based on whether or not such trends are present. Because the algorithm is an unsupervised learning technique, it operates on an un-labelled dataset and gets no supervision. Un-labelled data can be clustered using the sklearn.cluster method in the Scikit-learn module of Python.
+Now that we are familiar with clustering, let's investigate the various clustering methods available in SkLearn.
+Clustering Methods in Scikit-learn of Python
+
+
+
+Method name
+Parameters
+Scalability	Use case
+Geometry (metric used)
+
+
+K-Means
+This takes the number of clusters we want.
+Very large sample, medium number of clusters
+Generally applicable, uniform cluster size, flat shape, few clusters, and inductive.
+The distance between the points and the cluster centre
+
+
+Affinity propagation
+It takes the damping and sample preference.
+It is not scalable with the number of samples.
+Numerous clusters, variable cluster size, irregular geometry, and inductive
+It measures graph distance (for example, nearest-neighbour graph)
+
+
+Mean-shift
+It takes the bandwidth required.
+It is not scalable with the number of samples.
+Numerous clusters, variable cluster size, irregular geometry, and inductive
+It measures the distance between points
+
+
+Spectral clustering
+It takes the number of clusters.
+Can be scaled to a medium number of samples, or a small number of clusters
+Transductive, non-flat geometry, few clusters, even cluster size.
+It measures graph distance (for example, nearest-neighbour graph)
+
+
+Ward hierarchical clustering
+It takes the number of clusters or the maximum distance acceptable.
+It can be scaled to a large number of samples and number of clusters
+Transductive, numerous clusters, and maybe connectivity restrictions.
+It uses the distance between two points as its metrics.
+
+
+Agglomerative clustering
+It takes the number of clusters or the maximum distance acceptable, type of linkage, and distance.
+It can be scaled to a large number of samples and number of clusters
+There are numerous clusters, potential connection restrictions, non-Euclidean distances, and transductive.
+It measures the pairwise distance
+
+
+DBSCAN
+It takes the size of the neighbourhood.
+It can be scaled to a very large number of samples and a medium number of clusters.
+Transductive, non-flat geometry, unequal cluster sizes, and outlier reduction.
+It measures the distance between the two nearest points.
+
+
+OPTICS
+It takes the amount of minimum cluster membership.
+It can be scaled to a very large number of samples and a large number of clusters.
+Transductive, non-flat geometry, varied cluster density, uneven cluster sizes, and outlier removal.
+It measures the distance between points
+
+
+Gaussian mixtures
+many
+This method is not scalable
+Inductive, flat geometry that is helpful for estimating densities.
+It measures Mahalanobis distances to centres of the clusters.
+
+
+BIRCH
+It takes the branching factor, threshold value, and an optional global clustered parameter.
+It can be scaled to a large number of samples and number of clusters
+big dataset, removing outliers, data reduction, and inductive.
+This method measures the Euclidean distance between two points
+
+
+Bisecting K-Means
+It takes the number of clusters.
+It can be scaled to a large number of samples and a medium number of clusters
+universal, uniform cluster size, flat shape, no empty clusters, inductive, and hierarchical.
+It measures the distance between points.
+
+
+
+KMeans
+The centroids of the clusters of different data classes are calculated by this algorithm, which then identifies the ideal centroid through iteration. It assumes there are previously known clusters for the given dataset because it needs the number of clusters as its parameter. The fundamental idea behind this clustering method is to cluster the provided data by splitting samples into n number of groups with identical variances while reducing the inertia constraint.
+The number of clusters is represented by k. Python Scikit-learn has sklearn.cluster.KMeans clustering to perform the KMeans clustering. The sample weight argument enables sklearn.cluster to compute the cluster centres and inertia value. KMeans module to give some samples additional weight.
+Algorithm of K-Means Clustering
+A set of N number of samples is divided into K number of disjoint clusters via the k-means clustering algorithm, and each cluster's mean is used to characterize its samples. Although they share a similar space, the means are often referred to as the cluster's "centroids". The centroids are usually not the points from the independent feature X.
+To minimize the sum of squares criterion within the cluster, or inertia, is the goal of the Kmeans clustering method. 
+The algorithm of the k-means clustering method, which the four significant steps can sum up, can be used to cluster the samples into different classes depending on how related their features are.
+Select k number of centroids randomly from the sample locations to serve as the first cluster centres.
+Place each sample point next to its closest centroid.
+Position the centroids in the middle of the sample points given to the clusters.
+Repeat steps 2 and 3 to attain a tolerance level defined by the user, the maximum number of iterations, or until no changes to the cluster classes are observed.
+Python Scikit-Learn Clustering KMeans
+
+class sklearn.cluster.KMeans(n_clusters = 8, *, init = 'k-means++', n_init = 10, max_iter = 300, tol = 0.0001, verbose = 0, random_state = None, copy_x = True, algorithm = 'lloyd')
+
+Parameters
+n_clusters (int, default = 8):- This number represents the number of centroids to create and the number of clusters to construct.
+Init ({'k-means++', 'random'}, array-like having shape (n_clusters, n_features), default = 'k-means++'):- The initialization method.
+To hasten convergence, "k-means++" intelligently chooses the starting cluster centres for k-mean clustering.
+"random" randomly select the number of clusters observations (rows) for the starting centroids from the dataset.
+n_init (int, default = 10):- The number of iterations the k-means clustering algorithm will undergo using various centroid seeds. The end scores will be the inertia-minimized best result of n_init successive cycles.
+max_iter (int, default = 300):- This specifies the maximum number of k-means clustering algorithm iterations in a single run.
+tol (float, default = 1e-4):- Convergence is defined as the distance between the cluster centres of two successive iterations with a proportional tolerance with respect to the Frobenius norm.
+verbose (int, default = 0):- Mode of verbosity.
+random_state (int, RandomState instance or None, default = None):- This parameter determines how the centroid initialization random sample is generated. Make the randomization deterministic by using an int.
+copy_x (bool, default = True):- When calculating distances beforehand, it is more quantitatively precise to centre the data first. The initial data is not changed if x_copy is set to True (the default value). If False, the initial data is changed and restored before the method exits.
+algorithm ({"lloyd", "elkan", "auto", "full"}, default = "lloyd"):- Specifies the algorithm of the K-means clustering method to use.
+Code
+
+# Python program to show how to perform KMeans clustering
+
+# Importing the required libraries
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+
+# creating the cluster dataset, independent and dependent features
+X, Y = make_blobs(
+        n_samples = 200, n_features = 2,
+        centers = 4, cluster_std = 1,
+        shuffle = True, random_state = 10
+        )
+
+# ploting the original clusters
+plt.scatter(
+        X[:, 0], X[:,1],
+        c = 'lightpink', 
+        marker = 'o', s = 50
+    )
+plt.show()
+
+K_Means = KMeans(
+        n_clusters = 3, init = "k-means++",
+        n_init = 15, max_iter = 350, 
+        tol = 1e-04, random_state = 10
+    )
+y_kmeans = K_Means.fit_predict(X)
+
+# ploting the 3 clusters created by kmeans
+plt.scatter(
+        X[y_kmeans == 0, 0], X[y_kmeans == 0, 1],
+        s = 50, c = 'red',
+        marker = 'o', label = 'cluster 1'
+    )
+
+plt.scatter(
+        X[y_kmeans == 1, 0], X[y_kmeans == 1, 1],
+        s = 50, c = 'blue',
+        marker = 's', label = 'cluster 2'
+    )
+
+plt.scatter(
+        X[y_kmeans == 2, 0], X[y_kmeans == 2, 1],
+        s = 50, c = 'green',
+        marker = 's', label = 'cluster 3'
+    )
+
+# plotting the 3 centroids of the 3 clusters
+plt.scatter(
+        K_Means.cluster_centers_[:, 0], K_Means.cluster_centers_[:, 1],
+        s = 250, marker = '*',
+        c = 'black',
+        label = 'centroids'
+    )
+plt.legend(scatterpoints=1)
+plt.grid()
+plt.show()
+
+Output:
+
+
+
+The Elbow Method
+Even though k-means performed well on our test dataset, it is crucial to stress that one of its limitations is that we must first define k, the number of clusters, before we can determine what the ideal k is. In real-world situations, the number of clusters to select might not always be evident, mainly if we deal with a dataset with high dimensions that cannot be seen.
+The elbow technique is a helpful graphical tool to determine the ideal number of clusters, k, for a specific activity. We can infer that the within-cluster SSE ( or distortion) will decrease as k grows. This is so that the data will be nearer their designated centroids.
+Code
+
+# calculating the distortion values for a range of number of clusters
+inertia = []
+for i in range(1, 15):
+    K_Means = KMeans(
+        n_clusters = i, init = "k-means++",
+        n_init = 15, max_iter = 350,
+        tol = 1e-04, random_state = 10
+        )
+    K_Means.fit(X)
+    inertia.append(K_Means.inertia_)
+
+# plotting the elbow curve for kmeans
+plt.plot(range(1, 15), inertia, marker = 's')
+plt.xlabel('Value of k (Number of clusters)')
+plt.ylabel('Inertia')
+plt.show()
+
+Output:
+
+Hierarchical Clustering
+Forming clusters from data using a top-down or bottom-up strategy is known as hierarchical clustering. Either it begins with a solitary cluster made up of all the samples included in the dataset and then divides that cluster into additional clusters, or it begins with several clusters made up of all the samples included in the dataset and then combines the samples according to certain metrics to generate clusters with even more measurements.
+As hierarchical clustering advances, the results can be seen as a dendrogram. Tying "depth" to a threshold aids us in determining how deeply we want to cluster (when to stop).
+It has 2 types:
+Agglomerative Clustering (bottom-up strategy): Starting with individual samples of the dataset and their clusters, we continuously combine these randomly created clusters into more prominent clusters based on a criterion until only one cluster is left at the end of the process.
+Divisive Clustering (top-down strategy): In this approach, we begin with the entire dataset at a time combined as one solitary cluster and continue to break this cluster down into multiple smaller clusters until each cluster contains just one sample.
+Single Linkage: Through this linkage method, we combine the two clusters with the most comparable two members, using pairs of elements from each cluster that are the most similar to one another.
+Complete Linkage: Through this linkage method, we select the most different samples from each cluster and combine them into the two clusters with the smallest dissimilarity distance.
+Average Linkage: In this linkage approach, we use average distance to couple the most comparable samples from every cluster and combine the two clusters containing the most similar members to form a new group.
+Ward: This approach reduces the value of the sum of the squared distances calculated for all the cluster pairs. Although the method is hierarchical, the idea is identical to KMeans.
+Be aware that we base our comparison of similarity on distance, which is often euclidean distance.
+
+class sklearn.cluster.AgglomerativeClustering(n_clusters = 2, *, affinity = 'euclidean', memory = None, connectivity = None, compute_full_tree = 'auto', linkage = 'ward', distance_threshold = None, compute_distances = False)
+
+Parameters
+n_clusters (int or None, default = 2):- The number of clusters to be generated by the algorithm. If the distance threshold parameter is not None, it must be None.
+affinity (str or callable, default = 'euclidean'):- This parameter suggests the metric employed in the linkage computation. L1, L2, Euclidean, Cosine, Manhattan, or Precomputed are all possible options. Only "euclidean" is acceptable if the linkage method is "ward." If "precomputed", the fit technique requires a proximity matrix as input rather than a similarity matrix).
+memory (str or an object having joblib.Memory interface, default = None):- It is used to store the results of the tree calculation. Caching is not carried out by default. The path to access the cache directory is specified if a string is provided.
+connectivity (array-like or a callable object, default = None):- This parameter takes the connectivity matrix.
+compute_full_tree ('auto' or bool, default = 'auto'):- At n_clusters, the algorithm stops the tree's construction.
+linkage ({'ward', 'single', 'complete', 'average'}, default = 'ward'):- The linking criterion determines which metric should be used to calculate the distance between the sets of observations. The algorithm will combine cluster combinations that minimise this factor into one cluster.
+distance_threshold (float, default = None):- The maximum connectivity distance between the cluster pairs above which the clusters cannot be merged. If it is not provided or is None, the parameters compute_full_tree and n_clusters must both be True.
+compute_distances (bool, default = False):- Even when the distance threshold value is not used, this parameter computes the distances between the cluster pairs. The dendrogram can be visualised using this. However, there is a memory and computational penalty.
+Code
+
+# Python program to show various hierarchical clustering using sklearn
+
+# Importing the libraries
+import numpy as np
+import pandas as pd
+from sklearn import datasets
+import matplotlib.pyplot as plt
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.metrics import adjusted_rand_score
+
+# Creating the dataset and segregating dependent and independent features
+data = datasets.load_iris()
+X, Y = data.data[:, [2,3]], data.target
+
+print("Features of the dataset : ", data.feature_names)
+print("Target feature of the dataset : ", data.target_names)
+print('Size of our dataset : ', X.shape, Y.shape)
+
+# Plotting the original dataset
+plt.scatter(X[:,0], X[:, 1], c = Y)
+plt.xlabel(data.feature_names[2])
+plt.ylabel(data.feature_names[3])
+plt.title("Iris Dataset of Sklearn")
+
+# Performing Agglomerative clustering using sklearn
+cluster = AgglomerativeClustering(n_clusters = 3, linkage = "ward")
+Y_pred = cluster.fit_predict(X)
+
+# Calculating the scores to evaluate the performance of the clustering algorithm
+score = adjusted_rand_score(Y, Y_pred)
+print("Score of the Agglomerative clustering algorithm with ward linkage: ", score)
+
+# Plotting the Agglomerative clustering with Ward linkage
+plt.scatter(X[Y_pred == 0, 0], X[Y_pred == 0, 1], c = 'blue', marker = "^", s = 50)
+plt.scatter(X[Y_pred == 1, 0], X[Y_pred == 1, 1], c = 'red', marker = "^", s = 50)
+plt.scatter(X[Y_pred == 2, 0], X[Y_pred == 2, 1], c = 'green', marker = "^", s = 50)
+plt.title("Predictions of Agglomerative Clustering Algorithm (ward linkage)")
+plt.show()
+
+# Performing Agglomerative clustering using sklearn
+cluster = AgglomerativeClustering(n_clusters = 3, linkage = "single")
+Y_pred = cluster.fit_predict(X)
+
+# Calculating the scores to evaluate the performance of the clustering algorithm
+score = adjusted_rand_score(Y, Y_pred)
+print("Score of the Agglomerative clustering algorithm with single linkage: ", score)
+
+# Plotting the Agglomerative clustering with Ward linkage
+plt.scatter(X[Y_pred == 0, 0], X[Y_pred == 0, 1], c = 'blue', marker = "^", s = 50)
+plt.scatter(X[Y_pred == 1, 0], X[Y_pred == 1, 1], c = 'red', marker = "^", s = 50)
+plt.scatter(X[Y_pred == 2, 0], X[Y_pred == 2, 1], c = 'green', marker = "^", s = 50)
+plt.title("Predictions of Agglomerative Clustering Algorithm (single linkage)")
+plt.show()
+
+Output:
+Features of the dataset :  ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+Target feature of the dataset :  ['setosa' 'versicolor' 'virginica']
+Size of our dataset :  (150, 2) (150,)
+
+
+
+Score of the Agglomerative clustering algorithm with ward linkage:  0.8857921001989628
+
+
+
+Next TopicSklearn Tutorial
+
+
+
+
+← prev
+next →
+
+
+
+

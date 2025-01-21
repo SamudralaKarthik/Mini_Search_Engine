@@ -1,0 +1,82 @@
+
+
+
+
+next →
+← prev
+
+How to Find Armstrong Numbers between two given Integers
+An integer is referred to as the Armstrong numbers of the order n. When it's each digit is separated, cubed, and added together then it will result in a sum that is the same as the number, (i.e., pqrs... = pn + qn + rn + sn +...).
+If there is an Armstrong number with three digits, the total of cubes in each number is equal to the number in itself.
+Example:
+
+371 = 3 * 3 * 3 + 7 * 7 * 7 + 1 * 1 * 1  
+    = 27 + 343 + 1
+    = 371        
+Therefore, 371 is an Armstrong number.
+
+In this tutorial, we will learn how we can find Armstrong numbers between two given integers by using Python language.
+For example:
+
+Input: Two Integer Numbers: 1000 10000
+Output: Armstrong Numbers Between Two Given Integers: 1634 8208 9474
+Explanation: For the Output numbers: 1000 and 10000 are given two integers. (interval)
+  1634 = 1 * 1 * 1 * 1 + 6 * 6 * 6 * 6 + 3 * 3 * 3 * 3 + 4 * 4 * 4 *4  
+      = 1 + 1296 + 81 + 256
+      = 1634
+  8208 = 8 * 8 * 8 * 8 + 2 * 2 * 2 * 2 + 0 * 0 * 0 * 0 + 8 * 8 * 8 * 8  
+      = 4096 + 16 + 0 + 4096
+      = 8206
+  9474 = 9 * 9 * 9 * 9 + 4 * 4 * 4 *4 + 7 * 7 * 7 * 7 + 4 * 4 * 4 *4
+      = 6561 + 256 + 2401 + 256 
+      = 9474
+
+The method we use below is easy. We look through all numbers within the range. For each number, we first determine the number of digits within it. Make the total number of decimal digits of the current number be the number "n". Then we calculate the sum of the" n-th" power of each digit. If the sum is greater than "K", then we record the result.
+Code:
+
+# First we will import required module:
+import math
+lower1 = int(input("Please enter the lower range of the integer: "))
+upper1 = int(input("Please enter the upper range of the integer: "))
+print("The Armstrong Numbers Between Two Given Integers:")
+for num_1 in range(lower1, upper1 + 1):
+
+   # Now, we will set the order of number
+   order1 = len(str(num_1))
+    
+   # here, we are initializing sum
+   sum = 0
+
+   temp1 = num_1
+   while temp1 > 0:
+       digit1 = temp1 % 10
+       sum += digit1 ** order1
+       temp1 //= 10
+
+   if num_1 == sum:
+
+       print(num_1)
+
+Output:
+Please enter the lower range of the integer:  1000
+Please enter the upper range of the integer:  10000
+The Armstrong Numbers Between Two Given Integers:
+1634
+8208
+9474
+
+Conclusion
+In this tutorial, we have discussed how to print Armstrong numbers between two given integers using Python programming.
+
+
+Next TopicCelery Tutorial Using Python: Must Learn Technology for Python Developer
+
+
+
+
+← prev
+next →
+
+
+
+

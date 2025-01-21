@@ -1,0 +1,209 @@
+
+
+
+
+next →
+← prev
+
+Tree view widgets and Tree view scrollbar in Tkinter-Python
+GUI stands for Graphical User Interface and it is the graphical design on the interface like icons, menus using which a user can interact with an application. Tkinter is a Python module designed to develop the GUI of any project, from an app to a website. It is one of the most widely used modules to create GUI faster. The functionality of the module makes the work of the designer easier.
+To use any function in the module, we need to import Tkinter:
+
+import tkinter
+
+Using Tkinter, we can display information in hierarchical representation using Treeview. This tutorial explains the following contents:
+
+Tree view
+Tree view widgets
+Tree view scrollbar
+
+Let us now break the words down; we'll learn about each of them one after the other:
+
+A Tree view, also known as an "Outline view," is the graphical visualization of a hierarchical representation of data with every item having more sub-items.
+A Tree view widget is the interaction of the user to browse with the represented hierarchical representation. There can be two types of Tree view widgets in Tkinter:
+
+Tree table widget: Displaying the structures data in tabular format in rows and columns where rows represent items/ entities and columns represent attributes of the items.
+Hierarchical widget: It is the representation of the data level-wise. There can be any number of top-level nodes, and only if we click on the extension will the sub-nodes appear. A top node can have second-level and third-level nodes also.
+Here is an example of Tree view hierarchical representation of data:
+
+
+A Tree view scrollbar is a regular scrollbar using Tree view widgets.
+
+First, let us cover the foundation of Tree view widgets:
+For creating a Tree view widget, we need to import the tkinter.ttk module. Tkinter has two types of widgets-classic and themed. To use themed widgets, we need to use the ttk class of the tkinter module.
+Tabular representation:
+
+#modules and the needed classes
+import tkinter as t
+from tkinter import ttk
+from tkinter.messagebox import showinfo
+
+#Creating a root window
+root_window = t.Tk()
+root_window.title('Treeview widget')
+root_window.geometry('600x330')
+
+#Identifiers for columns
+descriptions = ('SNo', 'Name', 'Phone number')
+tree = ttk.Treeview(root_window, columns = descriptions, show = 'headings')
+tree.heading('SNo', text = 'Serial Number') #Headings
+tree.heading('Name', text = 'Name of the person')
+tree.heading('Phone number', text = 'Phone number')
+
+data = []
+for i in range(1, 50):
+    data.append((f'{i}', f'Name {i}', f'Phone number')) #list of tuples
+
+#Inserting the elements
+for i in data:
+    tree.insert('', t.END, values = ("1", "Raghav", "9999999999"))
+    tree.insert('', t.END, values = ("2", "Gayathri", "8888888888"))
+
+#function to handle the event <<Treeviewselect>>
+def selection(event):
+    for i in tree.selection():
+        item = tree.item(i)
+        record = item['values']
+        showinfo(title = 'Data', message = ' '.join(str(record)))
+tree.bind('<<TreeviewSelect>>', selection)
+tree.grid(row = 0, column = 0, sticky = 'nsew') #Treeview widget on the root window
+
+Output:
+
+First, we imported the Tkinter module, the ttk sub-module, and the needed features(show info). We created a root window called root_window, gave it a name, and gave dimensions to it.
+Using ttk.Treeview(), we created a Table Tree view widget with the root_window and columns, and by specifying 'headings' to show, we are telling the function to show the header row in the table. Now, as we create a tabular representation, we specify the names of the columns in a tuple.
+Finally, we assigned headings to the columns, inserted data into them, and created a function to handle the event (When clicked on a row in the table, it displays a message). By configuring it, we set the table in the window.
+Hierarchical Representation:
+Here is a program with an example of the Hierarchical representation we discussed above with courses in engineering:
+
+#Importing the modules and classes
+import tkinter as t
+from tkinter import ttk
+from tkinter.messagebox import showinfo
+
+#Root window creation
+root_window = t.Tk()
+root_window.title('Hierarchical representation')
+root_window.geometry('600x370')
+
+#grid layout
+root_window.rowconfigure(0, weight=1)
+root_window.columnconfigure(0, weight=1)
+
+#Tree view
+tree = ttk.Treeview(root_window)
+tree.heading('#0', text = 'Courses', anchor=t.W)
+
+#Inserting more data
+tree.insert('', t.END, text = 'Engineering', iid=0, open=False)
+tree.insert('', t.END, text = 'Mechanical engineering', iid=1, open=False)
+tree.insert('', t.END, text = 'Electrical engineering', iid=2, open=False)
+tree.insert('', t.END, text = 'Electronic and computer engineering', iid=3, open=False)
+tree.insert('', t.END, text = 'Information Technology', iid=4, open=False)
+tree.insert('', t.END, text = 'Computer science and engineering', iid=5, open=False)
+tree.insert('', t.END, text = 'Artificial Intelligence and Machine Learning', iid=6, open=False)
+tree.insert('', t.END, text = 'Data Science', iid=7, open=False)
+tree.insert('', t.END, text = 'Cyber Security', iid=8, open=False)
+tree.insert('', t.END, text = 'Internet Of Things', iid=9, open=False)
+
+#Assinging the sub-data into Engineering
+tree.move(1, 0, 0)
+tree.move(2, 0, 1)
+tree.move(3, 0, 2)
+tree.move(4, 0, 3)
+tree.move(5, 0, 4)
+
+#Assigning the sub-data to Computer science and engineering
+tree.move(6, 5, 0)
+tree.move(7, 5, 1)
+tree.move(8, 5, 2)
+tree.move(9, 5, 3)
+
+#Positioning
+tree.grid(row = 0, column = 0, sticky = t.NSEW)
+
+#Execution
+root_window.mainloop()
+
+Output:
+
+We followed the same steps from tabular representation till creating a Tree view widget. After creating a widget, we insert elements into the widget with an iid, and this iid identifies every item individually. After inserting all the items, we use the move() function to specify the sub-items by making changes to the indentation
+You can observe that only if we click on the hierarchy all the sub contents will get displayed.
+Treeview Scrollbar:
+A regular scrollbar can use Treeview widgets, which is called the "Treeview scrollbar". Now that we learned about the Treeview widgets, let us try to create a Treeview scrollbar:
+
+#Importing the modules and the classes
+from tkinter import ttk 
+import tkinter as t
+
+#Creating a window 
+root_window = t.Tk()
+root_window.resizable(width = 2, height = 2)
+
+#Treeview widget
+tree = ttk.Treeview(root_window, selectmode = 'browse')
+tree.pack(side = 'left')
+
+#scrollbar
+scrollbar = ttk.Scrollbar(root_window, orient = "vertical", command = tree.yview)
+scrollbar.pack(side = 'left', fill = 'x')
+tree.configure(xscrollcommand = scrollbar.set)
+
+#Number of columns 
+tree["columns"] = ("1", "2")
+ 
+# Headings
+tree['show'] = 'headings'
+ 
+#Columns configuration
+tree.column("1", width = 90, anchor ='c')
+tree.column("2", width = 90, anchor ='se')
+
+#Headings
+tree.heading("1", text = "Name")
+tree.heading("2", text = "Age")
+
+#Data
+tree.insert("", 'end', text ="L1",
+             values =("Harry Styles", "28"))
+tree.insert("", 'end', text ="L2",
+             values =("Zayn Malik", "29"))
+tree.insert("", 'end', text ="L3",
+             values =("Liam Payne", "29"))
+tree.insert("", 'end', text ="L4",
+             values =("Louis Tomlinson", "30"))
+tree.insert("", 'end', text ="L5",
+             values =("Niall Horan", "29"))
+tree.insert("", 'end', text ="L6",
+             values =("Adam Levine", "43"))
+tree.insert("", 'end', text ="L7",
+             values =("Selena Gomez", "30"))
+tree.insert("", 'end', text ="L8",
+             values =("Shawn Mendes", "24"))
+tree.insert("", 'end', text ="L10",
+             values =("Taylor Swift", "32"))
+tree.insert("", 'end', text ="L11",
+             values =("Justin Beiber", "28"))
+tree.insert("", 'end', text ="L12",
+             values =("Demi Lovato", "30"))
+tree.insert("", 'end', text ="L13",
+             values =("Conan Gray", "23"))
+ 
+# Calling main loop
+root_window.mainloop()
+
+Output:
+ 
+
+
+Next Topic__getitem__() in Python
+
+
+
+
+← prev
+next →
+
+
+
+

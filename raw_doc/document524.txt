@@ -1,0 +1,163 @@
+
+
+
+
+next →
+← prev
+
+Two Sum Problem: Python Solution of Two sum problem of Given List
+In this tutorial, we will implement the two sum problem using Python code. This is the basic problem of the array, and you can found on this on Leetcode. We will solve it using a different approach using the Python programming language. Let's understand the problem statement.
+Problem Statement
+In this problem, we need to find the pair of the two elements from the given list whose sum is equal to the given target value. We can assume that the array has only one pair of integers that add up to the target sum.
+Note - A given list or array must be sorted in increasing manner.
+Example - 1
+
+list = [1 , 2 , 3 , 4 , 5]
+target = 6
+
+Output:
+[1, 5]
+
+Example - 2
+
+array = [1 , 4 , 5 , 11 , 12]
+target = 9
+
+Output:
+[2, 3]
+
+Let's solve this problem using the Brute Force approach.
+Approach - 1: Brute Force Approach
+The brute force approach is a commonly used way to solve the problem. In this approach, our primary goal is to solve the problem, not efficiently. We check every possible pair and the number of possible pairs in the array. We will use the two for loop, add the two values, and compare the target value. If it is equal to the target value, return the indices of pairs of the integer.
+Algorithm -
+
+Run the first loop to point the first index of the solution in the array.
+Run another loop to point a second index of the solution for every first integer.
+If the both elements equal to the target value, return the both indices values
+
+Let's implement the algorithm using Python code.
+Implementation of Two Sum Problem
+Example -
+
+class TwoSum:
+    def __init__(self, list1, target):
+        self.list1 = list1
+        self.target = target
+        
+    def solution(self):
+        length = len(list1)
+        
+        for i in range(length-1):
+            for j in range(i+1, length):
+                if list1[i]+list1[j] == self.target:
+                    new_list = i, j
+                    return list(new_list)
+        return -1
+
+list1 = [1, 2, 4, 5, 11]
+target = 6
+obj = TwoSum(list1, target)
+print(obj.solution())
+
+Output:
+[0, 3]
+
+Explanation - 
+In the above program, we have created the TwoSum class and initialized the two variables list1 and target. Then, we declare the solution() method where first we checked the length of the list and applied two for loops. The first for loop is to maintain the first index, and the second for loop is to maintain the second index. We checked the sum of both values; if it is true; we assigned a new list and returned the indices of the elements.
+Example - 2:
+
+list1 = [1, 4, 5, 11, 12]
+target = 9
+obj = TwoSum(list1, target)
+print(obj.solution())
+
+Output:
+[1, 2]
+
+Approach -2: Using Dictionary
+
+class Solution:
+    def twoSum(self, nums, target):
+        #declaring a dictionary to keep track of all the values 
+        visited_numbers = dict()
+        
+        # iterating over the entire array
+        for index, num in enumerate(nums):
+            
+            #subtracting the num from the target to search for its pair
+            number_to_be_search = target - num
+            
+            #if the pair is found, return the index of the both numbers
+            if number_to_be_search in visited_numbers:
+                return [index, visited_numbers[number_to_be_search]]
+            #otherwise we simply add it to out dictionary for future lookup
+            else:
+                visited_numbers[num] = index
+     
+list1 = [2, 7, 11, 15]    
+target = 18
+obj = Solution()
+print(obj.twoSum(list1, target))
+
+Output:
+[1, 0]
+
+Explanation -
+In this approach, we created the TwoSum class, and inside it, we declare the solution() method. In this method, we declared a dictionary to keep track of all the values seen so far in the value to the index. Now, we iterate the given list using the enumerated. Then, we subtract the num value from the target value to search its pair. If the pair is found, return the index of both numbers. Otherwise, add it to our dictionary for a future visit.
+Time Complexity of Two Number Sums (Brute Force Approach)
+We need to use the two for loops. The first for loop visits n numbers of elements and second for loop visits n-1. Hence, the check for the possible and total number of pair are: N*(N-1)/2, the time-complexity will be O(N*N) = N2.
+Space Complexity
+0(1): Only constant space for variable is used.
+Using the dictionary, it takes only one for loop so the time complexity will be the O(N).
+Approach - 3: Using Two Pointers
+In this approach, we will use the binary search algorithm where the given list array must be sorted. We need to fix the first index and then the required value to fulfill the target found in the list.
+We will use the two pointers: left and right; the left denotes the first element, and the right denotes the last element of the list. Then we compare the sum of the pointer's value to the target value; if some of the value and target is equal, return the pointers index pairs. If the sum of value is more than the target, we decrement the right pointer. Otherwise, some of the value is less than the target; we need to increase the left pointer by one and check the same conditions.
+Let's understand the following example.
+Example -
+
+class Solution:
+    def twoSum(self, list1, target):
+        left = 0
+        right = len(list1) - 1
+        
+        temSum = 0
+        
+        while (left<right):
+            tempSum = list1[left] + list1[right]
+            if tempSum == target:
+                return list((left, right))
+            elif tempSum>target:
+                right -= 1
+            elif tempSum<target:
+                left += 1
+                
+        return list((-1, -1))
+         
+list1 = [2, 7, 11, 15]    
+target = 26
+obj = Solution()
+print(obj.twoSum(list1, target))
+
+Output:
+[2, 3]
+
+Time Complexity using Two Sum
+The time complexity will be O(n) even in the worst case, we visit all the elements in the array only once.
+Space complexity
+0(1): Only constant space for the variable is used.
+Using the dictionary, it takes only one for loop so that the time complexity will be the O(n).
+Conclusion
+It is a basic and commonly asked programming question in the interview. In this tutorial, we have covered three approaches to solving the two sum problem. We recommend implementing the above approaches independently and practicing such questions to crack coding interviews.
+
+
+Next TopicWrite a Python Program to Check a List Contains Duplicate Element
+
+
+
+
+← prev
+next →
+
+
+
+

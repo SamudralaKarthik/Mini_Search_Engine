@@ -1,0 +1,184 @@
+
+
+
+
+next →
+← prev
+
+Python Coroutines
+In this tutorial, we are going to learn about coroutine in Python. We will discuss the coroutines, subroutine, execution of coroutines, and closing of coroutine in Python in details. 
+Before we start learning about coroutine, we must have a basic understanding of subroutines in Python. So, we will start with the Python subroutine in this tutorial.
+Python subroutines
+As we all are known with functions in Python, we may or may not know that these Python functions are also known as a procedure, subprocess, or subroutines.
+Generally, a function in Python is a packed sequence of instructions that work as a unit to perform a certain task in the code. When we divide the complex function's logic into several steps that are self-contained and work like a unique function (nested functions etc.), then these helpers or nested functions in the main function are called subroutines in Python.
+We call subroutines by the main function in Python that is responsible for the coordination while using subroutines in a function. All subroutines in Python have only a single entry point, i.e., starting of the main function.
+Main Function
+
+After seeing the figure given above, we can easily conclude that the main function is required to coordinate between the subroutines while using them, and the main function is also the only entry point for subroutines in Python.
+What are Coroutines?
+Now, in this section, we will talk about coroutines that are basically a generalization of subroutines.
+Coroutines are generally used for cooperative multitasking of a process that is voluntarily giving away (yield) control over a period of time (periodically). A coroutine is also used when idle to enable the running of multiple applications simultaneously.
+
+Coroutines are different from the thread as in coroutines; it is the programmer and the programming language that decides when coroutines are to be switched, whereas in the case of threads, the operating system schedule the switching between threads.
+Difference between Coroutines and Subroutines
+
+
+Coroutines
+Subroutines
+
+
+Unlike subroutines, Coroutines have multiple entry points.
+Subroutines have only a single entry point, i.e., the main function.
+
+
+We can only suspend and resume the execution of Python subroutines from a single point, and it can only be resumed only from the starting point.
+We can suspend and resume the execution of coroutines in Python from multiple points in the function, and also, we can resume execution from where we have suspended it last.
+
+
+Unlike subroutines, we don't have any main function for Python coroutines to order and coordinate their execution particularly.
+In Python subroutines, the main function coordinates between the multiple subroutines and controls their executions.
+
+
+Coroutines are corporative as they together form a pipeline structure while we are executing them.
+Subroutines form a linear execution structure.
+
+
+In Coroutines, we have a coroutine that displays the result for input data.
+For subroutines, the processing result of data given in them is displayed by the main function.
+ 
+
+Coroutines in Python
+Coroutines are very similar to generators present in Python but coroutines come with a few modifications in the yield (give away) statement and some extra methods given in it. Python coroutines also able to consume the input data, whereas the generators were only able to produce data for iteration in function.
+In Python having versions higher than 2.5, we can observe a slight change introduced in the yield statement of coroutines, and after this change, the yield statement can be used as an expression.
+Example: Assignment of yield on the right side, i.e., LineOfCode = (yield)
+Any value that we send to the coroutine in the program will be captured by the coroutine and return only through the yield expression. We can send a value to coroutine only by the send() function.
+Consider the given coroutines in the below program that will print out names only that have 'Officer' in their prefix and we will send the names to coroutines using the send() function.
+Example:
+
+# Default function to search prefix
+def print_name(prfx): 
+    print("Coroutine object searching for the prefix: {}".format(prfx)) # Searching for prefix
+    while True: 
+        GivenName = (yield) 
+        if prfx in GivenName: # If required prefix match
+            print(GivenName) # Print  given name
+CorouteObject = print_name("Officer") # Taking prefix = Officer for coroutine object
+# Taking names as input from user
+Name1 = input("Enter first name: ")
+Name2 = input("Enter second name: ")
+Name3 = input("Enter third name: ")
+CorouteObject.__next__() # using _next_() method to call coroutine
+# sending input data to coroutine with send() method
+CorouteObject.send(Name1)
+CorouteObject.send(Name2)
+CorouteObject.send(Name3)
+
+Output:
+Enter first name: Alex
+Enter second name: Officer Steve Rogers
+Enter third name: Officer Natasha Widow
+Coroutine object searching for the prefix: Officer
+Officer Steve Rogers
+Officer Natasha Widow
+
+Explanation -
+So, as we can see in the above program that we have taken three names from the user as input data, we have sent the user input data to the coroutine defined in the function by send() method. We have used the "Officer" keyword in coroutine to search the names that have officer prefix in their name, and coroutine will only print these matched names only as we can see in the output.
+Execution of Coroutines
+In Python, the execution of coroutine is very similar to generators. Nothing will happen when we call the coroutine in the program; it will only run to the following two responses: send() and next() function.
+We can clearly observe in the above example; coroutine starts executing only after we called the _next_() method in the program. After the coroutine is called, the execution advances to yield the first expression.
+After that, the execution of the coroutine pauses and waits for the value to send to the coroutine object. After the first value is sent to the coroutine object, it checks if the required prefix is present, and if it is, then the object will print the name with the prefix. And after printing the name, it goes through a continuous loop till it encounters, name = (yield) expression again.
+Closing Coroutine
+To close coroutine, we have to use the close() function in the program. When we close the coroutine, it will produce an exception, i.e., GeneratorExit exception that we can catch in a normal way of catching the exception.
+Example -
+
+# Default function to search prefix
+def print_name(prfx): 
+    print("Coroutine object searching for the prefix: {}".format(prfx)) # Searching for prefix
+    # Using excption handling by try and except
+    try:
+        while True:
+            GivenName = (yield)
+            if prfx in GivenName: # If required prefix match
+                print(GivenName) # Print given name
+    except GeneratorExit: # Handling GeneratorExit exception
+            print("Now we have closed the coroutine!!")
+CorouteObject = print_name("Officer") # Taking preifx = Officer for coroutine object
+CorouteObject.__next__() # using _next_() method
+# sending input data to coroutine with send() method
+CorouteObject.send("Alexa")
+CorouteObject.send("Officer Tony Stark")
+CorouteObject.send("Officer Steve Rogers")
+# closing the coroutine
+CorouteObject.close()
+
+Output:
+Coroutine object searching for the prefix: Officer
+Officer Tony Stark
+Officer Steve Rogers
+Now we have closed the coroutine!!
+
+We have to remember that if we try to send values to coroutine objects after closing the coroutine, the program will raise a StopIteration exception in the output.
+Creating Pipeline Structure by Chaining Coroutine
+We can use coroutine to create a pipe structure. After we chain together the coroutine, we can push the given data through the created pipe structure using the push() method. To create a pipe structure in the program with coroutines, we have to take care of the following things:
+We have to give an initial source, i.e., producer, that will derive the complete pipeline structure. Generally, producers are not a coroutine in itself, and they are just a simple method.
+We have to create a sink at the end of the pipeline, and the sink will act as the endpoint of the pipeline. The sink is the point in the coroutine pipeline, which might collect all the input data and displays it.
+Understand the following program of coroutine with pipeline structure.
+Example:
+
+# Defining producer for the pipeline
+def producer(GivenSentence, NextCoroutine): 
+    tokens = GivenSentence.split(" ") # splitting sentence
+    for token in tokens: # iterating over tokens
+        NextCoroutine.send(token) 
+    NextCoroutine.close() # closing coroutine
+# Defining pattern filter for the pipeline structure
+def pattern_filter(SearchPattern = "ing", NextCoroutine = None):
+    print("In the input sentence, we are searching for words that end with{}".format(SearchPattern)) # Searching for pattern
+    try: 
+        while True: 
+            token = (yield) # yielding tokens
+            if SearchPattern in token: 
+                NextCoroutine.send(token) # Sending tokens
+    except GeneratorExit: # Exception handling for GeneratorExit exception
+        print("We are done with filtering the given input sentence!!")
+# Defining sink for the pipeline
+def print_token(): 
+    print("I'm sink in the pipeline and I am used to print the tokens given.") 
+    try: 
+        while True: 
+            token = (yield) # yielding tokens
+            print(token) # printing the tokens from sink
+    except GeneratorExit: 
+        print("Now we are done with printing!")
+# Taking sink variable
+PrintToken = print_token() 
+PrintToken.__next__() # calling sink
+# Taking Pattern filter variable
+PatternFilter = pattern_filter(NextCoroutine = PrintToken) 
+PatternFilter.__next__() # calling pattern filter
+# Taking a sentence for the producer in the pipeline
+GivenSentence = "Steve rogers is running very fast to chase down a train moving with high speed"
+producer(GivenSentence, PatternFilter) # calling producer
+
+Output:
+I'm sink in the pipeline, and I am used to printing the tokens given.
+In the input sentence, we are searching for words that end with ing
+running
+moving
+We are done with filtering the given input sentence!!
+
+Explanation -
+That's how we can use the pipeline created with multiple coroutines and filtering the input data. The filtered or resultant data will be displayed at the sink of the pipeline, as we can see in the above output.
+
+
+Next TopicDouble Underscores in Python
+
+
+
+
+← prev
+next →
+
+
+
+

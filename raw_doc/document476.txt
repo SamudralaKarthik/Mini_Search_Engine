@@ -1,0 +1,265 @@
+
+
+
+
+next →
+← prev
+
+Python zlib Library | what is zlib in Python?
+The zlib is a Python library that supports the zlib C library, a higher-level generalization for deflating lossless compression algorithms. The zlib library is used to lossless compress, which means there is no data loss between compression and decompression).
+It also provides portability advantages across the different platforms and doesn't expand the data.
+This library plays a very significant role in terms of security. Many applications require the compression and decompression of arbitrary data such as strings, files, or structured in-memory content.
+This library is well-suited with the gzip file format/tool, the most popular and useful compression application on UNIX systems.
+The compression() method
+The zlib library facilitates us to compress() method, which is used to compress a data string. Below is the syntax of the function.
+
+compress(data, level=-1)
+
+Parameter -
+
+The data parameter specifies the bytes to be compressed, and the level represents an integer value between -1 to 9. The level parameter is used to define the level of the compression. Level 9 signifies the slowest; however, it brings the highest compression level. The value -1 is a default that is level 6. Level 0 yields no compression.
+
+Let's understand the below example.
+Example -
+
+import zlib
+import binascii
+
+value = 'Welcome to JavaTpoint'
+
+compressed_data = zlib.compress(value, 2)
+
+print('Original data: ' +  value)
+print('Compressed data: ' + binascii.hexlify(compressed_data))
+
+Output:
+Original data: Welcome to JavaTpoint
+Compressed data: 785ef348cdc9c95728cf2fca49010018ab043d
+
+If we change the value 2 to 0, then the result will be as below.
+
+Original data: Welcome to JavaTpoint
+Compressed data: 785ef348cdc9c95728cf2fca49010018ab043d
+
+Compressing Large Data Streams
+The zlib library provides the comressobj() function to manage large data streams. This method returns the compression object. The syntax is given below.
+Syntax -
+
+compressobj(level=-1, method=DEFLATED, wbits=15, memLevel=8, strategy=Z_DEFAULT_STRATEGY[, zdict])
+
+Parameters -
+
+The above method accepts wbits as an argument that handles the window size, and header and trailer are comprised in the output. Below is the possible value for
+
+
+
+Value
+Window size logarithm
+Output
+
+
++9 to +15
+Base 2
+It includes zlib headers and trailer.
+
+
++9 to -15
+Represent absolute value of wbit
+Exclude header and trailer.
+
+
++25 to +31
+Low 4 bits of the value.
+It includes a header and trailing checksum.
+
+
+
+The method argument defines the algorithm to be used in compression. The DEFLATED is the default or we can say current possible algorithm.
+The strategy argument defines compression tuning. It is recommended to use only its default value as of now.
+
+Let's understand the following example
+Example -
+
+import zlib
+import binascii
+
+data = 'Welcome to JavaTpoint'
+
+compress = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION, zlib.DEFLATED, -15)
+compressed_data = compress.compress(data)
+compressed_data += compress.flush()
+
+print('Original: ' + data)
+print('Compressed data: ' + binascii.hexlify(compressed_data))
+
+Output:
+Original: Hello world
+Compressed data: f348cdc9c95728cf2fca490100
+
+Explanation -
+We took a simple string value that is not a large data stream, it serves the purpose of showing the working of compressobj() function. The string "Welcome to JavaTpoint" has compressed. Generally, this method is used when the data streams are too large or won't fit into memory. This method plays essential role in a bigger application where we can configure the compression and can be used to compress portions of the data in series.
+It plays the significant role where the compression is required. With the help of compress.compress(data) method, we can compress and flush the chunk of data without accumulating full data in memory.
+Compressing a File
+We will use the compression() method to compress the file. The syntax is similar as in the previous example.
+In the below example, we will compress the PNG image "mountain.png".
+Let's understand the following example.
+Example -
+
+import zlib
+
+original_data = open(r'C:\Users\DEVANSH SHARMA\Pictures\Saved Pictures\mountain.png', 'rb').read()
+compressed_data = zlib.compress(original_data, zlib.Z_BEST_COMPRESSION)
+
+compress_ratio = (float(len(original_data)) - float(len(compressed_data))) / float(len(original_data))
+print('Compressed: %d%%' % (100.0 * compress_ratio))
+
+Output:
+Compressed: 10%
+
+In the above example, we have used the Z_BEST_COMPRESSION, which is the best compression level this algorithm has to offer. In the next line, we calculate the level of compression based on the ratio of the compressed data length over the original data. The file is compressed by 13%, this is how to compress the ASCII string or binary image data.
+Saving Compress Data to a File
+We can also save the compressed data in a file for the further use. In the below example, we shows some compressed text into a file.
+Example -
+
+import zlib
+
+my_data = 'Welcome to JavaTpoint'
+
+compressed_data = zlib.compress(my_data, 2)
+
+f = open('outfile.txt', 'w')
+f.write(compressed_data)
+f.close()
+
+When we run the above program, it compresses the given string and saves the compressed data into a file named "output.txt".
+Decompression
+Decompressing is also an important aspect of the application. The zlib library provides the decompress() method. Below is the syntax of it.
+Syntax:
+
+decompress(data, wbits=MAX_WBITS, bufsize=DEF_BUF_SIZE)
+
+Parameters -
+
+The data argument is a byte formatted value.
+The wbits argument is used to manage the size of the history buffer. The possible buffer value can be as below.
+
+
+
+Value
+Window size logarithm
+Input
+
+
++8 to +15
+Base 2
+It includes zlib header and trailer
+
+
+-8 to -15
+It represents the absolute alve of wbits
+It includes Raw stream with no header and trailer
+
+
++24 to +31 = 16 + (8 to 15)
+It represents Low 4 bits of the value
+It includes gzip header and trailer
+
+
++40 to +47 = 32 + (8 to 15)
+It represents Low 4 bits of the value
+zlib or gzip format
+
+
+
+The bufsize argument indicates the buffer size. The best thing about this argument is that it doesn't need to be exact; its value automatically increases when extra buffer size is needed.
+
+Let's understand the following example.
+Example -
+
+import zlib
+data = 'Welcome to JavaTpoint'
+
+compressed_data = zlib.compress(data, 2)
+decompressed_data = zlib.decompress(compressed_data)
+
+print('Decompressed data: ' + decompressed_data)
+
+Output:
+Welcome to JavaTpoint
+
+Decompressing Large Data Streams
+While decompressing the large data stream, we may face the memory management issue due to the size or source of the data. There is a chance we may not utilize all of the available memory for that particular task. So that, the decompressobj() allows us to divide up a large stream in multiple chunks, which can be decompressed separately.
+The syntax is as below.
+Syntax -
+
+decompressobj(wbits=15[, zdict])
+
+The above method returns decompress object, which is used to decompress the particular data.
+Let's understand the following example.
+Example -
+
+import zlib
+
+data = 'Welcome to JavaTpoint'
+
+compress = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION, zlib.DEFLATED, +15)
+compressed_data = compress.compress(data)
+compressed_data += compress.flush()
+
+print('Data before Decompress: ' + data)
+print('Data After Decompress: ' + compressed_data)
+
+f = open('compressed.datd', 'w')
+f.write(compressed_data)
+f.close()
+
+CHUNKSIZE = 1024
+
+data2 = zlib.decompressobj()
+my_file = open('compressed.dat', 'rb')            
+buffer_value = my_file.read(CHUNKSIZE)
+
+# Decompress stream chunks
+while buffer_value:
+    decompressed_data = data2.decompress(buf)
+    buf = my_file.read(CHUNKSIZE)
+
+decompressed_data += data2.flush()
+
+print('Decompressed data: ' + decompressed_data)
+
+my_file.close()
+
+Output:
+Data Before Decompress: Welcome to JavaTpoint
+Data After Decompress - #@$%%#@@#s
+Decompressed Data: Welcome to JavaTpoint
+
+Decompressing Data from a File
+As we have discussed in previous examples, we can easily decompress the data contained in the file. This example is similar to the previous example; we get the data from the file, except that in this case, we will use the decompress() method. This method is useful when data is small enough to fit in the memory easily.
+Let's understand the following example.
+Example -
+
+import zlib
+
+compressed_data = open('hello.dat', 'rb').read()
+decompressed_data = zlib.decompress(compressed_data)
+print(decompressed_data)
+
+Explanation -
+We have read the hello.dat that contains "Welcome to JavaTpoint". However, the file contains the a small string so we have used the decompress() instead of decompressobj() function.
+Conclusion
+The Python zlib library is useful when the application requires compression at a security level. It comes with a bunch of excellent functions. We have discussed some important concepts of the zlib library, although many functions are available. The compress() and decompress() methods are used for the small data, whereas compressobj() and decompressobj() methods are available to provide more flexibility by supporting compression/decompression of data streams.
+
+
+Next TopicPython Queue Module
+
+
+
+
+← prev
+next →
+
+
+
+

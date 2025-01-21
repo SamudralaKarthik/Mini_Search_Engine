@@ -1,0 +1,163 @@
+
+
+
+
+next →
+← prev
+
+Set to list in Python
+In this article, we will discuss how we can convert a set to a list in Python.
+Before that let's have a quick revision of lists and sets.
+List - It is a sequence of elements enclosed in square brackets where each element is separated with a comma.
+Syntax of a list is-
+
+a = [1,2,4.5,'Python','Java']
+
+We can print the list and check its type using-
+
+print(a)
+print(type(a))
+
+NOTE: The list is mutable which means we can change its elements.
+Set - It is an unordered collection of elements that contains all the unique values enclosed within curly brackets.
+Syntax of a set is-
+
+b = {1,2,4.5,'Python','Java'}
+
+We can print the set and check its type using-
+
+print(b)
+print(type(b))
+
+The different approaches of converting a set to a string that we will use are-
+
+Using list()
+Using sorted()
+Using *set
+Using for loop
+Using frozenset
+
+Using list()
+In the first method, we will use list() to convert the set.
+The following program shows how it can be done-
+
+#declaring a set
+subjects={'C','C++','Java','Python','HTML'}
+#using list()
+res=list(subjects)
+print(res)
+
+Output:
+['C','C++','Java','Python','HTML' ]
+
+Explanation:
+Let us understand what we have done in the above program-
+
+The first thing that we have done here is to declare the set that consists of different subject names.
+After this, we have used list() function in which we passed the set 'subjects'.
+On executing the program, the desired output is displayed.
+
+Using sorted()
+The second approach is to use the sorted() function to convert a set to a list.
+The program below illustrates the same-
+
+#defining a function
+def convert_set(set):
+  return sorted(set)
+
+subjects={'C','C++','Java','Python','HTML'}
+res = set(subjects)
+print(convert_set(res))
+
+Output:
+['C','C++','Java','Python','HTML' ]
+
+Explanation:
+Let us understand what we have done in the above program-
+
+The first thing that we have done here is, we created a function that takes a set as its parameter and returns the expected output.
+After this, we have declared the variable of a set type that consists of different subject names.
+The next step was to pass our set in the function 'convert_set'.
+On executing the program, the desired output is displayed.
+
+Using *set
+In the third method, we will use the *set to convert a set to a list in Python.
+The *set unpacks the set inside a list.
+The following program shows how it can be done-
+
+#defining a function
+def convert_set(set):
+  return [*set, ]
+
+res = set({'C','C++','Java','Python','HTML'})
+print(convert_set(res))
+
+Explanation:
+Let us understand what we have done in the above program-
+
+The first thing that we have done here is, we created a function that takes a set as its parameter and returns the expected output.
+After this, we have passed the value of the set that consists of different subject names inside the set().
+The next step was to pass our set in the function 'convert_set'.
+On executing the program, the desired output is displayed.
+
+Output
+['C','C++','Java','Python','HTML' ]
+
+Using for loop
+In the fourth method, we will use for loop to convert a set to a list in Python.
+The program below illustrates the same-
+
+#using for loop
+subjects = set({'C','C++','Java','Python','HTML'})
+ 
+res = []
+ 
+for i in subjects:
+    res.append(i)
+
+Output:
+['C','C++','Java','Python','HTML' ]
+
+Let us understand what we have done in the above program-
+
+The first thing that we have done here is to declare the set that consists of different subject names.
+After this, we have declared an empty list res.
+We have used for loop here, that took each element from the set and added it to the list.
+On executing the program, the desired output is displayed.
+
+Using frozenset
+Finally, in the last method, we will use frozenset to convert a set to a list in Python.
+The difference between a set and a frozenset is that a set is mutable whereas a frozenset is immutable.
+The following program shows how it can be done-
+
+subjects = frozenset({'C','C++','Java','Python','HTML'})
+ 
+res = list(subjects)
+ 
+print(res)
+
+Output:
+['C','C++','Java','Python','HTML' ]
+
+Explanation:
+Let us understand what we have done in the above program-
+
+The first thing that we have done here is to declare the frozenset that consists of different subject names.
+After this, we have used list() in which we passed the set 'subjects'.
+On executing the program, the desired output is displayed.
+
+Conclusion
+In this tutorial, we came across the different approaches of converting a set to a list in Python.
+
+
+Next TopicString to int in Python
+
+
+
+
+← prev
+next →
+
+
+
+

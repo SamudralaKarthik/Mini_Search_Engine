@@ -1,0 +1,229 @@
+
+
+
+
+next →
+← prev
+
+Write the Python Program to Print the Doubly Linked List in Reverse Order
+In this tutorial, we will write the Python program to print the reversed linked list. Doubly-linked list is a circular linked list which creates the circular linked list. To solve this problem we will use the following steps -
+
+ Traverse the linked list using a pointer
+Swap the prev and next pointers for all nodes
+At last, change the head pointer of the doubly linked list
+
+Example -
+
+class Node(object):
+    # Singly linked node
+    def __init__(self, data=None, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+
+class Doubly_Linked_List(object):
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
+
+    def insert_element(self, data):
+        # Append an item 
+        new_item = Node(data, None, None)
+        if self.head is None:
+            self.head = new_item
+            self.tail = self.head
+        else:
+            new_item.prev = self.tail
+            self.tail.next = new_item
+            self.tail = new_item
+        self.count += 1
+    
+    def iter(self):
+        # Iterate the list
+        current = self.head
+        while current:
+            item_val = current.data
+            current = current.next
+            yield item_val
+    def print_list(self):    
+        #Node current will point to head    
+        current = self.head;    
+        if(self.head == None):    
+            print("List is empty");    
+            return;    
+        print("Nodes of doubly linked list: ");    
+        while(current != None):     
+            #Prints each node by incrementing pointer.    
+            print(current.data),;    
+            current = current.next;   
+    
+    def print_reversed_list(self):
+        for node in self.iter():
+            print(node)  
+        
+    def reverse(self):
+        """ Reverse linked list. """
+        current = self.head
+        while current:
+            temp = current.next
+            current.next = current.prev
+            current.prev = temp
+            current = current.prev
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
+node = Doubly_Linked_List()
+node.insert_element(4)
+node.insert_element(2)
+node.insert_element(8)
+node.insert_element(1)
+node.insert_element(5)
+node.insert_element(12)
+print("Print Doubly Linked list ")
+items.print_list()
+print("Print Reversed Doubly Linked List")
+items.reverse()
+items.print_reversed_list()
+
+Output -
+Print Doubly Linked list 
+Nodes of doubly linked list: 
+4
+2
+8
+1
+5
+12
+Print Reversed Doubly Linked List
+12
+5
+1
+8
+2
+4
+
+Explanation -
+In the above code, we have created the class Node that initialized the singly linked list. To create the doubly linked list, we initialized the doubly linked list class where we assigned the initial value of the head, prev and next as none and count as zero. We defined the insert_element() function which call the Node class to insert the elements. First we check if the head is none, insert the new item to head and assign the head into tail.
+Otherwise, we assigned the tail to new_item.pre, new node to tail.next and tail. We increased the count as one on every insertion of the element.
+In the reverse() function, we assign the current variable that holds the head of the list. We checked if double-linked list is non-empty, we store the current's next into temp variable and traverse the doubly linked list, we assign the current's prev to the current's next and temp to current's prev.
+At the end of the code we created the object of the Doubly_Linked_List class and insert the elements to the list. We called the print_list() method to print the simple doubly linked list and called reverse() function to print reverse of the linked list.
+The time complexity will be O(N) where N represents the number of nodes in the doubly linked list and auxiliary space will be O(N).
+Reverse the Doubly Linked List using Stack
+We can reverse the linked list using the stack as well. We will follow the below approach -
+
+First, we traverse the linked list and push the node's data into the stack.
+Then keep popping the elements out of the stack and updating the Doubly Linked List.
+
+Let's implement the above approach into the Python code -
+Example -
+
+class Node(object):
+    # Singly linked node
+    def __init__(self, data=None, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+
+class Doubly_Linked_List(object):
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
+
+    def push(self, data):
+        # Append an item 
+        new_item = Node(data, None, None)
+        if self.head is None:
+            self.head = new_item
+            self.tail = self.head
+        else:
+            new_item.prev = self.tail
+            self.tail.next = new_item
+            self.tail = new_item
+        self.count += 1
+    
+    def iter(self):
+        # Iterate the list
+        current = self.head
+        while current:
+            item_val = current.data
+            current = current.next
+            yield item_val
+    def print_list(self):    
+        #Node current will point to head    
+        current = self.head;    
+        if(self.head == None):    
+            print("List is empty");    
+            return;    
+        print("Nodes of doubly linked list: ");    
+        while(current != None):     
+            #Prints each node by incrementing pointer.    
+            print(current.data),;    
+            current = current.next;   
+    
+    def print_reversed_list(self):
+        for node in self.iter():
+            print(node)  
+        
+    def reverse_using_stacks(self):
+ 
+        stack = []
+        temp = self.head
+        while temp is not None:
+            stack.append(temp.data)
+            temp = temp.next
+ 
+        # Add all the elements in the stack
+        # in a sequence to the stack
+        temp = self.head
+        while temp is not None:
+            temp.data = stack.pop()
+            temp = temp.next
+
+node = Doubly_Linked_List()
+node.push(4)
+node.push(2)
+node.push(8)
+node.push(1)
+node.push(5)
+node.push(12)
+
+print("Print Doubly Linked list ")
+node.print_list()
+print("Print Reversed Doubly Linked List")
+node.reverse_using_stacks()
+node.print_reversed_list()
+
+Output -
+Print Doubly Linked list 
+Nodes of doubly linked list: 
+4
+2
+8
+1
+5
+12
+Print Reversed Doubly Linked List
+12
+5
+1
+8
+2
+4
+
+The time complexity will be O(N) and auxiliary space will be O(N).
+
+
+Next TopicApplication to get live USD - INR rate using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

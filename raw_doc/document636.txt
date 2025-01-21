@@ -1,0 +1,63 @@
+
+
+
+
+next →
+← prev
+
+How to insert current_timestamp into Postgres via Python?
+PostgreSQL supports two types of data to process timestamps: time stamp and timestamptz. Timestamp data type allows us to create a timestamp that is not based on the timezone. Likewise, timestamptz can help us create a timestamp with the timezone. It is possible to store dates and times using the datatype timestamp. It does not, however, include time zone information. This means that if you change the timezone of your database server, the values for timestamps stored in the database won't immediately update, and in these circumstances, the datatype timestamptz is used.
+Example:
+The code below illustrates the datatypes. psycopg2.connect() technique is utilized to connect with the database. A cursor can be created by connection.cursor() method. connection.cursor() method. execute() method executes the SQL commands specified. A table called timestamp_data is made. A time stamp formatted in a string is added to the table that is created. The values are then retrieved from the table. The table is where we see the column timestamp_timezone as well as the timezone.
+
+# first, we will import the required library
+import psycopg2 as P2
+from datetime import datetime as DT
+from datetime import timezone as TZ
+
+# Here, we will establish the connections
+conn1 = P2.connect(
+	database = "TIMESTAMPDATA", user = 'postgres', password = 'pass',
+	host = '127.0.0.1', port = '5432'
+)
+
+
+conn1.autocommit = True
+
+# Now, we will create a cursor
+cursor1 = conn1.cursor()
+
+# Now, we will create table
+cursor1.execute('''CREATE TABLE timestamp_data
+(timestamp TIMESTAMP, timestamp_timezone TIMESTAMPTZ);''')
+
+# # Now, we will insert timestamp values
+cursor1.execute('''INSERT INTO timestamp_data VALUES
+('2021-05-20 12:07:18-09','2021-05-20 12:07:18-09');''')
+
+# # Now, we will fetch the data
+sql_1 = '''select * from timestamp_data;'''
+cursor1.execute(sql_1)
+for k in cursor1.fetchall():
+	print(k)
+
+conn1.commit()
+
+# Here, we will close the connection
+conn1.close()
+
+Output:
+
+
+
+Next TopicHow to Perform a One-Way ANOVA in Python
+
+
+
+
+← prev
+next →
+
+
+
+

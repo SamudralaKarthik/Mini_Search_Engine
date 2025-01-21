@@ -1,0 +1,144 @@
+
+
+
+
+next →
+← prev
+
+Python Semaphore
+In the following tutorial, we will understand the multi-threading synchronization with the help of Semaphore in Python.
+Let us begin with understanding Python Semaphore.
+Understanding the Semaphore
+
+A semaphore is a synchronization construct.
+Semaphore offers threads with synchronized access to a restricted amount of resources.
+A semaphore can be considered as a variable that reflects the amount of currently existing resources. For instance, there are several slots available on a particular level in a parking lot of a shopping mall that is a semaphore.
+The semaphore value cannot be less than zero and greater than the total number of the existing resources.
+The semaphore is linked with two operations - acquire and release.
+When one resource among them is synchronized using a semaphore is "acquired" by a thread, the semaphore's value is decremented.
+When one resource among them is synchronized using a semaphore is "release" by a thread, the semaphore's value is incremented.
+The concept of semaphore is created by the Dutch computer scientist named Edsger Dijkstra.
+The two operations of the semaphore, namely acquire and release, are denoted as p and v, respectively by Dijkstra, where p and v are the first letters of the Dutch words proberen and vehogen.
+The word proberen represents the test, whereas vehogen represents the increment in Dutch.
+
+Now let us understand the semaphores in the Python programming language.
+Understanding the Python Semaphores
+
+A class of the threading module is used to implement the concept of semaphore in Python. This class is known as the Semaphore
+The Semaphore class consists of a constructor, and two functions, acquire() and release(), respectively.
+The acquire() function is used to decrease the count of the semaphore in case the count is greater than zero. Else it blocks till the count is greater than zero.
+The release() function is used for increasing the count of the semaphore and waking up one of the threads waiting on the semaphore.
+
+Let us consider the following syntax in order to create an object of Semaphore.
+Syntax:
+
+object_name = Semaphore(count)
+
+Explanation:
+In the above syntax, the object_name is the object of the Semaphore class. The 'count' parameter of the Semaphore class is the number of Threads allowed to access simultaneously. The default value of this parameter is 1.
+Whenever the acquire() function is executed by a Thread, the value of the "count" parameter will be decremented by one. Whenever the release() function is executed by a Thread, the value of the "count" parameter will be incremented by one. This statement implies that whenever we call the acquire() method, the "count" parameter value will be decremented, whereas on calling the release() method, the "count" parameter value will be incremented.
+Methods of creating a Semaphore object
+Case 1: In the following case, we do not specify the argument within the Semaphore class while creating an object. Thus, the value of the count variable is 1 because of which only a thread is permitted to access. This case is the exact copy of the Lock concept.
+The syntax for the same is shown below:
+Syntax:
+
+object_name.Semaphore()
+
+Case 2: In the following case, an object of the Semaphore class can be accessed by 'n' Threads at a time. The remaining Threads have to wait until releasing the semaphore.
+The syntax for the same is shown below:
+Syntax:
+
+object_name.Semaphore(n)
+
+Let us consider the following example to understand the complete concept properly.
+Example:
+
+# importing the modules
+from threading import *         
+import time        
+  
+# creating thread instance where count = 3
+my_obj = Semaphore(4)        
+  
+# creating instance
+def show(the_name):
+    
+    # calling acquire method
+    my_obj.acquire()                
+    for n in range(6):
+        print('Javatpoint, ', end = '')
+        time.sleep(1)
+        print(the_name)
+          
+        # calling release method
+        my_obj.release()    
+          
+# creating multiple thread 
+thread_1 = Thread(target = show , args = ('Thread 1',))
+thread_2 = Thread(target = show , args = ('Thread 2',))
+thread_3 = Thread(target = show , args = ('Thread 3',))
+thread_4 = Thread(target = show , args = ('Thread 4',))
+thread_5 = Thread(target = show , args = ('Thread 5',))
+thread_6 = Thread(target = show , args = ('Thread 6',))
+
+# calling the threads 
+thread_1.start()
+thread_2.start()
+thread_3.start()
+thread_4.start()
+thread_5.start()
+thread_6.start()
+
+Output
+Javatpoint, Javatpoint, Javatpoint, Javatpoint, Thread 1
+Thread 3
+Thread 4
+Thread 2
+Javatpoint, Javatpoint, Javatpoint, Javatpoint, Javatpoint, Javatpoint, Thread 1
+Thread 5
+Javatpoint, Javatpoint, Thread 6
+Thread 3
+Thread 4
+Javatpoint, Javatpoint, Thread 2
+Javatpoint, Javatpoint, Thread 5
+Javatpoint, Thread 1
+Javatpoint, Thread 3
+Javatpoint, Thread 6
+Thread 2
+Thread 4
+Javatpoint, Javatpoint, Javatpoint, Thread 5
+Javatpoint, Thread 1
+Javatpoint, Thread 3
+Javatpoint, Thread 6
+Thread 2
+Javatpoint, Javatpoint, Thread 4
+Javatpoint, Thread 5
+Javatpoint, Thread 1
+Thread 3
+Javatpoint, Javatpoint, Thread 2
+Thread 6
+Javatpoint, Javatpoint, Thread 4
+Javatpoint, Thread 5
+Javatpoint, Thread 1
+Thread 3
+Thread 2
+Thread 6
+Javatpoint, Thread 4
+Thread 5
+Thread 6
+
+Explanation:
+In the above snippet of code, we have imported the required modules and created an object for the Semaphore class with a count value of 4. We have then defined a function using the acquire() function on the object. We have then used the for-loop to iterate the value to 6. We have then called the release() function and created multiple threads. At last, we have called the threads using the start() function.
+
+
+Next TopicPython sorted reverse
+
+
+
+
+← prev
+next →
+
+
+
+

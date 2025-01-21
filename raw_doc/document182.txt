@@ -1,0 +1,483 @@
+
+
+
+
+next →
+← prev
+
+Menu-Driven Programs in Python
+An Introduction to Menu-Driven Program
+Menu-Driven Program is a program that gets input from a user by showing the options list, known as the menu, from which the user chooses their option. Systems processing the Menu-Driven programs are ordinary, starting from washing machines controlled by Microprocessors to Automated Teller Machines (ATMs). Taking the ATM case, the user presses single keys to indicate the type of transaction (if the user wants a receipt with the cash, or if an account statement is needed). With many, the user presses a single key to indicate the amount of cash for withdrawal.
+The Menu-Driven Systems are beneficial in two ways: At first, input is taken by the single keystrokes, which reduces the chance of the system too prone to user error. Secondly, Menu-Driven Systems limits the characters range resulting in the way where the entered input becomes unambiguous. Hence, these two characteristics make the whole system pretty user-friendly.
+In the following tutorial, we will discover some Menu-Driven Programs written in Python. These programs will let us understand different aspects of Menu-Driven Programs along with different libraries and modules of Python Programming Language.
+So, let's get started.
+Calculate the Parameter and Area of different Shapes using functions
+Program:
+
+# defining functions
+def p_circle(radius):
+    para = 2 * 3.14 * radius
+    print("Parameter of Circle:", para)
+
+def p_rectangle(height, width):
+    para = 2 * (height + width)
+    print("Parameter of Rectangle:", para)
+
+def p_square(side):
+    para = 4 * side
+    print("Parameter of Square:", para)
+
+def a_circle(radius):
+    area = 3.14 * radius * radius
+    print("Area of Circle:", area)
+
+def a_rectangle(height, width):
+    area = height * width
+    print("Area of Rectangle:", area)
+
+def a_square(side):
+    area = side * side
+    print("Area of Square:", area)
+
+# printing the starting line
+print("WELCOME TO A SIMPLE MENSURATION PROGRAM")
+
+# creating options
+while True:
+    print("\nMAIN MENU")
+    print("1. Calculate Parameter")
+    print("2. Calculate Area")
+    print("3. Exit")
+    choice1 = int(input("Enter the Choice:"))
+
+    if choice1 == 1:
+        print("\nCALCULATE PARAMETER")
+        print("1. Circle")
+        print("2. Rectangle")
+        print("3. Square")
+        print("4. Exit")
+        choice2 = int(input("Enter the Choice:"))
+
+        if choice2 == 1:
+            radius = int(input("Enter Radius of Circle:"))
+            p_circle(radius)
+            
+        elif choice2 == 2:
+            height = int(input("Enter Height of Rectangle:"))
+            width = int(input("Enter Width of Rectangle:"))
+            p_rectangle(height, width)
+            
+        elif choice2 == 3:
+            side = int(input("Enter Side of Square:"))
+            p_square(side)
+
+        elif choice2 == 4:
+            break
+            
+        else:
+            print("Oops! Incorrect Choice.")
+    
+    elif choice1 == 2:
+        print("\nCALCULATE AREA")
+        print("1. Circle")
+        print("2. Rectangle")
+        print("3. Square")
+        print("4. Exit")
+        choice3 = int(input("Enter the Choice:"))
+
+        if choice3 == 1:
+            radius = int(input("Enter Radius of Circle:"))
+            a_circle(radius)
+            
+        elif choice3 == 2:
+            height = int(input("Enter Height of Rectangle:"))
+            width = int(input("Enter Width of Rectangle:"))
+            a_rectangle(height, width)
+            
+        elif choice3 == 3:
+            side = int(input("Enter Side of Square:"))
+            a_square(side)
+
+        elif choice3 == 4:
+            break
+            
+        else:
+            print("Oops! Incorrect Choice.")
+    
+    elif choice1 == 3:
+        break
+    
+    else:
+        print("Oops! Incorrect Choice.")
+
+Output:
+WELCOME TO A SIMPLE MENSURATION PROGRAM
+
+MAIN MENU
+1. Calculate Parameter
+2. Calculate Area
+3. Exit
+Enter the Choice:1
+
+CALCULATE PARAMETER
+1. Circle
+2. Rectangle
+3. Square
+4. Exit
+Enter the Choice:2
+Enter Height of Rectangle:4
+Enter Width of Rectangle:5
+Parameter of Rectangle: 18
+
+MAIN MENU
+1. Calculate Parameter
+2. Calculate Area
+3. Exit
+Enter the Choice:2
+
+CALCULATE AREA
+1. Circle
+2. Rectangle
+3. Square
+4. Exit
+Enter the Choice:1
+Enter Radius of Circle:2
+Area of Circle: 12.56
+
+MAIN MENU
+1. Calculate Parameter
+2. Calculate Area
+3. Exit
+Enter the Choice:5
+Oops! Incorrect Choice.
+
+MAIN MENU
+1. Calculate Parameter
+2. Calculate Area
+3. Exit
+Enter the Choice:3
+
+
+
+Explanation:
+In the above example, we have defined different functions printing the estimated value after calculation. These functions include the parameters and areas of circle, rectangle, and square, respectively. We have then printed the heading of the program saying: WELCOME TO A SIMPLE MENSURATION PROGRAM. Below that, we have used the infinite while loop to print the Main Menu containing different options. The program then uses the if-elif-else statements to ask the user to input the integer choosing the options. The program will also raise an exception if the inserted integer is not present in the options list. We have then created two different submenus separating the Parameter option and the Area option. We have then added few more options within these submenus describing different shapes. These options also take different integer values indicating the radius for circle, height and width for rectangle, and side for square. As a result, the menu-driven program is successfully created and is able to calculate the parameter and areas of different shapes.
+Menu-Driven Program to create a simple calculator
+In the following Menu-Driven Program, we are going to build a simple calculator in Python. We will use the infinite while loop and functions same as above. We will design a menu allowing the user to interact with the calculator functions such as addition, subtract, multiplication and division.
+Let us consider the following program's syntax:
+Program:
+
+# defining addition function
+def add(a, b):
+    sum = a + b
+    print(a, "+", b, "=", sum)
+
+# defining subtraction function
+def subtract(a, b):
+    difference = a - b
+    print(a, "-", b, "=", difference)
+
+# defining multiplication function
+def multiply(a, b):
+    product = a * b
+    print(a, "x", b, "=", product)
+
+# defining division function
+def divide(a, b):
+    division = a / b
+    print(a, "/", b, "=", division)
+
+# printing the heading
+print("WELCOME TO A SIMPLE CALCULATOR")
+
+# using the while loop to print menu list
+while True:
+    print("\nMENU")
+    print("1. Sum of two Numbers")
+    print("2. Difference between two Numbers")
+    print("3. Product of two Numbers")
+    print("4. Division of two Numbers")
+    print("5. Exit")
+    choice = int(input("\nEnter the Choice: "))
+
+# using if-elif-else statement to pick different options
+    if choice == 1:
+        print( "\nADDITION\n")
+        a = int( input("First Number: "))
+        b = int( input("Second Number: "))
+        add(a, b)
+
+    elif choice == 2:
+        print( "\nSUBTRACTION\n")
+        a = int( input("First Number: "))
+        b = int( input("Second Number: "))
+        subtract(a, b)
+
+    elif choice == 3:
+        print( "\nMULTIPLICATION\n")
+        a = int( input("First Number: "))
+        b = int( input("Second Number: "))
+        multiply(a, b)
+
+    elif choice == 4:
+        print( "\nDIVISION\n")
+        a = int( input("First Number: "))
+        b = int( input("Second Number: "))
+        divide(a, b)
+
+    elif choice == 5:
+        break
+    
+    else:
+        print( "Please Provide a valid Input!")
+
+Output:
+WELCOME TO A SIMPLE CALCULATOR
+
+MENU
+1. Sum of two Numbers
+2. Difference between two Numbers
+3. Product of two Numbers
+4. Division of two Numbers
+5. Exit
+
+Enter the Choice: 1
+
+ADDITION
+
+First Number: 3
+Second Number: 4
+3 + 4 = 7
+
+MENU
+1. Sum of two Numbers
+2. Difference between two Numbers
+3. Product of two Numbers
+4. Division of two Numbers
+5. Exit
+
+Enter the Choice: 2
+
+SUBTRACTION
+
+First Number: 6
+Second Number: 3
+6 - 3 = 3
+
+MENU
+1. Sum of two Numbers
+2. Difference between two Numbers
+3. Product of two Numbers
+4. Division of two Numbers
+5. Exit
+
+Enter the Choice: 3
+
+MULTIPLICATION
+
+First Number: 8
+Second Number: 2
+8 x 2 = 16
+
+MENU
+1. Sum of two Numbers
+2. Difference between two Numbers
+3. Product of two Numbers
+4. Division of two Numbers
+5. Exit
+
+Enter the Choice: 4
+
+DIVISION
+
+First Number: 10
+Second Number: 4
+10 / 4 = 2.5
+
+MENU
+1. Sum of two Numbers
+2. Difference between two Numbers
+3. Product of two Numbers
+4. Division of two Numbers
+5. Exit
+
+Enter the Choice: 5
+
+
+
+Explanation:
+In the above program, we have used almost similar procedure we did in the previous program. We have defined various functions such as add, subtract, multiply, and divide. We have then used the while loop to print the menu list to the users and if-elif-else statements to return the answers that the user needed. As a result, a simple calculator is successfully created and performs some basic calculations like addition, subtraction, multiplication, and division.
+Menu-Driven Program to create a Phone Directory
+In the following Menu-Driven Program, we are going to create a Phonebook Directory using the different functions. We will add the following features to the Phonebook Directory:
+
+Storing the Contact Numbers of People
+Searching for the Contact Number using the person's name
+
+Let us implement this idea in the following program:
+Program:
+
+# printing the heading of the program
+print( "WELCOME TO THE PHONEBOOK DIRECTORY")
+
+# creating a .txt file to store contact details
+filename = "myphonebook.txt"
+myfile = open(filename, "a+")
+myfile.close
+
+# defining main menu
+def main_menu():
+    print( "\nMAIN MENU\n")
+    print( "1. Show all existing Contacts")
+    print( "2. Add a new Contact")
+    print( "3. Search the existing Contact")
+    print( "4. Exit")
+    choice = input("Enter your choice: ")
+    if choice == "1":
+        myfile = open(filename, "r+")
+        filecontents = myfile.read()
+        if len(filecontents) == 0:
+            print( "There is no contact in the phonebook.")
+        else:
+            print(filecontents)
+        myfile.close
+        enter = input("Press Enter to continue ...")
+        main_menu()
+    elif choice == "2":
+        newcontact()
+        enter = input("Press Enter to continue ...")
+        main_menu()
+    elif choice == "3":
+        searchcontact()
+        enter = input("Press Enter to continue ...")
+        main_menu()
+    elif choice == "4":
+        print("Thank you for using Phonebook!")
+    else:
+        print( "Please provide a valid input!\n")
+        enter = input( "Press Enter to continue ...")
+        main_menu()
+
+# defining search function        
+def searchcontact():
+    searchname = input( "Enter First name for Searching contact record: ")
+    remname = searchname[1:]
+    firstchar = searchname[0]
+    searchname = firstchar.upper() + remname
+    myfile = open(filename, "r+")
+    filecontents = myfile.readlines()
+     
+    found = False
+    for line in filecontents:
+        if searchname in line:
+            print( "Your Required Contact Record is:", end = " ")
+            print( line)
+            found = True
+            break
+    if found == False:
+        print( "The Searched Contact is not available in the Phone Book", searchname)
+
+# first name
+def input_firstname():
+    first = input( "Enter your First Name: ")
+    remfname = first[1:]
+    firstchar = first[0]
+    return firstchar.upper() + remfname
+
+# last name
+def input_lastname():
+    last = input( "Enter your Last Name: ")
+    remlname = last[1:]
+    firstchar = last[0]
+    return firstchar.upper() + remlname
+
+# storing the new contact details
+def newcontact():
+    firstname = input_firstname()
+    lastname = input_lastname()
+    phoneNum = input( "Enter your Phone number: ")
+    emailID = input( "Enter your E-mail Address: ")
+    contactDetails = ("[" + firstname + " " + lastname + ", " + phoneNum + ", " + emailID +  "]\n")
+    myfile = open(filename, "a")
+    myfile.write(contactDetails)
+    print( "The following Contact Details:\n " + contactDetails + "\nhas been stored successfully!")
+
+main_menu()
+
+Output:
+WELCOME TO THE PHONEBOOK DIRECTORY
+
+MAIN MENU
+
+1. Show all existing Contacts
+2. Add a new Contact
+3. Search the existing Contact
+4. Exit
+Enter your choice: 1
+There is no contact in the phonebook.
+Press Enter to continue ...
+
+MAIN MENU
+
+1. Show all existing Contacts
+2. Add a new Contact
+3. Search the existing Contact
+4. Exit
+Enter your choice: 2
+Enter your First Name: Mark
+Enter your Last Name: Henry
+Enter your Phone number: 1234567890
+Enter your E-mail Address: [email protected]
+The following Contact Details:
+ [Mark Henry, 1234567890, [email protected]]
+
+has been stored successfully!
+Press Enter to continue ...
+
+MAIN MENU
+
+1. Show all existing Contacts
+2. Add a new Contact
+3. Search the existing Contact
+4. Exit
+Enter your choice: 3
+Enter First name for Searching contact record: Mark
+Your Required Contact Record is: [Mark Henry, 1234567890, [email protected]]
+
+Press Enter to continue ...
+
+MAIN MENU
+
+1. Show all existing Contacts
+2. Add a new Contact
+3. Search the existing Contact
+4. Exit
+Enter your choice: 1
+[Mark Henry, 1234567890, [email protected]]
+
+Press Enter to continue ...
+
+MAIN MENU
+
+1. Show all existing Contacts
+2. Add a new Contact
+3. Search the existing Contact
+4. Exit
+Enter your choice: 4
+Thank you for using Phonebook!
+
+Explanation:
+In the above Menu-Driven Program, we have created a Phonebook Directory that can store a new contact in a text file, display the stored contacts and allow users to search an existing number too. First of all, we have created a text file to store the contact details. We have then defined various functions in order to add, show, and search different contacts. We have also created different contact detail fields such as First Name, Last Name, Mobile Number, and E-mail Address. As a result, the program is completed successfully, and the output of the same can be seen above.
+Conclusion
+In the above tutorial, we have understood the meaning of Menu-Driven Programming along with some examples. We have created three different programs, including the mensuration program, a simple calculator, and a phonebook directory. Apart from these three, there are many other programs that one can create.
+
+
+Next TopicPython Array vs. List
+
+
+
+
+← prev
+next →
+
+
+
+

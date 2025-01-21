@@ -1,0 +1,127 @@
+
+
+
+
+next →
+← prev
+
+Multiply All Elements in list of Python
+In this tutorial, we will learn how we can multiply all the elements of a list in Python.
+Let us have a look at some examples to understand our objective-
+
+Input - [2, 3, 4]
+Output - 24
+
+We can observe that in the output we have obtained the product of all the elements present in the list.
+
+Input - [3, 'a']
+Output - aaa
+
+Since the first element is three, a is printed three times in the output.
+We will learn the following methods-
+
+Traversing the list
+Using NumPy
+Using lambda
+
+Let's start with the first one,
+Traversing the list
+Consider the program given below-
+
+#creating a function
+def multiply_ele(list_value1):
+    #multiply the elements
+    prod=1
+    for i in list_value1:
+        prod = prod*i
+    return prod
+#initializing the list
+list_value1 = [10, 11, 12, 13, 14]
+list_value2 = [2, 3, 4, 5, 6, 7]
+#displaying the resultant values 
+print("The multiplication of all the elements of list_value1 is: ", multiply_ele(list_value1))
+print("The multiplication of all the elements of list_value2 is: ", multiply_ele(list_value2))
+
+Output:
+The multiplication of all the elements of list_value1 is: 240240
+The multiplication of all the elements of list_value2 is: 5040
+
+Explanation-
+It's time to have a look at the explanation of the above program-
+
+In the first step, we have created a function that will make the list as an input.
+In the function definition, we have used a for loop that takes each element from the list, multiplies it with one initially, and then prints the resultant value of the product.
+In the next step, we have initialized the lists and then passed them into our function.
+On executing this program, the desired output is displayed.
+
+In the second program, we will see how NumPy can help us to implement the same.
+Using NumPy
+The following program illustrates how it can be done in Python.
+
+#importing the NumPy module
+import numpy
+#initializing the list
+list_value1 = [10, 11, 12, 13, 14]
+list_value2 = [2, 3, 4, 5, 6, 7]
+#using numpy.prod()
+res_list1 = numpy.prod(list_value1)
+res_list2 = numpy.prod(list_value2)
+#displaying the resultant values 
+print("The multiplication of all the elements of list_value1 is: ", res_list1)
+print("The multiplication of all the elements of list_value2 is: ", res_list2)
+
+Output:
+The multiplication of all the elements of list_value1 is: 240240
+The multiplication of all the elements of list_value2 is: 5040
+
+Explanation-
+Let's understand what we have done in the above program.
+
+In the first step, we have imported the NumPy module.
+In the next step, we have initialized the values of the two lists, list_value1 and list_value2.
+After this, we will use prod() that will compute the product of the elements present in the lists.
+On executing the program, the expected output is displayed.
+
+Finally, we will learn how lambda can be used to multiply the elements of our list.
+Using lambda
+The program given below demonstrates the same-
+
+#importing the module
+from functools import reduce
+#initializing the list
+list_value1 = [10, 11, 12, 13, 14]
+list_value2 = [2, 3, 4, 5, 6, 7]
+#using numpy.prod()
+res_list1 = reduce((lambda a, b:a*b), list_value1)
+res_list2 = reduce((lambda a, b:a*b), list_value2)
+#displaying the resultant values 
+print("The multiplication of all the elements of list_value1 is: ", res_list1)
+print("The multiplication of all the elements of list_value2 is: ", res_list2)
+
+Output:
+The multiplication of all the elements of list_value1 is: 240240
+The multiplication of all the elements of list_value2 is: 5040
+
+Explanation-
+Let us understand what happened in the above program.
+
+In the first step, we have imported reduce from
+After this, we have initialized the two lists, list_value1 and list_value2.
+We have used the precise way of defining functions, which is lambda, and then provided the required functionality.
+On executing the program, the desired values are displayed.
+
+Conclusion
+In this tutorial, we learned the various approaches of multiplying the elements present in the list in Python.
+
+
+Next TopicDifference between module and function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

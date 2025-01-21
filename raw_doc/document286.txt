@@ -1,0 +1,144 @@
+
+
+
+
+next →
+← prev
+
+Name Mangling in Python
+In this tutorial, we are going to discuss the name mangling process in Python and how we can use the name mangling process in Python with different methods.
+Name Mangling
+A process in which any given identifier with one trailing underscore and two leading underscores is textually replaced with the __ClassName__Identifier is known as Name mangling. In __ClassName__Identifier name, ClassName is the name of current class where identifier is present.
+Illustration:
+Basically, above given definition of name mangling means that any identifier in the form such as __Jtp (Either at least two leading underscores or at most one underscore trailing the name) will be replaced by __ClassName__Jtp (the name of the current class will replace ClassName) with the leading underscore (s) striped in ClassName.
+Look at the following example to understand the name mangling process.
+Example:
+
+# A testing class for identifier
+class Testing: 
+    # Giving Name as an identifier
+    def __init__(self, name):
+         # Identifier initializing
+        self.__name = name 
+    def PrintName(self): 
+        print(self.__name) 
+t1 = Testing("JavaTpoint") # Calling variable name with the class
+t1.PrintName() # Printing name in the output
+
+Output:
+JavaTpoint
+
+Explanation:
+We have defined a testing class with a name identifier in the class in the above program. Inside the testing class, we have defined two default functions and one with the PrintName().
+In the PrintName() function, we have given the print command to print the name. Then, we initialized a t1 variable with the testing class. In last, we have used PrintName() to print the name we used in the Testing class while initializing it.
+Note: If we try to access the functions and variables of the Testing class outside the class, it will throw an error. Any changes made to the variable given inside the Testing Class can be done inside the class only.
+Example: 2
+
+# A testing class for identifier
+class Testing: 
+    # Giving Name as an identifier
+    def __init__(self, name):
+         # Identifier initializing with double underscore
+        self.__name = name 
+    def PrintName(self): 
+        print(self.__name) 
+t1 = Testing("JavaTpoint") # Calling variable name with the class
+t1.PrintName() # Printing name in the output
+# Accessing identifier outside the class
+print(t1.__name) # will throw an error in the output
+
+Output:
+JavaTpoint
+Traceback (most recent call last):
+  File "C:\Users\Manish\Downloads\code.py", line 12, in 
+    print(t1.__name) # will throw an error in the output
+AttributeError: 'Testing' object has no attribute '__name'
+
+Name Mangling in Python
+Implementation of the name mangling process in Python is the same as we have discussed above. We will use different methods in our Python program to implement the name mangling process and accessing variables in it.
+We will perform the following tasks in this section:
+
+Name mangling in Python with dir() method
+Accessing Name mangled variables in the program
+Name mangling with method overriding in Python
+
+We will use a program for each method to understand its implementation in Python.
+1. Name mangling with dir() method
+We can use the dir() method to perform the name mangling process, and it will be done to a class given in the code. The Python interpreter will do the process of name mangling to the class. We can use the dir() method by passing the defined class object in it, and the dir() method will return all the valid attributes belonging to the given class object.
+Look at the following exemplar program to understand this dir() method of name mangling:
+Example:
+
+# A testing class for name mangling
+class Testing: 
+    def __init__(self, name): 
+        self.__name = name
+# Initializing variable with the testing class
+t1 = Testing("JavaTpoint")
+# Using dir() method on initialized variable
+print(dir(t1))
+
+Output:
+['_Testing__name', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__']
+
+Explanation:
+As we look at the output, we can see that the dir() method we used on the initialized variable, i.e., t1, returned all the valid attributes of the class testing and printed them. We can also see that the name of the identifier, i.e., __name, is changed to _Testing__name by the interpreter.
+2. Accessing name mangled variables
+We can access the name mangled variables even outside the class and print the in output (Not like accessing the class variable that will return an error). To access the name mangled variables outside the class, we simply have to add _ClassName with the variable, and we can also print the value in the output.
+Look at the following program where we have accessed name mangled variables outside the testing class.
+Example:
+
+# A testing class for name mangling
+class Testing: 
+    def __init__(self, name): 
+          self.__name = name
+# Initializing variable with the testing class
+t1 = Testing("JavaTpoint")
+# Accessing Name mangled variables outside testing class
+print("The name mangled that we are accessing outside the class: ", t1._Testing__name)
+
+Output:
+The name mangled that we are accessing outside the class:  JavaTpoint
+
+Explanation:
+We have been able to access the __name variable outside as it was a name mangled variable, and it returned the name value in the output.
+3. Name mangling using method overriding
+As we are using the name mangling process in our program, we are limited because of little support for a valid use case of members from a private class. The limited support for the private class member's valid use case is to avoid name clashes of various names with names defined inside the subclasses. As long as the name mangling process will occur as per the definition of a Python class, the mangling process will be done by the interpreter. And, it is very helpful for the subclasses in the program to let them override methods without even breaking calls of the interclass method.
+Let's understand the following example.
+Example:
+
+# A default testing class for name mangling
+class Testing:  
+    def __init__(self):  
+        self.__jtp()  # name mangling with the Jtp variable
+    def jtp(self):  # default function for name mangling in parent class
+        print("Name mangling process done inside the parent testing class")  
+    # copy of jtp() method for private class members
+    __jtp = jtp     # Name mangling with method overriding process
+# A subclass for Testing class
+class SubTesting(Testing):  
+    # Providing new signature for jtp() function
+    def jtp(self):          
+        print("Name mangling process done inside the child sub-testing class") 
+# Calling the objects from subclass and function of it 
+obj = SubTesting() 
+obj.jtp()
+
+Output:
+Name mangling process done inside the parent testing class
+Name mangling process done inside the child sub-testing class
+
+Conclusion
+First, we have learned about the introduction of the Name mangling process in this tutorial. We also learned that how we can use the dir() method for name mangling in Python. Then, we accessed the name mangled variables outside the class in which they are present. In last, we also learn about that how we can use the name mangling process with method overriding in given subclasses in the program.
+
+
+Next TopicPython combination without itertools
+
+
+
+
+← prev
+next →
+
+
+
+

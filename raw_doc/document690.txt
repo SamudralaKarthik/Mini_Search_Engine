@@ -1,0 +1,328 @@
+
+
+
+
+next →
+← prev
+
+Flipping Tiles (Memory game) using Python
+Anyone can test their memory by playing the flipping-tiles game. Each number or figure has a pair of tiles in this set, which is an even number. We must flip the tiles so that we can see them because they are facing down. One flips two tiles in a turn, and if they match, they are taken out. If not, they are turned around and put back into position. Until all of the tiles have been matched and eliminated, we continue in this manner.
+Introducing the game :
+The tiles in our grid can now be displayed either face up or face down. But there is no way for us to engage in the game itself. Here's a reminder of how the game operates :
+
+All of the tiles are face down as the game begins.
+The player then turns over two cards and clicks on them to choose
+The tiles stay face up if they have the same image. If not, they must be turned face down once more after a little interval.
+
+Flipping clickable tiles :
+We currently have a programme that merely draws a tile grid before stopping. As time goes on, we want our programme to generate a variety of images. It will initially draw face-down tiles, followed by clicked tiles and a win screen if everything goes according to plan for the player.
+Moving all of our drawing code to this language draw() function is the next logical step. While the application is running, the computer will continue to execute draw(), causing the tiles to continue to be drawn based on whether they are facing up or down.
+
+draw = function() {
+    background(255, 255, 255);
+    for (var i = 0; i < tiles.length; i++) {
+        tiles[i].draw();
+    }
+};
+
+
+Now let's turn a few of those tiles face up! The player must click on a tile in order to flip it. In This language projects, we can write a mouseClicked() function to respond to mouse clicks, and the computer will run that code each time the mouse is clicked.
+
+  // process click somehow
+};
+
+When our application notices that the player has clicked someplace, we want to use mouseX and mouseY to detect if they have clicked on a tile. Let's begin by giving Tile an isUnderMouse() method that returns true if a given x and y are inside the area of a tile.
+The x and y of the tile correspond to the upper left corner of the tile because the way we've created the tiles, thus we should only return true if the provided x is between this.x and this.x + this.size and if the provided y falls between this.y and this.y + this.size.
+
+Tile.prototype.isUnderMouse = function(x, y) {
+    return x >= this.x && x <= this.x + this.size  &&
+        y >= this.y && y <= this.y + this.size;
+};
+
+Since we have that method now, we can check in mouseClicked() to see if each tile is within the mouseX and mouseY using a for loop. If so, then we set the isFaceUp() property of the tile to true.
+
+mouseClicked = function() {
+  for (var i = 0; i < tiles.length; i++) {
+    if (tiles[i].isUnderMouse(mouseX, mouseY)) {
+      tiles[i].isFaceUp = true;
+    }
+  }
+};
+
+Restricting the flipping of cards :
+The player's ability to flip the tiles over is a feature we should've developed, however we've left out a crucial limitation : - users shouldn't be capable of flipping more than two tiles at once.
+The number of flipped tiles will need to be recorded in some way. One straightforward approach would be to use a global variable called numFlipped that we increment each time a player turns a card face up. If numFlipped would be less than 2 and the tile isn't already face up, we only flip it over :
+
+var numFlipped = 0;
+mouseClicked = function() {
+    for (var i = 0; i < tiles.length; i++) {
+        var tile = tiles[i];
+        if (tiles.isUnderMouse(mouseX, mouseY)) {
+            if (numFlipped < 2 && !tile.isFaceUp) { 
+              tile.isFaceUp = true;
+              numFlipped++;
+            }
+        }
+    }
+
+Delaying of the tile's flipping :
+So, the logic behind flipping two tiles is finished. Next, what? Let's go over the guidelines once more :
+The tiles stay face up if they have the same image. Otherwise, after a while, the tiles turn back around.
+It will be difficult to test the first portion if we can't simply seek for fresh matches, so we will first develop the second component, which automatically flips the tiles back over.
+By setting isFaceUp to false, we know how to reverse the direction of the tiles, but what about after some time has passed? Delaying code execution takes many forms in different languages and environments, and we need to figure out how to achieve it in This language. In order to determine if the delay period has passed, we need a mechanism to keep track of time. We also need a way to call code once the delay period has ended. What we would advise is this :
+
+We created the delayStartFC global variable, which was initially empty.
+After flipping over a second tile in the mouseClicked() method, we kept the present value of frameCount in delayStartFC. One way we may tell the time in our programmes is by using the variable that indicates how many frames have passed since the programme began to execute.
+In the draw() function, we determine whether the new frameCount value is much higher than the previous one. If so, all of the tiles are turned over, and numFlipped is set to 0. Additionally, we nullized delayStartFC.
+
+In fact, it's a wonderful solution that doesn't involve writing a lot of code. We may use the loop and noLoop methods to ensure that the draw code is only called when a delay is present in order to improve performance. Here's everything we explained :
+
+var numFlipped = 0;
+var delayStartFC = null;
+
+mouseClicked = function() {
+  for (var i = 0; i < tiles.length; i++) {
+    var tile = tiles[i];
+    if (tile.isUnderMouse(mouseX, mouseY)) {
+      if (numFlipped < 2 && !tile.isFaceUp) {
+        tile.isFaceUp = true;
+        numFlipped++;
+        if (numFlipped === 2) {
+          delayStartFC = frameCount;
+        }
+        loop();
+      } 
+    }
+  }
+};
+
+draw = function() {
+  if (delayStartFC &&
+     (frameCount - delayStartFC) > 30) {
+    for (var i = 0; i < tiles.length; i++) {
+      tiles[i].isFaceUp = false;
+    }
+    numFlipped = 0;
+    delayStartFC = null;
+    noLoop();
+  }
+
+  background(255, 255, 255);
+  for (var i = 0; i < tiles.length; i++) {
+    tiles[i].draw();
+  }
+};
+
+Checking the matches :
+If we were able to match any of the tiles above, we were likely disappointed when they were turned back over because, hey, we were successful! So it's time to put this game rule into action :
+When two tiles line up perfectly, they should remain face up.
+This indicates that whenever there are two flipped over tiles, as well as before the user set up the delay, we should look for matching tiles. Pseudo-code for that would be :
+
+if there are two tiles flipped over:
+    if first tile has same face as second tile:
+       keep the tiles face up
+
+How do we determine if two tiles are facing the same direction? We already have a checked for this (numFlipped === 2). First, we need a way to get at the two tiles that are faced up. How can we locate them?
+Each time, we could traverse over our array to identify all of the tiles whose isFaceUp property was set to true before storing those into another array.
+Let's take a short cut and always keep our flipped tiles inside an array for convenience. By doing this, each time the player flips a tile, we avoid having to loop through the entire array of tiles.
+We may first swap out numFlipped for an array, then use flippedTiles.length wherever numFlipped was previously used. This is how our mouseClicked() function looks :
+
+var flippedTiles = [];
+var delayStartFC = null;
+
+mouseClicked = function() {
+  for (var i = 0; i < tiles.length; i++) {
+    var tile = tiles[i];
+    if (tile.isUnderMouse(mouseX, mouseY)) {
+      if (flippedTiles.length < 2 && !tile.isFaceUp) {
+        tile.isFaceUp = true;
+        flippedTiles.push(tile);
+        if (flippedTiles.length === 2) {
+          delayStartFC = frameCount;
+          loop();
+        }
+      } 
+    }
+  }
+};
+
+Now, identifying whether the two tiles in the flippedTiles array indeed have the same face requires further investigation. What is the face property, then? It's an object, and since the variable is directing at the same location in computer memory for each, the face of matching tiles should actually be pointing at the exact same item. This is due to the fact that each image object was only ever created once (for example, getImage("avatars/old-spice-man")), and that object was then twice pushed onto the faces array :
+
+var face = possibleFaces[randomInd];
+selected.push(face);
+selected.push(face);
+
+If two variables that refer to objects are used, and if both of those variables correspond to the same object in memory, then the equality operator, at least in JavaScript, will return true. As a result, we can do a quick check by using the equality operator on the face property of each tile.
+
+if (flippedTiles[0].face === flippedTiles[1].face) {
+  ...
+}
+
+We must keep the tiles up now that we are certain they match. They would all currently be turned over after some delay. We could simply choose not to set up the animation in this scenario, but we can't rely on that as there will be an animation in subsequent turns.
+We need a method to be able to say, "Hey, when we turn them all back, we should not turn these specific ones over." That is a good application for a boolean property! Let's add the isMatch property to the Tile constructor and then just inside that if block, set the isMatch property to true. It is shown below too :
+
+if (flippedTiles[0].face === flippedTiles[1].face) {
+  flippedTiles[0].isMatch = true;
+  flippedTiles[1].isMatch = true;
+}
+
+We can now make a decision regarding whether to flip the tiles over with or without the delay using that property.
+
+for (var i = 0; i < tiles.length; i++) {
+  var tile = tiles[i];
+  if (!tile.isMatch) {
+    tile.isFaceUp = false;
+  }
+}
+
+Complete Code :
+
+import random, pygame, sys
+from pygame.locals import *
+
+var Tile = function(x, y, face) {
+    this.x = x;
+    this.y = y;
+    this.face = face;
+    this.size = 50;
+};
+
+Tile.prototype.drawFaceDown = function() {
+    fill(214, 247, 202);
+    strokeWeight(2);
+    rect(this.x, this.y, this.size, this.size, 10);
+    image(getImage("avatars/leaf-green"), this.x, this.y, this.size, this.size);
+    this.isFaceUp = false;
+};
+
+Tile.prototype.drawFaceUp = function() {
+    fill(214, 247, 202);
+    strokeWeight(2);
+    rect(this.x, this.y, this.size, this.size, 10);
+    image(this.face, this.x, this.y, this.size, this.size);
+    this.isFaceUp = true;
+};
+
+Tile.prototype.isUnderMouse = function(x, y) {
+    return x >= this.x && x <= this.x + this.size  &&
+        y >= this.y && y <= this.y + this.size;
+};
+
+// Global config
+var NUM_COLS = 5;
+var NUM_ROWS = 4;
+
+// Declare an array of all possible faces
+var faces = [
+    getImage("avatars/leafers-seed"),
+    getImage("avatars/leafers-seedling"),
+    getImage("avatars/leafers-sapling"),
+    getImage("avatars/leafers-tree"),
+    getImage("avatars/leafers-ultimate"),
+    getImage("avatars/marcimus"),
+    getImage("avatars/mr-pants"),
+    getImage("avatars/mr-pink"),
+    getImage("avatars/old-spice-man"),
+    getImage("avatars/robot_female_1")
+];
+
+// Make an array which has 2 of each, then randomize it
+var possibleFaces = faces.slice(0);
+var selected = [];
+for (var i = 0; i < 10; i++) {
+    // Randomly pick one from the array of remaining faces
+    var randomInd = floor(random(possibleFaces.length));
+    var face = possibleFaces[randomInd];
+    // Push 2 copies onto array
+    selected.push(face);
+    selected.push(face);
+    // Remove from array
+    possibleFaces.splice(randomInd, 1);
+}
+
+// Now shuffle the elements of that array
+var shuffleArray = function(array) {
+    var counter = array.length;
+
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        var ind = Math.floor(Math.random() * counter);
+        // Decrease counter by 1
+        counter--;
+        // And swap the last element with it
+        var temp = array[counter];
+        array[counter] = array[ind];
+        array[ind] = temp;
+    }
+};
+shuffleArray(selected);
+
+// Create the tiles
+var tiles = [];
+for (var i = 0; i < NUM_COLS; i++) {
+    for (var j = 0; j < NUM_ROWS; j++) {
+        var tileX = i * 54 + 10;
+        var tileY = j * 54 + 40;
+        var tileFace = selected.pop();
+        tiles.push(new Tile(tileX, tileY, tileFace));
+    }
+}
+
+background(255, 255, 255);
+
+// Now draw them face down
+for (var i = 0; i < tiles.length; i++) {
+    tiles[i].drawFaceDown();
+}
+
+var flippedTiles = [];
+var delayStartFC = null;
+
+mouseClicked = function() {
+    for (var i = 0; i < tiles.length; i++) {
+        if (tiles[i].isUnderMouse(mouseX, mouseY)) {
+            if (flippedTiles.length < 2 && !tiles[i].isFaceUp) {
+                tiles[i].drawFaceUp();
+                flippedTiles.push(tiles[i]);
+                if (flippedTiles.length === 2) {
+                    if (flippedTiles[0].face === flippedTiles[1].face) {
+                        flippedTiles[0].isMatch = true;
+                        flippedTiles[1].isMatch = true;
+                    }
+                    delayStartFC = frameCount;
+                    loop();
+                }
+            } 
+        }
+    }
+};
+
+draw = function() {
+    if (delayStartFC && (frameCount - delayStartFC) > 30) {
+        for (var i = 0; i < tiles.length; i++) {
+            if (!tiles[i].isMatch) {
+                tiles[i].drawFaceDown();
+            }
+        }
+        flippedTiles = [];
+        delayStartFC = null;
+        noLoop();
+    }
+};
+
+Output:
+
+
+
+Next TopicPython Curl
+
+
+
+
+← prev
+next →
+
+
+
+

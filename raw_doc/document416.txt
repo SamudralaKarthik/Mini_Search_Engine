@@ -1,0 +1,413 @@
+
+
+
+
+next →
+← prev
+
+Image Steganography using Python
+The modern world of computation revolves around the word "Data". However, why is data so fascinating? In this modern world, people are starting to realize the significance of the data in order to expand the scope of their businesses. Business owners used data to potentially predict customer trends, increase sales, and push the organization to newer heights. With the help of the rapid advancement in technology and data for nonstop revolution, it has become the chief importance to secure data. Data sharing has also increased as thousands of messages and data are being transmitted on the internet day-to-day from one place to another. Data protection is the key concern of the sender, and, significantly, we encrypt the message in a secret method that only the receiver can understand.
+In the following tutorial, we will understand the concept of Steganography along with its practical implementation using the Python programming language.
+Understanding the concept of Steganography
+Steganography refers to the process of hiding a secret message within a larger one in such a manner that someone cannot know the presence or contents of the hidden message. The objective of Steganography is to maintain secret communication between two parties. Unlike Cryptography, where we can conceal the contents of a secret message, Steganography conceals the fact that a message is transmitted. Even though Steganography differs from Cryptography, there are various analogies between the two. Some authors classify Steganography as a form of Cryptography as hidden communication seems like a secret message.
+Understanding the benefits of using Steganography over Cryptography
+As we know, Cryptography has always had its ultimate role in protecting the confidentiality between the sender and the expected receiver. However, the usage of the methods of Steganography besides Cryptography has increased gradually to include more protective layers to the hidden data. One of the benefits of utilizing Steganography over Cryptography alone is that the proposed secret message does not attract attention to itself as an object of scrutiny. Visible encrypted messages, no matter how unbreakable they are, arouse interest and may in themselves be convicting in countries where encryption is illegal.
+Understanding the types of Steganography
+The works of Steganography have been carried out on various transmission media, categorizing it into different types:
+
+Text Steganography
+Image Steganography
+Video Steganography
+Audio Steganography
+Network Steganography
+E-mail Steganography
+
+
+Now, let us understand the basic model of Steganography
+Basic Model of Steganography
+
+As we can observe in the above image, both the actual file (X) and secret message (M) that must be hidden are fed into a steganographic encoder as input. Steganographic Encoder function, f(X, M, K) embeds the secret message into a cover image file using techniques like least significant bit encoding. The resulting stego image looks very similar to your cover image file, with no visible changes. This completes encoding. To retrieve the secret message, the stego object is fed into Steganographic Decoder.
+This tutorial will support us in implementing image steganography with the help of the Python programming language. It will help us write Python script in order to hide text messages using a technique known as Least Significant Bit.
+Understanding the Least Significant Bit Steganography
+We can describe a digital image as a finite set of digital values, known as Pixels. Pixels are the smallest individual element of an image, holding values representing the brightness of a particular colour at any specific point. Thus, we can think of an image as a matrix (or a two-dimensional array) of pixels consisting of a static number of rows and columns.
+LSB (or Least Significant Bit) is a method where we can modify the last bit of every pixel, replacing them with the data bit of the secret message.
+
+From the above image, we can observe that if we alter the Most Significant Bit (or MSB), it will have a larger impact on the final values; however, if we alter the Least Significant Bit (or LSB), the impact on the final value is minimal. Hence, we use Least Significant Bit (LSB) Steganography.
+Understanding the working of the Least Significant Bit technique
+Each pixel consists of three values - Red, Green, Blue. These values range from 0 to 255, which means that they are 8-bit values. Let us understand the working of this technique using an example. Suppose that we want to hide the message "hi" into an image of size 4x4, which has the pixel values as shown below:
+
+[(225, 12, 99), (155, 2, 50), (99, 51, 15), (15, 55, 22), (155, 61, 87), (63, 30, 17), (1, 55, 19), (99, 81, 66), (219l, 77, 91), (69, 39, 50), (18, 200, 33), (25, 54, 190)]
+
+With the help of the ASCII Table, we can convert the secret message into decimal values and then into a binary form: 0110100 0110101. Now, we can iterate through the pixel values one after one. Once we convert them into binary, we can replace each least significant bit with that message bits in a sequential manner (For instance, the binary of 225 is 11100001, we can then replace the last bit, the bit in the right (1), with the initial data bit (0) and so on). This will allow us to modify the values of the pixel by +1 or -1 only, which is not perceptible at all. The output values of the pixels after performing LSBS is as follows:
+
+[(224, 13, 99), (154, 3, 50), (98, 50, 15), (15, 54, 23), (154, 61, 87), (63, 30, 17), (1, 55, 19), (99, 81, 66), (219, 77, 91), (69, 39, 50), (18, 200, 33), (25, 54, 190)]
+
+Hiding Text within an Image using Python
+The following section mainly focuses on the step-by-step approach of the hide and reveal process with the help of a Python script.
+The steps for this approach are as follows:
+Step 1: Importing all the required Python libraries.
+Step 2: Defining a function to convert any type of data into binary, we will use this to convert the secret data and pixels' values into binary in the encoding and decoding phase. 
+Step 3: Defining another function to hide a secret message in the image by changing the LSB.
+Step 4: Writing a function to decode the hidden message from the Steganographic image.
+Step 5: Writing another function that accepts the user's image name and secret message and calls the hide_data() function to encode the message.
+Step 6: Defining a function to ask the user to enter the image name that requires decoded and call the show_data() function to return the decoded message.
+Step 7: Defining the main function.
+Let us see the above steps in action:
+Importing the Python libraries
+We will start by importing the necessary libraries that we need for the project. If any of the used libraries are not found in the system, install it using the pip installer.
+Let us consider the following Python script to understand the same:
+Example:
+
+# importing the required libraries
+import cv2
+import numpy as np
+import types
+
+Explanation:
+In the above snippet of code, we have imported the OpenCV library along with the NumPy and types libraries.
+Converting Types to Binary
+Now we will define a function in order to convert any type of data into binary. We will be using this method to convert the secret data and pixel values to binary in the encoding and decoding phase.
+Let us consider the following Python script to understand the same:
+Example:
+
+# converting types to binary
+def msg_to_bin(msg):
+    if type(msg) == str:
+        return ''.join([format(ord(i), "08b") for i in msg])
+    elif type(msg) == bytes or type(msg) == np.ndarray:
+        return [format(i, "08b") for i in msg]
+    elif type(msg) == int or type(msg) == np.uint8:
+        return format(msg, "08b")
+    else:
+        raise TypeError("Input type not supported")
+
+Output:
+Explanation:
+In the above snippet, we have defined a function as msg_to_bin() that accepts the msg parameter in the form of data input by the user. We have then used the if-elif-else conditional statements to check the data type of the input secret data in the form of the message and image and convert them into Binary.
+Hiding Secret Data in the Image
+Once the conversion into the binary format is complete, we will define a function in order to hide a secret message in the image by changing the Least Significant Bit.
+Let us consider the following script to understand the same:
+Example:
+
+# defining function to hide the secret message into the image
+def hide_data(img, secret_msg):
+    # calculating the maximum bytes for encoding
+    nBytes = img.shape[0] * img.shape[1] * 3 // 8
+    print("Maximum Bytes for encoding:", nBytes)
+    # checking whether the number of bytes for encoding is less
+    # than the maximum bytes in the image
+    if len(secret_msg) > nBytes:
+        raise ValueError("Error encountered insufficient bytes, need bigger image or less data!!")
+    secret_msg += '#####'       # we can utilize any string as the delimiter
+    dataIndex = 0
+    # converting the input data to binary format using the msg_to_bin() function
+    bin_secret_msg = msg_to_bin(secret_msg)
+
+    # finding the length of data that requires to be hidden
+    dataLen = len(bin_secret_msg)
+    for values in img:
+        for pixels in values:
+            # converting RGB values to binary format
+            r, g, b = msg_to_bin(pixels)
+            # modifying the LSB only if there is data remaining to store
+            if dataIndex < dataLen:
+                # hiding the data into LSB of Red pixel
+                pixels[0] = int(r[:-1] + bin_secret_msg[dataIndex], 2)
+                dataIndex += 1
+            if dataIndex < dataLen:
+                # hiding the data into LSB of Green pixel
+                pixels[1] = int(g[:-1] + bin_secret_msg[dataIndex], 2)
+                dataIndex += 1
+            if dataIndex < dataLen:
+                # hiding the data into LSB of Blue pixel
+                pixels[2] = int(b[:-1] + bin_secret_msg[dataIndex], 2)
+                dataIndex += 1
+            # if data is encoded, break out the loop
+            if dataIndex >= dataLen:
+                break
+    
+    return img
+
+Explanation:
+In the above snippet of code, we have defined a function that accepts two parameters in the form of an image file and a secret message. We have then calculated the maximum bytes for encoding and checked if the number of bytes to encode is less than the maximum bytes in the image. We have then set the index of the data to 0 and converted the secret data into binary. We then found the length of data and used the for-loop to iterate through pixel values in the image, convert the RGB values to binary format, and hide the data for each pixel.
+Decoding the hidden message from the Steganographic image
+Now, we will write a function to decode the hidden message from the Steganographic image. Let us consider the following script to understand the same:
+Example:
+
+def show_data(img):
+    bin_data = ""
+    for values in img:
+        for pixels in values:
+            # converting the Red, Green, Blue values into binary format
+            r, g, b = msg_to_bin(pixels)
+            # data extraction from the LSB of Red pixel
+            bin_data += r[-1]
+            # data extraction from the LSB of Green pixel
+            bin_data += g[-1]
+            # data extraction from the LSB of Blue pixel
+            bin_data += b[-1]
+    # splitting by 8-bits
+    allBytes = [bin_data[i: i + 8] for i in range(0, len(bin_data), 8)]
+    # converting from bits to characters
+    decodedData = ""
+    for bytes in allBytes:
+        decodedData += chr(int(bytes, 2))
+        # checking if we have reached the delimiter which is "#####"
+        if decodedData[-5:] == "#####":
+            break
+    # print(decodedData)
+    # removing the delimiter to display the actual hidden message
+    return decodedData[:-5]
+
+Explanation:
+In the above snippet of code, we have defined the show_data() function that accepts the image file. Within this function, we have defined empty binary data and used the for-loop to iterate through the image pixels and convert the RGB pixels into binary format. We have also extracted the data from each pixel, and we have then split them by 8-bits and converted them to characters. At last, we checked the delimiter and removed it to display the actual hidden message.
+Encoding the message
+We will now define a function that accepts the name of the image and secret message from the user. We will also call the hide_data() function in order to encode the message.
+Let us consider the following script to understand the same:
+Example:
+
+# defining function to encode data into Image
+def encodeText():
+    img_name = input("Enter image name (with extension): ")
+    # reading the input image using OpenCV-Python
+    img = cv2.imread(img_name)
+
+    # printing the details of the image
+    print("The shape of the image is: ", img.shape) # checking the image shape to calculate the number of bytes in it
+    print("The original image is as shown below: ")
+    # resizing the image as per the need
+    resizedImg = cv2.resize(img, (500, 500))
+    # displaying the image
+    cv2_imshow(resizedImg)
+    data = input("Enter data to be encoded: ")
+    if (len(data) == 0):
+        raise ValueError('Data is Empty')
+    
+    file_name = input("Enter the name of the new encoded image (with extension): ")
+    # calling the hide_data() function to hide the secret message into the selected image
+    encodedImage = hide_data(img, data)
+    cv2.imwrite(file_name, encodedImage)
+
+Explanation:
+In the above snippet of code, we have defined a function as encodeText() to encode the secret message along with the image. Within the function, we have asked the user for the name of the image file using the input() function and used the OpenCV library to read that file. We have then printed the details of the image along with the image itself. We have then asked the user for the text message to be encoded and the new file name for the encoded image. At last, we have called the hide_data() function in order to hide the secret message in the selected image.
+Decoding the message
+Now, we will define a function to ask the user to enter the name of the image file that has to be decoded and call the show_data() function in order to return the decoded message.
+Let us consider the following Python script illustrates the same:
+Example:
+
+# defining the function to decode the data in the image
+def decodeText():
+    # reading the image containing the hidden image
+    img_name = input("Enter the name of the Steganographic image that has to be decoded (with extension): ")
+    img = cv2.imread(img_name)  # reading the image using the imread() function
+
+    print("The Steganographic image is as follow: ")
+    resizedImg = cv2.resize(img, (500, 500))    # resizing the actual image as per the needs
+    cv2_imshow(resizedImg)  # displaying the Steganographic image
+
+    text = show_data(img)
+    return text
+
+Explanation:
+In the above snippet of code, we have defined another function as decodeText() that allows the user to decode any image file. Within this function, we have asked the user for the name of the image file that has to be decoded and read the same using one of the functions of the OpenCV library. We have then resized the image and displayed the Steganographic image. We have also extracted the secret text data from the image file by calling the show_data() function and returning text for the users.
+The main function
+We will now set up the main function in order to commence the operation of image steganography. We will include a menu for the user to either encode the data or decode one and continue the execution afterward.
+Let us consider the following Python script demonstrating the same:
+Example:
+# image ste
+
+# image steganography
+def steganography():
+    n = int(input("Image Steganography \n1. Encode the data \n2. Decode the data \n Select the option: "))
+    if (n == 1):
+        print("\nEncoding...")
+        encodeText()
+
+    elif (n == 2):
+        print("\nDecoding...")
+        print("Decoded message is " + decodeText())
+    
+    else:
+        raise Exception("Inserted value is incorrect!")
+
+steganography() # encoding the image
+
+Explanation:
+In the above snippet of code, we have defined the main function as steganography(). We created a menu within this function and asked the users for their input as 'int' data type. We have then used the if-elif-else conditional statements to execute the function as per the user input. At last, we have called this main function to execute the program.
+Let us see the complete program code and the output after its execution.
+The Complete Program
+File: imgSteganography.py
+
+# importing the required libraries
+import cv2
+import numpy as np
+import types
+from google.colab.patches import cv2_imshow
+
+# converting types to binary
+def msg_to_bin(msg):
+    if type(msg) == str:
+        return ''.join([format(ord(i), "08b") for i in msg])
+    elif type(msg) == bytes or type(msg) == np.ndarray:
+        return [format(i, "08b") for i in msg]
+    elif type(msg) == int or type(msg) == np.uint8:
+        return format(msg, "08b")
+    else:
+        raise TypeError("Input type not supported")
+
+# defining function to hide the secret message into the image
+def hide_data(img, secret_msg):
+    # calculating the maximum bytes for encoding
+    nBytes = img.shape[0] * img.shape[1] * 3 // 8
+    print("Maximum Bytes for encoding:", nBytes)
+    # checking whether the number of bytes for encoding is less
+    # than the maximum bytes in the image
+    if len(secret_msg) > nBytes:
+        raise ValueError("Error encountered insufficient bytes, need bigger image or less data!!")
+    secret_msg += '#####'       # we can utilize any string as the delimiter
+    dataIndex = 0
+    # converting the input data to binary format using the msg_to_bin() function
+    bin_secret_msg = msg_to_bin(secret_msg)
+
+    # finding the length of data that requires to be hidden
+    dataLen = len(bin_secret_msg)
+    for values in img:
+        for pixels in values:
+            # converting RGB values to binary format
+            r, g, b = msg_to_bin(pixels)
+            # modifying the LSB only if there is data remaining to store
+            if dataIndex < dataLen:
+                # hiding the data into LSB of Red pixel
+                pixels[0] = int(r[:-1] + bin_secret_msg[dataIndex], 2)
+                dataIndex += 1
+            if dataIndex < dataLen:
+                # hiding the data into LSB of Green pixel
+                pixels[1] = int(g[:-1] + bin_secret_msg[dataIndex], 2)
+                dataIndex += 1
+            if dataIndex < dataLen:
+                # hiding the data into LSB of Blue pixel
+                pixels[2] = int(b[:-1] + bin_secret_msg[dataIndex], 2)
+                dataIndex += 1
+            # if data is encoded, break out the loop
+            if dataIndex >= dataLen:
+                break
+    
+    return img
+
+def show_data(img):
+    bin_data = ""
+    for values in img:
+        for pixels in values:
+            # converting the Red, Green, Blue values into binary format
+            r, g, b = msg_to_bin(pixels)
+            # data extraction from the LSB of Red pixel
+            bin_data += r[-1]
+            # data extraction from the LSB of Green pixel
+            bin_data += g[-1]
+            # data extraction from the LSB of Blue pixel
+            bin_data += b[-1]
+    # split by 8-Bits
+    allBytes = [bin_data[i: i + 8] for i in range(0, len(bin_data), 8)]
+    # converting from bits to characters
+    decodedData = ""
+    for bytes in allBytes:
+        decodedData += chr(int(bytes, 2))
+        # checking if we have reached the delimiter which is "#####"
+        if decodedData[-5:] == "#####":
+            break
+    # print(decodedData)
+    # removing the delimiter to display the actual hidden message
+    return decodedData[:-5]
+
+# defining function to encode data into Image
+def encodeText():
+    img_name = input("Enter image name (with extension): ")
+    # reading the input image using OpenCV-Python
+    img = cv2.imread(img_name)
+
+    # printing the details of the image
+    print("The shape of the image is: ", img.shape) # checking the image shape to calculate the number of bytes in it
+    print("The original image is as shown below: ")
+    # resizing the image as per the need
+    resizedImg = cv2.resize(img, (500, 500))
+    # displaying the image
+    cv2_imshow(resizedImg)
+
+    data = input("Enter data to be encoded: ")
+    if (len(data) == 0):
+        raise ValueError('Data is Empty')
+    
+    file_name = input("Enter the name of the new encoded image (with extension): ")
+    # calling the hide_data() function to hide the secret message into the selected image
+    encodedImage = hide_data(img, data)
+    cv2.imwrite(file_name, encodedImage)
+
+# defining the function to decode the data in the image
+def decodeText():
+    # reading the image containing the hidden image
+    img_name = input("Enter the name of the Steganographic image that has to be decoded (with extension): ")
+    img = cv2.imread(img_name)  # reading the image using the imread() function
+
+    print("The Steganographic image is as follow: ")
+    resizedImg = cv2.resize(img, (500, 500))    # resizing the actual image as per the needs
+    cv2_imshow(resizedImg)  # displaying the Steganographic image
+
+    text = show_data(img)
+    return text
+
+# image steganography
+def steganography():
+    n = int(input("Image Steganography \n1. Encode the data \n2. Decode the data \n Select the option: "))
+    if (n == 1):
+        print("\nEncoding...")
+        encodeText()
+
+    elif (n == 2):
+        print("\nDecoding...")
+        print("Decoded message is " + decodeText())
+    
+    else:
+        raise Exception("Inserted value is incorrect!")
+
+steganography() # encoding the image
+
+Output for Data Encoding:
+Image Steganography 
+1. Encode the data 
+2. Decode the data 
+ Select the option: 1
+
+Encoding...
+Enter image name (with extension): my_image.jpg
+The shape of the image is:  (1080, 1920, 3)
+The original image is as shown below: 
+
+Enter data to be encoded: python tutorial
+Enter the name of the new encoded image (with extension): testimage.jpg
+Maximum bytes to encode: 589693
+
+Output for Data Decoding:
+Image Steganography 
+1. Encode the data 
+2. Decode the data 
+ Select the option: 2
+
+Decoding...
+Enter the name of the Steganographic image that has to be decoded (with extension): testimage.jpg
+The Steganographic image is as follow: 
+
+Decoded message is python tutorial
+
+
+
+Next TopicInconsistent use of tabs and spaces in indentation
+
+
+
+
+← prev
+next →
+
+
+
+

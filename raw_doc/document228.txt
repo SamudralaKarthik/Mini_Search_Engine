@@ -1,0 +1,228 @@
+
+
+
+
+next →
+← prev
+
+Python Requests Module - HTTP Request
+In this tutorial, we will learn about the Python request module or how we can handle the requests using the Python requests library. The request module is a standard way for making HTTP requests in Python. We will also discuss the features of the request. Finally, we will learn how to optimize and customize those features for different situations.
+This tutorial includes following topics.
+
+Introduction
+Python Request Module
+The GET Request
+The POST Request
+Status Code
+JSON Response
+Request Header
+The Message Body
+Other Important HTTP Method
+Conclusion
+
+Let's understand the basic introduction of the request library.
+Introduction
+Generally, we look for some information from the website. Or we may want to get access to social media accounts, checking mails, watching online videos. We likely send the request using the web browser, and the webserver returns the desired result from the webserver. To get information from the Internet, we need to send the request through the web browser.
+For example - We search the Python tutorial on Google. Then the request sends an HTTP request to the Google server, and the server returns the searched result with the status code.
+There are two main components to initiate the communication - Client and Server. We use HTTP (Hypertext Transfer Protocol), which enables the communication between a client and server over the Internet.
+Python provides the requests module, which allows us to make these requests using the Python script.
+Python Request Module
+It is the most powerful tool of Python that allows us to send requests on the web. It includes many features and methods to send HTTP requests. The system that sends requests is known as the client, and the system that holds the webserver is known as a server.
+While working with the requests, we will come across the following methods.
+
+GET - It is used to request data from a server.
+POST - It is used to submit some data to the server for processing it.
+
+The Python request module consists of many simple API that is helpful to handle those requests. These API has many features such as adding headers, sending custom headers, passing parameters with URLs, and many others.
+To start working with the requests, the first step is to install the request module in Python using the following command.
+
+pip install requests
+
+Or
+We can also use the Pipenv (Python packaging tool) to install the request module. Type the following command.
+
+pipenv install requests
+
+Import the requests module in the file to check whether it is successfully installed or not.
+
+import requests
+
+Now, we are ready to start our journey to learn request in Python.
+The GET Request
+The GET and POST methods determine the user action on the web pages. The GET is one of the most general-purpose methods of the Python requests module. It specifies that the user is attempting to retrieve data from a specified resource. In other words, it is used to send a request to a URL. To invoke the GET request, we use the following syntax.
+
+requests.get(url, param = {key:value}, args)
+
+In the above method, the url argument is the URL of the particular website where the user sends the request. The param argument is used to send a query string in the dictionary and the args is one of the multiple named arguments.
+When the get request is successfully sent, the method will return a requests.Response object. This object saves the response received from the server. We can assign get() request result in variable.
+This object saves the response received from the server. Therefore, we can assign get() request results in a variable.
+Making a GET Requests
+It is quite an easy way to make an HTTP request using the requests module. Following is the code for making the request.
+Here the response object will store the information. Below are the essential properties.
+
+content - It returns the content of the data for the responses.
+status_code - It returns the status of our request. For example - 200 OK means you made successful request, 404 NOT FOUND means resource is not found.
+cookies - It uses to obtaining a CookieJar object having all cookies we get from the server.
+
+Example -
+
+import requests
+req = requests.get('http://www.javatpoint.com/')
+ 
+print(req.encoding) # returns 'utf-8'
+print(req.status_code) # returns 200
+print(req.elapsed) # returns datetime.timedelta(0, 1, 666890)
+print(req.url) # returns 'https://edureka.co/'
+ 
+print(req.history) 
+ 
+print(req.headers['Content-Type'])
+
+Output:
+ISO-8859-1
+200
+0:00:01.007097
+https://www.javatpoint.com/
+[]
+text/html;charset=ISO-8859-1
+
+The POST Request
+The POST method is used to send information using the post() method. The basic syntax is given below.
+Syntax
+requests.post(url, data={key: value}, json={key: value}, args)
+Following are the important parameters.
+
+url - The url is a mandatory parameter that indicates URL where we want to send some data.
+data - It specifies a dictionary, file object, or tuple that we want to send to the URL. It is an optional parameter.
+json - This is the JSON object to be sent to the URL.
+
+The POST method returns the requests.Response object.
+Status Code
+Status code is a response that we get after making the GET or POST request. A status code informs us of the status of the request.
+There are many status codes available for the responses. For example, when our request was successful the status code will be 200 or 201, 404 status code is the bad request or the page we are looking for was not found.
+We can also use this information to make the decision in our code.
+
+if response.status_code == 200:
+    print('Success!')
+elif response.status_code == 404:
+    print('Not Found.')
+
+If the status code is 200 then it will print the Success, if the result a 404, program will print Not found.
+One point should never forget that this method does not verify that the status code is equal to 200. This is because other status codes within the 200 to 400 range, such as 204 NO CONTENT, are also considered successful in the sense.
+For example - The 204 will indicate the successful request, but there's no content to return in the message body.
+JSON Response
+JSON represents the JavaScript Object Notation which is a most popular way to transmitting the data format. JSON data can be easily readable by the web-browser. The data is stored in the dictionary form (key, value pair).
+How to convert JSON to Python Dictionary?
+We use the r.json() method to create a Python dictionary from the JSON response. Let's see the following example.
+Example -
+
+import requests
+json_data = {'username':'mathew','password':'1234'}
+r = requests.post('https://httpbin.org/post',data = json_data)
+
+print(r.json())
+
+Output:
+{'args': {}, 'data': '', 'files': {}, 'form': {'password': '1234', 'username': 'mathew'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '29', 'Content-Type': 'application/x-www-form-urlencoded', 'Host': 'httpbin.org', 'User-Agent': 'python-requests/2.25.1', 'X-Amzn-Trace-Id': 'Root=1-60b711e8-60f535db7df2f6a61f710e29'}, 'json': None, 'origin': '132.154.100.245', 'url': 'https://httpbin.org/post'}
+
+Storing in a variable
+The JSON data can be converted to be Python dictionary and can also store in a variable. Let's understand the following example.
+Example -
+
+import requests
+json_data = {'username':'mathew','password':'1234'}
+r = requests.post('https://httpbin.org/post',data = json_data)
+r_dictionary= r.json()
+print(r_dictionary['form'])
+
+Output:
+{'password': '1234', 'username': 'mathew'}
+
+Request Header
+We can create a custom header using the get() method. The dictionary of HTTP header is passed in the get() using the headers parameter.
+Let's understand the following example.
+Example -
+
+import requests
+
+response = requests.get(
+    'https://api.github.com/search/repositories',
+    params={'q': 'requests+language:python'},
+    headers={'Accept': 'application/vnd.github.v3.text-match+json'},
+)
+
+json_result = response.json()
+repo = json_result['items'][0]
+print(f'Text matches: {repo["text_matches"]}')
+
+Output:
+Text matches: [{'object_url': 'https://api.github.com/repositories/4290214', 'object_type': 'Repository', 'property': 'description', 'fragment': 'Requests + Gevent = <3', 'matches': [{'text': 'Requests', 'indices': [0, 8]}]}]
+
+Explanation - 
+In the above code, the Accepts header is a content type that the application can handle. For example, we have used the header value application/vnd.github.v3.text-match+json, a proprietary GitHub Accept header. The content of the header is in JSON format.
+Other Important HTTP Methods
+Apart from GET and POST methods, there are few essential methods in HTTP, including PUT, DELETE, HEAD, PATCH, and OPTIONS. These methods are used to create, read, update, and delete (or CRUD) operations. Below is a summarize table of HTTP methods.
+
+
+HTTP Method
+CRUD
+Entire Collection
+Specific Item
+
+
+POST
+Create
+It shows the 201 (created) on the location header with link customer id.
+If resource is already exists, it shows 404 (Not Found).
+
+
+GET	Read
+It shows 200, list of customers, pagination
+404, if the ID is not found or invalid.
+
+
+PUT
+Update
+It shows 405, unless we want to replace every resource.
+404, if the ID is not found or invalid.
+
+
+PATCH
+Update
+It shows 405, unless we want to modify entire collection itself.
+404, if the ID is not found or invalid.
+
+
+DELETE
+Delete
+It shows 405, unless we want delete the whole collection.
+404, if the ID is not found or invalid.
+
+
+The Message Body
+The message body is used to pass the data instead of parameters in the query string. These data are passed by the POST, PUT and the less common patch. The data can be a dictionary, a list of tuple, bytes, or a file-like object. Using requests, you will pass the payload to the corresponding function's data parameter.
+If the request content type is application/x-www-form-urlencoded, the data will be send in the dictionary.
+
+requests.post('https://httpbin.org/post', data={'key':'value'})
+
+We can also send the same data using the list of tuple.
+
+requests.post('https://httpbin.org/post', data=[('key', 'value')])
+
+Conclusion
+We have discussed the basic details about the Python request module which will be very helpful make basic server request.
+The main point is the get() method is less secure than the post() method because the request can only be passed through the URL. So, the sensitive password can be breached by the hackers.
+We have also mentioned the important HTTP methods and how we can send request using the custom header. If you want learn more about the request module then you can visit its well-written request documentation.
+
+
+Next TopicShutil Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

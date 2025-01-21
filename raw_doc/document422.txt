@@ -1,0 +1,171 @@
+
+
+
+
+next →
+← prev
+
+Python Phonenumbers Module
+Whenever we look at strange phone numbers or a call from a random number comes, some basic questions come to our mind, including who is calling, from where the person is calling, region of the phone number, phone number is valid or not, and many others. If we have to find out the answer to all these questions manually, it will take some time as we can't perform all the operations at once. Like, for knowing the region of the phone number, we must have an idea of the country code of every country, which is practically not possible (except for some exceptions). Same, if we have to check that given phone number manually is valid or not, then we have to dial the number, and what if we have hundreds or thousands of such numbers. Therefore, manually performing such operations is very hectic and time-consuming, and that's why we have to look for alternate solutions. Many programming languages offer us extensions or packages to perform these operations on given phone numbers.
+Python, one of the most popular programming languages, offers us the phonenumbers Module, which is very helpful to us to perform all such operations using a program. Therefore, we will learn this phonenumbers Module of Python in this tutorial and perform several such operations by using this module in example programs.
+Introduction to Phonenumbers Module of Python
+Phonenumbers is a Python module that comes with multiple features such as parsing phone numbers, etc. The Phonenumbers module of Python has multiple functions capable of performing various operations on a given phone number, like finding the region of the phone number, operator of the phone number, etc. We can use functions of the phonenumbers module in a Python program by importing this module into the program, and then we can use these functions to perform desired operations on given phone numbers. The Phonenumbers module is very helpful for us in many ways, which include several following benefits:
+
+This module saves our lot of efforts
+This module saves our time for performing operations on phone numbers
+We can perform multiple operations at once on a given phone number using the phonenumbers module
+We can even perform operations on multiple phone numbers at once using this module
+
+These are the several highlighted advantages of using the phonenumbers module in a Python program. We will perform several such operations on a given phone number in this tutorial through example programs, and that's how we will understand the implementation of the phonenumbers module. We will also perform the installation process of the phonenumbers module in this section.
+Phonenumbers Module of Python: Installation
+Phonenumbers is not an in-built package of Python (it doesn't get installed along with the Python installation), and that's why if this module is not present in our system already, we have to install this module. We should first make sure that the phonenumbers module is already installed in the system or not because we will not be able to perform implementation without having this module present in our system. If the phonenumbers module is not installed in our system, we have multiple methods to install this module and among all the possible installation methods, installing the phonenumbers module with the pip installer is the simplest and easiest one. That's why we will use pip installer in this tutorial for installing the phonenumbers module in our system, and in this method, we will use the following pip installer command:
+
+pip install phonenumbers
+
+We have to write the above-given command in the command prompt terminal shell, and after writing the command, we have to press the enter key so that the pip installer will start installing this module in our system. Once the installation process of this module begins, it will take a while to install the module in our system successfully, and we have to wait till then.
+
+As we can see, a successfully installed message is displayed on our screen, which means that the phonenumbers module is now successfully installed in our system. Now, we can start working with the phonenumbers module by importing it into the example Python programs and understanding its implementation.
+Phonenumbers Module of Python: Implementation
+As we have already discussed, we can perform several operations using the functions of the phonenumbers module in a Python program. We will perform several such operations with the phonenumbers module's functions in this part to understand the implementation of this module. We are going to perform the following operations with the functions of the phonenumbers module to understand its implementation:
+
+Knowing the region of the phone number
+Knowing the timezone of a phone number
+knowing carrier of a phone number
+Converting string variable numbers into phonenumber format
+Matching and extracting phone numbers
+Validating a phone number
+
+We will perform all the operations given above in this part by using functions of the phonenumbers module in an example program to understand its implementation and working.
+Application 1: Knowing the Region of the Phone Number
+We can know the region of a given phone number, i.e., we can find out from which country or which area, given phone number belong. The Geocoder library of the phonenumbers module provides us the description_for_number() function, which we can use to find out the region of a given phone number. We can use this by giving the phone number as an argument inside the function, and then we can print the region of the phone number as a result in the output. We can understand the implementation of the description_for_number() function of the phonenumbers module through the following example program.
+Example 1: Look at the following program where we have printed the region of a given phone number in the output:
+
+# Importing phonenumbers module
+import phonenumbers as pn
+# Importing geocoder library from the phonenumbers module
+from phonenumbers import geocoder as gc
+# Parsing a given phone number
+givenPN = pn.parse("+919034xxxxxx")
+# Using parse phone number for finding region
+regionOfPN = gc.description_for_number(givenPN, 'en')
+# Printing region as the result
+print("The region of the given phone number is: ", regionOfPN)
+
+Output:
+The region of the given phone number is:  India
+
+As we can see, the region of the given phone number is printed in the output, and that's how we can find out and print the region of any given phone number. We have hidden the last six digits of the phone number used in the example for security and personal reasons.
+Explanation:
+After importing the phonenumbers module as pt, we have imported the geocoder library of the phonenumbers module as gc. After that, we have parsed the given phone number and stored the result in the initialized variable (givenPN) to use it as an argument inside the description_for_number() function. Then, we used the parsed number variable in the description_for_number() as an argument and stored the result in the second initialized variable. Inside the description_for_number() function, we have also used the 'en' language to specify English for printing and storing results. Lastly, we printed the result in the output by using the regionOfPN variable in the print statement.
+Application 2: Finding Operator of the Given Phone Number:
+We can even find out that the given phone number belongs to which SIM card operator using the phonenumbers module. The carrier library of the phonenumbers module provides us the option to find out the carrier of the phone number using the name_for_number() function. In the name_for_number() function of the carrier library, we have to use the parse phone number as an argument, and then we can print the carrier of the given phone number in the output. We can understand the implementation of the name_for_number() function of the phonenumbers module through the following example program.
+Example 2: Look at the following Python program where we have printed the sim card operator of given phone number:
+
+# Importing phonenumbers module
+import phonenumbers as pn
+# Importing carrier library from the phonenumbers module
+from phonenumbers import carrier as cr
+# Parsing a given phone number
+givenPN = pn.parse("+919034xxxxxx")
+# Using parse phone number for finding the carrier
+carrierOfPN = cr.name_for_number(givenPN, 'en')
+# Printing carrier as the result
+print("The SIM Card operator or carrier of the given phone number is: ", carrierOfPN)
+
+Output:
+The SIM Card operator or carrier of the given phone number is:  Tata Docomo
+
+As we can see, the carrier of the given phone number is printed in the output, and that's how we can find out and print the SIM card operator of any given phone number.
+Explanation:
+We have used the parsed phone number variable inside the name_for_number() function to find out the carrier, and lastly, we printed the result of the program in the output by using the result variable, i.e., carrierOfPN variable, in the print statement.
+Application 3: Parsing a Given Phone Number:
+Parsing a given phone number means setting the given phone number according to the phonenumbers module format. We can do this operation using the parse() function of the phonenumbers module by providing a phone number as an argument in the function. The function will yield the result by providing the given phone number in the phonenumbers format in the output. We can understand the use of this parse() function through the following example program where we parse a given phone number.
+Example 3: Look at the following program where we have used the parse() function to parse a phone number:
+
+# Importing phonenumbers module
+import phonenumbers as pn
+# Parsing a given phone number
+givenPN = pn.parse("+919034xxxxxx")
+# Printing the parsed phone number
+print("The given phone number after parsed will look like as the following format: ")
+print(givenPN)
+
+Output:
+The given phone number after parsed will look like as the following format: 
+Country Code: 91 National Number: 9034xxxxxx
+
+As we can see, we have parsed the given phone number in the program, and we can use this parse function to parse any phone number given in the argument.
+Note: We have to keep in mind that the given phone number as an argument in the parse() function should be given with the country code of it.
+Application 4: Getting Timezone of the Given Phone Number's Region:
+We can even get the timezone of the area from where the given phone number belongs simply from the given phone number. We can perform this task using the phonenumbers module as the phonenumber module provide us with the timezone library, which is used to find out the timezone of the given phone number's area. The timezone library of the phonenumbers module provides us with the time_zones_for_number() function, which we can use to find out the timezone of the phonenumber. We have to simply give the parsed phone number as an argument in the time_zones_for_number(), and thus, we can find out the timezone of the phone number and print the result in the output. We can understand the implementation of the time_zones_for_number() function of the phonenumbers module through the following example program.
+Example 4: Look at the following Python program where we have printed the timezone of a given phone number in the output:
+
+# Importing phonenumbers module
+import phonenumbers as pn
+# Importing timezone library from the phonenumbers module
+from phonenumbers import timezone as tz
+# Parsing a given phone number
+givenPN = pn.parse("+919034xxxxxx")
+# Using parse phone number for finding timezone
+timezoneOfPN = tz.time_zones_for_number(givenPN)
+# Printing carrier as the result
+print("The timezone of the given phone number is: ", timezoneOfPN)
+
+Output:
+The timezone of the given phone number is:  ('Asia/Calcutta',)
+
+As we can see, the timezone of the given phone number is printed in the output, and that's how we can find out and print the timezone of any given phone number.
+Application 5: Matching and Extracting Phone Numbers:
+Sometimes we have given multiple phone numbers, and we have to find out phone numbers of a particular country code or region among them. If we do this manually, it will take a lot of time but doing it with the help of the phonenumbers module saves a lot of time. The Phonenumbers module provides us with the PhoneNumberMatcher object, which has a relevant function to perform phone number matching tasks. We can use PhoneNumberMatcher() function with some given phone numbers to filter out required phone numbers, and then we can print them in the output. We can understand this implementation of the phonenumbers module with the help of the following example program:
+Example 5: Look at the following Python program where we have performed extracting and matching operations on given phone numbers:
+
+# Importing phonenumbers module
+import phonenumbers as pn
+# Defining multiple phone numbers
+sampleText = "You can contact us at +919034xxxxxx in daytime or you can reach out us in night with +119876543210"
+# Searching for a particular phone number
+resultPN = pn.PhoneNumberMatcher(sampleText, "IN")
+# Printing result in the output
+for desiredPN in resultPN:
+      print(desiredPN)
+
+Output:
+PhoneNumberMatch [23,36) +919034xxxxxx
+
+As we can see, we have extracted a particular region (India in this example) phone number from the given sample text and printed it in the output. That's how we can use the PhoneNumberMatcher object to match and extract some particular phone number from given text.
+Explanation:
+After defining a sample text (in which we have mentioned two different regions phone numbers), we have used this sampleText variable in the PhoneNumberMatcher() function with the "IN" argument so that it will find out Indian regions phone numbers from the sample text. After that, we have printed the result of this search in the output using the for loop to loop over the resultPN variable.
+Application 6: Validating a Phone Number:
+We can even check that if a given phone number is valid or not using the phonenumbers module. Other than this, we can also check that if the given number is possible or not. For performing both these tasks, phonenumbers provide us with two different functions i.e., is_valid_number() & is_possible_number(). We can use these functions to determine the validation and possibility of a given phone number by providing parsed phone number as an argument in these functions. We can understand the implementation of both of these functions through the following example program.
+Example 6: Look at the following program where we have validated and checked the possibility of a given number:
+
+# Importing phonenumbers module
+import phonenumbers as pn
+# Parsing a given phone number
+givenPN = pn.parse("+919034xxxxxx")
+# Validating the parsed number
+validNumber = pn.is_valid_number(givenPN)
+# Checking possibility of the number
+possibleNumber = pn.is_possible_number(givenPN)
+# Printing results in the output
+print("Is the given phone number is valid?: ", validNumber)
+print("Is the given phone number is possible?: ", possibleNumber)
+
+Output:
+Is the given phone number is valid?:  True
+Is the given phone number is possible?:  True
+
+As we can see, the validation and possibility of the given number are printed in the output, and that's how we can validate and check the possibility of any given phone number.
+
+
+Next TopicPython Platform Module
+
+
+
+
+← prev
+next →
+
+
+
+

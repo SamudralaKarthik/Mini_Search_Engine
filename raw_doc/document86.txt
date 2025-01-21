@@ -1,0 +1,140 @@
+
+
+
+
+next →
+← prev
+
+How to reverse a string in Python?
+Python String is the collection of the Unicode character. Python has numerous functions for string manipulation, but Python string library doesn't support the in-built "reverse()" function. But there are various ways to reverse the string. We are defining the following method to reverse the Python String.
+
+Using for loop
+Using while loop
+Using the slice operator
+Using the reversed() function
+Using the recursion
+
+Using for loop
+Here, we will reverse the given string using for loop.
+
+def reverse_string(str):
+    str1 = ""   # Declaring empty string to store the reversed string
+    for i in str:
+        str1 = i + str1
+    return str1    # It will return the reverse string to the caller function
+   
+str = "JavaTpoint"    # Given String     
+print("The original string is: ",str)
+print("The reverse string is",reverse_string(str)) # Function call
+
+Output:
+('The original string is: ', 'JavaTpoint')
+('The reverse string is', 'tniopTavaJ')
+
+Explanation-
+In the above code, we have declared the reverse_string() function and passed the str argument. In the function body, we have declared empty string variable str1 that will hold the reversed string.
+Next, the for loop iterated every element of the given string, join each character in the beginning and store in the str1 variable.
+After the complete iteration, it returned the reverse order string str1 to the caller function. It printed the result to the screen.
+Using while loop
+We can also reverse a string using a while loop. Let's understand the following example.
+Example -
+
+# Reverse string
+# Using a while loop
+
+str = "JavaTpoint" #  string variable
+print ("The original string  is : ",str) 
+reverse_String = ""  # Empty String
+count = len(str) # Find length of a string and save in count variable
+while count > 0: 
+    reverse_String += str[ count - 1 ] # save the value of str[count-1] in reverseString
+    count = count - 1 # decrement index
+print ("The reversed string using a while loop is : ",reverse_String)# reversed string
+
+Output:
+('The original string  is : ', 'JavaTpoint')
+('The reversed string using a while loop is : ', 'tniopTavaJ')
+
+Explanation:
+In the above code, we have declared a str variable that holds string value. We initialized a while loop with a value of the string.
+In each iteration, the value of str[count - 1] concatenated to the reverse_String and decremented the count value. A while completed its iteration and returned the reverse order string.
+Using the slice ([]) operator
+We can also reverse the given string using the extended slice operator. Let's understand the following example.
+Example -
+
+#  Reverse a string  
+# using  slice syntax 
+# reverse(str) Function to reverse a string 
+def reverse(str): 
+    str = str[::-1] 
+    return str 
+  
+s = "JavaTpoint"
+print ("The original string  is : ",s) 
+print ("The reversed string using extended slice operator  is : ",reverse(s))
+
+Output:
+('The original string  is : ', 'JavaTpoint')
+('The reversed string(using extended slice syntax) is : ', 'tniopTavaJ')
+
+Explanation:
+Generally, a slice operator accepts three parameters - start, stop and step. We provided the no value to start and end index, which indicates the start index is 0 and the end is n-1 by default. The step size is -1; it means the string continues the traverse from the end and goes to the 1 index position.
+Using reverse function with join
+Python provides the reversed() function to reverse the string. Let's understand the following example.
+Example -
+
+#reverse a string using reversed() 
+# Function to reverse a string 
+def reverse(str): 
+	string = "".join(reversed(str)) # reversed() function inside the join() function
+	return string 
+
+s = "JavaTpoint"
+
+print ("The original string is : ",s) 
+print ("The reversed string using reversed() is : ",reverse(s) )
+
+Output:
+('The original string is : ', 'JavaTpoint')
+('The reversed string using reversed() is : ', 'tniopTavaJ')
+
+Explanation:
+In the function body, we declared the empty string separated by .dot operator. The reversed() string returned the reverse string it joined with the empty string separated using the join() function.
+Using recursion()
+The string can also be reversed using the recursion. Recursion is a process where function calls itself. Consider the following example.
+Example -
+
+# reverse a string  
+# using recursion 
+  
+def reverse(str): 
+    if len(str) == 0: # Checking the lenght of string
+        return str 
+    else: 
+        return reverse(str[1:]) + str[0] 
+  
+str = "Devansh Sharma" 
+print ("The original string  is : ", str)   
+print ("The reversed string(using recursion) is : ", reverse(str))
+
+Output:
+('The original string is : ', 'JavaTpoint')
+('The reversed string(using reversed) is : ', 'tniopTavaJ')
+
+Explanation:
+In the above code, we have defined a function that accepts the string as an argument.
+In the function body, we defined the base condition of recursion, if a length of a string is 0, then the string is returned, and if not then we called the function recursively.
+The slice operator slice the string expects the first character and concatenated to the end of the slice string.
+
+
+Next TopicHow to read CSV file in Python
+
+
+
+
+← prev
+next →
+
+
+
+

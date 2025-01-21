@@ -1,0 +1,154 @@
+
+
+
+
+next →
+← prev
+
+Python New Line
+Generally, when we print a string using a print statement, we use another print statement to print another string in a new line. When we write a print statement, after its execution, automatically, the cursor is shifted to a new line. Why does this happen? Can't we print a string in a new line without using a new print statement? The code becomes absurd if we keep writing new print statements for every string. 
+The answer to both the above questions is an escape sequence character called the 'Python new line character' represented by '\n'. This article discusses new line character with examples.
+Basic understanding:
+Character: '\n'
+Function: Shifts the cursor to a new line.
+
+The character is valid for strings and characters only.
+This character is also called "line-break".
+It is an escape sequence character in Python.
+We can keep '\n' anywhere in the string.
+
+Syntax:
+
+To declare a string in multiple lines:
+
+
+Str_var = "\nstring 1\n string 2\n"
+
+
+To print a string in multiple lines:
+
+
+print ("\nstr1\nstr2\n")
+
+
+Initial \n: leaves a blank line, shifts to a new line and prints str1
+Middle \n: shifts to a new line after printing str1 and prints str2
+Final \n: leaves a blank line, shifts to a new line after executing str2
+
+Need of '\n':
+Suppose we are trying to print "Hello" in the first line, '!' in the next line and "world" in the line after that and if we use a normal print statement:
+
+print ("Hello")
+print ('!')
+print ("World")
+
+Output:
+
+It took 3 lines of code to print 3 words. The code will be longer if we want to print more strings.
+Now, if we use '\n':
+
+print ("Hello\n!\nWorld")
+
+Output:
+
+It just took one line. We can print any number of strings using '\n' in multiple lines and still keep the code simple and small.
+More about '\n':
+Why is the print statement not printing '\n' like a normal string? How does Python recognize '\n'? 
+We have a few predefined characters in Python succeeding a back slash character ('\'), called the 'Escape sequences'. Python recognizes the '\' and immediately understands that it is not a part of the string and executes it based on its succeeding character. Using a backslash before a character helps the character escape normal string execution.
+Examples: \t, \r, \n etc.
+Declaring a string with '\n':
+
+string = "Hello\nWorld"
+print (string)
+print ("\n")
+print ("Hello\nWorld")
+
+Output:
+
+Understanding:
+In the above example:
+
+The string is arranged in two lines using \n and stored in the string variable. Whenever we want to print the string or perform any operations on the string, we can use the variable.
+We used a print with only the new line character to give an empty line gap.
+
+How does the print statement automatically shift to a new line?
+In Python, the syntax of the print statement:
+print (values, sep = '', end = '\n', file = file, flush = flush)
+Here, the end is an optional parameter. It specifies the last character we want the string to end with. By default, '\n' is assigned to the end, which is why, after the execution of a print statement, it will shift the cursor to the next line when we don't give any argument to the end.
+If we give an argument to the end:
+
+print ("Hello", end = "!")
+print (" World")
+
+Output:
+
+Understanding:
+We assigned '!' to the end. Hence, after the execution of the first print statement, the second print statement is not shifted to a new line and follows "!" in the same line.
+Another way to print a string in a new line:
+There is one more way we can shift to a new line. First, we can use multiple print statements. Second, we can use the '\n' character. We can achieve this using 'Multi-line strings' in Python.
+We use single quotes or double quotes to print a single-line string. In Python, we can print multiple lines of strings using either 3 double quotes ("""strings""") or three single quotes (''' string''').
+Syntax:
+
+'''String 1
+String 2
+...............
+String n'''
+
+OR
+
+"""String 1
+String 2
+..............
+String n"""
+
+Python recognizes that the string is a multi-line string by the quotes ''' or """.
+Example:
+
+string = '''Hello
+!
+world'''
+string2 = """I
+love 
+Python"""
+print ("Using 3 single quotes: ")
+print (string)
+print ("\n")
+print ("Using 3 double quotes: ")
+print (string2)
+
+Output:
+
+Understanding:
+We wrote two multi-line strings using single quotes and double-quotes.
+
+In the above code, though we wrote multi-line strings, we used '\n' for a blank line.
+The more lines of strings we want to print, the more the length of the code will be.
+
+Summary:
+We can print a string in a new line in 3 ways in Python:
+
+Multiple print statements
+Using '\n.'
+Using multi-line strings.
+
+These three ways might be useful for different needs, but programmers mostly use '\n' to print a new line because it is the most commonly accepted method due to its simplicity.
+Using '\n,' we can:
+
+Print a string in multiple lines.
+Keep the code short and simple.
+Customize the positions of the characters of a string.
+Leave a blank line.
+
+
+
+Next Topic__init__ in python
+
+
+
+
+← prev
+next →
+
+
+
+

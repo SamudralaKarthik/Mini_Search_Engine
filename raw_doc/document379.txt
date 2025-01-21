@@ -1,0 +1,190 @@
+
+
+
+
+next →
+← prev
+
+Python Wand library
+ImageMagick is a utility designed and developed for the image conversion from one format to another. The tool has been supported by a large community because of a versatile variety of image formats and its precise as well as straightforward execution. We can get images from PDF format files.
+In the following tutorial, we will be going to discuss a binding developed for Python by Imagemagick called wand. We will understand the features and uses of the Wand library in the Python programming language with different examples.
+So, let's get begun.
+Understanding the Wand library in Python
+The wand is an ImageMagick library developed for the Python programming language. This library supports the functionalities of ImageMagick or Imagick API in Python version 2.6, 2.7, 3.3+, and PyPy. The wand is used to open and manipulate images. This library not only supports the processing of the images but also offers valuable functionalities for Machine Learning codes with the help of the NumPy library. The wand provides a big number of functions to manipulate images. Some of the uses of the Python wand library are shown below:
+Uses of the Python Wand library:
+
+The wand library is used to Read/Write images of various formats, and it is also used to convert images from one form to another.
+It also supports Image Scaling and Cropping.
+This library adds simple effects to the images.
+This library also adds special effects to the images.
+It is also used to transform images.
+It also supports other color enhancements.
+
+Now, let us install the Python wand library.
+How to install the wand library?
+We can install the wand module with the help of the pip installer using the following command:
+Syntax:
+
+$ pip install wand
+
+The module will be installed in the system as the version of Python and pip.
+As we have discussed that the wand library is an Imagick API, thus, we have to include the Imagick dependencies also. The installation procedure for Imagick dependencies is quite distinct for different Operating Systems.
+For Ubuntu/Debian:
+Syntax:
+
+$ sudo apt-get install libmagickwand-dev
+
+For Mac (Using Brew Installer):
+Syntax:
+
+$ brew install imagemagick
+
+Installation of MacPort:
+Syntax:
+
+$ sudo port install imagemagick
+
+Note: If Python is not installed using MacPort, we have to export MAGICK_HOME as shown below:
+Syntax:
+
+$ export MAGICK_HOME=/opt/local
+
+For Windows:
+We can create ImageMagick by ourselves; however, it needs a build tool chain such as Visual Studio in order to compile it. One simple method is to download a prebuilt binary of ImageMagick for the architecture (win32 or win64)
+We can download it from the following links:
+https://www.imagemagick.org/download/binaries/
+Verifying the Installation
+In order to check whether the module has been installed in the system properly or not, we can try importing the module and execute the program.
+Once the installation is complete, create a new Python file and type the following syntax in it.
+Example:
+
+# importing the required module
+import wand
+
+Now, save the file and run the file using the following command in the command prompt.
+Syntax:
+
+$ python <file-name>.py
+
+If the program runs without raising any import error, the module is installed properly. Else it is recommended to reinstall the module and refer to its official documentation.
+Now, let us understand start working with the wand library.
+Reading an Image using Python Wand
+The image library of the Python wand allows the programmers to import the image file using its Image module. We can then use different attributes in order to read the image, such as height, width, and many more.
+Let us consider the following example for the same.
+Example:
+
+# Importing library from the wand
+from wand.image import Image
+  
+# Importing the image
+with Image(filename ='jtp_logo.png') as my_pic:
+  
+    # Reading the image to fetch original dimensions
+    print('Height of the image:', my_pic.height)
+    print('Width of the image:', my_pic.width)
+
+Input Image:
+
+Output:
+Height of the image: 33
+Width of the image: 150
+
+Explanation:
+In the above snippet of code, we have imported the Image module from the wand.image library. We have then used the Image() function to import the image from the directory. We have then used different attributes to read the dimensions of the input image. As a result, the program returned the dimensions (height and width) of the images to the users.
+Blurring an Image using Python Wand
+The wand library allows the programmers in order to blur an image using the blur() function and save it as the save() function.
+Let us consider the following example to understand the same.
+Example:
+
+# Importing library from the wand
+from wand.image import Image
+  
+# Importing the image
+with Image(filename ='jtp_logo.png') as my_pic:
+    # Invoking blur function with radius 0 and sigma 3
+    my_pic.blur(radius = 0, sigma = 3)
+  
+    # saving the processed iamge
+    my_pic.save(filename ="blur_img.png")
+
+Input Image:
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the Image module from the wand.image library. We have then imported the required image from the directory and used the blur() function, specifying the radius parameter to 0 and the sigma parameter to 3. At last, we have saved the file using the save() function specifying the new filename to the image file.
+As a result, the provided image gets blurred with radius 0 and sigma 3 and saved as the specified filename.
+Transforming the image using Python Wand
+We can also transform the image using the several functions of the wand library. Let us consider the following example to understand the same.
+Example:
+
+# Importing library from the wand
+from wand.image import Image
+  
+# Importing the image
+with Image(filename ='jtp_logo.png') as my_pic:
+    # Cloning the image in order to process
+    with my_pic.clone() as my_flip:
+  
+        # Invoking flip function
+        my_flip.flip()
+  
+        # Saving the image
+        my_flip.save(filename = 'flip-jtp.jpg')
+
+Input Image:
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the Image module from the wand.image library. We have then again imported the image file from the directory and used the clone() function to make the image. We have then used the flip() function on the cloned image and saved the resultant image in the file using the save() function.
+As a result, the input image has been transformed successfully.
+Drawing different figures using Python Wand
+The Python wand library also provides us with different functions that allow us to draw different figures.
+Let us consider the following example to understand the same.
+Example:
+
+# Importing libraries from the wand  
+from wand.image import Image
+from wand.drawing import Drawing
+from wand.color import Color
+  
+with Drawing() as img_draw:
+    # Setting Stroke color the circle to black
+    img_draw.stroke_color = Color('black')
+  
+    # Setting Width of the circlw to 3
+    img_draw.stroke_width = 3
+  
+    # Setting the fill color to 'Yellow'
+    img_draw.fill_color = Color('yellow')
+  
+    # Invoking the Circle function with center 
+    # at 250, 250 and radius 125
+    img_draw.circle((250, 250), # Center point
+                (125, 125)) # Perimeter point
+    with Image(
+        width = 420,
+        height = 420,
+        background = Color('green')
+        ) as my_pic:
+        img_draw(my_pic)
+        my_pic.save(filename = 'img-circle.jpg')
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required modules from the wand library. We have then used the Drawing() function to draw a circle. We have then used different attributes specifying the dimensions, color, and outline color. We have then used the Image() function specifying the height, width, and background color and saved the resultant image for the users using the save() function.
+
+
+Next TopicGenerate a QR Code using Python
+
+
+
+
+← prev
+next →
+
+
+
+

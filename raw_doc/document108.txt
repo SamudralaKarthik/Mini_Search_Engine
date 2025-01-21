@@ -1,0 +1,150 @@
+
+
+
+
+next →
+← prev
+
+How to declare a global variable in Python
+What is a Global Variable?
+The global variables are the ones that are available both within and outside of any function, provided they are defined outside a function which is a global scope. Let's explore the creation of a global variable.
+In this example, we will define and access a global variable.
+Code
+
+# Python program to show how to define a global variable
+
+# defining a function
+def func():
+    print( "Inside the defined function the string is: ", var ) # this is local scope
+# This is global scope
+var = "Declaring Global Variable"
+# calling the function
+func() 
+print("Outside the defined function the string is: ", var)
+
+Output:
+Inside the defined function the string is:  Declaring Global Variable
+Outside the defined function the string is:  Declaring Global Variable
+Accessing the Global Variable
+
+The variable var is accessed both within and outside the function func(), and since it is declared in the global scope, it is designated as a global variable.
+Since we have not created local variables, the value of the global variable will be applied; however, we must ensure that the names of the local and global variables match.
+What if a variable with the same identifier is initialized globally and inside a defined function? What will occur if we modify the value of a variable within the function func()? The problem is whether changing the local variable will change the global variable or, conversely, changing the global variable will change the local variable. The following example of code is used to evaluate it:
+Code
+
+# Python program to show how to access global and local variables
+ 
+# defining a function
+def func():
+    var = "Global Variable" # declared variable in the local scope
+    print( var )
+ 
+ 
+# Declared variable in the global scope
+var = "I am learning Python"
+func()
+print( var )
+
+Output:
+Global Variable
+I am leaning Python
+
+Suppose a certain variable, having the name just as given to the variable in the global scope, is declared inside the function's local scope. In that case, it will only show the value provided within the defined function but not the global value.
+Changing Global Variable inside the Local Scope
+What would happen if we attempted to alter the value of a variable defined in the global scope inside the function? Let's examine it with the help of the example below.
+Code
+
+# We will try to change the value of the variable defined in the global scope in the local scope
+
+# defining a function
+def func():
+    var = var + "Global Variable"
+    print( "Inside the defined function", var )
+ 
+ 
+# Declaring a variable in the global scope
+var = "Python Tutorial"
+func()
+
+Output:
+      4 def func():
+----> 5     var = var + "Global Variable"
+      6     print( "Inside the defined function", var )
+
+UnboundLocalError: local variable 'var' referenced before assignment
+
+We must include the "global" Python keyword for the preceding application to run. Let us now study the global variable.
+Global Keyword
+When assigning values to or changing the variables declared in global scope within a function, we must use the global Python keyword. The keyword is not required to display or access a global scope variable. Since we declared var inside the function func(), the Python interpreter "assumes" that we desire a local variable, which is why the first sentence raises the error. It is considered local if a variable is modified or declared inside a function without being declared a global variable using the global keyword. The following example demonstrates how to employ the keyword "global" to instruct the Python interpreter that we wish to access the global variable.
+Code
+
+# Python program to show the use of the global keyword to modify a variable, defined in global scope, inside a local scope.
+# defining a function
+def func():
+    global var
+    var = var + " " + "Global Variable"
+    print( "Inside the defined function: ", var )
+ 
+ 
+# Declaring a variable in the global scope
+var = "Python Tutorial"
+func()
+print( "Outside the function: ", var ) # this will show if the variable var is changed in global scope also or not
+
+Output:
+Inside the defined function:  Python Tutorial Global Variable
+Outside the function:  Python Tutorial Global Variable
+
+Example to Show Use of Local and Global Variables
+Code
+
+# Python program to show how to use global and local variables
+
+var = 10
+ 
+# this will show the global value of var as there is no local var
+def func1():
+    print('Inside the first function: ', var)
+
+# declaring a local variable named var
+def func2():
+    var = 15
+    print('Inside the second function: ', var)
+
+# using the global keyword to modify var in global scope
+def func3():
+    global var
+    var += 3
+    print("Inside the third function: ", var)
+ 
+ 
+# Global scope
+print('global value of variable: ', var)
+func1()
+print('global value of variable: ', var)
+func2()
+print('global value of variable: ', var)
+func3()
+print('global value of variable: ', var)
+
+Output:
+global value of variable:  10
+Inside the first function:  10
+global value of variable:  10
+Inside the second function:  15
+global value of variable:  10
+Inside the third function:  13
+global value of variable:  13
+
+
+
+Next TopicHow to reverse a number in Python
+
+
+
+← prev
+next →
+
+
+
+

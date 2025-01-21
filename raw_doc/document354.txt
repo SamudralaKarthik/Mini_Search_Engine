@@ -1,0 +1,155 @@
+
+
+
+
+next →
+← prev
+
+How to Remove Duplicates from a list in Python
+When an element occurs more than once in a list, we refer to it as a duplicate.
+In this tutorial, we will learn different methods of removing these duplicates from a list in Python.
+
+The Basic Approach
+Using List Comprehension
+Using Set()
+Using enumerate()
+Using OrderedDict
+
+Let us discuss each one of them in detail.
+The Basic Approach
+In the first method, we will discuss the basic approach of removing duplicates from the list using Python.
+
+#initializing the list
+list_value1=[12,15,11,12,8,15,3,3]
+print("The initialized list is ",list_value1)
+res_list=[]
+for i in list_value1:
+    if i not in res_list:
+        res_list.append(i)
+#printing the list after removing duplicate elements
+print("The resultant list after removing duplicates is ",res_list)
+
+Output:
+The initialized list is  [12, 15, 11, 12, 8, 15, 3, 3]
+The resultant list after removing duplicates is  [12, 15, 11, 8, 3]
+
+Explanation
+So, now it's time to have a glance at the explanation of the above program.
+
+The first step is to initialize the list that contains duplicate values.
+After this, we have printed this list so that it becomes easy for us to compare the lists in the output.
+In the next step, we have declared an empty list that will hold all the unique values and then used for loop followed by decision making to check whether a particular element exists in the list or not, if it doesn't exist, we will append it in the list.
+Finally, we have displayed the resultant list.
+
+In the second program, we will make use of list comprehension to meet our objective.
+Using List Comprehension
+The following program illustrates the same-
+
+#initializing the list
+list_value1=[12,15,11,12,8,15,3,3]
+print("The initialized list is ",list_value1)
+res_list=[]
+#using list comprehension
+[res_list.append(i) for i in list_value1 if i not in res_list]
+#printing the list after removing duplicate elements
+print("The resultant list after removing duplicates is ",res_list)
+
+Output:
+The initialized list is  [12, 15, 11, 12, 8, 15, 3, 3]
+The resultant list after removing duplicates is  [12, 15, 11, 8, 3]
+
+Explanation
+Let's understand what we have done in the above program-
+
+The first step is to initialize the list that contains duplicate values.
+After this, we have printed this list so that it becomes easy for us to compare the lists in the output.
+In the next step, we have used list comprehension to build the same logic.
+Finally, we have displayed the resultant list.
+
+In the third approach, we will see how set() can be used to obtain a list of distinct elements.
+Using Set()
+The program given below shows how it can be done-
+
+#initializing the list
+list_value1 = [12,15,11,12,8,15,3,3]
+print("The initialized list is ",list_value1)
+res_list = []
+#using set()
+list_value1 = list(set(list_value1))
+#printing the list after removing duplicate elements
+print("The resultant list after removing duplicates is ",list_value1)
+
+Output:
+The initialized list is  [12, 15, 11, 12, 8, 15, 3, 3]
+The resultant list after removing duplicates is  [12, 15, 11, 8, 3]
+
+Explanation
+Let's try and understand what happened here,
+
+The first step is to initialize the list that contains duplicate values.
+After this, we have printed this list so that it becomes easy for us to compare the lists in the output.
+In the next step, we have used set() inside list() and passed list_value1 as a parameter so that we can obtain a list of distinct elements.
+Finally, we have displayed the resultant list.
+
+Using enumerate()
+Now let's see how enumerate() can be used to meet our objective.
+The following program illustrates the same-
+
+#initializing the list
+list_value1 = [12,15,11,12,8,15,3,3]
+print("The initialized list is ",list_value1)
+res_list = [x for n,x in enumerate(list_value1) if x not in list_value1[:n]]
+#printing the list after removing duplicate elements
+print("The resultant list after removing duplicates is ",res_list)
+
+Output:
+The initialized list is  [12, 15, 11, 12, 8, 15, 3, 3]
+The resultant list after removing duplicates is  [12, 15, 11, 8, 3]
+
+Explanation
+
+The first step is to initialize the list that contains duplicate values.
+After this, we have printed this list so that it becomes easy for us to compare the lists in the output.
+In the next step, we have used enumerate() inside list comprehension that will return a list containing unique elements.
+Finally, we have displayed the resultant list.
+
+Finally, in the last program we will see how OrderedDict can be used to remove duplicates from list using Python.
+Using OrderedDict
+The program given below shows how it can be done-
+
+from collections import OrderedDict
+#initializing the list
+list_value1 = [12,15,11,12,8,15,3,3]
+print("The initialized list is ",list_value1)
+#using OrderedDict
+res_list = list(OrderedDict.fromkeys(list_value1))
+#printing the list after removing duplicate elements
+print("The resultant list after removing duplicates is ",res_list)
+
+Output:
+The initialized list is  [12, 15, 11, 12, 8, 15, 3, 3]
+The resultant list after removing duplicates is  [12, 15, 11, 8, 3]
+
+Explanation
+
+The first step is to import OrderedDict from collections so that we can use it to remove duplicates from the list.
+In the next step, we have initialized the list that contains duplicate values.
+After this, we have printed this list so that it becomes easy for us to compare the lists in the output.
+Now we have passed list_values1 inside OrderedDict.fromkeys().
+Finally, we have displayed the resultant list that does not contain any duplicate elements.
+
+Conclusion
+In this tutorial, we explored and learned some interesting methods to remove duplicates from a list in Python.
+
+
+Next TopicRemove Multiple Characters from a String in Python
+
+
+
+
+← prev
+next →
+
+
+
+

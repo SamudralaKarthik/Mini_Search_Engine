@@ -1,0 +1,117 @@
+
+
+
+
+next →
+← prev
+
+__name__ in Python
+Python's __name__ special variable stores the name of the currently running Python script or module. The Python __name__ variable was added in Python 3.0 and is not present in Python 2.x. When a Python script or module is being executed, the __name__ variable is given the value __main__ for the present Python script or module.
+What does _name_ mean ?
+Python has a built-in variable called __name__ that records the name of the currently running module or script. The __name__ variable merely holds the name of the module or script unless the current module is executing, in which case the value __main__ is set to it.
+Therefore, if a Python script is imported into another Python script, its __name__ variable should always have the value __main__ when that Python script is running. Otherwise, it would have the name of the module.
+Example :
+To further understand this, let's use an example. Make a script in Python called testing.py, and append the following code to it :
+
+# Code to define a function
+def anything():
+    print('Value of the __name__ : ', __name__)
+    
+anything()
+
+Output:
+Value of the __name__ :  __main__
+
+Explanation :
+The value of the __name__ variable was set to __main__ when we ran the test.py script.
+Let's now build another Python script called mains.py and import the previous one into it.
+Example :
+
+# importing testing.py
+import testing
+
+testing.anything()
+
+Output:
+Value of the __name__ : testing
+
+Explanation :
+Because we displayed the testing,py module's value of the __name__ variable , we can see from the output of the code above that the value of the variable is testing.
+Using the condition if name == main :
+We use the if statement and the condition __name__ == __main__ to declare that certain Python code should only be performed when the script is run directly.
+Example :
+
+# importing testing.py
+import testing
+
+if __name__ == __main__:
+    testing.anything()
+
+Here, the string __main__ is used to determine if the present module or script is executing independently or not. The two underscores on each side of name in the __name__ variable were there to let the Python interpreter know that it's a reserved or special keyword.
+Code example for name in Python :
+As previously said, when we run a code file, the value of the __name__ variable changes to __main__ because the code is executed directly, without even being imported into another file.
+Code : Here is ScriptP1.py, a code file.
+
+# defining a function
+def anything():
+    print('It is a function in the ScriptP1.')
+    
+if __name__=='__main__':
+    anything()
+    print('Called from the ScriptP1.')
+else:
+    print('ScriptP1 is imported into another file.')
+
+Output:
+It is a function in the ScriptP1.
+Called from the ScriptP1.
+
+Let's now create a new Python script file called ScriptP2.py, import ScriptP1.py into it, and attempt to invoke the function anything() that is defined in ScriptP1.
+Code : The ScriptP2.py code is provided here:
+
+import ScriptP1
+
+if __name__=='__main__':
+    ScriptP1.anything()
+    print('Called from the ScriptP2.')
+
+Output:
+ScriptP1 is imported into another file.
+It is a function in the ScriptP1.
+Called from the ScriptP2.
+
+The __name__ variable had the value ScriptP1 (the name of the module) when the import statement for ScriptP1 was run inside of ScriptP2, but as the ScriptP2 was the first script to be executed, it will now have the value __main__.
+Printing the Value of __name__ :
+Let's print the value of the __name__ variable at each stage of execution to help you understand it better.
+Example : The ScriptP1.py Python script's source code is provided below :
+
+print('Value or the variable __name__ : ' + __name__)
+
+Output:
+Value or the variable __name__ : __main__
+
+Example 2 : And here is the script ScriptP2.py's source code :
+
+# importing the file ScriptP1.py
+import ScriptP1
+
+print('Value or the variable __name__ : ' + __name__)
+
+Output:
+Value or the variable __name__ : __main__
+
+Summary :
+The primary method or function is typically used as the point at which any program is executed in most programming languages. What about Python, though? A Python program (script) typically begins execution at the first line, which is the program's indentation level 0. A __name__ variable is generated prior to the execution of a Python program, though. In Python, this variable could be used in place of the main method.
+
+
+Next Topic_name_ _main_ in Python
+
+
+
+
+← prev
+next →
+
+
+
+

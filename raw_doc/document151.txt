@@ -1,0 +1,288 @@
+
+
+
+
+next →
+← prev
+
+Python Audio Modules
+Python programming language is a leading nowadays because of its user - friendly features. Python also has many interesting modules and libraries by which users can do a lot by using them. One of the most interesting features of the Python language is its Audio modules. In this article, we will discuss the various types of audio modules and their unique features and advantages.
+This article will cover 10 different types of audio modules and libraries in python:
+'
+PYO
+PyAudio
+Dejavu
+Mingus
+hYPerSonic
+pydub
+simpleaudio
+winsound
+python - sounddevice
+playsound
+
+Let's understand the above audio modules one by one.
+1. PYO
+PYO is a Module of Python is written in the C programming language for the creation of a digital signal processing script. This module of Python contains classes for processing a wide variety of audio signal types. Due to this, users are able to import signal processing chains directly in Python scripts or projects and can manipulate the audio signals in real time by using an interpreter.
+The tool of PYO modules in Python have primitives such as mathematical operations, basic signal processing like delays, synthesis generators, filters, and much more. But it also complexes the algorithms to develop sound granulation and many other artistic audio operations.
+For example:
+
+# to play a sound file:
+from pyo import *
+sound = Server ( ) .boot ( )
+sound.start  ( )
+sound_file = SFPlayer ( " path /to /users /sound.aif ", speed = 1, loop = True ).out ( )
+# for Granulating an audio buffer:
+sound = Server ( ) .boot ( )
+sound_nd = SndTable ( " path /to /users /sound.aif " )
+ev = HannTable ( ) 
+ps = Phasor ( freq = sound_nd.getRate ( )*.25, ml = sound_nd.getSize ( ) )
+dr = Noise ( mul = .001, add = .1 )
+granulate = Granulator ( sound_nd, ev, [ 1, 1.001 ] , ps, dr, 32, ml = .1 ).out ( )
+# to generate melodies:
+sound = Server ( ) .boot ( )
+sound.start ( )
+wv = SquareTable ( )
+ev = CosTable ( [ ( 0, 0 ) , ( 100 , 1 ) , ( 500 , 0.3 ) , ( 8391 , 0 ) ] )
+mt = Metro ( 0.135 , 12 ).play ( )
+ap = TrigEnv ( mt , table = ev , dr = 1 , ml = .1 )
+pt = TrigXnoiseMidi ( mt , dist = ' loopseg ' , x1 = 20 , scale = 1 , mrange = ( 47, 74 ) )
+out = Osc ( table = wav , freq = pt , ml = ap ).out ( )
+
+2. pyAudio
+Pyaudio is a Python library which is an open - source and cross - platform audio input - output. It has a wide range of functionalities, which are audio - related and mainly focusing on segmentation, features extraction, classification and visualization issues.
+By using the pyaudio library, users can classify unknown sounds, perform supervised and unsupervised segmentation, extract audio features and representations, detect audio events and filter out silence periods from the long recordings, apply dimensionality reduction to visualize audio data and content similarities and much more.
+This library provides bindings for PortAudio. The users can use this library for playing and recording audio on different platforms, like Windows, Mac and Linux. For playing audio by using the pyaudio library, the user has to write to a .stream.
+For example:
+
+import pyaudio
+import wave
+
+filename = ' example.wav '
+
+# Set chunk size of 1024 samples per data frame
+chunksize = 1024  
+
+# Now open the sound file, name as wavefile
+wavefile = wave.open ( filename, ' rb ' )
+
+# Create an interface to PortAudio
+portaudio = pyaudio.PyAudio ( )
+
+# Open a .Stream object to write the WAV file to play the audio using pyaudio
+# in this code, 'output = True' means that the audio will be played rather than recorded
+streamobject = portaudio.open(format = portaudio.get_format_from_width ( wavefile.getsampwidth ( ) ),
+                channels = wavefile.getnchannels ( ),
+                rate = wavefile.getframerate ( ),
+                output = True ( )
+
+# Read data in chunksize
+Data_audio = wavefile.readframes ( chunksize )
+
+# Play the audio by writing the audio data to the streamobject
+while data != '':
+    streamobject.write ( data_audio )
+    data_audio = wavefile.readframes ( chunksize )
+
+# Close and terminate the streamobject
+streamobject.close ( )
+portaudio.terminate ( )
+
+Here, users can notice that playing audio using the pyaudio library can be a bit complex, comparing the other audio playing libraries. That's why this library might not be the first choice of users for playing the audio in their projects or applications.
+Although, as pyaudio library provides more low - level control, which makes it possible for the users to set the parameters for their input and output devices. This library also lets the users check the load of their CPU and input - output activity.
+Pyaudio library also allows its users to play and record the audio in callback mode. Where a stated callback function is called when new data is needed for playback and available for recording. These are the features of the pyaudio library, which makes it different from other audio libraries and modules. This library is specifically used if the user wants to play the audio beyond simple playback.
+3. Dejavu
+Dejavu is an audio fingerprinting module in Python. It is an open - source module. This module can remember the recorded audio by listening to it once, and this module stores the audio in the database. After this, when a song is played, or microphone input or a disk file, Dejavu tries to match the audio with the fingerprints stored in the database and return the song or recording which was played earlier.
+Dejavu module surpasses at the recognition of particular signals with a realistic amount of noise. There are two forms in which user can use Dejavu to recognize the audio:
+
+User can recognize the audio by reading and processing the audio files on disk.
+
+OR,
+
+User can use the Computer's microphone.
+
+For example:
+
+#User should create a MySQL database where Dejavu can store fingerprints of the audio. 
+#on user local setup:
+$ mysql -u root -p
+Enter password: *************
+mysql> HERE, USER SHOULD CREATE A DATABASE dejavu;
+
+Now users can start fingerprinting their audio collection!
+
+from dejavu import Dejavu
+config = {
+    " database ": {
+         " host ": " 125.0.1.1 ",
+         " user ": " root ",
+         " password ": < password imported in Local setup >, 
+         " database ": < name of the database user has created in local setup >,
+     }
+}
+dejv = Dejavu ( config )
+
+4. Mingus
+Mingus is a package in Python. It is used by many programmers, musicians' researchers and composers for making and examining the music and songs. This package is a cross - platform and very advanced music theory representing package for python along with Musical Instrument Digital Interface files and playback support.
+Mingus package can be used to play with music theory, for education tools, to build editors for songs, and in many other applications and software's in which users want to import the function of processing and playing music. This package is a music theory, and it includes topics like scales, progressions, chords and intervals. This package tests these components and is used for generating and recognizing the musical essentials with the help of convenient shorthand.
+For example:
+
+import mingus.core.notes as notes_m
+# for valid notes
+notes_m.is_valid_note("C") 
+notes_m.is_valid_note("D#") 
+notes_m.is_valid_note("Eb")
+notes_m.is_valid_note("Fbb")
+notes_m.is_valid_note("G##")
+
+Output:
+True
+True
+True
+True
+True
+
+# for invalid notes:
+
+notes_m.is_valid_note("c")
+notes_m.is_valid_note("D #")
+notes_m.is_valid_note("E-b")
+
+Output:
+False
+False
+False
+
+5. hYPerSonic
+hYPerSonic is a framework of Python and C language. This is used for developing and operating the sound processing pipelines, which are intended for real - time control. This framework is a low - level in which every byte count, and this also includes objects for soundcard, filters memory operations, file - io, and oscillators. This framework is operated on Linux and OSX operating systems.
+6. Pydub
+Pydub is a Python library used for manipulating audios and adding effects to it. This library is a very simple and easy but high - level interface which is based on FFmpeg and inclined by jquery. This library is used for adding id3 tags in audio, slicing it, and concatenating the audio tracks. Pydub library supports 2.6, 2.7, 3.2 and 3.3 versions of Python.
+However, users can open and save the WAV file by using the pydub library without any dependencies. But users are required to install an audio playback package if they want to play audio.
+The following code can be used to play a WAV file with pydub:
+For example:
+
+from pydub import AudioSegment
+from pydub.playback import play
+
+sound_audio = AudioSegment.from_wav ( ' example.wav ' )
+play ( sound_audio )
+
+if user wants to play other audio files formats like MP3 files, they should install libav or FFmpeg.
+After installing FFmpeg, the user needs to make a small change in the code to play an MP3 file.
+For example:
+
+from pydub import AudioSegment
+from pydub.playback import play
+
+sound_audio = AudioSegment.from_mp3 ( 'example.mp3 ' ) 
+play ( sound_audio )
+
+By using the AudioSegment.from_file (file_name, file_type ) statement, users can play any format supported by ffmpeg of the audio file.
+For example:
+
+# Users can play a WMA file:
+sound = AudioSegment.from_file ( 'example.wma ', ' wma ' )
+
+Pydub library also allows the users to save the audio in different file formats. Users can also calculate the length of the audio files. User can use cross - fades in the audio by using this library.
+7. Simpleaudio
+Simpleaudio is a Python library which is a cross - platform. This library is also used for playing back WAV files without any dependencies. simpleaudio library waits for the file to finish the playing audio in WAV format before termination of the script.
+For example:
+
+import simpleaudio as simple_audio
+
+filename = ' example.wav '
+wave_object = simple_audio.WaveObject.from_wave_file ( filename )
+play_object = wave_object.play ( )
+play_object.wait_done ( )  
+# Wait until audio has finished playing
+
+In a WAV format file, a categorization of bits is stored which represents the raw audio data, and headers along with metadata in Resource Interchange File format is also stored.
+The definitive record of the industry is to store every audio sample, which is a particular data point related to air pressure, as at 44200 samples per second, a 16 - bit value, for CD recordings.
+For reducing the size of the file, it is sufficient for storing few recordings like Human speech, at a lower sampling rate, like 8000 samples per second. However, the higher sound frequencies cannot be represented much accurately.
+Some of the libraries and modules discussed in this article play and records the bytes objects, and some of them use NumPy arrays to record raw audio data. Both resemble to a categorization of data points that can be played back at a definite sample rate to play audio.
+In a NumPy array, every element can contain a 16 - bit value equivalent to an individual sample, and for the bytes object, each sample is stored as a set of two 8 - bit values. The important difference between these two data types is that the NumPy arrays are mutable, and the bytes objects are immutable, which makes the latter more suitable for generating audios and processing the more complex signals.
+Users can play NumPy arrays and bytes object in the simpleaudio library by using simpleaudio.play_buffer ( ) statement. But, before this, users should make sure that they have already installed NumPy and simpleaudio libraries.
+For example:
+To generate a Numpy array corresponding to a 410 Hz tone.
+
+import numpy as numpy
+import simpleaudio as simple_audio
+
+frequency = 410  # user's played note will be 410 Hz
+fsample = 44200  # 44200 samples per second will be played
+second = 5  # Note duration of 5 seconds
+
+# Generate array with second*sample_rate steps, ranging between 0 and seconds
+tp = numpy.linspace ( 0 , second , second * fsample, False )
+
+# to generate a 410 Hz sine wave
+note = numpy.sin ( frequency * tp * 2 * numpy.pi )
+
+# user should Ensure that highest value is in 16-bit range
+audio = note * (2**15 - 1) / numpy.max ( numpy.abs ( note ) )
+# now, Convert to 16-bit data
+ado = audio.astype ( numpy.int16 )
+
+# to Start the playback
+play_object = simple_audio.play_buffer ( ado , 1 , 2 , fsample )
+
+# user now Waits for playback to finish before exiting
+play_object.wait_done ( )
+
+8. winsound
+winsound is a module in Python which is used for accessing the basic sound - playing machinery of the Windows operating system.
+In the winsound module, the WAV file can be played in just a few lines of code.
+For example:
+
+import winsound
+
+filename = ' example.wav '
+winsound.PlaySound ( filename, winsound.SND_FILENAME )
+
+winsound module does not support any file format except WAV files. It allows the users to beep their speakers by using winsound.Beep ( frequency, duration ) statement.
+For example:
+
+# User can beep a 1010 Hz tone for 110 milliseconds:
+import winsound
+
+winsound.Beep ( 1010, 110 )  # Beep at 1010 Hz for 110 milliseconds 
+
+9. python-sounddevice
+The python - sounddevice is a python module for cross - platform audio play back. This module provides bindings for the PortAudio library and has some suitable functions to play and record NumPy arrays, which contain audio signals.
+If the user wants to play a WAV file, they should install NumPy and soundfile to open an audio file format in WAV files as NumPy arrays.
+For example:
+
+import sounddevice as sound_device
+import soundfile as sound_file
+
+filename = ' example.wav '
+# now, Extract the data and sampling rate from file
+data_set, fsample = sound_file.read ( filename , dtype = ' float32 ' )  
+sound_device.play ( data_set, fsample )
+# Wait until file is done playing
+status = sound_device.wait ( )  
+
+The statement sound_file.read ( ) used for extracting the raw audio data and also the sampling rate of the file, which are stored in Resource Interchange File format header. sound_device.wait ( ) statement is used to make sure that the script is only terminated after the audio finishes playing.
+10. playsound
+playsound is a Python module by which users can play sound in a single line of code. It is a cross - platform module which is a single function without any dependencies for playing sounds and audios.
+For example:
+
+from playsound import playsound
+
+playsound ( ' example.wav ' )
+
+The playsound module is used for files formatted in WAV file and MP3 file, and it can also work with other file formats.
+Conclusion:
+In this article, we have discussed various types of Python Library and modules which are used for playing and recording different types of audio files and sounds. Here, we have explained the different features and importance of each library and modules for playing sounds in the project of developing and modifying applications and software.
+
+
+Next TopicWikipedia Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

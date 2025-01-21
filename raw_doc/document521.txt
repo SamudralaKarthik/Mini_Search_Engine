@@ -1,0 +1,161 @@
+
+
+
+
+next →
+← prev
+
+How to Solve Stock Span Problem Using Python
+In this tutorial, we will solve the stock span problem using the Python code. Before proceeding to the solution, let's understand the problem statement of this problem.
+What is Stock Span Problem?
+The stock span problem is financial problem where we calculate the share price. In this problem, we have a series of n daily price quotes and we need to calculate the span of stock's price for all n days.
+Suppose the span Si of the stock's price on a given day I is defined as the maximum number of consecutive days just before the given day, for which the price of the stock on the current day is less than or equal to its price on the given day.
+For example, if an array of 7 days prices is given as [100, 80, 60, 70, 60, 75, 85], then the span values for corresponding 7 days are [1, 1, 1, 2, 1, 4, 6].
+Code Implementation -
+The following solution is simple but inefficient where we traverse the input price array. When we visit the every element, traverse elements on the left of it and increment the span value of it while elements on the left side are smaller.
+Example -
+
+def shareSpan(price, n, Span):
+    
+    # We define the Span value of first day is 1
+    Span[0] = 1
+
+    # Calculating the span value of rest of days by linearly
+    # checking previous days
+    for i in range(1, n, 1):
+        Span[i] = 1 # Initialize span value
+
+        # Traverse left while the next element on left is
+        # smaller than price[i]
+        j = i - 1
+        while (j>= 0) and (price[i] >= price[j]) :
+                    Span[i] += 1
+                    j -= 1
+                        
+# A utility function to print elements of array
+def printList(arr, n):
+
+    for i in range(n):
+        print(arr[i], end = " ")
+price = [10, 4, 5, 90, 120, 80]
+n = len(price)
+S = [None] * n
+
+# Fill the span values in list S[]
+shareSpan(price, n, S)
+
+# print the calculated span values
+printList(S, n)
+
+Output:
+1 1 2 4 5 1 
+
+The above method takes the 0(n2) to solve the problem. Let's try to reduce the time complexity by the 0(n) times.
+A Linear-Time Complexity Method
+We can make the above solution efficient using linear-time complexity method. In this method, S[i] where i can be calculated if we know the closed day preceding i, such that the price is greater than on that day than the price on the day i. If such condition occurs, let's call it h(i), otherwise, we define h(i) =-1.
+We will implement this logic using the stack data structure.
+Example -
+
+def getSpan(price, S):
+    
+    n = len(price)
+    # Initializing a stack
+    st = [] 
+    st.append(0)
+
+    # Span value of first element fixed as 1
+    S[0] = 1
+
+    # Calculating  span values for rest of the elements
+    for i in range(1, n):
+        
+        # Pop elements from stack while stack is not
+        # empty and top of stack is smaller than price[i]
+        while( len(st) > 0 and price[st[-1]] <= price[i]):
+            st.pop()
+
+        S[i] = i + 1 if len(st) <= 0 else (i - st[-1])
+
+        # Push this element to stack
+        st.append(i)
+
+# A utility function to print elements of array
+def printArray(arr, n):
+    for i in range(0, n):
+        print (arr[i], end =" ")
+
+# Driver program to test above function
+price = [10, 4, 5, 90, 120, 80]
+S = [0 for i in range(len(price)+1)]
+
+# Fill the span values in array S[]
+getSpan(price, S)
+
+# Print the calculated span values
+printArray(S, len(price))
+
+Output:
+1 1 2 4 5 1
+
+Explanation -
+In the above code, we defined the a getSpan() method that takes the lists as arguments. First we calculated the length of the price list and initialized the empty stack. We fixed the span value of the first element as 1. Then, we visited each element using for loop.
+In for loop iteration, we iterated while loop until pop elements from stack while stack is not empty and top of stack is smaller than price[i]. Then we checked, if the stack becomes empty, price[i] is greater than all elements on left of it, i.e. price[0], price[1]……price[i-1], otherwise the price[i] is greater than elements after top of stack. If the condition is true pushed element to the stack.
+We created a utility function to print elements of array. At the end, we initialized price and span list. Now called the getSpan() function along with the printList(). It printed the span values.
+Time Complexity
+The time complexity of this method will be 0(n) which is better than the previous one. We can see that every element of the array is added and removed from the stack at most once.
+Let's see another approach.
+Without Using Stack
+
+def getSpan(List, n, res):
+     
+    res[0] = 1
+ 
+    # Calculate span values for rest
+    # of the elements
+    for i in range(1, n):
+        counter = 1
+         
+        while ((i - counter) >= 0 and
+              List[i] >= List[i - counter]):
+            counter += res[i - counter]
+        res[i] = counter
+ 
+# An utility function to print elements
+# of array
+def printArray(arr, n):
+     
+    for i in range(n):
+        print(arr[i], end = ' ')
+    print()
+ 
+# Driver code
+price = [ 10, 4, 5, 90, 120, 80 ]
+n = len(price)
+S = [0] * (n)
+ 
+# Fill the span values in array S[]
+getSpan(price, n, S)
+ 
+# Print the calculated span values
+printArray(S, n)
+
+Output:
+1 1 2 4 5 1 
+
+Explanation -
+In this approach, we created a getSpan() function that takes three arguments - List, length, and result. We fixed the first element as 1 and calculate the rest span values of the element. We defined the utility function to print the elements of the list. At the end, we called the getSpan() method and it returned the span values.
+Conclusion
+This problem commonly asked in the technical interview and you can find this problem top coding practice sites like leetcode.com. In this tutorial, we have implemented the solution of span problem using the three approaches. First solution is quite simple but inefficient in terms of memory.
+
+
+Next TopicSelection Sort in Python
+
+
+
+
+← prev
+next →
+
+
+
+

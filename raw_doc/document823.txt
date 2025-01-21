@@ -1,0 +1,119 @@
+
+
+
+
+next →
+← prev
+
+__getitem__() in Python
+In Python, there are a lot of functions that are used for particular purposes, and they have double underscores before and after the function name. They are called magic functions or dunder methods.
+For example: __abs__ , __contains__ etc.
+Some examples of magic methods are as follows:
+__str__() function:
+This function is used to return the printable string.
+__add__() function:
+This function is used to add the two objects or attributes.
+_ge__() function: 
+This function is used to overload the greater than or equal operator. ( >=).
+__floor__() function:
+This function is called by the Math.floor() function internally.
+__ceil__() function:
+This function is called by the Math.ceil() function internally.
+__trunc__() function:
+This function is called by the Math.trunc() function internally.
+__init__() function:
+This is the constructor for any class, which is called by the __new__() function.
+__getitem__() method:
+__getitem__() is also a magic method in Python that is used in a class, and it gives the flexibility to any instance of the class to use the indexer operator.
+Syntax:
+
+__getitem__(self,key)
+
+So, it is used to evaluate the value of self[key] by any object or instance of the class. Let's suppose we have one object obj, then obj[key] will be equivalent to obj.__getitem(key).
+We will some examples to understand the __getitem__() function:
+Example1:
+
+class JavatPoint:
+    def __getitem__(self, key):
+        print('hello world from javatpoint and ayush from jaipur ', key)
+
+myObj = JavatPoint()
+myObj[6000]
+myObj['hi intern']
+
+Output:
+
+Explanation:
+In the above code, we have one custom class named JavatPoint. In this class, we have our own definition of the __getitem__() function where we print the some statement with the key.
+Then we created its instance name myObj, and then we passed the numeric value 6000 as the key. It will print the statement and the value of the key. Then in the next line, we used a string as a key using an indexer, which will print the statement accordingly.
+Example 2:
+
+class JavatPoint:
+    def __init__(self, lst):
+        self.lst = lst
+
+    def __getitem__(self, key):
+        print('this statement from __getitem__', key)
+        return self.lst[key]
+
+    def __setitem__(self, key, value):
+        print('this statement from__setitem__', key, value)
+        self.lst[key] = value
+
+    def __delitem__(self, key):
+        print('this statement from__delitem__', key)
+        del self.lst[key]
+
+myObj = JavatPoint(['Ayush', 'Shivani', 'Mansi','Gopal'])
+
+print(myObj[1])
+myObj[1] = '69'
+print(myObj[1])
+
+del myObj[1]
+print(myObj[1])
+
+Output:
+
+Explanation:
+In the above code, we have one class named JavatPoint, where we have defined four functions. In the init function, we have taken a list. Then we have created an instance of the class with a list with four string values.
+In the first statement, we have printed the value at 1st index so it will print the value and the statement of the __getitem__() function. Then we changed the value from string to integer and again called the indexer, so it printed again.
+Then we deleted the first index value of the list using the __delitem__() function. So the value at the second index will be shifted to the left, and it will be printed as the first index.
+Example 3:
+
+# Python Code to demonstrate use of __getitem__() in Python
+class JavatPoint(object):
+	# This function prints the type of the object passed as well as the object item
+	def __getitem__(self, items):
+		print (type(items), items)
+
+test = JavatPoint()
+test[69]
+test[1:69:2]
+test['Javatpoint: Ayush, Shivani , Gopal , Mansi - all from jaipur']
+test[1, 'x', 10.0]
+test['a':'z':2]
+test[object()]
+
+Output:
+
+Explanation:
+In the above code, we have the class named Javatpoint, which accepts the object and it has the function __getitem__ () in which we pass a key or items, and in this function, we print the type of the key and the value of the key. Then we created the object or instance of the Javatpoint class named test and passed different types of keys into the test using indexer([ ]).
+In the first example, we passed value 69, so it printed the data type as 'int' and its value.
+The second example is of a type slice object, so it is printed as a class slice.
+The third example is a statement, which has the datatype as str or string.
+The fourth example is of a type tuple, and the fifth example is of a type slice.
+The last example is of a type object, so it prints the value or the address of the object.
+
+
+Next TopicGET and POST Requests using Python
+
+
+
+
+← prev
+next →
+
+
+
+

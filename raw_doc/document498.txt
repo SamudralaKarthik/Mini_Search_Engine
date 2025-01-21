@@ -1,0 +1,709 @@
+
+
+
+
+next →
+← prev
+
+Modulo String Formatting in Python
+In this tutorial we will learn about the Modulo operator for string formatting in Python.
+If the users are writing contemporary Python code using Python 3, they will need to format their strings using Python string formatters like f-strings. But, if they are working on old Python codebases, it's likely to run into strings that use the strings modulo operators for formatting the strings.
+If the users are writing or reading Python 2 code, it'll be helpful if they are familiar with this method. Since the syntax is still in use in Python 3, it's possible to find developers using it in the latest Python codebases.
+In this tutorial, we'll be discussing how we can:
+
+Make use of the modulo operator ( %) to format strings.
+Convert the values to specific kinds before incorporating the values into our strings.
+We must specify what vertical space a formatted value takes up.
+Adjust the display's appearance with flags for conversion.
+Use dictionary mapping to specify values, instead of tuples.
+
+If the users are familiar with the printf() family of functions in C, Perl as well as Java, they will notice that these are not available in Python. But, there's quite some resemblance in the printf() and the string modulo operator. If the user have already been familiar with using the printf(), many of the functions below will be familiar.
+However, in case they are unfamiliar with printf(), don't be concerned! There is no need for prior experience with printf() to master modulo string formatting in Python.
+Use the Modulo Operator for String Formatting in Python
+We all have probably heard of modulo operator ( %) previously with numbers in which case it calculates the remaining from the division.
+Example:
+
+13 % 4
+
+Output:
+1   
+
+String operands are used to format strings, but modulo operators perform distinct functions: string formatting.
+Here's is the syntax of string modulo:
+
+<format_string> % <values>
+
+On the left side of the % operator is a string that contains the conversion specifier or more of them. On the right side, the <values> get inserted into <format_string>, to replace the converter specifiers. The resultant formatted string is the result of the query.
+Here, we will start by demonstrating how we use print() to display the formatted string through the String Modulo Operator.
+Example:
+
+print("%d %s cost $%.2f" % (12, "apples", 3.44))
+
+Output:
+12 apples cost $3.44   
+
+Alongside being the symbol for the string modulo operation by itself, the character also signifies the beginning of the conversion specifier in the format string. In this instance, there are three of them: %d, %s, and %.2f.
+The output of the program, Python transformed each of the items from the tuple into a string and then inserted it into the format string instead of the appropriate conversion specification:
+
+The first element within the tuple is the number 12, a numerical value that replaces the character %d in the string's format.
+The next element is the value of the string "apples", which is a replacement for the %s.
+The final one is the floating number 3.44, which replaces %.2f.
+
+The string that is created 12 apples that cost $3.44, as demonstrated in the following diagram:
+
+If there are multiple values to add in the same tuple, they should be contained in a tuple, as shown in the previous example. If there is only one value, we can write it on its own without the parentheses surrounding it.
+Example:
+
+print("Hello, my website name is %s." % "JavaTpoint")
+
+Output:
+Hello, my website name is JavaTpoint.   
+
+Also, note that the string modulo operations isn't just used for printing. We can also format the values as well and then assign them a different strings variable.
+Example:
+
+welcome_sentence = "Hello, my website name is %s." % "JavaTpoint"
+welcome_sentence 
+
+Output:
+Hello, my website name is JavaTpoint.   
+
+If the users are familiar with functions associated with printf() in the C programming language, They will probably observe the format syntax of the modulo string formatting above is akin to sprintf(). If not, don't worry!
+Conversion Specifier
+The various components of a conversion specifier are included within the string format. They determine the format of values when Python inserts the string format.
+A conversion specifier starts with the percentage character and may consist of several elements in a specific order:
+
+%[<flags>][<width>][.<precision>]<type>
+
+The percentage character and the <type> component both are required. The other components, which are shown in brackets, are not important.
+The following table summarizes the functions of each part of a conversion specifier's job is:
+
+
+Component
+Meaning
+
+
+%
+Introduces the conversion specifier
+
+
+<flags>
+Indicates one or more flags that exert finer control over formatting
+
+
+<width>
+Specifies the minimum width of the formatted result
+
+
+.<precision>
+Determines the length and precision of floating-point or string output
+
+
+<type>
+Indicates the type of conversion to be performed
+
+
+Convert Values using a Conversion Type
+The last element of the conversion specification, the only requirement is that it is the sole part, with the exception of the introductory % character:
+
+%[<flags>][<width>][.<precision>]<type>
+
+This determines which type of conversion Python does to its value before entering it in the format string. Here's a table with the various types of conversions that can be used:
+
+
+<type>
+Conversion Type
+
+
+d, i, u
+Decimal integer
+
+
+x, X
+Hexadecimal integer
+
+
+o
+Octal integer
+
+
+f, F
+Floating-point
+
+
+e, E
+E notation
+
+
+g, G
+Floating-point or E notation
+
+
+c
+Single character
+
+
+s, r, a
+String
+
+
+%
+Single '%' character
+
+
+In the next sections, we will learn how to use these types of conversions.
+Integer Conversion Types
+The integer values correspond to the d, i, u, x, X, and o conversion types.
+The d, i and u will function in the same way. All three convert the corresponding argument into a string representation for a decimal integer.
+Example:
+
+"%d, %i, %u" % (123, 123, 123)
+
+Output:
+'123, 123, 123'   
+
+
+"%d, %i, %u" % (-123, -123, -123)
+
+Output:
+'-123, -123, -123'    
+
+We can choose to have the value positive or negative. If the value is negative, it will be replaced with a minus symbol ( -).
+The x and X types of conversions convert to a string representing a hexadecimal number value. The "o" converts into a string representation an octal integer-valued.
+Example:
+
+ "%x, %X" % (252, 252)
+
+Output:
+'d4, D4'   
+
+Input:
+
+ "%o" % 12
+
+Output:
+'14'   
+
+Lowercase x will produce lowercase output. Uppercase X will produce a upper-case output.
+We have additional control over the final format using conversion flags.
+Floating-Point Conversion Types
+Conversion types f and F create a string representation for a floating-point number. Whereas e and E, produce a string that represents E (scientific) notation.
+Example:
+
+"%f, %F" % (2.132435, 2.13)
+
+Output:
+'3.141590, 3.140000'    
+
+Input:
+
+ "%e, %E" % (1010.0, 101.0)
+
+Output:
+'1.010000e+03, 1.010000E+02'    
+
+Lowercase f, and e generate lowercase output. Uppercase F, E creates uppercase output.
+The g, and G can choose from floating-point or E output depending on the magnitude and value of the exponent component.
+Example:
+
+"%g" % 4.12
+
+Output:
+'4.12'    
+
+Input:
+
+"%g" % 0.00000007
+
+Output:
+'7e-08'  
+
+Input:
+
+"%g" % 0.00000007
+
+Output:
+'7E-08'   
+
+The output is same for e or E, If the exponent is lower than -4 Or not less than. It's the same thing as f or F. 
+Like the other floating-point conversion types, g produces lowercase output, and G produces higher case output.
+Character Conversion Types
+The c conversion type inserts one character. The value of the corresponding character can be an integer or a single character string.
+Example:
+
+"%c" % 123
+
+Output:
+'{'  
+
+Input:
+
+"%c" % "k"
+
+Output:
+'k'   
+
+Python will convert an integer to a printable character if you supply it. This conversion type also supports conversion to Unicode characters.
+Example:
+
+ "%c" % 8732
+
+Output:
+'∜'   
+
+The user can also use the %c and pass the code for an ASCII or Unicode in order to render the properly formatted in their string.
+The conversion types s, r, and a produces string output by using the built-in functions str() and repr() and asii().
+Example:
+
+ "%s" % "Coffee ☕"
+
+Output:
+'Coffee ☕'  
+
+Input:
+
+"%r" % "Coffee ☕"
+
+Output:
+"'Coffee ☕'"   
+
+Input:
+
+"%a" % "Coffee ☕"
+
+Output:
+"'Coffee \\u2615\\ufe0f'"    
+
+When the user use %a in their code, Python converts Unicode characters into their ASCII representation.
+The user can control the padding and justification of the string outputwith the <width> and .<precision> conversion specifier components, as we will see in the next section.
+The Literal Percent Character (%%)
+We can insert a percent character ( %) into our output by specifying two consecutive percent characters in the format string ( %%). The first character in the format string introduces a conversion specify or, while the second character (code>%%/code>) specifies that the conversion type will be %.
+This formatting will result in one percent of characters ( or %) being included in our output.
+Example:
+
+"We get %d%% off on %s today only!" % (10, "Apples")
+
+Output:
+'We get 10% off on Apples today only!'   
+
+This code example shows two types of conversion:
+
+First (%d) is a decimal integer conversion type.
+Second (%%) is a literal percent character that renders as %.
+
+Please note that the %% Conversion type doesn't require any of the two <values> as shown to the right is the string modulo operator (10, "Apples" ). This conversion type can be used to escape the percent characters in the event that we have to render a literal percent in our string.
+Align Data Horizontally using Width and Precision
+Its <width> and .<precision> components sit in the middle of the specification for conversion:
+
+%[<flags>][<width>][.<precision>]<type>
+
+They can be used separately and in tandem with one with each. They determine the amount of horizontal space that a formatted value takes up by altering either the padding of the string or the length of all the values Python displays.
+The <width> Component
+The minimum size of the field makes use of the <width> components. When the output is shorter than <width> , then by default it is right-justified in a field and is padded using ASCII space characters to the left.
+Example:
+
+"%4s" % "foo"
+
+Output:
+' foo'    
+
+Input:
+
+"%4d" % 4
+
+Output:
+'   4'    
+
+The "foo" is the first of these strings. It has a length of three characters. Since a user are using 4 as the <width> to convert the specifying element, Python adds two whitespace characters before including "foo" to make a string with 4 characters.
+In the second scenario, the user chooses the one-digit number "4" as input and request a string length of 4 characters. Thus, Python again adds two whitespace characters before inserting strings that represent the number 4 to create the final string with an overall length of 4 characters.
+We can alter the padding character Python should make use of.
+If the length of the output exceeds the length of the input, it does not have any effect.
+Example:
+
+"%4d" % 3241
+
+Output:
+'3241'   
+
+Input:
+
+"%d" % 3241
+
+Output:
+'3241'    
+
+Input:
+
+"%2s" % "JavaTpoint"
+
+Output:
+'JavaTpoint'   
+
+Input:
+
+"%s" % "JavaTpoint"
+
+Output:
+'JavaTpoint'  
+
+In each of the examples, it indicates the width of the field as 2. However, since the values we are asking Python to write are greater than two characters, this results in identical to when we don't provide a <width> in any way.
+The .<precision> Component
+The .<precision> conversion specifier component influences the floating-point type of conversion and the types of conversion for characters.
+For the floating-point conversion types f, F, e, and E. Determine how many digits are following the decimal point.
+Example:
+
+"%.2f" % 213.73571
+
+Output:
+'213.74'   
+
+Input:
+
+"%.2e" % 213.73571
+
+Output:
+'2.14e+02'   
+
+For floating-point conversion types, we can use "g" as well as "G" to determines the number of significant numbers prior to and following the decimal point.
+Example:
+
+"%.2g" % 213.73571
+
+Output:
+'2.1e+02'   
+
+String values formatted using the s, r, and a Types of character conversion are shortened to the lengths specified by the .<precision> component.
+Example:
+
+"%.4s" % "JavaTpoint"
+
+Output:
+'Java'   
+
+In this instance, we will need to determine the length of the input value "JavaTpoint" is eight characters. However, we have set .<precision> to 4. Therefore, Python will only display the initial four characters in the string input.
+The user will likely see <width> and .<precision> Also, they can be used together.
+Example:
+
+"%8.3f" % 213.73571
+
+Output:
+' 213.736'    
+
+Input:
+
+"%8.3s" % "JavaTpoint"
+
+Output:
+'     Jav'   
+
+We can mention both <width> and .<precision> with an asterisk character ( * ) to serve as placeholders. If we do this, Python takes the value for these placeholders from items within the tuple.
+Example:
+
+>>> "%*d" % (9, 141)
+
+Output:
+'      141'    
+
+Input:
+
+"%.*d" % (9, 13)
+
+Output:
+'000000013'   
+
+Input:
+
+"%*.*d" % (9, 4, 123)
+
+Output:
+'     0141'  
+
+It is unlikely that we will need to use this feature if our value is an unchanging value. There's no difference in functionality between using placeholders like in the above example or directly using the value.
+Example:
+
+"%10d" % 14
+
+Output:
+'        14'    
+
+Input:
+
+"%.10d" % 14
+
+Output:
+'0000000014'  
+
+Input:
+
+"%10.5d" % 14
+
+Output:
+'     00014' 
+
+Utilizing placeholder asterisks can be more appealing when we define the width or precision with variables.
+Example:
+
+for i in range(3):
+...     w = int(input("Enter width: "))
+...     print("[%*s]" % (w, "ABC"))
+
+Output:
+Enter width:  4
+[ ABC]
+Enter width:  2
+[ABC]
+Enter width:  7
+[    ABC]    
+
+This syntax can set the width and precision at the time of execution, which means that they may be different from one run to the next.
+Fine-Tune the Output with Conversion Flags
+We can also specify conversion flags in the middle of the character: % character:
+
+%[<flags>][<width>][.<precision>]<type>
+
+They let us alter the display of specific kinds of conversions in more specific detail. The <flag> component conversion specifier may include one or more of the letters listed in the table below:
+
+
+Character
+Controls
+
+
+#
+Display of decimal or base point for floating and integer values
+
+
+0
+Padding of values that are smaller than the field width specified
+
+
+-
+Validation of fields that are smaller than the field width specified
+
+
++
+The display of the leading sign for numerical values
+
+
+' ' (space)
+The display of the leading sign for numbers
+
+
+The Hash Flag (#)
+The # flag allows the base information to be displayed in the formatted output for hexadecimal and octal conversion types. In those using the o kind of conversion, this flag will add the leading "0o". When it comes to those using the "x" as well as "X" kinds of conversions, this flag will add an introductory "0x" or "0X".
+Example:
+
+ "%#o" % 12
+
+Output:
+'0o14'   
+
+Input:
+
+"%#x" % 12, "%#X" % 12
+
+Output:
+('0xc', '0XC')    
+
+The # flag is ignored for decimal conversion types. Flag # flag does not apply when using the type of decimal converters such as d, i, and the decimal conversion type u.
+The number flag causes the output to contain the decimal point for floating-point values. Normally, floating-point values do not have a decimal mark in the event that there aren't any digits following them. This flag is required to include the addition of a decimal number.
+Example:
+
+"%.0f" % 412
+
+Output:
+'412'    
+
+Input:
+
+"%#.0f" % 412
+
+Output:
+'412.'   
+
+Input:
+
+"%.0e" % 412
+
+Output:
+'4e+02'  
+
+Input:
+
+"%#.0e" % 412
+
+Output:
+'4.e+02'  
+
+The requirement to include decimal points employing # flag. Number flag is also possible to display values with E Notation. This is demonstrated in the code example.
+The Zero Flag (0)
+If a formatted numeric value is smaller than the dimension of field size, the standard behaviour is to cover the field by ASCII spaces on the right side of the number. The flag 0 option causes the padding using "0" characters instead.
+Example:
+
+"%04d" % 234
+
+Output:
+'0234'    
+
+Input:
+
+"%08.2f" % 3.2
+
+Output:
+'00003.20'   
+
+The 0 flag is used in all types of numeric conversions: d, i, u, x, X, o, f, F, e, E, g, and G.
+The Hyphen-Minus Flag (-)
+If a value formatted in a formatted form is less than the specified field's width, it's normally right-justified within the field. In this case, the hyphen ( -) flag will cause the value to be left-justified in the field instead.
+Example:
+
+"%-5d" % 234
+
+Output:
+'234  '   
+
+Input:
+
+"%-8.2f" % 234.3
+
+Output:
+'234.30  '  
+
+Input:
+
+"%-*s" % (9, "ABC")
+
+Output:
+'ABC      ' 
+
+It is possible to utilize the flag (-)to specify the three types of string conversion: s, a, and r in addition to any of the other types of numeric conversion. If the type is numeric, and both zero or the character '-' occur, the 0 is not considered.
+The Plus Flag (+)
+In default, all positive numerical values do not include a leading sign character. In addition, the (+) flag is added with a plus symbol ( +) to the left of the numeric output.
+Example:
+
+"%+d" % 4
+
+Output:
+'+4'   
+
+Input:
+
+"%+5d" % 4
+
+Output:
+'   +4'    
+
+Input:
+
+"%5d" % 4
+
+Output:
+'    4'    
+
+If we compare the two outputs, it is possible to see that Python uses the + character we have added by using this flag into consideration in calculating the width of the output.
+This flag isn't affected by negative numerical values, usually containing a leading minus ( -). Similar to that plus symbol, Python also considers the plus character when calculating the size of the output.
+The Space Character Flag (' ')
+Space character flag ( ' ') is an extra space character to the front of positive numeric values:
+
+"% d" % 4
+
+Output:
+' 4'   
+
+Like that the flag does not affect negative numeric values, which are always accompanied by an underlying zero characters ( -).
+Example:
+
+"% d" % 4
+
+Output:
+' 4'   
+
+Input:
+
+ "% d" % -3
+
+Output:
+'-3'  
+
+Input:
+
+"%d" % -3
+
+Output:
+'-3'  
+
+The use of one of the flags +, as well as the flag for space, will assist us in aligning the positive and negative numbers consistently.
+Specify Values by Dictionary Mapping
+We can define the format string inserted inside the string format as a dictionary rather than a Tuple. In this case, every convert specifier must include any dictionary-related keys within parentheses immediately after the "%" character.
+Example:
+
+"%d %s cost $%.2f" % (4, "apples", 3.74)
+
+Output:
+'4 apples cost $3.74'   
+
+Input:
+
+data = {"quantity": 4, "item": "apples", "price": 3.74}
+template = "%(quantity)d %(item)s cost $%(price).2f"
+template % data
+
+Output:
+'4 apples cost $3.74'    
+
+With this method, we can define the values to be inserted by any sequence:
+
+data = {" quantity": 4, "item": "apples", "price": 3.74}
+
+ad_1 = "%(quantity)d %(item)s cost $%(price).2f"
+ad_1 % data
+
+Output:
+'4 apples cost $3.74'    
+
+Input:
+
+ad_2 = "You'll pay $%(price).2f for %(item)s, if you buy %(quantity)d"
+ad_2 % data
+
+Output:
+"You'll pay $3.74 for apples, if you buy 4"    
+
+The conversion specifier components that are listed below-- <flags>, <width>, and .<precision> are still working the same way it was when we entered values by using the Tuple. It is possible to use any of them to define the dictionary as a dictionary:
+
+"Quantity: %(quantity)03d" % data
+
+Output:
+'Quantity: 004'   
+
+Input:
+
+"Item:     %(item).4s" % data
+
+Output:
+'Item:     apple'   
+
+In the code snippet example above, we've made use of the 0 flags accompanied by the first example and with an estimated value of 5 In the second example.
+Input values can be defined using dictionary mapping can be particularly helpful for those who want to specify the input values just once and then change the order in which it is displayed for different outputs.
+Conclusion
+We have gained a great understanding of the string modulo operator. It's an older formatting technique used that is used in Python. Since this technique is still working and is widely employed within Python 2, it's helpful to be familiar with the basics of this particular syntax.
+In this course, we have learned to:
+
+Make use of the modulo operator ( %) to format strings. Modulo operator ( %) to format strings. formatting of strings
+Convert the values to specific kinds before insertion into our string
+Indicate what is the horizontal area in which a formatted value occupies
+Adjust the display's appearance with flags of conversion
+Use dictionary mapping to specify values. Dictionary mapping instead of tuples.
+
+
+
+Next TopicCounters in Python | How to Initialize and Update
+
+
+
+
+← prev
+next →
+
+
+
+

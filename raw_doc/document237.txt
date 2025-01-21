@@ -1,0 +1,77 @@
+
+
+
+
+next →
+← prev
+
+Gradient Descent Algorithm
+The Gradient Descent is an optimization algorithm which is used to minimize the cost function for many machine learning algorithms. Gradient Descent algorithm is used for updating the parameters of the learning models. 
+Following are the different types of Gradient Descent:
+
+Batch Gradient Descent: The Batch Gradient Descent is the type of Gradient Algorithm that is used for processing all the training datasets for each iteration of the gradient descent. Suppose the number of the training dataset is large, the batch gradient descent will be comparatively expensive. Hence, if the number of the training dataset is large, the users are not advised to use batch gradient descent. Instead, they can use mini-batch gradient descent for a large training dataset.
+Mini-Batch Gradient Descent: The mini-batch gradient descent is the type of gradient descent that is used for working faster than the other two types of gradient descent. Suppose the user has 'p' (where 'p' is batch gradient descent) dataset where p < m (where 'm' is mini-batch gradient descent) will be processed per iteration. So, even if the number of 'p' training dataset is large, the mini-batch gradient descent will process it in batches of 'p' training datasets in a single attempt. Therefore, it can work for large training datasets with fewer numbers of iterations.
+Stochastic Gradient Descent: Stochastic gradient descent is the type of gradient descent which can process one training dataset per iteration. Therefore, the parameters will be updated after each iteration, in which only one dataset has been processed. This type of gradient descent is faster than the Batch Gradient Descent. But, if the number of training datasets is large then also, it will process only one dataset at a time. Therefore, the number of iterations will be large.
+
+Variables used:
+Let 'k' be the number of training datasets.
+Let 'j' be the number of features in the dataset.
+If p == k, the mini-batch gradient descent will behave similarly to the batch gradient descent. (where 'p' is batch gradient descent)
+Algorithm used for batch gradient descent:
+Let hθ(a) be the hypothesis for linear regression. Then the cost function will be given by:
+Let Σ represents the sum of all the training datasets from t = 1 to k.
+Gtrain(θ) = (1/2k) Σ (hθ(a(t)) - b(t))2
+
+Repeat {
+θg = θg - (learning rate/k) * Σ (hθ(a(t)) - b(t))ag(t)
+   For every g = 0 …j
+}
+
+Where ag(t) represents the gth feature of the t th training dataset, suppose if 'k' is very large (for example, 7 million number of training datasets), then batch gradient descent will take hours or maybe days for completing the process. Therefore, for large training datasets, batch gradient descent is not recommended to the users as this will slows down the learning process of the machine.
+Algorithm used for mini-batch gradient descent
+Suppose 'p' is the number of datasets in one batch, where p < k.
+Let p = 10 and k = 100;
+However the users can adjust the batch size. This is generally written as a power of 2.
+Repeat { 
+   For t = 1, 11, 21, ….., 91
+      
+	  Let Σ be the summation from t to t+9 represented by d. 
+	  
+	  Θg = θg - (learning rate/size of (p)) * Σ (hθ(a(d)) - b(d))ag(d)
+	    For every g = 0 …j
+}
+
+Algorithm used for stochastic gradient descent:
+
+This gradient descent will randomly shuffle the dataset for training the parameters for each kind of data.
+The stochastic gradient descent will take only one dataset per iteration.
+
+Hence,
+Let (a(t), b(t)) be the training dataset
+Cost(θ, (a(t), b(t))) = (1/2) Σ (hθ(a(t)) - b(t))2
+
+Gtrain(θ) = (1/k) Σ Cost (θ, (a(t), b(t)))
+
+Repeat {
+  For t = 1 to k{
+      Θg = θg - (learning rate) * Σ (hθ(a(t)) - b(t))ag(t)
+	    For every g = 0 …j
+		
+		}
+}
+
+Conclusion
+In this tutorial, we have discussed about the different types of Gradient Descent algorithms and their variants.
+
+
+Next TopicPrettytable in Python
+
+
+
+
+← prev
+next →
+
+
+
+

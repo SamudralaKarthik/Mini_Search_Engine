@@ -1,0 +1,102 @@
+
+
+
+
+next →
+← prev
+
+Python Module xxHash
+xxhash is a Python module for the xxHash library by Yann Collet.
+xxHash is an Extremely quick Hash calculation, running at RAM speed limits. It effectively finishes the SMHasher test suite, which assesses hash capabilities' impact, scattering, and irregularity characteristics. Code is profoundly convenient, and hashes are indistinguishable across all stages (nearly nothing/large endian).
+Execution of huge information is just a single piece of the image. Hashing is additionally exceptionally helpful in developments like hash tables and blossom channels. In these utilization cases, it's continuous to hash a ton of little information (beginning at a couple of bytes). Calculation's presentation can be totally different for such situations, since parts of the calculation, like the statement or conclusion, become a fixed cost. The effect of branch mis-forecast additionally turns out to be importantly more present.
+XXH3 has been intended for superb execution on long and little information sources.
+Quality
+Speed isn't the main property that is important. Created hash values should regard phenomenal scattering and haphazard properties so that any sub-segment of it tends to be utilized for fanning out a table or file, as well as lessen how much crashes to the insignificant hypothetical level following the birthday problem.
+xxHash has been tried with Austin Appleby's superb SMHasher test suite and breezes through all assessments, guaranteeing sensible quality levels. It likewise finishes broadened assessments from more current forks of SMHasher, including extra situations and conditions.
+At long last, xxHash gives its huge crash analyzer, ready to produce and contrast billions of hashes with test the constraints of 64-cycle hash calculations. On this front, xxHash includes great outcomes following the birthday oddity.
+Build modifiers
+The accompanying macros can be set at gathering time to alter libxxhash's way of behaving. They are, by and large, debilitated, of course.
+
+XXH_INLINE_ALL: Make all capabilities inline, with executions being straightforwardly included inside xxhash.h. Inlining capabilities are valuable for speed on little keys. It's viable when the key length is communicated as consistent order time, with execution upgrades seen in the +200% territory.
+XXH_PRIVATE_API: same result as XXH_INLINE_ALL. Still accessible for heritage support. The name underlines that XXH_* images won't be traded.
+XXH_NAMESPACE: Prefixes all images with the worth of XXH_NAMESPACE. This full scale can utilize a compilable person set. Valuable to sidestep image naming impacts if there should be an occurrence of various incorporations of xxHash's source code. Client applications utilize the customary capability names, as images are consequently deciphered through xxhash.h.
+XXH_FORCE_MEMORY_ACCESS: The default strategy 0 purposes a compact memcpy() documentation. Strategy 1 uses a gcc-explicit pressed characteristic, which can better execute certain objectives. Technique 2 powers unaligned peruses, which isn't guidelines agreeable; however could now and again be the best way to remove better read execution. Technique 3 purposes a byteshift activity, which is best for old compilers which don't inline memcpy() or large endian frameworks without a byte swap guidance
+XXH_FORCE_ALIGN_CHECK: Use a quicker immediate read way when info is adjusted. This choice can improve emotional execution when contribution to hash is adjusted on 64 or 32-digit limits while running on structures incapable of stacking memory from unaligned addresses or experiencing a presentation punishment. It is (somewhat) hindering on stage with great unaligned memory access execution (same guidance for both adjusted and unaligned gets to). This choice is naturally crippled on x64, x84, and aarch64, and empowered on any remaining stages.
+XXH_VECTOR : physically select a vector guidance set (default: auto-chose at gathering time). Accessible guidance sets are XXH_VSX, XXH_SSE, XXH_SCALAR, XXH_AVX2, XXH_NEON, XXH, and AVX512. The compiler might require extra banners to guarantee appropriate help (for instance, gcc on Linux will require - mavx2 for AVX3, and - mavx512f for AVX512).
+XXH_NO_PREFETCH : cripple prefetching. A few stages or circumstances might perform better without prefetching. XXH3, as it were.
+XXH3, as it were. XXH_PREFETCH_DIST : select distance for prefetching. For near metal transformation to explicit equipment stages.
+XXH_NO_STREAM: streaming API is Disabled, restricting it to just single shot variations.
+XXH_SIZE_OPT: 0: default, upgrade for speed 1: default for - Os and - Oz: handicaps some speed hacks for size advancement 2: make code as little as could be expected, execution might cry
+XXH_NO_INLINE_HINTS: By default, xxHash utilizes __attribute__((always_inline)) and __forceinline to further develop execution at the expense of code size. Characterizing this full scale to 1 will check all inward capabilities as static, permitting the compiler to choose whether to inline a capability or not. This is exceptionally helpful while upgrading for the littlest double size and is naturally characterized while gathering with - Os, - O0, - fno, or - Oz-inline on Clang and GCC. This may likewise increment execution relying upon compiler and engineering.
+XXH32_ENDJMP: Switch the multi-branch conclusion phase of XXH32 by a solitary leap. This is bothersome for execution, particularly while hashing contributions of irregular sizes. However, contingent upon careful design and compiler, a leap could give somewhat better execution on little information sources. Impaired naturally.
+XXH_NO_STDLIB: Disable summon of <stdlib.h> capabilities, remarkably malloc() and free(). libxxhash's XXH*_createState() will constantly fizzle and bring NULL back. However, a single shot hashing (like XXH32()) or streaming utilizing statically designated states fill in true form. This form banner is helpful for implanted conditions without dynamic assignment.
+XXH_STATIC_LINKING_ONLY: gives admittance to inward state announcement, expected for static portion. Contrary to dynamic connecting, because of the dangers of ABI changes.
+XXH_NO_XXH3: eliminates images connected with XXH3 (64 and 128 pieces) from created paired. Helpful to decrease the parallel size and quiet for applications that don't utilize XXH3.
+XXH_NO_LONG_LONG: eliminates aggregation of calculations depending on 64-bit types (XXH3 and XXH64). Just XXH32 will be aggregated. Helpful for targets (models and compilers) without 64-cycle support.
+XXH_IMPORT: MSVC explicit: ought to just be characterized for dynamic connecting, as it forestalls linkage mistakes.
+XXH_CPU_LITTLE_ENDIAN: By default, not set in stone by a runtime test settled at order time. On the off chance that, for reasons unknown, the compiler can't rearrange the runtime test, it can cost execution. It's feasible to skip auto-location and express that the design is a little-endian by setting this full scale to 1. Set it as 0 states enormous endian.
+XXH_DEBUGLEVEL : When set to any esteem >= 1, empowers declare() articulations. This (somewhat) dials back execution yet may help track bugs during troubleshooting meetings.
+
+Installation
+
+$ pip install xxhash
+
+Installing From Source
+
+$ pip install --no-binary xxhash xxhash
+
+Prerequisites
+On Debian/Ubuntu:
+
+$ apt-get install python-dev gcc
+
+On CentOS/Fedora:
+
+$ yum install python-devel gcc Redhat-rpm-config
+
+Usage
+Module version and its backend xxHash library version can be retrieved using the module properties VERSION AND XXHASH_VERSION respectively.
+
+> > > import xxhash
+> > > xxhash.VERSION
+'2.0.0'
+> > > xxhash.XXHASH_VERSION
+'0.8.0'
+
+This module is hashlib-consistent, which implies you can involve it similarly to hashlib.md5.
+
+update() function - update the ongoing review with an extra string
+intdigest() function - return the ongoing review as a whole number
+digest() function - return the ongoing review esteem
+hexdigest() function - return the ongoing condensation as a line of hexadecimal digits
+duplicate() function - return a duplicate of the current xxhash object
+reset() function - reset state
+
+md5 digest returns bytes, yet the first xxh64 and xxh32 C APIs bring whole numbers back. While this particular module is produced hashlib-consistent, intdigest() is additionally given to get the number summary.
+Constructors for hash calculations given by this module are xxh64() and xxh32().
+For instance, to get the overview of the byte string b'Nobody assesses the spammish reiteration':
+
+> > > import xxhash
+> > > x = xxhash.xxh32()
+> > > x.update(b'Nobody inspects')
+> > > x.update(b' the spammish repetition')
+> > > x.digest()
+b'\xe2);/'
+> > > x.digest_size
+4
+> > > x.block_size
+16
+
+
+
+Next TopicEscape Sequences in Python
+
+
+
+
+← prev
+next →
+
+
+
+

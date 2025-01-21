@@ -1,0 +1,43 @@
+
+
+
+
+next →
+← prev
+
+Script deployment on Linux
+Hence, we are done with the python script (blocker.py) which is running fine. This is the time to deploy this script at system startup.
+The process to deploy a script to run at startup depends upon the operating system. In this section of the tutorial, we will describe the process for Linux and windows.
+Procedure 
+To schedule a script to run at startup on Linux, we need to configure the entry in the crontab schedule. 
+The crontab can be defined as the list that contains the commands that are to be run on a regular schedule. The crontab stands for cron table which is a set schedule according to which the script is executed on a regular interval.
+Follow the following steps.
+Step 1: 
+Open the crontab with the -e flag. Run the following command on the terminal on Linux.
+
+$ sudo crontab -e 
+
+This will open a crontab file which looks like following. 
+
+Step 2 
+Now add the following line to the file and save it. 
+
+@reboot python3 /home/javatpoint/Desktop/Python/website_blocker/blocker.py
+
+
+Step 3 
+Restart the system now. On reboot, our script blocker.py is scheduled to run at system start-up. As of now, we are in working hours. So let's try to open the Facebook on the browser.
+
+As shown in the above image, the website www.facebook.com is refused to connect. Hence, our script is working fine on the system start-up as the website is refused to connect. 
+
+Next TopicScript Deployment on Windows
+
+
+
+
+← prev
+next →
+
+
+
+

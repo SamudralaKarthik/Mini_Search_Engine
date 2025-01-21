@@ -1,0 +1,226 @@
+
+
+
+
+next →
+← prev
+
+Python pprint Module
+While printing data from a program, we have faced the issue of printing datasets in a standard format. The data printed in the output is printed without a defined format, which makes data look unorganized. Also, it makes it difficult for us to look for particular information from the printed dataset. If we have to print this data in some set format, we have to use multiple format functions with every row & column of the dataset. This becomes time-consuming and hectic when the given dataset has multiple numbers of rows and columns with different size entries. Therefore, if we have to print the dataset in some sorted way in the output from a program, we have to look for some alternate choices of printing the dataset in a set format. This set format printed dataset will also help when we look for some particular information from the dataset. That's why the importance of such pretty printer packages increases during the development and programming tasks. Many programming languages provide us with packages that we can use to print datasets in a set format in the output. Talking specifically about Python, it has a pprint module that comes with multiple functions used to print datasets in some set or defined format. Therefore, we will study this pprint module of Python in this tutorial and learn how we can use the functions of this module to print datasets in some specific format in the output.
+Introduction to pprint Module of Python
+pprint module is part of Python's standard library that comes with multiple functions used to print a given dataset in the specific format in the output. The name of the pprint module itself stands for pretty-printer module, and it is also known as Data pretty printer module. The aesthetically good-looking appearance of data structures and datasets is also possible because of the functionality of the pprint module. pprint module enables us to print any given data structure in a defined format and thus gives it an aesthetically good-looking appearance in the output. Any data structure or dataset, which is correctly parsed and executed in the Python program, is elegantly formatted in the output by the functionality of the pprint module.
+As far as possible, the formatted expression of the data structures in the output is kept in a single line by the pprint module, but sometimes when the length of format expression exceeds the defined length, it is broken into multiple lines. Sometimes, the formatted expression breaks into multiple lines when its size exceeds the default width parameter of the pprint module's formatting functions. The dictionary data in the pprint output of the program is automatically formatted before representing or displaying the result in the output, and it is the one unique feature of the pprint module. Thus, we can say that data printed using the pprint module is well-structured and in a more readable form.
+pprint Module in Python: Installation
+pprint module comes with the standard libraries of Python, i.e., pprint is a pre-installed module of Python installed along with the installation of standard Python distribution. Therefore, we don't have to perform or carry out any installation process before using the pprint module in the Python programs. We can directly start importing this module into Python programs to work with it and understand its implementation and functioning. We can use the following line of code for importing the pprint module of Python in the programs:
+
+# Importing the pprint module
+import pprint
+
+Thus, we can use this module in the example programs in this tutorial to work with it and understand its implementation.
+Classes in the pprint Module
+The pprint module of Python contains the definition of the PrettyPrinter class in its standard library to set the given data structure in a sorted format. To use the PrettyPrinter class of this module, we have to define a constructor for the class in the program, and only after that can we use functions of the pprint module from this PrettyPrinter class.
+Syntax for Defining PrettyPrinter Class Constructor:
+If we have to use the pprint class in the program, we can use it by defining the constructor of this class in the program and then use the constructor with the functions of the pprint module while printing data structures or datasets in some specific format.
+We have to use the following syntax or line of code for defining the constructor of the pprint class:
+
+# Constructor for pprint class
+pcr = ppr.PrettyPrinter(indentGiven, widthOfLine, depthInData, stream, compact)
+
+Arguments: As we can see in the syntax written above, the constructor of the pprint class can be defined using the PrettyPrinter() function of the pprint module. The PrettyPrinter() function takes the following five arguments while we are using it to define the constructor for the PrettyPrinter class:
+(i) indentGiven: The indent parameter of the function is used to define the indentation that should be added after each recursive level (Data values in each row and column). If we don't define this parameter by passing an argument in the function, the function will take the default argument, which is 1 for the indent argument.
+(ii) widthOfLine: This parameter of the function defines the width of every line from the data structure, and desired output format of the data structure is restricted to this format. The default value for the width parameter is 80, and it is used when we don't provide any width argument in the function. If the length of the line of data structure is more than the width parameter defined in the function, it will break into multiple line structures in the output.
+(iii) depthInData: The depth parameter of the function is used to control the number of levels printed in the output. It is an optional argument of the function, and no default value is present for this parameter.
+(iv) stream: The default value of the stream parameter is std.out- the default output machine. This parameter is used in the function to take any stream object such as files while printing data structures in the output.
+(v) compact: It is the last argument used in the PrettyPrinter() function, and by default, compact parameter id is set to False. We have to set this argument to True only when the data we are displaying is adjustable within width.
+These are the five arguments that should be given in the PrettyPrinter() function while defining the constructor for the PrettyPrinter class. We can use these arguments to specify the format we want to print the given data structure in the output.
+Methods in the PrettyPrinter Class:
+The pprint module has multiple methods in which some of them are defined using the constructor of the PrettyPrinter class. These methods or functions defined by the PrettyPrinter class's constructor are used in the program to print the data structure in the specified format. Following are the two methods that are defined under the constructor of the PrettyPrinter class:
+a) pprint() function: The first method in the PrettyPrinter class is the pprint() function, which prints the formatted representation of the PrettyPrinter object (where data from data structure is stored in a specific format) in the output. We can use this function as the print statement to print any data from the program.
+b) pformat() function: Based on the parameters we provided in the constructor of the PrettyPrinter class, this function returns the formatted representation of the PrettyPrinter object.
+These two functions are defined under the PrettyPrinter class's constructor, and we can use these methods with the constructor and print data structure in the output.
+pprint Module in Python: Implementation
+We have learned about functions, classes, and methods of the pprint module till now in this tutorial. Now, we will understand the working of the pprint module and its classes & functions in this part of the tutorial. We will use the functions and class constructors of the pprint module in the example programs to understand their functioning and working in the program. We will use the pprint() and pformat() functions in the example programs to understand their implementation and work that how we can pformat (use these functions to print data structures according to the specified format in the output.
+Look at the following example programs to understand the implementation of functions of the pprint module for printing data structures:
+Implementation 1: Using pprint() Function for Formatted Output:
+In this implementation part, we will use the pprint() function of the pprint module to print the data structures given in the program in a specified format so that it will look catchier and formatted. We will use some example programs to understand the working of this pprint() functions with different arguments given in the function. First, look at the following example program to understand the output printed using the pprint() function:
+Example 1: Look at the following Python program where we have compared the simple print statement output with the pprint() function output:
+
+# Importing the pprint module as ppr
+import pprint as ppr
+# Defining a data structure that has students data
+studentDS = {"Dwayne Johnson": ["English", "Chemistry", "Physics", "Mathematics", "Biology"],
+     "Randy Orton" :{"English": 50,"Physics": 60,
+     "Chemistry": 70, "Mathematics": 80, "Biology": 90},
+     "Karl Marx" :(50, 60, 70, 80, 90)}
+# Defining Constructor for the PrettyPrinter class
+ppConst = ppr.PrettyPrinter()
+# Printing normal output of the student data structure
+print ("Normal output of student data structure with print statement:")
+print (studentDS)
+print ("----")
+# Printing formatted output of the pprint() function
+print ("The pprint function's formatted output of the student data structure:")
+# Using pprint() function
+ppConst.pprint(studentDS)
+
+Output:
+Normal output of student data structure with print statement:
+{'Dwayne Johnson': ['English', 'Chemistry', 'Physics', 'Mathematics', 'Biology'], 'Randy Orton': {'English': 50, 'Physics': 60, 'Chemistry': 70, 'Mathematics': 80, 'Biology': 90}, 'Karl Marx': (50, 60, 70, 80, 90)}
+----
+The pprint function's formatted output of the student data structure:
+{'Dwayne Johnson': ['English',
+                    'Chemistry',
+                    'Physics',
+                    'Mathematics',
+                    'Biology'],
+ 'Karl Marx': (50, 60, 70, 80, 90),
+ 'Randy Orton': {'Biology': 90,
+                 'Chemistry': 70,
+                 'English': 50,
+                 'Mathematics': 80,
+                 'Physics': 60}}
+
+As we can see, normal print output and pprint function's formatted output of the student data structure are printed in the output. We can observe the difference between the normal output and the pprint() function's formatted output and conclude that the pprint() function's formatted output is much simple and easily observable. That's how we can use the pprint() function without any argument inside it to print the formatted output of the given data structure.
+Explanation: We have first imported the pprint module in the program as ppr, and after that, we defined the constructor of the PrettyPrinter class. We have also defined a sample data structure of some students' data and named this data structure as studentDS. We named the PrettyPrinter class's constructor variable as ppConst and used it later with the pprint() function. We have then used the pprint() function with the ppConst constructor variable. While using the pprint() function, we passed the student's data structure variable as an argument to format the output of the student data structure. After that, first, we have printed the normal output of the data structure using the studentDS variable. And, lastly, we printed the pprint() function's formatted output using the pprint() function to compare it with the normal output.
+Recursive Data Structure Printing with pprint() Function:
+We can also print data structure recursively with the pprint() function. Here, we will also try to print a recursive object from the given data structure, and for the further recursion process, only the references will be printed in the output. Look at the following example program to understand the recursive object printing implementation of the pprint() function:
+Example 2: Look at the following program where we have printed a recursive object in the output:
+
+# Importing the pprint module as ppr
+import pprint as ppr
+# Define a list of numbers
+numList = list(range(24, 31))
+# Appending the list
+numList.append(numList)
+# Printing appended number list
+print("Appended list of numbers: ")
+print(numList)
+print("----------------")
+#Printing recursive object with pprint() function
+print("Appended list with recursive object from pprint function: ")
+ppr.pprint(numList)
+
+Output:
+Appended list of numbers: 
+[24, 25, 26, 27, 28, 29, 30, [...]]
+----------------
+Appended list with recursive object from pprint function: 
+[24, 25, 26, 27, 28, 29, 30, ]
+
+As we can see, when we printed the appended list in the output using the pprint() function, the last item from the list was printed as a recursive object. The output shows that recursion is started on the list with the object reference id of the last item.
+Providing Width Parameter:
+Now, we will provide the width parameter (which we discussed in the previous section) of the PrettyPrinter class while defining the constructor for the same. The width we provide inside the PrettyPrinter() function formats the output according to the given width and presents it in the same format. Look at the following example program to understand the width parameter implementation of the PrettyPrinter class:
+Example 3: Look at the following program where we used the width parameter for PrettyPrinter class's constructor:
+
+# Importing the pprint module as ppr
+import pprint as ppr
+# Defining a data structure which having student's data
+studentDS = {"Dwayne Johnson": ["English", "Chemistry", "Physics", "Mathematics", "Biology"],
+     "Randy Orton" :{"English": 50,"Physics": 60,
+     "Chemistry": 70, "Mathematics": 80, "Biology": 90},
+     "Karl Marx" :(50, 60, 70, 80, 90)}
+# Defining Constructor for the PrettyPrinter class with width argument
+ppConst = ppr.PrettyPrinter(width = 24)
+# Printing formatted output of the pprint() function
+print ("The pprint function's formatted output of the student data structure with defined width:")
+ppConst.pprint(studentDS)
+
+Output:
+The pprint function's formatted output of the student data structure with defined width:
+{'Dwayne Johnson': ['English',
+                    'Chemistry',
+                    'Physics',
+                    'Mathematics',
+                    'Biology'],
+ 'Karl Marx': (50,
+               60,
+               70,
+               80,
+               90),
+ 'Randy Orton': {'Biology': 90,
+                 'Chemistry': 70,
+                 'English': 50,
+                 'Mathematics': 80,
+                 'Physics': 60}}
+
+As we can see, the formatted output of the student's data structure is printed according to the width we have provided inside the PrettyPrinter class using width argument, i.e., width = 24.
+Implementation 2: Using pformat() Function for Formatted Output:
+We will learn to implement the pformat() function for printing formatted output of given data structure in this implementation part. We can implement the pformat function from the PrettyPrinter constructor using the following two ways:
+(i) pformat as a method
+(ii) pformat as a function
+We will use an example program in each case to understand the implementation of pformat.
+(i) Using pformat as a Method:
+Here, we will use pformat like a method to print the formatted output with this function. We can look at the following example program to understand the method implementation of pformat:
+
+# Importing the pprint module as ppr
+import pprint as ppr
+# Defining a data structure which having student's data
+studentDS = {"Dwayne Johnson": ["English", "Chemistry", "Physics", "Mathematics", "Biology"],
+     "Randy Orton" :{"English": 50,"Physics": 60,
+     "Chemistry": 70, "Mathematics": 80, "Biology": 90},
+     "Karl Marx" :(50, 60, 70, 80, 90)}
+# Defining Constructor for the PrettyPrinter class
+ppConst = ppr.PrettyPrinter()
+# Using pformat() function
+pfOutput = ppConst.pformat(studentDS)
+# Printing formatted output of the pprint() function
+print ("The pformat method's formatted output of the student data structure:")
+print(pfOutput)
+
+Output:
+The pformat method's formatted output of the student data structure:
+{'Dwayne Johnson': ['English',
+                    'Chemistry',
+                    'Physics',
+                    'Mathematics',
+                    'Biology'],
+ 'Karl Marx': (50, 60, 70, 80, 90),
+ 'Randy Orton': {'Biology': 90,
+                 'Chemistry': 70,
+                 'English': 50,
+                 'Mathematics': 80,
+                 'Physics': 60}}
+
+(ii) Using pformat as a Function:
+We can look at the following example program to understand the function implementation of pformat:
+
+# Importing the pprint module as ppr
+import pprint as ppr
+# Defining a data structure which having student's data
+studentDS = {"Dwayne Johnson": ["English", "Chemistry", "Physics", "Mathematics", "Biology"],
+     "Randy Orton" :{"English": 50,"Physics": 60,
+     "Chemistry": 70, "Mathematics": 80, "Biology": 90},
+     "Karl Marx" :(50, 60, 70, 80, 90)}
+# Using pformat() function
+pfOutput = ppr.pformat(studentDS)
+# Printing formatted output of the pprint() function
+print ("The pformat function's formatted output of the student data structure:")
+print(pfOutput)
+
+Output:
+The pformat function's formatted output of the student data structure:
+{'Dwayne Johnson': ['English',
+                    'Chemistry',
+                    'Physics',
+                    'Mathematics',
+                    'Biology'],
+ 'Karl Marx': (50, 60, 70, 80, 90),
+ 'Randy Orton': {'Biology': 90,
+                 'Chemistry': 70,
+                 'English': 50,
+                 'Mathematics': 80,
+                 'Physics': 60}}
+
+
+
+Next TopicPython PrimePy Module
+
+
+
+
+← prev
+next →
+
+
+
+

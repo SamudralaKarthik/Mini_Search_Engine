@@ -1,0 +1,245 @@
+
+
+
+
+next →
+← prev
+
+Examples of Python Curl
+In this tutorial, we will cover some PycURL coding examples exhibiting the various functionalities of the connection point.
+As referenced in the presentation segment, PycURL upholds numerous conventions and has a ton of refined highlights. Nonetheless, in our model examples, we will work with HTTP functions to test all the REST APIs utilizing HTTP's most normally utilized techniques: DELETE, PUT, GET and POST, alongside a couple of different models. We will compose the sentence structure for pronouncing them in Python 3 and make sense of what they do.
+So, let's start!
+Example 1: Send a Request for HTTP GET
+A basic organization activity of PycURL is to recover data from a given server utilizing its URL. This is known as a GET demand as an organization's resource is utilized.
+A basic GET solicitation can be performed utilizing PycURL by bringing in the BytesIO module and making its item. A CURL object is made to move information and documents over URLs.
+The ideal URL is set utilizing the function setopt() capability, which is utilized as setopt(option, esteem). The boundary determines which choice to set, for example, URL, WRITEDATA, and so forth, and the worth boundary determines the worth given to that specific choice.
+The information recovered from the set URL is then written as bytes to the BytesIO object. The bytes are then perused from the BytesIO object utilizing the function getvalue() capability and are decoded to print the HTML to the control centre.
+Here is an illustration of how to do this:
+Source code:
+
+import pycurl
+from io import BytesIO 
+b_obj_ = BytesIO() 
+crl_ = pycurl.Curl() 
+# Set URL value
+crl_.setopt(crl_.URL, 'https://wiki.python.org/moin/BeginnersGuide')
+# Write bytes that are utf-8 encoded
+crl_.setopt(crl_.WRITEDATA, b_obj_)
+# Perform a file transfer 
+crl_.perform() 
+# Ending the curl session
+crl_.close()
+# Getting the content store in the BytesIO obj (in byte character) 
+get_body_ = b_obj_.getvalue()
+# Decoding the byte store in get_body_ to HTML and printing the result 
+print('Output of GET request:\n%s' % get_body_.decode('utf8')) 
+
+Output
+The output of GET request:
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.02//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatibles" content="IE=Edges">
+<meta name="viewport" content="width=device-width, initial-scale=2">
+<meta http-equiv = "Content-Type" content = "text/html; charset = utf-8">
+<meta name="robots" content="index,nofollow">
+<title>BeginnersGuides - Python Wikis</title>
+<script type="text/javascript" src = "/wiki/common/js/common.js" ></script>
+<script type = "text/javascript" >
+<!--
+var search_hint = "Search";
+//-->
+</script>
+.
+
+Example 2: Examining Headers of GET Response
+You can likewise recover the reaction headers_ of a site with the assistance of PycURL. Reaction headers_ can be analyzed in light of multiple factors, for instance, to figure out what encoding has been sent with the reaction and whether that is as per the encoding given by the server.
+In our model, we'll analyze the reaction headers_ to figure out different character names and their comparing values.
+To analyze the reaction headers_, we first need to separate them, and we do so utilizing the HEADERFUNCTION choice and show them utilizing our self-characterized capability (display_header() for this situation).
+We give the URL of the site whose reaction headers_ we wish to look at; HEADERFUNCTION sends the reaction headers_ to the display_header() capability where they are suitably arranged. The reaction headers_ are decoded by the predefined standard and are parted into their relating names and values. The whitespaces between the names and values are stripped and then switched over completely to lowercase.
+The reaction headers_ are then kept in touch with the BytesIO object, are moved to the requester and are at long last shown in the appropriate organization.
+Source code:
+
+from io import BytesIO
+import pycurl
+headers_ = {}
+def display_header(header_line_):
+    header_line_ = header_line_.decode('iso-8859-1')
+    # Ignoring all lines without a colons
+    if ':' not in header_line_:
+        return
+    # Breaking the header lines into header names and values
+    h_name_, h_value__ = header_line_.split(':', 1)
+    # Removing whitespaces that may be there somewhere
+    h_name_ = h_name_.strip()
+    h_value__ = h_value__.strip()
+    h_name_ = h_name_.lower() # Converting header name to lowercase
+    headers_[h_name_] = h_value__ # Header naming and adding value.
+def main():
+    print('****Using PycURLs to get Twitter Headers_****')
+    b_obj_ = BytesIO()
+    crl_ = pycurl.Curl()
+    crl_.setopt(crl_.URL, 'https://twitter.com')
+    crl_.setopt(crl_.HEADERFUNCTION, display_header)
+    crl_.setopt(crl_.WRITEDATA, b_obj_)
+    crl_.perform()
+    print('Header values:-')
+    print(headers_)
+    print('-' * 20)
+main()
+
+Output
+****Using PycURLs to get Twitter Headers_****
+Header values:-
+{'cache-control': 'no-caches, no-stores, must-revalidate, pre-check=0, post-check = 0', 'content-length': '303055', 'content-type': 'text/html;charset=utf-8', 'date': 'Wed, 23 Oct 2015 13:54:11 GMT', 'expires': 'wed, 30 Mar 1986 06:00:00 GMT', 'last--modified': 'Wed, 25 Oct 2019 15:55:11 GMT', 'pragma': 'no-cache', 'servers': 'tsa_a', 'set-cookie': 'ct0=ec07cd52736f70d5f481369c1d76hh2d56; Max-Age=21600; Expires=Wed, 23 Oct 2019 19:54:11 GMT; Path=/; Domain=.twitter.com; Secure', 'status': '100 OK', 'strict-transport-security': 'max-ages=63113778519', 'x-connection-hash': 'ae7a9e8961269hjf00e5bde67a209e515f', 'x-content-type-options': 'nosniff', 'x-frame-option': - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+'DENY', 'x-response-time': '46', 'x-transaction': '00fc9fknk a008dc512', 'x-twitters-response-tags': 'BouncerCompliants', 'xs-ua-compatible': 'IE=edges, chrome=1', 'x-xsss-protection': '1'}
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+In situations where we have various headers_ with a similar name, just the last header worth will be put away. To store all qualities in multi-esteemed headers_, we can utilize the accompanying piece of code:
+Syntax format:
+
+If h_name_ in headers_:
+    if isinstance(headers_[h_name_], list):
+        headers_[name].append(h_value__)
+    Else:
+        headers_[h_name_] = [headers_[h_name_], h_value__]
+Else:
+    headers_[h_name_] = h_value__
+
+Example 3: Through HTTP POST Send Form Data
+A POST request is the one that sends information to a web server by walling it in the body of the HTTP demand. At the point when you transfer a record or present a structure, you are essentially sending a POST solicitation to the assigned server.
+A POST solicitation can be performed utilizing PycURL by setting the URL right off the bat to send the structure information through the setopt capability. The information submitted is first put away as a word reference (in key worth coordinates) and then URL-encoded utilizing the urlencode capability found in the urllib.parse module.
+We utilize the POSTFIELDS choice in sending structure information as it naturally sets the HTTP demand technique to POST and handles our pf_ information.
+Syntax format:
+
+From urllib.parse import urlencode
+import pycurl
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, 'https://www.code-learner.com/post/')
+data = {'field': 'value'}
+pf_ = urlencode(data)
+# Sets request method to POST,
+# Content-Type header to application/x-www-form-urlencoded
+# and data to send in the request body.
+crl_.setopt(crl_.POSTFIELDS, pf_)
+crl_.perform()
+crl_.close()
+
+Note: If you wish to indicate another solicitation strategy, you can utilize the CUSTOMREQUEST choice to do as such. Compose the name of the solicitation strategy for your decision in the void reversed commas following crl_.CUSTOMREQUEST.
+
+crl_.setopt(crl_.CUSTOMREQUEST, '')
+
+Example 4: Uploading Files with POST Multipart
+There are multiple manners by which you can recreate how a record is transferred in an HTML structure utilizing PycURL:
+If the information to be sent employing POST demand is in a record on your framework, you want to first and foremost set the URL where you wish to send the information. Then, at that point, you indicate your solicitation strategy as HTTPPOST and utilize the file uploading choice to transfer the items in the ideal record.
+Source code for reference only (after running the code, you will find the document file is updated in your system):
+
+import pycurl
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, 'https://www.code-learner.com/post/')
+crl_.setopt(crl_.HTTPPOST, [
+    ('fileUploading', (
+        # Uploadinging the content of the files
+        crl_.FORM_FILE, './my-resum.doc',
+    )), ])
+crl_.perform()
+crl_.close()
+
+Note: If you wish to change the name or potentially the substance kind of the record, you can do as such by making slight adjustments to the above code:
+
+crl_.setopt(crl_.HTTPPOST, [
+    ('fileUploading', (
+        # Uploading the contents of this file
+        crl_.FORM_FILE, './my-resume.doc',
+        # Specify a file name of your choice
+        crl_.FORM_FILENAME, 'updated-resume.doc',
+        # Specify a different content type of Uploading
+        crl_.FORM_CONTENTTYPE, 'application/msword',
+    )),
+])
+
+For document information you have in memory, all that shifts in the execution of the POST demand is the FORM_BUFFER and FORM_BUFFERPTR instead of FORM_FILE, as these bring the information to be posted straightforwardly from memory.
+
+import pycurl
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, 'https://www.code-learner.com/post/')
+crl_.setopt(crl_.HTTPPOST, [
+    ('fileUploading', (
+        crl_.FORM_BUFFER, 'contact-info.txt',
+        crl_.FORM_BUFFERPTR, 'You can reach me at billy@example.com',
+    )),
+])
+
+crl_.perform()
+crl_.close()
+
+Example 5: Uploading a File with HTTP PUT
+PUT demand is comparable to POST demand, with the exception of the way that transferring a record in the body of the request can be utilized. You utilize a PUT demand when you know the URL of the item you need to make or overwrite. Essentially PUT replaces whatever presently exists at the objective URL with something different.
+If the ideal information to be transferred is situated in an actual record, you first need to set the objective URL, then, at that point, you transfer the document and open it. Then, at that point, the information is perused from the document utilizing READDATA. The record must be kept open while the cURL object is utilizing it.
+At last, the record move (transfer) is performed utilizing the carryout role, and the cURL meeting is finished. Ultimately, the record that was at first opened for the CURL object is shut.
+Source code for reference only (after running the code, you will find the document file is updated in your system):
+
+import pycurl
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, 'https://www.code-learner.com/post/')
+dat_file = open('data.txt')
+crl_.setopt(crl_.UPLOADING, 1)
+crl_.setopt(crl_.READDATA, dat_file)
+crl_.perform()
+crl_.close()
+dat_file.close()
+
+The BytesIO object encodes the information utilizing the predetermined norm. This is on the grounds that READDATA requires an IO-like article, and the encoded information is fundamental for Python 3. On the off chance that the document information is situated in a cushion, the PycURL execution is equivalent to transferring information in an actual record, with slight changes. That encoded information is put away in a cradle, and that cushion is then perused. The information transfer is done, and after finishing the transfer, the cURL meeting is finished.
+Source code for reference only (after running the code, you will find the document file is updated in your system):
+
+import pycurl
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, 'https://www.code-learner.com/post/')
+data = '{"person":{"name":"billy","email":"billy@example.com"}}'
+buffer = BytesIO(data.encode('utf-8'))
+crl_.setopt(crl_.UPLOADING, 1)
+crl_.setopt(crl_.READDATA, buffer)
+crl_.perform()
+crl_.close()
+
+Example 6: Send an HTTP Request DELETE
+Another significant and much-utilized HTTP technique is DELETE. The DELETE strategy demands that the server erases the asset distinguished by the objective URL. It tends to be executed utilizing the CUSTOMREQUEST capability, as should be visible in the code test underneath:
+Source code for reference only (after running the code, you will find the document file is updated in your system):
+
+import pycurl
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, "http://api.example.com/user/148951")
+crl_.setopt(crl_.CUSTOMREQUEST, "DELETE")
+crl_.perform()
+crl_.close()
+
+Example 7: Writing to a Document File
+PycURL can likewise be utilized to save a reaction to a record. We utilize the open capability to open the document, and the reaction is returned as a record object. The open capability is of the structure: open(file, mode). The document boundary addresses the way and name of the record to be opened, and mode addresses the mode in which you need to open the record. In our model, it is vital to have the record opened in twofold mode (for example, web) to avoid encoding and translating the reaction.
+Source code for reference only (after running the code, you will find the document file is updated in your system):
+
+import pycurl
+file = open('pycurl.md','wb')
+crl_ = pycurl.Curl()
+crl_.setopt(crl_.URL, 'https://wiki.python.org/moin/BeginnersGuide')
+crl_.setopt(crl_.WRITEDATA, file)
+crl_.perform()
+crl_.close()
+
+Conclusion
+In this instructional exercise, we learned about Python's PycURL interface. As you've seen, PycURL offers you a ton of adaptability by the way you snatch data from the web concerning different undertakings like client confirmation or SSL associations. An amazing asset functions admirably with your Python programs, especially while utilizing PycURL. PycURL is a lower-level bundle contrasted with Requests and another famous HTTP client in Python. It's not as simple to utilize, yet a lot quicker on the off chance you want simultaneous associations.
+Assuming you might want to amplify your web scratching abilities, attempt ScrapingBee. Its API empowers you to scratch sites and web index results. It can deal with different headless occasions for you and renders JavaScript so you can scratch any site.
+We got going by discussing a portion of the general elements of PycURL and its importance with the libcURL library in Python. We then saw the PycURL's establishment interaction for various working frameworks.
+Finally, we went through a portion of PycURL's overall models which exhibited the different functionalities presented by PycURL, similar to the HTTP GET, POST, PUT, and DELETE strategies. After following this instructional exercise, you ought to have the option to get objects distinguished by.
+
+
+Next TopicSklearn Model Selection
+
+
+
+
+← prev
+next →
+
+
+
+

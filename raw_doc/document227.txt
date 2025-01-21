@@ -1,0 +1,186 @@
+
+
+
+
+next →
+← prev
+
+Python AST Module
+In this tutorial, we will learn how to use the AST to understand the code.
+What is AST Module?
+AST stands for Abstract Syntax Tree, which is a potent tool of the Python programming language. It allows us to interact with the Python code itself and can modify it.
+Have you ever thought about how the Python code gets run? Is there magic behind it?
+For those who don't know, the Python interpreter is responsible for running the Python code. It follows the pre-written instructions that translate the Python code into instructions that a machine can run.
+Following is the process of converting a Python code into machine code.
+
+When we run the code, the code is parsed into smaller chunks called tokens. These tokens are created by predefined instructions that should treat differently. For example - the keyword else is a different keyword than a numeric value like
+The tokens are stored in the list transformed to build an Abstract Syntax tree, AST. An AST is a collection of two or more nodes linked together based on the grammar of the Python language.
+The compiler can produce the lower-level instruction known as binary code from the AST. This code is very generic so that the computer can run easily.
+When the interpreter gets the instructions-like byte code, the interpreter can now run the code. The byte code is responsible for calling the function in the operating system, which will eventually interact with a CPU and memory to run the program.
+
+The above description is a rough sketch of the how interpreter runs the Python code using the AST.
+Mode for Code Compilation
+There are three modes available to compile the code. They are given below.
+
+exec - This mode is used to execute the normal Python code.
+eval - This mode is used to evaluate Python's expression and will return the result after evaluation.
+single - This mode works as Python shell that executes one statement at a time.
+
+Executing Python Code
+Using the AST module, we can run the Python code. Let's understand the following example.
+Example -
+
+import ast
+
+code = ast.parse("print('Hello Learner ! Welcome to JavaTpoint')")
+print(code)
+
+exec(compile(code, filename="", mode="exec"))
+
+Output:
+<_ast.Module object at 0x0000010B889A6AC0>
+Hello Learner! Welcome to JavaTpoint
+
+Evaluate Python Expression
+The AST module allows us to evaluate the Python expression and return the result from the expression. Let's understand the following example.
+Example -
+
+import ast
+
+expression = '6 + 8'
+code = ast.parse(expression, mode='eval')
+
+print(eval(compile(code, '', mode='eval')))
+print(ast.dump(code))
+
+Output:
+14
+Expression(body=BinOp(left=Constant(value=6, kind=None), op=Add(), right=Constant(value=8, kind=None)))
+
+Creating Multi-line ASTs
+In the previous example, we have seen the single line AST and how to dump them. Now, we will learn how we can create multi-line AST. First, let's understand the following example.
+Example -
+
+import ast
+
+tree_ast = ast.parse('''
+subjects = ['computer science', 'alorithm']
+name = 'Ricky'
+
+for sub in subjects:
+    print('{} learn {}'.format(name, subjects))
+''')
+
+print(ast.dump(tree_ast))
+
+Output:
+Module(body=[Assign(targets=[Name(id='subjects', ctx=Store())], value=List(elts=[Constant(value='computer science', kind=None), Constant(value='alorithm', kind=None)], ctx=Load()), type_comment=None), Assign(targets=[Name(id='name', ctx=Store())], value=Constant(value='Ricky', kind=None), type_comment=None), For(target=Name(id='fruit', ctx=Store()), iter=Name(id='fruits', ctx=Load()), body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[Call(func=Attribute(value=Constant(value='{} learn {}', kind=None), attr='format', ctx=Load()), args=[Name(id='name', ctx=Load()), Name(id='subjects', ctx=Load())], keywords=[])], keywords=[]))], orelse=[], type_comment=None)], type_ignores=[])
+
+NodeTransformer and NodeVisitor
+The NodeTransformer class is used to take different types and modify according to our requirement. The ast module also provides the NodeVisitor class, which helps us call the visit function every time we go through the tree. So that we can get more control on the nodes, let's understand the following example.
+Example - 1
+
+import ast
+class Visitor(ast.NodeVisitor):
+    def visit_Str(self, node):
+        print('String Node: "' + node.s + '"')
+
+class MyTransformer(ast.NodeTransformer):
+    def visit_Str(self, node):
+        return ast.Str('str: ' + node.s)
+
+parsed = ast.parse("print('Hello World')")
+MyTransformer().visit(parsed)
+Visitor().visit(parsed)
+
+Output:
+Welcome to the Javatpoint
+
+Explanation -
+In the above code, we have imported the ast module that parses the code. Then we have defined the Visitor class that inherits the NodeVisitor class. Every time finds the string node; it gets transformed adding that prefix.
+We can also use the module when we run directly run the source code. Let's understand the following example.
+Example - 2:
+
+import ast
+from pprint import pprint
+
+def main():
+    with open("ast_module.py", "r") as source:
+        ast_tree = ast.parse(source.read())
+
+    analysis = Analyzer()
+    analysis.visit(ast_tree)
+    analysis.report()
+
+class Analyzer(ast.NodeVisitor):
+    def __init__(self):
+        self.stats = {"import": [], "from": []}
+
+    def node_visit(self, node):
+        for alias in node.names:
+            self.stats["import"].append(alias.name)
+        self.generic_visit(node)
+
+    def node_visitFrom(self, node):
+        for alias in node.names:
+            self.stats["from"].append(alias.name)
+        self.generic_visit(node)
+
+    def report(self):
+        pprint(self.stats)
+
+if __name__ == "__main__":
+
+Output:
+{'from': ['pprint'], 'import': ['ast']}
+
+Explanation - 
+The above code converts the Python file into an abstract syntax tree. Then we analyze the tree to get helpful information.
+We have opened a Python file in the read mode and then create AST named ast_tree. Then, the parse() function processed all the tokens, followed all the language rules, and build a tree data structure that consists of much useful information.
+The tree is nothing but a collection of nodes, where a tree variable is referenced to the "root" node. Thus, we can visit each node in the tree and perform operations. But, first, we visit each node and processing the data.
+Analyze the AST
+Once we get the tree, now the Analyzer follows the visitor pattern. Using the NodeVisitor class, we can track any node in Python. We need to implement a method visit_<node type> to visit a particular node type. In the previous example, we used the below script.
+Example -
+
+class Analyzer(ast.NodeVisitor):
+    def node_visit(self, node):
+            for alias in node.names:
+                self.stats["import"].append(alias.name)
+            self.generic_visit(node)
+
+    def node_visitFrom(self, node):
+           for alias in node.names:
+                self.stats["from"].append(alias.name)
+          self.generic_visit(node)
+
+The code accepts the name of the module and stores it in a list of statistics. With the help of NodeVisitor class, we can analyze the tree.
+
+analyzer = Analyzer()
+analyzer.visit(tree)
+
+The visit() method will work same as the visit_<node type> method.
+Using AST as Analysis Tool
+After the Python code turned into byte code, it can't be readable by humans. But it makes the interpreter fast, which means byte code is designed for the machine, not for humans.
+AST consists of enough structured information, which makes them helpful in learning about Python code. However, ASTs are still not user-friendly, but they are much understandable than byte code representation.
+When to use Python AST module?
+Abstract Syntax Tree is quite helpful for code coverage tools. It parses the source code and finds the possible flaws and errors in the code. It can also use in -
+
+It is used as a custom Python interpreter.
+It is used to analyze the static code.
+It makes the IDEs intelligent, which is known as IntelliSense.
+
+Conclusion
+We have learned about the ast module in Python, which is responsible for running the Python code. Then, we have built the AST tree from the Python code and perform analysis on the AST using a NodeVisitor class.
+
+
+Next TopicPython Requests Module - HTTP Request
+
+
+
+
+← prev
+next →
+
+
+
+

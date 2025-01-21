@@ -1,0 +1,145 @@
+
+
+
+
+next →
+← prev
+
+How to compare two lists in Python
+Python provides multiple ways to compare the two lists. Comparison is the process when the data items of are checked against another data item of list, whether they are the same or not.
+
+list1 - [11, 12, 13, 14, 15]
+list2 - [11, 12, 13, 14, 15]
+Output - The lists are equal
+
+The methods of comparing two lists are given below.
+
+The cmp() function
+The set() function and == operator
+The sort() function and == operator
+The collection.counter() function
+The reduce() and map() function
+
+The cmp() function
+The Python cmp() function compares the two Python objects and returns the integer values -1, 0, 1 according to the comparison.
+Note - It doesn't use in Python 3.x version.
+The set() function and == operator
+Python set() function manipulate the list into the set without taking care of the order of elements. Besides, we use the equal to operator (==) to compare the data items of the list. Let's understand the following example.
+Example -
+
+list1 = [11, 12, 13, 14, 15]
+list2 = [12, 13, 11, 15, 14]
+
+a = set(list1)
+b = set(list2)
+
+if a == b:
+    print("The list1 and list2 are equal")
+else:
+    print("The list1 and list2 are not equal")
+
+Output:
+The list1 and list2 are equal
+
+Explanation:
+In the above example, we have declared the two lists to be compared with each other. We converted those lists into the set and compared each element with the help of == operator. All elements are equal in both lists, then if block executed and printed the result.
+The sort() method with == operator
+Python sort() function is used to sort the lists. The same list's elements are the same index position it means; lists are equal.
+Note - In the sort() method, we can pass the list items in any order because we are sorting the list before comparison.
+Let's understand the following example -
+Example -
+
+import collections
+
+list1 = [10, 20, 30, 40, 50, 60]
+list2 = [10, 20, 30, 50, 40, 70]
+list3 = [50, 10, 30, 20, 60, 40]
+
+# Sorting the list
+list1.sort()
+list2.sort()
+list3.sort()
+
+
+if list1 == list2:
+    print("The list1 and list2 are the same")
+else:
+    print("The list1 and list3 are not the same")
+
+if list1 == list3:
+    print("The list1 and list2 are not the same")
+else:
+    print("The list1 and list2 are not the same")
+
+Output:
+The list1 and list3 are not the same
+The list1 and list2 are not the same
+
+The collection.counter() function
+The collection module provides the counter(), which compare the list efficiently. It stores the data in dictionary format <value>:<frequency> and counts the frequency of the list's items.
+Note - The order of the list's elements doesn't matter in this function.
+Example -
+
+import collections
+
+list1 = [10, 20, 30, 40, 50, 60]
+list2 = [10, 20, 30, 50, 40, 70]
+list3 = [50, 10, 30, 20, 60, 40]
+
+
+if collections.Counter(list1) == collections.Counter(list2):
+    print("The lists l1 and l2 are the same")
+else:
+    print("The lists l1 and l2 are not the same")
+
+if collections.Counter(list1) == collections.Counter(list3):
+    print("The lists l1 and l3 are the same")
+else:
+    print("The lists l1 and l3 are not the same")
+
+Output:
+The lists list1 and list2 are not the same
+The lists list1 and list3 are the same
+
+The reduce() and map()
+The map() function accepts a function and Python iterable object (list, tuple, string, etc) as an arguments and returns a map object. The function implements to each element of the list and returns an iterator as a result.
+Besides, The reduce() method implements the given function to the iterable object recursively.
+Here, we will use both methods in combination. The map() function would implement the function (it can be user-define or lambda function) to every iterable object and the reduce() function take care of that would apply in recursive manner.
+Note - We need to import the functool module to use the reduce() function.
+Let's understand the following example.
+Example -
+
+import functools
+
+list1 = [10, 20, 30, 40, 50]
+list2 = [10, 20, 30, 50, 40, 60, 70]
+list3 = [10, 20, 30, 40, 50]
+
+if functools.reduce(lambda x, y: x and y, map(lambda a, b: a == b, list1, list2), True):
+    print("The list1 and list2 are the same")
+else:
+    print("The list1 and list2 are not the same")
+
+if functools.reduce(lambda x, y: x and y, map(lambda a, b: a == b, list1, list3), True):
+    print("The list1 and list3 are the same")
+else:
+    print("The list1 and list3 are not the same")
+
+Output:
+The list1 and list2 are not the same
+The list1 and list3 are the same
+
+In this section, we have covered various methods of comparing two lists in Python. 
+
+
+Next TopicHow to convert int to string in Python
+
+
+
+
+← prev
+next →
+
+
+
+

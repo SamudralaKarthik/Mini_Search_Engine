@@ -1,0 +1,120 @@
+
+
+
+
+next →
+← prev
+
+Python __call__ method
+An Introduction to Magic Methods
+Method Names having double underscores as prefixes and suffixes are the reserved methods for particular use in Python. For example, the __init__ method is used for object constructors or the __call__ method for making object callable. We call these methods dunder methods, where dunder refers to Double Under (Underscores). These dunder methods are also known as magic methods - However, there is nothing magical related to them. There are many developers in the Python community who are not a big fan of the word 'magic', as it delivers a feeling that the use of this method is discouraged, but quite the contradiction is factual.
+Understanding the callable function
+The Object in Python is called callable when that object is defined within the __call__() function. The function for the same can be defined as x(arg 1, arg 2, …), which is short for x.__call__(arg1, arg2, …).
+Note: The callable() method returns the Boolean value for whether the object appears to be callable. This function returns True if the object is callable; else, it returns False. Moreover, it is also possible that this function may return True even when the object is not callable. Still, if this method returns False, then the object is not callable.
+Moreover, a Python class is always Callable. Thus, we can always utilize the callable() function with an object of the class, not the class itself.
+Let us consider the following example in order to understand the behavior of the Python callable() function.
+Example:
+
+# creating a class
+class Employee:
+    n = 0
+    # defining a function
+    def __init__(self, emp_id):
+        self.i = emp_id
+
+# instantiating the class
+x = Employee(15)
+
+# checking if the class and object are callable or not
+print('Employee Class is callable = ', callable(Employee))
+print('Employee object is callable = ', 
+
+Output:
+Employee Class is callable =  True
+Employee object is callable =  False
+
+Explanation:
+In the above example, we have defined a class Employee that takes a variable n = 0. We have then defined a function and instantiated the class. At last, we have checked whether the class and its object are callable or not using the callable() function.
+Let us consider an example of __call__() function.
+Example:
+
+# creating Person Class
+class Person:
+    person_id = 0
+    person_name = ""
+    # defining an initializing function
+    def __init__(self, personid, personname):
+        self.person_id = personid
+        self.person_name = personname
+
+    # defining a callable function
+    def __call__(self, *args, **kwargs):
+        print('Printing Arguments')
+        print(*args)
+
+        print('Printing Keyword Arguments')
+        for key, value in kwargs.items():
+            print("%s == %s" % (key, value))
+
+# instantiating the class
+m = Person(15, 'George')
+
+# printing the object
+print(m)
+
+# checking if the object is callable or not
+print("The Person object is callable: ", callable
+
+Output:
+<__main__.Person object at 0x000002706DF41FD0>
+The Person object is callable:  True
+
+Explanation:
+In the above example, we have defined the Person class and the variables person_id = 0 and person_name = " ". We have then defined the initializing function along with the callable function. At last, we have instantiated the class, printed the object, and checked whether the object is callable or not. And as a result, the person object appears to be callable.
+Moreover, we can observe that we have used the *args to allow passing variable arguments and **kwargs to allow passing named arguments to the __call__() method.
+Now, let us consider another example where we will have used the callable() function to check whether the object is callable or not and then called the object as a function.
+Example:
+
+if callable(m):
+    m()
+    m(15, 30)
+    m.__call__(15, 30)
+
+    m(15, 30, {'a': 4, 'b': 8})
+
+    m(15, 'B', personname = 'George', personid = 50)
+
+Output:
+Printing Arguments
+
+Printing Keyword Arguments
+Printing Arguments
+15 30
+Printing Keyword Arguments
+Printing Arguments
+15 30
+Printing Keyword Arguments
+Printing Arguments
+15 30 {'a': 4, 'b': 8}
+Printing Keyword Arguments
+Printing Arguments
+15 B
+Printing Keyword Arguments
+personname == George
+personid == 50
+
+Explanation:
+In the above example, we have defined an if-statement where if the object m is callable, then the object is called as a function without arguments, with only arguments, with __call__() function, with the arguments of different types and with arguments and keyword arguments. As a result, the required objects have been called successfully.
+
+
+Next TopicPython heapq module
+
+
+
+
+← prev
+next →
+
+
+
+

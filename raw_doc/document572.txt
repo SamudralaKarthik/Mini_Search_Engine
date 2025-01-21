@@ -1,0 +1,86 @@
+
+
+
+
+next →
+← prev
+
+How to Import Datasets using sklearn in PyBrain
+In this tutorial, we will explain how to import datasets with Sklearn within PyBrain.
+A Dataset can be described as the collection of data that could be used to test, validate as well as train networks. When compared with arrays that are considered to be more flexible, a dataset is thought of as more flexible and easier to work with. A dataset is akin to a two-dimensional array. The data sets are used to execute tasks of machine learning.
+Libraries we would be needing for this tutorial are:
+
+sklearn
+Pybrain
+
+Syntax to install these libraries:
+
+!pip3 install sklearn pybrain
+
+Example 1
+In this example, firstly, we have imported packages datasets from the sklearn library and ClassificationDataset from pybrain.datasets. After that, we loaded the numbers dataset. In the next line, we will define the feature variables and targets variables. We then create an algorithm for the classification of the dataset by creating 64 inputs, 1 output as well as 15 classes. We then add information to the dataset we created.
+Code:
+
+# First we will import the libraries
+from sklearn import datasets as DS
+from pybrain.datasets import ClassificationDataSet as CDS
+
+# Here, we will load the digits
+loaded_digits1 = DS.load_digits()
+
+# Now, we will set the data items
+Q_data, P_data = loaded_digits1.data, loaded_digits1.target
+
+# now, we will upload the Classification dataset
+dataset1 = CDS(64, 1, nb_classes=15)
+
+# Now, we will perform the Iterations over the length of Q
+for k in range(len(Q_data)):
+	dataset1.addSample(Q_data[k], P_data[k])
+
+# Print the dataset
+print(dataset1)
+
+Output:
+
+Example 2
+In this example, firstly, we have imported packages datasets from the sklearn library and ClassificationDataset from pybrain.datasets. After that, we loaded the Iris dataset. In the next line, we will define the feature variables and the targets variables. Then, we create an algorithm for classifying the dataset by defining four inputs, one output, and two classes. After that, we added data to the newly created dataset.
+Code:
+
+# First we will import the libraries
+from sklearn import datasets as DS
+from pybrain.datasets import ClassificationDataSet as CDS
+
+# Here, we will load the iris
+loaded_digits1 = DS.load_iris()
+
+# Now, we will set the data items
+Q_data, P_data = loaded_digits1.data, loaded_digits1.target
+
+# now, we will create the Classification dataset
+dataset1 = CDS(4, 1, nb_classes=2)
+
+# Now, we will perform the Iterations over the length of Q
+for k in range(len(Q_data)):
+	dataset1.addSample(Q_data[k], P_data[k])
+
+# Print the dataset
+print(dataset1)
+
+Output:
+
+Conclusion:
+In this tutorial we have discussed how to import various datasets using sklearn library in PyBrain.
+
+
+Next TopicPart of Speech Tagging using TextBlob
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,293 @@
+
+
+
+
+next →
+← prev
+
+Fabric Module in Python
+Linux users must do a variety of administrative and general duties regularly, such as reloading the apache server after making any changes, developing and deploying new applications, accessing certain log files, and so on. To do these operations regularly, SSH (Secure Shell) is necessary. Fabric is a useful Python module that works with SSH and the operating system to automate a variety of application development and administration activities. This command-line program is basic and straightforward to use. This article demonstrates how to install and utilize the fabric library in Python 3+.
+It extends the APIs of Invoke (subprocess command execution and command-line features) and Paramiko (SSH protocol implementation), complementing and providing extra capabilities. The project's maintainer keeps a roadmap. Fabric's project information, such as the changelog and contribution requirements, is available on official website. The code documentation site, docs.fabfile.org, has extensive use and API documentation.
+The paramiko is a library that allows you to do basic or lower-level ssh tasks. Fabric is a library that uses paramiko internally to execute various higher-level tasks (for ssh purposes). In a nutshell, if all you want to do is ssh, use paramiko; if you want to do a lot more, such as running a configuration, installing something on the server, or deploying code, use fabric script. It will make your life easier by requiring you to write fewer lines of code than if you used paramiko directly. (and don't worry, because paramiko is used internally by fabric).
+Through an imported library, Paramiko simply provides an easy method to utilize SSH in Python. The fabric enables you to create a "fabfile" and perform various actions that are programmed into it. This may be anything you want it to be. For example, on my PC, I have a fabfile that links to the personal server, CDs into the proper directory, pull the git branch in, transfers different config files to the correct places (uwsgi, Nginx), and restarts the appropriate services. As a consequence, I can push the latest version of my site online with a single command on my local PC. The fabric also makes use of Paramiko as a dependency.
+Now we know that the fabric library uses the paramiko module internally let us look at the paramiko module of the python library.
+The creation of an SSHClient object is the first step in the high-level client API. Pass a socket (or socket-like object) to a Transport for more direct control, then use start server or start client to negotiate with the remote host as a server or client. As a client, you are responsible for verifying the server's host key and authenticating using a password or private key. (Paramiko handles key signature and verification, but you'll need to provide private keys and double-check that the content of a public key matches what you intended.) You, as the server, are in charge of determining which users, passwords, and keys to accept, as well as which channels to enable. After you've completed it, any party might ask for flow-controlled channels.
+Now let us look at the code of the usage of the fabric module in Python::
+Code::
+
+#A sample code to show the uses of fabric module in Python we have different functions to perform different operations on the remote site server the initial step of all these functions is to make a secure ssh connection to the remote side server 1st secure connection is established successfully the next step is to perform the specified operation in the corresponding function
+
+# the fabric module is imported which will be used to use various functions within this model
+from fabric import Connection
+#  the system module is also imported to use the exit function
+import sys
+
+# this is the first function that will be used to create a working directory on the remote site server when we run this function it asks the user for the name of the directory that the user wants to create on the remote site server once the user provides the name of the directory that particular directory is created on the remote site server and the result is conveyed to reuse
+def createWorkingDir():
+    print("Enter the name of the directory that you want to create")
+    dir_name = input()
+    with Connection("superbook",user="client",connect_kwargs={"password":"nirnay"}) as c:
+        with c.cd("/home/client/Desktop"):
+            c.run("mkdir {}".format(dir_name))
+            c.run("ls {}".format(dir_name))
+
+    print("{} directory created sucessfully.".format(dir_name))
+
+#  this is another function that we have written that is to operate changing a directory or moving to another directory on the remote site server on executing this function it asks for the name of the directory to which we want to move after adding the name of the directory the current execution of the code gets moved to the directory whose name is added by the user this function on its completion changes the current working directory of the program execution
+def moveToDir():
+    print("Enter the name of the directory to which you want to move")
+    dir_name = input()
+    with Connection("superbook",user="client",connect_kwargs={"password":"nirnay"}) as c:
+        with c.cd("/home/client/Desktop/{}".format(dir_name)):
+            c.run("pwd")
+
+    print("directory changed successfully")
+
+
+#This function is used to create new files on the remote site server on the execution of this function the user is prompted with a message asking for pee name of the directory in which the user wants to create the files after  specifying the name of the directory 10 demo files are created in that directory and on the successful creation of the files in the specified directory the user is prompted with the successful message confirming the successful creation of the files in a particular specified Directory on the remote  side server
+def create files():
+    print("Enter the name of the directory in which you want to create files")
+    dir_name = input()
+    with Connection("superbook",user="client",connect_kwargs={"password":"nirnay"}) as c:
+        with c.cd("/home/client/Desktop/{}".format(dir_name)):
+            c.run("touch files{1..15}")
+
+    print("Files created sucessfully in {} directory.".format(dir_name))
+
+#  the main motive of this function is to list all the files that are present in a particular directory by adding the name of the directory whose files we want to list all the files that are present in that particular specified directory are listed and are displayed to the user point to be noted is that all the files getting list are present on the remote server not on the local machine
+def listFilesInDir():
+    print("Enter the name of the directory in which you want to list files")
+    dir_name = input()
+    with Connection("superbook",user="client",connect_kwargs={"password":"nirnay"}) as c:
+        with c.cd("/home/client/Desktop/{}".format(dir_name)):
+            c.run("ls")
+
+    print("Files listed sucessfully in {} directory.".format(dir_name))
+
+# similar to the previous function this function is also used to list all the directories instead of the files the only difference between the previously written function and this function is that this function list all the directories inside a directory and the previous function list all the files inside  a directory similar to the previous function this function also asks for the name of the directory whose directories we want to list the directories which get listed are the children directories of the directory whose name is added by the user
+def listAllDirs():
+    with Connection("superbook",user="client",connect_kwargs={"password":"nirnay"}) as c:
+        with c.cd("/home/client/Desktop"):
+            c.run("ls")
+
+    print("All dirs listed sucessfully.")
+
+#  this function is a kind of combination of the above to return functions that will be used to list all the files as well as the directories from the current execution directory of the program the user can use this function instead of calling to separate above written functions that will return the same data which is is collectively returned by this function  print the  files and directories in the current working directory in a recursive manner that means if there is a directory inside a directory that the contents of the nested directories are also listed by this functions whether the contents are files or directories all of them will be listed with the use of thisfunction
+def listAllDirsAndFilesInTreeMode():
+    with Connection("superbook",user="client",connect_kwargs={"password":"nirnay"}) as c:
+        with c.cd("/home/client/Desktop"):
+            c.run("tree .")
+
+    print("All dirs and files listed sucessfully.")
+
+
+
+# In the end the main function is written to call all the above detail functions and verify their functionalities one by one by calling each of them each of them provide a separate unique operation on the remote site server by taking various inputs and providing different of food accordingly. 
+def main():
+    while(True):
+        print("Select any one of the fab operation you want to do::")
+        print("1. To list all directories which are present.")
+        print("2. To create a new directory.")
+        print("3. To move to another directory.")
+        print("4. To create files in a specific directory.")
+        print("5. To list all the files inside a directory.")
+        print("6. To display the files and dirs in tree mode.")
+        print("7. To exit from the code execution.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            callable = globals()['listAllDirs']
+            callable()
+        elif menu_choice == 2:
+            callable = globals()['createWorkingDir']
+            callable()
+        elif menu_choice == 3:
+            callable = globals()['moveToDir']
+            callable()
+        elif menu_choice == 4:
+            callable = globals()['createFiles']
+            callable()
+        elif menu_choice == 5:
+            callable = globals()['listFilesInDir']
+            callable()
+        elif menu_choice == 6:
+            callable = globals()['listAllDirsAndFilesInTreeMode']
+            callable()
+        elif menu_choice == 7:
+            sys.exit()
+
+        
+        print("To move ahead with code execution enter [y] else [n]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+#the main fucntion is called to start the execution of the code.
+if __name__ == '__main__':
+    main()
+
+Output:
+[email protected]:~$ python3 fabfile.py 
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+1
+primary
+All dirs listed successfully.
+To move ahead with code execution enter [y] else [n]
+y
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+2
+Enter the name of the directory that you want to create
+mydir
+mydir directory created successfully.
+To move ahead with code execution enter [y] else [n]
+y
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+1
+mydir
+primary
+All dirs listed successfully.
+To move ahead with code execution enter [y] else [n]
+y
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+3
+Enter the name of the directory to which you want to move
+mydir
+/home/client/Desktop/mydir
+directory changed successfully
+To move ahead with code execution enter [y] else [n]
+y
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+4
+Enter the name of the directory in which you want to create files
+mydir
+Files were created successfully in the media directory.
+To move ahead with code execution enter [y] else [n]
+y
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+5
+Enter the name of the directory in which you want to list files
+mydir
+files1
+files10
+files11
+files12
+files13
+files14
+files15
+files2
+files3
+files4
+files5
+files6
+files7
+files8
+files9
+Files are listed successfully in the mydir directory.
+To move ahead with code execution enter [y] else [n]
+y
+Select any one of the fab operations you want to do::
+1. To list all directories which are present.
+2. To create a new directory.
+3. To move to another directory.
+4. To create files in a specific directory.
+5. To list all the files inside a directory.
+6. To display the files and dirs in tree mode.
+7. To exit from the code execution.
+6
+.
+|-- mydir
+|   |-- files1
+|   |-- files10
+|   |-- files11
+|   |-- files12
+|   |-- files13
+|   |-- files14
+|   |-- files15
+|   |-- files2
+|   |-- files3
+|   |-- files4
+|   |-- files5
+|   |-- files6
+|   |-- files7
+|   |-- files8
+|   `-- files9
+`-- primary
+
+2 directories, 15 files
+All dirs and files are listed successfully.
+To move ahead with code execution enter [y] else [n]
+n
+
+Conclusion:
+In the above-written code, we have used the fabric module of python to perform various operations on the remote site server these corporations are initiated from the client machine and every time a particular operation is triggered a secure connection between the remote site server and the client machine is established and after the successful establishment of the connection between the remote site server and the client machine with the use of fabric functions the specific operation is performed. the various operations which are performed are to list all the directories that are present inside a directory, to create a new directory, to list all the files that are present in a particular directory, to create new files a set of new files inside a directory, to change the current working directory of the code execution, and to list all the files and directories that are present inside a particular directory in a recursive manner that means the files or directories inside a directory which itself is present inside a directory are also listed in this method. And for all these operations there are separate functions that are written that perform the specified operation. In each method, first of all, a secure connection between the server-side and the client machine is established and for the establishment of the secure connection between the server and the client the inbuilt functions of the fabric module are used, once the connection is established the specified operation is performed for example if the user has selected to create a new directory inside a particular directory the user will be prompted to enter the name of the new directory that he wants to create, on entering the name of the directory which need to be created the create directory operation is performed and once the directory is successfully created similar message is prompted to the user. Similarly, if the user selects the option to list all the directories inside a particular directory the user is prompted to enter the name of the directory from which we want to list the children directories, on entering the name of the parent directory all the children directories present inside the directory are listed. Similarly whatever the option the user selects the user is asked for the relevant input if it is required and that particular operation is performed on the server and whatever the result is generated as the output is displayed to the user. so the user is prompted with the number of functions or options that are methods to perform different operations on the remote site server the user can select any one of them and perform the specific operation this options menu keeps on getting printed to perform various options if the user wants to exit the code execution he can select the last option with the help of which the user can exit the execution of the current code.
+Advantages of Fabric Module in Python:
+Now let us discuss some of the major advantages of the Fabric Module in Python that make it a very powerful and popular choice among the developers for automating a list of tasks that needs to be done repeatedly on the remote server that are prerequisites for various configurations of the applications.
+
+Given that Fabric is a Python library, any Python command (or method) and module can be used with it out of the box. Fabric's main value is its vast and superb interaction with SSH, which allows you to automate everything with simple scripts (i.e. fabfile.py). This section contains a list of Fabric tools (such as functions) that may be used to interface with environments where commands you express are executed.
+Deploying an application (whether it's a website, an API, or a server) usually entails starting from scratch (or from a snapshot), updating everything, downloading dependencies, setting up the file structure and permissions, and finally uploading your codebase - or downloading it using a version control system like Git. You'll probably have instructions that need to be run regularly during the development phase (ex: right before entering a deployment cycle).
+Being able to script these processes (both local and remote) in a logically ordered and - most importantly - programmable manner quickly becomes beneficial once you realize how much time is wasted repeatedly repeating the same steps, making everything error-prone in the process. Fabric comes to your rescue in the shape of a Python file that knows exactly what to do and where to do it.
+Things that appear mysterious will rapidly become familiar once you start working with your droplet (which is a fully virtualized server with complete management and access). It's only natural to expect some challenges as you launch your applications and begin dealing with their maintenance. However, as your application becomes more popular and things begin to expand, the necessity to manage several droplets and repeat everything ceases to be enjoyable.
+A single Fabric script (fabfile), as we indicated in the beginning, can be used to conduct activities on both the local machine and the distant system (s). Fabric offers the local operative the ability to run commands locally for this purpose.
+However, unlike run or sudo, there is no ability to interact with the output of local in the same way. The switch can be configured with the capture argument to capture or print either output. Local helpers, such as the lcd context manager (which sets the local working directory), are honored in the same manner as run (or sudo) honors the cd context manager.
+
+So in this article, we have seen how we can use the fabric module in Python to connect to a remote server and perform various operations on that remote server, the main use case of the fabric module is seen in the scenarios where a system administrator or network controller needs to manage several client machines having different configurations and requirement throughout the organization in this scenario the network administrator for this system administrator can use the fabric module of the python to easily automate the job of installing and configuring various system configurations and setting files easily with the help of simple python code. Similarly, we have seen in this example how we can perform various operations on the remote site server easily just with the help of a simple python script. These functions can perform simple to simple as well as complex tasks.
+
+
+Next TopicTracemalloc module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

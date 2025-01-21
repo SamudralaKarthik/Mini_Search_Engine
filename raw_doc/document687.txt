@@ -1,0 +1,267 @@
+
+
+
+
+next →
+← prev
+
+Sklearn Linear Regression Example
+A machine learning algorithm built on supervised learning is called linear regression. It executes a regression operation. Regression uses independent variables to train a model and find prediction values, and it is mainly used to determine how variables and predictions relate to one another.
+Regression models vary according to the number of independent variables in use, the relationship they consider between the dependent and independent variables, and other factors. This tutorial will show how to apply linear regression to a given dataset using several Python modules. Since a single linear model is simpler to visualise, we'll use it as our example. The model will use the sklearn diabetes dataset in this presentation to learn.
+How to use Linear Regression in Sklearn?
+A Python package called Scikit-learn simplifies using various Machine Learning (ML) methods for studying predictive data, including linear regression.
+Finding the straight line model that best fits a collection of scattered data points is known as linear regression; we can then extrapolate the curve to foretell new data points. Linear regression is a vital Machine Learning technique due to its simplicity and key characteristics.
+Linear Regression using Sklearn Example
+Code
+
+# Python code on sklearn linear regression example
+
+# Importing required libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_diabetes
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Loading the sklearn diabetes dataset
+X, Y = load_diabetes(return_X_y=True)
+
+# Taking only one feature to perform simple linear regression
+X = X[:,8].reshape(-1,1)
+
+# Splitting the dependent and independent features of the dataset into training and testing dataset
+X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.3, random_state = 10 )
+
+# Creating an instance for the linear regression model of sklearn
+lr = linear_model.LinearRegression()
+
+# Training the model by passing the dependent and independent features of the training dataset
+lr.fit( X_train, Y_train )
+
+# Creating an array of predictions made by the model for the unseen or test dataset
+Y_pred = lr.predict( X_test )
+
+# The value of the coefficients for the independent feature through the multiple regression model
+print("Value of the oefficients: \n", lr.coef_)
+
+# The value of the mean squared error
+print(f"Mean square error: {mean_squared_error( Y_test, Y_pred)}")
+
+# The value of the coefficient of determination, i.e., R-square score of the model
+print(f"Coefficient of determination: {r2_score( Y_test, Y_pred )}")
+
+# Plotting the output
+plt.scatter(X_test, Y_test, color = "black", label = "original data")
+plt.plot(X_test, Y_pred, color = "blue", linewidth=3, label = "regression line")
+plt.xlabel("Independent Feature")
+plt.ylabel("Target Values")
+plt.title("Simple Linear Regression")
+plt.show()
+
+Output:
+Value of the coefficients: 
+ [875.72247876]
+Mean square error: 4254.602428877642
+Coefficient of determination: 0.3276195356900222
+
+
+
+Sklearn Linear Regression Example Using Cross-Validation
+Many ML models are trained on portions of the raw data and then evaluated on the complementing subset of data. This process is known as cross-validation. To identify overfitting or to fail to generalise a pattern, use cross-validation.
+Cross-validation involves the following three steps:
+
+Set aside a certain amount of the sample data set.
+Train the model by using a specific portion of the dataset.
+Validate the model using the data set's reserve section.
+
+We generate multiple small train-test splits using our original training dataset through cross-validation. We use these splits to train our model, which best describes the relationship between dependent and independent variables. For the standard k-fold cross-validation test, we split the original dataset into k subgroups. After we have trained the linear regression model iteratively using the k-1 dataset, we use the remaining dataset to validate the model.
+This allows us to validate the model on a new dataset to know if the model describes a good relationship or not. In this section, we'll learn how to use cross-validation tests on a linear regression model using sklearn. Additionally, we will see a method to improve the accuracy provided by the KFold cross-validation method. 
+Code
+
+# Python program to perform kfold cross-validation test on a Linear Regression model 
+
+#Importing the required libraries
+from sklearn.datasets import load_diabetes
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import KFold 
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split
+ 
+#Loading the diabetes dataset of sklearn
+dataset = load_diabetes(as_frame = True)
+dataset = data.frame
+
+# Segregating dependent and independent variables of the dataset
+X = dataset.iloc[:,:-1] 
+Y = dataset.iloc[:,-1]
+
+# Separating the dataset into training and testing dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3)
+ 
+#Implementing k-fold cross validation
+k_value = 6
+k_fold = KFold(n_splits = k_value, random_state = None)
+Lreg = LinearRegression()
+
+# Fitting the Linear Regression model to the training dataset
+Lreg.fit(X_train, Y_train)
+
+# Finding the accuracy scores for each fold using cross_val_score methods
+scores = cross_val_score(Lreg, X_train, Y_train, cv = k_fold)
+
+# Calculating the mean accuracy score through the scores value
+mean_accuracy_score = sum(scores) / len(scores)
+
+# Printing the accuracy scores
+print("Accuracy score of each fold: ", scores)
+print("Mean accuracy score: ", mean_accuracy_score)
+
+Output:
+Accuracy score of each fold:  [0.41676766 0.45263441 0.44526044 0.43015152 0.40605028 0.41904005]
+Mean accuracy score:  0.4283173940888665
+
+To improve the accuracy of the KFold cross-validation test, we can use the stratified KFold method
+Code
+
+# Python program showing stratified k-fold cross-validation test on a Linear Regression model 
+
+# Importing the required library
+from sklearn.datasets import load_diabetes
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_val_score, StratifiedKFold, train_test_split
+
+# Loading the dataset
+dataset = load_diabetes()
+
+# Getting dependent and independent features
+X = dataset.data
+Y = dataset.target
+print("Size of the dataset is: ", len(X))
+
+# Separating the dataset into training and testing dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.3)
+ 
+# Creating an instance of a linear regression model
+Lreg = LinearRegression()
+
+# Fitting the training dataset to train the model
+Lreg.fit(X_train, Y_train)
+
+# Performing stratified K-fold cross-validation test
+stratified_kfold = StratifiedKFold(n_splits = 6)
+score = cross_val_score(Lreg, X, Y, cv = stratified_kfold )
+
+# Printing accuracy scores
+print("Stratified k-fold Cross Validation Scores are: ", score )
+print("Average Cross Validation score is: ", score.mean())
+
+Output:
+Size of the dataset is:  442
+Stratified k-fold Cross Validation Scores are:  [0.50117449 0.45486492 0.46935982 0.5599043  0.50545775 0.42289802]
+Average Cross Validation score is:  0.48560988266624
+
+Multivariate Linear Regression by Using Python Sklearn
+A supervised machine learning approach called multivariate regression used many independent data features to analyse the target feature. One dependent variable and many independent variables make up a multivariate regression, which is an elaboration of the multiple regression models. We attempt to forecast the result by training the model using the independent variables.
+Multivariate regression uses a formula to describe how several variables react concurrently to changes in the target variable.
+Data Pre-processing
+Most ML programmers believe that data pre-processing is among the most crucial phases of a regression model project. There may be excessive data points, reporting mistakes, or many other problems that prevent an algorithm from making an accurate prediction for the dataset.
+Before the dataset is ever fed into an ML model, data scientists spend numerous hours cleaning, normalising, and scaling the data to avoid this.
+Standardizing functions, such as the MinMax and Standard functions, are the most frequent function types to perform feature scaling. This is due to the range of the features in your data. Euclidean distance is used by almost all machine learning methods to estimate the separation between two data points.
+By scaling every point in the collection to fit within the same range, scale standardization functions enable algorithms to calculate distance accurately.
+We must first import sklearn.preprocessing and numpy for both.
+Multiple Linear Regression Sklearn example
+Code
+
+# Python program shows how to process data before fitting it to a Linear Regression Model. 
+# Multiple Linear Regression Sklearn example
+
+# Importing the required libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import preprocessing
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+
+# Loading the dataset 
+iris_data = datasets.load_iris()
+dataset = pd.DataFrame(data = iris_data.data, columns = iris_data.feature_names)
+
+# Adding the target feature to the dataset
+dataset["target"] = iris_data.target
+
+#Printing head of dataset
+print(dataset.head())
+
+# Eliminating from the dataset any NaN or missing type input numbers
+dataset.fillna(method = 'ffill', inplace = True)
+
+# Dropping any rows with Nan values
+dataset.dropna(inplace = True)
+
+# Separating independent and dependent variables
+# This will convert each dataframe into numpy arrays
+X = dataset.iloc[:, :-1].values
+Y = dataset.iloc[:, -1].values
+
+
+# Separating the data into training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, random_state = 10)
+
+# Creating an instance of the Linear Regression class of the sklearn
+lr = LinearRegression()
+
+# Fitting the training data of the dataset into the model to train the model
+lr.fit( X_train, Y_train )
+
+# Printing the R-square for the trained model by passing unseen or the test data
+score = lr.score( X_test, Y_test )
+print("R-square score of the model: ", score)
+
+# Storing the predicted values of the test dataset by the model in an array
+Y_pred = lr.predict(X_test)
+
+# Creating a dataset for the coefficient value for the intercept and independent features
+result = pd.DataFrame(data = dataset.iloc[:,:-1].columns, columns = ["Features"])
+result["Coefficients"] = lr.coef_
+result.loc[0] = ["Intercept", lr.intercept_]
+result
+
+Output:
+   sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)  \
+0                5.1               3.5                1.4               0.2   
+1                4.9               3.0                1.4               0.2   
+2                4.7               3.2                1.3               0.2   
+3                4.6               3.1                1.5               0.2   
+4                5.0               3.6                1.4               0.2   
+
+   target  
+0       0  
+1       0  
+2       0  
+3       0  
+4       0  
+R-square score of the model:  0.9215461211058802
+	Features	Coefficients
+0	Intercept	0.279851
+1	sepal width (cm)	-0.006845
+2	petal length (cm)	0.297868
+3	petal width (cm)	0.507009
+
+
+
+Next TopicPython Timeit Module
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,141 @@
+
+
+
+
+next →
+← prev
+
+Difference between Append, Extend and Insert in Python
+List: are like an array of dynamic size, declared in another programming language such as vector in C++ or Arraylist in Java. It is not necessary for a list to be homogeneous, and this is the main reason that makes it the most powerful tool in Python. A single list can contain different data types such as strings, integers, and objects.
+As we know, lists are mutable, so they can be altered even after creating them. Lists has several methods, among which append(), insert(), extend() are most common ones.
+In this tutorial, we will learn how append(), expend(), and insert() functions are different from each other in Python's lists.
+Append() Function
+The append() function is used for adding an element at the end of the list. The argument we pass in the append() function is added as a single element at the end of the list, and the length of the list will increase by 1.
+Syntax
+
+list_name1.append(element_1)
+
+The "element_1" can be an integer, tuple, string or another list.
+Example:
+
+list_1 = ['The', 'list_1']
+ 
+# Using the method
+list_1.append('is')
+list_1.append('an')
+list_1.append('example')
+ 
+# Displaying the list
+print ("The added elements in the given list are: ", list_1)
+
+Output:
+The added elements in the given list are: ['The', 'list_1', 'is', 'an', 'example']
+
+Insert() Function
+The insert() function is used for inserting the value at any desired position in the list. We have to pass two arguments in it; the first is for index where we want to inter the element, and the second is for element to be inserted.
+Syntax
+
+list_name1.insert(index, element_1)
+
+The "element_1" can be an integer, tuple, string, or object.
+Example:
+
+list_1 = ['The', 'is']
+ 
+# Using the method
+list_1.insert(3,'an')
+list_1.insert(1, 'list_1')
+list_1.insert(4, 'example')
+ 
+# Displaying the list
+print ("The inserted elements in the given list are: ", list_1)
+
+Output:
+The inserted elements in the given list are:  ['The', 'list_1', 'is', 'an', 'example']
+
+Extend() Function
+The extend() function is used for appending each element of the iterable (list, string, or tuple) to the end of the list. This will increase the length of the list by the number of elements of the iterable are passed as an argument.
+Syntax
+
+list_name1.extend(iterable)
+
+Example:
+
+list_1 = ['The', 'list_1']
+ 
+# Using the method
+list_1.extend(['is', 'an', 'example'])
+list_1.extend('javatpoint')
+ 
+# Displaying the list
+print ("The extended elements in the given list are: ", list_1)
+
+Output:
+The extended elements in the given list are:  ['The', 'list_1', 'is', 'an', 'example', 'j', 'a', 'v', 'a', 't', 'p', 'o', 'i', 'n', 't']
+
+Difference Between Append(), Insert() and Extend()
+
+
+append() Function
+insert() Function
+extend() Function
+
+
+The element passed in the argument is added at the end of the list.
+The element passed in the argument is added at the mentioned index of the list.
+Each element of the iterable is passed as ab argument is added at the end of the list.
+
+
+The element passed as an argument will be added as a single element without any changes.
+The element passed in the argument will be added as a single element at the desired location without any changes.
+The iterable passed as an argument will append each of its elements at the end of the list.
+
+
+The length of the list will increase by 1.
+The length of the list will increase by 1.
+The length of the list will increase by the number of elements in the iterable.
+
+
+The append() function has a constant time complexity of O(1).
+The insert() function has linear complexity of O(n).
+The extend() function has a time complexity of O(k), where "k" is the length of the iterable.
+
+
+Let's compare all the three methods in a single program:
+
+list_name1 = ['this', 'is', 'LIST_1']
+list_name2 = ['this', 'is', 'of', 'LIST_2']
+list_name3 = ['this', 'is', 'LIST_3']
+ 
+S = ['Example_1', 'Example_2']
+ 
+# Using methods
+list_name1.append(S)
+list_name2.insert(2, S)
+list_name3.extend(S)
+ 
+# Displaying lists
+print ("The appended elements in the given list are: ", list_name1)
+print ("The inserted elements in the given list are: ", list_name2)
+print ("The extended elements in the given list are: ", list_name3)
+
+Output:
+The appended elements in the given list are: ['this', 'is', 'LIST_1', ['Example_1', 'Example_2']]
+The inserted elements in the given list are: ['this', 'is', ['Example_1', 'Example_2'], 'of', 'LIST_2']
+The extended elements in the given list are: ['this', 'is', 'LIST_3', 'Example_1', 'Example_2']
+
+Conclusion
+In this tutorial, we discussed different methods that can be used for modifying lists in Python. We have also explained the difference between append(), insert(), and extend() functions in the list of Python.
+
+
+Next TopicHow to Remove Duplicates from a list in Python
+
+
+
+
+← prev
+next →
+
+
+
+

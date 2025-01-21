@@ -1,0 +1,566 @@
+
+
+
+
+next →
+← prev
+
+Python Forensics and Virtualization | Hash Functions
+In this tutorial, we will learn the Forensics science using Python, basic Python forensics applications, Hash functions, Cracking an Encryption, Visualization, Naming Conventions, Dshell and Scapy, Network Forensics with its detailed explanation.
+Introduction
+Collecting and preserving evidence is most essential for cyber forensic investigation and analysis at the computer devices. It plays important role in a court room to be used against the criminal. Nowadays, technology facilitates us to get the information by just typing the query on the browser. But it also invites the cyber crooks. Cyber crooks are those who perform the malicious activity by using their system and internet. They can get your all information from sitting somewhere else.
+With its wide applications, Python also provides the facility to work with the digital forensics. By using it, we can gather data, extract evidence, and also encrypt password. It will support us to reinstate the reliability of evidence.
+Before go further, you must familiar with the Python and its advance concepts.
+Introduction to Computational Forensics
+Computational Forensics is a part of study which used to solve problems in various forensics disciplines. It uses computer-based modeling, analysis, computer simulation and recognition. Python Forensics was invented by the Chet Homster. There are also pattern evidence, such as fingerprints, shoeprints, toolmarks and any documents. It makes use of procedures, scope of objects, and substances. There are also physiological and behavioral patterns such as digital evidence, DNA, and crime scenes.
+
+We can also use the various algorithms to deal with the signal and image processing. By using algorithms, we can also handle the, data mining, computer graphics, machine learning, computer vision data visualization, and statistical pattern recognition.
+In a few words, the computation forensics is used to study the digital evidence, computational forensics deals with the various types of evidence.
+Naming Conventions for Python Forensics Application
+We must familiar with the naming convention and patterns to follow the Python Forensics guidelines. Consider the following table.
+
+
+
+Naming Convention
+Example
+
+
+Local variables
+camelCase with optional underscore
+studentName
+
+
+Constant
+Uppercase, words separated by underscores
+STUDENT_NAME
+
+
+Global variable
+Prefix with camelCase with optional underscores
+my_studentName
+
+
+Function
+PascalCase with optional underscores; active voice
+MystudentName
+
+
+Module
+Prefix with the camel case
+_studentname
+
+
+Class
+Prefix class with Pascalcase; keep it sort
+class_MyStudentName
+
+
+Object
+Prefix ob_with camelcase
+ob_studentName
+
+
+The hashing algorithm is one of the best ways of take as an input a stream of binary data. In the real life scenario, we can encrypt our password, file, or even any kinds of digital file or data. The algorithm takes an input and generates the encrypted message. Let's see the given example.
+Example
+
+import sys,string,md5
+print("Enter the name")
+line=sys.stdin.readline()
+line=line.rstrip()
+md5_object=md5.new()
+md5_object.update(line)
+print(md5_object.hexdigest())
+
+Python Hash Function
+Python hash function is used to map a vast amount of data to a fixed value. An input returns the same output. It is a hash sum and stores features with precise information. Once we map the data to a fixed value, that cannot be revert. That's why we also refer it as one-way cryptographic algorithm.
+Let's understand the following example -
+Example -
+
+import hashlib
+import uuid
+
+def hash_pass(password):
+    s = uuid.uuid4().hex
+    return hashlib.sha256(s.encode() + password.encode()).hexdigest() + ':' + s
+def verify_password(hashed_password, user_password):
+    password, s = hashed_password.split(':')
+    return password == hashlib.sha256(s.encode() + user_password.encode()).hexdigest()
+new_password = input('Enter your password :')
+
+hashed_password = hash_pass(new_password)
+print('The hash string to store in the db is: ' + hashed_password)
+
+Output:
+Enter your password: sharma
+The hash string to store in the db is: 947782bdb0c7a5ad642f1f26179b6aef2d9857427b45a09af4fce3b8f1346e91:8a8371941513482487e5ab8af2ae6466
+
+Now, we will re-enter the password.
+
+old_password = input('Enter new password ')
+if verify_password(hashed_password, old_password):
+    print(' Entered password is correct')
+else:
+    print('Passwords do not match')
+
+Output:
+Enter your password devansh 
+The hash string to store in the db is: 4762866edd3b49c7736163ef3d981e42629a09a9ca7e081f56d116e137d77b9c:ebbf5b16bd9f4b989505a495bf7ae9b9
+Enter new password sharma
+Passwords do not match
+
+The hash function has the following properties.
+
+We can simply transform any hash value for any input value.
+It doesn't able to produce the same output as given hash value.
+It is unrealistic to transform the input without moving the hash value.
+
+Cracking an Encryption in Python
+We must know how to encrypt the text data that we fetch during analysis and evidence. First, understand the basic cryptographic.
+Generally, secret messages are sent by the army person to convey their plans without get read by their enemies. These messages are not in the human-readable format. The plain texts are encrypted by using the encryption algorithm and these texts are called cipher text.
+Suppose a general commander sends a message to senior to save the text from their enemies. Here, we take shift the plain text letter four place in the alphabet. Now, the A will be E, each B is F and so no.
+Let's understand the following example to crack the vector data.
+Example -
+
+import sys
+def decryption(text,cipher):
+    simple_text=''
+    for each in cipher:
+        x = (ord(each)-text) % 126
+        if x < 32:
+            x+=95
+            simple_text += chr(x)
+            print(simple_text)
+cipher_text = input('Enter the message: ')
+for i in range(1,95,1):
+    decryption(i,cipher_text)
+
+Output:
+Enter message: Yes
+~
+}
+|
+{
+z
+y
+x
+w
+v
+u
+t
+s
+r
+r~
+q
+q}
+p
+p|
+o
+o{
+n
+nz
+m
+my
+l
+lx
+k
+kw
+j
+jv
+i
+iu
+h
+ht
+g
+gs
+f
+fr
+e
+eq
+d
+dp
+dp~
+c
+co
+co}
+b
+bn
+bn|
+a
+am
+am{
+`
+`l
+`lz
+_
+_k
+_ky
+j
+jx
+i
+iw
+h
+hv
+g
+gu
+f
+ft
+
+Virtualization
+A virtualization is an act of emulate IT system such as workstations, networks and storage. We make the virtual instance of such a resource. It can be done with the help of hypervisor.
+
+The virtualization of hardware plays very important role in the computer forensics. By using the virtualization, we can get following advantages.
+
+We can use the workstation in a validate state for each investigation.
+We can recover deleted data by including dd images of a drive on a virtual machine.
+The virtual machine can turn into the recovery device that will help to gather evidence.
+
+We define the following steps to create virtual machine using Python
+Step - 1: Suppose we consider our local machine as "dummy". Each Virtual Machine will have at least 512 MB of memory.
+
+virmach_memory = 512 * 1024 * 1024
+
+Step - 2: Now, we attach this virtual machine to the default cluster.
+
+virmach_cluster = api.clusters.get(name = "Default")
+
+Step - 3: Next, boot the virtual machine from the virtual HDD.
+
+vm_os = params.OperatingSystem(boot = [params.Boot(dev = "hd")])
+
+Now, we will combine the above steps into a virtual machine parameter object. Let's understand the following example.
+Example -
+
+from ovirtsdk.xml import params
+from ovirtsdk.api import API  
+
+
+try:  
+# We need to provide Api credentials for virtual machine
+    api = API(url="https://HOST",
+              username="Example",
+              password="example123",
+              ca_file="ca.crt")
+
+    virmach_name = "dummy"
+    virmach_memory = 512 * 1024 * 1024  # calculating the memory in bytes
+    virmach_cluster = api.clusters.get(name="Default")
+    virmach_template = api.templates.get(name="Blank")
+
+    # here we are assigning the parameters to operating system
+    virmach_os = params.OperatingSystem(boot=[params.Boot(dev="hd")])
+
+    virmach_params = params.VM(name=virmach_name,
+                          memory=virmach_memory,
+                          cluster=virmach_cluster,
+                          template=virmach_template,
+                           os = virmach_os)
+
+    try:
+        api.vms.add(vm=virmach_params)
+        print("Virtual machine '%s' added successfully." % virmach_name) 
+    except Exception as ex:
+        print("Adding virtual machine '%s' failed: %s" % (virmach_name, ex))
+        api.disconnect()
+
+except Exception as ex:
+
+Output:
+Virtual Machine dummy added successfully.
+
+Network Forensics in Python
+Python also provide the facility to work with the network forensics. In the modern days, Python network forensics environment investing can come across many difficulties. These problems can be responding to a breach report, executing assessments pertaining to susceptibility, or validating regularity compliances. Let's understand the basic terminology of network forensics.
+Client - The client runs personal computer and workstation.
+Server - The server executes the client's request.
+Protocols - Protocols are the set of rule that must be followed while data transfer.
+Websockets - A websockets are protocol that provides the full-duplex communication and runs over the TCP connection. We can send the bi-direction messages using the websockets.
+With the help of those protocols, we can authenticate the information and sent or received by the third party users. But, encryption is necessary to secure channels.
+Let's understand the following example of network
+Example -
+
+import socket
+# creating a socket object
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# getting local machine name
+host = socket.gethostname()
+port = 8080
+# connection to hostname on the port.
+sock.connect((host, port))
+# Receive no more than 1024 bytes
+temp = sock.recv(1024)
+print("The client waits for connection")
+sock.close()
+
+Output:
+The client waits for connection
+
+Python Scapy and Dshell
+Let's understand the brief introduction Python Scapy and Dshell.
+Python Scapy
+A scapy is Python-based tool which analyze and manipulate network traffic. With the help of scapy, we can analyze packet manipulation. We can also capture and decode the packets of a wide number of protocols. The benefit of using scapy is to get the detailed report about network traffic to the investigator. The third-party tools such as OS fingerprint app can be also used in Scapy. Let's understand the following example.
+Example -
+
+#Imports scapy and GeoIP toolkit
+import scapy, GeoIP 
+from scapy import *
+
+geoIp = GeoIP.new(GeoIP.GEOIP_MEMORY_CACHE) 
+def locatePackage(pkg):
+    # extracts the source IP address
+    source = pkg.getlayer(IP).src
+    # extracts the destination IP address
+    destination = pkg.getlayer(IP).dst
+    # gets Country details of source
+    srcCountry = geoIp.country_code_by_addr(source) 
+    dstCountry = geoIp.country_code_by_addr(destination)
+    # gets country details of destination
+    print src+"("+sourceCountry+") >> "+destination+"("+destinationcountry+")\n"
+
+Output:
+source INDIA >> destination USA
+
+Python Dshell
+The Dshell is a Python-based network forensics analysis toolkit. It was developed by the US army research laboratory and released it open-source in 2014. It makes the forensics investigation very easy. Dshell provides the following decoders.
+
+reservedips - It is used to identify solutions for the DNS problems.
+rip-http - It extracts the files from HTTP traffic.
+large-flows - It is a decoder that represents the list net flows.
+Protocols - It identifies the non-standard protocols.
+dns - It extracts DNS-related queries.
+
+Python Searching
+Searching is the most important part of the forensics investigation. Nowadays, the good search is upon the investigator who is running the evidence. Keyword searching from the message is a pillar of the investigation. We can find the strong evidence with the help of a keyword.
+The experience and knowledge both are required to get the information from the deleted messages.
+Python provides the various built-in modules to support search operation. The investigator can find the result using the keywords such as "who", "what", "where", "when", "which", etc. Let's understand the following example.
+Example -
+
+# Searching a particular word from a message
+str1 = "This is an example for Computational forensics of gathering evidence!"
+str2 = "string"
+
+print(str1.find(str2))
+print(str1.find(str2, 10))
+print(str1.find(str2, 40))
+
+Output:
+11
+11
+-1
+
+Python Indexing
+Indexing is feature that the investigator can use to gather potential evidence from the files. The evidence can be restricted within the memory snapshot, a disk image, a file, or a network trace. It is very helpful to reduce time for time-consuming tasks like keyword searching. The indexing also used to locate the keywords in interactive searching phase. In the following example, we have explained indexing in Python.
+Example -
+
+list1 = [123, 'example', 'creative', 'indexing']
+
+print("Index example : ", list1.index('example'))
+print("Index for indexing : ", list1.index('indexing'))
+
+str1 = "This is a message for forensic investigation indexing"
+str2 = "message"
+
+print("Index of the character keyword found is ")
+print(str1.index(str2))
+
+Output:
+Index example :  1
+Index for indexing :  3
+Index of the character keyword found is 
+10
+
+Python Image Library
+The real meaning of forensics investigation is to extract the valuable information from the available resources. Getting all the relevant information from the resource is essential for the report. It helps us to derive appropriate result.
+
+Resource data can be either simple data structure such as databases or complex data structures such as JPEG image.
+Investigator can easily access the information from the simple data structure but extracting information from the complex data structure is tedious task.
+Python provides the Image library which is known as PIL. It is used to add image processing capabilities to out Python interpreter. It also support the file formats, graphics capabilities and also provides powerful image processing. Let's understand the following image to extracting data from images.
+We define the programming example to explain how it actually works.
+Step - 1: Suppose we have a following image where we need to extract the details.
+
+Step - 2: An image consists of various pixel values. The PIL library uses to extract the image details for gather evidence. Let's understand the following example.
+Example -
+
+from PIL import Image
+im = Image.open('penguin.jpeg', 'r')
+pix_val = list(im.getdata())
+pix_val_flat = [x for sets in pix_val for x in sets]
+print(pix_val_flat)
+
+Output:
+[255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255]
+
+The output is returned in the form of a list. It is a pixel value of the RGB combination that gives a better picture of what data is needed.
+Python Multiprocessing Support
+Forensics experts find difficulties to apply digital solutions to large digital evidence on the common crime. Most of the digital evidences are the single threaded that mean we can execute only one command at time. Let's see the brief introduction of multiprocessing.
+Multiprocessing
+Multiprocessing is an ability of the system that support more than one process. It enables the several programs to run concurrently. There are two types of the multiprocessing - symmetric and asymmetric processing.
+Let's understand the following example of multiprocessing.
+Example -
+
+import random
+import multiprocessing
+
+
+def list_append(count, id, out_list):
+    # count number of process at a time
+    for i in range(count):
+        out_list.append(random.random())
+
+    if __name__ == "__main__":
+        size = 810
+        procs = 2
+        jobs = []
+
+    for i in range(0, procs):
+        out_list = list()  # list of processes
+        process1 = multiprocessing.Process(
+            target=list_append, args=(size, i, out_list))
+
+        # appends the list of processes
+        jobs.append(process1)
+
+    # Calculate the random number of processes
+    for j in jobs:
+        j.start()  # initiate the process
+
+    # After the processes have finished execution
+    for j in jobs:
+        j.join()
+        print("List processing complete.")
+
+Output:
+List processing complete
+
+Mobile Forensics in Python
+Forensics investing is not only limited to the standard computer hardware such as hard disk, CPUs, etc. Hardware is followed with the help of techniques to analyze non-standard hardware or transient evidence.
+Nowadays, smartphones are widely used in digital investigation, but they still meant as non-standard. With the proper research of smartphones, we can extract photos, smartphones, and messages.
+The android smartphones uses the PIN, or alphanumeric password. The password can be between 4 and 16 digits/characters.
+In the following example, we will get through a lock screen to extract data. The smartphone password generally stores inside a file password.key in /data/system.
+Android stores a salted SHA1-hashsum and MD5-hashsum of this password. Let's see the following example.
+Example -
+
+public byte[] passwordToHash(String password) {
+  if (password == null) {
+     return null;
+  }
+  String algo = null;
+  byte[] hashed = null;
+  try {
+     byte[] saltedPassword = (password + getSalt()).getBytes();
+     byte[] sha1 = MessageDigest.getInstance(algo = "SHA-1").digest(saltedPassword);
+     byte[] md5 = MessageDigest.getInstance(algo = "MD5").digest(saltedPassword);
+     hashed = (toHex(sha1) + toHex(md5)).getBytes();
+  } catch (NoSuchAlgorithmException e) {
+     Log.w(TAG, "Failed to encode string because of missing algorithm: " + algo);
+  }
+  return hashed;
+}
+
+The above code is a sample code of crack smartphone password. The dictionary attack won't be affected to crack the password since hashed password is stored in a salt file. The salt file is a string of hexadecimal representation of a random integer of 64 bit. The Rooted smartphones or JTAG Adapter can access the salt file.
+Rooted Smartphones
+The file's dump /data/system/password.key is stored in SQLite database under the lock screen.password_salt. The Password is stored under settings.db.
+JTAG Adapter
+The JTAG stands for Joint Test Action Group which can be used to access the salt. Similarly, a Riff-Box or a JIG-Adapter can be used to access the sale files. We can find the position of the encrypted data using the obtained information from Riff-box. The rules are given below.
+
+Find the associated string "password_salt".
+The width of the salt file represents in the bytes. This is its length.
+This is the length which is actually searched to get the stored password/pin of the smartphones.
+
+Memory and Forensics
+Python forensics primarily focuses on the volatile memory with the help of Volatility which is a Python based framework.
+Volatile Memory
+Volatile memory is a type of memory that erased when the system's power is turned off or interrupted. In the simple words, if we are working on a document that has not been saved to the hard disk and suddenly the power goes off, we will lose our data.
+The volatile memory follows the same pattern as the other forensics investigations.
+
+First, it needs to be selected the target of the investing.
+Acquire the forensics data.
+Forensics Analysis
+
+The RAM dump is tool which used to analysis the gathered data from the RAM.
+YARA Rules
+YARA is a tool which used to examine the suspected files/ directories and match strings. It is based on the pattern matching implementation. It plays an important role in forensics analysis.
+Example -
+
+import operator
+import os
+import sys
+
+sys.path.insert(0, os.getcwd())
+import plyara.interp as interp
+
+# Plyara is a script that lexes and parses a file consisting of one more Yara
+
+if __name__ == '__main__':
+    file_to_analyze = sys.argv[1]
+Dictrules = interp.parseString(open(file_to_analyze).read())
+authors = {}
+imps = {}
+meta_keys = {}
+max_strings = []
+max_string_len = 0
+tags = {}
+rule_count = 0
+
+for rule in Dictrules:
+    rule_count += 1
+
+# Imports 
+if 'imports' in rule:
+    for imp in rule['imports']:
+        imp = imp.replace('"', '')
+
+if imp in imps:
+    imps[imp] += 1
+else:
+    imps[imp] = 1
+# Tags 
+if 'tags' in rule:
+    for tag in rule['tags']:
+        if tag in tags:
+           tags[tag] += 1
+        else:
+           tags[tag] = 1
+
+# Metadata 
+if 'metadata' in rule:
+    for key in rule['metadata']:
+       if key in meta_keys:
+         meta_keys[key] += 1
+       else:
+         meta_keys[key] = 1
+
+if key in ['Author', 'author']:
+    if rule['metadata'][key] in authors:
+         authors[rule['metadata'][key]] += 1
+else:
+authors[rule['metadata'][key]] = 1
+
+# Strings 
+if 'strings' in rule:
+    for strr in rule['strings']:
+if len(strr['value']) > max_string_len:
+    max_string_len = len(strr['value'])
+max_strings = [(rule['rule_name'], strr['name'], strr['value'])]
+elif len(strr['value']) == max_string_len:
+max_strings.append((rule['rule_name'], strr['key'], strr['value']))
+
+print("\nThe number of rules implemented" + str(rule_count))
+ordered_meta_keys = sorted(meta_keys.items(), key=operator.itemgetter(1),
+reverse = True)
+ordered_authors = sorted(authors.items(), key=operator.itemgetter(1),
+reverse = True)
+ordered_imps = sorted(imps.items(), key=operator.itemgetter(1), reverse=True)
+ordered_tags = sorted(tags.items(), key=operator.itemgetter(1), reverse=True)
+
+
+
+Next TopicBest Books to Learn Python
+
+
+
+
+← prev
+next →
+
+
+
+

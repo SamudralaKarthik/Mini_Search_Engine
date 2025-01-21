@@ -1,0 +1,194 @@
+
+
+
+
+next →
+← prev
+
+Validate the IP Address in Python
+In this tutorial, we will learn to validate the IP address in Python using several ways. It is useful when we write the OS level programs. If we are developing some web applications in Django or Flask, we may need to determine if a user's IP address is valid or not. IP address validation is essential to preventing fraud, providing targeted location services to users, and many more.
+Let's have a brief introduction to the IP address.
+What is IP (Internet Protocol) Address?
+IP stands for internet protocol; it is a unique address allocated to every computer connected to the internet. It refers to a set of rules that govern one part of how data is sent around the internet. It combines DNS resolution and information transfer from one computer to another.
+There are two versions of IP addresses mainly - IPv4 and IPv6.
+IPv4 vs IPv6
+The IPv4 address that we are familiar probably. An IPv4 consists of four numbers (each between 0 and 255) separated by the periods. The IP address format is a 32-bit numeric address written as four decimal numbers called (octal). It provides the combination for the 4.3 billion unique addresses.
+Example -
+
+32.253.431.175
+
+IPv6
+It is a newer version and slightly different from the previous version. It looks like as below.
+
+3002:0bd6:0000:0000:0000:ee00:0033:6778
+
+It uses the combination of alphanumeric characters. It has the number of available spaces that an IPv4 address consists of thrice. It is a 128-bit address space that combines the 2128 unique addresses, whereas IPv4 allows for 4.3 billion unique space addresses. That's 1028 times as many addresses as IPv4.
+Why do we need IPv6?
+Even though IPv4 is known as "version 4", it is the first version of the IP ever created and has been around since the invention of the internet. At that time, engineers could not have imagined that 4.3 billion IP addresses won't be enough to fulfill the requirements. In 2022, about 4.29 billion addresses were already used by various smartphones, laptops, and tablets.
+How to Validate the IP address in Python
+In this section, we will see various ways to validate the IP address.
+Method - 1 Using the count() method
+Let's understand the following example
+Example -
+
+def validate_ip(s):
+     
+    # check number of periods
+    if s.count('.') != 3:
+        return 'Invalid Ip address'
+ 
+    ip_list = list(map(str, s.split('.')))
+ 
+    # check range of each number between periods
+    for element in ip_list:
+        if int(element) < 0 or int(element) > 255 or (element[0]=='0' and len(element)!=1):
+            return 'Invalid IP address'
+ 
+    return 'Valid IP address'
+ 
+ 
+print(validate_ip('255.1.2.2'))
+
+Output:
+Valid IP Address
+
+Explanation
+In the above code, we have used the count() method to count . (dot) separator. If the count of separator is less than 3, the entered IP address is invalid. Then we check the range of each number between the periods. If the condition is satisfied means entered IP is valid.
+It is an easy example of validating the IP address.
+Method - 2: Using a set()
+Let's understand the following example -
+Example -
+
+def validate_ip(s):
+
+    # initialize count variable
+    count = 0
+
+    # check if period is present
+    for i in range(0, len(s)):
+        if(s[i] == '.'):
+            count = count+1
+    if(count != 3):
+        return 0
+
+    # check the range of numbers between periods
+    set_val= set()
+    for i in range(0, 256):
+        set_val.add(str(i))
+    count = 0
+    temp = ""
+    for i in range(0, len(s)):
+        if(s[i] != '.'):
+            temp = temp+s[i]
+        else:
+            if(temp in set_val):
+                count = count+1
+            temp = ""
+    if(temp in set_val):
+        count = count+1
+
+    # verifying all conditions
+    if(count == 4):
+        return 'Valid Ip address'
+    else:
+        return 'Invalid Ip address'
+
+print(validate_ip('110.234.52.124'))
+
+Output:
+Valid Ip address
+
+Explanation -
+In the code, we have initialized the count variable that counts the number of . dot from the IP address. If the count of the separator is less than 3, the entered IP address is invalid, and if the condition is true, initialize the set_val as a set. In the set_val, we added the numbers as string range between 0 to 256. After that, we initialized the count variable again and temp as an empty string. The for loop iterated the and checked if the string is not equal to the dot; if a condition is True, then add that string to the temp. Otherwise, we check if the string is already present in the set_val; if true, increase the count by one and clear the temp.
+Then we verify the count; if it is equal to four, we have a valid IP address.
+Method - 3: Using ipadress() Module
+Python comes with a handy module known as ipaddress that can be used to validate IP addresses and perform some basic arithmetic operations on IP addresses. It doesn't evaluate IP address explicitly that an address is a valid IP address, but we need to use some logic to do it.
+It provides the most robust and secure way to determine the valid IP address. It supports both IPv4 and IPv6 addresses.
+To use this module, we need to import it into the Python code.
+Let's understand the following example.
+Example -
+
+import ipaddress
+def validate_ip(ip_str):
+   try:
+       ip_obj = ipaddress.ip_address(ip_str)
+       print(f"The IP address {ip_obj} is valid")
+   except ValueError:
+       print(f"The IP address {ip_str} is not valid")
+
+validate_ip("127.0.0.2.4")
+validate_ip("127.0.0.0")
+
+Output:
+The IP address '127.0.0.2.4' is not valid
+The IP address 127.0.0.0 is valid
+
+The advantage of using this module is that it can validate the IPv4 and IPv6 addresses.
+
+validate_ip("2001:0db8:75a2:0000:0000:8a2e:0340:5625")
+
+Output:
+The IP address 2001:db8:75a2::8a2e:340:5625 is valid
+
+Validate IP using the Regex
+In this method, we will use the custom regex to check the shape of the provided IP string. Python provides the re library, which is used to parse and match Regex.
+This method is not more efficient and robust than the ipaddress module; it takes more lines of the code and checks that the string is not only the right shape but the value in it are between 0 and 255. We must also write the two logics to check IPv4 and IPv6 addresses.
+To validate the IPv4, we create the Regex string that matches an IPv4 address. Let's understand the following Regex.
+"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+Let's understand its components one by one.
+
+[0-9] - It indicates that we are searching for a numeric character between 0 and 9.
+{1,3} - It indicates that we are looking for as few as one or as many as three instances of the previous character set.
+\. - It tells the parser to check . character. In Regex, we need to use \ escape to specify that we are looking for a special character.
+
+Those three components make up one byte of an IP address (For example 255.) Now we repeat these components four times.
+We need to import the re module to use Regex in Python. Next, we will use the match() function to check input against the Regular expression.
+Example -
+
+import re
+match = re.match(r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", "127.0.0.1")
+print(match)
+
+Output:
+
+
+Now let's implement the complete validation function.
+Example -
+
+import re
+def validate_ip(ip_address):
+    match = re.match(r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", ip_address)
+  
+    if not bool(match):
+       print(f"The IP address {ip_address} is not valid")
+       return False
+
+    bytes = ip_address.split(".")
+  
+    for ip_byte in bytes:
+       if int(ip_byte) < 0 or int(ip_byte) > 255:
+           print(f"The IP address {ip_address} is not valid")
+           return False
+    print(f"The IP address {ip_address} is valid")
+    return True
+
+validate_ip('127.0.0.1')
+
+Output:
+The IP address 127.0.0.1 is valid
+
+Conclusion
+In this tutorial, we have learnt about the various ways to validate the IP addresses, including the built-in module ipaddress. We learned how IPv4 is different from the IPv6 address and why we require the IPv6 addresses. You can easily find your current IP address on your system. Open the device setting and then open System Preference > Network > Select either WiFi or Ethernet, depending upon your connection.
+
+
+Next TopicWrite a Program to Print the Diagonal Elements of the Given 2D Matrix
+
+
+
+
+← prev
+next →
+
+
+
+

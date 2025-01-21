@@ -1,0 +1,88 @@
+
+
+
+
+next →
+← prev
+
+Selection Sort in Python
+In this tutorial, we will implement the selection sort algorithm in Python. It is quite straightforward algorithm using the less swapping.
+In this algorithm, we select the smallest element from an unsorted array in each pass and swap with the beginning of the unsorted array. This process will continue until all the elements are placed at right place. It is simple and an in-place comparison sorting algorithm.
+Working of Selection Sort
+The following are the steps to explain the working of the Selection sort in Python.
+Let's take an unsorted array to apply the selection sort algorithm.
+[30, 10, 12, 8, 15, 1]
+Step - 1: Get the length of the array.
+length = len(array) → 6
+Step - 2: First, we set the first element as minimum element.
+Step - 3: Now compare the minimum with the second element. If the second element is smaller than the first, we assign it as a minimum.
+Again we compare the second element to the third and if the third element is smaller than second, assign it as minimum. This process goes on until we find the last element.
+Step - 4: After each iteration, minimum element is swapped in front of the unsorted array.
+Step - 5: The second to third steps are repeated until we get the sorted array.
+Selection Sort Algorithm
+The selection sort algorithm as follows.
+Algorithm
+
+selection_sort(array)
+  repeat (0, length - 1) times
+  set the first unsorted element as the minimum
+  for each of the unsorted elements
+    if element < currentMinimum
+      set element as new minimum
+  swap minimum with first unsorted position
+end selection_sort
+
+Selection Sort Program using Python
+The following code snippet shows the selection sort algorithm implementation using Python.
+Code -
+
+def selection_sort(array):
+    length = len(array)
+    
+    for i in range(length-1):
+        minIndex = i
+        
+        for j in range(i+1, length):
+            if array[j]<array[minIndex]:
+                minIndex = j
+                
+        array[i], array[minIndex] = array[minIndex], array[i]
+        
+        
+    return array    
+array = [21,6,9,33,3]
+
+print("The sorted array is: ", selection_sort(array))
+
+Output:
+The sorted array is:  [3, 6, 9, 21, 33]
+
+Explanation -
+Let's understand the above code -
+
+First, we define the selection_sort() function that takes array as an argument.
+In the function, we get the length of the array which used to determine the number of passes to be made comparing values.
+As we can see that, we use two loops - outer and inner loop. The outer loop uses to iterate through the values of the list. This loop will iterate to 0 to (length-1). So the first iteration will be perform (5-1) or 4 times. In each iteration, the value of the variable i is assigned to the variable
+The inner loop uses to compare the each value of right-side element to the other value on the leftmost element. So the second loop starts its iteration from i+1. It will only pick the value that is unsorted.
+Find the minimum element in the unsorted list and update the minIndex position.
+Place the value at the beginning of the array.
+Once the iteration is completed, the sorted array is returned.
+At last we create an unsorted array and pass to the selection_sort() It prints the sorted array.
+
+Time Complexity of Selection Sort
+Time complexity is an essential in term of how much time an algorithm take to sort it. In the selection sort, there are two loops. The outer loop runs for the n times (n is a total number of element).
+The inner loop is also executed for n times. It compares the rest of the value to outer loop value. So, there is n*n times of execution. Hence the time complexity of merge sort algorithm is O(n2).
+The time complexity can be categorized into three categories.
+
+
+Next TopicThe info() Function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

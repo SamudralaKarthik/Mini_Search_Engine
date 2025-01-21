@@ -1,0 +1,88 @@
+
+
+
+
+next →
+← prev
+
+re.search() vs re.findall() in Python Regex
+The regular expression, also known as rational expression, is the sequence of characters used for defining the search pattern. It mostly uses for pattern matching with strings or string matching such as find and replace operations. Regular expressions are the generalized way for matching patterns with sequences of characters.
+Module Regular Expressions (RE) is used for specifying the set of strings that matches the pattern. For understanding the RE analogy, the MetaCharacters are used in functions of the re module.
+There are 14 MetaCharacters, and we will discuss them as they follow into the functions:
+
+\ :  It is used for dropping the special meaning of character following it 
+[] : It is used for representing a character class
+^ : It is used for matching the beginning
+$ :  It is used for matching the end
+. : It is used for matching any character except newline
+? : It is used for matching zero or one occurrence.
+| : It means OR. This is used for matching with any of the characters separated by it.
+* :  It is used for any number of occurrences (including 0 occurrences)
++ :  It is used for one or more occurrences
+{} : It is used for indicating the number of occurrences of the preceding RE to match.
+() : It is used for enclosing the group of REs.
+
+The re.search() method
+The re.search() method is used for returning None ( in case the pattern does not match), or re.MatchObject which contains all the information about the matching parts of the string. This method stops functioning after the first match, so this is perfectly suited for testing the Regular expression more than extracting the data.
+Example:
+
+import re   
+# We will use the regular expression for matching the string of data 
+# in the form of Weekday's name followed by day number 
+regex = r"([A-Za-z]+) (\d+)"   
+match = re.search(regex, "Day and Date of Today is Tuesday 12")     
+if match != None: 
+    print ("The String match at index % s, % s" % (match.start(), match.end()))
+    print ("Full match of Pattern: % s" % (match.group(0)))    
+    print ("The Weekday of Today is: % s" % (match.group(1)))    
+    print ("The Date of Today is: % s" % (match.group(2)))   
+else: 
+    print ("The pattern of Python regex does not match with the string of Data imported.")
+
+Output:
+The String match at index 25, 35
+Full match of Pattern: Tuesday 12
+The Weekday of Today is: Tuesday
+The Date of Today is: 12
+
+Explanation:
+In the above code, we have imported the re module  and used the regular expression for matching the string of data with the pattern, that is Weekday and Date of Today.
+The expression "([A-Za-z]+) (\d+)" should match the string of data imported. It will then print the [25, 35] as it matches the string at the 25th index and ends as the 35th index number. We have used the group() function for getting all the matches and captured groups for getting the required output in pattern. These groups contain the matched values. Such as:
+match.group(0) will always return the fully matched string of data,
+match.group(1) and match.group(2) will return the capture groups in the order of left to right in the input string. The (match.group() also means match.group(0)). If the data string matches the pattern, it will print in the right sequence; otherwise, it will go for else statement.
+The re.findall() method
+The re.findall() method is used for getting all the non-overlapping matches of the pattern in the string of data as return, in the form of the list of strings. The string of data will be scanned from left to right, and its matches will be returned in the same order as found.
+Example:
+
+import re    
+# The string of text where regular expression will be searched. 
+string_1 = """Here are some student's ID, student A: 676
+            student B: 564
+            student C: 567
+            student D: 112
+            student E: 234"""    
+# Setting the regular expression for finding digits in the string. 
+regex_1 = "(\d+)"                
+match_1 = re.findall(regex_1, string_1) 
+print(match_1)
+
+Output:
+['676', '564', '567', '112', '234']
+
+Explanation:
+In the above code, we first import the string of text which contains some digits. Then we set the regular expression "(\d+)" for matching the string with the pattern. The match will be non-overlapping data in the text string. After importing the re.findall() method, we get the non-overlapping matched data of the string as output.
+Conclusion
+In this tutorial, we have discussed the difference between the re.search() method and the re.findall() method in Python regex, with examples.
+
+
+Next TopicHow to install statsmodels in Python
+
+
+
+
+← prev
+next →
+
+
+
+

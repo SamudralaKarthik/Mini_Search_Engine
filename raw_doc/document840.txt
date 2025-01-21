@@ -1,0 +1,120 @@
+
+
+
+
+next →
+← prev
+
+How to Print a List Without Brackets in Python?
+This tutorial explains how to print a Python list without using square brackets. We're going to assume that you know the fundamentals of lists. There are several ways to print lists that remove square brackets, which are thoroughly detailed below.
+3 Python Techniques for Printing a List Without Brackets
+In Python programming language, there are three ways to print a list without brackets.
+
+Use Python for loop.
+Use * asterisk operator
+Use Python join() function
+
+Using the Python for Loop to Print a List Without Brackets
+Printing the list's components using a for loop is among the most straightforward solutions immediately coming to mind. Print each list element, separated by commas, using the Python for loop to iterate through the list elements one at a time. For instance:
+Code
+
+# Python program to print a Python list without brackets
+
+# Creating a list
+numbers = ["1", "2", "3", "4", "5"]
+
+# Using a for loop to print the list elements
+for i in numbers:
+
+  print(i, end=" ")
+
+Output:
+1 2 3 4 5
+
+The Python for loop iterates through the list and prints items from lists during each cycle in the program above. Each element is separated from the others by the end argument. You can also use commas or another character to split all items by providing it to the end parameter.
+Using Asterisk '*' to Print a List Without Brackets
+List items can be unpacked using the asterisk(*) operator. The components of iterable objects are unpacked using this Python operator. We can use this operator to extract list elements and output them without brackets, as a Python list is also an iterable object. For instance
+Code
+
+# Python program to print a Python list without brackets using the * operator
+
+# Creating a list
+numbers = [1, 2, 3, 4, 5]
+
+# Using the * operator
+print(*numbers, sep = ' ')
+
+Output:
+1 2 3 4 5
+
+All integers, floating-point numbers, and string data types can be used using this function. By providing it to the "sep", you may add any character between the elements. For instance:
+Code
+
+# Python program to print a Python list without brackets using the * operator
+
+# Creating a list
+numbers = [1, 2, 3, 4, 5]
+
+# Using the * operator
+print(*numbers, sep = ', ')
+
+Output:
+1, 2, 3, 4, 5
+
+Using the Join() Function to Print the List Without Brackets
+The join() function accepts an iterable data type as an input, such as a Python list, tuple, string, set, or dictionary. It produces a string in which each member is connected to the other by the character supplied to the function. For instance: Let's say you would like to print the list of elements that have numbers as their elements. We can use the join function to link these numbers with commas ',' between these elements.
+Code
+
+# Python program to print a Python list without brackets using the join() function
+
+# Creating a list
+numbers = ["1", "2", "3", "4", "5"]
+
+# Using the join() function
+print(', '.join(numbers))
+
+Output:
+1, 2, 3, 4, 5
+
+Similarly, if we substitute a space for the comma in the previous case, the program above will produce numbers without commas between them.
+Code
+
+# Python program to print a Python list without brackets using the join() function
+
+# Creating a list
+numbers = ["1", "2", "3", "4", "5"]
+
+# Using the join() function
+print(' '.join(numbers))
+
+Output:
+1 2 3 4 5
+
+We can use just a list of strings with this technique; any integer or float elements will cause it to fail. For lists that contain numbers, we can use the map() method to turn the list elements into a string before using the join() method. A method and an iterable are the two main arguments for the map() method. It applies the provided function specified in the first parameter to each element of the iterable.
+Code
+
+# Python program to print a Python list without brackets using the join() and map() function
+
+# Creating a list
+numbers = [1, 2, 3, 4, 5]
+
+# Using the join() function
+print(', '.join(map(str, numbers)))
+
+Output:
+1, 2, 3, 4, 5
+
+The map() method is used in the instance above to typecast each item in our list into a string datatype, which is later combined with commas.
+
+
+Next TopicHow to Rename Column Names in Python
+
+
+
+
+← prev
+next →
+
+
+
+

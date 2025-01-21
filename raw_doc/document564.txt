@@ -1,0 +1,184 @@
+
+
+
+
+next →
+← prev
+
+Python urllib Library | Python's urllib.request for HTTP Requests
+In this tutorial, we will learn about the Python urllib.request and make the GET request to the sample URL. We will also make the GET request to a sample REST API for some JSON data. We will also learn about the POST request using the urllib.request library. The urllib library plays an essential role in opening the URL using Python code. This library has many features besides opening URLs. Later we explore its important features. Let's have a brief introduction to the urllib library.
+Python urllib Module
+The Python urllib module allows us to access the website via Python code. This facility of urllib provides the flexibility to run GET, POST, and PUT methods and mock the JSON data in our Python code. We can download data, access websites, parse data, and modify the headers using the urllib library. There are two versions of urllib - urllib2 and urllib3. The urllib2 is used in Python 2, and urllib 3 is used in Python 3. The urllib3 has some advanced features.
+Few websites don't allow programs to invade their website's data and put the load on their servers. When they find such programs, they may sometimes choose to block the program or serve the different data that a regular user might use. However, we can overcome such situations with simple code. We only need to modify the user-agent, which is included in the request header that we send in.
+For those who don't know, headers are the bits of data that share to the server so that server can know about us. It is where the Python version informs the websites that we are trying to access the website with the urllib and Python versions.
+The urllib module consists of several modules for working with the URLs. These are given below -
+
+The urllib.request for opening and reading.
+The urllib.parse for parsing URLs
+The urllib.error for the exceptions raised
+The urllib.robotparser for parsing robot.txt files
+
+Most of the time, the urllib package comes with the Python installation if it is not in your environment. We can download it using the below command.
+
+pip install urllib
+
+It will install the urllib in your environment.
+Basic of HTTP Messages
+To understand the urllib.request in a better way, we need to know about the HTTP message. An HTTP message can be known as text, transmitted as a stream of bytes that follow the guideline specified by RFC 7230. A decoded HTTP message can be simple as below.
+
+GET / HTTP/1.1
+Host: www.google.com
+
+A GET request specifies at the root (/) using the HTTP/1.1 protocol. The HTTP method has two main parts -metadata and body. The above message has all the metadata but nobody. The response also consists of two parts -
+
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=ISO-8859-1
+Server: gws
+(... other headers ...)
+
+<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage"
+
+As we can see, the response starts with a status code 200 OK. It is a metadata of the response. We have shown the standard HTTP message, but some may break these rules or follows the older specification. We may get many key-value pair data, such as representing all the response headers.
+The urllib.request
+Let's understand the following example of urllib.request.OpenURL() method. We need to import the urllib3 module and assign the opening of the URL to a variable, where we can use the read() command to read the data.
+When we request with the urllib.request.urlopen(), it returns HTTPResponse object. We can print the HTTPResponse object using the dir() function to see different methods and properties.
+Example -
+
+from urllib.request import urlopen
+with urlopen("https://www.google.com") as response:
+    print(dir(response))
+
+Output:
+['__abstractmethods__', '__class__', '__del__', '__delattr__', '__dict__', '__dir__', '__doc__', '__enter__', '__eq__', '__exit__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__next__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '_abc_impl', '_checkClosed', '_checkReadable', '_checkSeekable', '_checkWritable', '_check_close', '_close_conn', '_get_chunk_left', '_method', '_peek_chunked', '_read1_chunked', '_read_and_discard_trailer', '_read_next_chunk_size', '_read_status', '_readall_chunked', '_readinto_chunked', '_safe_read', '_safe_readinto', 'begin', 'chunk_left', 'chunked', 'close', 'closed', 'code', 'debuglevel', 'detach', 'fileno', 'flush', 'fp', 'getcode', 'getheader', 'getheaders', 'geturl', 'headers', 'info', 'isatty', 'isclosed', 'length', 'msg', 'peek', 'read', 'read1', 'readable', 'readinto', 'readinto1', 'readline', 'readlines', 'reason', 'seek', 'seekable', 'status', 'tell', 'truncate', 'url', 'version', 'will_close', 'writable', 'write', 'writelines']
+
+Example -
+
+import urllib.request
+
+request_url = urllib.request.urlopen('https://www.google.com/')
+print(request_url.read())
+
+Output:
+b'<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="en-IN"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta content="/images/branding/googleg/1x/googleg_standard_color_128dp.png" itemprop="image"><title>Google</title><script nonce="miKBzQYvtiMON4gUmZ+2qA==">(function(){window.google={kEI:\'lj1QYuXdLNOU-AaAz5XIDg\',kEXPI:\'0,1302536,56873,1710,4348,207,4804,2316,383,246,5,1354,4013,1238,1122515,1197791,610,380090,16114,19398,9286,17572,4859,1361,9290,3027,17582,4020,978,13228,3847,4192,6430,22112,629,5081,1593,1279,2742,149,1103,841,6296,3514,606,2023,1777,520,14670,3227,2845,7,17450,16320,1851,2614,13142,3,346,230,1014,1,5444,149,11325,2650,4,1528,2304,6463,576,22023,3050,2658,7357,30,13628,13795,7428,5800,2557,4094,4052,3,3541,1,16807,22235,2,3110,2,14022,1931,784,255,4550,743,5853,10463,1160,4192,1487,1020,2381,2718,18233,28,2,2,5,7754,4567,6259,3008,3,3712,2775,13920,830,422,5835,11862,3105,1539,2794,8,4669,1413,1394,445,2,2,1,6395,4561,10491,2378,701,252,1407,10,1,8591,113,5011,5,1453,637,162,2,460,2,430,586,969,593,5214,2215,2343,1866,1563,4987,791,6071,2,1,5829,227,161,983,3110,773,1217,2780,933,504,1259,957,749,6,601,23,31,748,100,1392,2738,92,2552,106,197,163,1315,1133,316,364,810,3,333,233,1586,229,81,967,2,440,357,298,258,1863,400,1698,417,4,881,219,20,396,2,397,481,75,5444944,1269,5994875,651,2801216,882,444,3,1877,1,2562,1,748,141,795,563,1,4265,1,1,2,1331,4142,2609,155,17,13,72,139,4,2,20,2,169,13,19,46,5,39,96,548,29,2,2,1,2,1,2,2,7,4,1,2,2,2,2,2,2,353,513,186,1,1,158,3,2,2,2,2,2,4,2,3,3,269,1601,141,1002,98,214,133,10,9,9,2,10,3,1,11,10,6,239
+
+The above code returns the source code of the www.google.com; we can clean up the results using the regular expression. The webpages are made using HTML, CSS, and JavaScript, but our program only extracts the text usually. Hence the regular expression becomes useful; we will use it in the next section.
+There are two methods of data transfer - GET and POST. The GET method is used to fetch the data, and the POST method is used to send data over the server, same as we post some data and get a request based on the post. We also make the request using the GET and POST from/to a URL.
+Now let's see the uses of urllib.parse.
+The urllib.parse
+The urllib.parse helps to define the function to manipulate URLs and their components parts to create or destroy them. There is a way to hard code the value and pass it to the URL, but we can use the urllib to do it. Let's understand the following example.
+Example -
+
+# used to parse values into the url
+import urllib.parse
+
+url = 'https://www.google.com/search'
+values = {'query' : 'python tutorial'}
+
+In the above code, we defined the values to use with the POST method to send with the URL. To do so, first we need to encode the all of the values. And we encode to utf-8 bytes. We encoded dictionary request. Then, we open the URL using the URL with the request. Finally, we read that response with the read().
+Example -
+
+data = urllib.parse.urlencode(values)
+data = data.encode('utf-8') # data should be bytes
+req = urllib.request.Request(url, data)
+resp = urllib.request.urlopen(req)
+respData = resp.read()
+
+print(respData)
+
+Output:
+urllib.error.HTTPError: HTTP Error 405: Method Not Allowed
+
+When we run the above code, Google will return the 405, method not allowed. Google doesn't allow sending the request using the Python script. We can use another website with the search bar to send a request using Python.
+Sometimes websites don't like to be visited by spammers or robots, or they might treat them differently. In the past time, most the website blocks the program. Wikipedia used to outright block programs, but now they serve a page like Google.
+We send a header each time we request the URL, which is basic information about us. There is a user-agent value within the header that defines the browser accessing the website's server. And that's how Google analytics determines what browser we are using.
+By default, the user-agent with urllib 3.4 if we are using the Python 3.4 version. It is either unknown to the websites; otherwise, they will block it entirely.
+Example -
+
+import urllib.parse
+import urllib.request
+
+try:
+    url = 'https://www.google.com/search?q=python-tutorial'
+
+    # now, with the below headers, we defined ourselves as a simpleton who is
+    # still using internet explorer.
+    headers = {}
+    headers['User-Agent'] = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.27 Safari/537.17"
+    request = urllib.request.Request(url, headers = headers)
+    resp = urllib.request.urlopen(request)
+    respData = resp.read()
+
+    saveFile = open('ModifyHeaders.txt','w')
+    saveFile.write(str(respData))
+    saveFile.close()
+except Exception as e:
+    print(str(e))
+
+We have modified our headers and run the same thing. We make the request, and our response is indeed different.
+Common urllib.request Troubles
+The program can throw an error while running the urllib.request program. In this section, we will deal with a couple of the most common errors when getting started.
+Before understanding the specific errors, we will learn how to implement error handling.
+Implement Error Handling
+Web development is plagued with errors, and it can take lots of time to resolve. We will define how to handle HTTP, URL, and timeout errors when using urllib.request.
+HTTP status code is attached with every response in the status line. If we can read a status code in response, the request reaches its target. There are predefined status codes that are used with the response. For example - 200 and 201 represent successful requests. If the request code is 404 and 405, it means there is something wrong.
+There can also be a connection error, or the URL provided isn't correct. In this case, the urllib.request will raise an error.
+Finally, the server takes lots of time to respond. Maybe the network connection is slow, the server is down, or the server is programmed to ignore specific requests. To overcome this, we can pass a timeout argument to the urlopen() function to raise a TimeoutError after a certain time. We need to catch them first using the try….expect clause to solve these problems.
+Example -
+
+from urllib.error import HTTPError, URLError
+from urllib.request import urlopen
+
+def request_func(url):
+    try:
+        with urlopen(url, timeout=10) as response:
+            print(response.status)
+            return response.read(), response
+    except HTTPError as error:
+        print(error.status, error.reason)
+    except URLError as error:
+        print(error.reason)
+    except TimeoutError:
+        print("Request timed out")
+
+The request_func() function takes a string as an argument, which will try to fetch the request from the URL with the urllib.request. If URL is not correct, it will catch the URLError. It also catches HTTPError's object that's raised an error. If there is no error, it will print the status and return the body and response.
+As we can observe, we have called the urlopen() function with the timeout parameter, which will reason a TimeoutError to be raised after the seconds specified. The program will wait for ten seconds, which is a good amount of time to wait for a response.
+Handling 403 Error
+The 403 status means that server understood the request but won't fulfill it. It is a common error when we work with web-scraping. As discussed above, this error can be solved using the User-Agent header. Two mainly related 4xx codes are sometimes confused.
+
+401 Unauthorized
+403 Forbidden
+
+401 Error - It is returned by the server if the user isn't identified or logged in and must do something to gain access, like log in register.
+403 Error - It is returned by the server if the user is identified but doesn't have access to the resource.
+Luckily we can handle such an error by modifying the User-Agent string on the web, including a user agent database.
+The Request Package Ecosystem
+This section will clarify the package ecosystem around HTTP requests with Python. There are multiple packages with no clear standard. We must be familiar with the correct package for our requirements.
+What are urllib2 and urllib3?
+The urllib library is split into parts. If we look back to an early version of Python 1.2 when the original urllib was introduced, around version 1.6, a revamped urllib2 was added. But when Python 3 was introduced, the original urllib was deprecated, and urllib2 dropped the 2, taking on the original urllib name.
+
+urllib.error
+urllib.parse
+urllib.request
+urllib.response
+urllib.robotparser
+
+The urllib3 is a third-party library developed while urllib2 was still around. It is an independently maintained library.
+When Should Use requests over urllib.requests
+It is important to know when to use request or urllib.request library. The urllib.request is meant to be a low-level library that reveals many details about the working of HTTP requests.
+The request library is highly recommended when users interact with the many different REST APIs. The official documentation of the request library claims that "built for human beings" and has successfully created an intuitive, secure, and straightforward API around HTTP. The request library allows us to do complex tasks easily, especially when it comes to character encoding. With the urllib library, we have to be aware of encoding and take steps to ensure an error-free experience.
+If you are more focused on learning about the more standard Python and how to deal with the HTTP request, the urllib.request is the best way to start. You could even go further and use the very low-level http modules.
+Conclusion
+We have discussed the urllib library in detail and learned how to make a request using the Python script. We can use this built-in module in our project, keeping them dependency-free for longer. This tutorial explored the urllib library and its lower-level module, such as urllib.request and also explained how to deal with the common error and how to resolve them.
+
+
+Next TopicFiona module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

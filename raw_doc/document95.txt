@@ -1,0 +1,53 @@
+
+
+
+
+next →
+← prev
+
+How to create a virtual environment in Python
+Python application will often use the packages and additional modules that don't come as a part of a standard library. Sometimes applications may require the specific version of the library to perform a specific task or fixed a bug.
+The importance of creating virtual environment
+Suppose we are developing two applications that require an older version of the library, and other applications require a new version of libraries in the same Python installation. Sometimes, it leads to a problem.
+In the other words, one Python installation may not able to meet the requirements of every application. The requirement of the various applications may create conflict with each other. For example, - If application A requires version 1.0 and another application requires version 2.0, so they will create conflict, and the result is one application unable to run.
+To resolve this conflicting requirement, Python offers to create the virtual environment. Application A has its environment with version 1.0. Application B has its environment with version 2.0, so if we want to upgrade application B with version 3.0, this will not affect application A's environment.
+Creating a Virtual Environment
+The module venv is used to create and manage a virtual environment. It is available with the most recent version of Python. We can decide the location to create a virtual environment and run the venv module as a script with the directory path. Type the following command in your command line and hit the enter button.
+
+python3 -m venv new-env
+
+The above command will create the new-env directory; it also creates the directory inside the newly created virtual environment new-env, containing a new copy of a Python interpreter.
+Note: We can write simply python instead of python3, because it is used only if we have installed various versions of Python.
+All virtual environments are stored in the common directory location venv folder. Once we create the virtual environment, we have to activate it by typing the following command.
+On Window, Press enter after typing
+
+new-env\Scripts\activate.bat
+
+On UNIX or MacOs, run:
+
+source new-env/bin/activate
+
+After activating the virtual environment, it will change the shell prompt's to tell what virtual environment we are using.
+Managing Packages Using pip
+We can install, upgrade, and delete the libraries in activated virtual environment using the Python package manager called pip. For example -
+
+(new-env) $ pip install requests==2.6.0
+Collecting requests==2.6.0
+  Using cached requests-2.6.0-py2.py3-none-any.whl
+Installing collected packages: requests
+Successfully installed requests-2.6.0
+
+If we re-run the previous command, it will display the required version is already installed.
+
+
+Next TopicHow to declare a variable in Python
+
+
+
+
+← prev
+next →
+
+
+
+

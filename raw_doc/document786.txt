@@ -1,0 +1,138 @@
+
+
+
+
+next →
+← prev
+
+Function Annotations in Python
+Function annotations are some random expressions which are written with the functions, and they are evaluated at compile time. They do not exist at run time, and there is no meaning of these expressions to python. They are used and interpreted by a third party or external python libraries.
+As we know, function annotations are used by third-party libraries because different libraries have different benefits from these function annotations. For example:
+
+ Function annotations with strings can be used as messages at compile time to describe the functionality of different methods, classes and variables.
+ [def fxn(a:"int", b:"float"=5.0) -> "int"]
+
+In the above example, these annotations can be used to define the data types of the parameters because python supports dynamic type checking, and there is no way to check the return type or the data type. Libraries like mypy use these kinds of annotations.
+Syntax for the function annotations
+Function annotations can be written in many ways in a function like as follows:
+1. Function annotation for simple parameters:
+
+def functionName(argumentName : expression):
+
+In this way, we can use colons after the argument name and then we can write the expression after the colon. The expression can be anything like any data type of the argument or any string which contains any message.
+For Example:
+
+def fxn(var1 : expression1,var2:expression2:96):
+
+2. Function annotations for excess parameters:
+If we want an arbitrary number of arguments as function parameters with the same expression, then we can use this way of function annotation.
+For Example:
+
+def fxn(*arg1: expression1,**arg2:expression2):
+
+3. Function annotation for the nested parameters:
+If we want to pass the list in the function call as an argument, then we have to apply function annotations on individual elements separately.
+For Example:
+
+def fxn((var1:expression,var2:expression),(var3:expression,var4:expression)):
+
+4. Function annotations for the return type:
+Annotation of the return type is done by the '->' operator.
+For Example:
+
+def fxn(var1:expression) -> expression2:
+
+We can understand the function annotations in Python by the following example:
+Example:
+
+# program to print Fibonacci series using function annotations
+def fibonacci(n:'int', res:'list'=[])-> 'list':
+	if n == 0:
+		return res
+	else:
+		if len(res)< 2:
+			res.append(1)
+			fibonacci(n-1, res)
+		else:
+			last = res[-1]
+			second_last = res[-2]
+			res.append(last + second_last)
+			fibonacci(n-1, res)
+		return res
+print(fibonacci(8))
+
+Output:
+
+Explanation:
+In the above code, we have the function which is used to calculate the starting n Fibonacci numbers. It takes n and an empty list as an argument and returns the list which contains the answer.
+In the function description, we have defined that n will be of type integer and the res variable will be of type list. With function annotation, we also defined that the return type would be a list.
+Note: we can access all the function annotations we used in the function by various methods:
+1. Using '__annotations__':
+The attribute __annotations__ is used to get all the annotations in a function. It returns the dictionary, which contains the pairs of keys and values where the key will be the arguments and the value will be their individual expression.
+Example 2:
+
+# Python program to print Fibonacci series using function annotations and to access the annotations
+def fibonacci(n:'int', res:'list'=[])-> 'list':
+	if n == 0:
+		return res
+	else:
+		if len(res)< 2:
+			res.append(1)
+			fibonacci(n-1, res)
+		else:
+			last = res[-1]
+			second_last = res[-2]
+			res.append(last + second_last)
+			fibonacci(n-1, res)
+		return res
+print(fibonacci(8))
+print(fibonacci.__annotations__)
+
+Output:
+
+Explanation:
+In the above code, we have used the function annotations in the function, which returns the list of starting n Fibonacci numbers.
+Also, we printed the function annotation using the '__annotations__' attribute, and we got the result in the form of a dictionary.
+2. Using standard python module:
+In Python, there is a standard module named pydoc which can be used to get the function annotations.
+pydoc.help() function provides a shell environment where we can get any information related to any file, and we can easily get any function's annotations also.
+3. Using inspect module:
+In python, we have another standard module named inspect. This module provides information about any file, module, class or object.
+It has a lot of functions to get information. Inspect module's getfullargspec function will be used to get the function annotation details and all other information.
+Example 3:
+
+# Python program to print Fibonacci series using function annotations
+import inspect
+def fibonacci(n:'int', res:'list'=[])-> 'list':
+	if n == 0:
+		return res
+	else:
+		if len(res)< 2:
+			res.append(1)
+			fibonacci(n-1, res)
+		else:
+			last = res[-1]
+			second_last = res[-2]
+			res.append(last + second_last)
+			fibonacci(n-1, res)
+		return res
+print(fibonacci(8))
+print(inspect.getfullargspec(fibonacci))
+
+Output:
+
+Explanation:
+In the above code, we used the getfullargspec function, and we got complete details about the function, including function annotation also.
+
+
+Next TopicNumpy-3d Matrix Multiplication
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,106 @@
+
+
+
+
+next →
+← prev
+
+__add__ Method in Python
+In this tutorial, we will discuss operator overloading, its advantages, and how we can overload the '+' operator.
+Before discussing about the __add__ method, let us understand what operator overloading is.
+Operator overloading enables us to create a definition of the existing operators so that we can use them for user-defined data types as well.
+Consider the following examples-
+i) 10+2
+In the first example, the '+' operator is used to add two integers.
+ii) 'JavaTpoint' + 'Tutorials'
+In the second example, the '+' operator is used to concatenate two strings.
+iii) list1+list2 
+In the third example, the '+' operator is used to combine the elements of two lists.
+This makes it clear that based on the data type, the '+' operator works differently in different situations.
+Advantages of Operator Overloading
+
+The same operator can be used for different user-defined objects.
+The syntactic support which can be observed in the case of built-in data types is provided for user-defined types as well.
+This concept has an essential role in understanding scientific computations.
+The program looks lucid and easy to comprehend.
+
+It's time to deep dive into the world of applications where we will see how the operator '+' can be overloaded.
+The function that we will use for the same is __add__.
+In the first program, we will discuss how we can add two complex numbers.
+Example -
+
+class Complex:
+    def __init__(self):
+        self.real=0
+        self.imag=0
+    def decValue(self,real,imag):
+        self.real=real
+        self.imag=imag
+    def __add__(self,C):
+        temp=Complex()
+        temp.real=self.real+C.real
+        temp.imag=self.imag+C.imag
+        return temp
+    def display(self):
+        print("(",self.real, "+", self.imag,"i)")
+C1=Complex()
+C1.decValue(10,12)
+C2=Complex()
+C2.decValue(8,6)
+C3=Complex()
+C3=C1+C2
+print("The result of the addition of two complex numbers is: ")
+C3.display()
+
+Output:
+The result of the addition of two complex numbers is: 
+( 18 + 18 i)
+
+Explanation -
+In the above program, we have created a class named 'Complex' and defined some class methods. The first method uses __init__ which is a class constructor, it is important to use this since it initializes the variables of the class object. Next, we can see the keyword 'self' here which refers to the object itself.
+The next method, decValue is used to pass the values of real and imag.
+Moving on to the next, we will add the two complex numbers where the real part of the first number will be added to the real part of the second number and the imaginary part of the first number will be added to the imaginary part of the second number.
+Finally, the display method would display the desired output in the provided format.
+
+class Student:
+    def __init__(self,name,marks):
+        self.name=name
+        self.marks=marks
+    def display(self):
+        print(self.name,self.marks)
+    def __add__(self,S):
+        temp=Student(S.name,[])
+        for i in range(len(self.marks)):
+            temp.marks.append(self.marks[i]+S.marks[i])
+        return temp
+S1=Student("Aarav",[90,91,88])
+S2=Student("Aarav",[88,86,87])
+S1.display()
+S2.display()
+S3=Student("",[])
+S3=S1+S2
+S3.display()
+
+Output:
+Aarav [90, 91, 88]
+Aarav [88, 86, 87]
+Aarav [178, 177, 175]
+
+Explanation - 
+In the above program, we have created a class named 'Student' and defined some class methods. The first method uses __init__ which is a class constructor, it is important to use this since it initializes the variables of the class object. Next, we can see the keyword 'self' here which refers to the object itself.
+Moving on to the next, we will add the marks of students, for this we have used for loop to append the marks in the list.
+Finally, the display method would display the desired output in the provided format.
+So, in this article, we learned how we can use __add__ in our Python program.
+
+
+Next TopicEthical Hacking with Python
+
+
+
+
+← prev
+next →
+
+
+
+

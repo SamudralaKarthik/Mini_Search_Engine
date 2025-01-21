@@ -1,0 +1,155 @@
+
+
+
+
+next →
+← prev
+
+Pair Plot in Python
+An Introduction to Seaborn Pairplot
+In this tutorial, we will understand Seaborn Pairplot with the help of the pairplot() function in the Python programming language. This function can considerably help analyze the exploratory data for machine learning projects. We will also discover the syntax of the pairplot() function of the seaborn library and perform some of its examples.
+But before we get started, let us understand the Seaborn library in brief.
+What is the Seaborn library in Python?
+Python community provides an open-source library designed for data visualization known as Seaborn. Seaborn library has been developed on top of matplotlib library and closely integrated with the data structures of Pandas in Python. Visualization is the central concept of the Seaborn library, helping the users explore and understand the data.
+Since the Seaborn library combines and integrates different libraries, it is reasonably necessary for the learners to be familiar with NumPy, Matplotlib, and Pandas libraries.
+There are various functionalities that the Seaborn library provides. Some of them are listed below:
+
+Seaborn provides an Application Programming Interface (API) oriented with Dataset in order to determine the relationship between the variables.
+Seaborn also provides Automatic estimation and plotting functionalities of Linear Regression Plots.
+Seaborn also provides support to high-level abstractions for Multiple plot grids.
+Seaborn also offers to visualize distribution for Univariate and Bivariate.
+
+Now, let us understand how to download and install the Seaborn library.
+How to install the Seaborn library?
+In the following section, we will discuss the steps entangled in the installation process of the Seaborn Library.
+Using the pip installer
+We can install the latest version of the Seaborn library with the help of the pip installer. All we have to do is to type the following command in a command shell or terminal.
+
+$ pip install seaborn
+
+Using the conda installer
+Anaconda is a multi-platform free Python distribution for SciPy stack available for Windows, Linux, and Mac.
+We can install the latest version of the Seaborn library using the conda installer using the command shown below:
+
+$ conda install seaborn
+
+Apart from these two, we can install the development version of the Seaborn library.
+Installing Development version using GitHub
+In order to install the development version, we can go to the link given below:
+https://github.com/mwaskom/seaborn
+Some Dependencies
+While downloading and installing the Seaborn library, there are few dependencies one has to take care of. These dependencies are as follows:
+
+Python version 2.7 or 3.4+
+NumPy library
+Matplotlib library
+SciPy library
+Pandas library
+
+Initializing the Seaborn library
+Once we are done downloading and installing the Seaborn library, let us create an empty Python file and use the following syntax in order to initialize the library
+
+import seaborn
+
+or
+
+import seaborn as sbn
+
+Save the program and execute the file. If the program does not return the import error, the library has been installed successfully. Else consider reinstalling the library as described above.
+The Seaborn library provides the user to plot a wide range of plots such as:
+
+Pie Charts
+Bar Chars
+Distribution Plots
+Scatter Plots
+Heat maps
+Pair Plots
+
+In this tutorial, we will only be discussing Seaborn Pair Plots and the pairplot() function. So, let's get started.
+Understanding the Seaborn Pairplot function
+The Seaborn Pairplot function allows the users to create an axis grid via which each numerical variable stored in data is shared across the X- and Y-axis in the structure of columns and rows. We can create the Scatter plots in order to display the pairwise relationships in addition to the distribution plot displaying the data distribution in the column diagonally.
+The pairplot() function can also be used to showcase the subset of variables, or we can plot different types of variables on rows and columns.
+Let us have a look at the syntax of the Seaborn Pairplot function, shown below:
+Syntax of the Seaborn Pairplot function
+
+seaborn.pairplot(
+    data,
+    hue = None,
+    hue_order = None,
+    palette = None,
+    vars = None,
+    x_vars = None,
+    y_vars = None,
+    kind = 'scatter',
+    diag_kind = 'auto',
+    markers = None,
+    height = 2.5,
+    aspect = 1,
+    corner = False,
+    dropna = False,
+    plot_kws = None,
+    diag_kws = None,
+    grid_kws = None,
+    size = None
+    )
+
+Parameters of Pairplot function:
+
+data: The data parameter accepts the data depending on the visualization to be plotted. The values can be in terms of DataFrame, Array, or List of Arrays.
+hue_order, order: The hue_order or simply order parameter is the order for categorical variables utilized in the plot. The values for this parameter can be the lists of strings.
+scale: The scale parameter is used for scaling the plot. This parameter takes more than values for usage, such as area, count, or width.
+scale_hue: The scale_hue parameter takes the Boolean value in order to determine whether the scale is estimated within each level of the major grouping variable for TRUE or across all the violins on the plot for FALSE.
+gridsize: The gridsize parameter takes the integer value to calculate the kernel density for the plot.
+inner: The inner parameter allows the users to define the inner points of a violin plot. This parameter takes the values such as box, point, quartile, stick, or None.
+orient: The orient parameter allows the user to determine the plot's orientation. The orientation can be either vertical, denoted by 'v' or horizontal, denoted by 'h', respectively.
+linewidth: The linewidth parameter takes the float integer as its value to determine the width of the grey lines utilized within the plot.
+color: The color parameter allows the user to specify the range of color for all the data elements of the plot. The value for this parameter can be matplotlib color.
+palette: The palette parameter is used to define the colors utilized for each level of the plot with a variety of hues.
+ax: The ax parameter is used to define the axes on which the plot will be constructed. The value for this parameter can be matplotlib Axes.
+
+Let us consider some examples to understand the working of the pairplot() function:
+Example 1:
+
+# importing the required libraries
+import seaborn as sbn
+import matplotlib.pyplot as plt
+# loading the dataset using the seaborn library
+mydata = sbn.load_dataset('penguins')
+# pairplot with the hue = gender parameter
+sbn.pairplot(mydata, hue = 'gender')
+# displaying the plot
+plt.show()
+
+Output:
+
+Explanation:
+In the above example, we have imported the required libraries and load the data set of penguins to work with using the Seaborn load_dataset() function. We have then used the pairplot() function to visualize the plot with the hue parameter set to the value 'gender'. At last, we have used the Matplotlib show() function to display the plot to the users. As a result, the pair plot has been generated successfully.
+Example 2:
+
+# importing the required libraries
+import seaborn as sbn
+import matplotlib.pyplot as plt
+# loading the dataset using the seaborn library
+mydata = sbn.load_dataset('tips')
+# pairplot with the kind = kde parameter
+sbn.pairplot(mydata, kind = 'kde')
+# displaying the plot
+plt.show()
+
+Output:
+
+Explanation:
+In the above example, we have imported the required libraries and load the data set of tips to work with using the Seaborn load_dataset() function. We have then used the pairplot() function to visualize the plot with the kind parameter set to the value 'kde'. At last, we have used the Matplotlib show() function to display the plot to the users. As a result, the pair plot has been generated successfully.
+
+
+Next TopicData Hiding in Python
+
+
+
+
+← prev
+next →
+
+
+
+

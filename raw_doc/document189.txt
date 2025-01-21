@@ -1,0 +1,131 @@
+
+
+
+
+next →
+← prev
+
+How Brython Works
+For understanding how Brython works, we first have to install brython with our preferred method, which we have discussed in "How to install Brython article".
+Few this, we should know before discussing how brython works:
+
+How to implement python in JavaScript
+How to translate Python to JavaScript and also a runtime executive in the browser.
+The two main libraries of JavaScript file:
+
+brython_stdlib.js, which is standard library of Brython
+brython.js, which is the core of the brython language
+
+How to invoke brython(), which will compiles Python program stored in the script tags with the text/python type.
+
+In this article, we will discuss Brython core components, standard libraries, and how it works.
+Brython Core Components
+The brython.js and brython.min.js (the minimized version of the Brython engine) contains the core components of brython. Both of them contains the following key components:
+The brython.js and brython.min.js (the minimized version of the Brython engine) contain the core components of Brython. Both of them contains the following key components:
+
+_BRYTHON_: It is the JavaScript global object which holds all internal objects that should be needed for running Python script. _BRYTHON_ is not used directly when we write Brython applications. If we look at the Brython program, broth the Python and JavaScript, then we will notice the regular occurrences of _BRYTHON_. We do not need to use this object, but we should be aware of this when we see an error or when we want to debug our program in the browser console.
+Brython(): It is the primary JavaScript function which is exposed in the JavaScript global namespace. We can not execute any Python program without calling this function. This is the only JavaScript function that we should have to call explicitly.
+Browser: It is the module of the browser, which exposes the JavaScript objects that are commonly used in the front-end website applications like the Document Object Model interfaces use to document, and the browser window uses the window object.
+Built-in types: these are implementations of the Python built-in types in JavaScript. Such as py_dicts.js, py_string.js and py_int.js are respectively performances of dict, str, and int.
+
+Brython Standard Library
+After having an idea of what core Brython file, brython.js, we will now learn about their companion file, brython_stdlib.js.
+The Python standard library is exposed by brython_stdlib.js. After the generation of the brython_stdlib.js file, Brython can compile the Python standard library into JavaScript and links the result into the package brython_stdlib.js.
+Brython should be closed to CPython, which the Python's preferred implementation. As Brython runs inside the context of a website browser, it has few limitations, such as the browser does not allow direct access to the file system, so, os.open() function cannot open the file. Functions which are not related to the website browser cannot be implemented.
+For example:
+# let's run the code in the Brython environment:
+
+import os
+os.unlink()
+
+Output:
+TypeError                                 Traceback (most recent call last)
+<ipython-input-1-85e82a7fc62f> in <module>
+      1 import os
+----> 2 os.unlink()
+
+TypeError: unlink() missing required argument 'path' (pos 1)
+
+Here, os.unlink() is raising an exception, as it is not secure for deletion of a local file from the browser environment, and the File and Directories Entries API is just a default proposal.
+Brython only supports native Python modules. It does not support Modules of Python built in C unless they have been implemented again in JavaScript. For example, hashlib module is written in C and implemented in JavaScript in Brython. The users and developers can also consult the list of modules in the Brython distribution for comparing the CPython implementation.
+The user needs to include brython_stdlib.js and brython_stdlib.min.js for importing modules from the Python standard library.
+Brython Working
+Now, let's see how Brython works inside the Browser, which is only aware of their JavaScript engine. We will understand this with the help of an example and the tools that are available in the browser. We will learn about the process that is involved in the execution of Python code in the browser.
+For example:
+
+<!doctype html>
+<html>
+  <head>
+    <script
+      src = "https://raw.githack.com/brython-dev/brython/master/www/src/brython.js">
+    </script>
+  </head>
+  <body onload = "brython()">
+    <script type = "text/python">
+      import browser
+      browser.alert("Hello JavaTpoint!")
+    </script>
+  </body>
+</html>
+
+After loading and parsing the HTML page, brython() will take these following steps:
+
+It will read the Python program which is stored in the element <script type = "text/python">
+Then compile the python program for equivalenting JavaScript
+After that, it will evaluate the resulting JavaScript code with eval()
+
+For example:
+# embed the Python code in the HTML file:
+
+    <script type = "text/python">
+      import browser
+      browser.alert("Hello JavaTpoint!")
+    </script>
+
+Second option is to download the Python program from the separate file:
+For example:
+
+<head>
+    <script src = "https://www.forexample.com/main.py"
+            type = "text/python">
+    </script>
+</head>
+
+In the above case the Python file will look like this:
+
+import browser
+browser.alert("Hello JavaTpoint?)
+
+The process of separating the Python program from the HTML program is a cleaner method. This also allows the users to take advantage of the functionalities and benefits of code editors. Some of the editors have support for embedded JavaScript into HTML, but they do not support inline Python into HTML.
+Internals of Brython
+In this section of the article, we will provide a depth of the process of how to transform Python program into JavaScript.
+For illustrating the process, and see what is the internals of Brython, the user should use the following step:
+
+First, open the home page of Brython
+Then open the website console by clicking CTrl+shift+I for Windows and Linux operating system and CMD+ALT+I for Mac operating system
+
+In the REPL of browser JavaScript, the user should type and execute the following commands bellow:
+For example:
+
+eval(__BRYTHON__.python_to_js("import browser; browser.console.log('Hello Brython in JavaTpoint!')"));
+
+Then the python_to_js() will parse and compile the above program into JavaScript and then it will execute the JavaScript in the website browser. The user will get the following Output:
+
+After applying the eval() function to the Brython program, it will print "Hello Brython in JavaTpoint!" in the console of Browser. The function of JavaScript will return undefined, which is the default return value for the functions in JavaScript.
+Whenever the user builds a Brython application, they should not need to call the function explicitly in the _BRYTHON_ JavaScript module. This example above is used only for explaining how Brython operates in the background.
+The JavaScript _BRYTHON_ object is also available in the JavaScript global scope, and the users can access it with the console of Browser JavaScript.
+Conclusion
+In this article, we have discussed and explain the core components and standard libraries of Brython and how the Brython works on the Browser. We have also talked about the internals of Brython and how it operated the websites from the background.
+
+
+Next TopicHow to use Brython in the Browser
+
+
+
+
+← prev
+next →
+
+
+
+

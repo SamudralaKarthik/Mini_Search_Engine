@@ -1,0 +1,140 @@
+
+
+
+
+next →
+← prev
+
+Python sleep() Function
+The sleep() method pauses (waits) the current thread's execution for a specified period of time.
+Python contains a time module that offers a number of helpful functions to manage time-related tasks. Sleep is one of the common activities among them ().
+The sleep() function pauses the current thread's execution for a specified period of time.
+The Python time sleep function is being used to delay a program's execution. To stop the running of the programme for a certain amount of time in seconds, we can use the sleep function in Python. Keep in mind that the Python time sleep function only halts the current thread's execution, not the entire programme.
+Python comes with built-in functionality for sleeping our programme. The sleep() function in the time module allows us to pause the caller thread's execution for as many seconds we want.
+Code 1: Python sleep()
+
+import time
+print("Printed time immediately.")
+time.sleep(2.5)
+print("Printed after 2.5 seconds.")
+
+Output:
+"Printed time immediately" is printed
+Suspends (Delays) execution for 2.5 seconds.
+"Printed after 2.5 seconds" is printed.
+
+The aforementioned example demonstrates that sleep() accepts a floating-point integer as an input. Prior to Python 3.5, the suspension time could actually be shorter than the value supplied as an argument to the time() method.
+The suspension period is at least the set number of seconds starting with Python 3.5. The core developers of Python 3.5 made a little adjustment to the way time.sleep() behaves. Even though the sleep is stopped by a signal, the newer Python sleep() system will continue for at least the amount of seconds we've chosen. However, if the message itself produces an exception, then this does not apply.
+Code 2: Python in Create a Digital Clock
+
+import time
+while True:
+disttime = time.disttime()
+  ans = time.strftime("%I:%M:%S %p", disttime)
+ print(ans)
+  time.sleep(1)
+
+Within the endless while loop of the programme shown above, we computed and reported the current local time. The programme then waits for a full second. The current local time is once more calculated and printed. This procedure continues.
+Output:
+02:10:50 PM
+02:10:51 PM
+02:10:52 PM
+02:10:53 PM
+02:10:54 PM
+
+Code 2: Improved Version
+Here is a significantly improved version of the previously mentioned software.
+
+import time
+while True:
+disttime = time.disttime()
+  ans = time.strftime("%I:%M:%S %p", disttime)
+print(ans, end="", flush=True)
+  print("\r", end="", flush=True)
+  time.sleep(1)
+
+Output:
+02:10:50 PM
+02:10:51 PM
+02:10:52 PM
+02:10:53 PM
+02:10:54 PM
+
+Multithreading in Python:
+Let's speak about groups and thread first before discussing sleep() in multithreaded systems. There are further instances in which we would want to provide a thread a Python sleep() function. Maybe we're using a production database containing millions of documents and a migration script.
+We choose to use threads because we would not want to create any downtime but we really do not want to wait any longer than required for the migration to be finished.
+Each instruction in a computer programme is a separate unit. The carrying out of those directives constitutes a procedure. A part of the process is called a thread. One or even more threads may be present in a process.
+Code 3: Python Multithreading
+The tutorial programmes listed above are all single-threaded programmes. Here is an instance of a Python programme with several threads.
+
+import threading 
+def print_hola_3_times():
+  for a in range(3):
+    print("Hola")  
+def print_hey_3_times(): 
+    for a in range(3): 
+      print("Hey") 
+th1 = threading.Thread(target=print_hola_3_times)  
+th2 = threading.Thread(target=print_hey_3_times)  
+th1.start()
+th2.start()
+
+Output:
+Hola
+Hola
+Hey
+Hola
+Hey
+Hey
+
+The software mentioned above has two threads, th1 and th2. The statements th1.start() and th2.start() are used to start these threads. Keep in mind that th1 and th2 may run concurrently and produce different results.
+time.sleep() in Python Multithreaded Programs
+The sleep() function pauses the current thread's execution for a specified period of time.
+Sleep() pauses the operation of the thread and processes in single-threaded programmes. In multithreaded programmes, the function halts a thread instead of the entire operation.
+Code 4: sleep() in a Multithreaded Program
+
+import time
+from threading import Thread
+class make(Thread):
+    def run(self):
+        for m in xrange(0,11):
+            print m
+            time.sleep(1)
+class made(Thread):
+    def run(self):
+        for m in xrange(100,103):
+            print m
+            time.sleep(5)
+def run():
+    make().start()
+    made().start()
+
+Output:
+0
+100
+>>> 1
+2
+3
+4
+5
+101
+6
+7
+8
+9
+10
+102
+
+
+
+Next TopicDiabetes Prediction Using Machine Learning
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,201 @@
+
+
+
+
+next →
+← prev
+
+Spinner Widget in the kivy Library of Python
+Kivy is the Graphical User Interface tool in Python, which is platform independent. The applications developed using Kivy can be used on IOS, Windows, Linux, and Android operating systems. The basic use of the Kivy tool in developing applications for the Android operating system but it can also be used for developing desktop applications.
+Spinner Widget:
+The users can import the spinner widget of the kivy library by using the following command:
+
+from kivy.uix.spinner import Spinner
+
+A spinner widget is used for selecting one value from a set. In the default state, a spinner shows its currently selected value. When the user clicks on the spinner, it displays a dropdown menu that shows all the other available values from which the user can select.
+Like a combo-box, the spinner widget is also used for giving the multiple-choice option to the user for selecting anyone of its menu. The user can also attach a callback to the spinner widget for receiving the notifications on the selection of the value from the widget menu.
+Approach:
+
+Step 1: We will import the kivy
+Step 2: We will import the kivyApp
+Step 3: We will import the label
+Step 4: We will import the Spinner
+Step 5: We will import the FLoatlayout
+Step 6: We will set the minimum version (this step is optional)
+Step 7: We will create an App class:
+
+First, we will create the spinner
+Then, we will attach the labels to the spinners
+Then, we will attach a callback
+
+Step 8: We will return layout/ widget/ class (as per the requirements)
+Step 9: We will run the instance of the class.
+
+Example:
+
+from kivy.config import Config
+  
+# In this code:
+# 0 means off 
+# 1 means ON 
+# Here, we can also use 0 or 1 && True or False
+Config.set('graphics', 'resizable', True)
+  
+# Here, we are writing a program for Showing how to create a switch
+# first, we will import the kivy module   
+import kivy 
+     
+# the, base Class of our Application is inherited from the App class.   
+# app will refers to the instance of our application  
+from kivy.app import App as app1
+   
+# this will limit the kivy version that means 
+# below this kivy version we cannot 
+# use the application or software 
+kivy.require('1.9.0')
+  
+# The Label widget is for rendering text. 
+from kivy.uix.label import Label as lab
+  
+# Now, we will import the spinner widget
+from kivy.uix.spinner import Spinner as spin
+  
+# This module consist the float layout 
+# for working with FloatLayout 
+# we have to import it first 
+from kivy.uix.floatlayout import FloatLayout as fl
+  
+  
+# Now, we will create an Application by deriving from the App class
+class Spinner_example(app1):
+  
+    # now we will define build 
+    def build_1(self):
+  
+        # here, we will create floatlayout
+        layout = fl()
+  
+        # then, we will create the spinner
+        # first, we will configure spinner object and then add it to the layout
+        self.spinnerObject = spin(text = "Option 1",
+             values = ("Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6"),
+             background_color =(0.784, 0.443, 0.216, 1)) 
+  
+        self.spinnerObject.size_hint = (0.3, 0.2)
+  
+        self.spinnerObject.pos_hint ={'x': .35, 'y':.75}
+  
+        layout.add_widget(self.spinnerObject)
+  
+        # return the layout
+        return layout;
+  
+  
+# for, Running the application
+if __name__ == '__main__':
+    Spinner_example().run()      
+
+Output:
+Image 1:
+
+Image 2:
+
+Now, we have to display which of the option in the menu list is selected currently. We can display the label just beside the spinner widget.
+Example 2:
+
+from kivy.config import Config
+  
+# In this code:
+# 0 means off 
+# 1 means ON 
+# Here, we can also use 0 or 1 && True or False
+Config.set('graphics', 'resizable', True)
+  
+# Here, we are writing a program for Showing how to create a switch
+# first, we will import the kivy module   
+import kivy 
+     
+# the, base Class of our Application is inherited from the App class.   
+# app will refers to the instance of our application  
+from kivy.app import App as app1
+   
+# this will limit the kivy version that means 
+# below this kivy version we cannot 
+# use the application or software 
+kivy.require('1.9.0')
+  
+# The Label widget is for rendering text. 
+from kivy.uix.label import Label as lab
+  
+# Now, we will import the spinner widget
+from kivy.uix.spinner import Spinner as spin
+  
+# This module consist the float layout 
+# for working with FloatLayout 
+# we have to import it first 
+from kivy.uix.floatlayout import FloatLayout as fl
+  
+  
+# Now, we will create an Application by deriving from the App class
+class Spinner_example(app1):
+  
+    # now we will define build 
+    def build_1(self):
+  
+        # here, we will create floatlayout
+        layout = fl()
+  
+        # then, we will create the spinner
+        # first, we will configure spinner object and then add it to the layout
+        self.spinObject = spin(text = "Option 1",
+             values = ("Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6"),
+             background_color =(0.784, 0.443, 0.216, 1)) 
+  
+        self.spinObject.size_hint = (0.3, 0.2)
+  
+        self.spinObject.pos_hint ={'x': .35, 'y':.75}
+  
+        layout.add_widget(self.spinObject)
+        self.spinObject.bind(text = self.on_spinner_select)
+  
+        # It will change the label information as well
+        # It will add a label displaying the selection from the spinner
+        self.spinSelection = Label(text = "Selected value in spinner widegt is: %s" 
+                                                     %self.spinObject.text)
+  
+        layout.add_widget(self.spinSelection)
+        self.spinSelection.pos_hint ={'x': .1, 'y':.3}
+          
+        return layout;
+  
+    # call back for the selection in spinner object
+    def on_spinner_select(self, spin, text):
+        self.spinSelection.text = ("Selected value in spinner widget is: %s" %self.spinObject.text)
+  
+        print('The spinner widget', spin, 'have text', text)
+      
+  
+# Run the app
+if __name__ == '__main__':
+    Spinner_example().run()
+
+Output:
+Image 1:
+
+Image 2:
+
+Conclusion
+In this tutorial, we have discussed implementing a spinner widget of the kivy library in the Python application for giving the option of selecting the element from the menu to the users.
+
+
+Next TopicNumber Plate Recognition using Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,167 @@
+
+
+
+
+next →
+← prev
+
+Looping technique in Python
+Python has specific inbuilt functions, due to which it supports numerous looping techniques in several sequential containers. These looping functions and methods are very useful for competitive coding. It can be used in different projects in which user has to use some specific technique with loops for maintaining the whole structure of the program. These techniques help save time and memory space as the user does not have to declare the extra variables for the traditional approach of loops.
+Where these looping techniques are used?
+Different types of looping techniques are used in the places where the user does not have to manipulate the structure of the code or the orders of the whole containers. Instead, the user has to print the elements for a single-use instance, and no in-place change occurs in the container. These can also be used for saving time and memory.
+Looping Techniques by using Python Data Structures:
+
+enumerate(): The enumerate() function is used for looping through the containers and for printing the index number with the value present in that specific index.
+
+Example:
+
+for key, value in enumerate(['Joe', 'waited', 'for', 'the', 'train', ',', 'but', 'the', 'train', 'was', 'late', '.']):
+    print(key, value)
+
+Output:
+0 Joe
+1 waited
+2 for
+3 the
+4 train
+5 ,
+6 but
+7 the
+8 train
+9 was
+10 late
+11 .
+
+
+zip(): The zip() function is used for combining the two similar containers, such as dict with dict or list with the list, by printing their values in sequence. The loop will exist only after the end of the smaller container.
+
+Example:
+
+# first, we will initialize the list
+question = ['animal', 'shape', 'time']
+answer = ['tiger', 'square', '11 o clock']
+  
+# the zip() function will be used for combining these two containers 
+for question, answer in zip(question, answer):
+    print('What is this {0}?  this is {1}.'.format(question, answer))
+
+Output:
+What is this animal?  this is tiger.
+What is this shape?  this is square.
+What is this time?  this is 11 o clock.
+
+
+items(): The items() function is used for looping through the dictionary and printing the key and its values in sequence.
+
+Example:
+
+dict = { "Joe" : "waited", "for" : "the", "train" : "but", "the" : "train", "was" : "late" }
+  
+# the use items for print the dictionary key-value pair
+print ("The key value pair by using items is : ")
+for a, b in dict.items():
+    print(a, b)
+
+Output:
+The key value pair by using items is : 
+Joe waited
+for the
+train but
+the train
+was late
+
+
+sorted(): The sorted() function is used for printing the container in sorted order. This function does not sort the container, but it is used for printing the container in sorted order, for instance. The user can use the set() function with the sorted() function to remove the duplicate value in the output.
+
+Example 1:
+
+# first, initialize the list
+list = [ 1 , 4, 6, 7, 1, 2, 4 ]
+  
+# using sorted() to print the list in sorted order
+print ("The list in sorted order is : ")
+for a in sorted(list) :
+    print (a, end = " ")
+      
+print ("\r")
+      
+# now use the sorted() function and set() function for printing the list in sorted order
+# use of set() to removes duplicates in output value.
+print ("The list in sorted order (without duplicates) is : ")
+for a in sorted(set(list)) :
+    print (a, end = " ")
+
+Output:
+The list in sorted order is : 
+1 1 2 4 4 6 7 
+The list in sorted order (without duplicates) is : 
+1 2 4 6 7
+
+Example 2:
+
+# initializing list
+list2 = ['Joe', 'waited', 'for', 'the', 'train', 'but', 'the', 'train', 'was', 'late']
+  
+# now use the sorted() function and set() function for printing the list in sorted order
+for sentence in sorted(set(list2)):
+    print(sentence)
+
+Output:
+Joe
+but
+for
+late
+the
+train
+waited
+was
+
+
+reversed(): The reserved() function is used for printing the values of the container in the reversed order.
+
+Example 1:
+
+# initializing list
+list = [ 1 , 3, 5, 7, 9, 11, 13, 15, 17, 19, 21 ]
+
+# by using the revered() function for printing the list in reversed order
+print ("The list in reversed order is : ")
+for a in reversed(list) :
+    print (a, end = " ")
+
+Output:
+The list in reversed order is : 
+21 19 17 15 13 11 9 7 5 3 1
+
+Example 2:
+
+for b in reversed(range(1, 20, 2)):
+    print (b)
+
+Output:
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+
+Conclusion
+In this tutorial, we have discussed the different types of lopping techniques that are useful for saving memories and time.
+
+
+Next TopicMetaprogramming with Metaclasses in Python
+
+
+
+
+← prev
+next →
+
+
+
+

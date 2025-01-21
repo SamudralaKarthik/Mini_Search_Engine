@@ -1,0 +1,158 @@
+
+
+
+
+next →
+← prev
+
+Python return statement
+Introduction
+The Python return statement is used to return a value from a function. The user can only use the return statement in a function. It cannot be used outside of the Python function. A return statement includes the return keyword and the value that will be returned after that.
+Syntax of return statement:
+
+def funtion_name():
+statements
+.
+.
+.
+return [expression]
+
+Program 1
+
+def adding(x, y):
+    i = x + y
+    return i
+result = adding(16, 25)
+print(f'Output of adding(16, 25) function is {result}')
+
+Output
+
+Program 2
+
+def adding(a, b):
+	# this function is return the value of (a + b)
+	return a + b
+def boolean_function(a):
+	# this function is return the Boolean value
+	return bool(a)
+# calling function
+flag = adding(2, 3)
+print("Output of first function is {}".format(flag))
+flag = boolean_function(9 < 5)
+print("\nOutput of second function is {}".format(flag))
+
+Output.
+
+Returning Multiple Values
+In the Python programming language, a user can return multiple values from a function. The following are the various methods for this.
+1. Using Object: This method is similar to C / C ++ and Java. A user can create a class to hold multiple values in a function and return an object of that class.
+
+class a:
+	def __init__(self):
+		self.omg = "javatpoint is the best website to learn"
+		self.i = 122
+# This function will return an object of the class a
+def test():
+	return a()
+# Driver code to test the above method
+z = test()
+print(z.omg)
+print(z.i)
+
+Output
+
+2. Using Tuple: The tuple is similar to a list, but there is a slight difference between tuple and list. In the tuple, the object values cannot be changed, while the object value can be changed in the list.
+
+def test():
+	omg = "javatpoint is the best website to learn"
+	i = 122
+	return omg, i; 
+    # Return tuple, we could also.	
+# Driver code to test the above method.
+omg, i = test() 
+# Assign return tuple
+print(omg)
+print(i)
+
+Output
+
+3. Using list: The list is similar to the dynamically sized array. In the list, the user can store everything in a single variable.
+
+def test():
+	omg = "javatpoint"
+	i = 122
+	return [omg, i];
+# Driver code to test the above method
+list = test()
+print(list)
+
+Output
+
+4. Using dictionary: In the Python language, a dictionary is a collection of unstructured items that are used to store data values such as hash or map.
+
+def test():
+	a = dict();
+	a['omg'] = "javatpoint"
+	a['i'] = 122
+	return a	
+# Driver code to test the above method
+a = test()
+print(a)
+
+Output
+
+5. Using Data Class (Python 3.7+)
+
+from dataclasses import dataclass
+@dataclass
+class Book_list:
+	bookname: str
+	cost: float
+	quantity_of_book_available: int = 0		
+	# This function is used to calculate the total cost of the books	
+	def total_cost_of_book(self) -> float:
+		return self.cost * self.quantity_of_book_available       
+book = Book_list("Python programming language.", 499, 10)
+i = book.total_cost_of_book()
+# print the total cost
+print(i)
+# print the details of the book
+print(book)
+
+Output
+
+Function returning another function
+In the Python programming language, a function is in the form of an object. Therefore, the user can return a function from another function.
+In the below program, The first_add function returns the second_add function.
+
+def first_add(x):
+	def second_add(y):
+		return x + y
+	return second_add
+i = first_add(20)
+print("The value of x + y is", i(10))
+# second function
+def outer_func(x):
+	return x * 5
+def func():
+	# return the value in the different function
+	return outer_func
+# storing the function in z
+z = func()
+print("\nThe value of x * y is", z(10))
+
+Output
+
+
+
+Next TopicGetter and Setter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

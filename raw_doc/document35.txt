@@ -1,0 +1,124 @@
+
+
+
+
+next →
+← prev
+
+Python read csv file
+CSV File
+A csv stands for "comma separated values", which is defined as a simple file format that uses specific structuring to arrange tabular data. It stores tabular data such as spreadsheet or database in plain text and has a common format for data interchange. A csv file opens into the excel sheet, and the rows and columns data define the standard format.
+Python CSV Module Functions
+The CSV module work is used to handle the CSV files to read/write and get data from specified columns. There are different types of CSV functions, which are as follows:
+
+csv.field_size_limit - It returns the current maximum field size allowed by the parser.
+csv.get_dialect - It returns the dialect associated with a name.
+csv.list_dialects - It returns the names of all registered dialects.
+csv.reader - It read the data from a csv file
+csv.register_dialect - It associates dialect with a name. The name must be a string or a Unicode object.
+csv.writer - It writes the data to a csv file
+o	csv.unregister_dialect - It deletes the dialect which is associated with the name from the dialect registry. If a name is not a registered dialect name, then an error is being raised.
+csv.QUOTE_ALL - It instructs the writer objects to quote all fields. csv.QUOTE_MINIMAL - It instructs the writer objects to quote only those fields which contain special characters such as quotechar, delimiter, etc.
+csv.QUOTE_NONNUMERIC - It instructs the writer objects to quote all the non-numeric fields.
+csv.QUOTE_NONE - It instructs the writer object never to quote the fields.
+
+Reading CSV files
+Python provides various functions to read csv file. We are describing few method of reading function.
+
+Using csv.reader() function
+
+In Python, the csv.reader() module is used to read the csv file. It takes each row of the file and makes a list of all the columns.
+We have taken a txt file named as python.txt that have default delimiter comma(,) with the following data:
+
+name,department,birthday month  
+Parker,Accounting,November  
+Smith,IT,October  
+
+Example
+
+import csv  
+with open('python.csv') as csv_file:  
+    csv_reader = csv.reader(csv_file, delimiter=',')  
+    line_count = 0  
+    for row in csv_reader:  
+        if line_count == 0:  
+            print(f'Column names are {", ".join(row)}')  
+            line_count += 1  
+
+Output:
+Column names are name, department, birthday month
+  Parker works in the Accounting department, and was born in November.
+  Smith works in the IT department, and was born in October.
+Processed 3 lines.
+
+In the above code, we have opened 'python.csv' using the open() function. We used csv.reader() function to read the file, that returns an iterable reader object. The reader object have consisted the data and we iterated using for loop to print the content of each row
+Read a CSV into a Dictionar
+We can also use DictReader() function to read the csv file directly into a dictionary rather than deal with a list of individual string elements.
+Again, our input file, python.txt is as follows:
+
+name,department,birthday month  
+Parker,Accounting,November  
+Smith,IT,October  
+
+Example
+
+import csv    
+with open('python.txt', mode='r') as csv_file:  
+    csv_reader = csv.DictReader(csv_file)  
+    line_count = 0  
+    for row in csv_reader:  
+        if line_count == 0:  
+            print(f'The Column names are as follows {", ".join(row)}')  
+            line_count += 1  
+        print(f'\t{row["name"]} works in the {row["department"]} department, and was born in {row["birthday month"]}.')  
+        line_count += 1  
+    print(f'Processed {line_count} lines.')  
+
+Output:
+The Column names are as follows name, department, birthday month
+   Parker works in the Accounting department, and was born in November.
+   Smith works in the IT department, and was born in October.
+Processed 3 lines.
+
+Reading csv files with Pandas
+The Pandas is defined as an open-source library which is built on the top of the NumPy library. It provides fast analysis, data cleaning, and preparation of the data for the user.
+Reading the csv file into a pandas DataFrame is quick and straight forward. We don't need to write enough lines of code to open, analyze, and read the csv file in pandas and it stores the data in DataFrame.
+Here, we are taking a slightly more complicated file to read, called hrdata.csv, which contains data of company employees.
+
+Name,Hire Date,Salary,Leaves Remaining  
+John Idle,08/15/14,50000.00,10  
+Smith Gilliam,04/07/15,65000.00,8  
+Parker Chapman,02/21/14,45000.00,10  
+Jones Palin,10/14/13,70000.00,3  
+Terry Gilliam,07/22/14,48000.00,7  
+Michael Palin,06/28/13,66000.00,8  
+
+Example
+
+import pandas  
+df = pandas.read_csv('hrdata.csv')  
+print(df)  
+
+In the above code, the three lines are enough to read the file, and only one of them is doing the actual work, i.e., pandas.read_csv()
+Output:
+         Name                Hire Date     Salary      Leaves Remaining
+0     John Idle              03/15/14      50000.0       10
+1     Smith Gilliam          06/01/15      65000.0       8
+2     Parker Chapman         05/12/14      45000.0       10
+3     Jones Palin            11/01/13      70000.0       3
+4     Terry Gilliam          08/12/14      48000.0       7
+5     Michael Palin          05/23/13      66000.0       8
+
+
+
+Next TopicPython write csv file
+
+
+
+
+← prev
+next →
+
+
+
+

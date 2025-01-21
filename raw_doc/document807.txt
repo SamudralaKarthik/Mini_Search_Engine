@@ -1,0 +1,485 @@
+
+
+
+
+next →
+← prev
+
+Hypothesis Testing Python
+Null hypothesis and alternative hypothesis are the two different methods of hypothesis testing. The premise for a null hypothesis is an occurrence (also called the ground truth). An alternative hypothesis is a presumption that disputes the primary hypothesis. Imagine a woman in her seventies who has a noticeable tummy bump. Medical professionals could presume the bulge is a fibroid.
+In this instance, our first finding (or the null hypothesis) is that this woman has a fibroid, and our alternative finding is that she does. We shall use terms null hypothesis (beginning assumption) and alternate hypothesis (countering assumption) to conduct hypothesis testing. The next step is gathering the data samples we can use to validate the null hypothesis.
+Data on the hypothesis should be gathered and examined to determine whether or not H0 may be accepted. When doing that, there's a chance that the following things will occur:
+
+H0 is acknowledged as the ground truth since it is true.
+Since H0 is denied and H1 is accepted, the ground truth is incorrect.
+
+The preferred scenarios are the two examples mentioned above. Our null hypothesis can be correct and accepted, or it can be incorrect and rejected.
+The following options are the remaining ones:
+
+Although the null hypothesis (H0) was correct, we rejected it.
+Although the null hypothesis (H0) was incorrect, we did not dismiss it.
+
+P-value:- The likelihood of discovering the recorded or more severe outcomes whenever the null hypothesis (H0) of a research question is true is known as the P value or computed probability; the meaning of "severe" relies upon how the hypothesis has been tested.
+When your P value falls below the selected significance threshold, you dismiss the null hypothesis and agree that your sample contains solid proof that the alternative hypothesis is true. It Still does not Suggests a "significant" or "important" change; you must determine that while evaluating the applicability of your conclusion in the actual world.
+T- Test
+When comparing the mean values of two samples that specific characteristics may connect, a t-test is performed to see if there exists a substantial difference. It is typically employed when data sets, such as those obtained from tossing a coin 100 times and stored as results, would exhibit a normal distribution. It could have unknown variances. The t-test is a method for evaluating hypotheses that allows you to assess a population-applicable assumption.
+Assumptions
+
+Each sample's data is randomly and uniformly distributed (iid).
+Each sample's data have a normal distribution.
+Every sample's data share the same variance.
+
+T-tests are of two types: 1. one-sampled t-test and 2. two-sampled t-test.
+One sample t-test: The One Sample t-test ascertains if the sample average differs statistically from an actual or apposed population mean. A parametric testing technique is the One Sample t-test.
+Example: You are determining if the average age of 10 people is 30 or otherwise. Check the Python script below for the implementation.
+Code
+
+# Python program to implement T-Test on a sample of ages
+
+# Importing the required libraries
+from scipy.stats import ttest_1samp
+import numpy as np
+
+# Creating a sample of ages
+ages = [45, 89, 23, 46, 12, 69, 45, 24, 34, 67]
+print(ages)
+
+# Calculating the mean of the sample
+mean = np.mean(ages)
+print(mean)
+
+# Performing the T-Test 
+t_test, p_val = ttest_1samp(ages, 30)
+print("P-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print(" We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+[45, 89, 23, 46, 12, 69, 45, 24, 34, 67]
+45.4
+P-value is:  0.07179988272763554
+We can accept the null hypothesis
+
+Two sampled t-test:- To ascertain if there exists any statistical confirmation that the related population means are statistically substantially distinct, the Independent Samples T-Test, also known as the 2-sample T-test, analyses the mean values of two independent samples. The Independent Samples T-Test is also a parametric test. The Independent t Test is another name for this test.
+For instance, can we check if there is a correlation between the two data groups defined in the code below?
+Code
+
+# Python program to implement Independent T-Test on the two independent samples
+
+# Importing the required libraries
+from scipy.stats import ttest_ind
+import numpy as np
+
+# Creating the data groups
+data_group1 = np.array([12, 18, 12, 13, 15, 1, 7,
+                        20, 21, 25, 19, 31, 21, 17,
+                        17, 15, 19, 15, 12, 15])
+data_group2 = np.array([23, 22, 24, 25, 21, 26, 21,
+                        21, 25, 30, 24, 21, 23, 19,
+                        14, 18, 14, 12, 19, 15])
+
+# Calculating the mean of the two data groups
+mean1 = np.mean(data_group1)
+mean2 = np.mean(data_group2)
+
+# Print mean values
+print("Data group 1 mean value:", mean1)
+print("Data group 2 mean value:", mean2)
+
+# Calculating standard deviation
+std1 = np.std(data_group1)
+std2 = np.std(data_group2)
+
+# Printing standard deviation values
+print("Data group 1 std value:", std1)
+print("Data group 2 std value:", std2)
+
+# Implementing the t-test
+t_test,p_val = ttest_ind(data_group1, data_group2)
+print("The P-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print("We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+Data group 1 mean value: 16.25
+Data group 2 mean value: 20.85
+Data group 1 std value: 6.171507109288622
+Data group 2 std value: 4.452808102759426
+The P-value is:  0.012117171124028792
+We can reject the null hypothesis
+
+Paired sampled t-test:- The dependent samples t-test is another name for the paired samples t-test. A substantial difference between two related variables is tested using a univariate test. An illustration of this would be taking a person's blood pressure before and after a specific medication, condition, or period.
+Code
+
+# Python program to implement Paired Sample T-Test on the two dependent samples
+
+# Importing the required libraries
+import pandas as pd
+from scipy import stats
+
+# Creating two samples 
+sample1 = [29, 30, 33, 41, 38, 36,
+       35, 31, 29, 30]
+sample2 = [31, 32, 33, 39, 30, 33,
+        30, 28, 29, 31]
+
+# Performing paired sample t-test
+t_test, p_val = stats.ttest_rel(sample1, sample2)
+print("The P-value of the test is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:
+    print("We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+The P-value of the test is:  0.15266056244408904
+We can accept the null hypothesis
+
+Z-Test
+In the z-test, which also functions as a hypothesis test, the z-statistic has a normal distribution. As the central limit theorem states, observations are assumed to be roughly normally distributed as sample size increases. Hence the z-test is most effective for samples bigger than 30.
+The null and alternate hypotheses, alpha, and z-score values must all be specified when doing a z-test. The test statistic must then be computed, followed by a statement of the findings and conclusions. A z-statistic, also known as a z-score, measures how many standard deviations a score resulting from a z-test is either above or under the mean population.
+One-sample location tests, two-sample location tests, paired difference tests, and maximum likelihood estimates are a few tests that may be performed as z-tests.
+One-Sample Z-Test:- Assume a trader wants to determine if a stock's daily mean gain is more than 3%. The average is defined for a straightforward arbitrary sample of 50 results, which is 2%. Assume that the profits' standard deviation is 1.5 percent. Therefore, the null hypothesis in this situation is whenever the mean is equal to 3%.
+On the other hand, the alternate hypothesis is if the average return is more or lower than 3%. We can assume a two-tailed z-test is used to choose an alpha value of 0.05%. As a result, the alpha has a significance level of 1.96 or -1.96, and 0.025% of the observations are distributed evenly across the two tails. We will disprove the null hypothesis if z is larger than 1.96 or smaller than -1.96.
+The answer for z is determined by deducting the observed mean of the samples from the value of the mean daily return chosen for the test, in this instance, 1%. After that, multiply the result by the square root of the total number of observations in the sample divided by the standard deviation.
+Since z is higher than 1.96, the person will reject the null hypothesis and concludes that the daily mean return is higher than 1%.
+Code
+
+# Python program to implement One Sample Z-Test 
+
+# Importing the required libraries
+import pandas as pd
+from scipy import stats
+from statsmodels.stats import weightstats as stests
+
+# Creating a dataset
+data = [89, 93, 95, 93, 97, 98, 96, 99, 93, 97,
+        110, 104, 119, 105, 104, 110, 110, 112, 115, 114]
+
+# Performing the z-test
+z_test ,p_val = stests.ztest(data, x2 = None, value = 160)
+print(p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:
+    print("We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+2.417334226169332e-186
+We can reject the null hypothesis
+
+Two-sample Z-test- Equivalent to the t-test, the 2 data groups z-test examines two independent data sets to determine whether or not the sample means of the two groups are identical.
+H0: average of the two data groups is 0
+H1: average of the two data groups is not 0
+Example: we are examining the two data groups in the code below.
+Code
+
+# Python program to implement Two Sample Z-Test 
+
+# Importing the required libraries
+import pandas as pd
+from scipy import stats
+from statsmodels.stats import weightstats as stests
+
+# Creating a dataset
+data1 = [83, 85, 86, 90, 90, 93, 93, 95, 97, 97,
+         106, 108, 106, 108, 111, 113, 113, 112, 116, 111]
+
+data2 = [92, 92, 90, 93, 93, 97, 94, 98, 109, 108,
+         110, 117, 110, 115, 114, 114, 130, 130, 149, 131]
+
+# Implementing the two-sample z-test 
+z_test ,p_val = stests.ztest(data1, x2 = data2, value = 0, alternative = 'two-sided')
+print(p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:
+    print("We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+0.04813782199434202
+We can reject the null hypothesis
+
+ANOVA (F-TEST)
+The t-test is effective for comparing two groups; however, there are situations when we wish to examine more than two datasets at once. For instance, we would need to analyze the averages of each class or group to determine whether voter age varied depending on a categorical variable like race. We could do a separate t-test for each combination of groups, which raises the possibility of false positive results. Analysis of variance, or ANOVA, is a statistical inference technique that permits the parallel comparison of the distribution of several data groups.
+The F-distribution cannot contain any negative numbers, contrary to the z-test and t-distributions, since the within and between-group variability are generally positive due to squaring each deviation value.
+One-Way F-test(Anova):- Depending on the average similarity and f-score of two or more data groups, it may be determined if they are similar or not.
+Code
+
+# Python program to implement One-Way f-test
+
+# Importing the required libraries
+import scipy.stats
+
+# Creating sample data
+data1 = [0.0842, 0.0368, 0.0847, 0.0935, 0.0376, 0.0963, 0.0684,
+             0.0758, 0.0854, 0.0855]
+data2 = [0.0785, 0.0845, 0.0758, 0.0853, 0.0946, 0.0785, 0.0853,
+           0.0685]
+data3 = [0.0864, 0.2522, 0.0894, 0.2724, 0.0853, 0.1367, 0.853]
+
+# Performing the F-Test 
+f_test, p_val = scipy.stats.f_oneway(data1, data2, data3)
+print("p-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print(" We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+p-value is:  0.04043792126789144
+We can reject the null hypothesis
+
+Two-Way F-test:- When there are two independent variables and two or more groups, we utilize the two-way F-test, a generalization of the one-way F-test. We cannot find the dominant factor using the 2-way F-test. If the personalized significance value needs to be validated, post-hoc testing is required.
+Code
+
+# Python program to perform 2-way F-test
+
+# Importing the required modules
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+  
+# Create a dataframe
+df = pd.DataFrame({'Frequency_fertilizers': np.repeat(['daily', 'weekly'], 16),
+                          'Frequency_Watering': np.repeat(['daily', 'weekly'], 16),
+                          'Crop_height': [12, 14, 15, 12, 17, 21, 19, 8, 
+                                          5, 12, 19, 23, 23, 14, 16, 21, 
+                                          25, 16, 17, 13, 24, 9, 19, 4, 
+                                          12, 14, 15, 12, 17, 15, 18, 14]})
+  
+  
+# Performing the two-way ANOVA test
+f_test = ols('Crop_height ~ C(Frequency_fertilizers) * C(Frequency_Watering) +\
+C(Frequency_fertilizers):C(Frequency_Watering)',
+            data = df).fit()
+result = sm.stats.anova_lm(f_test, type = 2)
+  
+# Printing the result
+print(result)
+
+Output
+                                                  df      sum_sq     mean_sq  \
+C(Frequency_fertilizers)                         1.0    1.531250    1.531250   
+C(Frequency_Watering)                            1.0  117.945205  117.945205   
+C(Frequency_fertilizers):C(Frequency_Watering)   1.0    1.643988    1.643988   
+Residual                                        30.0  802.437500   26.747917   
+
+                                                       F    PR(>F)  
+C(Frequency_fertilizers)                        0.057247  0.812528  
+C(Frequency_Watering)                           4.409510  0.044253  
+C(Frequency_fertilizers):C(Frequency_Watering)  0.061462  0.805889  
+Residual                                             NaN       NaN  
+
+Chi-Square Test
+This test is used when two categorized variables are from the same population. Its purpose is to decide if the two elements are significantly associated.
+For example, we may group people in an election campaign survey based on their preferred method of voting and gender (male or female) (Democratic, Republican, or Independent). To determine if gender affects voting choice, we may apply a chi-square test evaluating independence.
+Here is an example
+Code
+
+# Python program to perform a chi-square test
+
+# Importing the required modules
+from scipy.stats import chi2_contingency
+  
+# defining our data
+data = [[231, 256, 321], [245, 312, 213]]
+
+# Performing chi-square test
+test, p_val, dof, expected_val = chi2_contingency(data)
+  
+# interpreting the p-value
+alpha = 0.05
+print("The p-value of our test is " + str(p_val))
+
+# Checking the hypothesis
+if p_val <= alpha:
+    print('We can reject the null hypothesis')
+else:
+    print('We can accept the null hypothesis')
+
+Output
+The p-value of our test is 1.4585823594475804e-06
+We can reject the null hypothesis
+
+Mann-Whitney U Test
+Tests whether the distributions of two independent samples are equal or not.
+Assumptions
+
+Each sample's data are randomly and uniformly distributed (iid).
+Each sample's data can be rated.
+
+Interpretation
+
+H0: Both sets' distributions are equivalent.
+H1: Neither of the sets' distributions is equal.
+
+Code
+
+# Python program to implement Mann-Whitney U Test
+
+# Importing the required dataset
+from scipy.stats import mannwhitneyu
+
+# Creating the dataset
+data1 = [0.978, 2.792, 0.248, -0.820, -0.102, -1.203, 0.102, -1.392, -1.395, -1.928]
+data2 = [1.283, -0.284, -0.821, -0.792, -0.793, -0.294, 0.600, 1.294, -1.183, -0.284]
+
+# Implementing the test
+k_test, p_val = mannwhitneyu(data1, data2)
+print("P-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print(" We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+P-value is:  0.520366020896531
+We can accept the null hypothesis
+
+Wilcoxon Signed-Rank Test
+Tests whether the distributions of two paired samples are equal or not.
+Assumptions
+
+Every sample's observations are randomly and uniformly distributed (iid).
+Every sample's observations can be ranked.
+Every sample's observations should be coupled.
+
+Interpretation
+
+H0: The samples' distributions are equal.
+H1: Neither of the samples' distributions is equal.
+
+Code
+
+# Python program to implement Wilcoxon Signed-Rank Test
+
+# Importing the required dataset
+from scipy.stats import wilcoxon
+
+# Creating the dataset
+data1 = [0.978, 2.792, 0.248, -0.820, -0.102, -1.203, 0.102, -1.392, -1.395, -1.928]
+data2 = [1.283, -0.284, -0.821, -0.792, -0.793, -0.294, 0.600, 1.294, -1.183, -0.284]
+
+# Implementing the test
+w_test, p_val = wilcoxon(data1, data2)
+print("P-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print(" We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+P-value is:  0.625
+We can accept the null hypothesis
+
+Kruskal-Wallis H Test
+Tests whether the distributions of two or more independent samples are equal or not.
+Assumptions
+
+Every sample's observations are randomly and uniformly distributed (iid).
+Every sample's observations can be ranked.
+
+Interpretation
+
+H0: The samples' distributions are equal.
+H1: Neither of the samples' distributions is equal.
+
+Code
+
+# Python program to implement Kruskal-Wallis H Test
+
+# Importing the required dataset
+from scipy.stats import kruskal
+
+# Creating the dataset
+data1 = [0.978, 2.792, 0.248, -0.820, -0.102, -1.203, 0.102, -1.392, -1.395, -1.928]
+data2 = [1.283, -0.284, -0.821, -0.792, -0.793, -0.294, 0.600, 1.294, -1.183, -0.284]
+
+# Implementing the test
+k_test, p_val = kruskal(data1, data2)
+print("P-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print(" We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+P-value is:  0.49612971494281877
+We can accept the null hypothesis
+
+Friedman Test
+Tests whether the distributions of two or more paired samples are equal or not.
+Assumptions
+
+Every sample's observations are randomly and uniformly distributed (iid).
+Every sample's observations can be ranked.
+Every sample's observations should be coupled.
+
+Interpretation
+
+H0: The samples' distributions are equal.
+H1: Neither of the samples' distributions is equal.
+
+Code
+
+# Python program to implement Friedman Test
+
+# Importing the required dataset
+from scipy.stats import friedmanchisquare
+
+# Creating the dataset
+data1 = [0.978, 2.792, 0.248, -0.820, -0.102, -1.203, 0.102, -1.392, -1.395, -1.928]
+data2 = [1.283, -0.284, -0.821, -0.792, -0.793, -0.294, 1.100, 0.294, -0.183, -1.284]
+data3 = [-0.324, 1.346, 1.148, -1.258, -0.233, 0.749, 0.157, 0.529, -0.240, -1.254]
+
+# Implementing the test
+f_test, p_val = friedmanchisquare(data1, data2, data3)
+print("P-value is: ", p_val)
+
+# taking the threshold value as 0.05 or 5%
+if p_val < 0.05:    
+    print(" We can reject the null hypothesis")
+else:
+    print("We can accept the null hypothesis")
+
+Output
+P-value is:  0.496585303791408
+We can accept the null hypothesis
+
+
+
+Next Topic**args and **kwargs in Python
+
+
+
+
+← prev
+next →
+
+
+
+

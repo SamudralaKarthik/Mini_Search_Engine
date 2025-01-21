@@ -1,0 +1,129 @@
+
+
+
+
+next →
+← prev
+
+How to Check if Element Exists in List in Python
+The list is a crucial container in Python because it is able to store elements of all types of data as a collection. Knowing specific list operations is essential to be able to program day-to-day. This article will discuss one of the most fundamental list operations, which is to verify the existence of the elements on the list.
+Method 1: Naive Method
+In the Naive approach, one employs a loop to iterate through the entire list of elements to verify whether the element is a target element. This is the most efficient method of determining the presence of the element on the list.
+Method 2: Using in
+Python is the most common method of determining whether an element is present in a list. This method returns True if the element is present in the list and False if it is not within the set. The list does not need to be sorted in order to use this method of checking.
+Code #1: A demonstration of how you can check whether an element is in the list by using the Naive method as well as in.
+
+# First, we will initialize list
+test_list1 = [ 1, 5, 2, 6, 3, 5 ]
+ 
+print ("Check if 5 exists in list (using loop): ")
+ 
+# Here, we will checking if 7 exists in list using loop
+for K in test_list1:
+    if(K == 7) :
+        print ("Given element Exists")
+    else:
+        print ("Given element does not exists")
+ 
+print ("Check if 5 exists in list (using in): ")
+ 
+# Here, we will check if 5 exists in list using in
+if (5 in test_list1):
+    print ("Given element Exists")
+else:
+    print ("Given element does not exists")
+
+Output:
+Check if 5 exists in list ( using loop ) : 
+Given element does not exists
+Check if 5 exists in list ( using in ) : 
+Given element Exists
+
+Method 3 : Using set() + in
+Converting the list to the set and then using the in may make more sense than just making use of in. However, efficiency as a plus has some drawbacks. One of these concerns is that order in which the list is displayed isn't maintained. If you choose to make a list and make a new one, you'll need to make use of additional space. Another issue is that set doesn't allow duplicates, and therefore duplicate elements will be eliminated from the list.
+Method 4 : Using sort() + bisect_left()
+The traditional binary search method to determine the existence of elements means that list must be sorted first, thus not keeping the order of elements. Bisect_left() will return the very first instance of an element found. It works similarly with lower_bound() in C++ STL.
+Note: The bisect function will only give the location of the element but not provide details of whether the element is there or not.
+Code #2: Demonstrating to check existence of element in list using set() + in and sort() + bisect_left().
+
+from bisect import bisect_left as BL
+from bisect import bisect as BS
+ 
+# First, we will initialize list
+test_list_set1 = [ 1, 5, 2, 6, 3, 5 ]
+test_list_bisect1 = [ 1, 5, 2, 6, 3, 5 ]
+ 
+print ("Checking if 5 exists in list (using set() + in): ")
+ 
+# Check if 7 exists in list using set() + in
+test_list_set1 = set(test_list_set1)
+if 7 in test_list_set1:
+    print ("Given element Exists")
+else:
+    print ("Given element does not exists")
+ 
+print ("Checking if 7 exists in list (using sort() + bisect_left()): ")
+ 
+# Check if 8 exists in list using sort() + bisect_left()
+test_list_bisect1.sort()
+if BL(test_list_bisect1, )!= BS(test_list_bisect1, 8):
+    print ("Given element Exists")
+else:
+    print ("Given element does not exists")
+
+Output:
+Checking if 5 exists in list (using set() + in): 
+Given element does not exists
+Checking if 7 exists in list (using sort() + bisect_left()): 
+Given element does not exists
+
+Method 5 : Using count()
+We can make use of the built-in Python List method count() to verify whether the element passed is present in the List. If the element that we passed is in the List, then the count() technique will reveal how many instances it is present throughout the list. If it's a positive number, that means that an element exists within the List.
+Code #3: Explaining how to verify the presence of elements on the list by counting().
+
+# First, we will initialize list
+test_list1 = [ 1, 5, 2, 6, 3, 5, 46, 2 ]
+
+print ("Checking if 5 exists in list: ")
+ 
+# Here we will calculate the number of times element exists in list
+exist_count1 = test_list1.count(5)
+ 
+# Now, we will check if it is more then 0
+if exist_count1 > 0:
+    print("Yes, 5 exists in list")
+else:
+    print("No, 5 does not exists in list")
+#Checking for another number:
+print ("Checking if 46 exists in list: ")
+ 
+# Here we will calculate the number of times element exists in list
+exist_count2 = test_list1.count(46)
+ 
+# Now, we will check if it is more then 0
+if exist_count2 > 0:
+    print("Yes, 46 exists in list")
+else:
+    print("No, 46 does not exists in list")
+
+Output:
+Checking if 5 exists in list: 
+Yes, 5 exists in list
+Checking if 46 exists in list: 
+Yes, 46 exists in list
+
+Conclusion
+In this tutorial, we discussed how to check if the given element exists in the list using different methods in Python.
+
+
+Next TopicHow to Check Spellings of Given Words using Enchant in Python
+
+
+
+
+← prev
+next →
+
+
+
+

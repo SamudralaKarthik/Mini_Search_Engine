@@ -1,0 +1,438 @@
+
+
+
+
+next →
+← prev
+
+Building a Twitter Bot using Python
+In the following tutorial, we will learn how to build our very own Twitter Bot in the Python programming language with the help of the Tweepy package, which provides an efficient way to use the Twitter Application Programming Interface (API).
+Twitter is considered among the most widely adopted social networks. For many organizations and people, having a great Twitter presence is a chief factor in keeping their audience engaged.
+A Great Twitter presence means being involved in activities like keeping an active account with new tweets and retweets, following interesting accounts, and quickly replying to the followers' messages. We can perform all this work manually; however, that can take time. Instead, we can depend on a Twitter bot, a program that automates all or part of the Twitter activity.
+By the end of this tutorial, we will be able to learn the following:
+
+Improving and automating the interactions with the Twitter audience
+Installing Tweepy
+Signing up as a Twitter developer to utilize its API
+Utilizing Tweepy in order to invoke the Twitter API
+Building a Twitter Bot
+
+But before getting started, let us briefly look into the Twitter API.
+Understanding the Twitter API
+The Twitter API provides developers access to almost every function of Twitter. We can utilize the API in order to read and write information associated with the entities of Twitter, which includes tweets, users, and trends.
+Technically, the API exposes various endpoints of HTTP associated with:
+
+Tweets
+Retweets
+Likes
+Favorites
+Direct messages
+Media
+Trends
+
+The Tweepy package, as we will discuss later, offers a method to invoke those HTTP endpoints without dealing with low-level details.
+The Twitter API utilizes OAuth, a widely used open authorization protocol, to authenticate all the requests. Before making any call to the Twitter API, we have to create and configure the authentication credentials. We will be looking into the detailed instructions for this later in this tutorial.
+We can leverage the Twitter API to build various kinds of automation, like bots, analytics, and other utilities. The thing to remember is that Twitter imposes certain restrictions and policies related to what we can and cannot build with the help of its API. The tools developed to spam, mislead users, and other activities are forbidden. This is done to guarantee users a good experience.
+The Twitter API also imposes rate limits about how commonly we are allowed to invoke the methods of API. If we exceed these limits, we will have to wait for around 5 to 15 minutes to be able to use the API again. We must consider this while designing and implementing bots to avoid unnecessary waits.
+One can find more details about the policies of the Twitter API and limits in its official documentation.
+Let us now understand the Tweepy package.
+Understanding the Python Tweepy package
+Tweepy is an open-source Python package that provides us with an efficient way to access the Twitter API using Python. The Tweepy package consists of a set of classes and methods that depicts the models of Twitter and API endpoints, and it transparently handles different implementation details, like:
+
+Data encoding and decoding
+Results pagination
+HTTP requests
+OAuth authentication
+Streams
+Rate limits
+
+If we were not using the Tweepy package, we would have to deal with low-level details related to HTTP requests, rate limits, authentication, and data serialization. The entire procedure could be time-consuming and prone to error. Instead, thanks to Tweepy, we can focus on the functionality we want to build.
+We can use almost every functionality offered by Twitter API through Tweepy. As of version 3.7.0, the only current limitation is that Direct Messages do not work properly due to some recent alterations in the Twitter API.
+Using the Python Tweepy package
+The following section will discuss how we can install the Tweepy package for development, configure authentication credentials, and interact with the Twitter API.
+Let us begin by installing the package.
+Installation
+We can install the Tweepy package using pip, a Python package manager. In the following section, we are about to use a virtual environment (virtualenv) for the projects to avoid depending on system-wide packages.
+We can create a project named tweepyBots. The primary step is to create a directory and a virtual environment. Let us consider the following syntax for the same:
+Syntax:
+
+$ mkdir tweepyBots
+$ cd tweepyBots
+$ python3 -m venv tweepyEnv
+
+The above commands will create the virtual environment within the project directory.
+Then we can install the Tweepy package. First, we have to activate the newly created virtual environment and then utilize the pip installer to do the installation.
+Syntax:
+
+$ path_to_the_tweepyEv_directory ./script/activate.bat
+$ pip install tweepy
+
+Now that the Tweepy package is installed let's create a requirements.txt file consisting of the names of the dependencies. We can use the pip command freeze for this task as shown below:
+Syntax:
+
+$ pip freeze > requirements.txt
+
+We will use this requirements.txt file when we are deploying the project.
+Creating Twitter API Authentication Credentials
+As we have discussed earlier, the Twitter API requires that all requests use OAuth in order to authenticate. Thus, we have to create the required authentication credentials to be able to use the API. These credentials are four text strings:
+
+Consumer key
+Consumer secret
+Access token
+Access secret
+
+If we already have a Twitter user account, follow these steps to create the key, token, and secrets. Otherwise, we need to sign up as a Twitter user before proceeding.
+Step 1: Applying for a Twitter Developer Account
+Step 2: Creating an application
+Step 3: Creating the authentication credentials
+Applying for a Twitter Developer Account
+First of all, we have to go to the Twitter developer site to apply for a developer account. The link to the website can be found below:
+https://developer.twitter.com/en
+Here, we need to select the Twitter user responsible for this account. It must be our organization or us.
+Twitter will then request a few details about how we plan to utilize the developer account.
+We will then need to specify the name of the developer account and if we are planning to utilize it for personal usage or the organization.
+Creating an application
+Twitter grants authentication credentials to applications, not accounts. An application can be any utility or bot that uses the Twitter API. Thus, we have to register the application to be able to make API calls.
+We must go to the Twitter apps page in order to register the application and select the Create an app option.
+We will then provide the following details associated with the application and its purpose:
+
+Name of the Application: This information will serve as the name to identify the application (For example, testbot)
+Description of the Application: This information will serve as the purpose of the application (For example, test bot to learn about tweepy)
+Website URL for the application: This information is required; however, we can use the URL to some personal websites as the bots do not require a URL to function.
+Use of the application: This information tells how users will utilize the application (For example, this application is a bot that will automatically respond to users)
+
+Creating the Authentication Credentials
+We can go to the Twitter apps page to create the authentication credentials. Here we will find the Details button of the application. Once we click this button, we will be taken to the next page, where we can generate the credentials.
+By selecting the Keys and tokens tab, we can generate and copy the key, token, and secret to utilize them in the code. Once we are done generating the credential, we can save them to use in the code later.
+We can test the credentials with the help of the following snippet of code:
+Example:
+
+# importing the required library
+import tweepy
+
+# Authenticating to Twitter
+authCreds = tweepy.OAuthHandler("pGBDoAaEpkuiVKBOLwjtcmHGc", 
+    "xF3g1wrP50b6BlZEd20u4oVfjgH1FGQcuSUzlQO5aUWOufvlhw")
+authCreds.set_access_token("642518493-6VcLIQprbQbv9wkcBBPvCle8vsjU9fE85Dq9oStl", 
+    "tH9aKQbQQ1iRdYTcLSsPwitl44BkAc6jikrsU0ifnXvZhq")
+
+# creating an object of the API class
+apiObj = tweepy.API(authCreds)
+
+# verifying credentials
+try:
+    apiObj.verify_credentials()
+    print("Authentication Successful")
+except:
+    print("Error raised during authentication")
+
+Explanation:
+In the above snippet of code, we have imported the required package. We created an object of the OAuthHandler class of the Tweepy package to authenticate to Twitter. We have then created an object of the API class. Later, we used the try-expect method, where we used the verify_credentials() function and printed some statements regarding the same. If everything goes well, we should see a message saying Authentication Successful.
+Note: All the credentials utilized in this article are only for understanding and will not work. We are required to generate and utilize our credentials.
+Reviewing of Tweepy Functionality
+Tweepy provides an interface to its users in order to access the Twitter API from the Python programming language. It does so by encapsulating much of the complexity of the Twitter API and adding a model layer along with some of the useful functionalities on top of it.
+Since, over time, the names of different concepts of Twitter have evolved, some old names are still utilized in Tweepy. Thus, it is better to remember that, in the context of this tutorial, these equivalences hold:
+
+A status is referred to as a tweet.
+A friendship is considered a follow-follower relationship.
+A favorite is equivalent to a like.
+
+Now that we know how Tweepy names things let us understand how it works.
+We can divide the functionality of Tweepy into the following groups:
+
+OAuth
+The API classes
+Models
+Cursors
+Streams
+
+Now we are about to investigate these groups to learn about the functionality each one provides.
+Understanding OAuth
+The Tweepy package takes care of all the information using OAuth required by the Twitter API to authenticate each request. It offers an OAuthHandler class that we can use to set the credentials in all API calls.
+The following snippet of code illustrates how we can create an OAuthHandler object that we can use later for API calls:
+Example:
+
+# importing the required package
+import tweepy
+
+# Authenticating to Twitter
+authCreds = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
+authCreds.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
+
+Explanation:
+In the above snippet of code, we have imported the required package. We have then created an object of the OAuthHandler class specifying the consumer key and consumer secret as its parameters and used the set_access_token() function providing the access token and its secret in order to authenticate to Twitter.
+Here we are telling Tweepy to use the credentials we created in Step 3: Creating the Authentication Credentials. It is mandatory to replay CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, and ACCESS_TOKEN_SECRET with the previously generated values.
+Understanding the API Class
+The API class consists of multiple methods that offer access to Twitter API endpoints. With the help of these methods, we can access the functionality of the Twitter API.
+Let us consider the following snippet of code that illustrates the creation of an API object that we can use to invoke Twitter API. We will also be setting the wait_on_rate_limit and wait_on_rate_limit_notify arguments to True to make sure that the API object prints a message and waits if the rate limit is exceeded:
+Example:
+
+# importing the required package
+import tweepy
+
+# Authenticating to Twitter
+authCreds = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
+authCreds.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
+
+# Creating an object of the API class
+apiObj = tweepy.API(
+    authCreds,
+    wait_on_rate_limit = True,
+    wait_on_rate_limit_notify = True
+    )
+
+Explanation:
+We have set the authentication credentials and created an API object in the above snippet of code. We can invoke the methods of this object in order to perform any API call.
+The methods of API can be grouped into the following categories:
+
+Methods for user timelines
+Methods for tweets
+Methods for users
+Methods for followers
+Methods for the account
+Methods for likes
+Methods for blocking users
+Methods for searches
+Methods for trends
+Methods for streaming
+
+In the following sub-sections, we are about to review various groups of API methods. We can visit the complete documentation of the API Class for a detailed list of all API methods.
+Methods for User Timelines
+These methods deal with reading tweets, mentions, and retweets from the timeline or any other user's timeline if it is public.
+Let us consider the following snippet of code that prints the author and the text of the last tweets in the home timeline:
+Example:
+
+# using the home_timeline() method
+time_line = apiObj.home_timeline()
+for the_tweet in time_line:
+    print(f"{the_tweet.user.name} said {the_tweet.text}")
+
+Explanation:
+In the above snippet of code, we have used the home_timeline() method of the API class. This method is used to get the last twenty entries in the timeline. 20 is the default value in the Tweepy package. We will see how to get more than 20 results later and work with paginated results.
+Methods for Tweets
+The methods deal with creating, fetching, and retweeting tweets. Let us consider the following snippet of code that illustrates the use of the Tweepy package in creating a tweet with some text:
+Example:
+
+# using the update_status() method
+apiObj.update_status("This is a test tweet to learn Tweepy Python")
+
+Explanation:
+In the above snippet of code, we have used the update_status() method in order to create a new tweet from a Python string.
+Methods for Users
+Methods in this group allow us to search users with a filter criterion, fetch details of a user, and list the followers of any user if that user account is public.
+Let us consider the following snippet of code to fetch the details of the user and print it along with the 20 most recent followers:
+Example:
+
+# using the get_user() method
+the_user = apiObj.get_user("Name of some user")
+
+# printing the details of the user like name, description, location
+print("Details of the User:")
+print(the_user.name)
+print(the_user.description)
+print(the_user.location)
+
+# printing the last 20 followers of the user
+print("Last 20 Followers of the User:")
+for the_follower in the_user.followers():
+    print(the_follower.name)
+
+Explanation:
+In the above snippet of code, we have used the get_user() method that returns an object consisting of the details of the user. This returned object also has methods to access information related to the user. We have then used the followers attribute to get the list of followers and print their names.
+Methods for Followers
+This group of methods deals with the following and unfollowing users, querying the followers of users and listing the accounts any user is following.
+Let us consider the following snippet of code that shows how we can use Tweepy to start following some users.
+Example:
+
+# using the create_friendship() method
+apiObj.create_friendship("user_name")
+
+Explanation:
+In the above snippet of code, we have used the create_friendship() method to add the user to the list of accounts we follow.
+Methods for the Account
+These methods enable us to read and write our own profile details.
+Let us consider the following snippet of code that shows how we can update our profile description:
+Example:
+
+# using the update_profile() method
+apiObj.update_profile(description = "Welcome to javatpoint.com")
+
+Explanation:
+In the above snippet of code, we have used the update_profile() method within which we have passed the description argument in order to change the profile description to "Welcome to javatpoint.com".
+Methods for Streaming
+Streaming allows us to watch for tweets actively that match specific criteria in real-time. This statement implies that when no new tweets match the criteria, the program will wait until a new tweet is created and processed.
+We need to create two objects to use streaming:
+
+The stream object utilizes the Twitter API to get tweets that match a few criteria. This object is the source of tweets processed by a stream listener.
+The stream listener receives tweets from the stream.
+
+Let us consider the following snippet of code that demonstrates the same:
+Example:
+
+# importing the required modules
+import json
+import tweepy
+
+# defining a Class
+class TheStreamListener(tweepy.StreamListener):
+    def __init__(self, api):
+        self.api = api
+        self.me = api.me()
+
+    def onStatus(self, tweet):
+        print(f"{tweet.user.name}:{tweet.text}")
+
+    def onError(self, status):
+        print("Error detected")
+
+# Authenticating to Twitter
+the_auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
+the_auth.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
+
+# Creating API object
+the_api = tweepy.API(
+    the_auth, wait_on_rate_limit = True,
+    wait_on_rate_limit_notify = True
+    )
+
+tweetsListener = TheStreamListener(the_api)
+the_stream = tweepy.Stream(the_api.auth, tweetsListener)
+the_stream.filter(track = ["Python", "Django", "Tweepy"], languages = ["en"])
+
+Explanation:
+In the above snippet of code, we have imported the required modules and created a class of StreamListener. This class is used for the stream listener tweetsListener. We reused the common code to all stream listeners by extending the StreamListener of the Tweepy package. Tweets from the stream are processed by the onStatus() function.
+We have created the stream with the help of the tweepy.Stream, passing the authentication credentials and our stream listener. We have to call the filter() function to get tweets from the stream, passing the criteria through filtering tweets. Then, for each new tweet that matches the criteria, the stream object invokes the onStatus() function of the stream listener.
+Models
+Tweepy utilizes its model classes to encapsulate the responses from different Twitter API methods. This provides us with a convenient method to use the outputs from API operations.
+The model classes are as follows:
+
+User
+Status
+Friendship
+SearchResults
+
+Let us consider an example where we need to fetch every tweet in which we are mentioned, and then mark each tweet as Liked and follow its author:
+Example:
+
+# using the mentions_timeline() method
+the_tweets = apiObj.mentions_timeline()
+for the_tweet in the_tweets:
+    the_tweet.favorite()
+    the_tweet.user.follow()
+
+Explanation:
+In the above snippet of code, we have used the mentions_timeline() belonging to the Status class that returns a tweet object. We have then used the favorite() method to mark it as Liked. We have then used the user attribute along with the follow() method to add the author of the tweet to the list of people we follow.
+Leveraging Tweepy models allows us to create concise and understandable code.
+Cursors
+A lot of Twitter API endpoints utilize pagination in order to return their outputs. By default, each method returns the first page, which generally consists of some dozen items.
+Tweepy cursors take away part of the complexity of working with paginated outputs. Cursors are implemented as a Tweepy class named Cursor. The Cursor object takes care of fetching the different result pages transparently. We can use a cursor by selecting the API method to fetch items and the number of items we want.
+Let us consider the following snippet of code that illustrates how we can get the first page from the timeline and the last hundred tweets with the help of a cursor.
+Example:
+
+# using the Cursor method
+for the_tweet in tweepy.Cursor(apiObj.home_timeline).items(100):
+    print(f"{the_tweet.user.name} said: {the_tweet.text}")
+
+Explanation:
+In the above snippet of code, we have created a cursor object using tweepy.Cursor. The class constructor receives an API method to utilize as the source for results. In the above example, we have used the home_timeline() function as the source as we wanted tweets from the timeline. The Cursor object has an items() method that returns an iterable we can use to iterate over the results. We can pass items() the number of result items we want to get.
+Making a Twitter Bot in Python using Tweepy
+Now that we have understood the working of Tweepy let us see how we can make a Twitter bot in Python with Tweepy. Bots work by continuously watching for some Twitter activity and automatically reacting to it.
+Watching for Twitter Activity
+There are two ways to watch for Twitter activity continuously:
+
+Using streams: to be notified when new content, such as tweets, that matches specific criteria is created
+Using polling: to make Tweepy API calls periodically and then check their results to see if they consist of something new
+
+Which option to choose depends on the use case. Using streams is the most efficient option, but then we can only watch activity related to tweets, so it is less flexible. In the following section, we will be using only one option to build a bot.
+Follow Followers bot
+We will learn how to build the follow followers bot that automatically follows anyone who follows us in the following section. This bot gets the list of the followers from Twitter every minute and then iterates through it to follow each user that we are not already following.
+Let us consider the following source code that demonstrates the same.
+Example:
+
+# importing the required libraries
+import tweepy
+import logging
+import os
+import time
+
+logging.basicConfig(level = logging.INFO)
+logger = logging.getLogger()
+
+# defining the createApi() function
+def createApi():
+    consumerKey = os.getenv("CONSUMER_KEY")
+    consumerSecret = os.getenv("CONSUMER_SECRET")
+    accessToken = os.getenv("ACCESS_TOKEN")
+    accessTokenSecret = os.getenv("ACCESS_TOKEN_SECRET")
+
+    the_auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
+    the_auth.set_access_token(accessToken, accessTokenSecret)
+    api = tweepy.API(
+        the_auth,
+        wait_on_rate_limit = True,
+        wait_on_rate_limit_notify = True
+        )
+    try:
+        api.verify_credentials()
+    except Exception as e:
+        logger.error("Error creating API", exc_info = True)
+        raise e
+    logger.info("API created")
+    return api
+
+# defining the followFollowers() function
+def followFollowers(the_api):
+    logger.info("Retrieving and following followers")
+    for the_follower in tweepy.Cursor(the_api.followers).items():
+        if not the_follower.following:
+            logger.info(f"Following {the_follower.name}")
+            the_follower.follow()
+
+# defining the main() function
+def main():
+    the_api = createApi()
+    while True:
+        followFollowers(the_api)
+        logger.info("Waiting...")
+        time.sleep(60)
+
+if __name__ == "__main__":
+    main()
+
+Explanation:
+In the above snippet of code, we have imported the required libraries. We then defined a function as createApi() that reads the authentication credentials from environment variables and creates the Tweepy API object. These credentials are:
+
+CONSUMER_KEY
+CONSUMER_SECRET
+ACCESS_TOKEN
+ACCESS_TOKEN_SECRET
+
+The function uses the os.getenv() function to read environment variables and then creates the Tweepy the_auth object. Then the API object is created.
+We have then passed wait_on_rate_limit and wait_on_rate_limit_notify in the creation of the tweepy.API object makes Tweepy wait and print a message when the rate limit is exceeded.
+Before returning the API object, the createApi() function calls the verify_credentials() method to check valid credentials.
+We can observe that we have also used the logging Python module to inform errors and info messages that support us debugging them if any problem arises.
+We have also defined the main() function that creates a Tweepy API object using the createApi() function. We have called the followFollowers() function once every minute within a loop.
+We have also defined the followFollowers() function that uses a Tweepy cursor and the Tweepy API method followers() to get the list of followers. This list consists of a Tweepy user model for each user following us.
+Then the bot iterates through the list and utilizes the following attribute to check if we are already following each user. Users that are not already being followed are followed with the help of the follow() function.
+Execution of the Bot
+We must first create the environment variables for the authentication credentials. We can perform this by replacing the values with the actual credentials.
+Once the environment variables containing the credentials required to use the Twitter API are set, we need to activate the virtual environment and execute the Python project file.
+Syntax:
+
+$ path_to_the_tweepyEv_directory ./script/activate.bat
+$ python followFollowersBot.py
+
+While it is executing, the bot will follow anybody who follows us. We can test that it works by unfollowing someone that is following us. After a minute, they will be followed again. We can stop the bot using Ctrl + C.
+
+
+Next TopicPython Progressbar Module
+
+
+
+
+← prev
+next →
+
+
+
+

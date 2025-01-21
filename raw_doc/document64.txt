@@ -1,0 +1,100 @@
+
+
+
+
+next →
+← prev
+
+nsetools in Python
+In the following tutorial, we will discuss the nsetools library in the Python programming language. We will understand its features and work with some examples.
+So, let's get started.
+Understanding the nsetools library
+NSE or National Stock Exchange of India Limited is the leading stock exchange of India, situated in Mumbai, Maharashtra. NSE was established in the year 1992 as the first dematerialized electronic exchange in the country.
+Python offers a library that allows the programmers to collect real-time data from National Stock Exchange (India). This library is known as nsetools. We can use this library in different projects, which requires fetching live quotes for a provided index or stock or creating large sets of data for further data analytics. We can also create Command-Line Interface (CLI) Applications that may deliver us the details of the live market at a blazing fast speed, pretty faster than any web browser. The data accuracy is only as correct as provided on the official website of the National Stock Exchange of India Limited. (http://www.nseindia.com)
+Main features of the Python nsetools library
+Some of the key features of the Python nsetools library are stated as follows:
+
+The nsetools library works out of the box, without any setup requirement.
+This library helps programmers to fetch livestock code and index codes at blazing fast speed.
+It also offers a set of all stocks and indices traded on the National Stock Exchange.
+Moreover, it also provides a set of:
+
+Top losers
+Top gainers
+Most active
+
+
+It also delivers several helpful Application Programming Interfaces (APIs) in order to validate a stock code and index code.
+The library optionally returns data in JSON format.
+It has a hundred per cent Unit test coverage.
+
+How to install the Python nsetools library?
+The installation part of the nsetools library is quite easy, and it has no external dependencies. All the dependencies of the library are part of standard distribution packages of Python. We can install the nsetools library using the pip installer as shown in the following syntax:
+Syntax:
+
+$ pip install nsetools
+
+Updating the library
+If some of us already have installed the nsetools library in their systems, then the following command will allow them to update the library.
+Syntax:
+
+$ pip install nsetools -upgrade
+
+Python 3 support
+Python 3 support for the library has been included from version 1.0.0 and so on. Now, this library is able to work for both Python 2 as well as Python 3.
+Creating an NSE object
+We can create an NSE object using the Nse() function offered by the nsetools library. The same can be seen in the following example:
+Example:
+
+# importing the Nse() function from the nsetools library
+from nsetools import Nse
+
+# creating an NSE object
+nse_obj = Nse()
+
+# printing the value of the object
+print("NSE Object:", nse_obj)
+
+Output:
+NSE Object: Driver Class for National Stock Exchange (NSE)
+
+Explanation:
+In the above snippet of code, we have imported the required function from the library. We have then defined a variable that uses the Nse() function to create an NSE object. We have then printed the value of the variable for the users.
+Getting Information using the nsetools library
+Let us consider an example demonstrating the use of nsetools for gathering Information.
+Example:
+
+# importing the Nse() function from the nsetools library
+from nsetools import Nse
+
+# creating an NSE object
+nse_obj = Nse()
+
+# getting quotation of the company
+the_quotation = nse_obj.get_quote('sbin')
+
+# printing the name of the company
+print(the_quotation["companyName"])
+
+# printing average price
+print("Average Price: " + str(the_quotation["averagePrice"]))
+
+Output:
+State Bank of India
+Average Price: 431.97
+
+Explanation:
+In the above snippet of code, we have imported the required module and created an NSE object using the Nse() function. We have then defined another variable that uses the get_quote() function on the NSE object to get the quotation of the specified company. We have then printed the required details for the users.
+
+
+Next TopicPython program to find the nth Fibonacci Number
+
+
+
+
+← prev
+next →
+
+
+
+

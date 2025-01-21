@@ -1,0 +1,112 @@
+
+
+
+
+next →
+← prev
+
+Sentiment Analysis using VADER
+Sentiment analysis is a process that 'computationally determines' whether a piece is positive, neutral, or negative. It is also known as opinions mining. This process determines whether a sentence of the paragraph is negative, positive, or neutral.
+
+Business: Marketing companies use it to create strategies, understand customers' feelings about products and brands, how they respond to campaigns and product launches, and why some consumers don't purchase certain products.
+Politics: It is used in the political field to track political views and detect consistency or inconsistency among statements and actions at the government level. It can also be used to predict the outcome of elections.
+Public Activities: Sentiment Analysis is also used to analyse social phenomena and spot potentially dangerous situations.
+
+Install vaderSentiment:
+We can install the vaderSentiment module by using the following command:
+
+!pip3 install vaderSentiment
+
+VADER Sentiment Analysis:
+Valence Aware Dictionary and Sentiment Reasoner (VADER) is a type of dictionary that uses a rule-based sentiment analysis tool. It is especially suited to social media sentiments. VADER use the mixture of the sentiment dictionary is a list of linguistic features (e.g., words) which are labelled according to their semantic orientation as negative or positive. VADER tells us not only about the Positivity or Negativity score but also about how positive and negative sentiment is.
+Code:
+
+# First, we will import SentimentIntensityAnalyzer class.
+
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer as SIA
+
+# Now, we will create a function for printing sentiments of the sentence.
+def sentiment_scores1(sentence):
+
+	# Here, we will create a SIA object.
+	sid_obj1 = SIA()
+
+	# Now, we will create polarity_scores method of SIA object 
+    #gives a sentiment dictionary. which contains positive (pos), negative (neg), # neutral (neu), and compound scores.
+	sentiment_dict1 = sid_obj1.polarity_scores(sentence)
+	
+	print ("The overall sentiment dictionary is: ", sentiment_dict1)
+	print ("The sentence has been rated as ", sentiment_dict1['neg'] * 100, "% Negative")
+	print ("The sentence has been rated as ", sentiment_dict1['neu'] * 100, "% Neutral")
+	print ("The sentence has been rated as ", sentiment_dict1['pos'] * 100, "% Positive")
+
+	print("The sentence Overall Rated As ", end = " ")
+
+	# Here, we will decide sentiment as positive (pos), negative(neg) and neutral(neu)
+	if sentiment_dict1['compound'] >= 0.05 :
+		print(" It is Positive")
+
+	elif sentiment_dict1['compound'] <= - 0.05 :
+		print("It is Negative")
+
+	else :
+		print("It is Neutral")
+
+
+
+# Driver code
+if __name__ == "__main__" :
+
+	print("\n The 1st statement :")
+	sentence = "Jack, Jill and Bill are living in America.\ Jack use to go for running every morning " 
+
+	# Now, we will create a function calling
+	sentiment_scores1(sentence)
+
+	print("\n The 2nd Statement :")
+	sentence = "jill is a school teacher."
+	sentiment_scores1(sentence)
+
+	print("\n The 3rd Statement :")
+	sentence = "bill is a fun guy, for him laughing is the best medicine"
+	sentiment_scores1(sentence)
+
+Output:
+The 1st statement :
+The overall sentiment dictionary is:  {'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}
+The sentence has been rated as  0.0 % Negative
+The sentence has been rated as  100.0 % Neutral
+The sentence has been rated as  0.0 % Positive
+The sentence Overall Rated As  It is Neutral
+
+ The 2nd Statement :
+The overall sentiment dictionary is:  {'neg': 0.0, 'neu': 1.0, 'pos': 0.0, 'compound': 0.0}
+The sentence has been rated as  0.0 % Negative
+The sentence has been rated as  100.0 % Neutral
+The sentence has been rated as  0.0 % Positive
+The sentence Overall Rated As  It is Neutral
+
+ The 3rd Statement :
+The overall sentiment dictionary is:  {'neg': 0.0, 'neu': 0.457, 'pos': 0.543, 'compound': 0.8934}
+The sentence has been rated as  0.0 % Negative
+The sentence has been rated as  45.7 % Neutral
+The sentence has been rated as  54.300000000000004 % Positive
+The sentence Overall Rated As   It is Positive
+
+The Compound score has calculated the sum of all lexicon ratings that have been normalized between 1 (most extreme negative) or +1 (most extreme positive).
+Positive sentiment: (compound Score > = 0.0.05);
+neutral sentiment: (compound Score > -0.05);
+negative sentiment: (compound Score = 0.0.05);.
+
+
+Next TopicBreak Statement in Python
+
+
+
+
+← prev
+next →
+
+
+
+

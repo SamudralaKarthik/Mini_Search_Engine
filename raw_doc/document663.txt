@@ -1,0 +1,137 @@
+
+
+
+
+next →
+← prev
+
+Adding a key:value pair to a dictionary in Python
+Python dictionaries are collections of key-value pairs that are not sorted. In this article, we'll look at how to expand a dictionary that has previously been created with new key-value pairs.
+Dictionary in Python :
+A list of entries can be turned into a dictionary in Python by enclosing them in curly brackets and separating them with commas. Dictionary pairs of values are kept in pairs, where one element is the key and the other is the value. Values in dictionaries can be of any type of data and can be replicated, unlike keys, which cannot be repeated and must be immutable.
+The structure is enclosed in curly brackets {}, with commas separating the elements and a colon (:) separating each key from its value. You can write a dictionary that has no words at all like follows: {}.
+The keys must be immutable, such as integers, tuples, or strings. The same key name spelt differently is regarded as a distinct key in Python dictionaries. Please be aware that dictionary keys are case-sensitive, meaning that they will be treated differently even if they have the same name but a different case.
+We might need to add or update the key/value pairs when utilising a dictionary. Let's examine the key-value pair addition process in a Python dictionary.
+Method - 1 : Giving a new key the subscript designation
+Using a new key as a subscript and giving it a value, we add a new item to the dictionary.
+Example :
+
+
+# Python code to demonstrate the addition of a key:value pair to an existing dictionary
+
+dicts = {'key-1':'Technology', 'key-2':'is'}
+print("The Current Dictionary is : ", dicts)
+	
+# using the subscript notation
+# Dicts_Name[New_Keys_Name] = New_Keys_Value
+
+dicts['key-3'] = 'very'
+dicts['key-4'] = 'important'
+dicts['key-5'] = 'for'
+dicts['key-6'] = 'everyone'
+print("The Updated Dictionary is : ", dicts)
+
+
+Output :
+
+The Current Dictionary is :  {'key-1': 'Technology', 'key-2': 'is'}
+The Updated Dictionary is :  {'key-1': 'Technology', 'key-2': 'is', 'key-3': 'very', 'key-4': 'important', 'key-5': 'for', 'key-6': 'everyone'}
+
+
+Method - 2 : The use of the update() method
+A key-value pair is taken by the update() function and immediately added to the dictionary that already exists. The update function's parameter is the key-value pair. As demonstrated below, we can also provide numerous key values.
+Example :
+
+
+# Python code to demonstrate the addition of a key:value pair to an existing dictionary using update() method
+
+CountryCapitalDict = {"India": "New Delhi", "France" : "Paris" , "Nepal" : "Kathmandu", "Spain" : "Madrid"}
+print("Current Dictionary is :",CountryCapitalDict)
+
+CountryCapitalDict.update( {"United States of America" : "Washington DC"} )
+
+print("Updated Dictionary is :",CountryCapitalDict)
+
+# Adding few more key value pairs to be updated
+CountryCapitalDict.update( [("Australia", "Canberra"),("Japan","Tokyo")] )
+
+print("The New Dictionary is :",CountryCapitalDict)
+
+
+Output :
+
+Current Dictionary is : {'India': 'New Delhi', 'France': 'Paris', 'Nepal': 'Kathmandu', 'Spain': 'Madrid'}
+
+Updated Dictionary is : {'India': 'New Delhi', 'France': 'Paris', 'Nepal': 'Kathmandu', 'Spain': 'Madrid', 'United States of America': 'Washington DC'}
+
+The New Dictionary is : {'India': 'New Delhi', 'France': 'Paris', 'Nepal': 'Kathmandu', 'Spain': 'Madrid', 'United States of America': 'Washington DC', 'Australia': 'Canberra', 'Japan': 'Tokyo'}
+
+
+Method - 3 : Combining Two dictionaries
+By combining two dictionaries, we can also add elements to an existing dictionary. Here too, the update() method is used, but this time the method's parameter is a dictionary.
+Example :
+
+
+CountryCapitalDict1 = {'India': 'New Delhi', 'France': 'Paris', 'Nepal': 'Kathmandu', 'Spain': 'Madrid'}
+
+CountryCapitalDict2 = {'United States of America': 'Washington DC', 'Australia': 'Canberra', 'Japan': 'Tokyo'}
+CountryCapitalDict1.update(CountryCapitalDict2)
+print("The Combined Dictionary is :",CountryCapitalDict1)
+
+
+Output :
+
+The Combined Dictionary is : {'India': 'New Delhi', 'France': 'Paris', 'Nepal': 'Kathmandu', 'Spain': 'Madrid', 'United States of America': 'Washington DC', 'Australia': 'Canberra', 'Japan': 'Tokyo'}
+
+
+Method - 4 : Using Key:Value pair as an input
+The key:value pair is taken in the form of input from the user and is then inserted and added to the existing dictionary.
+Example :
+
+
+# Taking input to add key:value into the existing dictionary in a functional way
+
+# Creating a dictionary class
+class my_dict(dict):
+
+	# __init__ function
+	def __init__(self):
+		self = dict()
+		
+	# Function to add key:value
+	def add(self, keys, values):
+		self[keys] = values
+
+# Main Function
+dict_objct = my_dict()
+
+# Taking input key = 1, value = Geek
+dict_objct.keys = input("Enter a key : ")
+dict_objct.values = input("Enter a value : ")
+
+dict_objct.add(dict_objct.keys, dict_objct.values)
+dict_objct.add("John", 26)
+
+print(dict_objct)
+
+
+Output :
+
+Enter a key : Ross
+Enter a value : 25
+{'Ross': '25', 'John': 26}
+
+
+
+
+Next Topicfit(), transform() and fit_transform() Methods in Python
+
+
+
+
+← prev
+next →
+
+
+
+

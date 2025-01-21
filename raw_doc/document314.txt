@@ -1,0 +1,95 @@
+
+
+
+
+next →
+← prev
+
+Kadane's Algorithm in Python
+In the following, we will discuss Kadane's Algorithm and its property of solving problems to solve the "Maximum Subarray Sum" problem. We will understand the concept of the Algorithm and work on the Python code for the same along with the example and its respective output. At last, we will discuss the Algorithm's time complexity and the real-life application of Kadane's Algorithm.
+Thus, let's get begun.
+Understanding the Kadane's Algorithm
+Kadane's Algorithm is among the popular approaches used to solve the problem with the help of dynamic programming. As we already know, the maximum subarray problem is considered among the popular problems in the field of dynamic programming. We must be thinking that the problem appears to be simple, and the output of the problem will be the sum of all data elements in an array. However, this doesn't seem right. We will also come across negative integers as the data elements in the array that can decrease the sum of the whole array. Thus, we will take the help of Kadane's Algorithm to solve this problem.
+Kadane's Algorithm is used to find the continuous subarray in the One-Dimensional integer array, which has the largest sum possible. After understanding the statement of the problem, the primary approach for everyone will be applying the brute-force approach and solving the problem. However, by performing so, the solution's time complexity will be O(n^2) which is not impressive at all. Hence, we will use Kadane's Algorithm to solve the problem by traversing over the entire array with the help of two variables to track the sum so far and maximum total. The most significant aspect of paying attention to while utilizing this Algorithm is the condition using which we will update both the variables.
+Understanding the Algorithm for Maximum Subarray Sum
+Let us now consider the fundamental steps of the Algorithm for Maximum Subarray Sum as shown below:
+Step 1: We have to initialize max_till_now = 0
+Step 2: We have to initialize max_ending = 0
+Step 3: We have to repeat the Step 4 to 6 for each data element in the array.
+Step 4: We have to set max_ending = max_ending + a[i]
+Step 5: If (max_ending < 0) then we have to set max_ending = 0
+Step 6: If (max_till_now < max_ending) then we have to set max_till_now = max_ending
+Step 7: We have to return max_till_now
+In the above steps of the Algorithm, we have used the max_ending to look for all the positive data elements of the array and max_till_now to find the maximum sum of the data elements among all positive segments. Thus, every time we get the positive-sum during the comparison with max_till_now, we will be able to update it with the greater sum.
+Hence, whenever the max_ending becomes negative, we will set it to zero, and for every iteration, we will check for the condition where max_till_now is less than max_ending in order to update max_till_now if the condition returns True.
+Understanding Kadane's Algorithm using Pictorial Representation
+Let us consider the following example on an integer array.
+
+Fig 1: An Integer Array
+
+Fig 2: We will initialize max_till_now = 0 and max_ending = 0 (n = 0).
+
+Fig 3: We will then get max_till_now = 0 and max_ending = 0 for n = 1; however, we will get max_till_now = 4 and max_ending = 4 for n = 2.
+
+Fig 4: We will then assign the value n = 3 and 4, and get max_till_now = 4 and max_ending = 3, and max_till_now = 4 and max_ending = 1 respectively.
+
+Fig 5: We will get max_till_now = 6 (6 > 4) for n = 5 and max_ending = 6.
+
+Fig 6: We will also get max_till_now = 6 and max_ending = 4 for n = 6.
+Hence, from the above example, we will find the maximum subarray ranging from n = 2 to n = 5 and the maximum sum will be 6.
+Understanding Kadane's Algorithm using the Python Code
+Let us consider the following snippet of code demonstrating the working of Kadane's Algorithm.
+Example:
+
+# defining the function to find the maximum subarray sum
+def max_Subarray_Sum(my_array, array_size):
+    # assigning the variables
+    maxTillNow = my_array[0]
+    maxEnding = 0
+    
+    # using the for-loop
+    for n in range(0, array_size):
+        maxEnding = maxEnding + my_array[n]
+        # using the if-elif-else statement
+        if maxEnding < 0:
+            maxEnding = 0
+        
+        elif (maxTillNow < maxEnding):
+            maxTillNow = maxEnding
+            
+    return maxTillNow
+# defining the array
+my_array = [-2, -3, 4, -1, -2, 5, -3]
+# printing the maximum subarray sum for the users
+print("Maximum Subarray Sum:", max_Subarray_Sum(my_array, len(my_array)))
+
+Output:
+Maximum Subarray Sum: 6
+
+Explanation:
+In the above snippet of code, we have defined a function as max_Subarray_Sum taking two parameters as my_array and array_sum, respectively. We have then assigned the variable maxTillNow to the first index value of the array and maxEnding to zero. We have then used the for-loop to iterate through the whole array. We have also used the if-elif-else conditional statement and return maxTillNow. At last, we have defined the array and print the max subarray sum for the users, which is 6 in the above example.
+Understanding the Time Complexity
+The time complexity of Kadane's algorithm for an array consisting of the n data element as an integer is defined as O(n) as only one for loop is to be executed across the program. Similarly, the auxiliary space complexity of the algorithm is O(1).
+Understanding the Applications
+There are various applications of Kadane's algorithm, and a few of them are as described below:
+
+Kadane's algorithm is to find the maximum subarray sum for a provided array of integers.
+It is utilized as an algorithm for image processing.
+It can also be utilized to solve the problems such as "Station Travel in Order" and "Hostels Along the Coast".
+It is also utilized for Business Analysis.
+
+Conclusion
+In the end, we can conclude that the solution does not appear to be easy and simple while solving the problem statement of finding the maximum subarray sum. However, Kadane's algorithm simplified solving such a problem and achieved the solution with the least time complexity. This was possible as Kadane's algorithm utilizes the technique to collect the information required for reaching the solution avoiding unwanted storage of data. Hence, we can consider this algorithm as a simple example of an approach of dynamic programming with lots of practical applications in the real world.
+
+
+Next TopicLoggers in Django
+
+
+
+
+← prev
+next →
+
+
+
+

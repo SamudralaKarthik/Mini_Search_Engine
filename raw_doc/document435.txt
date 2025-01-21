@@ -1,0 +1,245 @@
+
+
+
+
+next →
+← prev
+
+How to Customize Legends with Matplotlib
+In this tutorial, we will explain how we can learn to alter the legend of matplotlib. Matplotlib is a well-known software for the visualization of data. This is a graphing library written in Python and has the NumPy extension for numerical computation.
+Legend is an area on the graph that describes each element that makes up the. A graph may be straightforward in the sense that it's. If we include titles, labels for X, the Y label, and the legend, it will be clearer. When we look at the names, we are able to determine what the graph represents easily and the type of data it represents.
+First, let's look at how we can create an image legend using matplotlib.
+Syntax:
+Syntax of legend in Matplotlib is:
+
+legend(*args, **kwargs)
+
+It can be described by the following terms:
+
+legend(): legend() automatically determines the elements to display. It accomplishes this by showing every plot that has been marked with the keyword argument "label.
+legend(labels): The name of the X and the name of Y, which is shown in the legend
+legend(handles and labels): The list of line numbers to add to the legend. Combining labels and handles gives you complete control over what information should be included within the legend. It is recommended that the lengths of both legend as well as handles should be equal.
+
+Code:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+  
+# Here, we will create the legend
+mplot.legend()
+
+Output
+
+How to Customize the Legend
+Legends add meaning to graph plots. The addition of the font, place of origin, and so on makes the legend more visible and easily identifiable. Let's take a look at the various programs available to alter the legends for the plots.
+Location:
+Sometimes the legend could be incorrect or not be placed in the correct spot. Matplotlib lets us specify the place where we would like to put the legend. This way, we can put the legend where it doesn't overshadow the plot. This means that the plots will appear more tidy and clean.
+Syntax:
+
+legend(loc = ")
+
+It is possible to pass it by following the steps:
+
+"upper left", "upper right", "lower left", "lower right": It is located in the appropriate area of the plot.
+"upper-center", "lower center", "center left", "center right": It is located at the edge that is in the middle of it.
+"center": It is situated in the exact middle of the map.
+"Best": It is not placed with the cross-over of artists.
+
+Code:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+  
+# Here, we will create the legend and add the location
+mplot.legend(loc = 'lower right')
+
+Output
+
+Font Size:
+To improve the look of the legend, we can also alter the size of legend. By connecting the parameter for font dimensions to the operation, we can alter the font size within the legend box in the same way as the plot title.
+Syntax:
+
+legend(fontsize = ")
+
+This can be passed as, 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'
+Code:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+  
+# Here, we will create the legend and adjusting its fontsize.
+mplot.legend(fontsize = 'x-large', loc = 'upper left')
+
+Output
+
+Colour of the Legend
+Sometimes we think that it would be wonderful to have the legend box coloured to make it look more appealing and help it stand out from plots. Matplotlib can also help by allowing us to change the look of legends by altering the colour of text and background and even the edges that the legend displays.
+Syntax:
+
+legend(labelcolor = ")
+
+
+labelcolor: is used for changing the colour of the text.
+
+
+legend(facecolor = ")
+
+
+facecolor: is used for changing the background colour of the legend
+
+
+legend(edgecolor=")
+
+
+edgecolor: is used for changing the edge colour of the legend
+
+Code:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+  
+# Here, we will create the legend and add the colour to it:
+mplot.legend(labelcolor = 'Pink', facecolor = 'blue',
+           edgecolor = 'Brown', fontsize = 'xx-large')
+
+Output
+
+In the example above, we can clearly discern which arguments for keywords add which colour in the legend block.
+Marker Properties:
+Here, if we see the legend box,
+Syntax:
+
+legend(markerfirst = bool, default: True)
+
+The marker is put first, while the label is put in the second. The markerfirst parameter allows us to alter the location of the marker. If we set it to False, the positions of the marker and labels are swapped.
+Code:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+  
+# Here, we will create the legend
+mplot.legend(markerfirst = False)
+
+Output
+
+Changing the Looks:
+The legend can include some of the fundamental CSS properties such as creating a shadow, putting in frames, and turning the corners, and let us make the legend transparent box if you do not want to obscure those tiny aspects of the plot by the frame.
+shadow: This argument creates shadows to the legend.
+frameon: Gives the frame to the legend.
+fancybox: Gives smooth edges for the title.
+framealpha: Provides transparency to the background of the legend.
+Example 1: For adding shadow and round corners:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+#Here, we will create the legend and adding shadow and fancybox to the legend
+mplot.legend(shadow = True, fancybox = True)
+
+Output
+
+Example 2: Removing the frame of the legend box:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+#Here, we will create the legend and removing frame
+mplot.legend(frameon = False)
+
+Output
+
+Title of the Legend:
+The addition of a title to the legend is crucial to include in the legend boxes. The title parameter can let us create the legend of a title, and the title_size lets us choose a particular fontsize for the name.
+Syntax:
+
+legend(title= "" , title_fontsize = "")
+
+title: It will give title to the legend
+title_fontize: It will give size to the title.
+This can be, 'xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'
+Code:
+
+# First, we will import the required modules
+import matplotlib.pyplot as mplot
+  
+# Here, we will plot values
+P = [2, 4, 3, 6, 5, 1]
+Q = [6, 12, 19, 21, 10, 2]
+  
+# Now, we will plot using matplotlib
+mplot.plot(P, label = "P")
+mplot.plot(Q, label = "Q")
+#Here, we will create the legend and give title and fontsize:
+mplot.legend(title = "Legend", title_fontsize = 'xx-large')
+
+Output
+
+Conclusion
+In this tutorial, we have discussed how we can customize the legend, such as adding the title, shadow, removing the frame, changing font size and colours, etc.
+
+
+Next TopicMatplotlib legend in subplot
+
+
+
+
+← prev
+next →
+
+
+
+

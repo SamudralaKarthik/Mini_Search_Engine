@@ -1,0 +1,126 @@
+
+
+
+
+next →
+← prev
+
+Pyramid Framework in Python
+Pyramid is a general, open-source Python framework used to develop web applications. This framework allows Python developers to create web applications with ease.
+Pyramid Framework is backed by the enterprise knowledge Management System KARL (a George Soros project).
+Setting up the Environment
+As stated, "the start small, finish big, stay finished framework", the Pyramid framework is much like Flask, which takes a bit of effort in order to install and run. If we will recognize that a few of the patterns are similar to Flask once we start building this application.
+Following are the steps to create the Pyramid framework environment:
+Step 1: We will create a project directory. Let us name this directory as projectPyramid (One can select any name as their preference).
+Step 2: We will create a virtual environment where we will install all the dependencies required for the project. Let us name this virtual environment folder as pyramidEnv, where we will install the Pyramid framework.
+Step 3: Now, let us go to the directory, pyramidEnv, and install the framework.
+Installing the Pyramid framework
+In order to install the Pyramid framework, we will be using 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the pyramid framework using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ python.exe -m pip install pyramid
+
+Verifying the Installation
+Once the framework is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import pyramid
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the framework, and it is also recommended to refer to the official documentation of the framework.
+Understanding the Core Concepts of the Pyramid Framework
+The Pyramid framework is based on the following core concepts:
+
+Zope (extensibility, traversal, declarative security)
+Pylons (URL dispatch, non-opinionated view of persistence, templating, and many more)
+Django (View, level of documentation)
+
+Zope - Pyramid is loosely based on Zope in terms of extensibility, the concept of traversal, and declarative security.
+Pylons - The Pylons project is another area from where the pyramid draws its concept. Pylons have that concept of routes that calls the URL dispatch within the Pyramid framework, and they also have the non-opinionated view of persistence layer or templating.
+Django - Pyramid also gets a hint from Django. The way we take the view, route the URL, and the level of documentation is very Django way.
+Some of the features of the Pyramid framework are as follows:
+
+It is the fastest known Python web framework.
+It supports small and large projects (why rewrite whenever we outgrow the small framework).
+It supports single file webapps like microframeworks.
+It has built-in sessions.
+It supports events similar to Pylon/Zope.
+It offers Transaction Management (if one already has noticed that we have utilized Zope before).
+
+Understanding Configuration
+Configuration is the settings that influence the operation of an application. There are two methods to configure a Pyramid application: imperative configuration and declarative configuration.
+Pyramid configuration maintains -
+
+Imperative configuration or even the overriding of the configs on the basis of a decorator.
+Configuration conflict detection (involving more local versus less local determination).
+Configuration Extensibility (included from multiple apps).
+Flexible Policies for Authentication and Authorization.
+Programmatic Introspection of Configuration (view present state of routes to generate nav).
+
+Understanding the generation of URL
+We can generate URLs for routes, resources, and static assets in the Pyramid framework. It is easy and flexible to work with an API that helps generate URLs. By generating URLs using various APIs of the Pyramid framework, users can alter the configuration arbitrarily without much worry of breaking a link with any of the web pages.
+Thus, in short, URL in the pyramid -
+
+Supports the generation of URLs to enable alterations to the application that won't break links.
+Generates URLs to static resources that live either inside or outside the application.
+Supports Routes and Traversal.
+
+Understanding Views
+One of the primary jobs of the Pyramid framework is to find and invoke a view callable whenever a request reaches the application. View callables are bits of code that do something interesting in response to a request made in the application.
+Whenever we map the views onto the URL dispatch or Python code, there can be any kind of call. Views can be considered a function declaration or an instance, and they can be utilized as a view in the Pyramid framework.
+The following are some of the significant points related to Views:
+
+Views are generated from any callable.
+Views on the basis of Renderer can return dictionaries (not needed to return a webby style object).
+Support multiple views per route (GET versus POST versus HTTP Header Check, and many more).
+View response adapters (when we need to specify the method to handle the values returned by View versus the response objects).
+
+Understanding Extensibility
+The Pyramid framework is designed with the concept of extensibility in mind. Thus, if a Pyramid developer remembers specific constraints while building an application, a third party should be able to alter the behavior of the application without the need for modification in its source code. The behavior of a Pyramid application that obeys specific constraints can be overridden or extended without any modification. It is designed for flexible deployments to multiple environments (No singletons). Pyramid has "Tweens" middleware support (WSGI middleware; however, it executes in the context of Pyramid itself).
+Let's Code
+In the following tutorial, we will be looking into the simplest program that we can create using the Pyramid framework.
+Let us consider the following example demonstrating the use of the Pyramid framework to print a "Hello" statement on port number 1234:
+Example:
+
+from wsgiref.simple_server import make_server
+from pyramid.config import Configurator
+from pyramid.response import Response
+
+def helloWorld(request):
+    return Response('<h1>Hello, World! Welcome to Javatpoint.com</h1>')
+
+if __name__ == '__main__':
+    with Configurator() as cnfg:
+        cnfg.add_route('hello', '/')
+        cnfg.add_view(helloWorld, route_name = 'hello')
+        myApp = cnfg.make_wsgi_app()
+    myServer = make_server('0.0.0.0', 8000, myApp)
+    myServer.serve_forever()
+
+Output:
+
+Explanation:
+In the first three lines, we have import statements. In the first line, we have imported the make_server function that helps us create a simple web server when passed to an application. We have then imported the Configuration and Response function from the Pyramid framework. These functions are utilized to details configuration, set parameters for the application, and respond to requests.
+In the next two lines, we have defined a function as helloWorld. This function will help in generating the response. This function fulfills the requirement of a view responsible for rendering the text that will be passed back to the requesting entity. In the above case, the function, when called, uses the Response function we imported earlier. This passes back a value that should be provided to the client.
+In the next line, we have used the if __name__ = '__main__': Python statement that says, "Begin here while executing from the command line", rather than when this module is imported.
+In the next line, we have created a variable called cnfg out of the object created by the Configurator function that we imported at the top of the program. In the next two lines, we have called the add_route and add_view method of this object. This method is utilized in order to define a view that can be used by the application. As we can observe, we have passed the helloWorld function we defined earlier. This is where that function is incorporated as a view.
+In the last two lines, we have created the WSGI application by calling the make_wsgi_app method of the cnfg object. This utilizes the attributes of the object, like the view we included, in order to create an application. This application is then passed to the make_server function we imported to create an object that allows us to launch a webserver to serve the application. At last, we have launched this server.
+As a result, our introductory application has been created successfully. This is among the simplest and easiest possible Pyramid applications configured "imperatively". It is imperative as the full power of the Python programming language is available to us as we perform configuration tasks.
+At last, we can conclude that the Pyramid framework is an open-source Python web framework with a large and active community. This huge community contributes towards making the Python web framework famous and relevant. The Pyramid web framework simplifies and accelerates web application development by offering a set of robust features and utilities.
+
+
+Next TopicBuilding a Telegram bot using Python
+
+
+
+
+← prev
+next →
+
+
+
+

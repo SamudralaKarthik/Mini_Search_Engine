@@ -1,0 +1,127 @@
+
+
+
+
+next →
+← prev
+
+The reprlib module in Python
+In the following tutorial, we will understand the reprlib module in the Python programming language with the help of examples.
+So, let's get started.
+Understanding the reprlib module in Python
+The Python reprlib module offers a means for producing object representations with limits on the size of the resulting strings. This is used in the Python debugger and may be beneficial in other contexts.
+This module offers a class, an instance, and a function.
+class reprlib.Repr
+This Class offers the formatting services beneficial for the implementation of functions similar to the built-in the repr() function. This class also has size limits for various object types to avoid the generation of excessively long representations.
+reprlib.aRepr
+aRepr is an object of Repr, which is utilized to offer the repr() function shown below. Altering the attributes of this object will affect the size limits utilized by the repr() function and the Python debugger.
+reprlib.repr(obj)
+repr() is a method of aRepr. However, this method returns a string similar to that returned by the built-in function of the same name, with limits on most sizes.
+Moreover, along with the size-limiting tools, this module also offers a decorator to detect recursive calls to __repr__() and substitute a placeholder string.
+@reprlib.recursive_repr(fillvalue = '…')
+This is a decorator for the __repr__() methods to detect recursive calls inside the same thread. In case a recursive call is made, the fillvalue is returned; else the usual __repr__() call is made.
+Let us consider the following demonstrating the same:
+Example:
+
+# importing the required module
+from reprlib import recursive_repr
+
+# defining the class
+class TheList(list):
+    # using the decorator
+    @recursive_repr()
+    # defining the function
+    def __repr__(self):
+        return '<' + '|'.join(map(repr, self)) + '>'
+
+# instantiating the class
+one = TheList('abc')
+
+# appending elements to the list
+one.append(one)
+one.append('x')
+
+# printing the final list
+print(one)
+
+Output:
+<'a'|'b'|'c'|...|'x'>
+
+Explanation:
+In the above snippet of code, we have imported the required module and defined a class as TheList. We have then used the decorator and defined the function as __repr__() that returns the fillvalue. We have then instantiated the class and appended elements to the list. At last, we have printed the list.
+Understanding the Repr Objects
+Repr objects offer different attributes, which we can use to provide size limits to represent different object types, and methods that format specific object types.
+
+
+S. No.
+Methods/Variables
+Descriptions
+
+
+1
+Repr.maxlevel
+This object type represents the depth limit for the recursive representation. The default value is 6.
+
+
+2
+Repr.maxlong
+This object type consists of the maximum number to represent the long value. The default value is 40.
+
+
+3
+Repr.maxstring
+This object type limits the number of characters in a string-type object. The default value is 30.
+
+
+4
+Repr.maxother
+This object type limits the size of some other data, where formatting is not specified. 
+
+
+5
+Repr.repr(obj)
+This method serves the same purpose as the built-in repr() method.
+
+
+6
+Repr.repr1(obj, level)
+This method is a recursive implementation of the repr() method. Moreover, we have to specify the level for the recursive output.
+
+
+There are some other max limits for dict, lists, tuples, sets, array and many more.
+Let us consider an example demonstrating the use of the Repr objects.
+Example:
+
+# importing the required modules
+import reprlib
+import math
+
+# creating a list of factorials using the functions of the math library
+factList = [math.factorial(x) for x in range(100)]
+print(reprlib.repr(factList))
+
+# creating the Repr object and set long size to 15
+myRept = reprlib.Repr()
+# using maxlong
+myRept.maxlong = 15
+print(myRept.repr(factList[53]))
+
+Output:
+[1, 1, 2, 6, 24, 120, ...]
+427488...000000
+
+Explanation:
+In the above snippet of code, we have imported the required libraries and defined a list containing the factorials of numbers ranging from 0 to 100. and printed the value of the repr() function. We created the Repr object and set the long size to 15 using the maxlong object type. At last, we have again printed the result of the repr() function.
+
+
+Next TopicHow to take Multiple Input from User in Python
+
+
+
+
+← prev
+next →
+
+
+
+

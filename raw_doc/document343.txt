@@ -1,0 +1,252 @@
+
+
+
+
+next →
+← prev
+
+Decorators with Parameters in Python
+In this tutorial, we will discuss Decorators with parameters in Python, but before starting this topic, users must study Decorators in Python, Function Decorators.
+Decorators are a very powerful and useful tool in Python because it allows users to modify the behaviour of function or class.
+Python functions can be treated as supreme citizens as objects.
+
+Functions can be referenced to a variable.
+Functions can be passed as an argument to other functions.
+Functions can be returned from a function.
+
+Decorators with parameters are like normal decorators.
+Syntax:
+
+@decorator(params)
+def function_name():
+	'''Function implementation'''
+
+Code Implementation of Decorators with Parameters:
+
+def function_name():
+	'''Function implementation'''
+function_name = (decorator(params))(function_name)
+"""
+
+As we execute this code, the execution will start from left to right, which will call decorator(params) for returning the function object func_obj. the func_obj(function_name) will be called by using func_obj. Inside the inner function, required operations will be performed, and the actual function reference will return for assigning to the function_name. Now, the users can use the function_name() to call the function with decorator applied.
+How to Implement Decorators with Parameters:
+First, we will see what we could get as output if we run a code of parameters directly without implementing any value.
+
+def decorators_1(*args, **kwargs):
+    def inner_1(func_1):
+        '''
+           doing operations with func_1
+        '''
+        return func_1
+    return inner_1 # this is the function_object mentioned in the above content
+ 
+@decorators_1(params)
+def func_1():
+    """
+         function implementation
+    """
+
+Here, in the above code, as params is empty, we might get some errors.
+Let's understand this stepwise:
+
+def decorator_function(function_name):
+  print("Inside the Decorator: ")
+ 
+  def inner_1(*args, **kwargs):
+    print("Inside the Inner Function: ")
+    print("'Decorated the function'")
+    # perform this operations with function_name
+     
+    function_name()
+     
+  return inner_1
+ 
+@decorator_function
+def function_to():
+    print("Inside the actual function")
+ 
+function_to()
+
+Output:
+Inside the Decorator: 
+Inside the Inner Function: 
+'Decorated the function'
+Inside the actual function
+
+Visual Representation of the Code Execution:
+Inside the Decorator Execution:
+
+Inside Inner Function Execution:
+
+Decorator Function Execution:
+
+Final Output Execution:
+
+In the above code, we will get the outputs from the functions called using decorators with parameters.
+Alternate Way:
+In the following code, we will see how to write a code for using decorators for functions in an alternative way.
+
+def decorator_fun(function_name):
+  print ("Inside the Decorator: ")
+ 
+  def inner_1(*args, **kwargs):
+    print ("Inside the Inner Function: ")
+    print ("'Decorated the function'")
+    # Perform this operations with function_name
+     
+    function_name()
+     
+  return inner_1
+ 
+def function_to():
+    print ("Inside the actual function")
+ 
+# This is another way of using decorators
+decorator_fun(function_to)()
+
+Output:
+Inside the decorator
+Inside the inner function
+Decorated the function
+Inside the actual function
+
+Now we will see different examples of using decorations with the parameter for better understanding the concept.
+Example 1:
+
+def decorator_1(*args, **kwargs):
+    print("Inside the Decorator")
+     
+    def inner_1(function_1):
+         
+        # Here, we will see the functionality of the code:
+        print ("Inside the inner function")
+        print ("I am studying ", kwargs['JTP'])
+         
+        function_1()
+         
+    # Returning the inner function   
+    return inner_1
+ 
+@decorator_1(JTP = "COMPUTER SCIENCE AND ENGINEERING ")
+def my_function():
+    print ("Inside the actual function")
+
+Output:
+Inside the Decorator
+Inside the inner function
+I am studying COMPUTER SCIENCE AND ENGINEERING 
+Inside the actual function
+
+Visual Representation of the Code Execution:
+
+Final Output Execution:
+
+Example 2:
+
+def decorator_function(A, B):
+ 
+    def Inner_1(function_1):
+ 
+        def wrapper_1(*args, **kwargs):
+            print ("I am studying COMPUTER SCIENCE AND ENGINEERING ")
+            print ("Summation of values - {}".format(A + B) )
+ 
+            function_1(*args, **kwargs)
+             
+        return wrapper_1
+    return Inner_1
+ 
+ 
+# here, we are not using decorator
+def my_function(*args):
+    for ele in args:
+        print (ele)
+ 
+# another way of using decorators
+decorator_function(22, 14)(my_function)('Computer', 'Science', 'and', 'Engineering')
+
+Output:
+I am studying COMPUTER SCIENCE AND ENGINEERING 
+Summation of values - 36
+Computer
+Science
+and
+Engineering
+
+The above example also shows that the enclosed inner function can access the parameters of the outer function.
+Visual Representation of the Code Execution:
+
+Example 3:
+
+def deco_decorator(dataType, message_1, message_2):
+    def decorator_1(function_1):
+        print (message_1)
+        def wrapper_1(*args, **kwargs):
+            print(message_2)
+            if all([type(arg) == dataType for arg in args]):
+                return function_1(*args, **kwargs)
+            return "Invalid Input"
+        return wrapper_1
+    return decorator_1
+ 
+ 
+@deco_decorator(str, "Decorator for 'string_Join'", "stringJoin process started ...")
+def string_Join(*args):
+    st1 = ''
+    for K in args:
+        st1 += K
+    return st1
+ 
+ 
+@deco_decorator(int, "Decorator for 'summation_1'\n", "summation process started ...")
+def summation_1(*args):
+    summ1 = 0
+    for arg in args:
+        summ1 += arg
+    return summ1
+ 
+ 
+print (string_Join("I ", 'am ', "studying ", 'Computer ', "Science ", "and ", "Engineering"))
+print ()
+print ("The sum is equal to: ", summation_1(22, 12, 48, 133, 627, 181, 219))
+
+Output:
+Decorator for 'string_Join'
+Decorator for 'summation_1'
+
+stringJoin process started ...
+I am studying Computer Science and Engineering
+
+summation process started ...
+The sum is equal to: 1242
+
+Visual Representation of the Process:
+Returning decorator_1:
+
+Returning wrapper_1:
+
+
+
+Executing message_1:
+
+Executing String_Join:
+
+Executing summation_1:
+
+Final Output Execution:
+
+Conclusion
+In this tutorial, we have discussed how to execute the function using a decorator with parameters. We have also explained examples using a visual representation of inner functions and Outer functions of the parameters.
+
+
+Next TopicDynamic Typing in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,76 @@
+
+
+
+
+next →
+← prev
+
+Python main() function
+In this tutorial, we will learn about the main() function in the Python programming language. And we will also understand how we can utilize the __name__ attribute in Python program in order to execute it dynamically in various contexts.
+Let us begin with understanding what the main() function in Python is.
+Understanding the main() function in Python
+The main() is considered a unique function for several programming languages, also referred to as the point of execution for a program file. However, the interpreter of the Python programming language executes each of the lines serial-wise from the top of the file and has no explicit main() function.
+Python provides other conventions in order to define the point of execution. One of them is utilizing the main() function along with the __name__ property of a python file.
+Now, let us understand the __name__ property in Python programming language.
+Understanding the __name__ property in Python
+The __name__ property is a unique core variable in the Python that displays the name of the present module.
+This property offers different values relying on where we run the Python file. Let us consider an example to understand the __name__ property in a better way.
+Executing Python File as a Script
+Let us consider that we have a Python file known as myworld.py containing the following content:
+File: myworld.py
+
+print(__name__)
+
+Output:
+$ python myworld.py
+__main__
+
+Explanation:
+In the above program file, we have printed the value of the __name__ property. As a result, the value of the __name__ variable is set to __main__.
+Executing Python File as a Module
+We can also execute a Python file as a module. In order to perform this, we need to import the required file into another Python program. Let us consider the following example to understand the concept properly.
+Suppose that we have created a Python file as python_main.py in the same directory as the myworld.py file with the following content:
+File: python_main.py
+
+import myworld
+
+Output:
+$ python python_main.py
+myworld
+
+Explanation:
+In the above program file, we have imported a module as myworld. As a result, when we executed the python_main.py file, the program runs the complete code in the module file. However, we can observe that the displays the module name that is myworld instead of displaying __main__.
+This happens because, in the context of executing a Python file as a module, the module name itself is assigned to the __name__ variable.
+Using if statement with the __name__ variable
+Since we have correctly understood how the __name__ property is assigned values, we can utilize the if statement in order to run the same Python file differently in various contexts.
+Let us consider the following example where we have changed the content of the myworld.py file.
+File: myworld.py
+
+def main():
+    print("This is my Python program.")
+
+if __name__ == "__main__":
+    main()
+
+Output:
+$ python myworld.py
+This is my Python program.
+
+Explanation:
+In the above snippet of code, we have defined a function as main() to print some strings for the users. We have then used the if conditional clause to check if the value of the __name__ variable is equal to the __main__, then the main() function will execute. As a result, when we executed the myworld.py file, the string message is printed for the user.
+However, when we execute the file as a module by importing it in the python_main.py, the program returns no output as the main() function is not called.
+Thus, we can conclude the custom main() function we have defined in the myworld.py file can only be executed as a standalone script but not as an imported module.
+This is the standard method to define the main() function explicitly in Python. It is among the most popular use cases of the __name__ property of a Python file.
+
+
+Next Topicstrftime() function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

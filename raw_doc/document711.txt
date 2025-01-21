@@ -1,0 +1,263 @@
+
+
+
+
+next →
+← prev
+
+Python Word2Vec
+Language assumes a vital part in how people collaborate. People are innate to comprehend what others are talking about and what to say accordingly. This capacity is created by reliably communicating with others and the general public over numerous years. Dialects that people use for cooperation are called normal dialects.
+The guidelines of different regular dialects are unique. In any case, there is one thing in like manner in normal dialects: adaptability and advancement.
+Normal dialects are exceptionally truly adaptable. Assume you are driving a vehicle, and your companion expresses one of these three expressions: "Pull over", "Stop the vehicle", and "End". You quickly comprehend that he is requesting that you stop the vehicle. This is because normal dialects are incredibly adaptable. There are different ways of saying a certain something.
+
+One more significant part of normal dialects is how they are reliably developing.
+A couple of years prior, there was no term, for example, "Google it", which alludes to looking for something on the Google web index.
+Regular languages are continuously going through development.
+Running against the norm, scripting languages follow severe punctuation.
+There is an extraordinary order to advise a PC to print something on the screen.
+The undertaking of Natural Language Processing is to cause PCs to comprehend and produce human language in a manner like people.
+
+This is an enormous errand, and there are many obstacles included. This video address from the University of Michigan contains an excellent clarification of why NLP is so difficult.
+In this article, we will execute the Word2Vec word implanting method utilized for making word vectors with Python's Gensim library. In any case, before hopping directly to the coding segment, we will first momentarily audit the absolute most ordinarily utilized word implanting strategies, alongside their upsides and downsides.
+Word2Vec
+Word2Vec is a calculation planned by Google that utilizes network organizations to make word embeddings to such an extent that embeddings with comparative word implications often point in a comparable heading. For instance, embeddings of words like care and so on will point to a comparative course when contrasted with words like a battle, fight, and so on in a vector space.
+Such a model can likewise recognize the equivalents of the given the word and recommend a few extra words for halfway sentences. It is broadly utilized in numerous applications like archive recovery, machine interpretation frameworks, autocompletion and forecast. In this instructional exercise, we will figure out how to prepare a Word2Vec model involving the Gensim library and stacking pre-prepared that converts words to vectors.
+Word Embedding Approaches
+One reason that NLP (Natural Language Processing) is a troublesome issue to tackle is the way that, not at all like people, PCs can grasp numbers. We need to address words in a numeric configuration that is reasonable for the PCs. Word inserting alludes to the numeric portrayals of words.
+A few words inserting approaches exist, and every one of them has its upsides and downsides. We will talk about three of them here:
+
+Bag of Words
+TF-IDF Scheme
+Word2Vec
+
+Bag of Words
+The pack of words approach is one of the least complex word inserting approaches. Next are moving toward creating word embeddings utilizing the pack of words approach.
+We will see the word embeddings created by the pack of words approach with the assistance of a model. Assume you have a corpus with three sentences.
+
+S1 = I love downpour.
+S2 = downpour disappear
+S3 = I am away
+
+To change over above sentences into their related word installing portrayals utilizing the sack of words approach, we want to play out the accompanying advances:
+
+Create a word reference of novel words from the corpus. In the above corpus, we have the following novel words: [I, love, downpour, go, away, am]
+Parse the sentence. For each word in the sentence, add 1 instead of the word in the word reference and add zero for the wide range of various words that don't exist in the word reference. For example, the sack of words for sentence S1 (I love downpour) seems to be this: [1, 1, 1, 0, 0, 0]. Comparatively for S2 and S3, sack of word portrayals is [0, 0, 2, 1, 1, 0] and [1, 0, 0, 0, 1, 1], individually.
+
+Notice that for S2, we added 2 instead of "downpour" in the word reference because S2 contains "downpour" twice.
+Pros and Cons of Bag of Words
+The bag of words approach has two advantages and disadvantages.
+
+The fundamental benefit of the pack of words approach is that you needn't bother with an exceptionally immense corpus of words to obtain great outcomes. You can see that we construct an extremely fundamental pack of words model with three sentences.
+Computationally, a pack of words model isn't exceptionally intricate.
+A disadvantage of the pack of words approach is that we want to make enormous vectors with void spaces to address a number (scanty framework) that consumes memory and space. In the model past, we just had 3 sentences. However, you can see three zeros in each vector.
+In such a case, the number of extraordinary words in a word reference can be thousands. Assuming that one record contains 10% of the one-of-a-kind words, the comparing inserting vector will, in any case, contain 90% zeros.
+Another significant issue with the pack of words approach is how it keeps up with no setting data. It couldn't care less about the request in which the words appear in a sentence.
+
+Example:
+For example, it similarly treats the sentences "Container is in the vehicle" and "Vehicle is in the jug" as very surprising sentences.
+A kind of sack of words approach, known as n-grams, can assist with keeping up with the connection between words. N-gram alludes to a coterminous grouping of n words. For example, 2 grams for the sentence "You are unsettled", "You are", "are not", and "not blissful". Albeit the n-grams approach is equipped for catching connections between words, the size of the list of capabilities develops dramatically with an excessive number of n-grams.
+TF-IDF Scheme
+The TF-IDF conspire a sort of pack words approach where rather than adding zeros and ones in the implanting vector, and you add drifting numbers that contain more helpful data contrasted with zeros and ones. The thought behind TF-IDF conspires with the way that words have a high recurrence of the event in one record and less recurrence in the wide range of various reports, which are more pivotal for characterization.
+TF-IDF results from two qualities: Term Frequency (TF) and Inverse Document Frequency (IDF).
+Term recurrence alludes to the times a word shows up in the report and can be determined as:
+Term frequency = (Number of Occurrences of a word)/(Total words in the document)
+Example:
+For example, assuming that we take a gander at sentence S1 from the past segment, "I love downpour", each word in the sentence happens once and, like this, has a recurrence of 1. Going against the norm, for S2, for example, "downpour disappear", the recurrence of "downpour" is two while until the end of the words, it is 1.
+IDF alludes to the log of the absolute number of records isolated by the number of reports in which the word exists and can be determined as:
+IDF(word) = Log((Total number of documents)/(Number of documents containing the word))
+For example, the IDF incentive for "downpour" is 0.1760 since the all-out number of reports is 3, and the downpour shows up in 2. Consequently, log(3/2) is 0.1760. Then again, assuming you check "love" in the primary sentence, it shows up in one of the three archives and accordingly, its IDF esteem is log(3), which is 0.4771 out.
+Advantages and disadvantages of TF-IDF
+However, TF-IDF is an improvement over the basic sack of words approach and yields improved results for normal NLP errands; the general advantages and disadvantages continue as before. We need to make an enormous inadequate framework, which likewise takes much more calculation than the basic sack of words approach.
+Gensim Word2Vec
+Gensim is a Python module, an open-source project that can be utilized for theme displaying, recording orders, and resigning similitude with enormous corpora. Gensim's calculations are memory-free as for the corpus size. It has additionally been intended to reach out to other vector space calculations.
+Gensim gives the execution of Word2Vec calculation alongside a few different functionalities of NLP (Natural Language Processing) in the class called Word2Vec. We should perceive how to make a Word2Vec model utilizing Gensim.
+Developing model of Word2Vec using Gensim
+Parameters that the class Gensim Word2Vec class requires:
+
+Sentences: It is the information on which the model is prepared to make word embeddings. It tends to be a rundown of arrangements of tokens/words or an information stream from a network/circle on account of enormous corpora. In our model, we will utilize Brown Corpus present in NLTK.
+Size: It addresses how long you maintain that the dimensionality of your vector should be for each word in the jargon. Its default esteem is 100.
+Window: The most extreme distance between the ongoing and adjoining words. On the off chance that your adjoining word is more prominent than the width, a few adjoining words wouldn't be considered as being connected with the ongoing word. Its default esteem is 5.
+Min_count: It addresses the base recurrence worth of words available in the jargon. Its default esteem is 5.
+Iter: It addresses the quantity of emphasis/ages over the dataset. Its default esteem is 5.
+
+Python Word2Vec Example
+Source Code:
+
+import string
+import nltk
+from nltk.corpus import brown
+from gensim.models import Word2Vec
+from sklearn.decomposition import PCA
+from matplotlib import pyplot
+ 
+nltk.download("pink")
+ 
+# Preprocess the data (all the words) to lowercase and remove all the included words of a single punctuation 
+document = brown.sents()
+data = []
+for sents in the document:
+  new_sents = []
+  for a word in sent:
+    new_words = word.lower()
+    if new_words[0] not in string.punctuation:
+      new_sents.append(new_words)
+  if len(new_sents) > 0:
+    data.append(new_sents)
+ 
+# Creating Word2Vec
+model = Word2Vec(
+    sentences = data,
+    size = 50,
+    window = 10,
+    iter = 20,
+)
+ 
+# Vector for word like
+print("Vector for like:")
+print(model.wv["like"])
+print()
+ 
+# searching most similar words
+print("three words similar to the car")
+words = model.most_similar("car", topn=3)
+for a word in words:
+  print(word)
+print()
+ 
+#Visualize data
+words1 = ["france", "germany", "german", "trucks", "boats", "road", "teacher", "student"]
+ 
+X1 = model.wv[words]
+pca1 = PCA(n_components=2)
+result1 = pca1.fit_transform(X1)
+ 
+pyplot.scatter(result1[:, 0], result1[:, 1])
+for i1, word1 in enumerate(words1):
+    pyplot.annotate(word1, xy1=(result[i1, 0], result1[i1, 1]))
+pyplot.show()
+
+Output:
+Some Output[nltk__data] Download module pink to /root/nltk__data . . . . . . . . . . . . 
+[nltk_data]   Unzipping corpora/brown.zip.
+Vector for like:
+[ 2.576164   -0.2537464  -2.5507743   3.1892483  -1.8316503   2.6448352
+ -0.06407754  0.5304831   0.04439827  0.45178193 -0.4788834  -1.2661372
+  9.0838386   0.3944989  -8.3990848   8.303479   -8.869455   -9.988338
+ -0.36665946 -0.38986085  0.97970368 -8.0898065  -0.9784398  -0.5798809
+ -8.809848    8.4033384  -9.0886359   9.9894895  -0.9980708  -9.9975308
+  9.9987594  -8.887549   -9.6990344   0.88058434 -3.0898548   9.9833578
+  0.93773608  9.5869758  -9.8643668  -9.5568909  -0.33570558  9.4908848
+  0.84859069 -9.6389756   0.08789899 -8.9980007  -9.5788864  -0.9047495
+  9.7374605   8.9498986 ]
+ 
+three words similar to car
+('boats', 0.754489303685488)
+('trucks', 0.798306666589606)
+('block', 0.693647380389099)
+
+Word2Vec Visualization
+In the above representation, we can see that the words under study and educator point toward one bearing, nations like India, Germany, and France point toward another path, and words like street, boats, and truck. This shows that our Word2Vec model has taken in the embeddings that can separate words in light of their significance.
+Loading Models which are Pre-trained using Gensim
+Gensim also comes with several already-in-built models, as shown below.
+Example Source Code:
+
+import gensim
+import gensim.downloader
+ 
+for model_names in list(gensim.downloader.info()['models'].keys()):
+  print(model_names)
+
+Output:
+fasttext-wiki-news-subword-300 - - - 
+conceptnet-numberbatch-17-06-300 - - -
+word2vec-ruscorporaa-300 - - -
+word2vec-google-news-300 - - -
+glike-wiki-gigawords-50 - - -
+glike-wiki-gigawords-100 - - -
+glike-wiki-gigawords-200 - - -
+glike-wiki-gigawords-300 - - -
+glike-twitter_-25 - - -
+glike-twitter_-50 - - -
+glike-twitter_-100 - - -
+glike-twitter_-200 - - -
+__testing_word2vec--matrix--synopsis - - -
+
+We should stack the word2vec-google-news-300 model and perform various errands like tracking relations among Capitals and Country, getting comparative words, and ascertaining cosine comparability.
+Source Code:
+
+import gensim
+import gensim.downloader
+google_news_vectorsss = gensim.downloader.load('word2vec-google-news-300')
+# Find Capitals of Britain given Capitals of France: (Paris - France) + Britain = 
+print("Find Capitals of Britain: (Paris - France) + Britain - - -")
+capitals = google_news_vectorsss.most_similar(["Paris", "Britain"], ["France"], topn=1)
+print(capitals)
+print()
+# Find Capitals of German given Capitals of Germany: (Berlin - Germany) + German = 
+print("Find Capitals of German: (Berlin - Germany) + German - - -")
+capitals = google_news_vectorsss.most_similar(["Berlin", "German"], ["Germany"], topn=1)
+print(capitals)
+print()
+# Find words same like BMW
+print("five similar words to BMW: - - -")
+words1 = google_news_vectorsss.most_similar("BMW", topn=5)
+for a word in words1:
+  print(word)
+print()
+ 
+# Find words same like word Beautiful
+print("3 similar words to beautiful: - - -")
+words = google_news_vectorsss.most_similar("beautiful", topn=3)
+for w in words:
+  print(w)
+print()
+ 
+# Find cosine same like word between battle and fight 
+cosine = google_news_vectorsss.similarity("battle ", " fight ")
+print("Cosine similarity between battle and fight: - - - - - -", cosine)
+print()
+ 
+# Find cosine same like word between fight and like
+cosine = google_news_vectorsss.similarity("fight", "like")
+print("Cosine similarity between fight and like: - - - - - -", cosine)
+
+Output:
+[= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = ] 100.0% 1662.8/1662.8MB downloaded
+Finding Capitals of Britain: (Paris - France) + Britain - - -
+[('London', 0.7541897892951965)]
+ 
+Finding Capitals of German: (Berlin - Germany) + German - - -
+[('Delhi', 0.7268318338974)]
+ 
+Five similar words to BMW: - - -
+('Audi', 0.79329923930835)
+('Mercedes_Benz', 0.68347864990234)
+('Porsche', 0.72721920022583)
+('Mercedes', 0.707384757041931)
+('Volkswagen', 0.65941150188446)
+ 
+3 similar words to beautiful: - - -
+('gorgeous', 0.833004455566406)
+('likely', 0.81063621635437)
+('stunningly_beautiful', 0.732941390838623)
+ 
+Cosine similarity between battle and fight: - - - - - - 0.721284
+ 
+Cosine similarity between fight and like: - - - - - - 0.1350612
+
+Summary
+Congrats! You learned the concept of Word2Vec and how to make your model that transforms words into vectors. Word2Vec is a calculation that changes over a word into vectors with the end goal it gathers comparative words into vector space. Word2Vec is broadly utilized in numerous applications like record comparability and recovery, machine interpretations, etc. Presently you can involve it in your undertakings too.
+Gratitude for perusing!
+
+
+Next TopicCreating the GUI Marksheet using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

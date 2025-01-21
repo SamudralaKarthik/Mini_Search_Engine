@@ -1,0 +1,160 @@
+
+
+
+
+next →
+← prev
+
+Class Decorator in Python
+Decorators are an important and useful tool of Python. It allows us to modify the behavior of the function or class. So far, we have learned how to make the decorators using the function, but here we will discuss defining a class as a decorator. In this tutorial, we will learn to make the class decorator. You are familiar with the decorators; if not, and then have a detailed understanding of the decorator from our decorator in Python tutorial.
+The decorator allows us to wrap another function to extend the wrapped function's behavior without permanently changing it.
+Let's see the following example.
+Example -
+
+def pattern(n):
+    def decorate(fn):
+        def wrapper(*args, **kwargs):
+            print(n*'*')
+            result = fn(*args, **kwargs)
+            print(result)
+            print(n*'*')
+            return result
+        return wrapper
+    return decorate
+@pattern(10)
+def add(a, b):
+    return a + b    
+print(add(20, 30))
+
+Output:
+**********
+50
+**********
+
+Explanation -
+In the above code, we have created the star() decorator, which takes an integer as an argument and returns a callable. The callable takes the function func as an argument, a function that will be decorated. Also, the callable can access the n from the decorator factory.
+Now we will implement this decorator using the Python class.
+Python Class Decorator
+To define the class decorator, we need to use a __call__() method of classes. When we need to create an object that behaves like a function, the function decorator must return an object that behaves like a function. Let's understand the following example.
+Example - 1:
+
+class NewDocorator:
+	def __init__(self, function):
+		self.function = function
+	
+	def __call__(self):
+        # can add some more code
+		self.function()
+@NewDocorator
+def function():
+	print("WelCome to JavaTpoint")
+function()
+
+Output:
+WelCome to JavaTpoint
+
+Explanation -
+We have created the simple decorator using the class decorator using the __call__ method. We can modify it as we want. Now, we rewrite the above code using the class decorator.
+Example - 2:
+
+class Pattern:
+    def __init__(self, n):
+        self.n = n
+
+    def __call__(self, fn):
+        def wrapper(*args, **kwargs):
+            print(self.n*'*')
+            result = fn(*args, **kwargs)
+            print(result)
+            print(self.n*'*')
+            return result
+        return wrapper  
+@Pattern(5)
+def add(a, b):
+    return a + b
+    
+add(20, 30)
+
+Output:
+*****
+50
+*****
+
+Explanation -
+The pattern(5) returns an instance of the Pattern and that instance is a callable so it will work like as below.
+add = Pattern(5)(add)
+
+Class Decorator with the Return Statement
+We can use the return statement in the class decorator. In the previous example, we didn't return anything, so there is no issue. But sometimes, we need to return the value. We can do it as below.
+Example -
+
+class CubeDecorator:
+	def __init__(self, function):
+		self.function = function
+
+	def __call__(self, *args, **kwargs):
+
+		# before function
+		result = self.function(*args, **kwargs)
+
+		# after function
+		return result
+# adding class decorator to the function
+@CubeDecorator
+def get_cube(n):
+	print("given number is:", n)
+	return n * n * n
+
+print("Cube of number is:", get_cube(25))
+
+Output:
+Given number is: 25
+Cube of number is: 15625
+
+Explanation -
+In the above code, we have created CubeDecorataor class as a decorator and called the __call__() method. In the __call__() we called the caller function and return the result.
+Using Class Decorator to Print the Execution Time of Program
+We use the time module with the __call__ method to get the execution time of a program. Let's understand the following example.
+Example -
+
+from time import time as t
+from time import sleep
+class Timer:
+
+	def __init__(self, func):
+		self.function = func
+
+	def __call__(self, *args, **kwargs):
+		start_time = t()
+		result = self.function(*args, **kwargs)
+		end_time = t()
+		print("Execution took {} seconds".format(end_time-start_time))
+		return result
+
+
+# adding a decorator to the function
+@Timer
+def some_function(delay):
+	sleep(delay)
+some_function(4)
+
+Output:
+Execution took 4.004076242446899 seconds
+
+Explanation -
+We have imported the time method as t from the time module in the above code. Then we created the ExecutionTimer class as a decorator, where we got the start time when the program started its execution and the end time when it ended. We subtracted the start time from the end time and got the program execution time.
+Conclusion
+In this tutorial, we have covered class decorator with some examples. Decorators are an important tool in Python, which change another function's behavior without changing its actual implementation. Most of the time, we use Python functions to define the decorators, but class decorators are also useful and enhance the readability of the code. The class decorators can be extended as either taking the arguments or falling back to a default if no argument is passed.
+
+
+Next TopicCustomizing Parser Behaviour Python Module ?configparser.'
+
+
+
+
+← prev
+next →
+
+
+
+

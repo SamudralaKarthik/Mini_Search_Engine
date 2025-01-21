@@ -1,0 +1,148 @@
+
+
+
+
+next →
+← prev
+
+Python ChemPy Module
+While learning Python and its basics, we all must have heard that Python is one of the most popular programming languages, and the demand for Python in the market is increasing with every passing day. It is also not very hard to depict the reasons behind it, but as most of us read that Python is easy to learn and understand, and that's why it is so much popular. It is true up to some extent but not completely true because there are other major reasons which are reasons behind the increasing popularity and demand of Python. The most important reason is that Python has a very rich library in which it has lots of packages that are very useful in multiple fields like ML (Machine learning), Robotic Development, AI (Artificial Intelligence), Data Science, Data Analysis, etc. Other than this, Python offers multiple solution packages for multiple subjects like the Physics module, ChemPy module, Statistics module, etc. One of such important solution packages offered by Python is the ChemPy module designed to solve inorganic and physical chemistry problems. We are going to learn about this ChemPy module of Python in this tutorial, and we will learn about its applications, implementation, and installation.
+Introduction to ChemPy Module of Python
+ChemPy module is a Python package that is mainly designed to solve problems of inorganic, physical, and analytical chemistry. ChemPy module is an open-source and free Python package, and it has applications in fields like materials science, chemical engineering, chemistry, etc. ChemPy module is basically designed to solve all problems related to chemistry and associated fields of chemistry with the help of a Python program.
+This package includes many classes which are used to represent different types of reactions, the system of reactions, and substances. ChemPy module also includes analytical solutions to some differential equations that are commonly encountered in chemical kinetics, and it also has all the well-established formulae of Physical and analytical chemistry that help us in finding many important values.
+ChemPy Module in Python: Applications
+ChemPy module has multiple applications in various fields and associated fields of chemistry like materials science, etc. ChemPy module offers us a wide range of classes and functions which are very useful in calculating important values like Ionic strength, Chemical equilibrium, and many more. Classes of this module also represent reactions, systematic reactions, substances, and thus we can carry them out through a Python program. Besides these applications, the chempy module has multiple other applications related to chemistry and its associated fields' problems which we will discuss in this section.
+Following are some general applications of the ChemPy module by using them in a Python program:
+
+We can use the chempy module for balancing chemical reactions through a Python program
+We can use multiple formulae from the chempy module to calculate multiple chemical and analytical values such as morality, molality, and many more
+We can use functions of this module to maintain chemical equilibria for chemical reactions
+We can use the chempy module's classes to identify the substance and maintain reaction systematics in the program
+We can use also use functions of the chempy module to find out the ionic strength of the ions or molecules by applying the formula
+ChemPy module also provide us with functions that can be used as parsing formulae
+We can use the chempy module to print elements from the periodic table with their properties like atomic mass, charge, and many more
+We can also calculate chemical kinetics such as order of reactions from a given chemical reaction using functions of chempy module in a Python program
+
+These are some general applications of the Python ChemPy Module, and it has many other applications too. We can implement all of chempy's applications through a Python program by importing this module into the program.
+ChemPy Module in Python: Installation
+ChemPy is not an in-built module of Python, and therefore first, we have to install this module in our system before importing it into a Python program. We should make sure that the chempy module is present and successfully installed in our system before we start working with it. If the chempy module is not present in our system, there are multiple ways and methods which we can use to install the chempy module, but in this tutorial, we will install the chempy module through the pip installer. We will use the pip command to install the chempy module through the command prompt terminal of our system using the pip installer. Following pip command, which we will use to install the chempy module through pip installer:
+
+pip install chempy
+
+Once we write the above-given command inside the terminal, we have to press the enter key to give the pip installer command to start the installation process. Once the installation process starts, it will take a while to install this module in our system successfully, and therefore, we have to wait for a while.
+
+As we can see, the chempy module is successfully installed in our system, and now we can start working with it to understand its implementation and applications.
+ChemPy Module in Python: Implementation
+Now, moving ahead with the implementation of the chempy module, we can use its applications and functions to perform many chemical analyses and solve many chemistry problems through a Python program. But we will only use the following two applications of the chempy module in this tutorial and understand this module's implementation:
+
+Getting 'N' number of elements from the periodic table
+Getting properties and formula of a given chemical substance
+
+We will use a Python program in each application listed above and print the required result in the output to understand the implementation of the chempy module.
+Application 1: Getting 'N' number of elements from the periodic table:
+We can get a required number of elements with their properties, such as atomic mass, symbol, etc., in the output using the period table functions from the chempy module in the program. We will understand the implementation and use of this application through the following example program, where we will print the 'n' number of elements with their properties in the output.
+Example 1:
+Look at the following program where we have printed elements from periodic table in the output:
+
+# Importing the chempy module
+from chempy.util import periodic as prd
+# Number of elements from user
+num = int(input("Enter number of elements which you want to fetch from periodic table: "))
+print("Printing", num, "elements from the periodic table")
+# Displaying the periodic element information
+print("Atomic No.\tName\t\tSymbol\t\tMass")
+# Using for loop to loop over periodic table
+for a in range(1, num + 1):
+	# Printing the atomic number of elements
+	print(a, end = "\t\t")
+	# Displaying the names of elements
+	if len(prd.names[a]) > 7:
+		print(prd.names[a], end = "\t")
+	else:
+		print(prd.names[a], end = "\t\t")
+	# Printing the element symbol
+	print(prd.symbols[a], end = "\t\t")
+
+	# Displaying the atomic mass of element
+	print(prd.relative_atomic_masses[a])
+print("Result for periodic elements is printed according to number you provided")
+
+Output:
+Enter number of elements which you want to fetch from periodic table: 24
+Printing 24 elements from the periodic table
+
+Atomic No.	Name		Symbol		Mass
+1		Helium		He		4.002602
+2		Lithium		Li		6.94
+3		Beryllium	Be		9.0121831
+4		Boron		B		10.81
+5		Carbon		C		12.011
+6		Nitrogen	N		14.007
+7		Oxygen		O		15.999
+8		Fluorine	F		18.998403163
+9		Neon		Ne		20.1797
+10		Sodium		Na		22.98976928
+11		Magnesium	Mg		24.305
+12		Aluminium	Al		26.9815385
+13		Silicon		Si		28.085
+14		Phosphorus	P		30.973761998
+15		Sulphur		S		32.06
+16		Chlorine	Cl		35.45
+17		Argon		Ar		39.948
+18		Potassium	K		39.0983
+19		Calcium		Ca		40.078
+20		Scandium	Sc		44.955908
+21		Titanium	Ti		47.867
+22		Vanadium	V		50.9415
+23		Chromium	Cr		51.9961
+24		Manganese	Mn		54.938044
+
+Result for periodic elements is printed according to the number you provided
+
+As we can see, a list of the required number of elements with their atomic masses and symbols is printed in the output.
+Explanation:
+We have first imported periodic function as 'prd' from the chempy module in the program. After that, we initialized the 'num' variable where we take the user input the value, and then we will print the 'num' number of elements. After that, we used the for loop to loop over the periodic function to print the required number of functions in the output. We used the names[a] function to print the element names, symbols[a] to print the symbol of elements, and relative_atomic_masses[a] to print their atomic passes. We used the for loop till 'num' number of times, and then the list is printed in the output.
+Application 2: Getting properties and formula of a given chemical substance:
+We can print the chemical and general properties of a substance, like its formula, html name, etc., by using the substance functions of the chempy module. With substance functions, we can also validate the formula of a given substance with the existing formula. We will understand the implementation and use of this application through the following example program:
+Example 2:
+Look at the following Python program where we used substance functions of chempy on ferricyanide:
+
+# Import the chempy module
+from chempy import Substance as sst
+# Defining chemical formula for Ferricyanide
+elemtentFerriCyanide = sst.from_formula('Fe(CN)6-3')
+# Checking if the chemical formula provided is right
+if elemtentFerriCyanide.composition == {0: -3, 26: 1, 6: 6, 7: 6}:
+        print("Yes formula for Ferricyanide given in the program is right")
+# Printing chemical formula for Ferricyanide
+print("Chemical formula for Ferricyanide:", elemtentFerriCyanide.unicode_name)
+# Printing chemical formula for Ferricyanide in latex form
+print("Chemical formula for Ferricyanide in latex name form:", elemtentFerriCyanide.latex_name)
+# Printing chemical formula for Ferricyanide in html form
+print("Chemical formula for Ferricyanide in html name form:", elemtentFerriCyanide.html_name)
+# Printing total mass of Ferricyanide
+print("Atomic mass of Ferricyanide compound:", '%.3f' % elemtentFerriCyanide.mass)
+
+Output:
+Yes formula for Ferricyanide given in the program is right
+Chemical formula for Ferricyanide: Fe(CN)₆³?
+Chemical formula for Ferricyanide in latex name form: Fe(CN)_{6}^{3-}
+Chemical formula for Ferricyanide in html name form: Fe(CN)<sub>6</sub><sup>3-</sup>
+Atomic mass of Ferricyanide compound: 211.955
+
+As we can see, we have printed multiple properties of the ferricyanide in the output using substance functions of the chempy module.
+Explanation:
+We have imported substance as sst from the chempy module in the program. After that, we initialized the variable for ferricyanide by taking the formula of ferricyanide from the library. Then, we used the if statement to validate if the given variable's formula is actually the ferricyanide's chemical formula or not. After that, we printed Unicode, latex, and html names of the substance according to the chempy library, and lastly, we printed the mass of the substance in the output.
+
+
+Next TopicPython memory-profiler Module
+
+
+
+
+← prev
+next →
+
+
+
+

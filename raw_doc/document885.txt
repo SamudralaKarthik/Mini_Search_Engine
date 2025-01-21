@@ -1,0 +1,155 @@
+
+
+
+
+next →
+← prev
+
+Building python script
+Let's start building the python script that can run at system startup to block the access to the particular websites. Open PyCharm to edit the code or you can use any IDE you want.
+Create a new Python Script named as web-blocker.py. To make the process understandable to you, we will build this script step by step. So let's start coding by setting up all the required variables.
+Setting up the variables 
+This step initializes all the required variables that will be used in the script. Here, the host_path is set to the path to the hosts file. In our case, it is located under /etc. In python, r is used to represent the raw string. 
+The redirect is assigned to the localhost address, i.e. 127.0.0.1. The websites is a list which contains the website lists that are to be blocked. 
+
+host_path = r"/etc/hosts"
+redirect = "127.0.0.1"
+websites = ["www.facebook.com", "https://www.facebook.com"]
+
+Setting up the infinite loop 
+We need to have a while loop in the python script to make sure that our script will run at every 5 seconds. 
+To make this happen, we will use the sleep() method of the time module.
+
+import time
+
+host_path = r"/etc/hosts"
+redirect = "127.0.0.1"
+websites = ["www.facebook.com", "https://www.facebook.com"]
+
+while True:
+    time.sleep(5)
+
+Determining the time 
+In the process to build our desired python script, we need to check the current time whether it is working time or fun time since the application will block the website access during the working time. 
+To check the current time, we will use the datetime module. We will check whether the datetime.now() is greater than the datetime object for 9 AM of the current date and is lesser than the datetime object for 5 PM of the current date.
+Let's discuss more the output of datetime.now().
+
+It returns a datetime object containing current time including year (2019), month(January 1st), date(23rd), time (hour, minutes, seconds). We can compare this value and check whether this value exists between the 9 AM for the current date and 5 PM for a current date using if statement.
+The script will now contain the following code. 
+
+from time import *
+from datetime import *
+
+host_path = r"/etc/hosts"
+redirect = "127.0.0.1"
+websites = ["www.facebook.com", "https://www.facebook.com"]
+
+while True:
+    if datetime(datetime.now().year,datetime.now().month,datetime.now().day,9)< datetime.now()< datetime(datetime.now().year,datetime.now().month,datetime.now().day,17):
+        print("Working hours")
+
+    else:
+        print("Fun hours")
+    sleep(5)
+
+Writing to the hosts file 
+The main objective of the script is to keep modifying the hosts file at regular intervals. To let the script configure the hosts file, we need to implement the file handling methods here. 
+The following code is added to the hosts file.
+
+with open(host_path,"r+") as fileptr:
+            content = fileptr.read()
+            for website in websites:
+                if website in content:
+                    pass
+                else:
+                    fileptr.write(redirect+"
+					"+website+"\n")
+
+The open() method opens the file stored as host_path in r+ mode. First of all, we read all the content of the file by using the read() method and store it to a variable named content. 
+The for loop iterates over the website list (websites) and we will check for each item of the list whether it is already present in the content. 
+If it is present in the hosts file content, then we must pass. Otherwise, we must write the redirect-website mapping to the hosts file so that the website hostname will be redirected to the localhost.
+The hosts file will now contain the following python code. 
+
+from time import *
+from datetime import *
+host_path = r"/etc/hosts"
+redirect = "127.0.0.1"
+websites = ["www.facebook.com", "https://www.facebook.com"]
+while True:
+    if datetime(datetime.now().year,datetime.now().month,datetime.now().day,9)<datetime.now()<datetime(datetime.now().year,datetime.now().month,datetime.now().day,17):
+        print("working hours")
+        with open(host_path,"r+") as fileptr:
+            content = fileptr.read()
+            for website in websites:
+                if website in content:
+                    pass
+                else:
+                    fileptr.write(redirect+"    "+website+"\n")
+    else:
+        print("Fun hours")
+    sleep(5)
+
+Now, let's run this python script and check whether it has modified the hosts file or not.
+
+As we can see, It keeps printing working hours on the console as we are in working hours. Now, let's check the content of the hosts file.
+
+As we can see, the two lines have been added to the hosts file. It will redirect the access of Facebook to the localhost.
+Removing from the hosts file 
+Our script is working fine for the working hours, now lets add some features for the fun hours also. In the fun hours (not working hours) we must remove the added lines from the hosts file so that the access to the blocked websites will be granted. 
+The following code is added to the else part (fun hours case) of the script. 
+
+with open(host_path,'r+') as file:
+    content = file.readlines();
+    file.seek(0)
+    for line in content:
+        if not any(website in line for website in		websites):
+            file.write(line)
+    file.truncate()
+print("fun hours")
+
+The else part will be executed during the fun hours, and it removes all the mappings that block the access to some specific websites on the computer.
+Let's check the content of hosts file on the execution of the python script during the fun hours.
+
+The final script 
+Now, we have a python script which is running fine to block the access of some particular websites during working hours (9 AM to 5 PM) and provide the access during the fun hours. 
+The script web-blocker.py is given below. 
+web-blocker.py 
+
+from time import *
+from datetime import *
+
+host_path = r"/etc/hosts"
+redirect = "127.0.0.1"
+websites = ["www.facebook.com", "https://www.facebook.com"]
+
+while True:
+    if datetime(datetime.now().year,datetime.now().month,datetime.now().day,9)<datetime.now()<datetime(datetime.now().year,datetime.now().month,datetime.now().day,17):
+        with open(host_path,"r+") as fileptr:
+            content = fileptr.read()
+            for website in websites:
+                if website in content:
+                    pass
+                else:
+                    fileptr.write(redirect+"    	"+website+"\n")
+    else:
+        with open(host_path,'r+') as file:
+            content = file.readlines();
+            file.seek(0)
+            for line in content:
+                if not any(website in line for website in 				websites):
+                    file.write(line)
+            file.truncate()
+    sleep(5)
+
+
+Next TopicScript Deployment on Linux
+
+
+
+
+← prev
+next →
+
+
+
+

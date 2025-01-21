@@ -1,0 +1,255 @@
+
+
+
+
+next →
+← prev
+
+Basic Commands in Python | Magic Commands
+When Python was introduced in 1991, it was general assumption that Python is "use at own risk" language. But situation has changed; Python is a dominant language at present time, it is used for data science, machine learning, and software development.
+As we know that Python is a flexible language. So we can add new features and functions such as magic command.
+This tutorial will discuss about the magic commands. These magic commands surely help to reduce the lot of headache.
+Introduction
+Magic commands are easy designed syntax that facilitates us to perform routine task. These are basically created to accomplish some common task in data analysis using Python. In fact, they control the nature of IPython itself. It is used to running an external script or calculating the execution time of a piece of code.
+We can use the two different forms of magic commands in IPython.
+
+Line Magic - The line magic commands represent using % prefix and operates on a particular line of input. It is used in the form of expression and their return value can be assigned to variable.
+Cell Magic - The cell magic commands represent using %% prefix and works on a complete cell or multiple lines of input. They receive the whole block as a string.
+
+Let's learn about the most popular and interesting commands.
+Built -in Magic commands
+1.%autocall [mode]
+The %autocall[mode] magic function is used to make a function automatically callable without having to use parentheses.
+2. %automagic
+The magic function can be also callable without having to initial % if we set to 1. We need to set to 0 to deactivate it.
+Output:
+
+Automagic is OFF, % prefix IS needed for line magics.
+
+3. %run
+Suppose we have a file named program_test.py with the following code.
+
+def name()
+	print("Hello I am Stuart?)
+name()
+
+We use the following statement to run.
+
+%run program_test.py
+
+The script will run without importing defined variables.
+The above command will behave same as the python program_script.py file.
+Note - We can offer access to already defined variables using %run -i.
+Now we can access all the variables of executed file in IPython shell.
+4. %cd
+This magic command changes the current directory. It automatically manages the internal list of directories we visit during IPython session.
+Output:
+
+C:\Users\DEVANSH SHARMA
+
+Usage -
+
+%cd <dir> - Changes current working directory to <dir>
+%cd.. - It changes current directory to parent directory.
+%cd - It changes to last visited directory.
+
+5. %dhist
+It is a very useful magic command; it prints all the directories we have visited in current session. Every time %cd command is executed, this is updated in _dh variable.
+Output:
+
+Directory history (kept in _dh)
+0: C:\Users\DEVANSH SHARMA
+
+6. %edit
+The edit magic command unlocks the default text editor of current operating system (Notepad for Window) for editing a Python script. We can edit the current Python script in editor.
+Output:
+
+IPython will make a temporary file named: C:\Users\DEVANS~1\AppData\Local\Temp\ipython_edit_z41uo6o8\ipython_edit_zwb99en9.py
+
+7. %env[GUINAME]
+This magic command is used to enable and disables IPython GUI event loop integration. When we use the GUINAME argument, this command replaces the default GUI toolkits by the specified one.
+8. %%timeit
+The above command calculates the time taken by the IPython environment to execute a Python program. Let's understand the following program.
+
+%%timeit
+square_numbers = [num**2 for num in range(1,1000)]
+
+Output:
+659 µs ± 19.8 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+
+9. %lsmagic
+This command will return the list of all magic command. Let's see the following example.
+
+%lsmagic
+
+Output:
+
+10. %who
+The above command will return a list of all variables that are defined in the current notebook.
+Output:
+
+a	 b	 c	 name	 z	
+
+11. %pinfo <variable_name>
+It returns the detailed information about the variable. We can inspect the object that is stored in the particular variable name. Let's understand the following example.
+Command -
+
+%pinfo a 
+
+Output:
+Type:        int
+String form: 10
+Docstring:  
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is a number, return x.__int__().  For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base.  The literal can be preceded by '+' or '-' and be surrounded
+by whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+13. %matplotlib inline
+It is used to display the matplotlib graph in the Jupyter notebook. However, this command is available in the older version of Jupyter notebook. In the newer versions, this is no longer in use.
+14. %hist
+This command returns the history of the current notebook. Means, what we have done so far in the current notebook.
+Output -
+
+%dhist
+%edit
+%env[GUINAME]
+%automagic
+def name()
+    print('Hello I am Stuart')
+name()
+def name():
+    print('Hello I am Stuart')
+name()
+%cd
+%%timeit
+square_number = []
+for num in range(1,100):
+    sqaure_number.append(num**2)
+%%timeit
+square_numbers = []
+for num in range(1,100):
+    sqaure_numbers.append(num**2)
+%%timeit
+square_numbers = [num**2 for num in range(1,1000)]
+%%html
+<html>
+<body>
+<h3>Student Marks</h3>
+<table>
+        <tr> 
+            <th>Name</th> 
+            <th>Roll</th> 
+            <th>Age</th>
+            <th>Marks</th>
+        </tr> 
+        <tr> 
+..........................................
+..........................................
+..........................................
+
+Execute the Html Script in IPython
+We can execute the HTML and JavaScript code using the magic command. It helps us to provide some simple UI elements to our code.
+Syntax -
+%%html allows us to execute the html script.
+%%js allows us to execute the JS script.
+Let's see the following example.
+Command
+
+%%html
+<html>
+<body>
+<h3>Employee Details</h3>
+<table>
+        <tr> 
+            <th>Name</th> 
+            <th>Designation</th> 
+            <th>Age</th>
+            <th>Salary</th>
+        </tr> 
+        <tr> 
+            <td>Peter</td> 
+            <td>HR</td> 
+            <td>29</td>
+            <td>93000</td>
+        </tr>
+        <tr> 
+            <td>Parker</td> 
+            <td>IT</td> 
+            <td>24</td>
+            <td>92000</td>
+        </tr>
+        <tr> 
+            <td>Adam</td> 
+            <td>IT</td> 
+            <td>26</td>
+            <td>120000</td>
+        </tr>
+</table>
+</body>
+</html>
+
+
+Working with Environment Variable
+
+%env
+
+This command offers us to access and handle system environment variables.
+Output:
+{'ALLUSERSPROFILE': 'C:\\ProgramData',
+ 'APPDATA': 'C:\\Users\\DEVANSH SHARMA\\AppData\\Roaming',
+ 'C:\\PROGRAMDATA\\ANACONDA3\\SCRIPTS\\': 'C:\\ProgramData\\Anaconda3',
+ 'C:\\USERS\\DEVANSH SHARMA\\APPDATA\\ROAMING\\NPM': 'C:\\Users\\DEVANSH SHARMA\\AppData\\Roaming\\npm',
+ 'COMMONPROGRAMFILES': 'C:\\Program Files\\Common Files',
+ 'COMMONPROGRAMFILES(X86)': 'C:\\Program Files (x86)\\Common Files',
+ 'COMMONPROGRAMW6432': 'C:\\Program Files\\Common Files',
+ 'COMPUTERNAME': 'DESKTOP-2VAN176',
+ 'COMSPEC': 'C:\\WINDOWS\\system32\\cmd.exe',
+ 'DART_SDK': 'C:\\Program Files\\Dart\\dart-sdk',
+ 'DRIVERDATA': 'C:\\Windows\\System32\\Drivers\\DriverData',
+ 'FPS_BROWSER_APP_PROFILE_STRING': 'Internet Explorer',
+ 'FPS_BROWSER_USER_PROFILE_STRING': 'Default',
+ 'HOMEDRIVE': 'C:',
+ 'HOMEPATH': '\\Users\\DEVANSH SHARMA',
+ 'LOCALAPPDATA': 'C:\\Users\\DEVANSH SHARMA\\AppData\\Local',
+ 'LOGONSERVER': '\\\\DESKTOP-2VAN176',
+ 'NUMBER_OF_PROCESSORS': '4',
+ 'ONEDRIVE': 'C:\\Users\\DEVANSH SHARMA\\OneDrive',
+ 'OS': 'Windows_NT',
+ 'PATH': 'C:\\Users\\DEVANSH SHARMA\\Anaconda3;C:\\Users\\DEVANSH SHARMA\\Anaconda3\\Library\\mingw-w64\\bin;C:\\Users\\DEVANSH SHARMA\\Anaconda3\\Library\\usr\\bin;C:\\Users\\DEVANSH SHARMA\\Anaconda3\\Library\\bin;C:\\Users\\DEVANSH SHARMA..............
+
+
+%env var - It return value for specific variable. For example - %env OS
+
+Output:
+
+'Windows_NT'
+
+
+%env var value - It is used to set value for variable var.
+
+Conclusion
+In this tutorial, we have covered the important magic commands of the Jupyter notebook. These commands make work easier and also provide the flexibility to use notebook efficiently.
+
+
+Next TopicF String in Python
+
+
+
+
+← prev
+next →
+
+
+
+

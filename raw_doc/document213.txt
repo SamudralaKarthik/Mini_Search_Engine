@@ -1,0 +1,128 @@
+
+
+
+
+next →
+← prev
+
+Converting CSV to JSON in Python
+In this tutorial, we will understand how we can convert the CSV formatted file to a JSON formatted file with the help of the Python programming language.
+But we begin, let us understand what CSV and JSON files mean.
+What is a CSV file?
+A CSV file, short for Comma Separated Values file, is a plain text file that stores a list of data. The CSV files are generally utilized to exchange the data between various applications. For instance, the Contact Managers and Databases generally provide CSV file support.
+These CSV files are also known as Comma Delimited Files or Character Separated Values. These files mainly utilize the comma character in order to delimit or separate the data. However, sometimes utilize other characters such as semicolons. The anticipation is to export the complex data from one program to a CSV formatted file and then import the data from the CSV file into another program.
+A Comma Separated Values (CSV) file has a pretty basic structure containing some data listed and separated by commas. The CSV files are designed in a way that they can import and export data from other applications easily. The resultant data is easily be read by humans and can be viewed with a text editor such as Notepad or a spreadsheet application such as Microsoft Excel or Google Sheets.
+What is a JSON file?
+A JSON file, also short for JavaScript Object Notation file, is a file that allows users to store basic objects and data structure in a standard data interchange format called JSON format. The JSON file is generally utilized in order to transmit the data between a web-based application and a server. The JSON files are lightweight text-based files that humans can easily read, and we can edit these files with the help of a text editor like Notepad.
+The format JSON was genuinely based on a JavaScript subset. However, it is referred to as a language-independent format and is supported by a variety of programming APIs. JSON is generally utilized in Ajax Web Application Programming. There has been a gradual growth in the popularity of JSON when compared as an alternative to XML over the past few years.
+While there are various programs that use JSON for the data interchange, they may not save the JSON format files on their hard drive. The data interchange takes place between the Computers connected over the Internet. Nevertheless, few programs allow us to save the JSON format files. For instance, Google+ uses a JSON file to save the Profile Data. Once we logged in, we can choose the "Data liberation" page and select the "Download your Profile data" option.
+Since JSON files are plain text files which allows us to open them in any text editor, such as Microsoft Notepad for Windows, Apple TextEdit for Mac, Vim for Linux, and GitHub Atom, we can also use the web browsers like Google Chrome and Mozilla Firefox in order to open the JSON format files.
+Now let us begin with the conversion of the CSV file to the JSON file.
+Conversion of CSV file to JSON file
+We will convert the CSV file into a JSON file with the help of a simple Python program as scripted below.
+We will be using the following CSV file.
+File: mydatalist.csv
+
+Program:
+
+# importing the required libraries
+import csv
+import json
+
+# defining the function to convert CSV file to JSON file
+def convjson(csvFilename, jsonFilename):
+    
+    # creating a dictionary
+    mydata = {}
+    
+    # reading the data from CSV file
+    with open(csvFilename, encoding = 'utf-8') as csvfile:
+        csvRead = csv.DictReader(csvfile)
+        
+        # Converting rows into dictionary and adding it to data
+        for rows in csvRead:
+            
+            mykey = rows['S. No.']
+            mydata[mykey] = rows
+
+    # dumping the data
+    with open(jsonFilename, 'w', encoding = 'utf-8') as jsonfile:
+        jsonfile.write(json.dumps(mydata, indent = 4))
+
+# filenames     
+csvFilename = r'mydatalist.csv'
+jsonFilename = r'mydatalist.json'
+
+# Calling the convjson function
+convjson(csvFilename, jsonFilename)
+
+Output:
+File: mydatalist.json
+{
+    "1": {
+        "S. No.": "1",
+        "Name": "Dave",
+        "Age": "17"
+    },
+    "2": {
+        "S. No.": "2",
+        "Name": "Albus",
+        "Age": "16"
+    },
+    "3": {
+        "S. No.": "3",
+        "Name": "John",
+        "Age": "19"
+    },
+    "4": {
+        "S. No.": "4",
+        "Name": "Tom",
+        "Age": "22"
+    },
+    "5": {
+        "S. No.": "5",
+        "Name": "Harry",
+        "Age": "19"
+    },
+    "6": {
+        "S. No.": "6",
+        "Name": "Ron",
+        "Age": "20"
+    },
+    "7": {
+        "S. No.": "7",
+        "Name": "William",
+        "Age": "13"
+    },
+    "8": {
+        "S. No.": "8",
+        "Name": "George",
+        "Age": "15"
+    },
+    "9": {
+        "S. No.": "9",
+        "Name": "Mark",
+        "Age": "11"
+    },
+    "10": {
+        "S. No.": "10",
+        "Name": "Max",
+        "Age": "18"
+    }
+}
+
+Explanation:
+In the above example, we have imported the csv and json libraries and defined a function as convjson(). We have then created an empty dictionary and read the data from the CSV file. We have converted the rows from CSV to the dictionary and add them to the data. We have then dumped the data into a JSON file. At last, we have defined the variables for the file path names and called the convjson() function to implement the conversion. As a result, when we executed the program, the CSV file was successfully converted to a JSON file.
+
+
+Next TopicUnderscore (_) in Python
+
+
+
+
+← prev
+next →
+
+
+
+

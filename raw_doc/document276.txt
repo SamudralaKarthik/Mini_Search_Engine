@@ -1,0 +1,199 @@
+
+
+
+
+next →
+← prev
+
+EOL in Python
+As we know that a programming language like Python is an Interpreted language, which essentially implies that every block or line of code is processed one after one, rather than changing the whole program to a low-level code altogether.
+Whenever the interpreter of Python scans a line of code and notices something unexceptional, it raises an error known as the Syntax Error. Generally, a missing bracket, missing ending quote, and other fundamental anomalies in the syntax are why the errors were raised.
+In the following tutorial, we will be going to discover one of the syntax errors in Python known as EOL, which is usually raised when we try to scan a string literal.
+Understanding the meaning of EOL
+We must understand the meaning of EOL effectively before solving a problem. EOL is short for "End of Line". The EOL error signifies that the Interpreter of Python reached the end of the line while scanning the string literal.
+The string literals, also known as constants, must be enclosed in single or double quotation marks. Reaching the "End of Line" when we attempt to scan means that we have reached the last character of the string and have not encountered the ending quotation marks.
+Let us consider a basic example demonstrating how the EOL error is raised.
+Example:
+
+# defining a string value
+my_string = "This is my string literal, and it is broken...
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+  File "D:\Python\ternarypy.py", line 2
+    my_string = "This is my string literal, and it is broken...
+                                                               ^
+SyntaxError: EOL while scanning string literal
+
+Explanation:
+In the above snippet of code, we have defined a string literal; however, we have missed a quotation mark at the end of the string, which raised the syntax error called EOL while printing that string for the users.
+In the output section, we can observe a small arrow pointing to the last character of the string, demonstrating that the error had occurred when the program tried to parse that segment of the statement.
+Now that we have understood the issue let us understand some instances where this error can appear while executing a python code.
+Fixing the "Syntax Error: EOL while scanning string literal."
+We can encounter this error in four main situations while working on a Python program. These four main situations are as shown below:
+
+Missing the ending quotation mark
+Using the incorrect ending quotation mark
+String constant stretching to multiple lines
+Using backslash before the ending quotation mark
+
+Let us begin to understand each of these situations and try to work around them.
+Missing the ending quotation mark
+As discussed in the previous snippet of code, the Python interpreter raises a syntax error whenever it reaches the string literal's end and discovers that the quotation mark is missing.
+Example:
+
+# defining a string value
+my_string = "This is my string literal, and it is broken...
+
+# printing the string value
+print("String:", my_string)
+
+Explanation:
+We can observe that the quotation mark at the end of the literal string is missing, which also justifies the syntax error. Every language has few fundamental rules regarding syntax, which, when violated, result in errors.
+Let us now consider the following syntax as the solution for the above problem.
+Solution:
+
+# defining a string value
+my_string = "This is my string literal, and it is broken..."
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+String: This is my string literal, and it is broken...
+
+Explanation:
+In the above snippet of code, we can observe that we have included the quotation mark at the end of the literal string. As a result, the string is printed for the users successfully without raising any Syntax error.
+Using the incorrect ending quotation mark
+We can make use of " " as well as ' ' in order to enclose a certain string constant in Python. However, a programmer often uses an incorrect quotation mark at the end of the string value. Such a situation causes the program to raise a Syntax error in terms of EOL.
+Let us consider such a situation in the following example:
+Example:
+
+# defining a string value
+my_string = "This is my string literal with wrong quotation mark at the end.'
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+  File "D:\Python\ternarypy.py", line 2
+    my_string = "This is my string literal with wrong quotation mark at the end.'
+                                                                                 ^
+SyntaxError: EOL while scanning string literal
+
+Explanation:
+In the above snippet of code, we have used the incorrect quotation mark at the end of the string value that results in the syntax error.
+We can avoid such a problem by using the matching quotation mark at the end of the string, as shown in the following snippet of code.
+Solution:
+
+# defining a string value
+my_string = "This is my string literal with wrong quotation mark at the end."
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+String: This is my string literal with wrong quotation mark at the end.
+
+Explanation:
+In the above snippet of code, as we can observe, we have used the matching quotation mark at the end of the string that helps us avoid any EOL error.
+String constant stretching to multiple lines
+There are various novice Python programmers that make the mistake of stretching statements to more than one line. Python takes into account a new line as the end of the statement, unlike other languages such as C++ and Java that consider ';' as the end of statements.
+Let us consider an example demonstrating the same problem.
+Problem Example:
+
+# defining a string value
+my_string = "This is my string literal...
+                this is my new line"
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+  File "D:\Python\ternarypy.py", line 2
+    my_string = "This is my string literal...
+                                             ^
+SyntaxError: EOL while scanning string literal
+
+Explanation:
+In the above snippet of code, we can observe that the code may look ordinary; however, as soon as the next line is begun, the Python interpreter puts an end to that statement raising a Syntax error for not enclosing the string constant.
+However, we can solve this problem using various methods as shown below:
+Solution 1: Using the '\n' to provide the effect of a new line to the string constant
+
+# defining a string value
+my_string = "This is my string literal...\n this is my new line"
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+String: This is my string literal...
+ this is my new line
+
+Explanation:
+In the above snippet of code, we have included the '\n' in the string constant to provide the effect of a new line to it. As a result, the string constant breaks statement into multiple lines.
+Now let us consider another solution.
+Solution 2: Using triple quotation marks, ''' or """ to store multi-line string constants
+
+# defining a string value
+my_string = """This is my string literal...
+                    this is my new line"""
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+String: This is my string literal...
+                    this is my new line
+
+Explanation:
+In the above snippet of code, we have used the triple quotation mark, """ in order to store multi-line string constants.
+Using backslash before the ending quotation mark
+The backslash '\' is responsible for escaping the string and causes the syntax error.
+Let us consider the following example.
+Example:
+
+# storing a directory path
+my_string = "D:\Python\My_Folder\"
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+  File "D:\Python\ternarypy.py", line 2
+    my_string = "D:\Python\My_Folder\"
+                                      ^
+SyntaxError: EOL while scanning string literal
+
+Explanation:
+In the above snippet of code, we have used to backslash '\' in order to separate the paths of the folder from each other. However, during the execution of the program, the Python interpreter raised the Syntax error.
+The last backslash before the quotation mark escapes the string constant, and the Python interpreter considers \" as a single character. This escape sequence translates to a quotation mark (").
+We can solve this problem using the following snippet of code.
+Solution:
+
+# storing a directory path
+my_string = "D:\\Python\\My_Folder\\"
+
+# printing the string value
+print("String:", my_string)
+
+Output:
+String: D:\Python\My_Folder\
+
+Explanation:
+In the above snippet of code, we have used the '\\' in the string constant. As a result, the Python interpreter executes that string without raising an error.
+
+
+Next TopicPython Program to convert Hexadecimal String to Decimal String
+
+
+
+
+← prev
+next →
+
+
+
+

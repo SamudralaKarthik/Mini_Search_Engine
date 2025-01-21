@@ -1,0 +1,127 @@
+
+
+
+
+next →
+← prev
+
+Python Program to Find Intersection of Two Lists
+In this tutorial, we will discuss how we can get the intersection of the two lists. The intersection of two lists means we need to get all the familiar elements to both of the initial lists.
+Python is known for its excellent built-in data structure. Python list is one of the famous and valuable built-in data types of Python. It can store the various data-types value in sorted order. However, there is no built-in function for lists like sets.
+Python provides the many ways to perform the intersection of the lists. Let's see the following scenario.
+Input :
+
+list1 = [40, 90, 11, 58, 31, 66, 28, 54, 79]
+list2 = [58, 90, 54, 31, 45, 11, 66, 28, 26]
+
+Output:
+[90, 11, 58, 31, 66, 28, 54]
+
+Input :
+
+list1 = [4, 9, 1, 17, 11, 26, 28, 54, 69]
+list2 = [9, 9, 74, 21, 45, 11, 63, 28, 26]
+
+Output:
+[9, 11, 26, 28]
+
+Let's see following methods to get intersection of two lists.
+Method - 1: Using for loop
+
+# Python program to get the intersection
+# of two lists in most simple way
+def intersection_list(list1, list2):
+   list3 = [value for value in list1 if value in list2]
+   return list3
+
+# Driver Code
+list1 = [40, 90, 11, 58, 31, 66, 28, 54, 79]
+list2 = [58, 90, 54, 31, 45, 11, 66, 28, 26]
+print(intersection_list(list1, list2))
+
+Output:
+[90, 11, 58, 31, 66, 28, 54]
+
+We have used for loop to get the common value from both lists and stored it in the list3 variable.
+Method - 2: Convert List to Set
+
+def intersection_list(list1, list2):
+   return list(set(list1) & set(list2))
+
+list1 = [40, 90, 11, 58, 31, 66, 28, 54, 79]
+list2 = [58, 90, 54, 31, 45, 11, 66, 28, 26]
+
+print(intersection_list(list1, list2))
+
+Output:
+[66, 90, 11, 54, 58, 28, 31]
+
+Method - 3:
+We will use the built-in set's intersection() method. The intersection() is a first-class part of the set. Let's understand the following example.
+Example -
+
+# Python program to get the intersection
+# of two lists using set() and intersection()
+def intersection_list(list1, list2):
+   return set(list1).intersection(list2)
+
+list1 = [40, 90, 11, 58, 31, 66, 28, 54, 79]
+list2 = [58, 90, 54, 31, 45, 11, 66, 28, 26]
+
+print(intersection_list(list1, list2))
+
+Output:
+{66, 90, 11, 54, 58, 28, 31}
+
+Method - 4:
+In this method, we will use the hybrid method. This is much efficient way to perform the task. Let's understand the following example.
+Example -
+
+# Python program to get the intersection
+# of two lists
+def intersection(list1, list2):
+
+   # Use of hybrid method
+   temp = set(list2)
+   list3 = [value for value in list1 if value in temp]
+   return list3
+
+list1 = [40, 90, 11, 58, 31, 66, 28, 54, 79]
+list2 = [58, 90, 54, 31, 45, 11, 66, 28, 26]
+print(intersection(list1, list2))
+
+Output:
+[90, 11, 58, 31, 66, 28, 54]
+
+Method - 5:
+In this method, we will use the filter() method. The intersection is performed over sub-lists inside other lists. Let's understand the following example.
+Example -
+
+# Python program togetthe intersection
+# of two lists, sublists and use of filter()
+def intersection_list(list1, list2):
+   list3 = [list(filter(lambda x: x in list1, sublist)) for sublist in list2]
+   return list3
+
+
+list1 = [10, 9, 17, 40, 23, 18, 56, 49, 58, 60]
+list2 = [[25, 17, 23, 40, 32], [1, 10, 13, 27, 28], [60, 55, 61, 78, 15, 76]]
+print(intersection_list(list1, list2))
+
+Output:
+[[17, 23, 40], [10], [60]]
+
+The filter() method takes each item of the sublist and checks if it is present in the list1. The list comprehension is executed for each sublist in the list2.
+
+
+Next TopicHow to Create Requirements.txt File in Python
+
+
+
+
+← prev
+next →
+
+
+
+

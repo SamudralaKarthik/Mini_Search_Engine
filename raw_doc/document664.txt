@@ -1,0 +1,182 @@
+
+
+
+
+next →
+← prev
+
+fit(), transform() and fit_transform() Methods in Python
+It's safe to say that scikit-learn, sometimes known as sklearn, is one of Python's most influential and popular Machine Learning packages. It includes a complete collection of algorithms and modeling techniques that are ready to be trained, including utilities for pre-processing, training, and grading models.
+One of the most elementary classes in Sklearn is the transformer, which implements three different methods: fit(), transform(), and fit_transform(). We will examine what the difference between them is.
+Introduction
+Before continuing, let us look at the steps followed for a data science project; we would know that there are specific actions that we should take to construct any data science project. We'll go over them in brief here:
+
+We evaluate the datasets using exploratory data analysis (EDA), and by doing so, we reveal their crucial significance.
+Using some domain expertise, feature engineering is the procedure of extracting features from raw data.
+Feature Selection, when we decide which features will significantly influence the model.
+Model building in this step, we build a machine learning model using the appropriate techniques.
+Implementation, where we post our machine learning model online.
+
+If we focus on the first three processes, model development and model training will likely be more centered on data pre-processing. Therefore, every time we wished to launch any machine learning software, it was a very crucial process.
+Transformer In Sklearn
+Transformers are a commonly used object seen on Scikit-learn. The function of a transformer is to execute the feature transformation process, which is a part of data pre-processing; however, for model training, we require objects referred to as models, such as linear regression, classification, etc. Some examples of the transformer-like objects used for feature selection are StandardScaler, PCA, Imputer, MinMaxScaler, etc... We use these tools to perform some pre-processing on the raw data, such as changing the format of the input data and feature scaling. Further, this data is used for model training.
+We use a standardization procedure that takes a feature F and changes it into F'. By utilizing a standardization formula for f_1, f_2, f_3, and f_4 features, f_1, f_2, f_3, and f_4 are the independent features, and f_4 is the dependent feature; we change these features. We can transform an input feature F into another input feature F' with the help of three distinct operations. These operations are:
+
+fit()
+transform()
+fit_transform()
+
+fit() Method
+In the fit() method, we apply the necessary formula to the feature of the input data we want to change and compute the result before fitting the result to the transformer. We must use the .fit() method after the transformer object.
+If the StandardScaler object sc is created, then applying the .fit() method will calculate the mean (µ) and the standard deviation (σ) of the particular feature F. We can use these parameters later for analysis.
+Let's use the pre-processing transformer known as StandardScaler as an example and assume that we have to scale the features of self-created data. The example dataset in the code below is created using the arrange method and then divided into the training and testing datasets. After that, we create a StandardScaler instance and fit the feature of the training data to it to determine the mean and standard deviation to be utilized for scaling in the future.
+The significance of separating the dataset into the train and test datasets before using any pre-processing process, such as scaling, must be emphasized. Test data points represent real-world data. Therefore, we must only execute fit() to the training feature to prevent future data to our model.
+Code
+
+# Python program to show how to use the fit() method of the Transformer class of scikit-learn.
+# We will use the fit() method with the feature scaling tool known as StandardScaler. This tool is used for scaling the features using standardization.
+
+# Importing the required modules
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# Creating a random dataset with features X and y
+X, Y = np.arange(20).reshape((10, 2)), range(10)
+
+# Segregating data into training and testing datasets
+X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.30, random_state = 1 )
+
+# Printing the training dataset
+print( "Training dataset: \n", X_train)
+
+# Printing the testing dataset
+print( "Testing dataset: \n", X_test)
+
+# Calculating the standardizing parameters that are the mean and standard deviation of the X_train dataset.
+standard_scaler = StandardScaler()
+standard_scaler.fit(X_train)
+print(" Prameters of the fit method: \n", standard_scaler.get_params())
+
+Output:
+Training dataset: 
+ [[ 8  9]
+ [ 0  1]
+ [ 6  7]
+ [ 2  3]
+ [14 15]
+ [16 17]
+ [10 11]]
+Testing dataset: 
+ [[ 4  5]
+ [18 19]
+ [12 13]]
+ Parameters of the fit method: 
+ {'copy': True, 'with_mean': True, 'with_std': True}
+
+transform() Method
+To change the data, we most likely use the transform() function, where we perform the calculations from fit() to each value in feature F. We transform the fit computations. Hence we must use .transform() after we have applied the fit object.
+When we make an object using the fit method, we utilize the example from the section above and place the object in front of the.
+The scale of the data points is transformed using the transform and fit_transform method, and the output we receive is always a sparse matrix or array.
+Code
+
+# Python program to show how to use the transform() method of the Transformer class of scikit-learn.
+# We will use the transform() method with the feature scaling tool known as StandardScaler.
+
+# Importing the required modules,
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# Createing a random dataset with features X and y
+X, Y = np.arange(20).reshape((10, 2)), range(10)
+
+# Segregating data into training and testing datasets
+X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.30, random_state = 1 )
+
+# Printing original X_train
+print(X_train)
+# Calculating the standardizing parameters and transforming the dataset.
+standard_scaler = StandardScaler()
+fitted = standard_scaler.fit(X_train)
+X_train = fitted.transform(X_train)
+
+# Printing X_train after transforming data
+print(X_train)
+
+Output:
+[[ 8  9]
+ [ 0  1]
+ [ 6  7]
+ [ 2  3]
+ [14 15]
+ [16 17]
+ [10 11]]
+[[ 0.          0.        ]
+ [-1.46759877 -1.46759877]
+ [-0.36689969 -0.36689969]
+ [-1.10069908 -1.10069908]
+ [ 1.10069908  1.10069908]
+ [ 1.46759877  1.46759877]
+ [ 0.36689969  0.36689969]]
+
+fit_transform() Method
+The training data is scaled, and its scaling parameters are determined by applying a fit_transform() to the training data. The model we created, in this case, will discover the mean and variance of the characteristics in the training set.
+The mean and variance of every feature reported in our data are calculated using the fit approach. The transform method transforms all features using the corresponding means and variances.
+We wish scaling to be implemented in our testing data, but we also don't want our model to be biased. We expect our test set of data to be entirely fresh and unexpected for our model. In this situation, the convert approach is useful.
+Code
+
+# Python program to show how to use the fit_transform() method of the Transformer class of scikit-learn.
+# We will use fit_transform() method with the feature scaling tool known as StandardScaler.
+
+# Importing the required modules
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+# Createing a random dataset with features X and y
+X, Y = np.arange(20).reshape((10, 2)), range(10)
+
+# Segregating data into training and testing datasets
+X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.30, random_state = 1 )
+
+# Printing original X_train
+print(X_train)
+# Directly transforming the X_train dataset.
+standard_scaler = StandardScaler()
+X_train = standard_scaler.fit_transform(X_train)
+
+# Printing X_train after transforming data
+print(X_train)
+
+Output:
+[[ 8  9]
+ [ 0  1]
+ [ 6  7]
+ [ 2  3]
+ [14 15]
+ [16 17]
+ [10 11]]
+[[ 0.          0.        ]
+ [-1.46759877 -1.46759877]
+ [-0.36689969 -0.36689969]
+ [-1.10069908 -1.10069908]
+ [ 1.10069908  1.10069908]
+ [ 1.46759877  1.46759877]
+ [ 0.36689969  0.36689969]]
+
+Conclusion
+In this tutorial, we explored the three sklearn transformer functions, fit(), transform(), and fit_transform(), that are most frequently used. We looked at what each performs, how they differ, and in what situations we should choose one over the other. In simple language, the fit() method will allow us to get the parameters of the scaling function. The transform() method will transform the dataset to proceed with further data analysis steps. The fit_transform() method will determine the parameters and transform the dataset.
+
+
+Next TopicPython For Finance
+
+
+
+
+← prev
+next →
+
+
+
+

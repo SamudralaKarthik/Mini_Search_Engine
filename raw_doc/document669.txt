@@ -1,0 +1,115 @@
+
+
+
+
+next →
+← prev
+
+How to Iterate a Dictionary in Python
+Foundation/ A brief on the pre-requisite knowledge:
+A dictionary is one of the data types available in Python. If we are aware of sets and lists, a dictionary is another data storage simply. For a formal definition, a dictionary is an unordered collection of data stored in the form of values attached to their respective keys. So, what are these keys and values? A key in the dictionary is similar to an index. It represents the value it holds. Hence, inside a dictionary, it will store data in key and value pairs: When we open the textbook in search of a topic, we search for a topic on the index page and go to the page number.
+{key1: value1, key2: value2, key3: value3….keyn: valuen}
+The actual data we need is in the values, and we use keys to give an identification number to the values. This article discusses how we can iterate over the values in the dictionary. A few ways are using which we can achieve this. We'll discuss one by one with examples of each method:
+1. Using the inbuilt Methods
+Code:
+
+dictionary = {1: 'A', 2: 'B', 3: 'C'}
+print ("Keys in the dictionary: ", dictionary. keys ())
+print ("Values in the dictionary: ", dictionary. values ())
+print ("The data stored in the dictionary: ", dictionary. items ())
+
+Output:
+
+Methods used in the code:
+1. Dictionary.keys()
+Returns the list of keys in the dictionary
+2. Dictionary.values()
+Returns the list of values in the dictionary
+3. Dictionary.items()
+Returns the list of all the key-value pairs as tuples in the dictionary
+Understanding:
+We just used the methods already defined in Python to manipulate a dictionary in the code. In the first statement, a dictionary is created. In the next three statements, we used .keys(), .values() and .items() to prints the keys, values and the (key: value) pairs in the dictionary.
+2. Using the basic Functionality of a Dictionary:
+Code:
+
+dictionary = {1: 'A', 2: 'B', 3: 'C'}
+print ("The dictionary is: ", dictionary)
+print ("Keys in the dictionary: ")
+for i in dictionary:
+    print (i)
+print ("Values in the dictionary: ")
+for i in dictionary:
+    print (dictionary [i])
+
+Output:
+
+Understanding:
+There are two important points to be grasped from the above code:
+
+If we iterate a variable 'i' over a dictionary in Python, the dictionary's keys will be traversed.
+Now, if we want the values the keys hold, we need to ask the dictionary for which we use- dictionary [key].
+
+These are the two things we've done in the code. First, we declared a dictionary and printed it. Then, we traversed through the dictionary's keys using the variable 'i'. In the next loop, we traversed through the keys and printed their values:
+We can use the same loop for printing both keys and values:
+
+for i in dictionary:
+    print (i, end = ' ')
+    print (dictionary [i], end = ' ')
+    print ()
+
+Output:
+
+3. Iterating items ():
+We've already seen the method items (). We used it to print all the (key: value) pairs in the dictionary as a list of tuples. For a more clear representation of every key-value pair in the dictionary, we can iterate a variable on the method:
+Code:
+
+dictionary = {1: 'A', 2: 'B', 3: 'C'}
+print ("The dictionary is: ", dictionary)
+for i in dictionary. items ():
+    print (i)
+
+Output:
+
+One Program using all types of Iteration Methods:
+
+dictionary = {1: 'Hydrogen', 2: 'Helium', 3: 'Lithium'}
+print ("\nThe dictionary: ", dictionary)
+print ("\n")
+print ("Without using the inbuilt functions: ")
+print ("Keys and values in the dictionary: ")
+for i in dictionary:
+    print ('key: ', i, end = ' ')
+    print ('value: ', dictionary [i], end = ' ')
+    print ()
+print ("\nUsing the inbuilt functions: ")
+print ("Keys in the dictionary: ", dictionary. keys ())
+print ("Values in the dictionary: ", dictionary. values ())
+print ("The data stored in the dictionary: ", dictionary. items ())
+print ("\nTuple-wise representation: ")
+for i in dictionary. items ():
+    print (i)
+
+Output:
+
+Summary:
+In this Tutorial, we discussed:
+
+Given a dictionary, how to iterate over all the keys?
+Given a dictionary, how to iterate over all the values?
+Iterating over the dictionary with the use of inbuilt Python methods and without the use of the inbuilt methods.
+Given a key, how to find the value it is holding?
+Tuple arrangement of all the key-value pairs in the dictionary using .items ().
+
+
+
+Next TopicHow to Iterate through a List in Python
+
+
+
+
+← prev
+next →
+
+
+
+

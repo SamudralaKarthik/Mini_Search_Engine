@@ -1,0 +1,335 @@
+
+
+
+
+next →
+← prev
+
+Regular Dictionary vs Ordered Dictionary in Python
+As all we know, the dictionary is the most important data structure in Python and remembers its item's order (according to its latest update). Python Dictionary stores data values like a map; holds the key: value pair. Key-value is provided in the dictionary to make it more optimized. 
+The problem with the standard dictionary, it doesn't remember the insertion order of the key-value pair and thus iterates through the keys based on how they are stored in the hash table.
+Python provides the OrderDict type, which remembers the insertion order of (key, value) pair in the dictionary. 
+In this tutorial, we will learn the difference between the regular dictionary and the ordered dictionary OrderDict. We will create and use OrderedDict objects in the code. We will also identify the differences between OrderedDict and dict. 
+Getting Started with OrderDict
+Python's OrderDict is a dict subclass that stores the order in which key-value pairs are inserted into the dictionary. We will get the items in such order that they were inserted. If we update the value of an existing key, the order remains unchanged. If we remove an item a reinsert it, the item will be inserted at the end of the dictionary.
+It consists of all Python dictionary methods and has some additional features. Let's understand how to create an OrderDict in Python.
+Creating OrderDict Objects
+To create the OrderDict, we need to import the class from collections. There are various ways to create the OrderDict; many are same as the regular dictionaries. Let's create the ordered dict.
+
+from collections import OrderedDict
+
+numbers = OrderedDict()
+
+print(numbers)
+numbers["one"] = 1
+numbers["two"] = 2
+numbers["three"] = 3
+
+print(numbers)
+
+Output:
+OrderedDict()
+OrderedDict([('one', 1), ('two', 2), ('three', 3)])
+
+In the above code, first we import the OrderDict from collections and create the empty dictionary by instantiating OrderDict without passing any argument.
+We can pass the key-value pair to the dictionary by providing a key in a square bracket ([]). We get the items in the same order they were inserted into the dictionary. Let's understand the following example.
+Example -
+
+from collections import OrderedDict
+numbers = OrderedDict([("one", 1), ("two", 2), ("three", 3)])
+print(numbers)
+
+letters = OrderedDict({("a", 1), ("b", 2), ("c", 3)})
+print(letters)
+
+Output:
+OrderedDict([('one', 1), ('two', 2), ('three', 3)])
+OrderedDict([('a', 1), ('c', 3), ('b', 2)])
+
+In the above code, we have passed the list and set it in the OrderedDict() constructor. For the list or tuple, the resulting ordered dictionary matches the original order of items in the input sequence. However, the final order of items is unknown with the set until the OrdereDict is created. 
+We can create an ordered dictionary by passing keyword arguments to the class constructor. 
+Example -
+
+from collections import OrderedDict
+
+numbers = OrderedDict(one=1, two=2, three=3)
+print(numbers)
+
+Output:
+OrderedDict([('one', 1), ('two', 2), ('three', 3)])
+
+The OrderedDict provides the fromkeys(), which creates a new dictionary from an iterable of the keys and sets all its value to a common value.
+
+from collections import OrderedDict
+
+keys = ["one", "two", "three"]
+val = OrderedDict.fromkeys(keys, 0)
+print(val)
+
+Output:
+OrderedDict([('one', 0), ('two', 0), ('three', 0)])
+
+In this case, we create an ordered dictionary using a list of keys as starting point. The second arguments to .fromkeys() delivers a single value to all the items in the dictionary.
+Managing Item in an OrderedDict
+We can perform the mutation operations in the OrdereDict; it means we can modify the behavior of the OrderedDict. We can insert new items, update and remove existing items, and so on. If the newly added item is inserted into the existing ordered dictionary, the item is added to the end of the dictionary.
+Let's understand the following example -
+Example -
+
+from collections import OrderedDict
+
+numbers = OrderedDict(one=1, two=2, three=3)
+numbers
+
+
+numbers["four"] = 4
+print(numbers)
+
+Output:
+OrderedDict([('one', 1), ('two', 2), ('three', 3), ('four', 4)])
+
+The newly added item, ('four', 4) is placed at the end of the underlying dictionary. We can see that the order of the existing items remains unchanged.
+When we delete any key and insert a new instance of the same item, the new item is added to the end of the underlying dictionary. Let's see the following example.
+Example -
+
+from collections import OrderedDict
+numbers = OrderedDict(one=1, two=2, three=3)
+del numbers["two"]
+print(numbers)
+numbers["two"] = 2  
+print(numbers)
+Output:
+
+Output:
+OrderedDict([('one', 1), ('three', 3)])
+OrderedDict([('one', 1), ('three', 3), ('two', 2)])
+
+When we update the existing value, the key remains the same but assigned the new value in place.
+Iterate Over an OrderedDict
+We can iterate the OrdereDict same as the regular dictionary. We can iterate over the keys directly, or we can use built-in methods such as .items(), keys(), and values(). 
+Example -
+
+from collections import OrderedDict
+num = OrderedDict(one=1, two=2, three=3, four=4)
+
+for key in num:
+    print(key, "->", num[key])
+
+# Iterate over the items using .items()
+for key, value in num.items():
+    print(key, "->", value)
+
+# Iterate over the keys using .keys()
+for key in num.keys():
+    print(key, "->", num[key])
+
+# Iterate over the values using .values()
+for value in num.values():
+    print(value)
+
+Output:
+one -> 1
+two -> 2
+three -> 3
+four -> 4
+one -> 1
+two -> 2
+three -> 3
+four -> 4
+one -> 1
+two -> 2
+three -> 3
+four -> 4
+1
+2
+3
+4
+
+Explanation -
+In the above code, we have iterated over the keys directly and used the dictionary methods to iterate the num OrderedDict. 
+Difference between OrderedDict and Dictionary
+In the previous version of Python, Dictionary is defined as the unordered data structures. If the Python developer requires to order data, they look towards the lists and other data structures to keep their data in order. By passing the time, developers found the dictionary to keep its item ordered.
+In 2008, PEP 372 introduced the idea of adding a collection class that can remember the order of items defined by the order in which keys are inserted.
+When Python released its 3.6 version, it modified the implementation of the standard dictionary. Its new implementation comes with extensive features such as less memory usage and iteration efficiency, and the unexpected one: dict object can now keep their items in the same order they are introduced.
+Let's understand the basic difference between regular dictionary and OrderedDict.
+Example - Initializing the Dictionary
+
+import collections
+# Creating a regular dictionary
+print('Regular dictionary:')
+dict1 = {chr(k):k for k in range(ord('b'), ord('h'))}
+  
+for key, val in dict1.items():
+    print(key, val)
+# Creating an Ordered dictionary
+print('\nOrderedDict:')
+dict1 = collections.OrderedDict()
+[dict1.setdefault(chr(k), k) for k in range(ord('a'), ord('g'))]
+  
+for key, val in dict1.items():
+    print(key, val)
+
+Output:
+Regular dictionary:
+b 98
+c 99
+d 100
+e 101
+f 102
+g 103
+OrderedDict:
+a 97
+b 98
+c 99
+d 100
+e 101
+f 102
+
+Deletion and Updation
+Let's understand how the deletion and updation or re-insert by the both OrderedDict and dictionary.
+Example -
+
+from collections import OrderedDict
+print("Before deleting:\n")
+dict1 = {}
+print("Regular dictionary:")
+dict1['a'] = 1
+dict1['b'] = 2
+dict1['c'] = 3
+dict1['d'] = 4
+for key, value in dict1.items():
+	print(key, value)	
+od = OrderedDict()
+print("\nOrdered dictionary:")
+od['a'] = 1
+od['b'] = 2
+od['c'] = 3
+od['d'] = 4
+for key, value in od.items():
+	print(key, value)
+print("\nAfter deleting:\n")
+
+print("Regular dictionary:")
+dict1.pop('c')
+for key, val in dict1.items():
+	print(key, val)
+	
+print("\nOrdered dictionary:")
+od.pop('c')
+for key, val in od.items():
+	print(key, val)
+
+
+print("\nAfter re-inserting:\n")
+
+
+print("Regular dictionary:")
+dict1['c'] = 3
+for key, val in dict1.items():
+	print(key, val)
+	
+print("\nOrdered dictionary:")
+od['c'] = 3
+for key, val in od.items():
+	print(key, val)
+
+Output:
+Before deleting:
+Regular dictionary:
+a 1
+b 2
+c 3
+d 4
+
+Ordered dictionary:
+a 1
+b 2
+c 3
+d 4
+
+After deleting:
+
+Regular dictionary:
+a 1
+b 2
+d 4
+
+Ordered dictionary:
+a 1
+b 2
+d 4
+
+After re-inserting:
+
+Regular dictionary:
+a 1
+b 2
+d 4
+c 3
+
+Ordered dictionary:
+a 1
+b 2
+d 4
+c 3
+
+Comparison between OrderDict and Dictionary
+The below comparison will help select the more relevant differences and features. Let's understand the below comparison.
+Example -
+
+
+Sr.
+OrderedDict
+Dict
+
+
+1.
+It maintains the key insertion order since Python 3.1 version.
+It maintains the key insertion order since Python 3.6 version.
+
+
+2.
+It provides high readability and intent signalling regarding the order of items.
+It provides low readability and intent signalling regarding the order of items.
+
+
+3.
+Its control over the order of items is quite high.
+Its control over the order of items is quite low.
+
+
+4.
+It consumes a lot more memory.
+It consumes less memory than the OrderedDict.
+
+
+5.
+It supports the reverse iteration since Python 3.5.
+It doesn't support the reverse iteration since Python 3.5.
+
+
+6.
+Its operation performance is low.
+Its operation performance is high.
+
+
+7.
+It supports the merge (|) and update (|=) dictionary operators.
+It doesn't support the merge (|) and update (|=) dictionary operators.
+
+
+Conclusion
+This tutorial included the difference between the regular dictionary and OrderedDict and the introduction of OrderedDict. Python dictionaries couldn't remember the order of the key, so the Python developers created the OrderedDict, which was specially designed to keep items ordered.
+But Python 3.6 introduced the new feature that the dict object can remember the order of the items. This tutorial has given precise insight into both dictionaries, which would help you choose the appropriate one for your requirements. 
+
+
+Next TopicTopology Sorting in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,215 @@
+
+
+
+
+next →
+← prev
+
+Getter and Setter in Python
+Getters and setters in Python are different from those in other OOPs languages. The primary use of getters and setters is to ensure data encapsulation in object-oriented programs. In contrast to other object-oriented languages, private variables in Python are not hidden fields. Some OOPs languages use getters and setter's methods for data encapsulation. We want to conceal an object class's attributes from other classes so that methods in other classes don't accidentally modify data.
+In OOPs languages, getters and setters are used to retrieve and update data. A getter retrieves an object's current attribute value, whereas a setter changes an object's attribute value. In this article, we are going to discuss the getter and setter in Python with examples.
+What is Getter in Python?
+Getters are the methods that are used in Object-Oriented Programming (OOPS) to access a class's private attributes. The setattr() function in Python corresponds to the getattr() function in Python. It alters an object's attribute values.
+What is Setter in Python?
+The setter is a method that is used to set the property's value. It is very useful in object-oriented programming to set the value of private attributes in a class.
+Generally, getters and setters are mainly used to ensure the data encapsulation in OOPs.
+Using the normal function to achieve getters and setter behavior:
+There will be no special implementation if we specify normal get() and set() methods to achieve the getters & setters property.
+Example:
+Let's take an example to understand how we may use the normal function to achieve the getters and setter function.
+
+class Javatpoint: 
+    def __init__(self, age = 0): 
+         self._age = age 
+      # using the getter method 
+    def get_age(self): 
+        return self._age 
+      # using the setter method 
+    def set_age(self, a): 
+        self._age = a 
+  
+John = Javatpoint() 
+  
+#using the setter function
+John.set_age(19) 
+  
+# using the getter function
+print(John.get_age()) 
+  
+print(John._age)
+
+Output: After executing this above code, we will get the output as shown below:
+The output is:
+19
+19
+
+Explanation:
+To achieve such functionality, the functions get age() and set age() in the above code operate as standard functions do not affect getters and setters. Python has a unique function property ().
+Using the property() function to achieve getters and setter behavior
+In Python, property() is a built-in function for creating and returning a property object. There are three methods on a property object: getter(), setter(), and delete(). In Python, the property() function takes four arguments: property(fget, fset, fdel, doc). The fget function is used for retrieving the attribute value. The fset function is used for setting the value of an attribute. The fdel function is used to delete the value of an attribute. The attribute is given a docstring by doc.
+Example:
+Let's take an example to understand how we can use the property() function to achieve getters and setters behavior.
+
+class Javatpoint: 
+     def __init__(self): 
+          self._age = 0
+       # using the get function 
+     def get_age(self): 
+         print("getter method") 
+         return self._age 
+       # using the set function 
+     def set_age(self, y): 
+         print("setter method") 
+         self._age = y 
+  # using the del function 
+     def del_age(self): 
+         del self._age 
+     age = property(get_age, set_age, del_age)  
+  
+John = Javatpoint() 
+  
+John.age = 18
+  
+print(John.age) 
+
+Output: After executing this above code, we will get the output as shown below:
+The output is:
+setter method
+getter method
+18
+
+Explanation:
+In the above program, there is only single print statement. The output consists of three lines due to the setter method set age() being called, and the getter method get age() being called. As a result, age is a property object that aids in the security of private variable access.
+Using the @property decorators to achieve getters and setter behavior:
+We used the property() function in the previous method to achieve getters and setters behavior. However, as previously mentioned in this article, getters and setters are also used to validate the getting and setting of attribute values. Another method for enforcing property function is to use a decorator. @property is one of Python's built-in decorators. The primary goal of any decorator is to modify the class methods or attributes so that the class user does not need to change their code.
+Example:
+Let's take an example to understand how we can use the @property decorators to achieve the getters and setter behavior.
+
+class Javatpoint: 
+     def __init__(self): 
+          self._age = 0
+       
+     # using the getter function 
+     @property
+     def age(self): 
+         print("getter method") 
+         return self._age 
+       
+     #now, using the setter function 
+     @age.setter 
+     def age(self, x): 
+         if(x < 20): 
+            raise ValueError("the age is below eligibility criteria") 
+         print("setter method") 
+         self._age = x 
+  
+John = Javatpoint() 
+  
+John.age = 25
+  
+print(John.age) 
+
+Output: After executing the above code, we will get the output as shown below:
+The output is:
+setter method called
+getter method called
+25
+
+Explanation:
+The preceding code demonstrates how to use the @property decorator to build pythonic getters and setters. The above example serves as validation code, raising a ValueError if we attempt to initialize age with a value less than 20.
+Making the attributes private
+Now, we'll see how to render the methods private so that external calling functions can't manipulate the variables within them. They could only be manipulated by functions that are defined within the class. They are made private by prefixing them with two underscores.
+Example:
+Let's take an example to understand how we can make the attributes private in the program.
+
+class Javatpoint:
+   def __init__(self, age=49):
+      self._age = age
+# make the getter method
+   def get_age(self):
+      return self.__age
+# make the setter method
+   def set_age(self, a):
+      self.__age = a
+grad_obj = Javatpoint()
+print(grad_obj._age)
+# Before using setter
+print(grad_obj.get_age())
+# After using setter
+grad_obj.set_age(2020)
+print(grad_obj._age)
+
+Output: After executing this above code, we will get the output as shown below:
+49
+
+Reading the values from private methods
+To read the value from private methods, we have to use the getter method. Without using the getter method, we can't use the property method to access the private attribute values. Let's take an example to understand this method.
+Example:
+
+# A program to read the value from private method
+class Javatpoint:
+   def __init__(self, year=27):
+      self._year = year
+
+   @property
+   def Aboutyear(self):
+      return self.__year
+
+   @Aboutyear.setter
+   def Aboutyear(self, x):
+      self.__year = x
+
+grad_obj = Javatpoint()
+print(grad_obj._year)
+
+grad_obj.year = 2020
+print(grad_obj.year)
+
+Output: After executing this above code, we will get the output as shown below:
+The output is:
+27
+2020
+
+Example:
+Let's take another example to create a class with properties. From that class we may several objects.
+
+class Javatpoint:    
+    def __init__(self):
+        self.emp = "None"
+Mark = Friend()
+John = Friend()
+
+The property (Emp) is not set on these objects. We could set it directly, but that is not a good method. We construct two methods instead: getEmp() and setEmp().
+
+class Javatpoint:
+    def __init__(self):
+        self.emp = "None"
+    def getEmp(self):
+        return self.emp
+    def setEmp(self, emp):
+        self.emp = emp
+Mark = Javatpoint()
+John = Javatpoint()
+Mark.setEmp("Developer")
+John.setEmp("Designer")
+print(John.emp)
+print(Mark.emp)
+
+Output: After executing this above code, we will get the output as shown below:
+The output is:
+Designer
+Developer
+
+
+
+Next TopicEnum class in Python
+
+
+
+
+← prev
+next →
+
+
+
+

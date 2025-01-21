@@ -1,0 +1,362 @@
+
+
+
+
+next →
+← prev
+
+How to Round Numbers in Python
+It's the big data age, and each day, new companies are attempting to use their information to make better choices. Many enterprises are using Python's robust data science environment to analyze their data, as indicated by Python's expanding prominence in the data analytics world.
+Every data scientist should be aware of how a data set can be skewed. Conclusions drawn upon biased data can result in pricey errors.
+Bias can enter a dataset in a variety of ways. We're certainly aware of phrases like reporting bias, sample bias, and selection bias if we've formally studied statistics. Another crucial bias to consider when working with quantitative data is rounding bias.
+Built-In round() Function
+The round() method in Python accepts two numerical inputs, n & ndigits, and it returns the number given n rounded down to ndigits. Because the ndigits option sets to zero by default, omitting it gives a value that is rounded to the nearest integer. As one will see, round() doesn't always operate as expected.
+Let's say we wish to round off a figure to the nearest 4.5. The number will be rounded up to the closest whole number, 5. The number 4.74, on the other hand, will be reduced to one decimal number, yielding 4.7.
+When working with floats with numerous decimal places, it's critical to round figures fast and easily. The Python function round() ends up making things simple and straightforward.
+Syntax:
+
+round(number, number of digits)
+
+Parameters:
+
+number: This is the number that will be rounded
+number of digits (Optional): The number of digits the provided number should be rounded up to.
+
+Code
+
+# Rounding integers
+print (round(17))
+  
+# For floating type
+print (round(23.71))  
+  
+# giving second parameter also
+  
+# when the last digit is equal to 5 
+print (round(7.465845, 5)) 
+    
+# when the last digit is greater than 5 
+print (round(7.47786, 4))   
+    
+# when the last digit is less than 5 
+print (round(7.473772, 5))
+
+Output:
+17
+24
+7.46584
+7.4779
+7.47377
+
+In some cases round() function does not act as expected.
+Code
+
+print (round(1.5))
+print (round(2))
+print (round(2.5))
+
+Output:
+2
+2
+2
+
+The round() algorithm rounds 1.5 to 2 and 2.5 to 2. This is not a mistake; this is how the round() algorithm works.
+Truncating Decimals
+Truncation is among the easiest methods for rounding a number by reducing it to a specific number of decimals. Each digit just after a specific location is substituted with 0 in this algorithm. The truncate() function works with both positive and negative values.
+We can use the following method to create the truncation function:
+
+Shifting the decimal place p positions to the right via multiplying the given number by 10 raised to the power p.
+Using int() to get the integer component of the updated number.
+Dividing by 10p to move the decimal position p positions towards the left.
+
+
+
+Value
+Truncated To
+Result
+
+
+14.952
+Tens place
+10
+
+
+14.952
+Ones place
+14
+
+
+14.952
+Tenths place
+14.9
+
+
+14.952
+Hundredths place
+14.95
+
+
+Code
+
+# first define truncate function
+# setting default decimal places to 0, it will truncate all the decimal places and will return integer part only
+  
+def truncate(n, decimal_place = 0):
+    v = 10 ** decimal_place
+    return int(n * v) / v
+  
+print(truncate(56.9))
+print(truncate(-7.396, 1))
+print(truncate(8.525, 2))
+  
+# if we pass negative number in second argument it will truncate n towards left
+print(truncate(535.643, -1))
+print(truncate(-56236.753, -4))
+
+Output:
+56.0
+-7.3
+8.52
+530.0
+-50000.0
+
+The trunc() method, often known as the truncate function, is a Python Math function that removes decimal values from an expression and returns the integer result. Because this function is part of the Python math package, we must import math to utilize it.
+Syntax
+
+math.trunc(number)
+
+There is only one parameter of this operation. A number can be either positive or negative in this case.
+Code
+
+import math 
+n = 45.3467
+#using inbuilt trunc function of math module to truncate decimals of n
+print("Truncated number is: ", math.trunc(n))
+
+Output:
+Truncated number is:  45
+
+Rounding Up
+Another such approach is "rounding up," which involves rounding a value to a specific number of figures. For instance:
+
+
+Value
+Round Up To
+Result
+
+
+46.345
+Tens place
+50
+
+
+46.345
+Ones place
+47
+
+
+46.345
+Tenths place
+46.4
+
+
+46.345
+Hundredths place
+46.35
+
+
+In maths, the word ceiling is often used to describe the closest integer bigger than a number or equal to a certain number. We will employ 2 functions in this tutorial for "rounding up," the ceil() function and the math() operation.
+Between two successive integers, a non-integer value exists. Consider the value 6.2, which will fall somewhere between 6 & 7. The ceiling is the interval's upper terminus, while the floor is its bottom endpoint. As a result, the 6.2 ceiling is 7, and the 6.2 floor is 6.
+Python's math.ceil() method is used to apply the ceiling method. It generally returns the nearest integer that is bigger than the given number or equal to it.
+Code
+
+import math
+
+c1 = math.ceil(6.2)
+print( "Ceiling for 6.2: ", c1)
+c2 = math.ceil(6)
+print( "Ceiling for 6: ", c2)
+c3 = math.ceil(-0.8)
+print( "Ceiling for -0.8: ", c3)
+
+Output:
+Ceiling for 6.2:  7
+Ceiling for 6:  6
+Ceiling for -0.8:  0
+
+Let's focus on the code that uses the round_up() function to execute the "rounding up" approach:
+We can use the following method to create the rounding up function:
+
+Firstly, multiply num by 10 ** decimal_place; the decimal position of num is moved by the appropriate number of positions to the right.
+Using math.ceil() module, the resulting number is rounded up to the closest integer.
+Finally, by dividing the resulting number by 10 ** decimal_place, the decimal position is pushed back to the left.
+
+Code
+
+# importing the required library
+import math
+  
+# defining a function to round up decimals
+def round_up(num, decimal_place = 0): 
+    cons = 10 ** decimal_place 
+    return math.ceil(num * cons) / cons
+  
+# applying on positive numbers
+print(round_up(5.1))
+print(round_up(5.73, 1))
+print(round_up(5.246, 2))
+  
+# applying on negative numbers
+print(round_up(46.25, -1))
+print(round_up(754.357, -2))
+
+Output:
+6.0
+5.8
+5.25
+50.0
+800.0
+
+Rounding up generally moves a value to the right along the number line, while rounding down usually moves a value to the left.
+Rounding Down
+We have an approach termed rounding down that is analogous to rounding up.
+
+
+Value
+Rounded Down To
+Result
+
+
+46.345
+Tens place
+40
+
+
+46.345
+Ones place
+46
+
+
+46.345
+Tenths place
+46.3
+
+
+46.345
+Hundredths place
+46.34
+
+
+In Python, we can round downwards using the same mechanism to truncate or round up. We must first move the decimal point before rounding an integer. Finally, return the decimal point.
+Once the decimal point is moved, math.ceil() can be employed to round up the number's ceiling. To "round down," we must go first round the resulting number's floor after the decimal point has been relocated.
+math.floor() provides the smallest integer less than or equals a specific number.
+Code
+
+import math
+
+c1 = math.floor(6.2)
+print( "Floor value for 6.2: ", c1)
+c2 = math.floor(6)
+print( "Floor value for 6: ", c2)
+c3 = math.floor(-0.8)
+print( "Floor value for -0.8: ", c3)
+
+Output:
+Floor value for 6.2:  6
+Floor value for 6:  6
+Floor value for -0.8:  -1
+
+We can use the following method to implement the rounding down function:
+
+First, by multiplying n by 10 ** decimal place, the decimal position in num is moved by the appropriate number of spaces to the right.
+Using math.floor, the resulting number is rounded up into the closest integer ().
+Finally, by dividing the resulting number by 10 ** decimals, the decimal digits are pushed back to the left.
+
+Code
+
+# importing the required library
+import math
+  
+# defining a function to round down decimals
+def round_down(num, decimal_place = 0):
+    cons = 10 ** decimal_place
+    return math.floor(num * cons) / cons
+  
+# applying function on positive and negative values
+print(round_down(4.6))
+print(round_down(3.74, 1))
+print(round_down(-5.7))
+
+Output:
+4.0
+3.7
+-6.0
+
+Rounding Bias
+There are three techniques for rounding: truncate(), round_down(), and round_up(). Whenever it comes to maintaining an acceptable level of accuracy for a particular number, all 3 of these strategies are quite basic.
+There is one key distinction between truncate(), round_down(), and round_up() that shows a key component of rounding: symmetric about zero.
+Keep in mind that round_up() is asymmetric near zero. In mathematics, a function f(n) is symmetrical about zero if f(n) + f(-n) = 0 for any value of n. Round up(5.5), for instance, returns 6, whereas round up(-5.5) returns -5. Neither the round_down() nor the round_up() functions are symmetric about 0.
+The truncate() method, on the contrary, is symmetrical at about zero. This is because truncate() removes the leftover digits after relocating the decimal position to the right. This is equivalent to pushing the value downwards when the original number is positive. Negative figures are rounded upwards. As a result, truncate(5.5) yields 5 while truncate(-5.5) yields -5.
+The concept of rounding bias is introduced by the principle of symmetry, which outlines how rounding impacts numeric values in a dataset.
+Because the number is constantly rounded up on the path of positive infinity, the "rounding up" approach exhibits a bias for positive infinity. In the same way, the "rounding down" technique has a bias for negative infinity.
+On positive numbers, the "truncation" technique has a bias for negative infinity, while with negative values, it has a bias for positive infinity. In general, rounding algorithms having this tendency are considered to have a bias towards zero.
+Let's take a look at how it works in practise. Take the list of floating numbers below:
+
+numeric_values = [3.52, -5.36, 0.96, -2.63, 8.24, -9.43, 6.35, 5.86]
+
+Let us use statistics.mean() function to calculate the average value of the numeric_values. 
+Code
+
+import statistics
+
+mean = statistics.mean(numeric_values)
+print ("original mean: ", mean)
+
+Output:
+original mean:  0.93875
+
+Now, using list comprehension, perform truncate(), round_down(), and round_up() to round every number of the numeric values list one decimal point and compute the revised mean:
+Code
+
+roundingUp_data = [round_up(x, 1) for x in numeric_values]
+print(roundingUp_data)
+print ("Rounded up mean: ", statistics.mean(roundingUp_data))
+
+roundingDown_data = [round_down(x, 1) for x in numeric_values]
+print ("Rounded dwn mean: ", statistics.mean(roundingDown_data))
+
+
+truncate_data = [truncate(x, 1) for x in numeric_values]
+print ("Truncated mean: ", statistics.mean(truncate_data))
+
+Output:
+[3.6, -5.3, 1.0, -2.6, 8.3, -9.4, 6.4, 5.9]
+Rounded up mean:  0.9875000000000002
+Rounded dwn mean:  0.8874999999999998
+Truncated mean:  0.9249999999999998
+
+The revised mean is 0.98, 0.88, and 0.924 when the values in numeric_values are rounded up. Rounding down lowers the average to approximately 0.887. The truncated figures' average is around 0.924, which is the nearest to the original mean.
+This isn't to say that we must truncate whenever rounding distinct values while keeping the mean value as near as possible. The result is that the ratio number of positive and negative numbers is close to 1. On a set of all positive numbers, the truncate() method will act similarly to round_up(), and on a set of all negative numbers, it will behave similarly to round_down().
+This instance demonstrates the impact of rounding bias on numbers generated from rounded data. When making inferences from rounded data, we'll need to bear these consequences.
+When rounding, we usually want to round to the closest figure with a certain accuracy, rather than just rounding it up or down.
+If we were asked to round the figures 2.63 and 2.68 to the nearest decimal place, we would most likely respond with 2.6 and 2.7. The methods truncate(), round_down(), and round_up() don't perform anything similar.
+Points to Remember
+Round Data after Collection is Complete
+If we're working with a huge amount of information, storage can become a challenge. In an industrial furnace, for instance, a temperature monitor would be used to record the temperature every twenty seconds to eight decimal places. These values will aid in avoiding excessive oscillations that could cause any heat source or element to malfunction. Using a Python script, we may examine the measurements and look for big fluctuations.
+Because measurements are taken on a daily basis, there'll be a great number of them. Keeping 3 decimal places of accuracy is an option. However, eliminating too much specificity may cause the computation to vary. If we have adequate room, we can effortlessly store all of the data in complete precision. When there is limited capacity, it is always preferable to retain at minimum 2 or 3 decimal places of precision.
+Finally, once we have calculated the daily mean temperature, round the value to the highest accuracy possible.
+Error Reduction
+When rounding numbers in huge datasets for complex calculations, the most important thing to keep in mind is the error from growing.
+
+
+Next TopicPrecedence and Associativity of Operators in Python
+
+
+
+
+← prev
+next →
+
+
+
+

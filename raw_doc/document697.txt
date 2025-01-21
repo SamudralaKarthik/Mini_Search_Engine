@@ -1,0 +1,333 @@
+
+
+
+
+next →
+← prev
+
+Python NetworkX
+In this tutorial, let's explore the NetworkX library of Python. NetworkX represents network examination in Python. NetworkX is a module of Python for the control, creation, and investigation of the elements, construction, and intricate network elements. It is utilized to make, control, and concentrate on complex charts.
+Introduction
+NetworkX is a Python language programming module investigating perplexing organizations' element design and capability. It is utilized to concentrate on enormous, complex organizations addressed in charts with nodes and edges. Utilizing networks, we can load and store complex organizations. We can produce many arbitrary and exemplary organizations, break down network structures, construct network models, plan new organization calculations and draw organizations. NetworkX is free programming delivered under the BSD-new permit.
+Prerequisites Required: Basic knowledge of the foundation of Python programming and graph theory of mathematics.
+Highlights of NetworkX
+
+Classes for diagrams and digraphs.
+Transformation of diagrams to and from a few configurations.
+Capacity to steadily develop irregular diagrams or build them.
+Capacity to find subgraphs, inner circles, and k-centres.
+Investigate nearness, Degree, distance across, range, focus, betweenness, and so forth.
+Attract networks 2D and 3D.
+
+Appropriateness
+NetworkX is appropriate for the procedure on enormous certifiable charts: e.g., diagrams of more than 20 billion nodes and 200 billion edges.[clarification needed] Due to its reliance on an unadulterated Python "word reference of word reference" information structure, NetworkX is a sensibly effective, entirely versatile, profoundly compact system for organization and informal organization examination.
+Installation
+On the off chance that the NetworkX package isn't introduced in your framework, you need to introduce it right away. You can install it by utilizing the accompanying command below:
+
+Pip install networkx
+
+The command above will introduce the NetworkX bundle in your framework. Presently, you are prepared to utilize it. Once in a while, the above order might give a blunder message. You are informed to utilize pip3 order rather regarding pip. It relies heavily on how your framework is designed.
+Importing the Library
+You can utilize the 'networkx' module by bringing it utilizing the accompanying command:
+
+import networkx as nxx
+
+Presently, the 'networkx' module is accessible with the reference 'nxx'. You can utilize any reference name; however, 'nxx' is the most regularly used reference for the 'networkx' module in Python.
+Various Operations Performed using NetworkX Python Module
+Creating a full empty graph
+Use the accompanying command to create any empty graph
+
+G1 = nxx.Graph()
+
+The command above will create an empty graph. An empty graph has an empty edge set and an empty vertex set.
+To access the edge set and the vertex set of the graph G1, we can utilize the accompanying command:
+
+print(G1.nodes()) # return list
+print(G1.edges()) # return list
+
+Both G1.nodes() and G1.edges return lists of Python. G1.nodes() and G1.commands will return null records since we have not added any nodes or edges to diagram G1.
+Adding nodes to the graph
+To start, we will make an unfilled chart by calling Graph() class as displayed beneath.
+
+G1 = nxx.Graph()
+
+A node in NetworkX can be any hashable item, i.e., a number, a text string, a picture, an XML object, etc. It very well may be a NetworkX diagram, moreover.
+There are two techniques used to add nodes in the diagram.
+add_node(): This strategy is utilized to add one single node at a time.
+add_nodes_from(): This technique takes an iterable compartment like rundown, set, and so forth and adds numerous nodes simultaneously.
+Source Code:
+
+import networkx as nxx
+G = nxx.Graph()
+G.add_node(1)
+G.add_nodes_from([2,3,"node 5"])
+print(G.nodes())
+
+Output:
+[1, 2, 3, 'node 5']
+
+Adding edges to the graph
+These two strategies are significantly used to add edges to the chart. An edge is like a connection between two nodes. Obscure nodes determined in the boundaries are consequently added to the chart.
+add_edges_from(): This strategy takes an iterable holder of edges tuples like rundown, iterator, and so on.
+add_edge(): This strategy adds each edge in turn.
+Adding an edge or a node again to the diagram will be quietly overlooked by NetworkX.
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+# Add one edge one time
+# Node 1 and 2 will continue automatic add
+G1.add_edge(1,2)
+G1.add_edge(3,2)
+# Add multiple edges one time
+G1.add_edges_from([(4,2), (3,5), (5,4)])
+# Add duplicate will ignore it.
+G1.add_node(1)
+G1.add_edge(1,2)
+print(G1.nodes())
+print(G1.edges())
+
+Output:
+[1, 2, 3, 4, 5]
+[(1, 2), (2, 3), (2, 4), (3, 5), (4, 5)]
+
+Remove Edges and Nodes from the given graph.
+Comparably to adding edges and nodes, we can eliminate single edges and nodes all at once and different edges and nodes at a time.
+
+remove_node(): This strategy eliminates one edge and nodes related to that node from the diagram. There is no such thing as in the event that the node in the diagram will raise NetworkXError.
+remove_nodes_from(): This strategy takes an iterable holder and eliminates all edges and nodes related to those nodes from the chart. There is no such thing as the event that any node in the diagram will quietly dispose of it with practically no changes.
+remove_edge(): This technique eliminates one edge from the chart keeping the nodes for what it's worth. There is no such thing as in the event that the edge in the diagram will raise NetworkXError.
+remove_edges_from(): This technique takes an iterable compartment and eliminates edges from the chart. There is no such thing as the event that any edge in the chart will quietly dispose of it with practically no progressions.
+
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+# Create graph
+G1.add_edges_from([(1, 2), (2, 3), (3, 4), (4, 1)])
+G1.add_edges_from([(5, 6), (5, 7), (5, 8), (7, 8)])
+print(G1.nodes())
+print(G1.edges())
+# Remove edges 1-2 from the graph
+G1.remove_edge(2, 1)
+# Remove edges 3-4 and 1-4 at once
+G1.remove_edges_from([(3, 4), (1, 4)])
+print()
+print(G1.nodes())
+print(G1.edges())
+# Remove node 5 from the graph
+G1.remove_node(5)
+# Remove nodes 7 and 8
+G1.remove_nodes_from([7,8])
+print()
+print(G1.nodes())
+print(G1.edges())
+
+Output:
+[1, 2, 3, 4, 5, 6, 7, 8]
+[(1, 2), (1, 4), (2, 3), (3, 4), (5, 6), (5, 7), (5, 8), (7, 8)]
+- - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[1, 2, 3, 4, 5, 6, 7, 8]
+[(2, 3), (5, 6), (5, 7), (5, 8), (7, 8)]
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+[1, 2, 3, 4, 6]
+[(2, 3)]
+
+Access element of a graph
+We can get to 4 fundamental chart properties in the NetworkX diagram.
+
+nodes: It returns the rundown of nodes in the diagram.
+edges: It returns the rundown of edges in the diagram.
+adj: It returns the contiguousness list for every one of the nodes. A nearness rundown of node X contains adjoining nodes that are straightforwardly connected to node X. You can get to every one of the adjoining nodes of a node utilizing an addendum notation (using square sections after G.adj).
+degree: It returns the number of nodes connected to every node in the diagram. You can get to the level of a node utilizing an addendum notation (using square sections after G.degree).
+
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+G1.add_edges_from([(1,2), (1,3), (3,5), (3,6)])
+print("Node - - - - - - - - - - - - - - - - - - - - - ")
+print(G1.nodes)
+print("Edge - - - - - - - - - - - - - - - - - - - - - ")
+print(G1.edges)
+print("Adjacency List - - - - - - - - - - - - - - - - - - - - - ")
+print(G1.adj)
+print("Degree - - - - - - -  - - - - - - - - - - - - - - ")
+print(G1.degree)
+ 
+print()
+ 
+print("Adjacence Python List for node 3")
+print(G1.adj[3])
+print("Degree for node 3 - - - - - - - - - - - - - - ")
+print(G1.degree[3])
+
+Output:
+Node - - - - - - - - - - - - - -- - - - - - -
+[1, 2, 3, 5, 6]
+Edge - - - - - - - - - - - - - - - - - - - - -
+[(1, 2), (1, 3), (3, 5), (3, 6)]
+Adjacency List- - - - - - - - - - - - - - - - - - - - -
+{1: {2: {}, 3: {}}, 2: {1: {}}, 3: {1: {}, 5: {}, 6: {}}, 5: {3: {}}, 6: {3: {}}}
+Degree- - - - - - - - - - - - - - - - - - - - -
+[(1, 2), (2, 1), (3, 3), (5, 1), (6, 1)]
+Adjacence Python List for node 3- - - - - - - - - - - - - -
+{1: {}, 5: {}, 6: {}}
+Degree for node 3- - - - - - -
+3
+
+Attributes for Graph, Nodes, and Edges
+Each chart, node, and edge can hold key/esteem characteristic matches in a related quality word reference. Of course, these are vacant. However, qualities can be added or changed utilizing add_edge, add_node or direct control of the property word references named G.graph, G.nodes, and G.edges for a chart G.
+1. Chart Attributes
+You can allot characteristics to diagram while making it utilizing nxx.Graph().
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph(graph_description = "empty graph is created here'")
+print(G1.graph)
+
+Output:
+ {'graph_description': 'empty graph is created here'}
+
+Or you can add/modify the attributes later, just like a dictionary object
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+G1.graph["description"] = "This is empty graph"
+G1.graph["data"] = 5
+print(G1.graph)
+
+Output:
+ Output: {'description': 'This is empty graph', 'data': 5}
+
+2. Nodes Attribute
+You can add ascribes for node utilizing add_node(), add_nodes_from() or G.nodes. You can get it for all nodes utilizing G.nodes.data(). For a specific node, utilize square sections as displayed.
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+# Use the function add_node
+G1.add_node(1, data = "data11")
+# Use the function add_nodes_from
+G1.add_nodes_from([(2, {"data": "data22"}),
+                  (3, {"data": "data33"})], 
+                   node_type = "children node")
+# Add more attributes on node 1 use the function G.nodes
+G1.nodes[1]["type"] = "root node"
+print(G1.nodes.data())
+print(G1.nodes[1])
+
+Output:
+[(1, {'data': 'data11', 'type': 'root node'}), (2, {'node_type': 'children node', 'data': 'data22'}), (3, {'node_type': 'children node', 'data': 'data33'})]
+ {'data': 'data11', 'type': 'root node'}
+
+3. Edges Attribute - Make a weighted edge graph
+You can add ascribes for edges utilizing add_edge(), add_edges_from(), G.edges or addendum documentation. We can make a weighted diagram as displayed by relegating credits to edges.
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+# Use the function add_edge
+G1.add_edge(1, 2, weight_ = 50)
+# Use the function add_edges_from
+G1.add_edges_from([
+                  (1, 3, {"weight_": 70}),
+                  (1, 4, {"weight_": 100})
+                ])
+# Use the function subscripts notations
+G1.add_edge(4,5)
+G1[4][5]["weight_"] = 175
+# Use the function G1.edges
+G1.edges[1, 2]["weight_"] = 10
+print(G1.edges.data())
+
+Output:
+[(1, 2, {'weight_': 10}), (1, 3, {'weight_': 70}), (1, 4, {'weight_': 100}), (4, 5, {'weight_': 175})]
+
+Visualize the NetworkX Package's Graph
+We can draw diagrams and envision them in the NetworkX bundle utilizing the draw() technique as displayed.
+Source Code:
+
+import networkx as nxx
+G1 = nxx.Graph()
+# Using the function add_edge
+G1.add_edge(1, 2, weight_ = 12.5)
+G1.add_edge(3, 2, weight_ = 50.0)
+G1.add_edge(1, 3, weight_ = 17)
+G1.add_edge(4, 2, weight_ = 100)
+G1.add_edge(2, 5, weight_ = 1)
+G1.add_edge(4, 6, weight_ = 25.5)
+G1.add_edge(7, 4, weight_ = 175)
+G1.add_edge(5, 8, weight_ = 90)
+nxx.draw(G1, with_labels= True, font_weight_='bold')
+
+Output:
+
+NetworkX Graph Visualization
+If you want to draw diagrams with loads, use draw_networkx_edge_labels() alongside nxx.draw() indicating the chart, pos and edge_label credits.
+Source Code:
+
+import networkx as nxx
+import matplotlib.pyplot as plt1
+G1 = nxx.Graph()
+# Using the function add_edge
+G1.add_edge(1, 2, weight_ = 12.5)
+G1.add_edge(3, 2, weight_ = 50.0)
+G1.add_edge(1, 3, weight_ = 17)
+G1.add_edge(4, 2, weight_ = 100)
+G1.add_edge(2, 5, weight_ = 1)
+G1.add_edge(4, 6, weight_ = 25.5)
+G1.add_edge(7, 4, weight_ = 175)
+G1.add_edge(5, 8, weight_ = 90)
+pos=nxx.circular_layout(G1)
+nxx.draw(G1, pos, with_labels=True, font_weight_='bold')
+edge_weight_ = nxx.get_edge_attributes(G1,'weight_')
+nxx.draw_networkx_edge_labels(G1, pos, edge_labels = edge_weight_)
+plt1.show()
+
+Output:
+
+Figure: NetworkX Graph Visualization with Weights
+Creating Directed Graphs using the NetworkX Package
+NetworkX likewise permits you to make coordinated charts utilizing the DiGraph() class which gives extra strategies and properties intended for coordinated edges, e.g., DiGraph.out_edges, DiGraph.in_degree, DiGraph.predecessors(), DiGraph.successors() and so on.
+Source Code:
+
+import networkx as nxx
+DG = nxx.DiGraph()
+DG.add_edges_from([(1,2), (2,3), (3,4), (4,5), (5,2), (4, 6)])
+# Printing edges going out from node 4
+print("Out edges of node 4 are:",DG.out_edges(4))
+# Printing in Degree of node 2
+print("In Degree of node 2 is:",DG.in_degree(2))
+# Printing successors of node 4
+print("Successors of node 4 are:",list(DG.successors(4)))
+# Printing predecessors of node 2
+print("Predecessors of node 2 are:",list(DG.predecessors(2)))
+nxx.draw(DG, with_labels= True, font_weight_='bold')
+
+Output:
+Out edges of node 4 are: [(4, 5), (4, 6)]
+In Degree of node 2 is: 2
+Successors of node 4 are: [5, 6]
+Predecessors of node 2 are: [1, 5]
+
+
+
+Figure: NetworkX Directed Graph
+Conclusion
+In this instructional exercise, you learned about NetworkX bundle and how to utilize it to make, control and imagine charts. This library becomes supportive in concentrating on complex organizations and charts. It is utilized by mathematicians, physicists, researchers, PC researchers, and so on for study.
+Gratitude for perusing!!
+
+
+Next TopicSklearn Logistic Regression
+
+
+
+
+← prev
+next →
+
+
+
+

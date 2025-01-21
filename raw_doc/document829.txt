@@ -1,0 +1,123 @@
+
+
+
+
+next →
+← prev
+
+How to Get 2 Decimal Places in Python
+This tutorial will demonstrate how to perform rounding off of a float value in Python to the nearest two decimal places.
+Using round() Function
+The rounded form of the requested value is provided by the round() function, which returns a floating point value with the given number of decimals.
+Since the default value is 0 decimals, the method will give the closest integer if the number of decimal places is not specified.
+Syntax
+
+round(number, digits)
+
+Parameters:-
+
+number (required)- The number to be rounded
+digits (optional)- Up to how many decimals the number needs to be rounded. The default value is 0.
+
+To store the given number, we will define a variable. The round() method will round the given float number up to two decimal places by passing the given number and the number of decimal places (2 in this case) to it as arguments. We will print the rounded result of the given floating-point figure up to two decimals.
+Example
+The round() method is used in the program that follows to give the rounded result of the supplied floating-point value up to two decimals:
+Code
+
+# Python program to round a float value to two decimal places
+
+# creating a floating-point value
+number = 3.3469456
+# rounding the above number 
+rounded_number = round(number, 2)
+# printing the result
+print("Rounding 3.3469456 up to two decimal places:",  rounded_number)
+
+Output:
+Rounding 3.3469456 up to two decimal places: 3.35
+
+Using format() Function
+We'll create a variable to hold the given number. By giving the original number and format (up to the 2 decimal places) as arguments to the format() method, one can round a value up to two decimal places. It returns the given number in the format that the format specifier has defined.
+Example
+The following program will use the format() method to give the rounded number of the given floating-point value up to two decimals:
+Code
+
+# Python program to round a float value to two decimal places using the format() function
+
+# creating a floating-point value
+number = 3.3469456
+
+# rounding the above number 
+rounded_number = format(number, ".2f")
+print("Rounding 3.3469456 up to 2 decimal places:", rounded_number)
+
+Output:
+Rounding 3.3469456 upto 2 decimal places: 3.35
+
+Using Decimal Module
+The decimal module of Python contributes to improving the precision of floating-point values. We must import the Python decimal module before we can utilize it.
+floatnumber.Decimal(decimal) provides a 50-digit decimal point by default.
+Here, we can round up to two digits decimal place by using value.quantize(decimal.Decimal('0.00')).
+We will import the Python decimal module using the keyword import. We will create a variable to store the original number. We will use the Decimal() method of the decimal module to convert the provided floating-point value. The number has to be rounded up to two decimal places. Therefore, we use the value.quantize(decimal.Decimal()) function to give only two digits (2 zeros in the argument) after the decimal point. We'll obtain the results we want.
+Example
+The following program uses the decimal module to give the rounded-off value of the supplied floating-point value up to two decimals.
+Code
+
+# Python program to round off the decimals using the decimal module
+
+# importing the required module
+import decimal
+
+# inputing the floating-point number
+number = 35.67533
+
+# Converting the above number into decimal
+decimal_value = decimal.Decimal(number)
+
+# rounding off
+rounded_number = decimal_value.quantize(decimal.Decimal('0.00'))
+
+# printing the result
+print("Rounding 35.67533 upto 2 decimal places: ", rounded_number)
+
+Output:
+Rounding 35.67533 upto 2 decimal places:  35.68
+
+Using ceil() Function
+A given number's ceiling value, the smallest integer number larger than or equal to that number, is returned by the ceil() function.
+To import the math module, use the Python import keyword. To store the supplied floating-point value, we'll make a variable. To round the integer to two decimal digits and display the result, use the ceil() function.
+Example
+The ceil() method is used in the program below to return the rounded-off value of the supplied floating-point value up to two decimals.
+Code
+
+# Python program to round off the decimals using the ceil() function of the math module
+
+# importing the required module
+import math
+
+# creating the floating-point value
+number = 4.83622
+
+# rounding the above number using ceil() function
+print("Rounding 4.83622 upto 2 decimal places: ")
+rounded_number = math.ceil(number*100)/100
+print(rounded_number)
+
+Output:
+Rounding 4.83622 upto 2 decimal places: 
+4.84
+
+In this tutorial, we learned four alternative ways to round a given floating-point value in Python upto two decimal digits. We discovered how to round numbers to two decimal points using the ceil method and some mathematical reasoning. We also learned how to quantize a floating-point number by converting it to a decimal using Python's decimal module.
+
+
+Next TopicHow to Get Index of Element in List Python
+
+
+
+
+← prev
+next →
+
+
+
+

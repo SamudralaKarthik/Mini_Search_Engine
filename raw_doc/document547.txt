@@ -1,0 +1,162 @@
+
+
+
+
+next →
+← prev
+
+Plotting Google Map using gmplot package in Python
+There are different methods available for us to draw geographical coordinates on Google Maps. However, in a scenario where we require to save it in a local file, one better method to accomplish this is using a Python module known as gmplot.
+Python gmplot library allows us to plot data on google maps. The gmplot library has an interface similar to matplotlib in order to generate the HTML and JavaScript to deliver all the additional data users would prefer on top of Google Maps.
+How to Install the Python gmplot Library?
+In order to install the Python module, we need 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the gmplot library using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ pip install gmplot
+
+Verifying the Installation
+Once the module is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import gmplot
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the library, and it is also recommended to refer to the official documentation of the library.
+Working with the Python gmplot library
+The gmplot library provides different plotting methods in order to create exploratory maps views pretty simple. The gmplot library is very flexible to create google Maps as we can utilize it to generate HTML directly.
+Some of the methods to accomplish it are as follows:
+Case 1: We can use the gmplot library to create the base map.
+Case 2: We can also draw a polygon on Google Map using gmplot
+Case 3: We can also scatter points on Google Map and draw a line between given coordinates.
+Case 4: We can also plot the heatmap and scatter in one graph in order to represent the earthquakes.
+Let us understand the usage of the above methods in detail.
+Creating the base map using the gmplot library
+The gmplot library allows us to create the base map in Python. We can place the map to a specific location by writing the values of the latitude and longitude of that location and the zoom resolution.
+Let us consider the following example demonstrating the same:
+Example 1.1:
+
+# importing the gmplot library
+from gmplot import *
+# placing the map
+# First two parameters are the geogrphical coordinates i.e., Latitude and Longitude
+# and the zoom resolution
+firstGmap = gmplot.GoogleMapPlotter(28.612894, 77.229446, 18)
+# location where we want to save the file
+firstGmap.draw( "firstmap.html" )
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the gmplot library. We have then placed the map by creating an object of the GoogleMapPlotter class. At last, we have used the draw() method of the GoogleMapPlotter class to save the map in the HTML file in the directory.
+Note: As we can observe the above output screen, we notice that services are only available for development purposes. The reason is that the Google Maps service is not free now in case we are accessing it through an API. We have to add the API_KEY to see a better Google Maps view.
+Let us consider the following example demonstrating the same:
+Example 1.2:
+
+# importing the gmplot library
+from gmplot import *
+# placing the map
+# first two Parameters are the geogrphical coordinates i.e., Latitude and Longitude
+# and the zoom resolution
+firstGmap = gmplot.GoogleMapPlotter(28.612894, 77.229446, 18)
+# since google maps is not a free service now, we need to get an api key. Else commenting
+# below line we will see the maps with "For Development Purpose Only" on the screen and maps
+# with low resolution.
+# firstGmap.apikey = "The_API_KEY"
+firstGmap.apikey = "AIzaSyDeRNMnZ__VnQDiATinz4kPjF_c9r1kWe8"
+# location where we want to save the file.
+firstGmap.draw( "firstmap.py" )
+
+Explanation:
+The above snippet of code is similar to the example we see earlier. However, we have added the API key in this example and saved the file.
+Note: We have to add the Google Maps API key ('The_API_KEY') and set it equal to apikey attribute of the GoogleMapPlotter class. One can create their API Key using the following link: https://developers.google.com/maps/documentation/javascript/get-api-key
+Drawing a polygon on Google map using the gmplot library
+We can draw a polygon on Google map using the polygon() method of the GoogleMapPlotter class provided by the gmplot library.
+Let us consider the following example demonstrating the same:
+Example 2:
+
+# importing the gmplot package
+import gmplot
+latitudeList = [ 28.691234, 28.818390, 29.089301 ]
+longitudeList = [ 77.193802, 77.023890, 76.865211 ]
+myGmap = gmplot.GoogleMapPlotter(28.612894, 77.229446, 11)
+myGmap.scatter( latitudeList, longitudeList, '#FF0000', size = 40, marker = False )
+# drawing a polygon using the polygon() method
+# of the GoogleMapPlotter class with the help of coordinates
+myGmap.polygon( latitudeList, longitudeList, color = 'cornflowerblue' )
+# gmap.apikey = "Your_API_KEY"
+myGmap.draw( "secondmap.html" )
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the gmplot library. We have then created the lists to store some values of Latitude and Longitude. We have then placed the map by creating an object of the GoogleMapPlotter class. We have then used the scatter() method to plot a collection of points. We have then used the polygon() method to plot the polygon on the map. At last, we have used the draw() method of the GoogleMapPlotter class to save the map in the HTML file in the directory.
+Scattering points on Google Map and drawing a line in between given coordinates using the gmplot library
+The gmplot library allows us to scatter the points on Google Map and draw a line between the given coordinates using the scatter() and plot() methods.
+Let us consider the following example demonstrating the usage of these methods.
+Example 3:
+
+# importing the gmplot package
+import gmplot
+# setting the different latitude and longitude points
+CharminarTopAttractionLats, CharminarTopAttractionLons = zip(*[
+   (17.3832, 78.4010), (17.4238, 78.4737), (17.3712, 78.4803), (17.3615, 78.4746),
+   (17.3577, 78.4716), (17.3603, 78.4735), (17.2542, 78.6807), (17.4061, 78.4690),
+   (17.3949, 78.3967), (17.3586, 78.2987), (17.4155, 78.4749)
+   ])
+# declaring the center of the map, and how much we want the map zoomed in
+myGmap = gmplot.GoogleMapPlotter(17.3615, 78.4746, 12)
+# Scattering map
+myGmap.scatter( CharminarTopAttractionLats, CharminarTopAttractionLons, '#FF0000', size = 50, marker = False )
+# Plotting method Draw a line in between given coordinates
+myGmap.plot(CharminarTopAttractionLats, CharminarTopAttractionLons, 'cornflowerblue', edge_width = 3.0)
+# the Google_API_Key
+# myGmap.apikey = "API_Key"
+# saving the map to html
+myGmap.draw(r"thirdmap.html")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the gmplot module and set the different points of latitude and longitude. We have then declared the center of the map and how much we want the map zoomed in by creating an object of the GoogleMapPlotter class. We then scattered the points on the map using the scatter() method. We used the plot method to draw a line between the given coordinates and saved it to the html file using the draw() method.
+Plotting the Heatmap and scattering in one graph to represent the Earthquakes using the gmplot library
+The gmplot library also allows us to plot the heatmap using the heatmap() method and scatter it in one graph in order to represent the earthquakes.
+Let us consider the following example demonstrating the usage of the same:
+Example 4:
+
+# importing the required and important libraries
+import gmplot
+import numpy as np
+# generating the 700 random latitude and longitude points
+latitudePts = (np.random.random_sample(size = 700) - 0.5) * 180
+longitudePts = (np.random.random_sample(size = 700) - 0.5) * 360
+# declaring the center of the map, and how much we want the map zoomed in
+myGmap = gmplot.GoogleMapPlotter(0, 0, 2)
+# plotting the heatmap
+myGmap.heatmap(latitudePts, longitudePts)
+myGmap.scatter(latitudePts, longitudePts, c = 'r', marker = True)
+# enter the Google_API_Key
+# myGmap.apikey = " Google_API_Key "
+# saving the map to the HTML file
+myGmap.draw(r"exampleMap.html")
+
+Output:
+
+Explanation:
+We have imported the gmplot and NumPy libraries in the above snippet of code. We have then generated 700 random latitudes and longitudes. We have then declared the center of the map and how much we want the map zoomed in by creating an object of the GoogleMapPlotter class. We have then used the heatmap() method to plot the heatmap and the scatter() method to scatter it in one graph to represent the earthquakes. At last, we have saved the map to the HTML file using the draw() method.
+
+
+Next TopicMonitoring Devices using Python
+
+
+
+
+← prev
+next →
+
+
+
+

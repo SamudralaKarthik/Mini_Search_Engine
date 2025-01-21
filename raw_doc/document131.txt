@@ -1,0 +1,151 @@
+
+
+
+
+next →
+← prev
+
+Heap Sort in Python
+The heap sort is quite the same as the selection sort, where we find the maximum element and put it at the end. It is based on a comparison sorting algorithm which works on Binary heap data structure. It is the best example of an efficient sorting algorithm.
+What is Heap Sort?
+Heap sort is an efficient and popular sorting algorithm. The heap sort concept is to "eliminate" the element from the heap part of the list one-by-one and insert them to the sorted part of the list. Before learning more about the heap sorting algorithm, let's discuss the heap data structure.
+It is an in-place algorithm, which means a fixed amount of memory is used to store the sorted list, or the memory size doesn't rely on the size of the preliminary list.
+For example - We don't need the additional memory stack to store the sorted array and neither recursive call stack. The heapsort algorithm usually implements using the second array to sort the fixed values. This process is quick, simple, natural and easy to implement.
+On the other hand, heap sort is unstable, which means it doesn't maintain the comparative order of elements with equal values. It can quickly sort primitive types such as integers and characters, but it has a problem with the complex types and objects.
+Let's understand it by the following example -
+We have a custom class Student with properties age and name, and several objects of that class in an array, including a student called "Thomas" ages "20" and also "Peter," have aged 20 appear in the same order.
+If we sort the array of people by age, then there is no guarantee that "Thomas" would appear before the "Peter" in the sorted array. It can be defined order, but there is no guarantee.
+Heap Data Structure
+The heap data structure is a complete binary tree that fulfills the heap property. It is also known as the binary heap.
+A complete binary tree satisfies the following properties.
+
+Every level should be filled.
+All the nodes are as far left as possible.
+
+
+As we can see in the above image of the heap, but it is not sorted. We will not dig in-depth this article because our focus is to explain the Heap sort algorithm, not a heap. In the heap sort, the next smallest element is always the first element.
+The heap tree can be the two types - min-heap and max tree. A min-heap is kept a record of the maximum element. A max heap keeps track of the largest element. Heap mainly supports the following operations - delete_minimum(), get_minimum() and add().
+The first element of the heap can delete after restoring it. It takes O(log N) time, and that is highly effective.
+Implementation
+Python provides the in-built functions for sorting elements using heap sort. The functions are given below.
+
+heappush(list, item) -It is used to add the heap element and re-sort it.
+heappop(list) - It is used to remove the element and return the element.
+heapfy() - It is used to turn the given list into a heap.
+
+Consider the following example for heap sort.
+Example -
+
+from heapq import heappop, heappush
+ 
+ def heapsort(list1):
+     heap = []
+     for ele in list1:
+         heappush(heap, ele)
+ 
+     sort = []
+ 
+     # the elements are lift in the heap
+     while heap:
+         sort.append(heappop(heap))
+ 
+     return sort
+ 
+ list1 = [27, 21, 55, 15, 60, 4, 11, 17, 2, 87]
+ print(heapsort(list1))
+
+Output:
+[2, 4, 11, 15, 17, 21, 27, 55, 60, 87]
+
+Explanation
+In the above code, we have imported the heapq module which consist heappop() and heappush() method. We created the Heapsort Heapsort () method, which takes list1 as an argument. A for loop iterated the list1 and pushed the elements to the empty heap. We used the while loop and sorted element added to the empty sort.
+We called the Heapsort Heapsort () function and passed a list. It returned the sorted list. 
+Sorting Custom Objects
+Heap sort is useful for predefined data types, but it is more complicated to handle the user-define data types, such as class objects. We will sort the custom objects in this section.
+As we can see, our implementation depends upon the built-in methods. Python provides the following methods.
+
+heapq.nlargest(*n*, *iterable*, *key = None) - This method is used to get a list with the n largest element from the dataset, defined by the iterable.
+heapq.nsmallest(*n*, *iterable*, *key = None) - This method is used to get a list with the n smallest elements from the dataset, which is defined by the iterable.
+
+Let's understand the following implementation of custom objects.
+Example -
+
+from heapq import heappop, heappush
+ 
+ class Car:
+     def __init__(self, model, year):
+         self.model = model
+         self.year = year
+ 
+     def __str__(self):
+         return str.format("Model Name: {}, Year: {}", self.model, self.year)
+ 
+     def __lt__(self, other):
+         return self.year < other.year
+ 
+     def __gt__(self, other):
+         return other.__lt__(self)
+ 
+     def __eq__(self, other):
+         return self.year == other.year
+ 
+     def __ne__(self, other):
+         return not self.__eq__(other)
+ 
+ 
+ def heapsort(list1):
+     heap = []
+     for element in list1:
+         heappush(heap, element)
+ 
+     ordered = []
+ 
+     while heap:
+         ordered.append(heappop(heap))
+ 
+     return ordered
+ 
+ 
+ car1 = Car("Renault", 2001)
+ car2 = Car("Bentley", 2005)
+ car3 = Car("Kia", 2014)
+ car4 = Car("Maruti Suzuki", 1999);
+ car5 = Car("Nano", 2012)
+ 
+ list1 = [car1, car2, car3, car4, car5]
+ 
+ for c in Heapsort Heapsort (list1):
+     print(c)
+
+Output:
+Model Name: Maruti Suzuki, Year: 1999
+Model Name: Renault, Year: 2001
+Model Name: Bentley, Year: 2005
+Model Name: Nano, Year: 2012
+Model Name: Kia, Year: 2014
+
+We have sorted the objects on the year base.
+Comparison between Heap sort and Other Algorithm
+One of the popular quick sort algorithms is also very efficient, but heap sort is legally used because of its reliability. The heap sort's key benefit is O(nlogn) upper bound as far as the time complexity is fretful.
+The heap sort algorithm takes O(nlogn) time in both average and worst-case scenarios while the quick sort is 20% faster in the average case.
+The quick sort algorithm becomes slow in predictable situations. There is a chance of the security breach in quick sort since the foul O(n2) can be easily triggered.
+Now we compare to the Merge sort, which takes the same time as the heap sort.
+Merge sort is much stable and intuitively parallelizable, where heap sort doesn't have such advantages.
+Furthermore, Merge sort is faster than the Heap Sort in most cases since they have the same time complexity.
+In contrast, HeapsortHeapsort can be implemented much quickly in-place than Marge sort can.
+Conclusion
+Heapsort is not so popular and faster, but it is more predictable than any other sorting algorithm. This algorithm is preferred where memory and security are a priority.
+It can be quickly implemented using Python. We require to insert the elements in a heap and take them out.
+
+
+Next TopicPalindrome program in python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,291 @@
+
+
+
+
+next →
+← prev
+
+Reading NetCDF Data using Python
+In the following tutorial, we will understand how to read NetCDF Data with the help of the Python programming language.
+But before we get started, let us briefly understand what exactly NetCDF is.
+Understanding NetCDF
+Network common data form (also known as NetCDF) is generally utilized to store multi-dimensional geographic data. Some examples of these data can be precipitation, temperature, and wind speed. Variables stored in NetCDF are usually measured more than once per day over large (continental) areas. With more than one measurement per day, data values accumulate quickly and become unwieldy to work with. Data management is further complicated when each value is also assigned to a geographic location. NetCDF offers a solution for these challenges. This tutorial will get you to begin reading data from the NetCDF file using the modules in the Python programming language.
+Installation
+We can read the NetCDF files using different Python modules. Some of such famous modules include netCDF4 and gdal. For this tutorial, we will mainly focus on the netCDF4 module.
+The process of installing the module is simple. We can either use the pip installer or the anaconda Python distribution. The syntax to install the netCDF4 module using the pip installer is shown below:
+Syntax:
+
+$ pip install netCDF4
+
+We can also use the anaconda Python distribution in order to eliminate the confusion that can come with dependencies and versioning. The syntax to install the module using anaconda (conda) is shown below:
+Syntax:
+
+$ conda install netCDF4
+
+Verifying the Installation
+Once the module is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import netCDF4 as nc
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the module, and it is also recommended to refer to the official documentation of the module.
+Loading a NetCDF Dataset
+Loading a dataset is quite easy. All we have to do is pass a NetCDF file path to the netCDF4.Dataset() function. For this tutorial, we will be using a file consisting of climate data.
+Let us consider the following snippet of code demonstrating the same:
+Example:
+
+# importing the required module
+import netCDF4 as nc
+
+# defining the path to file
+filePath = 'sample.nc'
+
+# using the Dataset() function
+dSet = nc.Dataset(filePath)
+
+Output:
+Explanation:
+In the above snippet of code, we have imported the required module. We have then specified the path to the NetCDF file. We have then converted the data of the NetCDF file to the dataset using the Dataset() function.
+General File Structure
+The netCDF4 module enables us to access the metadata and data related to a NetCDF file. A NetCDF file consists of three basic segments: metadata, dimensions, and variables. Variables consist of both metadata and data.
+Accessing Metadata
+Printing the dataset provides us information regarding the variables stored in the file along with their dimension.
+Let us consider the following snippet of code demonstrating the same.
+Example:
+
+# printing the dataset
+print(dSet)
+
+Output:
+<class 'netCDF4._netCDF4.Dataset'>
+root group (NETCDF4 data model, file format HDF5):
+    start_year: 2021
+    month: 01
+    source: Daymet Software Version 4.0
+    Version_software: Daymet Software Version 4.0
+    Version_data: Daymet Data Version 4.0
+    Conventions: CF-1.6
+    citation: Please see http://daymet.ornl.gov/ for current Daymet data citation information
+    references: Please see http://daymet.ornl.gov/ for current information on Daymet references
+    dimensions(sizes): x(284), y(584), time(31), nv(2)
+    variables(dimensions): float32 x(x), float32 y(y), float32 lat(y, x), float32 lon(y, x), float32 time(time), int16 yearday(time), float32 time_bnds(time, nv), int16 lambert_conformal_conic(), float32 prcp(time, y, x)
+    groups:
+
+Explanation:
+In the above snippet of code, we have used the print() function to print the dataset for the users. As we can observe, the above information includes the file format, data source, data version, citation, dimensions, and variables. The variables we are interested in are lat, lon, time, and prcp (precipitation). We can find the precipitation at a specific location for a given time with these variables. This file only consists of 31-time steps (the time dimension is 31).
+We can also access the Metadata as a Python dictionary, which is more helpful. Let us consider the following example demonstrating the same.
+Example:
+
+# importing the required module
+import netCDF4 as nc
+
+# defining the path to file
+filePath = 'sample.nc'
+
+# using the Dataset() function
+dSet = nc.Dataset(filePath)
+
+# printing the metadata as a dictionary
+print(dSet.__dict__)
+
+Output:
+{'start_year': 2021, 'month': '01', 'source': 'Daymet Software Version 4.0', 'Version_software': 'Daymet Software Version 4.0', 'Version_data': 'Daymet Data Version 4.0', 'Conventions': 'CF-1.6', 'citation': 'Please see http://daymet.ornl.gov/ for current Daymet data citation information', 'references': 'Please see http://daymet.ornl.gov/ for current information on Daymet references'}
+
+Explanation:
+In the above snippet of code, we have imported the required module and defined the path to the NetCDF file. We have then used the Dataset() function to create the dataset of the file. At last, we have converted the data into a dictionary and printed the resultant data for the users.
+We can then access any metadata element using its key. Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required module
+import netCDF4 as nc
+
+# defining the path to file
+filePath = 'sample.nc'
+
+# using the Dataset() function
+dSet = nc.Dataset(filePath)
+
+# printing the metadata as a dictionary
+print(dSet.__dict__['start_year'])
+
+Output:
+2021
+
+Explanation:
+In the above snippet of code, we have specified the key and printed the resulting value for the users.
+Dimensions
+Accessing dimensions is similar to file metadata. Each dimension is stored as a dimension class which consists of pertinent information. We can access the Metadata for all dimensions by looping through all available dimensions. Let us consider the following snippet of code demonstrating the same.
+Example:
+
+# importing the required module
+import netCDF4 as nc
+
+# defining the path to file
+filePath = 'sample.nc'
+
+# using the Dataset() function
+dSet = nc.Dataset(filePath)
+
+# printing the dimensions of the dataset
+for dimension in dSet.dimensions.values():
+    print(dimension)
+
+Output:
+<class 'netCDF4._netCDF4.Dimension'>: name = 'x', size = 284
+<class 'netCDF4._netCDF4.Dimension'>: name = 'y', size = 584
+<class 'netCDF4._netCDF4.Dimension'> (unlimited): name = 'time', size = 31
+<class 'netCDF4._netCDF4.Dimension'>: name = 'nv', size = 2
+
+Explanation:
+In the following snippet of code, we have imported the required libraries and defined the path to the NetCDF file. We have then used the Dataset() function to create a dataset of the file. At last, we have printed the dimensions of the dataset using the for-loop iterating through each dimension given in the dataset.
+We can also access individual dimensions like so: dSet.dimensions['x'].
+Variable Metadata
+We can access variable metadata in a similar way as dimensions. Let us consider the following snippet of code demonstrating the same.
+Example:
+
+# importing the required module
+import netCDF4 as nc
+
+# defining the path to file
+filePath = 'sample.nc'
+
+# using the Dataset() function
+dSet = nc.Dataset(filePath)
+
+# printing the variables of the dataset
+for variable in dSet.variables.values():
+    print(variable)
+
+Output:
+<class 'netCDF4._netCDF4.Variable'>
+float32 x(x)
+    units: m
+    long_name: x coordinate of projection
+    standard_name: projection_x_coordinate
+unlimited dimensions:
+current shape = (284,)
+filling on, default _FillValue of 9.969209968386869e+36 used
+<class 'netCDF4._netCDF4.Variable'>
+float32 y(y)
+    units: m
+    long_name: y coordinate of projection
+    standard_name: projection_y_coordinate
+unlimited dimensions:
+current shape = (584,)
+filling on, default _FillValue of 9.969209968386869e+36 used
+<class 'netCDF4._netCDF4.Variable'>
+float32 lat(y, x)
+    units: degrees_north
+    long_name: latitude coordinate
+    standard_name: latitude
+unlimited dimensions:
+current shape = (584, 284)
+filling on, default _FillValue of 9.969209968386869e+36 used
+<class 'netCDF4._netCDF4.Variable'>
+float32 lon(y, x)
+    units: degrees_east
+    long_name: longitude coordinate
+    standard_name: longitude
+unlimited dimensions:
+current shape = (584, 284)
+filling on, default _FillValue of 9.969209968386869e+36 used
+<class 'netCDF4._netCDF4.Variable'>
+float32 time(time)
+    standard_name: time
+    calendar: standard
+    units: days since 1950-01-01 00:00:00
+    bounds: time_bnds
+    long_name: 24-hour day based on local time
+unlimited dimensions: time
+current shape = (31,)
+filling on, default _FillValue of 9.969209968386869e+36 used
+<class 'netCDF4._netCDF4.Variable'>
+int16 yearday(time)
+    long_name: day of year (DOY) starting with day 1 on January 1st
+unlimited dimensions: time
+current shape = (31,)
+filling on, default _FillValue of -32767 used
+<class 'netCDF4._netCDF4.Variable'>
+float32 time_bnds(time, nv)
+unlimited dimensions: time
+current shape = (31, 2)
+filling on, default _FillValue of 9.969209968386869e+36 used
+<class 'netCDF4._netCDF4.Variable'>
+int16 lambert_conformal_conic()
+    grid_mapping_name: lambert_conformal_conic
+    longitude_of_central_meridian: -100.0
+    latitude_of_projection_origin: 42.5
+    false_easting: 0.0
+    false_northing: 0.0
+    standard_parallel: [25. 60.]
+    semi_major_axis: 6378137.0
+    inverse_flattening: 298.257223563
+unlimited dimensions:
+current shape = ()
+filling on, default _FillValue of -32767 used
+<class 'netCDF4._netCDF4.Variable'>
+float32 prcp(time, y, x)
+    _FillValue: -9999.0
+    long_name: daily total precipitation
+    units: mm/day
+    missing_value: -9999.0
+    coordinates: lat lon
+    grid_mapping: lambert_conformal_conic
+    cell_methods: area: mean time: sum
+unlimited dimensions: time
+current shape = (31, 584, 284)
+filling on
+
+Explanation:
+In the above snippet of code, we have imported the required module and defined the path to the NetCDF file. We have then used the Dataset() function to create the dataset of the file. At last, we have used the for-loop to iterate through the variables of the dataset and print them for users.
+We can also access the individual variables. Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required module
+import netCDF4 as nc
+
+# defining the path to file
+filePath = 'sample.nc'
+
+# using the Dataset() function
+dSet = nc.Dataset(filePath)
+
+# printing the value of the prcp variable
+print(dSet['prcp'])
+
+Output:
+<class 'netCDF4._netCDF4.Variable'>
+float32 prcp(time, y, x)
+    _FillValue: -9999.0
+    long_name: daily total precipitation
+    units: mm/day
+    missing_value: -9999.0
+    coordinates: lat lon
+    grid_mapping: lambert_conformal_conic
+    cell_methods: area: mean time: sum
+unlimited dimensions: time
+current shape = (31, 584, 284)
+filling on
+
+Explanation:
+In the above snippet of code, we have printed the value of the prcp variable by specifying it as a parameter to the dSet variable.
+Conclusion
+NetCDF files are generally utilized for geographic time-series data. Initially, they can be quite intimidating to work with due to the large amounts of data and the different formats from the CSV and raster files that are most utilized. NetCDF is a great manner of documenting geographic data because of the built-in documentation and metadata. This makes it easy for end-users to understand exactly what the data represent with little ambiguity. NetCDF data are accessed as NumPy arrays, which present many possibilities for analysis and incorporation to existing utilities and workflows.
+
+
+Next TopicThe reprlib module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

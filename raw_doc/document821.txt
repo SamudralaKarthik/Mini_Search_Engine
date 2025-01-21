@@ -1,0 +1,488 @@
+
+
+
+
+next →
+← prev
+
+Simple FLAMES game using PyQt5 in Python
+This post will demonstrate how to use PyQt5 to develop a flames calculator. Based on an algorithm of two provided names, this flames calculator evaluates relationships and forecasts how they may turn out.
+The most well-liked and effective programming language is Python. Python has a strong developer community and a tonne of packages. Simplicity in creating code is one of its primary strengths. It may be used in practically any industry.
+The term FLAMES stands for Friends, Lovers, Affectionate, Marriage, Enemies, and Sibling. Although the outcome of this game cannot be used to determine if a person is suited for you, playing it with friends may be entertaining. This game is just for recreation and fun purpose and is not based on any real-life scenarios. It is a source of entertainment for a group of friends and nothing more than that.
+But before that, we must know some important basics of the PyQt5 in Python.
+Introduction to the basics of PyQt :
+The Python programming language and the Qt library were combined to create the toolkit known as PyQt. As one of the most popular GUI Frameworks for Python, PyQt has a strong community and a tonne of excellent documentation.
+The QWidget class, which implements a Widget, is one of PyQt's fundamental classes. The fundamental components of user interfaces and GUI components are widgets. A label, button, menu, combo box, scroller, toolbar, file dialogue, etc. are examples of widgets.
+Widgets are many, and getting used to them requires some time. We'll be using the most frequently used widgets in this project, which are nearly always included in PyQt applications.
+For building GUI programmes, PyQt offers a broad selection of widgets. However, there have been changes to the licencing and a reorganisation of the classes into several modules with PyQt5.
+Consequently, it's important to have a broad understanding of PyQt5's structure. This section explains the internal structure of PyQt5, as well as the many modules, libraries, and API classes that it offers.
+For installing the PyQt5 we need to follow this. The PyQt framework must first be installed using the pip package manager before it can be used.
+To install the most recent version of PyQt, use the command below if pip is already installed on your computer :
+
+$ pip install pyqt6
+
+Steps for implementing a GUI :
+
+Make a label saying "Enter player 1's name" and give it a colour and geometric shape.
+To obtain the first name, place a QLineEdit widget in front of the first name label.
+In a same manner, make a second label that reads "Enter player 2's name" and give it a colour and geometric shape.
+To obtain the second name, place the QLineEdit widget in front of this label.
+Create a label to display the outcome and modify its font, shape, and border.
+Create a get result push button at the bottom.
+
+Implementation steps for the back end :
+
+Make the push button do anything
+Obtain the names of both players inside the push button action.
+Eliminate the white space between the names.
+Use the get() result function to obtain the outcome.
+In the obtain result method, use the delete letter technique to get rid of characters that are often used in sentences.
+After determining the number of characters left, use the letters ["F", "L", "A", "M", "E", "S"] to represent FLAMES.
+Using the count we obtained, begin eliminating letters. The final letter in the procedure is the outcome; provide the outcome
+Use the setText function to set the result to the label.
+
+Walking through the code :
+Now, we will be taking you step by step in order to understand each and every section of the code before implementing the entire code.
+
+# import all required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+Firstly, we will import all the required files into our program from the standard python library of PyQt5. These files are needed to imported only once in the beginning of the program and can be used throughout the program. These files include QtCore, QtGui, qtwidgets and sys.
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# Give a title
+		self.setWindowTitle("Python ")
+
+		# set the geometry
+		self.setGeometry(100, 100, 320, 400)
+
+		# calling the func
+		self.UiComponents()
+
+		# displaying all the widgets
+		self.show()
+
+Then, we will create a new class called Window and initialize the window along with setting the title of the window and the geometry for the window. Then we will call the UiComponents() method that contains all the components in our window like all the labels, widgets, buttons and text fields and will then display all the widgets present there using the show() method.
+
+# func for all the components
+	def UiComponents(self):
+
+		# create a new label asking the user enter the first name
+		name1st_lbl = QLabel("Enter Player 1 Name : ", self)
+
+		# set the border and the colour for the label
+		name1st_lbl.setStyleSheet("border : 1px solid black ;
+									background : lightgrey;")
+
+		# set the geometry
+		name1st_lbl.setGeometry(10, 20, 140, 40)
+
+		# create a new label asking the user to enter second name
+		name2nd_lbl = QLabel("Enter Player 2 Name : ", self)
+
+		# set the border and the colour for the label
+		name2nd_lbl.setStyleSheet("border : 1px solid black ;
+									background : lightgrey;")
+
+		# set the geometry
+		name2nd_lbl.setGeometry(10, 70, 140, 40)
+
+Next, we will define the components method and will then create 2 labels. First label will be the name1st_lbl for asking the user to enter the first name and the, we will set its border, colour and geometry. second label will be the name2nd_lbl for asking the user to enter the second name and the, we will set its border, colour and geometry.
+
+	# create a line edit to get the first name
+		self.name1st = QLineEdit(self)
+
+		# set the geometry
+		self.name1st.setGeometry(160, 20, 150, 40)
+
+		# create another line edit to get the second name
+		self.name2nd = QLineEdit(self)
+
+		# set the geometry
+		self.name2nd.setGeometry(160, 70, 150, 40)
+
+Then, we will create the 2 line editors to introduce the text field area for input of the first and the second name. Later, setting their geometry
+
+	# create a new label to display result
+		self.answer = QLabel("Find Relationship Status", self)
+
+		# set the geometry for the answer label
+		self.answer.setGeometry(20, 160, 280, 60)
+
+		# set the border and the background color for it
+		self.answer.setStyleSheet("border : 2px solid black;
+									background : white;")
+
+		# set the alignment for the answer
+		self.answer.setAlignment(Qt.AlignCenter)
+
+		# set the font for the answer
+		self.answer.setFont(QFont('Times', 11))
+
+		# create a new push button to get the result
+		self.push = QPushButton("Get Result", self)
+
+		# set the geometry for the button
+		self.push.setGeometry(80, 260, 140, 50)
+
+		# add action for the push button
+		self.push.clicked.connect(self.do_actn)
+
+Next, we will create a new label in order to display the final relationship result. Then, we will set its geometry, alignments, font styles, border and background colour. We will also create a push button for getting the result for the user along with setting its geometry and adding the respective action that it needs to perform on being pressed.
+
+# action to be called by the push button
+	def do_actn(self):
+
+		# getting the names
+		name1st = self.name1st.text()
+		name2nd = self.name2nd.text()
+
+		# removing empty spaces form the name
+		name1st.replace(" ", "")
+		name2nd.replace(" ", "")
+
+
+		# func for removing the common chars present
+		# with their respective appearances
+		def remove_same_chars(list01, list02):
+
+			for i in range(len(list01)):
+				for j in range(len(list02)):
+
+					# if common chars are found
+					# then remove that certain char
+					# and return the list of the concatenated
+					# list with the True Flag
+					if list01[i] == list02[j]:
+						c = list01[i]
+
+						# removing chars from the list
+						list01.remove(c)
+						list02.remove(c)
+
+						# concatenating the two list elements with *
+						# * is acting as the border mark here
+						list3 = list01 + ["*"] + list02
+
+						# returning the concatenated list with the True flag
+						return [list3, True]
+
+						# common characters are not found
+			# returning the concatenated list with the False flag
+			list3 = list01 + ["*"] + list02
+			return [list3, False]
+
+Then, we will create a new function which defines all the actions and methods that need to be performed after the push button is pressed. It will first intake the 2 names and remove the empty spaces between them. Then, a function is created to remove the common characters present in both the names by using the if else conditions and loops. After that, the two names will be stored as a list in two different list, First, the lists be concatenated and then be converted into one final list.
+
+# func for finding out the result
+		def find_relationship(p01_list, p02_list):
+			
+			# taking the flag value as True initially
+			proceed = True
+
+			# Do not stop calling remove_same_chars func
+			# until common chars are found or
+			# keep the loop going until proceed flag remains True
+			while proceed:
+				# method for calling and storing the return value
+				retrn_list = remove_same_chars(p01_list, p02_list)
+
+				# taking out the concatenated list from return list
+				conct_list = retrn_list[0]
+
+				# taking out the flag value from return list
+				proceed = retrn_list[1]
+
+				# finding the index of the "*" / border mark
+				str_indx = conct_list.index("*")
+
+				# performing the slicing of lists
+
+				# every char before the * is stored in the p01_list
+				p01_list = conct_list[: str_indx]
+
+				# Every char after the * is stored in the p02_list
+				p02_list = conct_list[str_indx + 1:]
+
+				# counting the total chars remaining 
+			count = len(p01_list) + len(p02_list)
+
+			# list of all the FLAMES acronyms
+			result = ["Friends" , "Love" , "Affection" , "Marriage" , "Enemy" , "Siblings"]
+
+Next, we will create a function to find the relationship status between the two entered names. We will then set the initial value for the flag as true and will start the while loop and keep it going until all the same characters are not removed. Then, this new list will be stored we will use the " * " operator to slice the concatenated list and will separate it out in 2 different lists and will count the total number of characters left now in both the lists. Next, we will introduce the acronyms list for the word FLAMES which will include the relations as Friends, Love, Affection, Marriage, Enemy and Siblings. And on of this will be the final relationship status.
+
+# keep the loop running only one item
+			# is left in the final list
+			while len(result) > 1:
+
+				# storing the index value 
+				# where we will be performing slicing.
+				split_indx = (count % len(result) - 1)
+
+				# it is done in order to perform
+				# anti-clockwise circular counting.
+				if split_indx >= 0:
+
+					# slicing the two lists
+					right_side = result[split_indx + 1:]
+					left_side = result[: split_indx]
+
+					# concatenating the two lists
+					result = right_side + left_side
+
+				else:
+					result = result[: len(result) - 1]
+
+			# printing the final result
+			return result[0]
+
+		# calling the find relation method here
+		result = find_relationship(list(name1st), list(name2nd))
+
+		# setting text for the answer label
+		self.answer.setText("Relationship : " + result)
+
+Then, we will keep the loop going on until the last selected letter is not eliminated after every round by slicing the list using the " * " operator. After the slicing is done, the selected character is removed. Then again, the remaining characters in the list are again concatenated to form one single list. This process keeps on repeating until we get to know the final result. The final result gives the acronym from the word FLAMES and then the appropriate acronym is displayed as the outcome in the form of the relationship status in the allotted label.
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the window
+window = Window()
+
+# starting the application
+sys.exit(base.exec())
+
+Finally, we will create the PyQt5 application which will contain all these components. We will create an instance our window that will be dis[played on the user's screen and will ultimately, call the exit method in order to start the application and execute the code to get the desired output.
+Complete code :
+
+# Python program to create a simple Flames game using PyQt5 
+# import all required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# Give a title
+		self.setWindowTitle("Python ")
+
+		# set the geometry
+		self.setGeometry(120, 120, 340, 420)
+
+		# calling the func
+		self.UiComponents()
+
+		# displaying all the widgets
+		self.show()
+
+	# func for components
+	def UiComponents(self):
+
+		# create a new label asking the user enter the first name
+		name1st_lbl = QLabel("Enter Player 1 Name : ", self)
+
+		# set the border and the colour for the label
+		name1st_lbl.setStyleSheet("border : 1px solid black ;
+									background : lightgrey;")
+
+		# set the geometry
+		name1st_lbl.setGeometry(10, 20, 140, 40)
+
+		# create a new label asking the user to enter second name
+		name2nd_lbl = QLabel("Enter Player 2 Name : ", self)
+
+		# set the border and the colour for the label
+		name2nd_lbl.setStyleSheet("border : 1px solid black ;
+									background : lightgrey;")
+
+		# set the geometry
+		name2nd_lbl.setGeometry(10, 70, 140, 40)
+
+		# create a line edit to get the first name
+		self.name1st = QLineEdit(self)
+
+		# set the geometry
+		self.name1st.setGeometry(160, 20, 150, 40)
+
+		# create another line edit to get the second name
+		self.name2nd = QLineEdit(self)
+
+		# set the geometry
+		self.name2nd.setGeometry(160, 70, 150, 40)
+
+		# create a new label to display result
+		self.answer = QLabel("Find Relationship Status", self)
+
+		# set the geometry for the answer label
+		self.answer.setGeometry(20, 160, 280, 60)
+
+		# set the border and the background color for it
+		self.answer.setStyleSheet("border : 2px solid black;
+									background : white;")
+
+		# set the alignment for the answer
+		self.answer.setAlignment(Qt.AlignCenter)
+
+		# set the font for the answer
+		self.answer.setFont(QFont('Times', 11))
+
+		# create a new push button to get the result
+		self.push = QPushButton("Get Result", self)
+
+		# set the geometry for the button
+		self.push.setGeometry(80, 260, 140, 50)
+
+		# add action for the push button
+		self.push.clicked.connect(self.do_actn)
+
+	# action to be called by the push button
+	def do_actn(self):
+
+		# getting the names
+		name1st = self.name1st.text()
+		name2nd = self.name2nd.text()
+
+		# removing empty spaces form the name
+		name1st.replace(" ", "")
+		name2nd.replace(" ", "")
+
+
+		# func for removing the common chars present
+		# with their respective appearances
+		def remove_same_chars(list01, list02):
+
+			for i in range(len(list01)):
+				for j in range(len(list02)):
+
+					# if common chars are found
+					# then remove that certain char
+					# and return the list of the concatenated
+					# list with the True Flag
+					if list01[i] == list02[j]:
+						c = list01[i]
+
+						# removing chars from the list
+						list01.remove(c)
+						list02.remove(c)
+
+						# concatenating the two list elements with *
+						# * is acting as the border mark here
+						list3 = list01 + ["*"] + list02
+
+						# returning the concatenated list with the True flag
+						return [list3, True]
+
+						# common characters are not found
+			# returning the concatenated list with the False flag
+			list3 = list01 + ["*"] + list02
+			return [list3, False]
+
+		# func for finding out the result
+		def find_relationship(p01_list, p02_list):
+			
+			# taking the flag value as True initially
+			proceed = True
+
+			# Do not stop calling remove_same_chars func
+			# until common chars are found or
+			# keep the loop going until proceed flag remains True
+			while proceed:
+				# method for calling and storing the return value
+				retrn_list = remove_same_chars(p01_list, p02_list)
+
+				# taking out the concatenated list from return list
+				conct_list = retrn_list[0]
+
+				# taking out the flag value from return list
+				proceed = retrn_list[1]
+
+				# finding the index of the "*" / border mark
+				str_indx = conct_list.index("*")
+
+				# performing the slicing of lists
+
+				# every char before the * is stored in the p01_list
+				p01_list = conct_list[: str_indx]
+
+				# Every char after the * is stored in the p02_list
+				p02_list = conct_list[str_indx + 1:]
+
+				# counting the total chars remaining 
+			count = len(p01_list) + len(p02_list)
+
+			# list of all the FLAMES acronyms
+			result = ["Friends" , "Love" , "Affection" , "Marriage" , "Enemy" , "Siblings"]
+
+			# keep the loop running only one item
+			# is left in the final list
+			while len(result) > 1:
+
+				# storing the index value 
+				# where we will be performing slicing.
+				split_indx = (count % len(result) - 1)
+
+				# it is done in order to perform
+				# anti-clockwise circular counting.
+				if split_indx >= 0:
+
+					# slicing the two lists
+					right_side = result[split_indx + 1:]
+					left_side = result[: split_indx]
+
+					# concatenating the two lists
+					result = right_side + left_side
+
+				else:
+					result = result[: len(result) - 1]
+
+			# printing the final result
+			return result[0]
+
+		# calling the find relation method here
+		result = find_relationship(list(name1st), list(name2nd))
+
+		# setting text for the answer label
+		self.answer.setText("Relationship : " + result)
+
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the window
+window = Window()
+
+# starting the application
+sys.exit(base.exec())	
+
+Output:
+The output of the above presented code for the simple FLAMES game using PyQt5 in Python has been attached below in the form of a screenshot.
+
+
+
+Next TopicTree view widgets and Tree view scrollbar in Tkinter-Python
+
+
+
+
+← prev
+next →
+
+
+
+

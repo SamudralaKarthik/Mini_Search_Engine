@@ -1,0 +1,811 @@
+
+
+
+
+next →
+← prev
+
+Data Structures and Algorithms in Python | Set 1
+Data structures and algorithms or DSA is the concept in programming that every programmer has to be perfect in, to create a code by efficiently making the best use of the available resources. Irrespective of the programming language, DSA is more of a general concept. This tutorial covers the basic foundation of DSA using the Python programming language.
+Data structures:
+"Data + structures" says it all. A data structure structures the data. It is a storage unit that organizes and stores data in a way the programmer can easily access.
+In the real world, a programmer/ coder's work involves huge amounts of data. Analyzing and using the data is made easy for the programmer when it is arranged the right way. Apart from organizing the data, Data structures also makes processing and accessing the data easy.
+This tutorial covers all of Python's Data structures. There are built-in data structures as well as user-defined data structures. Let's first look at the built-in ones:
+1. Lists
+A list is like a dynamic and heterogeneous array. Arrays are used in languages like C. Unlike arrays, lists are dynamically-sized and can store data of different types. It is one of the sequential data types in Python.
+Important points about Lists:
+
+Lists are mutable, meaning that after creation, we can modify their elements.
+It consists of data separated by commas inside square braces-[].
+Lists allow duplicate elements.
+We use indexing to access the list elements (0 to length - 1), and negative indexing is allowed too (-1 to -length).
+We can nest another data structure as an element inside a list. Nesting another list makes it a multi-dimensional list.
+Using Slicing, we can get sub-lists of a list for which we need to use the slice operator - [:].
+List comprehension is used to create new lists from existing lists or other data structures. It is faster than creating a list using the regular for loop.
+We can use functions like max(), min() and sum() to find the maximum, minimum and sum of the elements in the list.
+We can concatenate lists using + and repeat elements using * operators.
+To take a list as an input, we use input() and then the split(separator) to convert the string into a list.
+
+Most used Functions and Methods:
+
+
+1. List.len()
+To find the length of the list
+
+
+2. List.append()
+Add an element at the end of the list.
+
+
+3. List.insert()
+To add an element at a specified index.
+
+
+4. List.remove()
+To remove a specified element from the list.
+
+
+5. List.reverse()
+Returns the reverse ordered list.
+
+
+6. List.index()
+Returns the first-found index of the specified element.
+
+
+7. List.extend()
+Adds the elements of another list as elements to the specified list.
+
+
+8. List.pop()
+Removes the returns of the last element of the specified list.
+
+
+9. String.split()
+Converts the given string into a list
+
+
+Example:
+
+#Creating a list
+emptylist = []
+mylist = [20, 20, 'H', "Hello"]
+nestedlist = [[1, 2], mylist]
+print("Created lists:")
+print("emptylist:", emptylist)
+print("mylist:", mylist)
+print("nestedlist:", nestedlist)
+print("Concatenating mylist and nestedlist:", mylist + nestedlist)
+print("Repeating the elements of a list:", mylist*3)
+#List as an input 
+print("\nList as an input:",end="")
+inputlist = list(map(int, input("Enter elements(separate by space):").split()))
+print(inputlist)
+#Accessing elements
+print("In the nested list: ")
+print("(Normal)nestedlist[0]:", nestedlist[0])
+print("(Negative)nestedlist[-2]:", nestedlist[-2])
+#adding elements
+print()
+print("Adding elements into empty list:")
+emptylist.append(1)
+for i in range(3, 6):
+    emptylist.append(i)
+print("emptylist:", emptylist)
+emptylist.insert(1, 2)
+print("Adding at index emptylist[1]:", emptylist)
+print("Extending mylist with emptylist:", mylist.extend(emptylist))
+#Using Slicing
+print("Slicing mylist[:]:", mylist[:])
+print("Reverse using slicing[::-1]:", mylist[::-1])
+print("Slicing using indices[1:3]:", mylist[1:3])
+#list comprehension
+print()
+print("Creating a newlist[] using list comprehension:")
+newlist = [i for i in emptylist if i%2 == 0]
+print("newlist with even elements in emptylist:", newlist)
+#Using the built-in functions
+print("\nUsing functions:")
+print("Length using len():", len(mylist))
+print("Removing an element using remove:", mylist.remove(20))
+print("Removing the last element using pop:", mylist.pop())
+print("Using index():",mylist.index(3))
+print("Using reverse on",emptylist,":")
+emptylist.reverse()
+print(emptylist)
+
+Output:
+Created lists:
+emptylist: []
+mylist: [20, 20, 'H', 'Hello']
+nestedlist: [[1, 2], [20, 20, 'H', 'Hello']]
+Concatenating mylist and nestedlist: [20, 20, 'H', 'Hello', [1, 2], [20, 20, 'H', 'Hello']]
+Repeating the elements of a list: [20, 20, 'H', 'Hello', 20, 20, 'H', 'Hello', 20, 20, 'H', 'Hello']
+
+List as an input:
+Enter elements(separate by space):8 9 7 8
+[8, 9, 7, 8]
+In the nested list: 
+(Normal)nestedlist[0]: [1, 2]
+(Negative)nestedlist[-2]: [1, 2]
+
+Adding elements to the empty list:
+emptylist: [1, 3, 4, 5]
+Adding an index emptylist[1]: [1, 2, 3, 4, 5]
+Extending mylist with emptylist: None
+
+Using Slicing
+Slicing mylist[:]: [20, 20, 'H', 'Hello', 1, 2, 3, 4, 5]
+Reverse using slicing[::-1]: [5, 4, 3, 2, 1, 'Hello', 'H', 20, 20]
+Slicing using indices[1:3]: [20, 'H']
+
+Creating a newlist[] using list comprehension:
+newlist with even elements in emptylist: [2, 4]
+
+Using functions:
+Length using len(): 9
+Removing an element using remove: None
+Removing the last element using pop: 5
+Using index(): 5
+Using reverse on [1, 2, 3, 4, 5] :
+[5, 4, 3, 2, 1]
+
+Tuples:
+A Tuple is like an immutable list. It is also a sequence data type in Python and can store data of different data types, like a list, but unlike a list, we cannot alter a tuple once created; Python raises an error if we try.
+Example:
+
+nestedtuple = ([1, 2], mytuple)
+nestedtuple.append(1)
+print(nestedtuple[0])
+
+Output:
+nestedtuple.append(1)
+AttributeError: 'tuple' object has no attribute 'append.'
+
+
+The above tuple is a nested tuple with a list as its first element. We can't modify the tuple, but we can modify the list inside it.
+
+Example:
+
+nestedtuple[0].append(1)
+print(nestedtuple[0])
+print(nestedtuple)
+
+Output:
+[1, 2, 1]
+([1, 2, 1], (1, 'h', 'Hello'))
+
+Important points about Tuples:
+
+A tuple consists of data separated by commas inside the parenthesis, although parenthesis is not mandatory but followed for readability in convention.
+Creating a tuple without parenthesis is called "Tuple packing" and to access a tuple, we can also use "Tuple unpacking".
+Tuples allow duplicate elements like lists.
+We use indexing to access the tuple elements (0 to length - 1), and negative indexing is allowed too (-1 to -length).
+We can nest another data structure as an element inside a tuple. Nesting another tuple makes it a multi-dimensional tuple.
+Using Slicing, we can get sub-tuples of a tuple for which we need to use the slice operator - [:].
+We can concatenate two tuples, repeat, reassign or delete the whole tuple but once created, we can't perform operations like append, remove, insert elements or delete elements which means we cannot disturb the original elements from when created-Tuples are immutable.
+To perform all the operations we can't perform on a tuple, we generally convert a tuple into a list using list(), do what we want and then convert it back to a tuple using tuple().
+As a tuple is immutable, it can be used as a key in dictionaries.
+Iterating through a tuple is much faster than iterating through a list.
+
+Most used Functions and Methods:
+
+
+1. Tuple.len()
+To find the length of the tuple
+
+
+2. sorted(Tuple)
+Sorts the specified tuple
+
+
+3. max(Tuple)
+To find the maximum valued element in the tuple.
+
+
+4. min(Tuple)
+To find the minimum valued element in the tuple.
+
+
+5. sum(Tuple)
+To find the sum of the elements in the tuple.
+
+
+6. Tuple.index()
+Returns the first-found index of the specified element.
+
+
+7. all(Tuple)
+Returns True if all the elements in the tuple are True.
+
+
+8. any(Tuple)
+Returns true if atleast one element in the tuple is True.
+
+
+9. Tuple.count(element)
+Returns the number of occurrences of the specified element in the tuple.
+
+
+
+len(), sorted(), max(), min(), sum(), all(), any() work on any iterable data type in Python.
+Do not confuse sort() with sorted(). sort() is limited to lists.
+
+Example:
+
+#Creating a tuple
+emptytuple = ()
+mytuple = (1, 'h', "Hello")
+nestedtuple = ([1, 2], mytuple)
+print("Emptytuple:",emptytuple)
+print("mytuple:",mytuple)
+print("nestedtuple:",nestedtuple)
+mytuple1 = 1,'Hi'
+print("By Tuple packing:", mytuple1)
+list1 = [1, 2, 3]
+print("Using tuple():", tuple(list1))
+tuple2 = (1,)
+print("Tuple with one element:", tuple2)
+print("Concatenating nestedtuple and mytuple:", nestedtuple + mytuple)
+print("Repeating the elements of a tuple:", mytuple*3)
+#Tuple as an input 
+print("\nTuple as an input:",end="")
+inputtuple = tuple(map(int, input("Enter elements(separate by space):").split()))
+print(inputtuple)
+#Using Slicing
+print("\nSlicing mytuple[:]:", mytuple[:])
+print("Reverse using slicing[::-1]:", mytuple[::-1])
+print("Slicing using indices[1:3]:", mytuple[1:3])
+#Accessing elements
+print("\nAcccessing elements:")
+print("In nestedtuple[0]:", nestedtuple[0])
+print("In nestedtuple[-2]:", nestedtuple[-2])
+a, b, c = mytuple
+print("By tuple unpacking:",a,b,c)
+#Using the built-in functions
+print("\nUsing the built-in functions: ")
+print("Length of mytuple:", len(mytuple))
+print("Sorting a tuple using sorted():", sorted((2, 1, 0)))
+print("Using max():", max((8, 23, 1)))
+print("Using min():", min((3, 1, 2)))
+print("Using sum():", sum((3, 4, 3)))
+print("Using all():", all((3, 0, 9)))
+print("Using any():", any((2, 0, 9)))
+print("Using count():", (3, 1, 2, 1).count(1))
+
+Output:
+Emptytuple: ()
+mytuple: (1, 'h', 'Hello')
+nestedtuple: ([1, 2], (1, 'h', 'Hello'))
+By Tuple packing: (1, 'Hi')
+Using tuple(): (1, 2, 3)
+Tuple with one element: (1,)
+Concatenating nestedtuple and mytuple: ([1, 2], (1, 'h', 'Hello'), 1, 'h', 'Hello')
+Repeating the elements of a tuple: (1, 'h', 'Hello', 1, 'h', 'Hello', 1, 'h', 'Hello')
+
+Tuple as an input:
+Enter elements(separate by space):3 4 5
+(3, 4, 5)
+
+Slicing mytuple[:]: (1, 'h', 'Hello')
+Reverse using slicing[::-1]: ('Hello', 'h', 1)
+Slicing using indices[1:3]: ('h', 'Hello')
+
+Accessing elements:
+In nestedtuple[0]: [1, 2]
+In nestedtuple[-2]: [1, 2]
+By tuple unpacking: 1 h Hello
+
+Using the built-in functions: 
+Length of mytuple: 3
+Sorting a tuple using sorted(): [0, 1, 2]
+Using max(): 23
+Using min(): 1
+Using sum(): 10
+Using all(): False
+Using any(): True
+Using count(): 2
+
+Sets:
+A set is a collection of unique elements which does not support duplicate elements like lists and tuples. Another important point about Sets is that they are unordered, which makes accessing their elements using indexes impossible.
+Important points about Sets:
+
+A set is enclosed by {}.
+It is a mutable data type and is iterable.
+Even though a set is mutable, due to its no duplicates policy and unordered nature, the elements of a set are immutable.
+We can add or delete elements from a set, but we can't perform slicing or indexing operations on a set.
+There is another category of immutable sets called the Frozen sets.
+Internally, the elements in a set are arranged based on hashing and hash tables.
+If more than one element is placed in an index, the values are arranged in a linked list to that index position.
+Every index position acts as a key, and the members/ values in the index are stored as values inside a dictionary.
+The internal working makes a set more time-optimized.
+A set won't allow mutable items as its elements like lists:
+
+
+set1 = {[1, 2], 2, 3}
+print(set1)
+
+Output:
+set1 = {[1, 2], 2, 3}	
+TypeError: unhashable type: 'list'
+
+Most used Functions and Methods on Sets:
+
+
+Function/ method
+Equivalent operator
+Explanation
+
+
+1. Set.add(value)
+ 
+Adds the specified element into a set.
+
+
+2. Set1.union(Set2)
+Set1 | Set2
+Merges two given sets
+
+
+3. Set1.intersection(Set2)
+Set1 & Set2
+Finds the common elements of the given two sets.
+
+
+4. Set1.difference(Set2)
+Set1 - Set2
+Finds elements in Set1 that are not in Set2
+
+
+5. Set.clear()
+ 
+Empties the given set.
+
+
+6. set()
+ 
+To create a set or to convert other data types into a set.
+
+
+7. Set1.isdisjoint(Set2)
+ 
+To check if Set1 and Set2 have no elements in common.
+
+
+Set Operators:
+
+
+Equality:
+1. Set1 == Set2
+2. Set1 != Set2
+Checks if:
+1. Set1 is equal to Set2
+2. Set1 is not equal to Set2
+
+
+Subset:
+1. Set1 <= Set2
+2. Set1 < Set2
+Checks if:1. Set1 is a subset of Set2
+2. Set1 is a proper subset of Set2
+
+
+Superset:
+1. Set1 >= Set2
+2. Set1 > Set2
+Checks if:
+1. Set1 is a superset of Set2
+2. Set1 is a proper subset of Set2
+
+
+Set1 ^ Set2
+Returns a set of elements in either Set1 or Set2 but not in both sets.
+
+
+Example:
+
+#Creating a set
+print("Creating a set:")
+emptyset = set()
+print("Empty set:", emptyset)
+myset = {1, 2, 3}
+print("Myset:", myset)
+nestedset = {(1, 2), 3, 4}
+print("Nestedset:", nestedset)
+set1 = set([1, 2, 1])
+print("Removing duplicacy using set():", set1, end = "")
+inputset = set(map(int, input("Enter elements: ").split()))
+print("inputset:", inputset)
+#Frozen sets
+myfrozenset = frozenset([1, 2, 3, 4, 5])
+print("\nFrozen set:", myfrozenset)
+#Using functions
+emptyset.add('a')
+print("\nAdding to emptyset:",emptyset)
+print("Union of", myset,"and", nestedset,":")
+print(myset.union(nestedset))
+print("Intersection of", myset,"and", nestedset,":")
+print(myset.intersection(nestedset))
+print("Difference of", myset,"and", nestedset,":")
+print(myset.difference(nestedset))
+emptyset.clear()
+print("Clearing emptyset:", emptyset)
+#Set operators
+print("\nMembership operator to check if (1, 2) is in nestedset:",(1, 2) in nestedset)
+print("Equivalency on myset and nested set:", myset == nestedset)
+print("Subset operator to check if {1} is a subset of nestedset:", {1} <= nestedset)
+print("proper subset operator to check if {1} is a proper subset of nestedset:", {1} < nestedset)
+print("Superset operator to check if nestedset is a superset of {1}:", nestedset >= {1})
+print("proper superset operator to check if nestedset is a proper superset of {1}:", nestedset > {1})
+print("Elements in either myset or nestedset but not in both:", myset ^ nestedset)
+
+Output:
+Creating a set:
+Empty set: set()
+Myset: {1, 2, 3}
+Nestedset: {3, (1, 2), 4}
+Removing duplicacy using set(): {1, 2}
+Enter elements: 10 11 12
+inputset: {10, 11, 12}
+
+Frozen set: ({1, 2, 3, 4, 5})
+
+Adding to emptyset: {'a'}
+Union of {1, 2, 3} and {3, (1, 2), 4} :
+{1, 2, 3, (1, 2), 4}
+Intersection of {1, 2, 3} and {3, (1, 2), 4} :
+{3}
+Difference of {1, 2, 3} and {3, (1, 2), 4} :
+{1, 2}
+Clearing emptyset: set()
+
+Membership operator to check if (1, 2) is in nestedset: True
+Equivalency on myset and nested set: False
+Subset operator to check if {1} is a subset of nestedset: False
+proper subset operator to check if {1} is a proper subset of nestedset: False
+Superset operator to check if nestedset is a superset of {1}: False
+proper superset operator to check if nestedset is a proper superset of {1}: False
+Elements in either myset or nestedset but not in both: {1, 2, (1, 2), 4}
+
+
+If we write emptyset = {}, a dictionary will be created to create an empty set. Hence, we need to use the set().
+add(element) will cause an error as a frozen set is not mutable.
+
+Dictionary
+A dictionary is a collection of {key: value} pairs. Keys map values, and to access the values, in the places of indexes, we need to use the keys. It is an unordered collection of data.
+Important points about a Dictionary:
+
+Keys identify values. Hence, a key has to be unique and immutable. Only immutable data types are accepted to be keys.
+Any data type can be used to make a value as it is the data.
+There cannot be any duplicate keys, but duplicate values are allowed.
+We can also use dictionary comprehension to create a dictionary like list comprehension.
+The dictionary's keys are like the Roll numbers of students, and the values are the students' names.
+
+Most used dict Functions and Methods:
+
+
+1. keys()
+Returns a list of keys in the dictionary 
+
+
+2. values()
+Returns a list of values in the dictionary
+
+
+3. items()
+Returns a list of key, value pairs as tuples in the dictionary
+
+
+4. pop()
+Deletes and returns the value at the specified key 
+
+
+5. dict()
+Creates a dictionary and converts a list of key-value tuples into a dictionary.
+
+
+6. get()
+Returns the value at the given key
+
+
+7. update()
+Extends the dictionary with the given key: value pairs.
+
+
+Example:
+
+#Creating a dictionary
+emptydict = {}
+mydict1 = {1: 'A', 2: 'B', 3: 'C'}
+mydict2 = {4: 'D', 'E': 5}
+mydict3 = dict([(6, 'F'), (7, 'G')])
+nesteddict = {1: mydict1, 2: mydict2}
+inputdict = {}
+#Taking dict as input
+keys = []
+keys = map(int, input("Enter keys: ").split(" "))
+for i in keys:
+    inputdict[i] = input("Enter value for "+ str(i) +": ")
+print("Created dictionaries:")
+print("Emptydict:", emptydict)
+print("mydict1:", mydict1)
+print("mydict2:", mydict2)
+print("mydict3:", mydict3)
+print("nesteddict:", nesteddict)
+print("inputdict:", inputdict)
+#Operations on dictionary
+mydict2['E'] = 'E'
+mydict2[5] = mydict2['E']
+del mydict2['E']
+print("\nAltering mydict2:", mydict2)
+mydict3[8] = 'H'
+mydict3[9] = 'I', 'J', 'K'
+print("Adding elements to mydict3:", mydict3)
+#Using built-in functions 
+print("\nUsing get() to access: mydict1.get(1): ", mydict1.get(1))
+print("Using keys() on",mydict1,":", mydict1.keys())
+print("using values() on",mydict1,":", mydict1.values())
+print("Using items() on",mydict1,":", mydict1.items())
+print("Updating",mydict1,"with",mydict2,":") 
+mydict1.update(mydict2)
+print(mydict1)
+print("Deleting a value using pop():", mydict1.pop(2), mydict1)
+
+Output:
+Enter keys: 1 2 3
+
+Enter value for 1: a
+
+Enter value for 2: b
+
+Enter value for 3: c
+Created dictionaries:
+Emptydict: {}
+mydict1: {1: 'A', 2: 'B', 3: 'C'}
+mydict2: {4: 'D', 'E': 5}
+mydict3: {6: 'F', 7: 'G'}
+nesteddict: {1: {1: 'A', 2: 'B', 3: 'C'}, 2: {4: 'D', 'E': 5}}
+inputdict: {1: 'a', 2: 'b', 3: 'c'}
+
+Altering mydict2: {4: 'D', 5: 'E'}
+Adding elements to mydict3: {6: 'F', 7: 'G', 8: 'H', 9: ('I', 'J', 'K')}
+
+Using get() to access: mydict1.get(1):  A
+Using keys() on {1: 'A', 2: 'B', 3: 'C'} : dict_keys([1, 2, 3])
+using values() on {1: 'A', 2: 'B', 3: 'C'} : dict_values(['A', 'B', 'C'])
+Using items() on {1: 'A', 2: 'B', 3: 'C'} : dict_items([(1, 'A'), (2, 'B'), (3, 'C')])
+Updating {1: 'A', 2: 'B', 3: 'C'} with {4: 'D', 5: 'E'} :
+{1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E'}
+Deleting a value using pop(): B {1: 'A', 3: 'C', 4: 'D', 5: 'E'}
+
+Strings:
+A string is an array of bytes/ characters. In C, we declare a string as a character array. In Python, there is no character data type. Characters do exist, but they are recognized as strings with length 1. A string is immutable, meaning we can't modify it once created.
+Important points about Strings:
+
+A string can be enclosed by single, double, or even triple quotes. Generally, triple quotes are used to create a multi-line string.
+The bytes/ characters of the string can be accessed using indices (0 to length-1). Negative indexing is also allowed (-1 to -length). Accessing a character in the string out of the range causes an IndexError.
+Only integers can be indices, and using any other data type causes a TypeError.
+Using Slicing, we can obtain copies of sub-strings from the original string.
+Deleting or manipulating a string's characters causes an error as a string is an immutable data type. Using the del keyword, we can delete the whole string. We can also reassign new strings to old existing string variables.
+As quotes enclose a string, Python won't be able to print a quote if it is a part of the string to be printed. It assumes it reached the end of the string. Hence, we need to use "Escape sequences".
+Using the {}.format() method, we can hold space for formatting and printing variables following the order.
+If we try to update/ manipulate the characters of a string:
+
+
+string = "Hello"
+string[2] = "h"
+
+Output:
+TypeError: 'str' object does not support item assignment
+
+Example:
+
+string = "Hello"
+del string[2]
+
+Output:
+TypeError: 'str' object doesn't support item deletion
+
+
+Old style string formatting is done using the % operator.
+Using formatting, we can even change the representation of a value in the string.
+
+Example: To represent a floating-point number, we can use %a.bf where a represents the number of digits we want in the representation and b represents the number of digits we want after the decimal point.
+
+number = 0.2567
+print("%3.2f" %number)
+
+Output:
+0.26
+
+Example:
+
+#Creating a string
+string1 = 'Hi'
+string2 = "Hi"
+string3 = """Hello
+            Man"""
+print("Created strings:")
+print(string1)
+print(string2)
+print(string3)
+#Accessing characters
+print("\nThe first character string1[0]:", string1[0])
+print('The first character string[-2]:', string1[-2])
+#Slicing
+print("\nSubstrings of string3:")
+print("string3[0:6]:", string3[0:6], end = '')
+print("string3[-6:-1]:", string3[-6:-1])
+print("Reversing using slicing-string3[::-1]:", string3[::-1])
+#Taking input
+inputstring = input("Enter a string: ")
+print("inputstring::", inputstring)
+#Updation
+print("\nReassigning string2 to Hello:")
+print("Present:", string2)
+string2 = 'Hello'
+print("After reassigning:", string2)
+#Escape sequences
+print('\nUsing escape sequences to escape single quotes, double quotes and backslashes')
+print('Hi it\'s my pen')
+print("I read a book called \"It ends with us\" yesterday")
+print("The file is stored in the path: C:\\Media\\Documents\\")
+print("Printing in a new line: Hi\nman")
+print("Urging a tab space: Hi\tman")
+#String formatting
+a = 4
+b = 5
+print("\nThe sum of {0} and {1}: {2}".format(4,5,4+5))
+print("The difference between {a} and {b}: {c}".format(a=5, b=4, c=5+4))
+print("The product of %d and %d: %d"%(a,b,a*b))
+
+Output:
+Created strings:
+Hi
+Hi
+Hello
+            Man
+
+The first character string1[0]: H
+The first character string[-2]: H
+
+Substrings of string3:
+string3[0:6]: Hello
+string3[-6:-1]:    Ma
+Reversing using slicing-string3[::-1]: naM            
+olleH
+
+Enter a string: What's up
+inputstring:: What's up
+
+Reassigning string2 to Hello:
+Present: Hi
+After reassigning: Hello
+
+Using escape sequences to escape single quotes, double quotes and backslashes
+Hi it's my pen
+I read a book called "It ends with us" yesterday
+The file is stored in the path: C:\Media\Documents\
+Printing in a new line: Hi
+man
+Urging a tab space: Hi	man
+
+The sum of 4 and 5: 9
+The difference between 5 and 4: 9
+The product of 4 and 5: 20
+
+Strings are one of the most used data types in Python. Hence, the number of concepts, methods and functions for strings are adequate in the libraries of Python.
+Some very important Functions and Methods:
+
+
+String.split(separator)
+Splits the string concerning the specified separator and returns a list of separated substrings. The default separator is a white space.
+
+
+String.strip()
+Returns the string eliminating all the leading and trailing unnecessary spaces.
+
+
+"string".join()
+Joins the elements of an iterable with the specified string and converts to a string.
+
+
+String.upper
+String.lower
+Converts all the lowercase characters to uppercase.
+Converts all the uppercase characters to lowercase.
+
+
+String.replace(substring1, substring2)
+Replaces substring1 with substring2 in the string.
+
+
+String.find(substring)
+Searches for a character or a substring and returns the index of the first occurrence.
+
+
+String.count(substring)
+Returns the number of times a substring occurred in the string.
+
+
+Bytearray:
+First: 1 byte = 8 bits(varies system-wise). A bytearray, as the name suggests, is an array of bytes. It is a collection of bytes. It can represent integers ranging from 0 to 256. It is one of the sequence data types in Python. A string is a sequence of Unicode characters, and a bytearray is a sequence of bytes.
+Important points about a Bytearray:
+
+A bytearray is mutable, while another similar data type in Python-bytes is immutable.
+A bytearray can be constructed using the predefined function bytearray(). The same function is used to convert other data types into a bytearray.
+Indexing in bytearray is faster than other sequences, given the direct access to 8 bits in one array element.
+Bytearray is mostly used for the optimization of code and memory usage.
+
+Example:
+
+#Creating a bytearray
+list1 = [1, 2, 3, 4]
+BA = bytearray(list1)
+print("Created bytearray:", BA)
+print("Type:", type(BA))
+#Accessing and iterating
+print("\nElements of bytearray:")
+for i in BA:
+    print(i)
+print("BA[2]:", BA[2])
+#Manipulating
+BA[2] = 6
+print("\nModifying BA[2] to 20:", BA)
+BA.append(7)
+print("Adding elements:", BA)
+
+Output:
+Created bytearray: bytearray(b'\x01\x02\x03\x04')
+Type: <class 'bytearray'>
+
+Elements of bytearray:
+1
+2
+3
+4
+BA[2]: 3
+
+Modifying BA[2] to 20: bytearray(b'\x01\x02\x06\x04')
+Adding elements: bytearray(b'\x01\x02\x06\x04\x07')
+
+bytearray():
+The function can construct a bytearray object and convert other objects to a bytearray object. The syntax of the function:
+
+It can have three optional parameters:
+
+
+bytearray(source, encoding, error_aid)
+
+Example:
+
+BA = bytearray()
+print(BA)
+
+Output:
+bytearray(b'')
+
+Summary:
+In this tutorial, we learned about the built-in data structures in Python:
+
+Lists
+Tuples
+Sets, Frozen sets
+Strings
+Dictionaries
+Bytearrays
+
+In the second part of this tutorial, we'll learn about user-defined data structures like Linked lists, Trees, and heaps in Python.
+
+
+Next TopicGaussian Elimination in Python
+
+
+
+
+← prev
+next →
+
+
+
+

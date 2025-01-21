@@ -1,0 +1,256 @@
+
+
+
+
+next →
+← prev
+
+Tkinter Application to Switch Between Different Page Frames in Python
+There are a lot of other GUI frameworks for Python, but only Tkinter is included in the core library. Tkinter has a number of advantages. The same code runs on Windows, macOS, and Linux since it is cross-platform. Since Tkinter uses native operating system components to produce visual elements, applications created with it appear as though they belong on the platform being used to run them.
+Despite being the de facto Python GUI framework, Tkinter is not without its detractors. One noteworthy complaint is that GUIs created using Tkinter appear antiquated. Tkinter might not be what you're searching for if you want a sleek, contemporary interface.
+In contrast to other frameworks, Tkinter is lightweight and generally simple to use. This makes it an appealing option for creating GUI apps in Python, especially for those where a modern polish is unnecessary and constructing something cross-platform and functionally sound rapidly is the top goal.
+Python provides a variety of choices for GUI development (Graphical User Interface). Tkinter is the approach used the most frequently among all GUI approaches. It is a typical Python interface for the Python-supplied Tk GUI toolkit. The fastest and simplest approach to construct GUI apps is with Python and Tkinter. Tkinter makes building a GUI a simple process.
+
+Importing the tkinter module to create a tkinter application.
+Make the primary window (container).
+Add as many widgets as you like to the main window.
+Apply the widgets' event triggers.
+
+Tkinter can be imported into Python code just like any other module. Keep in mind that the module's name is "tkinter" in Python 3.x and "Tkinter" in Python 2.x.
+
+import tkinter
+
+On occasion, we must develop an application with numerous pop-up dialogue windows, also known as Page Frames. Here is a step-by-step tutorial on how to join multiple Tkinter Page Frames together! For more complicated Python GUI applications, such as building user interfaces for Virtual Laboratories for experiments, classrooms, etc., this can be used as a boilerplate.
+But first, let's get to know in brief about few concepts which can be used in tkinter programs.
+Significant Tk Concepts :
+Even the example ahead will also demonstrate the following crucial Tk ideas :
+Widgets :
+The components of a Tkinter user interface are called widgets. Each widget is represented as an instance of a Python class, such as ttk.Frame, ttk.Label, or ttk.Button.
+Widget hierarchy :
+There is a hierarchy of widget placement. A frame, which itself was contained within the root window, held the label and button. Each child widget is created with its parent widget as the first argument, which is then supplied to the widget function constructor.
+Options for configuration :
+Widgets include configuration settings that change how they look and behave, like the text that appears in labels and buttons. There will be several possibilities for various classes of widgets.
+Geometry control :
+When they are generated, widgets are not immediately added to the user interface. Where they are positioned within the user interface is controlled by a geometry manager like grid.
+Event loop :
+Only when an event loop is actually being executed by Tkinter does it respond to user input, changes made by your programme, and even refreshes the display. Your user interface won't change if your software isn't using the event loop.
+These are some steps that can be followed :
+
+Make three distinct pages. The start page serves as the home page and is followed by pages one and two.
+Design an enclosure for each page frame.
+Four classes are available. The first is the tkinterApp class, where the three frames were created and the function show_frame was defined. This function is executed each time a button is clicked by the user.
+The StartPage is straightforward and has two buttons for Page 1 and Page 2.
+The buttons on Page 1 are for Page 2 and for going back using the Back to home Page.
+Two buttons on Page 2 are also for returning to StartPage and for Page 1.
+This is a straightforward Tkinter frame navigation programme.
+Several features can be added, and this can be used as a boilerplate for applications that are more complicated.
+
+As illustrated in class tkinterApp, the StartPage serves as the app's initial page. There are two buttons in this area of StartApp. You can access a button's associated Page by clicking on it. These pages can include graphs, graphics, and sophisticated functionality. Two buttons are also included on the pages. When a button is pressed, the show_frame function is executed, displaying the corresponding Page.
+Explaining the code in steps :
+First, we just need to make a minor change to the SeaofBTCapp class. This is the new complete class :
+
+class SeaofBTCapp(tk.Tk):
+
+    def __init__(self, *args, **kwargs):
+        
+        tk.Tk.__init__(self, *args, **kwargs)
+        container = tk.Frame(self)
+
+        container.pack(side="top", fill="both", expand = True)
+
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
+
+        self.frames = {}
+
+        for F in (StartPage, PageOne, PageTwo):
+
+            frame = F(container, self)
+
+            self.frames[F] = frame
+
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(StartPage)
+
+    def show_frame(self, cont):
+
+        frame = self.frames[cont]
+        frame.tkraise()
+
+We used the configure() function to call any widget to learn what configuration options are available. This method produces a dictionary with detailed information about each widget, including its default and current values. To obtain only the names of each option, use keys().
+Observe this important change being made here :
+
+for F in (StartPage, PageOne, PageTwo):
+
+    frame = F(container, self)
+    self.frames[F] = frame
+    frame.grid(row=0, column=0, sticky="nsew")
+
+Here, we fill in this tuple with all potential pages for our application. These pages will all load as a result. We're using StartPage to show first in our __init__ method, but later we may call show frame to raise any additional frame or window we want.
+Similar to how HTML tables function, the grid() method is used to determine the label's relative layout (position) within the widget that contains it.
+So, we came up with Pages One and Two. Here is our new StartPage class because we need a way to access these pages from the StartPage :
+
+class StartPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="Start Page", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+
+        button = tk.Button(self, text="Visit Page 1",
+                            command=lambda: controller.show_frame(PageOne))
+        button.pack()
+
+        button2 = tk.Button(self, text="Visit Page 2",
+                            command=lambda: controller.show_frame(PageTwo))
+        button2.pack()
+
+Here, the widget's appearance within its container and its behaviour when the main application window is resized are controlled by keyword-option/value pairs that can be passed to the pack() method.
+NOTE : Keep in mind that widgets don't show up until their geometry has been set using a geometry manager. Leaving off the geometry specification is a common early error that leads to surprise when the widget is generated but does not show up. A widget won't show up until, for instance, the packer's pack() method has been used on it.
+We've included buttons that use controllers above. PageOne and PageTwo are passed as inputs to the show frame function.
+The only thing left to do is to create the PageOne and PageTwo classes. These are simple to create and are almost identical to StartPage :
+
+class PageOne(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+        button2 = tk.Button(self, text="Page Two",
+                            command=lambda: controller.show_frame(PageTwo))
+        button2.pack()
+
+
+class PageTwo(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Page Two!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+        button2 = tk.Button(self, text="Page One",
+                            command=lambda: controller.show_frame(PageOne))
+        button2.pack()
+
+Here, the buttons and the places they lead to are the only significant modifications.
+Ultimately, the mainloop() method displays everything and keeps running until the programme is finished.
+Complete Code :
+
+#Python program for creating an application to switch pages using trinket.
+
+import tkinter as tk
+
+
+LARGE_FONT= ("Verdana", 12)
+
+
+class SeaofBTCapp(tk.Tk):
+
+    def __init__(self, *args, **kwargs):
+        
+        tk.Tk.__init__(self, *args, **kwargs)
+        container = tk.Frame(self)
+
+        container.pack(side="top", fill="both", expand = True)
+
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
+
+        self.frames = {}
+
+        for F in (StartPage, PageOne, PageTwo):
+
+            frame = F(container, self)
+
+            self.frames[F] = frame
+
+            frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(StartPage)
+
+    def show_frame(self, cont):
+
+        frame = self.frames[cont]
+        frame.tkraise()
+
+        
+class StartPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="Start Page", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+
+        button = tk.Button(self, text="Visit Page 1",
+                            command=lambda: controller.show_frame(PageOne))
+        button.pack()
+
+        button2 = tk.Button(self, text="Visit Page 2",
+                            command=lambda: controller.show_frame(PageTwo))
+        button2.pack()
+
+
+class PageOne(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+        button2 = tk.Button(self, text="Page Two",
+                            command=lambda: controller.show_frame(PageTwo))
+        button2.pack()
+
+
+class PageTwo(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = tk.Label(self, text="Page Two!!!", font=LARGE_FONT)
+        label.pack(pady=10,padx=10)
+
+        button1 = tk.Button(self, text="Back to Home",
+                            command=lambda: controller.show_frame(StartPage))
+        button1.pack()
+
+        button2 = tk.Button(self, text="Page One",
+                            command=lambda: controller.show_frame(PageOne))
+        button2.pack()
+        
+
+app = SeaofBTCapp()
+app.mainloop()
+
+Output :
+
+
+
+
+
+
+
+Next TopicAppend (key: value) Pair to Dictionary
+
+
+
+
+← prev
+next →
+
+
+
+

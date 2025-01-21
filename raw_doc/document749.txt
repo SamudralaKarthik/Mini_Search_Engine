@@ -1,0 +1,156 @@
+
+
+
+
+next →
+← prev
+
+Python List Comprehension vs. Generator Expression
+In this tutorial, we will discuss some important differences between list comprehension and generator expression. Both are quite similar in syntax, but they have some significant differences. Let's have a brief introduction to list comprehension and generator expression.
+What is List Comprehension?
+List comprehension is an excellent way to create a list. It allows us to create a list using the loop and conditional statement. We can perform the task using the lesser code. While a normal list takes the 3-4 lines of code, it can be done in a single line. Let's understand the following code.
+Example -
+
+# initialize the empty list
+list = []
+
+for i in range(20):
+	if i % 2 == 0:
+		list.append(i)
+
+# print elements
+print(list)
+
+Output:
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+We can do the same thing using the list comprehension with just a single line of code.
+Example -
+
+list = [i for i in range(20) if i % 2 == 0]
+print(list)
+
+Output:
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+As we can see, the syntax of the list compression takes for loop along with the if condition. We can also use the nested for loop but it will reduce the readability.
+Let's see another example.
+Example - Using the Normal List
+
+square_cube=[] 
+for num in range(10):
+    if num%2==0:
+        square_cube.append(num**2)
+    else:
+        square_cube.append(num**3)
+ 
+print(f"square_cube = {square_cube}")
+
+Output:
+square_cube = [0, 1, 4, 27, 16, 125, 36, 343, 64, 729]
+
+Example - Using List Comprehension
+
+square_cube=[n**2 if n%2==0 else n**3 for n in range(10)]
+print(f"With List-Conprehension = {square_cube}")
+
+Output:
+With List Comprehension = [0, 1, 4, 27, 16, 125, 36, 343, 64, 729]
+
+The both code do the same thing, filters the number based on condition num%2 ==0 and accordingly execute either square_cube.append(num**2) or square_cube.append(num**3).
+What are Generator Expressions?
+The Generator Expression is similar to the list compression, but it uses parentheses () and square brackets []. Unlike a list, it returns the generator object. Instead of holding the entire sequence in the memory, the generator generates the next element when needed. The normal function terminates when the return statement is called. But the generator function uses the yield statement, which saves the state of the function and can be picked up from the same state whenever the function is called.
+The Generator expression provides the facility to create the generator without using the yield keyword.
+Let's understand the following example.
+Example - 
+
+list_comprehension = [i for i in range(20) if i % 2 == 0]
+print(list_comprehension)
+
+Output:
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+
+Example - Generator Expression
+
+# Generator Expression
+generator_expression = (i for i in range(20) if i % 2 == 0)
+
+print(generator_expression)
+
+Output:
+<generator object <genexpr> at 0x7fa0e3f3b580>
+
+The above code returns the generator object; to print the value of the expression, we need to iterate the generator object.
+
+for i in generator_expression:
+	print(i)
+
+Output:
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+
+Here we get all the elements. Now we see the difference between the Generator expression and List Comprehension.
+Difference between Generator Expression and List Comprehension
+Both the syntaxes are quite similar, the only difference being that the list comprehension is enclosed in square brackets, whereas the generator expression is enclosed in parentheses.
+The generator yields the elements, which means it evaluates the demand value. The normal function with the return statement is terminated whenever it encounters a return statement, whereas Python restores the memory for the entire list.
+The main advantage of the generator expression over a list is memory efficiency. The generator expression is memory more efficient than the list. Let's understand the following example.
+Example -
+
+# import getsizeof from sys module
+from sys import getsizeof
+
+comp = [i for i in range(20000)]
+gen = (i for i in range(20000))
+
+# gives size for list comprehension
+x = getsizeof(comp)
+print("x = ", x)
+
+#gives size for generator expression
+y = getsizeof(gen)
+print("y = ", y)
+
+Output:
+We can see the difference while creating a list and Python reserves memory for the whole list and calculates the entire memory that it will consume. The generator expression generates the next element of the sequence on demand. It calculates memory of the next value.
+Generators are slower as the element of the sequence is calculated and yielded every time. The state of the function has to be saved to generate the value for the next time.
+Example -
+
+# List creation
+import timeit
+print(timeit.timeit('''list_com = [i for i in range(100) if i % 2 == 0]''', number=1000000))  
+
+Output:
+14.614160199999986
+
+Example -
+
+import timeit
+print(timeit.timeit('''gen_exp = (i for i in range(100) if i % 2 == 0)''', number=1000000))
+
+Output:
+0.9265093000000206
+
+As we can see, there is a significant difference in the execution time. Generator expressions are quite faster than list comprehension and time-efficient.
+Conclusion
+This tutorial included the basic introduction of the list comprehension and generator expression. We have also learned about some important differences between them. List comprehensions effectively reduce the number of lines, whereas generator expression generates the values on demand. The comprehensions are considered a more Pythonic way of coding by some. It is up to you to choose which one is best for you.
+
+
+Next TopicPython Output Formatting
+
+
+
+
+← prev
+next →
+
+
+
+

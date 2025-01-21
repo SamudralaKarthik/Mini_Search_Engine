@@ -1,0 +1,190 @@
+
+
+
+
+next →
+← prev
+
+Python Platform Module
+It is a simple fact that the platform on which our device or system is a crucial factor for the system's performance. We refer to the Operating System (OS) of the system, the application version on which we are performing some action, etc., as the platform for performance analysis. Knowing about the platform is very important because it helps us know whether the application we want to use in the system or function we want to perform is compatible with the OS application we are using. Platform information is also a very much important factor when we are working on someone else's system. But if we are going to check manually about all this information regarding the platform, it will take a while and so much effort from us. It will become even more hectic when we want to perform operations with some new function or work on new applications or software. Therefore, we can't keep checking the platform information manually, and we need something else to perform this task, which Python provides us.
+Python provides us with the Platform module, which is used to retrieve all information about the platform we are running it. We can fetch all this information simply by executing a Python program. Therefore, we will learn about the platform module of Python in this tutorial and learn how we can implement & use this module to fetch information from our system.
+Introduction to Platform Module in Python
+Platform module is a Python package that can retrieve all the information regarding the platform we are running the Python. We can fetch all information regarding the system on which we are running the Python by using the functions of this module in a Python program and executing the program. Platform module of Python can fetch the following information from the system:
+
+The operating system on which Python is present,
+The version of OS in which program is running,
+Python version,
+Type of Machine or system,
+Node version, etc.
+
+Platform module is very helpful to us whenever we are working on a system in which information is not known to us, and we want to know these details about it. This module plays a crucial role whenever we have to install several software and applications in our system, and we want to check whether our system is compatible with that application or not. We can check the system's compatibility by checking its version, type of machine, and several other properties before installing any application. If we want to understand more practically about the implementation of the platform module of Python then, look at the following example scenario:
+Example:
+Suppose we have to install an external library for Python to perform some specific operation, or we have to install an extension for Python, then we have first to make sure that our system and Python version is compatible with the external library or extension. Here, we can use the platform module of Python to know about all these properties from a system, and that's how this module plays a crucial role in Python.
+Platform Module of Python: Installation
+Platform module is an in-built module of Python (It means it comes along with the other in-built Python packages), and that's why we don't have to perform any installation process for this module. We can use the following line of code to import and use the functions of the platform module in a Python program:
+
+import platform
+
+Platform Module of Python: Implementation
+Platform module comes with multiple functions used to fetch information regarding multiple properties of the system such as machine type, system name, system version, processor information, etc. We will use some of them here in the implementation part and understand how to retrieve information using the platform module. We will use an example program for each function of the platform module and print the data in the output.
+Following are several examples and implementations of the platform module and its functions:
+Application 1: Displaying the System' Processor:
+We can display the system's processor using the processor() function of the platform module. We can understand the working of the processor() function by using it in an example program.
+Example 1:
+Look at the following Python program where we printed processor information in the output:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching processor information
+processorInformation = plt.processor()
+# Printing results
+print("The processor of the system in which we are running the program is: ", processorInformation)
+
+Output:
+The processor of the system in which we are running the program is:  Intel64 Family 6 Model 61 Stepping 4, GenuineIntel
+
+As we can see, the processor name with its details is printed in the output, and this information can vary according to the system in which we are running this example.
+Application 2: Displaying platform's architecture:
+Platform module provides us with architecture() function that we can use to know the system's architecture, and we can even print this information in the output. We can understand the working of architecture() function by using it in an example program.
+Example 2:
+Look at the following Python program where we printed architecture information of the system in the output:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching architecture of the system
+archInfo = plt.architecture()
+# Printing results
+print("The architecture of the system in which we are running the program is: ", archInfo)
+
+Output:
+The architecture of the system in which we are running the program is:  ('64bit', 'WindowsPE')
+
+As we can see, the system's architecture details are printed in the output, and this information can vary according to the system in which we are running this example.
+Application 3: Use of machine() Function:
+If we want to print the type of machine on which we are working, we can use the machine() function of the platform module. The machine() function returns a string in the output, displaying the machine type on which the program is executed. Here, we refer to machine type as the size of the width of registers available in the core of the system we are working on. We can understand the working of machine() function by using it in an example program.
+Example 3:
+Look at the following Python program where we printed machine type using the machine() function:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching machine type from the system
+machInfo = plt.machine()
+# Printing results
+print("The type of machine on which we are running the program is: ", machInfo)
+
+Output:
+The type of machine on which we are running the program is:  AMD64
+
+As we can see, details regarding the machine type of system are printed in the output, which can vary according to the system.
+Application 4: Fetching the Network Name:
+The platform provides us the node() function, which fetches information about the node of the system. Node() function of platform module returns a string of results which displays system's network name, or we can say node information. We can understand the working of node() function by using it in an example program.
+Example 4:
+Look at the following Python program where we printed network type of system using node() function:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching node type from the system
+nodeInfo = plt.node()
+# Printing results
+print("The system's network name or node details of system on which we are running the program is: ", nodeInfo)
+
+Output:
+The system's network name or node details of the system on which we are running the program is:  Manish-Arora-Laptop
+
+As we can see, the network name or mode of the system is printed in the output, and this information can vary according to the system and network it is connected to.
+Application 5: Operating System or Platform Name of System:
+Platform system and operating system (OS) are very similar, and when we print the platform information, it also shows the name of the operating system along with it. Therefore, if we want to know only Operating System's name then, we will use the system() function of the platform module, and if we want to get complete information regarding the platform, then we will use the platform() function. Here, we will understand the implementation of both system() and platform() functions by using them in an example program.
+Example 5:
+Look at the following Python program where we have used both system() and platform() functions to fetch information from the system:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching name of operating system
+osInfo = plt.system()
+# Fetching information of the platform
+platformInfo = plt.platform()
+# Printing results
+print("The system's Operating System Name on which we are running the program is: ", osInfo)
+print("Platform's information on which we are running the program: ", platformInfo)
+
+Output:
+The system's Operating System Name on which we are running the program is:  Windows
+Platform's information on which we are running the program:  Windows-10-10.0.19041-SP0
+
+As we can see, details regarding the platform and name of the operating system on which we are working are printed in the output, and this information can vary according to different systems and their OS.
+Application 6: Knowing Version of Python Installed:
+Platform module provides us with the python_version() function, which we can use to know about the version of Python installed in our system. This function is very helpful when we have to check the version of Python and if this version is compatible with the latest released modules. We can understand the working of the python_version() function by using it in an example program.
+Example 6: Look at the following Python program where we printed installed Python's version in the output:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching installed version information
+pvInfo = plt.python_version()
+# Printing results
+print("The version of Python installed in our system is: ", pvInfo)
+
+Output:
+The version of Python installed in our system is:  3.9.0
+
+As we can see, installed Python's version is printed in the output, and it will be different for everyone who is working on different versions of Python.
+Application 7: Displaying Branch of Python:
+From the Branch of Python here, we refer to the SCM branch of Python in which SCM stands for Source Code Manager. With the help of the python_branch() function of the Platform module, we can easily know which SCM branch Python is installed in our system. SCM or Source Code Manage is used to track revisions and updation made in the software. We can understand the working of the python_branch() function by using it in an example program.
+Example 7:
+Look at the following Python program where we printed installed Python's SCM branch name in the output:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching installed Python's SCM branch name
+pbInfo = plt.python_branch()
+# Printing results
+print("The name of SCM branch of Python which is installed in our system is: ", pbInfo)
+
+Output:
+The name of SCM branch of Python which is installed in our system is:  tags/v3.9.0
+
+As we can see, installed Python's SCM branch name is printed in the output, and it will be different for everyone working on different branch versions of Python.
+Application 8: Information of Python Compiler:
+Platform module provides us with the python_compiler() function, which we can use to get the complete information about the Python compiler present in our system. The python_compiler() function returns a string of results which displays the information about the Python compiler used to compile all Python programs. We can understand the working of the python_compiler() function by using it in an example program.
+Example 8:
+Look at the following Python program where we printed information about the Python compiler in the output:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching installed Python's compiler information
+pcInfo = plt.python_compiler()
+# Printing results
+print("Information regarding Python compiler present in our system: ", pcInfo)
+
+Output:
+Information regarding Python compiler present in our system:  MSC v.1927 64 bit (AMD64)
+
+As we can see, installed Python's compiler information is printed in the output, and it may be the same or different for different users.
+Application 9: Displaying Build date and time of Python:
+We can even know about the build date and time of the Python version present in our system using the platform module. Platform module provides us with the python_build() function, which returns a string of results that displays information about the build date and time of the Python version present in our system. We can understand the working of the python_build() function by using it in an example program.
+Example 9:
+Look at the following Python program where we printed information about the build date & time of Python in the output:
+
+# Importing platform module in the program
+import platform as plt
+# Fetching information about Python's build date & time
+pbInfo = plt.python_build()
+# Printing results
+print("Information regarding build date & time of Python version present in our system: ", pbInfo)
+
+Output:
+Information regarding build date & time of Python version present in our system: ('tags/v3.9.0:9cf6752', 'Oct  5 2020 15:34:40')
+
+As we can see, the installed Python version's build date & time is printed in the output, and it may be the same or different for different users according to the Python version present in their system.
+
+
+Next TopicTypeError string indices must be an integer
+
+
+
+
+← prev
+next →
+
+
+
+

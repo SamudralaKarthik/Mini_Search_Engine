@@ -1,0 +1,124 @@
+
+
+
+
+next →
+← prev
+
+Ethical Hacking with Python
+A computer science engineer, a part of encrypting the world, must know the basics of hacking. Hacking is the process of getting access to a system of which we are not supposed to have.
+Such as login in to the email account without authorization is a part of hacking that account. Getting access to the computer or mobile phone without authorization is hacking. There is a large number of ways the user can hack into the system, and the basic concept of hacking is the same, breaking into the system without any authentication.
+Ethical Hacking
+Ethical hacking is not limited to cracking passwords or stealing data. Ethical hacking is used for scanning vulnerabilities and for finding potential threats on the computer system or networks. Ethical hackers find the weak points or loopholes in the system, applications, or networks and report them to the organization.
+There are different types of hackers, following are some:
+
+Black Hat Hackers
+The Black Hat Hackers are the people who entered inside the website unethically for stealing data from the admin portal or to manipulate the data. They basically do this for their profit or to take advantage of personal data. Their main purpose is to cause major damage to the company, and this can even lead to dangerous consequences.
+White Hat Hacker
+They type of hackers work for finding bugs and report them ethically to the organizations or firms. They are authorized as the user for testing and checking bugs in the networks or websites and report back to the developers or authorized people. The white-hat hacker usually gets all the required information about the website or network system they are testing from the firm itself. They hacked the system with authorization. They do this so; they can save the website from malicious hackers in the future.
+Grey Hat Hackers
+These types of hackers get access to the data of the website or network and violate cyber law. But they don't have the same intentions as the Black Hat Hackers do. They hack the system for the common good, but they as different from white hat hackers, as they exploit vulnerability publicly, and the white hat hackers do it privately for the firm or organization.
+
+Why the user should user Python programming for hacking?
+The Python language is used widely for general purposes, and it's a high-level programming language. It is a very simple and powerful scripting language that is open source and object-oriented. Python has inbuilt libraries which can be used for various functions, and hacking is one of them. Python is very popular, and it has great demand in the market. Learning how to hack using Python will the great for an understanding language better.
+How Passwords are Hacked?
+As we know that the passwords of websites or files are not stored in the form of plain text in the database of websites. In this tutorial, we are going to hack the plain text, which is secured by a password. In the plain text, the passwords are stored in the hashed (md5) format.
+So, the user has to take the input_hashed(which is the hashed password stored in the database), and then they have to try to compare it with the hashed(md5) of each plain text password which can be found in the password file.
+When the match of the hashed password is found, the user can display the plain text password, which is stored in the file of passwords. But if the password is not found in the file of input passwords, then it will display that "Password is not found", this happens only when the buffer overflow does occur.
+These types of hacking attacks are considered "Dictionary Attacks".
+Example:
+
+import hashlib
+print("# # # # # #  Password Hacking # # # # # #")
+        
+# to check if the password is found or not in the text file.
+password_found = 0                                     
+ 
+input_hashed = input(" Please enter the hashed password: ")
+ 
+password_document = input(" \n Please enter the passwords file name including its path (root / home/): ")
+  
+try:
+    # here, we will try to open the passwords text file.
+    password_file = open(password_document, 'r')             
+except:
+    print("Error: ")
+    print(password_document, "is not found.\n Please enter the path of file correctly.")
+    quit()
+ 
+ 
+# now, for comparing the input_hashed with the hashes of the words present in the password text file for finding the password.
+ 
+for word in password_file:
+    # to encode the word into utf-8 format
+    encoding_word = word.encode('utf-8') 
+             
+    # to Hash the word into md5 hash
+    hashed_word = hashlib.md5(encoding_word.strip())  
+  
+    # to digest that the hash into the hexadecimal value    
+    digesting = hashed_word.hexdigest()        
+      
+    if digesting == input_hashed:
+        # to compare the hashes
+        print ("Password found.\n The required password is: ", word)  
+        password_found = 1
+        break
+ 
+# if the password is not found in the text file.
+if not password_found:
+    print(" The password is not found in the ", password_document, "file")  
+    print('\n')
+print(" # # # # # # Thank you # # # # # # ")
+
+Input 1:
+
+# # # # # #  Password Hacking # # # # # #
+ Please enter the hashed password:  1f23a6ea2da3425697d6446cf3402124
+ 
+Please enter the passwords file name including its path (root / home/):  passwords.txt
+
+Output:
+Password found.
+ The required password is:  manchester123
+
+ # # # # # # Thank you # # # # # #
+
+Input 2:
+
+# # # # # #  Password Hacking # # # # # #
+ Please enter the hashed password:  b24aefc835df9ff09ef4dddc4f817737
+ 
+ Please enter the passwords file name including its path (root / home/):  passwords.txt
+
+Output:
+Password found.
+ The required password is:  heartbreaker07
+
+ # # # # # # Thank you # # # # # #
+
+Input 3:
+# # # # # # Password Hacking # # # # # #
+Please enter the hashed password: 33816712db4f3913ee967469fe7ee982
+Please enter the passwords file name including its path (root / home/): passwords.txt
+Output:
+The password is not found in the passwords.txt file.
+Explanation:
+In the above code, the we first imported the "hashlib" module as it contains various methods which can handle hashing any raw message in the encrypted method. Then the user has to input the hashed password and the location of the passwords text file. Then, the user is trying to open the text file, but if the text file is not found at the mentioned location, it will print the error of "File not found".
+Then, we compare the input hashed password with the hashed words present in the text file to find the correct password; for that, we have to encode the words into the utf-8 format and then hash the words into md5 hash. Then digest the hashed word into hexadecimal values.
+If the digested value is equal to the input hash password, it will print the password found and print the correct password value. But if the password is not found, that means the digested value does not match with the input hash password. It will print "Password is not found".
+Conclusion
+In this tutorial, we have discussed ethical hacking in Python, and we have also shown an example of how to hack a password.
+
+
+Next TopicClass Variable vs Instance
+
+
+
+
+← prev
+next →
+
+
+
+

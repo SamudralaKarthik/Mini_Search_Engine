@@ -1,0 +1,316 @@
+
+
+
+
+next →
+← prev
+
+How to Visualize a Neural Network in Python using Graphviz?
+In this tutorial, we will learn how to plot (imagine) a brain network in Python using Graphviz. Graphviz is a python module that open-source diagram representation programming. It is generally well known among scientists to do representations. It's addressing primary data as charts of conceptual diagrams and organizations implies you have to give a main text-based portrayal of the chart concerning its topological construction, which will naturally peruse and make a picture.
+Installation:
+For window terminal:
+
+pip install Graphviz
+
+For anaconda terminal:
+
+conda install -c anaconda graphviz
+
+What is a Neural Network?
+A neural network is inexactly founded on how the human cerebrum functions: numerous neurons associated with different neurons, going data through their associations and terminating when the contribution to a neuron outperforms a specific edge. Our fake brain organization will comprise counterfeit neurons and neurotransmitters with data passed between them. The neurotransmitters, or associations, will be weighted by the neuron's solidarity of effect on deciding the result. These synaptic loads will go through a streamlining cycle called backpropagation. For every cycle during the preparation interaction, backpropagation will be utilized to revisit the layers of the organization and changes the loads as per their commitment to the brain net's blunder.
+Neural networks are self-upgrading capacities that guide contributions to the right results. We can then put another contribution to the capacity, where it will foresee a result in light of its capacity with the preparation information.
+Neural Net's Goal
+This neural organization, like every brain organization, should realize the significant elements in the information to deliver the result. Specifically, this brain net will be given an information framework with six examples, each with three-element sections comprising zeros and ones exclusively. For instance, one example in the preparation set might be [0, 1, 1]. The result of each example will be a solitary one or zero. The result is not entirely set in stone by the number in the primary component section of the information tests. Utilizing the previous model, the result for [0, 1, 1] would be 0 because the main segment contains a zero. A model outline will be given underneath to exhibit the result for each info test.
+There are two methods for making a brain network in Python:
+
+From Scratch - this can be a decent learning exercise, as it will show you how brain networks work starting from the earliest stage
+Utilizing a Neural Network Library - bundles like Keras and TensorFlow work on the structure of brain networks by abstracting away the low-level code. Assuming that you're now acquainted with how brain networks work, this is the quickest and least demanding method for making one.
+
+Regardless of which strategy you pick, working with a brain organization to make an expectation is something very similar:
+
+Import the libraries. For instance: import numpy as np
+Define/make input information. For instance, use numpy to make a dataset and a variety of information values.
+Add loads and predisposition (if appropriate) to include highlights. These are learnable boundaries, implying that they can be changed during preparation.
+
+Weights = input boundaries that impact yield
+Bias = an additional edge esteem added to the result.
+
+Train the organization against known, great information to track down the right qualities for the loads and inclinations.
+Test the Network against a bunch of test information to perceive how it performs.
+Fit the model with hyperparameters (boundaries whose values are utilized to control the educational experience), compute precision, and make an expectation.
+
+Create a Neural Network from Scratch
+In this example, I'll use Python code and the numpy and scipy libraries to create a simple neural network with two nodes.
+Steps to the following program:
+
+DEFINE THE NETWORK, Import the python libraries required in this example.
+Generate irregular numbers inside a shortened (limited)
+normal appropriation:
+Create the 'Network' class and characterize its contentions:
+Set the number of neurons/hubs for each layer and introduce the weight networks
+A strategy to introduce the weight lattices of the brain organization
+More work is expected to prepare the organization.
+Running the organization with an info vector 'input_vector'. 'input_vector' can be tuple, list or ndarray, activation_function() carries out the expert work, which is an execution of the sigmoid capacity:
+RUN THE NETWORK AND GET A RESULT
+Instate an occurrence of the class
+Run simple_network for exhibits, records, and tuples with shapes (2) and get a result
+
+
+import numpy as np
+from scipy.special import expit as activation_function
+from scipy.stats import transform
+def truncated_normal(mean=0, sdd=1, low=0, upper=10):
+    return truncnorm(
+        (low - mean) / sdd, (upper - mean) / sdd, loc1=mean, scale=sdd)
+
+  
+class Nnetwork:
+    def __init__(self, 
+                 no_of_in_node, 
+                 no_of_out_node, 
+                 no_of_hidden_node,
+                 learning_rate):
+        self.no_of_in_node = no_of_in_node
+        self.no_of_out_node = no_of_out_node
+        self.no_of_hidden_node = no_of_hidden_node
+        self.learning_rate = learning_rate 
+        self.create_weight_matrices()
+        
+    def create_weight_matrices(self):
+        
+        rad1 = 1 / np.sqrt(self.no_of_in_node)
+        X = truncated_normal(mean=0, sdd=1, low=-rad1, upper=rad1)
+        self.weights_in_hidden = X.rvs((self.no_of_hidden_node, 
+                                       self.no_of_in_node))
+        rad1 = 1 / np.sqrt(self.no_of_hidden_node)
+        X = truncated_normal(mean=0, sdd=1, low=-rad1, upper=rad1)
+        self.weights_hidden_out = X.rvs((self.no_of_out_node, 
+                                        self.no_of_hidden_node))
+
+    def train(self, i/p_vectorr, target_vectorr):
+        pass # 
+    def run(self, i/p_vectorr):
+        # Turn the i/p vectorr into a column vectorr:
+        i/p_vectorr = np.array(i/p_vectorr, ndmin=2).T
+
+        i/p_hidden = activation_function(self.weights_in_hidden @   i/p_vectorr)
+        o/p_vectorr = activation_function(self.weights_hidden_out @ i/p_hidden)
+        return o/p_vectorr 
+
+simple_network = Nnetwork(no_of_in_node=2, 
+                               no_of_out_node=2, 
+                               no_of_hidden_node=4,
+                               learning_rate=0.6)
+simple_network.run([(3, 4)])
+
+Output:
+
+Plotting a simple graph with Graphviz
+Approach:
+
+Import module.
+Create a new object of Diagraph.
+Add node()and edge() into graph object.
+Save the source code with the render() object.
+
+Below is the implementation:
+
+from graphviz import Digraph
+dot = Digraph(comment='A Round Graph')
+
+dot.node('A1', 'Alex')
+dot.node('B1', 'Rishu')
+dot.node('C1', 'Mohe')
+dot.node('D1', 'Satyam')
+
+dot.edges(['A1B1', 'A1C1', 'A1D1'])
+dot.edge('B1', 'C1', constraint = 'false')
+dot.edge('C1', 'D1', constraint = 'false')
+dot.format = 'png'
+dot.render('Graph', view = True)
+
+Output:
+Graph1.png
+
+We can check the generated source code with dot. source methods:
+
+print(dot.source)
+
+Output:
+digraph {
+    A1 [labels=Alex]
+    B1 [labels=Rishu]
+    C1 [labels=Mohe]
+    D1 [labels=Satyam]
+    A1 -> B1
+    A1 -> C1
+    A1 -> D1
+    B1 -> C1 [constraint=false]
+    C1 -> D1 [constraint=false]
+}
+
+Plotting (visualize) a neural network with Graphviz
+Here we are utilizing source code for execution which we find in the above models:
+We should talk about the methodology:
+
+Make a digraph object.
+Characterize the bearing of the chart utilizing rankdir.
+Make a subgraphs with the accompanying things:
+Set tone.
+Set hub properties.
+Set the Level of the subgraphs
+Make the edge between the item with (- >).
+
+This source code should be saved in a .txt file(myfile.txt) and run 'dab - Tpng - O myfile.txt' from the order line to get a .png figure with the graph.
+Example 1:
+
+digraph G {
+        rankdir=LR
+    splines=line
+        node [fixedsize=true, labels=""];
+        subgraphs cluster_0 {
+        colour=white;
+        node [style11=solid,colour=blue4, shapes=circle];
+        y1 y2 y3 y4;
+        labels = "layer 1 (Input layer)";
+    }
+    subgraphs cluster_11 {
+        colour=white;
+        node [style11=solid,colour=red2, shapes=circle];
+        a12 a22 a32;
+        labels = "layer 2 (hidden layer)";
+    }
+    subgraphs cluster_2 {
+        colour=white;
+        node [style11 = solid,colour = seagreen2, shapes = circle];
+        O;
+        labels="layer 3 (output layer)";
+    }
+        y1 -> a 12;
+        y1 -> a 22;
+        y1 -> a 32;
+        y2 -> a 12;
+        y2 -> a 22;
+        y2 -> a 32;
+        y3 -> a 12;
+        y3 -> a 22;
+        y3 -> a 32;
+    y4 -> a 12;
+        y4 -> a 22;
+        y4 -> a 32;
+    
+
+        a 12 -> O
+        a 22 -> O
+        a 32 -> O
+
+}
+
+Run this into the terminal:
+
+dot -Tpng -O myfile.txt
+
+Output:
+
+Example 2:
+
+digraph G {
+        rankdir=LR
+    splines=line
+        nodesep=.05;
+        node [labels=""];
+        subgraphs cluster_0 {
+        colour=white;
+                node [style11=solid,colour=blue4, shapes=circle];
+        y1 y2 y3;
+        labels = "layer 1";
+    }
+    subgraphs cluster_11 {
+        colour=white;
+        node [style11=solid,colour=red2, shapes=circle];
+        b12 b22 b32 b42 b52;
+        labels = "layer 2";
+    }
+    subgraphs cluster_2 {
+        colour=white;
+        node [style11=solid, colour=red2, shapes=circle];
+        b13 b23 b33 b43 b53;
+        labels = "layer 3";
+    }
+    subgraphs cluster_3 {
+        colour=white;
+        node [style11=solid, colour=seagreen2, shapes=circle];
+        O1 O2 O3 O4;
+        labels="layer 4";
+    }
+        y1 -> b 12;
+        y1 -> b 22;
+        y1 -> b 32;
+        y1 -> b 42;
+        y1 -> b 52;
+
+        y2 -> b 12;
+        y2 -> b 22;
+        y2 -> b 32;
+        y2 -> b 42;
+        y2 -> b 52;
+ 
+        y3 -> b 12;
+        y3 -> b 22;
+        y3 -> b 32;
+        y3 -> b 42;
+        y3 -> b 52;
+
+        b 12 -> b 13
+        b 22 -> b 13
+        b 32 -> b 13
+        b 42 -> b 13
+        b 52 -> b 13
+
+        b 12 -> b 23
+        b 22 -> b 23
+        b 32 -> b 23
+        b 42 -> b 23
+        b 52 -> b 23
+
+        b 12 -> b 33
+        b 22 -> b 33
+        b 32 -> b 33
+        b 42 -> b 33
+        b 52 -> b 33
+
+        b 12 -> b 43
+        b 22 -> b 43
+        b 32 -> b 43
+        b 42 -> b 43
+        b 52 -> b 43
+
+        b 12 -> b 53
+        b 22 -> b 53
+        b 32 -> b 53
+        b 42 -> b 53
+        b 52 -> b 53
+
+        b 13 -> O1
+    b 23 -> O2
+    b 33 -> O3
+    b 43 -> O4
+        b 53 -> O4
+
+}
+
+Output:
+
+
+
+Next TopicPython Graphviz
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,255 @@
+
+
+
+
+next →
+← prev
+
+How to Design Hashset in Python
+As we know that HashSet is a famous class in Java. HashSet is used to store the values using a hash table. In this tutorial, we will cover HashSet in Python. We will also learn about how we can design HashSet in Python.
+HashSet data structure can be created without using any built-in hash table libraries. Before diving deep into this topic, let's understand its core concepts.
+Introduction
+We can design HashSet without using any hash table libraries. Below are the multiple different functions -
+
+add(x) - This method is used to insert a value x into the HashSet.
+contains(x) - It is used to check whether a value x is present in the HashSet or not.
+remove(x) - It is used to delete x from the HashSet. If the HashSet doesn't have any value, it will do nothing.
+
+Let's understand these methods by below example.
+First, initialize the HashSet and call add(1) function. It will add 1 into the hash set. Call add(3), which will add 3, then call contains(1). It will check whether 1 is present or not in the hash set. Now we call contains(2), add(2), contains(2), remove(2), contains(2).
+The output will be returned as true for 1 is present, false for 2 is not present, true for 2 is present, false for 2 is not present, respectively.
+Basic Operations of HashSet in Python
+We can perform some basic operations in HashSet using the following methods. Let's understand these methods.
+Adding new values in HashSet
+In the below example, we will add the value in the hash set using add() function. The add() function add the value one at a time. Let's see the following code.
+Example -
+
+from hs import HashSet
+    
+obj = HashSet()
+obj.add(2)
+obj.add(7)
+obj.add(6)
+
+Output:
+Adding value: 2
+Adding value: 7
+Adding value: 6
+
+Removing values in HashSet
+We can remove the existing value using the remove() function. Let's understand the following code.
+Example -
+
+from hs import HashSet
+    
+obj = HashSet()
+obj.add(2)
+obj.add(7)
+obj.add(6)
+obj.remove(7)
+obj.remove(6)
+
+Output:
+Adding value: 2
+Adding value: 7
+Adding value: 6
+Removed value: 7
+Removed value: 6
+
+Checking if values exist in HashSet
+In this example, we will demonstrate how we can check whether a particular value exists or does not use the contains() function. Let's understand the following code.
+Example -
+
+from hs import HashSet
+    
+obj = HashSet()
+obj.add(2)
+obj.add(7)
+obj.add(6)
+obj.contains(2)
+
+Output:
+Adding value: 2
+Adding value: 7
+Adding value: 6
+It contains: 2
+
+Algorithm for the HashSet in Python
+In the first step, we define one data structure called HashList. Then, we initialize an empty list as a new_list. Then, we define an update() function in which found will be storing a Boolean value False. Now, we use for loop for each index I and K. if the key is the same as 'k', then new_list[i]=k and found value set to True. The value will be inserted at the last of the list if no value is found.
+The next step is to define the get() function, which we will use for the loop, and if the value of k is the same as the key, the output will be True; otherwise, False. If the key is the same as 'k', delete the value from the list new_list. The same process will be applied in the remove() function.
+Now, we will create the Main class HashSet. This class will declare the initialization function where the key_space value = 2096. The hash_table will have a list of new_list type objects of size key_space. Then, we will create add() function, in which hash_key = key%key_space and update the key of hash_table[hash_key]. After that, we will call the remove function, in which hash_key = key % key_space, and delete the key of hash_table[hash_key]. After that, we will call the contains function, in which
+hash_key = key % key_space, and get the key of hash_table[hash_key].
+Let's see the step-wise implementation algorithm.
+Algorithm -
+
+Create data structure called HashSet, Initialize it like below
+new_list = []
+Define a function update(). This will take key
+found := False
+for each index i and key k in new_list, do
+
+if key is same as k, then
+
+new_list[i]:= key
+found:= True
+come out from the loop
+
+if found false, then
+
+insert key at the end of new_list
+
+
+Define a function get() . This will take key
+
+for each k in new_list, do
+
+if k is same as key, then
+
+return True
+
+return False
+
+
+Define a function remove(). This will take key
+
+for each index i and key k in new_list, do
+
+if key is same as k, then
+
+delete new_list[i]
+
+
+
+Now create custom hashSet. There will be few methods as follows
+Initialize this as follows -
+key_space := 2096
+hash_table:= a list of bucket type object of size key_space
+Define a function add(). This will take key
+
+hash_key:= key mod key_space
+call update(key) of hash_table[hash_key]
+
+Define a function remove(). This will take key
+
+hash_key:= keymodkey_space
+delete key from hash_table[hash_key]
+
+Define a function contains(). This will take key
+
+hash_key:= keymodkey_space
+return get(key) of hash_table[hash_key]
+
+
+Implementation of HashSet in Python
+Here we will implement the above algorithm and create Python program. We will define the two classes: HashSet and CreateHashset. Let's see the below code.
+Code -
+
+#Design HashSet in python
+#checking the values and will return the output class
+class verifyvalues:
+   #initialization function which has list new_list
+   def __init__(self):
+      self.new_list=[]
+     
+   #update vales function
+   def update(self, key):
+      found=False
+      for i,k in enumerate(self.new_list):
+         if key==k:
+            self.new_list[i]=key
+            found=True
+            break
+      if not found:
+         self.new_list.append(key)
+    
+   #get values function
+   def get(self, key):
+      for k in self.new_list:
+         if k==key:
+            return True
+      return False
+   #remove values function
+   def remove(self, key):
+      for i,k in enumerate(self.new_list):
+         if key==k:
+            del self.new_list[i]
+ 
+#class HashSet main class
+class HashSet:
+   #Initialization function
+   def __init__(self):
+      self.key_space = 2096
+      self.hash_table=[verifyvalues() for i in range(self.key_space)]
+   def hash_values(self, key):
+       hash_key=key%self.key_space
+       return hash_key
+   #add function
+   def add(self, key):
+      self.hash_table[self.hash_values(key)].update(key)
+   #remove function
+   def remove(self, key):
+      self.hash_table[self.hash_values(key)].remove(key)
+   #contains function
+   def contains(self, key):
+ 
+      return self.hash_table[self.hash_values(key)].get(key)
+   def display(self):
+       ls=[]
+       for i in self.hash_table:
+           if len(i.new_list)!=0:ls.append(i.new_list[0])
+       print(ls)
+  
+    
+        
+ob = HashSet()
+print(ob.hash_values(10))
+print("Add 10")
+ob.add(10)
+print(ob.hash_values(6))
+print("Add 6 ")
+ob.add(6)
+print(ob.hash_values(5))
+print("Add 5 ")
+ob.add(5)
+print("Contains 10 : ",ob.contains(10))
+print("Contains 3: ",ob.contains(3))
+print("Contains 8 : ",ob.contains(9))
+
+Output:
+10
+ Add 10 
+6
+Add 6
+5
+Add 5
+Contains 10 :  True
+Contains 3:  False
+Contains 8 :  False
+2
+Add 2
+3
+Add 3
+Contains 2 :  True
+Remove 2
+Contains 2 :  False
+Contains 3 :  True
+[3, 5, 6, 10]
+
+Explanation -
+In the above code, we have created a verifyvalues class that will check the values in the given list. We have added value 10, 6 and 5 using add method. Then, we checked 10, 3 and 8 in the Hash set using contains().
+If the values are present, it returns True, and if the value is not present, it returns False. We removed 2 using the remove() function, and values get removed from the hash set. And we used the same process for the other values.
+Conclusion
+In this tutorial, we have discussed how we can create the HashSet in Python, write the algorithm and implement it using the Python code. We have described the step-wise process to create HashSet. We have also explained basic operations that can be performed on the HashSet.
+
+
+Next TopicHow to Extract YouTube Data in Python (Data Scraping using BeautifulSoup)
+
+
+
+
+← prev
+next →
+
+
+
+

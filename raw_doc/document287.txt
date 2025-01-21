@@ -1,0 +1,109 @@
+
+
+
+
+next →
+← prev
+
+Python combination without itertools
+There are many instances when we have to find different combinations from single strings or a different set of numbers.
+To find such combinations in Python, we have the itertools module, the most common for finding different combinations and permutations.
+This module is a very efficient tool and works very fast to find all the possible combinations. But itertools module functions are not the only possible method that we can use to find the combinations.
+In this tutorial, we will learn about the different methods by which we can find different combinations from a string in Python without using itertools.
+Combinations in Python without using itertools
+In this section, we will write Python programs to find combinations by implementing several methods in them. We will use the following methods in our Python program:
+
+Using Iteration method
+Using recursion method
+
+In both methods, first, we will look at the program and understood it's working, and then we will move to the explanation part to understand the implementation used in it.
+Python combinations using iteration method:
+To implement the iterative approach in the program, we have to import numpy library to use its functions. Let's understand the following example.
+Example:
+
+# Import numpy module in program
+import numpy as np
+# Default function to use iterative approach
+def RecurCombo(iterArray, num):
+ char = tuple(iterArray) # converting input string into a tuple
+ m = len(char) # length of string or tuple
+ if num > m: # checking if length of combinations is more than length of string
+   return
+ index = np.arange(num) # using numpy arrange() function
+ # Yielding the first sequence
+ yield tuple(char[i] for i in index)
+ # Using while loop with true condition
+ while True:
+  # iterating over the tuple we made using reversed for loop
+  for a in reversed(range(num)):
+     if index[a] != a + m - num:
+         break
+     else:
+              return
+  index[a] += 1
+  # another for loop iteration
+  for b in range(a + 1, num):
+   index[b] = index[b - 1] + 1
+  yield tuple(char[a] for a in index) # yielding possible combinations from given string
+# Taking an input string from user
+inputArray = input("Enter an input string to find combinations: ")
+# Printing different combinations as result in output
+print("All possible combinations of three letter sets from the string given by you is: ")
+print([x for x in RecurCombo(inputArray, 3)])
+
+Output:
+Enter an input string to find combinations: JavaTpoint
+All possible combinations of three letter sets from the string given by you is: 
+[('J', 'a', 'v'), ('J', 'a', 'a'), ('J', 'a', 'T'), ('J', 'a', 'p'), ('J', 'a', 'o'), ('J', 'a', 'i'), ('J', 'a', 'n'), ('J', 'a', 't')]
+
+Explanation:
+We have used the iteration method in the above program to find combinations from the input string.
+First, we have used a default Python function with the input string and length of the combinational set as a parameter. Then, we converted the input string into a tuple. We also checked if the required length of the combination is not more than the length of the string.
+After that, we used arrange() function of numpy to set the index for the tuple. We are going to iterate over tuple with the index variable.
+Then, we iterated over the tuple using reverse for loop and another for loop inside the while loop. After the iteration in loops, we have yielded the possible combinations of the required length.
+Then, we have taken an input string from the user. In the last, we returned combinations of three sets from the input string.
+Python combinations using recursion method:
+In the Recursive method approach, we will iterate over the list by that consists of list of strings. Let's understand the following example.
+Example:
+
+# Default Python function to use recursive approach
+def RecurCombo(array, num): 
+    if num == 0: 
+        return [[]] # if length for combination is 0
+    l =[] # list to printed in result
+    # Using for loop to implement recursive approach
+    for j in range(0, len(array)): 
+        emptyArray = array[j] # define an empty array to print list of sets
+        recurList = array[j + 1:]
+        # Recursion method on list defined in function
+        for x in RecurCombo(recurList, num-1): 
+            l.append([emptyArray]+x) # appending list
+    return l # list as result of recursion
+if __name__=="__main__":
+    # Taking an input string from user
+    inputArray = input("Enter an input string to find combinations: ")
+    # Printing different combinations as result in output
+    print("All possible combinations of three letter sets from the string given by you is: ")
+    print(RecurCombo([a for a in inputArray], 3))
+
+Output:
+Enter an input string to find combinations: Python
+All possible combinations of three letter sets from the string given by you is: 
+[['P', 'y', 't'], ['P', 'y', 'h'], ['P', 'y', 'o'], ['P', 'y', 'n'], ['P', 't', 'h'], ['P', 't', 'o'], ['P', 't', 'n'], ['P', 'h', 'o'], ['P', 'h', 'n'], ['P', 'o', 'n'], ['y', 't', 'h'], ['y', 't', 'o'], ['y', 't', 'n'], ['y', 'h', 'o'], ['y', 'h', 'n'], ['y', 'o', 'n'], ['t', 'h', 'o'], ['t', 'h', 'n'], ['t', 'o', 'n'], ['h', 'o', 'n']]
+
+Explanation:
+In the above program, while implementing the recursive approach, we haven't used any specific module of Python. Like the iteration method, we used a default function to implement the recursion method in code.
+In this program, we used a condition to check if the required length of the combination. Then, we used the recursion method inside the function with the for loop. After using the recursion method, we returned combinations of the required length from the input string. Last, we took string as input from the user and returned combinations of three sets in output.
+
+
+Next TopicPython Comprehensions
+
+
+
+
+← prev
+next →
+
+
+
+

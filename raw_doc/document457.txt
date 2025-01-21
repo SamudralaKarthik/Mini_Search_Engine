@@ -1,0 +1,101 @@
+
+
+
+
+next →
+← prev
+
+Visualize Tiff File using Matplotlib and GDAL in Python
+The file format TIFF is utilized for the storage of images that are rasterized. A library named GDAL Geospatial Data Abstraction Library is specifically designed to read these raster files, as well as other file formats, such as vector formats. The gdal library is part of the Open-Source Geospatial Foundation.
+To install required modules, we can use following commands in our terminal:
+
+pip install gdal
+!pip3 intall matplotlib
+
+We require matplotlib and GDAL modules within Python to display a tiff image.
+Approach:
+
+Step 1: Import the module
+Step 2: We can count how many bands.
+Step 3: Find every raster band in the TIFF file.
+Step 4: The bands are read to NumPy arrays.
+Step 5: In the imshow() function of Matplotlib to display.
+
+To explain this tutorial, we will be using the following image in tiff format:
+
+Step-by-step Implementation:
+Step 1: Importing the modules and opening the file.
+
+from osgeo import gdal as GD
+import matplotlib.pyplot as mplot
+import numpy as npy
+data_set = GD.Open(r'land_shallow_topo_2048.tif')
+
+Step 2: Counting the total number of bands.
+
+print(data_set.RasterCount)
+
+Output:
+3
+
+Step 3: Fetching the bands
+We utilize the GDAL's GetRasterBand(int) to get the bands. It is important to note that the value that we pass will always begin with one (indexing of bands starts at 1)
+
+# As, there are 3 bands, We will store in 3 different variables
+band_1 = data_set.GetRasterBand(1) # red channel
+band_2 = data_set.GetRasterBand(2) # green channel
+band_3 = data_set.GetRasterBand(3) # blue channel
+
+Step 4: Reading the bands as NumPy arrays.
+GDAL offers the ReadAsArray() method to convert those bands in NumPy arrays and returns the arrays.
+
+b1 = band_1.ReadAsArray()
+b2 = band_2.ReadAsArray()
+b3 = band_3.ReadAsArray()
+
+Step 5: Plotting the arrays using imshow() function of matplotlib.
+For plotting the three arrays, we'll stack them up in order.
+
+img_1 = npy.dstack((b1, b2, b3))
+f = mplot.figure()
+plt.imshow(img_1)
+mplot.savefig('Tiff.png')
+mplot.show()
+
+Final code:
+
+from osgeo import gdal as GD
+import matplotlib.pyplot as mplot
+import numpy as npy
+data_set = GD.Open(r'land_shallow_topo_2048.tif')
+print(data_set.RasterCount)
+# As, there are 3 bands, we will store in 3 different variables
+band_1 = data_set.GetRasterBand(1) # red channel
+band_2 = data_set.GetRasterBand(2) # green channel
+band_3 = data_set.GetRasterBand(3) # blue channel
+b1 = band_1.ReadAsArray()
+b2 = band_2.ReadAsArray()
+b3 = band_3.ReadAsArray()
+img_1 = npy.dstack((b1, b2, b3))
+f = mplot.figure()
+plt.imshow(img_1)
+mplot.savefig('Tiff.png')
+mplot.show()
+
+Final Output:
+
+Conclusion
+In this tutorial, we have discussed how we can visualize tiff file format images by using matplotlib and glad modules in Python.
+
+
+Next Topicrarfile module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

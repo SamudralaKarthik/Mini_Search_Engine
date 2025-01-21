@@ -1,0 +1,172 @@
+
+
+
+
+next →
+← prev
+
+Nested Decorators in Python
+Python functions are first-class objects in the Python programming language. It means that a function can be assigned to a variable, return another function, and, most importantly, take another function as an argument. The concept of the Python decorator is based on these features of functions.
+It is assumed that you have a basic understanding of Python decorators. If you aren't familiar with decorators, you can learn from our decorators in the Python tutorial. In this tutorial, we will learn about the nested decorators or chaining of the decorators.
+Nested Decorators in Python
+Everything in Python is an object, and each object has it associated class in Python. Python decorators are used to modifying the function's behavior without changing its actual value. The decorator is the same as suggesting itself - which decorates something.
+Nested decorators are simple as the normal decorators. Nesting means placing or storing inside the other. Therefore, Nested decorators mean applying more than one decorator inside a function. Python provides the facility to implement more than one decorator to a function. It makes decorators useful for reusable building blocks as it consists of several features together.
+How are Nested Decorators used?
+A function can be decorated multiple times. The nested decorators are also known as the chaining of the decorators. To create the nested decorator, first, we need to define the decorator that we want to wrap the output string with and apply them to function using the pie syntax (@ sign). Let's understand the following syntax.
+Syntax -
+
+@function1
+@function2
+def function(name):
+      print(f"{name}")
+
+
+As we can see in the above syntax, there are two decorators for a particular approach. These decorators will be executed in the bottom to top approach i.e. reverse order. We can take the reference of the construction of the building where we start the construction from the ground to then build floors.
+Let's understand the following example.
+Example -
+
+def lower(func):
+    
+    def wrapper():
+        return func().lower()
+    
+    return wrapper
+
+def upper(func):
+    
+    def wrapper():
+        return func().upper() + ' OF NESTED DECORATORS.'
+    
+    return wrapper
+
+@lower
+@upper
+def message():
+    return 'This is a Basic program'
+
+print(introduction())
+
+Output:
+this is a basic program of nested decorator.
+
+Explanation -
+In the above code, we have defined two decorator functions first, which are used to wrap the output string of the decorator function in the 'lower()' and 'upper()' function of the string.
+
+We have applied two decorators to the message() function using the '@' and function name. In this program, we are using @upper and @lower. 
+We executed the bottom to top. Therefore, the string is wrapped with 'FOR DECORATOR' first and then converted all strings into the lowercase.
+
+Example - 2:
+
+def decorator1(func):
+    def wrap():
+        print("$ $ $ $ $ $ $ $ $ $ $ $ $ $")
+        func()
+        print("$ $ $ $ $ $ $ $ $$ $ $ $ $")
+    return wrap
+
+def decorator2(func):
+
+    def wrap():
+        print("# # # # # # # # # # # # # #")
+        func()
+        print("# # # # # # # # # # # # # #")
+    return wrap
+
+@decorator1
+@decorator2
+def message():
+    print("Hello")
+
+message()
+
+Output:
+$ $ $ $ $ $ $ $ $ $ $ $ $ $
+# # # # # # # # # # # # # #
+Hello
+# # # # # # # # # # # # # #
+$ $ $ $ $ $ $ $ $ $ $ $ $ $
+
+Nesting Parameterized Decorators
+Now, let's implement the nested parameterized decorator where the method takes arguments. Here, we will create the two parameterized decorators - One will perform the multiplication of the two parameters, and the second will perform the divide. Let's see the following example.
+Example -
+
+def multiply(num):
+    def mul(func):
+        def _mul_method(a, b):
+            return func(a, b) * num
+        return _mul_method
+    return mul
+
+def divide(num):
+    def div(func):
+        def _div_method(a, b):
+            return func(a, b) / num
+
+        return _div_method
+    return div
+
+
+@divide(3)
+@multiply(3)
+def add(a, b):
+    return a + b
+
+print(add(1, 5))
+
+Output:
+6.0
+
+Explanation -
+Let's understand what we have done in the above code -
+
+We have defined the multiply decorator that will multiply the resulting value to the given number.
+And the same we have done with the divide decorator.
+When we call the add(1, 5) method, it goes to multiply decorator and multiply with the 3, here the value is add(1, 5) => 1 + 5 => 6*3 => 18.
+It goes to the divide decorator; it performs the divide 18/3 => 6. And we get the answer.
+The order of execution of decorators is important. If we change the order, the answer could be different. But not in our case because we are dividing and multiplying with the same value.
+
+Bonus Program
+
+def multiply(num):
+    def mul(func):
+        def _mul_method(a, b):
+            return func(a, b) * num
+        return _mul_method
+    return mul
+
+def divide(num):
+    def div(func):
+        def _div_method(a, b):
+            return func(a, b) / num
+
+        return _div_method
+    return div
+
+def add_multiply_divide(a, b, c, d):
+    @divide(d)
+    @multiply(c)
+    def add(m, n):
+        return m + n
+    return add(a, b)
+
+print(add_multiply_divide(1, 5, 3, 2))
+
+Output:
+9.0
+
+The above code works same as the previous examples; the decorator could be applied inside a method as well.
+Conclusion
+Decorators are one of the best features of the Python programming language. In this tutorial, we have covered the advanced concept of decorators. We have explained simple and parameterized decorators both.
+
+
+Next TopicPython Program to Find Difference between Two Strings
+
+
+
+
+← prev
+next →
+
+
+
+

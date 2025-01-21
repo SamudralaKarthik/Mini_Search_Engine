@@ -1,0 +1,185 @@
+
+
+
+
+next →
+← prev
+
+Apache Airflow in Python | Airflow Python Operator
+In this tutorial, we will learn about the Apache Airflow and its operators. We will discuss all the operators of airflow however our primary aim is explore the Python operators and how we can use it. Before dive deep into this topic let's understand the basic concept of the Airflow and why it is popular.
+What are Data Pipelines?
+Data pipelines contain multiple tasks or actions that must be executed to get the desired result. For example - We want to create a weather API that forecasts the weather in the upcoming week. We need to perform the following tasks to implement this live weather dashboard.
+
+Fetch weather forecast data from a weather API.
+Make some transformations on the fetched data (e.g., converting temperatures from Fahrenheit to Celsius or vice versa) so that the data suits our purpose.
+Push the transformed data to the weather dashboard.
+
+As we can see that these are the set of tasks in the pipeline. Moreover, these tasks are required to perform in a specific order.
+What is Apache Airflow?
+Apache Airflow is a tool that is popularly used in the data engineering fields. It is a workflow engine that easily schedules and runs the complex data pipeline. It assures that each task in the data pipeline will get executed in the order and each task gets the required resources. It provides an excellent user interface and monitors and fixes issues.
+Airflow uses the DAG (Directed Acyclic Graph), a collection of all tasks users want to run. These tasks are organized in such a way that the relationship and dependencies are maintained. The structure of the DAG (tasks and their dependencies) is specified as code in Python scripts.
+DAG of data pipeline is the best way to make task relationships more apparent. The node represents the task, and the directed edges represent the dependencies between tasks.
+For example, if task X connected with the edge and pointed to task Y, task A must be finished before task B can begin. This direction makes it a directed graph.
+Installation of Airflow
+
+To install the Airflow, we will use the following pip command.
+
+
+pip install apache-airflow
+
+
+Once the airflow is installed, start it by initializing the metadata base (a database where all Airflow is stored) using the below command.
+
+
+airflow db init
+
+
+Now, start the apache airflow scheduler
+
+
+airflow schedular
+
+It is important to create the dags folder in the airflow directory where we will define our DAGS. Now open the web browser and visit http://localhost:8080/admin/ it will look like as below.
+Python Operator in Apache Airflow
+There are multiple operators in Apache Airflow, such as BashOperator, PythonOperator, EmailOperator, MySqlOperator, etc. An operator specifies a single workflow task, and operators provide many operators for the different tasks.
+In this section, we will discuss the Python operator.
+Importing Libraries
+
+### importing the required libraries
+from datetime import timedelta
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+from airflow.utils.dates import days_ago 
+
+Defining DAG Argument
+We need to pass one argument dictionary for each of the DAG. Below is the description of the argument that we can pass.
+
+owner -The name of the owner of the workflow. It should be alphanumeric and can have underscores but not include any spaces.
+depends_on_past -We need to mark the past run as true each time we run our workflow; otherwise, mark it as False.
+start_date -It specifies the start_date of the workflow.
+email -It represents our email-id so that we can receive an email whenever any task fails due to any reason. 
+retry_delay - It represents the time when the task fails and how long it should wait to retry it. 
+
+Let's understand the following example -
+Example -
+
+# These args will get passed on to the python operator
+default_args = {
+'owner': 'lakshay',
+ 'depends_on_past': False,
+ 'start_date': days_ago(2),
+ 'email': ['airflow@example.com'],
+'email_on_failure': False,
+ 'email_on_retry': False,
+'retries': 1,
+ 'retry_delay': timedelta(minutes=5),
+ # 'queue': 'bash_queue',
+ # 'pool': 'backfill',
+# 'priority_weight': 10,
+# 'end_date': datetime(2016, 1, 1),
+# 'wait_for_downstream': False,
+# 'dag': dag,
+# 'sla': timedelta(hours=2),
+# 'execution_timeout': timedelta(seconds=300),
+# 'on_failure_callback': some_function,
+ # 'on_success_callback': some_other_function,
+# 'on_retry_callback': another_function,
+# 'sla_miss_callback': yet_another_function,
+# 'trigger_rule': 'all_success'
+}
+
+Defining the Python Function
+Now, we will define a Python function that will print the given string using an argument, and the Python operator will later use this function.
+
+def new_func(str1):
+	return str1 + 'is a fantastic tool'
+
+Defining DAG
+The next step is to create the DAG object and pass the dag_id. The dag_id is the name of the DAG and must be unique. Then pass the argument that we defined earlier and add a description and schedule_interval. It will run the DAG after the specified interval of time. Let's see the following example.
+
+dag = DAG(
+    'python_operator_sample',
+    default_args=default_args,
+    description='Learn the Python Operator?',
+    schedule_interval=timedelta(days=1),
+)
+
+Defining the Task
+In the workflow, we have defined only one task -
+
+print - In the task, we will print the string value of the terminal using the python function.
+
+We will pass the task_id to the Python Operator object. We will see the name on the nodes of Graph view of our DAG. In the python_callable argument, pass the function name that we want to execute and pass its parameter value "op_kwargs" as a dictionary and finally, the DAG object to which we want to link this task.
+
+t1 = PythonOperator(
+    task_id='print',
+    python_callable= new_function,
+    op_kwargs = {"x" : "Apache Airflow"},
+    dag=dag,
+)
+t1
+
+Run the DAG
+Now, refresh the Airflow dashboard; it will show the DAG in the list. Each step in the workflow will be a separate box; click on the DAG and wait until its border turns dark green, indicating that it is completed successfully.
+Click on the node "print" to get more details about this step, and then click on Logs, and you will see the output like this.
+What are the Variables in Apache Airflow?
+As we discussed, the airflow can be used to create and manage complex workflows. We can run multiple workflows at the same time. The workflow can use the database or the same file path. Now, we change the directory path where the user saves files or changes the database configuration. In that case, we don't want to go and update each of the DAGS distinctly. 
+Using the airflow, we can create the variables where we can store and retrieve data at runtime in the multiple DAGS. If we want to make the change, we can edit the variable, and our workflow is good to go.
+How to create Variables?
+To create the variable, we open the Airflow and click on the Admin from the top menu and then click on Variables.
+Click on the Create button to create a new variable and a window will open. Now add the value and submit.
+Now, we will create a DAG where we will find out the word count of the text data in this file. We can import the newly created variables. Let's understand the following example.
+Example -
+
+from datetime import timedelta
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+from airflow.utils.dates import days_ago
+from airflow.models import Variable
+
+Now we will define the function that will use the variable, read it, and calculate the word count.
+
+from collections import Counter
+# define the python function
+def my_function():
+    # get the variable value
+    file_path = Variable.get("data_path")
+    # open the file
+    file_ = open(file_path)
+    # read the file and calculate the word count
+    data = Counter(file_.read().split())
+    return data
+
+Now, the steps are same as above, we need to define the DAG and task and our workflow is ready to run.
+
+dag = DAG(
+    'word_count_example',
+    default_args=default_args,
+    description='How to use the Python Operator?',
+    schedule_interval=timedelta(days=1),
+)
+
+# define the first task
+t1 = PythonOperator(
+    task_id='print_word_count',
+    python_callable= my_function,
+    dag=dag,
+)
+t1
+
+When we run the DAG, it will show the word count. We can also edit the DAG whenever we want and all our DAGS get updated.
+Conclusion
+In this tutorial, we have discussed the Python Operator in Apache Airflow and normal variables and branching. We have understood the basic concepts of Apache Airflow and its installation.
+
+
+Next TopicCurrying in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,583 @@
+
+
+
+
+next →
+← prev
+
+Python Keywords
+Every scripting language has designated words or keywords, with particular definitions and usage guidelines. Python is no exception. The fundamental constituent elements of any Python program are Python keywords.
+This tutorial will give you a basic overview of all Python keywords and a detailed discussion of some important keywords that are frequently used.
+Introducing Python Keywords
+Python keywords are unique words reserved with defined meanings and functions that we can only apply for those functions. You'll never need to import any keyword into your program because they're permanently present.
+Python's built-in methods and classes are not the same as the keywords. Built-in methods and classes are constantly present; however, they are not as limited in their application as keywords.
+Assigning a particular meaning to Python keywords means you can't use them for other purposes in our code. You'll get a message of SyntaxError if you attempt to do the same. If you attempt to assign anything to a built-in method or type, you will not receive a SyntaxError message; however, it is still not a smart idea.
+Python contains thirty-five keywords in the most recent version, i.e., Python 3.8. Here we have shown a complete list of Python keywords for the reader's reference.
+
+
+False
+await
+else
+import
+pass
+
+
+None
+break
+except
+in
+raise
+
+
+True
+class
+finally
+is
+return
+
+
+and
+continue
+for
+lambda
+try
+
+
+as
+def
+from
+nonlocal
+while
+
+
+assert
+del
+global
+not
+with
+
+
+async
+elif
+if
+or
+yield
+
+
+In distinct versions of Python, the preceding keywords might be changed. Some extras may be introduced, while others may be deleted. By writing the following statement into the coding window, you can anytime retrieve the collection of keywords in the version you are working on.
+Code
+
+# Python program to demonstrate the application of iskeyword()
+# importing keyword library which has lists
+import keyword
+  
+# displaying the complete list using "kwlist()."
+print("The set of keywords in this version is: ")
+print( keyword.kwlist )
+
+Output:
+The set of keywords in this version is : 
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+
+By calling help(), you can retrieve a list of currently offered keywords:
+Code
+
+help("keywords")
+
+How to Identify Python Keywords
+Python's keyword collection has evolved as new versions were introduced. The await and async keywords, for instance, were not introduced till Python 3.7. Also, in Python 2.7, the words print and exec constituted keywords; however, in Python 3+, they were changed into built-in methods and are no longer part of the set of keywords. In the paragraphs below, you'll discover numerous methods for determining whether a particular word in Python is a keyword or not.
+Write Code on a Syntax Highlighting IDE
+There are plenty of excellent Python IDEs available. They'll all highlight keywords to set them apart from the rest of the terms in the code. This facility will assist you in immediately identifying Python keywords during coding so that you do not misuse them.
+Verify Keywords with Script in a REPL
+There are several ways to detect acceptable Python keywords plus know further regarding them in the Python REPL.
+Look for a SyntaxError
+Lastly, if you receive a SyntaxError when attempting to allocate to it, name a method with it, or do anything else with that, and it isn't permitted, it's probably a keyword. This one is somewhat more difficult to see, but it is still a technique for Python to tell you if you're misusing a keyword.
+Python Keywords and Their Usage
+The following sections categorize Python keywords under the headings based on their frequency of use. The first category, for instance, includes all keywords utilized as values, whereas the next group includes keywords employed as operators. These classifications will aid in understanding how keywords are employed and will assist you in arranging the huge collection of Python keywords.
+
+A few terms mentioned in the segment following may be unfamiliar to you. They're explained here, and you must understand what they mean before moving on:
+The Boolean assessment of a variable is referred to as truthfulness. A value's truthfulness reveals if the value of the variable is true or false.
+
+In the Boolean paradigm, truth refers to any variable that evaluates to true. Pass an item as an input to bool() to see if it is true. If True is returned, the value of the item is true. Strings and lists which are not empty, non-zero numbers, and many other objects are illustrations of true values.
+False refers to any item in a Boolean expression that returns false. Pass an item as an input to bool() to see if it is false. If False is returned, the value of the item is false. Examples of false values are " ", 0, { }, and [ ].
+Value Keywords: True, False, None
+Three Python keywords are employed as values in this example. These are singular values, which we can reuse indefinitely and every time correspond to the same entity. These values will most probably be seen and used frequently.
+The Keywords True and False
+These keywords are typed in lowercase in conventional computer languages (true and false); however, they are typed in uppercase in Python every time. In Python script, the True Python keyword represents the Boolean true state. False is a keyword equivalent to True, except it has the negative Boolean state of false.
+True and False are those keywords that can be allocated to variables or parameters and are compared directly.
+Code
+
+print( 4 == 4 )
+print( 6 > 9 )
+print( True or False )
+print( 9 <= 28 )
+print( 6 > 9 )
+print( True and False )
+
+Output:
+True
+False
+True
+True
+False
+False
+
+Because the first, third, and fourth statements are true, the interpreter gives True for those and False for other statements. True and False are the equivalent in Python as 1 & 0. We can use the accompanying illustration to support this claim:
+Code
+
+print( True == 3 )
+print( False == 0 )
+print( True + True + True)
+
+Output:
+False
+True
+3
+
+The None Keyword
+None is a Python keyword that means "nothing." None is known as nil, null, or undefined in different computer languages.
+If a function does not have a return clause, it will give None as the default output:
+Code
+
+print( None == 0 )
+print( None == " " )
+print( None == False )
+A = None 
+B = None
+print( A == B )
+
+Output:
+False
+False
+False
+True
+
+If a no_return_function returns nothing, it will simply return a None value. None is delivered by functions that do not meet a return expression in the program flow. Consider the following scenario:
+Code
+
+def no_return_function():
+    num1 = 10
+    num2 = 20
+    addition = num1 + num2
+
+number = no_return_function()
+print( number )
+
+Output:
+None
+
+This program has a function with_return that performs multiple operations and contains a return expression. As a result, if we display a number, we get None, which is given by default when there is no return statement. Here's an example showing this:
+Code
+
+def with_return( num ):
+    if num % 4 == 0:
+        return False
+
+number = with_return( 67 )
+print( number )
+
+Output:
+None
+
+Operator Keywords: and, or, not, in, is
+Several Python keywords are employed as operators to perform mathematical operations. In many other computer languages, these operators are represented by characters such as &, |, and!. All of these are keyword operations in Python:
+
+
+Mathematical Operations
+Operations in Other Languages
+Python Keyword
+
+
+AND, ∧
+&&
+and
+
+
+OR, ∨
+||
+or
+
+
+NOT, ¬
+!
+not
+
+
+CONTAINS, ∈
+
+in
+
+
+IDENTITY
+===
+is
+
+
+Writers created Python programming with clarity in mind. As a result, many operators in other computer languages that employ characters in Python are English words called keywords.
+The and Keyword
+The Python keyword and determines whether both the left-hand side and right-hand side operands and are true or false. The outcome will be True if both components are true. If one is false, the outcome will also be False:
+
+
+Truth table for and
+
+
+X
+Y
+X and Y
+
+
+True
+True
+True
+
+
+False
+True
+False
+
+
+True
+False
+False
+
+
+False
+False
+False
+
+
+
+
+<component1> and <component2>
+
+It's worth noting that the outcomes of an and statement aren't always True or False. Due to and's peculiar behavior, this is the case. Instead of processing the inputs to corresponding Boolean values, it just gives <component1> if it is false or <component2> if it is true. The outputs of a and expression could be utilized with a conditional if clause or provided to bool() to acquire an obvious True or False answer.
+The or Keyword
+The or keyword in Python is utilized to check if, at minimum, 1 of the inputs is true. If the first argument is true, the or operation yields it; otherwise, the second argument is returned:
+
+<component1> or <component2>
+
+Similarly to the and keyword, the or keyword does not change its inputs to corresponding Boolean values. Instead, the outcomes are determined based on whether they are true or false.
+
+
+Truth table for or
+
+
+X
+Y
+X or Y
+
+
+True
+True
+True
+
+
+True
+False
+True
+
+
+False
+True
+True
+
+
+False
+False
+False
+
+
+The not Keyword
+The not keyword in Python is utilized to acquire a variable's contrary Boolean value:
+The not keyword is employed to switch the Boolean interpretation or outcome in conditional sentences or other Boolean equations. Not, unlike and, and or, determines the specific Boolean state, True or False, afterward returns the inverse.
+
+
+Truth Table for not
+
+
+X
+not X
+
+
+True
+False
+
+
+False
+True
+
+
+Code
+
+False and True
+False or True
+not True
+
+Output:
+False
+True
+False
+
+The in Keyword
+The in keyword of Python is a robust confinement checker, also known as a membership operator. If you provide it an element to seek and a container or series to seek into, it will give True or False, depending on if that given element was located in the given container:
+
+<an_element> in <a_container>
+
+Testing for a certain character in a string is a nice illustration of how to use the in keyword:
+Code
+
+container = "Javatpoint"
+print( "p" in container )
+print( "P" in container )
+
+Output:
+True
+False
+
+Lists, dictionaries, tuples, strings, or any data type with the method __contains__(), or we can iterate over it will work with the in keyword.
+The is Keyword
+In Python, it's used to check the identification of objects. The == operation is used to determine whether two arguments are identical. It also determines whether two arguments relate to the unique object.
+When the objects are the same, it gives True; otherwise, it gives False.
+Code
+
+print( True is True )
+print( False is True )
+print( None is not None )
+print( (9 + 5) is (7 * 2) )
+
+Output:
+True
+False
+False
+True
+
+True, False, and None are all the same in Python since there is just one version.
+Code
+
+print( [] == [] )
+print( [] is [] )
+print( {} == {} )
+print( {} is {} )
+
+Output:
+True
+False
+True
+False
+
+A blank dictionary or list is the same as another blank one. However, they aren't identical entities because they are stored independently in memory. This is because both the list and the dictionary are changeable.
+Code
+
+print( '' == '' )
+print( '' is '' )
+
+Output:
+True
+True
+
+Strings and tuples, unlike lists and dictionaries, are unchangeable. As a result, two equal strings or tuples are also identical. They're both referring to the unique memory region.
+The nonlocal Keyword
+Nonlocal keyword usage is fairly analogous to global keyword usage. The keyword nonlocal is designed to indicate that a variable within a function that is inside a function, i.e., a nested function is just not local to it, implying that it is located in the outer function. We must define a non-local parameter with nonlocal if we ever need to change its value under a nested function. Otherwise, the nested function creates a local variable using that title. The example below will assist us in clarifying this.
+Code
+
+def the_outer_function():
+    var = 10
+    def the_inner_function():
+        nonlocal var
+        var = 14
+        print("The value inside the inner function: ", var)
+    the_inner_function()
+    print("The value inside the outer function: ", var)
+
+the_outer_function()
+
+Output:
+The value inside the inner function:  14
+The value inside the outer function:  14
+
+the_inner_function() is placed inside the_outer_function in this case.
+The the_outer_function has a variable named var. Var is not a global variable, as you may have noticed. As a result, if we wish to change it inside the the_inner_function(), we should declare it using nonlocal.
+As a result, the variable was effectively updated within the nested the_inner_function, as evidenced by the results. The following is what happens if you don't use the nonlocal keyword:
+Code
+
+def the_outer_function():
+    var = 10
+    def the_inner_function():
+        var = 14
+        print("Value inside the inner function: ", var)
+    the_inner_function()
+    print("Value inside the outer function: ", var)
+
+the_outer_function()
+
+Output:
+Value inside the inner function:  14
+Value inside the outer function:  10
+
+Iteration Keywords: for, while, break, continue
+The iterative process and looping are essential programming fundamentals. To generate and operate with loops, Python has multiple keywords. These would be utilized and observed in almost every Python program. Knowing how to use them correctly can assist you in becoming a better Python developer.
+The for Keyword
+The for loop is by far the most popular loop in Python. It's built by blending two Python keywords. They are for and in, as previously explained.
+The while Keyword
+Python's while loop employs the term while and functions similarly to other computer languages' while loops. The block after the while phrase will be repeated repeatedly until the condition following the while keyword is false.
+The break Keyword
+If you want to quickly break out of a loop, employ the break keyword. We can use this keyword in both for and while loops.
+The continue Keyword
+You can use the continue Python keyword if you wish to jump to the subsequent loop iteration. The continue keyword, as in many other computer languages, enables you to quit performing the present loop iteration and go on to the subsequent one.
+Code
+
+# Program to show the use of keywords for, while, break, continue
+for i in range(15):
+  
+    print( i + 4, end = " ")
+      
+    # breaking the loop when i = 9
+    if i == 9:
+        break   
+print()
+      
+# looping from 1 to 15
+i = 0 # initial condition
+while i < 15:
+      
+    # When i has value 9, loop will jump to next iteration using continue. It will not print
+    if i == 9:
+        i += 3
+        continue
+    else:
+        # when i is not equal to 9, adding 2 and printing the value
+        print( i + 2, end = " ")
+          
+    i += 1
+
+Output:
+4 5 6 7 8 9 10 11 12 13 
+2 3 4 5 6 7 8 9 10 14 15 16 
+
+Exception Handling Keywords - try, except, raise, finally, and assert
+try: This keyword is designed to handle exceptions and is used in conjunction with the keyword except to handle problems in the program. When there is some kind of error, the program inside the "try" block is verified, but the code in that block is not executed.
+except: As previously stated, this operates in conjunction with "try" to handle exceptions.
+finally: Whatever the outcome of the "try" section, the "finally" box is implemented every time.
+raise: The raise keyword could be used to specifically raise an exception.
+assert: This method is used to help in troubleshooting. Often used to ensure that code is correct. Nothing occurs if an expression is interpreted as true; however, if it is false, "AssertionError" is raised. An output with the error, followed by a comma, can also be printed.
+Code
+
+# initializing the numbers
+var1 = 4
+var2 = 0
+  
+# Exception raised in the try section
+try:
+    d = var1 // var2 # this will raise a "divide by zero" exception.
+    print( d )
+# this section will handle exception raised in try block
+except ZeroDivisionError:
+    print("We cannot divide by zero")
+finally:
+    # If exception is raised or not, this block will be executed every time
+    print("This is inside finally block")
+# by using assert keyword we will check if var2 is 0
+print ("The value of var1 / var2 is : ")
+assert var2 != 0, "Divide by 0 error"
+print (var1 / var2)
+
+Output:
+We cannot divide by zero
+This is inside finally block
+The value of var1 / var2 is : 
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+Input In [44], in ()
+     15 # by using assert keyword we will check if var2 is 0
+     16 print ("The value of var1 / var2 is : ")
+---> 17 assert var2 != 0, "Divide by 0 error"
+     18 print (var1 / var2)
+
+AssertionError: Divide by 0 error
+
+The pass Keyword
+In Python, a null sentence is called a pass. It serves as a stand-in for something else. When it is run, nothing occurs.
+Let's say we possess a function that has not been coded yet however we wish to do so in the long term. If we write just this in the middle of code,
+Code
+
+def function_pass( arguments ):
+
+Output:
+def function_pass( arguments ):
+                                   ^
+IndentationError: expected an indented block after function definition on line 1
+
+as shown, IndentationError will be thrown. Rather, we use the pass command to create a blank container.
+Code
+
+def function_pass( arguments ):
+    pass
+
+We can use the pass keyword to create an empty class too.
+Code
+
+class passed_class:
+    pass
+
+The return Keyword
+The return expression is used to leave a function and generate a result.
+The None keyword is returned by default if we don't specifically return a value. The accompanying example demonstrates this.
+Code
+
+def func_with_return():
+    var = 13
+    return var
+
+def func_with_no_return():
+    var = 10
+
+print( func_with_return() )
+print( func_with_no_return() )
+
+Output:
+13
+None
+
+The del Keyword
+The del keyword is used to remove any reference to an object. In Python, every entity is an object. We can use the del command to remove a variable reference.
+Code
+
+var1 = var2 = 5
+del var1
+print( var2 )
+print( var1 )
+
+Output:
+5
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+Input In [42], in ()
+      2 del var1
+      3 print( var2 )
+----> 4 print( var1 )
+
+NameError: name 'var1' is not defined
+
+We can notice that the variable var1's reference has been removed. As a result, it's no longer recognized. However, var2 still exists.
+Deleting entries from a collection like a list or a dictionary is also possible with del:
+Code
+
+list_ = ['A','B','C']
+del list_[2]
+print(list_)
+
+Output:
+['A', 'B']
+
+
+
+Next TopicPython Literals
+
+
+
+← prev
+next →
+
+
+
+

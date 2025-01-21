@@ -1,0 +1,119 @@
+
+
+
+
+next →
+← prev
+
+Numpy-3d Matrix Multiplication
+What is a Matrix?
+The matrix in the programming is also considered a multi-dimensional array. One matrix can be of any dimension, such as a two-dimensional matrix, three-dimensional matrix etc.
+We can create the two-dimensional matrix by arranging the many one-dimensional arrays (stack of one-dimensional arrays). In the same way, we can create the three-dimensional array by stacking the two-dimensional array or matrix in the third direction.
+We can do the arithmetic operation on the matrix of the same dimension, like addition, subtraction or multiplication. We cannot do the operations on the matrix of different dimensions.
+We can multiply the two three-dimensional (3-d) matrices in python using the numpy library. Numpy is the library in a python programming language which is used for the operations of arrays.
+We can represent any three-dimensional matrix size by (i,j,k), which means there are i number of two-dimensional matrices arranged, and each two-dimensional matrix has the dimension of size jxk.
+So, as we know to multiply two 2-d matrices, we follow the RXC rule in which the column number of the first matrix should be equal to the other row number of the second matrix.
+Example:
+
+#importing the numpy library in the main file
+import numpy as np
+
+np.random.seed(96)
+
+#creating the random three-dimensional matrix 
+matrix1 = np.random.randint(0, 10, size=(3, 5, 2))
+matrix2 = np.random.randint(0, 10, size=(3, 2, 5))
+
+
+#printing the both matrix with their sizes
+print("matrix1:\n{}, size={}\nmatrix2:\n{}, size={}".format(
+matrix1, matrix1.shape, matrix2, matrix2.shape))
+
+#multiplying the two 3-d matrices and storing them in a third matrix
+result = np.matmul(matrix1, matrix2)
+
+#printing the result
+print("Muliplication result:\n{}, size={}".format(result, result.shape))
+
+Output:
+
+
+
+Explanation:
+In the above program, we have two 3-d matrices, and we implemented the matrix multiplication using the numpy library. We imported the humpy library in our file to use its functions.
+We use the random.randInt function, which will create the matrix of a given size with a value in the range we provided.
+The size of the first matrix is 3x5x2 of a random number which means there are three 2-d matrices of the size 5x2 size. In the same way, we created the second matrix of size 3x2x5 of a random number which means there are three 2-d matrices of size 2 x 5 size. 
+Since the column number of the first 3-d matrix's 2d matrix is the same as the row number of the second 3-d matrix's 2d matrix, we can multiply the 2d matrices easily using the R-C multiplication rule.
+For the matrix multiplication, we used the inbuilt matmul function of the numpy library. Since there are three 3-d matrices, in the resultant, there also will be three 3-d matrices.
+The size of a two-dimensional matrix would be 5x5. So finally, the size of the resultant matrix will be 3x5x5.
+In the resultant matrix, the first 2-d matrix of matrix1 will be multiplied with the first 2-d matrix of matrix2, and in the same way, all the matrices will be multiplied.
+result[0] = matrix1[0]X matrix2[0]
+result[1] = matrix1[1]X matrix2[1]
+result[2] = matrix1[2]X matrix2[2]
+Note: If the size of the two-dimensional matrices is not the same then there will be an error:
+Example 2:
+
+#importing the numpy library in the main file
+import numpy as np
+
+np.random.seed(96)
+
+#creating the random three-dimensional matrix 
+matrix1 = np.random.randint(0, 10, size=(3, 5, 2))
+matrix2 = np.random.randint(0, 10, size=(4, 3, 5))
+
+
+#printing the both matrix with their sizes
+print("matrix1:\n{}, size={}\nmatrix2:\n{}, size={}".format(
+matrix1, matrix1.shape, matrix2, matrix2.shape))
+
+#multiplying the two 3-d matrices and storing in a third matrix
+result = np.matmul(matrix1, matrix2)
+
+#printing the result
+print("Muliplication result:\n{}, size={}".format(result, result.shape))
+
+Output:
+
+Explanation:
+In the above code, the size of the 2-d matrix in matrix1 is 5 x 2, and in matrix2, it is 3x5, so it will not be multiplied, and we get the above compilation error.
+Note: if the number of 2-d matrices is not the same, then there also will be an error in the program.
+Example 3:
+
+#importing the numpy library in the main file
+import numpy as np
+
+np.random.seed(96)
+
+#creating the random three-dimensional matrix 
+matrix1 = np.random.randint(0, 10, size=(3, 5, 2))
+matrix2 = np.random.randint(0, 10, size=(6, 2, 5))
+
+
+#printing the both matrix with their sizes
+print("matrix1:\n{}, size={}\nmatrix2:\n{}, size={}".format(
+matrix1, matrix1.shape, matrix2, matrix2.shape))
+
+#multiplying the two 3-d matrices and storing into a third matrix
+result = np.matmul(matrix1, matrix2)
+
+#printing the result
+print("Muliplication result:\n{}, size={}".format(result, result.shape))
+
+Output:
+
+Explanation:
+In the above code, the number of 2-d matrices in matrix1 is three, and in matrix2, it is 6. So, there will be an error due to unequal size.
+
+
+Next Topicos.path.abspath() method in Python
+
+
+
+
+← prev
+next →
+
+
+
+

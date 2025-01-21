@@ -1,0 +1,153 @@
+
+
+
+
+next →
+← prev
+
+Customizing Parser Behaviour Python Module 'configparser.'
+Utilize the ConfigParser module to oversee user documents and files for any apps. The document format is coordinated into segments; each part can contain key-value matches for coordinated data. Key-value interjection utilizing the Python formatting strings technique is likewise upheld to fabricate values that rely upon each other (this is particularly helpful for URLs and message strings).
+The document format utilized by ConfigParser is like the arrangement utilized by more established adaptations of Microsoft Windows. It comprises at least one named area, every one of which can contain individual choices with names and values.
+Config document segments are recognized by searching for lines beginning with. The worth between the square sections is the segment name and can contain any characters with the exception of square sections.
+Customizing Parser Behavior
+There are nearly as many INI design format variations as apps are utilizing it. Python module configparser goes quite far to offer help for the biggest reasonable arrangement of INI styles accessible. The verifiable foundation chiefly directs the default usefulness, and almost certainly, you will need to tweak a portion of the highlights.
+The most well-known method for having an impact on the way a particular config parser works is to utilize the __init__() function choices:
+1. Defaults, default value: None
+This choice acknowledges a word reference of key-values matches, which will be at first placed in the DEFAULT segment. This makes for a rich method for supporting compact setup records that don't indicate values equivalent to the reported default.
+Here's a clue: if you need to determine default values for a particular segment, use the read_dict() function before you read the genuine record.
+2. dict_type, default values: dict
+This wide range of options impacts how the mapping protocol works in the future and in what way the configuration files will look. With the standard word reference, each segment is put away in the request they were added to the parser. The same goes for choices inside segments.
+An alternative type can be utilized instead of a dictionary, for instance, to sort segments and choices on write-back.
+If it's not too much trouble, note: there are ways of adding a bunch of key pair value matches in a solitary activity. At the point when you utilize a standard word reference in those tasks, the request for the keys will be requested. For instance:
+Python console screen:
+
+> > > > parser_ = configparser_.ConfigParser_()
+> > > > parser_.read_dict({'section_1': {'firstkey': 'value__1',
+. . . .                                'secondkey': 'value__2',
+. . . .                                'thirdkey': 'value__3'},
+. . . .                   'section_2': {'keyA': 'value__A',
+. . . .                                'keyB': 'value__B',
+. . . .                                'keyC': 'value__C'},
+. . . .                   'section_3': {'foooo': 'x',
+. . . .                                'bar__': 'y',
+. . . .                                'baz': 'z'}
+. . . . })
+> > > > parser_.section_s()
+['section_1', 'section_2', 'section_3']
+> > > > [option for option in parser_['section_3']]
+['foooo', 'bar__', 'baz']
+
+3. Allow no value, default value: False
+Some setup records are known to incorporate settings without values; however, in any case, adjust to the grammar upheld by configparser. The allow_no_value boundary to the constructor can be utilized to demonstrate that such qualities ought to be acknowledged: For instance:
+Python console screen:
+
+> > > > import configparser
+
+> > > > sample_config = """
+. . . . [mysqld]
+. . . .   user = mysql_
+. . . .   pid-file = /var/run/mysqld/mysqld.pid
+. . . .   skip--external--locking
+. . . .   old_passwords = 1
+. . . .   skip--bdb
+. . . .   # we do not require ACID today
+. . . .   skip-innodb
+. . . . """
+> > > > config = configparser.ConfigParser(allow_no_value=True)
+> > > > config.read_string(sample_config)
+
+> > > > # Settings with values are treated as before:
+> > > > config["mysqld"]["user"]
+'mysql_'
+
+> > > > # Setting without values provide None:
+> > > > config["mysql_d"]["skip--bdb"]
+
+> > > > # Setting which are not specified can raise any error:
+> > > > config["mysql_d"]["do-not-exist"]
+Traceback (most recent call last):
+  . . . .
+KeyError: 'do-not-exist'
+
+4. delimiters, default values: (':', '=')
+Delimiters are substrings that delimit keys from values inside a segment. The primary event of a delimiting substring on a line is considered a delimiter. This implies values (however, not keys) can contain the delimiters.
+See likewise the space_around_delimiters contention to ConfigParser.write(). There is another configuration that is Comment prefixes, which has default values: (' ; ', ' # ')
+5. Inline comment prefixes, default values: None
+Remark prefixes are strings that show the beginning of a legitimate remark inside a config document. comment_prefixes are utilized exclusively on void lines (alternatively indented), while inline_comment_prefixes can be utilized after each legitimate worth (for example, segment names, choices, and void lines)). Naturally, inline remarks are impaired, and '#' and ';' are utilized as prefixes for entire line remarks.
+Changed in variant 3.2: In past adaptations of configparser conduct matched comment_prefixes=(';','#') and inline_comment_prefixes=(';',).
+If it's not too much trouble, note that config parsers don't uphold getting away with remark prefixes. Utilizing inline_comment_prefixes may keep clients from indicating choice qualities with characters utilized as remark prefixes. If all else fails, try not to set inline_comment_prefixes. In any conditions, the main approach to putting away remark prefix characters toward the start of a line in multiline values is to add the prefix, for instance:
+Python console screen:
+
+> > > > from configparser import ConfigParser, ExtendedInterpolation
+> > > > parser_ = ConfigParser(interpolation=ExtendedInterpolation())
+> > > > # the default BasicInterpolation could be used as well
+> > > > parser_.read_string("""
+. . . . [DEFAULT]
+. . . . hash_ = #
+. . . .
+. . . . [hash_es]
+. . . . shebang =
+. . . .   ${hash_}!//user//bin//env python
+. . . .   ${hash_} - - - - *-  - - - -  coding: utf-8 -*-
+. . . .
+. . . . Xtensions =
+. . . .   enabled_Xtension
+. . . .   another_Xtension
+. . . .   #disabled_by_comments
+. . . .   yet_another_Xtension
+. . . .
+. . . . interpolation not necessary = if # is not at line_ start
+. . . . even in multiline_ values = line_ #1
+. . . .   line_ #2
+. . . .   line_ #3
+. . . . """)
+> > > > print(parser_['hash_es']['shebangs'])
+
+#!/user/bin/env python
+# -*- coding: utf-8 -*-
+> > > > print(parser_['hash_es']['Xtensions'])
+
+enabled_Xtension
+another_Xtension
+yet_another_Xtension
+> > > > print(parser['hash_es']['interpolation not necessary'])
+if # is not at line_ start
+> > > > print(parser['hash_es']['even in multiline_ values'])
+line_ #1
+line_ #2
+line_ #3
+
+6. Strict, default values: True
+At the point when set to True, the parser won't take into consideration any segment or choice copies while perusing from a solitary source (utilizing the read_file() function, read_string() function, or read_dict()function). Involving severe parsers in new applications is suggested.
+Changed in adaptation 3.2: In past forms of configparser conduct matched strict=False.
+7. empty lines in values, default values: True
+In config parsers, values can traverse numerous lines for however long they are indented more than the key that holds them. Of course, parsers likewise let void lines be portions of values. Simultaneously, keys can be indented for arbitrary reasons to develop meaningfulness further. As an outcome, when arrangement documents get enormous and complex, it is simple for the client to forget about the record structure. Take, for example:
+Python console screen:
+
+[Sections]
+Key_s = multiline
+  values with a gotch
+
+ can = is a part of the value of 'keys.'
+
+This can be particularly wrong, so the client might check whether they are utilizing a relative text style to alter the record. That is why your application doesn't require values with void lines, and you ought to consider refusing them. Every time this can make void lines split into different keys. In the model above, it would create two keys, key_s and can.
+8. default sections, default values: configparser.DEFAULTSECT (that is: "DEFAULT")
+The show of permitting a unique part of default values for different segments or insertion intentions is an influential idea of this library, allowing clients to make complex explanatory setups. This segment is regularly called "DEFAULT", yet this can be modified to highlight another substantial area name. A few normal qualities include "general" or "normal". The name given is accustomed to perceiving default segments while perusing from any source and is utilized while composing setup back to a document. Its ongoing worth can be recovered utilizing the parser_instance.default_section characteristic and might be altered at runtime (for example, to change records starting with one configuration over completely and then onto the next).
+9. Introduction, default values: configparser.BasicInterpolation
+Insertion conduct might be tweaked by giving a custom controller through the introduction. None can be utilized to switch off the introduction; ExtendedInterpolation () function gives a further developed variation propelled by zc.buildout. To a greater degree, toward the subject in the devoted documentation segment. RawConfigParser has a default worth of None.
+10. converters, default values: not set
+Config parsers give choice worth getters that perform type change. Of course getint() function, getfloat() function, and getboolean() function are carried out. Should other getters be alluring, clients might characterize them in a subclass or pass a word reference where each key is the converter's name, and each worth is a callable carrying out said transformation. For example, passing {'decimal': decimal.Decimal} would add the getdecimal() function on both the parser article and all segment intermediaries. At the end of the day, it will be feasible to compose both parser_instance.getdecimal('section', 'key', fallback=0) and parser_instance['section'].getdecimal('key', 0).
+On the off chance that the converter needs to get to the condition of the parser, it tends to be executed as a strategy on a config parser subclass. In the event that the name of this strategy begins with getting, it will be accessible on all part intermediaries in the dict-viable structure (see the getdecimal() function model above).
+
+
+Next TopicPython's Module Configparser
+
+
+
+
+← prev
+next →
+
+
+
+

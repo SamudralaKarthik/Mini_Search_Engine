@@ -1,0 +1,109 @@
+
+
+
+
+next →
+← prev
+
+How to Write in Text File using Python
+In this tutorial, we will explain how the users can write in the text file using Python language.
+Python has an inbuilt function to create, write or read the files. It can handle two types of files normal text files and binary files.
+
+Normal Text File: In the text file, every line of the text is terminated with the special character known as "End of Line" (EOL). By default, it is the new line character ('\n') in python.
+Binary File: In the binary file, no line is terminated, and the data is stored after it is converted into machine binary language.
+
+Example: (To show how the user can write in the text file using Python)
+
+with open ('writeme.txt', 'w') as file:
+    file.write('writeme')
+
+Steps Used for Writing in the Text File:
+For writing in the text file using Python, the user has to follow the following steps:
+
+Step 1: The user has to open the text file for writing or appending by using the open() function.
+Step 2: The user can write in the text file by using the write() or writelines() function.
+Step 3: The user can close the text file by using the close() function.
+
+Syntax: To open a file
+
+file = open (path_to_the_file, mode)
+
+The open() function can accept various parameters. But the user has to focus on the first two:
+
+The "path_to_the_file" parameter is used for specifying the path of the text file that the user wants to open for writing.
+The mode parameter is used for specifying the mode ( write, read, etc.) for which the user wants to open the text file.
+
+For writing in the text file, the user will use the following mode:
+
+
+Mode
+Description
+
+
+'w'
+It is used to open the text file for writing text.
+
+
+'a'
+It is used for opening the text file to append text.
+
+
+The open() function will return the file object, and the file object will have two useful functions to write text in the file:
+
+write()
+writelines()
+
+The write() function is used for writing the string in the text file, and the writelines() function is used for writing the list of the string in the file at once.
+The writelines() function can also accept the iterable object. The user can also pass the tuple of strings, the set of strings, etc.
+To write the line in the text file, the user has to add the new line character manually.
+Example 1: To show how the user can add the new line character in the Text.txt file
+
+file.write('\n')
+file.writelines('\n')
+
+It is totally up to the user whether they want to add the text in the following line or not.
+Example 2: To show how to use the write() function for writing the list of texts in the text file
+
+lines_1 = ['Text', 'this is the example to show how the user can write in the text file by using Python']
+with open ('text.txt', 'w') as file:
+    for line_1 in lines_1:
+        file.write(line_1)
+        file.write('\n')
+
+Output:
+
+If the text.txt file does not exist in the folder, the open() function will create the new file.
+Example 3: To show how the user can write the list of text strings in the text.txt file.
+
+lines_1 = ['Text 2', ' This is the example no. 3 to show how the user can write in the text file by using Python']
+with open ('text.txt', 'w') as file:
+    for line_1 in lines_1:
+        file.writelines(line_1)
+
+Output:
+
+If the user treats each element of the list as the line, then they have to link it with the newline character.
+Example 4: To show how the user can link the newline character with each element of the line in the text.txt file
+
+lines_1 = ['Text 2.', ' This is the example no. 3 to show how the user can write in the text file by using Python.']
+with open ('text_2.txt', 'w') as file:
+    for line_1 in lines_1:
+        file.write('\n'.join(lines_1))
+
+Output:
+
+Conclusion
+In this tutorial, we have explained how the user can write the text in the text file using Python and its different functions.
+
+
+Next TopicPython KeyError
+
+
+
+
+← prev
+next →
+
+
+
+

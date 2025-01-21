@@ -1,0 +1,100 @@
+
+
+
+
+next →
+← prev
+
+Encapsulation in Python
+Encapsulation is one of the most fundamental concepts in object-oriented programming (OOP). This is the concept of wrapping data and methods that work with data in one unit. This prevents data modification accidentally by limiting access to variables and methods. An object's method can change a variable's value to prevent accidental changes. These variables are called private variables.
+Encapsulation is demonstrated by a class which encapsulates all data, such as member functions, variables, and so forth.
+Take a look at a real-world example of encapsulation. There are many sections in a company, such as the accounts and finance sections. The finance section manages all financial transactions and keeps track of all data. The sales section also handles all sales-related activities. They keep records of all sales. Sometimes, a finance official may need all sales data for a specific month. In this instance, he is not permitted to access the data from the sales section. First, he will need to contact another officer from the sales section to request the data. This is encapsulation. The data for the sales section, as well as the employees who can manipulate it, are all wrapped together under the single name "sales section". Encapsulation is another way to hide data. This example shows that the data for sections such as sales, finance, and accounts are hidden from all other sections.
+Protected Members
+Protected members in C++ and Java are members of a class that can only be accessed within the class but cannot be accessed by anyone outside it. This can be done in Python by following the convention and prefixing the name with a single underscore.
+The protected variable can be accessed from the class and in the derived classes (it can also be modified in the derived classes), but it is customary to not access it out of the class body.
+The __init__ method, which is a constructor, runs when an object of a type is instantiated.
+Example:
+
+# Python program for demonstrating protected members
+
+# first, we will create the base class
+class Base1:
+	def __init__(self):
+
+		# the protected member
+		self._p = 78
+
+# here, we will create the derived class
+class Derived1(Base):
+	def __init__(self):
+
+# now, we will call the constructor of Base class
+		Base1.__init__(self)
+		print ("We will call the protected member of base class: ",
+			self._p)
+
+# Now, we will be modifing the protected variable:
+		self._p = 433
+		print ("we will call the modified protected member outside the class: ",
+			self._p)
+
+
+obj_1 = Derived1()
+
+obj_2 = Base1()
+
+# here, we will call the protected member
+# this can be accessed but it should not be done because of convention
+print ("Access the protected member of obj_1: ", obj_1._p)
+
+# here, we will access the protected variable outside
+print ("Access the protected member of obj_2: ", obj_2._p)
+
+Output:
+We will call the protected member of base class:  78
+we will call the modified protected member outside the class:  433
+Access the protected member of obj_1:  433
+Access the protected member of obj_2:  78
+
+Private Members
+Private members are the same as protected members. The difference is that class members who have been declared private should not be accessed by anyone outside the class or any base classes. Python does not have Private instance variable variables that can be accessed outside of a class.
+However, to define a private member, prefix the member's name with a double underscore "__".
+Python's private and secured members can be accessed from outside the class using Python name mangling.
+Example:
+
+class Base1:
+    def __init__(self):
+          self.p = "Javatpoint"
+          self.__q = "Javatpoint"
+
+# Creating a derived class
+class Derived1(Base1):
+      def __init__(self):
+
+# Calling constructor of
+# Base class
+     Base1.__init__(self)
+     print("We will call the private member of base class: ")
+     print(self.__q)
+
+
+# Driver code
+obj_1 = Base1()
+print(obj_1.p)
+
+Output:
+Javatpoint
+
+
+
+Next TopicPolymorphism in Python
+
+
+
+
+← prev
+next →
+
+
+
+

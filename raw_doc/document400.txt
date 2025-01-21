@@ -1,0 +1,152 @@
+
+
+
+
+next →
+← prev
+
+Python imaplib Module
+It happens many times when we want to retrieve information or data from our mail through a program, but we don't want to download the mail on our device. This even happens when we want just to fetch the information and look for some particular data from the mail.
+We have many Python modules through which we can fetch the data of our emails using a program, but most of these modules download the mail while retrieving information from them. This is exactly what we don't want because we don't need to save the mail's information in the system or many times we are working on other's system, and we only have to take a look at some specific information present in our emails. But there are some modules and protocols are available in Python through which we can retrieve the information from our emails without actually downloading them in the system. One of such modules in Python is the 'imaplib' module which provides us access to IMAP protocol for accessing and retrieving data from the mail.
+We will learn about this 'imaplib' module of Python and IMAP protocol in this tutorial, and we will also learn how we can use this protocol to retrieve information from emails.
+imaplib Module of Python
+imaplib is a Python module or library that provide us with client classes so that we can set up communication with IMAP version 4 servers, and through this IMAP communication, we can retrieve data from our emails. imaplib library provides us with three client classes that are used while communicating with the servers using the IMAP protocol in Python. Following are three client classes that are provided to us in the imaplib module of Python:
+
+IMAP_4
+IMAP4_Stream
+IMAP_SSL
+
+These classes of imaplib module are used to set up a communication with the server while we are using the IMAP protocol to access our emails' data through a Python program.
+imaplib Module of Python: Installation
+The imaplib module is a pre-installed library of Python that comes with the Python installation packages, and that's why we don't have to do any installation process for installing this library. Instead of it, we can directly use the function of the imaplib module in a Python program by importing it into the program using the 'import' keyword.
+IMAP Protocol in Python
+IMAP is an email retrieval protocol that stands for Internet Mail Access Protocol, and we will use this protocol through a Python program to have access to data present in our email. IMAP protocol was first proposed in 1986, and this module does not download the emails in our system for retrieving data from them. IMAP module just reads the data present in our emails and displays them in the program's output. This protocol is very helpful in the devices that are present in the low bandwidth condition. We have to use the IMAP module with the imaplib module of Python (which is a client-side library) to retrieve data from our emails. The IMAP module will use the client classes of the imaplib module and set up communication with the server so that it can retrieve data from the emails and show them to us in the output.
+Key Points for IMAP Protocol:
+Following are some key points of IMAP protocol that we have to remember and are very useful for us while we are using this protocol for retrieving data from emails through it:
+
+We should remember that the email from which we retrieve the data through IMAP protocol is held and maintained by a remote server.
+IMAP protocol also helps us search through the emails by establishing a connection with the server by using client classes of the imaplib module.
+IMAP protocol also allows client programs (Python program in which we will use this protocol) to manipulate our emails on the server without downloading them to our devices or on the local computer.
+IMAP protocol also enables us to delete, manipulate, or create a single or multiple remote message folder which is called mailboxes.
+IMAP module also allows concurrent access to multiple mailboxes (or multiple email accounts), and it will be present on multiple mail servers.
+IMAP protocol also allows us to take various actions on the emails without even reading the email, such as deleting the mail, downloading the mail, etc.
+
+These are some of the key points of the IMAP protocol which we should remember, and it will be very helpful for us while we are using this protocol in a Python program. We can perform all the actions that are mentioned above in the key points of the IMAP protocol.
+IMAP Commands
+IMAP protocol has several different commands which are used to perform several different actions through it. Using these commands of IMAP protocol, we can perform multiple actions on our email box, and thus these commands help us to retrieve information from our emails. Following are the list of commands of IMAP protocol with their description, in which some of them we are going to use in the implementation part of this protocol:
+
+
+S No
+IMAP command
+Description of Command
+
+
+1
+LOGIN
+This command is used to open the connection with the email server by logging into the server through the credentials we will provide.
+
+
+2
+SELECT
+We use this command to select the mailbox folder which mail we want to access, and thus it accesses all the emails present in the mailbox. We can even make changes in the mailbox after selecting the mailbox through this SELECT command.
+
+
+3
+CAPABILITY
+We can use this command when we want to know the capabilities that the server supports, and we can do this by requesting from the server for listing its capabilities.
+
+
+4
+CREATE
+When we want to create a mailbox with some specified name, we can use this CREATE command of the IMAP protocol.
+
+
+5
+NOOP
+The NOOP command acts like and is used as a periodic poll to alert us about new messages or any update on message status during some period of inactivity by us.
+
+
+6
+EXAMINE
+The EXAMINE command works the same as the SELECT command, but the only difference between these commands is that EXAMINE command doesn't allow to make any changes in the mailbox. This command only allows us to read and retrieve information from the mail and check how many emails are present in the selected mailbox.
+
+
+7
+RENAME
+When we want to change the name of a mailbox from our email, we have to use the RENAME to perform the same.
+
+
+8
+DELETE
+DELETE command is used to permanently delete the emails present in the mailbox we have selected or created, and action performed by this command cannot be undone.
+
+
+9
+LOGOUT
+When we are not using the IMAP protocol or when we have done our work with the emails, then we want to close the connection with the email server, and we can do this using the LOGOUT command. This command informs the email server that the user is done with the session, and now the session should be closed. The server will first send the BYE response through the protocol, followed by the OK response from the client-side and then the connection with the server will be closed.
+
+
+These are the important command of IMAP protocol. We have to use these commands while using the IMAP protocol to retrieve information from the mail and make changes in the mailbox. We also use these commands while we are making or closing the connection with the email server.
+imaplib Module of Python: Implementation
+We have learned the IMAP protocol and the commands from this protocol used to retrieve information from emails and make changes in the mailbox in the previous sections of this tutorial. We implement this IMAP protocol in Python through the imaplib module by using the functions from this module in a program. To learn how to implement IMAP protocol through the imaplib module, we will use an example program where we use functions from this module and communicate with the email server.
+Example:
+Look at the following Python program where we will use the imaplib module and make a connection with the email server:
+
+# Import imaplib library in the program
+import imaplib as imp
+# Also import the pprint module
+import pprint as pp
+# Targeting the host server for email
+imapHostServer = 'imap.gmail.com'
+# User email id
+imapUserEmail = 'forpythoncontent@gmail.com'
+# Password for user Email
+imapPassword = 'NotAPassword'
+# Connecting to host server using SSL client class
+imapVar = imp.IMAP4_SSL(imapHostServer)
+# Login to the email server with credentials
+imapVar.login(imapUserEmail, imapPassword)
+# Mailbox folder where emails are present
+imapVar.select('Inbox')
+# Searching data through the mail
+tmp, data = imapVar.search(None, 'ALL')
+# Using for loop to print data
+for n in data[0].split():
+	tmp, data = imapVar.fetch(n, '(RFC822)')
+	print('Message: {0}\n'.format(n))
+	pp.pprint(data[0][1])
+	break
+# Closing the connection with the server
+imapVar.close()
+
+Output:
+Message: b'1'
+
+(b'Delivered-To: [email protected]\r\nReceived: by 2002:a05:6839:408'
+ b'e:0:0:0:0 with SMTP id dt14csp1139908nkc;\r\n        Thu, 18 Nov 2021 21:1'
+ b'8:23 -0800 (PST)\r\nX-Received: by 2002:a02:6901:: with SMTP id e1mr248002'
+ b'85jac.0.1637299103144;\r\n        Thu, 18 Nov 2021 21:18:23 -0800 (PST)\r\nA'
+ b'RC-Seal: i=1; a=rsa-sha256; t=1637299103; cv=none;\r\n        d=google.com'? https://notifications.google.c=\r\nom/'
+ b'g/img/AD-FnEznfDyGI_ixnq3rHvh5p8bctFcd4ga52j55D-mp0uud4w.gif></body>\r\n  '
+ b'</html>\r\n\r\n--000000000000b5138a05d11d6681--\r\n')
+
+
+
+As we can see, data from the emails present in the inbox is printed in the output and the output will be different for everyone.
+Explanation: We have first imported the imaplib and pprint module in the program to use their functions for implementing the IMAP protocol. We imported imaplib as imp and pprint module as pp in the program. After that, we have initialized the imapHostServer variable in which we defined the server path for the email. Then, we have initialized two variables, i.e., imapUserEmail and imapPassword, in which we defined the User Email ID and password of the email (The password we defined in the program is not the correct password for security reasons), respectively. One can use their email ids and password while implementing this program in their system. After that, we defined the imapVar variable in which we used the IMAP4_SSL() function from the imaplib module, using imapHostServer as an argument in the function. This function will make connections with the email server, and then we use the login() function to access our emails. We have used imapUserEmail & imapPassword as arguments in the login() function as the Email Id & password of our email account. Then, we used the select() function to select the 'Inbox' mailbox and retrieve emails present in the inbox. After that, we used the search() function to search for the data from emails present in the inbox. In last, we used for loop to loop over all the emails present in the inbox and retrieve information from them in the output. We have used the fetch() function in the for loop to fetch data from the emails and the pprint() function to print the information present in the mail.
+Note: We have used the pprint module in the program, which is also an in-built module of Python, and it is important to use it to print the data in the output.
+Conclusion
+We can use the IMAP protocol to retrieve data from our emails without actually downloading them in our system. To implement the IMAP protocol, we have to imaplib module, which provides us with three IMAP client classes. We can use various commands of IMAP to perform multiple functions in our email. We have to use the imaplib module in a Python program to implement the IMAP protocol and fetch data or maintain a connection from emails.
+
+
+Next TopicPython lxml Module
+
+
+
+
+← prev
+next →
+
+
+
+

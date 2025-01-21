@@ -1,0 +1,309 @@
+
+
+
+
+next →
+← prev
+
+What Is Sleeping Time in Python?
+Have you ever been forced to delay the execution of a Python programme? You typically wish your code to run as rapidly as possible. There are, however, instances when it serves your best interests to put your program to sleep for a while.
+For instance, to mimic a pause in our programme, we may use Python's sleep() method. We may need to wait while data uploads or downloads; the graphic loads or is shown to the screen. We may need to take a break even amid requests to a web API or database operations. Each of these situations and many more can benefit from inserting Python sleep() methods into our code.
+Python time.sleep()
+The Python time sleep method is applied to pause a program's execution. We can employ the sleep method of the time module in our Python programs to stop the execution of the programme for a certain amount of time in seconds. Remember that the Python time sleep method halts the current thread's execution, not the entire programme.
+Python time.sleep() Function Syntax
+The sleep() function is a method of the time module. Therefore, before using this function, we must first import the time module into our program. Following is the syntax of using the sleep function.
+
+import time
+time.sleep(t)
+
+The sleep() method's input, t, is the time the programme is to be delayed which is given in seconds. That indicates that the subsequent code line would run after the expression time.sleep(t) has been executed after t seconds of execution of the previous code line. See the example below:
+Code
+
+# Python program to experience the delayed execution due to sleep function
+
+# importing the required module
+import time
+
+# printing time at the beginning of the execution
+print(time.ctime())
+
+print("Before delay of the program")
+time.sleep(50)
+print("After delay of the program")
+
+# printing time at the end of the execution
+print(time.ctime())
+
+Output:
+Sun Aug 28 17:07:33 2022
+Before delay of the  program
+After delay of the program
+Sun Aug 28 17:08:23 2022
+
+The second print statement is executed after 50 seconds when the mentioned code is invoked. Consequently, we can add delays as needed to our code. To have a more precise delay in execution, we can also give the parameter t in a floating point number. For instance, if we wish to add a delay of 10 milliseconds (or 0.01 seconds), do as follows:
+Code
+
+# Python program to delay the program by 100 milliseconds
+
+# importing the required module
+import time
+
+# printing epoch time at the beginning of the execution
+print(time.time())
+
+print("Before delay of the program")
+time.sleep(0.1)
+print("After delay of the program")
+
+# printing epoch time at the end of the execution
+print(time.time())
+
+Output:
+1661706874.95425
+Before delay of the program
+After delay of the program
+1661706875.0580375
+
+Python time.sleep Example
+Let's look at the next Python time.sleep() function example.
+Code
+
+# Python program to use sleep function inside the Python loop
+
+# Importing the time module
+import time
+
+# Time at the beginning of the execution of the program
+start = time.ctime()
+print(start)
+
+for i in range(10):
+    # using the time.sleep() method to halt the execution
+    time.sleep(5) 
+    print(i)
+end = time.ctime()
+print(end)
+
+Output:
+Sun Aug 28 17:19:50 2022
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Sun Aug 28 17:20:40 2022
+
+Due to the for loop's 5-second timeouts, the total time spent is greater than 5. The additional time is a result of the program's processing time, operating system thread sequencing, etc.
+Creating a Delay in Time in a Python List
+Code
+
+# Python program to create a time delay in a Python list
+
+# importing the required package
+import time
+
+# Marking the beginning of the time
+b = time.ctime()
+print(b)
+
+# creating a delay of 10 seconds
+time.sleep(10)
+ 
+# Initializing the Python list
+my_List = ["Time", "Sleep", "Python"]
+ 
+# Printing the list
+print(my_List)
+
+# Marking the end of the program
+e = time.ctime()
+print(e)
+# List will be displayed after a time difference of 10 seconds from the beginning of the program
+
+Output:
+Thu Sep  1 12:28:05 2022
+['Time', 'Sleep', 'Python']
+Thu Sep  1 12:28:15 2022
+
+Creating a Delay in Time in a Python Tuple
+Code
+
+# Python program to create a time delay in a Python tuple
+
+# importing the required package
+import time
+
+# Recording the beginning of the program
+b = time.ctime()
+print(b)
+
+# creating a delay of 15 seconds in the execution
+time.sleep(15)
+ 
+# Initializing the Python tuple
+my_tuple = ("Time", "Sleep", "Python")
+ 
+# Printing the tuple
+print(my_tuple)
+
+# Recording the end of the program
+e = time.ctime()
+print(e)
+# Tuple will be displayed after 15 seconds of delay in the execution
+
+Output:
+Thu Sep  1 12:32:31 2022
+('Time', 'Sleep', 'Python')
+Thu Sep  1 12:32:46 2022
+
+Creating a Delay in Time Delay in List Comprehension
+Code
+
+# Python program to create a time delay in a list comprehension
+
+# importing the required package
+import time
+
+# Displaying the beginning of the execution
+b = time.ctime()
+print(b)
+
+# creating and Initializing a list
+listt = ['Delay', 'Time', 'Sleep', 'Python', 'Time', 'Module']
+ 
+# a time delay of 10 seconds is inserted in between creating the list comprehension and printing the components of the list
+listt = [(time.sleep(10), print(l)) for l in listt]
+
+
+# Displaying the end of the execution
+e = time.ctime()
+print(e)
+
+Output:
+Thu Sep  1 12:38:03 2022
+Delay
+Time
+Sleep
+Python
+Time
+Module
+Thu Sep  1 12:39:03 2022
+
+Creating Many Time Delays in a Program
+Code
+
+# Python program to create a time delay in a list comprehension
+
+# importing the required package
+import time
+
+# Displaying the start of the execution
+b = time.ctime()
+print(b)
+ 
+# creating and Initializing a list
+languages = ['Python', 'C', 'C++', 'R', 'Java', 'JavaScript', 'HTML']
+ 
+# Halting the execution for 2 seconds here
+time.sleep(2)
+ 
+# Interpreter will execute this command after 2 seconds
+print(languages)
+ 
+for l in languages:  
+    # Halting the execution for 5 seconds here
+    time.sleep(5)  
+    # A component of the list will be delayed after every 5 seconds
+    print(l)
+
+# Displaying the end of the execution
+# There must be a delay of 37 seconds in the complete execution of the program
+e = time.ctime()
+print(e)
+
+Output:
+Thu Sep 1 12:44:39 2022
+['Python', 'C', 'C++', 'R', 'Java', 'JavaScript', 'HTML']
+Python
+C
+C++
+R
+Java
+JavaScript
+HTML
+Thu Sep 1 12:45:16 2022
+
+Python Thread Sleep
+The sleep() method in Python is a crucial multithreading technique. The straightforward example demonstrates how the Python time sleep method merely halts the operation of the currently running thread in multithreaded coding.
+Code
+
+# Python program to show how to use the sleep() function in a thread
+
+# Importing the required modules
+import time
+from threading import Thread
+
+# Beginning a thread
+class a_thread(Thread):
+    def func(self):
+        for i in range(10):
+            print(i)
+            time.sleep(5)
+
+class Delay(Thread):
+    def func(self):
+        for i in range(100, 105):
+            print(i)
+            time.sleep(10)
+
+print("Starting the thread a_thread")
+a_thread().start()
+print("Starting the delay thread")
+Delay().start()
+print("Complete")
+
+Including a Python time.sleep() Request With Decorators
+We are occasionally required to try a failed operation again. This is a frequent use scenario when we have to repeat a file downloading since the server was overloaded. Including a Python sleep() function between every request is preferable because we usually won't like to send requests to the server frequently.
+I've also had to monitor the status of a UI while running an automated test, yet another scenario. The user interface may load quicker or slower than expected based on the machine we are using to test, which could alter the information displayed on the screen when my software is checking anything.
+In this situation, we can instruct the application to take a little break and verify everything again a moment or two later. This may determine whether a test is passed or failed.
+In either of these scenarios, we may add a Python sleep() method using a decorator. Let's examine an illustration:
+Code
+
+import time
+
+def sleep(timeout, retry = 4):
+    def real_decorator(function):
+        def a_wrapper(*args, **kwargs):
+            retry_no = 0
+            while retry_no < retry:
+                try:
+                    v = function(*args, **kwargs)
+                    if v is None:
+                        return
+                except:
+                    print(f'This is sleeping for {timeout} seconds')
+                    time.sleep(timeout)
+                    retry_no += 1
+        return a_wrapper
+    return real_decorator
+
+This is the decorator in the above code: sleep(). It receives a time window and a retry count, with a default setting of three. The real decorator(), a function that takes the decorated method, is contained within the sleep() method.
+Last but not least, the inner method wrapper() takes both keyword arguments and parameters passed to the decorated method. The magic happens right here! We try invoking the procedure once more by using a while loop. If there is an exception raised, we should declare it over. Try executing the function once more after using sleep() and increasing the number of retries.
+
+
+Next TopicPython Word2Vec
+
+
+
+
+← prev
+next →
+
+
+
+

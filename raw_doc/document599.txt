@@ -1,0 +1,604 @@
+
+
+
+
+next →
+← prev
+
+Combinatoric Iterators in Python
+In this tutorial, we will learn about the Combinatoric iterators in Python. As we know, iterators are objects that can be iterated on the iterable, and Iterators are used to traverse all the iterable values. Generators are also known as the advance iterators, but they cannot return the complete result, and they yield the results. Generators can be recursive, just like the functions. We will learn the itertools module and how to get the infinite iterators. We will also discuss how Python iterators terminate the shortest input sequence.
+So let's understand the Python itertools module.
+Python Itertools Module
+Python itertools module provides the facility to create iterators for efficient looping. There are multiple types of iterators, some are infinite iterators, and some terminate on the shortest input sequence. And few are Combinatoric iterators.
+Let's have a brief overview of the infinite iterators.
+Infinite Iterators in Python
+As its name suggests, infinite iterators can generate value infinite times. There are three types of infinite iterators, and let's understand the following functions.
+
+count([start=0, step=1]) 
+
+The count() method takes the two arguments start and step. The start parameter prints from the given start number and prints infinitely. The step parameter is optional if steps are given; the given numbers are skipped; the default step is one. Let's understand the following example.
+Example -
+
+import itertools
+
+# for in loop
+for i in itertools.count(3, 3):
+    if i == 36:
+        break
+    else:
+        print(i, end =" ")
+
+Output:
+3 6 9 12 15 18 21 24 27 30 33
+
+Example - With One Argument
+
+import itertools
+
+# for in loop
+for i in itertools.count(3):
+    print(i)
+
+Output:
+3
+6
+9
+12
+15
+18
+21
+Traceback (most recent call last):
+  File "d:/Python Project/bubble_sort.py", line 308, in 
+    print(i)
+KeyboardInterrupt
+
+
+cycle(iterable) -
+
+The cycle() function prints all the values in order they pass. If all the iterable elements are printed, it restarts the printing value from the beginning. Let's understand the following example.
+Example -
+
+import itertools
+
+count = 0
+
+# for in loop
+for i in itertools.cycle('ABC'):
+    if count > 20:
+        break
+    else:
+        print(i, end = " ")
+        count += 1
+
+Output:
+A B C A B C A B C A B C A B C A B C A B C
+
+Example -
+
+import itertools 
+for i in itertools.cycle(['red','green','blue']):
+
+    print(i, end = ' ')
+
+Output:
+red green blue red green blue red green blue red green blue red green blue red green blue red green blue red green blue red green 
+blue red green blue red green blue red green blue red green blue red green blue
+File "d:/Python Project/iterators.py", line 32, in 
+    print(i, end = ' ')
+KeyboardInterrupt
+
+Example - 2: Using next() Method
+
+import itertools
+
+list1 = ['Java', 'T', 'Point']
+
+# defining iterator
+iterators = itertools.cycle(list1)
+
+# for in loop
+for i in range(12):
+    
+    # Using next function
+    print(next(iterators), end = " ")
+
+Output:
+Java T Point Java T Point Java T Point Java T Point
+
+
+repeat(element, num)
+
+It prints the passed value infinite number of times repeatedly. If the optional keyword num is given, it repeatedly prints num numbers of times. Let's understand the following example.
+Example -
+
+import itertools
+
+print (list(itertools.repeat(100, 20)))
+
+Output:
+[100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+
+Example - 2:
+
+import itertools
+
+for i in itertools.repeat('Blue'):
+    print(i, end = ' ')
+
+Output:
+Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue 
+Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue 
+Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue Blue 
+Blue Traceback (most recent call last):
+  File "d:/Python Project/iterators.py", line 332, in 
+    print(i, end = ' ')
+KeyboardInterrupt
+
+Here we have discussed three methods of the infinite iterator. Now we will learn about the Combinatoric iterators.
+Combinatoric Iterators
+Combinatoric iterators are the arrangements of the operations, and selection of the discrete mathematical elements. It is a type of recursive generators which are used to simplify combinatorial constructs such as permutation, combination, and Cartesian products. Let's understand about the combinatoric iterators.
+
+product(*iterables, repeat=1)
+
+These iterators calculate the Cartesian product of the input iterables. We need to specify the optional repeat keyword argument to compute the product of an iterable with itself. It returns the tuples in the sorted order. Let's understand the following example.
+Example -
+
+from itertools import product
+
+print("The cartesian product using repeat:")
+print(list(product([2, 4], repeat=2)))
+print()
+
+print("The cartesian product of the containers:")
+print(list(product(['Learn', 'from', 'JavaTpoint'], '3')))
+print()
+
+print("The cartesian product of the containers:")
+print(list(product('AB', [3,4])))
+
+Output:
+The cartesian product using repeat:
+[(2, 2), (2, 4), (4, 2), (4, 4)]
+
+The cartesian product of the containers:
+[('Learn', '3'), ('from', '3'), ('JavaTpoint', '3')]
+
+The cartesian product of the containers:
+[('A', 3), ('A', 4), ('B', 3), ('B', 4)]
+
+Example - 2:
+
+from itertools import product
+for i in product('VX','YZ',repeat=3):
+                print(i)
+
+Output:
+('V', 'Z', 'X', 'Y', 'V', 'Y')
+('V', 'Z', 'X', 'Y', 'V', 'Z')
+('V', 'Z', 'X', 'Y', 'X', 'Y')
+('V', 'Z', 'X', 'Y', 'X', 'Z')
+('V', 'Z', 'X', 'Z', 'V', 'Y')
+('V', 'Z', 'X', 'Z', 'V', 'Z')
+('V', 'Z', 'X', 'Z', 'X', 'Y')
+('V', 'Z', 'X', 'Z', 'X', 'Z')
+('X', 'Y', 'V', 'Y', 'V', 'Y')
+('X', 'Y', 'V', 'Y', 'V', 'Z')
+('X', 'Y', 'V', 'Y', 'X', 'Y')
+('X', 'Y', 'V', 'Y', 'X', 'Z')
+('X', 'Y', 'V', 'Z', 'V', 'Y')
+('X', 'Y', 'V', 'Z', 'V', 'Z')
+('X', 'Y', 'V', 'Z', 'X', 'Y')
+('X', 'Y', 'V', 'Z', 'X', 'Z')
+('X', 'Y', 'X', 'Y', 'V', 'Y')
+('X', 'Y', 'X', 'Y', 'V', 'Z')
+('X', 'Y', 'X', 'Y', 'X', 'Y')
+('X', 'Y', 'X', 'Y', 'X', 'Z')
+('X', 'Y', 'X', 'Z', 'V', 'Y')
+('X', 'Y', 'X', 'Z', 'V', 'Z')
+('X', 'Y', 'X', 'Z', 'X', 'Y')
+('X', 'Y', 'X', 'Z', 'X', 'Z')
+('X', 'Z', 'V', 'Y', 'V', 'Y')
+('X', 'Z', 'V', 'Y', 'V', 'Z')
+('X', 'Z', 'V', 'Y', 'X', 'Y')
+('X', 'Z', 'V', 'Y', 'X', 'Z')
+('X', 'Z', 'V', 'Z', 'V', 'Y')
+('X', 'Z', 'V', 'Z', 'V', 'Z')
+('X', 'Z', 'V', 'Z', 'X', 'Y')
+('X', 'Z', 'V', 'Z', 'X', 'Z')
+('X', 'Z', 'X', 'Y', 'V', 'Y')
+('X', 'Z', 'X', 'Y', 'V', 'Z')
+('X', 'Z', 'X', 'Y', 'X', 'Y')
+('X', 'Z', 'X', 'Y', 'X', 'Z')
+('X', 'Z', 'X', 'Z', 'V', 'Y')
+('X', 'Z', 'X', 'Z', 'V', 'Z')
+('X', 'Z', 'X', 'Z', 'X', 'Y')
+('X', 'Z', 'X', 'Z', 'X', 'Z')
+
+Example - 3:
+
+from itertools import product
+for i in product([1,2,3],[4,5,6]):
+                print(i)
+
+Output:
+(1, 4)
+(1, 5)
+(1, 6)
+(2, 4)
+(2, 5)
+(2, 6)
+(3, 4)
+(3, 5)
+(3, 6)
+
+Let's look at another one.
+Example - 4:
+
+from itertools import product
+for i in product('UV','WX','YZ'):
+        print(i)
+
+Output:
+('U', 'W', 'Y')
+('U', 'W', 'Z')
+('U', 'X', 'Y')
+('U', 'X', 'Z')
+('V', 'W', 'Y')
+('V', 'W', 'Z')
+('V', 'X', 'Y')
+('V', 'X', 'Z')
+
+
+permutation(iterables*, group_size=None)
+
+The permutation() function generates all possible permutations of an iterable in the lexicographic order and returns the unique elements. It uses the element's position, not the value. It takes an iterable object and the group_size; if the value of group_size is not given or equal to None, the value of group_size becomes the length of the iterable. Let's understand the following example.
+Example -
+
+from itertools import permutations
+
+print ("All the permutations is:")
+print (list(permutations([1, 'JavaTpoint'], 2)))
+print()
+
+print ("All the permutations is:")
+print (list(permutations('CD')))
+print()
+
+print ("All the permutations is:")
+print(list(permutations(range(3), 2)))
+
+Output:
+All the permutations is:
+[(1, 'JavaTpoint'), ('JavaTpoint', 1)]
+All the permutations is:
+[('C', 'D'), ('D', 'C')]
+All the permutations is:
+[(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (1, 0), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (2, 0), (2, 1), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (3, 0), (3, 1), (3, 2), (3, 4), (3, 5), (3, 6), (3, 7), (4, 0), (4, 1), (4, 2), (4, 3), (4, 5), (4, 6), (4, 7), (5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 6), (5, 7), (6, 0), (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 7), (7, 0), (7, 1), (7, 2), (7, 3), (7, 4), (7, 5), (7, 6)]
+
+Example - 2:
+
+from itertools import permutations
+for i in permutations('ABCD'):
+                print(i)
+
+Output:
+('A', 'B', 'C', 'D')
+('A', 'B', 'D', 'C')
+('A', 'C', 'B', 'D')
+('A', 'C', 'D', 'B')
+('A', 'D', 'B', 'C')
+('A', 'D', 'C', 'B')
+('B', 'A', 'C', 'D')
+('B', 'A', 'D', 'C')
+('B', 'C', 'A', 'D')
+('B', 'C', 'D', 'A')
+('B', 'D', 'A', 'C')
+('B', 'D', 'C', 'A')
+('C', 'A', 'B', 'D')
+('C', 'A', 'D', 'B')
+('C', 'B', 'A', 'D')
+('C', 'B', 'D', 'A')
+('C', 'D', 'A', 'B')
+('C', 'D', 'B', 'A')
+('D', 'A', 'B', 'C')
+('D', 'A', 'C', 'B')
+('D', 'B', 'A', 'C')
+('D', 'B', 'C', 'A')
+('D', 'C', 'A', 'B')
+('D', 'C', 'B', 'A')
+
+As we can see in the above code, we didn't pass the second argument to it, so it takes the length of the tuple of the iterable. In the below example, we pass the 3 as a length.
+Example - 3:
+
+from itertools import permutations
+for i in permutations('ABCD', 3):
+                print(i)
+
+Output:
+('A', 'B', 'C')
+('A', 'B', 'D')
+('A', 'C', 'B')
+('A', 'C', 'D')
+('A', 'D', 'B')
+('A', 'D', 'C')
+('B', 'A', 'C')
+('B', 'A', 'D')
+('B', 'C', 'A')
+('B', 'C', 'D')
+('B', 'D', 'A')
+('B', 'D', 'C')
+('C', 'A', 'B')
+('C', 'A', 'D')
+('C', 'B', 'A')
+('C', 'B', 'D')
+('C', 'D', 'A')
+('C', 'D', 'B')
+('D', 'A', 'B')
+('D', 'A', 'C')
+('D', 'B', 'A')
+('D', 'B', 'C')
+('D', 'C', 'A')
+('D', 'C', 'B')
+
+
+combinations(iterable, r)
+
+It prints the all possible combination of the iterable without replacement. It takes an iterable object and the group_size, if the value of group_size is not given or equal to None, the value of group_size becomes length of the iterable. Let's understand the following example.
+Example -
+
+from itertools import combinations
+
+print ("All the combination is:")
+print(list(combinations(['D', 2], 2)))
+print()
+
+print ("All the combination is:")
+print(list(combinations('ABCD', 2)))
+print()
+
+print ("All the combination is:")
+print(list(combinations(range(7),1)))
+
+Output:
+All the combination is:
+[('D', 2)]
+All the combination is:
+[('A', 'B'), ('A', 'C'), ('A', 'D'), ('B', 'C'), ('B', 'D'), ('C', 'D')]
+All the combination is:
+[(0,), (1,), (2,), (3,), (4,), (5,), (6,)]
+
+Example -
+
+from itertools import combinations
+for i in combinations('ABCD',2):
+                print(i)
+
+Output:
+('A', 'B')
+('A', 'C')
+('A', 'D')
+('B', 'C')
+('B', 'D')
+('C', 'D')
+
+Let's see another example.
+Example -
+
+from itertools import combinations
+
+for i in combinations(range(10),3):
+                print(i)
+
+Output:
+(0, 1, 2)
+(0, 1, 3)
+(0, 1, 4)
+(0, 1, 5)
+(0, 1, 6)
+(0, 1, 7)
+(0, 2, 3)
+(0, 2, 4)
+(0, 2, 5)
+(0, 2, 6)
+(0, 2, 7)
+(0, 3, 4)
+(0, 3, 5)
+(0, 3, 6)
+(0, 3, 7)
+(0, 4, 5)
+(0, 4, 6)
+(0, 4, 7)
+(0, 5, 6)
+(0, 5, 7)
+(0, 6, 7)
+(1, 2, 3)
+(1, 2, 4)
+(1, 2, 5)
+(1, 2, 6)
+(1, 2, 7)
+(1, 3, 4)
+(1, 3, 5)
+(1, 3, 6)
+(1, 3, 7)
+(1, 4, 5)
+(1, 4, 6)
+(1, 4, 7)
+(1, 5, 6)
+(1, 5, 7)
+(1, 6, 7)
+(2, 3, 4)
+(2, 3, 5)
+(2, 3, 6)
+(2, 3, 7)
+(2, 4, 5)
+(2, 4, 6)
+(2, 4, 7)
+(2, 5, 6)
+(2, 5, 7)
+(2, 6, 7)
+(3, 4, 5)
+(3, 4, 6)
+(3, 4, 7)
+(3, 5, 6)
+(3, 5, 7)
+(3, 6, 7)
+(4, 5, 6)
+(4, 5, 7)
+(4, 6, 7)
+(5, 6, 7)
+
+
+combinations_with_replacement(iterable, r)
+
+It is similar to the combination() but it may include the individual elements itself. It returns the subsequence of length n from the elements of the iterable when n is a parameter that determines the length of the generated combination. Let's understand the following example.
+Example -
+
+from itertools import combinations_with_replacement
+
+print ("All the combination is:")
+print(list(combinations_with_replacement([1, 2], 2)))
+print()
+
+print ("All the combination is:")
+print(list(combinations_with_replacement('ABCD', 2)))
+print()
+
+print ("All the combination is:")
+print(list(combinations_with_replacement(range(7),1)))
+
+Output:
+All the combination is:
+[(1, 1), (1, 2), (2, 2)]
+
+All the combination is:
+[('A', 'A'), ('A', 'B'), ('A', 'C'), ('A', 'D'), ('B', 'B'), ('B', 'C'), ('B', 'D'), ('C', 'C'), ('C', 'D'), ('D', 'D')]
+
+All the combination is:
+[(0,), (1,), (2,), (3,), (4,), (5,), (6,)]
+
+Iterator Terminating on the Shortest Input Sequence
+Below are some important methods that are also used as iterators. Let's understand the following methods.
+
+accumulate(iterable, [, func]) -
+
+It is used to make an iterator with the accumulated sums. In other words, it accumulates the results of a specified binary function. Let's understand the following example.
+Example -
+
+from itertools import accumulate
+for i in accumulate([2,1,0,1,0,2,3,5]):
+            print(i)
+
+Output:
+2
+3
+3
+4
+4
+6
+9
+14
+
+Example - 2:
+
+from itertools import accumulate
+import operator
+for i in accumulate([1, 2, 3, 4, 5, 6, 7, 8, 9, 10],operator.mul):
+                print(i)
+
+Output:
+1
+2
+6
+24
+120
+720
+5040
+40320
+362880
+3628800
+
+
+chain(*iterables) -
+
+The chain() function iterates the given iterable one by one. It moves to the next iterable as one iterable terminates.
+Example -
+
+from itertools import chain
+for i in chain('Hello','World','How are you'):
+            print(i)
+
+Output:
+H
+e
+l
+l
+o
+W
+o
+r
+l
+d
+H
+o
+w
+
+a
+r
+e
+
+y
+o
+u
+
+
+compress(data, selectors) -
+
+It makes the iterator a filter, and it can filter the elements from data for which selector values amount to True. Let's understand the following example.
+Example -
+
+from itertools import compress
+for i in compress('ABCDEF',[1,0,1,True,0,' ']):
+              print(i)
+
+Output:
+A
+C
+D
+F
+
+
+dropwhile(predicate, iterable)
+
+The dropwhile() method drops element from the iterable as long as predicate is True. If it is False, it starts returning every element. Let's understand the following example.
+Example - 
+
+from itertools import dropwhile
+for i in dropwhile(lambda x:x<7,[10,12,67,9,5,39,29,91]):
+                print(i)
+
+Output:
+10
+12
+67
+9
+5
+39
+29
+91
+
+There are many other methods, but we have discussed some essential methods.
+Conclusion
+We have discussed an extended version of iterators in Python. We have mentioned Combinatoric iterators and infinite iterators, and these iterators are pretty helpful in mathematic operations.
+
+
+Next TopicDifference between Class Method, Static Method, and Instance Method
+
+
+
+
+← prev
+next →
+
+
+
+

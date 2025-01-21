@@ -1,0 +1,63 @@
+
+
+
+
+next →
+← prev
+
+How to read a text file in Python
+Python provides the facility to read, write, and create files. The file can be two types - normal text and binary.
+
+Text Files - This type of file consists of the normal characters, terminated by the special character This special character is called EOL (End of Line). In Python, the new line ('\n') is used by default.
+Binary Files - In this file format, the data is stored in the binary format (1 or 0). The binary file doesn't have any terminator for a newline.
+
+Here, we will learn to read the text file in Python.
+Python takes the three required steps to read or write a text file.
+
+Open a file
+Read or Write file
+Close file
+
+Reading a Text File
+Python provides a built-in function open() to open a file. It takes mainly two arguments the filename and mode. It returns the file object, which is also called a handle. It can be used to perform various operations to the file.
+
+fs = open('example.txt, 'r')   # The first argument is the file name, and the second                         #argument is a mode of the file. Here r means read mode.
+
+We can specify the mode of the file while opening a file. The mode of file can be read r, write w, and append a.
+We will open the text file using the open() function.
+Python provides the various function to read the file, but we will use the most common read() function. It takes an argument called size, which is nothing but a given number of characters to be read from the file. If the size is not specified, then it will read the entire file.
+Example -
+
+fs = open(r"C:\Users\DEVANSH SHARMA\Desktop\example.txt",'r')
+# It will read the 4 characters from the text file
+con = fs.read(4)
+# It will read the 10 characters from the text file
+con1 = fs.read(10)
+# It will read the entire file
+con2 = fs.read()
+print(con)
+fs.close()  # It will read the entire file
+
+Output:
+This
+ is line 1
+
+This is line 2
+This is line 3
+This is line 4
+
+Explanation
+In the above code, we can see the read() function read the character according to its given size from the file. The con1 variable read the next 10 characters from the last read() function. In the last line, we closed the file after performing the read operation using the close() function.
+
+
+Next TopicHow to use for loop in Python
+
+
+
+
+← prev
+next →
+
+
+
+

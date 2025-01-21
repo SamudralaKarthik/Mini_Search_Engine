@@ -1,0 +1,503 @@
+
+
+
+
+next →
+← prev
+
+Tabula Python
+An Introduction
+Generally, it is not necessary that the data we use available in CSV or JSON format. The data can be stored in the form of a table in a PDF file. As a most straightforward case, we can copy and paste the table into a spreadsheet or a text editor. But it may also be that we can more than one table in the same PDF that has similar structures. For such cases, we have to copy and paste each of these tables separately, which makes the work tedious.
+However, to cut this dreary work, Python provides an open-source library, also known as tabula-py, that allows users to extract more than one table distinctly. In the following tutorial, we will learn about tabula and their functions.
+What is Tabula?
+Tabular is a basic wrapper of tabula-java that allows users to the extraction of the table and converts the PDF file directly into Data frames or JSON using Python Programming language. The user can also extract tables from PDF and convert them into TSV, CSV, or JSON format files.
+Tabula is a tool based on Graphical User Interface (GUI) Application; however, tabula-java is a tool based on Command-Line User Interface (CUI). tabula-java provides the bindings of Ruby, R, and NodeJS but not for Python. Thus, the developers introduced the concept of tabula-py that provides Python binding.
+Now, let us understand who uses Tabula and how we can install it.
+Who utilizes Tabula?
+Tabula is a powerful tool that is being used by News organizations of all sizes in order to power investigative reporting. These News organizations are The Times of London, ProPublica, Foreign Policy, The New York Times, La Nacion (Argentina), and St. Paul (MN) Pioneer Press.
+There are Grassroots Organizations such as SchoolCuts.org that also depend upon Tabula in order to convert clunky documents into human-friendly public resources.
+Apart from the above, there are researchers from other backgrounds who utilize Tabula for turning their PDF reports into Excel Spreadsheets, CSVs, and JSON format files and use it for the purpose of Analysing and Database Applications.
+Implementation of Tabula in Python
+Once we have discussed a bit Tabula, let us understand its implementation in Python.
+Installation of the library
+Since tabula-py is an open-source library of Python, we will use the pip installer in order to install the library.
+
+$ pip install tabula-py
+
+Importing of the library
+Once the installation is completed, we can verify it by simply importing the library as shown below:
+
+import tabula
+
+In case the program returns an importing error, it is recommended to reinstall the package.
+The tabula-py library provides various functions such as reading a PDF file, reading a table on a specific page of a PDF file, reading multiple tables on the same page of a PDF file, or Converting PDF files directly a CSV file.
+Let us begin with reading a PDF file
+Reading a PDF file
+The tabula-py library allows its users to read a PDF file using the function known as the read_pdf() function.
+Syntax:
+
+obj = tabula.read_pdf(filename, args[])
+
+Parameters:
+filename: The filename parameter is the name of the pdf file; we would like to read the data from.
+Let us convert the following pdf data table into pandas Data Frame.
+File Name: marksheet_table.py
+Page: 1
+
+
+Name
+English
+Physics
+Chemistry
+Biology
+Total
+
+
+A
+86
+54
+65
+83
+288
+
+
+B
+56
+45
+80
+55
+236
+
+
+C
+34
+66
+73
+90
+263
+
+
+D
+77
+75
+46
+34
+232
+
+
+E
+74
+82
+55
+77
+288
+
+
+F
+69
+76
+82
+46
+273
+
+
+G
+53
+33
+29
+45
+160
+
+
+H
+70
+41
+67
+23
+201
+
+
+I
+80
+43
+88
+28
+239
+
+
+J
+90
+37
+45
+71
+243
+
+
+K
+98
+55
+88
+81
+322
+
+
+L
+90
+54
+67
+37
+248
+
+
+M
+87
+76
+88
+54
+305
+
+
+N
+86
+69
+82
+66
+303
+
+
+O
+67
+74
+54
+65
+260
+
+
+P
+75
+96
+53
+67
+291
+
+
+Q
+45
+87
+80
+45
+257
+
+
+R
+44
+66
+49
+78
+237
+
+
+S
+78
+39
+78
+80
+275
+
+
+T
+56
+54
+76
+86
+273
+
+
+U
+43
+90
+64
+77
+274
+
+
+V
+95
+88
+66
+55
+304
+
+
+W
+64
+67
+86
+80
+297
+
+
+X
+82
+56
+45
+65
+248
+
+
+Y
+79
+65
+70
+54
+268
+
+
+Z
+83
+54
+40
+75
+252
+
+
+Here is an example given below, that demonstrates how to extract the data from the pdf.
+Example:
+
+# importing the library
+import tabula
+# address of the file
+myfile = 'marksheet_table.pdf'
+# using the read_pdf() function
+mytable = tabula.read_pdf(myfile, pages = 1)
+# printing the table
+print(mytable[0])
+
+Output:
+	   Name  English  Physics  Chemistry  Biology  Total
+0     A       86       54         65       83    288
+1     B       56       45         80       55    236
+2     C       34       66         73       90    263
+3     D       77       75         46       34    232
+4     E       74       82         55       77    288
+5     F       69       76         82       46    273
+6     G       53       33         29       45    160
+7     H       70       41         67       23    201
+8     I       80       43         88       28    239
+9     J       90       37         45       71    243
+10    K       98       55         88       81    322
+11    L       90       54         67       37    248
+12    M       87       76         88       54    305
+13    N       86       69         82       66    303
+14    O       67       74         54       65    260
+15    P       75       96         53       67    291
+16    Q       45       87         80       45    257
+17    R       44       66         49       78    237
+18    S       78       39         78       80    275
+19    T       56       54         77       86    273
+20    U       43       90         64       77    274
+21    V       95       88         66       55    304
+22    W       64       67         86       80    297
+23    X       82       56         45       65    248
+24    Y       79       65         70       54    268
+25    Z       83       54         40       75    252
+
+Explanation:
+In the above example, we have imported the required library and defined a variable that stores the address of the pdf data file. We have then used the read_pdf() function to read the data from the pdf and printed it for the users. As a result, the data table has been read successfully.
+Note: We have used the pages parameter in the read_pdf() function to read the data from the specified page(s).
+Let us consider another example to print the tables from a specific page, say page number 2.
+Example:
+
+# importing the library
+import tabula
+# address of the file
+myfile = 'marksheet_table.pdf'
+# using the read_pdf() function
+mytable = tabula.read_pdf(myfile, pages = 2)
+# printing the table
+print(mytable[0])
+
+Output:
+      Name  Final Scores
+0     A           288
+1     B           236
+2     C           263
+3     D           232
+4     E           288
+5     F           273
+6     G           160
+7     H           201
+8     I           239
+9     J           243
+3     D           232
+4     E           288
+5     F           273
+6     G           160
+7     H           201
+8     I           239
+9     J           243
+10    K           322
+11    L           248
+12    M           305
+13    N           303
+14    O           260
+15    P           291
+16    Q           257
+17    R           237
+18    S           275
+19    T           273
+20    U           274
+21    V           304
+22    W           297
+23    X           248
+24    Y           268
+25    Z           252
+
+Explanation:
+In the above example, we have followed the same procedure as we did earlier. However, we have assigned the pages parameter to 2 and printed the first table of the specified page. As a result, the table of index zero on page 2 has been printed successfully.
+Now, let us understand what happens when there is more than one table on the same page of a PDF data file.
+Handling multiple tables on the same page of a PDF file
+We can handle more than one table on the same using an additional parameter known as multiple_tables. The multiple_tables parameter takes a Boolean value for which the read_pdf() function reads multiple tables as independent tables if true or reads multiple tables as a single table if false.
+Let us consider the following example demonstrating how to read multiple tables as independent tables.
+Example:
+
+# importing the library
+import tabula
+# address of the file
+myfile = 'marksheet_table.pdf'
+# using the read_pdf() function
+mytable = tabula.read_pdf(myfile, pages = 2, multiple_tables = True)
+# printing the table
+print(mytable[0])
+print(mytable[1])
+
+Output:
+       Name  Final Scores
+0     A           288
+1     B           236
+2     C           263
+3     D           232
+4     E           288
+5     F           273
+6     G           160
+7     H           201
+8     I           239
+9     J           243
+10    K           322
+11    L           248
+12    M           305
+13    N           303
+14    O           260
+15    P           291
+16    Q           257
+17    R           237
+18    S           275
+19    T           273
+20    U           274
+21    V           304
+22    W           297
+23    X           248
+24    Y           268
+25    Z           252
+  Name Position
+0    K        I
+1    M       II
+2    V      III
+3    N       IV
+4    W        V
+
+Explanation:
+In the following example, we have again imported the required library and defined the variable that stores the address of the PDF file. We have then used the read_pdf() function and included the multiple_tables parameter setting it to True. We have then printed the multiple tables present on page 2 of the PDF file separately.
+Now, let us consider an example to understand how to read multiple tables as a single table.
+Example:
+
+# importing the library
+import tabula
+# address of the file
+myfile = 'marksheet_table.pdf'
+# using the read_pdf() function
+mytable = tabula.read_pdf(myfile, pages = 2, multiple_tables = False)
+# printing the table
+print(mytable[0])
+
+Output:
+       Name Final Scores
+0      A          288
+1      B          236
+2      C          263
+3      D          232
+4      E          288
+5      F          273
+6      G          160
+7      H          201
+8      I          239
+9      J          243
+10     K          322
+11     L          248
+12     M          305
+13     N          303
+14     O          260
+15     P          291
+9      J          243
+10     K          322
+11     L          248
+12     M          305
+13     N          303
+14     O          260
+15     P          291
+16     Q          257
+17     R          237
+18     S          275
+19     T          273
+20     U          274
+21     V          304
+22     W          297
+23     X          248
+24     Y          268
+25     Z          252
+26  Name     Position
+27     K            I
+28     M           II
+29     V          III
+30     N           IV
+31     W            V
+
+Explanation:
+In the following example, we have now set the multiple_tables parameter to False. As a result, the tables present on page 2 are treated as a single table.
+Converting PDF file directly to a CSV file
+We can convert a PDF file that contains tabular data directly into a CSV file with the help of the convert_into() method in the tabula library.
+Syntax:
+
+tabula.convert_into("filename.pdf", "newfilename.csv", args[])
+
+Let us consider the following example illustrating the conversion of the PDF file into CSV file.
+Example:
+
+# importing the library
+import tabula
+# address of the file
+myfile = 'marksheettable.pdf'
+# using the read_pdf() function
+tabula.convert_into(myfile, "marksheet.csv")
+print("The PDF file has been converted successfully.")
+
+Output:
+    'pages' argument isn't specified.Will extract only from page 1 by default.
+    The PDF file has been converted successfully.
+
+Explanation:
+In the above example, we have again imported the required library and defined the variable containing the address of the PDF file. We have then used the convert_into() method to convert the PDF file into the CSV file and printed a success message.
+Moreover, we can also observe that the program returned a statement saying that the 'pages' argument is not specified. Thus, the table present on page 1 will be extracted by default.
+
+
+Next TopicPython Program to Print Prime Factor of Given Number
+
+
+
+
+← prev
+next →
+
+
+
+

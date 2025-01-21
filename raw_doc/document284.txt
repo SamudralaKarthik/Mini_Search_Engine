@@ -1,0 +1,143 @@
+
+
+
+
+next →
+← prev
+
+Difference between Yield and Return in Python
+Python Yield statement
+The generators are defined by using the yield statement in Python. Generally, it converts a normal Python function into a generator.
+The yield statement hauls the function and returns back the value to the function caller and restart from where it is left off. The yield statement can be called multiple times. While the return statement ends the execution of the function and returns the value back to the caller. The function returns nothing without it. In Python generators, the yield function is used for replacing the return function that sends back the value to the user without ruining local variables.
+What is Generator?
+Python generators are used as a method for generating the iterators. Generators have automatically handled the task. A generator can be defined as the special function that returns an object of the generator to the caller.
+In simple words, a generator is referred to the function that returns an iterator that we can iterate upon. In Python, it is very easy to create a generator and it uses the yield statement instead of the return statement.
+Example 1:
+
+# Python Code for using yield statement 
+def myfunction(a, b):
+add = a + b
+yield add
+sub = a - b
+yield sub
+mul = a * b
+yield mul
+div = a % b
+yield div
+# generator runs with for loop for getting all values
+for value in myfunction(49,45):
+print(value)
+
+Output:
+94
+4
+2205
+1.08
+
+Example 2:
+
+# Python code for using the yield statement
+def printoutput(String) : 
+    for i in String: 
+        if i == "a": 
+            yield i  
+# string initialization
+String = "Tutorial and examples" 
+ans = 0
+print ("The number of 'a' in the string is : ", end = "" ) 
+String = String.strip()   
+for j in printoutput(String): 
+    ans = ans + 1  
+print (ans) 
+
+Output:
+The number of 'a' in the string is : 3
+
+Python Return Statement
+The return statement is generally used for the execution ending and returns the value back to the caller. The return statement can return all types of values and it returns nothing when there is no expression passed to return statement. There can be multiple return statements in a function but only a single statement is called for any specified invocation of the function.
+We can see a return statement is placed at the end of the block of the function for returning the final output of the execution of all statements inside the function. Also, it can be seen earlier in the block of the function for stopping the execution of all consequent statements in the block. The execution of the program at the caller is quickly restarted with a return statement. It returns none when no value is specified.
+Example 1:
+
+# Python code for 
+#demonstrating use of return statement
+def myfunc(a, b):
+    add = a + b
+    sub = a - b
+    mul = a * b
+    div = a % b
+    return(add, sub, mul, div)
+    # Getting return value and printing the output
+    output = myfunc(49,45)
+    print("Addition: ", output[0])
+    print("Subtraction: ", output[0])
+    print("Multiplication: ", output[0])
+    print("Division: ", output[0])
+
+Output:
+Addition: 94
+Subtraction: 4
+Multiplication: 2205
+Division: 1.08
+
+Example 2:
+
+# Python code for 
+#demonstrating use of return statement
+class check:  
+    def __init__(self):  
+        self.str = "Tutorial and examples"
+        self.x = "Kaushal"         
+# Object of test will be returned by this function
+def fun():  
+    return check()           
+# Driver code for checking the above method
+t = fun()   
+print(t.str)  
+print(t.x) 
+
+Output:
+Tutorial and examples
+Kaushal
+
+Difference between yield and return Statement
+
+
+Yield Statement
+Return Statement
+
+
+Yield returns the generator object.
+Returns the results to the caller.
+
+
+It can run multiple times.
+It runs only a single time.
+
+
+Code can be executed in the next function call after the yield statement.
+Code will not be executed after the return statement.
+
+
+This statement can resume from where it is left off or paused.
+The function call in this statement only runs the function from the beginning.
+
+
+The yield statement hauls the function and returns back the value to the function caller.
+The return statement takes exit from the execution and returns the value back to the caller.
+
+
+Conclusion
+In the above article, we have seen the differences in the return and yield statements. Also, we have understood the concepts of both statements and know how to use them in our Python programs.
+
+
+Next TopicGraphene Python
+
+
+
+
+← prev
+next →
+
+
+
+

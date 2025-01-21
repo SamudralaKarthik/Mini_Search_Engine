@@ -1,0 +1,626 @@
+
+
+
+
+next →
+← prev
+
+Split, Sub, Subn functions of re module in python
+Before looking into the Split, Sub, Subn functions of the re module in python, let us understand a little bit about the re module offered by python.
+A regex or Regular Expression (RE) is a particular text string that is very useful in defining a search pattern in a computer language. It's great for extracting data from text, such as code, files, logs, spreadsheets, and even papers. Regular expressions (also known as REs, regexes, or regex patterns) are a small, highly specialized computer language that is integrated into Python and accessible through the re module. You provide the criteria for the collection of potential strings that you wish to match using this small language; this set may include English phrases, e-mail addresses, TeX instructions, or anything else you desire. Then you may ask things like, "Does this string match the pattern?" or "Is there a pattern match everywhere in this string?" REs can also be used to change or split a string in a variety of ways. Regular expression patterns are converted into bytecodes, which are subsequently performed by a C-based matching engine. To create a bytecode that runs quicker, it may be required to pay close attention to how the engine will execute a particular RE and write the RE in a specific style for advanced use.
+Because the regular expression language is short and limited, regular expressions cannot be used to do all string processing jobs. Some tasks can be accomplished using regular expressions, but the expressions are quite complex. In certain circumstances, creating Python code to perform the processing may be preferable; while Python code is slower than a complex regular expression, it is also likely to be more intelligible.
+The majority of letters and characters will simply match. The regular expression test, for example, will perfectly match the string test. (A case-insensitive mode may be enabled, allowing this RE to match Test or TEST as well; more on that later.) There are some exceptions to this rule; certain characters are special metacharacters that don't match. Instead, they indicate that something unusual should be matched, or they have an effect on other parts of the RE by repeating or modifying their meaning. [and] are the first strings that are going to be observed by us. They're used to identify a character class, which is a collection of characters to match. Individual characters can be stated, or a range of characters can be indicated by using two characters and a '-' to separate them. [abc], for example, will match any of the letters a, b, or c; this is the same as [a-c], which expresses the same set of characters using a range. Your RE would be [a-z] if you just wanted to match lowercase letters. Inside of classes, metacharacters are inactive.
+By complementing the set, you can match characters who aren't included in the class. An " as the initial character of the class indicates this. For instance, [5] will match any character other than the letter '5.' The caret has no special significance if it appears elsewhere in a character class. [5] will match either a '5' or a ", for instance.
+The backslash is maybe the most essential metacharacter. The backslash can be followed by various characters to signify various specific sequences, just like in Python string literals.
+the escaping of all the matter characters in a regular expression can be then with the help of the backslash it plays a very important role in defining various characters in the regular expression.
+Both special and conventional characters can be used in regular expressions. The simplest regular expressions are the most common characters, such as 'A', 'a', or '0'; they simply match themselves. Ordinary characters can be concatenated, so last matches the string 'last'. Some characters, such as '|' and '(,' are unique. Special characters either represent classes of ordinary characters or impact the interpretation of regular expressions around them.
+Repetition qualifiers (*, +,?, m,n, and so on) cannot be nested directly. This eliminates ambiguity with the non-greedy suffix?, as well as other modifiers in other implementations. Parentheses can be used to add a second repetition to an inner repetition. The equation (?:a6*) matches any multiple of six 'a' letters, for example.
+Those characters discussed above are:
+
+. (Dot.) This matches any character except a newline in the default mode. This fits any character, including one with a newline, if the DOT ALL flag is set.
+$ Matches the string's end or right before the newline at the end of the string, as well as before a newline in MULTILINE mode. The regular expression foo$ matches only 'foo', while foo matches both 'foo' and 'foobar'.
+^ (Caret.) Matches the beginning of the string, as well as immediately after each newline in MULTILINE mode.
++ The resulting RE must match one or more repeats of the previous RE. ab+ will match any non-zero number of 'b's after 'a;' it will not match just 'a.'
+* Causes the resulting RE to match 0 or more repeats of the preceding RE, up to the maximum number of repetitions. ab* will match any number of 'b's after 'a', 'ab', or 'a'.
+{m} Specifies that exactly m copies of the previous RE should be matched; if there are fewer matches, the entire RE will fail to match. For instance, a6 will match six 'a' characters exactly, but not five.
+? Causes the resulting RE to match the previous RE's 0 or 1 repetitions. ab? 'a' or 'ab' will be matched.
+{m,n} Causes the resulting RE to match the preceding RE from m to n repeats, striving to match as many as feasible. For instance, a3,5 will match between 3 and 5 'a' letters. When m is omitted, the lower bound is set to zero, and when n is omitted, the upper bound is set to infinity. a4,b, for example, will match 'aaaab' or a thousand 'a' letters followed by a 'b,' but not 'aaab.' If the comma is removed, the modifier will be mistaken with the form described previously.
+{m,n}? Causes the resulting RE to match the preceding RE from m to n repeats, to match as few repetitions as feasible. This qualifier is the non-greedy counterpart to the previous one. For example, a3,5 will match 5 'a' characters in the 6-character string 'aaaaaa,' whereas a3,5? will only match 3 characters.
+| A|B creates a regular expression that matches either A or B, where A and B are arbitrary REs. The '|' can be used to separate an arbitrary number of REs. This can also be used within groups (see below). REs separated by '|' are tried from left to right as the target string is scanned. When one pattern matches perfectly, a branch is allowed. This means that once A matches, B isn't tested again, even if it would result in a lengthier overall match. The '|' operator, in other words, is never greedy. Use | or enclose it inside a character class, as in [|], to match a literal '|'.
+(...) The contents of a group can be recovered after a match has been completed, and can be matched later in the string with the number special sequence, as detailed below. Use (or ) to match the literals ( or ) or wrap them in a character class: [(], [)].
+(?...) This is an extension notation (otherwise, a '?' after a '(' is meaningless). The first character after the '?' determines the construct's meaning and further syntax. The lone exception is (?Pname>...), which does not establish a new group by default. The extensions that are currently supported are listed below.
+(?:...) Regular parentheses in a non-capturing form. The substring matched by the group cannot be retrieved or referenced later in the pattern since it Matches whatever regular expression is inside the parentheses.
+(?<=...) If a match for... that ends at the current location before the current place in the string, it matches. A positive look behind the statement is what it's termed. Because the look behind will back up three characters and verify if the contained pattern matches, (?=abc)def will find a match in 'abcdef'. The contained pattern can only match strings of a certain length, so abc or a|b are acceptable, but a* and a3,4 are not.
+
+Now let us see the respective codes for all the functions of the re module.
+The split () method in re module in python:
+The built-in re module has the split() method, which splits a text based on regular expression matches.
+The split() function has the following syntax:
+Syntax:
+
+split(pattern, string, maxsplit=0, flags=0)
+
+This is the syntax:
+
+the pattern is a regular expression with matches that will be utilized as split separators.
+the string is the input string that will be split.
+Maxsplit determines the maximum number of splits. If maxsplit is one, the resulting list will often have two elements. The resulting list will have three elements if the maxsplit is two, and so on.
+The flags parameter is optional and has a value of zero by default. One or more regex flags can be passed to the flags parameter. The flags option modifies the regex engine's behavior while matching a pattern.
+
+The code for the split() method in the re module in python is like this,
+Code:
+
+# A sample python code to demonstrate the use of the split() method of the re module of python
+
+# re module is imported to use variables and functions offered by re module
+import re
+
+# A sample class is written that will have different functions representing the different use case scenarios of the split() method of the re module of python
+class NirnayREClass:
+
+	# A constructor is written that can be used for initialization of the class variables
+	def __init__(self):
+		pass
+
+	# the use_split_default() method is the first method of the NirnayREClass class that will reflect the
+	# usage of split() method with default parameters only, these default parameters are the regex pattern
+	# and the input string, the split operation is performed on the according to the provided regular expression 
+	def use_split_default(self):
+		print("Enter the string that you want to split.")
+		ip_str = input()
+		print("Enter the regular expression for performing the split operation on the input string.")
+		pattern = input()
+		list_after_split = re.split(pattern,ip_str)
+		print("The result after the split operation::")
+		print(list_after_split)
+
+	# the use_split_with_maxsplit_parameter() method is the second method of the NirnayREClass class that will reflect the
+	# usage of split() method with default parameters and maxsplits parameter, the default parameters are the regex pattern
+	# and the input string, the split operation is performed on the according to the provided regular expression and split is performed only upto specified number of max splits 
+	def use_split_with_maxsplit_parameter(self):
+		print("Enter the string that you want to split.")
+		ip_str = input()
+		print("Enter the regular expression for performing the split operation on the input string.")
+		pattern = input()
+		print("Enter the maximum number of splits that you want.")
+		max_splits = int(input())
+		list_after_split = re.split(pattern,ip_str,max_splits)
+		print("The result after the split operation with maxsplit parameter::")
+		print(list_after_split)
+
+
+	# the use_split_with_maxsplit_parameter() method is the second method of the NirnayREClass class that will reflect the
+	# usage of split() method with default parameters and maxsplits and flag parameters, the default parameters are the regex pattern
+	# and the input string, the split operation is performed on the according to the provided regular expression and split is performed only 
+	# upto specified number of max splits and according to the flag parameter
+	def use_split_with_maxsplit_and_flag_parameter(self):
+		print("Enter the string that you want to split.")
+		ip_str = input()
+		print("Enter the regular expression for performing the split operation on the input string.")
+		pattern = input()
+		print("Enter the maximum number of splits that you want.")
+		max_splits = int(input())
+		list_after_split = re.split(pattern,ip_str,max_splits,flags=re.IGNORECASE)
+		print("The result after the split operation with maxsplit and flag parameter::")
+		print(list_after_split)
+
+
+# In the main function the object of the above-written class is created and all the member methods()
+# of that class are called with the use of the object of the NirnayREClass class.
+def main():
+
+    re_object = NirnayREClass()
+
+    while(True):
+        print("Select among the options printed below::")
+        print("1. To use split() method of re module.")
+        print("2. To use split() method of re module with maxsplit parameter.")
+        print("3. To use split() method of re module with maxsplit and flag parameter.")
+        print("4. To finish the code execution and exit.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            re_object.use_split_default()
+
+        elif menu_choice == 2:
+            re_object.use_split_with_maxsplit_parameter()
+            
+        elif menu_choice == 3:
+            re_object.use_split_with_maxsplit_and_flag_parameter()
+
+        elif menu_choice == 4:
+            sys.exit()
+        
+        print("Move further with code execution enter (y/n) as the input")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+#the main fucntion is called to start the execution of the code.
+if __name__ == '__main__':
+    main()
+
+Output:
+[email protected]:~$ python3 re1.py 
+Select among the options printed below::
+1. To use split() method of re module.
+2. To use split() method of re module with maxsplit parameter.
+3. To use split() method of re module with maxsplit and flag parameter.
+4. To finish the code execution and exit.
+1
+Enter the string that you want to split.
+Hi my name is nirnay khajuria and I'm author of this python code
+Enter the regular expression for performing the split operation on the input string.
+\s+
+The result after the split operation::
+['Hi', 'my', 'name', 'is', 'nirnay', 'khajuria', 'and', "I'm", 'author', 'of', 'this', 'python', 'code']
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use split() method of re module.
+2. To use split() method of re module with maxsplit parameter.
+3. To use split() method of re module with maxsplit and flag parameter.
+4. To finish the code execution and exit.
+2
+Enter the string that you want to split.
+This example will show the use case of maxsplit parameter of the split() method of re module.
+Enter the regular expression for performing the split operation on the input string.
+\s+
+Enter the maximum number of splits that you want.
+6
+The result after the split operation with maxsplit parameter::
+['This', 'example', 'will', 'show', 'the', 'use', 'case of maxsplit parameter of the split() method of re module.']
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use split() method of re module.
+2. To use split() method of re module with maxsplit parameter.
+3. To use split() method of re module with maxsplit and flag parameter.
+4. To finish the code execution and exit.
+2
+Enter the string that you want to split.
+This example will show the use case of maxsplit parameter of the split() method of re module.
+Enter the regular expression for performing the split operation on the input string.
+\s+
+Enter the maximum number of splits that you want.
+9
+The result after the split operation with maxsplit parameter::
+['This', 'example', 'will', 'show', 'the', 'use', 'case', 'of', 'maxsplit', 'parameter of the split() method of re module.']
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use split() method of re module.
+2. To use split() method of re module with maxsplit parameter.
+3. To use split() method of re module with maxsplit and flag parameter.
+4. To finish the code execution and exit.
+3
+Enter the string that you want to split.
+This example will show the use case of maxsplit parameter of the split() method of re module.
+Enter the regular expression for performing the split operation on the input string.
+\s+
+Enter the maximum number of splits that you want.
+20 
+The result after the split operation with maxsplit and flag parameter::
+['This', 'example', 'will', 'show', 'the', 'use', 'case', 'of', 'maxsplit', 'parameter', 'of', 'the', 'split()', 'method', 'of', 're', 'module.']
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use split() method of re module.
+2. To use split() method of re module with maxsplit parameter.
+3. To use split() method of re module with maxsplit and flag parameter.
+4. To finish the code execution and exit.
+4
+
+Explanation:
+So in the above-written code, we have seen the usage of the split method and how we can use this method with different parameters. In the above-written code, we have created a class that has different functions representing the different use case scenario of the split function with its different parameters the first function is used to display the usage of the split method with its default input parameters there are two defaults input parameters which are the input string and the regular expression these two input parameters are used to split the input string based on the regular expression specified the second function represent the usage of the split method with the max split parameter in this scenario the splitting of the input string based on provided regular expression is limited up to the max split parameter specified by the user and in the last function we have used the flag parameter of the split function.
+Sub() function of re module in python:
+Return the string obtained by replacing the replacement repl with the leftmost non-overlapping instances of the pattern in the string. If the pattern isn't found, the string is left alone. In other words, n becomes a single newline character, r becomes a carriage return, and so on. Unknown ASCII letter escapes are set aside for future use and are viewed as mistakes. Other undiscovered escapes, such as &, are left to their own devices.
+Syntax:
+
+re.sub(pattern, repl, string, count=0, flags=0)
+
+
+A regular expression that you want to match is called a pattern. The pattern can also be a Pattern object, in addition to a regular expression.
+The count parameter indicates the maximum number of matches that the sub() method should replace.
+repl is the replacement string. The sub() function will replace all matches if the count parameter is set to 0 or omitted entirely.
+flags are one or more regex flags that change the pattern's default behavior.
+
+The sub() function searches the string for a pattern and replaces the matched strings with the replacement string (repl). If the sub() function fails to discover a match, the original string is returned. Otherwise, the sub() function replaces the matches and returns the string. The leftmost non-overlapping repetitions of the pattern are replaced with the sub() function. In the following example, you'll see it in further detail.
+Code:
+
+# A sample python code to demonstrate the use of the sub() method of the re module of python
+
+# re module is imported to use variables and functions offered by re module
+import re
+
+# A sample class is written that will have different functions representing the different use case scenarios of the sub() method of the re module of python
+class NirnayREClass:
+
+	# A constructor is written that can be used for initialization of the class variables
+	def __init__(self):
+		pass
+
+	# the use_sub_default() method is the first method of the NirnayREClass class that will reflect the
+	# usage of sub() method with default parameters only, these default parameters are the regex pattern
+	# and the input string, the replace operation is performed on the input string according to the
+	# provided regular expression 
+	def use_sub_default(self):
+		print("Enter the string on which you want to perform the replacement.")
+		ip_str = input()
+		print("Enter the regular expression according to which you want to do replace on the input string.")
+		pattern = input()
+		list_after_sub = re.sub(pattern,ip_str)
+		print("The result after the sub operation::")
+		print(list_after_sub)
+
+	# the use_sub_with_repl_parameter() method is the second method of the NirnayREClass class that will reflect the
+	# usage of sub() method with default parameters and rel parameter, the default parameters are the regex pattern
+	# and the input string, the replace operation is performed on the according to the provided regular expression 
+	# and matching string is replaced with the repl parameter 
+	def use_sub_with_repl_parameter(self):
+		print("Enter the string on which you want to perform the replacement.")
+		ip_str = input()
+		print("Enter the regular expression according to which you want to do replace on the input string.")
+		pattern = input()
+		print("Enter repl string.")
+		repl_str = int(input())
+		list_after_sub = re.sub(pattern,repl_str,ip_str)
+		print("The result after the sub operation::")
+		print(list_after_sub)
+
+
+
+	# the use_sub_with_repl_and_count_parameter() method is the second method of the NirnayREClass class that will reflect the
+	# usage of sub() method with default parameters and rel parameter, the default parameters are the regex pattern
+	# and the input string, the replace operation is performed on the according to the provided regular expression 
+	# and matching string is replaced with the repl parameter upto count parameter
+	def use_sub_with_repl_and_count_parameter(self):
+		print("Enter the string on which you want to perform the replacement.")
+		ip_str = input()
+		print("Enter the regular expression according to which you want to do replace on the input string.")
+		pattern = input()
+		print("Enter repl string.")
+		repl_str = input()
+		print("Enter max count.")
+		max_c = int(input())
+		list_after_sub = re.sub(pattern,repl_str,ip_str,max_c)
+		print("The result after the sub operation::")
+		print(list_after_sub)
+
+
+# In the main function the object of the above-written class is created and all the member methods()
+# of that class are called with the use of the object of the NirnayREClass class.
+def main():
+
+    re_object = NirnayREClass()
+
+    while(True):
+        print("Select among the options printed below::")
+        print("1. To use sub() method of re module.")
+        print("2. To use sub() method of re module with repl parameter.")
+        print("3. To use sub() method of re module with repl and count parameters.")
+        print("4. To finish the code execution and exit.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            re_object.use_sub_default()
+
+        elif menu_choice == 2:
+            re_object.use_sub_with_repl_parameter()
+            
+        elif menu_choice == 3:
+            re_object.use_sub_with_repl_and_count_parameter()
+
+        elif menu_choice == 4:
+            sys.exit()
+        
+        print("Move further with code execution enter (y/n) as the input")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+#The main function is called to start the execution of the code.
+if __name__ == '__main__':
+    main()
+
+Output:
+[email protected]:~$ python3 re2.py 
+Select among the options printed below::
+1. To use sub() method of re module.
+2. To use sub() method of re module with repl parameter.
+3. To use sub() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+1
+Enter the string on which you want to perform the replacement.
+This-is-a-simple-string-having-hyphen-instead-of-space
+Enter the regular expression according to which you want to do replace on the input string.
+\-
+The result after the sub-operation::
+This is a simple string having a hyphen instead of a space
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use sub() method of re module.
+2. To use sub() method of re module with repl parameter.
+3. To use sub() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+2
+Enter the string on which you want to perform the replacement.
+This-is-a-simple-string-having-hyphen-instead-of-space
+Enter the regular expression according to which you want to do replace on the input string.
+\-
+Enter repl string.
+_
+The result after the sub-operation::
+This_is_a_simple_string_having_hyphen_instead_of_space
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use sub() method of re module.
+2. To use sub() method of re module with repl parameter.
+3. To use sub() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+3
+Enter the string on which you want to perform the replacement.
+This-is-a-simple-string-having-hyphen-instead-of-space
+Enter the regular expression according to which you want to do replace on the input string.
+\-
+Enter repl string.
+_
+Enter max count.
+5
+The result after the sub-operation::
+This_is_a_simple_string_having-hyphen-instead-of-space
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use sub() method of re module.
+2. To use sub() method of re module with repl parameter.
+3. To use sub() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+1
+Enter the string on which you want to perform the replacement.
+Only replace the hyphen in this-sentence
+Enter the regular expression according to which you want to do replace on the input string.
+\-
+The result after the sub-operation::
+Only replace the hyphen in this sentence
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use sub() method of re module.
+2. To use sub() method of re module with repl parameter.
+3. To use sub() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+2
+Enter the string on which you want to perform the replacement.
+Replace +this string+
+Enter the regular expression according to which you want to do replace on the input string.
+\+
+Enter repl string.
+*
+The result after the sub-operation::
+Replace *this string*
+
+Move further with code execution enter (y/n) as the input
+Y
+Select among the options printed below::
+1. To use sub() method of re module.
+2. To use sub() method of re module with repl parameter.
+3. To use sub() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+3
+Enter the string on which you want to perform the replacement.
+My [email protected] is [email protected]
+Enter the regular expression according to which you want to replace on the input string.
+\@
+Enter repl string.
+a
+Enter max count.
+1
+The result after the sub-operation::
+My mail is [email protected]
+Move further with code execution enter (y/n) as the input
+N
+
+Explanation:
+For the above-written code, we have seen the usage of the sub method and its usage with different parameters. In the above-written code, we have created a class that has different functions representing the different use case scenario of the sub function with its different parameters the first function is used to display the usage of the sub method with its default input parameters there are two defaults input parameters which are the input string and the regular expression these two input parameters are used to replace the input string based on the regular expression specified, the second function represent the usage of the sub method with the repl parameter in this scenario the replacement of the input string is based on provided regular expression is limited up to the count parameter is depicted in the last function.
+Subn function of re module:
+The regular expressions (RE) module in Python has a function called subn() that defines strings or a group of strings or patterns that match it. The RE module must be imported before we can utilize this function. The subn() method is similar to the sub() function, but it additionally gives you a count of how many replacements you've done.
+Syntax:
+
+re.subn(pattern, repl, string, count=0, flags=0)
+
+
+The first argument, pattern, specifies the text or pattern to replace.
+The second option, repl, specifies the string/pattern that will be used to replace the pattern.
+The third option, string, specifies the string that will be used for the subn() function.
+The fourth option, count, specifies how many replacements should be made before the subn() action is performed.
+The fifth argument, flags, aids in code reduction and performs similar roles to split operations.
+
+Code:
+
+# A sample python code to demonstrate the use of the subn() method of the re module of python
+
+# re module is imported to use variables and functions offered by re module
+import re
+import sys
+
+# A sample class is written that will have different functions representing the different use case scenarios of the subn() method of the re module of python
+class NirnayREClass:
+
+	# A constructor is written that can be used for initialization of the class variables
+	def __init__(self):
+		pass
+
+	# the use_subn_default() method is the first method of the NirnayREClass class that will reflect the
+	# usage of subn() method with default parameters only, these default parameters are the regex pattern
+	# and the input string, the replace operation is performed on the input string according to the
+	# provided regular expression 
+	def use_subn_default(self):
+		print("Enter the string on which you want to perform the replacement.")
+		ip_str = input()
+		print("Enter the regular expression according to which you want to do replace on the input string.")
+		pattern = input()
+		list_after_sub = re.sub(pattern,ip_str)
+		print("The result after the sub operation::")
+		print(list_after_sub)
+
+	# the use_subn_with_repl_parameter() method is the second method of the NirnayREClass class that will reflect the
+	# usage of subn() method with default parameters and rel parameter, the default parameters are the regex pattern
+	# and the input string, the replace operation is performed on the according to the provided regular expression 
+	# and matching string is replaced with the repl parameter 
+	def use_subn_with_repl_parameter(self):
+		print("Enter the string on which you want to perform the replacement.")
+		ip_str = input()
+		print("Enter the regular expression according to which you want to do replace on the input string.")
+		pattern = input()
+		print("Enter repl string.")
+		repl_str = int(input())
+		list_after_sub = re.sub(pattern,repl_str,ip_str)
+		print("The result after the sub operation::")
+		print(list_after_sub)
+
+
+
+	# the use_subn_with_repl_and_count_parameter() method is the second method of the NirnayREClass class that will reflect the
+	# usage of subn() method with default parameters and rel parameter, the default parameters are the regex pattern
+	# and the input string, the replace operation is performed on the according to the provided regular expression 
+	# and matching string is replaced with the repl parameter upto count parameter
+	def use_subn_with_repl_and_count_parameter(self):
+		print("Enter the string on which you want to perform the replacement.")
+		ip_str = input()
+		print("Enter the regular expression according to which you want to do replace on the input string.")
+		pattern = input()
+		print("Enter repl string.")
+		repl_str = input()
+		print("Enter max count.")
+		max_c = int(input())
+		list_after_sub = re.sub(pattern,repl_str,ip_str,max_c)
+		print("The result after the sub operation::")
+		print(list_after_sub)
+
+
+# In the main function the object of the above-written class is created and all the member methods()
+# of that class are called with the use of the object of the NirnayREClass class.
+def main():
+
+    re_object = NirnayREClass()
+
+    while(True):
+        print("Select among the options printed below::")
+        print("1. To use subn() method of re module.")
+        print("2. To use subn() method of re module with repl parameter.")
+        print("3. To use subn() method of re module with repl and count parameters.")
+        print("4. To finish the code execution and exit.")
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            re_object.use_subn_default()
+
+        elif menu_choice == 2:
+            re_object.use_subn_with_repl_parameter()
+            
+        elif menu_choice == 3:
+            re_object.use_subn_with_repl_and_count_parameter()
+
+        elif menu_choice == 4:
+            sys.exit()
+        
+        print("Move further with code execution enter (y/n) as the input")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+#The main function is called to start the execution of the code.
+if __name__ == '__main__':
+    main()
+
+Output:
+Select among the options printed below::
+1. To use subn() method of re module.
+2. To use subn() method of re module with repl parameter.
+3. To use subn() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+1
+Enter the string on which you want to perform the replacement.
+This is a sample string to show the usage of subn() function.
+Enter the regular expression according to which you want to do replace on the input string.
+()
+The result after the subm operation::
+('This is a sample string to show the usage of subn function.', 1)
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use subn() method of re module.
+2. To use subn() method of re module with repl parameter.
+3. To use subn() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+2
+Enter the string on which you want to perform the replacement.
+The repl [email protected]@meter is used to [email protected] with a specific string
+Enter the regular expression according to which you want to do replace on the input string.
+\@
+Enter repl string.
+a
+The result after the subn operation::
+('The repl parameter is used to replace with a specific string', 3)
+Move further with code execution enter (y/n) as the input
+y
+Select among the options printed below::
+1. To use subn() method of re module.
+2. To use subn() method of re module with repl parameter.
+3. To use subn() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+3
+Enter the string on which you want to perform the replacement.
+My [email protected] is [email protected]
+Enter the regular expression according to which you want to do replace on the input string.
+\@
+Enter repl string.
+a
+Enter max count.
+1
+The result after the subn operation::
+('My mail is [email protected]', 1)
+Move further with code execution enter (y/n) as the input	
+y
+Select among the options printed below::
+1. To use subn() method of re module.
+2. To use subn() method of re module with repl parameter.
+3. To use subn() method of re module with repl and count parameters.
+4. To finish the code execution and exit.
+4
+
+Explanation:
+For the above-written code, we have seen the usage of the subn method and its usage with different parameters. In the above-written code, we have created a class that has different functions representing the different use case scenario of the subn function with its different parameters the first function is used to display the usage of the subn method with its default input parameters there are two defaults input parameters which are the input string and the regular expression these two input parameters are used to replace the input string based on the regular expression specified, the second function represent the usage of the subn method with the repl parameter in this scenario the replacement of the input string is based on provided regular expression is limited up to the count parameter is depicted in the last function.
+Conclusion:
+So, in this article, we understood the usage of the Split, Sub, Subn functions of the re module in python. And we have also seen the sample python code to use these functions in the different scenarios.
+
+
+Next TopicRobot Framework in Python
+
+
+
+
+← prev
+next →
+
+
+
+

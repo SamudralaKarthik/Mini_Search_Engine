@@ -1,0 +1,173 @@
+
+
+
+
+next →
+← prev
+
+Python Glob Module
+In Python, we have many in-built modules for performing various tasks, and one of such tasks we want to perform with the Python modules is finding and locating all the files present in our system, which follows a similar pattern. This similar pattern can be a file extension, the file name's prefix, or any similarity between two or many files. We have many different Python modules with which we can easily perform this task using a Python program, but not all the modules are as efficient as others. In this tutorial, we are going to learn about one of such efficient modules, i.e., glob module in Python, with which we can perform file matching with a specific pattern by using it inside a program. We will learn in detail about the glob module in Python, how we can use it inside a program, what its key features are and the application of this module.
+Glob Module in Python
+With the help of the Python glob module, we can search for all the path names which are looking for files matching a specific pattern (which is defined by us). The specified pattern for file matching is defined according to the rules dictated by the Unix shell. The result obtained by following these rules for a specific pattern file matching is returned in the arbitrary order in the output of the program. While using the file matching pattern, we have to fulfil some requirements of the glob module because the module can travel through the list of the files at some location in our local disk. The module will mostly go through those lists of the files in the disk that follow a specific pattern only.
+Pattern Matching Functions
+In Python, we have several functions which we can use to list down the files that match with the specific pattern which we have defined inside the function in a program. With the help of these functions, we can get the result list of the files which will match the given pattern in the specified folder in an arbitrary order in the output.
+We will discuss the following such functions in this section:
+
+fnmatch()
+scandir()
+path.expandvars()
+path.expanduser()
+
+The first two functions present in the above-given list, i.e., fnmatch.fnmatch() and os.scandir() function, is actually used to perform the pattern matching task and not by invoking the sub-shell in the Python. These two functions perform the pattern matching task and get the list of all filenames and that too in arbitrary order. Here is a catch that the glob module treats as special cases for all the files which names begin with a dot (.) which is very unlikely in the fnmatch.fnmatch() function.
+The last two functions are given in the list, i.e., os.path.expandvars() and os.path.expanduser() function can be used for the shell and tilde variable expansion in the filename pattern-matching task.
+Rules of Pattern
+If any of us thinks that we can define or use any pattern to perform the pattern matching filename task, then let us clarify here that it is not possible. We can't define any pattern or use any pattern to collect the list of files with the same. We have to follow a specific set of rules while defining the pattern for the filename pattern matching functions in the glob module.
+In this section, we will discuss all such rules which we have to keep in mind and adhere them while defining a pattern for filename pattern matching functions. We will only discuss these rules briefly and don't go in-depth about them as they are not our primary focus in this tutorial.
+Following are set of rules for the pattern that we define inside the glob module's pattern matching functions:
+
+We have to follow all the standard set of rules of the UNIX path expansion in the pattern matching.
+The path we define inside the pattern should be either absolute or relative, and we can't define any unclear path inside the pattern.
+The special characters allowed inside the pattern are only two wild-cards, i.e., '*, ?' and the normal characters that can be expressed inside the pattern are expressed in [].
+The rules of the pattern for glob module functions are applied to the filename segment (which is provided in the functions), and it stops at the path separator, i.e., '/' of the files.
+
+These are some general rules for the patterns we define inside the glob module functions for filename pattern matching tasks, and we have to follow these set of rules in order to perform the task successfully.
+Applications of Glob Module
+We have already discussed how pattern matching is very helpful for us when we are looking for similar files on our disk. Here, we will discuss the applications of the glob module and how it is very helpful to us.
+Following are some listed applications of the Python glob module, and we can use this module in the given functions:
+
+Sometimes, we want to search for a file that has a certain prefix in its name, any common string in the middle of the names of many files or have the same certain extension. Now, to perform this task, we may have to write a code that will scan the whole directory and then it will produce the result. Instead of it, the glob module is going to be very helpful in this case as we can use the functions of the glob module and perform this task very easily and can save our time.
+Other than this, the Glob module is also very useful when one of our programs have to look for the list of all the files in a given file system with the names of the files matching a similar pattern. Glob module can easily perform this task and that too without opening the result of the program in other sub-shell.
+
+So, by looking at the application of the glob module, we can say that how important this module is for us and where we can use it to reduce the complexity of the code and save our time.
+Glob Module Functions
+Now, we will discuss various more functions of the glob module and understand their working inside a Python program. We will also learn that how these functions help us in the pattern matching task. Look at the following list of functions that we have in the glob module, and with the help of these functions, we can carry out the task of filename pattern matching very smoothly:
+
+iglob()
+glob()
+escape()
+
+Now, we will briefly discuss these functions and then understand the implementation of these functions by using them inside a Python program. We will use each of the above- given functions in an example program and get the list of file names following a similar pattern (that we will define in the function) in the output.
+1. iglob() Function: The iglob() function of the glob module is very helpful in yielding the arbitrary values of the list of files in the output. We can create a Python generator with the iglob() method. We can use the Python generator created by the glob module to list down the files under a given directory. This function also returns an iterator when called, and the iterator returned by it yields the values (list of files) without storing all of the filenames simultaneously.
+Syntax: Following is the syntax for using the iglob() function of glob module inside a Python program:
+
+iglob(pathname, *, recursive=False)
+
+As we can see in the syntax of iglob() function, it takes a total of three parameters in it, which can be defined as given below:
+(i) pathname: The pathname parameter is the optional parameter of the function, and we can even leave it while we are working on the file directory that is the same as where our Python is installed. We have to define the pathname from where we have to collect the list of files that following a similar pattern (which is also defined inside the function).
+(ii) recursive: It is also an optional parameter for the iglob() function, and it takes only bool values (true or false) in it. The recursive parameter is used to set if the function is following the recursive approach for finding file names or not.
+(iii) '*': This is the mandatory parameter of the iglob() function as here we have to define the pattern for which the iglob() function will collect the file names and list them down in the output. The pattern we define inside the iglob() function (such as the extension of file) for the pattern matching should start with the '*' symbol.
+Now, let's use this iglob() function in an example program so that we can understand its implementation and function in a better way.
+Example 1:
+Look at the following Python program with the implementation of iglob() function:
+
+# Import glob module in the program
+import glob as gb
+# Initialize a variable
+inVar = gb.iglob("*.py") # Set Pattern in iglob() function
+# Returning class type of variable
+print(type(inVar))
+# Printing list of names of all files that matched the pattern
+print("List of the all the files in the directory having extension .py: ")
+for py in inVar: 
+    print(py)
+
+Output:
+<class 'generator'>
+List of the all the files in the directory having extension .py: 
+adding.py
+changing.py
+code#1.py
+code#2.py
+code-3.py
+code-4.py
+code.py
+code37.py
+code_5.py
+code_6.py
+configuring.py
+
+Explanation:
+We have first imported the glob module so that we can use the iglob() function of it in the program. After that, we have initialized a variable where we used the iglob() function, and inside the iglob() function, we have defined the pattern for which the function will perform filename pattern matching. The pattern we have defined in the iglob() function is all files with a .py extension, i.e., "*.py". After that, we have returned the class type of the variable we have initialized. After that, we have used a for loop on the variable to print the list of all the filenames that have matched by the iglob() function for the pattern we have defined in it.
+As we can see in the output, the first program has printed the class type of initialized variable, and then it printed the list of the files with the ".py" extension.
+2. glob() Function: With the help of the glob() function, we can also get the list of files that matching a specific pattern (We have to define that specific pattern inside the function). The list returned by the glob() function will be a string that should contain a path specification according to the path we have defined inside the function. The string or iterator for glob() function actually returns the same value as returned by the iglob() function without actually storing these values (filenames) in it.
+Syntax:
+Following is the syntax for using the glob() function of the glob module inside a Python program:
+
+glob(pathname, *, recursive = True)
+
+As we can see in the syntax of the glob() function, it also takes a total of three parameters in it, like the iglob() function. The three parameters defined in the glob() function are the same as those we have read in the iglob() function above. Now, let's use this glob() function in an example program so that we can understand its implementation and function in a better way.
+Example 2: Look at the following Python program with the implementation of glob() function:
+
+# Import glob module in the program
+import glob as gb
+# Initialize a variable
+genVar = gb.glob("*.py") # Set Pattern in glob() function
+# Printing list of names of all files that matched the pattern
+print("List of the all the files in the directory having extension .py: ")
+for py in genVar: 
+    print(py)   
+
+Output:
+List of the all the files in the directory having extension .py: 
+adding.py
+changing.py
+code#1.py
+code#2.py
+code-3.py
+code-4.py
+code.py
+code37.py
+code_5.py
+code_6.py
+configuring.py
+
+As we can see in the above example program, we have followed the same logic as we have followed in example 1 with the iglob() function. The program has returned the list of all the filenames that match the pattern we set inside the glob() function.
+3. escape() Function: The escape() becomes very impactful as it allows us to escape the given character sequence, which we defined in the function. The escape() function is very handy for locating files that having certain characters (as we will define in the function) in their file names. It will match the sequence by matching an arbitrary literal string in the file names with that special character in them.
+Syntax:
+Following is the syntax for using the escape() function of glob module inside a Python program:
+
+>> escape(pathname)
+
+The escape() should be used with either glob() or iglob() function so that we can print the list of file names in the output as a result. Now, let's use this escape() function in an example program so that we can understand its implementation and function in a better way.
+Example 3: Look at the following Python program with the implementation of escape() function:
+
+# Import glob module in the program
+import glob as gb
+# Initialize a variable
+charSeq = "-_#"
+print("Following is the list of filenames that match the special character sequence of escape function: ")
+# Using nested for loop to get the filenames
+for splChar in charSeq:
+    # Pathname for the glob() function
+    escSet = "*" + gb.escape(splChar) + "*" + ".py"
+    # Printing list of filenames with glob() function
+    for py in (gb.glob(escSet)): 
+        print(py) 
+
+Output:
+Following is the list of filenames that match the special character sequence of escape function: 
+code-3.py
+code-4.py
+code_5.py
+code_6.py
+code#1.py
+code#2.py
+
+Explanation:
+We have first defined a character sequence for the escape() sequence so that the escape() function will collect all the file names having that special character sequence in it. We have used a nested for loop such that first, we have created a pathname for the glob() function from the escape() function. And after that, we have used the pathname in glob() function to print the list of filenames matching the special character sequence defined earlier.
+As we can see in the output, we have all the filenames with special character sequences in their names which we defined in the program.
+Conclusion
+So, as we have used the functions of glob modules, i.e., glob(), escape() and iglob() function, we can now easily understand the functionality of the glob module and its functions. With this, we can also depict that how the glob module is very helpful in performsing the filename pattern matching task and how we can get the list of all the files that are following a specific pattern.
+
+
+Next TopicWriting a Python Module
+
+
+
+
+← prev
+next →
+
+
+
+

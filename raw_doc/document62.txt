@@ -1,0 +1,213 @@
+
+
+
+
+next →
+← prev
+
+Grid Search in Python
+In this tutorial, we will discuss the Grid Search for the purpose of hyperparameter tuning. We will also learn about the working of Grid Search along with the implementation of it in optimizing the performance of the method of Machine Learning (ML).
+Hyperparameter tuning is significant for the appropriate working of the models of Machine Learning (ML). A method like Grid Search appears to be a basic utility for hyperparameter optimization.
+The Grid Search Method considers some hyperparameter combinations and selects the one returning a lower error score. This method is specifically useful when there are only some hyperparameters in order to optimize. However, it is outperformed by other weighted-random search methods when the Machine Learning model grows in complexity.
+So let us begin by understanding Grid Search.
+Understanding Grid Search
+Grid Search is an optimization algorithm that allows us to select the best parameters to optimize the issue from a list of parameter choices we are providing, thus automating the 'trial-and-error' method. Although we can apply it to multiple optimization issues; however, it is most commonly known for its utilization in machine learning in order to obtain the parameters at which the model provides the best accuracy.
+Let us consider that the model accepts the below three parameters in the form of input:
+
+Number of hidden layers [2, 4]
+Number of neurons in every layer [5, 10]
+Number of epochs [10, 50]
+
+If we want to try out two options for every parameter input (as specified in square brackets above), it estimates different combinations. For instance, one possible combination can be [2, 5, 10]. Finding such combinations manually would be a headache.
+Now, suppose that we had ten different parameters as input, and we would like to try out five possible values for each and every parameter. It would need manual input from the programmer's end every time we like to alter the value of a parameter, re-execute the code, and keep a record of the outputs for every combination of the parameters.
+Grid Search automates that process, as it accepts the possible value for every parameter and executes the code in order to try out each and every possible combination outputs the result for the combinations and outputs the combination having the best accuracy.
+Installing the required libraries
+Before we start implementing the Grid Search in the Python programming language, let us briefly discuss some of the necessary libraries and frameworks that need to be installed in the system.
+These libraries and frameworks are as follows:
+
+Python 3
+NumPy
+Pandas
+Keras
+Scikit-Learn
+
+They are all quite simple to install. We can use the pip installer in order to install these libraries as shown below:
+
+$ pip install numpy tensorflow pandas scikit-learn keras
+
+Note: If any issues arise while executing any package, try reinstalling and referring to each package's official documentation.
+Now, let us begin implementing the Grid Search in Python
+Implementation of Grid Search in Python
+In the following section, we will understand how to implement Grid Search on an actual application. We will simply be executing the code and discuss in-depth regarding the section where Grid Search comes in rather than discussing Machine Learning and Data Pre-processing section.
+So, let's get started.
+We will use the Diet Dataset containing data regarding the height and weight of different people based on various attributes such as gender, age, and type of diet. We can directly import the data from an online resource with the help of the Pandas read_csv() function.
+But before that, we have to import the required packages:
+File: mygrid.py
+
+import sys
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import GridSearchCV, KFold
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+from keras.wrappers.scikit_learn import KerasClassifier
+from keras.optimizers import Adam
+
+Explanation:
+In the above snippet of code, we have imported the required packages and libraries necessary for the project. One can also save the program file and execute it in order to check if the libraries and packages are installed and imported properly.
+Once the packages are imported successfully, we have to use the following snippet of code in order to import the dataset and print the first five rows of it.
+File: mygrid.py
+
+# importing the dataset
+mydf = pd.read_csv("Diet_Dataset.csv")
+
+# printing the first five lines of dataset
+print(mydf.head())
+
+Output:
+   Person gender  Age  Height  pre.weight  Diet  weight6weeks
+0      25          41     171          60     2          60.0
+1      26          32     174         103     2         103.0
+2       1      0   22     159          58     1          54.2
+3       2      0   46     192          60     1          54.0
+4       3      0   55     170          64     1          63.3
+
+Explanation:
+In the above snippet of code, we have imported the dataset using the read_csv() of the pandas library and stored it within the mydf variable. We have then printed the first five rows using the head() function along with the mydf variable.
+Now, let us divide the data into the feature and label sets in order to apply the standard scaling on the dataset.
+The snippet of code for the same is shown below:
+File: mygrid.py
+
+# converting dataframe into numpy array
+mydataset = mydf.values
+
+X = mydataset[:, 0:6]
+Y = mydataset[:, 6].astype(int)
+
+# Normalizing the data using sklearn StandardScaler
+from sklearn.preprocessing import StandardScaler
+
+myscaler = StandardScaler().fit(X)
+
+# Transforming and displaying the training data
+X_stdized = myscaler.transform(X)
+
+mydata = pd.DataFrame(X_stdized)
+
+Explanation:
+In the above snippet of code, we have converted the pandas dataframe into a NumPy array. We have then imported the StandardScaler module from the sklearn library and use the function to normalize the data. We have then transformed and displayed the training data using the transform() function.
+Now, let us consider the following snippet of code in order to create a simple deep learning model.
+File: mygrid.py
+
+# defining the function to create model
+def create_my_model(learnRate, dropoutRate):
+    # Creating model
+    mymodel = Sequential()
+    mymodel.add(Dense(6, input_dim = 6, kernel_initializer = 'normal', activation = 'relu'))
+    mymodel.add(Dropout(dropoutRate))
+    mymodel.add(Dense(3, input_dim = 6, kernel_initializer = 'normal', activation = 'relu'))
+    mymodel.add(Dropout(dropoutRate))
+    mymodel.add(Dense(1, activation = 'sigmoid'))
+
+    # Compiling the model
+    my_Adam = Adam(learning_rate = learnRate)
+    mymodel.compile(loss = 'binary_crossentropy', optimizer = my_Adam, metrics = ['accuracy'])
+    return mymodel
+
+Explanation:
+The following snippet of code has defined a function as create_my_model() accepting two parameters, i.e., learnRate and dropoutRate, respectively. We have then created the model as mymodel using the Sequential() function. We have also used the add() along with the Dense() and Dropout() function. We have then compiled the model using the compile() function.
+As a result, when we execute the code, this will lead to loading the dataset, preprocessing it, and creating a machine learning model. Since we are only interested in understanding the working of Grid Search, we haven't performed the train/test split, and we had fitted the model on the complete dataset.
+Now, we will understand how Grid Search makes the programmer's life easier by optimizing the parameters in the next section.
+Training the Model without Grid Search
+In the snippet of code shown below, we will create a model with the help of parameter values that we decided on randomly or based on our intuition and see how our model performs:
+File: mygrid.py
+
+# Declaring the values of the parameter
+dropoutRate = 0.1
+epochs = 1
+batchSize = 20
+learnRate = 0.001
+
+# Creating the model object by calling the create_my_model function we created above
+mymodel = create_my_model(learnRate, dropoutRate)
+
+# Fitting the model onto the training data
+mymodel.fit(X_stdized, Y, batch_size = batchSize, epochs = epochs, verbose = 1)
+
+Output:
+4/4 [==============================] - 41s 14ms/step - loss: 0.9364 - accuracy: 0.0000e+00
+
+Explanation:
+In the above snippet of code, we have declared the values of the parameter, i.e., dropoutRate, epochs, batchSize, and learnRate, respectively. We have then created the model object by calling the create_my_model() function. We have then fitted the model onto the training data.
+As a result, the accuracy we got is 0.0000e+00.
+Optimizing Hyper-parameters using Grid Search
+If we are not using the Grid Search method, we can directly call the fit() function on the model we have created above. But in order to utilize the Grid Search method, we have to pass in few arguments to the create_my_model() function. Moreover, we have to declare the grid with various options to try for every parameter. Let us perform that in different parts.
+First of all, we will try modifying the create_my_model() function in order to accept arguments from the calling function as shown below:
+File: mygrid.py
+
+def create_my_model(learnRate, dropoutRate):
+    # Creating the model
+    mymodel = Sequential()
+    mymodel.add(Dense(6, input_dim = 6, kernel_initializer = 'normal', activation = 'relu'))
+    mymodel.add(Dropout(dropoutRate))
+    mymodel.add(Dense(3, input_dim = 6, kernel_initializer = 'normal', activation = 'relu'))
+    mymodel.add(Dropout(dropoutRate))
+    mymodel.add(Dense(1, activation = 'sigmoid'))
+
+    # Compile the model
+    myadam = Adam(learning_rate = learnRate)
+    mymodel.compile(loss = 'binary_crossentropy', optimizer = myadam, metrics = ['accuracy'])
+    return mymodel
+
+# Creating the model object
+mymodel = KerasClassifier(build_fn = create_my_model, verbose = 1)
+
+Explanation:
+In the above snippet of code, we have made some changes to the previous create_my_model function and used the KerasClassifier to create the model object.
+Now, let us implement the algorithm for Grid Search and fit the dataset on it:
+File: mygrid.py
+
+# Defining the arguments that we want to use in Grid Search along
+# with the list of values that we want to try out
+learnRate = [0.001, 0.02, 0.2]
+dropoutRate = [0.0, 0.2, 0.4]
+batchSize = [10, 20, 30]
+epochs = [1, 5, 10]
+
+# Making a dictionary of the grid search parameters
+paramgrid = dict(learnRate = learnRate, dropoutRate = dropoutRate, batch_size = batchSize, epochs = epochs )
+
+# Building and fitting the GridSearchCV
+mygrid = GridSearchCV(estimator = mymodel, param_grid = paramgrid, cv = KFold(random_state = None), verbose = 10)
+
+gridresults = mygrid.fit(X_stdized, Y)
+
+# Summarizing the results in a readable format
+print("Best: " + gridresults.best_score_ + " using " + gridresults.best_params_)
+
+means = gridresults.cv_results_['mean_test_score']
+stds = gridresults.cv_results_['std_test_score']
+params = gridresults.cv_results_['params']
+
+for mean, stdev, param in zip(means, stds, params):
+    print(mean + "(" + stdev + ")" + " with: " + param)
+
+Output:
+Best: 0.00347268912077, using {batch_size=10, dropoutRate=0.4, epochs=5, learnRate=0.2}
+
+Explanation:
+The above output shows the parameter combination which yields the best accuracy.
+At last, we can conclude that the Grid Search is quite easy to implement in the Python programming language and saved us a lot of time in human labor. We can list down all the arguments we wanted to tune, declare the values that need to be tested, execute the code, and forget about it. The process is so easy and convenient that it requires less input from the programmer's side. Once the best argument combination has been found, we can utilize that for the final model.
+
+
+Next TopicPython High Order Function
+
+
+
+
+← prev
+next →
+
+
+
+

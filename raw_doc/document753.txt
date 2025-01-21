@@ -1,0 +1,214 @@
+
+
+
+
+next →
+← prev
+
+Fast API Tutorial: A Framework to Create APIs
+In this tutorial, we will learn about the FastAPI framework and how we can create REST APIs. We will learn why FastAPI is so popular and how it differs from the other available frameworks. We will also discuss how to create web APIs that implement best practices by default quickly. By the end of this tutorial, we will be able to start creating production-ready web APIs and be able to go deeper for specific cases. We assume that you are familiar with HTTP and how it works, JSON, and Python basics. So let's move to the introduction of the FastAPI.
+What is FastAPI?
+FastAPI is a popular, modern, and high-performance web-framework for creating web services or APIs. It is a Python based framework comes with the standard type hints. REST is a set of the rules that outlines the best practices for sharing data between clients and servers. As its name suggest, it is fast due to its out-of-the-box support of the async feature of the Python 3.6+.
+This framework was released in 2018 and it was created by the Sebastián Ramírez. An interesting reason behind creating this project, he was not happy with the current available framework like Flask and DRF so he created own framework using tools such as Starlette and Pydantic.
+Now, FastAPI is quite popular and demanding in industry even big tech giants like Uber, Netflix, and Microsoft are using FastAPI to build their apps.
+FastAPI Features
+FastAPI provides many features over the currently available framework. These features are given below.
+
+High-performance - FastAPI is quite fast. It is considered one of the fastest frameworks currently present. It is par with NodeJS and Go, and also Starlette and Pedantic.
+Fast to code - It allows for significant increases in development speed.
+Robust - It has a well-written document, and we can create the production-ready APIs using our own by reading its documentation.
+Intuitive - It is designed as everyone can understand easily, is easy to use and offers excellent editor support.
+Fewer Bugs - It reduces around 40% of induced bugs. 
+Plugins - It provides the facility to create the plugins using dependency injection.
+Type Hints - We can use type hinting for data validation and conversion.
+Standard Based - It is based on the open standards for APIs, OpenAI and JSON Schema. 
+Straightforward - It is straightforward, so we can spend less time reading documentation. 
+
+Flask vs FastAPI
+Now, we will see how Flask is different from FastAPI. Flask is a Python microframework with ORM, caching, and authentication. It was designed to build web applications using Python, and it is meant to be pretty straightforward, fast, and reliable. Despite having such features, why do we need to use the FastAPI? Let's understand the following pros and cons.
+Advantages
+
+Flask is flexible; we can manipulate most aspects of it.
+Flask is easy to learn beginner friendly. 
+The built-in functionality, along with its integrated support, allows for seamless unit testing.
+
+Disadvantages
+
+It doesn't come with data validation. So this can cause programs to crash often. 
+It has a single source that handles requests in turns, meaning that requests can take some time to be addressed. 
+
+Use Cases
+Flask API is most suitable for such type of projects -
+
+Social Network
+Social media bots
+E-commerce systems
+Static websites
+
+Now let's see the FastAPI.
+FastAPI
+FastAPI is a modern, efficient, high-performing web framework used to build web APIs.
+Advantages
+
+FastAPI comes with the data validation. It can validate the data type even in nested JSON request.
+The user can do exception handling easily.
+It supports async code using the async/wait Python keywords.
+
+Disadvantages
+
+As we mentioned earlier, FastAPI is created using the Pydantic and used as request validation. Sometimes the user needs to write their custom validator. 
+Since it is a new framework in the market, it has a smaller community than other web frameworks. 
+
+Use Cases
+It is commonly used for -
+
+Internal crisis management.
+It is used to deploy the machine learning models.
+Create accounts, logins, and authentication for web application.
+
+Getting Started with FastAPI
+We have done enough with the theory, now it is time to do some practical and write the "Hello World" API using the FastAPI. In this section, we will create the minimal FastAPI app. But before that, we need to install it in our system. As any other Python project it would be best to start by creating a virtual environment. Create the virtual environment and activate it.
+The first step is to install FastAPI and Uvicorn using pip.
+
+pip install fastapi uvicorn[standard]
+
+Once the installation is completed, we are ready to learn how to use them. FastAPI is a framework we will use to create APIs, and Unicorn is the server that will use the API we build for server requests.
+Note - If you face problem with the above command, you can install them separately as below.
+
+pip install fastapi
+
+and
+
+pip install uvicorn
+
+Create First API
+Now we will create an API display Hello World message and run it with a server using Uvicorn. We will explain its internal part as well.
+
+# main.py
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+
+Create the main.py file and paste the above code into it. Now we have a fully functional API application with some best practices. The code won't work itself if we call it using Python directly. We need a server program to run it. We have installed uvicorn, which is our server.
+Run the Application with Uvicorn
+Run the live server using uvicorn.
+
+uvicorn main:app --reload
+
+INFO:     Will watch for changes in these directories: ['C:\\Users\\DEVANSH SHARMA\\Desktop\\FastApiProject\\FastApi']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [17664] using StatReload
+INFO:     Started server process [16172]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+We have highlighted the URL where our app being served in our local machine.
+Check the Response
+When we open the http://127.0.0.1:8000 in browser, it will send the JSON response as below.
+
+{"message": "Hello World"}
+
+Now let's breakdown the code -
+
+uvicorn main:app --reload
+
+
+uvicorn - It is a server library.
+main - It refers the file name.
+app - It refers to the object of the FastAPI created inside the main.py file.
+--reload - It is a parameter that makes server restart after the code changes.
+
+Now let's break down the main.py code.
+Line - 1: First we import the FastAPI class that provides all the functionality for the API.
+Line -3: We initialize the FastAPI class and name it app. It refers to the uvicorn in the above command.
+Line - 5: We create a GET path.
+Line - 6: We create an async function that execute when the user visit to the path.
+Line - 7: We return a response to the client whenever the route is accessed.
+Path Parameters
+We can pass the parameter in the path and declare its type in the function using Python data. With the help of path parameters, we don't need to build a body to find the resource, and it helps scope the API call down to a single resource. These parameters are enclosed in curly brackets {}, and they offer a way for you to control the representation of specific resources. Let's see the following example.
+Example -
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/students/{student_id}")
+async def get_student(student_id: int):
+    return {"student_id": student_id}
+
+We used the path parameter value as student_id, which will be passed as the argument student_id.
+Data Conversion
+When we run the above API and visit to http://127.0.0.1:8000/students/4, we will get the following response.
+{'student_id': 4}
+The function received and returned is 4, which is an integer, not a string ("3"). So the type declaration helps with automatic request parsing.
+Query Parameters
+Query parameters are optional to use. If we pass the parameters in API function, not in the path are automatically interpreted as query parameters.
+Let's understand the following code.
+Example - 
+
+from fastapi import FastAPI
+ 
+app = FastAPI()
+ 
+student_names = [{"student_name": "Sauvik"}, {"student_name": "Mathew"}, {"student_name": "Peter"}]
+ 
+@app.get("/courses/")
+def get_students(start: int, end: int):
+    return student_names[start : start + end]
+
+The query is the key-value pair set after the question mark. In URL and separated by the ampersand &.
+http://localhost:8000/courses/?start=0&end=10
+The start with a value of 0 and end with a value of 10 is the query parameters.
+Request Body
+A request body is JSON data used to send data from a client to the API. The API almost always has to send a response body. But client don't necessary to send the response body all the time. There are three most common methods to send data - put, patch, or delete. We can also send data using the GET but it is not preferable.
+In FastAPI, we use pydantic models to declare a request body. Pydantic tool provides all the advantages and methods.
+First, we need to import the BaseModel from pydantic then use it to create a subclass defining the schema or data shape so that we want to receive. 
+Let's understand the following example.
+Example -
+
+from typing import Optional
+from fastapi import FastAPI
+from pydantic import BaseModel
+ 
+class Student(BaseModel):
+    id : int
+    name: str
+    address: Optional[str] = None
+    branch: str
+ 
+app = FastAPI()
+ 
+@app.post("/students/")
+def create_student(student: Student):
+    return student
+
+When we run the API and navigate to http://127.0.0.1:8000/docs it gives us the following page.
+
+Let's breakdown the above code -
+
+First, we import the required packages.
+We declare a sub-class Student that inherited BaseModel class.
+In the class, we define the schema of the data.
+We create an instance of the FastAPI class.
+We create a POST path.
+We add the request data model to the path.
+
+Conclusion
+In this tutorial, we have learned about FastAPI and its essential concepts. We have seen how to create production-ready APIs. We have discussed a brief introduction to FastAPI and how it is different from Flask. We learned how to use path parameters to get a unique URL path per item, and how to use the pedantic to receive JSON data in the request. Apart from that, FastAPI has much functionality that we will explore in the upcoming tutorial. However, you can start creating your own high-performance APIs.
+
+
+Next TopicMirror Character of a String in Python
+
+
+
+
+← prev
+next →
+
+
+
+

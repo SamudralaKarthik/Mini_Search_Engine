@@ -1,0 +1,78 @@
+
+
+
+
+next →
+← prev
+
+Memoization using Decorators in Python
+In this tutorial, we will discuss one of the advance concepts of Python decorator. We assume that, you have basic understanding of the Python decorators. If not, you can learn from of Decorator in Python tutorial.
+What is Memoization?
+Before learning about the memoization, let's have a brief introduction of Recursion A recursion is a technique where a function calls itself repeatedly till the base case condition is met. For example calculation of Fibonacci series, factorial, etc. But it creates the problem with the recursion tree; there can be chances that the sub-problem that is already solved is being solved again, which leads to be overhead in the memory. To overcome such error, memoization comes into the play.
+Memoization is a programming technique which records the intermediate results so that it can be used to overlook the repeated calculations and makes the fast execution of program. This technique is used to optimize the recursion based program with the help of decorators.
+Let's understand the following example of calculating the factorial of a number using the recursion.
+Example 
+
+def fact(num):
+    if num == 1:
+        return 1
+    else:
+        return num * fact(num-1)
+        
+
+print(fact(5))
+
+Output:
+120
+
+The same program can be implemented using the memoization decorators.
+Example 2:
+
+memory = {}
+def memoize_factDecorator(f):
+     
+    def inner(num):
+        if num not in memory:        
+            memory[num] = f(num)
+        return memory[num]
+ 
+    return inner
+
+@memoize_factDecorator
+def fact(num):
+    if num == 1:
+        return 1
+    else:
+        return num * fact(num-1)
+        
+
+print(fact(5))
+
+Explanation 
+In the above code 
+
+We have defined memorize_factDecorator to store the intermediate result in the variable called memory.
+The second method fact is the function to calculate the factorial. It is wrapped by the decorator. The fact method has access to the memory variables as result. The wrapped function is equivalent as below 
+
+
+fact = memorize_factorial(fact)
+
+
+When fact(5) is called, the recursive call begins in addition to the storage of the intermediate results. Every time a calculation needs to be done, it is checked if the result is available in the memory. If the value is available in the memory it is used, the value is calculated and stored in the memory.
+We can use this technique in the tree-based problems.
+
+Conclusion
+In this tutorial, we have explained the Python advance concept of decorator memoization. It is quite helpful in recursion tree problems. It reduces the memory heads.
+
+
+Next TopicLearn Python for Network Engineering: A Step-by-Step Approach
+
+
+
+
+← prev
+next →
+
+
+
+

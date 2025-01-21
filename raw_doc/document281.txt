@@ -1,0 +1,122 @@
+
+
+
+
+next →
+← prev
+
+Eel in Python
+In this tutorial, we will discuss the use of the Eel library in the Python programming language in order to design a user interface for Python programs with the help of HTML, CSS, and JavaScript.
+We have divided the tutorial into two sections. The first section is based on the fundamental theory of the Eel library. In contrast, we have shown the implementation of the library in the other section by creating a simple application that accepts two integers as input from the user and returns their sum.
+Understanding the Python Eel Library
+Eel is a small library in the Python programming language that allows programmers to create simple Electron-like offline Graphical User Interface (GUI) applications based on HTML and JavaScript with complete access to the capabilities and libraries of Python.
+Eel is capable of hosting a local webserver, then allows programmers to annotate methods and functions in Python so that we can call them from JavaScript and vice versa. This library is designed in order to take the disturbance out of writing simple and short GUI applications.
+Let us consider a figure depicting the concept of Eel.
+
+The files of HTML, CSS, and JavaScript are stored in the same directory and are initialized with the help of the python program. The JS file enables the connection between the HTML page and Python using the functions activated by onclick events from the HTML page.
+Implementation of the Eel Library
+The following section deals with making a simple application with the help of the Eel library for demonstration purposes. The idea behind the application is that the program accepts two numbers from the HTML page, adds them in Python, and shows the output to the user.
+But before we start creating the application, let us install the Eel library.
+We will be using the pip installer in order to install the required library. The syntax for same is shown below:
+Syntax:
+
+$pip install eel
+
+Next, we will be using the Visual Studio Code for this project creation. We have created a folder named "Web_test". Within that folder, we have created another folder named "myWeb". This folder will store the following files:
+
+html
+js-file.js
+py
+
+For the HML page, we will be creating three text areas and a button. Let us consider the following snippet of code for the same.
+File: myWebpage.html
+
+<html>
+    <head>
+        <title>
+            Sum Application
+        </title>
+        <script type = "text/javascript" src = "js-file.js"></script>
+        <script type = "text/javascript" src = "/eel.js"></script>
+    </head>
+    <body>
+        <label>Enter First Number
+        <textarea id = "int1"></textarea>
+        <label>Enter Second Number
+        <textarea id = "int2"></textarea>
+        <label>Result
+        <textarea id = "res"></textarea>
+
+        <button type = "button" id = "add" onclick = "summation()">
+            Sum
+        </button>
+    
+    </body>
+</html>
+
+Explanation:
+In the above snippet of code, we have created an HTML page where we have defined three text areas with different IDs. The 'int1' and 'int2' are to get the input from the user, and the 'res' text area is to display the result. The button with id = 'sum' has an onclick function attached to it defined in the JS file.
+Now, let us consider the snippet of code for the JS file.
+File: js-file.js
+
+document.querySelector("button").onclick = function summation(){
+    var data_1 = document.getElementById("int1").value
+    var data_2 = document.getElementById("int2").value
+    eel.add(data_1, data_2)(call_Back)
+}
+
+function call_Back(output){
+    document.getElementById("res").value = output
+}
+
+Explanation:
+In the above snippet of code, we have defined a function as summation() that is activated through an onclick event. Within the function, we have fetched the value of 'int1' and 'int2' and passed them to the 'sum' function, which will be defined in the Python file. The function named call_Back() accepts 'output' as an argument returned by the Python method named "sum". This 'output' is returned in the text area with id 'res'.
+Now, let us consider the snippet of code for the Python file.
+File: my_sum.py
+
+# importing the eel library
+import eel
+# initializing the application
+eel.init("myWeb")
+
+# using the eel.expose command
+@eel.expose
+# defining the function for addition of two numbers
+def add(data_1, data_2):
+    int1 = int(data_1)
+    int2 = int(data_2)
+    output = int1 + int2
+    return output
+
+# starting the application
+eel.start("myWebpage.html")
+
+Explanation:
+In the above snippet of code, we have imported the eel library and initialized the application with the help of the eel.init("folder name") command, where we have assigned "myweb" as the name of the folder.
+We have then used the eel.expose command under which we have defined the "add" function, which will add 'data_1' with 'data_2' and return the resultant value as "output". The value stored in "output" is fetched by the "call_Back" function in the JS file and is placed in the HTML webpage.
+We have then initialized the application with the help of the eel.start("html filename") command, specifying the name of the file as "myWebpage.html".
+Now let us save the python file and execute it using the following syntax in order to see the result
+Syntax:
+
+$ python my_sum.py
+
+The following figure displays the designed User Interface.
+Output:
+
+Explanation:
+By default, the Python Eel library utilizes the Google Chrome web browser in order to run the application; however, we can also mention the browser with the help of the 'mode' option. Along with 'mode', there are few other application choices available like 'position', 'size', 'geometry', and a lot more, which are passed inside the eel.start() command.
+Conclusion
+In the above tutorial, we have discussed the Eel library and its usage in Python. We have learned that this library helps programmers to create an offline application based on HTML and JavaScript. With the help of the Eel library, we get the capabilities of Python, including the freedom to design User Interface with HTML as well as CSS. Although according to the popularity, Eel is below its main competitor, Electron; however, there are many programmers whose first choice is Eel in order to create simple Graphical User Interface (GUI) applications.
+
+
+Next TopicHow to Calculate Distance between Two Points using GEOPY
+
+
+
+
+← prev
+next →
+
+
+
+

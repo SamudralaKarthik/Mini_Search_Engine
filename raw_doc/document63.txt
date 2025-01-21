@@ -1,0 +1,171 @@
+
+
+
+
+next →
+← prev
+
+Python High Order Function
+As we must be aware of the basic concept of Python functions, we should move forward with some advanced concepts related to Python functions. In this tutorial, we are going to discuss the important aspects of High order functions in Python, like what high order functions are, how we can define them in Python, how we can use them in Python and what the properties of high order functions are.
+Prerequisites:
+To learn about high order functions in Python, we must have basic knowledge of the following concepts:
+
+Python functions
+Parameters
+Python objects
+Python decorators
+
+First, let's start with the first thing, i.e., High order functions, and understand a basic about them.
+High order functions
+A function that is having another function as an argument or a function that returns another function as a return in the output is called the High order function. High order functions operate with other functions given in the program.
+A fact about the High order function is that a high order function is applicable to both functions as well as to the methods that take a function as their parameter or return a function as the result of them. In Python, this concept of high-order functions is supported with every aspect.
+Properties of High order functions in Python
+Now, in this section, we will discuss some of the important properties of high order functions that are applicable in Python as well.
+
+In high order function, we can store a function inside a variable.
+In high order function, a function can act as an instant of an object type.
+In high order function, we can return a function as a result of another function.
+In high order function, we can pass a function as a parameter or argument inside another function.
+We can store Python high order functions in data structures format such as lists, hash tables, etc.
+
+High order functions in Python
+Now, in this section, we will talk specifically about the Python high order functions and how we can define them. We will discuss the methods and means by which we will define and use high order functions in our Python program.
+Following are the ways to define High order functions in a Python code that we are going to discuss in this tutorial.
+
+Using functions as objects in High order function
+Returning function as a result in high order function
+Functions as a parameter for another function
+Decorators as high order function
+
+Now, we will discuss each of the above-given methods in detail and learn about their implementation as high order functions in a Python program.
+Method 1: Using functions as objects in High order function
+In Python, we can even assign a given function to a variable also. This assignment of function into variable will not call the actual function, instead of it will create a reference to the function that is created. Thus, it makes this assignment of assigning a function as a variable object will create a high order function in the program.
+Look at the following example program to learn the implementation of method we discussed above:
+Example -
+
+# a default function to take another function parameter
+def spell(text):
+    # Making text in upper
+    return text.upper() 
+# Taking text as user input
+text = input("Enter a text to print it in uppercase and double: ")
+# Spell function with text
+print(spell(text)) 
+# Assigning variable with the default function
+scream = spell
+# Scream with text variable
+print(scream(text))
+
+Output:
+Enter a text to print it in uppercase and double: JavaTPoint
+JAVATPOINT
+JAVATPOINT
+
+Method 2: Functions as a parameter for another function
+Basically, Python functions are like Python objects, and therefore we can use Python functions to pass them as an argument inside another function, and that will create a high order function in the program.
+Look at the following program to understand the implementation of above-given method:
+Example -
+
+# Default function for making text uppercase
+def scream(word): 
+    return word.upper() 
+# Default function for making text lowercase
+def spell(word): 
+    return word.lower() 
+# A third function that work as a high order function
+def speak(funct): 
+    # Storing the function in a variable in high order function 
+    speaking = funct("Hello Python Developers! You are welcomed to JavaTpoint") 
+    print(speaking)  
+# Printing text in uppercase
+speak(scream)
+# Printing text in lowercase
+speak(spell)
+
+Output:
+HELLO PYTHON DEVELOPERS! YOU ARE WELCOMED TO JAVATPOINT
+hello python developers! you are welcomed to javatpoint
+
+Method 3: Returning function as a result in high order function
+We can also return a function as the result of another function as an object, and that makes the function a high order function.
+Look at the following example program to learn the implementation of method we discussed above:
+Example -
+
+# A default function for addition
+def Adding(a):
+    # Nested function with second number 
+    def Addition(b): 
+            return a + b # addition of two numbers
+    return Addition # Result
+
+# Taking both number variable as user input
+a = int(input("Enter First Number: "))
+b = int(input("Enter Second Number: "))
+# Assigning nested adding function to a variable
+AddVariable = Adding(a)
+# Using variable as high order function
+Result = AddVariable(b)
+# Printing result
+print("Sum of Two numbers given by you is: ", Result)
+
+Output:
+Enter First Number: 24
+Enter Second Number: 26
+Sum of Two numbers given by you is:  50
+
+Method 4: Decorators as high order function
+We can use decorators as the high order function as the most commonly used high order function in Python. Decorators in Python allow us to modify the behavior of methods or functions we defined in the program, and it also allows us to wrap a function inside another function to extend the behavior of wrapped or parent function. We can even wrap a function inside another function without even permanently modifying the parent function.
+In Python decorators, a function is taken as an argument for the other function, and then these decorators are called inside the wrapped function. Look at the following exemplar syntax for a decorator defined in a Python program.
+Syntax
+
+# Using a decorator
+@JTP_Decorator
+def Python_Decorator(): 
+    .
+    .
+
+The above syntax for the decorator is equivalent to the following Python code for a high order function.
+
+# Using Python default function as Python decorators
+def Python_Decorator(): 
+    .
+    .
+Python_Decorator = @JTP_Decorator(Python_Decorator)
+
+We have referred @JTP_Decorator as a callable function inside the default Python_Decorator() function in the above-given code. We will have to add just some extra code in this structure, and we will get the output as the wrapper function.
+Look at the following program to understand the implementation of above given method:
+Example -
+
+# Using default function as Python decorators
+def Python_Decorator(funct):
+       # Inner nested function
+       def inner(): 
+              print("This line of code will be printed before the execution of high order function")
+              funct() 
+              print("This line of code will be printed after the execution of high order function")
+       return inner 
+# A default function as decorator
+def JTP_Decorator(): 
+    print("This line of code will be printed inside the execution of high order function")
+JTP_Decorator = Python_Decorator(JTP_Decorator) # Python decorator as high order function 
+# Python decorator calling out as high order function 
+JTP_Decorator()
+
+Output:
+This line of code will be printed before the execution of high order function
+This line of code will be printed inside the execution of high order function
+This line of code will be printed after the execution of high order function
+
+
+
+Next TopicAssignment Operators in Python
+
+
+
+
+← prev
+next →
+
+
+
+

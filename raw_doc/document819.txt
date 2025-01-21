@@ -1,0 +1,399 @@
+
+
+
+
+next →
+← prev
+
+Countdown Timer using PyQt5 in Python
+This article will demonstrate how to build a countdown timer application using PyQt5. When using a timer, which is a particular sort of clock used to measure certain time intervals, we must count down from the supplied time until it reaches zero.
+Steps for implementing a GUI :
+
+Make a push button that opens a pop-up window for time display and configure its shape.
+Label the time and the status of completion.
+Set the label's size, font, and text alignment to centre.
+Make three push buttons: one for the timer's start, one for its pause, and one for its reset.
+Set each button's geometry.
+
+Implementation procedure for the back end :
+
+Create a count variable and a flag to indicate whether the counter is running or not.
+Give each button a function.
+Get the value of the second using the input dialogue box within the get second button action, then set the flag to false.
+Make the flag true within the start action, but if the count is zero, make the if false.
+Inside the pause action, set the flag to false.
+Set the count value to zero, the flag to false, and the label's text as part of the reset process.
+Create an object called a timer that calls its method every 100 milliseconds.
+Check for the flag inside the timer action, then reduce the value of the count and set the label's content.
+
+Walking through the code :
+First, import all the required libraries into the program.
+
+# import all the required modules
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+Next, create a class to initialise the window and set its properties.
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the window title
+		self.setWindowTitle("Python ")
+
+		# set the window geometry
+		self.setGeometry(100, 100, 400, 600)
+
+		# call the components method
+		self.UiComponents()
+
+		# displaying all the present widgets
+		self.show()
+
+Then, create a method to introduce all components, add buttons and add labels to display text.
+
+# function for the widgets
+	def UiComponents(self):
+
+		# introducing the variables
+		# create a count variable
+		self.count = 0
+
+		# starting value of flag
+		self.start = False
+
+		# create a push button for getting the time in seconds
+		btn = QPushButton("Set time(s)", self)
+
+		# set the geometry of the push button
+		btn.setGeometry(125, 100, 150, 50)
+
+		# add action to the push button for being clicked
+		btn.clicked.connect(self.get_seconds)
+
+		# create a new label to display the seconds
+		self.label = QLabel("//TIMER//", self)
+
+		# set the geometry for the label
+		self.label.setGeometry(100, 200, 200, 50)
+
+		# set the label's borders
+		self.label.setStyleSheet("border : 3px solid black")
+
+		# set the font for the label
+		self.label.setFont(QFont('Times', 15))
+
+		# set the alignment for the label
+		self.label.setAlignment(Qt.AlignCenter)
+
+		# create a new start button
+		start_btn = QPushButton("Start", self)
+
+		# set the geometry for the start button
+		start_btn.setGeometry(125, 350, 150, 40)
+
+		# add action to the start button
+		start_btn.clicked.connect(self.start_actn)
+
+		# create a new pause button
+		pause_btn = QPushButton("Pause", self)
+
+		# set the geometry for the pause button
+		pause_btn.setGeometry(125, 400, 150, 40)
+
+		# add action to the button
+		pause_btn.clicked.connect(self.pause_actn)
+
+		# create a new reset button
+		reset_btn = QPushButton("Reset", self)
+
+		# set the geometry for the reset button
+		reset_btn.setGeometry(125, 450, 150, 40)
+
+		# add action to the reset button
+		reset_btn.clicked.connect(self.reset_actn)
+		
+           # create a new timer clock object
+		timerClock = QTimer(self)
+
+		# add action to the timer clock
+		timerClock.timeout.connect(self.displayTime)
+
+		# updating the timer clock after every tenth of a second
+		timerClock.start(100)
+
+Then, create the functions to be called when different buttons are clicked and what should the action done after that.
+
+	# function to be called by the timer clock
+	def displayTime(self):
+
+		# check if the flag value is true
+		if self.start:
+			# increasing the counter
+			self.count -= 1
+
+			# timer clock is completed
+			if self.count == 0:
+
+				# converting the flag value to false
+				self.start = False
+
+				# set the text for the label
+				self.label.setText("Completed !!!! ")
+
+		if self.start:
+			# get the text from the count
+			txt = str(self.count / 10) + " s"
+
+			# displaying the text
+			self.label.setText(txt)
+
+
+	# func to be called by the push button
+	def get_scnds(self):
+
+		# converting the flag value to false
+		self.start = False
+
+		# get the seconds and the flag value
+		second, done = QInputDialog.getInt(self, 'Seconds', 'Enter Seconds:')
+
+		# if the flag value is true
+		if done:
+			# improvising the value of the count variable
+			self.count = second * 10
+
+			# set the text for the label
+			self.label.setText(str(second))
+
+	def start_actn(self):
+		# changing the flag value to true
+		self.start = True
+
+		# count = 0
+		if self.count == 0:
+			self.start = False
+
+	def pause_actn(self):
+
+		# changing the flag value to false
+		self.start = False
+
+	def reset_actn(self):
+
+		# change the flag value to false
+		self.start = False
+
+		# set the count value to 0
+		self.count = 0
+
+		# set the label's text
+		self.label.setText("//TIMER//")
+
+Lastly, create an instance of the window to be displayed and execute the application.
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the of Window created
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Complete code for the project :
+
+# Python program to create a countdown timer using PyQt5
+# import all the required modules
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the window title
+		self.setWindowTitle("Python ")
+
+		# set the window geometry
+		self.setGeometry(100, 100, 400, 600)
+
+		# call the components method
+		self.UiComponents()
+
+		# displaying all the present widgets
+		self.show()
+
+	# function for the widgets
+	def UiComponents(self):
+
+		# introducing the variables
+		# create a count variable
+		self.count = 0
+
+		# starting value of flag
+		self.start = False
+
+		# create a push button for getting the time in seconds
+		btn = QPushButton("Set time(s)", self)
+
+		# set the geometry of the push button
+		btn.setGeometry(125, 100, 150, 50)
+
+		# add action to the push button for being clicked
+		btn.clicked.connect(self.get_seconds)
+
+		# create a new label to display the seconds
+		self.label = QLabel("//TIMER//", self)
+
+		# set the geometry for the label
+		self.label.setGeometry(100, 200, 200, 50)
+
+		# set the label's borders
+		self.label.setStyleSheet("border : 3px solid black")
+
+		# set the font for the label
+		self.label.setFont(QFont('Times', 15))
+
+		# set the alignment for the label
+		self.label.setAlignment(Qt.AlignCenter)
+
+		# create a new start button
+		start_btn = QPushButton("Start", self)
+
+		# set the geometry for the start button
+		start_btn.setGeometry(125, 350, 150, 40)
+
+		# add action to the start button
+		start_btn.clicked.connect(self.start_actn)
+
+		# create a new pause button
+		pause_btn = QPushButton("Pause", self)
+
+		# set the geometry for the pause button
+		pause_btn.setGeometry(125, 400, 150, 40)
+
+		# add action to the button
+		pause_btn.clicked.connect(self.pause_actn)
+
+		# create a new reset button
+		reset_btn = QPushButton("Reset", self)
+
+		# set the geometry for the reset button
+		reset_btn.setGeometry(125, 450, 150, 40)
+
+		# add action to the reset button
+		reset_btn.clicked.connect(self.reset_actn)
+
+		# create a new timer clock object
+		timerClock = QTimer(self)
+
+		# add action to the timer clock
+		timerClock.timeout.connect(self.displayTime)
+
+		# updating the timer clock after every tenth of a second
+		timerClock.start(100)
+
+	# function to be called by the timer clock
+	def displayTime(self):
+
+		# check if the flag value is true
+		if self.start:
+			# increasing the counter
+			self.count -= 1
+
+			# timer clock is completed
+			if self.count == 0:
+
+				# converting the flag value to false
+				self.start = False
+
+				# set the text for the label
+				self.label.setText("Completed !!!! ")
+
+		if self.start:
+			# get the text from the count
+			txt = str(self.count / 10) + " s"
+
+			# displaying the text
+			self.label.setText(txt)
+
+
+	# func to be called by the push button
+	def get_scnds(self):
+
+		# converting the flag value to false
+		self.start = False
+
+		# get the seconds and the flag value
+		second, done = QInputDialog.getInt(self, 'Seconds', 'Enter Seconds:')
+
+		# if the flag value is true
+		if done:
+			# improvising the value of the count variable
+			self.count = second * 10
+
+			# set the text for the label
+			self.label.setText(str(second))
+
+	def start_actn(self):
+		# changing the flag value to true
+		self.start = True
+
+		# count = 0
+		if self.count == 0:
+			self.start = False
+
+	def pause_actn(self):
+
+		# changing the flag value to false
+		self.start = False
+
+	def reset_actn(self):
+
+		# change the flag value to false
+		self.start = False
+
+		# set the count value to 0
+		self.count = 0
+
+		# set the label's text
+		self.label.setText("//TIMER//")
+
+
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the of Window created
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Output:
+The output of the above mentioned code is attached below in the form of a screenshot.
+
+
+
+Next TopicGUI to Shut Down, Restart, and Log off the computer using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,139 @@
+
+
+
+
+next →
+← prev
+
+How to Write a Code for Printing the Python Exception/Error Hierarchy?
+In this tutorial, we will see how to write a code for printing the Python Error Hierarchy. But before starting first, we should learn what an Exception really is? Exceptions are the errors that can occur even if our code is syntactically correct. These are not unconditionally fatal, and the errors users get while executing the code are known as exceptions. There are numerous inbuilt Exceptions in Python, and here, we will try to print them out in a hierarchy.
+To print the tree hierarchy, we can use inspect module of Python. The inspect module is used for getting information about objects like modules, classes methods, functions, and objects of the program. Such as, the users can use it for examining the contents of a class, extracting, and formatting the argument list for a function.
+To build a tree hierarchy, we can use inspect.getclasstree() function.
+Syntax:
+
+inspect.getclasstree(classes, unique = False)
+
+inspect.getclasstree(): is used for arranging the given list of classes into a hierarchy of the nested lists. Where the nested list appears, it will contain the classes derived from the class whose entry would immediately proceed the list.
+Example:
+
+# For printing the hierarchy for inbuilt exceptions:
+# First, we will import the inspect module
+import inspect as ipt
+  
+# Then we will create tree_class function
+def tree_class(cls, ind = 0):
+    
+      # Then we will print the name of the class
+    print ('-' * ind, cls.__name__)
+      
+    # now, we will iterate through the subclasses
+    for K in cls.__subclasses__():
+        tree_class(K, ind + 3)
+  
+print ("The Hierarchy for inbuilt exceptions is: ")
+  
+# THE inspect.getmro() will return the tuple 
+# of class  which is cls's base classes.
+  
+#Now, we will build a tree hierarchy 
+ipt.getclasstree(ipt.getmro(BaseException))
+  
+# function call
+tree_class(BaseException)
+
+Output:
+The Hierarchy for inbuilt exceptions is: 
+ BaseException
+---> Exception
+------> TypeError
+---------> MultipartConversionError
+---------> FloatOperation
+------> StopAsyncIteration
+------> StopIteration
+------> ImportError
+---------> ModuleNotFoundError
+---------> ZipImportError
+------> OSError
+---------> ConnectionError
+------------> BrokenPipeError
+------------> ConnectionAbortedError
+------------> ConnectionRefusedError
+------------> ConnectionResetError
+--------------> RemoteDisconnected
+---------> BlockingIOError
+---------> ChildProcessError
+---------> FileExistsError
+---------> FileNotFoundError
+---------> IsADirectoryError
+---------> NotADirectoryError
+---------> InterruptedError
+------------> InterruptedSystemCall
+---------> PermissionError
+---------> ProcessLookupError
+---------> TimeoutError
+---------> UnsupportedOperation
+---------> Error
+------------> SameFileError
+---------> SpecialFileError
+---------> ExecError
+---------> ReadError
+---------> herror
+---------> gaierror
+---------> timeout
+---------> SSLError
+------------> SSLCertVerificationError
+------------> SSLZeroReturnError
+------------> SSLWantReadError
+------------> SSLWantWriteError
+------------> SSLSyscallError
+------------> SSLEOFError
+---------> URLError
+------------> HTTPError
+------------> ContentTooShortError
+------> EOFError
+---------> IncompleteReadError
+------> RuntimeError
+---------> RecursionError
+---------> NotImplementedError
+------------> StdinNotImplementedError
+------------> ZMQVersionError
+---------> _DeadlockError
+---------> BrokenBarrierError
+---------> BrokenExecutor
+---------> SendfileNotAvailableError
+------> NameError
+---------> UnboundLocalError
+------> AttributeError
+---------> FrozenInstanceError
+------> SyntaxError
+---------> IndentationError
+------------> TabError
+------> LookupError
+---------> IndexError
+---------> KeyError
+------------> UnknownBackend
+------------> NoSuchKernel
+.
+.
+.
+.
+---> GeneratorExit
+---> SystemExit
+---> KeyboardInterrupt
+---> CancelledError
+
+Conclusion
+In this tutorial, we have discussed how to print the exception error in the hierarchy by using the inspect module of Python.
+
+
+Next TopicPrincipal Component Analysis (PCA) with Python
+
+
+
+
+← prev
+next →
+
+
+
+

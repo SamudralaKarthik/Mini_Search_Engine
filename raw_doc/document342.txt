@@ -1,0 +1,162 @@
+
+
+
+
+next →
+← prev
+
+Convert String to Float in Python
+We are quite familiar with the data types available in Python and what kind of different operations we can perform on them.
+We know that,
+Strings are a sequence of characters that are denoted using inverted commas ''. They are immutable which means they cannot be changed once declared.
+And float values are nothing but the decimal values.
+We can check the types using the program given below-
+
+x = 2.71
+# printing the type of x
+print(type(x))
+y = 'Moscow'
+#printing the type of y
+print(type(y))
+
+Output:
+<class 'float'>
+<class 'str'>
+
+In this tutorial, we will discuss the different scenarios of converting a string to float in Python.
+
+Using float function
+Converting a string with commas
+Converting to a float list
+Converting a list of strings to float
+Converting using NumPy
+Converting in specified decimal points
+
+Using Float Function
+Let us look at the first case where we will use the float function,
+The following program illustrates the same-
+
+x = '2.71'
+res = float(x)
+print("The float value is ",res)
+
+Output:
+The float value is 2.71
+
+Explanation:
+Let's understand what we have done in the above program-
+
+The first step is to declare the string value that we would like to convert.
+After this, we will make use of a float() in which we'll then pass the variable that holds the string value.
+On executing the program, we can observe that it displays the required value.
+
+Converting a String with Commas
+Let us look at the second case where we will convert a string with commas,
+The following program illustrates the same-
+
+x = '27,.71'
+res = float(x.replace(',', ''))
+print("The float value is ",res)
+
+Output:
+The float value is 2.71
+
+Explanation:
+Let's understand what we have done in the above program-
+
+The first step is to declare the string value that we would like to convert, this time a comma is present before the decimal point.
+After this, we will make use replace() inside float() in which we'll specify both, the value we would like to replace and with what it would be replaced.
+On executing the program, we can observe that it displays the required value.
+
+Converting to a Float List
+Let us look at the third case where we will convert the string to a float list,
+The following program illustrates the same-
+
+x='1.21, 2.34, 3.42, 9.22, 5.43'
+res=[float(i) for i in x.split(', ')]
+print("The list having float values: "+str(res))
+
+Output:
+The list having float values: [ 1.21, 2.34, 3.42, 9.22, 5.43]
+
+Explanation:
+Let's understand what we have done in the above program-
+
+The first step is to declare the string value that we would like to convert, this time there is a list of different decimal values separated with a comma.
+After this, we will make use of list comprehension that will take each value and convert it into the required type.
+On executing the program, we can observe that it displays the required value.
+
+Converting List of Strings to Float
+Let us look at the fourth case where we will convert list of strings to float,
+The following program illustrates the same-
+
+x=['1.21', '2.34', '3.42', '9.22', '5.43']
+res=[]
+for i in x:
+  res.append(float(i))
+print('The list having float values:',res)
+
+Output:
+The list having float values: [ 1.21,2.34,3.42,9.22,5.43] 
+
+Let's understand what we have done in the above program-
+
+The first step is to declare the list that contains all the string values as it's elements
+After this, we have declared an empty list and used for loop that takes each element, converts it into float value, and appends it into res.
+On executing the program, we can observe that it displays the required value.
+
+Converting Using NumPy
+Let us look at the fifth case where we will convert the string using numpy,
+The following program illustrates the same-
+
+import numpy as np
+x=np.array(['1.21', '2.34', '3.42', '9.22', '5.43'])
+res=x.astype(float)
+print('The list having float values:',res)
+
+Output:
+The list having float values: [1.21 2.34 3.42 9.22 5.43 ]
+
+Explanation:
+Let's understand what we have done in the above program-
+
+The first step is to import the numpy library as np.
+After this, we have declared the array that has all the string values.
+Once this is done, the next step is to use astype() and specify float in it since this is the functionality/feature we wish to apply on all the elements.
+On executing the program, we can observe that it displays the required value.
+
+Converting in Specified Decimal Points
+Finally, in the last program we will see how we can convert a string to specified decimal points,
+The following program illustrates the same-
+
+x='2.88731'
+val=float(x)
+res="{:.2f}".format(val)
+print(res)
+
+Output:
+2.89
+
+Explanation:
+Let's understand what we have done in the above program-
+
+The first step is to declare the string value that we would like to convert.
+After this, we will make use of a float() and pass the variable x.
+Since we want our output in two decimal places, we will mention this in the next statement.
+On executing the program, we can observe that it displays the required value.
+
+Conclusion
+So, in this tutorial, we understood the different scenarios and learned approaches to convert a string to float in Python.
+
+
+Next TopicDecorators with Parameters in Python
+
+
+
+
+← prev
+next →
+
+
+
+

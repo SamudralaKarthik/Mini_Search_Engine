@@ -1,0 +1,126 @@
+
+
+
+
+next →
+← prev
+
+Convert string to dictionary in Python
+We have worked on different problems based on strings and dictionaries. In this tutorial, we will see how we can convert a string to a dictionary in Python.
+Before that, let's have a quick recall of strings and dictionaries.
+Strings are defined as a sequence of characters and are denoted using single or double inverted commas.
+For example-
+
+flower = 'Rose'
+sub = 'Python'
+name = 'James'
+
+We can check the data type of the above variables using type().
+Dictionaries are defined as a data structure in Python that uses key-value pairs which are enclosed in curly braces.
+We can access the values present in the dictionary with the help of respective keys.
+The example of a dictionary is-
+
+Subj = {'subj1': 'Computer Science', 'subj2': 'Physics', 'subj3': 'Chemistry', 'subj4': 'Mathematics'}
+
+Now let's list out the methods that can convert a string to a dictionary.
+
+Using loads()
+Using literal_eval()
+Using Generator Expressions
+
+It's time to discuss each one of them in detail-
+Using json.loads()
+The following program shows how we can convert a string to a dictionary using json.loads()
+
+#using json()
+import json
+#initialising the string
+string_1 = '{"subj1":"Computer Science","subj2":"Physics","subj3":"Chemistry","subj4":"Mathematics"}'
+print("String_1 is ",string_1)
+#using json.loads()
+res_dict=json.loads(string_1)
+#printing converted dictionary
+print("The resultant dictionary is ",res_dict)
+
+Output:
+String_1 is  {"subj1":"Computer Science","subj2":"Physics","subj3":"Chemistry","subj4":"Mathematics"}
+The resultant dictionary is  {'subj1': 'Computer Science', 'subj2': 'Physics', 'subj3': 'Chemistry', 'subj4': 'Mathematics'}
+
+Explanation:
+Let's understand what we have done in the above program-
+
+In the first step, we have imported the json module.
+After this, we have initialized the string that we would like to convert.
+Now we have simply passed 'string_1' as a parameter in loads().
+Finally, in the last step, we have displayed the resultant dictionary.
+
+Using ast.literal_eval()
+Now we will see how ast.literal_eval can help us to meet our objective.
+The following program illustrates the same-
+
+#convert string to dictionary
+#using ast()
+import ast
+#initialising the string
+string_1 = '{"subj1":"Computer Science","subj2":"Physics","subj3":"Chemistry","subj4":"Mathematics"}'
+print("String_1 is ",string_1)
+#using ast.literal_eval
+res_dict=ast.literal_eval(string_1)
+#printing converted dictionary
+print("The resultant dictionary is ",res_dict)
+
+Output:
+String_1 is  {"subj1":"Computer Science","subj2":"Physics","subj3":"Chemistry","subj4":"Mathematics"}
+The resultant dictionary is  {'subj1': 'Computer Science', 'subj2': 'Physics', 'subj3': 'Chemistry', 'subj4': 'Mathematics'}
+
+Explanation:
+Let's understand what we have done in the above program-
+
+In the first step, we have imported the ast module.
+After this, we have initialized the string that we would like to convert.
+Now we have simply passed 'string_1' as a parameter in literal_eval().
+Finally, in the last step, we have displayed the resultant dictionary.
+
+Using Generator Expressions
+Finally, in the last example we will discuss how generator expressions can be used.
+Let's study the given program carefully.
+
+#convert string to dictionary
+#using generator expressions
+#initialising the string
+string_1 = "subj1 - 10 , subj2 - 20, subj3 - 25, subj4 - 14"
+print("String_1 is ",string_1)
+#using strip() and split()
+res_dict = dict((a.strip(), int(b.strip()))
+                     for a, b in (element.split('-')
+                                  for element in string_1.split(', ')))
+#printing converted dictionary
+print("The resultant dictionary is: ", res_dict)
+print(type(res_dict))
+
+Output:
+String_1 is  subj1 - 10 , subj2 - 20, subj3 - 25, subj4 - 14
+The resultant dictionary is:  {'subj1': 10, 'subj2': 20, 'subj3': 25, 'subj4': 14}
+<class 'dict'>
+
+It's time to check the explanation of this approach-
+
+In the first step, we have declared a string that has values paired with a hyphen, and each pair is separated with a comma. This information is important since it will act as a great tool in obtaining the desired output.
+Further, we have used strip() and split() in the for loop so that we get the dictionary in the usual format.
+Finally, we have printed the dictionary we created and verified its type using type().
+
+Conclusion
+In this tutorial, we explored the conversion methods of string to the dictionary.
+
+
+Next TopicConvert string to JSON in Python
+
+
+
+
+← prev
+next →
+
+
+
+

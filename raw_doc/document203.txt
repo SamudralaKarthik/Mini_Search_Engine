@@ -1,0 +1,97 @@
+
+
+
+
+next →
+← prev
+
+Python Program to Print Prime Factor of Given Number
+In this tutorial, we will discuss how we can get the prime factor of the given number using the Python program. All we familiar with the prime numbers, if not then prime numbers are the number that can be divided by one or itself. For example - 1, 2, 3, 5, 7, 11, 13, ……
+Finding all prime factorization of a number
+If the user enters the number as 12, then the output must be '2, 2, 3, and if the input is 315; the output should be "3 3 5 7". The program must return the prime all prime factor of given number. The prime factors of 330 are 2, 3, 5, and 11. Therefore 11 is the most significant prime factor of 330.
+For Example: 330 = 2 × 3 × 5 × 11.
+Before writing the Python program, let's understand the following conjectures.
+
+1st Conjecture - There can be at-least one prime factor that would be less than √n in case of n is not a prime number.
+
+Proof -There are two greater sqrt(n) numbers, then their product should also divide n but which will exceed n, which contradicts our assumption. So there can NOT be more than one prime factor of n greater than sqrt(n).
+Let's see the following step to perform such an operation.
+
+p <= sqrt(n} or q <= sqrt(n)
+
+
+2nd Conjecture - There can be AT-MOST 1 prime factor of n greater than sqrt(n).
+
+Proof - Suppose there are two greater sqrt(n) number then their product should also divide n but which will exceed n, which contradicts our assumption. So there can NOT be more than 1 prime factor of n greater than sqrt(n).
+Let's see the following step to perform such operation.
+Example - Python program to print prime factors
+
+import math
+# Below function will print the
+# all prime factor of given number
+def prime_factors(num):
+    # Using the while loop, we will print the number of two's that divide n
+    while num % 2 == 0:
+        print(2,)
+        num = num / 2
+
+    for i in range(3, int(math.sqrt(num)) + 1, 2):
+
+        # while i divides n , print i ad divide n
+        while num % i == 0:
+            print(i,)
+            num = num / i
+    if num > 2:
+        print(num)
+# calling function 
+
+num = 200
+prime_factors(num)
+
+Output:
+2
+2
+2
+5
+5
+
+Explanation - 
+In the above code, we have imported the math module. The prime_factor() function is responsible for printing the composite number. First, we get the even numbers; after this, all remaining prime factors must be odd. In for loop, the num must be odd, so we incremented i by two. A for loop will run the square root of n times.
+Let's understand the following property of composite numbers.
+Every composite number has at least one prime factor less than or equal to the square root.
+The program will work as follows.
+
+In the first step, find the least prime factor i.
+The occurrence of i be will removed from n by repeatedly dividing n by i.
+Repeat the above both steps for dividing n and i = i + 2. Both steps will be repetitive till n become either 1 or a prime number.
+
+Let's understand another example where we find the largest prime factor of a given number.
+Example - 2 Python program to find the largest prime factor of a given number.
+
+def largest_prime_factor(n):
+    i = 2
+    while i * i <= n:
+        if n % i:
+            i += 1
+        else:
+            n //= i
+    return n
+
+print(largest_prime_factor(345))
+
+Output:
+23
+
+
+
+Next TopicPython Program to Print Pascal Triangle
+
+
+
+
+← prev
+next →
+
+
+
+

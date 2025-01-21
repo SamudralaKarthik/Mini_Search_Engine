@@ -1,0 +1,349 @@
+
+
+
+
+next →
+← prev
+
+Automate Instagram Messages using Python
+In this article, we will automate the operation of sending Instagram Messages using Python. First of all, let us look at what is Instagram.
+Instagram is a prominent social media platform that focuses on the photo and video sharing. It's been operating since 2010 and has maintained its appeal by introducing inventive new features like Instagram Stories, shopping, Instagram Reels, and more. Instagram is a picture and video-sharing social networking website created by Kevin Systrom and Mike Krieger in 2010 and later bought by Facebook Inc. Users may upload photographs and videos that can be filtered and grouped using hashtags and geotagging. Posts can be shared with the entire public or only with pre-approved followers. Users may browse other people's content by tag and location, check what's popular, such as photos, and follow other people to add their content to their own personal feed.
+When the resolution was upgraded to 1080 pixels in 2015, this restriction was removed. It also included texting features, the ability to share multiple photos or videos in a single post, and a Stories feature, similar to Snapchat's, that allowed users to post content in a chronological feed that was accessible by others for 24 hours. As of January 2019, 500 million individuals utilize Stories every day. Instagram, which was bought by Facebook in 2012 and now has over a billion users, has become ingrained in people's lives.
+Instagram was first defined by the fact that it only allowed the material to be framed in a square (1:1) aspect ratio of 640 pixels, which corresponded to the width of the iPhone at the time.
+Instagram is a platform that both individuals and businesses may utilize. Companies may use the photo-sharing app to promote their brand and products by creating a free business account. Businesses with business accounts may get free engagement and impression analytics. According to Instagram's website, more than 1 million marketers utilize the platform to share their stories and achieve commercial goals. Furthermore, 60% of users report that the app assists them in discovering new products.
+Now let us have a look at the code
+Code:
+
+# This is a sample python code that represents the automation of  sending a message to a particular user with the desired message on Instagram
+
+# importing module
+#  all the models which are required for performing this automation operation are included at the beginning of the file
+from selenium import webdriver
+import os
+import time
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+#   A class is written which will have different functions each of which function is performing a different task that is required for automating the operation of sending a message to a particular list of users on Instagram
+class AutomateInstagram:
+	
+#   a constructor is written for the class in which the various class variables like the username of the user password of the user list of the usernames of the users to whom we send the message,  and the list of the messages that need to be sent to those users and the base URL of the Instagram website and the Selenium object which will be referred as website handler in this code are initialized in this constructor.
+    def __init__(self):
+        self.username = None
+        self.password = None
+        self.target_usernames = None
+        self.target_messages = None
+        self.base_url = 'https://www.instagram.com/'
+        self.webiste_handler = webdriver.Chrome(ChromeDriverManager().install())
+		self.login()
+
+#  this is the first function of this class in this function the user is asked for credentials,  in this function the user is first of all ask for the username of the Instagram website from which the user wants to send a message to the other users,  once the user provides see the username,  the user is asked for the respective password that is associated with that particular user name which is entered by the user,  once we get both of these credential values we set them to our class variables which we have initialized in the above-written constructor
+    def get_user_credentials(self):
+        print("Enter the username to login to {}".format(self.base_url))
+        username = input()
+        print("Enter the password to login to {}".format(self.base_url))
+        password = input()
+        self.username = username
+        self.password = password
+
+
+# This is the second function of this class in this function the user is asked for the list of the user names of the users to the user who wants to send a message,  in this function first of all the user is asked for the number of users to whom the user want to send the message,  on entering the number of users the user is asked for n number of times for the username of the uses who are going to receive the message after  providing the username of the users those list of user names is stored in the class variable which was initialized in the constructor which was written in this class 
+    def get_the_recievers_usernames(self):
+        print("Enter the number of users to whom you want to send messages")
+        number_of_users = int(input())
+
+        list_of_usernames = list()
+
+        for i in range(number_of_users):
+            print("Enter the username of user {}".format(i+1))
+            target_username = input()
+
+            list_of_usernames.append(target_username)
+
+        self.target_usernames = list_of_usernames
+
+# In this function for each user name that is entered by the user a particular message is asked which is going to be sent to that particular user in this function the user is printed with the user name which he has entered and then ask for the respective message which needs to be sent to that user,  this step is repeated for all the user names that the user has added and all the inputs provided by the users are stored into one list of messages variable which was initialized in the constructor of this class, This variable will be later referred when we need to actually send the messages so this list of usernames and list of messages are initialized in two separate functions but while actual sending a message they are used at respective messages are sent to their respective users 
+    def messages_for_target_usernames(self):
+
+        list_of_target_messages = list()
+        for target_username in self.target_usernames:
+            print("Enter the message for user with username {}".format(target_username))
+            message = input()
+            list_of_target_messages.append(message)
+
+        self.target_messages = list_of_target_messages
+
+# This function is used to login to the intended website and once we login to the website the next step is to navigate to the homepage once we login to Instagram we see many popups coming so this function handles all the pop-ups that are handcrafted after login into the Instagram website so was our dedication a successful and a user is able to successfully logged into the website first offer a popup comes. We have to minimize a popup this is the code written for that popup to be a disabled and handled show with the help of this we can handle all the purposes that are encountered after login into the Instagram website. We can easily navigate to the homepage of the website. 
+    def login_to_target_website(self):
+		self.webiste_handler.get(self.base_url)
+		username_element_handler = WebDriverWait(self.webiste_handler, 20).until(
+			expected_conditions.presence_of_element_located((By.NAME, 'username')))
+		username_element_handler.send_keys(self.username)
+		password_element_handler = WebDriverWait(self.webiste_handler, 20).until(
+			expected_conditions.presence_of_element_located((By.NAME, 'password')))
+		password_element_handler.send_keys(self.password)
+		password_element_handler.send_keys(Keys.RETURN)
+		time.sleep(5)
+
+		# first pop-up
+		self.webiste_handler.find_element_by_xpath(
+			'//*[@id="react-root"]/section/main/div/div/div/div/button').click()
+		time.sleep(3)
+
+		# 2nd pop-up
+		self.webiste_handler.find_element_by_xpath(
+			'/html/body/div[4]/div/div/div/div[3]/button[2]').click()
+		time.sleep(4)
+
+#  Once the login is access to the website and if you successfully navigated to the homepage of the Instagram website the next step is to take the list of all the users and the respective messages which we need to send to those users who are entered by the user,  show first of all first user is picked up from the list of usernames which is provided by the user and their respective message which is intended to be sent to that user is typed in his chat box so for this to happen first of all we have to open the chat box of that particular user,   so, first of all, we go to the chat box for the user and click on the typing area so after clicking on the type of area our culture is enabled and we can type intended message which is required to be sent to that user,  and then we type the message from the list of the messages which are taken as input from the user in the previous steps so once the message is typed for the user the next step is to click on the send button to send the type message. This step is repeated for all the user's data present in the list of user names which are provided by the method used at the initial execution of this program,  so once all the users are present in the list of usernames which are provided by the user have received their message this function is exited,   the main operation of this function is to type the messages in the respective chat box of the users and send those message to the all the users feature present in the list of user name list which is provided by the user. 
+    def type_and_send_message(self):
+        for i,j in zip(self.target_usernames,self.target_messages):
+            print("[{}] message sent to [{}] successfully.".format(i,j))
+
+        # direct button
+		self.webiste_handler.find_element_by_xpath(
+			'//a[@class="xWeGp"]/*[name()="svg"][@aria-label="Direct"]').click()
+		time.sleep(3)
+
+		# clicks on pencil icon
+		self.webiste_handler.find_element_by_xpath(
+			'//*[@id="react-root"]/section/div/div[2]/div/div/div[2]/div/button').click()
+		time.sleep(2)
+		for i in user:
+
+			# enter the username
+			self.webiste_handler.find_element_by_xpath(
+				'/html/body/div[4]/div/div/div[2]/div[1]/div/div[2]/input').send_keys(i)
+			time.sleep(2)
+
+			# click on the username
+			self.webiste_handler.find_element_by_xpath(
+				'/html/body/div[4]/div/div/div[2]/div[2]/div').click()
+			time.sleep(2)
+
+			# next button
+			self.webiste_handler.find_element_by_xpath(
+				'/html/body/div[4]/div/div/div[1]/div/div[2]/div/button').click()
+			time.sleep(2)
+
+			# click on message area
+			send = self.webiste_handler.find_element_by_xpath(
+				'/html/body/div[1]/section/div/div[2]/div/div/div[2]/div[2]/div/div[2]/div/div/div[2]/textarea')
+
+			# types message
+			send.send_keys(self.message)
+			time.sleep(1)
+
+			# send message
+			send.send_keys(Keys.RETURN)
+			time.sleep(2)
+
+			# clicks on direct option or pencl icon
+			self.webiste_handler.find_element_by_xpath(
+				'/html/body/div[1]/section/div/div[2]/div/div/div[1]/div[1]/div/div[3]/button').click()
+			time.sleep(2)
+
+
+# Now the main function is written which has the object created for the above written class, and this created object is used for  calling all the different functions which are written in the above class,  the sequence of the program goes like this the user is provided with a list of options to select from the user can select any operation from the list the operation which are provided in the list are like to provide the credentials to login to the website,  to provide a list of usernames to whom the user wants to send the messages,  to provide the list of messages which needs to be sent to those usernames which are provided in the previous steps,  after providing all the required input the user can select the login function and navigate to the home page,  after the success for authentication and login to the  website  the user then choose for the option to type and send the message,   this option will it will invoke the main function which is written in the our class that will actually perform the operation of typing the message in the respective chat box office username which are provided in the second step  and the the corresponding message is typed in the chat work of of that user and then there is a click on the send button to send that message to the  target user  and this process is repeated for all the user that are present in the list of user name which is provided by the user in the previous steps. 
+def main():
+    
+    instagram_automation_obj =  AutomateInstagram()
+    url = None
+    while(True):
+        print("from the listed below the list of operations select any one of the operations:")
+        print("1. To provide the credentials(username/password) to login to the website.")
+        print("2. To provide the list of usernames of the users to whom to send the messages.")
+        print("3. To provide the list of messages that will be sent to specified users.")
+        print("4. To login to the website and navigate to the homepage of the website.")
+        print("5. To type message for all the users and send those typed messages.")
+        print("6. To exit from the code execution.")
+        
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+ 
+        if menu_choice == 1:
+            instagram_automation_obj.get_user_credentials()
+        elif menu_choice == 2:
+            instagram_automation_obj.get_the_recievers_usernames()
+        elif menu_choice == 3:
+            instagram_automation_obj.messages_for_target_usernames()
+        elif menu_choice == 4:
+            # instagram_automation_obj.login_to_target_website()
+            print("Logged In Successfully and naviagted to homepage.")
+        elif menu_choice == 5:
+            instagram_automation_obj.type_and_send_message()
+            print("Messages sent successfully.")
+        elif menu_choice == 6:
+            sys.exit()
+        
+        print("To move forward with the code, enter either [y] or [n] to halt")
+        continue_or_exit = input()
+ 
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+ 
+if __name__ == '__main__':
+    main()
+
+Output:
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+1
+Enter the username to login to https://www.instagram.com/
+user_name_demo
+Enter the password to login to https://www.instagram.com/
+[email protected]
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to login into the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+2
+Enter the number of users to whom you want to send messages to
+3
+Enter the username of user 1
+target_user_1
+Enter the username of user 2
+target_user_2
+Enter the username of user 3
+target_user_3
+To move forward with the code, enter either [y] or [n] to halt
+y
+
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+3
+Enter the message for the user with username target_user_1
+Hi, this is a message for user1.
+Enter the message for the user with username target_user_2
+Hope you get this message.
+Enter the message for the user with username target_user_3
+User3 this message for you.
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+4
+Logged In Successfully and navigated to the homepage.
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To login to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+5
+[target_user_1] message sent to [Hi this is message for user1.] successfully.
+[target_user_2] message sent to [Hope you get this message.] successfully.
+[target_user_3] message sent to [User3 this message for you.] successfully.
+Messages were sent successfully.
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+2
+Enter the number of users to whom you want to send messages to
+1
+Enter the username of user 1
+Ronaldo. Chris
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+3
+Enter the message for the user with the username Ronaldo.Chris
+Hi, I'm a big fan of your game.
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+5
+[ronaldo. cris] message sent to [Hi I'm a big fan of your game.] successfully.
+Messages were sent successfully.
+To move forward with the code, enter either [y] or [n] to halt
+y
+from the listed below the list of operations select any one of the operations:
+1. To provide the credentials(username/password) to log in to the website.
+2. To provide the list of usernames of the users to whom to send the messages.
+3. To provide the list of messages that will be sent to specified users.
+4. To log in to the website and navigate to the homepage of the website.
+5. To type messages for all the users and send those typed messages.
+6. To exit from the code execution.
+6
+
+Explanation:
+In the code which is written above as we can see in the output in the main function is written which has the object created for the above written class, and this created object is used for calling all the different functions which are written in the above class, the sequence of the program goes like this the user is provided with a list of options to select from the user can select any operation from the list the operation which are provided in the list are like to provide the credentials to login to the website, to provide a list of usernames to whom the user wants to send the messages, to provide the list of messages which needs to be sent to those usernames which are provided in the previous steps, after providing all the required input the user can select the login function and navigate to the home page, after the success for authentication and login to the website the user then choose for the option to type and send the message, this option will it will invoke the main function which is written in the our class that will actually perform the operation of typing the message in the respective chat box office username which are provided in the second step and the the corresponding message is typed in the chat work of of that user and then there is a click on the send button to send that message to the target user and this process is repeated for all the user that are present in the list of user name which is provided by the user in the previous steps.
+Advantages of Automation:
+
+Increasing Reliability: Automation has a clear productivity boost. However, the actual diamond that shines with automation is reliability. It is the foundation of every effective IT operations department; without it, there would be confusion, turmoil, and dissatisfied users. IT operations necessitate the mastery of two opposing skill sets: On the one hand, and operations manager requires advanced technical abilities, such as the ability to comprehend the complexity of an operating system and assess and resolve problems as they develop. This same individual, on the other hand, must be comfortable with pushing buttons and loading paper. Off-shift operations, let's face it, involve some of an IT organization's most tedious, repetitive, and error-prone duties. However, removing the human aspect eliminates the majority of batch processing problems.
+Optimizing Performance: Every firm wishes for its business to run like a thoroughbred. In actuality, it's more probable that you're overworked. Despite the fact that every year, advances in computer technology make them quicker and less expensive, the demands on them inevitably catch up and eventually surpass the capabilities of a company's computer infrastructure. As a result, many businesses strive to increase their system's performance. Upgraded hardware or the purchase of a newer machine are two pricey solutions for improving performance. It's also feasible to tweak a system for improved performance, but this requires a highly competent expert who isn't always accessible. When a system is tuned for a given workload, the settings are no longer optimal if the workload changes.
+Reducing Operational Costs: Automation software is a more intelligent and effective method of cost management and reduction. The best potential is to improve customer (end-user) service while gradually lowering expenses. This potential for cost reductions is frequently overlooked by management. The running costs of most current servers are inexpensive, and the total cost of ownership is decreasing. Despite this, the cost of the operations crew might account for up to 71% of the entire cost.
+Ensuring High Availability: Companies are becoming increasingly reliant on technology. The firm suffers if the computer is unavailable. One of the key purposes of IT management is to ensure high availability.
+Increasing Productivity: Productivity becomes more of an issue when an organization's technological demands expand. Automated operations can help with these problems in a variety of ways. The automation program then performs the commands accurately and in the exact sequence, avoiding operator mistakes. Forecasting job completion and being able to undertake "what if" evaluations of schedule changes help operations by removing a lot of the uncertainty from day-to-day chores.
+
+Disadvantages of Automation:
+
+Worker displacement: The most serious downside of automation is that it eliminates human labor. This is due to the fact that a computerized task may be completed faster and with higher precision than a human can. Disney World, for example, has been utilizing self-driving cars to shuttle visitors around the park for years. Many individuals are concerned that this will lead to less human employment.
+Initial training is required: The industry has relied heavily on automation for decades. However, before making the leap to automation, producers must consider potential unforeseen effects. One of these ramifications is the necessity for significant financial investment to maintain and service automated systems. These technologies are also more prone to cyber assaults than manual ones, putting firms at risk if their infrastructure isn't adequately safeguarded.
+Could introduce new safety hazards: When working circumstances change unexpectedly, automation may pose new safety dangers. A driverless automobile, for example, might be designed to drive independently yet still cause an accident if a person steps out onto the roadway under less-than-ideal conditions (night, limited visibility, etc.).
+Still requires human intervention: While the benefits of automation have been demonstrated in general, some activities still require human interaction. We'll use the self-driving car example above: these vehicles can recognize most road obstructions and can be taught to stop. However, under some circumstances, like driving over a barrier that is not clearly visible to the car's sensor, these technologies might misread the information and have unwanted results.
+Can become redundant: Automation is a practical answer to a variety of issues. However, in instances when change is introduced and the automation must be updated, this convenience may become obsolete. These sorts of modifications will simply add to the company's workload and may cost them valuable time and resources.
+Incompatible with Customization: Automation entails a reduction in variety and flexibility. In contrast to humans, machines can only execute a restricted range of jobs and can only accomplish what they are designed to do, but individuals can undertake a wide range of tasks. Automation implies repeatedly doing the same procedure, which frequently necessitates uniformity. Some automated procedures are incompatible with one-off customization for specific consumers.
+Security Concerns: Businesses are using important data to attract new consumers, grow sales, and enhance efficiency in today's data-driven environment. Unfortunately, hackers may exploit automated technologies that manage massive amounts of customer/company data. Many small firms do not want to risk data theft, despite the fact that adequate security protection methods may be put in place to avoid fraud.
+
+So, in this article, we have understood how to automate the process of sending Instagram messages using python.
+
+
+Next TopicPython SimpleHTTPServer Module
+
+
+
+
+← prev
+next →
+
+
+
+

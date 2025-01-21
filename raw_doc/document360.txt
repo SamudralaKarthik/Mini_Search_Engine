@@ -1,0 +1,233 @@
+
+
+
+
+next →
+← prev
+
+Difflib module in Python
+In the following tutorial, we will understand the Difflib module in the Python programming language. We will discuss the functioning of this module along with some examples based on its classes.
+So, let's get begun.
+Understanding the Python Difflib module
+Difflib is a built-in module in the Python programming language consisting of different simple functions and classes that allow users to compare data sets. The module offers the outputs of these sequence comparisons in a format that can be read by a human, using deltas to show the differences more efficiently.
+The difflib module is generally used to compare the sequence of the strings. But we can also use it to compare other data types as long as they are hash-able. We know that an object is hash-able if its hash value does not alter through the duration of its lifetime.
+The most commonly utilized classes in the Python difflib module are the Differ and the Sequence Matcher classes. There are also a few other helper classes and functions that can assist with more particular operations. Let us understand of some these functions in the following sections.
+Understanding the Sequence Matcher class
+Let us first begin with a fairly self-explanatory method of the difflib module: SequenceMatcher. The SequenceMatcher method will compare two provided strings and return the data representing the similarity between the two strings. Let us try this method with the help of the ratio() object. This object will return the comparison data in decimal format. An example for the same is shown below:
+Example:
+
+# importing the difflib library and SequenceMatcher class
+import difflib
+from difflib import SequenceMatcher
+
+# defining the strings
+str_1 = "Welcome to Javatpoint"
+str_2 = "Welcome to Python tutorial"
+
+# using the SequenceMatcher() function
+my_seq = SequenceMatcher(a = str_1, b = str_2)
+
+# printing the result
+print("First String:", str_1)
+print("Second String:", str_2)
+print("Sequence Matched:", my_seq.ratio())
+
+Output:
+First String: Welcome to Javatpoint
+Second String: Welcome to Python tutorial
+Sequence Matched: 0.5106382978723404
+
+Explanation:
+In the above snippet of code, we have first imported the difflib module along with the SequenceMatcher Class. We have then defined the two string values that we will compare with the help of that class. After that, we have created a new variable that encapsulates the SequenceMatcher class with two arguments, a and b, respectively. While the method actually accepts three arguments: None, a, and b.
+In order for the method to acknowledge the two strings, we have to assign each of the values of the string to the variables of the method, SquenceMatcher(a = str_1, b = str_2).
+Once every required variable have been defined, and the SequenceMatcher has been provided at least two arguments, we can now print the value with the help of the ratio() object that we have stated earlier. This object will determine the ratio of identical characters in the two strings, and the output is returned in the form of a decimal. Just like that, we have compared two simple strings and received an output on their resemblances.
+Note: The ratio() object is among a few that associated with the Sequence Matcher class. One can check the official documentation of Python to find out about more of these objects to perform different operations on sequences.
+Understanding the Differ class
+The Differ class is considered the opposite of SquenceMatcher; it takes in lines of text and finds the differences between the strings. But the Differ class is special in its utilization of deltas, making it even more efficient and readable for humans for spotting the differences.
+For example, while inserting new characters to the second string in a comparison between two strings, a ' + ' will pop up before the line that has received the extra characters.
+As we have probably guessed, deleting a few of the characters visible in the first string will cause ' - ' to appear before the second line of text.
+If a line is the same in both sequences, ' ' will be returned, and if a line is missing, then ' ? ' will appear. Moreover, we can also use the attributes such as ratio(), which we discussed in the previous example.
+Let us consider the following example to understand the working of the Differ class.
+Example:
+
+# importing the difflib module and Differ class
+import difflib
+from difflib import Differ
+
+# defining the strings
+str_1 = "They would like to order a soft drink"
+str_2 = "They would like to order a corn pizza"
+
+# using the splitlines() function
+lines_str1 = str_1.splitlines()
+lines_str2 = str_2.splitlines()
+
+# using the Differ() and compare() function
+dif = difflib.Differ()
+my_diff = dif.compare(lines_str1, lines_str2)
+
+# printing the results
+print("First String:", str_1)
+print("Second String:", str_2)
+print("Difference between the Strings")
+print('\n'.join(my_diff))
+
+Output:
+First String: They would like to order a soft drink
+Second String: They would like to order a corn pizza
+Difference between the Strings
+- They would like to order a soft drink
+?                            ^ ^^ ^^ ^^
+
++ They would like to order a corn pizza
+?                            ^ ^^ ^ ^^^
+
+Explanation:
+In the above snippet of code, we have imported the difflib module along with the Differ class. We have then defined the two strings that we want to compare. We have then invoked the splitlines() function on the two strings.
+Syntax:
+
+lines_str1 = str_1.splitlines()
+lines_str2 = str_2.splitlines()
+
+This function allows us to compare the strings by each line rather than by each character.
+Once we have defined a variable consisting of the Differ class, we create another containing Differ with the compare() object that takes in the two strings as arguments.
+Syntax:
+
+my_diff = dif.compare(lines_str1, lines_str2)
+
+We call the print() function and join the my_diff variable with a line enter so that the output is formatted in a method that makes it more readable.
+Understanding the get_close_matches method
+The difflib module serves another simple yet powerful utility as the get_close_matches method. This method is exactly what it sounds like: a tool that will accept parameters and return the closest matches to the target string. In pseudocode, the function runs in the following way:
+Syntax:
+
+get_close_matches(target_word, list_of_possibilities, n = res_limit, cutoff)
+
+As we can observe the above syntax, the get_close_matches() method accepts the four parameters; however, it only requires the first two in order to return the output.
+The first argument is the word that has to be targeted; we want the method to return similarities. The second argument can be an array of variables or terms that points to an array of strings. The third argument enables the user to define a limit to the number of outputs that are returned. The last argument determines the similarity between two words need to be in order to be returned as an output.
+With the first two arguments alone, the function will return outputs on the basis of the default cut-off of 0.6 (in the range of 0 - 1) and a default result limit of 3. Let us consider the following example to understand the working of this function.
+Example:
+
+# importing the difflib module and get_close_matches method
+import difflib
+from difflib import get_close_matches
+
+# using the get_close_matches method
+my_list = get_close_matches('mas', ['master', 'mask', 'duck', 'cow', 'mass', 'massive', 'python', 'butter'])
+
+# printing the list
+print("Matching words:", my_list)
+
+Output:
+Matching words: ['mass', 'mask', 'master']
+
+Explanation:
+In the above snippet of code, we have imported the difflib module and the get_close_matches method. We have then used the get_close_matches() method on a list of items with some similarities in their characters. Once we execute the program, the function will return only three words that have similar letters in them even though there is a fourth item similar to the word 'mas': 'massive'. Now, let us try defining a result_limit and a cutoff in the following example:
+Example:
+
+# importing the difflib module and get_close_matches method
+import difflib
+from difflib import get_close_matches
+
+# using the get_close_matches method
+my_list = get_close_matches(
+    'mas',
+    ['master', 'mask', 'duck', 'cow',
+    'mass', 'massive', 'python', 'butter'],
+    n = 4,
+    cutoff = 0.6
+    )
+
+# printing the list
+print("Matching words:", my_list)
+
+Output:
+Matching words: ['mass', 'mask', 'master', 'massive']
+
+Explanation:
+In the above snippet of code, we have yielded four results that are at least 60% similar to the word 'mas'. The cutoff is equivalent to the original as we just defined the same value as the default, 0.6. However, we can change this parameter to make the results more or less strict. The closer to 1, the stricter the constraints will be.
+Understanding the unified_diff & context_diff classes
+There are two classes in difflib that work in identical ways: the unified_diff and the context_diff. The only chief difference between the two is the result.
+The unified_diff class accepts two strings of data and then returns each word that was either inserted or deleted from the first.
+Let us consider the following example for better understanding.
+Example:
+
+# importing the required modules
+import sys
+import difflib
+from difflib import unified_diff
+
+# defining the string variables
+str_1 = ['Mark\n', 'Henry\n', 'Richard\n', 'Stella\n', 'Robin\n', 'Employees\n']
+str_2 = ['Arthur\n', 'Joseph\n', 'Stacey\n', 'Harry\n', 'Emma\n', 'Employees\n']
+
+# using the unified_diff() function
+sys.stdout.writelines(unified_diff(str_1, str_2))
+
+Output:
+--- 
++++ 
+@@ -1,6 +1,6 @@
+-Mark
+-Henry
+-Richard
+-Stella
+-Robin
++Arthur
++Joseph
++Stacey
++Harry
++Emma
+ Employees
+
+Explanation:
+In the above snippet of code, we have imported the required modules and defined two variables storing some words. We have then used the unified_diff() function to remove the words from the first variable and add the words from the second variable to the first one. As a result, we can observe that the unified_diff returns the removed words prefixed with - and returns the added words prefixed with +. The final word, 'Employees', consists of no prefix present in both strings.
+The context_diff class works in a similar manner as the unified_diff. However, instead of revealing what was inserted and deleted from the original string, it simply returns what lines have changed by returning the changed lines with a prefix of '!'.
+Let us consider the following example to understand the working of this class.
+Example:
+
+# importing the required modules
+import sys
+import difflib
+from difflib import context_diff
+
+# defining the string variables
+str_1 = ['Mark\n', 'Henry\n', 'Richard\n', 'Stella\n', 'Robin\n', 'Employees\n']
+str_2 = ['Arthur\n', 'Joseph\n', 'Stacey\n', 'Harry\n', 'Emma\n', 'Employees\n']
+
+# using the context_diff() function
+sys.stdout.writelines(context_diff(str_1, str_2))
+
+Output:
+*** 
+--- 
+***************
+*** 1,6 ****
+! Mark
+! Henry
+! Richard
+! Stella
+! Robin
+  Employees
+--- 1,6 ----
+! Arthur
+! Joseph
+! Stacey
+! Harry
+! Emma
+  Employees
+
+Explanation:
+In the above example, we have used the context_diff to remove and add the words in the first string. The result of the same can be observed as the words altered are described with the '!' prefix.
+
+
+Next TopicConvert the Column Type from String to Datetime Format in Pandas DataFrame
+
+
+
+
+← prev
+next →
+
+
+
+

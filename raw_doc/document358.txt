@@ -1,0 +1,124 @@
+
+
+
+
+next →
+← prev
+
+The sqrt(): Math Function of Python
+The sqrt() function is a built-in function in Python for performing operations related to math. The sqrt() function is used for returning the square root of any imported number.
+In this tutorial, we will discuss how we can use the sqrt() function in Python.
+Syntax:
+
+math.sqrt(N)
+
+Parameter:
+'N' is any number which is greater or equal to 0 (N >= 0).
+Returns:
+It will return the square root of the number "N", that is passed as the parameter.
+Example:
+
+# importing the math module 
+import math as m
+  
+# printing the square root of 7 
+print ("The square root of 7: ", m.sqrt(7)) 
+  
+# printing the square root of 49
+print ("The square root of 49: ", m.sqrt(49)) 
+  
+# printing the square root of 115
+print ("The square root of 115: ", m.sqrt(115))
+
+Output:
+The square root of 7:  2.6457513110645907
+The square root of 49:  7.0
+The square root of 115:  10.723805294763608
+
+Error
+We get an error while executing the sqrt() function if the number passed as a parameter is less than "0" due to a runtime error.
+Example:
+
+# import the math module 
+import math as m
+ 
+print ("The square root of 16: ", m.sqrt(16)) 
+
+# printing the error when x less than 0 
+print ("The square root of -16: ", m.sqrt(-16))
+
+Output:
+The square root of 16:  4.0
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-3-79d85b7d1d62> in <module>
+      5 
+      6 # printing the error when x less than 0
+----> 7 print ("The square root of -16: ", m.sqrt(-16))
+      8 
+
+ValueError: math domain error
+
+Explanation:
+As at first, we passed "16" as a parameter, and we got the output as "4", but for "-16", which is less than "0", we got an error, saying "math domain error".
+Application
+We can also use the sqrt() function for creating an application for performing math functions. Suppose we have a number "N", of which we have to check whether it is a prime number or not.
+Approach:
+We will use the following approach:
+
+Step1: we will import the math module.
+Step 2: we will create a function "check_if" for checking if the given number is prime or not.
+Step 3: we will check if the number is equal to 1. If "yes", it will return false.
+Step 4: we will run a for loop from range "2" to "sqrt(N)".
+Step 5: we will check if any number between the given range divides "N".
+
+Example:
+
+import math as M
+  
+# Creating a function for checking if the number is prime or not 
+def check_if(N):
+    if N == 1:
+        return False
+          
+        # Checking from 1 to sqrt(N) 
+    for K in range(2, (int)(M.sqrt(N)) + 1):
+        if N % K == 0:
+            return False 
+    return True
+  
+# driver code
+N = int( input("Enter the number you want to check: "))
+if check_if(N):
+    print ("The number is prime") 
+else:
+    print ("The number is not prime")
+
+Output:
+#1:
+Enter the number you want to check:  12
+The number is not prime
+
+#2:
+Enter the number you want to check:  11
+The number is prime
+
+#3:
+Enter the number you want to check:  53
+The number is prime
+
+Conclusion
+In this tutorial, we have discussed how to use Python's sqrt() function for calculating the square root of any number greater than 0.
+
+
+Next TopicPython yfinance Module
+
+
+
+
+← prev
+next →
+
+
+
+

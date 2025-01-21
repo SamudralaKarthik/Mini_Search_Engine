@@ -1,0 +1,294 @@
+
+
+
+
+next →
+← prev
+
+Graphene Python
+Python is considered among the most beloved general-purpose programming languages because of its ease of utilization and simplicity. In addition to it, GraphQL, a declarative query language for Application Programming Interfaces and server runtimes, pairs pretty well with Python. However, a very small number of comprehensive learning materials are available out there that provide the programmers a step-by-step breakdown on the utilization of GraphQL with Python.
+Graphene is among the best libraries to create the endpoints of GraphQL in a programming language like Python. It is dynamically advanced. It contains reasonably entire helper libraries for ORM of Django, SQLAlchemy, and MongoDB. It is considerably effortless to achieve something simple going. The Documentation of Graphene leaves a lot to be desired. It is easy to achieve something simple going in GraphQL with the help of its documentation; however, getting something hardened, production-ready, and capable is another story.
+In the following tutorial, we will focus on the use of GraphQL with Python using the Graphene library.
+But before we get into that, let us briefly discuss the goal and requirements for the tutorial.
+Objective
+We will build a project based on a crawling service. We will use the extraction library for this project.
+This crawling service will submit the client request in the following way:
+
+{
+    website(url: "https://www.javatpoint.com/python-tutorial") {
+        title
+        image
+    }
+}
+
+The response from the server will be:
+
+{
+    "data": {
+        "website": {
+            "title": "Learn Python Tutorial - javatpoint",
+            "image": "https://static.javatpoint.com/images/logo/jtp_logo",
+        }
+    }
+}
+
+Each website will also involve a description field.
+Setting up the environment
+With the hypothesis that we already have Python version 3 available locally, let us first create a virtual environment for the dependencies. In order to create one, let us begin with installing virtualenv as shown below:
+Syntax:
+
+$ pip install virtualenv
+$ virtualenv env
+
+Output:
+created virtual environment CPython3.9.0.final.0-64 in 45108ms
+  creator CPython3Windows(dest=D:\Python\env, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=C:\Users\Mango\AppData\Local\pypa\virtualenv)
+    added seed packages: pip==21.2.2, setuptools==57.4.0, wheel==0.36.2
+  activators BashActivator,BatchActivator,FishActivator,PowerShellActivator,PythonActivator
+
+Let us activate the virtual environment.
+The syntax for Windows, MacOS, and Linux is quite different.
+1. For Windows:
+Syntax:
+
+$ env\Scripts\activate
+
+2. For MacOS / Linux:
+Syntax:
+
+$ source env/bin/activate
+
+Now, let us understand what the required libraries for the project are.
+
+Extraction
+Graphene
+Flask-graphql
+Requests
+
+We can install them individually, using the pip installer as shown below.
+Syntax:
+
+$ pip install extraction
+$ pip install graphene
+$ pip install flask-graphql
+$ pip install requests
+
+OR
+We can install them as a group as shown below:
+Syntax:
+
+$ pip install extraction graphene flask-graphql requests
+
+Crawling and Extraction
+Before we get started with GraphQL, let us briefly understand the following snippet of code for crawling and extracting data from a website.
+Example:
+
+# importing the required libraries
+import graphene
+import extraction
+import requests
+# defining the function for extraction
+def extract(myurl):
+    myhtml = requests.get(myurl).text
+    extrctd = extraction.Extractor().extract(myhtml, source_url = myurl)
+    print(extrctd)
+# calling the function
+extract('https://www.javatpoint.com/python-tutorial')
+
+Output:
+
+
+Explanation:
+In the above snippet of code, we have imported the required libraries and defined a function for extraction as extract().
+Inside the function, we have used the requests module to request the details from the URL and stored those details in the variable named myhtml. We have then used the Extractor()
+function of the extraction module to extract the required data for the user and printed them for the user.
+At last, we have called the extract() function specifying the URL we want to extract the data from.
+We can observe that every extracted object generates different sections of data available such as title, url, image, description, and feed.
+Schema
+GraphQL scheme is present at the base of each API of GraphQL. It helps in describing the types, fields, objects for the exposed API. We utilize the Graphene library in order to describe the schema as an object in Python.
+We can write a schema for describing an extracted website in a quite simple way, as shown below:
+Example:
+
+# importing the graphene library
+import graphene
+# defining a class
+class my_Website(graphene.ObjectType):
+    my_url = graphene.String(required = True)
+    my_title = graphene.String()
+    my_description = graphene.String()
+    my_image = graphene.String()
+
+Explanation:
+In the above snippet of code, we have imported the graphene library and defined a class as myWebsite that inherits the ObjectType class of the graphene library. This ObjectType acts as a building block utilized in order to define the relationship between the Fields in the Schema and the way of retrieving their data. Inside the class, we have defined different fields and used the String() of the graphene library to describe the types of fields; however, each field could be another object we have described or several other lists, scalars, enums, and many more.
+The thing which is quite unexpected is that we also need to write a schema describing the query we will make in order to retrieve these objects:
+Example:
+
+# importing the graphene library
+import graphene
+# defining the class
+class my_Query(graphene.ObjectType):
+    website1 = graphene.Field(my_Website, my_url = graphene.String())
+    # defining the function
+    def resolv_website(self, info, my_url):
+        extrctd = extract(my_url)
+        return my_Website(my_url = my_url,
+                       my_title = extrctd.title,
+                       my_description = extrctd.description,
+                       my_image = extrctd.image,
+        )
+
+Explanation:
+In the above snippet of code, website1 is an object type that we support querying against, my_url is a parameter that we will pass along to the resolution function, and then the website1 object calls the resolv_website function by each request.
+The last step is to create an instance of graphene.Schema, which we will pass to the server in order to describe the new API we have created. Let us consider the following snippet of code for the same.
+Example:
+
+my_schema = graphene.Schema(query = my_Query)
+
+With that done, we have created the schema for the project successfully.
+The complete code for same is shown below:
+File: my_schema.py
+
+# importing the required libraries
+import graphene
+import extraction
+import requests
+# defining the function for extraction
+def extract(my_url):
+    myhtml = requests.get(my_url).text
+    extrctd = extraction.Extractor().extract(myhtml, source_url = my_url)
+    print(extrctd)
+    return extrctd
+# defining the class
+class my_Website(graphene.ObjectType):
+    my_url = graphene.String(required = True)
+    my_title = graphene.String()
+    my_description = graphene.String()
+    my_image = graphene.String()
+# defining the class
+class my_Query(graphene.ObjectType):
+    website1 = graphene.Field(my_Website, my_url = graphene.String())
+    # defining the function
+    def resolv_website(self, info, my_url):
+        extrctd = extract(my_url)
+        return my_Website(my_url = my_url,
+                       my_title = extrctd.title,
+                       my_description = extrctd.description,
+                       my_image = extrctd.image,
+        )
+
+my_schema = graphene.Schema(query = my_Query)
+
+Server
+Now that we have written the schema, we can begin serving it over HTTP with the help of flask and flask-graphql.
+Let us consider the following snippet of code in order to create a server.
+File: my_server.py
+
+# importing the required library
+from flask import Flask
+from flask_graphql import GraphQLView
+import my_schema
+# using the Flask() function to create app
+my_app = Flask(__name__)
+# setting URL rules
+my_app.add_url_rule(
+  '/',
+  view_func = GraphQLView.as_view('graphql', schema = my_schema, graphiql = True)
+)
+my_app.run()
+
+Explanation:
+In the above snippet of code, we have imported the required libraries in addition to the file named my_schema that we created earlier. We have then used the Flask() function specifying the parameter as __name__ to create the application. We have also added different rules for the URL using the add_url_rule() function, where we have specified different parameters and used the run() function at last to execute the application.
+Now we can run the server using the following syntax:
+Syntax:
+
+$ python my_server.py
+
+Once we entered the above syntax, the server will begin running at localhost:5000 or http://127.0.0.1:5000/.
+The output for the same is shown below:
+Output:
+Serving Flask app "my_server" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+Client
+Even though they exist, we do not require a special GraphQL client in order to perform API requests against the new API; we can stick to the HTTP clients that we are used to, with us utilizing requests in the following example.
+File: my_client.py
+
+# importing the requests library
+import requests
+# defining the query
+my_query = """
+{
+  website(url: "https://www.javatpoint.com/python-tutorial") {
+    title
+    image
+    description
+  }
+}
+"""
+# defining the response
+my_response = requests.post("http://127.0.0.1:5000/", params = {'query': my_query})
+print(my_response.text)
+
+Output:
+{
+  "data": {
+    "website": {
+      "title": "Learn Python Tutorial - javatpoint",
+      "image": "https://static.javatpoint.com/images/logo/jtp_logo",
+      "description": "Learn Python Tutorial for beginners and profession"
+    }
+  }
+}
+
+Explanation:
+In the above snippet of code, we have imported the requests library and defined a query as my_query that will be sent to the server. We have then defined a variable as my_response, which will store the data returned in the form of a response from the server. At last, we have printed the response for the user.
+One can also customize the contents of the my_query variable in order to retrieve various fields or even utilize things such as aliases in order to retrieve more than one object at a time.
+Introspection
+Among the most powerful aspects of GraphQL, its servers support introspection. Introspection allows both humans as well as automated tools in order to understand the available objects and operations.
+One of the good examples of this can be that while we are running the example we built, we can navigate to http://127.0.0.1:5000 and utilize GraphiQL in order to test the new API directly.
+These capabilities are not restricted to GraphiQL, and the integration can also be done by us with the help of the same query interface we would utilize to query the new API. Let us consider a simple example where we ask about the available queries exposed by the sample service:
+
+{
+  __type(name: "Query") {
+    fields {
+      name
+      args {
+        name
+      }
+    }
+  }
+}
+
+The server reply would be:
+{
+  "data": {
+    "__type": {
+      "fields": [
+        {
+          "name": "website",
+          "args": [{ "name": "url" }]
+        }
+      ]
+    }
+  }
+}
+
+Many other queries based on introspection are available, which are quite clumsy to write; however, they depict a tremendous amount of power to tool builders.
+
+
+Next TopicName Mangling in Python
+
+
+
+
+← prev
+next →
+
+
+
+

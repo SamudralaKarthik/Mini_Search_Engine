@@ -1,0 +1,555 @@
+
+
+
+
+next →
+← prev
+
+Tracemalloc module in Python
+In the following tutorial, we will discuss the tracemalloc module of the Python programming language with some examples.
+Tracemalloc is a module that became available from Python version 3.4 that allows us to monitor memory allocations in the Python code. It allows us to take memory snapshots at a specific point, perform different statistics on snapshots and perform differences between two snapshots in order to check object allocation between two snapshots.
+The following tutorial will help us understand the use of the Application Programming Interface (API) of the tracemalloc module to trace memory consumption in Python code and perform different operations. We will also understand the usage of the different classes, methods, and attributes available through the tracemalloc module using different examples.
+So, let's get begun.
+Understanding the Python tracemalloc module
+The tracemalloc module is a debug utility in order to tool memory blocks allocated by Python. It offers the following information:
+
+Traceback where an object was allocated
+Statistics on allocated memory blocks per filename and per line number: total size, number, and the average size of allocated memory blocks
+Calculate the differences between two snapshots in order to detect memory leaks
+
+We must start the tracemalloc module as early as possible to trace most memory blocks allocated by the Python programming language. We can make this possible by setting the PYTHONTRACEMALLOC environment variable to 1 or with the help of the -X tracemalloc command-line option. The start() function of the tracemalloc module can be called at runtime in order to start tracing Python memory allocations.
+By default, a trace of an allocated memory block only stores the most recent frame (1 frame). We can store 25 frames at startup by setting the PYTHONTRACEMALLOC environment variable to 25 or using the -X tracemalloc = 25 command line option.
+Let us now understand some classes and methods that the tracemalloc module offers.
+Understanding the Classes and Methods of the tracemalloc module
+
+These are some of the classes and methods that the Python tracemalloc module provides:
+start() - This method is used to begin tracing of memory. It takes an integer parameter named nframe, which specifies the number of frames to allocate per call. The default value is 1.
+take_snapshot() - This method takes a memory snapshot and returns the Snapshot object.
+statistics() - We can access this method using the Snapshot object and accept a key as an input to sort records of tracing. This method returns an iterator that has a list of Statistic objects. The single Statistic object has details related to a single traceback (usually a single line of code) which involves the number of objects and their sizes recorded in that traceback. The following is a list of keys that this method accepts as input:
+
+filename: This attribute allows the method to sort traces per the file names.
+lineno: This attribute allows the method to sort traces as per the line number in the file.
+traceback: This attribute allows the method to sort traces as per the trace taken order.
+
+traceback - This attribute of the Statistic object is used to return an object of the Traceback class. The Traceback has details associated with the individual trace, which can have multiple frames (Frame).
+format() - This method is used to format traceback as a list of lines that were traced for this traceback.
+get_traceback_limit() - This method is used to return an integer specifying the maximum number of frames stored in a single traceback. We can specify the total number of maximum frames to record per traceback in the tracemalloc.start() method.
+get_object_traceback() - This method accepts an individual object as an input and is used to return a traceback object specifying where the traceback for this object was taken.
+get_traced_memory() - This method is used to return the tuple of two integers specifying the current size and peak size of the block traced in bytes.
+get_tracemalloc_memory() - This method is used to return an integer specifying memory used by the tracemalloc module in bytes.
+is_tracing() - This method is used to return a Boolean value specifying whether tracing is happening or stopped.
+stop() - This method is used to stop the tracemalloc module from accepting traces.
+clear_traces() - This method is used to clear all the traces taken from the beginning of the start() method. It is necessary to make sure that traces info would still be available for the Snapshot objects taken; however, it won't be available if we call the take_snapshot() method after this method.
+dump() - This method accepts a filename as an input to store the traces information.
+load() - This method accepts a filename as an input from which to load the traces information.
+DomainFilter - This class allows us to filter the traces by addressing the space of the objects. It accepts two arguments as input.
+
+domain - This argument accepts an integer value specifying the address space of the memory block. Python memory traces usually utilize the integer 0; however, the number will be varied for C.
+inclusive - This argument accepts a Boolean value specifying whether to include or exclude traces mentioned by the domain attribute.
+
+Filter - This class allows us to filter traces based on the combination of the filename, line number, and domain. It has multiple parameters, as shown below:
+
+domain - This attribute accepts an integer value specifying the address space of the memory block. Python memory traces generally use the integer 0; however, the number will be varied for C.
+filename_pattern - This attribute accepts a string value specifying the pattern for which filenames will be matched in traces, and based on the inclusive flag, they will be included or excluded.
+lineno - This attribute accepts an integer value specifying the traces with that line numbers to include.
+
+inclusive - This attribute accepts a Boolean value specifying whether to include or exclude traces mentioned by domain, filename_pattern, and lineno attributes.
+
+
+all_frames - This attribute accepts a Boolean flag specifying whether to include all frames per trace or not.
+
+compare_to() - We can call this method on any snapshot object, passing it to another snapshot object in order to get the difference between two snapshots. It also accepts the key_type parameter as an input that we will utilize as the primary key to find out the difference between two snapshots. It will return an object of StatisticDiff class. This object has information related to the differences.
+
+We will now understand the usage of the above classes and methods with some examples.
+Some examples of the tracemalloc module
+Let us now consider some examples demonstrating the working of the classes and methods of the tracemalloc module.
+Example 1:
+In the following example, we will understand the use of the start(), take_snapshot() and statistics() method of the tracemalloc module.
+Code:
+
+import tracemalloc as tm
+
+tm.start()
+
+listOne = [n for n in range(15000)]
+listTwo = [n*n for n in range(15000)]
+listThree = [n*n*n for n in range(15000)]
+
+ss = tm.take_snapshot()
+
+for stats in ss.statistics("lineno"):
+    print(stats)
+
+Output:
+D:\Python_programs\tracOne.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracOne.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracOne.py:5: size=522 KiB, count=14745, average=36 B
+
+Explanation:
+In the above snippet of code, we have imported the tracemalloc module. We then began tracing at the starting using the start() method and then created three lists of integers. We have then taken a memory snapshot and printed a list of tracebacks collected by that snapshot from the beginning of the traceback.
+Example 2:
+In the following example we will understand the use of the methods like format(), get_traceback_limit(), get_object_traceback(), get_object_memory(), get_tracemalloc_memory(), and is_tracing().
+Code:
+
+import tracemalloc as tm
+import numpy as np
+
+tm.start(25)
+
+listOne = [n for n in range(15000)]
+listTwo = [n*n for n in range(15000)]
+listThree = [n*n*n for n in range(15000)]
+listFour = np.random.randint(1, 150, (1500,))
+
+ss = tm.take_snapshot()
+
+print("========== THE SNAPSHOT =============")
+for stats in ss.statistics("lineno"):
+    print(stats)
+    print(stats.traceback.format())
+
+print("\n=========== USEFUL METHODS ===========")
+print("\nTraceback Limit : ", tm.get_traceback_limit(), " Frames")
+
+print("\nAllocation Location for List l4 : ", tm.get_object_traceback(listFour))
+
+print("\nTraced Memory (Current, Peak): ", tm.get_traced_memory())
+
+# tracemalloc.reset_peak()
+
+# print("\nTraced Memory : ", tracemalloc.get_traced_memory())
+
+print("\nMemory Usage by tracemalloc Module : ", tm.get_tracemalloc_memory(), " bytes")
+
+print("\nTracing Status : ", tm.is_tracing())
+
+Output:
+========== THE SNAPSHOT =============
+D:\Python_programs\tracTwo.py:8: size=583 KiB, count=14994, average=40 B
+['  File "D:\\Python_programs\\tracTwo.py", line 8', '    listThree = [n*n*n for n in range(15000)]']
+D:\Python_programs\tracTwo.py:7: size=528 KiB, count=14984, average=36 B
+['  File "D:\\Python_programs\\tracTwo.py", line 7', '    listTwo = [n*n for n in range(15000)]']
+D:\Python_programs\tracTwo.py:6: size=522 KiB, count=14744, average=36 B
+['  File "D:\\Python_programs\\tracTwo.py", line 6', '    listOne = [n for n in range(15000)]']
+D:\Python_programs\tracTwo.py:9: size=6544 B, count=3, average=2181 B
+['  File "D:\\Python_programs\\tracTwo.py", line 9', '    listFour = np.random.randint(1, 150, (1500,))']
+<__array_function__ internals>:5: size=528 B, count=1, average=528 B
+['  File "<__array_function__ internals>", line 5']
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:3051: size=520 B, count=1, average=520 B
+['  File "C:\\Users\\khans\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\numpy\\core\\fromnumeric.py", line 3051', "    return _wrapreduction(a, np.multiply, 'prod', axis, dtype, out,"]
+<__array_function__ internals>:4: size=456 B, count=1, average=456 B
+['  File "<__array_function__ internals>", line 4']
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:70: size=440 B, count=1, average=440 B
+['  File "C:\\Users\\khans\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python39\\site-packages\\numpy\\core\\fromnumeric.py", line 70', '    passkwargs = {k: v for k, v in kwargs.items()']
+D:\Python_programs\tracTwo.py:11: size=424 B, count=1, average=424 B
+['  File "D:\\Python_programs\\tracTwo.py", line 11', '    ss = tm.take_snapshot()']
+
+=========== USEFUL METHODS ===========
+
+Traceback Limit :  25  Frames
+
+Allocation Location for List l4 :  D:\Python_programs\tracTwo.py:9
+
+Traced Memory (Current, Peak):  (2000444, 2019653)
+
+Memory Usage by tracemalloc Module :  2585088  bytes
+
+Tracing Status :  True
+
+Explanation:
+In the above snippet of code, we have imported the tracemalloc module. We then began tracing at the starting using the start() method and then created four lists of integers. We have then taken a memory snapshot and performed different operations using the methods mentioned above, and returned the information in the required pattern.
+Example 3:
+In the following example, we will understand the implementation of the stop() method along with the clear_traces() method.
+Code:
+
+import tracemalloc as tm
+
+tm.start()
+
+listOne = [n for n in range(1500000)]
+listTwo = [n*n for n in range(15000)]
+listThree = [n*n*n for n in range(15000)]
+
+ss_1 = tm.take_snapshot()
+
+print("================ SNAPSHOT ONE =================")
+for stats in ss_1.statistics("lineno"):
+    print(stats)
+
+listFour = [n*n*n*n for n in range(15000)]
+
+ss_2 = tm.take_snapshot()
+
+print("\n================ SNAPSHOT 2 =================")
+for stats in ss_2.statistics("lineno"):
+    print(stats)
+
+tm.clear_traces()
+
+listFive = [n*2 for n in range(15000)]
+
+ss_3 = tm.take_snapshot()
+
+print("\n================ SNAPSHOT 3 =================")
+for stats in ss_3.statistics("lineno"):
+    print(stats)
+
+print("\nTracing Status : ", tm.is_tracing())
+
+tm.stop()
+
+print("\nTracing Status : ", tm.is_tracing())
+
+try:
+    print("\nTrying to Take Snapshot After Tracing is Stopped.")
+    the_snap = tm.take_snapshot()
+except Exception as e:
+    print("Exception : ", e)
+
+Output:
+================ SNAPSHOT ONE =================
+D:\Python_programs\tracThree.py:5: size=51.5 MiB, count=1499745, average=36 B
+D:\Python_programs\tracThree.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracThree.py:6: size=528 KiB, count=14984, average=36 B
+
+================ SNAPSHOT 2 =================
+D:\Python_programs\tracThree.py:5: size=51.5 MiB, count=1499745, average=36 B
+D:\Python_programs\tracThree.py:15: size=642 KiB, count=14998, average=44 B
+D:\Python_programs\tracThree.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracThree.py:6: size=528 KiB, count=14984, average=36 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:226: size=896 B, count=3, average=299 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:173: size=816 B, count=2, average=408 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:505: size=656 B, count=3, average=219 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:423: size=576 B, count=4, average=144 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:533: size=576 B, count=1, average=576 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:498: size=528 B, count=3, average=176 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:560: size=472 B, count=2, average=236 B      
+D:\Python_programs\tracThree.py:12: size=456 B, count=1, average=456 B
+D:\Python_programs\tracThree.py:13: size=448 B, count=1, average=448 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:59: size=440 B, count=1, average=440 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:535: size=416 B, count=1, average=416 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:207: size=416 B, count=1, average=416 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:53: size=416 B, count=1, average=416 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:501: size=408 B, count=1, average=408 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:499: size=168 B, count=1, average=168 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:193: size=144 B, count=3, average=48 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:67: size=128 B, count=2, average=64 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:315: size=104 B, count=2, average=52 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:485: size=64 B, count=1, average=64 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:484: size=64 B, count=1, average=64 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:54: size=64 B, count=1, average=64 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:558: size=56 B, count=1, average=56 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:26: size=56 B, count=1, average=56 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:212: size=37 B, count=2, average=18 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:503: size=28 B, count=1, average=28 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:502: size=28 B, count=1, average=28 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:58: size=24 B, count=1, average=24 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:21: size=24 B, count=1, average=24 B
+
+================ SNAPSHOT 3 =================
+D:\Python_programs\tracThree.py:25: size=526 KiB, count=14873, average=36 B
+
+Tracing Status :  True
+
+Tracing Status :  False
+
+Trying to Take Snapshot After Tracing is Stopped.
+Exception :  the tracemalloc module must be tracing memory allocations to take a snapshot
+
+Explanation:
+In the above snippet of code, we have first taken a snapshot after the creation of three lists of integers. We have then created another list and taken snapshots again. We have then cleared all traces, which are traces of four lists created since the beginning. We have then created the fifth list and taken a snapshot again. We can also understand from the output that the third snapshot has information only about the fifth list created and all traces before it is cleared. At last, we have also displayed the usage of the stop() method.
+Example 4:
+In the following example, we will understand the implementation of the dump() and load() methods.
+Code:
+
+import tracemalloc as tm
+
+tm.start()
+
+listOne = [n for n in range(15000)]
+listTwo = [n*n for n in range(15000)]
+listThree = [n*n*n for n in range(15000)]
+
+ss = tm.take_snapshot()
+
+for stats in ss.statistics("lineno"):
+    print(stats)
+
+ss.dump("snap.out")
+
+ssLoaded = tm.Snapshot.load("snap.out")
+
+print("\nLoaded Snapshot From File :")
+for stats in ssLoaded.statistics("lineno"):
+    print(stats)
+
+Output:
+D:\Python_programs\tracFour.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracFour.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracFour.py:5: size=522 KiB, count=14745, average=36 B
+
+Loaded Snapshot From File :
+D:\Python_programs\tracFour.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracFour.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracFour.py:5: size=522 KiB, count=14745, average=36 B
+
+Explanation:
+In the above snippet of code, we have created three lists and taken a snapshot. We have then printed the statistics for the users. We have then used the dump() method to store the trace information in the snap.out file. We have then used the load() method to load the stored trace information from the snap.out file and printed the statistics for the user.
+Example 5:
+In the following example, we will understand the implementation of the DomainFilter and Filter classes by filtering out the traces from a list of all the traces recorded by the tracemalloc module.
+Code:
+
+import tracemalloc as tm
+import numpy as np
+
+tm.start(10)
+
+listTwo = [i*i for i in range(15000)]
+listOne = [i for i in range(15000)]
+listThree = [i*i*i for i in range(15000)]
+listFour = [i*2 for i in range(15000)]
+listFive = np.random.randint(1, 150, (1500, ))
+
+ss = tm.take_snapshot()
+
+print("========== The Original Snapshot ===========")
+for stats in ss.statistics("lineno"):
+    print(stats)
+
+print("\n========= Filtered Snapshot - One =============")
+filterSS = tm.DomainFilter(inclusive = True, domain = 0)
+snapShot = ss.filter_traces(filters = [filterSS])
+
+for stats in snapShot.statistics("lineno"):
+    print(stats)
+
+filterSS = tm.DomainFilter(inclusive = False, domain = 0)
+snapShot = ss.filter_traces(filters = [filterSS])
+
+print("\n========= Filtered Snapshot - Two =============")
+for stats in snapShot.statistics("lineno"):
+    print(stats)
+
+filterSS = tm.Filter(inclusive = True, filename_pattern = "tracFive.py")
+snapShot = ss.filter_traces([filterSS])
+
+print("\n========= Filtered Snapshot - Three =============")
+for stats in snapShot.statistics("lineno"):
+    print(stats)
+
+filterSS = tm.Filter(inclusive = False, filename_pattern = "tracFive.py")
+snapShot = ss.filter_traces([filterSS])
+
+print("\n========= Filtered Snapshot - Four =============")
+for stats in snapShot.statistics("lineno"):
+    print(stats)
+
+Output:
+========== The Original Snapshot ===========
+D:\Python_programs\tracFive.py:8: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracFive.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracFive.py:9: size=525 KiB, count=14872, average=36 B
+D:\Python_programs\tracFive.py:7: size=522 KiB, count=14744, average=36 B
+D:\Python_programs\tracFive.py:10: size=6544 B, count=3, average=2181 B
+<__array_function__ internals>:5: size=528 B, count=1, average=528 B
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:3051: size=520 B, count=1, average=520 B
+<__array_function__ internals>:4: size=456 B, count=1, average=456 B
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:70: size=440 B, count=1, average=440 B
+D:\Python_programs\tracFive.py:12: size=424 B, count=1, average=424 B
+
+========= Filtered Snapshot - One =============
+D:\Python_programs\tracFive.py:8: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracFive.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracFive.py:9: size=525 KiB, count=14872, average=36 B
+D:\Python_programs\tracFive.py:7: size=522 KiB, count=14744, average=36 B
+D:\Python_programs\tracFive.py:10: size=544 B, count=2, average=272 B
+<__array_function__ internals>:5: size=528 B, count=1, average=528 B
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:3051: size=520 B, count=1, average=520 B
+<__array_function__ internals>:4: size=456 B, count=1, average=456 B
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:70: size=440 B, count=1, average=440 B
+D:\Python_programs\tracFive.py:12: size=424 B, count=1, average=424 B
+
+========= Filtered Snapshot - Two =============
+D:\Python_programs\tracFive.py:10: size=6000 B, count=1, average=6000 B
+
+========= Filtered Snapshot - Three =============
+
+========= Filtered Snapshot - Four =============
+D:\Python_programs\tracFive.py:8: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracFive.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracFive.py:9: size=525 KiB, count=14872, average=36 B
+D:\Python_programs\tracFive.py:7: size=522 KiB, count=14744, average=36 B
+D:\Python_programs\tracFive.py:10: size=6544 B, count=3, average=2181 B
+<__array_function__ internals>:5: size=528 B, count=1, average=528 B
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:3051: size=520 B, count=1, average=520 B
+<__array_function__ internals>:4: size=456 B, count=1, average=456 B
+C:\Users\khans\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\numpy\core\fromnumeric.py:70: size=440 B, count=1, average=440 B
+D:\Python_programs\tracFive.py:12: size=424 B, count=1, average=424 B
+
+Explanation:
+In the above snippet of code, we have understood the utilization of the filters. The first snapshot involves all the traces from the memory blocks utilized by Python. The second snapshot involves traces of the memory blocks created by Python. It can be because of C, as NumPy is built on it. The third snapshot involves entries where the filename is tracFive.py, and the fourth snapshot excludes the entries with that file names.
+Example 6:
+In the following example, we will understand the method of comparing two snapshots and finding the difference in traces between them using the compare_to() method.
+Code:
+
+import tracemalloc as tm
+
+tm.start()
+
+listOne = [n for n in range(15000)]
+listTwo = [n*n for n in range(15000)]
+listThree = [n*n*n for n in range(15000)]
+
+ss_1 = tm.take_snapshot()
+
+print("SNAPSHOT - ONE")
+for stats in ss_1.statistics("lineno"):
+    print(stats)
+
+listFour = [n*n*n*n for n in range(15000)]
+listFive = [n*n*n*n*n for n in range(15000)]
+
+print("\nSNAPSHOT - TWO")
+ss_2 = tm.take_snapshot()
+
+for stats in ss_2.statistics("lineno"):
+    #if "tracSix.py" in str(stats):
+    print(stats)
+
+print("\nDIFFERENCE")
+for diff in ss_2.compare_to(ss_1, "lineno"):
+    #if "tracSix.py" in str(diff):
+    print(diff)
+
+Output:
+SNAPSHOT - ONE
+D:\Python_programs\tracSix.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracSix.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracSix.py:5: size=522 KiB, count=14745, average=36 B
+
+SNAPSHOT - TWO
+D:\Python_programs\tracSix.py:17: size=645 KiB, count=14998, average=44 B
+D:\Python_programs\tracSix.py:16: size=642 KiB, count=14998, average=44 B
+D:\Python_programs\tracSix.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracSix.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracSix.py:5: size=522 KiB, count=14745, average=36 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:226: size=848 B, count=2, average=424 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:173: size=816 B, count=2, average=408 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:533: size=576 B, count=1, average=576 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:498: size=528 B, count=3, average=176 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:423: size=512 B, count=3, average=171 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:505: size=488 B, count=2, average=244 B      
+D:\Python_programs\tracSix.py:12: size=456 B, count=1, average=456 B
+D:\Python_programs\tracSix.py:13: size=448 B, count=1, average=448 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:59: size=440 B, count=1, average=440 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:535: size=416 B, count=1, average=416 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:207: size=416 B, count=1, average=416 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:53: size=416 B, count=1, average=416 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:501: size=408 B, count=1, average=408 B      
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:193: size=144 B, count=3, average=48 B       
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:560: size=48 B, count=1, average=48 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:315: size=40 B, count=1, average=40 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:212: size=37 B, count=2, average=18 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:503: size=28 B, count=1, average=28 B        
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:502: size=28 B, count=1, average=28 B        
+
+DIFFERENCE
+D:\Python_programs\tracSix.py:17: size=645 KiB (+645 KiB), count=14998 (+14998), average=44 B
+D:\Python_programs\tracSix.py:16: size=642 KiB (+642 KiB), count=14998 (+14998), average=44 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:226: size=848 B (+848 B), count=2 (+2), average=424 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:173: size=816 B (+816 B), count=2 (+2), average=408 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:533: size=576 B (+576 B), count=1 (+1), average=576 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:498: size=528 B (+528 B), count=3 (+3), average=176 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:423: size=512 B (+512 B), count=3 (+3), average=171 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:505: size=488 B (+488 B), count=2 (+2), average=244 B
+D:\Python_programs\tracSix.py:12: size=456 B (+456 B), count=1 (+1), average=456 B
+D:\Python_programs\tracSix.py:13: size=448 B (+448 B), count=1 (+1), average=448 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:59: size=440 B (+440 B), count=1 (+1), average=440 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:535: size=416 B (+416 B), count=1 (+1), average=416 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:207: size=416 B (+416 B), count=1 (+1), average=416 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:53: size=416 B (+416 B), count=1 (+1), average=416 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:501: size=408 B (+408 B), count=1 (+1), average=408 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:193: size=144 B (+144 B), count=3 (+3), average=48 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:560: size=48 B (+48 B), count=1 (+1), average=48 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:315: size=40 B (+40 B), count=1 (+1), average=40 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:212: size=37 B (+37 B), count=2 (+2), average=18 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:503: size=28 B (+28 B), count=1 (+1), average=28 B
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.9_3.9.3312.0_x64__qbz5n2kfra8p0\lib\tracemalloc.py:502: size=28 B (+28 B), count=1 (+1), average=28 B
+D:\Python_programs\tracSix.py:7: size=583 KiB (+0 B), count=14994 (+0), average=40 B
+D:\Python_programs\tracSix.py:6: size=528 KiB (+0 B), count=14984 (+0), average=36 B
+D:\Python_programs\tracSix.py:5: size=522 KiB (+0 B), count=14745 (+0), average=36 B
+
+Explanation:
+In the above snippet of code, we have created three lists and taken the first snapshot. We have then printed the statistic information for the user. We added two more lists, took another snapshot, and printed its statistic information. At last, we have found the difference between two snapshots using the compare_to() method and printed that for the users.
+Example 7:
+The following example is absolutely the same as the previous example; however, the only difference is that we will use a filter to remove entries associated with the tracemalloc module itself.
+Code:
+
+import tracemalloc as tm
+
+tm.start()
+
+listOne = [n for n in range(15000)]
+listTwo = [n*n for n in range(15000)]
+listThree = [n*n*n for n in range(15000)]
+
+ss_1 = tm.take_snapshot()
+
+print("SNAPSHOT - ONE")
+for stats in ss_1.statistics("lineno"):
+    print(stats)
+
+listFour = [n*n*n*n for n in range(15000)]
+listFive = [n*n*n*n*n for n in range(15000)]
+
+print("\nSNAPSHOT - TWO")
+ss_2 = tm.take_snapshot()
+filterSS = tm.Filter(inclusive = False, filename_pattern = tm.__file__)
+ss_2 = ss_2.filter_traces([filterSS])
+
+for stats in ss_2.statistics("lineno"):
+    print(stats)
+
+print("\nDIFFERENCE")
+for diff in ss_2.compare_to(ss_1, "lineno"):
+        print(diff)
+
+Output:
+SNAPSHOT - ONE
+D:\Python_programs\tracSeven.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracSeven.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracSeven.py:5: size=522 KiB, count=14745, average=36 B
+
+SNAPSHOT - TWO
+D:\Python_programs\tracSeven.py:16: size=645 KiB, count=14998, average=44 B
+D:\Python_programs\tracSeven.py:15: size=642 KiB, count=14998, average=44 B
+D:\Python_programs\tracSeven.py:7: size=583 KiB, count=14994, average=40 B
+D:\Python_programs\tracSeven.py:6: size=528 KiB, count=14984, average=36 B
+D:\Python_programs\tracSeven.py:5: size=522 KiB, count=14745, average=36 B
+D:\Python_programs\tracSeven.py:12: size=456 B, count=1, average=456 B
+D:\Python_programs\tracSeven.py:13: size=448 B, count=1, average=448 B
+
+DIFFERENCE
+D:\Python_programs\tracSeven.py:16: size=645 KiB (+645 KiB), count=14998 (+14998), average=44 B
+D:\Python_programs\tracSeven.py:15: size=642 KiB (+642 KiB), count=14998 (+14998), average=44 B
+D:\Python_programs\tracSeven.py:12: size=456 B (+456 B), count=1 (+1), average=456 B
+D:\Python_programs\tracSeven.py:13: size=448 B (+448 B), count=1 (+1), average=448 B
+D:\Python_programs\tracSeven.py:7: size=583 KiB (+0 B), count=14994 (+0), average=40 B
+D:\Python_programs\tracSeven.py:6: size=528 KiB (+0 B), count=14984 (+0), average=36 B
+D:\Python_programs\tracSeven.py:5: size=522 KiB (+0 B), count=14745 (+0), average=36 B
+
+Explanation:
+In the above snippet of code, we have created three lists and taken the first snapshot. We have then printed the statistic information for the user. We added two more lists, took another snapshot, and printed its statistic information. We have then defined a filter using the Filter class. We have specified the tracemalloc filename (tracemalloc.__file__) to the filename_pattern attribute of the Filter class with the inclusive attribute as False to exclude the entries with the tracemalloc module. At last, we have found the difference between two snapshots using the compare_to() method and printed that for the users.
+
+
+Next TopicSplit, Sub, Subn functions of re module in python
+
+
+
+
+← prev
+next →
+
+
+
+

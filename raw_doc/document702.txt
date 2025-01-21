@@ -1,0 +1,291 @@
+
+
+
+
+next →
+← prev
+
+any() in Python
+Imagine a situation where we must check 100 conditions to operate. Traditionally, we use conditional statements (if, if-else, elif, nested if) to check if conditions are true. But, for that many conditions, the code becomes lengthy and too many if statements take away the readability of the code.
+For such situations, the programmer's choice has to be to use Python's any() function. This tutorial explains the use and functionality of the any () function with examples.
+Example for any():
+
+list1 = [True, False, True, False]
+print(any(list1))
+list1 = [False, False, False, False]
+print(any(list1))
+list1 = [True, True, True, True]
+print(any(list1))
+
+Output:
+True
+False
+True
+
+Understanding:
+In the three cases in the above code, any() returned False only in the second scenario where all the conditions are False. The function requires at least one condition to be True to return True.
+Mechanism:
+Lazy evaluation: When we give more than one expression/value to the function, it keeps evaluating each expression from left to right, and once it finds a True expression, it stops evaluation and returns True. It won't even check the succeeding expressions.
+Syntax:
+
+any(iterable)
+
+iterable: Any object that can be iterated using loops like a tuple, list, dictionary, set etc. (int, float etc., are not iterable).
+
+The function returns True if at least one of the conditions or values evaluates to True else, it returns False. (returns Boolean-True or False)
+
+Equivalent Boolean values:
+
+
+Token
+Equivalent Boolean value
+
+
+0, 0.0
+False
+
+
+Non-zero integer, float, double...
+True
+
+
+An empty string, list, tuple...any iterable
+False
+
+
+Non-empty iterable
+True
+
+
+None
+False
+
+
+
+Using the bool(x) function, we can find the equivalent Boolean values of any token in Python.
+
+Sample Code:
+
+print("0: ", bool(0))
+print("Some non-zero integer: ", bool(78))
+print("0.0: ", bool(0.0))
+print("Some non-zero float: ", bool(8.90))
+print("Empty string: ", bool(""))
+print("Non-empty string: ", bool("Hi!"))
+print("Empty list: ", bool([]))
+print("Non-empty list: ", bool([2, 3, 5]))
+print("None: ", bool(None))
+
+Output:
+0:  False
+Some non-zero integer:  True
+0.0:  False
+Some non-zero float:  True
+Empty string:  False
+Non-empty string:  True
+Empty list:  False
+Non-empty list:  True
+None:  False
+
+
+Knowing these values, we can use the any () function accurately.
+
+Example usage Scenarios:
+Generally, if a code is successful, it returns 0; if any unexpected error occurs, it returns some number. Imagine running many test cases and seeing if all the test cases returned 0. We can use any() to see if any test case returned a non-zero value.
+Code:
+
+print("Find if all the test cases returned zero")
+results = [0, 0, 0, 3.8343, 0, 0, 0]
+if(any(results)==True):
+    print("At least one test case returned a non-zero number")
+else:
+    print("All the test cases returned success")
+
+Output:
+Find if all the test cases returned zero
+At least one test case returned a non-zero number
+
+To find if any non-empty string is included in a set of empty strings:
+Code:
+
+print("Find if any empty string is created by accident")
+results = ["", "", "", "H"]
+if(any(results) == True):
+    print("At least one character is included in some string")
+else:
+    print("All are empty strings")
+
+Output:
+Find if any empty string is created by accident
+Atleast one character is included in some string
+
+any with lists, tuples and sets:
+Example:
+
+print("Lists: ")
+list1 = [0, 0, 0.0, ""]
+list2 = [1, 4, 9.0, "Hi"]
+print(list1,":",any(list1))
+print(list2,":",any(list2))
+print("Tuples: ")
+tuple1 = (0, 0, 0.0, "")
+tuple2 = (1, 4, 9.0, "Hi")
+print(tuple1,":",any(tuple1))
+print(tuple2,":",any(tuple2))
+print("Sets: ")
+set1 = {0, 0, 0.0, ""}
+set2 = {1, 4, 9.0, "Hi"}
+print(set1,":",any(set1))
+print(set2,":",any(set2))
+
+Output:
+Lists: 
+[0, 0, 0.0, ''] : False
+[1, 4, 9.0, 'Hi'] : True
+Tuples: 
+(0, 0, 0.0, '') : False
+(1, 4, 9.0, 'Hi') : True
+Sets: 
+{0, ''} : False
+{1, 4, 9.0, 'Hi'} : True
+
+any() with Dictionary:
+In the case of a dictionary, any checks if at least one key in the dictionary is True. If all the keys are False, it returns False.
+
+If an empty dictionary is given as an argument, it returns False
+
+Example:
+
+print("Dictionary: ")
+dict1 = {0: "Hi", False: "Hey"}
+dict2 = {}
+dict3 = {0: "", 1: "Hello"}
+print(dict1,":",any(dict1))
+print(dict2,":",any(dict2))
+print(dict3,":",any(dict3))
+
+Output:
+Dictionary: 
+{0: 'Hey'} : False
+{} : False
+{0: '', 1: 'Hello'} : True
+
+any() with a Condition:
+We can use the any () function to check if at least one element in the iterable satisfies a specified condition.
+Example:
+
+list1 = [0, -4, -3, 2, -1]
+print("The list: ", list1)
+result = any(i > 0 for i in list1)
+if(result==True):
+    print("At least one element in the list is greater than 0")
+else:
+    print("Not even one element in the list is greater than 0")
+
+Output:
+The list:  [0, -4, -3, 2, -1]
+At least one element in the list is greater than 0
+
+OR and any:
+'OR' is one of Python's Boolean operators. It returns true if at least one condition evaluates to True. Both OR and any follow the lazy approach, and both have the same type of functionality and are not quite the same. Here are some examples showing the similarity between both.
+Example:
+
+print(True or False)
+print(any([True, False]))
+print(True or False or True or False)
+print(any([True, False, True, False]))
+
+Output:
+True
+True
+True
+True
+
+Here are the differences:
+
+
+OR
+ANY()
+
+
+It is an operator
+It is a function
+
+
+It returns the first True valueprint(78 or 0)O/P: 78
+It returns the Boolean True or Falseprint(any([78, 0]))O/P: True
+
+
+It is used between values as it is an operator.
+It accepts only one argument, which has to be iterable with any number of values-list, tuple…
+
+
+print(0 or 0 or 0 or 0 or "Hi")O/P: Hi
+print(0 or 0 or 0 or 0 or "Hi")O/P: True
+
+
+Example:
+
+list1 = ["Hi", "Hey", "Hello"]
+print(any(list1))
+print(list1[0] or list1[1] or list1[2])
+
+Output:
+True
+Hi
+
+
+Both OR and any() stops checking the values after the first element-"Hi" as it is already True-Lazy evaluation.
+
+any() without using any()
+It is also important to understand how to implement the functionality of any () without actually using the function:
+
+We can achieve that using a simple for loop and an if-else.
+
+Example:
+
+list1 = [0, -4, -3, 2, -1]
+print("The list: ", list1)
+for i in list1:
+    if i:
+        print("True")
+        break
+if(i==len(list1)):
+    print("False")
+
+Output:
+The list:  [0, -4, -3, 2, -1]
+True
+
+
+More efficiently, we can use a function.
+
+Example:
+
+def any_func(list1):
+    for i in list1:
+        if i:
+            return True
+    return False
+    
+list1 = [0, -4, -3, 2, -1]
+print("The list: ", list1)
+print(any_func(list1))
+
+Output:
+The list:  [0, -4, -3, 2, -1]
+True
+
+
+
+Next TopicArguments and Parameters in Python
+
+
+
+
+← prev
+next →
+
+
+
+

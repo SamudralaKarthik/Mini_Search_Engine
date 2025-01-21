@@ -1,0 +1,64 @@
+
+
+
+
+next →
+← prev
+
+How to Perform a One-Way ANOVA in Python?
+One-Way ANOVA in Python One-way ANOVA (also known as "analysis of variance") is a test that can be used to determine any significant statistical differences between the results of a variety of groups.
+Hypothesis:
+One-way ANOVA is based on the below alternative and null hypotheses.
+
+The H0 (null hypothesis) The formula is: m1 = M2 = m3 ... = MK (It implies that the means of the entire inhabitants are the same)
+The H1 (null hypothesis) The law states that one distinct population from the others will exist at most.
+
+Statement:
+Researchers took 20 vehicles identical to participate in the study. The vehicles are randomly doped with one of the four-engine oils and then allowed to go on a free ride for 100 miles each. After the trip, the performance of each of the cars is recorded. Before we proceed, we have an order to add the SciPy library to our system. This library can be installed by running the following command from the terminal:
+
+pip3 install scipy
+
+Stepwise Implementation
+Conducting one-way ANOVA tests with Python is a step-by-stage procedure. The steps are described in the following paragraphs:
+Step 1: Creating data groups.
+The first step is to make three arrays to retain the details of cars as they drive.
+
+# here are the performance when each of the engine oil is applied
+performance_1 = [99, 99, 98, 88, 89]
+performance_2 = [83, 82, 84, 79, 78]
+performance_3 = [79, 78, 79, 83, 80]
+performance_4 = [71, 88, 71, 82, 92]
+
+Step 2: Conduct the one-way ANOVA:
+Python offers us the f_oneway() function of the SciPy library, with which we can perform ANOVAs using one-way methods.
+
+# first, we will import the f_oneway library fromscipy.stats
+from scipy.stats import f_oneway as FO
+
+# Here are the erformance when each of the engine oil is applied
+performance_1 = [99, 99, 98, 88, 89]
+performance_2 = [83, 82, 84, 79, 78]
+performance_3 = [79, 78, 79, 83, 80]
+performance_4 = [71, 88, 71, 82, 92]
+
+# Now, we will conduct the one-way ANOVA
+FO(performance_1, performance_2, performance_3, performance_4)
+
+Output:
+F_onewayResult(statistic=7.34325396825397, pvalue=0.002591682084345443)
+
+Step 3. Analyse the results:
+In the end, both the F statistic and the p-value work out to be the same as 4.625 as well as 0.016336498, respectively. The p-value can't be less than 0.5. Therefore, we are unable to prove our null hypothesis. This suggests that we do not have enough evidence to conclude an improvement in performance between four different oils for engines.
+
+
+Next TopicTypes of inheritance Python
+
+
+
+
+← prev
+next →
+
+
+
+

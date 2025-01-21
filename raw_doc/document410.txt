@@ -1,0 +1,120 @@
+
+
+
+
+next →
+← prev
+
+Converting HTML to PDF files using Python
+Most of us might know that there are many websites that do not provide permission to their users to download the website's content in a PDF format file. Instead, they either ask them to buy the premium version of their service or do not offer such a download service in the form of a PDF file.
+However, a programming language like Python provides the PDFKit module to generate PDF files. In the following tutorial, we will understand how we can convert HTML to PDF files with the help of the PDFKit module in the Python programming language.
+Understanding the Python PDFKit module
+Python offers various approaches to generating a PDF file; however, PDFKit lies among some best approaches. PDFKit works as a wrapper for the wkhtmltopdf tool that allows the programmers to convert an HTML file into PDF format with the help of Webkit. It renders HTML into PDF with different image formats, HTML forms, and other complex printable documents.
+How to Install the Python PDFKit Module?
+In order to install the Python module, we need 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the PDFKit module using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ pip install pdfkit
+
+Now, we have to install the dependencies of the PDFKit module, i.e., wkhtmltopdf tool.
+For Ubuntu/Debian:
+Type the following command:
+Command:
+
+$ sudo apt-get install wkhtmltopdf
+
+For Windows:
+Step 1: We can download the wkhtmltopdf tool from the following link:
+https://wkhtmltopdf.org/downloads.html
+Step 2: Set the PATH variable to the binary folder in Environment Variables.
+Verifying the Installation
+Once the module is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import pdfkit
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python test_file.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the module, and it is also recommended to refer to the official documentation of the module.
+Now, let us start working with PDFKit in Python.
+Working with PDFKit in Python
+This section will demonstrate how to convert HTML to PDF format files using the PDFKit module in the Python programming language with different examples.
+The Python PDFKit module allows the programmers to convert a local HTML file into a PDF format using the from_file() function. Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required module
+import pdfkit
+
+# configuring pdfkit to point to our installation of wkhtmltopdf
+config = pdfkit.configuration(wkhtmltopdf = r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+
+# converting html file to pdf file
+pdfkit.from_file('sample.html', 'output.pdf', configuration = config)
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then defined a variable as config that stores the address to the execution file of the wkhtmltopdf tool using the configuration() function. We have then used the from_file() function of the PDFKit module specifying the parameters as the address of the html file, location of the PDF file to be stored, and configuration.
+As a result, we have successfully converted the local HTML file to a PDF file.
+We can also convert the Website URL to a PDF file using the Python PDFKit module with the help of the from_url() function. Let us consider the following example demonstrating the same:
+Example:
+
+import pdfkit
+
+# configuring pdfkit to point to our installation of wkhtmltopdf
+config = pdfkit.configuration(wkhtmltopdf = r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+
+# converting url to pdf file
+pdfkit.from_url('https://www.javatpoint.com/tic-tac-toe-in-python', 'output2.pdf', configuration = config)
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then defined a variable as config that stores the address to the execution file of the wkhtmltopdf tool using the configuration() function. We have then used the from_url() function of the PDFKit module specifying the parameters as the URL, location of the PDF file to be stored, and configuration.
+As a result, we have successfully converted the URL to a PDF file.
+Moreover, the PDFKit module allows programmers to store strings to PDF files using the from_url() function. Let us consider the following example illustrating the same:
+Example:
+
+# importing the required module
+import pdfkit
+
+# configuring pdfkit to point to our installation of wkhtmltopdf
+config = pdfkit.configuration(wkhtmltopdf = r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
+
+my_string = """
+    <html>
+    <head>
+    <body>
+        <div class = "container">
+            <h1>STRING TO PDF</h1>
+            <p>This is my sample string that I wanted to stored in a PDF file</p>
+        </div>
+    </body>
+    </head>
+    </html>
+"""
+
+# storing string to pdf file
+pdfkit.from_string(my_string, 'output3.pdf', configuration = config)
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then defined a variable as config that stores the address to the execution file of the wkhtmltopdf tool using the configuration() function. We have then used the from_string() function of the PDFKit module specifying the parameters as the string variable, location of the PDF file to be stored, and configuration.
+As a result, we have successfully stored the string into a PDF file.
+
+
+Next TopicReadlines in Python
+
+
+
+
+← prev
+next →
+
+
+
+

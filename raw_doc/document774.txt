@@ -1,0 +1,250 @@
+
+
+
+
+next →
+← prev
+
+Application to get live USD - INR rate using Tkinter in Python
+In this lesson, we'll create a Python project that lets you convert between different currencies. We'll utilise the tkinter library to create a user interface. Therefore, creating a GUI application to get current value of USD to INR.
+What is a Currency Converter ?
+There are hundreds of different currencies in the globe, and each one has a different value when compared to the others, thus we need a currency converter. So, in order to translate the value of our money into another currency, we need a currency converter. This helps us to easily understand the value of a particular currency in our own currency.
+In this project we will be focussing mainly on the current conversion rate of the United States Dollars (USD) to Indian Rupees (INR).
+Requirements :
+We will be using three different modules in this project:
+
+Tkinter : To set up the GUI
+Requests : To request for the link to extract data.
+Bs4 : A Python package called Beautiful Soup can extract data from XML and HTML files.
+
+These libraries can be installed with certain commands in terminal, if not present already.
+
+pip install tkinter
+pip install requests
+pip install bs4
+
+Steps to be followed :
+
+Take information from the provided URL. After choosing the appropriate place, copy the URL.
+Utilize requests and the BeautifulSoup module to scrape the data.
+Put that information into HTML
+Find the necessary information, then filter
+
+Explanation :
+Step 1 : Import all necessary modules.
+
+# Importing the required modules into our program
+import requests
+from bs4 import BeautifulSoup
+
+Step 2 : Creating a URL get method.
+
+# Defining a Method for extracting the html data
+def getinfo(url):
+ req = requests.get(url)
+ return req.text
+
+Step 3 : In order to transform the data (currency information) into HTML code, send the URL into the getinfo() method.
+Here's the corresponding URL : https://finance.yahoo.com/quote/usdinr=X?ltr=1
+
+# Extracting the data and then converting the data extracted
+htmlinfo = getinfo("https://finance.yahoo.com/quote/usdinr=X?ltr=1")
+soups = BeautifulSoup(htmlinfo, 'html.parser')
+res = (soups.find_all("div", class_ = "D(ib) Va(m) Maw(65%) Ov(h)")
+
+Output:
+
+Step 4 : Apply filters to the available data to determine the currency's specifics and quality (increment/decrement).
+
+myinfostr = ''
+
+# Filtering out the data which was converted 
+for table in soup.find_all("div", class_ = "D(ib) Va(m) Maw(65%) Ov(h)"):
+ myinfostr += table.get_text()
+
+# Showing the ultimate output
+print(myinfostr)
+
+Output:
+'74.3721-1.3801 (-0.39%) As of 7:30PM BST. Market open.'
+
+Walking through the code :
+
+# Importing the modules required by our code
+from tkinter import *
+import requests
+from bs4 import BeautifulSoup
+
+Firstly, we will import the Tkinter and requests module and the BeautifulSoup module's class into our code.
+
+# creating a new function
+# for extracting the details regarding the currency
+def getinfo(url):
+ req = requests.get(url)
+ return req.text
+
+Then, we will create a method getinfo() to generate the details from a URL and store them in the variable req after receiving it using get() method.
+
+# Creating a new function for computing and 
+# showing the currency detalis
+def get_data():
+ try:
+  htmlinfo = getinfo("https://finance.yahoo.com/quote/usdinr=X?ltr=1")
+  soups = BeautifulSoup(htmlinfo, 'html.parser')
+  myinfostr = ''
+  for table in soups.find_all("div", class_ = "D(ib) Va(m) Maw(65%) Ov(h)"):
+   myinfostr += table.get_text()
+  list_info = myinfostr.split()
+  tmp = list_info[0].split("-")
+  rate.set(tmp[0])
+  incr.set(tmp[1])
+  perrate.set(list_info[1])
+  time.set(list_info[3])
+  res.set("success")
+ except:
+  res.set("Oops! something wrong")
+
+Then, we will create another method called get_data() in order to collect all the information from the html version of the URL mentioned and then convert it to required format from the BeautifulSoup module and storing it in different variables using the set() method.
+
+# Main Code 
+# creating an instance of the tkinter object
+root = Tk()
+
+# Setting the colour of the background of the window
+root.configure(bg = 'light grey')
+
+Next, we will start with the main code of our program by first creating a GUI window from Tkinter and then setting it's background colour to light grey, using the configure() method.
+
+# using the Variable Classes inside the tkinter
+res = StringVar()
+rate = StringVar()
+perrate = StringVar()
+time = StringVar()
+incr = StringVar()
+
+Then, we created few variable classes in order to store the different data that is to be displayed on the window.
+
+# Creating a label for every data field
+Label(root, text = "Status :", bg = "light grey").grid(row = 2, sticky = W)
+Label(root, text = "Current rate of INR :",
+ bg = "light grey").grid(row = 3, sticky = W)
+Label(root, text = "Incrrease/decrease by :",
+ bg = "light grey").grid(row = 4, sticky = W)
+Label(root, text = "Rate change :", bg = "light grey").grid(row = 5, sticky = W)
+Label(root, text = "Rate of time :", bg = "light grey").grid(row = 6, sticky = W)
+
+Next, we created labels using the Label widget to state the heading of all the respective text areas. We set the position of all the labels by the help of the grid() method.
+
+# Creating a label for all the introduced class variables
+Label(root, text = "", textvariable = res,
+ bg = "light grey").grid(row = 2, column = 1, sticky = W)
+Label(root, text = "", textvariable = rate,
+ bg = "light grey").grid(row = 3, column = 1, sticky = W)
+Label(root, text = "", textvariable = incr, bg = "light grey").grid(
+ row = 4, column = 1, sticky = W)
+Label(root, text = "", textvariable = perrate,
+ bg = "light grey").grid(row = 5, column = 1, sticky = W)
+Label(root, text = "", textvariable = time,
+ bg = "light grey").grid(row = 6, column = 1, sticky = W)
+
+Then, we defined corresponding labels to all the headings created previously by using the Label widget for displaying the information extracted. All these labels were placed precisely by the help of the grid() method.
+
+# Creating a submit button for getting results
+btn = Button(root, text = "Show", command = get_data, bg = "Blue").grid(row = 0)
+
+Lastly, we created a Show button by using the Button widget, which on clicking will show the information extracted in an organized manner. This button will also be positioned using grid() method.
+Complete code :
+
+# Python program to create an application to get live USD - INR
+# rate using Tkinter module.
+# Importing the modules required by our code
+from tkinter import *
+import requests
+from bs4 import BeautifulSoup
+
+# creating a new function
+# for extracting the details regarding the currency
+def getinfo(url):
+ req = requests.get(url)
+ return req.text
+
+# Creating a new function for computing and 
+# showing the currency detalis
+def get_data():
+ try:
+  htmlinfo = getinfo("https://finance.yahoo.com/quote/usdinr=X?ltr=1")
+  soups = BeautifulSoup(htmlinfo, 'html.parser')
+  myinfostr = ''
+  for table in soups.find_all("div", class_ = "D(ib) Va(m) Maw(65%) Ov(h)"):
+   myinfostr += table.get_text()
+  list_info = myinfostr.split()
+  tmp = list_info[0].split("-")
+  rate.set(tmp[0])
+  incr.set(tmp[1])
+  perrate.set(list_info[1])
+  time.set(list_info[3])
+  res.set("success")
+ except:
+  res.set("Oops! something wrong")
+
+
+
+# Main Code 
+# creating an instance of the tkinter object
+root = Tk()
+
+# Setting the colour of the background of the window
+root.configure(bg = 'light grey')
+
+# using the Variable Classes inside the tkinter
+res = StringVar()
+rate = StringVar()
+perrate = StringVar()
+time = StringVar()
+incr = StringVar()
+
+# Creating a label for every data field
+Label(root, text = "Status :", bg = "light grey").grid(row = 2, sticky = W)
+Label(root, text = "Current rate of INR :",
+ bg = "light grey").grid(row = 3, sticky = W)
+Label(root, text = "Incrrease/decrease by :",
+ bg = "light grey").grid(row = 4, sticky = W)
+Label(root, text = "Rate change :", bg = "light grey").grid(row = 5, sticky = W)
+Label(root, text = "Rate of time :", bg = "light grey").grid(row = 6, sticky = W)
+
+# Creating a label for all the introduced class variables
+Label(root, text = "", textvariable = res,
+ bg = "light grey").grid(row = 2, column = 1, sticky = W)
+Label(root, text = "", textvariable = rate,
+ bg = "light grey").grid(row = 3, column = 1, sticky = W)
+Label(root, text = "", textvariable = incr, bg = "light grey").grid(
+ row = 4, column = 1, sticky = W)
+Label(root, text = "", textvariable = perrate,
+ bg = "light grey").grid(row = 5, column = 1, sticky = W)
+Label(root, text = "", textvariable = time,
+ bg = "light grey").grid(row = 6, column = 1, sticky = W)
+
+# Creating a submit button for getting results
+btn = Button(root, text = "Show", command = get_data, bg = "Blue").grid(row = 0)
+
+# Executing the GUI
+mainloop()
+
+Output:
+The output for the aforementioned code for creating an application to get live USD - INR rate using Tkinter is attached below as a screenshot.
+
+
+
+
+
+Next TopicCreate the First GUI Application using PyQt5 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

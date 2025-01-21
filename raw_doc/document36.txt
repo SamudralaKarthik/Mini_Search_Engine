@@ -1,0 +1,138 @@
+
+
+
+
+next →
+← prev
+
+Python Write CSV File
+CSV File
+A CSV stands for "comma-separated values", which is defined as a simple file format that uses specific structuring to arrange tabular data. It stores tabular data such as spreadsheet or database in plain text and has a standard format for data interchange. The CSV file opens into the excel sheet, and the rows and columns data define the standard format.
+Python CSV Module Functions
+The CSV module work is to handle the CSV files to read/write and get data from specified columns. There are different types of CSV functions, which are as follows:
+
+csv.field_size_limit - It returns the current maximum field size allowed by the parser.
+csv.get_dialect - Returns the dialect associated with a name.
+csv.list_dialects - Returns the names of all registered dialects.
+csv.reader - Read the data from a CSV file
+csv.register_dialect - It associates dialect with a name, and name must be a string or a Unicode object.
+csv.writer - Write the data to a CSV file
+csv.unregister_dialect - It deletes the dialect, which is associated with the name from the dialect registry. If a name is not a registered dialect name, then an error is being raised.
+csv.QUOTE_ALL - It instructs the writer objects to quote all fields.
+csv.QUOTE_MINIMAL - It instructs the writer objects to quote only those fields which contain special characters such as quotechar, delimiter, etc.
+csv.QUOTE_NONNUMERIC - It instructs the writer objects to quote all the non-numeric fields.
+csv.QUOTE_NONE - It instructs the writer object never to quote the fields.
+
+Writing CSV Files
+We can also write any new and existing CSV files in Python by using the csv.writer() module. It is similar to the csv.reader() module and also has two methods, i.e., writer function or the Dict Writer class.
+It presents two functions, i.e., writerow() and writerows(). The writerow() function only write one row, and the writerows() function write more than one row.
+Dialects
+It is defined as a construct that allows you to create, store, and re-use various formatting parameters. It supports several attributes; the most frequently used are:
+
+Dialect.delimiter: This attribute is used as the separating character between the fields. The default value is a comma (,).
+Dialect.quotechar: This attribute is used to quote fields that contain special characters.
+Dialect.lineterminator: It is used to create new lines, and the default value is '\r\n'.
+
+Let's write the following data to a CSV File.
+
+data = [{'Rank': 'B', 'first_name': 'Parker', 'last_name': 'Brian'},   
+{'Rank': 'A', 'first_name': 'Smith', 'last_name': 'Rodriguez'},  
+{'Rank': 'C', 'first_name': 'Tom', 'last_name': 'smith'},  
+{'Rank': 'B', 'first_name': 'Jane', 'last_name': 'Oscar'},   
+{'Rank': 'A', 'first_name': 'Alex', 'last_name': 'Tim'}]  
+
+Example -
+
+import csv  
+   
+with open('Python.csv', 'w') as csvfile:  
+    fieldnames = ['first_name', 'last_name', 'Rank']  
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)  
+   
+    writer.writeheader()  
+    writer.writerow({'Rank': 'B', 'first_name': 'Parker', 'last_name': 'Brian'})  
+    writer.writerow({'Rank': 'A', 'first_name': 'Smith',  
+                     'last_name': 'Rodriguez'})  
+    writer.writerow({'Rank': 'B', 'first_name': 'Jane', 'last_name': 'Oscar'})  
+    writer.writerow({'Rank': 'B', 'first_name': 'Jane', 'last_name': 'Loive'})  
+   
+print("Writing complete")  
+
+Output:
+Writing complete
+
+It returns the file named as 'Python.csv' that contains the following data:
+
+first_name,last_name,Rank  
+Parker,Brian,B  
+Smith,Rodriguez,A  
+Jane,Oscar,B  
+Jane,Loive,B   
+
+Write a CSV into a Dictionary
+We can also use the class DictWriter to write the CSV file directly into a dictionary.
+A file named as python.csv contains the following data:
+
+Parker, Accounting, November
+Smith, IT, October
+
+Example -
+
+import csv  
+with open('python.csv', mode='w') as csv_file:  
+    fieldnames = ['emp_name', 'dept', 'birth_month']  
+    writer = csv.DictWriter(csv_file, fieldnames=fieldnames)  
+    writer.writeheader()  
+    writer.writerow({'emp_name': 'Parker', 'dept': 'Accounting', 'birth_month': 'November'})  
+    writer.writerow({'emp_name': 'Smith', 'dept': 'IT', 'birth_month': 'October'})  
+
+Output:
+emp_name,dept,birth_month
+Parker,Accounting,November
+Smith,IT,October
+
+Writing CSV Files Using Pandas
+Pandas is defined as an open source library which is built on the top of Numpy library. It provides fast analysis, data cleaning and preparation of the data for the user.
+It is as easy as reading the CSV file using pandas. You need to create the DataFrame, which is a two-dimensional, heterogeneous tabular data structure and consists of three main components- data, columns, and rows.
+Here, we take a slightly more complicated file to read, called hrdata.csv, which contains data of company employees.
+
+Name,Hire Date,Salary,Leaves Remaining  
+John Idle,08/15/14,50000.00,10  
+Smith Gilliam,04/07/15,65000.00,8  
+Parker Chapman,02/21/14,45000.00,10  
+Jones Palin,10/14/13,70000.00,3  
+Terry Gilliam,07/22/14,48000.00,7  
+Michael Palin,06/28/13,66000.00,8  
+
+Example -
+
+import pandas  
+df = pandas.read_csv('hrdata.csv',   
+            index_col='Employee',   
+            parse_dates=['Hired'],  
+            header=0,   
+            names=['Employee', 'Hired', 'Salary', 'Sick Days'])  
+df.to_csv('hrdata_modified.csv')  
+
+Output:
+Employee, Hired, Salary, Sick Days
+John Idle, 2014-03-15, 50000.0,10
+Smith Gilliam, 2015-06-01, 65000.0,8
+Parker Chapman, 2014-05-12, 45000.0,10
+Jones Palin, 2013-11-01, 70000.0,3
+Terry Gilliam, 2014-08-12 , 48000.0,7
+Michael Palin, 2013-05-23, 66000.0,8
+
+
+
+Next TopicPython read excel file
+
+
+
+
+← prev
+next →
+
+
+
+

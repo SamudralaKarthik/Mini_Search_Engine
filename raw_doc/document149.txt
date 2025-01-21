@@ -1,0 +1,206 @@
+
+
+
+
+next →
+← prev
+
+Git Modules in Python
+In this article, we will discuss the Git module in the Python programming language, how users can use it in projects of Python. We will also discuss how users can use git modules in conjunction with GitHub so that we can work on large projects with other users. We will also learn how to create a git repository, how to see all the project files' history, how we can go back to when our project's initial stage and how to add new files and modifies them in the repository.
+What Is Git?
+Git module of Python language is a distributed version control system. A version control system is a set of tools used for tracking the past of a set of files of the projects. Users can easily save the state of files at any point by instructing the Git version control system. After this, the user can continue to edit the files of the project and save the project at any state. Saving the project at any current state is like keeping a backup of the project directory. In the Git module, saving the state is referred to as making a commit.
+Whenever a user makes a commit in the Git module, the user adds a commit message that explains all the changes made in that state of the project. Git module can show all the history of changes and commits made by the user in the project. This feature of the git module really helps the users to figure out what work they have done and look specifically for all the bugs that crept into the systems.
+By using git modules, users can also compare the files of the projects with different commits. Git module also allows the user to return any file or files back to the earlier state of the project with very little effort.
+The distributed version control system is slightly different from the version control system. The earlier version control system works by saving all the commits locally on the user's hard drive. This collection of commits on the local hard drive of the user's is known as a repository. But due to this, users are not able to work with the team working on the same codebase. As working with the team on the same project, users need their repository to be saved on the platform where all the other team members can access it. A Distributed version control system saves the repository on a chief server, which can be shared by many users and developers. This also has the feature of file locking.
+For Git modules, most of the users and developers use GitHub as a central repository, where anyone can access the file. GitHub is like a central place where anyone can share the code, and everyone can access that. The full repository is still saved at all the local repos even after using GitHub.
+Basic Usage of Git Module
+Till now, we know the Git module in general. This topic will discuss how users can start working with Git modules on their local computer system.
+Step 1: Creating a new repository
+To start working with Git module, users first need to enter their information. They have to set a username with the git configuration command.
+
+$ git config -- global user.name " name of the user goes here "
+$ git config - global user.email "username@forexample.com"
+
+After the setup of the username, users would need a repository to work in. Creating a Repository is very easy. Users can use the git initialization command in the directory:
+
+$ mkdir sample
+$ cd sample
+$ git init
+
+Users can initialize the empty Git repository in / home / tmp / sample /. git /
+After creating a repository, users can search it on the Git module. The Git module command user uses the most frequently is the Git status:
+
+$ git status
+
+
+
+This output shows a couple of the information to the user, like on which branch they are on and that they have nothing to commit. Nothing to commit means that there is no file in the directory that the Git module is not aware of.
+And that's how we create a repository.
+Step 2. Add a new file to the Repository
+Create a file in the repository that Git does not know about it. Create the file sample.py using the editor, which has only a print statement in it.
+
+#Sample.py
+print ( ' Adding a New File ! ' ) 
+
+After this, if the user will run the Git status command again, they will see the different results:
+
+$ git status
+
+
+
+After checking the new file, the Git module will tell the user that the file is untracked. That means Git is saying that the particular file is not a part of the repository and is not under version control. Users can fix this by adding the new file to Git. Using the git add command for adding the file to the Git module.
+
+$ git add sample.py
+$ git status
+
+
+
+Now Git is aware of the new file sample.py, and it will list the file under changes to be committed. The addition of the file to the Git module transfers it into the staging area. This means users can now commit the file to the repository.
+Making a Commit Changes
+Whenever a User commits changes, they are telling the Git module to save this level of state of the file in the repository. Users can do it by using the commit command of the git module. The -m option in the command informs the git module to commit the following message. If the users do not use the -m while running the command, the Git module will open the editor for the users to create the commit message. To commit the message user should write the command like this:
+
+$ git commit -m " creating sample.py "
+
+
+
+
+
+$ git status
+
+
+
+Users can now see that the commit command has returned a couple of information, most of it is not much useful, but it does tell the user that only one file has changed because the user has only added one file in the repository. The commit command also informs the simple hashing algorithm of the commit (775ca29).
+After running the git status command again, it shows that the user now has a clean working directory, which means that all the changes in the file are not committed to Git.
+The Staging Area of the Git Module
+Git module has a staging area, which is mostly referred to as the index. The staging area is where the Git module keeps track of the change's user wants to do in their next commit. Whenever the user runs the Git Add command, like above, where a new file sample.py was moved to the staging area, this change was shown in the git status. The file of the project was moved from the untracked section of the git module to the to be committed section of the output.
+The staging area of the Git module shows the exact content of the file when the user run git add command. If the user modifies this again, the file will be visible on both the areas, staging and unstaging of the git status output.
+At any stage of working with the git module on the file, which has already been committed once, there are three versions of the file available on which users can work:
+
+One version is on the user's hard drive that the user is editing.
+Another version is stored by the Git module in the user's staging area.
+The third version is present in the repository of the file.
+
+All of the three versions of the file can be different from one another. By moving the changes to the staging area of the users and then committing the files, they can bring back all these versions of the file into the sync.
+.gitignore
+The git status command in the Git module is very accessible, and users can use it most often. But sometimes, users might find out that there are couples of files that are showing up on the untracked section of the git module, and they do not want the git modules to see them. For that, the user can use a .gitignore file.
+For example:
+
+#Let's create a new Python file of the project in the same directory called example.py:
+#example.py
+Def get_example ( ) :
+return " cow "
+
+After this, modify the sample.py file to include the example.py and call its function:
+
+#sample.py
+import example 
+ example = example.get_example ( )
+print ( " Animal { } " .format (example) )
+
+Whenever the user imports a local module, the Python starts compiling the module into byte code and saves the file on their filesystem. In the Python2, after compiling the module into bytecode, it will save the file in the form example.pyc. But in the case of python3, it will generate a _pycache_ directory and store the .pyc file in it.
+For example:
+
+
+
+After doing this, if the user runs the command of git status, they will see that particular directory present in the untracked section. Users can also see that their example.py file is in the untracked section, but the changes they made to sample.py are in the new section, which is known as "Changes not staged for commit". This section means that the changes a user made earlier have not been added to the staging area of the git module.
+For example:
+
+$ git status
+
+
+
+To add example.py sample.py files to the repository, the user needs to do the same they did earlier.
+For example:
+
+$ git add example.py sample.py
+$ git status
+
+
+
+Now, the user should commit the changes and should finish the clean - up:
+
+$ git commit -m " add example module " 
+
+
+
+whenever the user runs the git status command, they will see _pycache_ directory like this:
+
+$ git status
+
+
+
+if the user wants all the _pycache_ directory and its content to be ignored, then they have to add a .gitignore file in their repository. This is a very simple process. Users have to edit the file in their chosen editor.
+
+# .gitignore
+__pycache__
+
+Then, users have to run the git status command, and they no longer see the _pycache_ directory and its content. Although the user will see the new .gitignore ! file.
+For example:
+
+$ git status
+
+
+
+The file .gitignore is just a regular text file, and this can be added to the repository just like the other regular files.
+For example:
+
+$ git add .gitignore
+$ git commit - add " create .gitignore " 
+
+
+
+There is one more entrance in the .gitignore file, which is the directory that the user store in their virtual environments. This directory is called virtualenvs. The virtualenvs directory is normally known as env or venv.
+Users can add these to their .gitignore files of the project. By doing this, the directory or the files of the project present in the repository will be ignored. And if there is no file or directory is present then, no action will be done.
+Users can also store a global .gitignore file in their home directory. This process is very easy and simple if the user's editor uses to save the temporary files or makes a back - up files in the local directory of the computer system.
+For example:
+
+# .gitignore 
+__pycache__
+Venv
+Venv /
+Venv.bak /
+env /
+env.bak /
+.pytest_cache
+.cover /
+.coverage
+
+What user should not add to a Git Repository?
+When the users are in the initial stage of working on any version control tool, and most probably with the Git module. The user would want to store every kind of file in the repository of the Git but this a mistake. Git module does have limitations and also security concerns due to which users face some limits on what type of files and data they can add to the git repository.
+The basic rule of all version control systems is that the user should only add source files in the version control systems and never add the generated files to the version control system.
+The source file is any file that the user creates while typing in the editor. The generated files are the files that the computer creates while processing the source files.
+For example:
+Sample.py is a source file, while
+Sample.pyc is the generated file.
+The reasons for not involving the generated files in the Git repository:
+
+Storing generated files in the repository is a waste of space and time. The generated files can be created again, and it may need to be recreated in a different format. If user 1 is using IronPython or Cython, and user 2 is using Jython interpreter, then the .pyc files would be different from each other. And committing the one format of the .pyc file could create conflicts in the repository.
+The generated filers are comparatively larger than the source files of the project. Adding the generated files in the Git repository means that all the other users and developers of the particular project also have to download the files and store them, even they do not need the files.
+Another rule of the Git repository is that the user should commit the binary files with precautions and should avoid committing files of large size.
+
+Git module repository does not save the full replica of each file of the project the user commit. Instead, the repository uses the complicated algorithm, which is based on how different following versions of the files. This reduces the quantity of storage file needs. But this algorithm does not apply to the binary files as the binary files such as MP3 or JPG files do not have good difference tools. For binary files, the Git module repository has to save the full file of the project whenever the user makes the commit.
+When the user is working on the Git module, or storing files on the GitHub repositories do not save the confidential information in the repository, while sharing it publicly.
+Git Log
+Git log is the command of the Git module. Git log is used to seeing the history of the commits made by the user.
+For example:
+
+$ git log 
+
+
+
+Users can see the history of commits made by the user in the git repository. All the commit message will appear in the order they were made. The starting of the commit will be identified by the word "commit" and after the simple hashing area of the commit. Git log command will provide the history of every simple hashing areas.
+Conclusion
+This article has discussed the Git modules, version control system, how to make commit in Git and its repository functions, rules of adding files and information in the repositories of the Git module and GitHub. The different types of Git command like .gitignore, git log, git add, git status, etc., and their use in the files of project and directories.
+
+
+Next TopicTop Python Frameworks for Gaming
+
+
+
+
+← prev
+next →
+
+
+
+

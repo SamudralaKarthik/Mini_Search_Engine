@@ -1,0 +1,399 @@
+
+
+
+
+next →
+← prev
+
+Rank-Based Percentile GUI Calculator using PyQt5 in Python
+In this post, we will get to know about how we can build a Rank based Percentile GUI Calculator with the use of the PyQt5 library in Python language.
+Steps for implementing a GUI :
+
+Make a heading label with the name of the calculator.
+Create a label and line edit pair for the total number of students, with the label indicating what the user must input and the line edit allowing text entry.
+Create a pair similarly for rank.
+Construct a button that will compute the percentage.
+Create a label to display the determined percentile.
+
+Back-end implementation procedures :
+
+Change the line edit to only take numbers as input;
+Add a push button action.
+Within the push button action, retrieve the line edits' text.
+Determine if the line edit text is empty or zero, and then return to prevent continued execution of the procedure.
+Change the value of the text to an integer.
+Determine the percentile and adjust the label's value accordingly.
+
+Walking through the Code :
+
+# import all the required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+First of all, we will import all the modules into our program from the python standard library, these modules include QtWidgets, QtCore, QtGui and sys.
+
+# defining a new class
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# Mentioning the title
+		self.setWindowTitle("Python ")
+
+		# Providing the width of the window
+		self.wd_width = 450
+
+		# Providing the height of the window
+		self.wd_height = 450
+
+		# Mentioning the geometry
+		self.setGeometry(100, 100, self.wd_width, self.wd_height)
+		# calling the function
+		self.UiComponents()
+
+		# displaying all the present widgets
+		self.show()
+
+Then we created a class to set the basic properties of the window to be created.
+
+# Creating a new function for the components
+	def UiComponents(self):
+
+		# creating the top-most head label
+		heading = QLabel("Percentile Calculator", self)
+
+		# Providing the geometry for the heading
+		heading.setGeometry(0, 10, 400, 60)
+
+		# Setting the font
+		font = QFont('Times', 15)
+		font.setBold(True)
+		font.setItalic(True)
+		font.setUnderline(True)
+
+		# Mentioning the font for the heading label
+		heading.setFont(font)
+
+		# Adding alignment for the heading
+		heading.setAlignment(Qt.AlignCenter)
+
+		# Adding color effects to heading
+		color = QGraphicsColorizeEffect(self)
+		color.setColor(Qt.darkCyan)
+		heading.setGraphicsEffect(color)
+
+
+		# Defining a new label
+		tp_label = QLabel("Total Participants", self)
+
+		# Adding properties to the new label
+		tp_label.setAlignment(Qt.AlignCenter)
+		tp_label.setGeometry(20, 100, 170, 40)
+		tp_label.setStyleSheet("QLabel"
+							"{"
+							"border : 2px solid black;"
+							"background : rgba(70, 70, 70, 35);"
+							"}")
+		tp_label.setFont(QFont('Times', 9))
+
+		# Setting up a QLineEdit object to recieve the total no. of participants
+		self.total = QLineEdit(self)
+
+		# taking in only the numbers as input
+		intOnly = QIntValidator()
+		self.total.setValidator(intOnly)
+
+		# mentioning the properties for the line edit
+		self.total.setGeometry(200, 100, 180, 40)
+		self.total.setAlignment(Qt.AlignCenter)
+		self.total.setFont(QFont('Times', 9))
+
+		# Setting up a new rank label
+		rk_label = QLabel("Rank ", self)
+
+		# Adding properties to this label
+		rk_label.setAlignment(Qt.AlignCenter)
+		rk_label.setGeometry(20, 150, 170, 40)
+		rk_label.setStyleSheet("QLabel"
+							"{"
+							"border : 2px solid black;"
+							"background : rgba(70, 70, 70, 35);"
+							"}")
+		rk_label.setFont(QFont('Times', 9))
+
+		# Defining a new QLineEdit object to get the rank
+		self.rank = QLineEdit(self)
+
+		# taking in only a number as input
+		intOnly = QIntValidator()
+		self.rank.setValidator(intOnly)
+
+		# Adding properties to the line edit
+		self.rank.setGeometry(200, 150, 180, 40)
+		self.rank.setAlignment(Qt.AlignCenter)
+		self.rank.setFont(QFont('Times', 9))
+
+Next, we defined the UIcomponents and created a few labels and set their properties. Along with that, we also set the colour effects and fonts too wherever required by the labels and the text fields.
+
+# Defining a push button
+		calc = QPushButton("Calc Percentile", self)
+
+		# Mentioning the geometry to the push button
+		calc.setGeometry(125, 220, 150, 40)
+
+		# Entering the action for the calc button
+		calc.clicked.connect(self.calc_action)
+
+		# defining a new label to show percentile
+		self.result = QLabel(self)
+
+		# Mentioning the properties for the result label
+		self.result.setAlignment(Qt.AlignCenter)
+		self.result.setGeometry(50, 300, 300, 60)
+		self.result.setStyleSheet("QLabel"
+								"{"
+								"border : 3px solid black;"
+								"background : white;"
+								"}")
+		self.result.setFont(QFont('Arial', 11))
+
+
+	def calc_action(self):
+
+
+		# taking total num of students
+		stdnts = self.total.text()
+
+		# getting the student's rank
+		rnk = self.rank.text()
+
+		# when no input is given, close the method
+		if len(stdnts) == 0 or len(rnk) == 0:
+			return
+
+		# converting students value into integer value
+		stdnts = int(stdnts)
+
+		# converting the rank value into integer value
+		rnk = int(rnk)
+
+		# if the total value entered by user is 0
+		# then return the method
+		if stdnts == 0 or rnk == 0:
+			return
+
+		# var for storing the result of upto 3
+		# decimal points
+		res = round((stdnts - rnk) / stdnts * 100, 3)
+
+		# Adding text to the label of result
+		self.result.setText("Percentile : " + str(res))
+
+Next, we created a push button for getting the results. Then, we added the function enabler to it, which performs a particular function on being clicked. After that, we created a new label to show the final result in the form of text in this field.
+
+# creating a pyqt5 application
+base = QApplication(sys.argv)
+
+# creating an instance of the main Window
+window = Window()
+
+# starting the application
+sys.exit(base.exec())
+
+Finally, we created an instance of the of the main window and then we executed the code to start the application created.
+Complete Code :
+
+# Python program to create a rank based percentile GUI calculator
+  using PyQt5 
+# import all the required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+# defining a new class
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# Mentioning the title
+		self.setWindowTitle("Python ")
+
+		# Providing the width of the window
+		self.wd_width = 450
+
+		# Providing the height of the window
+		self.wd_height = 450
+
+		# Mentioning the geometry
+		self.setGeometry(100, 100, self.wd_width, self.wd_height)
+
+		# calling the function
+		self.UiComponents()
+
+		# displaying all the present widgets
+		self.show()
+
+	# Creating a new function for the components
+	def UiComponents(self):
+
+		# creating the top-most head label
+		heading = QLabel("Percentile Calculator", self)
+
+		# Providing the geometry for the heading
+		heading.setGeometry(0, 10, 400, 60)
+
+		# Setting the font
+		font = QFont('Times', 15)
+		font.setBold(True)
+		font.setItalic(True)
+		font.setUnderline(True)
+
+		# Mentioning the font for the heading label
+		heading.setFont(font)
+
+		# Adding alignment for the heading
+		heading.setAlignment(Qt.AlignCenter)
+
+		# Adding color effects to heading
+		color = QGraphicsColorizeEffect(self)
+		color.setColor(Qt.darkCyan)
+		heading.setGraphicsEffect(color)
+
+		# Defining a new label
+		tp_label = QLabel("Total Participants", self)
+
+		# Adding properties to the new label
+		tp_label.setAlignment(Qt.AlignCenter)
+		tp_label.setGeometry(20, 100, 170, 40)
+		tp_label.setStyleSheet("QLabel"
+							"{"
+							"border : 2px solid black;"
+							"background : rgba(70, 70, 70, 35);"
+							"}")
+		tp_label.setFont(QFont('Times', 9))
+
+		# Setting up a QLineEdit object to recieve the total no. of participants
+		self.total = QLineEdit(self)
+
+		# taking in only the numbers as input
+		intOnly = QIntValidator()
+		self.total.setValidator(intOnly)
+
+		# mentioning the properties for the line edit
+		self.total.setGeometry(200, 100, 180, 40)
+		self.total.setAlignment(Qt.AlignCenter)
+		self.total.setFont(QFont('Times', 9))
+
+		# Setting up a new rank label
+		rk_label = QLabel("Rank ", self)
+
+		# Adding properties to this label
+		rk_label.setAlignment(Qt.AlignCenter)
+		rk_label.setGeometry(20, 150, 170, 40)
+		rk_label.setStyleSheet("QLabel"
+							"{"
+							"border : 2px solid black;"
+							"background : rgba(70, 70, 70, 35);"
+							"}")
+		rk_label.setFont(QFont('Times', 9))
+
+		# Defining a new QLineEdit object to get the rank
+		self.rank = QLineEdit(self)
+
+		# taking in only a number as input
+		intOnly = QIntValidator()
+		self.rank.setValidator(intOnly)
+
+		# Adding properties to the line edit
+		self.rank.setGeometry(200, 150, 180, 40)
+		self.rank.setAlignment(Qt.AlignCenter)
+		self.rank.setFont(QFont('Times', 9))
+
+
+		# Defining a push button
+		calc = QPushButton("Calc Percentile", self)
+
+		# Mentioning the geometry to the push button
+		calc.setGeometry(125, 220, 150, 40)
+
+		# Entering the action for the calc button
+		calc.clicked.connect(self.calc_action)
+
+		# defining a new label to show percentile
+		self.result = QLabel(self)
+
+		# Mentioning the properties for the result label
+		self.result.setAlignment(Qt.AlignCenter)
+		self.result.setGeometry(50, 300, 300, 60)
+		self.result.setStyleSheet("QLabel"
+								"{"
+								"border : 3px solid black;"
+								"background : white;"
+								"}")
+		self.result.setFont(QFont('Arial', 11))
+
+
+	def calc_action(self):
+
+
+		# taking total num of students
+		stdnts = self.total.text()
+
+		# getting the student's rank
+		rnk = self.rank.text()
+
+		# when no input is given, close the method
+		if len(stdnts) == 0 or len(rnk) == 0:
+			return
+
+		# converting students value into integer value
+		stdnts = int(stdnts)
+
+		# converting the rank value into integer value
+		rnk = int(rnk)
+
+		# if the total value entered by user is 0
+		# then return the method
+		if stdnts == 0 or rnk == 0:
+			return
+
+		# var for storing the result of upto 3
+		# decimal points
+		res = round((stdnts - rnk) / stdnts * 100, 3)
+
+		# Adding text to the label of result
+		self.result.setText("Percentile : " + str(res))
+
+
+	# creating a pyqt5 application
+base = QApplication(sys.argv)
+
+# creating an instance of the main Window
+window = Window()
+
+# starting the application
+sys.exit(base.exec())
+
+Output:
+The output of the following Rank Based Percentile Calculator using Pyqt5 in Python has been attached below in the form of a screenshot.
+
+
+
+Next Topic3D Scatter Plotting in Python using Matplotlib
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,266 @@
+
+
+
+
+next →
+← prev
+
+Python AND Operator
+There are two AND operators in Python-'Logical AND' and 'Bitwise AND'. This article discusses both the operators and differentiates them.
+Logical AND:
+This 'AND' belongs to Logical operators. These operators mainly deal with decision-making needs along with conditional statements like if-else. There are three logical operators in Python:
+
+Logical AND
+Logical OR
+Logical XOR
+
+Now, let us get an understanding about Logical AND operator:
+Basic:
+In languages like C and Java, "&&" represents the AND operator, but in Python, we say "and" without using any special symbol.
+Syntax: a and b
+Return value: This operator either returns "True" or "False," depending on the operands.
+Operation:
+
+If all the operands/ expressions participating are true, AND returns True.
+If at least one of the operands is false, it returns False.
+
+Truth tale for "AND" Operator:
+
+
+Expression 1
+Expression 2
+(Expression 1 and Expression 2) returns:
+
+
+True
+True
+True
+
+
+True
+False
+False
+
+
+False
+True
+False
+
+
+False
+False
+False
+
+
+Need of AND operator:
+Suppose you are trying to write a code to find if a number is greater than 20 and is even. You need to check two conditions:
+
+If num > 20
+If num is even
+
+Both the conditions must be satisfied.
+Generally, we write it as:
+
+num = int (input ("Enter a number: "))
+if (num > 20):
+    if (num % 2 == 0):
+        print (num, " is greater than 20 and is even")
+
+Output:
+
+It took 4 lines of code. Now let us use the functionality of the AND operator:
+
+num = int (input ("Enter a number: "))
+if (num > 20 and num % 2 == 0):
+        print (num, " is greater than 20 and is even")
+
+Output:
+
+Understanding:
+In the line if (num > 20 and num % 2 == 0), first the left condition num > 20 is checked. For num = 34, it is true; hence the right condition is checked 34 is divisible by 2. Both the conditions are satisfied. The print statement is executed.
+
+If we have 31, even if it is 20, as it is not divisible by 2, it will not be printed. Both the conditions must be true for "and" to be true.
+
+Let us take another example with a real-time application:
+Suppose you are organizing a coding competition for b-tech and m-tech students; for any student to take part, he must be of age between 18 to 28. Any younger or older person is strictly not allowed to enter the competition. So, we need to check both conditions to enroll the student.
+Code:
+
+name = input ("Please enter the participant's name: ")
+age = int (input ("Please enter the valid age of the participant: "))
+if (age >= 18 and age <= 28):
+    print ("Congratulations!, You are eligible for the competition")
+else:
+    print("Only students between 18 to 28 are allowed to the competition. Sorry! We can't enroll you in")
+
+Output:
+
+"and" with just two numbers:
+Let us now see what happens if we give two decimal integers on both sides of the "and" operator:
+Pre-requisite: Generally, "and" checks if both the operands are True. Any number greater than 0 represents True, and 0 represents False.
+
+num1 = int (input ("Enter a number: "))
+num2 = int (input ("Enter another number: "))
+print (num1 and num2)
+
+Sample Output:
+
+Understanding:
+1. In the first case:
+
+Both the numbers are greater than 0 - True and True condition. Hence, "and" returns True.
+The condition of "and" is that both the operands should be true. Hence, after confirming that the first number- 3 (>0) is true, it checks the second number-4 (>0), which is true. So, it returns "True" with the second number.
+
+2. In the second case:
+
+False and True condition
+The first number is 0-False.
+There should be no "False" for "and" to be True. Hence, once it confirms that the first number is "False", without checking the second number, it returns "False".
+
+3. In the third case:
+
+The first number is 0-False.
+Immediately, "and" returns False.
+False and False condition
+
+Let us see another example:
+
+num = int (input ("Enter a number: "))
+if (num > 0 and num < 10):
+    print ("num is between 0 and 10")
+elif (num > 10 and num < 50):
+    print ("num is between 10 and 50")
+else:
+    print ("num is either less than 0 or greater than 50")
+
+Sample Output:
+
+Understanding:
+We checked if the num belongs in the intervals 0 to 10 or 10 to 50. If the number doesn't belong to both intervals, the number can either be less than 0 or greater than 50.
+"and" with multiple operands:
+
+num1 = int (input ("Enter the first value: "))
+num2 = int (input ("Enter the second value: "))
+num3 = int (input ("Enter the third value: "))
+print (num1 and num2 and num3)
+
+Output:
+
+Understanding:
+First, num1 is checked and it is True, second number num2 is checked and it is True. But, the third number num3 is False, hence, num1 and num2 and num3 returned False.
+With multiple expressions:
+
+num1 = int (input ("Enter the first value: "))
+num2 = int (input ("Enter the second value: "))
+num3 = int (input ("Enter the third value: "))
+print (num1 > 30 and num2 > 23 and num3 < 9)
+
+Output:
+
+Understanding:
+The first condition, num1 > 30, is itself False. Hence, directly False is printed. Even if the first condition turned out to be true, the second condition is False; if that is also true, the third one is False. Hence, all three conditions are False for the given values of num1, num2, and num3.
+Bitwise AND (&):
+There is another "and" operator in Python. It is a bitwise operator. We represent it as "&".
+Binary language is the language of a computer. All the inner mechanisms happen with respect to bits. Bitwise operators are the set of operators that allow the programmer to perform bitwise operations on integers. There are six bitwise operators:
+
+Bitwise AND
+Bitwise OR
+Bitwise NOT
+Bitwise XOR
+Bitwise right shift
+Bitwise left shift
+
+The difference between (logical or, bitwise or), (logical and, bitwise and), (logical not, bitwise not) lies in the word 'bitwise' itself.
+
+If we use any bitwise operator, first, the integer is converted into binary bits, and then and will perform the operation bit-by-bit.
+Here, 1 represents True, and 0 represents False.
+After the operation, the binary number will be converted to decimal and returned as the output.
+
+The operation of bitwise and:
+The given integers are converted into bits (binary), and 'and' operate on every corresponding bit of the two numbers.
+
+
+Bit 1 (operand 1)
+Bit 2 (operand 2)
+Return value
+
+
+0
+0
+0
+
+
+1
+0
+0
+
+
+1
+1
+1
+
+
+0
+1
+0
+
+
+Let us take an example:
+If num1 = 3 and num2 = 4:
+3 -> 011
+4 -> 100
+Performing &:
+
+If we perform logical and on 3 and 4, we'll get True and 4 will be returned:
+
+num1= int (input ("Enter a number: "))
+num2 = int (input ("Enter another number: "))
+print (num1 and num2)
+print (num1 & num2)
+
+Output:
+
+These are the two "and" operators available to use in Python language. Let us see the difference between these two operators:
+Logical AND vs. Bitwise AND
+
+
+Logical AND
+Bitwise AND
+
+
+Logical AND is represented by "and."
+Bitwise and is represented by "&."
+
+
+It is defined only for Boolean values; even if we use expressions, they are evaluated as True or False.
+It is defined for integer values as well as Boolean values
+Print (True & False) -> False
+
+
+It searches for a False value; if it finds one, it doesn't evaluate the rest of the expression and returns "False". This is called "Lazy evaluation".
+Even if the operator finds a False value, it continues evaluating the rest expressions.
+
+
+This operator is mostly used for decision-making and truth testing.
+Bitwise operators are designed for lower-level bit manipulations.
+
+
+Every number greater than 0 evaluates to "True" and every number == 0 or < 0 evaluate to "False"
+1 represents "True," and 0 represents "False".
+
+
+In the operator hierarchy, Bitwise operators have higher precedence than the logical operators.
+
+
+
+
+Next TopicPython OR Operator
+
+
+
+
+← prev
+next →
+
+
+
+

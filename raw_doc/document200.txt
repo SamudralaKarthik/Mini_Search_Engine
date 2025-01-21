@@ -1,0 +1,216 @@
+
+
+
+
+next →
+← prev
+
+Python Faker
+An Introduction to Faker
+Python provides an open-source library, also known as Faker that helps the user build their Dataset. We can generate random data using random attributes such as Name, Age, Location, and many more. The Faker library supports all central locations and languages beneficial to generate data relied on the locality.
+We can utilize this Faker data in order to tune models of machine learning, stress test a model, and many more. We can generate data depending on our requirements. We can also use Faker data for training and learning purposes, such as we can perform various operations on various types of data types.
+We can also use the generated datasets for the purpose of tuning the model of machine learning, validating the model and testing the model.
+In the following tutorial, we will understand Faker and its functions and create our very own Dataset.
+Let us begin with the implementation of the Faker library.
+Implementation of Faker Library
+Before we start working on the faker, it is necessary for us to install the library. We can do it by using the pip installer in the command prompt or terminal as shown below:
+Syntax:
+
+$ pip install faker
+
+Importing necessary libraries
+In order to discover various functions of the faker library, we must import the faker library. We are also importing the pandas library since we will perform few operations on the Dataset.
+Syntax:
+
+from faker import Faker
+import pandas as pd
+
+Using various functions
+Once we are done importing the required library, let us try using various functions available in the Faker library. In order to perform such activity, we have to initiate the Faker function with the help of a variable as shown below:
+Syntax:
+
+sample = Faker()
+
+Some of the functions, we are going to use are listed below:
+Syntax:
+
+sample.name()
+sample.date_of_birth()
+sample.address()
+sample.country()
+sample.email()
+
+Let us consider an example demonstrating the working of these functions:
+Example:
+
+# importing the required libraries
+from faker import Faker
+import pandas as pd
+
+# defining the variable for Faker() module
+sample = Faker()
+
+# using some functions
+print("Your Name: ", sample.name())
+print("Your Date of Birth: ", sample.date_of_birth())
+print("Your Address: ", sample.address())
+print("Your Country: ", sample.country())
+print("Your E-mail Address: ", sample.email())
+
+Output:
+Your Name:  Teresa Hill
+Your Date of Birth:  1950-03-12
+Your Address:  430 Bauer Turnpike Suite 931
+Annaton, OR 12319
+Your Country:  Angola
+Your E-mail Address:  [email protected]
+
+Explanation:
+In the above example, we have imported the required libraries and defined a variable for the Faker() module. We have then used some functions like name, date_of_birth, address, country, and email to generate some fake datasets. This generated dataset is so random that we will get a different dataset as an output every time we execute the code.
+We can also generate information as per different localities and regions in different languages. All we have to do is to mention the language we want. Let us consider the following example where we have generated some data in the languages like Hindi, French, and Japanese.
+Example:
+
+# importing the required libraries
+from faker import Faker
+import pandas as pd
+
+# defining the variable for Faker() module
+sample = Faker(['hi_IN', 'fr', 'jp_JP'])
+for n in range(10):
+    print(sample.name())
+
+Output:
+Thomas Schneider
+?????? ??????
+?? ??
+Lucas Poulain
+????? ??????
+Aurélie Merle-Menard
+?? ??
+????????, ??????
+Stéphane Lefebvre-Alves
+????? ?????
+
+Explanation:
+In the above example, we have again defined the required libraries and defined a variable for the Faker() module where we have provided some languages as the parameters. We have then used the 'for' statement to print the different generated names for the specified number of times. As a result, the program has generated ten different names of different languages for the users.
+We can also generate our own texts or sentences using the functions like text and sentences.
+Let us consider the following example to understand how these functions work.
+Example:
+
+# importing the required libraries
+from faker import Faker
+import pandas as pd
+
+# defining the variable for Faker() module
+sample = Faker()
+
+# printing the text
+print("Text: ", sample.text())
+
+# printing the sentence
+print("Sentence: ", sample.sentence())
+
+Output:
+Text:  Size plant task we through score name. Whose learn drop ground.
+Option entire some surface seek film involve. Billion body really common decade man. Worker foreign your then likely beat.
+Sentence:  Project star plant she energy them leave.
+
+Explanation:
+In the above example, we have again imported the required modules and defined a variable for the Faker() module. We have then used the text and sentence functions to create our own sentences and printed them for the users. As a result, we have created our own sentences successfully.
+However, we can also define a word library that stores a list of words that allows us to generate new fake sentences using those specified words. Let us consider the following example for generating fake sentences.
+Example:
+
+# importing the required libraries
+from faker import Faker
+import pandas as pd
+
+# defining the variable for Faker() module
+sample = Faker()
+# list of words
+mywords = ['Cow', 'domestic', 'why', 'what', 'bird', 'parrot', 'is', 'animal', 'a', 'my']
+
+# printing the sentence
+print("Sentence: ", sample.sentence(ext_word_list = mywords))
+
+Output:
+Sentence:  Cow is domestic domestic domestic animal animal.
+
+Explanation:
+In the above example, we have again imported the required libraries and defined the Faker() module variable. We have defined a list of words and used the sentence() function to create a sentence using the word library we created. As a result, the fake sentence has been generated using the words in the list.
+Moreover, the Faker() module also provides a function to generate the complete profiles for different non-existing persons rather than generating names and addresses separately. This function is known as the profile function, and it generates a fake profile of a person.
+Let us consider the following example to understand the behavior of this function.
+Example:
+
+# importing the required libraries
+from faker import Faker
+import pandas as pd
+
+# defining the variable for Faker() module
+sample = Faker()
+
+# generating the profile
+print("Complete Profile: ", sample.profile())
+
+Output:
+Complete Profile:  {'job': 'Minerals surveyor', 'company': 'Nichols and Sons', 'ssn': '715-16-7081', 'residence': '550 Moore Locks\nSouth Andrea, SD 94842', 'current_location': (Decimal('-78.730969'), Decimal('-151.109875')), 'blood_group': 'B+', 'website': ['https://www.smith-avila.com/', 'http://bennett-scott.com/', 'https://www.nguyen.com/'], 'username': 'joseph04', 'name': 'Toni Martin', 'sex': 'F', 'address': '29676 Mann Rapid\nWilkinsonbury, MN 35916', 'mail': '[email protected]', 'birthdate': datetime.date(2016, 10, 1)}
+
+Explanation:
+In the above example, we have again imported the required libraries and defined the variable. We have then used the profile function to generate the fake profile of a person and printed it for the users.
+Now, let us create a fake dataset with the help of the faker library.
+Creating a Fake dataset using the faker library
+Since we have discovered most of the functions and have already worked on the profile function in the previous section, let us try generating a dataset containing the fake profiles of 20 unique people. In order to store these profiles into a data frame, we will be using the pandas library too.
+Example:
+
+# importing the required libraries
+from faker import Faker
+import pandas as pd
+
+# defining the variable for Faker() module
+sample = Faker()
+
+# generating the profiles of 20 people
+mydata = [sample.profile() for n in range(20)]
+my_dframe = pd.DataFrame(mydata)
+
+print(my_dframe)
+
+Output:
+                                              job                    company  ...                       mail   birthdate
+0                         Housing manager/officer                  Cross LLC  ...  [email protected]  1983-03-26
+1                       Learning disability nurse            Bennett-Sellers  ...      [email protected]  1923-04-14
+2                           Agricultural engineer                Patrick PLC  ...     [email protected]  1941-01-13
+3              Research scientist (life sciences)    Coleman, Shaw and Owens  ...    [email protected]  1927-07-07
+4                                   Haematologist           Jefferson-Bailey  ...     [email protected]  2001-06-06
+5   Chartered legal executive (England and Wales)            Torres-Andersen  ...      [email protected]  1956-05-12
+6                                    Statistician            Rodriguez-Chung  ...      [email protected]  1955-07-06
+7                                Paediatric nurse  Simmons, Acosta and Gates  ...  [email protected]  1984-02-29
+8                             Dispensing optician                  Bauer Inc  ...     [email protected]  1935-03-30
+9                  Equality and diversity officer  Martinez, Allen and Davis  ...     [email protected]  2019-06-28
+10                       Secondary school teacher  Greene, Gonzalez and Hill  ...    [email protected]  1913-10-02
+11                                   TEFL teacher             Smith and Sons  ...     [email protected]  1989-06-17
+12              Planning and development surveyor       Smith, Lee and Reyes  ...    [email protected]  1905-09-05
+13                               Product designer   Taylor, Davis and Wilson  ...       [email protected]  1938-11-27
+14                  Development worker, community              Carlson-Evans  ...          [email protected]  1929-03-08
+15                    Engineer, building services                 Pham Group  ...   [email protected]  1984-12-31
+16                       Therapist, horticultural          Anderson-Gonzalez  ...     [email protected]  1929-03-16
+17       Geographical information systems officer               Burke-Burton  ...          [email protected]  1997-06-12
+18                                 Retail manager               Rivera-Lucas  ...            [email protected]  2016-03-20
+19                       Therapeutic radiographer             Holloway Group  ...       [email protected]  2011-02-23
+
+[20 rows x 13 columns]
+
+Explanation:
+In the above example, we have again imported the required libraries and defined a variable. We have then defined the data that contains the profiles of 20 people. At last, we have converted this data into data frames and printed it for the users. As a result, the generated dataset stores various attributes such as job, company, locations, email, and a lot more. We can utilize this dataset as per our requirements.
+
+
+Next TopicFizz-Buzz Program in Python
+
+
+
+
+← prev
+next →
+
+
+
+

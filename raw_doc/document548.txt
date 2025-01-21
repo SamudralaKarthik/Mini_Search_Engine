@@ -1,0 +1,416 @@
+
+
+
+
+next →
+← prev
+
+
+Monitoring Devices using Python
+In the following tutorial, we will understand how to monitor the devices using the Python programming language. But before we get started, let us briefly discuss the importance of monitoring system resources.
+Significance of Monitoring System Resources
+Monitoring the System Resources allows us to evaluate the performance of the critical system resources on a regular basis, such as:
+
+CPU
+Memory - RAM, Swap space, and Hard Disk space
+Network Utilization
+GPU Utilization
+
+Monitoring is essential in identifying the process that utilizes the most resources and the reason behind it. It helps us understand if the resources of the current system are sufficient for running or if a rogue process is consuming too many resources.
+Having a limiting threshold on the system resources will prevent further escalation of the issues and identify an appropriate root cause analysis in order to fix the issue.
+In this tutorial, we will explore the psutil (process and system utilities) library in Python, a cross-platform library for retrieving information on running processes and system utilization for resources such as CPU, memory, disks, network, and sensors.
+The psutil library currently supports the following platforms:
+
+Linux
+Windows
+MacOS
+FreeBSD, OpenBSD, NetBSD
+Sun Solaris
+AIX
+
+The GPUtil library is a Python module for getting the GPU status from NVIDIA GPUs with the help of nvidia-smi.
+System profiling
+Profiling the system is necessary in order to know the name of the system, version of the Operating System (OS), architecture of the system, whether it is 64-bit or 32-bit, number of physical and virtual cores, and the max and min frequency of the CPU.
+The Python platform library allows us to retrieve platform-identifying data such as the name of the device, OS version, OS release version, node, processor, and more.
+Let us consider the following snippet of code that demonstrate the usage of the above libraries.
+Code:
+
+# importing the required libraries
+import psutil
+import platform
+
+# getting the username
+username = platform.uname()
+
+# printing the details
+print(f"System: {username.system}")
+print(f"Node Name: {username.node}")
+print(f"Release: {username.release}")
+print(f"Version: {username.version}")
+print(f"Machine: {username.machine}")
+print(f"Processor: {username.processor}")
+print("Physical cores:", psutil.cpu_count(logical = False))
+print("Total cores:", psutil.cpu_count(logical = True))
+
+# CPU frequencies
+cpu_freq = psutil.cpu_freq()
+print(f"Max Frequency: {cpu_freq.max : .2f}Mhz")
+print(f"Min Frequency: {cpu_freq.min : .2f}Mhz")
+print(f"Current Frequency: {cpu_freq.current : .2f}Mhz")
+
+Output:
+System: Windows
+Node Name: MANGO-HOME
+Release: 10
+Version: 10.0.22000
+Machine: AMD64
+Processor: Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+Physical cores: 4
+Total cores: 8
+Max Frequency:  2496.00Mhz
+Min Frequency:  0.00Mhz
+Current Frequency:  2496.00Mhz
+
+Explanation:
+We have imported the psutil and platform libraries in the above snippet of code. We then get the username of the platform using the uname() method of the platform library. We have then printed the details like system name, node name, release, version, machine, processor, physical cores, and total cores. We then got the CPU frequencies using the cpu_freq() method of the psutil library and printed the details like maximum, minimum, and current frequencies.
+Monitoring and Limiting CPU Resources
+We can monitor the temperatures of the different physical cores. If the current temperature of any of the physical cores is above the threshold limit for the core, then give an alert.
+The psutil.sensors_temperatures(fahrenheit = True) method offers us the current, high, and critical temperatures of the various physical cores. This method does not apply to Windows.
+Let us consider the following snippet of code demonstrating the usage of the above method.
+Code:
+
+# importing the required libraries
+import psutil
+
+# monitoring temperature
+for n in range(len(psutil.sensors_temperatures(fahrenheit = True)[ 'coretemp' ])):
+    print(str(psutil.sensors_temperatures(fahrenheit = True)[ 'coretemp' ][n].label) + " has a temperature of " + str(psutil.sensors_temperatures(fahrenheit = True)[ 'coretemp' ][n].current) + "F")
+    if psutil.sensors_temperatures(fahrenheit = True)[ 'coretemp' ][n].current > psutil.sensors_temperatures(fahrenheit = True)[ 'coretemp' ][n].high:
+        print("Temperature is too high")
+
+Explanation:
+In the above snippet of code, we imported the psutil library, used the sensors_temperatures(fahrenheit = True) method, and printed the required details associated with the current temperature of different physical cores.
+Monitoring and Limiting Memory
+The virtual memory is a combination of RAM and the disk space used by the processes running on the CPU. In contrast, Swap space is the portion of the virtual memory on the hard disk utilized by the running processes when the RAM is full.
+Let us consider the following snippet of code demonstrating the same:
+Code:
+
+# importing the psutil library
+import psutil
+
+# defining the function
+def getSize(bytes, suffix = "B"):
+    """
+    Scaling bytes to its proper format- KB, MB, GB, TB and PB
+    """
+    the_factor = 1024
+    for the_unit in ["", "K", "M", "G", "T", "P"]:
+        if bytes < the_factor:
+            return f"{bytes:.2f}{the_unit}{suffix}"
+        bytes /= the_factor
+
+print("Virtual memory")
+sv_mem = psutil.virtual_memory()
+print(f"Total: {getSize(sv_mem.total)}")
+print(f"Available: {getSize(sv_mem.available)}")
+print(f"Used: {getSize(sv_mem.used)}")
+print(f"Percentage: {sv_mem.percent} %")
+print("SWAP memory")
+# getting the swap memory details (if exists)
+swap_mem = psutil.swap_memory()
+print(f"Total: {getSize(swap_mem.total)}")
+print(f"Free: {getSize(swap_mem.free)}")
+print(f"Used: {getSize(swap_mem.used)}")
+print(f"Percentage: {swap_mem.percent} %")
+
+Output:
+Virtual memory
+Total: 7.84GB
+Available: 1.76GB
+Used: 6.07GB
+Percentage: 77.5 %
+SWAP memory
+Total: 3.88GB
+Free: 908.48MB
+Used: 2.99GB
+Percentage: 77.1 %
+
+Explanation:
+In the above snippet of code, we have imported the required library. We have then defined the function to return the size. We then used the psutil.virtual_memory() method that returns statistics associated with the system memory utilization as a named tuple. We have then calculated the total, available, used, and percentage of the virtual memory.
+Similarly, we have also used the psutil.swap_memory() method provides information regarding the swap memory statistics as a tuple. At last, we have calculated the total, available, used, and percentage of the swap memory.
+Limiting the Threshold on Virtual Memory and Swap Memory
+Let us now consider the following snippet of code demonstrating the way of limiting the threshold on virtual memory and swap memory.
+Code:
+
+# importing the psutil library
+import psutil
+
+VIRTUAL_MEMORY_THRESHOLD = 100 * 1024 * 1024  # 100MB
+SWAP_MEMORY_THRESHOLD = 45
+if  psutil.virtual_memory().available <= VIRTUAL_MEMORY_THRESHOLD:
+    print("Low Virtual Memory warning")
+if psutil.swap_memory().percent >= SWAP_MEMORY_THRESHOLD:
+    print("Low Swap Memory warning")
+
+Output:
+Low Swap Memory warning
+
+Explanation:
+In the above snippet of code, we imported the required module and defined the constant threshold values for the virtual and swap memory. We have then checked if the available virtual memory is equal to or below the threshold virtual memory and printed the warning with respect to the same. We have then again checked if the percentage of the swap memory is equal to or above the threshold swap memory and printed the warning with respect to the same.
+Monitoring and Limiting Hard Disk Space
+The disk_partitions() method of the psutil library allows us to return all mounted disk partitions, including the device, mount point, and type of the file system.
+Let us consider the following snippet of code demonstrating the usage of this method.
+Code:
+
+# importing the psutil library
+import psutil
+
+# defining the function
+def getSize(bytes, suffix = "B"):
+    """
+    Scaling bytes to its proper format- KB, MB, GB, TB and PB
+    """
+    the_factor = 1024
+    for the_unit in ["", "K", "M", "G", "T", "P"]:
+        if bytes < the_factor:
+            return f"{bytes:.2f}{the_unit}{suffix}"
+        bytes /= the_factor
+
+print( "Hard Disk Information\nPartitions and Usage:")
+# getting all disk partitions on the device
+the_partitions = psutil.disk_partitions()
+for the_partition in the_partitions:
+    print("Device: ", the_partition.device)
+    print("Partition Mount point: ", the_partition.mountpoint)
+    print("Partition File system type: ", the_partition.fstype)
+    try:
+        partitionUsage = psutil.disk_usage(the_partition.mountpoint)
+    except PermissionError:
+        continue
+    print("Total Size: ", getSize(partitionUsage.total))
+    print("Used Space: ", getSize(partitionUsage.used))
+    print("Free hard disk Space", getSize(partitionUsage.free))
+    print("Hard disk Used Percentage: ", partitionUsage.percent, "%")
+    if(partitionUsage.percent > 82):
+        print("Disk space nearing full")
+
+Output:
+Hard Disk Information
+Partitions and Usage:
+Device:  C:\
+Partition Mount point:  C:\
+Partition File system type:  NTFS
+Total Size:  329.34GB
+Used Space:  195.17GB
+Free hard disk Space 134.17GB
+Hard disk Used Percentage:  59.3 %
+Device:  D:\
+Partition Mount point:  D:\
+Partition File system type:  NTFS
+Total Size:  146.48GB
+Used Space:  26.46GB
+Free hard disk Space 120.02GB
+Hard disk Used Percentage:  18.1 %
+
+Explanation:
+In the above snippet of code, we have imported the required library and defined the function to return the size. We have then used the disk_partitions() method to get the list of all the mounted disk partitions. We have then used the for-loop to iterate through each partition and print the required details such as device, partition mount point, partition file system type, total space, used space, free hard disk space, and hard disk used percentage. We have used the try-except method to check the disk space capacity.
+Monitoring and Limiting Network Usage
+All network protocols are linked with a particular address family. An address family offers services such as packet fragmentation and reassembly, routing, addressing, and transporting. The address family offers an inter-process communication between the processes that execute on the same system or different systems.
+An address family is generally comprised of some protocols, one per socket type.
+This is a list of different networks with their address families:
+
+AF_INET - IPv4 Internet Protocols
+AF_INET6 - IPv6 Internet Protocols
+AF_NETLINK - Kernel User Interface Device
+AF_PACKET - Low-Level Packet Interface
+
+Let us now consider the following snippet of code demonstrating the same:
+Code:
+
+# importing the psutil library
+import psutil
+
+print( "Network Information")
+
+# getting all network interfaces (virtual and physical)
+ifAddrs = psutil.net_if_addrs()
+for interfaceName, interfaceAddresses in ifAddrs.items():
+    for address in interfaceAddresses:
+        print(" Interface: ", interfaceName)
+        if str(address.family) == 'AddressFamily.AF_INET':
+            print("  IP Address: ", address.address)
+            print("  Netmask: ", address.netmask)
+            print("  Broadcast IPv4: ", address.broadcast)
+        elif str(address.family) == 'AddressFamily.AF_PACKET':
+            print("  MAC Address: {address.address}")
+            print("  Netmask: {address.netmask}")
+            print("  Broadcast MAC: {address.broadcast}")
+        elif str(address.family) == 'AddressFamily.AF_INET6':
+            print("  IP Address: ", address.address)
+            print("  Netmask: ", address.netmask)
+            print("  Broadcast IPv6: ", address.broadcast)
+
+Output:
+Network Information
+ Interface:  Ethernet
+ Interface:  Ethernet
+  IP Address:  169.254.65.123
+  Netmask:  255.255.0.0
+  Broadcast IPv4:  None
+ Interface:  Ethernet
+  IP Address:  fe80::dc05:fc5a:2b3f:417b
+  Netmask:  None
+  Broadcast IPv6:  None
+ Interface:  Local Area Connection* 9
+ Interface:  Local Area Connection* 9
+  IP Address:  169.254.196.107
+  Netmask:  255.255.0.0
+  Broadcast IPv4:  None
+ Interface:  Local Area Connection* 9
+  IP Address:  fe80::3ce0:aa56:980:c46b
+  Netmask:  None
+  Broadcast IPv6:  None
+ Interface:  Local Area Connection* 10
+ Interface:  Local Area Connection* 10
+  IP Address:  169.254.235.211
+  Netmask:  255.255.0.0
+  Broadcast IPv4:  None
+ Interface:  Local Area Connection* 10
+  IP Address:  fe80::1caa:5f5b:a099:ebd3
+  Netmask:  None
+  Broadcast IPv6:  None
+ Interface:  Wi-Fi
+ Interface:  Wi-Fi
+  IP Address:  192.168.0.196
+  Netmask:  255.255.255.0
+  Broadcast IPv4:  None
+ Interface:  Wi-Fi
+  IP Address:  fe80::f199:be8:532e:b02d
+  Netmask:  None
+  Broadcast IPv6:  None
+ Interface:  Bluetooth Network Connection
+ Interface:  Bluetooth Network Connection
+  IP Address:  169.254.16.59
+  Netmask:  255.255.0.0
+  Broadcast IPv4:  None
+ Interface:  Bluetooth Network Connection
+  IP Address:  fe80::c18b:b59f:f426:103b
+  Netmask:  None
+  Broadcast IPv6:  None
+ Interface:  Loopback Pseudo-Interface 1
+  IP Address:  127.0.0.1
+  Netmask:  255.0.0.0
+  Broadcast IPv4:  None
+ Interface:  Loopback Pseudo-Interface 1
+  IP Address:  ::1
+  Netmask:  None
+  Broadcast IPv6:  None
+
+Explanation:
+In the above snippet of code, we have imported the psutil library. We then retrieve all information regarding the network interfaces (virtual and physical) using the net_if_addrs() method. We then used the for-loop to iterate through these details and printed the required information for the users.
+We will now understand the usage of the net_io_counters() method that returns the system-wide network I/O statistics such as bytes sent, bytes received, incoming packets dropped, or outgoing packets dropped.
+Let us consider the following snippet of code demonstrating the same:
+Code:
+
+# importing the psutil library
+import psutil
+
+# defining the function
+def getSize(bytes, suffix = "B"):
+    """
+    Scaling bytes to its proper format- KB, MB, GB, TB and PB
+    """
+    the_factor = 1024
+    for the_unit in ["", "K", "M", "G", "T", "P"]:
+        if bytes < the_factor:
+            return f"{bytes:.2f}{the_unit}{suffix}"
+        bytes /= the_factor
+
+netIO = psutil.net_io_counters()
+
+print("Total Bytes Sent: ", getSize(netIO.bytes_sent))
+print("Total Bytes Received: ", getSize(netIO.bytes_recv))
+print("Total outgoing packets dropped: ", netIO.dropin)
+print("Total incoming packets dropped:", netIO.dropout)
+print("Total outgoing errors: ", netIO.errout)
+print("Total incoming errors:", netIO.errin)
+
+Output:
+Total Bytes Sent:  89.37MB
+Total Bytes Received:  5.66GB
+Total outgoing packets dropped:  0
+Total incoming packets dropped: 0
+Total outgoing errors:  0
+Total incoming errors: 0
+
+Explanation:
+In the above snippet of code, we have imported the required library and defined the function to return the size. We have then used the net_io_counters() method to return the system-wide I/O statistics and printed some required details for the users.
+Monitoring GPU
+We can monitor GPU using the GPUtil library provided by the Python programming language. This library allows us to retrieve the GPU status from NVIDIA GPUs. It shows all the NVIDIA GPUs available on the device, free memory available, memory used, and the GPU temperature in Centigrade.
+Let us consider the following snippet of code demonstrating the usage of the Python GPUtil library.
+Code:
+
+import GPUtil
+
+the_gpus = GPUtil.getGPUs()
+
+gpu_list = []
+
+for the_gpu in the_gpus:
+
+        print(the_gpu.name) 
+        print('gpu.id:', the_gpu.id)
+        print ( 'Total GPU:', the_gpu.memoryTotal)
+        print(f"Memory free {the_gpu.memoryFree}MB")
+        print ( 'GPU usage:', the_gpu.memoryUsed)
+        print ( 'GPU use proportion:', the_gpu.memoryUtil * 100)
+        print(str(the_gpu.temperature) + " C")
+
+        gpu_list.append([
+            the_gpu.id,
+            the_gpu.memoryTotal,
+            the_gpu.memoryUsed,
+            the_gpu.memoryUtil * 100
+            ])
+
+THRESHOLDGPU = 10
+
+for the_gpu in the_gpus:
+        print(the_gpu.name, ' gpu.id:', the_gpu.id)
+        if the_gpu.memoryTotal / the_gpu.memoryUsed * 100 > THRESHOLDGPU:
+            print ( f"GPU memory usage currently is: {the_gpu.memoryUtil * 100}% which exceeds the threshold of {THRESHOLDGPU}%" )
+
+Output:
+GeForce GTX 1650
+gpu.id: 0
+Total GPU: 4096.0
+Memory free 3962.0MB
+GPU usage: 134.0
+GPU use proportion: 3.271484375
+47.0 C
+GeForce GTX 1650  gpu.id: 0
+GPU memory usage currently is: 3.271484375% which exceeds the threshold of 10%
+
+Explanation:
+In the above snippet of code, we have imported the GPUtil library and used the getGPUs() method to get a list of GPUs. We have then created an empty list. We have then used the for-loop to iterate through the details of objects in the GPU list and append it to the empty list. We have then printed the information regarding the GPU memory usage.
+Monitoring Sensors
+To monitor IoT (Internet of Things) Sensors, we can retrieve the hardware temperature, fans speed, and battery information. We can also identify the threshold and raise an error if the threshold is reached.
+We can use the following memory to accomplish the same:
+
+sensors_temperatures()
+sensors_fans()
+sensors_battery()
+
+
+
+Next TopicWebbrowser module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

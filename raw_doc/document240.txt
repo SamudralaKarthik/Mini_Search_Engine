@@ -1,0 +1,100 @@
+
+
+
+
+next →
+← prev
+
+Convert Python List to NumPy Arrays
+Introduction
+In Python, a list is a linear data structure that may store heterogeneous elements. It does not need to be defined and can shrink and expand as needed. On the other end, a NumPy array is a data structure that may store homogenous elements. It is implemented in Python using the NumPy library. This library is very efficient in handling multi-dimensional arrays. It is also very efficient in handling a huge number of data elements. NumPy arrays use less memory than List data structures. Both the NumPy array and the list can be identified by their index value.
+The NumPy library provides two methods for converting lists to arrays in Python.
+
+Using numpy.array()
+Using numpy.asarray()
+
+Method 1: Using numpy.array()
+In Python, the simplest way to convert a list to a NumPy array is with numpy.array() function. It takes an argument and returns a NumPy array. It creates a new copy in memory.
+Program 1
+
+# importing library of the array in python
+import numpy
+# initilizing elements of the list
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# converting elements of the list into array elements
+arr = numpy.array(a)
+# displaying elements of the list
+print ("List: ", a)
+# displaying elements of the array
+print ("Array: ", arr)
+
+Output:
+List:  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+Array:  [1 2 3 4 5 6 7 8 9]
+
+
+Method 2: Using numpy.asarray()
+In Python, the second method is numpy.asarray() function that converts a list to a NumPy array. It takes an argument and converts it to the NumPy array. It does not create a new copy in memory. In this, all changes made to the original array are reflected on the NumPy array.
+Program 2
+
+# importing library of the array in python
+import numpy
+# initilizing elements of the list
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# converting elements of the list into array elements
+arr = numpy.asarray(a)
+# displaying elements of the list
+print ("List:", a)
+# displaying elements of the array
+print ("Array: ", arr)
+
+Output:
+List:  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+Array:  [1 2 3 4 5 6 7 8 9]
+
+
+Program 3
+
+# importing library of the NumPy array in python
+import numpy
+# initilizing elements of the list
+lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# converting elements of the list into array elements
+arr = numpy.asarray(lst)
+# displaying elements of the list
+print ("List:", lst)
+# displaying elements of the array
+print ("arr: ", arr)
+# made another array out of arr using asarray function
+arr1 = numpy.asarray(arr)
+#displaying elements of the arr1 before the changes made
+print("arr1: " , arr1)
+#change made in arr1
+arr1[3] = 23
+#displaying arr1 , arr , list after the change has been made
+print("lst: " , lst)
+print("arr: " , arr)
+print("arr1: " , arr1)
+
+Output:
+List: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+arr:  [1 2 3 4 5 6 7 8 9]
+arr1:  [1 2 3 4 5 6 7 8 9]
+lst:  [1, 2, 3, 4, 5, 6, 7, 8, 9]
+arr:  [ 1  2  3 23  5  6  7  8  9]
+arr1:  [ 1  2  3 23  5  6  7  8  9]
+
+
+
+
+Next TopicTraceback in Python
+
+
+
+
+← prev
+next →
+
+
+
+

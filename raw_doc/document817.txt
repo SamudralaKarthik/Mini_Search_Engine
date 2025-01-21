@@ -1,0 +1,571 @@
+
+
+
+
+next →
+← prev
+
+Colour game using PyQt5 in Python
+This post will demonstrate how to use PyQt5 to construct a colour game. In order to get the most points in this game, the player must correctly identify the colour of the word that is provided. To further confuse the player, the text will have several colour names.
+The multiplatform PyQt5 GUI toolkit includes Python bindings for Qt v5. The toolkit's features and simplicity make it very easy to construct an interactive desktop application. Installing it requires running the next command.
+
+pip install PyQt5
+
+Steps for implementation of the GUI :
+
+Create a head label to display the game's name and specify its characteristics, such as alignment colour, etc.
+Make an instruction label to provide the user the instructions.
+Design a push button to launch or restart the game.
+Make a label to display the score.
+Create a line edit to collect user input.
+Create a label for a countdown of 30 seconds.
+
+Implementation steps for the back end :
+
+Make a score value variable, a counter value variable, a list of colours, and a start flag.
+Make an object with a timer that calls a function after one second.
+Determine whether the start flag is set to true inside the timer method, then set the counter value to the counter label, and decrease the count value.
+If the counter variable equals zero, set the start flag to false and prevent line editing.
+Include a start button function.
+In the action for the start button, set its initial value as true, set thou count's value as 30 and clear the entire line edit text.
+Choose a random colour from the colour list and set it as the colour label.
+Once more, select a random option from the list, then add that text to the label.
+When enter is pressed, add an action to the line edit.
+Inside the action, verify the input text against a random choice, and if it matches, increase the score value and alter the colour label's text and colour to another random number.
+
+Walking through the code :
+
+# import all the required libraries
+
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import random
+import sys
+
+first, we import all the required files into our program from the standard python library.
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the title of the window
+		self.setWindowTitle("Python ")
+
+		# set the geometry of the window
+		self.setGeometry(150, 150, 550, 550)
+
+		# calling the func
+		self.UiComponents()
+
+		# displaying all the widgets
+		self.show()
+
+		# counter values
+		self.count_val = 30
+
+		# scoring values
+		self.scoring_val = 0
+
+		# start value of flag
+		self.strt_flag = False
+
+		# list containing the possible colours.
+		self.clr_list = ['Blue', 'Red', 'Pink', 'Green', 'Black',
+				'Orange', 'Yellow', 'Brown', 'Purple']
+
+Next, we will create a window class to initialize the window and set its geometry and title. Then we will introduce the various labels, flag and variables and also set their initial values and give a list of random colours.
+
+# func for the components
+	def UiComponents(self):
+
+		# create the heading label
+		heading = QLabel("Color Game", self)
+
+		# set the geometry for the heading
+		heading.setGeometry(100, 10, 300, 60)
+
+		# adding fonts
+		font = QFont('Times', 14)
+		font.setBold(True)
+		font.setItalic(True)
+		font.setUnderline(True)
+
+		# set the font to the heading
+		heading.setFont(font)
+
+		# set the alignment for the heading
+		heading.setAlignment(Qt.AlignCenter)
+
+		# introducing instructions label
+		inst = QLabel("Inst : Enter the Color not the text. "
+							"Press Start button to start the game		 "
+							"Note : Time limit for game is 30 seconds", self)
+
+		# changing the label to multi line
+		inst.setWordWrap(True)
+
+		# set the geometry for the label
+		inst.setGeometry(20, 60, 460, 60)
+
+		# creat a new start button
+		start = QPushButton("Start / Reset", self)
+
+		# set the geometry for the push button
+		start.setGeometry(200, 120, 100, 35)
+
+		# adding action to the start button
+		start.clicked.connect(self.start_action)
+
+		# create a new scoring label
+		self.scoring = QLabel("Score : 0", self)
+
+		# set the geometry for the label
+		self.scoring.setGeometry(160, 170, 180, 50)
+
+		# set the alignment for label
+		self.scoring.setAlignment(Qt.AlignCenter)
+
+		# set the font for label
+		self.scoring.setFont(QFont('Times', 16))
+
+		# set the style sheet properties
+		self.scoring.setStyleSheet("QLabel"
+								"{"
+								"border : 2px solid black;"
+								"color : green;"
+								"background : lightgrey;"
+								"}")
+
+		# create the label for showing color
+		self.color = QLabel("Color Name", self)
+
+		# set the geometry for the label
+		self.color.setGeometry(50, 230, 400, 120)
+
+		# set the alignment for the label
+		self.color.setAlignment(Qt.AlignCenter)
+
+		# set the fonts
+		self.color.setFont(QFont('Times', 30))
+
+		# create a line edit 
+		self.input_txt = QLineEdit(self)
+
+		# set the geometry
+		self.input_txt.setGeometry(150, 340, 200, 50)
+
+		# set the fonts
+		self.input_txt.setFont(QFont('Arial', 14))
+
+		# converting the line edit to be disabled
+		self.input_txt.setDisabled(True)
+
+		# add action to it when the enter key is pushed
+		self.input_txt.returnPressed.connect(self.input_actn)
+
+		# create a new label for the timerClock
+		self.count = QLabel("30", self)
+
+		# set the geometry of the label
+		self.count.setGeometry(225, 430, 50, 50)
+
+		# set the alignment of the label
+		self.count.setAlignment(Qt.AlignCenter)
+
+		# set the font
+		self.count.setFont(QFont('Times', 14))
+
+		# set the style sheet properties
+		self.count.setStyleSheet("border : 2px solid black;"
+								"background : lightgrey;")
+
+Next, we will create a new function for introducing the components for out window. We will then create new heading and various new labels and set their properties like geometry, fonts, and alignments and stylesheet properties too. We also added buttons and the functions for its action were also introduced.
+
+# create a timerClock object
+		timerClock = QTimer (self)
+
+		# add action to perform for the timerClock to be pressed
+		timerClock.timeout.connect(self.display_time)
+
+		# starting the timerClock
+		timerClock.start(1000)
+
+	def display_time(self):
+
+		if self.strt_flag:
+
+			# displaying the count value to the label
+			self.count.setText(str(self.count_val))
+
+			# verifying if the count value is zero or not
+			if self.count_val == 0:
+
+				# changing the start flag value to false
+				self.strt_flag = False
+
+				# changing the line edit 
+                # widget to disable form
+				self.input_txt.setDisabled(True)
+
+
+			# decreasing the count values
+			self.count_val -= 1
+
+Then, we created a clock timer label to show the time and mentioned its properties, Then, we created a function to display the time in that label and keep it updated after every second.
+
+def start_action(self):
+
+		# changing the start flag value to true
+		self.strt_flag = True
+
+		# reset the scoring value
+		self.scoring.setText("Scoring : 0")
+		self.scoring_val = 0
+
+		# reset the count value
+		self.count_val = 30
+
+		# clear the entire line edit text
+		self.input_txt.clear()
+
+		# changing the line edit value to enabled
+		self.input_txt.setEnabled(True)
+
+		# getting a random color from the list mentioned
+		self.rndm_color = random.choice(self.clr_list)
+
+		# changing the color choice to a random color
+		self.rndm_color.lower()
+
+		# set the random color for the label
+		self.color.setStyleSheet("color : " + self.rndm_color + ";")
+
+		# get another random color's name
+		rndm_text = random.choice(self.clr_list)
+
+		# set the text to the label
+		self.color.setText(rndm_text)
+
+
+	def input_actn(self):
+
+		# getting the line edit text
+		text = self.input_txt.text()
+
+		# changing the text to lower case
+		text.lower()
+
+		# check for the text with random color
+		if text == self.rndm_color:
+			# clear the entire line edit text
+			self.input_txt.clear()
+
+			# increasing the scoring value
+			self.scoring_val += 1
+
+			# set the score to the scoring label
+			self.scoring.setText("Score : " + str(self.scoring_val))
+
+			# get a random color from the list
+			self.rndm_color = random.choice(self.clr_list)
+
+			# changing the color choice to random color
+			self.rndm_color.lower()
+
+			# set the random color to label
+			self.color.setStyleSheet("color : " + self.rndm_color + ";")
+
+			# get the another random color's name
+			rndm_text = random.choice(self.clr_list)
+
+			# set the text for label
+			self.color.setText(rndm_text)
+
+Then, we created a start action function to start the countdown and used the labels to display and update the text and buttons to click for functionality which is to chose a random colour from the list and if it is entered right in the text field and repeat the process otherwise break the process. And an input function was also used to take and display the input from the user and give the result.
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the created Window
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Finally, we created an instance of the window and started our application by calling that instance.
+Complete code :
+
+# Python program to create a colour game using PyQt5
+# import all the required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import random
+import sys
+
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the title of the window
+		self.setWindowTitle("Python ")
+
+		# set the geometry of the window
+		self.setGeometry(150, 150, 550, 550)
+
+		# calling the func
+		self.UiComponents()
+
+		# displaying all the widgets
+		self.show()
+
+		# counter values
+		self.count_val = 30
+
+		# scoring values
+		self.scoring_val = 0
+
+		# start value of flag
+		self.strt_flag = False
+
+		# list containing the possible colours.
+		self.clr_list = ['Blue', 'Red', 'Pink', 'Green', 'Black',
+				'Orange', 'Yellow', 'Brown', 'Purple']
+
+
+		# func for the components
+	def UiComponents(self):
+
+		# creat the heading label
+		heading = QLabel("Color Game", self)
+
+		# set the geometry for the heading
+		heading.setGeometry(100, 10, 300, 60)
+
+		# adding fonts
+		font = QFont('Times', 14)
+		font.setBold(True)
+		font.setItalic(True)
+		font.setUnderline(True)
+
+		# set the font to the heading
+		heading.setFont(font)
+
+		# set the alignment for the heading
+		heading.setAlignment(Qt.AlignCenter)
+
+		# introducing instructions label
+		inst = QLabel("Inst : Enter the Color not the text. "
+							"Press Start button to start the game		 "
+							"Note : Time limit for game is 30 seconds", self)
+
+		# changing the label to multi line
+		inst.setWordWrap(True)
+
+		# set the geometry for the label
+		inst.setGeometry(20, 60, 460, 60)
+
+		# creat a new start button
+		start = QPushButton("Start / Reset", self)
+
+		# set the geometry for the push button
+		start.setGeometry(200, 120, 100, 35)
+
+		# adding action to the start button
+		start.clicked.connect(self.start_action)
+
+		# create a new scoring label
+		self.scoring = QLabel("Score : 0", self)
+
+		# set the geometry for the label
+		self.scoring.setGeometry(160, 170, 180, 50)
+
+		# set the alignment for label
+		self.scoring.setAlignment(Qt.AlignCenter)
+
+		# set the font for label
+		self.scoring.setFont(QFont('Times', 16))
+
+		# set the style sheet properties
+		self.scoring.setStyleSheet("QLabel"
+								"{"
+								"border : 2px solid black;"
+								"color : green;"
+								"background : lightgrey;"
+								"}")
+
+		# create the label for showing color
+		self.color = QLabel("Color Name", self)
+
+		# set the geometry for the label
+		self.color.setGeometry(50, 230, 400, 120)
+
+		# set the alignment for the label
+		self.color.setAlignment(Qt.AlignCenter)
+
+		# set the fonts
+		self.color.setFont(QFont('Times', 30))
+
+		# create a line edit 
+		self.input_txt = QLineEdit(self)
+
+		# set the geometry
+		self.input_txt.setGeometry(150, 340, 200, 50)
+
+		# set the fonts
+		self.input_txt.setFont(QFont('Arial', 14))
+
+		# converting the line edit to be disabled
+		self.input_txt.setDisabled(True)
+
+		# add action to it when the enter key is pushed
+		self.input_txt.returnPressed.connect(self.input_actn)
+
+		# create a new label for the timerClock
+		self.count = QLabel("30", self)
+
+		# set the geometry of the label
+		self.count.setGeometry(225, 430, 50, 50)
+
+		# set the alignment of the label
+		self.count.setAlignment(Qt.AlignCenter)
+
+		# set the font
+		self.count.setFont(QFont('Times', 14))
+
+		# set the style sheet properties
+		self.count.setStyleSheet("border : 2px solid black;"
+								"background : lightgrey;")
+
+		# create a timerClock object
+		timerClock = QTimer (self)
+
+		# add action to perform for the timerClock to be pressed
+		timerClock.timeout.connect(self.display_time)
+
+		# starting the timerClock
+		timerClock.start(1000)
+
+	def display_time(self):
+
+		if self.strt_flag:
+
+			# displaying the count value to the label
+			self.count.setText(str(self.count_val))
+
+			# verifying if the count value is zero or not
+			if self.count_val == 0:
+
+				# changing the start flag value to false
+				self.strt_flag = False
+
+				# changing the line edit 
+                # widget to disable form
+				self.input_txt.setDisabled(True)
+
+
+			# decreasing the count values
+			self.count_val -= 1
+
+
+	def start_action(self):
+
+		# changing the start flag value to true
+		self.strt_flag = True
+
+		# reset the scoring value
+		self.scoring.setText("Scoring : 0")
+		self.scoring_val = 0
+
+		# reset the count value
+		self.count_val = 30
+
+		# clear the entire line edit text
+		self.input_txt.clear()
+
+		# changing the line edit value to enabled
+		self.input_txt.setEnabled(True)
+
+		# getting a random color from the list mentioned
+		self.rndm_color = random.choice(self.clr_list)
+
+		# changing the color choice to a random color
+		self.rndm_color.lower()
+
+		# set the random color for the label
+		self.color.setStyleSheet("color : " + self.rndm_color + ";")
+
+		# get another random color's name
+		rndm_text = random.choice(self.clr_list)
+
+		# set the text to the label
+		self.color.setText(rndm_text)
+
+
+	def input_actn(self):
+
+		# getting the line edit text
+		text = self.input_txt.text()
+
+		# changing the text to lower case
+		text.lower()
+
+		# check for the text with random color
+		if text == self.rndm_color:
+			# clear the entire line edit text
+			self.input_txt.clear()
+
+			# increasing the scoring value
+			self.scoring_val += 1
+
+			# set the score to the scoring label
+			self.scoring.setText("Score : " + str(self.scoring_val))
+
+			# get a random color from the list
+			self.rndm_color = random.choice(self.clr_list)
+
+			# changing the color choice to random color
+			self.rndm_color.lower()
+
+			# set the random color to label
+			self.color.setStyleSheet("color : " + self.rndm_color + ";")
+
+			# get the another random color's name
+			rndm_text = random.choice(self.clr_list)
+
+			# set the text for label
+			self.color.setText(rndm_text)
+
+
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the created Window
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Output:
+The output of the code we explained above has been attached below as a screenshot.
+
+
+
+Next TopicDigital clock using PyQt5 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

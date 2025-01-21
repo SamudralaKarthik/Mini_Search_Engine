@@ -1,0 +1,135 @@
+
+
+
+
+next →
+← prev
+
+How to connect Database in Python
+The database is a well-organized collection of structured information or data stored in a computer system. In database, the data is arranged in the tabular form, and we can access that information or data by querying.
+Python can be used to connect the Database. MySQL is one of the most popular Databases. In this tutorial, we will learn to establish a connection to MySQL via Python. Let's understand the following steps to work with the MySQL using Python.
+
+Install MySQL Driver
+Create a connection Object
+Create a cursor Object
+Execute the Query
+
+Install MySQL Driver
+First, we need a MySQL driver in our system. Install the MySQL software and configure the settings. We will use the MySQL connector driver, which is installed using the pip command. Open a command prompt and type the following command.
+
+python -m pip install mysql-connector-python
+
+Press the enter button. It will download the MySQL driver.
+
+Verify the Driver
+
+Let's check whether we have installed it properly or not. It can be done by importing the mysql.connector.
+
+import mysql.connector
+
+If this line is executed without error, it means MySQL connector has installed properly. We are ready to use it.
+Create a Connection Object
+The mysql.connector provides the connect() method used to create a connection between the MySQL database and the Python application. The syntax is given below.
+Syntax:
+
+Conn_obj= mysql.connector.connect(host = <hostname>, user = <username>, passwd = <password>)  
+
+The connect() function accepts the following arguments.
+
+Hostname - It represents the server name or IP address on which MySQL is running.
+Username - It represents the name of the user that we use to work with the MySQL server. By default, the username for the MySQL database is root.
+Password - The password is provided at the time of installing the MySQL database. We don't need to pass a password if we are using the root.
+Database - It specifies the database name which we want to connect. This argument is used when we have multiple databases.
+
+Consider the following example.
+Example -
+
+import mysql.connector
+
+# Creating a the connection object   
+conn_obj = mysql.connector.connect(host="localhost", user="root", passwd="admin123")
+
+# printing the connection object   
+print(conn_obj)  
+
+Output:
+<mysql.connector.connection.MySQLConnection object at 0x7fb142edd780> 
+
+Create a Cursor Object
+The connection object is necessary to create because it provides the multiple working environments the same connection to the database. The cursor() function is used to create the cursor object. It is import for executing the SQL queries. The syntax is given below.
+Syntax:
+
+Con_obj = conn.cursor()
+
+Let's understand the following example.
+Example -
+
+import mysql.connector
+
+# Creating the connection object   
+conn_obj = mysql.connector.connect(host="localhost", user="root", passwd="admin123", database="mydatabase")
+
+# printing the connection object   
+print(conn_obj)
+
+# creating the cursor object  
+cur_obj = conn_obj.cursor()
+
+print(cur_obj)  
+
+Output:
+ 
+MySQLCursor: (Nothing executed yet)
+
+Executes the Query
+In the following example, we will create a database by executing the query. Let's understand the following example.
+Example -
+
+import mysql.connector
+
+# Creating the connection object   
+conn_obj = mysql.connector.connect(host="localhost", user="root", passwd="admin123")
+
+# creating the cursor object  
+cur_obj = conn_obj.cursor()
+
+try:
+    # creating a new database using query 
+    cur_obj.execute("create database New_PythonDB")
+
+    # getting the list of all the databases which will now include the new database New_PythonDB  
+    dbms = cur_obj.execute("show databases")
+
+except:
+    conn_obj.rollback() # it is used if the operation is failed then it will not reflect in your database
+
+for x in cur_obj:
+    print(x)
+
+conn_obj.close() 
+
+Output:
+'information_schema',)
+('javatpoint',)
+('javatpoint1',)
+(New_Pythondb)
+('mydb',)
+('mydb1',)
+('mysql',)
+('performance_schema',)
+('testDB',)
+
+In the above tutorial, we have discussed how we can establish a connection to MySQL via Python. You can learn complete Python with MySQL from (https://www.javatpoint.com/python-mysql-database-connection).
+
+
+Next TopicHow to convert list to dictionary in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,351 @@
+
+
+
+
+next →
+← prev
+
+QR code using python
+A QR code is a type of barcode that is simple for a digital device to read and carries data in the form of a string of pixels organized in a square-cornered grid. Because many smartphones have built-in QR scanners, QR codes are often utilized in marketing and promotional campaigns. They are widely employed to keep track of data regarding the products in a supply chain. They have proved essential in current initiatives to monitor coronavirus exposure and stop the virus's spread.
+In 1994, Denso Wave, a Japanese company and a subsidiary of Toyota, created the first QR code technology. They needed a more exact system to track automobiles and parts as they were being produced. To do this, they developed a particular form of barcode that could read kanji, kana, and alphanumeric characters.
+Traditional barcodes can only be read from top to bottom. As a result, they can only hold a limited amount of data, often in an alphanumeric format. However, there are two ways to read a QR code: from top to bottom and from right to left. Due to this, it may house. The QR code's design team aimed to make it simple to read so that workers would not lose time getting it at the proper angle. In order to make it stand out, they also wanted it to have a distinctive look. They ultimately decided on the enduringly popular square form as a result.
+Denso Wave announced that they will forgo exercising their patent rights and make their QR code freely accessible. Therefore, QR codes might be created and used by anybody. Though the concept took some time to catch on, the first QR-enabled mobile phones were introduced in Japan in 2002. The prevalence of smartphones contributed to the rise in the number of businesses utilizing QR codes.
+Traditionally, the quantity of space available on a product's packaging or in the advertising proclaiming its advantages limited the amount of information that could be transmitted about a good or service. A customer would need to locate a salesperson or obtain extra paperwork if they desired more information about the product, such as its availability, pricing, or features.
+Barcodes are frequently found on the rear of product packaging and use a mixture of parallel lines of varying lengths to transfer data. These codes may be read by devices equipped with an optical scanner. The U.S. railways used the barcode for the first time in the 1960s to track cargo and equipment, revolutionizing how businesses handled inventory and prices. In 1974, two-dimensional, conventional barcodes became widely used in American retail establishments.
+3 These days, barcodes may be seen on anything from shipping containers to hospital wristbands and personnel ID badges.
+Public information is frequently distributed using static QR codes like the one above. They are frequently seen in advertisements in newspapers and magazines, as well as on posters and billboards. The person who produced the code can keep track of information on the frequency with which their code was scanned and whether or not the call to action contained in the code was followed. QR codes that are dynamic (also known as unique QR codes) have more features. They are editable at any moment and may even be customized to sell to a particular person. More metadata is included in these codes to aid in tracking.
+Similar to store barcodes, a QR code functions similarly. Each QR code is made up of black squares and dots that stand in for various kinds of data. The barcode's distinctive design turns into data that can be read by humans when it is scanned. This transaction takes place instantly.
+Although most people now scan QR codes with smartphones, users must have a QR reader or scanner to get the information. There are several free apps for QR scanning, such NeoReader, and QuickMark Barcode Scanner, in case your phone lacks the capacity. The capacity to collect scanning metrics is a significant advantage of dynamic QR codes. The user's personal information is not accessible, however, you may view the date, place, and scanning equipment used for each scan. And as marketers, we are aware of the importance of these data in determining the success of a campaign.
+Code:
+
+import sys
+class QRGenerator:
+    import qrcode
+
+    def __init__(self):
+        self.text_for_qrcode = None
+        self.qr_filename = None
+
+    def get_data_for_qr_code(self):
+        print("Enter the text from which you want to generate the QR code:")
+        data = input()
+        self.text_for_qrcode = data
+
+    def get_name_of_file(self):
+        print("Enter the name of the file in which the generated QR code needs to be stored.\nThe file needs to be in .png format.")
+        filename = input()
+        self.qr_filename = filename
+
+    def generate_qr_code(self):
+        qr_init_handler = qrcode.QRCode(version=1, box_size=10, border=6)
+        qr_init_handler.add_data(self.text_for_qrcode)
+        qr_init_handler.make(fit=True)
+
+        image_handler_obj = qr_init_handler.make_image(
+            ill_color="black", back_color="white")
+        image_handler_obj.save(self.qr_filename)
+
+        print('QR code generated successfully and saved in {} file.'.format(
+            self.qr_filename))
+
+
+class QRReader:
+    from pyzbar import pyzbar
+    from PIL import Image
+
+    def __init__(self):
+        self.name_of_qr_file = None
+        self.text_from_qrcode = None
+
+    def get_the_name_of_qr_file(self):
+        print("Enter the name of the file in which the QR code is saved.\nThe file should be a .png file.")
+        filename = input()
+        self.name_of_qr_file = filename
+
+    def decode_data_from_qr_code(self):
+        image_handler_obj = Image.open(self.name_of_qr_file)
+        data_from_qr_file = pyzbar.decode(image)[0]
+
+        text_data = data_from_qr_file.data.decode("utf-8")
+        type_of_text_data = data_from_qr_file.type
+
+        decoded_data = f"{type_of_text_data}--->,{text_data}"
+        self.text_from_qrcode = decoded_data
+        print("QR code in the file named {} read sucessfully.".format(
+            self.name_of_qr_file))
+
+    def print_the_decoded_qr_code_data(self):
+        print("The data which is readed from the QR code file name {} is {}".format(
+            self.name_of_qr_file, self.text_from_qrcode))
+
+
+In the main function, the user is presented with a menu in which various options are presented to the user from which he can select, the various options which are presented to the user in this menu are like, To enter the text data from which the QR code will be generated, To enter the name of the file in which the genrated QR code will be saved, To generate a QR with the entered data which will be stored in the specified filename, To enter the name of the QR code file which needs to be read, To read the data from the specified QR code file, To print the data which has been read from the QR code file and the final option is to stop printing this menu and exit from the code execution. Depending upon the type of the choice selected by the user the appropriate function of the specific class is called with the help of the object of that class which is created earlier in this main function, if the function which is called by the user requires input from the user then it will ask the user to provide the appropriate input and then perform the various operation that is required on the provided input by the user.
+
+def main():
+
+    qr_code_generator = QRGenerator()
+    qr_code_reader = QRReader()
+
+    while(True):
+
+        # from the listed below the list of operations select any one of the operations
+        print("\n\nDo select any of these options:")
+        print("1. To enter the text data from which the QR code will be generated.")
+        print("2. To enter the name of the file in which the genrated QR code will be saved.")
+        print("3. To generate a QR with the entered data which will be stored in the specified filename.")
+        print("4. To enter the name of the QR code file which needs to be read.")
+        print("5. To read the data from the specified QR code file.")
+        print("6. To print the data which has been read from the QR code file.")
+        print("7. To exit from the code execution.")
+
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+        if menu_choice == 1:
+            qr_code_generator.get_data_for_qr_code()
+        elif menu_choice == 2:
+            qr_code_generator.get_name_of_file()
+        elif menu_choice == 3:
+            qr_code_generator.generate_qr_code()
+        elif menu_choice == 4:
+            qr_code_reader.get_the_name_of_qr_file()
+        elif menu_choice == 5:
+            qr_code_reader.decode_data_from_qr_code()
+        elif menu_choice == 6:
+            qr_code_reader.print_the_decoded_qr_code_data()
+        elif menu_choice == 7:
+            sys.exit()
+
+        print(
+            "To proceed with the printing of the menu which was getting displayed enter [Y] else [N]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+1
+Enter the text from which you want to generate the QR code:
+Save this data in a QR code file
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+2
+Enter the name of the file in which the generated QR code needs to be stored.
+The file needs to be in .png format.
+qrcodefile1.png
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+3
+QR code generated successfully and saved in qrcodefile1.png file.
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+4
+Enter the name of the file in which the QR code is saved.
+The file should be a .png file.
+qrcodefile1.png
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+5
+QR code in the file named qrcodefile1.png read successfully.
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+6
+The data which is read from the QR code file name [qrcodefile1.png] is [Save this data in a QR code file]
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+1
+Enter the text from which you want to generate the QR code:
+Data with [email protected] [email protected]$
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+2
+Enter the name of the file in which the generated QR code needs to be stored.
+The file needs to be in .png format.
+qrfilewithspeicalchars.png
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+3
+QR code generated successfully and saved in qrfilewithspeicalchars.png file.
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+4
+Enter the name of the file in which the QR code is saved.
+The file should be a .png file.
+qrfilewithspeicalchars.png
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+5
+QR code in the file named qrfilewithspeicalchars.png read successfully.
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+6
+The data which is read from the QR code file name [qrfilewithspeicalchars.png] is [Data with [email protected] [email protected]$]
+To proceed with the printing of the menu which was getting displayed enter [Y] else [N]
+y
+
+
+Do select any of these options:
+1. To enter the text data from which the QR code will be generated.
+2. To enter the name of the file in which the genrated QR code will be saved.
+3. To generate a QR with the entered data which will be stored in the specified filename.
+4. To enter the name of the QR code file which needs to be read.
+5. To read the data from the specified QR code file.
+6. To print the data which has been read from the QR code file.
+7. To exit from the code execution.
+7
+
+In the above-written code, the main function, the user is presented with a menu in which various options are presented to the user from which he can select, the various options which are presented to the user in this menu are like, To enter the text data from which the QR code will be generated, To enter the name of the file in which the genrated QR code will be saved, To generate a QR with the entered data which will be stored in the specified filename, To enter the name of the QR code file which needs to be read, To read the data from the specified QR code file, To print the data which has been read from the QR code file and the final option is to stop printing this menu and exit from the code execution. Depending upon the type of the choice selected by the user the appropriate function of the specific class is called with the help of the object of that class which is created earlier in this main function, if the function which is called by the user requires input from the user then it will ask the user to provide the appropriate input and then perform the various operation that is required on the provided input by the user.
+Advantages of QR code:
+
+Quick and error-free: Consumers can only access online information via URLs if QR Codes are not available. On a smartphone device, however, inputting a URL takes time and is cumbersome. Customers are also susceptible to typing mistakes. The procedure of scanning a QR Code is quicker and error-free in comparison. About 200 ATMs were introduced in 2015 by Wintrust Financial, a Chicago-based company, and FIS, a technology company. These ATMs are equipped to handle cardless transactions using QR Codes. With their Wintrust app, users may easily make a withdrawal by scanning a QR Code at the ATM screen. According to Wintrust and FIS, cardless cash withdrawal using a QR Code only needs 8 seconds as opposed to 47 seconds for a typical withdrawal. This demonstrates how quickly and conveniently a person may utilize a QR code. Customers may make a cash withdrawal by simply using their Wintrust smartphone to scan a QR Code at the ATM screen. According to Wintrust and FIS, cardless cash withdrawal using a QR Code takes just 8 seconds as opposed to the typical 47 seconds. This demonstrates how quicker and more practical QR Codes are for the user. This is a major factor in the popularity of QR Codes in China.
+More informative: Print-based marketing has drawbacks in contrast to online marketing. especially in the real estate sector. You can only say so much in a newspaper advertisement, product package, and brochure, right? Wrong. You may provide them a means to access an endless amount of information by using QR Codes. Maggi noodles, a well-liked Nestle product in India, were outlawed in 2015. It was as a result of assertions made by the authorities that it had lead levels that were illegal. Although the prohibition was shortly overturned, Nestle was aware that people's confidence levels had declined. Nestle made a number of actions to demonstrate its adherence to the law and people's health in order to win back their trust. To do this, they provided clients with a thorough list of components as well as other crucial details. This might be about health, the environment, society, or cooking. Of course, it was impossible to publish anything on the container. As a result, the business added a QR Code that directed them to a mobile site with all of this information.
+Engaging with rich content: Words are useful. There are a thousand words in a picture. However, a video has thousands of images. Furthermore, audio is more practical. Unfortunately, unless you include a QR Code, you cannot distribute these types of rich material through print advertisements. Marketers may convey rich material through their print advertisements by using QR Codes. They will therefore see more audience participation. One of Chef's Basket's pasta items, for instance, has a QR Code affixed to the box. The QR Code connects customers to a video with the pasta dish's recipe when it is scanned.
+Actionable: Even if print media is still effective for branding, it lacks interactive features compared to outdoor or digital marketing. But it is possible with QR Codes. You may make your promotions interactive and get feedback from your target market by using a QR Code. You may hold a contest, encourage people to sign up for a service or event, collect feedback, or let your consumers buy directly from a newspaper ad or flyer. An excellent illustration is "World Park," a QR Code-based campaign that ran in Central Park in New York City in 2010. Various spots throughout the park have boards with QR Codes on them. The QR Codes engaged visitors in a quiz about the history, popular culture, art, and music of the park when they were scanned.
+Trackable: If you work in marketing, you are aware of the value of analytics. It enables you to learn a lot about your audience. hence assisting you in identifying your strengths and weaknesses. However, unlike digital media, print media has no tracking capabilities on its own. Here is where QR Codes come in handy. Through the ability to monitor scanning activity, QR Codes allow you to evaluate the effectiveness of print media marketing campaigns. For instance, how many individuals have scanned it, and when and where they scanned it. It also provides an additional capability known as event tracking. It describes how users respond to the information included in a QR Code after scanning it. As an illustration, it may be clicking on
+A bridge between online and offline media: Offline media like flyers, business cards, billboards, posters, brochures, and signage may all be simply updated using QR codes. They are speedier, simpler, and less likely to cause end users to make mistakes. A potential customer may scan the unique code on your flier or message and respond to your website or call to action offer.
+Customer-Friendly: Well, they certainly make their life simpler, to begin with. Instead of having to remember to visit a website later or write down phone numbers and online addresses, people can now call your company or fill out a contact form on your website by quickly scanning the QR code. For B2B companies, this is especially crucial because you are dealing with potential clients who are frequently pressed for time. The more quickly and easily people can contact you to learn more about what you're selling, the more likely it is that they will convert. These are just a few of the benefits QR codes provide for your B2B website. They may be utilized in a number of ways. As certain as you are.
+New Technologies: Everyone enjoys interacting online since the world has gone digital. If your company has a digital presence, it is obvious that it is forward-thinking and advanced. Another benefit of QR codes is that they enable you to successfully spread your message and enhance the engaging brand image of your business.
+Saves Paper: A complete method of turning completely digital is via using QR codes. You have the opportunity to protect the environment by reducing your consumption of paper and other materials. Your investment in paper and other material items that you frequently use for marketing or publicity can be reduced with the aid of a custom QR code. It enables you to utilize handheld digital screens to their fullest potential. You can only provide them access to the greatest information without spending money on paper items by giving them digital QR codes.
+
+Disadvantages of QR code:
+
+Privacy Issues: With QR codes, you may access extra tracking and analytics features in addition to saving paper. According to a recent article in the New York Times, some companies have utilized QR codes to create databases of client order histories and contact information. Additionally, a QR code enables company owners to view the frequency, location, and time of each scan. While these technologies could be helpful for your business, others should evaluate if utilizing them is worth jeopardizing the privacy of your clients. Consumers have been more conscious in recent years of how firms utilize their personal data, and if they feel monitored, they are prepared to shop elsewhere. According to a 2019 Cisco poll, 32% of customers have changed businesses due to data-sharing agreements.
+Cyber Frauds: One of the biggest advantages of employing QR codes is the capacity to accept cashless payments. Customers may pay using their smartphones by scanning a QR code, eliminating the need for staff to physically handle credit cards and payment devices. However, cybercriminals are producing bogus QR codes and posing as legitimate companies in order to defraud unsuspecting clients of their money or infect their devices with malware. False QR codes are more difficult to spot than phishing emails or other methods of impersonating legitimate companies. A phony QR code resembles a real bar code almost exactly. By simply putting a bogus QR code over a legitimate one, cybercriminals may route users to phony payment websites.
+
+So, in this article, we understood how we can read and create QR codes with python.
+
+
+Next TopicFlipping Tiles (Memory game) using Python
+
+
+
+
+← prev
+next →
+
+
+
+

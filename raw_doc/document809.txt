@@ -1,0 +1,127 @@
+
+
+
+
+next →
+← prev
+
+__file__ (A Special Variable) in Python
+What are Special variables?
+In Python, there are some variables which are defined using double underscores, and they are called Dunder or magic methods. They are used for special purposes in the code, and that is why they are referred to as special variables.
+For example: __init__ , __add__ ,__len__ ,__file__ etc.
+__init__ method:
+This method is called without any function call, and it is invoked when we create any object or instance of any class. In other programming languages, it is called the constructor.
+__file__ method:
+In Python code, we import many files or modules in the current code to reuse the same code and to increase the efficiency. This method contains the path of the module which we have imported into our file for some special purpose. The type of this variable would be a string, and it can be empty or non-empty. If the module which we have imported is present in the database, not in our system then there would not be any path of that module, and this variable would be empty.
+If the module is present in our local system then there would definitely be a path of the module, and it will be stored in this variable. The value of this variable would be determined by the import system of python. We will see some examples to understand the different use case scenarios for this variable.
+Example1:
+Python code:
+test.py
+
+ # Creating a first module named HelloWorld
+# we will use this module and function in other modules
+def helloWorld():
+	print("This is imported from HelloWorld and thanks javatpoint ")
+
+test2.py
+
+# Importing the above created module of hello world
+import test
+
+
+# Calling the method created inside the test module
+test.helloWorld()
+
+# printing the __file__variableto get the path of the module
+print(test.__file__)
+
+Output:
+
+Explanation:
+In the above code, we have one module named test.py, where we have defined a method which will print some statements. Then we created a second module named test2.py, in which we have imported the test.py module. Now we use the method of test.py in test2.py, and we print the __file__ variable of the first module.
+We got the path of the test.py module using this special variable.
+Example2:
+We will import more than one module in the same file.
+Python code:
+test1.py
+
+# Creating a first module named HelloWorld1
+# we will use this module and function in other modules
+def helloWorld1():
+	print("This is  module 1 named test and thanks javatpoint ")
+
+test3.py
+
+# Creating a first module named HelloWorld3
+# we will use this module and function in other modules
+def helloWorld3():
+	print("This is  module 3 named test3 and thanks javatpoint ")
+
+test4.py
+
+# Creating a first module named HelloWorld4
+# we will use this module and function in other modules
+def helloWorld4():
+	print("This is  module 4 named test4 and thanks javatpoint ")
+
+test2.py
+
+# Importing the above created modules of hello world
+import test1
+import test3
+import test4
+
+# Calling the method created inside the test module
+# printing the __file__variableto get the path of the module
+
+test1.helloWorld1()
+print(test1.__file__)
+
+test3.helloWorld3()
+print(test3.__file__)
+
+test4.helloWorld4()
+print(test4.__file__)
+
+Output:
+
+Explanation:
+In the above code, we have three different modules named as test1,test3, and test4, where we have defined some methods. We have another module which is the main module or the file where we have imported all of the three modules. Now we have used the __file__ special variable for each module to get the path of each respective module.
+Example3:
+If the modules are present in different folders:
+Python code:
+add.py
+
+#defining the add function, which will be used by other modules
+def addNumber(a,b):
+    print("the sum of the numbers is ",a+b)
+
+test2.py
+
+# Importing the above created modules of hello world
+from javatpoint import add 
+
+# Calling the method created inside the test module
+
+add.addNumber(6,63)
+# printing the __file__variableto get the path of the module
+print(add.__file__)
+
+Output:
+
+Explanation:
+In the above code, we have one module named add.py, which has the method to add the two numbers. We have one main module named test2.py, in which we have imported the add module, and then we have used the addNumber method of the add module in the current module.
+We have used the __file__ special variable for the add module, which will print the exact path of the add module.
+
+
+Next Topic__future__ module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

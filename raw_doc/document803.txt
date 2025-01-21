@@ -1,0 +1,104 @@
+
+
+
+
+next →
+← prev
+
+Python Email.utils
+First, we should understand what the Python email package is.
+A library for managing email messages is the email package. It is expressly not intended to perform any email message sending to SMTP (RFC 2821), NNTP, or other servers; those tasks are performed by modules like smtplib and nntplib.
+What feature does the majority of office employment share? You must frequently send emails in the majority of them.
+Whether you're an engineer, programmer, or data scientist, you probably have to read and answer emails daily. Despite the fact that this activity doesn't advance our career, it disrupts our productivity and consumes vital time.
+In the email.utils module, there are a few helpful tools available. Let's understand them one by one:
+1.nutils.localtime(dt=None)
+As an aware datetime object, give back the local time. Return the current time if the call is made without any parameters. In the absence of this, the dt parameter should be a datetime instance, which is transformed to the local time zone using the system time zone database. It is presumed that dt is in local time if dt is naive (that is, if dt.tzinfo is None). If isdst has a positive or negative value in this situation, localtime will first assume that summer time (for instance, Daylight Saving Time) is or is not in effect for the given time. When isdst is set to a negative value, the localtime makes an effort to determine whether summer time is in effect at the given time.
+It's new version in 3.3.
+2.mutils.make_msgid(idstring=None, domain=None)
+returns a string appropriate for a Message-ID header that complies with RFC 2822. If provided, the optional idstring is a string that is used to increase the message ilevel d's of uniqueness. If provided, the optional domain displays the msgid text following the @ sign. The local hostname is used by default. Although overriding this default is typically unnecessary, there are some situations when it might be, like building a distributed system that uses a consistent domain name across multiple hosts.
+The domain keyword was added in version 3.2.
+The rest of the features are found in the old (Compat32) email API. There is no need to directly utilise them with the new API, since the parsing and formatting they provide is done automatically by the header parsing machinery of the new API.
+3. utils.unquote(str)
+Return a new string that is str's unquoted equivalent. Double quotes are removed from str if they appear at the end and the beginning. Likewise, angle brackets are removed if str has them at both the beginning and the end.
+4. utils.quote(str)
+Return a format string with double quotes replaced by backslash-double quotes and backslashes in str replaced by two backslashes.
+5. utils.parseaddr(address)
+Parse the address into its real name and email address components. The address should be the value of an address-containing field, like To or Cc. Unless the parse fails, in which case a 2-tuple of (", ") is returned, returns a tuple containing that information.
+6. utils.formataddr(pair, charset='utf-8')
+The function takes a 2-tuple of the type (realname, email address) and returns a string value appropriate for a To or Cc header. This function is the opposite of parseaddr(). The second member of a pair is returned unchanged if the first element of the pair is false.
+If the realname contains non-ASCII characters, the optional charset character set will be utilised in the RFC 2047 encoding of the realname. could be a Charset or an implementation of str. UTF-8 is the default.
+Version 3.3 introduced the encoding choice.
+7. utils.getaddresses(fieldvalues)
+A list of 2-tuples of the form returned by parseaddr are returned by this method (). fieldvalues is a list of header field values that Message might return. get all. Here is a straightforward illustration that will reach all message recipients,let's understand this by example:
+Example
+
+# import getaddress from email.utils module
+from email.utils import getaddresses
+from email.message import EmailMessage
+
+# Open the plain text file whose name is in textfile for reading.
+with open("textfile.txt") as fp:
+    # Create a text/plain message
+    msg = EmailMessage()
+    msg.set_content(fp.read())
+
+    # me == the sender's email address
+    msg['Subject'] = f'The contents of {fp}'
+    msg['From'] = "me"
+    msg['To'] = "java"
+    msg['cc'] = "tpoint"
+    msg['resent-to'] = "JAVA"
+    msg['resent-cc'] = "TPOINT"
+
+
+first = msg.get_all('to', [])
+second = msg.get_all('cc', [])
+resent_first = msg.get_all('resent-to', [])
+resent_second = msg.get_all('resent-cc', [])
+all_recipients = getaddresses(first + second + resent_first + resent_second)
+print(all_recipients)
+
+Output
+[('', 'java'), ('', 'tpoint'), ('', 'JAVA'), ('', 'TPOINT')]
+
+8. utils.formatdate(timeval=None, localtime=False, usegmt=False)
+It returns a date string as per RFC 2822.
+If a floating point time value, such as those accepted by time.gmtime() and time.localtime(), is provided, the optional timeval is utilised; otherwise, the current time is used.
+Optional localtime is a flag that, when set to True, interprets timeval and, instead of returning a date in UTC, returns one that correctly accounts for daylight savings time and is related to the local timezone. UTC is utilised if the default value is False.
+The optional usegmt flag, when set to True, generates a date string with GMT instead of a numeric -0000 as the timezone. For some protocols, this is required (such as HTTP). Only when localtime is False does this apply. False is the preset value.
+9. utils.format_datetime(dt, usegmt=False)
+Similar to formatdate, but with a datetime instance as the input. If the datetime is naive, it is presumed to be "UTC with no information about the originating timezone," and the standard -0000 is used for the timezone. The numerical timezone offset is used if the datetime is aware.
+The text GMT is used in place of the numeric timezone offset if usegmt is set to True and the timezone is an aware timezone with offset zero. This offers a method for creating HTTP date headers that adhere to standards.
+10. utils.decode_rfc2231(s)
+Following RFC 2231to decode the string s.
+11. utils.encode_rfc2231(s, charset=None, language=None)
+The string s should be encoded using RFC 2231. If provided, optional charset and language specify the character set and language to use. If neither is provided, s is returned in its current state. The string is encoded using the empty string for language if charset is specified but language is not.
+12. utils.collapse_rfc2231_value(value, errors='replace', fallback_charset='us-ascii')
+A 3-tuple comprising the character set, language, and value may be returned by calling Message.get_param on a header argument that has been encoded in RFC 2231 format. This is converted to a unicode string by collapse_rfc2231_value(). The errors argument of the str's encode() method can be optional and defaults to "replace." Optional fallback charset, which defaults to "us-ascii," specifies the character set to use in the event that Python is unable to recognise the one in the RFC 2231 header.
+For ease of use, the value supplied to collapse rfc2231 value() should be a string and is returned unquoted if it is not a tuple.
+13. utils.decode_params(params)
+parameters list decoded in accordance with RFC 2231. A series of 2-tuples called "params" has components of the form (content-type, string-value).
+14. utils.mktime_tz(tuple)
+Create a UTC timestamp from a 10-tuple supplied by parsedate_tz() (seconds since the Epoch). Assume local time if the timezone item in the tuple is None.
+15. utils.parsedate(date)
+tries to parse a date in accordance with RFC 2822's guidelines. However, some mailers don't adhere to that format exactly, thus parsedate() tries to make an educated guess in these situations. A string with an RFC 2822 date in it, like "Mon, 20 Nov 1995 19:12:08 -0500," is called date. Parsedate() provides a 9-tuple that can be supplied straight to time.mktime() if it is successful in parsing the date; otherwise, None is returned.
+NOTE: It should be noted that the result tuple indexes 6, 7, and 8 cannot be used.
+16. utils.parsedate_tz(date)
+performs the same task as parsedate() and returns either None or a 10-tuple, the last element of which is the offset of the date's timezone from UTC (the formal name for Greenwich Mean Time), while the first nine elements make up a tuple that can be supplied directly to time.mktime(). The final member of the tuple returned is 0, which stands for UTC, if the input string has no timezone information. It should be noted that the result tuple's indexes 6, 7, and 8 cannot be used.
+17. utils.parsedate_to_datetime(date)
+alternative to format datetime (). does the same task as parsedate() but, if successful, provides a datetime. If a date contains an invalid value, such as an hour larger than 23, or a time zone offset that is not between -24 and 24 hours, a ValueError is raised. The datetime will be naive if the input date has a timezone of -0000, and if the date complies with the RFCs, it will represent a time in UTC without any mention of the message's true source timezone. The datetime will be an aware datetime with the corresponding timezone tzinfo if the input date has any other legitimate timezone offset.
+Conclusion
+In this article, we discussed email.utils module and a few helpful tools that we discussed above in the article.
+
+
+Next TopicPython Win32 Process
+
+
+
+
+← prev
+next →
+
+
+
+

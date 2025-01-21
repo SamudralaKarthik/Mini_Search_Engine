@@ -1,0 +1,378 @@
+
+
+
+
+next →
+← prev
+
+Sentiment Detector GUI using Tkinter in Python
+Python provides a variety of choices for GUI (Graphical User Interface) development. Tkinter is the approach used the most frequently among all GUI approaches. The fastest and simplest approach to construct GUI apps is with Python and Tkinter. This article will provide a step-by-step tutorial on how to develop a Sentiment Detector GUI application using Tkinter. The basic idea behind the creation of this application is to detect whether a given sentence is positive, negative or neutral in nature. It is a very simple application that can also be of great use in various ways like to detect a person's mood by detecting the nature of the sentence that particular person is using to communicate. The process of how can such an application be programmed using Python will be discussed ahead in the article.
+Creating a tkinter :
+
+tkinter's module will be imported
+Making the primary window (container)
+Add as many widgets as we like to the main window.
+Putting the widgets under the event trigger.
+
+Now let us build a GUI-based sentiment detector programme that can display sentiments in relation to user-provided phrases.
+Walking through the code :
+
+# importing SentimentIntensityAnalyzer class
+# from the vaderSentiment.vaderSentiment module.
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+# importing all the functions & classes from the tkinter
+from tkinter import *
+
+Firstly, we will import all the required modules into our program, that is vaderSentiment and tkinter, from the standard Python library.
+
+# Method to clear the data from 
+# all the entry boxes and various Text fields
+
+def clrAll() :
+
+ # deleting the content from the entry box
+ ngtvField.delete(0 , END)
+ neutrlField.delete(0 , END)
+ postvField.delete(0 , END)
+ ovrallField.delete(0 , END)
+
+ # entire text of the text area will be deleted
+ textArea.delete(1.0, END)
+
+Then, we will create a clrAll() method which will clear out all the text, present in the ngtvField, neutrlField, postvField and ovrallField entry fields. And even the textArea will also be cleared under this method along with the use of the delete() method.
+
+# method for printing the sentiments
+# of the typed sentence.
+def dtct_sentiment():
+
+ # getting the entire input text from the text box
+ sntnce = textArea.get("1.0", "end")
+
+ # Creating the SentimentIntensityAnalyzer object.
+ sid_objct = SentimentIntensityAnalyzer()
+
+ # polarity_scores function from SentimentIntensityAnalyzer
+ # module provides a dictionary of sentiment,
+ # that contains positive, negative, neutral, and compound scores of
+ # the entered sentence.
+ sentiment_dictnry = sid_objct.polarity_scores(sntnce)
+
+ strng = str(sentiment_dictnry['neg']*100) + "% Negative"
+ ngtvField.insert(10, strng)
+ 
+
+ strng = str(sentiment_dictnry['neu']*100) + "% Neutral"
+ neutrlField.insert(10, strng)
+
+ strng = str(sentiment_dictnry['pos']*100) +"% Positive"
+ postvField.insert(10, strng)
+ 
+ # deciding whether the sentiment is positive, negative or neutral
+ if sentiment_dictnry['compound'] >= 0.05 :
+  strng = "Positive"
+
+ elif sentiment_dictnry['compound'] <= - 0.05 :
+  strng = "Negative"
+ 
+
+ else :
+  strng = "Neutral"
+
+ ovrallField.insert(10, strng)
+
+Then, we will create another method dtct_sentiment() in order to detect the sentiments of the entered sentence in the text field. Firstly, we will create a textField for taking in the data. Then, we will use the polarity_scores() method from the SentimentIntensityAnalyzer module for getting a dictionary of the sentiments present. The dtct_sentiment() method, will further helps us to be able to get the percentage of sentence that is negative, positive and neutral. Ultimately, on the basis of these three parameters, each parameter will be presented with some individual score Then, the percentage value of all these sentiments will display the overall sentiment of the sentence using the if-else loops.
+
+# Main Code
+if __name__ == "__main__" :
+ 
+
+ # Creating a new GUI window
+ base = Tk()
+ 
+ # Setting the bg colour of the GUI window
+ base.config(background = "light green")
+
+ # setting the title of the tkinter GUI window
+ base.title("Sentiment Detector")
+
+ # Setting the dimensions of the GUI window
+ base.geometry("350x500")
+
+Then, we will jump on to the main part of our code. Firstly, in the main code, we will create a new GUI. Then, we will set the background colour of the GUI window to "light green" using the config() method. Then, we will give a suitable title to our GUI window using the title() method. And lastly, we will give required dimensions to our window using the geometry() method.
+
+# creating a new label for entering the task
+ enterTxt = Label(base, text = "Enter Your Sentence",
+         bg = "light green")e
+
+ # creating a new text area for the base sentence
+ # with certain font and size
+ # This text area is used for entering the main sentence
+ textArea = Text(base, height = 5, width = 25, font = "lucida 13")
+
+ # creating a new Submit Button and placing it in the base of the 
+ # window and on clicking, the linked method
+ # will get executed.
+ chk = Button(base, text = "Check Sentiment", fg = "Black",
+      bg = "Red", command = dtct_sentiment)
+
+ # Creating a new label for : negative
+ negtv = Label(base, text = "sentence was rated as: ",
+          bg = "light green")
+
+ # Create a new label for : neutral
+ neutrl = Label(base, text = "sentence was rated as: ",
+         bg = "light green")
+
+ # Create a new label for : positive
+ postv = Label(base, text = "sentence was rated as: ",
+          bg = "light green")
+
+ # Create a new label for : overall
+ ovrall = Label(base, text = "Sntnce Overall Rated As: ",
+          bg = "light green")
+
+ # creating another text intake box for negative
+ ngtvField = Entry(base)
+
+# creating another text intake box for neutral
+ neutrlField = Entry(base)
+
+# creating another text intake box for positive
+ postvField = Entry(base)
+
+# creating another text intake box for overall
+ ovrallField = Entry(base)
+
+Next, we will start creating the various entry boxes and labels to enter the text. First, we will construct a label asking to enter your text and along with that we will then create an entry box to enter the main sentence that will be analysed to detect the sentiments. Then, we will create a check button to confirm the sentence and send it ahead for detection. Then, we will create a label for the detection of the sentence as negative along with an entry box for the same to show the analysed result of that particular field. Then, we will create a label for the detection of the sentence as neutral along with an entry box for the same to show the analysed result of that particular field in the entry box. Then, we will create a label for the detection of the sentence as positive along with an entry box for the same to show the analysed result of that particular field in the entry box. Then, we will create a label for the detection of the sentence as overall along with an entry box for the same to show the final result of the sentence entered in the entry box.
+
+# creating a new Clear Button and placing it in the base of the 
+ # window and on clicking, the linked method
+ # will get executed.
+ clr = Button(base, text = "Clear", fg = "Black",
+     bg = "Red", command = clrAll)
+ 
+ # creating a new Exit Button and placing it in the base of the 
+ # window and on clicking, the linked method
+ # will get executed.
+ Exit = Button(base, text = "Exit", fg = "Black",
+      bg = "Red", command = exit)
+
+ # Applying the grid method for helping to placing
+ # the certain widgets at required positions
+ # in a tabular form.
+ enterTxt.grid(row = 0, column = 2)
+ 
+ textArea.grid(row = 1, column = 2, padx = 10, sticky = W)
+ 
+ chk.grid(row = 2, column = 2)
+ 
+ negtv.grid(row = 3, column = 2)
+ 
+ neutrl.grid(row = 5, column = 2)
+     
+ postv.grid(row = 7, column = 2)
+     
+ ovrall.grid(row = 9, column = 2)
+     
+ ngtvField.grid(row = 4, column = 2)
+ 
+ neutrlField.grid(row = 6, column = 2)
+                       
+ postvField.grid(row = 8, column = 2)
+     
+ ovrallField.grid(row = 10, column = 2)
+     
+ clr.grid(row = 11, column = 2)
+     
+ Exit.grid(row = 12, column = 2)
+
+Then, we will create a few buttons for our GUI. Firstly, we will create a clear button which will help us to clear up all the present content in the entry boxes. Then, we will create an exit button, which when clicked will be responsible for exiting the GUI. All the text areas i.e. the entry boxes, labels and buttons will all then be placed at their required positions using the grid() method.
+
+# starting the GUI
+ base.mainloop()
+
+Ultimately, we will use the mainloop() method in order to execute the entire program that we created.
+Complete Code :
+
+# Python program to develop a sentiments detector GUI using Tkinter modules
+# importing SentimentIntensityAnalyzer class
+# from the vaderSentiment.vaderSentiment module.
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+# importing all the functions & classes from the tkinter
+from tkinter import *
+
+# Method to clear the data from 
+# all the entry boxes and various Text fields
+
+def clrAll() :
+
+ # deleting the content from the entry box
+ ngtvField.delete(0 , END)
+ neutrlField.delete(0 , END)
+ postvField.delete(0 , END)
+ ovrallField.delete(0 , END)
+
+ # entire text of the text area will be deleted
+ textArea.delete(1.0, END)
+ 
+# method for printing the sentiments
+# of the typed sentence.
+def dtct_sentiment():
+
+ # getting the entire input text from the text box
+ sntnce = textArea.get("1.0", "end")
+
+ # Creating the SentimentIntensityAnalyzer object.
+ sid_objct = SentimentIntensityAnalyzer()
+
+ # polarity_scores function from SentimentIntensityAnalyzer
+ # module provides a dictionary of sentiment,
+ # that contains positive, negative, neutral, and compound scores of
+ # the entered sentence.
+ sentiment_dictnry = sid_objct.polarity_scores(sntnce)
+
+ strng = str(sentiment_dictnry['neg']*100) + "% Negative"
+ ngtvField.insert(10, strng)
+ 
+
+ strng = str(sentiment_dictnry['neu']*100) + "% Neutral"
+ neutrlField.insert(10, strng)
+
+ strng = str(sentiment_dictnry['pos']*100) +"% Positive"
+ postvField.insert(10, strng)
+ 
+ # deciding whether the sentiment is positive, negative or neutral
+ if sentiment_dictnry['compound'] >= 0.05 :
+  strng = "Positive"
+
+ elif sentiment_dictnry['compound'] <= - 0.05 :
+  strng = "Negative"
+ 
+
+ else :
+  strng = "Neutral"
+
+ ovrallField.insert(10, strng)
+  
+
+
+# Main Code
+if __name__ == "__main__" :
+ 
+
+ # Creating a new GUI window
+ base = Tk()
+ 
+ # Setting the bg colour of the GUI window
+ base.config(background = "light green")
+
+ # setting the title of the tkinter GUI window
+ base.title("Sentiment Detector")
+
+ # Setting the dimensions of the GUI window
+ base.geometry("350x500")
+
+ # creating a new label for entering the task
+ enterTxt = Label(base, text = "Enter Your Sentence",
+         bg = "light green")
+
+ # creating a new text area for the base sentence
+ # with certain font and size
+ # This text area is used for entering the main sentence
+ textArea = Text(base, height = 5, width = 25, font = "lucida 13")
+
+ # creating a new Submit Button and placing it in the base of the 
+ # window and on clicking, the linked method
+ # will get executed.
+ chk = Button(base, text = "Check Sentiment", fg = "Black",
+      bg = "Red", command = dtct_sentiment)
+
+ # Creating a new label for : negative
+ negtv = Label(base, text = "sentence was rated as: ",
+          bg = "light green")
+
+ # Create a new label for : neutral
+ neutrl = Label(base, text = "sentence was rated as: ",
+         bg = "light green")
+
+ # Create a new label for : positive
+ postv = Label(base, text = "sentence was rated as: ",
+          bg = "light green")
+
+ # Create a new label for : overall
+ ovrall = Label(base, text = "Sntnce Overall Rated As: ",
+          bg = "light green")
+
+ # creating another text intake box for negative
+ ngtvField = Entry(base)
+
+# creating another text intake box for neutral
+ neutrlField = Entry(base)
+
+# creating another text intake box for positive
+ postvField = Entry(base)
+
+# creating another text intake box for overall
+ ovrallField = Entry(base)
+
+ # creating a new Clear Button and placing it in the base of the 
+ # window and on clicking, the linked method
+ # will get executed.
+ clr = Button(base, text = "Clear", fg = "Black",
+     bg = "Red", command = clrAll)
+ 
+ # creating a new Exit Button and placing it in the base of the 
+ # window and on clicking, the linked method
+ # will get executed.
+ Exit = Button(base, text = "Exit", fg = "Black",
+      bg = "Red", command = exit)
+
+ # Applying the grid method for helping to placing
+ # the certain widgets at required positions
+ # in a tabular form.
+ enterTxt.grid(row = 0, column = 2)
+ 
+ textArea.grid(row = 1, column = 2, padx = 10, sticky = W)
+ 
+ chk.grid(row = 2, column = 2)
+ 
+ negtv.grid(row = 3, column = 2)
+ 
+ neutrl.grid(row = 5, column = 2)
+     
+ postv.grid(row = 7, column = 2)
+     
+ ovrall.grid(row = 9, column = 2)
+     
+ ngtvField.grid(row = 4, column = 2)
+ 
+ neutrlField.grid(row = 6, column = 2)
+                       
+ postvField.grid(row = 8, column = 2)
+     
+ ovrallField.grid(row = 10, column = 2)
+     
+ clr.grid(row = 11, column = 2)
+     
+ Exit.grid(row = 12, column = 2)
+ 
+ # starting the GUI
+ base.mainloop()
+
+Output :
+
+
+
+Next TopicPython sleep() Function
+
+
+
+
+← prev
+next →
+
+
+
+

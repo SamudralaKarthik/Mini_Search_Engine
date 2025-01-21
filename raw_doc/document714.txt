@@ -1,0 +1,460 @@
+
+
+
+
+next →
+← prev
+
+Simple FLAMES game using Tkinter in Python
+Python provides a variety of choices for GUI development (Graphical User Interface). Tkinter is the approach used the most frequently among all GUI approaches. It is a typical Python interface for the Python-supplied Tk GUI toolkit. The fastest and simplest approach to construct GUI apps is with Python and Tkinter. Tkinter makes building a GUI a simple process.
+Making a tkinter application :
+
+tkinter's module is imported
+Make the primary window (container)
+Add as many widgets as you like to the main window.
+Put the widgets under the event trigger.
+
+What exactly is FLAMES ?
+The acronym FLAMES stands for Friends, Lovers, Affectionate, Marriage, Enemies, and Siblings. It is a well-known game played at sleepovers by young females, particularly by preteens and adolescents who are just beginning to delve into the realm of crushes. Although it cannot be used to exactly determine if a person is right for someone or not, this game may be enjoyable to play with friends.
+To create Python GUI apps, a variety of widgets like button, checkbutton, canvas, etc. are employed. However, some of those that we will incorporate into our program are :
+
+Button : To add different types of buttons to a Python application, utilise the Button.
+Frame : A container to which another widget can be placed and arranged is referred to as a "frame."
+Entry : The single-line text field is shown to the user using the entry widget. It is frequently used to receive data from users.
+Label : A label is a text that is used to display a message or other information about other widgets.
+
+Let's make a GUI adaptation of a simple FLAMES game.
+Walking through the code :
+To begin with, we will import the python libraries into out python program. We will thus import the Tkinter module.
+
+# importing all the functs from the tkinter module
+from tkinter import *
+
+Then, we will create a method del_same_char() in order to remove the characters that are occurring commonly in the names. Followed by a for loop which will help us to check the mentioned information. If the character that is common is found, then that character will be removed and the remaining list will be concatenated and will be returned as a new list along with the True Flag.
+
+# method for removal of common characters
+# along with their respective occurrences
+def del_same_char(lists01 , lists02):
+
+	for i in range(len(lists01)) :
+		for j in range(len(lists02)) :
+
+			# if the common char is detected
+			# then remove that particular char
+			# and return list of concatenated
+			# list with True Flag
+			if lists01[i] == lists02[j] :
+				c = lists01[i]
+
+				# removing char from the list
+				lists01.remove(c)
+				lists02.remove(c)
+
+				# concatenation of two list elements with *
+				# * will act as a border mark here
+				lists03 = lists01 + ["*"] + lists02
+
+				# returning the concatenated list with True flag
+				return [lists03 , True]
+
+Then, if common characters do no exist, then the new concatenated list will be returned along with the False flag.
+
+# no common chars are found
+	# returning the concatenated list with False flag
+	lists03 = lists01 + ["*"] + lists02
+	return [lists03 , False]
+
+Then, we will define a new method called get_status() to determine the status of relationship between the two users. Where, it will take in the name of the first player as pl01, will check and convert it to all lower case, if not already in lower case and will replace all the blank spaces with an empty string. And, at last will generate a new list of all the letters after executing the aforementioned steps.
+
+# method for showing the relationship status
+def get_status() :
+	
+	# take the 1st player's name from Plyr01_field entry box
+	pl01 = Plyr01_field.get()
+
+	# converting all letters into lower case
+	pl01 = pl01.lower()
+
+	# replacing any space with empty string
+	pl01.replace(" " , "")
+
+	# making a list of letters or chars
+	pl01_list = list(pl01)
+
+We will now repeat all the above steps again as it is, for player 2 now. Where, it will take in the name of the second player as pl02, will check and convert it to all lower case, if not already in lower case and will replace all the blank spaces with an empty string. And, at last will generate a new list of all the letters after executing the aforementioned steps.
+
+	# taking  the 2nd player's name from Plyr02_field entry box
+	pl02 = Plyr02_field.get()
+	pl02 = pl02.lower()
+	pl02.replace(" " , "")
+	pl02_list = list(pl02)
+
+Then, we will set the initial value of a flag named processed as true. After that, we will use a while loop to keep executing the method del_same_char() in order to remove all the common or repeating characters until no common characters are left. Then the new returned list will be evaluated, the concatenated list will be taken and sliced in two different lists after taking the flag's current value and two new lists pl01_List and pl02_List will be stored.
+
+	# taking a flag as True initially
+	processed = True
+	
+	# keep calling del_same_char method
+	# until common chars are found or
+	# keep the loop going on until processed flag is True
+	while processed :
+
+		# method calling and storing the return value
+		rtrn_list = del_same_char(pl01_list , pl02_list)
+
+		# taking out concatenated list from return list
+		conct_list = rtrn_list[0]
+
+		# taking out the flag value from the return list
+		processed = rtrn_list[1]
+
+		# finding the index of "*" / border mark
+		str_index = conct_list.index("*")
+
+		# performing list slicing
+		
+		# all chars before * stored in pl01_list
+		pl01_list = conct_list[ : str_index]
+
+		# all chars after * store in pl02_list
+		pl02_list = conct_list[str_index + 1 : ]
+
+Then the total number of remaining characters will be counted from the remaining lengths of the two newly formed lists, and the result will be stored in the count variable. After that, the list of all the acronyms for the word FLAMES will be given in the form of an array.
+
+# counting the total remaining chars
+	count = len(pl01_list) + len(pl02_list)
+
+	# list of the FLAMES acronyms
+	result = ["Friends" , "Love" , "Affection" , "Marriage" , "Enemy" , "Siblings"]
+
+Next, we will introduce another while loop to keep on checking until there is only one item left in the given array. After the execution of the loop, we will split the list and will store them separately. Then, after checking the condition, the new list will be formed after concatenation. And if the condition is not satisfied, then the resulting list will be concatenated according to that.
+
+# keeping the loop going on until only one item
+	# is left in the result list
+	while len(result) > 1 :
+
+		# storing that index value from
+		# where we need to perform the slicing .
+		slit_index = (count % len(result) - 1)
+
+		# these steps are done for performing
+		# anticlock-wise circular fashion counting .
+		
+		if slit_index >= 0 :
+
+			# slicing the list
+			right = result[slit_index + 1 : ]
+			left = result[ : slit_index]
+
+			# concatenating the list
+			result = right + left
+
+		else :
+			result = result[ : len(result) - 1]
+
+Then, the value will be inserted in the entry box using the insert method.
+
+		# using the insert method to insert the
+		# value in the text entry box .
+	Value_fields.insert(10 , result[0])
+
+Then, the clr_all() method will be used to reset and clear all the entry boxes. In this, we will use the delete() method in order to delete all the data filled in the respective fields.
+
+# method for clearing the
+# data of all text entry boxes
+def clr_all() :
+	Plyr01_field.delete(0 , END)
+	Plyr02_field.delete(0 , END)
+	Value_fields.delete(0 , END)
+
+	# setting the focus on the Plyr01_field entry box
+	Plyr01_field.focus_set()
+
+Then, we will write the main code, specifying the colour of background, window size, window title and creating the labels for Player 1, Player 2 and Relationship status along with mentioning the background colours of those labels. We will then use the grid method to set the formation of these labels by providing the row number and the column number and then we will create the entry boxes in the similar manner where the data like Player 1's name, Player 2's name and the relationship status will be mentioned in the window.
+
+# Main code
+if __name__ == "__main__" :
+
+	# Creating a GUI window
+	base = Tk()
+
+	# Setting the bg colour of GUI window
+	base.configure(background = 'light green')
+
+# Setting the configuration of GUI window
+	base.geometry("350x125")
+
+	# setting the name of tkinter GUI window
+	base.title("Flames Game")
+	
+	# Creating the Player 1 Name : label
+	labl01 = Label(base , text = "Player 1 Name: " ,
+				fg = 'black' , bg = 'dark green')
+
+	# Creating the Player 2 Name : label
+	labl02 = Label(base , text = "Player 2 Name: " ,
+				fg = 'black' , bg = 'dark green')
+	
+	# Creating a Relation Status : label
+	labl03 = Label(base , text = "Relationship Status: " ,
+				fg = 'black' , bg = 'red')
+
+	# grid funct is used for placing
+	# the widgets at certain positions
+	# in a tabular structure .
+	labl01.grid(row = 1 , column = 0 , sticky = "E")
+	labl02.grid(row = 2 , column = 0 , sticky = "E")
+	labl03.grid(row = 4 , column = 0 , sticky = "E")
+
+	# Creating a text entry box
+	# for filling or entering the info.
+	Plyr01_field = Entry(base)
+	Plyr02_field = Entry(base)
+	Value_fields = Entry(base)
+
+Then again, we will use the grid method but this time to set the formation of the various entry boxes in a tabular structure on the screen for displaying to the user, by mentioning the row number, column number and the size. Next, we will create a button called submit button that will be responsible to submit the data entered by the user. And another button will also be created, which will be the clear button, whose functionality will be to clear any sort of existing text or data present in the entry boxes. Once again, the grid method will be used to set the formation and the structure of the two submit and clear buttons on the screen, by providing the row number and column number. And finally, we will begin the GUI by calling the mainloop() method.
+
+# using the grid method for placing
+	# the widgets at certain positions
+	# in tabular structure .
+	# ipadx keyword helps to set the width of the entry space .
+	Plyr01_field.grid(row = 1 , column = 1 , ipadx = "50")
+	Plyr02_field.grid(row = 2 , column = 1 , ipadx = "50")
+	Value_fields.grid(row = 4 , column = 1 , ipadx = "50")
+
+	# Creating a Submit Button and attaching it
+	# to get_status function
+	btn01 = Button(base , text = "Submit" , bg = "red" ,
+					fg = "black" , command = get_status)
+
+	# Creating a Clear Button and attaching it
+	# to clr_all function
+	btn02 = Button(base , text = "Clear" , bg = "red" ,
+					fg = "black" , command = clr_all)
+
+	# grid funct is used for placing
+	# the widgets at certain positions
+	# in tabular structure .
+	btn01.grid(row = 3 , column = 1)
+	btn02.grid(row = 5 , column = 1)
+
+	# Starting the GUI
+	base.mainloop()
+
+Complete Code :
+
+# importing all the functs from the tkinter module
+from tkinter import *
+
+# method for removal of common characters
+# along with their respective occurrences
+def del_same_char(lists01 , lists02):
+
+	for i in range(len(lists01)) :
+		for j in range(len(lists02)) :
+
+			# if the common char is detected
+			# then remove that particular char
+			# and return list of concatenated
+			# list with True Flag
+			if lists01[i] == lists02[j] :
+				c = lists01[i]
+
+				# removing char from the list
+				lists01.remove(c)
+				lists02.remove(c)
+
+				# concatenation of two list elements with *
+				# * will act as a border mark here
+				lists03 = lists01 + ["*"] + lists02
+
+				# returning the concatenated list with True flag
+				return [lists03 , True]
+
+	# no common chars are found
+	# returning the concatenated list with False flag
+	lists03 = lists01 + ["*"] + lists02
+	return [lists03 , False]
+
+
+# method for showing the relationship status
+def get_status() :
+	
+	# take the 1st player's name from Plyr01_field entry box
+	pl01 = Plyr01_field.get()
+
+	# converting all letters into lower case
+	pl01 = pl01.lower()
+
+	# replacing any space with empty string
+	pl01.replace(" " , "")
+
+	# making a list of letters or chars
+	pl01_list = list(pl01)
+
+	# taking  the 2nd player's name from Plyr02_field entry box
+	pl02 = Plyr02_field.get()
+	pl02 = pl02.lower()
+	pl02.replace(" " , "")
+	pl02_list = list(pl02)
+
+	# taking a flag as True initially
+	processed = True
+	
+	# keep calling del_same_char method
+	# until common chars are found or
+	# keep the loop going on until processed flag is True
+	while processed :
+
+		# method calling and storing the return value
+		rtrn_list = del_same_char(pl01_list , pl02_list)
+
+		# taking out concatenated list from return list
+		conct_list = rtrn_list[0]
+
+		# taking out the flag value from the return list
+		processed = rtrn_list[1]
+
+		# finding the index of "*" / border mark
+		str_index = conct_list.index("*")
+
+		# performing list slicing
+		
+		# all chars before * stored in pl01_list
+		pl01_list = conct_list[ : str_index]
+
+		# all chars after * store in pl02_list
+		pl02_list = conct_list[str_index + 1 : ]
+
+
+	# counting the total remaining chars
+	count = len(pl01_list) + len(pl02_list)
+
+	# list of the FLAMES acronyms
+	result = ["Friends" , "Love" , "Affection" , "Marriage" , "Enemy" , "Siblings"]
+
+	# keeping the loop going on until only one item
+	# is left in the result list
+	while len(result) > 1 :
+
+		# storing that index value from
+		# where we need to perform the slicing .
+		slit_index = (count % len(result) - 1)
+
+		# these steps are done for performing
+		# anticlock-wise circular fashion counting .
+		
+		if slit_index >= 0 :
+
+			# slicing the list
+			right = result[slit_index + 1 : ]
+			left = result[ : slit_index]
+
+			# concatenating the list
+			result = right + left
+
+		else :
+			result = result[ : len(result) - 1]
+		
+		# using the insert method to insert the
+		# value in the text entry box .
+	Value_fields.insert(10 , result[0])
+
+# method for clearing the
+# data of all text entry boxes
+def clr_all() :
+	Plyr01_field.delete(0 , END)
+	Plyr02_field.delete(0 , END)
+	Value_fields.delete(0 , END)
+
+	# setting the focus on the Plyr01_field entry box
+	Plyr01_field.focus_set()
+
+# Main code
+if __name__ == "__main__" :
+
+	# Creating a GUI window
+	base = Tk()
+
+	# Setting the bg colour of GUI window
+	base.configure(background = 'light green')
+
+# Setting the configuration of GUI window
+	base.geometry("350x125")
+
+	# setting the name of tkinter GUI window
+	base.title("Flames Game")
+	
+	# Creating the Player 1 Name : label
+	labl01 = Label(base , text = "Player 1 Name: " ,
+				fg = 'black' , bg = 'dark green')
+
+	# Creating the Player 2 Name : label
+	labl02 = Label(base , text = "Player 2 Name: " ,
+				fg = 'black' , bg = 'dark green')
+	
+	# Creating a Relation Status : label
+	labl03 = Label(base , text = "Relationship Status: " ,
+				fg = 'black' , bg = 'red')
+
+	# grid funct is used for placing
+	# the widgets at certain positions
+	# in a tabular structure .
+	labl01.grid(row = 1 , column = 0 , sticky = "E")
+	labl02.grid(row = 2 , column = 0 , sticky = "E")
+	labl03.grid(row = 4 , column = 0 , sticky = "E")
+
+	# Creating a text entry box
+	# for filling or entering the info.
+	Plyr01_field = Entry(base)
+	Plyr02_field = Entry(base)
+	Value_fields = Entry(base)
+
+# using the grid method for placing
+	# the widgets at certain positions
+	# in tabular structure .
+	# ipadx keyword helps to set the width of the entry space .
+	Plyr01_field.grid(row = 1 , column = 1 , ipadx = "50")
+	Plyr02_field.grid(row = 2 , column = 1 , ipadx = "50")
+	Value_fields.grid(row = 4 , column = 1 , ipadx = "50")
+
+	# Creating a Submit Button and attaching it
+	# to get_status function
+	btn01 = Button(base , text = "Submit" , bg = "red" ,
+					fg = "black" , command = get_status)
+
+	# Creating a Clear Button and attaching it
+	# to clr_all function
+	btn02 = Button(base , text = "Clear" , bg = "red" ,
+					fg = "black" , command = clr_all)
+
+	# grid funct is used for placing
+	# the widgets at certain positions
+	# in tabular structure .
+	btn01.grid(row = 3 , column = 1)
+	btn02.grid(row = 5 , column = 1)
+
+	# Starting the GUI
+	base.mainloop()
+
+Output :
+The output for the aforementioned code has been attached below in the form of a screenshot. There are three such screenshots attached.
+1 . Displaying the default Screen after the GUI is loaded, with empty boxes that are to be filled with data by the user.
+
+2 . Displaying the result Screen after the two names have been entered in the empty boxes that were to be filled with data by the user, thus providing the result of their relationship status.
+
+3 . Displaying the result Screen after the two names have been entered in the empty boxes that were to be filled with data by the user, thus providing the result of their relationship status.
+
+
+
+Next TopicYouTube Video Downloader using Python Tkinter
+
+
+
+
+← prev
+next →
+
+
+
+

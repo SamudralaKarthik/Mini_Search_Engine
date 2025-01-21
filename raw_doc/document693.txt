@@ -1,0 +1,531 @@
+
+
+
+
+next →
+← prev
+
+Sklearn Model Selection
+Sklearn's model selection module provides various functions to cross-validate our model, tune the estimator's hyperparameters, or produce validation and learning curves.
+Here is a list of the functions provided in this module. Later we will understand the theory and use of these functions with code examples.
+Splitter Classes
+
+
+model_selection.GroupKFold([ n_splits ])
+This function is a variant of KFold cross-validation, which forms non-overlapping groups.
+
+
+model_selection.GroupShuffleSplit([ ... ])
+This function performs Shuffle-Group(s)-Out cross-validation test.
+
+
+model_selection.KFold([ n_splits, shuffle, ... ])
+This function is used to perform the KFold cross-validation test.
+
+
+model_selection.LeaveOneGroupOut( )
+This function performs the Leave One Group Out cross-validation test.
+
+
+model_selection.LeavePGroupsOut( n_groups )
+This function performs the test by using Leave P Group Out.
+
+
+model_selection.LeaveOneOut( )
+This test performs the Leave One Out cross-validation.
+
+
+model_selection.LeavePOut( p )
+Cross-validator with Leave-One-Out
+
+
+model_selection.PredefinedSplit( test_fold )
+This is a general version of the Leave One Out test, i.e. Leave P Out cross-validation test.
+
+
+model_selection.RepeatedKFold( *[, n_splits, ... ] )
+This performs a cross-validation test on a predefined split.
+
+
+model_selection.RepeatedStratifiedKFold( *[, ... ] )
+This test performs the repeated stratified K-Fold cross-validation.
+
+
+model_selection.ShuffleSplit([n_splits, ... ])
+This function performs a cross-validation test on a shuffled slit dataset using random permutations.
+
+
+model_selection.StratifiedKFold([ n_splits, ... ])
+This function performs a stratified KFold cross-validation test.
+
+
+model_selection.StratifiedShuffleSplit([ ... ])
+This function performs a stratified shuffle split cross-validation test.
+
+
+model_selection.StratifiedGroupKFold([ ... ])
+This function performs a stratified K-Folds cross-validation test on non-overlapping groups.
+
+
+model_selection.TimeSeriesSplit([ n_splits, ... ])
+This cross-validation test is for time series.
+
+
+Splitter Functions
+
+
+model_selection.check_cv([ cv, y, classifier ])
+This function checks the utility to perform a cross-validation test.
+
+
+model_selection.train_test_split( *arrays[, ...] )
+This function performs cross-validation by separating matrices or arrays into training and testing datasets at random.
+
+
+Hyper-parameter optimizers
+
+
+model_selection.GridSearchCV( estimator, ... )
+This function executes an exhaustive search for an estimator over the defined parameters.
+
+
+model_selection.HalvingGridSearchCV( ...[, ...] )
+This function executes a search over given parameters by using successive halving.
+
+
+model_selection.ParameterGrid( param_grid )
+This function performs a grid of parameters, where each parameter has a discrete range of values.
+
+
+model_selection.ParameterSampler( ...[, ...] )
+This function acts as a generator on parameter samples taken from the given distribution.
+
+
+model_selection.RandomizedSearchCV( ...[, ...] )
+This function performs a randomized search on the hyper-parameters.
+
+
+model_selection.HalvingRandomSearchCV( ...[, ...] )
+This function performs a randomized search on the hyper-parameters.
+
+
+Cross-validation: assessing the performance of the estimator
+A fundamental error data scientists make while creating a model is learning the parameters of a forecasting function and evaluating the model on the same dataset. A model that simply repeats the labels of the data points it has just been trained on would score well but be unable to make any predictions about data that the model has not yet seen. Overfitting is the term for this circumstance.
+It is common to reserve a portion of the given data as validation or the test set (X test, y test) when conducting a machine learning experiment to avoid this problem. We should note that the term "experiment" does not just refer to academic purposes since machine learning experiments sometimes begin in today's business world.
+Code
+
+# Python program to show how to perform k-fold cross-validation test
+
+# Importing the required library
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score, KFold
+
+# Loading the dataset
+iris = load_iris()
+
+# Getting dependent and independent features
+X = iris.data
+Y = iris.target
+print("Size of Dataset is : ", len( X ))
+
+# Creating a logistic regression object 
+logreg = LogisticRegression()
+
+# Performing the logistic regression on train dataset
+logreg.fit( X, Y )
+
+# Performing K-fold cross-validation test
+kf = KFold(n_splits = 5)
+score = cross_val_score(logreg, X, Y, cv=kf)
+
+# Printing accuracy scores
+print("K-fold Cross Validation Scores are: ", score)
+print("Mean Cross Validation score is: ", score.mean())
+
+Output
+Size of Dataset is: 150
+K-fold Cross Validation Scores are:  [1.         1.         0.86666667 0.93333333 0.83333333]
+Mean Cross Validation score is:  0.9266666666666665
+
+Another example of the cross-validation method.
+Code
+
+# Python program to show how to perform stratified k-fold cross-validation test
+
+# Importing the required library
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+
+# Loading the dataset
+iris = load_iris()
+
+# Getting dependent and independent features
+X = iris.data
+Y = iris.target
+print("Size of Dataset is: ", len(X))
+
+# Creating a logistic regression object 
+logreg = LogisticRegression()
+
+# Performing the logistic regression on train dataset
+logreg.fit(X, Y)
+
+
+
+# Python program to show how to perform Leave P Out cross-validation test
+
+# Importing the required library
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score, LeavePOut
+
+# Loading the dataset
+iris = load_iris()
+
+# Getting dependent and independent features
+X = iris.data
+Y = iris.target
+print("Size of Dataset is: ", len(X))
+
+# Splitting p dataset for LeavePOut cross-validation test
+leave_pout = LeavePOut(p = 2)
+leave_pout.get_n_splits(X)
+
+# Creating a Random forest classifier object and computing the accuracy score
+tree = RandomForestClassifier(n_estimators = 10, max_depth = 5, n_jobs = -1)
+score = cross_val_score(tree, X, Y, cv = leave_pout)
+
+# Printing accuracy scores
+print("LeavePOut Cross Validation Scores are: ", score)
+print("Average Cross Validation score is: ", score.mean())
+
+Output
+Size of Dataset is:  150
+LeavePOut Cross Validation Scores are:  [1. 1. 1. ... 1. 1. 1.]
+Average Cross Validation score is:  0.9494854586129754
+
+Cross-validated Metrics Calculation
+Calling the cross_val _score utility method for the estimator and the dataset is the most straightforward approach to calculating the performance of the cross-validation test.
+The following example shows ways to split the data, develop a model, test it through a cross-validation test and calculate the score five times in a row (using various splits each time) to measure the accuracy score of a support vector machine model on the sklearn's iris dataset.
+Code
+
+# Python program to calculate the accuracy score through cross_val_score function
+
+# Importing the required library
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+from sklearn import svm
+
+# Importing the dataset
+X, Y = datasets.load_iris(return_X_y = True)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.4, random_state = 10)
+
+# Training the Support Vector Classifier model
+svc = svm.SVC(kernel = 'linear', C = 1).fit(X_train, Y_train)
+
+# Printing the accuracy score of the model
+print(svc.score(X_test, Y_test))
+
+# Calculating accuracy score through cross_val_score
+scores = cross_val_score(svc, X, Y, cv = 5)
+print(scores)
+print(scores.mean())
+
+Output
+0.9666666666666667
+[0.96666667 1.         0.96666667 0.96666667 1.        ]
+0.9800000000000001
+
+Tuning the Hyper-Parameters of an Estimator
+Hyper-parameters are variables that estimators do not explicitly acquire, and they are supplied as parameters to the constructor of the class of estimator. In Support Vector Classifier, common examples are C, kernel and gamma, alpha for Lasso, etc.
+Searching the hyper-parameter domain for the maximum cross-validation score is feasible and advised.
+We can use this method to optimise any supplied parameter while building an estimator. Use the following function:
+
+estimator.get_params()
+
+to obtain the names and the current values of all the parameters for a given estimator.
+The components of a search are: an estimator function (for example, regressor or classifier, like sklearn.svm.SVC()), a parameter field, a search strategy or sampling procedure, a cross-validation strategy, and a scoring function.
+GridSearchCV uses two methods: "fit" and "score." If the estimator we use for grid search supports any of the following methods, it also implements the. The methods are "score samples", "predict proba", "predict", "transform", and "inverse transform", "decision function".
+Cross-validated grid search is employed over a parameter grid to improve the estimator's parameters on which the grid search strategies are used.
+Code
+
+# Python t=program to show how to perform the grid search
+
+# Importing the required libraries
+from sklearn.svm import SVC
+from sklearn.datasets import load_iris
+from sklearn.model_selection import GridSearchCV
+
+# Loading the dataset
+data = load_iris()
+
+# Specifying the parameters
+parameters = {'kernel':('linear', 'poly'), 'C':[1, 20]}
+
+# Initializing the model
+svc = SVC()
+
+# Performing the grid search
+gs = GridSearchCV(svc, parameters)
+
+# Giving the grid search function data and target values
+print( gs.fit(data.data, data.target) )
+
+sorted(gs.cv_results_.keys())
+
+Output
+GridSearchCV(estimator=SVC(),
+             param_grid={'C': [1, 20], 'kernel': ('linear', 'poly')})
+['mean_fit_time',
+ 'mean_score_time',
+ 'mean_test_score',
+ 'param_C',
+ 'param_kernel',
+ 'params',
+ 'rank_test_score',
+ 'split0_test_score',
+ 'split1_test_score',
+ 'split2_test_score',
+ 'split3_test_score',
+ 'split4_test_score',
+ 'std_fit_time',
+ 'std_score_time',
+ 'std_test_score']
+
+We can improve the efficiency of GridSearchCV by performing halving grid search algorithm.
+The search approach begins by analysing each option with a small number of elements before selecting the best options repeatedly with progressively more elements.
+Code
+
+# Python program to show how to perform halving grid search algorithm
+
+# Importing the required libraries
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.experimental import enable_halving_search_cv  
+from sklearn.model_selection import HalvingGridSearchCV
+
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)
+
+# Creating a Random forest classifier model object
+rfc = RandomForestClassifier(random_state = 10)
+
+# Specifu=ying the parameters
+parameters = {"max_depth": [4, None], "min_samples_split": [10, 15]}
+
+# Performing the grid search
+search = HalvingGridSearchCV(rfc, parameters, resource = 'n_estimators',
+                             max_resources = 10,
+                              random_state = 10).fit( X, Y )
+print( search.best_params_ )  
+
+Output
+{'max_depth' : None, 'min_samples_split': 10, 'n_estimators': 9}
+
+Points to Remember while Performing Parameter Search
+Defining an Objective Metric
+A parametric search default evaluates a parameter configuration using the estimator's scoring function. For classification, the metrics used are sklearn.metrics.accuracy_score, and for regression analysis, the sklearn.metrics.r2_score. Other scoring metrics may be more appropriate for a certain situation.
+Defining More than One Metrics for Evaluation
+We can specify multiple scoring metrics with the GridSearchCV and RandomizedSearchCV functions.
+Multimetric scoring methods can be given as parameters as either a Python dictionary mapping the name of the scorer to the scoring function and/or the predetermined scorer name or as a collection of strings of predetermined score names(s).
+Nested Estimators and Parameter Spaces
+Using a special <estimator>_<parameter> syntax, GridSearchCV and RandomizedSearchCV enable looking over the parameters of nested estimators like Pipeline, VotingClassifier, CalibratedClassifierCV or ColumnTransformer.
+Parallelism
+The parameter search functions separately evaluate each parameter permutation on each data subset. The term n jobs=-1 enables parallel processing of calculations.
+Robustness to Failure
+Some parameter selections could make accommodating one or more data subsets impossible. Even though the algorithm might completely assess some parameter values, this will, by default, fail in the whole search. The algorithm will resist such failures if error_score=0 (or =np.NaN) is specified, generating a warning and assigning the score value for that subset to 0 (or NaN) but finishing the search.
+Calculating the Prediction Quality
+We can use three different APIs to assess how well a model predicts the future:
+Estimator scoring system: Estimation methods have a scoring system that offers a default grading standard for the subject they are intended to address. This is covered in each estimator's manual.
+
+Scoring Criteria: Cross-validation modelling evaluation methods use an intrinsic scoring system, such as sklearn.model_selection.cross_val_score and sklearn.model_selection.GridSearchCV. 
+Metric Systems: For particular uses, the sklearn.metrics module contains routines for measuring estimation error.
+
+Examples of Model Evaluations Techniques
+The functions such as model_selection.GridSearch() and model_selection.cross_val_score() provide a scoring parameter to define the scoring method.
+Using sklearn.metrics to Include Different Scoring Methods
+Code
+
+# Python program to evaluate a model using cross_val_score scoring criteria with different scoring functions.
+
+# Importing the required libraries
+from sklearn.model_selection import cross_val_score
+from sklearn.datasets import load_iris
+from sklearn.svm import SVC
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)
+
+# Executing the Support Vector Classifier algorithm on the dataset
+svc = SVC(random_state = 10)
+
+# Calculating the prediction score using cross_val_score
+scores = cross_val_score(svc, X, Y, cv = 7, scoring = 'balanced_accuracy')
+print("Accuracy score for the scoring method 'balanced_accuracy' : \n  ", scores)
+
+# Using a different scoring method
+svc = SVC()
+scores = cross_val_score(svc, X, Y, cv = 7, scoring = 'f1_micro')
+print("Accuracy score for the scoring method 'f1_micro' : \n", scores)
+
+Output
+Accuracy score for the scoring method 'balanced_accuracy' : 
+ [0.95238095 1.         1.         0.95238095 0.95238095 0.95238095
+ 1.        ]
+Accuracy score for the scoring method 'f1_micro' : 
+ [0.95454545 1.         1.         0.95238095 0.95238095 0.95238095
+ 1.        ]
+
+Additionally, Scikit-learn's GridSearchCV, RandomizedSearchCV, and cross_validate all support the evaluation based on multiple metrics simultaneously.
+Code
+
+# Python program to evaluate a model using cross_validate scoring criteria with multiple scoring methods simultaneously.
+
+# Importing the required libraries
+from sklearn.model_selection import cross_validate
+from sklearn.datasets import load_iris
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import make_scorer
+
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)
+
+# Executing the Support Vector Classifier algorithm on the dataset
+svc = SVC(random_state = 10)
+
+# Giving the scoring methods as a list
+scoring = ['accuracy', 'r2']
+
+# Evaluating the model using cross_validate metric
+cv_scores = cross_validate(svc, X, Y, cv = 7, scoring = scoring)
+# Getting the scores
+print(cv_results)
+
+# Giving the scoring methods as a dictionary
+scoring = {'accuracy_score': make_scorer(accuracy_score), 'r2_score': 'r2'}
+cv_scores = cross_validate(svc, X, Y, cv = 7, scoring = scoring)
+
+# Getting the scores
+print(cv_results)
+
+Output
+{'fit_time': array([0.00099993, 0.00099993, 0.0150001 , 0.00200009, 0.00199986,
+       0.00100017, 0.00100017]), 'score_time': array([0.00099993, 0.00099993, 0.00099993, 0.00200033, 0.00099993,
+       0.00099993, 0.00099993]), 'test_accuracy': array([0.95454545, 1.        , 1.        , 0.95238095, 0.95238095,
+       0.95238095, 1.        ]), 'test_prec': array([0.9331307 , 1.        , 1.        , 0.92857143, 0.92857143,
+       0.92857143, 1.        ])}
+{'fit_time': array([0.00099993, 0.00099993, 0.0150001 , 0.00200009, 0.00199986,
+       0.00100017, 0.00100017]), 'score_time': array([0.00099993, 0.00099993, 0.00099993, 0.00200033, 0.00099993,
+       0.00099993, 0.00099993]), 'test_accuracy': array([0.95454545, 1.        , 1.        , 0.95238095, 0.95238095,
+       0.95238095, 1.        ]), 'test_prec': array([0.9331307 , 1.        , 1.        , 0.92857143, 0.92857143,
+       0.92857143, 1.        ])}
+
+Implementing Our Own Scoring Object
+By creating our custom scoring object instead of using the function make scorer, we can build different scoring methods which will be more adaptable to our model. A callable must adhere to the process outlined by the two following principles to be a scorer:
+
+It supports parameter calls (estimator, X, y).
+It gives back a floating point value by supplying the data that measures the accuracy score of the model's predictions for a sample dataset X regarding the target variable y.
+
+A set of straightforward routines evaluating an estimation error given the predicted values and the true values for a dataset are also provided by the sklearn.metrics module:
+
+The greater the value of the score for the predicted values returned by the functions that finish in "_score," the better the model is.
+The smaller the score value for the predicted values returned by the functions that end in _error or _loss, the better the model is. Set the greater_is_better argument to False using the make_scorer function to create a scorer object.
+
+Validation Curves and Learning Curves
+Each estimator that we build has benefits and disadvantages. Biases, variance errors, and noise combine to form the generalisation error. An estimator's bias is represented by the average value of the error across many training datasets. An estimator's variance reveals how responsive it has been to various training datasets. Noise is a characteristic of raw data.
+Since biases and variance are inherent characteristics of the estimators, we typically have to choose the learning algorithms and tune the hyperparameters to minimise bias and variance. Adding an extra training dataset to a model is another widely used technique to lower the estimator's variance. However, we must only gather more training data if the estimate cannot well model the actual function with a slight variation due to its complexity.
+Validation Curve
+We require a scoring system, such as a classifier accuracy function, to evaluate a model. Grid search or other similar strategies that tune the hyperparameter of the estimator with the best score for a validation dataset are the correct way to choose numerous hyperparameters of our estimator. Be aware that the validation accuracy score is biased and no longer a reliable indicator of the generalisation if the hyperparameters are tuned based on it. We must calculate the accuracy score on a different test set to obtain an accurate approximation of the generalisation.
+Code
+
+# Python program to use validation curves to compare training and validation scores
+
+#Importing the required libraries
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.model_selection import validation_curve, train_test_split
+from sklearn.linear_model import Lasso
+
+# Loading the dataset
+np.random.seed(0)
+X, Y = load_iris(return_X_y=True)
+
+# Shuffling the dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.4, random_state = 10)
+
+# Using validation curve to calculate score values
+training_scores, validation_scores = validation_curve(Lasso(), X_train, Y_train, param_name = "alpha", param_range = np.logspace(-8, 3, 3), cv = 10)
+print(training_scores)
+print(validation_scores)
+
+Output
+[[0.93973174 0.9494471  0.94188484 0.9435467  0.94419797 0.94252983
+  0.94608803 0.9460067  0.9423957  0.94253182]
+ [0.93944487 0.94914898 0.94164577 0.94328439 0.9439338  0.94224685
+  0.94584605 0.9457347  0.94212464 0.94227221]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.        ]]
+[[ 0.97300409  0.87636051  0.95494321  0.9417682   0.92512841  0.93081973
+   0.91016821  0.91853245  0.94939447  0.9475685 ]
+ [ 0.96865934  0.8803329   0.95417121  0.9445263   0.92533163  0.93193911
+   0.90834795  0.91843293  0.95295644  0.94553797]
+ [-0.01991239 -0.20576132 -0.09876543 -0.01991239 -0.09876543 -0.51981806
+  -0.02805836  0.         -0.01991239 -0.01991239]]
+
+The estimator will be under-fitted if the values of the training score and the values of the validation scores are both small. The estimator has overfitted if the value of the training scores is higher than the values of the validation scores. Still, if the scenario is otherwise, the estimator performs quite well. It is typically impossible to have high values of the validation score and a low training score.
+Learning Curve
+A learning curve displays an estimator's training and validation scores for various lengths of training samples which are given as an argument. It is a method to determine how much additional training dataset might help and if the estimator is more susceptible to bias or variance errors. Look at the example below, where we show the learning curves of the Lasso classifier.
+Code
+
+# Python program to use validation curves to produce a learning curve
+
+#Importing the required libraries
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.model_selection import learning_curve, train_test_split
+from sklearn.linear_model import Lasso
+
+# Loading the dataset
+np.random.seed(0)
+X, Y = load_iris(return_X_y=True)
+
+# Shuffling the dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.4, random_state = 10)
+
+# Using validation curve to calculate score values
+training_sizes, training_scores, validation_scores = learning_curve(Lasso(), X_train, Y_train, train_sizes=[20, 40, 81], cv = 10)
+
+print(training_scores)
+print(validation_scores)
+Output
+
+Output
+[[0.50150218 0.43690063 0.5154695  0.51452348 0.51452348 0.51452348
+  0.51452348 0.51452348 0.51452348 0.51452348]
+ [0.48754102 0.46153892 0.50115233 0.47687368 0.53209581 0.4838794
+  0.4838794  0.4838794  0.4838794  0.4838794 ]
+ [0.47761141 0.45787213 0.48397355 0.46741065 0.49652965 0.47942832
+  0.50579115 0.48615822 0.45051371 0.48083313]]
+[[0.43915574 0.33445944 0.38829399 0.50764841 0.45173949 0.15496657
+  0.40651899 0.48801649 0.56571766 0.4732054 ]
+ [0.44653145 0.42970004 0.4145817  0.4872139  0.43139094 0.21609031
+  0.42580156 0.48481259 0.55030939 0.4521308 ]
+ [0.43844149 0.40086229 0.43313405 0.46494005 0.38326539 0.23284754
+  0.46030724 0.48905027 0.51427695 0.42897388]]
+
+
+
+Next TopicStandardScaler in Sklearn
+
+
+
+
+← prev
+next →
+
+
+
+

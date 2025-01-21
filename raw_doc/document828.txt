@@ -1,0 +1,86 @@
+
+
+
+
+next →
+← prev
+
+Check if String has Character in Python
+One of the most frequent operations in every programming language is determining whether a given string contains a substring. Python has numerous methods for determining whether a given string contains a character. The "in" operator of Python, which serves as a tool for comparison operations, is the quickest and easiest way to determine if a Python string includes a character. Checking whether a string includes a substring also benefits from the use of other Python functions like find(), index(), count(), and others.
+Using Python's "in" Operator
+The "in" operator of Python is the quickest and easiest way to determine if a string comprises a substring or not. If the string has the characters, this operation returns a boolean true; else, it returns false.
+Code
+
+# Python program to show how to use the in operator to check if a string contains a substring
+
+# Creating a string
+str="Python Tutorial"
+print("The string 'tut' is present in the string: ", "Tut" in str)
+
+Output:
+The string 'tut' is present in the string:  True
+
+If the string given as the left argument is included inside the string given as the right argument, the "in" operator gives True. It accepts two parameters, one on each side. The "in" operator of Python treats Uppercase and Lowercase letters separately since it is a case-sensitive operator.
+Using __contains__() Function
+The __contains__() function of the String class of Python also provides a way to determine whether or not the given string contains a substring. Python's "in" operation calls the __contains__() method when used implicitly. When a class object appears at the right-hand side of the "in" and "not in" operators, the behavior is defined by the __contains__ method. Although we can, we choose not to use this method explicitly. Although functions with underscores as their first character are regarded as semantically private, it is advised to use "in" operators for readability.
+Code
+
+# Python program to show how to use the __contain__ method to check if a string contains a substring
+
+# Creating a string
+string = "Python Tutorial"
+print("The string 'tut' is present in the string: ", string.__contains__('Tut'))
+
+Output:
+The string 'tut' is present in the string:  True
+
+Using Python's str.find() Method
+You can also employ the string.find() technique. The find() function determines whether a substring exists in the given string. If it finds, the find() function returns -1; else, it gives the beginning index of the substring inside the string.
+Code
+
+# Python program to find a character in a string and get its index
+
+# Creating a string
+string = "Python Tutorial"
+index = string.find('T')
+
+if index != -1:
+    print("The character 'T' is present in the string at: ", index)
+else:
+    print('The character is not present in the string')
+
+Output:
+The character 'T' is present in the string at:  7
+
+This approach is acceptable; however, using str.find() is a less Pythonic way to complete this task. Although it is lengthier and somewhat more jumbled, it still accomplishes the task.
+Using str.count() Method
+Use the Python count() function if you wish to count the instances of a particular substring within a string. The function gives 0 if it cannot find the substring or the character in the given string.
+Code
+
+# Python program to check a character is present in the string using the count() function
+
+# Creating a string
+string = "Python Tutorial"
+count = string.count('o')
+
+if count != 0:
+    print(f"The character 'o' is present in the string {count} times.")
+else:
+    print('The character is not present in the string')
+
+Output:
+The character 'o' is present in the string 2 times.
+
+
+
+Next TopicHow to Get 2 Decimal Places in Python
+
+
+
+
+← prev
+next →
+
+
+
+

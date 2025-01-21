@@ -1,0 +1,177 @@
+
+
+
+
+next →
+← prev
+
+Python linter
+Introduction: In this article, we discuss python linter. Each day we are surrounded by wonderful guidelines that make existence much less hard. For instance, drivers should obey road visitors' guidelines.
+As a result, every driver knows how to behave on the street and what regulations must be observed. Therefore, use becomes more secure, driving force conduct becomes predictable, and each person knows how to force so that others can apprehend their intentions.
+Python has a Highway Code equivalent called the Python Enhancement Proposal (PEP).
+This report contains guidelines to enhance your Python code by making it more excellent, readable, and constant. Lamentably, even experienced programmers, on occasion, the battle to bear in mind all the regulations written in a PEP. Therefore, the Python linter turned into created.
+What is Python linter?
+A linter is a program that provides hints about the quality of your code by displaying warnings and errors. You can find errors in your Python code, find invalid code patterns, find non-compliant elements, and more. Python linters have many advantages, including the following:
+
+Prevent project bugs.
+Makes code readable by Python programmers.
+Interception of unwanted code parts.
+Simplifies code and reduces complexity.
+
+Of course, each approach has its drawbacks, which are given below:
+
+This process may take some time.
+Some errors may need to be noticed.
+
+There are numerous Python linters that you may use in your daily work. Logical lint notifies you of actual code errors, and statistical lint helps programmers spot formatting problems. Shows how to install and run the most popular linters, such as -
+
+Pylint (version 2.12.1) and
+Flake8 (version 4.0).
+
+Furthermore, you will find a comparison of each output. This could let you choose the linter that notably fits your needs.
+Example: Here, we give an example of a bad quality program written in python.
+
+import math;                       
+global_value = 0                
+def Bad_Quality_Function(arg1):
+      a = [7,8,9]
+      a[20] = 20
+      DivideByZero = math.e/0
+     if a[20]==2:
+          Another_Bad_Quality_Function()
+      else:
+          return result
+      pass
+
+Here we are written some issues of the above sample code:
+
+The unnecessary semicolon in import operation.
+Need to include newline and space.
+Missing docstring.
+global_value and argument 1 are not used.
+Wrong naming style.
+Selecting an item from the list with the wrong index.
+Division by null expression.
+Non-existent method.
+Returning undefined value.
+Unnecessary pass statement.
+
+What is the problem?
+Writing code is a brain-in-depth project. There are many matters to focus on at the same time. One issue this is regularly neglected is code readability. While the code finally works, you will want to cast off it so that you in no way should undo it again. But by no means. You or one of your teammates should evaluate this code in the future. Therefore, you must make your code readable and feasible as a developer.
+What is the solution to the above problem?
+One of the easiest ways to create cleaner code is to use a linter as your code quality assistant.
+Linters are code analysers that help you create well-formatted code according to best practices. The linter inspects each line of code and flags any style problems it detects.
+Normally the linter detects:
+
+Syntax error (wrong indentation, etc.).
+The structural problem such as an unused variable.
+Violation of Best Practices. 
+
+Lines that are too long. The linter is a flexible tool. Some linters even allow you to fix styling errors on the fly automatically. This saves a lot of time.
+How to use the linter with Python?
+The linter can be installed as a separate tool that can be operated from the command line. This is how linters display real-time warnings in the code editor. Now that you know what linters are and the problems they solve, it is time to get your hands dirty.
+First, you will learn how to use a Python linter called flake8 from the command line.
+The following describes how to use the linter named autopep8. This linter also fixes the list issue. Finally, integrate flake8 into Visual Studio Code to view style issues in the code editor.
+1. Pylint: Now we are discussing Pylint in python. Pylint is a static code evaluation tool for Python with famous programming and style mistakes, bugs, invalid code constructs, and inconsistencies with coding necessities. You could also personalize Pylint to your wishes by silencing a few of the suggested errors. Output messages can include blunders and statistics about the most important programming troubles.
+We often get stuck in the middle or get an error while programming/running some program. Usually, you search the web for help and run your code. But how do you make sense of code published on the Internet? Some typical answers to this question are docstrings and articles about this code.
+One of the biggest problems now is understanding other people's programs. The situation is even worse if the code has no explanation, such as comments or docstrings. As a programmer, you want your code to be easy to read and understand. To tackle the solution, Python provides the pylint module. This article briefly introduces the pylint module and tips to improve your code's score. Let us start. Pylint is a tool that lists the errors that occur after running this Python code. The pylint code is like the pyflakes, flake8, and mypy.
+Errors in Pylint: Pylint messages consist mainly of five types of errors, which are given below -
+R - R means refactoring your code according to good programming practices.
+C - C is your code that violates the conventions of a coding standard.
+W - W is warning about stylistic issues or some minor programming issues.
+E - E means an error. I have an important programming issue.
+F - F means a fatal error that stops code processing.
+How to install pylint?
+To install pylint, have a Python compiler installed on your PC. Open a Command Prompt (Windows) / Terminal (Linux) on your PC and enter the following command, which is written below:
+
+pip install pylint
+
+Check your pylint installation by entering the following command:
+
+pylint -version
+
+You should see pylint version "2.4.4". You can also reinstall pylint and check your installation. If the pylint is installed, the screen will tell you that the requirements are already met.
+To run the code in pylint, we use the following code:
+
+pylint script.py
+
+How to work in pylint?
+Remember the following program that accepts numbers and prints their sum.
+
+x = 5
+y = 4
+print(x + y)
+
+Save the above program in the linter.py file. Open a command prompt/terminal and enter the following command:
+
+pylint linter.py
+
+With the pylint 2.4.4 version, you will see a report below. The message may differ depending on the version.
+A low score does not mean your code is wrong. The score indicates how well/poorly your code is understood by other programmers. You should improve your code considering the suggestions contained in the report.
+Each message suggestion/item in the report is tagged with a message format consisting of an ID and its meaning. Each ID starts with a letter, and the rest are numbered. Each alphabet indicates a type of message object. Some of the message objects are:
+
+
+Sl. No
+Message Object
+Expansion
+Explanation
+
+
+1.
+R
+Refactor
+R means that you should refactor your code according to good programming practices.
+
+
+2.
+C
+Convention
+C is your code violates the conventions of a coding standard.
+
+
+3.
+W
+Warning
+W is warning about stylistic issues or some minor programming issues.
+
+
+4.
+E
+Error
+E means an error. I have an important programming issue.
+
+
+5.
+F
+Fatal
+F means fatal error that stops code processing.
+
+
+Let us discuss some techniques for improving your score.
+
+ID C0326 suggests an illegal whitespace error. You must put a space between the sign and the = sign. This rule applies to all declarations that use an operator immediately after an identifier.
+ID C0304 corresponds to a missing line break suggestion. This means that you will have to add blank lines when completing the code.
+ID C0114 corresponds to the missing module docstring suggestion. That means you must add a docstring at the top related to using the program described below.
+ID C0103 corresponds to an invalid name suggestion. This can be avoided by starting the identifier with an uppercase letter. However, class names are generally considered to use camel casing. That is, class names start with an uppercase letter.
+
+To avoid this suggestion, let us add a regular expression to pylint that accepts all lowercase variables. This will be explained in detail in another example.
+The modified version of the above code is given below -
+
+X = 5
+Y = 4
+print('Sum of the two Numbers:', X + Y)
+
+So, the Pylint is a very useful linter in python.
+
+
+Next TopicTokens and Character Set in Python
+
+
+
+
+← prev
+next →
+
+
+
+

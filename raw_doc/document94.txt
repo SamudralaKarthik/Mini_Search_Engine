@@ -1,0 +1,214 @@
+
+
+
+
+next →
+← prev
+
+How to Create a Dictionary in Python
+In Python, a dictionary is an unordered sequence of data entries that can be used to record data entries in the same way that a map can. Unlike alternative data structures that only carry a singular item as an object, Dictionary contains a key: value pair. The dictionary includes a Key-Value field to improve the efficiency of this data type.
+Creating a Dictionary
+We can create a dictionary in Python by wrapping a collection of objects in curly brackets and segregating them with a comma. The Dictionary keeps track of a couple of entries, one part of this is called a key, and the other is called the value of the key and is referred to as the key: value pair. We can store any data type as a value for the key and give the same value to two keys, but keys should be immutable and unique.
+Code
+
+# Initializing a dictionary with some elements 
+Dictionary = {1: 'Javatpoint', 2: 'Python', 3: 'Dictionary'}
+print("\nDictionary created using curly braces: ")
+print(Dictionary)
+# Creating a Dictionary with keys of different data types
+Dictionary = {'Website': 'Javatpoint', 3: [2, 3, 5, 'Dictionary']}
+print("\nDictionary with keys of multiple data type: ")
+print(Dictionary)
+
+Output:
+Dictionary created using curly braces: 
+{1: 'Javatpoint', 2: 'Python', 3: 'Dictionary'}
+
+Dictionary with keys of multiple data type: 
+{'Website': 'Javatpoint', 3: [2, 3, 5, 'Dictionary']}
+
+The built-in method dict() could also be used to generate a dictionary. By simply placing two curly brackets {}, a blank dictionary can be built.
+Code
+
+# Initializing an empty Dictionary
+Dictionary = {}
+print("An empty Dictionary: ")
+print(Dictionary)
+ 
+# Creating a Dictionary using in-built dict() method
+Dictionary = dict({1: 'Python', 2: 'Javatpoint', 3:'Dictionary'})
+print("\nDictionary created by using dict() method: ")
+print(Dictionary)
+ 
+# Creating dictionary by key:value pair format
+Dictionary = dict([(1, 'Javatpoint'), (2, 'Python'), (3, 'Dictionary')])
+print("\nDictionary with key:value pair format: ")
+print(Dictionary)
+
+Output:
+An empty Dictionary: 
+{}
+
+Dictionary created by using dict() method: 
+{1: 'Python', 2: 'Javatpoint', 3: 'Dictionary'}
+
+Dictionary with key:value pair format: 
+{1: 'Javatpoint', 2: 'Python', 3: 'Dictionary'}
+
+Adding Elements to a Dictionary
+The insertion of items in the Python Dictionary could be done in various methods. Items can be added to the dictionary using this particular format Dictionary[Key] = 'Value'. We can use the in-built update() function to update a current key in a Dictionary. Nested key: values can also be inserted into a preexisting Dictionary. If the key-value combination is present in the dictionary, the value for that key is modified; if this is not the case, a new key is created and added to the Dictionary with the given value.
+Code
+
+# Initializing an empty Dictionary
+Dictionary = {}
+print("The empty Dictionary: ")
+print(Dictionary)
+ 
+# Inserting key:value pairs one at a time
+Dictionary[0] = 'Javatpoint'
+Dictionary[2] = 'Python'
+Dictionary.update({ 3 : 'Dictionary'})
+print("\nDictionary after addition of these elements: ")
+print(Dictionary)
+ 
+# Adding a list of values to a single key
+Dictionary['list_values'] = 3, 4, 6
+print("\nDictionary after addition of the list: ")
+print(Dictionary)
+ 
+# Updating values of an already existing Key
+Dictionary[2] = 'Tutorial'
+print("\nUpdated dictionary: ")
+print(Dict)
+ 
+# Adding a nested Key to our dictionary
+Dictionary[5] = {'Nested_key' :{1 : 'Nested', 2 : 'Key'}}
+print("\nAfter addtion of a Nested Key: ")
+print(Dictionary)
+
+Output:
+The empty Dictionary: 
+{}
+
+Dictionary after addition of these elements: 
+{0: 'Javatpoint', 2: 'Python', 3: 'Dictionary'}
+
+Dictionary after addition of the list: 
+{0: 'Javatpoint', 2: 'Python', 3: 'Dictionary', 'list_values': (3, 4, 6)}
+
+Updated dictionary: 
+{1: 'Javatpoint', 2: 'Python'}
+
+After addtion of a Nested Key: 
+{0: 'Javatpoint', 2: 'Tutorial', 3: 'Dictionary', 'list_values': (3, 4, 6), 5: {'Nested_key': {1: 'Nested', 2: 'Key'}}}
+
+Removing Elements from Dictionary
+Using the pop() function, we can eliminate a specific item from a dictionary. This function returns the value of the key removed.
+The popitem() function removes and returns any (key, value) element pair from the given dictionary. We can use the clear() function to erase all objects in one go.
+We could also use the del keyword to eliminate single items or even the entire dictionary.
+Code
+
+# Program to show how to remove elements from a dictionary
+
+# initializing a dictionary
+Dictionary = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e'}
+
+# removing a key:value pair from the dictionary using pop()
+Dictionary.pop(4)
+print("\nAfter removing a key using pop(): ")
+print(Dictionary)
+
+# remove any item at random using popitem()
+Dictionary.popitem()
+print("\nAfter removing an arbitrary key: ")
+print(Dictionary)
+
+# remove all the items present in dictionary
+print("\nAfter removing all the items: ")
+Dictionary.clear()
+print(Dictionary)
+
+# deleting the dictionary variable
+del Dictionary
+
+# Printing dictionary after deleting it
+try:
+    print(Dictionary)
+except:
+    print('No dictionary of the given name')
+
+Output:
+After removing a key using pop(): 
+{1: 'a', 2: 'b', 3: 'c', 5: 'e'}
+
+After removing an arbitrary key: 
+{1: 'a', 2: 'b', 3: 'c'}
+
+After removing all the items: 
+{}
+No dictionary of the given name
+
+Python Dictionary Methods
+The techniques that we can use with a dictionary are listed below. Some of these have already been mentioned in this tutorial.
+
+
+Method
+Description
+
+
+clear()
+Every item in the dictionary is removed.
+
+
+copy()
+A shallow replica of the dictionary is returned.
+
+
+fromkeys(seq[, v])
+This function gives a new dictionary having seq's keys and v's values (defaults value for keys is None).
+
+
+get(key[,d])
+This function returns the value of the specific key. It returns d if the key doesn't exist.
+
+
+items()
+It returns a new object in (key, value) format containing the dictionary's contents.
+
+
+keys()
+Creates a new object with the keys of the dictionary.
+
+
+pop(key[,d])
+Eliminates the item associated with the given key and gives its value, or d if the key is not located. It raises KeyError if d is not specified and the given key is not found in the dictionary.
+
+
+popitem()
+Eliminates and replaces a random object (key, value). If the given dictionary is empty, it raises a KeyError.
+
+
+setdefault(key[,d])
+If the key is found in the dictionary, it gives the associated value. If not, yields d and adds the key with the value of d. (default value is None).
+
+
+update([other])
+Overwrites preexisting keys in the given dictionary
+
+
+values()
+Initializes a new dictionary object with the dictionary's elements.
+
+
+
+
+Next TopicHow to create a virtual environment in Python
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,494 @@
+
+
+
+
+next →
+← prev
+
+Python Math Module
+Mathematical calculations may occasionally be required when dealing with certain fiscal or rigorous scientific tasks. Python has a math module that can handle these complex calculations. Both simple mathematical calculations like addition (+), and subtraction (-), and advanced mathematical calculations like trigonometric operations, and logarithmic operations can be performed by the functions in the math module.
+This tutorial teaches us about applying the math module from fundamentals to more advanced concepts with the support of easy examples to understand the concepts fully. We have included the list of all built-in functions defined in this module for better understanding.
+What is Math Module in Python?
+Python has a built-in math module. It is a standard module, so we don't need to install it separately. We only have to import it into the program we want to use. We can import the module, like any other module of Python, using import math to implement the functions to perform mathematical operations.
+Since the source code of this module is in the C language, it provides access to the functionalities of the underlying C library. For instance,
+Code
+
+# This program will show the calculation of square root using the math module
+# importing the math module
+import math
+print(math.sqrt( 9 ))
+
+Output:
+3.0
+
+This Python module does not accept complex data types. The more complicated equivalent is the cmath module.
+We can, for example, calculate all trigonometric ratios for any given angle using the built-in functions in the math module. We must provide angles in radians to these trigonometric functions (sin, cos, tan, etc.). However, we are accustomed to measuring angles in terms of degrees. The math module provides two methods to convert angles from radians to degrees and vice versa.
+Constants in Math Module
+The value of numerous constants, including pi and tau, is provided in the math module so that we do not have to remember them. Using these constants eliminates the need to precisely and repeatedly write down the value of each constant. The math module includes the following constants:
+
+Euler's Number
+Tau
+Infinity
+Pi
+Not a Number (NaN)
+
+Let's go over each of them one by one.
+Euler's Number
+The value 2.71828182845 of Euler's number is returned by the math.e constant.
+Syntax of this is:
+
+math.e
+
+Code
+
+# importing the required library
+import math
+ 
+# printing the value of Euler's number using the math module
+print( "The value of Euler's Number is: ", math.e )
+
+Output:
+The value of Euler's Number is:  2.718281828459045
+
+Tau
+The ratio of a circle's circumference to its radius is known as tau. The value tau returned by the tau constant is 6.283185307179586.
+Syntax of this is:
+
+math.tau
+
+Code
+
+# Importing the required library
+import math
+ 
+# Printing the value of tau using math module
+print ( "The value of Tau is: ", math.tau )
+
+Output:
+The value of Tau is:  6.283185307179586
+
+Infinity
+Infinity refers to anything limitless or never-ending in both directions of the actual number line. Numbers cannot adequately represent it. The math.inf returns positive infinity constant. We can use -math.inf to print negative infinity.
+Syntax of this is:
+
+math.inf
+
+Code
+
+# Importing the required library
+import math
+ 
+# Printing the value of positive infinity using the math module
+print( math.inf )
+ 
+# Printing the value of negative infinity using the math module
+print( -math.inf )
+
+Output:
+inf
+-inf
+
+Further, we are comparing a very large floating-point number with positive and negative infinity values.
+Code
+
+# Importing the required library
+import math
+ 
+# comparing the value of infinity
+print( math.inf > 10e109 )
+print( -math.inf < -10e109 )
+
+Output:
+True
+True
+
+Pi
+Pi is known to everyone. It is mathematically represented as either the fraction 22/7 or the decimal number 3.14. math.pi gives the most accurate value of pi.
+Syntax of this is:
+
+math.pi
+
+Code
+
+# Importing the required library
+import math
+ 
+# Printing the value of pi using the math module
+print( "The value of pi is ", math.pi )
+
+Output:
+The value of pi is  3.141592653589793
+
+Let us calculate the circumference of a circle. 
+Code
+
+# Importing the required library
+import math
+ 
+# radius of the circle
+r = 4
+ 
+# value of pi
+pi_value = math.pi
+ 
+# circumference of the circle
+print(2 * pi_value * r)
+
+Code
+25.132741228718345
+
+NaN
+The math.nan gives us a floating-point nan (Not a Number) value. This amount is not a valid numeric value. Float("nan") and the nan constant are comparable.
+Code
+
+# Importing the required library
+import math
+ 
+# Printing the value of nan using the math module
+print( math.nan )
+
+Output:
+nan
+
+Mathematical Operations with Math Module
+The functions that are required in representation theory and number theory, such as calculating the factorial of an integer, will be covered in this part.
+Calculating the Ceiling and the Floor Value
+The terms "ceiling value" and "floor value" refer to the smallest integral value larger than the number and the largest integral value less than the number, respectively. The ceil() and floor() methods simplify calculating this.
+Code
+
+# Python program to show how to use floor() and ceil() functions.
+ 
+# importing the math module
+import math
+ 
+x = 4.346
+ 
+# returning the ceiling value of 4.346
+print("The ceiling value of 4.346 is : ", end="")
+print( math.ceil(x) )
+ 
+# returning the floor value of 4.346
+print("The floor value of 4.346 is : ", end="")
+print( math.floor(x) )
+
+Output:
+The ceiling value of 4.346 is : 5
+The floor value of 4.346 is : 4
+
+Calculating the Factorial of the Number
+We may determine the factorial of a given integer in a one-liner code by using the math.factorial() function. The Python interpreter will send a message if the given number is not integral.
+Code
+
+# Python program to show how to use function() functions.
+ 
+# importing the math module
+import math
+ 
+x = 6
+ 
+# returning the factorial of 6
+print( "The factorial of 6 is : ", math.factorial(x) )
+
+# passing a non integral number
+try:
+    print( "The factorial of 6.5 in: ", math.factorial(6.5) )
+except:
+    print( "Cannot calculate factorial of a non-integral number" )
+
+Output:
+The factorial of 6 is :  720
+Cannot calculate factorial of a non-integral number
+
+Calculating the Absolute Value
+The method math.fabs() returns the absolute number of the number given to the function.
+Code
+
+# Python program to show how to use fabs() functions.
+ 
+# importing the math module
+import math
+ 
+x = -45
+ 
+# returning x's absolute value.
+print( "The absolute value of -45 is: ", math.fabs(x) )
+
+Output:
+The absolute value of -45 is:  45.0
+
+Calculating the Exponential
+x to the power of e, often known as the exponential of a number x, is calculated using the exp() function.
+Code
+
+# Python program to show how to use the exp() function.
+ 
+# importing the math module
+import math
+ 
+# declaring some value
+num1 = 4
+num2 = -3
+num3 = 0.00
+ 
+# passing above values to the exp() function
+print( f"The exponenetial value of {num1} is: ", math.exp(num1) )
+print( f"The exponenetial value of {num2} is: ", math.exp(num2) )
+print( f"The exponenetial value of {num3} is: ", math.exp(num3) )
+
+Output:
+The exponenetial value of 4 is:  54.598150033144236
+The exponenetial value of -3 is:  0.049787068367863944
+The exponenetial value of 0.0 is:  1.0
+
+Calculating the Power of a Number
+x**y is computed via the pow() function. This function calculates the value of the power after converting its inputs into floats.
+Code
+
+# Python program to show how to use the pow() function.
+ 
+# importing the math module
+import math
+ 
+x = 4
+y = 5
+# returning x to the power of y.
+print( f"The value of {x} to the power of {y} is: ", math.pow(x,y) )
+
+Output:
+The value of 4 to the power of 5 is:  1024.0
+
+Calculating Sine, Cosine, and Tangent
+The values of sine, cosine, and tangent of an angle, which are supplied as an input to the function, are returned by the sin(), cos(), and tan() methods. This function expects a value that is provided in radians.
+Code
+
+# Python program to show how to use the sin(), cos(), tan() function.
+ 
+# importing the math module
+import math
+ 
+angle = math.pi / 4
+ 
+# returning the sine of pi/4
+print( "The sine of pi/4 is : ", math.sin( angle ) )
+ 
+# returning the cosine of pi/4
+print( "The cosine of pi/4 is : ", math.cos( angle ) )
+ 
+# returning the tangent of pi/4
+print("The tangent of pi/4 is : ", math.tan( angle ))
+
+Output:
+The sine of pi/4 is :  0.7071067811865475
+The cosine of pi/4 is :  0.7071067811865476
+The tangent of pi/4 is :  0.9999999999999999
+
+The dir( ) Function
+A sorted list of strings comprising the identifiers of the functions defined by a module is what the built-in method dir() delivers.
+The list includes the names of modules, each specified constants, functions, and methods. Here is a straightforward illustration:
+Code
+
+# Importing the math module
+import math
+
+functions = dir(math)
+print( functions )
+
+Output:
+['__doc__', '__loader__', '__name__', '__package__', '__spec__', 'acos', 'acosh', 'asin', 'asinh', 'atan', 'atan2', 'atanh', 'ceil', 'comb', 'copysign', 'cos', 'cosh', 'degrees', 'dist', 'e', 'erf', 'erfc', 'exp', 'expm1', 'fabs', 'factorial', 'floor', 'fmod', 'frexp', 'fsum', 'gamma', 'gcd', 'hypot', 'inf', 'isclose', 'isfinite', 'isinf', 'isnan', 'isqrt', 'lcm', 'ldexp', 'lgamma', 'log', 'log10', 'log1p', 'log2', 'modf', 'nan', 'nextafter', 'perm', 'pi', 'pow', 'prod', 'radians', 'remainder', 'sin', 'sinh', 'sqrt', 'tan', 'tanh', 'tau', 'trunc', 'ulp']
+
+Description of all the Functions in Python Math Module
+Here is a list of all the properties and functions specified in the math module, along with a brief description of what each one does.
+
+
+Function
+Description
+
+
+ceil(x)
+The lowest integer bigger than or equal to x is returned.
+
+
+copysign(x, y)
+gives x back with the sign of y.
+
+
+fabs(x)
+gives x's absolute value back.
+
+
+factorial(x)
+provides the x factorial back.
+
+
+floor(x)
+gives back the biggest integer that is less than or equal to x.
+
+
+fmod(x, y)
+returns the leftover value after dividing x by y.
+
+
+frexp(x)
+returns the pair of the mantissa and exponent of x. (m, e)
+
+
+fsum(iterable)
+returns the iterable's correct floating point sum of all values.
+
+
+isfinite(x)
+If x is neither an infinity nor a NaN, it returns True (Not a Number)
+
+
+isinf(x)
+If x is a positive or negative infinity, it returns True.
+
+
+isnan(x)
+If x is a NaN, it returns True.
+
+
+ldexp(x, i)
+gives back x * (2**i).
+
+
+modf(x)
+gives x's fractional and integer components back.
+
+
+trunc(x)
+x's shortened integer value is returned.
+
+
+exp(x)
+delivers e**x
+
+
+expm1(x)
+yields e**x - 1
+
+
+log(x[, b])
+gives back the x logarithm in base b. (defaults to e)
+
+
+log1p(x)
+the natural logarithm of 1 + x is returned.
+
+
+log2(x)
+gives x's base-2 logarithm back.
+
+
+log10(x)
+provides x's base-10 logarithm.
+
+
+pow(x, y)
+gives x raised to the power of y back.
+
+
+sqrt(x)
+gives x's square root back.
+
+
+acos(x)
+gives the arc cosine of x back.
+
+
+asin(x)
+gives the arc sine of x back.
+
+
+atan(x)
+gives the arc tangent of x back.
+
+
+atan2(y, x)
+gives back atan(y / x).
+
+
+cos(x)
+returns the x's cosine.
+
+
+hypot(x, y)
+returns sqrt(x*x + y*y), the Euclidean norm.
+
+
+sin(x)
+gives the sine of x back.
+
+
+tan(x)
+gives the tangent of x back.
+
+
+degrees(x)
+Angle x is transformed from radians to degrees.
+
+
+radians(x)
+Angle x is transformed from degrees to radians.
+
+
+acosh(x)
+x's inverse hyperbolic cosine is returned.
+
+
+asinh(x)
+x's inverse hyperbolic sine is returned.
+
+
+atanh(x)
+x's inverse hyperbolic tangent is returned.
+
+
+cosh(x)
+gives x's hyperbolic cosine.
+
+
+sinh(x)
+gives x's hyperbolic cosine.
+
+
+tanh(x)
+gives x's hyperbolic tangent back.
+
+
+erf(x)
+the error function at x is returned.
+
+
+erfc(x)
+a function that gives the complementary error at x
+
+
+gamma(x)
+the Gamma function at x is returned.
+
+
+lgamma(x)
+gives the natural logarithm of the gamma function's absolute value at x.
+
+
+pi
+The ratio of a circle's circumference to its diameter is a mathematical constant (3.14159...)
+
+
+e
+e is a constant in mathematics (2.71828...)
+
+
+
+
+Next TopicPython Tutorial
+
+
+
+← prev
+next →
+
+
+
+

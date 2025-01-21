@@ -1,0 +1,352 @@
+
+
+
+
+next →
+← prev
+
+Microservices in Python | Python Microservices with gRPC
+In this tutorial, we will learn about microservices, why microservices are important and how to implement them using Python programming language. We will also discuss the gRPC and use it with Python.
+In the current scenario, the technologies are more dedicated to "microservices architecture" and leaving behind old "monolithic architecture". We believe that "smaller things are much easier to handle", so we have microservices that suitably can be handled. We need to interact with different microservices.
+Here we will learn how to get up and running with Python microservices using gRPC, one of the most popular frameworks.
+Let's briefly introduce Microservices and how to use them in our project.
+What are Microservices?
+Microservices are a technique for organizing complex software systems. It is similar to breaking a complex problem into a smaller one and implementing it. Same as microservices, microservices don't put all the code, not into one app, developer breaks the code into the microservices that are deployed independently and communicate with each other.
+Implementing a microservices framework is essential. When we plan to develop a framework to provide critical applications, we must ensure its robust and developer-friendly behavior.
+Why Microservices are Important?
+Suppose a developer is working for the popular e-commerce website that sells multiple products online. The several hundred workers are working in the company. Each developer is assigned to write code for the back-end feature or some product such as adding item to cart, generating recommendations, handling payment transaction, or dealing with warehouse history.
+Now imagine, how hard to put all the code in one giant application? How hard would that be to understand? How long would it take to test? It definitely quite challenging especially as the business tries to grow fast.
+It would be far better to have code corresponding to modular product features be, well modular? A cart microservice manage cart. An inventory microservice manages inventory.
+Let's understand the reason behind to separate Python code into the microservices.
+Modularity
+Modularity allows making the changes with the least resistance. Suppose the CEO wants to add a new feature, the buy-two-books-get-one-free feature. And you are the part of the team that's asked to launch it as quickly as possible. If we put all the code into a single application, we face some critical problems while implementing this feature.
+Here you suppose the solution to the team - you can add some code to the cart logic to check if there are more than two books in the cart.
+The product manager also tells to track this campaign's impact on the sales of the books. It is also simple. You can simply subtract the cheapest book from the cart total. Along with the buy-two-books-get-one-free feature in the code, you update the line in the checkout column that updates a new column on the transaction database to indicate the sale was part of the promotion buy_two_get_one_free_promo = true. Done.
+Again another requirement comes; it should be valid for one use per customer. If you use this feature, you need to hide this banner on the home page.
+After some years, the transaction database has grown too large and requires replacing it with a new shared database. That might be a cause of data loss. All those references need to be changed.
+That's why putting all the code into a single application can be too dangerous in the long run.
+The best solution is to create the transaction microservices, and we can also scale it in the future. Another part of the code can be communicated with the transaction through an abstract API that hides the implementation details.
+Flexibility
+Flexibility is the most important which comes with microservices. The developer can write the code in multiple languages. We can also expand the microservices independently. We will create sample microservices in the upcoming section.
+Robustness
+If we put all the code into a single application, we also need to deploy it at once. This could be a big threat. When we try to make a change in the code, it means it can down the entire site.
+Ownership
+Microservices provide the ownership of their code. When a single codebase is shared with multiple employees where the employees come and go. There is no clear vision for the architecture of the code. Microservice helps give a clear vision for the code, and that code will remain clean and organized. It also clarifies who's responsible for adding features to code or making changes when something goes wrong.
+Example of Microservices
+We will define some microservices for online Books for the website. We will create an API and write the Python code that implements them as microservices.
+To make things short and easy, we will define only two microservices -
+
+Marketplace - It will be a minimal web app that shows a list of books to the user.
+Recommendations - It will show the books that the user might be interested in.
+
+The user will interact with the Marketplace microservices via their browser, and the Marketplace microservice will interact with the Recommendation microservices.
+The Recommendation API should have a few features -
+
+User ID - It will be the random user id.
+Category - We will add the shirt category to make API more interesting.
+Max results - We don't want to return every book in stock, so that we will add a limit to the request.
+
+The response will be a list of books. Each book will have the following data.
+
+Book ID: A numeric id of the book.
+Book title: The title of the book.
+
+We have taken some limited features of the API to make it simpler. Now we can define this API more formally using the protocol buffers.
+Example -
+
+syntax = "proto3";
+
+enum BookCategory {
+     FICTIONAL = 0;
+     ROMANCE = 1;
+     SELF_HELP = 2;
+ 
+ 
+message RecommendationRequest {
+    int32 user_id = 1;
+    BookCategory category = 2;
+    int32 max_results = 3;
+
+
+message BookRecommendation {
+    int32 id = 1;
+    string title = 2;
+
+message RecommendationResponse {
+    repeated BookRecommendation recommendations = 1;
+
+
+service Recommendations {
+    rpc Recommend (RecommendationRequest) returns (RecommendationResponse);
+
+We create a proto file that has our API. Protobuf buffers were developed at Google, and to get the idea about the protobuf, you can visit our how to implement protobuf in Python. It might seem a bit confusing at first, but let's break the file by line.
+
+First, we define the proto3 syntax instead of the older proto2 version.
+Then we specify the book categories, and each category is assigned a numeric ID.
+A message contains fields and each of a specific type. We use userID and max_result fields as int32, a 32-bit integer. We use the enum field BookCategory as the category type. After that, we define the API request as RecommendationRequest.
+Next, we define the new message type BookRecommendation that we can use for a book recommendation. It consists of a 32-bit integer ID and a string-based title.
+Then we define the Recommendations microservice response with the repeated keyword.
+At last, we define the method of the API. It can be understood as a function of a method in a class.
+
+It is a brief idea about the microservices using the protobuf. Now we will learn about the popular microservice technique gRPC.
+What is gRPC?
+According to the official documentation -
+"gRPC or Google Remote Procedure Call is a modern open-source high-performance RPC framework that can run in any environment. It can efficiently connect services in and across data centers with pluggable support for load balancing, tracing, health checking and authentication."
+RPC stands for remote procedure calls which are quite same as the normal function in Python. They are messages that server sends to the remote system to get the task (or routine) completed.
+Google's RPC provides the facility of a smooth and efficient communication between the services. It can be utilized in the different ways -
+
+Generating efficient client libraries.
+Efficiently connecting polyglot services in microservices style architecture.
+Connecting mobile devices, browser client to backend services.
+
+Why gRPC?
+The gRPC provides many advantages over the other microservices. Let's understand some advantages.
+
+HTTP/2-based transport - The gRPC uses the HTTP/2 protocol instead of HTTP 1.1. HTTP/2 protocol offers various benefits over the latter. It provides multiple bidirectional streams that can be created and sent over TCP connections parallel.
+Documentation - The protocol buffer provides a well-defined API and self-documented schema. If we are using JSON structure, we must document the field and its type. When we write the code in the protocol buffer language, it generates Python code automatically. The code will never be out of sync with our documentation. The document helps to understand the code, but self-paced code is better.
+Validation - When we generate the basic code from the protocol buffers, we get predefined validation. For example - the generated code won't accept fields of the wrong type. The generated code also has all the built-in RPC boilerplate.
+Developer-Friendliness - It is a most interesting feature that many people prefer gRPC over REST. We can define our API in terms of functions. Sometimes mapping functionality onto the REST API is disturbing. We have to decide the resources, how to construct the path, and which verbs to use. REST vs. gRPC can turn into a debate over preference. Protocol buffer refers to the serialization format of data sent between microservices.
+Language independent communication - If services are written in various languages like Python and Golang. The gRPC ensures smooth communication between the gRPC services and the gRPC client. It also uses it as the message interchange format.
+
+Protocol Buffers
+Protocol buffers are same as the XML which are provides an efficient and automated mechanism for serializing structured data. They allow to define the structure of the data to be transmitted. Google claims they are better than the XML. Its features are -
+
+It is easy to use.
+It is three to ten times smaller.
+It is quite faster.
+It is less ambiguous.
+It generates data access classes that make it easier to use them programmatically.
+
+Protobuf are defined in .proto files. It is easy to define them.
+Types of gRPC implementation
+There are four types of gRPC implementation. Let's understand each implementation -
+1. Unary RPCs - It is a simplest gRPC which executes as the normal function call. It sends single request declared in the .proto file and get the single response from the server.
+
+rpc HelloServer(RequestMessage) returns (ResponseMessage);
+</pre></div>
+<p><strong>2. Server streaming RPCs -</strong> It returns the streams of message sequence to read corresponding to client message request. The client reads from that stream of messages until there are no messages.</p>
+<div class="codeblock"><textarea name="code" class="java">
+rpc HelloServer(RequestMessage) returns (stream ResponseMessage);
+</pre></div>
+<p><strong>3. Client Streaming RPCs -</strong> The client writes a message sequence using a write stream and sends the same to the server. The server reads all the message and wait for server to read all the messages and return a response.</p>
+<div class="codeblock"><textarea name="code" class="java">
+rpc HelloServer(stream RequestMessage) returns (ResponseMessage);
+</pre></div>
+<p><strong>4. Bidirectional Streaming RCPs -</strong> Both gRPC client and the gRPC server use a read-write stream to send message sequence. The gRPC client and gRPC server can write and read in any order they like.</p>
+<div class="codeblock"><textarea name="code" class="java">
+rpc HelloServer(stream RequestMessage) returns (stream ResponseMessage);
+</pre></div>
+<h3 class="h3">Implementation of gRPC in Python</h3>
+<p>However, gRPC supports many programming languages such as Golang, C++, and Java. In this tutorial, we will implement using Python.</p>
+<p>Follow the below steps to proceed further.</p>
+<ul class="points">
+<li>Create a new folder. Here we create <strong>grpc_implementation.</strong> Open terminal and direct to <strong>grpc_implementation.</strong></li>
+<li>Create a virtual environment using the <strong>Python -m venv myenv</strong> command.</li>
+<li>Activate the virtual environment using the source myenv/bin/activate.</li>
+<li>Now install the required dependency using <strong>pip install grpcio grpc-tools</strong>.</li>
+</ul>
+<p>We will use the <strong>Unary gRPC,</strong> where we need to define three files.</p>
+<ul class="points">
+<li><strong>Proto File -</strong> Proto file includes the declaration of the service that is used to generate stubs (<package_name>_pb2.py and <package_name>_pb2_grpc.py). These are used by the gRPC client and the gRPC server.</package_name></package_name>.</li>
+<li><strong>gRPC client -</strong> The gRPC client requests the server and gets some response.</li>
+<li><strong>gRPC Server -</strong> The server sends the response to the client.</li>
+</ul>
+<p>Let's create the Unary service.</p>
+<h3 class="h3">Example -</h3>
+<div class="codeblock"><textarea name="code" class="java">
+syntax = "proto3";
+package unary;
+
+service Unary{
+  // A simple RPC.
+  //
+  // Obtains the MessageResponse at a given position.
+ rpc GetServerResponse(Message) returns (MessageResponse) {}
+
+}
+
+message Message{
+ string message = 1;
+}
+
+message MessageResponse{
+ string message = 1;
+ bool received = 2;
+}
+
+The above code contains the collection of services. Here we have implemented a single service GetServerResponse(). This service takes an input of type Message and returns a MessageResponse. Once we have done the .proto file, we need to generate the stubs using the below command.
+
+python -m grpc_tools.protoc --proto_path=. ./unary.proto --python_out=. --grpc_python_out=.
+
+When we press enter, it will generate the two files. 
+
+import grpc
+from concurrent import futures
+import time
+import unary.unary_pb2_grpc as pb2_grpc
+import unary.unary_pb2 as pb2
+	
+	
+class UnaryService(pb2_grpc.UnaryServicer):
+	
+def __init__(self, *args, **kwargs):
+	        pass
+	
+def GetServerResponse(self, request, context):
+	
+	       # get the string from the incoming request
+	       message = request.message
+	       result = f'Hello I am up and running received "{message}" message from you'
+	       result = {'message': result, 'received': True}
+	
+	       return pb2.MessageResponse(**result)
+		
+	def serve():
+	    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+	    pb2_grpc.add_UnaryServicer_to_server(UnaryService(), server)
+	    server.add_insecure_port('[::]:50051')
+	    server.start()
+	    server.wait_for_termination()
+	
+	
+if __name__ == '__main__':
+	   server()
+
+In the above file, the GetServerResponse() method takes the 'Message' from the client and returns a 'MessageResponse' as defined in the proto file. We have called the server() function in the main() to make sure that the server listens to the request. Now, we run the above server file.
+
+python3 unary_server.py
+
+Implementing the Client
+Below is the implementation of the client.
+Example -
+
+import grpc
+
+import unary.unary_pb2_grpc as pb2_grpc
+import unary.unary_pb2 as pb2
+
+
+class UnaryClient(object):
+    """
+    Client for gRPC functionality
+    """
+
+    def __init__(self):
+        self.host = 'localhost'
+        self.server_port = 50051
+
+        # instantiate a channel
+        self.channel = grpc.insecure_channel(
+            '{}:{}'.format(self.host, self.server_port))
+
+        # bind the client and the server
+        self.stub = pb2_grpc.UnaryStub(self.channel)
+
+    def get_url(self, message):
+        """
+        Client function to call the rpc for GetServerResponse
+        """
+        message = pb2.Message(message=message)
+        print(f'{message}')
+        return self.stub.GetServerResponse(message)
+
+
+if __name__ == '__main__':
+    client = UnaryClient()
+    result = client.get_url(message="Hello Server! Are you listening?")
+    print(f'{result}')
+
+In the above code, the __init__func has the stub variable using the and we ` self.stub = pb2_grpc.UnaryStub(self.channel)' and we have a get_url() function which calls to server using the above initialized stub.
+Now we have completed the Unary gRPC service. Run the service the check the output.
+
+-> python unary_client.py
+
+Output:
+message: "Hello Server Are you listening?"
+message: "Hello I am up and running. Received 'Hello Server you there?' message from you"
+received: true
+
+Bidirectional Implementation
+We can also define the bidirectional services as below.
+Example -
+
+syntax = "proto3";
+
+package bidirectional;
+
+service Bidirectional {
+  // A Bidirectional streaming RPC.
+  //
+  // Accepts a stream of Message sent while a route is being traversed,
+   rpc GetServerResponse(stream Message) returns (stream Message) {}
+}
+
+message Message {
+  string message = 1;
+}
+
+In the above code, we have declared a Birectional named service. It contains a collection of services. Currently, we have implemented only one service GetServerResponse(). This service accepts an input type Message and returns a Message. We follow the same process to generate the stubs. To generate the stub, we need to run the below command.
+
+python -m grpc_tools.protoc --proto_path=.  ./bidirecctional.proto --python_out=. --grpc_python_out=.
+
+The above command will generate the two files bidirectional_pb2.py and bidirectional_pb2_grpc.py. These files will be used to generate gRPC server and client. You can implement this service by taking the above example as reference and you can also refer its official documentation.
+Advantages and Disadvantages of Microservices
+We have discussed all the important aspect of the microservices, what microservices are, also discussed the importance of using microservices in software architecture of our project. Below are the short descriptions of pro and cons of microservices.
+
+
+Sr. No.
+Pros
+Cons
+
+
+1.
+Each service is independent and runs on its own.
+It shows latency in communication between services to get an end response.
+
+
+2.
+It takes less development time due to services modularity.
+It is hard to perform testing between multiple microservices.
+
+
+3.
+Infrastructure scaling depends on individual services.
+The cost of supporting multiple instances can scale up quickly.
+
+
+4.
+New features can be added or remove easily.
+There are information barriers due to additional layer of data provisioning.
+
+
+5.
+The code is organized by business logic.
+Some use cases can span across multiple services.
+
+
+6.
+It is independence from the old code stack.
+It supports for multiple code stacks in one system.
+
+
+7.
+Awesome failure isolation.
+Additional work needed to create DTOs and failure mechanisms.
+
+
+Conclusion
+Microservices are the most appropriate way to manage a complex system. They provide a natural way to organize code. Once we get familiar with the gRPC and how to implement microservices in Python effectively, we can become one step ahead in the development field.
+In this tutorial, we have discussed microservices, how to implement Python microservices effectively with gRPC, the types of microservices, and the advantages and disadvantages of microservices. We have also discussed gRPC, an emerging RPC framework that makes communication between microservices smooth and effective.
+
+
+Next TopicFunctools Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

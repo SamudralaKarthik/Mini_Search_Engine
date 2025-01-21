@@ -1,0 +1,126 @@
+
+
+
+
+next →
+← prev
+
+Fraction Module in Python
+Python Fraction module is used to work with the arithmetic of rational numbers. This module allows us to create a Fractional instance of integers, floats, numbers, decimal, and strings.
+What is a Fractional Instance?
+Fractional instances can be created using the pair of integers, or from a string, or another rational number. These are hashable and should be treated as mutable.
+How to create a fractional instance?
+Fraction module provides the following built-in functions that are used to create fraction. Let's understand the following ways of creating fraction instance.
+
+class fractions.Function(numerator = 0, denominator = 1): - This methods assigns numerator as 0 and denominator as 1 by default. If the denominator is equal to 0, it will raise the Zerodivision error. Let's understand the following example.
+
+Example -
+
+from fractions import Fraction
+print (Fraction(10, 37))
+# returns Fraction(11, 35)
+
+print (Fraction(11, 18))
+# returns Fraction(5, 9)
+
+print (Fraction())
+# returns Fraction(0, 1)
+
+Output:
+10/37
+11/18
+0
+
+
+class fractions.Fraction(other_fraction) : This method takes the other_fraction instance of a number. It returns rational and a fraction instance with same value.
+class fractions.Fraction(float) - This method takes the float value and returns the same value fraction instance.
+
+Example -
+
+from fractions import Fraction
+print(Fraction(1/12))
+
+Output:
+6004799503160661/72057594037927936
+
+
+class fractions.Fraction(decimal) :- This method takes the decimal instance and returns the instance with the same value. Let's understand the following example.
+
+Example -
+
+from fractions import Fraction
+print (Fraction('2.26'))
+
+Output:
+113/50
+
+
+class fractions.Fraction(string) : - This method takes the string or Unicode as an argument and returns the instance with the same value. Let's understand the following example.
+
+Example -
+
+from fractions import Fraction
+print (Fraction('7/25'))
+print (Fraction('1.23'))
+print (Fraction('3/5'))
+print (Fraction('1.414213 \t\n'))
+
+Output:
+7/25
+123/100
+3/5
+1414213/1000000
+
+
+limit_denominator(max_denominator=1000000) - It is used to find the approximation to given floating-point number. It returns the closet Fraction to self that has denominator at max_denominator. Let's understand the following example.
+
+Example -
+
+from fractions import Fraction
+print (Fraction('3.14159265358979323846'))
+print (Fraction('3.14159265358979323846').limit_denominator(10000))
+print (Fraction('3.14159265358979323846').limit_denominator(100))
+
+print (Fraction('3.14159265358979323846').limit_denominator(10))
+print (Fraction(125, 50).numerator)
+print (Fraction(125, 50).denominator)
+
+Output:
+157079632679489661923/50000000000000000000
+355/113
+311/99
+22/7
+5
+2
+
+Example - 2: Perform Mathematical Operation on Fractional
+
+from fractions import Fraction
+print (Fraction(56, 12) + Fraction(18, 25))
+print (Fraction(5, 2) / Fraction(12, 10))
+print (Fraction(16, 15) * Fraction(26, 39))
+print (Fraction(18, 5) * Fraction(15, 36))
+print (Fraction(22, 5) ** Fraction(6, 10))
+
+Output:
+404/75
+25/12
+32/45
+3/2
+2.4326050606703427
+
+Conclusion
+In this tutorial, we have discussed Fraction module and its few important methods. These methods can be used in the complex mathematical computation and machine learning project.
+
+
+Next TopicPopular Python Framework to Build API
+
+
+
+
+← prev
+next →
+
+
+
+

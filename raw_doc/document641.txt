@@ -1,0 +1,278 @@
+
+
+
+
+next →
+← prev
+
+Escape Sequences in Python
+If you have been programming for some time now, you must've worked with strings. You would have printed about a lakh of strings using a print statement, and solved thousands of errors. But here is a question, "did you ever try to insert a double quote inside a string enclosed in double quotes?" Or  did you ever try to print a single quote inside a character enclosed in single quotes?". In both of these cases, an error will be raised because Python will search for the second quote once it finds a quote. If it is not found, it raises a syntax error. So, How can we print a statement like, Hi"Hello?
+The Answer is, "double-quote inside the string must be escaped by the eye of Python." To achieve this, we have special characters in Python called the Escape Sequences. This article discusses the concept of escape sequences, their uses, and their importance with examples.
+Definition: As the name suggests, an escape sequence is a sequence of characters with special meaning when used inside a string or a character.
+Syntax: The characters need to be preceded by a backslash character
+Example: \n, \t etc.
+The characters that we can't insert into a string are called Illegal characters, and these characters modify the string. The function of escape sequences is to insert such characters into the string without modifying the string.
+Let us first see a simple example:
+1. Inserting single quotes into a string:
+#without using \'
+
+string = 'Hi! 'man'
+print ("Without using \: ", string)
+
+Output:
+	string = 'Hi! 'man'
+       	            ^
+	SyntaxError: invalid syntax
+
+Understanding: Python searches for an ending-single quote in the string 'Hi!'man'. Hence, it raises an error.
+
+In Python, the number of opening quotes must be equal to the number of ending quotes - the total number of quotes used must be even. Hence when it not find the even number of quotes, raises an error.
+
+#Using '' in the string
+
+string = 'Hi!''man'
+print ("By using \: ", string)
+
+Output:
+Hi! man
+
+Understanding:
+Here, 'Hi!' and 'man' are considered two separate strings, so no error is raised. The number of quotes is even. But if we try to insert something between 'Hi!' and 'man', Python gets confused again and raises an error.
+Example:
+
+string = 'Hi!'!'man'
+print ("By using \: ", string)
+
+Output:
+string = 'Hi!'!'man'
+                  ^
+SyntaxError: invalid syntax
+
+Using the escape sequence:
+#Using \'
+
+string = 'Hi! \'man'
+print ("By using \: ", string)
+
+Output:
+By using \:  Hi! 'man
+
+You can observe that our problem is now solved. Also, another solution in this situation is that we can use double quotes to enclose the string and use 'in the string:
+
+string = "Hi!'man"
+print ("By using \: ", string)
+
+Output:
+By using \:  Hi!'man
+
+There are more escape sequences in Python that helps the programmer to print different types of invalid statements:
+
+
+Escape character
+Use
+
+
+\'
+Prints a single quote inside a string enclosed with single quotes.
+
+
+\"
+Prints a double quote inside a string enclosed with double-quotes.
+
+
+\n
+Prints the succeeding part of \n even if in the same line, in a new line
+
+
+\t
+Gives a tab space equivalent to 8 normal spaces.
+
+
+\r
+Brings the cursor to the starting of the line, called as 'carriage return.' 
+
+
+\b
+Gives a backspace.
+
+
+\f
+Creates an f-string which is a whole new string formatting mechanism
+
+
+\ooo
+Gives the octal representation
+
+
+\\
+Prints a backslash character
+
+
+\xhh
+Gives the hexadecimal representation
+
+
+Now, let us see the examples for the sequences to understand their uses:
+1. /"
+
+#without using /:
+string = "Hi!"man"
+print ("Without using \: ", string)
+
+Output:
+string = "Hi!"man"
+                  ^
+SyntaxError: invalid syntax
+
+
+
+#by using /:
+string = "Hi!\"man"
+print ("By using \: ", string)
+
+Output:
+By using \:  Hi!"man
+
+Understanding: You can see that without using the backslash character, we got an error, and when we placed a / before the ", we got it printed.
+2. \n
+
+#without using \n:
+string = "Hi! man"
+print ("string =",string)
+
+Output:
+string = "Hi!"man"
+
+
+
+#By using /n:
+string = "Hi\nman"
+print ("By using \n: ", string)
+
+Output:
+By using 
+:  Hi! 
+man
+
+Understanding:
+In the string, "By using \n", unknowingly, we used \n. We need it to be printed, but we don't want its functionality. What to do? Use an escape sequence:
+
+string = "Hi\nman"
+print ("By using \\n: ", string)
+
+Output:
+By using \n:  Hi
+man
+
+3. \t
+
+string = "Hi! man"
+print ("Without using \\t: ", string)
+
+Output:
+Without using \:  Hi! man
+
+
+
+#By using \t
+string = "Hi!\tman"
+print ("By using \\t: ",string)
+
+Output:
+By using \t:  Hi!	man
+
+Understanding: We wrote the normal statement in the first code giving normal spaces. In the second code, we used the \t to give a tabular space between Hi! and man.
+4. \r
+
+#without using \r
+string = "Hi! man"
+print ("Without using \\r: ", string)
+
+Output:
+Without using \r:  Hi! man
+
+
+
+#By using \r
+string = "Hi!\rman"
+print ("By using \\r: ",string)
+
+Output:
+manusing \r:  Hi!
+
+Understanding:
+When we use \r, all the content after \r will be brought to the front by replacing all the existing characters.
+The string will be "By using \\r: Hi!\rman"
+The content after \r is "man". This word will be brought to the front of the string by replacing the existing characters-"By_" making the string man using \r: Hi!
+
+If we use \r in Hi! man:
+
+
+string = "Hi!\rman"
+print (string)
+
+Output:
+man
+
+Here, "man" succeeds \r. it will be brought to the front of the string, replacing Hi!; All the three characters in Hi! will be replaced by man making the output "man".
+5. \b
+
+#without using \b
+string = "Hi! man"
+print ("Without using \\b: ", string)
+
+Output:
+Without using \b:  Hi! man
+
+
+
+#by using \b
+string = "Hi!\bman"
+print ("By using \\b: ",string)
+
+Output:
+By using \b:  Himan
+
+Understanding:
+\b is the backspace character. It deletes the preceding character like the backspace key in our keyboards and calculators. We gave \b between Hi! and man. The preceding character is "!"; hence, it is deleted.
+6. \ooo
+ooo represents octal numbers. We can get the characters equivalent to octal representations by using this character.
+Example:
+
+string = "\543\432\789"
+print (string)
+
+Output:
+??89
+
+Understanding:
+\543 represents ?
+\432 represents ?
+\789 represents 89
+7. \xhh
+hh represents octal numbers. We can get the characters equivalent to hexadecimal representations by using this character.
+Example:
+
+string = "\x54\x34"
+print (string)
+
+Output:
+T4
+
+Understanding:
+\x54 represents T
+\x34 represents 4
+The sequences discussed in the article are the most commonly used escape characters. These are not the only escape sequences in Python. More sequences will be useful in different scenarios while writing different logic.
+
+
+Next TopicPYTHON NULL STATEMENT
+
+
+
+
+← prev
+next →
+
+
+
+

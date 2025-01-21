@@ -1,0 +1,591 @@
+
+
+
+
+next →
+← prev
+
+How to Provide Multiple Constructors in Python Classes
+Sometimes, we have to create a Python class with different ways of building objects. Also, it would help if a user had an object that has several constructors. This type of class can be useful in situations where we must create instances that use various types of arguments. The tools that allow for multiple constructors can help to write flexible classes that can be adapted to the changing requirements.
+In Python, there are a variety of methods and tools that we can employ to create classes. These include simulating multiple constructors using optional arguments, customizing the creation through class methods, and performing special dispatch using decorators. If the users are looking to know more about these methods and tools, this tutorial is for them.
+In this course, we will learn to:
+
+Make use of alternative argument arguments as well as check for type for a simulation of multiple constructors
+Create multiple constructors with an inbuilt classmethod decorator
+Overload our class constructors using the @singledispatchmethod decorator
+
+Also, the users will get a glimpse into the inside of the way Python internally creates instances of regular classes and how certain standard library classes offer several constructors.
+To benefit the most from this tutorial, it is recommended that the users have the basics of object-oriented programming and be able to define classes using @classmethod. Additionally, they must have some experience working using decorators in Python.
+Instantiating Classes in Python
+Python is a programming language that supports the concept of object-oriented programming by providing classes that are easy to write and utilize. Classes are similar to plans for objects, also referred to as instances. Just as we can construct multiple homes from one design, we could also build many instances from a single class. Python classes provide powerful capabilities that allow us to write better software.
+For defining a class using Python, it is necessary to define the keyword class keyword, followed by the class's name:
+
+# Defining a Person class
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+Python is a full set of specific methods that we can employ for our class. Python calls specific methods that automatically perform many different tasks on the instances. There are specific methods for making our object iterable. They can provide an appropriate string representation of our objects, initialize instances attributes, and much more.
+The most well-known technique can be found in .__init__(). The instance initializer refers to this method in Python. Its function is to set up instances' attributes with the appropriate values whenever we create a class.
+In-Person, the .__init__() method's first argument is referred to as self. The argument contains the current instance or object and is implicitly passed in this method's call. This argument is shared by all instances technique that is implemented in Python. The second argument in .__init__() is known as the name, and it will store the name of the Person in a text string.
+After we have defined the class, we are able to begin invoking it. That is, we can begin creating objects for that particular class. To accomplish this, we will have to use an old syntax. Call the class with the parentheses ( ()) that uses the same syntax we employ to invoke any Python function:
+
+# Instantiating Person
+jonny = Person("Jonny Joe")
+jonny.name
+
+Output:
+'Jonny Joe'
+
+In Python, the class name is the language that other languages, like C++ and Java, are known as the constructor for classes. In the same way, as we did in Person, that causes the instance of the class creation process, which runs with two phases:
+
+Create an entirely new instance of the class that we wish to target.
+Initiate the instance by using the appropriate instances attribute values.
+
+In the following example, the data we input in the form of an argument for Person is passed internally through .__init__() and later is assigned to an instance attribute .name. In this way, we can initialize our instance of our Person, jonny, with the correct data, which we can verify by visiting .name. Success! Jonny Joe is, in fact, his name.
+Once the users have mastered the mechanism of initialization for objects and the mechanism for object initialization, they are now ready to understand what Python does prior to getting to this stage in the instantiation process. It's time to explore another method that is known as .__new__(). This method is responsible for the creation of new instances in Python.
+The .__new__() special method uses the underlying class as the first argument and returns a new object. The object is usually an example of the class being input. However, it may be an instance belonging to a different class in certain cases.
+If the object .__new__() returns an instance of the class currently being called, This instance will be immediately transferred on to .__init__() to initialize the class. These two steps take place whenever we invoke the class.
+The Python objects class is the default or base version for .__new__() and .__init__(). Contrary to .__init__() there is no need to modify .__new__() in our own custom classes. In most cases we can count on the default implementation.
+To sum up, the lessons we have learned so far, the Python instantiation process begins by calling an instance of a class using the correct arguments. The process then goes through two phases creating objects using the use of the .__new__() method and initialization of the object by using it's .__init__() method.
+Once we have mastered the internal behaviour of Python, we are now able to begin providing several constructors within our classes. That is, we will offer multiple methods to create objects in the same Python class.
+How to Define Multiple Class Constructors
+Sometimes, we would like to write classes that allow us to build objects using arguments of various data types or even different numbers of arguments. One method is to provide different constructors within the class in question. Each constructor allows for the creation of instances by using an entirely different set of arguments.
+Certain programming languages, like C++, C# C#, and Java, are able to support overloading methods or functions. This feature lets us offer multiple class constructors since it allows us to write multiple methods or functions that have the same name but with different implementations.
+Method overloading is the process of deciding on the way we call the method the language will choose the most appropriate implementation for running. Thus, our method could accomplish different tasks depending on the situation of the instruction.
+Unfortunately, Python doesn't support function overloading directly. Python classes store the names of their methods within the internal dictionary known as .__dict__ that holds class namespace. Similar to the other Python dictionary .__dict__ can't contain repeated keys, which means we cannot have more than one method with the same name within the same class. If we try doing that, Python will only be able to remember the most recent execution of that method in the time:
+
+# greetr.py
+
+class Greeterr:
+    def say_hello(self):
+        print("Hello, Universe")
+
+    def say_hello(self):
+        print("Hello, Javatpoint")
+
+For this instance, we build Greeterr as the name suggests in this example. It is a Python class using two methods. Both methods share the same name. However, they use slight differences in their implementations.
+To find out the consequences of having two methods share the same name and class, save our class to the greetr.py file in the directory we work in and execute the following code during this active session:
+
+from greetr import Greeterr
+
+greeter = Greeterr()
+
+greeter.say_hello()
+
+
+Greeterr.__dict__
+
+Output:
+Hello, Javatpoint
+mappingproxy({'__module__': 'greetr',
+              'say_hello': ,
+              '__dict__': ,
+              '__weakref__': ,
+              '__doc__': None})
+
+In this instance, in this example, we invoke .say_hello() on greeter. It is an instance belonging to the Greeterr class. We see hello, Javatpoint in place of hello, Universe in our display, and this proves that the second version of the method wins over the first.
+The last line of code scrutinizes the contents in .__dict__,uncovering that the name of the method, say_hello, is only used once in the namespace for the class. This is in line with the way the dictionaries function in Python.
+The same thing happens when using functions within the Python module and in an interactivity session. The implementation that has the most functions that have the same name is superior to the other implementations:
+
+def say_hello():
+    print("Hello, Universe")
+
+def say_hello():
+    print("Hello, Javatpoint")
+
+
+say_hello()
+
+Output:
+Hello, Javatpoint
+
+Two functions are defined with the identical title, say_hello(), in an identical interpreter session. But the second definition replaces the previous one. When we invoke the function, we will get "Hello, Javatpoint", and it confirms the first definition is the one that prevails.
+Another method that certain programming languages employ to offer numerous ways to call an operation or method includes multiple dispatches.
+This technique allows us to create multiple versions of the same method or function and then dynamically dispatch the implementation we want to use based on the type or other attributes of the arguments used within the request. It is possible to use a variety of programs from the standard library to incorporate this technique into the code we write in Python code.
+Python is a very versatile and feature-rich language. It offers a few methods to use multiple constructors, making our classes more adaptable.
+In the next section, we will be able to simulate multiple constructors using additional arguments and examine arguments to determine the various behaviour in our initializers.
+How to Simulate Multiple Constructors in our Classes
+One method that is quite useful to simulate multiple constructors within the Python class would be to supply .__init__() with optional arguments by using default arguments. This way, we are able to use the class constructor in a variety of ways and experience the same behaviour every time.
+Another option is to verify the data format that we pass passed to .__init__() to offer different behaviours based on the data we pass during the call. This method lets us simulate several constructors within the same class.
+This section will help us discover the fundamentals of how to simulate different ways to build objects by providing the correct default values for arguments to the .__init__() method and by examining the type of data used in the argument to the method. Both methods require just one method of .__init__().
+Use Optional Argument Values in .__init__()
+A simple Pythonic method to simulate multiple constructors is implementing the .__init__() method that uses an optional argument. It is possible to do this by specifying the appropriate default arguments.
+To this end, say we need to code a factory class called CumulativePowerFactory. This class creates callable objects that calculate specific powers using the stream of numerical values as the input. It is also necessary for our class to keep track of the total power of the consecutive powers. Additionally, our class should accept an argument that holds that there is an initial amount for the sum of power.
+Create a powers.py file in the directory we are currently in. Then type in the following code to implement CumulativePowerFactory:
+
+# powerr.py
+
+class CumulativePowerFactory:
+    def __init__(self, exponent = 2, *, start = 0):
+        self._exponent = exponent
+        self.total = start
+
+    def __call__(self, base):
+        power = base ** self._exponent
+        self.total += power
+        return power
+
+The initializer of CumulativePowerFactory takes two optional arguments, exponent, and start. The first argument contains the exponent we will be using to calculate a set of powers. The default value is 2, the most commonly used value for computing power.
+The symbol of the star or asterisk ( *) following an exponent signifies that begin is only a keyword argument. In order to pass a value into an argument that is only for keywords, it is necessary to specify the argument's name in a specific. For example, to change the argument value to value, it is necessary to enter the word "arg = value" explicitly.
+Start Argument: The beginning argument is the initial value used to calculate the cumulative sum of power. The default value is zero, which is the best value in those instances where we don't have a calculated value to set the power sum.
+The special method .__call__() turns the instances of CumulativePowerFactory into callable objects. In other words, we can call the instances of CumulativePowerFactory like we call any regular function.
+Within .__call__(), We first calculate the power base that we have raised to an exponent. Then, we apply the resultant number to the value currently in .total. In the end, return the power we computed.
+To give CumulativePowerFactory a try, open a Python interactive session in the directory containing powerr.py and run the following code:
+
+from powerr import CumulativePowerFactory
+
+square = CumulativePowerFactory()
+square(26)
+
+Output:
+676
+
+Input:
+
+square(36)
+
+Output:
+1296
+
+Input:
+
+square.total
+
+Output:
+1972
+
+Input:
+
+cube = CumulativePowerFactory(exponent = 3)
+cube(31)
+
+Output:
+29791
+
+Input:
+
+cube(36)
+
+Output:
+46656
+
+Input:
+
+cube.total
+
+Output:
+76447
+
+Input:
+
+initialized_cube = CumulativePowerFactory(3, start=2205)
+initialized_cube(26)
+
+Output:
+17576
+
+Input:
+
+initialized_cube(46)
+
+Output:
+97336
+
+Input:
+
+initialized_cube.total
+
+Output:
+117117
+
+These examples show how CumulativePowerFactory simulates multiple constructors. For instance, the initial constructor doesn't accept arguments. It lets us create instances of a class that compute the powers 2, which will be the standard value for the exponent argument. The .total instance attribute contains the power of the computing power as we work.
+The second example illustrates an operator that takes the exponent for an argument. In this instance, .total works exactly as it did in the previous example. It produces a callable instance that calculates cubes.
+The third example shows how CumulativePowerFactory seems to have another constructor that allows us to create instances by providing the exponent and starting arguments. Now, .total starts with an initial number of 1972, which is the initial value for the power of the sum.
+Utilizing optional arguments when using .__init__() in our classes is a simple Pythonic method of creating classes that emulate multiple constructors.
+Check Argument Types in .__init__()
+To determine the nature of a variable in Python, it is common to use an inbuilt isinstance() function. The function will return True when an object is an object of a particular class and False otherwise. Another method to emulate the multiple constructors is to create a .__init__() method that performs differently based on the type of argument.
+
+isinstance(46, int)
+
+Output:
+True
+
+Input:
+
+isinstance(42, float)
+
+Output:
+False
+
+Input:
+
+isinstance(47, (list, int))
+
+Output:
+True
+
+The first argument for "isinstance()" is the object we want to type-check. Another argument will be the class or kind of reference. It is also possible to provide a number of data types in this case. If the users are using Python 3.10 or later, they may also make use of the new Union syntax using pipes ( |).
+Then, say we would like to work in creating our class and that we require the class to accept the date of birth for the person. Our code will show that birth date in a time object; however, to make things easier for users, they have the option of giving birth dates in a string using an appropriate format. In this instance, we could implement something like this:
+
+from datetime import date
+
+class Person:
+    def __init__(self, name, birth_date):
+        self.name = name
+        if isinstance(birth_date, date):
+            self.birth_date = birth_date
+        elif isinstance(birth_date, str):
+            self.birth_date = date.fromisoformat(birth_date)
+
+
+jonny = Person("Jonny Joe", "1993-12-19")
+jonny.birth_date
+
+Output:
+datetime.date(1993, 12, 19)
+
+Input:
+
+jammy = Person("Jammy Joe", date(1991, 7, 25))
+jammy.birth_date
+
+Output:
+datetime.date(1991, 7, 25)
+
+Within .__init__() it is first necessary to define the standard .name attribute. If a clause in the conditional statement determines if the birth date is a day object. If yes, then create .birth_date to store the current date.
+The elif clause tests whether we can determine if the birth_date arguments are one of the string types. If yes, set .birth_date to a date object derived from the supplied string. It is important to note that the birth_date argument must be a string containing the date with an ISO format. Such as YYYYY-DD-MM.
+That's it! Now we have got a .__init__() method that simulates a type that has multiple constructors. One constructor accepts an argument of the date type. The other constructor accepts arguments of type string.
+The approach used in the above illustration has the disadvantage that it isn't scalable. If we are using several arguments that may be used to represent various types of data, our application could quickly become an issue. Therefore, this approach is regarded as an anti-pattern within Python.
+For instance, what would occur if our user entered the date and time amount for a birth date? Take a look at the following code snippet.
+
+lucky = Person("Lucky Sam", 1033222000)
+lucky.birth_date
+
+Output:
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+ in 
+      1 lucky = Person("Lucky Sam", 1033222000)
+      2 
+----> 3 lucky.birth_date
+
+AttributeError: 'Person' object has no attribute 'birth_date'
+
+If we attempt to connect to .birth_date, we receive the error message indicating that the attribute is unavailable because our conditional statement does not have branches that consider an alternative format for dates.
+To resolve this problem, continue to add the elif clauses to include all possible formats for dates that users can use. It is also possible to include another alternative clause to detect not supported date formats:
+
+from datetime import date
+
+class Person:
+    def __init__(self, name, birth_date):
+        self.name = name
+        if isinstance(birth_date, date):
+            self.birth_date = birth_date
+        elif isinstance(birth_date, str):
+            self.birth_date = date.fromisoformat(birth_date)
+        else:
+            raise ValueError(f"unsupported date format: {birth_date}")
+
+
+lucky = Person("Lucky Sam", 1033222000)
+
+Output:
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+ in 
+     12 
+     13 
+---> 14 lucky = Person("Lucky Sam", 1033222000)
+
+ in __init__(self, name, birth_date)
+      9             self.birth_date = date.fromisoformat(birth_date)
+     10         else:
+---> 11             raise ValueError(f"unsupported date format: {birth_date}")
+     12 
+     13 
+
+ValueError: unsupported date format: 1033222000
+
+In this case, it is the otherwise clause. It is executed if the number in birthday_date isn't an actual day object or string that contains a legitimate ISO date. This way, the unique scenario does not happen in silence.
+How to Provide Multiple Constructors With @classmethod in Python
+An effective method to provide several Python constructors is utilizing the @classmethod decorator. This decorator lets us convert a normal method into an actual Class Method.
+As opposed to the normal method, the class does not make use of this instance self as an argument. Instead, they consider an entire class, typically included in the CLS argument. Utilizing the word cls to identify the argument has become a well-known practice within the Python community.
+This is the preliminary syntax used to define classes:
+
+class Demo_Class:
+    @classmethod
+    def class_method(cls):
+        print(f"This is a class method from {cls.__name__}!")
+
+
+Demo_Class.class_method()
+
+Output:
+This is a class method from Demo_Class!
+
+Input:
+
+demo = Demo_Class()
+demo.class_method()
+
+Output:
+This is a class method from Demo_Class!
+
+Demo class is the class method that uses the built-in @classmethod decorator. The first argument in .class_method() is the class's name. With this argument, we are able to access the class inside the class itself. In this instance, we will need to have access to using the .__name__ attribute, which records information about the class in a text string.
+It's important to know that we can invoke the class method by using the class or a specific example of that class in question. The primary reason for using classes as constructors for the class method is that we don't require an instance to invoke an instance of a class method. However, we call .class_method(), we will get Demo_Class for the first argument.
+The use of @classmethod allows us to include the number of explicit constructors we require for a particular class. It's a Pythonic and well-known method to use multiple constructors. It is also possible to call this kind of constructor an alternative constructor in Python, such as Raymond Hettinger uses in his PyCon presentation The Python Class Development Toolkit.
+What can we do now to use a class method to alter the instantiation process of Python? Instead of tweaking .__init__() and the initialization of the object, it is possible to control both of the stages: the creation of objects and initialization. In the following example, we will be taught how to accomplish this.
+Construct a Circle from Its Diameter
+For our first class constructor, using @classmethod, Let's say we are programming for a geometric-related program and require the circle class. At first, we will define our class in the following manner:
+
+# circle1.py
+
+import math as m
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return m.pi * self.radius ** 2
+
+    def perimeter(self):
+        return 2 * m.pi * self.radius
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(radius = {self.radius})"
+
+The class implements methods to calculate the perimeter and area of the Circle with the Python mathematical module. In the initializer, Circle uses a radius number in the form of an argument and then stores that as an attribute in the instance called .radius. The procedure .__repr__() provides the appropriate expression of a string that is appropriate for the class.
+Create circle1.py file in the directory we work in. After that, open Python interpreter and run the following program to test Circle:
+
+from circle1 import Circle
+
+circle = Circle(52)
+circle
+
+Output:
+Circle(radius = 52)
+
+Input:
+
+circle.area()
+
+Output:
+8494.8665353068
+
+Input:
+
+circle.perimeter()
+
+Output:
+326.7256359733385
+
+Cool! Our class is functioning properly! Now imagine that we would like to create a circle using the diameter. It's possible to do this using Circle (diameter + 2.), but that's not exactly Pythonic as well as intuitive. It's best to use an alternative constructor that can create circles simply by using the diameter of the Circle directly.
+Add the following class method to the Circle just in the middle .__init__():
+
+# circle.py
+
+import math as m
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return m.pi * self.radius ** 2
+
+    def perimeter(self):
+        return 2 * m.pi * self.radius
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(radius = {self.radius})"
+    @classmethod
+    def from_diameter(cls, diameter):
+        return cls(radius=diameter / 2)
+
+In this case, the code defines .from_diameter() as an example of a class method. The method's first argument will be an id to the class that it is a part of Class called Circle.
+The second argument is the size of the Circle we wish to make. In the process, we first determine the radius by using the input value in the diameter. Then, we create a circle by calling CLS using the radius calculated using the diameter argument.
+In this manner, we are in complete control of defining and initializing all instances for Circle with the diameter used in the argument.
+The function that calls the cls argument runs the initialization and creation procedures that Python requires to create the class. Then, .from_diameter() returns the newly created instance to the user.
+Here's how to use the brand-new constructor that we have created to create circles making use of the radius:
+
+from circle import Circle
+Circle.from_diameter(84)
+
+Output:
+Circle(radius=42.0)
+
+Input:
+
+circle.area()
+
+Output:
+5541.769440932395
+
+Input:
+
+circle.perimeter()
+
+Output:
+263.89378290154264
+
+The method of .from_diameter() on Circle produces a fresh brand instance of this class. Creating that instance utilizes an actual diameter, not the radius. The remainder of the function part of Circle is the same way it was before.
+The @classmethod, similar to the above example, is the most commonly used method to specify multiple constructors for our classes. This way, we are able to choose the appropriate name for each constructor that offer and can help make us in making our code more understandable and manageable.
+Build a Polar Point from Cartesian Coordinates
+For a more detailed example of implementing multiple constructors with class methods, suppose that we have got a class representing the polar spot concept in our math-related program. It is necessary to allow our class to be more flexible so that we can build new instances with Cartesian coordinates in addition.
+Here's how we can create a constructor to satisfy this need:
+
+# pointt.py
+
+import math as m
+
+class PolarPoint:
+    def __init__(self, distance, angle):
+        self.distance = distance
+        self.angle = angle
+
+    @classmethod
+    def from_cartesian(cls, x, y):
+        distance = m.dist((0, 0), (x, y))
+        angle = m.degrees(m.atan2(y, x))
+        return cls(distance, angle)
+
+    def __repr__(self):
+        return (
+            f"{self.__class__.__name__}"
+            f"(distance={self.distance:.1f}, angle={self.angle:.1f})"
+        )
+
+In this instance, .from_cartesian() accepts two arguments that represent the area's coordinates: x as well as the Cartesian coordinates. The method then calculates the needed distance and angle to create the appropriate PolarPoint objects. Then, .from_cartesian() produces a newly created instance for the class.
+Here's how the class functions by using the two coordinate systems.
+
+from pointt import PolarPoint
+
+# With polar coordinates
+PolarPoint(16, 21.6)
+
+Output:
+PolarPoint(distance = 16.0, angle = 21.6)
+
+Input:
+
+# With cartesian coordinates
+PolarPoint.from_cartesian(x = 22, y = 15)
+
+Output:
+PolarPoint(distance = 26.6, angle = 34.3)
+
+In these instances, we will employ the standard instantiation method and our alternate constructor .from_cartesian(), which allows us to generate PolarPoint instances that use conceptually distinct initialization arguments.
+Explore Multiple Constructors in Existing Python Classes
+Utilizing the @classmethod decorator to offer several constructors for the class is a common practice in Python. There are numerous examples of the standard and built-in classes that make use of this method to offer multiple different constructors.
+Within this article, we will be able to learn details about 3 of the renowned cases of this class: dict, datetime .date and pathlib.Path.
+Construct Dictionaries from Keys
+Dictionaries are the most fundamental kind of data in Python. They are present in every part of Python code, whether directly or indirectly. They're also an integral part of the language since significant parts that comprise Python's CPython application depend on them.
+There are many methods of identifying dictionary instances in Python. Dictionary literals can be used that are key-value pairs that are curly bracketed ( {}). It is also possible to call "dict()" explicitly with keyword arguments or the sequence of tuples with two items, as an example.
+This well-known class also provides an alternative constructor, called .fromkeys(). This class method uses the form of an array of keys as well as the option of a number of keys and an optional value. The value argument is optional. Value is defaulted to None, and is it is the same value as all keys of the resulting dictionary.
+What do the users think .fromkeys() help them in their program? If they manage an animal sanctuary and look to develop an app that will track the number of animals currently at their shelter. The application makes use of an alphabetical dictionary to record the animal's inventory.
+Because the user know what species of animal they can accommodate in their shelter, they can build the inventory dictionary from scratch, such as in the following code example:
+
+allowed_animals = ["Tiger", "lion", "Cobra", "donkey"]
+
+animal_inventory = dict.fromkeys(allowed_animals, 0)
+
+animal_inventory
+
+Output:
+{'Tiger': 0, 'lion': 0, 'Cobra': 0, 'donkey': 0} 
+
+In this instance, we have constructed an initial dictionary by using .fromkeys() that takes keys from animals that are allowed to be in the system. The inventory we create that each animal has to zero by supplying this number for the second argument in .fromkeys().
+As we have already learned, value defaults to None, which is an appropriate first value for the keys of our dictionary in certain situations. In the instance below, zero is an ideal value as we are dealing with the number of individuals are in each species.
+The other mappings within the standard library have a constructor named .fromkeys(). This is true for OrderedDict as well as defaultdict and UserDict. For instance UserDict's software source for UserDict offers this implementation .fromkeys().
+
+@classmethod
+def fromkeys(cls, iterable, value = None):
+    d = cls()
+    for key in iterable:
+        d[key] = value
+    return d
+
+This is because .fromkeys() uses from an iterable and the amount in the form of arguments. The method creates a brand-new dictionary using the cls method. Then, it loops over the keys within an iterative and assigns each value to a value set at None in the normal way. In the end, the method returns the newly created dictionary.
+Create datetime.date Objects
+It is the datetime.date class from the standard library is another class that utilizes numerous constructors. This class has a number of alternatives to constructors, including .today(), .fromtimestamp(), .fromordinal() and .fromisoformat(). All of them permit us to create datetime.date objects using the same arguments but with different concepts.
+Here are some examples of how we can use the constructors mentioned above to construct datetime.date objects:
+
+from datetime import date
+from time import time
+
+# Standard constructor
+date (2021, 12, 23)
+
+Output:
+datetime.date(2021, 12, 23)
+
+Input:
+
+date.today()
+
+Output:
+datetime.date(2021, 12, 23)
+
+Input:
+
+date.fromtimestamp(1632520000)
+
+Output:
+datetime.date(2021, 9, 25)
+
+Input:
+
+date.fromtimestamp(time())
+
+Output:
+datetime.date(2022, 3, 16)
+
+Input:
+
+date.fromordinal(738128)
+
+Output:
+datetime.date(2021, 12, 4)
+
+Input:
+
+date.fromisoformat("2021-12-23")
+
+Output:
+datetime.date(2021, 12, 23)
+
+The first example employs the standard constructor of classes as the reference. The second example demonstrates how to utilize .today() to construct a time object based on the current day's date.
+The remaining examples demonstrate the way datetime.date uses several classes to offer multiple constructors. The variety of constructors available allows the instantiation procedure to be robust and flexible and covers a variety of scenarios. This also enhances the accessibility of our code by providing explicit method names.
+Find Our Path to Home
+The Python pathlib module that is part of the standard library offers modern and efficient tools for efficiently handling the system path in your program. If the user have never heard of this module before, they should go through Python 3's pathlib module: The Art of Taming the File System.
+The most efficient tool available in the pathlib library can be found in the Path class. This class lets us manage our system's Path on a cross-platform basis. The Path is a different standard library class that has several constructors. For instance, we will come across Path.home(), which creates an object called a path from our home directory
+
+from pathlib import Path
+Path.home()
+
+Output:
+WindowsPath('C:/Users/User Name')
+
+The .home() constructor produces a brand new path object which represents our user's home directory. This alternative constructor could be beneficial when dealing with settings files within our Python applications and project.
+Conclusion
+Writing Python classes that have several constructors will help our code become more flexible and adaptable, allowing for many different use scenarios. Multiple constructors are an effective feature that lets us create instances of the core class with arguments of different kinds, different numbers of arguments, or both, depending on the needs of our users.
+In this course, we have learned how to do:
+
+Simulate multiple constructors by using additional argument arguments along with type checking.
+Create multiple constructors with the inbuilt @classmethod decorator
+
+
+
+Next TopicProfiling the Python code
+
+
+
+
+← prev
+next →
+
+
+
+

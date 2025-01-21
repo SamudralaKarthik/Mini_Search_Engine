@@ -1,0 +1,83 @@
+
+
+
+
+next →
+← prev
+
+Curdir Python
+In this article, we are going to discuss what is os path curdir in Python, how to change the working directory, and how to retrieve the current directory using Python.
+The OS Python Module provides a portable way to communicate with the operating system. Tools for locating and updating the working directory are included in the module, which is a part of the standard Python library.
+The operating system's default short hand for referring to the current directory.
+Firstly, we should understand what dictionaries are.
+What are Directories?
+If you're not familiar with programming, directories are simply folders. These folders, which can be found inside a root folder like C: or D:, may contain files or other directories.
+You must know the exact path to a file to get it in Python. You can view a file's path in Windows by right-clicking on it and selecting File->Properties->General->Location.
+Similarly, the working directory must be set to the script's directory to launch it. However, the Current Working Directory (CWD) is crucial when attempting to run several scripts or handle files.
+If the files are not present in the CWD, Python will not be able to access them. The Python command "get current directory" can be used in these situations to determine which directory you are currently in.
+Let's understand curdir Python.
+Curdir is a constant string used by an operating system to refer to the current directories. To get this, we should follow some steps which are given below:
+Step 1: Firstly we should import the os module; for importing this copy, the following code is given below:
+
+#importing the os module in Python
+import os
+
+Step 2: Let's move to the second step, but before this, complete the first step.
+After importing the os module, let's move further to know the current directory.
+We communicate with the operating system using the OS module to return the directory you are presently in. The path to the current directory is returned using the os.getcwd() method inside the OS module.
+Syntax to get the current working directory
+
+os.getcwd()
+
+Let's see the code of it to get the current directory in Python.
+
+# import the os module
+import os
+# For getting the current working directory
+>>> c_w_directory = os.getcwd()
+# printing the current working directory
+>>> print(c_w_directory)
+C:\Users\Hp\AppData\Local\Programs\Python\Python39
+
+According to this, first, we import the os module and then get the current working directory by using os.getcwd().
+The output may differ based on your directory, but it will always begin in the root folder, for example, C:\, and in the directory prefixed with a \.
+NOTE:
+
+Only the current working directory is returned by the os.getcwd method; if you want the whole path, use the os.path.realpath(file) method instead.
+Unlike os.getcwd, the change directory function requires a parameter that must be a directory; if it is not, Python gives a NotADirectoryError.
+A FileNotFoundError is returned if the directory is missing. And a 1PermissionError is issued if the user doesn't have the appropriate permissions to access the directory.
+
+Step 3: This is the final step to get the result of curdir python.
+Let's move to the third step, but before this, complete the second step.
+Let's see the code of it to get the curdir in Python.
+
+# import the os module
+import os
+# For getting the current working directory
+>>> c_w_directory = os.getcwd()
+# printing the current working directory
+>>> print(c_w_directory)
+C:\Users\Hp\AppData\Local\Programs\Python\Python39
+>>> os.curdir
+'.'
+>>> os.path.curdir
+'.'
+
+According to this, first, we import the os module and then get the current working directory by using os.getcwd(). After this, use os.curdir and get the output '.' and by os.path.curdir, we also get the same output as well.
+os.path.curdir returns ".," which is both completely accurate and useless. You must wrap it in os.path.abspath to obtain anything useful from it (os.path.curdir).
+os.path.curdir on Linux, Windows, and OS X has the value "." However, on older Mac OS 9 systems, it is ":". This used to be significant because Python has been around for so long.
+Conclusion
+In this article, we have discussed curdir in Python, what is os path curdir in Python, how to change the working directory, and how to retrieve the current directory using Python. For getting os path curdir in python, we have followed the 3 steps given above.
+
+
+Next TopicFastNlMeansDenoising in Python
+
+
+
+
+← prev
+next →
+
+
+
+

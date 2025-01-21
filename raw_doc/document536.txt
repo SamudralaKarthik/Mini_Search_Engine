@@ -1,0 +1,204 @@
+
+
+
+
+next →
+← prev
+
+Namespace in Python
+In this tutorial, we will learn about the namespace in Python, the structure used to organize the symbolic names assigned to objects in a Python program, why namespace is important, and how we can use them in our Python program. Let's have a brief introduction to a namespace.
+What is Namespace?
+A namespace is a way of providing the unique name for each object in Python. Everything in Python is an object, i.e., a variable or a method. In other words, it is a collection of the defined symbolic names along with the information about the object that each name references. A namespace can be understood as a dictionary where a name represents a key and objects are values. Let's understand it with a real-life example - A namespace is like a surname. A "Peter" name might be difficult to find in the class if there are multiple "Peter," but when we particularly ask for "Peter Warner" or "Peter Cummins,". It might be rare to find the same name and surname in a class for multiple students.
+The namespace helps the Python interpreter to understand what exact method or variable is trying to point out in the code. So its name gives more information - Name (which means name, a unique identifier) + Space (related to scope).
+In Python, there are four types of namespaces which are given below.
+
+Built-in
+Global
+Enclosing
+Local
+
+As these namespace various have lifetimes, Python interpreter creates namespaces as necessary and deletes them when they are no longer needed.
+Let's understand the various types of namespace in Python.
+The Built-in Namespace
+As its name suggests, it contains pre-defined names of all of Python's built-in objects already available in Python. Let's list these names with the following command.
+Open the Python terminal and type the following command.
+Command -
+
+dir(__builtins__)
+
+Output:
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BlockingIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 'ChildProcessError', 'ConnectionAbortedError', 'ConnectionError', 'ConnectionRefusedError', 'ConnectionResetError', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FileExistsError', 'FileNotFoundError', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'InterruptedError', 'IsADirectoryError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'ModuleNotFoundError', 'NameError', 'None', 'NotADirectoryError', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'PermissionError', 'ProcessLookupError', 'RecursionError', 'ReferenceError', 'ResourceWarning', 'RuntimeError', 'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 
+'TimeoutError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'WindowsError', 'ZeroDivisionError', '__build_class__', '__debug__', '__doc__', '__import__', '__loader__', '__name__', '__package__', '__spec__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray', 'bytes', 'callable', 
+'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
+
+The built-in namespace creates by the Python interpreter when its starts up. These are terminated when Python interpreter terminates.
+The Global Namespace
+The global namespace consists of any names in Python at any level of the main program. It is created when the main body executes and remains in existence until the interpreter terminates.
+The Python interpreter creates a global namespace for any module that our Python loads with the import statement. To get more information, visit our Python Module.
+The Local and Enclosing Namespaces
+The function uses the local namespaces; the Python interpreter creates a new namespace when the function is executed. The local namespaces remain in existence until the function terminates. The function can also consist of another function. We can define one function inside another as below.
+Example -
+
+def f():
+     print('Initiate f()')
+ 
+     def g():
+         print('Initiate g()')
+         print('End g()')
+         return
+ 
+    g()
+
+    print('Initiate f()')
+    return
+f()
+
+In the above example, the function g() is defined within the body of f(). Inside the f() we called the g() and called the main f() function. Let's understand the working of the above function -
+
+When we calls f(), Python creates a new namespace for f().
+Similarly, the f() calls g(), g() gets its own separate namespace.
+Here the g() is a local namespace created for f() is the enclosing namespace.
+
+Each of these namespace is terminated when the function is terminated.
+Scope of the Object/Variable
+The scope is term which defines the coding region from a particular Python object is accessible. Every object/variable has its scope where we can access that particular variable in the program. For example - A variable in a function can only access inside the function. Let's understand the following example -
+Example -
+
+def scope_func():
+    print("Inside scope_func")
+    def scope_inner_func():
+        var = 20
+        print("Inside inner function, value of var:",var)
+    scope_inner_func()
+    print("Try printing var from outer function: ",var)
+scope_func()
+
+Output:
+Inside scope_func
+Inside inner function, value of var: 20
+Traceback (most recent call last):
+  File "d:/Python Project/listproblems.py", line 343, in 
+    scope_func()
+  File "d:/Python Project/listproblems.py", line 342, in scope_func
+    print("Try printing var from outer function: ",var)
+NameError: name 'var' is not defined
+
+Python Namespace Dictionaries
+In the earlier tutorial, we have discussed that namespaces are as the dictionaries in which keys are the object names and values are the objects themselves. Python implements global and local namespaces as dictionaries. Python comes with the globals() and locals() methods that allow us to access global and local namespace dictionaries.
+The globals() Method
+The globals() method returns a reference to the current global namespace dictionary. We can use it to access the objects in the global namespace. Let's see the below example.
+Example -
+
+>>> type(globals())
+<class 'dict'>
+>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>}
+
+As we can see that, there are many built-in entries in globals() method. It may be differ according to your operating system and Python version. Now let's define the global variable and observe the differences.
+
+>>> a = 20
+>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, 'a': 20}
+
+After the assignment of a = 20, a new global variable assigned to the global namespace dictionary. We can access the values as we access in the dictionaries. Let's see the below example.
+
+>>> a = 20
+>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, 'a': 20}
+>>> a
+20
+>>> globals()['a']
+20
+
+We can modify the dictionary value using the globals() function. 
+
+>>> globals()['a'] = 100 
+>>> a
+100
+
+Now the new value of a will be appeared in the global dictionaries.
+The locals() Function
+Python also provides the locals() method similar to globals() but accesses objects in the local namespace instead. Let's see the following example.
+Example -
+
+>>> def func(a, b):
+...     str1 = "Hello"
+...     loc = locals()
+...     print(loc)
+... 
+>>> func(10, 20)
+{'a': 10, 'b': 20, 'str1': 'Hello'}
+
+When we call the func(10, 20), the locals() return the dictionary representing the function's local namespace. In the function scope, we defined the local variable str1; the local namespace included the function arguments since they are local to the func().
+However, when we call the locals() function, it behaves the same as the globals() function. There is a small difference between globals() and locals() function. The globals() save the return value and subsequently define additional variables. The new variables will show up in the dictionary along with their value. Let's see the below example.
+Example -
+
+>>> glob_var = globals()
+>>> glob_var
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, 'a': 100, 'func': <function func at 0x000001670FB85160>, 'glob_var': {...}, 'x': 100, 'y': 'JavaTpoint'}
+>>> x = 100  
+>>> glob_var
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, 'a': 100, 'func': <function func at 0x000001670FB85160>, 'glob_var': {...}, 'x': 100, 'y': 'JavaTpoint'}
+
+Here the glob_var is a reference to the global namespace dictionary. The new assignment statements x and y appeared in the glob_var dictionary.
+Changing Variables Out of Scope
+The function can change the argument in the calling environment by passing different value and sometimes it can't change the value.
+
+A function cannot modify an immutable argument.
+A mutable argument cannot be redefined wholesale, but it can be modified in place.
+
+Let's understand the following scenario.
+Example -
+
+x = 20
+def func():
+    x = 40
+    print(x)
+
+func()
+
+print(x)
+
+Output:
+40
+20
+
+We define a global variable x = 20 and also in function with the same name. When the func() execute, it creates the new local variable reference to an integer object whose value is 40. Inside the func() body, the assignment statement won't affect the global object.
+However, a function can modify an object of a mutable type outside its local scope. Let's understand the below example.
+Example -
+
+my_list = ['Hello', 'From', 'JavaTpoint']
+def func():
+    my_list[1] = 'Welcome to'
+    return my_list
+
+print(func())
+
+The my_list is a list and it is mutable type. The func() can modify inside my_list even though its outside the local scope. But, if we try to reassigned the my_list, it will create the new local object and won't modify the global my_list. Let's see the below example.
+Example -
+
+my_list = ['Hello', 'from', 'JavaTpoint']
+def func():
+    my_list = ['A', 'B', 'C', 'D', 'E', '']
+    return my_list
+
+print(func())
+
+Output:
+['A', 'B', 'C', 'D', 'E']
+
+Conclusion
+We have covered the namespace, how we can use it, and the variable's scope. A short Python program will create many different objects. In a complex Python program, this number can be in the thousand. Python namespace helps the interpreter keep track of these objects and their names.
+
+
+Next TopicPython Program to return the Sign of the product of an Array
+
+
+
+
+← prev
+next →
+
+
+
+

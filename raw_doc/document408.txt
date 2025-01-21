@@ -1,0 +1,164 @@
+
+
+
+
+next →
+← prev
+
+How to Read Contents of PDF using OCR (Optical Character Recognition) in Python
+Python is one of the most preferred programming languages in today's world. We can use it for analyzing the data, but data is not always available in the required format. In such cases, we can convert the format of the file from pdf, jpg to the text (.txt) format for analyzing the data in a better way. There are many libraries available to perform such tasks.
+We can use the PyPDF2 module of Python for performing the task of converting the .pdf file into text format. The major disadvantage we can face while using this module is the encoding scheme. The PDF document files can contain a variety of encodings such as Unicode, ASCII, UTF-8, and many more. Therefore, converting PDF files into text may result in loss of data because of encoding schema.
+In this tutorial, we will learn how to read the content of a PDF file and store it in a text (.txt) format by using "Optical Character Recognition" method.
+At first, we have to convert the pages of the PDF document file into images, and then, we will use OCR for reading the content from the image and storing it in the text (.txt) format file.
+Required Modules:
+We have to install the following modules using the given command for this tutorial:
+
+PIL: -
+
+
+!pip3 install PIL
+
+
+pytesseract: -
+
+
+!pip3 install pytesseract
+
+
+pdf2image: -
+
+
+!pip3 install pdf2image
+
+
+tesseract-ocr: -
+
+
+!pip3 install tesseract-ocr
+
+(for this the user should have Microsoft Visual C++ 14.0, Get it with "Build Tools for Visual Studio": https://visualstudio.microsoft.com/downloads/)
+Part 1:
+The first part will deal with converting my PDF pages into image files. Each page of the PDF file will be stored as an image file, and the names of the images will be stored as:
+
+PDF page no. 1: page_no_1.jpg
+PDF page no. 2: page_no_2.jpg
+PDF page no. 3: page_no_3.jpg
+PDF page no. 4: page_no_4.jpg
+.
+.
+PDF page no. n: page_no_n.jpg
+
+Part 2:
+The second part would deal with recognizing the text from the image files in sorting it into the text file in ".txt" format. Here, we will process the image files for converting them into text content. Once we have the text as a string variable, we can start processing the text (.txt) file. Such as, in many PFD files, we can see that when a line is complete, but the last word cannot be written entirely in the same line, then, a hyphen is added in the end, and the word is continued in the following line. For example:
+
+This is an example to show the above explanation of the wo-
+rd which cannot be written entirely in the same line and is conti-
+nued in the next line. 
+
+For such words, we will do a fundamental pre-processing for converting the hyphen and the following line into a full word. When we complete the pre-processing, this text will be sorted in a separate text file.
+Code:
+
+from PIL import Image as img
+import pytesseract as PT
+import sys
+from pdf2image import convert_from_path as CFP
+import os
+# Importing the pdf file
+PDF_file_1 = "exp.pdf"
+pages_1 = CFP(PDF_file1, 9)
+  
+# Now, we will create a counter for storing images of each page of PDF to image
+image_counter1 = 1
+  
+# Iterating through all the pages of the pdf file stored above
+for page in pages_1:
+  
+    # We will Declare the  filename for each page of PDF file as JPG file
+    # For each page, the filename will be:
+    # PDF page no. 1: Page_no_1.jpg
+    # PDF page no.2: Page_no_2.jpg
+    # PDF page no. 3: Page_no_3.jpg
+    # PDF page no. 4: Page_no_4.jpg
+    # .... and so on..
+    # PDF page n: page_n.jpg
+    filename1 = "Page_no_" + str(image_counter) + " .jpg"
+      
+    # Now, we will save the image of the page in system
+    page.save(filename1, 'JPEG')
+  
+    # Then, we will increase the counter for updating filenames
+    image_counter1 = image_counter1 + 1
+  
+'''
+Part #2 - Recognize the text content from the image files by using OCR
+'''
+# Variable for getting the count of the total number of pages
+filelimit1 = image_counter1 - 1
+  
+# then, we will create a text file for writing the output
+out_file1 = "output_text.txt"
+  
+# Now, we will open the output file in append mode so that all contents of the # images will be added in the same output file.
+f_1 = open(out_file1, "a")
+  
+# Iterating from 1 to total number of pages
+for K in range(1, filelimit1 + 1):
+  
+    # Now, we will set filename for recognizing text from images
+    # Again, these files will be:
+    # Page_no_1.jpg
+    # Page_no_2.jpg
+    # Page_no_3.jpg
+    # ....
+    # page_no_n.jpg
+    filename1 = "Page_no_" + str(K) + " .jpg"
+          
+    # Here, we will write a code for recognizing the text as a string variable in an image file by using the pytesserct module
+    text1 = str(((PT.image_to_string (Image.open (filename1)))))
+  
+    # : The recognized text will be stored in variable text
+    # : Any string variable processing may be applied to text content
+    # : Here, basic formatting will be done:-
+    
+    text1 = text1.replace('-\n', '')    
+  
+    # At last, we will write the processed text into the file.
+    f_1.write(text1)
+  
+# Closing the file after writing all the text content.
+f_1.close()
+
+Output:
+Input PDF file:
+
+Output Text file:
+
+As we can see, the pages of the PDF file how converted into images. Then those images were read, and their content was written into a text file.
+Advantages of using OCR method:
+
+The user can avoid text-based conversions, which can cause loss of data due to the encoding scheme.
+The OCR module can also recognize the handwritten content in a PDF file.
+The user can also modify recognizing only particular pages of the PDF by using the OCR module.
+The pre-processing can be done in a large amount as it gets the text in a variable form.
+
+Disadvantages of using OCR method:
+
+The disk storage is used for storing the image files in the local system. However, these files take very little space.
+The use of OCR does not guarantee 100% of accuracy. Whereas the PDF file documents created on computer result in very high accuracy.
+The OCR module can recognize handwritten content, but the accuracy depends on numerous factors such as the color of the page, how clear the handwriting is, and many more.
+
+Conclusion
+In this tutorial, we have discussed how to read the PDF files' content by using OCR in Python.
+
+
+Next TopicGrammar and Spell Checker in Python
+
+
+
+
+← prev
+next →
+
+
+
+

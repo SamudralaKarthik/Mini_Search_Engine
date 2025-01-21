@@ -1,0 +1,162 @@
+
+
+
+
+next →
+← prev
+
+Getpass module in Python
+There are various Python programs where we have to use secret keys, pass-phrases, or passwords for a secret transaction or identify a user who is authorized to perform some activity. Various actions have to be taken care of during the acceptance of the keys, that the phrase should not be echoed back to the screen, disabling the echoing of statements and a lot more. The getpass module in the Python programming language offers all of these features.
+In the following tutorial, we will be discussing the Python getpass module in detail with the help of different examples and understanding its uses.
+Understanding the Python getpass module
+Similar to the NumPy and Matplotlib modules, getpass is also a module of the Python programming language. The getpass module asks the user for a password without echoing, which implies without displaying what the user is typing.
+Whenever we utilize an application based on a terminal with different security credentials that utilize passwords before the execution of the application, then it will be accomplished using the Python getpass module.
+The getpass module of the standard library of Python has broadly defined two functions. These functions are supportable whenever a terminal-based application has to be executed only after the validation of the user credentials.
+These functions are as follows:
+
+getpass() function
+getuser() function
+
+Understanding the getpass() function
+In various programs, we have secure data or programs then this scenario, we utilize some secret or key or passwords in order to identify the users. Using the getpass() function, we can accept the password in the Python program.
+Let us understand the same using the following example:
+Example:
+
+# importing the getpass module
+import getpass
+
+# using the getpass() function
+my_pass = getpass.getpass(prompt = 'Input the Password:')
+# using the if-else conditional statments
+if my_pass == 'Admin':
+    print('The key is Unlocked!')
+else:
+    print('You\'ve entered an invalid password!')
+
+Output:
+Input the Password:
+# The inserted value is Admin
+The key is Unlocked!
+
+Explanation:
+In the above snippet of code, we have imported the getpass module and created a variable that uses the getpass() function of the getpass module to store the value of the key. We have then used the if-else conditional statements to check if the input value matches the value in the variable and, if so, unlock it for the user.
+Now let us understand the different uses of the getpass() function with the help of the examples.
+getpass() function without prompt
+In the following example, we will understand how to get a password from users and return the same password without a prompt.
+Example:
+
+# importing the getpass module
+import getpass
+
+# using the getpass() function without prompt
+my_pass = getpass.getpass()
+
+# printing the statement
+print("Entered password:", my_pass)
+
+Output:
+Password:
+# The inserted value is Admin
+Entered password: Admin
+
+Explanation:
+In the above snippet of code, we have imported the getpass module and defined a parameter that uses the getpass(). Here, we have not specified any parameter. We have then printed a statement for the users.
+getpass() function with prompt
+If the user requires some message such as a security question before logging in, we will utilize prompt attributes in the getpass() function.
+Let us consider the following example to understand the same.
+Example:
+
+# importing the getpass module
+import getpass
+
+# using the getpass() function with prompt
+my_pass = getpass.getpass(prompt = "What is your birthplace?:")
+
+# using the if-else conditional statement
+if my_pass == 'Ohio':
+    print("Unlock! Welcome back Dani.")
+else:
+    print("Your password is invalid!")
+
+Output:
+What is your birthplace?:
+# The inserted value is Ohio
+Unlock! Welcome back Dani.
+
+Explanation:
+In the above snippet of code, we have imported the getpass module. We have then defined a variable that uses the getpass() function along with the prompt parameter to include some message. We have then used the if-else conditional statement to check if the entered value of the password matches the value stored in the program and print the respective statements for the same.
+getpass() function with other streams
+This function enables the programmers to stream the password a user inputs. Let us understand the same with the help of an example given below:
+Example:
+
+# importing the getpass and sys modules
+import getpass
+import sys
+
+# using the getpass() function with stream
+my_pass = getpass.getpass(stream = sys.stderr)
+
+# printing the statement
+print("Entered Password:", my_pass)
+
+Output:
+Password:
+# The inserted value is Admin
+Entered Password: Admin
+
+Explanation:
+In the above snippet of code, we have imported the getpass module along with the sys module. We have then defined a variable that uses the getpass() function that accepts the sys.stderr stream as a parameter of the function. We have then printed a statement to ask the password from the user.
+Understanding the getuser() function
+The getuser() function returns the system login name of the user. This function checks the environment variable of the computer. It fetches the name of the user and returns a string, and if it is unable to find the environment variable, then an exception is raised.
+Let us consider an example based on the getuser() function to retrieve the username of the computer.
+Example:
+
+# importing the getpass and sys modules
+import getpass
+
+# using the getuser() function
+my_user = getpass.getuser()
+
+# printing the value
+print("Username:", my_user)
+
+Output:
+Username: Mango
+
+Explanation:
+In the above snippet of code, we have imported the getpass module and used the getuser() function to retrieve the username stored in the system.
+Now, let us consider another example to get a username and password using the getuser() and getpass() functions.
+Example:
+
+# importing the getpass module
+import getpass
+
+# using the getuser() and getpass() functions
+my_user = getpass.getuser()
+my_pass = getpass.getpass("Enter Password:")
+
+# printing the values
+print("Username:", my_user)
+print("Password:", my_pass)
+
+Output:
+Enter Password:
+# The inserted value is Admin
+Username: Mango
+Password: Admin
+
+Explanation:
+In the above snippet of code, we have imported the getpass module and defined the variables that use the getuser() and getpass() functions to get the username and password. We have then printed those values for the users.
+
+
+Next TopicAutomate LinkedIn Connections using Python
+
+
+
+
+← prev
+next →
+
+
+
+

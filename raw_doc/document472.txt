@@ -1,0 +1,128 @@
+
+
+
+
+next →
+← prev
+
+Python Top 10 Libraries to Learn in 2022
+In the programming world, Python is the most demanded and efficient programming language. There are many reasons that make Python a much-demanded language. One thing that attracts people is its incredible extensibility. Python provides thousands of libraries which reduces the number of lines. Python has a huge community worldwide, and its community has been continuously updating its features and libraries.
+In this tutorial, we will discuss Python Top 10 libraries that launched earlier. We haven't listed the typical libraries that everybody knows (pandas, pytorch, numpy, or Tensorflow).
+
+Awkward Array
+AugLy
+Gradily
+Hub
+Jupytext
+Evidently
+LightBGM
+Django Ninja
+SQLModel
+Scalene
+
+Bonus Library
+
+Jina and Finetuner
+
+Top Python Libraries
+We are listing some of top Python libraries that can be quite popular in upcoming years and provide a scale up in career. Below are the top 10 libraries of Python that are newly launched.
+1. Awkward Array
+Most of us might be familiar with the numpy and its array. That is the main data structure in numpy and a grid of value. Numpy array allows vectorized operations over the data part, which influences parallelism and optimization in low-level libraries. Hence, they can execute much faster than Python for a loop.
+But Numpy arrays are lack in expressing variable-length structures. Although, we can set dtype to object, this is not enough.
+In this scenario, an Awkward library can help us. Awkward arrays might seem like the regular array underneath; they are nested, tree-like data structures (JSON). They are similar to Numpy arrays, such as storing the data in the contiguous memory. They are operated using the compiled, vectorized code.
+We take the reference from the official documentation of the awkward library. Let's understand the following example -
+Example -
+
+import awkward as ak
+array = ak.Array([
+    [{"x": 1.1, "y": [1]}, {"x": 2.2, "y": [1, 2]}, {"x": 3.3, "y": [1, 2, 3]}],
+    [],
+    [{"x": 4.4, "y": [1, 2, 3, 4]}, {"x": 5.5, "y": [1, 2, 3, 4, 5]}]
+])
+
+
+Using regular Python for loop
+
+
+import numpy as np
+
+output = []
+for sublist in array:
+    tmp1 = []
+    for record in sublist:
+        tmp2 = []
+        for number in record["y"][1:]:
+            tmp2.append(np.square(number))
+        tmp1.append(tmp2)
+    output.append(tmp1)
+
+Output:1
+[[[], [4], [4, 9]], [], [[4, 9, 16], [4, 9, 16, 25]]]   
+
+
+Using Awkward Array
+
+
+output = np.square(array["y", ..., 1:])
+print(output)
+
+Output:2
+[[[], [4], [4, 9]], [], [[4, 9, 16], [4, 9, 16, 25]]]
+
+As we can see, both code snippets have generated the same output, but the second took a single line. It is much faster and uses less memory.
+2. Gradio
+
+If you belong to the data science field, you must be familiar with Streamlight. Streamlight enables data scripts into shareable web apps so that user can demo their output as an actual app, not a Jupiter Notebook. Grades are the fastest way to demo the machine learning model with a friendly web interface. It makes the demo of ML builder easier and faster than Streamlight.
+Radio allows us to create the web UI specific to our machine learning model.
+Users can modify the application by changing parameters using sliders, uploading images, writing text, and recording voice.
+No doubt, Gradio makes the model more accessible, which is the most important for the data scientist.
+3. Hub
+There is a general perception; usually, data scientists spend most of their time tuning models or planning about the best approach to novel problems. That is wrong; Data Scientist spends most of their time fetching data, arranging incorrect format, and writing boilerplate code.
+The infrastructure code is also essential to deal with the important qualities of data.
+Hub is a dataset format with a simple API used to store, create and collaborate on AI datasets of any size. We can store any dataset without worrying about the data size. Hub is used by many tech giants like Google, Waymo, Oxford University, Red Cross, and Omdena.
+Hub comes with the build-in integration for Pytorch and Tensorflow. It stores data in the compressed format (chucked arrays). We can also store any storage option such as AWS S3, a GCP bucket, or can consider the local storage. Hub works lazily means the data is only fetched when needed. One of the main advantages is that we don't need multi-TB to work with the multi-TB datasets.
+4. AugLy
+
+AugLy is used to train robust models in computer vision. Getting the most important insight from labeled data is very important. Moreover, data augmented is a core of various disciplines that have greatly advanced SOTA in 2021.
+ AugLy was invented by Meta (Facebook), a data augmentations library that currently supports four modalities (audio, image, text, and video) and more than 100 augmentations. We can configure the augmentations with metadata and compress them to get the desired result.
+AugLy library is designed to utilize for augmenting our data in model training. There are many other libraries in flipping, resizing, or color jittering. Let's take a real-life example of the Aug library - Turn an image into a meme, overlay text/emojis on images/videos, change some images into the Instagram filter, etc.
+5. jupytext
+
+The Jupyter notebook is a very useful tool, but we don't want to write data in a web browser. It is a demerit of the Jupyter notebook. Moreover, it also creates problems in version control. Jupytext eliminates such limitations and allows us to save notebooks as markdowns or scripts in several languages. It provides the result in plain text, making it easy to share them in version control. Other people can merge changes and even use IDEs and their nice autocomplete. It is a must-have tool for a data scientist in 2022.
+6. Evidently
+
+A team of ML engineers and data scientists creates a machine learning model and hat model receives and sends data effortlessly. But at the time of the production, many things can go wrong. This can happen for many reasons.
+It is an open-source Python package used to estimate and explore data drift for machine learning models. Instead of detecting anomalies in data, it helps us detect data drift and target drift. It helps to evaluate ML models during validation and monitor them in production.
+Evidently, it can generate visual reports that the data scientists can cross-check to ensure everything is working fine.
+7. LightGBM
+
+LightGBM is a most effective and gradient-boosting machine learning framework that uses tree-based learning algorithms. It allows the programmers to use the redefined elementary models and decision trees and develop new algorithms. Many other libraries, such as XGBoost and CatBoost, can apply the same approach, but LightGBM comes with some advanced advantages. It offers optimal speed and memory usage and gives better accuracy. This library is capable of large-scale handling data.
+8. Django Ninja
+
+Django is a most popular and battery-included framework that is used to build web applications. If developer wants to create a RESTful APIs, they move toward Django Rest Framework. But there is new contender known as Django Ninja. It is a fast web framework for building APIs with Django. Django Ninja provides the straightforward way to create APIs where we can get type casting and validation for our parameters. It is used by multiple companies on live projects. It is also integrated with the Django and ORM so that we can easily take the advantage of Python/Django.
+9. SQLModel
+SQLModel is a library that interacts with the SQL database using the Python code with Python objects. It is based on Python annotations and is supported by Pydantic and SQLAlchemy. It provides great support for editors and takes them less time in debugging. This library is quite easy and user-friendly. The main advantage is that; it has excellent compatibility with FastAPI, Pydantic, and SQLAlchemy. If you are familiar with the basic knowledge of databases, you can easily get known with this library.
+10. Scalene
+Scalene is a high-performing memory GPU/CPU profiler integrated that can do several things. It is equipped to handle the multi-threaded code and delivers far better details than other profilers. While using it, we don't need to make the changes in the script and can execute the script from the scalene command. It simply gives the result in the form of an HTML document or a text to track the CPU and memory used for each line of code.
+Bonus Library
+Jina and Finetuner
+
+Most of us are using search engines like Google, but have you ever noticed how search engines are getting better than they were a few years ago. Something revolutionary happens behind the scene that is slowly replacing the traditional way of keyword-based search.
+A new way of searching is known as Neural Search. The neural search feeds the entire text to the neural networks, which turns into vectors. To simplify, in a keyword-based search, texts are spat into discrete tokens and used that for matching. The neural search won't only limit to text data. It can be implemented with any data type (images, audio, and video).
+The Jina comes with a revolutionary solution that empowers developers to build scalable deep learning search applications in minutes. It provides the facility to implement neural search systems, both from a code and deployment perspective. It is scalable and cloud-native.
+On the other hand, the Fine tuner allows us to set up the fine-tune to the neural network representation to fetch the most appropriate results for the neural search tasks.
+Conclusion
+There are several other popular and useful libraries could be milestones in tech fields. But we have explained a few important, common libraries and which can be widely used in near future. Python is the most common language used for Data science activities. Most of the mentioned tools would be used by the Python expert to enhance the product quality.
+
+
+Next TopicReading NetCDF Data using Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,192 @@
+
+
+
+
+next →
+← prev
+
+Different Methods in Python for Swapping Two Numbers without using third variable
+In this tutorial, we will discuss different methods used for swapping two variables (n1 and n2) without using a third variable in Python programs.
+Example:
+
+P: 112
+Q: 211
+After swapping P and Q:
+P: 211
+Q: 112
+
+Method 1: By using inbuilt method
+The inbuilt method can work with any data type values such as string, float, it. This method is very easy to use.
+
+Left, Right = Right, Left
+
+Example:
+
+P = JavaTpoint
+Q = Tutorial
+ 
+print ("Variables Value Before Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+ 
+# Method to swap 'P' and 'Q'
+P, Q = Q, P
+ 
+print ("Variables Value After Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+
+Output:
+Variables Value Before Swapping: 
+Value of P:  JavaTpoint
+Value of Q:  Tutorial
+Variables Value After Swapping: 
+Value of P:  Tutorial
+Value of Q:  JavaTpoint
+
+Method 2: By using Bitwise XOR operator
+The Bitwise XOR method only works with integers, and it works faster as it uses bit operation that is for same value result = 0 and for different value result = 1.
+
+P ^= Q
+Q ^= P
+P ^= Q
+
+Example:
+
+P = 5 # P = 0101
+Q = 10 # Q = 1010
+ 
+print ("Variables Value Before Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+ 
+# Method to swap 'P' and 'Q'
+P ^= Q # P = 1111, Q = 1010
+Q ^= P # Q = 0101, P = 1111
+P ^= Q # P = 1010, Q = 0101
+ 
+print ("Variables Value After Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+
+Output:
+Variables Value Before Swapping: 
+Value of P:  5
+Value of Q:  10
+Variables Value After Swapping: 
+Value of P:  10
+Value of Q:  5
+
+Method 3: By using Addition and Subtraction Operators
+This method can be used only for numerical values.
+
+P = P + Q
+Q = P - Q
+P = P - Q
+
+Example:
+
+P = 112
+Q = 211
+ 
+print ("Variables Value Before Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+ 
+# Method to swap 'P' and 'Q'
+P = P + Q # P = 323, Q = 211
+Q = P - Q # P = 323, Q = 112
+P = P - Q # P = 211, Q = 112
+ 
+print ("Variables Value After Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+
+Output:
+Variables Value Before Swapping: 
+Value of P:  112
+Value of Q:  211
+Variables Value After Swapping: 
+Value of P:  112
+Value of Q:  211
+
+Method 4: By using Multiplication and Division Operators
+This method can be only used for numerical value except 0.
+
+P = P * Q
+Q = P / Q
+P = P / Q
+
+Example:
+
+P = 11.2
+Q = 21.1
+ 
+print ("Variables Value Before Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+ 
+# Method to swap 'P' and 'Q'
+P = P * Q # P = 236.32, Q = 21.1
+Q = P / Q # P = 236.32, Q = 11.2 
+P = P / Q # P = 21.1, Q = 11.2
+ 
+print ("Variables Value After Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+
+Output:
+Variables Value Before Swapping: 
+Value of P:  11.2
+Value of Q:  21.1
+Variables Value After Swapping: 
+Value of P:  21.1
+Value of Q:  11.2
+
+Method 5: By using both Bitwise operators and Arithmetic operators
+In this method, we will use both bitwise operators and arithmetic operators. This method only works with integers and not with float types.
+Example:
+
+P = 112
+Q = 211
+   
+print ("Variables Value Before Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+   
+# Same as P = P + Q
+P = (P & Q) + (P | Q) ;
+   
+# Same as Q = P - Q
+Q = P + (~Q) + 1 ;
+   
+# Same as P = P - Q
+P = P + (~Q) + 1 ;
+   
+print ("Variables Value After Swapping: ")
+print ("Value of P: ", P) 
+print ("Value of Q: ", Q)
+
+Output:
+Variables Value Before Swapping: 
+Value of P:  112
+Value of Q:  211
+Variables Value After Swapping: 
+Value of P:  211
+Value of Q:  112
+
+Conclusion
+In this tutorial, we have discussed different methods used for swapping values of two variables without using the third variable.
+
+
+Next TopicHow to Change Plot Size in Matplotlib
+
+
+
+
+← prev
+next →
+
+
+
+

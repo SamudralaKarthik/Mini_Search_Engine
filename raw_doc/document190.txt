@@ -1,0 +1,281 @@
+
+
+
+
+next →
+← prev
+
+How to use Brython in the Browser
+In this article, we will discuss how to use Brython in the browsers by implementing a Base64 calculator for experimenting in the browser with the Document Object Model Application Program Interface and other functionalities which are only available from JavaScript.
+The DOM Application Program Interface in Brython
+For experimenting with the Document Object Model manipulations, which are available in Brython, we will build a form for encoding the string to the Base64. The final output form will look like this:
+
+Let's create an HTML file, and name it index.html:
+For example:
+
+<!DOCTYPE html >
+<html>
+  <head>
+    <meta charset = "utf-8"/>
+    <link
+      rel = "stylesheet"
+      href = "https://cdnjs.cloudflare.com /ajax/libs/pure/2.0.3/pure-min.min.css"
+      integrity = "sha256-jYujp4Kf07YDuUF9i1MHo4AnpXUKuHxIUXH7CrHxdKw="
+      crossorigin = "anonymous" />
+    <script
+      src = "https://cdnjs.cloudflare.com /ajax/libs/brython/3.8.9/brython.min.js"
+      integrity = "sha256-U56d9Sn/Gtf1meSBXazW81LM1bUeyc1jFuoY3CBu6A8="
+      crossorigin = "anonymous">
+    </script>
+    <script
+      src = "https://cdnjs.cloudflare.com /ajax/libs/brython
+/3.8.9/brython_stdlib.min.js"
+      integrity = "sha256 twMHOlRBOpBkpyGFeXIBWoJqTpqf76Zp8HExOelwyRc="
+      crossorigin = "anonymous"
+      defer>
+    </script>
+    <script src = "main.py" type="text/python" defer>
+</script>
+    <style>
+      body { padding: 30px; }
+    </style>
+  </head>
+  <body onload="brython()">
+    <form class="pure-form" onsubmit="return false;">
+      <fieldset>
+        <legend>Base64 Calculator</legend>
+        <input type = "text" id = "text-src" placeholder = "Text to Encode" autocomplete="off"/>
+        <button type = "submit" id = "submit" class = "pure-button pure-button-primary">Ok
+</button>
+        <button id = "clear-btn" class = "pure-button">Clear
+</button>
+      </fieldset>
+    </form>
+    <div id="b64-display">
+</div>
+  </body>
+</html>
+
+The above code of html loads the static resources, which defines the UI layout, and also initiates the compilation of Python:
+
+Line 7: will load the PureCSS style sheet for improving the defaut HTML style
+Line 9: will load the minimized version of Brython engine.
+Line 12: will load the minimized version of standard library of Brython.
+Line 14: will load the main.py, which will handle the dynamic logics of this static HTML page.
+Line 21: will describe the input fields. This field will take the string for encoding as an argument.
+Line 22 to line 25: will define the default button wich will trigger the main logic of the page. The user can see this logic implemented in the main.py.
+Line 26: will define the button for clearing up the data and elements on the page. This will implement in the main.py.
+Line 29: will declare the div intended to be a placeholder for the table.
+
+The Python code which is associated, main.py.
+For example:
+
+from browser import document, html, alert
+import base64
+
+b64_map = {}
+
+
+def base64_compute(evt):
+    value = document[" text-src "].value
+    if not value:
+        alert(" You need to enter a value ")
+        return
+    if value in b64_map:
+        alert(
+            f" The base64 value of '{value}' already exists: '{b64_map[value]}' "
+        )
+        return
+    b64data = base64.b64encode(value.encode()).decode()
+    b64_map[value] = b64data
+    display_map()
+
+
+def clear_map(evt):
+    b64_map.clear()
+    document[" b64-display "].clear()
+
+
+def display_map():
+    table = html.TABLE(Class = "pure-table")
+    table <= html.THEAD(html.TR(html.TH(" Text ") + html.TH(" Base64 ")))
+    table <= (html.TR(html.TD(key) + html.TD(b64_map[key])) for key in b64_map)
+    base64_display = document[" b64-display "]
+    base64_display.clear()
+    base64_display <= table
+    document[" text-src "].value = ""
+
+
+document[" submit "].bind("click", base64_compute)
+document[" clear-btn "].bind("click", clear_map)
+
+The Python program shows the definition of callback function and the mechanism for manipulating the DOM:
+
+Line 1: will import the modules which the user use for interacting with the Document Object Model (DOM) and the Browser API code in the brython.min.js.
+Line 2: will import the base64, which is available in the standard library of Brython, that is brython_stdlib.min.js.
+Line 4: will declare the dictionary which the user will use for storing data during the running time of the HTML page.
+Line 6 will define the event handler, that is base64_compute(), which will encode the base54 value of the text entered in the input field with ID text-src.
+Line 7: will retrieve the value of the DOM elements identified with text-src.
+Line 18: will define the event handler, that is clear_map(), which will clear the data and presentation of the data on this page.
+Line 22: will define the display_map(), which will take the data contained in the b64_map, and display it under the form of page.
+Line 26: will retrieve the DOM elements with the ID text-src.
+Line 29: will clear the value of the DOM element with the ID text-src.
+Line 31: will bind the onclick event of the submit button to the base64_compute().
+Line 32: will bind the onclick event of the clear-btn button to clear_map().
+
+For manipulating the DOM, Brython will use two operators:
+
+<= is a new operator, mainly specific to Brython. This will add a child to the node. We have used it in display_map(), which is defined in line no. 22.
++ is the substitute for Element.insertAdjacementHTML('afterend') and for adding sibling nodes.
+
+We can see these two operators in action in the one of the above statement of the display_map():
+
+table <= html.THEAD(html.TR( html.TH(" Text ") + html.TH(" Base64 ")))
+
+The above command can be translated as "add to the table element and table head element containing the table row element composed of two adjacent table data cell elements. It is rendering in the browser as the following HTML program.
+For example:
+
+<table>
+<thead>
+<tr><th>Text</th><th>Base64</th></tr>
+</thead>
+</table>
+
+The above HTML code shows the nested structure for the header row of the table element. We can also write this code in more readable manner.
+For example:
+
+<table>
+  <thead>
+    <tr>
+      <th>
+Text
+      </th>
+      <th>
+Base64
+      </th>
+    </tr>
+  </thead>
+</table>
+
+For observing the result in the Brython console, we can enter the following code block:
+
+from browser import html
+table = html.TABLE()
+table <= html.THEAD(html.TR( html.TH(" Text ") + html.TH(" Base64 ")))
+table.outerHTML
+
+Output:
+'<table> <thead> <tr> <th> Text </th> <th> Base64 </th> </tr> </thead> </table>'
+
+For executing the whole code, we need to start the website server. As previously, we have started the built-in Python website server in the same directory as the two files, main.html and index.html.
+For example:
+
+$ python3 -m http.server
+
+Output:
+Serving HTTP on :: port 8080 (http://[::]:8080/) ...
+
+After starting the website server, point the browser to http://localhost:8080. This page will look like this:
+Image:
+
+Importing file in the Brython
+The user can use the import for accessing the Python or Brython modules and libraries to the JavaScript.
+Python modules and libraries are the files with a .py extension in the root folder of their project or the Python package in the subfolder containing the _init_.py file. For importing the Python modules in their Brython program, they would have to start the website server.
+If the users want to explore more about how to import Python modules into Brython code, they can look at the "Installation by using PyPI" section in the "How to install Brython" article. They have to create and activate the Python virtual environment, install the Brython, and then modify index.html.
+For example:
+
+ <!doctype html>
+<html>
+
+<head>
+<meta charset = " utf-8 ">
+<script type = " text/javascript " src = " brython.js ">
+</script>
+<script type = " text/javascript " src = " brython_stdlib.js ">
+</script>
+</head>
+
+<body onload = " brython() ">
+
+<script type = " text/python ">
+from browser import document, html, window
+import sys
+import functional
+
+selection = functional.take(10, range(10000))
+numbers = ', '.join([ str(x) for x in selection ])
+
+document <= html.P(f"{sys.version=}")
+document <= html.P(f"{numbers=}")
+</script>
+
+</body>
+
+</html>
+
+The above HTML file will expose the modules which are imported from the core engine of the browser, from the standard library of sys, and from the local Python module, which is functional. The content of the functional.py is the following:
+
+import itertools
+
+def take(n, iterable):
+    "Return first n items of the iterable as a list"
+    return list(itertools.islice(iterable, n))
+
+This module will implement the take(), which is one of the itertools receipts.take(), which will return the first 'n' elements of the given iterable. It will rely on the itertools.slice().
+If the user tries to open the index.html from the file system with their browser, then they will get the following error in the browser console:
+
+Traceback (most recent call last):
+         File file:///Users/User Name/brython/code /import/index.html/__main__
+----> 3 in <module>
+    import functional
+ModuleNotFoundError: functional
+
+After importing the Python module, which is required for starting the local website server. First, start the local website server and then open the http://localhost:8080 in the browser. The user will see the following HTML page:
+
+If there is a running website server, then the browser would be able to fetch the functional.py module after importing the functional is executed. The results of number and sys.version values are inserted in the HTML files with the help of the last two Python scripts, which are embedded and rendered by the browser.
+Reduce the Import Size
+In the directory of the previous example project, for reducing the size of the import JavaScript libraries and module, the user can use the Brython-cli with the option -module. This method can also be used for precompiling the Python module to JavaScript.
+For example:
+
+$ brython-cli -modules
+
+Output:
+Create brython_modules.js with all the modules used by the application
+searching brython_stdlib.js...
+finding packages...
+script in html index.html
+
+This will be used for generating the brython_modules.js, and the user can then modify the head element of the index.html file.
+For example:
+
+<head>
+ <meta charset="utf-8">
+ <script type="text/javascript" src="brython.js">
+</script>
+ <script type="text/javascript" src="brython_modules.js">
+</script>
+ </head>
+
+Line 5 will change the original form of the script source from the brython_stdlib.js into brython_modules.js.
+The user can open the index.html with their browser, or they can point the browser to the local server reduced to the same HTML page. The user can notice these points:
+
+They can reduce the HTML page in their browser, even without running the website server.
+They would not need to distribute the functional.py file, as the program is now converted into JavaScript and then bundled in brython_modules.js.
+The user would not need to load the brython_stdlib.js.
+
+The tool of the command-line that is brython-cli -modules will provide the solution for removing the unnecessary code from the standard library. Then it will compile the Python module into a JavaScript program. This will help the page of the user's application, and it will result in the reduced size of the resources download.
+Conclusion
+In this article, we have discussed how the users can use the Brython in the browsers with the help of the Base64 calculator, which is implemented for experimentation in the browser with the Document Object Model Application Program Interface. We have also explained how the user can import the Python files in the Brython and how the user can reduce the size of the Imported file.
+
+
+Next TopicArima Model in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,127 @@
+
+
+
+
+next →
+← prev
+
+Euclidian Distance using NumPy
+Euclidian distance between two points on any axes is the shortest distance between them. In other words, it is the displacement length between two points. Given two points, A (a, b) and B (c, d), in a 2-dimensional plane, the Euclidian distance between A and B is given as:
+
+Distance = √ (a-c) 2 + (b - d) 2
+
+
+To find the distance between two points in three-dimensional planes:
+
+Let A (x1, y1, z1) and B (x2, y2, z2) be two points:
+
+Distance = √ (x1 - x2) 2 + (y1 - y2) 2 + (z1 - z2)2
+
+We can use the Numpy library in python to find the Euclidian distance between two vectors without mentioning the whole formula.
+This article discusses how we can find the Euclidian distance using the functionality of the Numpy library in python.
+2. General Method without using NumPy:
+
+import math
+point1 = [1, 3, 5]
+point2 = [2, 5, 3]
+sqrs = (point1 [0] - point2 [0])**2 + (point1[1] - point2[1])**2 + (point1[2] - point2[2])**2
+euc_dist = math. sqrt (sqrs)
+print ("Euclidian distance between point1 and point2: ", euc_dist)
+
+Output:
+Euclidian distance between point1 and point2:  3.0
+
+
+We took two lists and stored the x, y and z coordinates of the 2 points. By traditionally accessing the list elements, we calculated the Euclidian distance between two points using the formula mentioned above.
+
+2. Using NumPy:
+
+Vectors are 1*1 matrices. All vectors are arrays. Hence, we use arrays to represent vectors.
+
+1. Using linealg.norm() Method:
+A vector's norm is the vector's size denoted by ||vector||.
+
+There are 8 types of norms L1, L2, Lp...L∞
+L2 norm is also called the "Euclidian norm" and is the shortest distance between two vectors.
+
+Formula:
+
+||x||2 = √ ∑ni=1 |xi|2
+
+
+We use the norm () method in the library to find one of the 8 norms available depending on the parameters and the values provided.
+
+Syntax:
+
+numpy. linealg. norm (vector, ord = None, axis = None)
+
+Code:
+
+import numpy as n
+p1 = n. array ((4, 7, 9))
+p2 = n. array ((10, 12, 14))
+euc_dist = n. linalg. norm (p1 - p2)
+print ("Euclidian distance between p1 and p2: ", euc_dist)
+
+Output:
+Euclidian distance between p1 and p2:  9.273618495495704
+
+
+Instead of lists in the earlier program, we used numpy arrays to store the coordinates of the points. The only difference between numpy arrays and lists is that numpy arrays can store data of only one data type while lists can store data of different data types.
+Without having to use the formula, we used the lineal. norm () to calculate the Euclidian distance.
+
+2. Using the dot() Method:
+
+dot() method is used to calculate the dot product. We use this function to calculate the sum of the squares of the differences in coordinates.
+
+Code:
+
+import numpy as n
+p1 = n. array ((4, 7, 9))
+p2 = n. array ((10, 12, 14))
+difference = p1 - p2
+sum_sq = n. dot (difference. T, difference)
+euc_dist = n. sqrt (sum_sq)
+print ("Euclidian distance between p1 and p2: ", euc_dist)
+
+Output:
+Euclidian distance between p1 and p2:  9.273618495495704
+
+Understanding:
+Here,
+p1 = 4i + 7j + 9k
+p2 = 10i + 12j + 14k
+difference = p1 - p2 = (4 - 10)i + (7 - 12)j + (9 - 14)k = -6i + -5j + -5k
+difference. T -> transpose (doesn't change as it is a 1 * 1 matrix) =
+[-6, -5, -5]
+dot ([-6, -5, -5], [-6, -5, -5]) = (-6*-6) + (-5*-5) + (-5*-5) = 86
+sqrt (sum_sq) = √86 = 9.27
+3. square() and sum() Methods:
+These two methods are as simple as their names. One is used to calculate the sum of vectors and the other for the square of a vector.
+Code:
+
+import numpy as n
+p1 = n. array ((4, 7, 9))
+p2 = n. array ((10, 12, 14))
+difference = p1 - p2
+sq_of_diff = n. square (difference)
+sum_of_sq = n. sum (sq_of_diff)
+euc_dist = n. sqrt (sum_of_sq)
+print ("Euclidian distance between p1 and p2: ", euc_dist)
+
+Output:
+Euclidian distance between p1 and p2:  9.273618495495704
+
+
+
+Next TopicHow to Parse JSON in Python
+
+
+
+
+← prev
+next →
+
+
+
+

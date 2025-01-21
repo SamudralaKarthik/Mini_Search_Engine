@@ -1,0 +1,115 @@
+
+
+
+
+next →
+← prev
+
+Python Asserts
+The assert statement in Python enables a user to add sanity tests to their code. Assertions are a check that they can utilize to see if particular hypotheses remain valid when writing code. If any of their assertions become false, our code contains a flaw.
+Assertions will help users improve their code's efficiency, robustness, and reliability. During creation, assertions are useful for documenting, troubleshooting, and testing code. After using assertions to debug and test their code, users can switch them off to make the code more production-ready.
+What Are Assertions?
+Assertions are useful for debugging code because they enable users to verify the correctness of their code by testing if certain conditions stay true.
+Unless our application has a problem, the assertion condition must always be valid. If the claim is false, the assertion throws an exception and ends our program's operation.
+Assertions let us create checks to ensure that invariants in our code remain invariant. We can test criteria like "This parameter is None" or "This return type is indeed a string", for example. We may test concepts like preconditions and postconditions this way. When building a program, these tests can help us detect flaws as soon as feasible.
+What Are the Benefits of Assertions?
+Assertions are mostly used for debugging purposes. They'll ensure users don't bring new issues to our program while adding new functionality and resolving existing ones. They may, however, have additional fascinating applications in the development phase. Documenting and validating their code are examples of these use cases.
+Assertions' principal purpose is to raise alerts when a program contains a problem. Assumptions are used in this situation. Ascertain if this condition is still valid. Otherwise, raise an exception.
+In practice, we can use assertions to verify preconditions as well as postconditions in our programs during development. For instance, programmers frequently use assert statements at the start of functions to ensure that the input argument is correct (preconditions). Assertions are also used as preceding functions' return arguments to ensure that the outcome is correct (postconditions).
+Assertions indicate that we wish to see if a certain condition is and will stay true. They can optionally contain an optional message in Python to clarify the issue or problem. As a result, they're also a useful tool for coding documentation. Their key benefit in this scenario is their capacity to take meaningful action rather than being inert like comments and docstrings.
+When Assertions cannot be used?
+In principle, assertions must not be used for information processing or data inspection since assertions could be disabled in the source program, deleting any assertion-based treatment and validation code. As we'll see utilizing assertions for data processing or verification is a common mistake.
+assert Keyword in Python
+This statement takes as input a boolean condition, which, when it returns true, doesn't do anything and continues the normal flow of execution. Still, if it is computed to be false, it raises an AssertionError along with the optional message provided. In Python, the assert keyword helps in achieving this task.
+Syntax:
+
+assert <condition>, <error_message(optional)>
+
+Parameters: ondition: True or false is returned by the boolean test.
+error_message: The optional parameter to be displayed on the screen in an instance of AssertionError.
+Returns: Returns AssertionError with the error statement if supplied.
+Assert keyword example without keyword
+Code
+
+# Python code to show the working of assert statement
+ 
+# initializing number
+x = 45
+y = 5
+ 
+# checking the divisibility using assert statements
+print("Checking for x and y : ")
+assert x%y == 0, "Not completely divisible"
+print(x / y)
+
+Output:
+Checking for x and y : 
+9.0
+
+assert keyword without Error Message
+Code
+
+# Python code to show the working of assert statement
+ 
+# initializing number
+x = 34
+y = 27
+ 
+# checking the divisibility using assert statements
+
+print("Checking for x and y : ")
+assert x%y == 0, "Not completely divisible"
+print(x / y)
+
+Output:
+Checking for x and y : 
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+Input In [10], in ()
+      7 # checking the divisibility using assert statements
+      9 print("Checking for x and y : ")
+---> 10 assert x%y == 0, "Not completely divisible"
+     11 print(x / y)
+
+AssertionError: Not completely divisible
+
+This is significantly more useful in the job of testing and quality control in any development area. Based on the application, various sorts of assertions are utilized. The following is a simplified demonstration of software that only enables the batch containing all hot meals to be despatched; otherwise, the entire batch is rejected.
+Code
+
+# Python code to show the working of assert statement application
+ 
+# creating list of temperatures of foods
+batch = [ 23, 36, 71, 10, 9, 56]
+ 
+# describing the cut temperature
+cut = 26
+ 
+# using assert statement to check the batch
+for b in batch:
+    assert b >= 26, f"Batch {b} is Not To be Supplied"
+    print(str(b) + " is O.K.")
+
+Output:
+---------------------------------------------------------------------------
+AssertionError                            Traceback (most recent call last)
+Input In [13], in ()
+      9 # using assert statement to check the batch
+     10 for b in batch:
+---> 11     assert b >= 26, f"Batch {b} is Not To be Supplied"
+     12     print(str(b) + " is O.K.")
+
+AssertionError: Batch 23 is Not To be Supplied
+
+
+
+Next TopicPython Bitwise Operators
+
+
+
+
+← prev
+next →
+
+
+
+

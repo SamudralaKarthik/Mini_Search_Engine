@@ -1,0 +1,106 @@
+
+
+
+
+next →
+← prev
+
+Python VLC module
+In the following tutorial, we will understand the VLC module in the Python programming language. We will also perform some examples based on the Python VLC module.
+So, let's get begun.
+Understanding the VLC module in Python
+The VLC media player is an open-source and free media player software that is portable and can be used on multiple platforms. The VLC media player is also a stream media server designed and developed by the VideoLAN project. VLC is a media player available on desktop operating systems, like Windows, Linux, and MacOS, as well as mobile platforms, like Android, iOS, iPadOS, Windows 10 mobile, Windows Phone, and Tizen.
+We can utilize the VLC media player with the help of Python as well. Python offers a supported module known as VLC.
+How to install the VLC module?
+In order to install the VLC module in Python, we will use the pip installer following the command shown below:
+Syntax:
+
+$ pip install python-vlc
+
+Note: The VLC media player must be installed on the user system before using the VLC module in Python.
+Once the installation is completed, we can verify it by importing the VLC module into a Python script. Let us consider the following syntax for the same:
+Syntax:
+
+# importing the vlc module
+import vlc
+
+Now, we have to save the file and run it. If the program does not raise any error, the module is installed properly. However, if not, it is recommended to reinstall the module and read the official documentation for more details.
+Fixing errors that may occur while importing the VLC module
+
+In case the path is not defined, the issue is that dll is not in the PATH (System Variable). We have to include the libvlc.dll file path to the system variable to solve the problem. We can find this file in the VLC folder where it is installed.
+Wrong version of VLC: Generally, users install 32 bits version of VLC, which may cause some trouble if we have installed the 64 bits version of Python. All we have to reinstall the 64 bits version of VLC in order to fix this.
+We can import the OS module before the VLC module and register dll using the following syntax:
+
+Syntax:
+
+os.add_dll_directory(r'C:\Program Files\VideoLAN\VLC')
+
+Some examples of the VLC module
+Let us consider a simple program to play Video using VLC.
+Example:
+
+# importing the vlc module
+import vlc
+
+# creating the vlc media player object
+my_media = vlc.MediaPlayer("video.mp4")
+
+# playing video
+my_media.play()
+
+Explanation:
+In the above snippet of code, we have imported the VLC module. We have then created an object of the VLC media player. At last, we have used the play() function in order to play the video.
+Now, let us consider another example deriving the duration of a video file using the VLC module.
+Example:
+
+# importing the time and vlc modules
+import time, vlc
+ 
+# defining the method to play video
+def vlc_video(src):
+     
+    # creating an instance of vlc
+    vlc_obj = vlc.Instance()
+     
+    # creating a media player
+    vlcplayer = vlc_obj.media_player_new()
+     
+    # creating a media
+    vlcmedia = vlc_obj.media_new(src)
+     
+    # setting media to the player
+    vlcplayer.set_media(vlcmedia)
+     
+    # playing the video
+    vlcplayer.play()
+     
+    # waiting time
+    time.sleep(0.5)
+     
+    # getting the duration of the video
+    video_duration = vlcplayer.get_length()
+     
+    # printing the duration of the video
+    print("Duration : " + str(video_duration))
+     
+# calling the video method
+vlc_video("video.mp4")
+
+Output:
+Duration : 465351
+
+Explanation:
+In the above snippet of code, we have imported the time and VLC module. We have then defined a function to play the video. Within the function, we have created an instance and a media player. We have then created a media and set it to the player. We have then played the video and set the waiting time to 0.5. We have then stored the duration of the video and printed it for the users. At last, we have called the defined function.
+
+
+Next TopicSet to list in Python
+
+
+
+
+← prev
+next →
+
+
+
+

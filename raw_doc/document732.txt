@@ -1,0 +1,216 @@
+
+
+
+
+next →
+← prev
+
+GUI to extract Lyrics from a song Using Tkinter in Python
+In this tutorial, we will create a Python program to extract a song's lyrics and connect them to the GUI application. By just entering the song's name, lyrics-extractor will extract the song's title and lyrics from a variety of websites and return them to us. It is a project for novices in which we will get knowledge on how to extract data from JSON web APIs and use these ideas in a practical project.
+About the application :
+The words of a song are extracted using a lyric extractor. In our project, the user will input the music title, and our application will then use requests and JSON libraries to extract the song's lyrics from a certain set of links. All of this will be made possible by building a GUI to perform this operation.
+We will need to install the lyrics-extractor module before continuing with the program. And we will be using our terminal to execute this command.
+
+pip install lyrics-extractor
+
+Requirements :
+We will be needing a Google Custom Search JSON API Engine ID and an API key.
+Engine ID :
+
+To obtain our Engine ID, we will be creating a Custom Search Engine here.
+To get lyrics, we must build our own Programmable Search Engine (Google Custom Search Engine) and include a link.
+Google's primary search technology is the foundation of Programmable Search Engine.
+It serves as a search engine for your website and is charged with helping users locate information.
+
+To acquire your search engine, select any of the following links :
+
+https://genius.com/
+http://www.lyricsted.com/
+http://www.lyricsbell.com/
+https://www.glamsham.com/
+http://www.lyricsoff.com/
+http://www.lyricsmint.com/
+
+The JSON API :
+
+The Programmable Search Engine's search results may be retrieved and shown using the custom search JSON API.
+Programmable Search Engine must be created in order to use the custom search JSON API.
+Get your API key by clicking this link https://developers.google.com/custom-search/v1/overview .
+
+Approach :
+
+Bring the modules in.
+
+
+from lyrics_extractor import SongLyrics
+
+
+Enter SongLyrics() using the Google Custom Search JSON API key and Engine ID.
+
+
+extracting_lyrics = SongLyrics(GCS_API_KEY, GCS_ENGINE_ID)
+
+
+By including the song name as a parameter in the extracting_lyrics.get lyrics() function, you may obtain the lyrics.
+
+
+extracting_lyrics.get_lyrics("I'll be there for you")
+
+Code for this approach :
+
+# import the required modules into the program
+from lyrics_extractor import SongLyrics
+ 
+# passing the GCS_API_KEY, GCS_ENGINE_ID in the SongLyrics() method
+extracting_lyrics = SongLyrics("AFteRqbcjskskyOw0oPesv","gsotsotstlex")
+ 
+extracting_lyrics.get_lyrics("Humko Tumse Ho Gaya Hai Pyar Kya Karein Lyrics")
+
+Output :
+
+Note : While entering the API key and the Engine ID in the code we must enter our own key and ID to avoid error generation.
+Extracting Lyrics GUI using Tkinter :
+The project is quite easy to work on and makes use of the modules like requests, tkinter and google API client. To establish a connection and retrieve the necessary search result, we utilise the Google API Client, and we use Tkinter to build the GUI.
+To extract the lyrics from the obtained result, requests are employed. This is a built-in library called Requests. We will also require an Engine ID and API Key when building the project. When extracting the lyrics, the SongLyrics() function will use them. With the help of the websites provided below, we may generate our own API key and Engine ID.
+The link mentioned earlier can be used to get your unique API key and this link can be used to get your unique Engine ID - https://cse.google.com/cse/create/new
+For security purposes, it is advisable to generate a fresh API key and Engine ID.
+We must include the name of the website we will be utilising to extract the lyrics when generating the Engine ID. To get better results, enter many website urls like we have mentioned earlier.
+Walking through the code :
+
+# importing the required modules from Python standard library
+from tkinter import *
+from lyrics_extractor import SongLyrics
+
+Firstly, we imported the modules that are required in our program like Tkinter and lyrics_extractor class from SongLyrics into our code.
+
+# Defining a method to get the lyrics of the song
+def getting_lyrics():
+
+ extracting_lyrics = SongLyrics(
+  "Aefgsdweamdhgpo-cdNlOq0oYird", "bewbewewbrdfewb")
+ 
+# variable for extracting and storing the lyrics of the song
+ var = extracting_lyrics.getting_lyrics(str(ent.get()))
+ final = var['lyrics']
+ result.set(final)
+
+Then, we defines a function getting_lyrics() to extract the song's lyrics along with entering the API key and the Engine ID using the songLyrics() method. Then, we created a new variable called var for extracting the lyrics and holding them temporarily and finally stored the result in final variable permanently.
+
+# Main code
+
+# creating an instance of the tkinter module
+base = Tk()
+# Setting the bg colour to light grey
+base.configure(bg = 'light grey')
+
+# Defining Variable Classes of the tkinter
+result = StringVar()
+
+Next, we set the main code and defined the GUI window as base as an instance of Tkinter library and set the background colour of the window to light grey, using the configure() method. Then, we created a new variable called result to store the outcome.
+
+# Creating a new label for the song's
+# name with the help of Label widget
+Label(base, text = "Enter Song name : ",
+ bg = "light grey").grid(row = 0, sticky = W)
+
+# Creating a new label for the song's
+# lyrics with the help of Label widget
+Label(base, text = "Result :",
+ bg = "light grey").grid(row = 3, sticky = W)
+
+Then, we created a few labels using the Label widgets for entering song name and displaying resulting lyrics. To create it precisely, we mentioned the parameters base, text and bg, Moreover, to position them, we used the grid() method with parameters row and sticky.
+
+# Creating another label for the variable classes
+# name with the help of Entry widget
+Label(base, text="", textvariable = result,
+ bg = "light grey").grid(row = 3, column = 1, sticky = W)
+
+ent = Entry(base, width=50)
+ent.grid(row = 0, column = 1)
+
+Then, we added another label using Label widget and a few entry boxes using the Entry widget to enter and display text and positioned them using the grid() method along with the parameters like row, column and sticky.
+
+# Setting a new button with the help of the button widget
+btn = Button(base, text = "Show",
+  command = getting_lyrics, bg = "Blue")
+
+btn.grid(row = 0, column = 2, columnspan = 2,
+ rowspan = 2, padx = 5, pady = 5)
+
+And lastly, we created a Show button using the Button widget for showing the extracted lyrics of the song. We used the grid() method to position it on the GUI window with the help of various parameters like row, column, columnspan, rowspan, padx and pady.
+Complete Code :
+
+# Python program to create a GUI to extract lyrics from 
+# a song using Tkinter
+# importing the required modules from Python standard library
+from tkinter import *
+from lyrics_extractor import SongLyrics
+
+# Defining a method to get the lyrics of the song
+def getting_lyrics():
+
+ extracting_lyrics = SongLyrics(
+  "Aefgsdweamdhgpo-cdNlOq0oYird", "bewbewewbrdfewb")
+ 
+# variable for extracting and storing the lyrics of the song
+ var = extracting_lyrics.getting_lyrics(str(ent.get()))
+ final = var['lyrics']
+ result.set(final)
+
+# Main code
+
+# creating an instance of the tkinter module
+base = Tk()
+# Setting the bg colour to light grey
+base.configure(bg = 'light grey')
+
+# Defining Variable Classes of the tkinter
+result = StringVar()
+
+# Creating a new label for the song's
+# name with the help of Label widget
+Label(base, text = "Enter Song name : ",
+ bg = "light grey").grid(row = 0, sticky = W)
+
+# Creating a new label for the song's
+# lyrics with the help of Label widget
+Label(base, text = "Result :",
+ bg = "light grey").grid(row = 3, sticky = W)
+
+
+# Creating another label for the variable classes
+# name with the help of Entry widget
+Label(base, text="", textvariable = result,
+ bg = "light grey").grid(row = 3, column = 1, sticky = W)
+
+ent = Entry(base, width=50)
+ent.grid(row = 0, column = 1)
+
+# Setting a new button with the help of the button widget
+btn = Button(base, text = "Show",
+  command = getting_lyrics, bg = "Blue")
+
+btn.grid(row = 0, column = 2, columnspan = 2,
+ rowspan = 2, padx = 5, pady = 5)
+
+# Executing the GUI
+mainloop()
+
+Output :
+The output of the GUI to extract lyrics from a song is attached below in the form of a screenshot.
+
+Conclusion :
+As a result, we started from scratch with a basic Python Extract Song Lyrics Project. The project serves as a fantastic introduction to web scraping, tkinter GUI design, and utilising a Google API client to build a customized search engine.
+
+
+Next TopicSentiment Detector GUI using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

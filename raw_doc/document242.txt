@@ -1,0 +1,91 @@
+
+
+
+
+next →
+← prev
+
+Time clock() Method in Python
+In this tutorial, we will discuss the clock() function of the time module in the Python. We will also see the syntax of the Python time clock() method along with some examples for better understanding.
+Understanding the time clock() method in Python
+The clock() method is a function in the time module of the Python programming language. It is represented as the total number of seconds to return the current floating-point computations of CPU time.
+Since many functions are defined in the time module call the equivalent C library function, the clock() method also calls the equivalent C library method to return the output. Moreover, the precision of the returned floating-point value relies on the C library function called. Therefore, it works as the alternative to the time() function of the time module to measure the time consumption.
+Note:
+The clock() method shows different meanings in different systems. On systems like UNIX, this function returns a "process of time", which is a floating-point value (in other words, timestamp) in seconds. Whereas in systems like WINDOWS, the function returns the actual processing time for the first call and the current processing time for the subsequent call. (Actually, a WIN32 on QueryPerformanceCount(), relies on much more accurate and precise than milliseconds).
+Let us understand the syntax of the clock() method of the time module in Python
+Syntax of the time clock() function
+The syntax of the Python time clock() function is shown below:
+Syntax:
+
+time.clock()
+
+Parameter:
+
+The time clock() function does not require any parameter.
+
+Return Value:
+The time clock() function displays two functionalities:
+
+On the first call, this function returns the actual processing time of the program.
+On the subsequent call, this function returns the processing time after the first call, and this call will be made to the interval.
+
+Under the Win32 system, this function returns the real-time (in other terms, wall time), whereas this function returns the CPU time in Unix or Linux systems.
+Now, let us take a look at some examples based on the clock() method in Python.
+Examples of Python clock() function
+Here are some examples based on the clock() function of the time module in the Python programming language.
+Example:
+
+# importing the time module
+import time
+
+# using the clock() function of the time module
+processing_time = time.clock()
+
+# printing the current processing time
+print("Current Processing Time (in sec):", processing_time)
+
+Output:
+Current Processing Time (in sec): 0.109375
+
+Explanation:
+In the above snippet of code, we have imported the time module. We have then defined an object that uses the time clock() function to return the current processing time. We have then printed this value for the users. As a result, the current processing time is successfully printed for the users.
+Note: The clock() function of the time module has been deprecated since Python version 3.3. The users can use the time perf_counter() and time process_time() functions instead, depending on their requirements.
+Now, let us consider another example based on the clock() function:
+Example:
+
+# importing the time module
+import time
+
+# defining a function
+def proc():
+   time.sleep( 2.5 )
+
+# measuring the current processing time
+pro_time = time.clock()
+proc()
+print("Current Processing Time (in sec):", pro_time)
+
+# measuring the wall time
+wall_time = time.time()
+proc()
+print("Wall Time (in sec):", time.time() - wall_time)
+
+Output:
+Current Processing Time (in sec): 0.109375
+Wall Time (in sec): 2.5002729892730713
+
+Explanation:
+In the above snippet of code, we have imported the time module. We have then defined a function as proc() and used the time sleep() function with the value 2.5 as its parameter. We have then measured the current processing time using the time clock() function, called the proc() function, and printed the current processing time for the users. We have then measured the wall time using the time() function, called the proc() function again, and printed the Wall time for the users. As a result, the required values are returned successfully.
+
+
+Next TopicDeque in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,300 @@
+
+
+
+
+next →
+← prev
+
+Shutil Module in Python
+In this tutorial, we will learn about the Shutil module in Python. We will discuss how we can perform the high-level file operation such as creating a new copy file and archive it and copy content one file to another file using the Python script. Let's have a basic introduction of Shutil module.
+Python Shutil Module
+Python shutil module provides the facility to perform the high-level file operation. It can operate with the file object and offers us the ability of copy and remove the files. It handles the low-level semantic such creating and closing file objects after performing all operations.
+Working of Shutil Module
+Python shutil module comes with the many built-in methods. We will explore a few important methods. To start working with this module, first we need to import it in our current Python file.
+Copy Files
+This module provides the copy() function which is used to copy a data from one file to another. The files must be in the same directory and destination file must be writable. Let's understand the following syntax.
+Syntax-
+
+shutil.copyfile(source, destination, *, follow_symlinks = True)
+
+Parameter:
+In the above syntax -
+
+The first argument is source which shows the path of source file.
+The second argument is destination which shows the path of the destination file.
+The third argument is optional; the default value of this parameter is true.
+It returns a string which shows the path of newly created file.
+
+Let's understand the following example.
+Example -
+
+import os
+import shutil
+
+# Creating a new folder in the current directory
+os.mkdir('javatpoint')
+
+# It will show the empty folder
+print('Empty Folder:', os.listdir('javatpoint'))
+
+# testcompare.py file will be copied in the javatpoint folder
+shutil.copy('testcompare.py', 'javatpoint')
+
+# After coping the file folder shows the file
+print('File Copied Name:', os.listdir('javatpoint'))
+
+Output:
+Empty Folder: []
+File Copied Name: ['testcompare.py']
+
+Explanation -
+The copy() function takes directory name as an argument. Here the metadata is not copied, the copied file will be considered as the freshly created file. This method also cloned the all permission of the file. One thing to note is that if the destination file already exists, it will be replaced with the source file.
+Let's see another example.
+Example - 2 if a destination is a directory
+
+import os
+import shutil
+
+# hello.txt file will be copied 
+source = r'D:\Python Project\javatpoint\hello.txt'
+
+# In the newly created foloder
+destination = r'D:\Python Project\NewFile'
+
+# Storing the new path of hello.txt file
+dest = shutil.copy(source, destination)
+
+# Print the new path
+print(dest)
+
+Output:
+D:\Python Project\NewFile\hello.txt
+
+As we have mentioned that, the copy() function doesn't copy the metadata. But, we will use the copy2() function which allows us to copy the file including its metadata.
+Example - 3: Error handling while using copy method
+
+# importing shutil module
+import shutil
+
+# It is a source path
+source = r"D:\Python Project\NewFolder"
+
+# It is a destination path
+destination = r"D:\Python Project\NewFolder"
+
+try:
+    shutil.copy(source, destination)
+    print("File copied successfully.")
+
+# If the given source and path are same
+except shutil.SameFileError:
+    print("Source and destination represents the same file.")
+
+# If there is no permission to write
+except PermissionError:
+    print("Permission denied.")
+
+# For other errors
+except:
+    print("Error occurred while copying file.")
+
+Output:
+Source and destination represents the same file.
+
+The copy2() Function
+This function is the similar to the copy() function. It can also copy the content of one file to another but the only difference is it can preserve the file's metadata. Let's understand the following syntax.
+Syntax:
+
+shutil.copy2(source, destination, *, follow_symlinks = True)
+
+Parameter:
+In the above syntax -
+
+The first argument is source which shows the path of source file.
+The second argument is destination which shows the path of the destination file.
+The third argument is optional; the default value of this parameter is true.
+It returns a string which shows the path of newly created file.
+
+Let's understand the following example.
+Example -
+
+import os
+import shutil
+
+# hello.txt file will be copied 
+source = r'D:\Python Project\javatpoint\hello.txt'
+
+metadata = os.stat(source)
+print(metadata)
+
+# In the newly created foloder
+destination = r'D:\Python Project\NewFile'
+# Storing the new path of hello.txt file
+
+dest1 = shutil.copy2(source, destination)
+metadata = os.stat(dest1)
+
+print("After copying file")
+print(metadata)
+
+# Print the new path
+print(dest1)
+
+Output:
+os.stat_result(st_mode=33206, st_ino=562949953459285, st_dev=3029671014, st_nlink=1, st_uid=0, st_gid=0, st_size=17, st_atime=1622815671, st_mtime=1622705607, st_ctime=1622705607)
+After copying file
+os.stat_result(st_mode=33206, st_ino=562949953459287, st_dev=3029671014, st_nlink=1, st_uid=0, st_gid=0, st_size=17, st_atime=1622815748, st_mtime=1622705607, st_ctime=1622706243)
+D:\Python Project\NewFile\hello.txt
+
+The shutil.copyfile() Function
+This method is used to copy the content of the source file to the destination file expect the metadata. Source and destination must have a file and destination file must provide the write permission. If there is destination file already present then it will be replaced by the new file otherwise create new file.
+Let's see the following syntax.
+Syntax:
+
+shutil.copyfile(source, destination, *, follow_symlinks = True)
+
+Parameters:
+In the above syntax -
+
+The first argument is source which shows the path of source file.
+The second argument is destination which shows the path of the destination file.
+The third argument is optional; the default value of this parameter is true.
+It returns a string which shows the path of newly created file.
+
+Let's understand the following example.
+Example -
+
+import shutil
+
+# hello.txt file will be copied 
+source = r'D:\Python Project\javatpoint\hello.txt'
+
+# In the newly created foloder
+destination = r'D:\Python Project\NewFile\hi.txt'
+# Storing the new path of hello.txt file
+
+dest1 = shutil.copyfile(source, destination)
+
+# Print the new path
+print(dest1)
+
+Output:
+D:\Python Project\NewFile\hi.txt
+
+The shutil.copytree() Function
+This method is used to replicate the complete directory. It copies an entire directory tree rooted at source to the destination directory. The destination directory must not already present. Let's see the following syntax.
+Syntax:
+
+shutil.copytree(src, dst, symlinks = False, ignore = None, copy_function = copy2, igonre_dangling_symlinks = False)
+
+Parameters:
+In the above syntax:
+
+src - It shows the path of the source directory.
+dest - It shows the path of the destination directory.
+symlinks(optional) - It takes the Boolean values - True and False. It depends on which the metadata of original links or links will be copied to the new tree.
+ignore(optional) - By default it is None but If the ignore is passed, it must be a callable that receive as its arguments. The directory is visited by copytree().
+copy_function(optional) - The copy2 is default value of this parameter. The copy() function can be used as parameter.
+ignore_dangling_symlinks(optional) - This parameter is used to raise the exception if the file pointed by symlink doesn't exist.
+It returns the string which represents the path of newly created directory.
+
+Example -
+
+# importing shutil module
+import shutil
+
+# It is source path
+src = r'D:\Python Project\javatpoint'
+
+# It is destination path
+dest = r'D:\Python Project\NewFolder'
+
+# Copy the content of
+# source to destination
+dest1 = shutil.copytree(src, dest)
+
+# Now we print path of newly
+# created file
+print("Destination path:", dest1)
+
+Output:
+Destination path: D:\Python Project\NewFolder
+
+The shutil.rmtree()
+This method is used to delete the complete directory tree. Let's see the following syntax.
+Syntax:
+
+shutil.rmtree(path, ignore_errors=False, onerror=None)
+
+Parameter-
+In the above syntax -
+
+path - It represents the file path. A path-like object is either a string or bytes object.
+ignore_errors - The removal will be ignored if this argument is True.
+onerror - If ignore_errors is false, such errors are handled by calling a handler specified by onerror.
+
+Let's understand the following example -
+Example -
+
+import shutil
+import os
+
+# location
+location_dir = r"D:\Python Project\NewFile"
+
+# directory
+directory = r"D:\Python Project\javatpoint"
+
+# path
+path1 = os.path.join(location_dir, directory)
+
+# removing directory
+shutil.rmtree(path1)
+
+The above code will remove the given directory.
+The shutil.which() Function
+The shutil.which() function is used to get the path of an executable application that would be run if the given cmd was called. It finds the file in the given path. Let's see the following syntax.
+Syntax:
+
+shutil.which(cmd, mode = os.F_OK | os.X_OK, path = None)
+
+Parameters 
+In the above syntax -
+
+cmd - It is string that represents the file.
+mode - It specifies the mode of file in which method should executed.
+path - This parameter specifies the path to be used.
+This method returns the path to an executable application.
+
+Let's understand the following example.
+Example - 
+
+# importing shutil module
+import shutil
+    
+# search the file
+cmd = 'python'
+    
+# Using shutil.which() method
+locating = shutil.which(cmd)
+    
+# Print result
+print(locating)
+
+Output:
+C:\Python\python.EXE
+
+It will find the given file in the computer, if file is found it returns the path of the file otherwise returns None. 
+
+
+Next TopicPython epoch to Datetime
+
+
+
+
+← prev
+next →
+
+
+
+

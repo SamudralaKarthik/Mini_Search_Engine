@@ -1,0 +1,134 @@
+
+
+
+
+next →
+← prev
+
+Box Plot in Python using Matplotlib
+What is Box Plot?
+A Box plot is a way to visualize the distribution of the data by using a box and some vertical lines. It is known as the whisker plot. The data can be distributed between five key ranges, which are as follows:
+
+Minimum: Q1-1.5*IQR
+1st quartile (Q1): 25th percentile
+Median:50th percentile
+3rd quartile(Q3):75th percentile
+Maximum: Q3+1.5*IQR
+
+Here IQR represents the InterQuartile Range which starts from the first quartile (Q1) and ends at the third quartile (Q3).
+Box Plot visualization
+
+In the box plot, those points which are out of range are called outliers. We can create the box plot of the data to determine the following:
+
+The number of outliers in a dataset
+Is the data skewed or not
+The range of the data
+
+The range of the data from minimum to maximum is called the whisker limit. In Python, we will use the matplotlib module's pyplot module, which has an inbuilt function named boxplot() which can create the box plot of any data set.
+Syntax:
+
+matplotlib.pyplot.boxplot(data,notch=none,vert=none,patch_artist,widths=none)
+
+In the boxplot() function, we have a lot of attributes which can be used to create a more attractive and amazing box plot of the data set.
+
+data: The data should be an array or sequence of arrays which will be plotted.
+notch: This parameter accepts only Boolean values, either true or false.
+vert: This attribute accepts a Boolean value. If it is set to true, then the graph will be vertical. Otherwise, it will be horizontal.
+position: It accepts the array of integers which defines the position of the box.
+widths: It accepts the array of integers which defines the width of the box.
+patch_artist: this parameter accepts Boolean values, either true or false, and this is an optional parameter.
+labels: This accepts the strings which define the labels for each data point
+meanline: It accepts a boolean value, and it is optional.
+order: It sets the order of the boxplot.
+bootstrap: It accepts the integer value, which specifies the range of the notched boxplot.
+
+Example1:
+We will create the random data set of the numpy array and create the box plot.
+
+import matplotlib.pyplot as plt
+import numpy as np
+np.random.seed(15)
+dataSet = np.random.normal(100, 25, 200)
+print(dataSet)
+figure = plt.figure(figsize =(10, 8))
+plt.boxplot(dataSet)
+plt.show()
+
+Output:
+
+Explanation:
+In the above code, first of all, we have imported the numpy and matplotlib libraries in the code. Then we created the random dataset and plotted the box plot using the boxplot() function.
+Example2:
+We can create multiple box plots simultaneously in the same file.
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(10)
+
+dataSet1 = np.random.normal(100, 10, 220)
+dataSet2 = np.random.normal(80, 20, 200)
+dataSet3 = np.random.normal(60, 35, 220)
+dataSet4 = np.random.normal(50, 40, 200)
+dataSet = [dataSet1, dataSet2, dataSet3, dataSet4]
+
+figure = plt.figure(figsize =(10, 7))
+ax = figure.add_axes([0, 0, 1, 1])
+bp = ax.boxplot(dataSet)
+plt.show()
+
+Output:
+
+Explanation:
+In the above code, we have four data sets using random methods of numpy. Then we have created the list of the four data sets and use this inside boxplot() function.
+Example 3:
+We can use some attributes of the boxplot() function to customize the plot.
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(10)
+dataSet1 = np.random.normal(100, 10, 220)
+dataSet2 = np.random.normal(80, 20, 200)
+dataSet3 = np.random.normal(60, 35, 220)
+dataSet4 = np.random.normal(50, 40, 200)
+dataSet = [dataSet1, dataSet2, dataSet3, dataSet4]
+
+figure = plt.figure(figsize =(10, 7))
+ax = figure.add_subplot(111)
+bp = ax.boxplot(dataSet, patch_artist = True,notch ='True', vert = 0)
+colors = ['#00FF00','#0F00FF', '#F00FF0','#FFFF0F']
+for patch, color in zip(bp['boxes'], colors):
+	patch.set_facecolor(color)
+for whisker in bp['whiskers']:
+	whisker.set(color ='#8E008B',linewidth = 1.4,linestyle =":")
+for cap in bp['caps']:
+	cap.set(color ='#8E008B',linewidth = 2.1)
+for median in bp['medians']:
+	median.set(color ='blue',linewidth = 3)
+for flier in bp['fliers']:
+	flier.set(marker ='D',color ='#d7298c',alpha = 0.6)	
+ax.set_yticklabels(['dataSet1', 'dataSet2','dataSet3', 'dataSet4'])
+plt.title("Customized box plot using attributes")
+ax.get_xaxis().tick_bottom()
+ax.get_yaxis().tick_left()	
+plt.show()
+
+Output:
+
+Explanation:
+In the above code, we have created the four datasets using random functions and set them in a list. Now we have set the different colors for each box plot using the list of colors and using the function set_facecolor().
+We have set the line width of each box plot and also set the labels for each box plot. We have set attribute vert =0, which means all the plots will be in horizontal mode.
+
+
+Next TopicBox-Cox Transformation in Python
+
+
+
+
+← prev
+next →
+
+
+
+

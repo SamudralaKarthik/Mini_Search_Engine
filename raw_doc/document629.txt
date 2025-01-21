@@ -1,0 +1,143 @@
+
+
+
+
+next →
+← prev
+
+Python Program to Rotate an Image
+In this tutorial, we will write the Python program to solve the rotation of an image (matrix). It is a problem related to the matrix. Let's understand the problem statement.
+Problem Statement
+An nxn 2D matrix represents an image. We need to rotate the image 90 degrees clockwise. We need to perform this operation using in-place means we do not need another 2D matrix and do the rotation. After the rotation, the image will look as below.
+Example -
+
+Example - 1
+
+Input
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output:
+[[7,4,1],[8,5,2],[9,6,3]]
+
+Example - 2
+
+Input: 
+matrix = [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]]
+Output: 
+[[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]]
+
+Example - 3
+
+Input: matrix = [[1]]
+Output: [[1]]
+
+We should follow the following constraints -
+
+  • n == matrix.length == matrix[i].length
+  • 1 <= n <= 20
+  • -1000 <= matrix[i][j] <= 1000
+
+Solution
+We will implement the following solution.
+
+First, get the number of rows and columns of the matrix.
+Iterate the inner loop and outer loop and transpose the matrix.
+Reverse the transposed matrix.
+
+Let's see the following code.
+Example -
+
+def rotate(matrix):
+    """
+    :type matrix: List[List[int]]
+    :rtype: None Do not return anything, modify matrix in-place instead.
+    """
+  if(matrix==None or len(matrix) == 0 or len(matrix[0]) == 0):return
+    for row in range(len(matrix)):
+        for col in range(row):
+            matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+    for i,row in enumerate(matrix):
+        matrix[i]=row[::-1] 
+    return matrix
+mat = [[1,2,3],[4,5,6],[7,8,9]]
+print('The input matrix is:', mat)
+print("The matrix after rotation: ", rotate(mat))
+
+Output:
+The input matrix is: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+The matrix after rotation:  [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+
+Explanation -
+In the above code, we have created a method that takes a matrix to be rotated. We iterated the outer loop, which will iterate each row of the matrix, and the outer loop is iterated over the column of each row. We changed the matrix's rows to columns and columns to rows inside the inner loop. If we print the transposed matrix, it will look as below.
+
+for row in range(len(matrix)):
+        for col in range(row):
+            matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+print(matrix)
+
+It will give the following output -
+[[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+
+If we look closely at the transposed matrix, we are just one step away from getting the desired output. We only need to reverse each row. Hence we reversed each row of the matrix with the help of enumerate() function.
+
+for i,row in enumerate(matrix):
+        matrix[i]=row[::-1] 
+        print(i, row)
+
+It will give the following output -
+0 [1, 4, 7]
+1 [2, 5, 8]
+2 [3, 6, 9]
+
+In the next line, we revered the rows and returned the matrix.
+Let's understand another solution.
+Solution - 2:
+In this solution, we will
+
+Switch the rows up and down, for example there are n rows: switch the 1st row and the nth row, the 2nd row and the (n-1) th row, and so on.
+Then find the transpose of the resultant matrix.
+
+Let's understand the following example.
+Example -
+
+def rotate(matrix):
+        if(matrix==None or len(matrix) == 0 or len(matrix[0]) == 0):return
+        rows = len(matrix)
+        cols = len(matrix[0])
+        
+        first,last = 0,rows-1
+        
+        while(first<last):
+            matrix[first],matrix[last] = matrix[last],matrix[first]
+            first +=1
+            last -=1
+            
+        
+        for i in range(0,rows):
+            for j in range(i+1,cols):
+                matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+                
+        return matrix         
+mat = [[1,2,3],[4,5,6],[7,8,9]]
+print('The input matrix is:', mat)
+print("The matrix after rotation: ", rotate(mat))
+
+Output:
+The input matrix is: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+[[7, 8, 9], [4, 5, 6], [1, 2, 3]]
+The matrix after rotation:  [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+
+Conclusion
+In this tutorial, we have solved one of the interesting Python matrix problems that are asked by the many big organizations. We have implemented the solution using the multiple codes with the explanation. One you get the solution approach, do it your own.
+
+
+Next TopicValidate the IP Address in Python
+
+
+
+
+← prev
+next →
+
+
+
+

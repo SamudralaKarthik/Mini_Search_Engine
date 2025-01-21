@@ -1,0 +1,420 @@
+
+
+
+
+next →
+← prev
+
+Implementing Apriori Algorithm in Python
+Apriori Algorithm is a Machine Learning algorithm utilized to understand the patterns of relationships among the various products involved. The most popular use of the algorithm is to suggest products based on the items already in the user's shopping cart. Walmart specifically has utilized the algorithm in recommending items to its users.
+Dataset: Groceries data
+Implementation of algorithm in Python:
+Step 1: Import the required libraries
+
+import numpy as np
+import pandas as pd
+from mlxtend.frequent_patterns import apriori, association_rules
+
+Step 2: Load and explore the data
+
+# Now, we will load the Data
+data1 = pnd.read_excel('Online_Retail.xlsx')
+data1.head()
+
+Output:
+
+
+
+
+InvoiceNo
+StockCode
+Description
+Quantity
+InvoiceDate
+UnitPrice
+CustomerID
+Country
+
+
+0
+536365
+85123A
+WHITE HANGING HEART T-LIGHT HOLDER
+6
+2010-12-01 08:26:00
+2.55
+17850.0
+United Kingdom
+
+
+1
+536365
+71053
+WHITE METAL LANTERN
+6
+2010-12-01 08:26:00
+3.39
+17850.0
+United Kingdom
+
+
+2
+536365
+84406B
+CREAM CUPID HEARTS COAT HANGER
+8
+2010-12-01 08:26:00
+2.75
+17850.0
+United Kingdom
+
+
+3
+536365
+84029G
+KNITTED UNION FLAG HOT WATER BOTTLE
+6
+2010-12-01 08:26:00
+3.39
+17850.0
+United Kingdom
+
+
+4
+536365
+84029E
+RED WOOLLY HOTTIE WHITE HEART.
+6
+2010-12-01 08:26:00
+3.39
+17850.0
+United Kingdom
+
+
+
+Input:
+
+# here, we will explore the columns of the data
+data1.columns
+
+Output:
+Index(['InvoiceNo', 'StockCode', 'Description', 'Quantity', 'InvoiceDate',
+       'UnitPrice', 'CustomerID', 'Country'],
+      Dtype = 'object')
+
+Input:
+
+# Now, we will explore the different regions of transactions
+data1.Country.unique()
+
+Output:
+array(['United Kingdom', 'France', 'Australia', 'Netherlands', 'Germany',
+       'Norway', 'EIRE', 'Switzerland', 'Spain', 'Poland', 'Portugal',
+       'Italy', 'Belgium', 'Lithuania', 'Japan', 'Iceland',
+       'Channel Islands', 'Denmark', 'Cyprus', 'Sweden', 'Austria',
+       'Israel', 'Finland', 'Bahrain', 'Greece', 'Hong Kong', 'Singapore',
+       'Lebanon', 'United Arab Emirates', 'Saudi Arabia',
+       'Czech Republic', 'Canada', 'Unspecified', 'Brazil', 'USA',
+       'European Community', 'Malta', 'RSA'], dtype = object)
+
+Step 3: Clean the Data
+
+# here, we will strip the extra spaces in the description
+data1['Description'] = data1['Description'].str.strip()
+
+# Now, drop the rows which does not have any invoice number
+data1.dropna(axis = 0, subset = ['InvoiceNo'], inplace = True)
+data1['InvoiceNo'] = data1['InvoiceNo'].astype('str')
+
+# Now, we will drop all transactions which were done on credit
+data1 = data1[~data1['InvoiceNo'].str.contains('C')]
+
+Step 4: Split the data according to the region of transaction
+
+# Transactions done in France
+basket1_France = (data1[data1['Country'] == "France"]
+		.groupby(['InvoiceNo', 'Description'])['Quantity']
+		.sum().unstack().reset_index().fillna(0)
+		.set_index('InvoiceNo'))
+
+# Transactions done in the United Kingdom
+basket1_UK = (data1[data1['Country'] == "United Kingdom"]
+		.groupby(['InvoiceNo', 'Description'])['Quantity']
+		.sum().unstack().reset_index().fillna(0)
+		.set_index('InvoiceNo'))
+
+# Transactions done in Portugal
+basket1_Por = (data1[data1['Country'] == "Portugal"]
+		.groupby(['InvoiceNo', 'Description'])['Quantity']
+		.sum().unstack().reset_index().fillna(0)
+		.set_index('InvoiceNo'))
+
+basket1_Sweden = (data1[data1['Country'] == "Sweden"]
+		.groupby(['InvoiceNo', 'Description'])['Quantity']
+		.sum().unstack().reset_index().fillna(0)
+		.set_index('InvoiceNo'))
+
+Step 5: Hot encoding the Data
+
+# Here, we will define the hot encoding function 
+# for making the data suitable
+# for the concerned libraries
+def hot_encode1(P):
+	if(P<= 0):
+		return 0
+	if(P>= 1):
+		return 1
+
+# Here, we will encode the datasets
+basket1_encoded = basket1_France.applymap(hot_encode1)
+basket1_France = basket1_encoded
+
+basket1_encoded = basket1_UK.applymap(hot_encode1)
+basket1_UK = basket1_encoded
+
+basket1_encoded = basket1_Por.applymap(hot_encode1)
+basket1_Por = basket1_encoded
+
+basket1_encoded = basket1_Sweden.applymap(hot_encode1)
+basket1_Sweden = basket1_encoded
+
+Step 6: Build the models and analyse the results
+a) France:
+
+# Build the model
+frq_items1 = AP(basket1_France, min_support = 0.05, use_colnames = True)
+
+# Collect the inferred rules in a dataframe
+rules1 = AR(frq_items1, metric = "lift", min_threshold = 1)
+rules1 = rules1.sort_values(['confidence', 'lift'], ascending = [False, False])
+print(rules1.head())
+
+Output:
+
+
+ antecedents \
+
+
+45 (JUMBO BAG WOODLAND ANIMALS) 
+
+
+260 (PLASTERS IN TIN CIRCUS PARADE, RED TOADSTOOL ... 
+
+
+272 (RED TOADSTOOL LED NIGHT LIGHT, PLASTERS IN TI... 
+
+
+302 (SET/6 RED SPOTTY PAPER CUPS, SET/20 RED RETRO... 
+
+
+301 (SET/6 RED SPOTTY PAPER PLATES, SET/20 RED RET... 
+
+
+ 
+
+
+ consequents antecedent support consequent support \
+
+
+45 (POSTAGE) 0.076531 0.765306 
+
+
+260 (POSTAGE) 0.051020 0.765306 
+
+
+272 (POSTAGE) 0.053571 0.765306 
+
+
+302 (SET/6 RED SPOTTY PAPER PLATES) 0.102041s 0.127551 
+
+
+301 (SET/6 RED SPOTTY PAPER CUPS) 0.102041 0.137755 
+
+
+ 
+
+
+ support confidence lift leverage conviction 
+
+
+45 0.076531 1.000 1.306667 0.017961 inf 
+
+
+260 0.051020 1.000 1.306667 0.011974 inf 
+
+
+272 0.053571 1.000 1.306667 0.012573 inf 
+
+
+302 0.099490 0.975 7.644000 0.086474 34.897959 
+
+
+301 0.099490 0.975 7.077778 0.085433 34.489796 
+
+
+From the above output, it can be seen that paper cups, paper and plates are bought together in France. This is because the French has a culture of having a get-together with their friends and family at least once a week. Also, since the French government has banned the use of plastic in the country, people have to purchase paper-based alternatives.
+b) United Kingdom:
+
+frq_items = apriori(basket_UK, min_support = 0.01, use_colnames = True)
+rules = association_rules(frq_items, metric ="lift", min_threshold = 1)
+rules = rules.sort_values(['confidence', 'lift'], ascending =[False, False])
+print(rules.head())
+
+
+
+If the guidelines for British transactions are examined in greater detail, it is discovered that British consumers purchase various colored tea plates. The reason could be due to the fact that the British love tea and tend to collect different colors of tea plates to suit different occasions.
+c) Portugal:
+
+frq_items1 = AP(basket1_Sweden, min_support = 0.05, use_colnames = True)
+rules1 = AR(frq_items1, metric ="lift", min_threshold = 1)
+rules1 = rules1.sort_values(['confidence', 'lift'], ascending =[False, False])
+print(rules1.head())
+
+Output:
+
+
+ antecedents consequents \
+
+
+1170 (SET 12 COLOUR PENCILS DOLLY GIRL) (SET 12 COLOUR PENCILS SPACEBOY) 
+
+
+1171 (SET 12 COLOUR PENCILS SPACEBOY) (SET 12 COLOUR PENCILS DOLLY GIRL) 
+
+
+1172 (SET OF 4 KNICK KNACK TINS LONDON) (SET 12 COLOUR PENCILS DOLLY GIRL) 
+
+
+1173 (SET 12 COLOUR PENCILS DOLLY GIRL) (SET OF 4 KNICK KNACK TINS LONDON) 
+
+
+1174 (SET 12 COLOUR PENCILS DOLLY GIRL) (SET OF 4 KNICK KNACK TINS POPPIES) 
+
+
+ 
+
+
+ antecedent support consequent support support confidence lift \
+
+
+1170 0.051724 0.051724 0.051724 1.0 19.333333 
+
+
+1171 0.051724 0.051724 0.051724 1.0 19.333333 
+
+
+1172 0.051724 0.051724 0.051724 1.0 19.333333 
+
+
+1173 0.051724 0.051724 0.051724 1.0 19.333333 
+
+
+1174 0.051724 0.051724 0.051724 1.0 19.333333 
+
+
+ 
+
+
+ leverage conviction 
+
+
+1170 0.049049 inf 
+
+
+1171 0.049049 inf 
+
+
+1172 0.049049 inf 
+
+
+1173 0.049049 inf 
+
+
+1174 0.049049 inf 
+
+
+In analysing the association regulations to Portuguese transactions, the use of Tiffin set (Knick Knack Tins) and colour pencils can be found. These two items are typically belonging to a primary school child. Both of these items are needed by students at school to carry their lunches as well as for work that requires creativity, and therefore it is logical to pair them together.
+d) Sweden:
+
+frq_items1 = AP(basket1_Sweden, min_support = 0.05, use_colnames = True)
+rules1 = AR(frq_items1, metric ="lift", min_threshold = 1)
+rules1 = rules1.sort_values(['confidence', 'lift'], ascending =[False, False])
+print(rules1.head())
+
+Output:
+
+
+ antecedents consequents \
+
+
+0 (PACK OF 72 SKULL CAKE CASES) (12 PENCILS SMALL TUBE SKULL) 
+
+
+1 (12 PENCILS SMALL TUBE SKULL) (PACK OF 72 SKULL CAKE CASES) 
+
+
+4 (36 DOILIES DOLLY GIRL) (ASSORTED BOTTLE TOP MAGNETS) 
+
+
+5 (ASSORTED BOTTLE TOP MAGNETS) (36 DOILIES DOLLY GIRL) 
+
+
+180 (CHILDRENS CUTLERY DOLLY GIRL) (CHILDRENS CUTLERY CIRCUS PARADE) 
+
+
+ 
+
+
+ antecedent support consequent support support confidence lift \
+
+
+0 0.055556 0.055556 0.055556 1.0 18.0 
+
+
+1 0.055556 0.055556 0.055556 1.0 18.0 
+
+
+4 0.055556 0.055556 0.055556 1.0 18.0 
+
+
+5 0.055556 0.055556 0.055556 1.0 18.0 
+
+
+180 0.055556 0.055556 0.055556 1.0 18.0 
+
+
+ 
+
+
+ leverage conviction 
+
+
+0 0.052469 inf 
+
+
+1 0.052469 inf 
+
+
+4 0.052469 inf 
+
+
+5 0.052469 inf 
+
+
+180 0.052469 inf 
+
+
+Analysing the above guidelines and the above rules, we find that both girls' and boys' cutlery are placed together. This makes sense since when a parent shops for cutlery items for their children, they would like the item to be specific to the child's desires.
+
+
+Next TopicSentiment Analysis using VADER
+
+
+
+
+← prev
+next →
+
+
+
+

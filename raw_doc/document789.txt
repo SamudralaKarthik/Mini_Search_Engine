@@ -1,0 +1,622 @@
+
+
+
+
+next →
+← prev
+
+Emerging Advance Python Projects 2022
+Python Projects (Advanced) tutorial is for expanding and amplifying your ambition to become the most successful person in the world. Python is a programming language that, most of the time, can be quite simple to use in order to do tasks more quickly and effectively. Python is used by the majority of IT industries as a result. We recently gave students a complete solution for 2000+ real-world Python projects, including project planning, designing, development, and deployment.
+Considering that Python offers cutting-edge development services, features, and most potent patterns, etc., this service is not just for researchers who have study prepared in advance; we also provide guidance to newcomers. We offer precise guidance on the latest research development environment and software development tools that are employed in your advanced Python projects.
+Understanding the significance of working on projects.
+It is essential to work on a project in order to advance your career as a Python developer. They enable us to best express the knowledge and abilities we are acquiring.
+We can benefit from projects in a number of ways:
+
+We benefit from projects by gaining confidence.
+Regardless of the level of complexity, it is essential to have faith in our capacity to produce superior software.
+We can also look into new technologies like servers, databases, and a lot of languages that are needed to build a full-fledged product.
+Projects help us learn programming concepts like object-oriented programming and design patterns and write better code.
+Developers can experience the entire software development life cycle (SDLC) through building projects, which teaches them how to maintain the coding process, plan before writing code, and update applications promptly.
+
+1. Scraping Instagram with Python
+Until you make mistakes when writing your usernames and passwords, it's a simple task. In this Tutorial, we will demonstrate some methods that will simplify scraping Instagram with Python for you.
+We will use the library named instaloader, which gives us an API for the Instagram scraping process, to scrape the platform. You can use the terminal's pip method to install this library.
+
+pip install instaloader
+
+Let's get started if you have installed the required package.
+Steps to Scraping Instagram with Python
+Step 1: First, scraping Instagram will assist you in studying the most recent business trends so that you can produce more leads and reach out to your new potential clients if you are learning data science. Let's now begin by scraping the profiles of Instagram users:
+Snippet code:
+
+# Import the module
+pip install instaloader
+import instaloader
+# Creating an instance of Instaloader class
+bot = instaloader.Instaloader()
+# Loading profiles from an Instagram handle
+profiles = instaloader.Profiles.from_username(bot.context, 'xxxxx')
+print(type(profiles))
+Code language: Python (Python)
+
+Output:
+
+
+Step 2: Let's now see how we may glean some useful data from Instagram profiles:
+Snippet code:
+
+print("Username: ", profiles.username)
+print("User ID: ", profiles.userid)
+print("Number of Posts: ", profiles.mediacount)
+print("Followers: ", profiles.followers)
+print("Followees: ", profiles.followees)
+print("Bio: ", profiles.biography,profiles.external_url)
+Code language: Python (Python)
+
+Expected Output:
+Username: xxxx User ID: 198670800 Number of Posts: 305 Followers: 621 Followees: 154 Bio: Data engineer thecleveprogrammer.com DataScience | MachineLearning | AI | 
+
+Step 3: Let's explore how to use Python to access your Instagram profiles:
+Snippet code:
+
+# Loging with username and password in the script
+bot.Loging(user="your user_name",passwd="our password")
+# Interactive Logging on terminal
+bot.interactive_Loging("your username") 
+
+You could wonder, "Why did I log in?" We will examine several of the strategies further; logging in proved crucial...
+Step 4: Scraping Instagram Followees and Followers 
+When working in a professional atmosphere in the data science industry, you will need to scrape your followers and followees to gather a list of their usernames:
+Snippet code:
+
+# Get the usernames of all 
+Followers = [follower. username for follower in profiles.get_followers()]
+# Get the usernames of all followees
+followers = [followee.username for followee in profiles.get_followees()]
+print(followers)
+#Code language: Python (Python)
+
+Step 5: Download Post from other Profile
+Python makes it simple to get posts from any profiles. We have to utilize get posts (). I'll apply this strategy to another person's profiles. We must loop through the generator object using the .download post() method to download each post. Let's go over this now.
+Snippet code:
+
+# Load new profiles
+profiles = instaloader.Profiles.from_username(bot.context, 'wwe')
+# Getting all posts in a object of generator
+posts = profiles.get_posts()
+# Iterate and download
+For index, post in enumerate(posts, 1):
+    bot.download_post(post, target=f"{profiles.username}_{index}")
+Code language: Python (Python)
+
+The post folder will be saved by creating its directory. In each folder, you can view the actual profile post content, such as videos and photographs.
+Complete Code
+
+# Import the module
+!pip install instaloader
+import instaloader
+# Creating an instance of Instaloader class
+bot = instaloader.Instaloader()
+# Loading a profile from an Instagram handle
+profiles = instaloader.Profiles.from_username(bot.context, 'xxxxx')
+print(type(profiles))
+print("Username: ", profiles.username)
+print("User ID: ", profiles.userid)
+print("Number of Posts: ", profiles.mediacount)
+print("Followers: ", profiles.followers)
+print("Followees: ", profiles.followees)
+print("Bio: ", profiles.biography,profiles.external_url)
+Code language: Python (Python)
+# Loging with username and password in the script
+bot.Loging(user="your username",passwd="your password")
+# Interactive Logging on terminal
+bot.interactive_Loging("your username") 
+# Get the usernames of all followers
+followers = [follower.username for follower in profiles.get_followers()]
+# Get the usernames of all followees
+followers = [followee.username for followee in profiles.get_followees()]
+print(followers)
+Code language: Python (Python)
+# Load new profiles
+profiles = instaloader.Profiles.from_username(bot.context, 'wwe')
+# Get all posts in a generator object
+posts = profiles.get_posts()
+# Iterate and download
+for index, post in enumerate(posts, 1):
+    bot.download_post(post, target=f"{profiles.username}_{index}")
+Code language: Python (Python)
+
+Expected Output:
+
+Username: xxxx User ID: 198670800 Number of Posts: 305 Followers: 621 Followees: 154 Bio: Data engineer thecleveprogrammer.com DataScience | MachineLearning | AI | 
+
+We hope this cleared all doubts about using Python to scrape Instagram.
+1. Using Python OTP Verification
+Do you know how to generate a different OTP each time you conduct an online transaction? Every organization has a different method for generating an OTP for verification, but most of them have their systems set up to produce a 6-digit random number. I'll demonstrate how to use Python to complete the work of OTP verification in this article.
+Steps using Python to Create an OTP Verification engine
+Before completing a registration or payment process, an OTP Verification is the process of authenticating a person by sending a message containing unique code. When we make a payment online, forget our password, or create an account on any online platform, we typically receive an OTP. As a result, sending a unique password to a user is the only purpose of an OTP.
+By following the procedure listed below, we can quickly develop a Python app for the task of verification of OTP:
+
+Frame a six-digit random number first.
+The number should then be stored in the form of python variable.
+The following step is to build an email-sending app.
+We need to utilize the OTP code as a message when sending emails. Last, we require two user inputs for the user's email address and then for the OTP received.
+
+Therefore, this is the entire procedure for developing a Python app for OTP verification. In the following, we'll teach you how to utilize Python to carry out the above explained steps for OTP verification.
+Using Python OTP Verification
+We trust you now better understand what an OTP is and how we can build an app to carry out the task of OTP verification. Let's construct an app in Python to perform the task of OTP verification work by following the above-mentioned methods. The first thing I'll do is import the Python library we'll require for this process:
+Snippet code:
+
+import os
+import math
+import random
+import smtplib
+
+Now I'll create a random number and save it in a variable that I'll use when I send the users' emails:
+Snippet code:
+
+digits="0123456789"
+OTP=""
+for i in range(6):
+    OTP+=digits[math.floor(random.random()*10)]
+OTP = OTP + " is your OTP"
+msg= OTP
+
+Before we continue, you must have your Google app password to send emails using your Gmail account. You will receive a key after creating an application password for the Gmail account. For Python to send emails for OTP verification, copy that key and put it into the following code:
+Snippet code:
+
+s = smtplib.SMTP('smtp.gmail.com', 587)
+s.starttls()
+s.Logging("Your Gmail Account", "You app password")
+emailid = input("Enter your email: ")
+s.sendmail('&&&&&&&&&&&',emailid,msg)
+a = input("Enter Your OTP >>: ")
+if a == OTP:
+    print("Verified")
+else:
+    print("Please Check your OTP again")
+
+Input:
+Enter your email: [email protected]
+Enter Your OTP >>: 47834
+Output:
+Verified
+After running this code, input the email address where you wish to send the OTP and then the OTP you just received. The whole code used in this post for OTP verification is below.
+Complete code:
+
+import os
+import math
+import random
+import smtplib
+digits="0123456789"
+OTP=""
+for i in range(6):
+    OTP+=digits[math.floor(random.random()*10)]
+otp = OTP + " is your OTP"
+msg= otp
+s = smtplib.SMTP('smtp.gmail.com', 587)
+s.starttls()
+s.Logging("Your Gmail Account", "You app password")
+emailid = input("Enter your email: ")
+s.sendmail('&&&&&&&&&&&',emailid,msg)
+a = input("Enter Your OTP >>: ")
+if a == OTP:
+    print("Verified")
+else:
+    print("Please Check your OTP again")
+
+Expected Output interface:
+
+Input:
+Enter your email: [email protected]
+Enter Your OTP >>: 47834
+Output:
+Verified
+Consequently, this is how you can build an application for your OTP verification requirement. The following thing you may do is apply this reasoning to the creation of the same application as a user interface-A. We hope you people enjoyed reading this Tutorial on Python OTP code verification. Please feel free to ask your insightful questions in the space below.
+3. Using Python to Scrape Twitter
+In this article, I'll show you how to scrape Twitter with Python without an API using the twint module. I'll also look at relationships among a group of Twitter users based on mentions and followers.
+Social media analytics is a hot topic in data science. Twitter, Instagram, Facebook, and other social media apps consume most of our time. Because everyone is familiar with this world, these analyses pique people's interest. The majority of relationship analysis tasks make use of social media analysis. In addition to using Python to scrape Twitter, I will conduct relationship analysis using the data we scraped.
+Using Python to Scrape Twitter
+Now let's get started on our project. We need to install a package called twint to complete this task of scraping Twitter with Python. Installing twint is simple with the terminal command pip to install twine. Let's import the necessary packages and begin the task of scraping Twitter with Python: If you have installed this library.
+Snippet code:
+
+import twint
+import pandas as pd
+from collections import Counter
+Code language: JavaScript (javascript)
+
+We must begin by making a user list of Twitter accounts after importing the required libraries. We'll examine the connections between these individuals' Twitter accounts, which I'll add to the list below:
+Snippet code:
+
+users = [
+    'shakira',
+    'KimKardashian',
+    'rihanna',
+    'jtimberlake',
+    'King-kJames',
+    'neymarjr',
+]
+Code language: JavaScript (javascript)
+
+To make our analysis more fascinating, I've selected well-known Twitter users that everyone is familiar with.
+Python Twitter Scraping and Relationship Analysis
+Let's start by using Python to scrape Twitter, and I'll create a function called get followings that calls the twins library with a username to study the connections between every Twitter account in the list above. The list of people that our input customers follows will be returned by this function.
+Snippet code:
+
+def get_followings(username):
+    c = twint.Config()
+    c.Username = username
+    c.Pandas = True
+    twint.run.Following(c)
+    list_of_followings = twint.storage.panda.Follow_df
+    return list_of_followings['following'][username]
+Code language: PHP (php)
+
+Since we occasionally get an index error when Twitter does not answer our request, the for loop below will produce two variables. To avoid these users in these situations, I added an exception to the code:
+Snippet code:
+
+followings = {}
+following_list__ = []
+for a person in users:
+    print('#####\nStarting: ' + person + '\n#####')
+    try:
+        followings[person] = get_followings(person)
+        following_list__ = following_list__ + followings[person]
+    except KeyError:
+        print('IndexError')
+Code language: PHP (php)
+
+We can simply calculate the list variable's most frequent values after obtaining all the following lists to determine which accounts are the most well-liked by our users. We will make use of the Counter function of the collection library to obtain the top 10 most followed accounts:
+Snippet code:
+
+Counter(following_list__).most_common(10)
+Code language: CSS (CSS)
+
+What if we want to know who in our user group is being followed? To research it, I created a for loop that determines which users are in the following list of other people. As a consequence, it generates a list dictionary that shows the states denoted by True and False for each of the following:
+Snippet code:
+
+follow_relations ={}
+for following_user in followings.keys():
+    p1follow_relation_list__ = []
+    for followed_user_ in followings.keys():
+        if followed_user_ in followings[following_user]:
+            p1follow_relation_list__.append(True)
+        else:
+            p1follow_relation_list__.append(False)
+    follow_relations[following_user] = p1follow_relation_list__
+Code language: PHP (php)
+
+The resulting dictionary is converted into a pandas dataframe in the code below for a more approachable representation. The dataframe's rows display the users who are being followed, while its columns display the opposite:
+Snippet code:
+
+following_df = pd.DataFrame.from_dict(follow_relations, 
+                                      orient='index', columns=followings.keys())
+following_df
+Code language: JavaScript (javascript)
+
+Expected Output:
+
+The results of our analysis are displayed above. In this table, we confirm Rihana's popularity. Each other follows it in order. We can't speak the same language about Kim Kardashians, though, because only Justin Timberlake's account in our users list follows her, per the data.
+Complete code:
+
+import twint
+import pandas as pd
+from collections import Counter
+Code language: JavaScript (javascript) users = [
+    'shakira',
+    'KimKardashian',
+    'rihanna',
+    'jtimberlake',
+    'King-kJames',
+    'neymarjr',
+]
+Code language: JavaScript (javascript)
+def get_followings(username):
+
+    c = twint.Config()
+    c.Username = username
+    c.Pandas = True
+    twint.run.Following(c)
+    list_of_followings = twint.storage.panda.Follow_df
+
+    return list_of_followings['following'][username]
+Code language: PHP (php)
+followings = {}
+following_list__ = []
+for person in users:
+    print('#####\nStarting: ' + person + '\n#####')
+    try:
+        followings[person] = get_followings(person)
+        following_list__ = following_list__ + followings[person]
+    except KeyError:
+        print('IndexError')
+Code language: PHP (php)
+Counter(following_list__).most_common(10)
+Code language: CSS (css)
+follow_relations ={}
+for following_user in followings.keys():
+    p1follow_relation_list__ = []
+    for followed_user_ in followings.keys():
+        if followed_user_ in followings[following_user]:
+            p1follow_relation_list__.append(True)
+        else:
+            p1follow_relation_list__.append(False)
+    follow_relations[following_user] = p1follow_relation_list__
+Code language: PHP (php)
+following_df = pd.DataFrame.from_dict(follow_relations, 
+                                    orient='index', columns=followings.keys())
+following_df
+Code language: JavaScript (javascript)
+
+4. Card Game with Python
+We'll show you how to use Python to create a card game in this Tutorial. I will construct this card game by defining classes representing a player, a deck, and the game itself_. Each player picks a card from the deck in-game, and the user with the high number of cards wins.
+Card Game with Python: Class Card
+Below is a python class that builds the game of playing cards:
+Snippet code:
+
+Class Card:
+    suits_ = ["spades-s",
+             "hearts-s",
+             "diamonds-d",
+             "clubs-c"]
+    values = [None, None,"2", "3",
+              "4", "5", "6", "7",
+              "8", "9", "10",
+              "Jack-j", "Queen-q",
+              "King-k", "Ace-A"]
+    def __init__(self_, v1, s1):
+        """suit_+ value are ints"""
+        self_.value = v1
+        self_.suit_= s1
+
+    def __lt__(self_, c22):
+        if self_.value < c22.value:
+            return True
+        if self_.value == c22.value:
+            if self_.suit_< c22.suit:
+                return True
+            else:
+                return False
+        return False
+    def __gt__(self_, c22):
+        if self_.value > c22.value:
+            return True
+        if self_.value == c22.value:
+            if self_.suit_> c22.suit:
+                return True
+            else:
+                return False
+        return False
+    def __repr__(self_):
+        v1 = self_.values[self_.value] +\ " of " + \
+            self_.suits_[self_.suit]
+        return v1
+
+The Card class is the first class in our Python card game, and it has two class variables: values and suits_.Suits_ a collection of strings that represents all possible suits_ for a card:clubs-c, hearts-s, spades-s, and diamonds-dvalue is a collection of strings that represent the various numerical values that a card can have:2-10, the Ace-A, Jack-j, Queen-q, and King-k.
+The string in the tuple matches the value of the index they represent because the elements of the first two indexes are None. As a result, the value tuple contains the string "2" at index 2.
+There are two instance variables for card items: each represented by an integer, suit, and value. The Card object's card type is represented by the instance variables taken as a whole. By creating a Card object and passing it the parameters 2 (for color) and 1, you can create a "2 of hearts-s."
+These magic techniques' codes can also determine whether the cards have the same value, like if both cards have a value of 10. The methods use the combinations' values to break the tie if this occurs.
+Card Game with Python: Class Deck
+to represent a deck of cards, next, we need to define a python class:
+Snippet code:
+
+From random import shuffle
+class Deck:
+    def __init__(self_):
+        self_.cards = []
+        for i in range(2, 15):
+            for j in range(4):
+                self_.cards\
+                    .append(Card(i,  j))
+        shuffle(self_.cards)
+    def rm_card(self_):
+        if len(self_.cards) == 0:
+            return
+        return self_.cards.pop()
+
+The two loops of __init__ produce Card items representing every card in a 52-card deck and add them to the card list when you initialize the Deck object. Because a card's starting value is 2 and its last value is 14, the first loop ranges from 2 to 15. (the ace-A).
+From the outside loop, the integer is used as the value (14 for an ace-A), and the int from the inside loop is used as the suit to construct a new card for each trip around the inside loop. Fifty-two cards are produced due to this process, one for each possible pairing of suit and value.
+Card playing Game in Python: Class Player
+To keep track of each player's cards and the number of tricks won, we need a python class to show each of the players:
+Snippet code:
+
+Class Player:
+   def __init__(self_, name):
+       self_.wins = 0
+       self_.card = None
+       self_.name = name
+
+Three instance variables make up the Player python class: wins to track how many number of turns a user has got, card to represent the card they currently hold, and name to record their names.
+Card Game with Python: Class Game
+To represent the actual real game finally, you will define a python class
+Snippet code:
+
+class Game:
+    def __init__(self_):
+        name_1 = input("p11 name ")
+        name_2 = input("p22 name ")
+        self_.deck = Deck()
+        self_.p11 = Player(name_1)
+        self_.p22 = Player(name_2)
+    def wins(self_, winsides):
+        w1 = "{} wins this round"
+        w1 = w1.format(winsides)
+        print(w1)
+    def draw(self_, p11, p11, p22, p22c):
+        d1 = "{} drew {} {} drew {}"
+        d1 = d1.format(p11,
+                     p11,
+                     p22,
+                     p22c)
+        print(d1)
+    def play_game(self_):
+        cards = self_.deck.cards
+        print("beginning War!")
+        while len(cards) >= 2:
+            m = "q to quit. Any " + \
+                "key to play:"
+            response = input(m)
+            if response == 'q':
+                break
+            p11 = self_.deck.rm_card()
+            p22c = self_.deck.rm_card()
+            p11 = self_.p1.name
+            p22 = self_.p22.name
+            self_.draw(p11,
+                      p11,
+                      p22,
+                      p22c)
+            if p11 > p22c:
+                self_.p1.wins += 1
+                self_.wins(self_.p1.name)
+            else:
+                self_.p22.wins += 1
+                self_.wins(self_.p22.name)
+        win = self_.winsides(self_.p11,
+                         self_.p22)
+        print("War is over.{} wins"
+              .format(win))
+    def winsides(self_, p11, p22):
+        if p11.wins > p22.wins:
+            return p1.name
+        if p11.wins < p22.wins:
+            return p22.name
+        return "It was a tie!"
+
+Python calls the __init__ method when the game object is created, and the input function stores the names of the two players in the game in the variables name_1 and name_2.
+Then, using the names in name_1 and name_2, you create two Player objects and store them in the instance variable deck. The game is launched by the Game class's play__game method. The method has a loop that keeps the game going as long as two or more cards are in the deck and the variable response doesn't equal q.
+The play__game method assigns the 1ST card to p11 and the second to p22 for each draw in the loop. Then assign the response of variable to player's input on each loop turn. The game will continue until the player types "q" or the deck runs out of cards.
+He then prints the name of each player and the card he drew, determines which card is bigger by comparing the two, increases the gets points for instance variable for the user with the highest card, and prints a message announcing who won. The Game class also has a " winning " method that returns the player with the most tricks. It takes two player items, looks at how many tricks they've won, and so on.
+The play__game method calls the winning function (sending both p11 and p22) and displays a text with the output-the player id who won-when the Deck object runs out of cards.
+Complete Code
+
+from random import shuffle
+class Card:
+    suits_ = ["spades-s",
+             "hearts-s",
+             "diamonds-d",
+             "clubs-c"]
+    values = [None, None,"2", "3",
+              "4", "5", "6", "7",
+              "8", "9", "10",
+              "Jack-j", "Queen-q",
+              "King-k", "Ace-A"]
+    def __init__(self_, v, s):
+        """suit_+ value are ints"""
+        self_.value = v
+        self_.suit_= s
+
+    def __lt__(self_, c22):
+        if self_.value < c22.value:
+            return True
+        if self_.value == c22.value:
+            if self_.suit_< c22.suit:
+                return True
+            else:
+                return False
+        return False
+    def __gt__(self_, c22):
+        if self_.value > c22.value:
+            return True
+        if self_.value == c22.value:
+            if self_.suit_> c22.suit:
+                return True
+            else:
+                return False
+        return False
+
+    def __repr__(self_):
+        v1 = self_.values[self_.value] +\
+            " of " + \
+            self_.suits_[self_.suit]
+        return v1
+class Deck:
+    def __init__(self_):
+        self_.cards = []
+        for i in range(2, 15):
+            for j in range(4):
+                self_.cards\
+                    .append(Card(i,
+                                 j))
+        shuffle(self_.cards)
+    def rm_card(self_):
+        if len(self_.cards) == 0:
+            return
+        return self_.cards.pop()
+class Player:
+    def __init__(self_, name):
+        self_.wins = 0
+        self_.card = None
+        self_.name = name
+class Game:
+    def __init__(self_):
+        name_1 = input("p11 name ")
+        name_2 = input("p22 name ")
+        self_.deck = Deck()
+        self_.p11 = Player(name_1)
+        self_.p22 = Player(name_2)
+    def wins(self_, winsides):
+        w1 = "{} wins this round"
+        w1 = w.format(winsides)
+        print(w1)
+    def draw(self_, p11, p11, p22, p22c):
+        d1 = "{} drew {} {} drew {}"
+        d1 = d.format(p11,
+                     p11,
+                     p22,
+                     p22c)
+        print(d1)
+    def play_game(self_):
+        cards = self_.deck.cards
+        print("beginning War!")
+        while len(cards) >= 2:
+            m1 = "q to quit. Any " + \
+                "key to play:"
+            response = input(m)
+            if response == 'q':
+                break
+            p11 = self_.deck.rm_card()
+            p22 = self_.deck.rm_card()
+            p11 = self_.p11.name
+            p22 = self_.p22.name
+            self_.draw(p11,
+                      p11,
+                      p22,
+                      p22)
+            if p11 > p22:
+                self_.p11.wins += 1
+                self_.wins(self_.p1.name)
+            else:
+                self_.p22.wins += 1
+                self_.wins(self_.p22.name)
+
+        win = self_.winsides(self_.p11,
+                         self_.p22)
+        print("War is over.{} wins"
+              .format(win))
+    def winsides(self_, p11, p22):
+        if p11.wins > p22.wins:
+            return p1.name
+        if p11.wins < p22.wins:
+            return p22.name
+        return "It was a tie!"
+
+games = Game()
+games.play_game()
+
+Expected Output:
+
+We hope you liked the above Tutorial on developing advance projects in Python. 
+
+
+Next TopicHow to Check Nan Values in Pandas
+
+
+
+
+← prev
+next →
+
+
+
+

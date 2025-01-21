@@ -1,0 +1,152 @@
+
+
+
+
+next →
+← prev
+
+Connect SQLite with Python
+First you have to install Python and SQLite on your syatem.
+Install Python
+Use the following code:
+
+sudo apt-get update
+sudo apt-get upgrade python
+
+
+Press y and installation will be completed within seconds.
+Install SQLite
+Installation steps
+type in the following command:
+
+sudo apt-get install sqlite3 libsqlite3-dev
+
+After installation check installation, sqlite terminal will give you a prompt and version info ?
+
+sqlite3
+
+Go to desired folder and create database:
+sqlite3 database.db
+It'll create database.db in the folder you've given the command.
+To check if your database is created, use the following command in sqlite3 terminal:
+
+ .databases
+
+Note: To connect SQLite with Python, you do not need to install the connection module separately because its being shipped by default along with Python version 2.5.x onwards.
+
+SQLite with Python
+Create a python file "connect.py", having the following code:
+
+#!/usr/bin/python
+
+import sqlite3
+
+conn = sqlite3.connect('javatpoint.db')
+
+print "Opened database successfully";
+
+Execute the following statement on command prompt:
+
+python connect.py
+
+
+Now connection is created with the javatpoint database. Now you can create a table. 
+Create a table 
+Create a table "Employees" within the database "javatpoint".
+Create a python file "createtable.py", having the following code:
+
+#!/usr/bin/python
+
+import sqlite3
+
+conn = sqlite3.connect('javatpoint.db')
+print "Opened database successfully";
+
+conn.execute('''CREATE TABLE Employees
+       (ID INT PRIMARY KEY     NOT NULL,
+       NAME           TEXT    NOT NULL,
+       AGE            INT     NOT NULL,
+       ADDRESS        CHAR(50),
+       SALARY         REAL);''')
+print "Table created successfully";
+
+conn.close()
+
+Execute the following statement on command prompt:
+
+python createtable.py
+
+
+A table "Employees" is created in the "javatpoint" database.
+Insert Records 
+Insert some records in "Employees" table. 
+Create a python file "connection.py", having the following code:
+
+#!/usr/bin/python
+
+import sqlite3
+
+conn = sqlite3.connect('javatpoint.db')
+print "Opened database successfully";
+
+conn.execute("INSERT INTO Employees (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (1, 'Ajeet', 27, 'Delhi', 20000.00 )");
+
+conn.execute("INSERT INTO Employees (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (2, 'Allen', 22, 'London', 25000.00 )");
+
+conn.execute("INSERT INTO Employees (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (3, 'Mark', 29, 'CA', 200000.00 )");
+
+conn.execute("INSERT INTO Employees (ID,NAME,AGE,ADDRESS,SALARY) \
+      VALUES (4, 'Kanchan', 22, 'Ghaziabad ', 65000.00 )");
+
+conn.commit()
+print "Records inserted successfully";
+conn.close()
+
+Execute the following statement on command prompt:
+
+python connection.py
+
+
+Records are inserted successfully.
+Select Records
+Now you can fetch and display your records from the table "Employees" by using SELECT statement. 
+Create a python file "select.py", having the following code:
+
+#!/usr/bin/python
+
+import sqlite3
+
+conn = sqlite3.connect('javatpoint.db')
+
+data = conn.execute("select * from Employees");
+
+for row in data:
+   print "ID = ", row[0]
+   print "NAME = ", row[1]
+   print "ADDRESS = ", row[2]
+   print "SALARY = ", row[3], "\n"
+
+conn.close();
+
+Execute the following statement on command prompt:
+
+python select.py 
+
+
+See all the records you have inserted before. 
+By same procedures, you can update and delete the table in SQLite database usnig Python. 
+
+
+Next TopicSQLite Interview Questions
+
+
+
+
+← prev
+next →
+
+
+

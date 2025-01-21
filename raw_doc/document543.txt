@@ -1,0 +1,226 @@
+
+
+
+
+next →
+← prev
+
+Gzip module in Python
+This module offers a simple interface for compressing and decompressing files, similar to the GNU tools gzip and gunzip. The GzipFile class, as well as the open(), compress(), and decompress() convenience functions, are all provided by the gzip module. The GzipFile class reads and writes gzip-format files, compressing or decompressing the contents automatically so that it seems to be a regular file object.
+Need for gzip module:
+The main answer to the question of what is the need of gzip is data compression. The process of encoding, rearranging, or otherwise changing data in order to minimize its size is known as data compression. It essentially entails re-encoding data with fewer bits than the original representation. Compression is carried out by a program that uses functions or algorithms to find the most efficient way to minimize the size of the data. For example, an algorithm might represent a string of bits with a smaller string of bits by converting between them using a reference dictionary.' A formula that inserts a reference or pointer to a string of data that the program has already seen is another example. When it comes to picture compression, this is a fantastic example. When a sequence of colours appears across the image, such as 'blue, red, red, blue,' the formula can convert this data string into a single bit while preserving the underlying information. Text compression is commonly accomplished by deleting all extraneous characters, replacing a smaller bit string with a more common bit string, and inserting a single character as a reference for a string of repeated characters. With the right approaches, data compression can reduce the size of a text file by up to 50%, considerably lowering its total size. Compression can be applied to the content or the complete transmission for data transport. Larger files, either alone or in combination with others, or as part of an archive file, may be transferred in one of the numerous compressed formats, such as ZIP, RAR, 7z, or MP3 when sent or received over the internet.
+Compression has several advantages, including reduced storage hardware, data transfer time, and communication bandwidth. This has the potential to save a lot of money. Compressed files require far less storage space than uncompressed ones, resulting in significant savings in storage costs. A compressed file also takes less time to transfer while using less bandwidth on the network. This can save costs while simultaneously increasing productivity. The primary downside of data compression is that it requires more processing resources to compress the necessary data. As a result, compression vendors place a premium on optimizing speed and resource efficiency in order to reduce the impact of intensive compression jobs.
+Compression has several advantages, including reduced storage hardware, data transfer time, and communication bandwidth. This has the potential to save a lot of money. Compressed files require far less storage space than uncompressed ones, resulting in significant savings in storage costs. A compressed file also takes less time to transfer while using less bandwidth on the network. This can save costs while simultaneously increasing productivity.
+The primary downside of data compression is that it requires more processing resources to compress the necessary data. As a result, compression vendors place a premium on optimizing speed and resource efficiency in order to reduce the impact of intensive compression jobs.
+Because uncompressed text or multimedia (speech, image, or video) data requires a large number of bits to represent them and consequently a big amount of bandwidth, this storage space, and bandwidth requirement can be reduced by using a good compression encoding strategy. The degree of compression, the amount of distortion introduced, and the computational resources required to compress and decompress the data are all factors to consider when designing data compression schemes.
+Data transfer in the Internet age is extremely time-sensitive. Consider an audio file, which is nothing more than variations in sound intensity over a set period of time. Sound files are used to transport this audio across networks. The time it takes to transfer the files increases if the size of the sound files is too large. Compression can reduce the amount of time it takes to transfer a file.
+Compression, in computer terminology, is the process of lowering the physical size of data so that it takes up less storage space and memory. Compressed files are thus easier to transport because the data size is reduced significantly.
+Code:
+
+#!/bin/python3
+
+import gzip
+import io
+import os
+import sys
+
+
+#A simple Python class that will be used to write the different functions that will depict the different use case scenarios of the above-mentioned compression library in Python
+class gzipClass:
+   
+# Sample constructor is written that can be used to initialize the class variables of this class
+    def __init__(self):
+        pass
+
+# a function is written which will write the encrypted or compressed contents to the gz file in this function the user is prompted with the message to enter the name of the gz file in which the user wants to store the data after adding the name of the file the user is asked for the data that he wants to store in the just specified file once the user adds the data he wants to compress there are two operations which are performed first of all the input data is compressed with the help of gzip library and on the successful completion of the input string or data that compressed data stream is written to the file with the name specified by the user   and a successful message is prompted to the user 
+def write_to_gz_file(self):
+        print("enter the name of the gz file to which you want to write::")
+        gz_filename = input()
+        print("enter the string you want to the write file::")
+        gz_file_content = input()
+
+        with gzip.open(gz_filename, 'wb') as gz_filehandle:
+            # We cannot directly write Python objects like strings!
+            # We must first convert them into a bytes format using io.BytesIO() and then write it
+            with io.TextIOWrapper(gz_filehandle, encoding='utf-8') as gz_encoder_obj:
+                gz_encoder_obj.write(gz_file_content)
+
+        print("String '{data}' written successfully to the {fname} file.".format(
+            data=gz_file_content, fname=gz_filename))
+
+#This function is totally different from the function that we have written above in this function the data is read from the particular gz file and then decompressed and is printed to the user in this function the user is prompted with the message to enter the name of the gz file from which the user wants to read the compressed data on adding the name of the file there are two operations which are performed the first operation which is performed is reading the data from the specified gz file and after reading the data from the specified gz file that data is decompressed with the help of the library and after the successful decompression of the data,  that decompressed data is printed to the user
+    def read_from_gz_file(self):
+        print("enter the name of the gz file from which you want to read::")
+        gz_filename = input()
+    # We cannot directly write Python objects like strings!
+    # We must first convert them into a bytes format using io.BytesIO() and then write it
+        with gzip.open(gz_filename, 'rb') as gz_reader_filehandle:
+            with io.TextIOWrapper(gz_reader_filehandle, encoding='utf-8') as gz_decoder_obj:
+                gz_file_contents = gz_decoder_obj.read()
+        print("The data inside the {fname} file is::\n{data}".format(
+            data=gz_file_contents, fname=gz_filename))
+
+# this function is used to get the size of the gz file in which we have stored the compressed data,  this function asks the user for the name of the gz file whose size the user wants to check after adding the name of the file, particularly the gz file,  the number of bytes that are present in that particular gz files are  calculated and printed,  point to be noted in this case is that these bytes of data represent the compressed data that is stored in the gz file
+    def get_gz_file_size(self):
+        print("enter the name of the gz whose size you want to check::")
+        gz_filename = input()
+
+        no_of_bytes = os.stat(gz_filename).st_size
+        print("The file {fname} has {bytes} number of bytes".format(
+            fname=gz_filename, bytes=no_of_bytes))
+
+#  this function is used to compress the input string with the help of the library in this function the user is asked to enter the data that the user wants to compress after adding the data or the string  that input string is first converted to the  Byte data with the help of encoding function of the string  on the successful conversion the byte data is compressed with the help of the Python compression library and in the end that compressed data is printed to the use
+    def compress_data(self):
+        print("enter the data that you want to compress")
+        data_to_compress = input()
+        byte_data = str.encode(data_to_compress)
+        compressed_data = gzip.compress(byte_data)
+        print("The data after compression {} ".format(compressed_data))
+
+# this function performs the exact opposite of the Above Return function.  this function converts the compressed data to the decompressed data,  this function Asks the user for the compressed bytes of the data, and on adding the input this function uses the same encoding function that was used in the previous function to encode it and then decompress the input stream of compressed data with the help of the decompress function of the gzip module of python.
+    def decompress_data(self):
+        print("enter the data to be decompress")
+        data_to_decompress = input()
+        byte_data = str.encode(data_to_decompress)
+        decompressed_data = gzip.decompress(byte_data)
+        print("The data after decompresion {} ".format(decompressed_data))
+
+
+#In the end the main function is written in which we have created the object of the above-written class and that object can be used to call all the different functions that we have written inside that class where each function is representing a different use case scenario of the different functions that are offered by the gzip module of python the different functionalities of functions that are offered by the gzip module of the python are like compressing the data and writing to a file,  reading data from a gz file,  getting the size of a gz file,  compressing the input stream of data and decompressing the input stream of compressed data that is provided as an input by the user all these functions are called with the help of the object of the above-written class. 
+w
+
+Output:
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+1
+enter the name of the gz file to which you want to write::
+my_gz_file_1.txt.gz
+enter the string you want to the write file::
+This is a sample data going to be stored in a compressed gz file.
+String 'This is a sample data going to be stored in a compressed gz file.' written successfully to the my_gz_file_1.txt.gz file.
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+2
+enter the name of the gz file from which you want to read::
+my_gz_file_1.txt.gz
+The data inside the my_gz_file_1.txt.gz file is::
+This is a sample data going to be stored in a compressed gz file.
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+3
+enter the name of the gz whose size you want to check::
+my_gz_file_1.txt.gz
+The file my_gz_file_1.txt.gz has 104 bytes
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+4
+enter the data that you want to compress
+sample string to compress
+The data after compression b'\x1f\x8b\x08\x00K\xd0Qb\x02\xff+N\xcc-\xc8IU(.)\xca\xccKW(\xc9WH\xce\xcf-(J-.\x06\x00i\xb7qc\x19\x00\x00\x00'
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+5
+enter the data to be decompress
+\x1f\x8b\x08\x00K\xd0Qb\x02\xff+N\xcc-\xc8IU(.)\xca\xccKW(\xc9WH\xce\xcf-(J-.\x06\x00i\xb7qc\x19\x00\x00\x00
+The data after compression sample string to compress
+To move ahead with code execution enter [y] else [n]
+Y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+1
+enter the name of the gz file to which you want to write::
+gz_file_new.gz
+enter the string you want to the write file::
+gzip module use cases are explained with the help of this python code
+String 'gzip module use cases are explained with the help of this python code ' written successfully to the gz_file_new.gz file.
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+2
+enter the name of the gz file from which you want to read::
+gz_file_new.gz
+The data inside the gz_file_new.gz file is::
+gzip module use cases are explained with the help of this python code
+To move ahead with code execution enter [y] else [n]
+y
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+3
+enter the name of the gz whose size you want to check::
+gz_file_new.gz
+The file gz_file_new.gz has 97 bytes
+
+Enter your choice according to the below-listed options::
+1. To write data to a gz compressed file.
+2. To read data from a gz compressed file.
+3. To get the size of the compressed gz file.
+4. To compress the input string with the gzip library.
+5. To decompress the input string with the gzip library.
+6. To exit from the code execution.
+6
+
+In the above-written code, we have written a class where each function is representing a different use case scenario of the different functions that are offered by the gzip module of python the different functionalities of functions that are offered by the gzip module of the python are like compressing the data and writing to a file, reading data from a gz file, getting the size of a gz file, compressing the input stream of data and decompressing the input stream of compressed data that is provided as an input by the user.
+a function is written which will write the encrypted or compressed contents to the gz file in this function the user is prompted with the message to enter the name of the gz file in which the user wants to store the data after adding the name of the file the user is asked for the data that he wants to store in the just specified file once the user adds the data he wants to compress there are two operations which are performed first of all the input data is compressed with the help of gzip library and on the successful completion of the input string or data that compressed data stream is written to the file with the name specified by the user and a successful message is prompted to the user The other function is totally different from the function that we have written above in this function the data is read from a particular gz file and then decompressed and is printed to the user in this function the user is prompted with the message to enter the name of the gz file from which the user wants to read the compressed data on adding the name of the file there are two operations which are performed the first operation which is performed is reading the data from the specified gz file and after reading the data from the specified gz file that data is decompressed with the help of the library and after the successful decompression of the data, that decompressed data is printed to the user
+So, in this article, we have the usage of the gzip module in python and how we can use the various functionalities offered by the gzip module in different use case scenarios. We have also seen a program that actually calls the different functions written where each function is representing an individual use case or functionality.
+
+
+Next Topicguppy/heapy in Python
+
+
+
+
+← prev
+next →
+
+
+
+

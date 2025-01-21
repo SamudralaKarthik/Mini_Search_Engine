@@ -1,0 +1,384 @@
+
+
+
+
+next →
+← prev
+
+Pathlib module in Python
+Interacting with the file system and working with files is crucial for various reasons. The simplest situations may merely entail reading or writing files, but more sophisticated actions are occasionally required. Perhaps you need to show all files in a directory of a specific kind, locate a file's parent directory, or generate a new file name that doesn't exist.
+It's impossible to develop a Python script that doesn't use the file system somehow. It might be as easy as reading a data file into a pandas DataFrame or as difficult as processing hundreds of files in a highly nested directory structure. For these purposes, Python's standard library includes numerous useful methods, notably the pathlib module.
+The pathlib module initially appeared in Python 3.4, and it has since been improved in each succeeding version. Pathlib is an object-oriented filesystem interface that provides a more natural, platform-agnostic, and pythonic way to interact with the filesystem. I recently completed a short project in which I opted to sort and handle thousands of files in a nested directory structure using pathlib and pandas. That project inspired this article. Once it all came together, I was blown away by pathlib's capabilities, and I'll be using it in future projects without hesitation. All versions of Python >= 3.4 contain the pathlib library. To obtain all of the newest upgrades, I recommend using the most recent version of Python. I'll be using Python 3.6 in this post.
+One of the advantages of the pathlib module is that it is easier to create routes without using os.joindir. When I start tiny projects, for example, I use os.getcwd() to create in and out directories as subdirectories beneath the current working directory. I keep the working input and output files in those locations. This is how that code might look:
+Syntax:
+
+import os
+
+in_dir = os.path.join(os.getcwd(), "in")
+out_dir = os.path.join(os.getcwd(), "out")
+in_file = os.path.join(in_dir, "input.xlsx")
+out_file = os.path.join(out_dir, "output.xlsx")
+
+Traditionally, Python has used ordinary text strings to represent file paths. This has proved adequate, if a little laborious, with help from the os.path standard library (as the second example in the introduction shows). However, because paths are not strings, key functionality is dispersed across the standard library, including libraries such as os, glob, and shutil. To move all text files to an archive directory, the following example requires three import statements:
+Syntax:
+
+import glob
+import os
+import shutil
+
+for file_name in glob.glob('*.txt'):
+    new_path = os.path.join('archive', file_name)
+    shutil.move(file_name, new_path)
+
+It is conceivable, but usually, a terrible idea, to utilise standard string methods with pathways represented by strings. Instead of joining two paths with + as you would with conventional strings, you should use os.path.join(), which joins paths using the operating system's correct path separator. Remember that on Windows, the separator is /, whereas, on Mac and Linux, it is /. This distinction can result in difficult-to-detect problems like our first example in the introduction, which only works for Windows paths.
+To address these issues, the pathlib module was added in Python 3.4 (PEP 428). It collects all of the required functionality in one place and makes it accessible via methods and properties on a simple Path object. Other packages used strings for file paths at first, but since Python 3.6, the pathlib module has been supported throughout the standard library, thanks in part to creating a file system path protocol. A backport for Python 2 is also available if one is stuck with legacy Python.
+Code:
+
+#Sample python code for the usage of pathlib module provided by the python
+
+# importing the required libraries  that are used across the  program
+import pathlib
+import sys
+
+# a class is written which will have different functions to perform or simulate the different functionalities of the pathlib  library provided by the python 
+class FunctionalitiesOfPathlib:
+	
+	#Constructor is written that will be just a placeholder in case of any further actions to be taken before the object initialisation of this class
+	def __init__(self):
+		pass
+	# this function is used to list all the subdirectories that are present in a directory this function prints all the directories that are present in the directory which is passed as a parameter to this function the part of the directory which is passed as a parameter to this function is used as a parent directory and the directory is inside the parent directory are treated as  children directories
+	def list_all_subdirectories_in_a_directory(self,path_of_main_directory):
+		 path_object = pathlib.Path(path_of_main_directory)
+		 for item in path_object.iterdir():
+		 	if item.is_dir():
+		 		print(item)
+
+	# this function is used to list all the files that are present in a particular directory to list all the files that are present in a directory this function is called with the parameter as the directory whose files we want to list the point to be noted here that it this function only list the files inside the parent directory and will not list the subdirectories for the children directories present inside the parent directory
+	def list_all_files_in_a_directory(self,path_of_main_directory):
+		path_object = pathlib.Path(path_of_main_directory)
+		for item in path_object.iterdir():
+			if not item.is_dir():
+				print(item)
+
+	# a function is written that will be used to check whether a file is present at a particular location or not the return type of this function is of the Boolean type which means the returning value of this function is determined by the presence of the file at that particular location or not if the file specified is present at the specified location then the return type of this function is true on the other hand if the specified file is not present in the particular directory the return type of this function will be changed to false type and the similar message is printed according 
+	def check_file_present(self,path_to_file):
+		path_object = pathlib.Path(path_to_file)
+		if path_object.is_file():
+			print("File is present.")
+			return True
+		else:
+			print("File is not present.")
+			return False
+	# a function is written to get the current working directory of the code execution whenever the user selects the execution of this function returns and prints the current working directory where the code is getting executed point to be noted here is that if the user has performed  the change directory operation then the latest directory will be created as the current working directory of the program execution and the same will be printed and displays as the current working directory of the code
+	def get_current_working_directory(self):
+		code_cwd = pathlib.Path().cwd()
+		print("The current working directory is: {}".format(code_cwd))
+	
+	# this function is used to change the current working directory of the code execution let's say if the code is executed in directory 1 And we want to change the current working directory to directory 2  so we can use this function that will change the current working directory to the new directory whose path is specified as a parameter to this function show the absolute path which is passed as a parameter to this function will be treated as the next current working directory and the return type of this function is of the Boolean type that means the returning value of this function is determined by the success or failure of the change current working directory operation if the current working directory is changed successfully then the return type is true and whereas on the other hand if Changing of the current working directory is field due to some reasons that the return type of this function will be changed to false
+	def change_current_working_directory(self,path_to_new_directory):
+		code_cwd = pathlib.Path().cwd()
+		path_object = pathlib.Path(path_to_new_directory)
+		return_code = path_object.cd()
+		if return_code:
+			print("The Current working directory changed successfully from {} to {}".format(code_cwd,path_to_new_directory))
+			return True
+		else:
+			print("Unable to change the current working directory.")
+			return False
+
+
+# and in the end the main function is written that will provide a menu-driven approach to the user to call all the above-written functions  showing different functionalities of the pathlib module in Python  and the end this main function is called to execute our code
+def main():
+
+	# 
+	while(True):
+		print("Please choose one of the appropriate options::")
+		print("1. To print all the sub-directories of a folder/dir.")
+		print("2. To print all the files present inside a folder/directory.")
+		print("3. Check the existence of a specified file")
+		print("4. To check the current directory of the code execution.")
+		print("5. To modify the current directory of the code execution. (using the chdir() function)")
+		print("6. To exit from the code execution.")
+		menu_choice = input()
+		menu_choice = int(menu_choice)
+
+		pathlib_object = FunctionalitiesOfPathlib()
+
+		# if the user chooses the first option then the user is asked for the absolute path of the directory whose subdirectories he wants to list after entering the absolute path all the subdirectories present in the entered directory are listed one by one
+		if menu_choice == 1:
+			print(">Enter the absolute path of the directory whose sub-directories you want to list::")
+			input_str = input()
+			pathlib_object.list_all_subdirectories_in_a_directory(input_str)
+
+		# on selecting the second option the user is again asked for the absolute path of the directory whose files the user wants to list after adding  the path of the directory all the files present in that directory are listed
+		elif menu_choice == 2:
+			print(">Enter the absolute path of the directory whose files you want to list::")
+			input_str = input()
+			pathlib_object.list_all_files_in_a_directory(input_str)
+			
+		#  selecting option 3 the user have to add the path of the file whose existence  the user wants to check if the file is present at the specified location the user is prompted with the successful message on the other hand if the file is not present the user is prompted with the unsuccessful message
+		elif menu_choice == 3:
+			print(">Enter the absolute path of the file which you want to check is present::")
+			input_str = input()
+			pathlib_object.check_file_present(input_str)
+
+		# on selecting the  fourth option the current working directory of the code is printed
+		elif menu_choice == 4:
+			pathlib_object.get_current_working_directory()
+		
+		# on selecting the fifth option of the above show me menu the user is asked for the absolute path to the new directory to which the user wants to change and then that directory will be treated as the current working directory of the code execution on the successful change of the current working directory to the new specified directory a successful message is prompted to the user whereas on the other hand if the change of current working directory is unsuccessful due to any reason the same message will be prompted to the user indicating him about the unsuccessful change of directory 
+		elif menu_choice == 5:
+			print(">Enter the absolute path to the new directory to which you want to change::")
+			input_str = input()
+			pathlib_object.change_current_working_directory(input_str)
+		
+		print("Do you want to continue or exit the code execution?[y/n]")
+		continue_or_exit = input()
+
+
+		#After the completion of one round a question is prompted to the user asking whether you want to continue the code execution or you want to exit the code depending upon the input provided by the user further actions are taken if the user wants to continue the code execution and perform further operations related to dir and listing of the dir, the code is continued whereas on the other hand if the user wants to exit the code execution the exit function is called and the program is ended
+		if continue_or_exit == 'y' or continue_or_exit == 'Y':
+			pass
+		elif continue_or_exit == 'n' or continue_or_exit == 'N':
+			sys.exit()
+
+
+if __name__ == '__main__':
+	main()
+
+Output:
+[email protected]:/# python3 /home/nirnay/code.py 
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+1
+>Enter the absolute path of the directory whose sub-directories you want to list::
+/directory1
+/directory1/directory4
+/directory1/directory3
+/directory1/directory2
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+2
+>Enter the absolute path of the directory whose files you want to list::
+/directory1
+/directory1/java_code.java
+/directory1/c++_code.c++
+/directory1/python_code.py
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+3
+>Enter the absolute path of the file which you want to check is present::
+/directory1/python_code.py
+The file is present.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+4
+The current working directory is: /
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+5
+>Enter the absolute path to the new directory to which you want to change::
+/directory1
+The Current working directory changed successfully from / to /directory1
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+4
+The current working directory is: /directory1
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+1
+>Enter the absolute path of the directory whose sub-directories you want to list::
+/directory1
+/directory1/directory4
+/directory1/directory3
+/directory1/directory2
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+5
+>Enter the absolute path to the new directory to which you want to change::
+/directory1/directory2
+The Current working directory changed successfully from /directory1 to /directory1/directory2
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+4
+The current working directory is: /directory1/directory2
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+2
+>Enter the absolute path of the directory whose files you want to list::
+/directory1/directory2
+/directory1/directory2/files6
+/directory1/directory2/files1
+/directory1/directory2/files3
+/directory1/directory2/files4
+/directory1/directory2/files2
+/directory1/directory2/files5
+/directory1/directory2/files8
+/directory1/directory2/files10
+/directory1/directory2/files7
+/directory1/directory2/files9
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+5
+>Enter the absolute path to the new directory to which you want to change::
+/directory1/directory4
+The Current working directory changed successfully from /directory1/directory2 to /directory1/directory4
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+5
+>Enter the absolute path to the new directory to which you want to change::
+/directory1/directory3
+The Current working directory changed successfully from /directory1/directory4 to /directory1/directory3
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To print all the sub-directories of a folder/dir.
+2. To print all the files present inside a folder/directory.
+3. Check the existence of a specified file
+4. To check the current directory of the code execution.
+5. To modify the current directory of the code execution. (using the chdir() function)
+6. To exit from the code execution.
+4
+The current working directory is: /directory1/directory3
+Do you want to continue or exit the code execution?[y/n]
+n
+[email protected]:/# tree directory1
+
+directory1/
+├── c++_code.c++
+├── directory2
+│   ├── files1
+│   ├── files10
+│   ├── files2
+│   ├── files3
+│   ├── files4
+│   ├── files5
+│   ├── files6
+│   ├── files7
+│   ├── files8
+│   └── files9
+├── directory3
+│   ├── files11
+│   ├── files12
+│   ├── files13
+│   ├── files14
+│   ├── files15
+│   ├── files16
+│   ├── files17
+│   ├── files18
+│   ├── files19
+│   └── files20
+├── directory4
+│   ├── files21
+│   ├── files22
+│   ├── files23
+│   ├── files24
+│   ├── files25
+│   ├── files26
+│   ├── files27
+│   ├── files28
+│   ├── files29
+│   └── files30
+├── java_code.java
+└── python_code.py
+
+Explanation:
+Before looking into the output of the above-written code, the directory structure shows the parent directory is named directory 1 and has three children directories named directory 2, directory 3 and directory 4, respectively. There are 10 files present inside each child's directory, and in the parent directory, apart from these three children's directories, three files are also present.
+Now let us look at the output of the above-written code, on the execution of the above-written program, the user is prompted with 6 options first one is to list all the subdirectories that are present inside a parent directories second option is to list all the files that are present in a particular directory option 3 to check whether a particular file is existing at a particular location or not option 4 is to print the current working directory of the code execution and option 5 is to change the current working directory of the code execution to a new directory that is specified as a parameter to this functionality method. and in the last 6 options is to execute the code execution.
+Conclusion
+So, in this article, we have understood the pathlib module in python and have seen various use case scenarios where we can use the different functionalities offered by the pathlib module.
+
+
+Next TopicHow to Build a Hash Function in Python - for Beginners
+
+
+
+
+← prev
+next →
+
+
+
+

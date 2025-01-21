@@ -1,0 +1,240 @@
+
+
+
+
+next →
+← prev
+
+Python Libraries for Data Visualization
+Python programming language has different types of libraries for all kind of projects. Likewise, python has various libraries for visualization of Data, so that user can understand the dataset in very detailed way and analyze it properly.
+Each library of visualization has its own specification. Using the particular libraries for specific task helps the user to complete the task in more easy and accurate way. Some liberates work better than the others. In this article we will discuss pros and cons of the libraries to understand which library would be better for data visualization.
+The Libraries for Data Visualization in Python programming are given below:
+
+Matplotlib
+Ggplot
+Pygal
+Missingno
+Seaborn
+Plotly
+Gleam
+Leather
+Geoplotlib
+Bokeh
+Folium
+
+Matplotlib
+Matplotlib is a Library used for plotting graphs in the Python programming language. It is used plot 2 - dimensional arrays. Matplotlib is built on NumPy arrays. It is designed to work with the border SciPy stack. It was developed by John Hunter in 2002.
+The benefit of visualization is that user can have visual access to large amounts of the dataset. Matplotlib is a library which is consists of various plots such as histogram, bar, line, scatter, etc.
+Matplotlib comes with a huge variety of plots. Plots are helpful for understanding patterns, trends and for making correlations. It has instruments for reasoning about quantitative information.
+As matplotlib was the very first library of data visualization in python, many other libraries are developed on top of it or designed to work parallel to it for the analysis of the dataset.
+
+import matplotlib.pyplot as pyplt
+import numpy as np
+np.random.seed ( 16 ) 
+pyplt.ylable ( ' stepfilled ' )
+pyplt.show ( )
+
+Output:
+
+Seaborn
+Seaborn is a library of Python programming basically used for making statistical graphics of the dataset. This library is built on top of the Matplotlib library. It is also integrated closely with Pandas, which is used for the data structure of Datasets.
+Seaborn is very helpful to explore and understand data in a better way. It provides a high level of a crossing point for sketching attractive and informative algebraic graphics. Let's understand the following example.
+Example -
+
+import seaborn as sns
+sns.set ( color_codes = True)
+import matplotlib.pyplot as plt
+for i in range(n_rows):
+    fg,ax = plt.subplots(nrows=1,ncols=n_cols,sharey=True,figsize=(8, 2.4))
+    for j in range(n_cols):
+        sns.violinplot(x = data.Outcome, y=data[columns[idx]], ax=ax[j]) 
+        idx += 1
+        if idx >= 8:
+            break
+
+Output:
+
+Ggplot
+The ggplot is a Python operation of the grammar for graphics. It is based on ggplot2, which is an R programming language plotting system. It has a different operating process than matplotlib, as it lets the user to layer components for creating a complete plot. The user can start layering from the axis, add points, then a line, afterward a trendline and so on.
+Ggplot is not designed to develop a high level of customized graphics. It has a simpler method of plotting with a lack of complexity. It is integrated with Pandas. Therefore, it's best to store data in a data frame while using ggplot.
+Example -
+
+from plotnine.data import economics
+from plotnine import ggplot , aes , geom_line
+(
+	ggplot ( economics ) #what data to use
+	+ aes ( x = " price " ) #what variables to use
+	+geom_line ( ) #Geometric object to use for creating graphs.
+)
+
+
+
+Bokeh
+Boken is a library of Python which is also based on the grammar of graphics, just like the ggplot. It is just inherent to Python language only. This library cannot be used in the R programming language. This library has the ability to build interactive, web-ready plots, which are the outputs of JSON objects, interactive web applications or HTML documents. This library of python language also allows streaming and real-time data.
+There are three interfaces with different levels of control to put up different user types in the Bokeh library. The highest level of control is used to create charts rapidly. This library includes different methods of generating and plotting standard charts such as bar plots, histograms and box plots. The lowest level focuses on developers and software engineers.
+This level has no pre - set defaults, and users have to define each element of the chart or plot. The middle level of control has the specifications same as the Matplotlib library. This level allows the users to control the basic development of blocks of every chart and plot. Let's understand the following example.
+Example -
+
+from bokeh.plotting import figure , output_file , show
+from bokeh.sampledata.stocks import AAPL
+aapl = np.array ( AAPL [ ' adj_close ' ] )
+aaply_city = np.array ( AAPL [ ' city ' ] , dtype = np.city.temperature(F)
+windows_size = 30
+window = np.ones ( windows_Size ) / float ( windows _size )
+
+
+
+pygal
+Pygal is a library of Python programming language which is also used for data visualization. This library also develops interactive plots, just like Bokeh and Plotly libraries. The interactive plots developed using the pygal library can be rooted inside the web browser. This library has the ability to provide the output chats of data as SVGs.
+SVGs work well with smaller datasets. So if the users are using a large data set and trying to create charts with a large number of data points, charts will have problems in execution and will become slow.
+In the pygal library, it is easy to draw an attractive chart in just a few code lines because it has methods for all different chart types, and it also has built-in styles.
+Example -
+
+import pygal
+box_plot = pygal.Box()
+box_plot.title = ' V8 benchmark result '
+box_plot.add ( ' Chrome ', [ 6394, 8211, 7519, 7217, 12463, 1659, 2122, 8606 ] )
+box_plot.add ( ' Firefox ', [ 7472, 8098, 11699, 2650, 6360, 1043, 3796, 9449 ] )
+box_plot.add ( ' Opera ', [ 3471, 2932, 4202, 5228, 5811, 1827, 9012, 4668 ] )
+box_plot.add ( ' IE ', [ 42, 40, 58, 78, 143, 135, 33, 101 ] )
+
+Output:
+
+Plotly
+Plotly is a library used for data visualization. It is also an open platform where users can visualize and analyse the data online.
+This library is used for developing interactive plots and charts. It is an open - source plotting library that allows nearly about 40 unique chart and plot types, covering a huge range of algebraic, economical, geographical 3 -Dimensional and scientific user cases.
+This library is used to draw chats and plots like dendrograms, 3 - Dimensional charts and contour plots.
+Plotly library of python is developed on the top of Plotly JavaScript library.
+Example -
+
+import plotly.graph_objects as ply
+
+# Add data
+months = [ ' Jan ', ' Feb ', ' Mar ', ' Apr ', ' May ', ' June ', ' July ',' Aug ', ' Sep ', ' Oct ', ' Nov ', ' Dec ']
+high_2010 = [ 31.5, 36.6, 48.9, 52.0, 68.1, 74.4, 75.5, 75.6, 69.7, 59.6, 44.1, 28.3 ]
+low_2010 = [ 12.8, 21.3, 31.5, 36.2, 50.9, 55.1, 56.7, 57.3, 50.2, 41.8, 30.6, 14.9 ]
+high_2015 = [ 35.5, 25.6, 42.6, 51.3, 70.5, 80.4, 81.5, 81.2, 75.0, 66.3, 45.1, 34.0 ]
+low_2015 = [ 22.6, 13.0, 26.0, 35.8, 46.6, 56.7, 57.9, 60.2, 52.3, 47.5, 30.0, 22.6 ]
+high_2020 = [ 27.8, 27.5, 36.0, 55.8, 68.7, 78.7, 77.5, 76.8, 73.1, 61.6, 44.3, 38.9 ]
+low_2020 = [ 11.7, 13.3, 17.6, 34.5, 48.9, 57.0, 59.0, 57.6, 50.7, 44.2, 31.2, 28.1 ]
+
+fig = go.Figure ()
+# Create and style traces
+fig.add_trace ( ply.Scatter( x = month, y = high_2020, name='High 2020',line = dict ( color = ' firebrick ', width = 4 ) ) )
+fig.add_trace ( ply.Scatter( x = month, y = low_2020, name = ' Low 2020', line = dict ( color = ' royalblue ', width = 4 ) ))
+fig.add_trace ( ply.Scatter( x = month, y = high_2015, name = 'High 2015', line = dict(color = 'firebrick', width = 4, dash = 'dash' ) # here in this code dash options also involve 'dash', 'dot', and 'dashdot' ) )
+fig.add_trace (ply.Scatter ( x = month, y = low_2015, name = 'Low 2015', line = dict ( color = 'royalblue', width = 4, dash = 'dash' ) ) )
+fig.add_trace (ply.Scatter ( x = month, y=high_2010, name='High 2010',
+                         line = dict(color='firebrick', width=4, dash='dot')))
+fig.add_trace (ply.Scatter ( x = months, y = low_2010, name='Low 2010', line = dict ( color = 'royalblue', width = 4, dash = 'dot') ) )
+
+# Editing the layout of the graph
+fig.update_layout ( title = 'Average High and Low Temperatures in NYC',
+                 xaxis_title = ' Months ',
+                 yaxis_title = ' Temperatures ( degrees F ) ' )
+
+fig.show ()
+
+Output:
+
+Geoplotlib
+Geoplotlib is a library of Python language which allows the user to develop maps and plot geographical data. It is a library of the toolbox that are used to draw different types of maps such as heatmaps, dot - density maps and choropleths.
+To use the geoplotlib library user needs to download Pyglet, which is an interface of an object-oriented programming language. Geoplotlib library plot the points of maps on OpenStreetMap tiles.
+It also has the feature of zooming and panning the map so that users can see more specifically. This library automatically handles the entire dataset loading, the projection of the map, and downloads the tiles of the map. It has graphics rending from OpenGL.
+Example -
+
+import geoplotlib
+from geoplotlib.utils import BoundingBox
+from geoplotlib.colors import ColorMap
+import json
+# find the unemployment rate of the particular county, and then change it to color
+def get_color ( properties ):
+    key = str ( int ( properties [ ' STATE ' ] ) ) + properties [ ' COUNTRY ' ]
+    if key in unemployment:
+        return cmap.to_color ( unemployment.get ( key ) , .15, ' lin ' )
+    else:
+        return [ 0, 0, 0, 0 ]
+with open (' sample /data /unemployment.json ' ) as fin:
+    unemployment = json.load ( fin )
+cmap = ColorMap (' Blues ', alpha = 255, levels = 10 )
+geoplotlib.geojson (' samples /data/ gz_2010_us_050_00_20m.json ' , fill = True , color = get_color , f_tooltip = lambda properties: properties[ ' NAME ' ] )
+geoplotlib.geojson ( ' samples/ data/ gz_2010_us_050_00_20m.json ' , fill = False , color = [ 255 , 255 , 255 , 64 ] )
+geoplotlib.set_bbox (BoundingBox.USA )
+geoplotlib.show ( )
+
+Output:
+
+Gleam
+Gleam is used for data visualization in the Python programming language. It is inspired by the Shiny package of R programming language. This library is used to visualize and analyse the data of interactive web applications which use Python scripts only.
+So, users do not need to learn any other programming language like JavaScript, HTML or CSS. Gleam can work with any data visualization library of python programming language.
+Using gleam, users need to develop the basic plot, and they can build different fields on its top and later on can filter and sort the data easily.
+Example -
+
+from wtforms import fields
+from ggplot import *
+from gleam import Page, panels
+class ScatterInput ( panels.Inputs ) :
+    title = fields.StringField ( label = " Title of plot : " )
+    yvar = fields.SelectField ( label = " Y axis " ,
+                          choices = [ ( " beef " , " Beef " ) ,
+                               ( " pork " , " Pork " ) ] )
+ smoother = fields.BooleanField ( label = " Smoothing Curve " )
+
+Output:
+
+Missingno
+Missingno is a library of the Python programming language used to deal with the dataset having missing values or messy values.
+This library provides a small toolset that is easy - to - use and flexible with missing data visualizations. It has utilities that help the user to get a rapidly visual summary of the completeness dataset.
+The user can use the filter and sort the dataset based on the completeness or spot the correlations using heatmap or dendrograms.
+Example -
+
+import missingno as mgno
+%matplotlib inline
+mgno.matrix ( collisions.samples ( 250 ) )
+
+Output:
+
+Leather
+Leather is a Python programming language library used to create charts for those who need charts immediately and do not care whether the chart is perfect.
+This library works with every type of data set. This library creates the output chats of data as SVGs so that the users can measure the charts with the best quality.
+The leather library is a new library, and still, some of its documentations are in progress. The charts created using this library are basic but of good quality, which is roughly made.
+Example -
+
+import random
+import leather
+dot_dat = [ ( random.randint ( 0 , 10 ) , random.randint ( 0 , 10 ) for i in range ( 100 ) ]
+def colorizer ( d ) :
+	return ' rgb ( %i , %, %i ) ' % ( d.x , d.y , 10 )
+chart = leather.chart ( ' first ' )
+
+
+
+Folium
+Folium is a library that makes ivery easy to visualize and analyse the data on an interactive leaflet map. This library has various built - in tilesets from different platforms like OpenStreetMaps, Stamen and Mapbox.
+Folium library is easy to draw maps with markers. However, other libraries of python language are also capable of creating maps like Altair, boken and Plotly. Folium library uses OpenStreetMap, which gives a feel of Google map and a few code lines.
+This library also made it easy to add possible locations of other users by using markers.
+Folium library also has various plugins that can be seen on the map, including a plugin to Altair.
+Example -
+
+import folium 
+M = folium.Map ( location = [ 26.987675 , 67.989654 ] )
+m
+
+
+
+Summary
+This article has discussed different types of Python libraries used for data visualization and analysis in more specific and detailed ways.
+We have also discussed each library's different use and purpose and their unique features, like which library is used for what kind of plotting and creating charts and how we can manage to get more accurate and fast output visualization of our data set.
+
+
+Next TopicHow to call a function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

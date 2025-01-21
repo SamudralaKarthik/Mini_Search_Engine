@@ -1,0 +1,117 @@
+
+
+
+
+next →
+← prev
+
+How to Sort Tuple in Python
+Tuples are a type of data type of a variable that lets us store multiple objects in one place. A tuple is an ordered and immutable (we cannot update elements in a tuple) collection of items. There are 4 in-built Python data structures to store elements, one of them is a tuple, and the others are List, Dictionary, and Set, each with its own set of properties and use. They are written in round brackets.
+Sorting a Tuple in Python
+Using sort()
+The sort() method is often used to sort elements of a list in ascending order, with the first element being sorted by default. We can sort a tuple by converting it to a list first and then apply this function. This function sorts the list in place and returns None.
+Input
+
+tuple_ = ('Itika', 'Arshia', 'Peter', 'Parker')
+list(tuple_).sort() 
+print(tuple_)
+print(type(tuple_))
+
+Output:
+('Itika', 'Arshia', 'Peter', 'Parker')
+<class 'tuple'>
+
+Using sorted()
+In Python, use the sorted() built-in function to sort a Tuple. The tuple should be passed as an argument to the sorted() function. The tuple items are sorted (by default) in ascending order in the list returned by the function. We can use a tuple to convert this list data type to a tuple ().
+The reverse parameter to the sorted() function can also specify the sorting order. Ascending is the default sorting order. The items are sorted in descending order when reverse=True is set. We can also specify a key function whose returned values are used to sort items. We take a tuple, tuple_, having integer values, and sort it in ascending order in the following program.
+Input
+
+tuple_ = (5, 2, 24, 3, 1, 6, 7)
+sorted_ = tuple(sorted(tuple_))
+print('Sorted Tuple :', sorted_)
+print(type(sorted_))
+
+Output:
+Sorted Tuple : (1, 2, 3, 5, 6, 7, 24)
+<class 'tuple'>
+
+Now we are sorting the tuple in descending order using same function. Pass reverse=True to the sorted() function to sort the tuple in descending order.
+Input
+
+tuple_ = (5, 2, 24, 3, 1, 6, 7)
+sorted_ = tuple(sorted(tuple_, reverse=True))
+print('Sorted Tuple :', sorted_)
+print(type(sorted_))
+
+Output:
+Sorted Tuple : (24, 7, 6, 5, 3, 2, 1)
+<class 'tuple'>
+
+Sorting a Tuple Based on a Key Function
+A key is a function that takes a value and returns a value. For each of the items in tuple, this key function is applied, and the returned value is used for comparison to sort the items. In the following program, we sort tuple of strings based on the length of strings. For this case, we may use len() builtin function as key.
+Input
+
+tuple_ = ('abhd', 'sbchcwsc', 'sjs', 'sxshs')
+sorted_ = tuple(sorted(tuple_, key=len))
+print('Sorted Tuple :', sorted_)
+print(type(sorted_))
+
+Output:
+Sorted Tuple : ('sjs', 'abhd', 'sxshs', 'sbchcwsc')
+<class 'tuple'>
+
+Sorting List of Tuples
+Using sorted()
+Let's look at how to sort a list in Python using a tuple. Consider the following scenario: we wish to sort the list of tuples. We must sort tuples according to any key given to us. This can be accomplished using the sorted() function, which sorts items using a key and stores the key index for sorting the given tuples. The Python execution of this approach is as follows:
+Input
+
+# Sorting list of tuples according to a key
+def middle(n):
+    return n[1]  
+   
+# function to sort the tuple   
+def sort(list_of_tuples):
+    return sorted(list_of_tuples, key = middle)
+   
+# driver code  
+list_ = [(34, 21, 56), (24, 12, 32), (42, 34, 42), (27, 11, 32)]
+
+print("Sorted list of Tuples:"),
+print(sort(list_))
+
+Output:
+Sorted list of Tuples:
+[(27, 11, 32), (24, 12, 32), (34, 21, 56), (42, 34, 42)]
+
+Using Bubble Sort
+Bubble sort is just a sorting algorithm for sorting a list of any number of elements. If the adjoining item in a given list are in the incorrect order, it swaps them. It then repeats this process until all of the elements have been sorted.
+In this example, we'll use the bubble sort algorithm to sort a list of tuples.
+Input
+
+roll = [('Arshia', 26), ('Itika', 53), ('Peter', 82), ('Parker', 74), ('MJ', 45)] 
+first = 0 
+last = len(roll) 
+for k in range(0, last): 
+    for l in range(0, last-k-1): 
+        if (roll[l][first] > roll[l + 1][first]): 
+            new_item = roll[l] 
+            roll[l]= roll[l + 1] 
+            roll[l + 1]= new_item 
+print(roll)
+
+Output:
+[('Arshia', 26), ('Itika', 53), ('MJ', 45), ('Parker', 74), ('Peter', 82)]
+
+
+
+Next TopicAdvantages of Python that made it so Popular and its Major Applications
+
+
+
+
+← prev
+next →
+
+
+
+

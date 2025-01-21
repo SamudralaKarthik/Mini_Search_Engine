@@ -1,0 +1,327 @@
+
+
+
+
+next →
+← prev
+
+Queue in Python
+In this tutorial, we will discuss the Queue's basic concepts and built-in Queue class and implement it using the Python code.
+What is the Queue?
+A queue is a linear type of data structure used to store the data in a sequentially. The concept of queue is based on the FIFO, which means "First in First Out". It is also known as "first come first severed". The queue has the two ends front and rear. The next element is inserted from the rear end and removed from the front end.
+For example - There are 20 computers in the computer science lab and connected to a single printer. The students want to print their paper; the printer will print the first task and second, so on. If we are the last in line, we need to wait until all other tasks are completed that ahead of ours.
+The operating system manages the queue for processing the various processes within a computer.
+Operations in Python
+We can perform the following operations in the Queue.
+
+Enqueue - The enqueue is an operation where we add items to the queue. If the queue is full, it is a condition of the Queue The time complexity of enqueue is O(1).
+Dequeue - The dequeue is an operation where we remove an element from the queue. An element is removed in the same order as it is inserted. If the queue is empty, it is a condition of the Queue Underflow. The time complexity of dequeue is O(1).
+Front - An element is inserted in the front end. The time complexity of front is O(1).
+Rear - An element is removed from the rear end.. The time complexity of the rear is O(1).
+
+Methods Available in Queue
+Python provides the following methods, which are commonly used to perform the operation in Queue.
+
+put(item) - This function is used to insert element to the queue.
+get() - This function is used to extract the element from the queue.
+empty() - This function is used to check whether a queue is empty or not. It returns true if queue is empty.
+qsize - This function returns the length of the queue.
+full() - If the queue is full returns true; otherwise false.
+
+We will learn these functions in the below sections.
+The built-in Python List
+The list can be used as the queue, but it is not suitable for a performance perspective. Python provides built-in methods insert() and pop() function to add and remove elements. Lists are quite slow because if we insert a new element to the list, all elements require shifting by one. It takes O(n) time. So lists are recommended in-place of queue. Let's understand the following example of how a list can be used as a queue.
+Example -
+
+que = []
+
+que.append('Apple')
+que.append('Mango')
+que.append('Papaya')
+
+print(que)
+
+# List is slow!
+print(que.pop(0))
+
+Output:
+['Apple', 'Mango', 'Papaya']
+Apple
+
+Explanation -
+We have defined the empty list in the above code and inserted a few elements using append() method. It will add an element to the end of the list.
+Adding Element to a Queue (Enqueue)
+We can add the element from to the rear end. This process is also called enqueue. We create a Queue class where we will implement the First-in-First-Out concept. Let's understand the following example.
+Example -
+
+class Queue:
+
+  def __init__(self):
+      self.queue = list()
+
+  def add_element(self,val):
+# Insert method to add element
+      if val not in self.queue:
+          self.queue.insert(0,val)
+          return True
+      return False
+
+  def size(self):
+      return len(self.queue)
+
+TheQueue = Queue()
+TheQueue.add_element("Apple")
+TheQueue.add_element("Mango")
+TheQueue.add_element("Guava")
+TheQueue.add_element("Papaya")
+
+print("The length of Queue: ",TheQueue.size())
+
+Output:
+The length of Queue:  4
+
+Removing Element from a Queue (Dequeue)
+We can remove the element form the rear end. This process is called a dequeue. In the following example, we use the built-in pop() method to remove an element from the list.
+Example -
+
+class Queue:
+
+  def __init__(self):
+      self.queue = list()
+
+  def add_element(self,val):
+# Insert method to add element
+      if val not in self.queue:
+          self.queue.insert(0,val)
+          return True
+      return False
+# Pop method to remove element
+  def remove_element(self):
+      if len(self.queue)>0:
+          return self.queue.pop()
+      return ("Queue is Empty")
+
+que = Queue()
+que.add_element("January")
+que.add_element("February")
+que.add_element("March")
+que.add_element("April")
+
+print(que)
+print(que.remove_element())
+print(que.remove_element())
+
+Output:
+January
+February
+
+Explanation -
+In the above code, we have defined a class named Queue and constructor in it. We assigned an list constructor to the queue variable. Then, we defined two methods - add_element() and remove_element(). In the add_element() block, we check the condition if the value is not in Queue. If value is not present, insert the element.
+In the remove_element() function block, we check the condition of whether a queue is not underflow. If it returns false, then remove the element one by one.
+Sorting the Queue
+In the following example, we have sorted the elements of the queue.
+Example -
+
+import queue
+q = queue.Queue()
+
+q.put(14)
+q.put(27)
+q.put(11)
+q.put(4)
+q.put(1)
+
+
+# Here, we use bubble sort algorithm for sorting
+n =  q.qsize()
+for i in range(n):
+    # Remove the element
+    x = q.get()
+    for j in range(n-1):
+        # Remove the element
+        y = q.get()
+        if x > y :
+            # put the smaller element at the beginning of the queue
+            q.put(y)
+        else:
+            # the smaller one is put at the start of the queue
+            q.put(x)
+            x = y    # The greater element is replaced by the x and check again
+    q.put(x)
+
+while (q.empty() == False): 
+    print(q.queue[0], end = " ")  
+    q.get()
+
+Output:
+1 4 11 14 27
+
+The Queue Module
+Python provides the queue module to implement multi-producer, multi-consumer queues. The queue module offers Queue class which is especially used for the threaded programming. The Queue class implements all the required locking semantics.
+We can perform all the operation using the in-built queue class.
+Working With queue.Queue Class
+The queue module contains several classes. The Queue is one of the important classes of them. This is very useful in the parallel computing and multiprogramming. Let's understand the following example of the queue. Queue class0uii
+Example -
+
+from queue import Queue
+que = Queue()
+
+que.put('Apple')
+que.put('Mango')
+que.put('Papaya')
+
+print(que)
+
+
+print(que.get())
+
+print(que.get())
+
+print(que.get())
+
+print(que.get_nowait())
+
+print(que.get())
+
+Output:
+<queue.Queue object at 0x00000114B30656A0>
+Apple
+Mango
+Papaya
+Traceback (most recent call last):
+  File "C:/Users/DEVANSH SHARMA/PycharmProjects/Hello/Queue.py", line 78, in <module>
+    print(que.get_nowait())
+  File "C:\Python\lib\queue.py", line 198, in get_nowait
+    return self.get(block=False)
+  File "C:\Python\lib\queue.py", line 167, in get
+    raise Empty
+_queue.Empty
+
+Working With collection.deque Class
+The collection.deque class is used to implement a double-ended queue that supports adding and removing element from both ends. It takes O(1) time to complete the process.
+The deque class can be used in both Queue and as stacks because it removes and adds elements effectively.
+The collection.deque can be a good choice for queue data structure in Python's standard library.
+Example -
+
+from collections import deque
+que = deque()
+
+que.append('Apple')
+que.append('Mango')
+que.append('Banana')
+
+print(que)
+deque(['Apple ', 'Mango', 'Banana'])
+
+print(que.popleft())
+
+print(que.popleft())
+
+print(que.popleft())
+
+
+que.popleft()
+
+Output:
+deque(['Apple', 'Mango', 'Banana'])
+Apple
+Mango
+Banana
+Traceback (most recent call last):
+  File "C:/Users/DEVANSH SHARMA/PycharmProjects/Hello/Queue.py", line 101, in <module>
+    que.popleft()
+IndexError: pop from an empty deque
+
+The multiprocessing.Queue Class
+The multiprocessing.Queue class is used to implement queued items for processed in parallel by multicurrent workers. The multiprocessing.Queue shares data between processes and can store any pickle-able object. Let's understand the following example.
+Example -
+
+from multiprocessing import Queue
+que = Queue()
+
+que.put('Apple')
+que.put('Mango')
+que.put('Banana')
+
+print(que)
+
+print(que.get())
+
+print(que.get())
+
+print(que.get())
+
+Output:
+<multiprocessing.queues.Queue object at 0x000002CA073356A0>
+Apple
+Mango
+Banana
+
+Priority Queue in Python
+A priority queue is a special type of queue in the data-structure. As the name suggest, it sorts the elements and dequeues the elements based on their priorities.
+Unlike normal queue, it retrieves the highest-priority element instead of the next element. The priority of individual elements is decided by ordering applied to their keys.
+Priority queues are most beneficial to handling scheduling problems where some tasks will happen based on priorities.
+For example - An operating system task is the best example of a priority queue - It executes the high precedence over lower-priority tasks (downloading updates in the background). The task scheduler can allow the highest-priority tasks to run first.
+There are various ways to implement a priority queue in Python. Let's understand the following ways.
+Manually Sorted List
+We can use the sorted Python list as the priority queue to quickly identify and delete the smaller and largest element. But inserting the new element is slow as it takes O(n) operations.
+Therefore sorted list can be effective when there are will be few insertions into the priority queue.
+Let's understand the following example -
+Example -
+
+pri_que = []
+
+pri_que.append((2, 'Apple'))
+pri_que.append((1, 'Mango'))
+pri_que.append((3, 'Banana'))
+
+# NOTE: Remember to re-sort every time
+#       a new element is inserted.
+pri_que.sort(reverse=True)
+
+while pri_que:
+    next_item = pri_que.pop()
+    print(next_item)
+
+Output:
+(1, 'Mango')
+(2, 'Apple')
+(3, 'Banana')
+
+The queue.PriorityQueue Class
+This priority queue implements uses heapq internally and shares the same time and space complexities.
+The difference is the priority queue is coordinated and delivers locking semantics to backing multiple concurrent events and consumers.
+Example -
+
+from queue import PriorityQueue
+q = PriorityQueue()
+
+q.put((2, 'Apple'))
+q.put((1, 'Banana'))
+q.put((3, 'Mango'))
+
+while not q.empty():
+    next_item = q.get()
+    print(next_item)
+
+Output:
+(1, 'Banana')
+(2, 'Apple')
+(3, 'Mango')
+
+We can choose any priority queue implementation in the Python program but keep in mind that queue.PriorityQueue is good default choice.
+Conclusion
+We have discussed all the basic concepts of queue and its implementation. It is similar to the standard list, but performance-wise it is always better. We have also defined the priority queue and its various ways of implementation.
+
+
+Next TopicStack in Python
+
+
+
+
+← prev
+next →
+
+
+
+

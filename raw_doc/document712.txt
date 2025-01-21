@@ -1,0 +1,1217 @@
+
+
+
+
+next →
+← prev
+
+Creating the GUI Marksheet using Tkinter in Python
+Tkinter is the standard Graphical User Interface (GUI) library for the Python programming language. When combined with the Tkinter library, Python offers a quick and reliable way to build applications based on GUI. In this tutorial, we will build a GUI marksheet with the help of Tkinter in Python.
+As per the definitions provided by the Oxford Dictionary, a Marksheet is an official record of a student's work, representing the courses taken and grades achieved. Simply put, a Marksheet is a document representing the marks awarded for academic work.
+Let us now consider the project's prerequisite before we start building a GUI Marksheet using the Tkinter library in Python.
+Prerequisites of the Project
+There are some libraries that we will need in the creation of the GUI Marksheet in Python. These libraries are briefly described as follows:
+
+Tkinter:The Tkinter library will allow us to provide the application with a graphical user interface (GUI).
+Pillow:The Pillow library is the Python Imaging Library that allows us to add image processing capabilities to the Python interpreter.
+
+Since the Tkinter library comes preinstalled with Python, there is no need to install it externally. However, we can install the Pillow (PIL) library using the PIP installer by typing the following command in a command prompt or terminal.
+Syntax:
+
+$ pip install pillow
+
+Once the installation is complete, we can verify whether the pillow library is installed properly or not by creating a new python program file and importing the pillow (PIL) module.
+The following is the snippet of code illustrating the same.
+File: verify.py
+
+import PIL
+
+Now, let us save the file and run the following command in a command prompt or terminal.
+Syntax:
+
+$ python verify.py
+
+The library has been installed successfully if the program does not return any importing error. In case any exception is raised, try reinstalling the library and consider checking the official documentation.
+Let us now start building the project.
+Building the GUI Marksheet using Tkinter in Python
+We have divided the complete project code for creating the GUI Marksheet in Python into several steps for better understanding. These steps are shown below:
+Step 1: Importing the necessary modules
+Step 2: Defining the required functions to manipulate the user data and yield the result.
+Step 3: Creating the main window of the application.
+Step 4: Adding necessary widgets to the window and set the event triggers.
+Let us understand the steps mentioned above in a more elaborate way.
+Importing the necessary modules
+We will start by importing all the necessary modules to build the applications. These modules include the tkinter module along with the messagebox module of the Tkinter library. We will also include the necessary modules from the PIL library.
+The following is the snippet of code demonstrating the same.
+File: guiMarksheet.py
+
+# importing the required modules
+from tkinter import *                                   # importing all the modules and widgets from tkinter
+from tkinter import messagebox as mb                    # importing the messagebox module from tkinter
+from PIL import ImageTk, Image, ImageDraw, ImageFont    # importing the ImageTk, Image, ImageDraw and ImageFont modules from PIL
+
+Explanation:
+In the above code snippet, we have imported all the modules and widgets from the tkinter module. We have also imported the messagebox module as mb from the tkinter module. At last, we have imported the ImageTk, Image, ImageDraw and ImageFont modules from the PIL module.
+Defining the functions for the application
+Once we have successfully imported the required modules, it is time for us to define different functions allowing us to manipulate the data entered by the user. We will define the functions to calculate the total, percentage, and grade for the given marks and return the result per the record. We will also add some other functions to perform data validation, display result, generate a marksheet, clear all the entries and close the application. Let us understand the implementation of these functions in detail.
+Functions to calculate the total of the entered marks
+This function will accept the marks from the entry fields as its arguments and calculate the sum of the marks returning the total.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# --------------------- functions ---------------------
+# defining a function to calculate the total
+def calculate_total(sub1, sub2, sub3, sub4, sub5):
+    # adding all the arguments
+    total = sub1 + sub2 + sub3 + sub4 + sub5
+    # returning the total
+    return total
+
+Explanation:
+In the above code snippet, we have defined a function as calculate_total(). This function accepts each subject's marks as its arguments and adds all of them to return the total of the marks.
+Function to calculate the percentage of the calculated sum
+This function will accept the total returned from the earlier function and calculate the average by dividing the total by the number of subjects returning the calculated percentage.
+Let us consider the following snippet of code demonstrating the same.
+File: guiMarksheet.py
+
+# defining a function to calculate the percentage
+def calculate_percentage(total):
+    # dividing the total by number of subjects (5)
+    percentage = total / 5
+    # returning the percentage
+    return percentage
+
+Explanation:
+In the above code snippet, we have defined a function as calculate_percentage(). This function accepts the argument consisting of the total of the marks. Within this function, we have calculated the average by dividing the total by the number of subjects, i.e., 5 in this case and returned the calculated percentage.
+Function to grade the student as per their percentage
+This function will return the grade per the student's performance and the percentage they received. We will use the if-elif-else conditional statement to calculate the grade.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to calculate the grade
+def calculate_grade(percentage):
+    # using the if-elif-else conditional statement
+    # to grade the student as per the percentage
+    # her 'O' stands for Outstanding,
+    # 'A+' and 'A' indicate excellent performance,
+    # 'B+' and 'B' stand for good performance,
+    # 'C' stands for satisfactory performance,
+    # 'D' stands for less than satisfactory performance, and
+    # 'F' stands for unsatisfactory performance indicating Failure
+    if (percentage >= 95.0):
+        return 'O'
+    elif (percentage >= 90.0 and percentage < 95.0):
+        return 'A+'
+    elif (percentage >= 80.0 and percentage < 90.0):
+        return 'A'
+    elif (percentage >= 70.0 and percentage < 80.0):
+        return 'B+'
+    elif (percentage >= 60.0 and percentage < 70.0):
+        return 'B'
+    elif (percentage >= 50.0 and percentage < 60.0):
+        return 'C'
+    elif (percentage >= 33.0 and percentage < 50.0):
+        return 'D'
+    else:
+        return 'F'
+
+Explanation:
+In the above code snippet, we have defined a function as calculate_grade() with accepted percentage as its parameter. Within this function, we have used the if-elif-else conditional statement and returned the grade on the basis of the student's percentage. We have returned the grade 'O' for the percentage equal to 95 or above. Similarly, we have returned the grade 'A+' for the percentage ranging between 90 to 94, grade 'A' for 80 to 89 per cent, grade 'B+' for 70 to 79 per cent, grade 'B' for 60 to 69 per cent, grade 'C' for 50 to 59 per cent, grade 'D' for 33 to 49 per cent and grade 'F' for less than 33 per cent.
+Function to calculate the result of the student
+This function will calculate the result by checking whether the percentage of the student is above the passing marks or not, i.e., 33 in this case. We will also check whether the student is passed every subject and return 'PASS' or 'FAIL' as per the situation.
+File: guiMarksheet.py
+
+# defining a function to calculate the result
+def calculate_result(percentage, sub1, sub2, sub3, sub4, sub5):
+    # using if-else conditional statement to whether the student is pass or fail
+    if (percentage >= 33.0 and sub1 >= 33.0 and sub2 >= 33.0 and sub3 >= 33.0 and sub4 >= 33.0 and sub5 >= 33.0):
+        return 'PASS'
+    else:
+        return 'FAIL'
+
+Explanation:
+In the above snippet of code, we have defined a function as calculate_result(). This function accepts multiple parameters like percentage and the marks of all subjects. Within this function, we have used the if-else conditional statement to check if the percentage is greater than 33 along with the marks of each subject greater than 33 or not and returned 'PASS' or 'FAIL' as per the situation.
+Function to check errors in entering the marks
+This function will check if any fields displaying marks are empty and return a message box displaying the error.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to check the errors
+def check_for_errors():
+    # using if conditional statement to check if the entries are invalid
+    if(marks_One_field.get() == "" or marks_Two_field == "" or marks_Three_field == "" or marks_Four_field == "" or marks_Five_field == ""):
+        # displaying the message box with the error message
+        mb.showerror("Invalid Input", "Marks must be in float data type.")
+
+        # calling the function to reset entries
+        reset_subject_entries()
+
+        # returning -1
+        return -1
+
+Explanation:
+In the above snippet of code, we have defined a function as check_for_errors(). Within this function, we have used the if-conditional statement to check whether any fields displaying are empty. We have then displayed a message box with an error message. We have also called the function to reset the entries. At last, we have returned -1 to quit the process.
+Function to display the result
+We will now define a function to display the result. This function will check the subject name fields and their marks. It will then evaluate the result and display it to the user.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to display the result
+def display_result():
+    # using the get() method to get subject names
+    sub1 = subject_One_field.get()
+    sub2 = subject_Two_field.get()
+    sub3 = subject_Three_field.get()
+    sub4 = subject_Four_field.get()
+    sub5 = subject_Five_field.get()
+
+    # checking if the strings are empty or not
+    if (sub1 == "" and sub2 == "" and sub3 == "" and sub4 == "" and sub5 == ""):
+        # displaying the message box with the error message
+        mb.showerror("Empty Fields", "Subject fields cannot be empty.")
+
+        # calling the function to reset entries
+        reset_subject_entries()
+    else:
+        # calling the check_for_errors() function and storing the value
+        val = check_for_errors()
+
+        # if the stored value is -1, then return
+        if val == -1:
+            return
+        else:
+            # using the get() method to get the marks and converting them into float
+            marks1 = float(marks_One_field.get())
+            marks2 = float(marks_Two_field.get())
+            marks3 = float(marks_Three_field.get())
+            marks4 = float(marks_Four_field.get())
+            marks5 = float(marks_Five_field.get())
+
+            # using the if-else conditional statement to check if the marks entered are valid and ranging in between 0 to 100
+            if (marks1 >= 0 and marks1 <= 100 and marks2 >= 0 and marks2 <= 100 and marks3 >= 0 and marks3 <= 100 and marks4 >= 0 and marks4 <= 100 and marks5 >= 0 and marks5 <= 100):
+                # calculating the result by calling the functions we created earlier and storing their values
+                total = calculate_total(marks1, marks2, marks3, marks4, marks5)
+                percentage = calculate_percentage(total)
+                grade = calculate_grade(percentage)
+                result = calculate_result(percentage, marks1, marks2, marks3, marks4, marks5)
+
+                # setting the grade to 'F', if the result is 'FAIL'
+                if result == 'FAIL':
+                    grade = 'F'
+
+                # calling the function to disable the entry fields
+                disable_field()
+                
+                # configuring the labels displaying result by setting their text to the corresponding values
+                display_total_label.config(text = total)
+                display_percentage_label.config(text = percentage)
+                display_grade_label.config(text = grade)
+                display_result_label.config(text = result)
+
+                # configuring the state of the 'Generate Marksheet' button to normal
+                generate_button.config(state = "normal")
+            else:
+                # displaying message box with error message
+                mb.showerror("Out of Range", "Marks must be ranging between 0 to 100.")
+
+                # calling the function to reset the entries
+                reset_subject_entries()
+
+Explanation:
+In the above code snippet, we have defined a function as display_result(). Within this function, we have used the get() method to retrieve the details of the subjects. We then checked if any fields were empty and returned a message box displaying the error for the same. We have then called the check_for_errors() function to check if any marks field is empty. If not, we have converted the marks into float values. We then check if the entered marks range from 0 to 100 and calculate the total, percentage, grade, and result. We have also set the grade to 'F' if the result equals 'FAIL'. We then called a function to disable all the fields, so the user cannot change the data after calculating the result. We have then used the config() method with the labels to display the result. We have also set the state of the 'Generate Marksheet' button to normal. In case the marks exceed the limits, we have returned a message box displaying the error and called the reset_subject_entries() function.
+Function to Generate the Marksheet as a PNG file
+We will now define a function to generate the marksheet as a PNG file. This function will use some modules of the PIL library and add the entered data to the image file.
+The following is the image file that we will use for the project.
+File: report_card.png
+
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to generate marksheet as a PNG file
+def generate_marksheet():
+    # using the get() method to get the entries from the entry field
+    # student's information
+    student_name = str(name_field.get())
+    student_dob = str(dob_field.get())
+    student_class = str(class_field.get())
+    regd_num = str(regd_num_field.get())
+    school_name = str(school_field.get())
+    roll_num = str(roll_num_field.get())
+
+    # names of the subjects
+    sub1 = str(subject_One_field.get())
+    sub2 = str(subject_Two_field.get())
+    sub3 = str(subject_Three_field.get())
+    sub4 = str(subject_Four_field.get())
+    sub5 = str(subject_Five_field.get())
+
+    # marks of the subjects
+    marks1 = str(marks_One_field.get())
+    marks2 = str(marks_Two_field.get())
+    marks3 = str(marks_Three_field.get())
+    marks4 = str(marks_Four_field.get())
+    marks5 = str(marks_Five_field.get())
+
+    # using cget() method to retrieve text from the result labels 
+    total = str(display_total_label.cget("text"))
+    percentage = str(display_percentage_label.cget("text"))
+    grade = str(display_grade_label.cget("text"))
+    result = str(display_result_label.cget("text"))
+
+    # importing the image of a report card using
+    # the open() method of the Image module
+    report_card_img = Image.open("reportCard.png")
+    # using the Draw() class of the ImageDraw module
+    # to make 2D drawing interface
+    draw_obj = ImageDraw.Draw(report_card_img)
+    
+    # defining coordinates
+    point1 = 380, 200
+    point2 = 480, 385
+    point3 = 480, 440
+    point4 = 480, 495
+    point5 = 480, 550
+    point6 = 480, 605
+    point7 = 420, 900
+    point8 = 1100, 900
+    point9 = 420, 966.6
+    point10 = 1100, 966.6
+    point11 = 420, 1032.3
+    point12 = 1100, 1032.3
+    point13 = 420, 1100
+    point14 = 1100, 1100
+    point15 = 420, 1166.6
+    point16 = 1100, 1166.6
+    point17 = 700, 1380
+    point18 = 700, 1450
+    point19 = 700, 1520
+    point20 = 700, 1680
+
+    # specifying the fonts for the text
+    fontOne = ImageFont.truetype("verdana.ttf", 70)
+    fontTwo = ImageFont.truetype("verdana.ttf", 40)
+    fontThree = ImageFont.truetype("verdana.ttf", 50)
+
+    # adding text values to the image
+    draw_obj.text(point1, school_name, "black", font = fontOne)
+    draw_obj.text(point2, regd_num, "black", font = fontTwo)
+    draw_obj.text(point3, roll_num, "black", font = fontTwo)
+    draw_obj.text(point4, student_name, "black", font = fontTwo)
+    draw_obj.text(point5, student_dob, "black", font = fontTwo)
+    draw_obj.text(point6, student_class, "black", font = fontTwo)
+    draw_obj.text(point7, sub1, "black", font = fontTwo)
+    draw_obj.text(point8, marks1, "black", font = fontTwo)
+    draw_obj.text(point9, sub2, "black", font = fontTwo)
+    draw_obj.text(point10, marks2, "black", font = fontTwo)
+    draw_obj.text(point11, sub3, "black", font = fontTwo)
+    draw_obj.text(point12, marks3, "black", font = fontTwo)
+    draw_obj.text(point13, sub4, "black", font = fontTwo)
+    draw_obj.text(point14, marks4, "black", font = fontTwo)
+    draw_obj.text(point15, sub5, "black", font = fontTwo)
+    draw_obj.text(point16, marks5, "black", font = fontTwo)
+    draw_obj.text(point17, total, "black", font = fontTwo)
+    draw_obj.text(point18, percentage, "black", font = fontTwo)
+    draw_obj.text(point19, grade, "black", font = fontTwo)
+    draw_obj.text(point20, result, "black", font = fontThree)
+
+    # saving the image file
+    report_card_img.save(rf'{name_field.get()}.png')
+
+    # displaying the image
+    report_card_img.show()
+
+Explanation:
+In the above code snippet, we have defined a function as generate_marksheet(). Within this function, we have used the get() method to retrieve all the entries from the entry field filled by the user and store them as Strings. We have then used the cget() method to retrieve the text from the labels displaying the result and again stored them as Strings. We have then imported the image file from the directory using the open() method of the Image module and used the Draw() class of the ImageDraw module to create a 2D image interface to add the stored values as text in the image. We have then defined different coordinates specifying the placement of all the text elements. We then used the truetype() method of the ImageFont and imported the required fonts for the decoration of the text values. We have then used the text() method with the object of the Draw() class to place the stored string values in the image file. At last, we saved the image file by the name of the student using the save() method and displayed the final image using the show() method.
+Function to disable the fields
+This function is optional. We will define this function to disable the entry fields so that the user cannot change the entered data once the result is calculated.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to disable the fields
+def disable_field():
+    # disabling all the entry fields by using the config()
+    # method and setting the state parameter to 'disabled'
+    name_field.config(state = "disabled")
+    dob_field.config(state = "disabled")
+    class_field.config(state = "disabled")
+    regd_num_field.config(state = "disabled")
+    school_field.config(state = "disabled")
+    roll_num_field.config(state = "disabled")
+    subject_One_field.config(state = "disabled")
+    subject_Two_field.config(state = "disabled")
+    subject_Three_field.config(state = "disabled")
+    subject_Four_field.config(state = "disabled")
+    subject_Five_field.config(state = "disabled")
+    marks_One_field.config(state = "disabled")
+    marks_Two_field.config(state = "disabled")
+    marks_Three_field.config(state = "disabled")
+    marks_Four_field.config(state = "disabled")
+    marks_Five_field.config(state = "disabled")
+    result_button.config(state = "disabled")
+
+Explanation:
+In the above code snippet, we have defined a function as disable_field(). Within this function, we have used the config() method with the objects of the Entry() widget and set the value of their state parameters to 'disabled'.
+Function to enable the fields
+This function is also optional. We will define this function to enable the entry fields so that the user can enter the data once the fields are cleared.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to enable the fields
+def enable_field():
+    # enabling all the entry fields by using the config()
+    # method and setting the state parameter to 'normal'
+    name_field.config(state = "normal")
+    dob_field.config(state = "normal")
+    class_field.config(state = "normal")
+    regd_num_field.config(state = "normal")
+    school_field.config(state = "normal")
+    roll_num_field.config(state = "normal")
+    subject_One_field.config(state = "normal")
+    subject_Two_field.config(state = "normal")
+    subject_Three_field.config(state = "normal")
+    subject_Four_field.config(state = "normal")
+    subject_Five_field.config(state = "normal")
+    marks_One_field.config(state = "normal")
+    marks_Two_field.config(state = "normal")
+    marks_Three_field.config(state = "normal")
+    marks_Four_field.config(state = "normal")
+    marks_Five_field.config(state = "normal")
+    result_button.config(state = "normal")
+
+Explanation:
+In the above code snippet, we have defined a function as enable_field(). Within this function, we have used the config() method with the objects of the Entry() widget and set the value of their state parameters to 'normal'.
+Function to reset entries in 'Subjects Information' Section
+This function will allow us to reset the entry fields present in the 'Subjects Information' section.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to reset entries in the subject's information columns
+def reset_subject_entries():
+    # calling the enable_field() function we defined earlier
+    enable_field()
+
+    # deleting the entries in the field using the delete() method
+    subject_One_field.delete(0, END)
+    subject_Two_field.delete(0, END)
+    subject_Three_field.delete(0, END)
+    subject_Four_field.delete(0, END)
+    subject_Five_field.delete(0, END)
+    marks_One_field.delete(0, END)
+    marks_Two_field.delete(0, END)
+    marks_Three_field.delete(0, END)
+    marks_Four_field.delete(0, END)
+    marks_Five_field.delete(0, END)
+
+    # setting the focus to first subject field using the focus_set() method
+    subject_One_field.focus_set()
+
+Explanation:
+In the above snippet of code, we have defined a function as reset_subject_entries(). Within this function, we have called the enable_field() function. We have then used the delete() method to delete the entries in the field available in the 'Subjects Information' section. At last, we have set the focus to the first subject name field using the focus_set().
+Function to reset all the entries
+We will now define a function that allows us to reset all the entries filled by the user along with the calculated result.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to clear all entries
+def reset():
+    # calling the reset_subject_entries() method we defined earlier
+    reset_subject_entries()
+
+    # deleting the entries of the fields in the student's information columns
+    name_field.delete(0, END)
+    dob_field.delete(0, END)
+    class_field.delete(0, END)
+    regd_num_field.delete(0, END)
+    school_field.delete(0, END)
+    roll_num_field.delete(0, END)
+
+    # configuring the initial text of the labels
+    display_total_label.config(text = "0")
+    display_percentage_label.config(text = "0")
+    display_grade_label.config(text = "XXXX")
+    display_result_label.config(text = "XXXX")
+
+    # disabling the 'Generate Marksheet' button
+    generate_button.config(state = "disabled")
+
+    # setting the focus to name field using the focus_set() method
+    name_field.focus_set()
+
+Explanation:
+In the above snippet of code, we have defined a function as reset(). Within this function, we have called the reset_subject_entries() function. We have then used the delete() method to delete the entries in the remaining fields. We have then used the config() method to configure the text of the labels displaying the result. We have also disabled the 'Generate Marksheet' button and used the focus_set() method to set the focus to the very first field, i.e., name_field.
+Function to exit the application
+We will now define a function to exit the application. The following is the snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# defining a function to exit the application
+def exit():
+    # using the destroy() method to close the application
+    gui_root.destroy()
+
+Explanation:
+In the above snippet of code, we have defined a function as exit(). We have used the destroy() method to close the application within this function.
+Creating the main window of the application
+Now that we have successfully defined all the necessary functions for the application, it is time for us to create the main window of the application, where we will later add different widgets to manipulate the user data and functions.
+We will use the Tk() class to create the main window of the application. We will also set the title, size, position, background color and icon.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+# main function
+if __name__ == "__main__":
+    # main window
+    # creating an object of the Tk() class
+    gui_root = Tk()
+
+    # setting the title of the application
+    gui_root.title("Marksheet Generator - JAVATPOINT")
+
+    # setting the size and position of the application
+    gui_root.geometry("800x700+650+200")
+    
+    # disabling the resizable option
+    gui_root.resizable(0, 0)
+
+    # configuring the background color of the application to #FCEEF6
+    gui_root.config(bg = "#FCEEF6")
+
+    # setting the icon of the application
+    gui_root.iconbitmap("marksheet_img.ico")
+
+Explanation:
+In the above snippet of code, we have created an object of the Tk() class as gui_root. We then used the title() method to set the title of the application. We then used the geometry() method to set the size and position of the application on the screen. We have then disabled the resizable option for better UI by setting the parameters of the resizable() method to zeros. We have configured the application's background color to #FCEEF6 by setting it as a value to the bg parameter in the config() method. We then used the iconbitmap() method to set the icon of the application by importing the ICO image file from the directory.
+Adding widgets to the main window and setting event triggers
+Since the main window of the application is created successfully, we will add all the necessary widgets to the window and set the event triggers. These widgets include frames to structure other widgets, labels to display important information, entry fields to insert data, and buttons to manipulate the entered data and call the functions.
+Let us now understand the addition of these widgets in detail.
+Adding Frames
+We will start by adding the frames to the main window. These frames will help structure the other widgets. These frames can be created using the Frame() widget of the tkinter module.
+Let us consider the following snippet of code demonstrating the same.
+File: guiMarksheet.py
+
+    # defining frames to provide structure to other widgets
+    header_frame = Frame(gui_root, bg = "#B05D8D")
+    heading_frame = Frame(header_frame, bg = "#B05D8D")
+    subheading_frame = Frame(header_frame, bg = "#5C153E")
+    info_frame = Frame(gui_root, bg = "#FCEEF6")
+    subject_frame = Frame(gui_root, bg = "#FCEEF6")
+    result_frame = Frame(gui_root, bg = "#FCEEF6")
+    buttons_frame = Frame(gui_root, bg = "#FCEEF6")
+
+    # using the pack() method to set the positions of these frames
+    header_frame.pack(fill = "both")
+    heading_frame.pack()
+    subheading_frame.pack(fill = "both")
+    info_frame.pack()
+    subject_frame.pack()
+    result_frame.pack(pady = 15)
+    buttons_frame.pack()
+
+Explanation:
+In the above snippet of code, we have used the Frame() widgets to add the frames to the window. We have also set the master parameter of these widgets to gui_root, and header_frame, respectively. We have configured the background color by setting it as a value for the bg parameter. At last, we have used the pack() method to set the positions of these frames.
+Adding the widgets to the heading_frame Frame
+We will now add the labels displaying the heading and an image to this frame. We will use the Label() widget to add the labels. We will also use the ImageTk and Image module of the PIL library to import the image from the directory and make it compatible for use in the Tkinter application.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+    # ---------------------- The heading_frame Frame ----------------------
+    # importing an image
+    the_image = ImageTk.PhotoImage(Image.open("marksheet_img.png").resize((50, 50), Image.ANTIALIAS))
+
+    # adding some labels to display an image and heading of the application
+    image_label = Label(heading_frame, image = the_image, bg = "#B05D8D")
+    header_label = Label(heading_frame, text = "Marksheet", font = ("verdana", "24", "bold"), bg = "#B05D8D", fg = "#FFFFFF")
+
+    # using the grid() method to set the positions of these labels in a grid format
+    image_label.grid(row = 0, column = 0, padx = 2.5, pady = 5)
+    header_label.grid(row = 0, column = 1, padx = 2.5, pady = 5)
+
+Explanation:
+In the above snippet of code, we have used the PhotoImage() method of the ImageTk module. Within this method, we have used the open() method of the Image module to import the image file from the directory. We have also used the resize() method to resize the imported image and convert it for compatible use in the Tkinter application. We have then used the Label() widget to create some labels to display the imported image and a heading. We have set the master parameters of these labels to the heading_frame Frame. At last, we have used the grid() method to set the position of these labels in a grid format.
+Adding the widgets to the subheading_frame Frame
+We will now add a label to this frame to display a sub-heading. We will again use the Label() widget to add the label to the application.
+The following snippet of code illustrates the same.
+File: guiMarksheet.py
+
+    # ---------------------- The subheading_frame Frame ----------------------
+    # adding a label to display sub-heading of the application
+    subheader_label = Label(subheading_frame, text = "Create your own Marksheet", font = ("verdana", "10"),bg = "#5C153E", fg = "#FEB9E1")
+
+    # using the pack() method to set the position of this label
+    subheader_label.pack(pady = 5)
+
+Explanation:
+In the above snippet of code, we have used the Label() widget to add the label to display a sub-heading. We have set the master parameter of this label to the subheading_frame frame. At last, we have used the pack() method to set the position of this label.
+Adding the widgets to the info_frame Frame
+We will now add some widgets to this frame to collect the student's information, including the student's name, date of birth, class, registration number, school name, and roll number. In order to gather this data, we will use the label with the help of the Label() widget to display the text asking user to enter details. Moreover, we will add the entry fields using the Entry() widget for users to enter the asked information.
+Let us understand the implementation of the same in the following snippet of code.
+File: guiMarksheet.py
+
+    # ---------------------- The info_frame Frame ----------------------
+    # defining some labels to display text asking user to enter details
+    info_label = Label(info_frame, text = "Student's Information", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    name_label = Label(info_frame, text = "Name of the Student:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    dob_label = Label(info_frame, text = "Date of Birth:", bg = "#FCEEF6", font = ("Times New Roman", "11", "bold"), fg = "#B05D8D")
+    class_label = Label(info_frame, text = "Programme/Class:", bg = "#FCEEF6", font = ("Times New Roman", "11", "bold"), fg = "#B05D8D")
+    regd_num_label = Label(info_frame, text = "Registration Number:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    school_label = Label(info_frame, text = "Name of the Institution:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    roll_num_label = Label(info_frame, text = "Roll Number:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+
+    # using the grid() method to set the positions of these labels in a grid format
+    info_label.grid(row = 0, column = 0, padx = 5, pady = 10, sticky = W)
+    name_label.grid(row = 1, column = 0, padx = 5, pady = 5, sticky = E)
+    dob_label.grid(row = 1, column = 2, padx = 5, pady = 5, sticky = E)
+    class_label.grid(row = 2, column = 0, padx = 5, pady = 5, sticky = E)
+    regd_num_label.grid(row = 2, column = 2, padx = 5, pady = 5, sticky = E)
+    school_label.grid(row = 3, column = 0, padx = 5, pady = 5, sticky = E)
+    roll_num_label.grid(row = 3, column = 2, padx = 5, pady = 5, sticky = E)
+    
+    # defining some entry fields for the user to enter the asked details
+    name_field = Entry(info_frame, width = 25, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    dob_field = Entry(info_frame, width = 10, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    class_field = Entry(info_frame, width = 25, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    regd_num_field = Entry(info_frame, width = 10, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    school_field = Entry(info_frame, width = 25, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    roll_num_field = Entry(info_frame, width = 10, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+
+    # using the grid() method to set the positions of these fields in a grid format 
+    name_field.grid(row = 1, column = 1, padx = 5, pady = 5)
+    dob_field.grid(row = 1, column = 3, padx = 5, pady = 5)
+    class_field.grid(row = 2, column = 1, padx = 5, pady = 5)
+    regd_num_field.grid(row = 2, column = 3, padx = 5, pady = 5)
+    school_field.grid(row = 3, column = 1, padx = 5, pady = 5)
+    roll_num_field.grid(row = 3, column = 3, padx = 5, pady = 5)
+
+Explanation:
+In the above snippet of code, we have used the Label() widget to create some labels displaying the text such as Student's Information, Name of the Student, Date of Birth, Class, Registration Number, Name of the Institution, and Roll Number. We have set the master parameters of these labels to the info_frame Frame. We have then used the grid() method to set the positions of these labels in a grid format. Similarly, we have added the entry fields to the application using the Entry() widgets and set their master parameters to the info_frame Frame. We have then set the position of these frames in a grid format with the help of the grid() method.
+Adding the widgets to the subject_frame Frame
+We will now add some widgets to this Frame to collect the student's academic record, which includes the subjects the student has studied and marks in each subject. In order to collect this data, we will again use the label with the help of the Label() widget to display the text asking user to enter details associated with subjects. Moreover, we will add the entry fields using the Entry() widget for users to enter the subject's name along with the marks obtained in each subject out of 100.
+Let us understand the implementation of the same in the following snippet of code.
+File: guiMarksheet.py
+
+    # ---------------------- The subject_frame Frame ----------------------
+    # defining some labels to display text asking user to enter their subject's information
+    subjects_label = Label(subject_frame, text = "Subjects Information", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    subject_name_label = Label(subject_frame, text = "Subject Name", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    marks_label = Label(subject_frame, text = "Marks Obtained", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    marks_extra_label = Label(subject_frame, text = "(Out of 100)", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    subject_One_label = Label(subject_frame, text = "Subject I :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Two_label = Label(subject_frame, text = "Subject II :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Three_label = Label(subject_frame, text = "Subject III :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Four_label = Label(subject_frame, text = "Subject IV :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Five_label = Label(subject_frame, text = "Subject V :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+
+    # using the grid() method to set the position of these labels in a grid format
+    subjects_label.grid(row = 0, column = 0, padx = 5, pady = 10, sticky = W)
+    subject_name_label.grid(row = 1, column = 1, padx = 5)
+    marks_label.grid(row = 1, column = 2, padx = 5)
+    marks_extra_label.grid(row = 2, column = 2, padx = 5, pady = 2.5)
+    subject_One_label.grid(row = 3, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Two_label.grid(row = 4, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Three_label.grid(row = 5, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Four_label.grid(row = 6, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Five_label.grid(row = 7, column = 0, padx = 5, pady = 5, sticky = E)
+
+    # defining some entry fields for the users to enter the asked details
+    subject_One_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_One_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Two_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Two_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Three_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Three_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Four_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Four_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Five_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Five_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+
+    # using the grid() method to set the positions of these fields in a grid format
+    subject_One_field.grid(row = 3, column = 1, padx = 5, pady = 5)
+    marks_One_field.grid(row = 3, column = 2, padx = 5, pady = 5)
+    subject_Two_field.grid(row = 4, column = 1, padx = 5, pady = 5)
+    marks_Two_field.grid(row = 4, column = 2, padx = 5, pady = 5)
+    subject_Three_field.grid(row = 5, column = 1, padx = 5, pady = 5)
+    marks_Three_field.grid(row = 5, column = 2, padx = 5, pady = 5)
+    subject_Four_field.grid(row = 6, column = 1, padx = 5, pady = 5)
+    marks_Four_field.grid(row = 6, column = 2, padx = 5, pady = 5)
+    subject_Five_field.grid(row = 7, column = 1, padx = 5, pady = 5)
+    marks_Five_field.grid(row = 7, column = 2, padx = 5, pady = 5)
+
+Explanation:
+In the above snippet of code, we have used the Label() widget to create some labels displaying the text such as Subjects Information, Subject Name, Marks obtained (Out of 100), and Number of subjects. We have set the master parameters of these labels to the subject_frame frame. We have then used the grid() method to set the positions of these labels in a grid format. Similarly, we have added the entry fields to the application using the Entry() widgets and set their master parameters to the subject_frame frame. We have then set the position of these frames in a grid format with the help of the grid() method.
+Adding the widgets to the result_frame Frame
+We will now add some labels to this frame to display the calculated total, percentage, grade, and result for the entered marks. We will again use the Label() widget to create the labels for the application.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+    # ---------------------- The result_frame Frame ----------------------
+    # defining some labels to display the result
+    total_label = Label(result_frame, text = "Total:", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_total_label = Label(result_frame, text = "0", font = ("Times New Roman", "12"), bg = "#FCEEF6", fg = "#5C153E")
+    percentage_label = Label(result_frame, text = "Percentage (%):", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_percentage_label = Label(result_frame, text = "0", font = ("Times New Roman", "12"), bg = "#FCEEF6", fg = "#5C153E")
+    grade_label = Label(result_frame, text = "Grade:", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_grade_label = Label(result_frame, text = "XXXX", font = ("Times New Roman", "12"), bg = "#FCEEF6", fg = "#5C153E")
+    result_label = Label(result_frame, text = "Result:", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_result_label = Label(result_frame, text = "XXXX", font = ("Times New Roman", "14", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+
+    # using the grid() method to set the positions of these labels in a grid format
+    total_label.grid(row = 0, column = 0, padx = 5, pady = 5, sticky = W)
+    display_total_label.grid(row = 0, column = 1, padx = 5, pady = 5, sticky = W)
+    percentage_label.grid(row = 0, column = 2, padx = 5, pady = 5, sticky = W)
+    display_percentage_label.grid(row = 0, column = 3, padx = 5, pady = 5, sticky = W)
+    grade_label.grid(row = 0, column = 4, padx = 5, pady = 5, sticky = W)
+    display_grade_label.grid(row = 0, column = 5, padx = 5, pady = 5, sticky = W)
+    result_label.grid(row = 0, column = 6, padx = 5, pady = 5, sticky = W)
+    display_result_label.grid(row = 0, column = 7, padx = 5, pady = 5, sticky = W)
+
+Explanation:
+In the above snippet of code, we have used the Label() widget to create labels displaying the calculated total, percentage, grade, and result, along with some associated text. We have set the master parameters of these labels to the result_frame Frame. At last, we have used the grid() method to set the positions of these labels in a grid format.
+Adding the widgets to the buttons_frame Frame
+We will now add some buttons to this frame to manipulate the entered data and call the functions we defined earlier. We will use the Button() widget to create the buttons in the application. These include the buttons to calculate the result, generate the marksheet, reset the entries and close the application.
+Let us consider the following snippet of code demonstrating the same.
+File: guiMarksheet.py
+
+    # ---------------------- The buttons_frame Frame ----------------------
+    # defining some buttons to manipulate the functions
+    result_button = Button(buttons_frame, text = "Display Result", font = ("verdana", "10"), width = 16, bg = "#64F0AB", fg = "#0C4529", activebackground = "#3AC982", activeforeground = "#FFFFFF", relief = GROOVE, command = display_result)
+    generate_button = Button(buttons_frame, text = "Generate Marksheet", font = ("verdana", "10"), width = 20, bg = "#6EF5FA", fg = "#144E50", activebackground = "#1DCAD1", activeforeground = "#FFFFFF", relief = GROOVE, state = "disabled", command = generate_marksheet)
+    reset_button = Button(buttons_frame, text = "Reset Entries", font = ("verdana", "10"), width = 15, bg = "#E3FF00", fg = "#454B14", activebackground = "#A7B817", activeforeground = "#FFFFFF", relief = GROOVE, command = reset)
+    exit_button = Button(buttons_frame, text = "Exit", font = ("verdana", "10"), width = 6, bg = "#FF0007", fg = "#FFFFFF", activebackground = "#AE1318", activeforeground = "#FFFFFF", relief = GROOVE, command = exit)
+
+    # using the grid() method to set the positions of these buttons in a grid format
+    result_button.grid(row = 0, column = 0, padx = 2.5, pady = 10)
+    generate_button.grid(row = 0, column = 1, padx = 2.5, pady = 10)
+    reset_button.grid(row = 0, column = 2, padx = 2.5, pady = 10)
+    exit_button.grid(row = 0, column = 3, padx = 2.5, pady = 10)
+
+Explanation:
+In the above snippet of code, we have used the Button() widget to create the buttons to manipulate the entered data and call the functions we defined earlier. We have set the master parameter of these buttons to the buttons_frame Frame. We have also set the command parameters of each button to the functions they will call. At last, we have used the grid() method to set the positions of these buttons in a grid format.
+Running the application
+Now that we have added all the necessary widgets to the application, it is time to call the mainloop() method along with the object of the Tk() class to run the application.
+Let us consider the following snippet of code illustrating the same.
+File: guiMarksheet.py
+
+    # using the mainloop() method to run the application
+    gui_root.mainloop()
+
+Explanation:
+We have called the mainloop() method to run the application in the above code snippet.
+Hence, the project code is now complete. We will save this python program file and run the following command in the command prompt or terminal to see the output.
+Syntax:
+
+$ python guiMarksheet.py
+
+But before we see the output, the complete project code of the 'Marksheet using Tkinter' is shown below.
+The Complete Project Code
+The following is the project code for the 'Marksheet using Tkinter in Python'.
+File: guiMarksheet.py
+
+# importing the required modules
+from tkinter import *                                   # importing all the modules and widgets from tkinter
+from tkinter import messagebox as mb                    # importing the messagebox module from tkinter
+from PIL import ImageTk, Image, ImageDraw, ImageFont    # importing the ImageTk, Image, ImageDraw and ImageFont modules from PIL
+
+# --------------------- functions ---------------------
+# defining a function to calculate the total
+def calculate_total(sub1, sub2, sub3, sub4, sub5):
+    # adding all the arguments
+    total = sub1 + sub2 + sub3 + sub4 + sub5
+    # returning the total
+    return total
+
+# defining a function to calculate the percentage
+def calculate_percentage(total):
+    # dividing the total by number of subjects (5)
+    percentage = total / 5
+    # returning the percentage
+    return percentage
+
+# defining a function to calculate the grade
+def calculate_grade(percentage):
+    # using the if-elif-else conditional statement
+    # to grade the student as per the percentage
+    # her 'O' stands for Outstanding,
+    # 'A+' and 'A' indicate excellent performance,
+    # 'B+' and 'B' stand for good performance,
+    # 'C' stands for satisfactory performance,
+    # 'D' stands for less than satisfactory performance, and
+    # 'F' stands for unsatisfactory performance indicating Failure
+    if (percentage >= 95.0):
+        return 'O'
+    elif (percentage >= 90.0 and percentage < 95.0):
+        return 'A+'
+    elif (percentage >= 80.0 and percentage < 90.0):
+        return 'A'
+    elif (percentage >= 70.0 and percentage < 80.0):
+        return 'B+'
+    elif (percentage >= 60.0 and percentage < 70.0):
+        return 'B'
+    elif (percentage >= 50.0 and percentage < 60.0):
+        return 'C'
+    elif (percentage >= 33.0 and percentage < 50.0):
+        return 'D'
+    else:
+        return 'F'
+
+# defining a function to calculate the result
+def calculate_result(percentage, sub1, sub2, sub3, sub4, sub5):
+    # using if-else conditional statement to whether the student is pass or fail
+    if (percentage >= 33.0 and sub1 >= 33.0 and sub2 >= 33.0 and sub3 >= 33.0 and sub4 >= 33.0 and sub5 >= 33.0):
+        return 'PASS'
+    else:
+        return 'FAIL'
+
+# defining a function to check the errors
+def check_for_errors():
+    # using if conditional statement to check if the entries are invalid
+    if(marks_One_field.get() == "" or marks_Two_field == "" or marks_Three_field == "" or marks_Four_field == "" or marks_Five_field == ""):
+        # displaying the message box with the error message
+        mb.showerror("Invalid Input", "Marks must be in float data type.")
+
+        # calling the function to reset entries
+        reset_subject_entries()
+
+        # returning -1
+        return -1
+
+# defining a function to display the result
+def display_result():
+    # using the get() method to get subject names
+    sub1 = subject_One_field.get()
+    sub2 = subject_Two_field.get()
+    sub3 = subject_Three_field.get()
+    sub4 = subject_Four_field.get()
+    sub5 = subject_Five_field.get()
+
+    # checking if the strings are empty or not
+    if (sub1 == "" and sub2 == "" and sub3 == "" and sub4 == "" and sub5 == ""):
+        # displaying the message box with the error message
+        mb.showerror("Empty Fields", "Subject fields cannot be empty.")
+
+        # calling the function to reset entries
+        reset_subject_entries()
+    else:
+        # calling the check_for_errors() function and storing the value
+        val = check_for_errors()
+
+        # if the stored value is -1, then return
+        if val == -1:
+            return
+        else:
+            # using the get() method to get the marks and converting them into float
+            marks1 = float(marks_One_field.get())
+            marks2 = float(marks_Two_field.get())
+            marks3 = float(marks_Three_field.get())
+            marks4 = float(marks_Four_field.get())
+            marks5 = float(marks_Five_field.get())
+
+            # using the if-else conditional statement to check if the marks entered are valid and ranging in between 0 to 100
+            if (marks1 >= 0 and marks1 <= 100 and marks2 >= 0 and marks2 <= 100 and marks3 >= 0 and marks3 <= 100 and marks4 >= 0 and marks4 <= 100 and marks5 >= 0 and marks5 <= 100):
+                # calculating the result by calling the functions we created earlier and storing their values
+                total = calculate_total(marks1, marks2, marks3, marks4, marks5)
+                percentage = calculate_percentage(total)
+                grade = calculate_grade(percentage)
+                result = calculate_result(percentage, marks1, marks2, marks3, marks4, marks5)
+
+                # setting the grade to 'F', if the result is 'FAIL'
+                if result == 'FAIL':
+                    grade = 'F'
+
+                # calling the function to disable the entry fields
+                disable_field()
+                
+                # configuring the labels displaying result by setting their text to the corresponding values
+                display_total_label.config(text = total)
+                display_percentage_label.config(text = percentage)
+                display_grade_label.config(text = grade)
+                display_result_label.config(text = result)
+
+                # configuring the state of the 'Generate Marksheet' button to normal
+                generate_button.config(state = "normal")
+            else:
+                # displaying message box with error message
+                mb.showerror("Out of Range", "Marks must be ranging between 0 to 100.")
+
+                # calling the function to reset the entries
+                reset_subject_entries()
+
+# defining a function to generate marksheet as a PNG file
+def generate_marksheet():
+    # using the get() method to get the entries from the entry field
+    # student's information
+    student_name = str(name_field.get())
+    student_dob = str(dob_field.get())
+    student_class = str(class_field.get())
+    regd_num = str(regd_num_field.get())
+    school_name = str(school_field.get())
+    roll_num = str(roll_num_field.get())
+
+    # names of the subjects
+    sub1 = str(subject_One_field.get())
+    sub2 = str(subject_Two_field.get())
+    sub3 = str(subject_Three_field.get())
+    sub4 = str(subject_Four_field.get())
+    sub5 = str(subject_Five_field.get())
+
+    # marks of the subjects
+    marks1 = str(marks_One_field.get())
+    marks2 = str(marks_Two_field.get())
+    marks3 = str(marks_Three_field.get())
+    marks4 = str(marks_Four_field.get())
+    marks5 = str(marks_Five_field.get())
+
+    # using cget() method to retrieve text from the result labels 
+    total = str(display_total_label.cget("text"))
+    percentage = str(display_percentage_label.cget("text"))
+    grade = str(display_grade_label.cget("text"))
+    result = str(display_result_label.cget("text"))
+
+    # importing the image of a report card using
+    # the open() method of the Image module
+    report_card_img = Image.open("reportCard.png")
+    # using the Draw() class of the ImageDraw module
+    # to make 2D drawing interface
+    draw_obj = ImageDraw.Draw(report_card_img)
+    
+    # defining coordinates
+    point1 = 380, 200
+    point2 = 480, 385
+    point3 = 480, 440
+    point4 = 480, 495
+    point5 = 480, 550
+    point6 = 480, 605
+    point7 = 420, 900
+    point8 = 1100, 900
+    point9 = 420, 966.6
+    point10 = 1100, 966.6
+    point11 = 420, 1032.3
+    point12 = 1100, 1032.3
+    point13 = 420, 1100
+    point14 = 1100, 1100
+    point15 = 420, 1166.6
+    point16 = 1100, 1166.6
+    point17 = 700, 1380
+    point18 = 700, 1450
+    point19 = 700, 1520
+    point20 = 700, 1680
+
+    # specifying the fonts for the text
+    fontOne = ImageFont.truetype("verdana.ttf", 70)
+    fontTwo = ImageFont.truetype("verdana.ttf", 40)
+    fontThree = ImageFont.truetype("verdana.ttf", 50)
+
+    # adding text values to the image
+    draw_obj.text(point1, school_name, "black", font = fontOne)
+    draw_obj.text(point2, regd_num, "black", font = fontTwo)
+    draw_obj.text(point3, roll_num, "black", font = fontTwo)
+    draw_obj.text(point4, student_name, "black", font = fontTwo)
+    draw_obj.text(point5, student_dob, "black", font = fontTwo)
+    draw_obj.text(point6, student_class, "black", font = fontTwo)
+    draw_obj.text(point7, sub1, "black", font = fontTwo)
+    draw_obj.text(point8, marks1, "black", font = fontTwo)
+    draw_obj.text(point9, sub2, "black", font = fontTwo)
+    draw_obj.text(point10, marks2, "black", font = fontTwo)
+    draw_obj.text(point11, sub3, "black", font = fontTwo)
+    draw_obj.text(point12, marks3, "black", font = fontTwo)
+    draw_obj.text(point13, sub4, "black", font = fontTwo)
+    draw_obj.text(point14, marks4, "black", font = fontTwo)
+    draw_obj.text(point15, sub5, "black", font = fontTwo)
+    draw_obj.text(point16, marks5, "black", font = fontTwo)
+    draw_obj.text(point17, total, "black", font = fontTwo)
+    draw_obj.text(point18, percentage, "black", font = fontTwo)
+    draw_obj.text(point19, grade, "black", font = fontTwo)
+    draw_obj.text(point20, result, "black", font = fontThree)
+
+    # saving the image file
+    report_card_img.save(rf'{name_field.get()}.png')
+
+    # displaying the image
+    report_card_img.show()
+
+# defining a function to disable the fields
+def disable_field():
+    # disabling all the entry fields by using the config()
+    # method and setting the state parameter to 'disabled'
+    name_field.config(state = "disabled")
+    dob_field.config(state = "disabled")
+    class_field.config(state = "disabled")
+    regd_num_field.config(state = "disabled")
+    school_field.config(state = "disabled")
+    roll_num_field.config(state = "disabled")
+    subject_One_field.config(state = "disabled")
+    subject_Two_field.config(state = "disabled")
+    subject_Three_field.config(state = "disabled")
+    subject_Four_field.config(state = "disabled")
+    subject_Five_field.config(state = "disabled")
+    marks_One_field.config(state = "disabled")
+    marks_Two_field.config(state = "disabled")
+    marks_Three_field.config(state = "disabled")
+    marks_Four_field.config(state = "disabled")
+    marks_Five_field.config(state = "disabled")
+    result_button.config(state = "disabled")
+
+# defining a function to enable the fields
+def enable_field():
+    # enabling all the entry fields by using the config()
+    # method and setting the state parameter to 'normal'
+    name_field.config(state = "normal")
+    dob_field.config(state = "normal")
+    class_field.config(state = "normal")
+    regd_num_field.config(state = "normal")
+    school_field.config(state = "normal")
+    roll_num_field.config(state = "normal")
+    subject_One_field.config(state = "normal")
+    subject_Two_field.config(state = "normal")
+    subject_Three_field.config(state = "normal")
+    subject_Four_field.config(state = "normal")
+    subject_Five_field.config(state = "normal")
+    marks_One_field.config(state = "normal")
+    marks_Two_field.config(state = "normal")
+    marks_Three_field.config(state = "normal")
+    marks_Four_field.config(state = "normal")
+    marks_Five_field.config(state = "normal")
+    result_button.config(state = "normal")
+
+# defining a function to reset entries in the subject's information columns
+def reset_subject_entries():
+    # calling the enable_field() function we defined earlier
+    enable_field()
+
+    # deleting the entries in the field using the delete() method
+    subject_One_field.delete(0, END)
+    subject_Two_field.delete(0, END)
+    subject_Three_field.delete(0, END)
+    subject_Four_field.delete(0, END)
+    subject_Five_field.delete(0, END)
+    marks_One_field.delete(0, END)
+    marks_Two_field.delete(0, END)
+    marks_Three_field.delete(0, END)
+    marks_Four_field.delete(0, END)
+    marks_Five_field.delete(0, END)
+
+    # setting the focus to first subject field using the focus_set() method
+    subject_One_field.focus_set()
+
+# defining a function to clear all entries
+def reset():
+    # calling the reset_subject_entries() method we defined earlier
+    reset_subject_entries()
+
+    # deleting the entries of the fields in the student's information columns
+    name_field.delete(0, END)
+    dob_field.delete(0, END)
+    class_field.delete(0, END)
+    regd_num_field.delete(0, END)
+    school_field.delete(0, END)
+    roll_num_field.delete(0, END)
+
+    # configuring the initial text of the labels
+    display_total_label.config(text = "0")
+    display_percentage_label.config(text = "0")
+    display_grade_label.config(text = "XXXX")
+    display_result_label.config(text = "XXXX")
+
+    # disabling the 'Generate Marksheet' button
+    generate_button.config(state = "disabled")
+
+    # setting the focus to name field using the focus_set() method
+    name_field.focus_set()
+
+# defining a function to exit the application
+def exit():
+    # using the destroy() method to close the application
+    gui_root.destroy()
+
+# main function
+if __name__ == "__main__":
+    # main window
+    # creating an object of the Tk() class
+    gui_root = Tk()
+
+    # setting the title of the application
+    gui_root.title("Marksheet Generator - JAVATPOINT")
+
+    # setting the size and position of the application
+    gui_root.geometry("800x700+650+200")
+    
+    # disabling the resizable option
+    gui_root.resizable(0, 0)
+
+    # configuring the background color of the application to #FCEEF6
+    gui_root.config(bg = "#FCEEF6")
+
+    # setting the icon of the application
+    gui_root.iconbitmap("marksheet_img.ico")
+    
+    # defining frames to provide structure to other widgets
+    header_frame = Frame(gui_root, bg = "#B05D8D")
+    heading_frame = Frame(header_frame, bg = "#B05D8D")
+    subheading_frame = Frame(header_frame, bg = "#5C153E")
+    info_frame = Frame(gui_root, bg = "#FCEEF6")
+    subject_frame = Frame(gui_root, bg = "#FCEEF6")
+    result_frame = Frame(gui_root, bg = "#FCEEF6")
+    buttons_frame = Frame(gui_root, bg = "#FCEEF6")
+
+    # using the pack() method to set the positions of these frames
+    header_frame.pack(fill = "both")
+    heading_frame.pack()
+    subheading_frame.pack(fill = "both")
+    info_frame.pack()
+    subject_frame.pack()
+    result_frame.pack(pady = 15)
+    buttons_frame.pack()
+
+    # ---------------------- The heading_frame Frame ----------------------
+    # importing an image
+    the_image = ImageTk.PhotoImage(Image.open("marksheet_img.png").resize((50, 50), Image.ANTIALIAS))
+
+    # adding some labels to display an image and heading of the application
+    image_label = Label(heading_frame, image = the_image, bg = "#B05D8D")
+    header_label = Label(heading_frame, text = "Marksheet", font = ("verdana", "24", "bold"), bg = "#B05D8D", fg = "#FFFFFF")
+
+    # using the grid() method to set the positions of these labels in a grid format
+    image_label.grid(row = 0, column = 0, padx = 2.5, pady = 5)
+    header_label.grid(row = 0, column = 1, padx = 2.5, pady = 5)
+
+    # ---------------------- The subheading_frame Frame ----------------------
+    # adding a label to display sub-heading of the application
+    subheader_label = Label(subheading_frame, text = "Create your own Marksheet", font = ("verdana", "10"),bg = "#5C153E", fg = "#FEB9E1")
+
+    # using the pack() method to set the position of this label
+    subheader_label.pack(pady = 5)
+
+    # ---------------------- The info_frame Frame ----------------------
+    # defining some labels to display text asking user to enter details
+    info_label = Label(info_frame, text = "Student's Information", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    name_label = Label(info_frame, text = "Name of the Student:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    dob_label = Label(info_frame, text = "Date of Birth:", bg = "#FCEEF6", font = ("Times New Roman", "11", "bold"), fg = "#B05D8D")
+    class_label = Label(info_frame, text = "Programme/Class:", bg = "#FCEEF6", font = ("Times New Roman", "11", "bold"), fg = "#B05D8D")
+    regd_num_label = Label(info_frame, text = "Registration Number:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    school_label = Label(info_frame, text = "Name of the Institution:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    roll_num_label = Label(info_frame, text = "Roll Number:", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+
+    # using the grid() method to set the positions of these labels in a grid format
+    info_label.grid(row = 0, column = 0, padx = 5, pady = 10, sticky = W)
+    name_label.grid(row = 1, column = 0, padx = 5, pady = 5, sticky = E)
+    dob_label.grid(row = 1, column = 2, padx = 5, pady = 5, sticky = E)
+    class_label.grid(row = 2, column = 0, padx = 5, pady = 5, sticky = E)
+    regd_num_label.grid(row = 2, column = 2, padx = 5, pady = 5, sticky = E)
+    school_label.grid(row = 3, column = 0, padx = 5, pady = 5, sticky = E)
+    roll_num_label.grid(row = 3, column = 2, padx = 5, pady = 5, sticky = E)
+    
+    # defining some entry fields for the user to enter the asked details
+    name_field = Entry(info_frame, width = 25, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    dob_field = Entry(info_frame, width = 10, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    class_field = Entry(info_frame, width = 25, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    regd_num_field = Entry(info_frame, width = 10, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    school_field = Entry(info_frame, width = 25, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    roll_num_field = Entry(info_frame, width = 10, font = ("Times New Roman", "11"), bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+
+    # using the grid() method to set the positions of these fields in a grid format 
+    name_field.grid(row = 1, column = 1, padx = 5, pady = 5)
+    dob_field.grid(row = 1, column = 3, padx = 5, pady = 5)
+    class_field.grid(row = 2, column = 1, padx = 5, pady = 5)
+    regd_num_field.grid(row = 2, column = 3, padx = 5, pady = 5)
+    school_field.grid(row = 3, column = 1, padx = 5, pady = 5)
+    roll_num_field.grid(row = 3, column = 3, padx = 5, pady = 5)
+
+    # ---------------------- The subject_frame Frame ----------------------
+    # defining some labels to display text asking user to enter their subject's information
+    subjects_label = Label(subject_frame, text = "Subjects Information", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    subject_name_label = Label(subject_frame, text = "Subject Name", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    marks_label = Label(subject_frame, text = "Marks Obtained", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    marks_extra_label = Label(subject_frame, text = "(Out of 100)", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    subject_One_label = Label(subject_frame, text = "Subject I :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Two_label = Label(subject_frame, text = "Subject II :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Three_label = Label(subject_frame, text = "Subject III :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Four_label = Label(subject_frame, text = "Subject IV :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+    subject_Five_label = Label(subject_frame, text = "Subject V :", font = ("Times New Roman", "11", "bold"), bg = "#FCEEF6", fg = "#B05D8D")
+
+    # using the grid() method to set the position of these labels in a grid format
+    subjects_label.grid(row = 0, column = 0, padx = 5, pady = 10, sticky = W)
+    subject_name_label.grid(row = 1, column = 1, padx = 5)
+    marks_label.grid(row = 1, column = 2, padx = 5)
+    marks_extra_label.grid(row = 2, column = 2, padx = 5, pady = 2.5)
+    subject_One_label.grid(row = 3, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Two_label.grid(row = 4, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Three_label.grid(row = 5, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Four_label.grid(row = 6, column = 0, padx = 5, pady = 5, sticky = E)
+    subject_Five_label.grid(row = 7, column = 0, padx = 5, pady = 5, sticky = E)
+
+    # defining some entry fields for the users to enter the asked details
+    subject_One_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_One_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Two_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Two_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Three_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Three_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Four_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Four_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    subject_Five_field = Entry(subject_frame, width = 30, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+    marks_Five_field = Entry(subject_frame, width = 5, font = ("Times New Roman", "11"), justify = CENTER, bg = "#FFFFFF", fg = "#5C153E", relief = GROOVE)
+
+    # using the grid() method to set the positions of these fields in a grid format
+    subject_One_field.grid(row = 3, column = 1, padx = 5, pady = 5)
+    marks_One_field.grid(row = 3, column = 2, padx = 5, pady = 5)
+    subject_Two_field.grid(row = 4, column = 1, padx = 5, pady = 5)
+    marks_Two_field.grid(row = 4, column = 2, padx = 5, pady = 5)
+    subject_Three_field.grid(row = 5, column = 1, padx = 5, pady = 5)
+    marks_Three_field.grid(row = 5, column = 2, padx = 5, pady = 5)
+    subject_Four_field.grid(row = 6, column = 1, padx = 5, pady = 5)
+    marks_Four_field.grid(row = 6, column = 2, padx = 5, pady = 5)
+    subject_Five_field.grid(row = 7, column = 1, padx = 5, pady = 5)
+    marks_Five_field.grid(row = 7, column = 2, padx = 5, pady = 5)
+
+    # ---------------------- The result_frame Frame ----------------------
+    # defining some labels to display the result
+    total_label = Label(result_frame, text = "Total:", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_total_label = Label(result_frame, text = "0", font = ("Times New Roman", "12"), bg = "#FCEEF6", fg = "#5C153E")
+    percentage_label = Label(result_frame, text = "Percentage (%):", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_percentage_label = Label(result_frame, text = "0", font = ("Times New Roman", "12"), bg = "#FCEEF6", fg = "#5C153E")
+    grade_label = Label(result_frame, text = "Grade:", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_grade_label = Label(result_frame, text = "XXXX", font = ("Times New Roman", "12"), bg = "#FCEEF6", fg = "#5C153E")
+    result_label = Label(result_frame, text = "Result:", font = ("Times New Roman", "12", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+    display_result_label = Label(result_frame, text = "XXXX", font = ("Times New Roman", "14", "bold"), bg = "#FCEEF6", fg = "#5C153E")
+
+    # using the grid() method to set the positions of these labels in a grid format
+    total_label.grid(row = 0, column = 0, padx = 5, pady = 5, sticky = W)
+    display_total_label.grid(row = 0, column = 1, padx = 5, pady = 5, sticky = W)
+    percentage_label.grid(row = 0, column = 2, padx = 5, pady = 5, sticky = W)
+    display_percentage_label.grid(row = 0, column = 3, padx = 5, pady = 5, sticky = W)
+    grade_label.grid(row = 0, column = 4, padx = 5, pady = 5, sticky = W)
+    display_grade_label.grid(row = 0, column = 5, padx = 5, pady = 5, sticky = W)
+    result_label.grid(row = 0, column = 6, padx = 5, pady = 5, sticky = W)
+    display_result_label.grid(row = 0, column = 7, padx = 5, pady = 5, sticky = W)
+
+    # ---------------------- The buttons_frame Frame ----------------------
+    # defining some buttons to manipulate the functions
+    result_button = Button(buttons_frame, text = "Display Result", font = ("verdana", "10"), width = 16, bg = "#64F0AB", fg = "#0C4529", activebackground = "#3AC982", activeforeground = "#FFFFFF", relief = GROOVE, command = display_result)
+    generate_button = Button(buttons_frame, text = "Generate Marksheet", font = ("verdana", "10"), width = 20, bg = "#6EF5FA", fg = "#144E50", activebackground = "#1DCAD1", activeforeground = "#FFFFFF", relief = GROOVE, state = "disabled", command = generate_marksheet)
+    reset_button = Button(buttons_frame, text = "Reset Entries", font = ("verdana", "10"), width = 15, bg = "#E3FF00", fg = "#454B14", activebackground = "#A7B817", activeforeground = "#FFFFFF", relief = GROOVE, command = reset)
+    exit_button = Button(buttons_frame, text = "Exit", font = ("verdana", "10"), width = 6, bg = "#FF0007", fg = "#FFFFFF", activebackground = "#AE1318", activeforeground = "#FFFFFF", relief = GROOVE, command = exit)
+
+    # using the grid() method to set the positions of these buttons in a grid format
+    result_button.grid(row = 0, column = 0, padx = 2.5, pady = 10)
+    generate_button.grid(row = 0, column = 1, padx = 2.5, pady = 10)
+    reset_button.grid(row = 0, column = 2, padx = 2.5, pady = 10)
+    exit_button.grid(row = 0, column = 3, padx = 2.5, pady = 10)
+
+    # using the mainloop() method to run the application
+    gui_root.mainloop()
+
+Output:
+Image 1: Marksheet Generator - Application
+
+Image 2: File: John Miller.png - Report Card
+
+
+
+Next TopicA Colour game using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

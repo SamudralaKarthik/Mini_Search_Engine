@@ -1,0 +1,148 @@
+
+
+
+
+next →
+← prev
+
+Control Statements in Python
+Loops are employed in Python to iterate over a section of code continually. Control statements are designed to serve the purpose of modifying a loop's execution from its default behaviour. Based on a condition, control statements are applied to alter how the loop executes. In this tutorial, we are covering every type of control statement that exists in Python.
+Control Statements in Python
+if Statements
+The if statement is arguably the most used statement to control loops. For instance:
+Code
+
+# Python program to show how if statements control loops
+
+n = 5
+for i in range(n):
+    if i < 2:
+        i += 1
+    if i > 2:
+        i -= 2
+    print(i)
+
+Output:
+1
+2
+2
+1
+2
+
+Break Statements
+In Python, the break statement is employed to end or remove the control from the loop that contains the statement. It is used to end nested loops (a loop inside another loop), which are shared with both types of Python loops. The inner loop is completed, and control is transferred to the following statement of the outside loop.
+Code
+
+# Python program to show how to control the flow of loops with the break statement
+
+Details = [[19, 'Itika', 'Jaipur'], [16, 'Aman', 'Bihar']]
+for candidate in Details:
+    age = candidate[0]
+    if age <= 18:
+        break
+    print (f"{candidate[1]} of state {candidate[2]} is eligible to vote")
+
+Output:
+Itika of state Jaipur is eligible to vote
+
+In the above code, if a candidate's age is less than or equal to 18, the interpreter won't generate the statement of eligibility. Otherwise, the interpreter will print a message mentioning that the candidate is eligible to vote in the console.
+Continue Statements
+When a Python interpreter sees a continue statement, it skips the present iteration's execution if the condition is satisfied. If the condition is not satisfied, it allows the implementation of the current iteration. It is employed to keep the program running even when it meets a break while being executed.
+Code
+
+# Python program to show how to control the flow of a loop using a continue statement
+# Printing only the letters of the string
+for l in 'I am a coder':
+    if l == ' ':
+        continue
+    print ('Letter: ', l)
+
+Output:
+Letter:  I
+Letter:  a
+Letter:  m
+Letter:  a
+Letter:  c
+Letter:  o
+Letter:  d
+Letter:  e
+Letter:  r
+
+In this code, when the if-statement encounters a space, the loop will continue to the following letter without printing the space.
+Pass Statements
+If the condition is met, the pass statement, or a null operator, is used by the coder to leave it as it is. Python's pass control statement changes nothing and moves on to the following iteration without stopping the execution or skipping any steps after completing the current iteration.
+A coder can put the pass statement to prevent the interpreter from throwing an error when a loop or a code block is left empty.
+Code
+
+# Python program to show how to create empty code blocks using a pass statement
+for l in 'Python':
+    if l == 't':
+        pass
+    print('Letter: ', l)
+
+Output:
+Letter:  P
+Letter:  y
+Letter:  t
+Letter:  h
+Letter:  o
+Letter:  n
+
+Even if the condition was satisfied in the code above, as we can see, the pass statement had no effect, and execution went on to the subsequent iteration.
+else in Loop
+The else statement is used with the if clause, as we have previously learned. Python supports combining the else keyword with the for and the while loop. After the code block of the loop, the else block is displayed. After completing all the iterations, the interpreter will carry out the code in the else code block. Only when the else block has been run does the program break from the loop.
+Code
+
+# Python program to show how to use else statements with a loop
+for n in range(5):
+   
+print(f"Current iteration: {n+1}")
+else:
+    print("This is the else block")
+print("Outside the loop")
+
+Output:
+Current iteration: 1
+Current iteration: 2
+Current iteration: 3
+Current iteration: 4
+Current iteration: 5
+This is the else block
+Outside the loop
+
+match Statements
+A match statement compares the value of an expression to a series of patterns. These patterns are presented as some case blocks. Contrary to appearances, this is more akin to pattern checking in other languages like Rust than to switching clauses in C, Java (or any other coding languages). It can also pull components (sequential elements or object characteristics) from the values into variables, and only the first matching pattern is executed.
+The most straightforward form contrasts a subject value with one or more regular expressions:
+Code
+
+# Python program to show how match control statement is used
+def error(error_status):
+    match error_status:
+        case 400:
+            return "Error 400: Bad request"
+        case 404:
+            return "Error 404: Link Not found"
+        case 418:
+            return "Error 418: Server Is Down"
+        case _:
+            return "Check Your Internet Connection"
+print(error(400))
+print(error(404))
+
+Output:
+Error 400: Bad request
+Error 404: Link Not found
+
+
+
+Next TopicHow to Plot Histogram in Python
+
+
+
+
+← prev
+next →
+
+
+
+

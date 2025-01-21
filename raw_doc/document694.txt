@@ -1,0 +1,126 @@
+
+
+
+
+next →
+← prev
+
+StandardScaler in Sklearn
+When and How to Use StandardScaler?
+When the features of the given dataset fluctuate significantly within their ranges or are recorded in various units of measurement, StandardScaler enters the picture.
+The data are scaled to a variance of 1 after the mean is reduced to 0 via StandardScaler. But when determining the empirical mean of the data and standard deviation, outliers present in data have a significant impact that reduces the spectrum of characteristic values.
+Many machine learning algorithms may encounter issues due to these variations in the starting features. For algorithms that calculate distance, for instance, if any of the dataset's features have values having large or completely different ranges, that particular feature of the dataset will control the distance calculation.
+The StandardScaler function of sklearn is based on the theory that the dataset's variables whose values lie in different ranges do not have an equal contribution to the model's fit parameters and training function and may even lead to bias in the predictions made with that model.
+Therefore, before including the features in the machine learning model, we must normalize the data (µ = 0, σ = 1). Standardization in feature engineering is commonly employed to address this potential issue.
+Standardizing using Sklearn
+
+sklearn.preprocessing.StandardScaler(*, copy = True, with_mean = True, with_std = True)
+
+By eliminating the mean from the features and scaling them to unit variance, features are standardised using this function.
+The formula for calculating a feature's standard score is z = (x - u) / s, where u is the training feature's mean (or zero if with_mean = False) and s is the standard deviation of the sample (or one if with_std = False).
+By calculating the pertinent statistics on the features in the training set, centring and scaling are applied independently to each feature. Then, for usage with later samples using transform(), the fit() method stores the mean and standard deviation.
+Parameters:
+
+copy (bool, default = True):- If this parameter is set to True, try to steer clear of copies and scale the samples in place instead. This isn't necessarily guaranteed to function in place; for instance, the function might still return a copy if the input is not in the form of a NumPy array or scipy.sparse CSR matrix.
+with_mean (bool, default = True):- If the parameter is set to True, scale the data after centring it. When applied to sparse matrices, this fails (and raises an exception), as centring them necessitates the construction of a dense matrix that, in most usage circumstances, is expected to be too huge to fit in the ram.
+with_std (bool, default = True):- This parameter scales the input data to the unit variance if it is set to true (or we can say it makes unit standard deviation).
+
+Attributes:
+
+scale_ (ndarray having shape of (n_features,) or None):- Data is relatively scaled for each feature with zero mean and unit variance.
+mean_ (ndarray having shape of (n_features,) or None):- It is the training dataset's average value for every feature. When the argument with_mean is set to False, this value equals None.
+var_ (ndarray having shape of (n_features,) or None):- It is the value of each feature's variance in the training dataset. It is used to determine the scale of the features. When the argument with_std is set to False, this value equals None.
+n_features_in_ (of _int type):- This attribute gives the number of features spotted when fitting.
+feature_names_in_ (ndarray having shape as (n_features_in_,)):- This attribute is the features identified by names during fitting. X is only defined when all of its feature names are of datatype string.
+n_samples_seen_ ( of int type or a ndarray having shape as (n_features,)):- This gives the number of samples that the estimator examined for each feature.
+
+Methods of the StandardScaler Class
+
+
+fit(X[, y, sample_weight])
+This method calculates the mean and the standard deviation to use later for scaling the data.
+
+
+fit_transform(X[, y])
+This method fits the parameters of the data and then transforms it.
+
+
+get_feature_names_out([input_features])
+This method obtains the feature names for the transformation.
+
+
+get_params([deep])
+This method gives the parameters of the particular estimator.
+
+
+inverse_transform(X[, copy])
+It reduces the data's size to match its original form.
+
+
+partial_fit(X[, y, sample_weight])
+The mean and the standard deviation on X are computed online for later scaling.
+
+
+set_params(**params)
+This method is used to set the value of the estimator's parameters.
+
+
+transform(X[, copy])
+This method transforms the data by using parameters already stored in the class.
+
+
+Example of StandardScaler
+Firstly, we will import the required libraries. To use the StandardScaler function, we need to import the Sklearn library.
+Then we will load the iris dataset. We can import the IRIS dataset from the sklearn.datasets library.
+We will create an object of the StandardScaler class.
+Separating the independent and target features.
+We will use the fit transform() method to implement the transformation to the dataset.
+Syntax:
+
+object_ = StandardScaler()
+object_.fit_transform(features)
+
+We initially built an instance of the StandardScaler() method following the syntax mentioned above. Additionally, we standardise the data by using fit_transform() together with the provided object.
+Code
+
+# Python program to standardize the data
+
+# Importing the required library
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_iris
+
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)
+
+# Printing 3 rows of original data
+print(X[:3, :])
+
+# Creating an object of the StandardScaler class
+std_scaler = StandardScaler()
+
+# Printing 3 rows of the transformed data
+print(std_scaler.fit_transform(X)[:3, :])
+print(std_scaler.mean_)
+
+Output
+[[5.1 3.5 1.4 0.2]
+ [4.9 3.  1.4 0.2]
+ [4.7 3.2 1.3 0.2]]
+[[-0.90068117  1.01900435 -1.34022653 -1.3154443 ]
+ [-1.14301691 -0.13197948 -1.34022653 -1.3154443 ]
+ [-1.38535265  0.32841405 -1.39706395 -1.3154443 ]]
+[5.84333333 3.05733333 3.758      1.19933333]
+
+
+
+Next TopicFilter List in Python
+
+
+
+
+← prev
+next →
+
+
+
+

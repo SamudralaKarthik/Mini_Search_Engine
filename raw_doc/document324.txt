@@ -1,0 +1,146 @@
+
+
+
+
+next →
+← prev
+
+Obfuscating a Python program
+In the following tutorial, we will understand how to obfuscate a python program. We will use a Python package known as pyarmor for Obfuscation.
+We might sometimes come across a scenario where we have to deliver the code directly to a client for certain reasons. However, we will lose control of the code by performing such a function. In such cases, we might encrypt the script to protect it, retain the control, and include few fallback conditions for controlling the dependency, just like if we delivered code to use only for a certain amount of time.
+In the following tutorial, we will be using a function consisting of the above capabilities to address the above problems. We will be using the pyarmor python library for the Obfuscation of any Python code.
+So, let"s get started.
+Creating a basic function
+We will start by creating a new Python program file in order to implement Obfuscation on Python code. Within the file, we will define an inference function and encrypt it later.
+Let us consider the following snippet of code for the inference function.
+File: func.py
+
+# importing the required modules
+import os
+import json
+import sys
+from datetime import datetime
+
+# defining an inference function
+def infer(person_name = "", tag = True):
+    '''
+    if the present year is 2021, then inference function will execute properly, else it fails.
+    Here the attribute variable contains the string version of the date in MM-DD-YYYY format
+    '''
+
+    print("Hello " + person_name + ", the inference function has been initiated successfully")
+
+    atr = str(datetime.now().strftime('%m-%d-%Y'))
+    resp = "Your license has been expired, please contact us."
+    expiration_year = int(2023)
+
+    try:
+        assert int(atr.split('-')[-1]) == expiration_year, resp
+    except AssertionError as e:
+        print(resp)
+        sys.exit()
+
+    # if the above assertion is True, it will reach until this point,
+    # otherwise it will stop in the previous line.
+
+    if tag:
+        print("Inference function has been done properly!")
+        return True
+    else:
+        return False
+
+if __name__ == "__main__":
+    _ = infer(person_name = "Peter Parker")
+
+    '''
+    Function outputs,
+    Case 1: if expiration_year = int(2021)
+    Hello Peter Parker, the inference function has been intiated successfully
+    Inference function has been done properly!
+    [Finished in 0.2s]
+
+    Case 2: if expiration_year = int(2022)
+    Hello Peter Parker, the inference function has been intiated successfully
+    Inference function has been done properly!
+    [Finished in 0.2s]
+
+    Case 3: if expiration_year = int(2023)
+    Hello Peter Parker, the inference function has been intiated successfully
+    You license has been expired, please contact us.
+    [Finished in 0.2s]
+    '''
+
+Output:
+Hello Peter Parker, the inference function has been initiated successfully
+Your license has been expired, please contact us.
+
+Explanation:
+In the above snippet of code, we have imported some required modules. We then defined an inference function as infer(), which accepts two parameters - person_name and tag = True. We have then printed a statement for the user initiating the inference function. Later, we defined a variable as atr that stores the current date and a string variable as resp. We have also assigned another variable as expiration_year to 2023. We have then used the try-exception method in order to handle any exception if raised. At last, we have used the if-else conditional statements to print a statement as per the situation. At last, we have assigned __name__ to "__main__" to execute the inference function.
+Now, let us save this python file in a folder.
+
+Encrypting the file using pyarmor
+The process of encrypting the file with the help of pyarmor is divided into two steps:
+Step 1: Installing the pyarmor package
+We can install the pyarmor package using the pip installer as shown below:
+Syntax:
+
+$ pip install pyarmor
+
+
+
+Step 2: Encrypting the python file
+We can encrypt the file by typing the following command in the command prompt.
+Syntax:
+
+$ pyarmor obfuscate --restrict=0 <filename>
+
+Now, let us implement the above command on the func.py file.
+Syntax:
+
+$ pyarmor obfuscate --restrict=0 func.py
+
+
+
+Now, if we open the folder consisting of the original func.py file, we will observe a new subfolder created known as dist.
+Within the dist folder, we will find another folder as pytransform and an encrypted func.py file.
+Now, let us see the contents inside this file.
+File: func.py (encrypted)
+
+from pytransform import pyarmor_runtime
+pyarmor_runtime()
+__pyarmor__(__name__, __file__, b'\x50\x59\x41\x52\x4d\x4f\x52\x00\...', 2)
+
+
+
+Importing the Inference function
+Once we are done, until this section, now let us try importing this encrypted func.py in a new python file known as new.py, which we created within the dist folder.
+The mandatory keys that allow us to decrypt the func.py at run-time are taken care of using pyarmor. Its presence exists in the pytransform folder; hence, creating the code unreadable to other's eyes.
+However, if we would like to do some modifications to the actual func.py script, we have to start from step 1 continue following the same steps.
+
+Let us consider the following snippet of code that we have to type within the new.py file.
+File: new.py
+
+# importing the inference function definition inside the func.py file
+from func import infer
+
+_ = infer(person_name = "Tony Stark")
+
+Output:
+Hello Tony Stark, the inference function has been initiated successfully
+Your license has been expired, please contact us.
+
+Explanation:
+In the above snippet of code, we have imported the inference function of the func.py in the new python file that we created as new.py. We have then executed that function with the same configuration as of the func.py.
+
+
+Next TopicConvert string to dictionary in Python
+
+
+
+
+← prev
+next →
+
+
+
+

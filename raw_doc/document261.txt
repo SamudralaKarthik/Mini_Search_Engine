@@ -1,0 +1,162 @@
+
+
+
+
+next →
+← prev
+
+Convert dataframe into list
+In this tutorial, we will learn how we can convert the dataframes into a simple Python list. We will learn about all the methods that we can use to convert dataframe into lists. Before proceeding with the methods, let's have a look at what a dataframe is and how we can create a dataframe in Python using Panda.
+Pandas Dataframe
+The dataframes in the panda module is a 2-D (two-dimensional) size module that is potentially in the heterogeneous tabular data structure with its axes (row & columns), labelled with variables. In simple words, a data frame is a 2-D data structure in which the data is aligned in tabular form.
+Creating a Dataframe in Pandas
+We can create a basic dataframe by the following program using the Pandas module in Python:
+Example -
+
+# Importing Panda module as jtp
+import pandas as jtp
+GivenData = {'Famous Name':['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker' ],
+             'Age': [42, 95, 38, 18] }  
+# Creating DataFrame with DataFrame() function 
+dataFrame = jtp.DataFrame(GivenData)  
+# Print the dataframe as result 
+print(dataFrame)
+
+Output:
+      Famous Name     Age
+0      Stark Iron             42
+1   Captain Rogers       95
+2     Hulk banner       38
+3    Spidy Parker       18
+
+So, that's how we can create a dataframe using the Panda module and after looking at the output, we can also figure out how a dataframe looks like.
+Converting Dataframe into List
+We will use the tolist() function from the Panda module in our program in the following way while converting the given dataframe into list:
+
+dataframe.tolist()
+
+Let's use this function in an example to understand the working of the tolist() function.
+Example:
+
+# Importing Panda module as jtp
+import pandas as jtp
+GivenData = {'Famous Name':['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker' ],
+             'Age': [42, 95, 38, 18] }  
+# Creating DataFrame with DataFrame() function 
+dataFrame = jtp.DataFrame(GivenData)  
+# Converting dataframe into a list
+List = dataFrame.values.tolist()
+# Print converted list data as result
+print(List)
+
+Output:
+[['Stark Iron', 42], ['Captain Rogers', 95], ['Hulk banner', 38], ['Spidy Parker', 18]]
+
+Methods to Convert Dataframe into List:
+The dataframe can be converted into a Python list in many ways. In this section, we will discuss all the methods that we are going to use to convert a given dataframe into a list. Here, we will use the following four methods with the help of the tolist() function:
+
+Converting dataframe while containing all rows
+Converting dataframe into a nested list
+Converting dataframe into a nested list of columns
+Converting dataframe into a list with column names included
+
+Now, let's learn about each method with an example to understand them in a better way.
+Method 1: Converting dataframe while containing all rows
+In this method, we will convert a given dataframe into a list that will contain all the rows of a particular column from the dataframe.
+Look at the following program to understand the implementation of this method:
+Example -
+
+# Importing Panda module as jtp
+import pandas as jtp
+GivenData = {'Famous Name':['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker' ],
+             'Age': [42, 95, 38, 18] }  
+# Creating DataFrame with DataFrame() function 
+dataFrame = jtp.DataFrame(GivenData)  
+# Converting dataframe Famous Names column into a single list
+FamousNames = dataFrame['Famous Name'].tolist()
+# Printing the converted list data
+print(FamousNames)
+
+Output:
+['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker']
+
+So, as we can see in the output that we have converted the famous name column of defined dataframe into a single list and printed it in the output.
+Method 2: Converting dataframe into a nested list
+In this method, we will convert the given dataframe into a nested list that will contain all the rows of all the columns from the dataframe separately.
+We will use this method in the following example to understand its implementation:
+Example -
+
+# Importing Pandas module as jtp
+import pandas as jtp
+GivenData = {'Famous Name':['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker' ],
+             'Age': [42, 95, 38, 18] }  
+# Creating DataFrame with DataFrame() function 
+dataFrame = jtp.DataFrame(GivenData)  
+# Initializing empty list
+ResultList = []
+
+# Using for loop to iterating through dataframe columns
+for column in dataFrame.columns:
+    listing = dataFrame[column].tolist()
+    ResultList.append(listing) # appending dataframe columns into list
+
+# Print the converted list data
+print(ResultList)
+
+Output:
+[['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker'], [42, 95, 38, 18]]
+
+Method 3: Converting dataframe into a nested list of columns
+Under this method, we will be converting a given dataframe into a list that will contain multiple lists in it that are having all the columns of a row.
+Look at the following program to understand the implementation of this method:
+Example -
+
+# Importing Panda module as jtp
+import pandas as jtp
+GivenData = {'Famous Name':['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker' ],
+             'Age': [42, 95, 38, 18] }  
+# Creating DataFrame with DataFrame() function 
+dataFrame = jtp.DataFrame(GivenData)  
+# Converting dataframe into a list
+List = dataFrame.values.tolist()
+# Print converted list data as result
+print(List)
+
+Output:
+[['Stark Iron', 42], ['Captain Rogers', 95], ['Hulk banner', 38], ['Spidy Parker', 18]]
+
+That's how we can use this method to convert the given dataframe into a list containing multiple lists of having data from all columns and rows.
+Method 4: Converting dataframe into list with column names included
+We use this method when we want to convert the given dataframe into a list that contains multiple lists having all the columns with column names of dataframe along with rows.
+We will use this method in the following example to understand its implementation:
+Example -
+
+# Importing Panda module as jtp
+import pandas as jtp
+GivenData = {'Famous Name':['Stark Iron', 'Captain Rogers', 'Hulk banner', 'Spidy Parker' ],
+             'Age': [42, 95, 38, 18] }  
+# Creating DataFrame with DataFrame() function 
+dataFrame = jtp.DataFrame(GivenData)
+
+# Converting dataframe into multiple lists
+listing = [dataFrame.columns.values.tolist()] + dataFrame.values.tolist()
+# Printing the converted list data
+print(listing)
+
+Output:
+[['Famous Name', 'Age'], ['Stark Iron', 42], ['Captain Rogers', 95], ['Hulk banner', 38], ['Spidy Parker', 18]]
+
+*************
+
+
+Next TopicANOVA Test in Python
+
+
+
+
+← prev
+next →
+
+
+
+

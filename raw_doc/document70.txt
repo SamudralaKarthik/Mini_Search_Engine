@@ -1,0 +1,91 @@
+
+
+
+
+next →
+← prev
+
+Python Class and Objects
+We have already discussed in previous tutorial, a class is a virtual entity and can be seen as a blueprint of an object. The class came into existence when it instantiated. Let's understand it by an example.
+Suppose a class is a prototype of a building. A building contains all the details about the floor, rooms, doors, windows, etc. we can make as many buildings as we want, based on these details. Hence, the building can be seen as a class, and we can create as many objects of this class.
+On the other hand, the object is the instance of a class. The process of creating an object can be called instantiation.
+In this section of the tutorial, we will discuss creating classes and objects in Python. We will also discuss how a class attribute is accessed by using the object.
+Creating classes in Python
+In Python, a class can be created by using the keyword class, followed by the class name. The syntax to create a class is given below.
+Syntax
+
+class ClassName:  
+    #statement_suite   
+
+In Python, we must notice that each class is associated with a documentation string which can be accessed by using <class-name>.__doc__. A class contains a statement suite including fields, constructor, function, etc. definition.
+Consider the following example to create a class Employee which contains two fields as Employee id, and name.
+The class also contains a function display(), which is used to display the information of the Employee.
+Example
+
+class Employee:  
+    id = 10 
+    name = "Devansh"  
+    def display (self):  
+        print(self.id,self.name)  
+
+Here, the self is used as a reference variable, which refers to the current class object. It is always the first argument in the function definition. However, using self is optional in the function call.
+The self-parameter
+The self-parameter refers to the current instance of the class and accesses the class variables. We can use anything instead of self, but it must be the first parameter of any function which belongs to the class.
+Creating an instance of the class
+A class needs to be instantiated if we want to use the class attributes in another class or method. A class can be instantiated by calling the class using the class name.
+The syntax to create the instance of the class is given below.
+
+<object-name> = <class-name>(<arguments>)  
+
+The following example creates the instance of the class Employee defined in the above example.
+Example
+
+class Employee:  
+    id = 10 
+    name = "John"  
+    def display (self):  
+        print("ID: %d \nName: %s"%(self.id,self.name))  
+# Creating a emp instance of Employee class
+emp = Employee()  
+emp.display()  
+
+Output:
+ID: 10 
+Name: John
+
+In the above code, we have created the Employee class which has two attributes named id and name and assigned value to them. We can observe we have passed the self as parameter in display function. It is used to refer to the same class attribute.
+We have created a new instance object named emp. By using it, we can access the attributes of the class.
+Delete the Object
+We can delete the properties of the object or object itself by using the del keyword. Consider the following example.
+Example
+
+class Employee:
+    id = 10
+    name = "John"
+
+    def display(self):
+        print("ID: %d \nName: %s" % (self.id, self.name))
+    # Creating a emp instance of Employee class
+
+emp = Employee()
+
+# Deleting the property of object
+del emp.id
+# Deleting the object itself
+del emp
+emp.display()
+
+It will through the Attribute error because we have deleted the object emp.
+
+
+Next TopicPython Constructors
+
+
+
+
+← prev
+next →
+
+
+
+

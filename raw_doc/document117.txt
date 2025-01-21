@@ -1,0 +1,604 @@
+
+
+
+
+next →
+← prev
+
+How to print pattern in Python
+In Python, for loop is used to print the various patterns. Printing the various patterns are most common asked programming questions in the interview. The multiple for loops are used to print the patterns where the first outer loop is used to print the number of rows, and the inner loop is used to print the number of columns. Most of the patterns use the following concepts.
+
+The outer loop to print the number of rows.
+The inner loops to print the number of columns.
+The variable to print whitespace according to the required place in Python.
+
+In this tutorial, we will discuss a few common patterns.
+Print Pyramid, Star, and diamond pattern in Python
+In this section, we will learn the common pyramid patterns.
+Pattern - 1: Simple pyramid pattern
+Example -
+
+# This is the example of print simple pyramid pattern
+n = int(input("Enter the number of rows"))
+# outer loop to handle number of rows
+for i in range(0, n):
+    # inner loop to handle number of columns
+    # values is changing according to outer loop
+        for j in range(0, i + 1):
+            # printing stars
+            print("* ", end="")     
+
+        # ending line after each row
+        print()
+
+Output:
+* 
+* * 
+* * * 
+* * * * 
+* * * * *
+
+Explanation:
+In the above code, we have initialized the n variable to enter the number of rows for the pattern. We entered n = 5, the range of outer for loop will be 0 to 4.
+
+The iteration of the inner for loop depends on the outer loop. The inner loop is responsible to print the number of columns.
+In the first iteration, the value of i is 0, and it increased by 1, so it becomes 0+1, now inner loop iterated first time and print one star(*).
+In the second iteration, the value of i is 1 and it increased by 1, so it becomes 1+1, now inner loop iterated two times and print two-star (*).
+The end argument prevents to jump into another line. It will printer the star until the loop is valid.
+The last print statement is responsible for ending the line after each row.
+
+Pattern - 2: Reverse right angle pyramid
+Example -
+
+# This is the example of print simple reversed right angle pyramid pattern
+rows = int(input("Enter the number of rows:"))
+k = 2 * rows - 2  # It is used for number of spaces
+for i in range(0, rows):
+    for j in range(0, k):
+        print(end=" ")
+    k = k - 2   # decrement k value after each iteration
+    for j in range(0, i + 1):
+        print("* ", end="")  # printing star
+    print("")
+
+Output:
+      * 
+     * * 
+    * * * 
+   * * * * 
+  * * * * *
+
+Pattern - 3: Printing Downward half - Pyramid
+Code -
+
+rows = int(input("Enter the number of rows: "))
+
+# the outer loop is executing in reversed order
+for i in range(rows + 1, 0, -1):  
+    for j in range(0, i - 1):
+        print("*", end=' ')
+    print(" ")
+
+Output:
+Enter the number of rows: 5
+* * * * *  
+* * * *  
+* * *  
+* *  
+*  
+
+Pattern - 4: Printing Triangle Pyramid
+Code -
+
+n = int(input("Enter the number of rows: "))
+m = (2 * n) - 2
+for i in range(0, n):
+    for j in range(0, m):
+        print(end=" ")
+    m = m - 1  # decrementing m after each loop
+    for j in range(0, i + 1):
+        # printing full Triangle pyramid using stars
+        print("* ", end=' ')
+    print(" ")
+
+Output:
+Enter the number of rows: 10
+                  *   
+                 *  *   
+                *  *  *   
+               *  *  *  *   
+              *  *  *  *  *   
+             *  *  *  *  *  *   
+            *  *  *  *  *  *  *   
+           *  *  *  *  *  *  *  *   
+          *  *  *  *  *  *  *  *  *   
+         *  *  *  *  *  *  *  *  *  *   
+
+Pattern - 5: Downward Triangle Pattern
+Code -
+
+rows = int(input("Enter the number of rows: "))
+
+# It is used to print space
+k = 2 * rows - 2
+# Outer loop in reverse order
+for i in range(rows, -1, -1):
+    # Inner loop will print the number of space.
+    for j in range(k, 0, -1):
+        print(end=" ")
+    k = k + 1
+    # This inner loop will print the number o stars
+    for j in range(0, i + 1):
+        print("*", end=" ")
+    print("")
+
+Output:
+                  * * * * * * * * * * * 
+                   * * * * * * * * * * 
+                    * * * * * * * * * 
+                     * * * * * * * * 
+                      * * * * * * * 
+                       * * * * * * 
+                        * * * * * 
+                         * * * * 
+                          * * * 
+                           * * 
+                            *
+
+Pattern - 6: Diamond Shaped Pattern
+Code -
+
+rows = int(input("Enter the number of rows: "))
+
+# It is used to print the space
+k = 2 * rows - 2
+# Outer loop to print number of rows
+for i in range(0, rows):
+    # Inner loop is used to print number of space
+    for j in range(0, k):
+        print(end=" ")
+    # Decrement in k after each iteration
+    k = k - 1
+    # This inner loop is used to print stars
+    for j in range(0, i + 1):
+        print("* ", end="")
+    print("")
+
+# Downward triangle Pyramid
+# It is used to print the space
+k = rows - 2
+# Output for downward triangle pyramid
+for i in range(rows, -1, -1):
+    # inner loop will print the spaces
+    for j in range(k, 0, -1):
+        print(end=" ")
+    # Increment in k after each iteration
+    k = k + 1
+    # This inner loop will print number of stars
+    for j in range(0, i + 1):
+        print("* ", end="")
+    print("")
+
+Output:
+Enter the number of rows: 8
+              * 
+             * * 
+            * * * 
+           * * * * 
+          * * * * * 
+         * * * * * * 
+        * * * * * * * 
+       * * * * * * * * 
+      * * * * * * * * * 
+       * * * * * * * * 
+        * * * * * * * 
+         * * * * * * 
+          * * * * * 
+           * * * * 
+            * * * 
+             * * 
+              *
+
+Pattern - 7: Print two pyramid in a single pattern
+Code -
+
+rows = input("Enter the number of rows: ")
+
+# Outer loop will print the number of rows
+for i in range(0, rows):
+    # This inner loop will print the stars
+    for j in range(0, i + 1):
+        print("*", end=' ')
+    # Change line after each iteration
+    print(" ")
+# For second pattern
+for i in range(rows + 1, 0, -1):
+    for j in range(0, i - 1):
+        print("*", end=' ')
+    print(" ")
+
+Output:
+Enter the number of rows: 7
+*  
+* *  
+* * *  
+* * * *  
+* * * * *  
+* * * * * *  
+* * * * * * *  
+* * * * * * *  
+* * * * * *  
+* * * * *  
+* * * *  
+* * *  
+* *  
+*
+
+Pattern - 8: Hourglass Pattern
+Code -
+
+rows = int(input("Enter the number of rows: "))
+k = rows - 2
+# This is used to print the downward pyramid
+for i in range(rows, -1 , -1):
+    for j in range(k , 0 , -1):
+        print(end=" ")
+    k = k + 1
+    for j in range(0, i+1):
+        print("* " , end="")
+    print()
+
+# This is used to print the upward pyramid
+k = 2 * rows  - 2
+for i in range(0 , rows+1):
+    for j in range(0 , k):
+        print(end="")
+    k = k - 1
+    for j in range(0, i + 1):
+        print("* ", end="")
+    print()
+
+Output:
+Enter the number of rows: 5
+   * * * * * * 
+    * * * * * 
+     * * * * 
+      * * * 
+       * * 
+        * 
+        * 
+       * * 
+      * * * 
+     * * * * 
+   * * * * * 
+  * * * * * *
+
+We have discussed the basic pyramid pattern using for loops. The concept of the pattern depends on the logic and proper use of for loop.
+Number Pattern in Python
+In this section, we describe a few programs of different types of number patterns. Let's understand the following patterns one by one.
+Pattern - 1: Number Pattern
+Code -
+
+rows = int(input("Enter the number of rows: "))
+# Outer loop will print number of rows
+for i in range(rows+1):
+    # Inner loop will print the value of i after each iteration
+    for j in range(i):
+        print(i, end=" ")  # print number
+    # line after each row to display pattern correctly
+    print(" ")
+
+Output:
+Enter the number of rows: 5
+1  
+2 2  
+3 3 3  
+4 4 4 4  
+5 5 5 5 5  
+
+Explanation -
+In the above code, we have printed the numbers according to rows value. The first row prints a single number. Next, two numbers, prints in the second row, and the next three number prints on the third row and so on. In the
+Pattern - 2: Half pyramid pattern with the number
+Code -
+
+rows = int(input("Enter the number of rows: "))
+
+# This will print the rows
+for i in range(1, rows+1):
+    # This will print number of column
+    for j in range(1, i + 1):
+        print(j, end=' ')
+    print("")
+
+Output:
+Enter the number of rows: 5
+1 
+1 2 
+1 2 3 
+1 2 3 4 
+1 2 3 4 5
+
+In the above code, we have printed the column value j in the inner for loop.
+Pattern - 3: Inverted Pyramid Pattern
+Code -
+
+rows = int(input("Enter the number of rows: 5"))
+k = 0
+# Reversed loop for downward inverted pattern
+for i in range(rows, 0, -1):
+    # Increment in k after each iteration
+    k += 1
+    for j in range(1, i + 1):
+        print(k, end=' ')
+    print()
+
+Output:
+Enter the number of rows: 5
+1 1 1 1 1 
+2 2 2 2 
+3 3 3 
+4 4 
+5
+
+Explanation:
+In the above code, we have used the reversed loop to print the downward inverted pyramid where number reduced after each iteration.
+Pattern - 4: Same number Inverted Pyramid
+Code -
+
+rows = int(input("Enter the number of rows: "))
+# rows value assign to n variable
+n = rows
+# Download reversed loop
+for i in range(rows, 0, -1):
+    for j in range(0, i):
+        # this will print the same number
+        print(n, end=' ')
+    print()
+
+Output:
+Enter the number of rows: 6
+6 6 6 6 6 6 
+6 6 6 6 6 
+6 6 6 6 
+6 6 6 
+6 6 
+6
+
+Pattern - 5: Descending Order of Number
+Code -
+
+rows = int(input("Enter the number of rows: "))
+# Downward loop for inverse loop
+for i in range(rows, 0, -1):
+    n = i   # assign value to n of i after each iteration
+    for j in range(0, i):
+        # print reduced value in each new line
+        print(n, end=' ')
+    print("\r")
+
+Output:
+Enter the number of rows: 6
+6 6 6 6 6 6 
+5 5 5 5 5 
+4 4 4 4 
+3 3 3 
+2 2 
+1
+
+Pattern - 6: Print 1 to 10 numbers in Pattern
+Code -
+
+current_Number = 1
+stop = 2
+rows = 3  # Number of rows to print numbers
+
+for i in range(rows):
+    for j in range(1, stop):
+        print(current_Number, end=' ')
+        current_Number += 1
+    print("")
+    stop += 2
+
+Output:
+1 
+2 3 4 
+5 6 7 8 9
+
+Pattern - 7: Reverse Pattern from 10 to 1
+Code -
+
+rows = int(input("Enter the number of rows: "))
+for i in range(0, rows + 1):
+    # inner loop for decrement in i values
+    for j in range(rows - i, 0, -1):
+        print(j, end=' ')
+    print()
+
+Output:
+Enter the number of rows: 6
+6 5 4 3 2 1 
+5 4 3 2 1 
+4 3 2 1 
+3 2 1 
+2 1 
+1
+
+Pattern - 8: Print Odd Numbers
+Code -
+
+rows = int(input("Enter the number of rows: "))
+i = 1
+# outer file loop to print number of rows
+while i <= rows:
+    j = 1
+    # Check the column after each iteration
+    while j <= i:
+        # print odd values
+        print((i * 2 - 1), end=" ")
+        j = j + 1
+    i = i + 1
+    print()
+
+Output:
+Enter the number of rows: 5
+1 
+3 3 
+5 5 5 
+7 7 7 7 
+9 9 9 9 9
+
+Pattern - 9: Square Pattern using with number
+Code -
+
+rows = int(input("Enter the number of rows: "))
+for i in range(1, rows + 1):
+    for j in range(1, rows + 1):
+        # Check condition if value of j is smaller or equal than
+        # the j then print i otherwise print j
+        if j <= i:
+            print(i, end=' ')
+        else:
+            print(j, end=' ')
+    print()
+
+Output:
+Enter the number of rows: 5
+1 2 3 4 5 
+2 2 3 4 5 
+3 3 3 4 5 
+4 4 4 4 5 
+5 5 5 5 5
+
+Pattern - 10: Multiplication Number in Column
+
+rows = int(input("Enter the number of rows: "))
+for i in range(1, rows):
+    for j in range(1, i + 1):
+        # It prints multiplication or row and column
+        print(i * j, end='  ')
+    print()
+
+Output:
+Enter the number of rows: 8
+1  
+2  4  
+3  6  9  
+4  8  12  16  
+5  10  15  20  25  
+6  12  18  24  30  36  
+7  14  21  28  35  42  49  
+
+In the above section, we have discussed all the basic number patterns. It will make a strong command on Python for loop. We can any type of pattern using for loop.
+Alphabets and Letters Pattern in Python
+As we know that the, each alphabet has its own ASCII value, so define a character and print it to the screen. Let's understand these patterns by following examples
+Pattern - 1: Right-angled pattern with characters
+Code -
+
+print("The character pattern ")
+asciiValue = 65     #ASCII value of A
+for i in range(0, 5):
+    for j in range(0, i + 1):
+        # It will convert the ASCII value to the character
+        alphabate = chr(asciiValue)
+        print(alphabate, end=' ')
+        asciiValue += 1
+    print()
+
+Output:
+The character pattern 
+A 
+B C 
+D E F 
+G H I J 
+K L M N O
+
+Explanation -
+In the above code, we have assigned the integer value 65 to asciiValue variable which is an ASCII value of A. We defined for loop to print five rows. In the inner loop body, we converted the ASCII value into the character using the char() function. It will print the alphabets, increased the asciiValue after each iteration.
+Pattern - 2: Right-angled Pattern with Same Character
+Code -
+
+print("The character pattern ")
+asciiValue = int(input("Enter the ASCII value to print pattern: "))
+# User - define value
+if (asciiValue >= 65 or asciiValue <=122):
+    for i in range(0, 5):
+        for j in range(0, i + 1):
+            # It will convert the ASCII value to the character
+            alphabate = chr(asciiValue)
+            print(alphabate, end=' ')
+        print()
+else:
+    print("Enter the valid character value")
+
+Output:
+The character pattern 
+Enter the ASCII value to print pattern: 75
+K 
+K K 
+K K K 
+K K K K 
+K K K K K
+
+Pattern - 3: Display letter of the word in Pattern
+Code -
+
+str1 = "JavaTpoint"
+x = ""
+for i in str1:
+    x += i
+    print(x)
+
+Output:
+J
+Ja
+Jav
+Java
+JavaT
+JavaTp
+JavaTpo
+JavaTpoi
+JavaTpoin
+JavaTpoint
+
+We can use any word to print the characters.
+Pattern - 5: Equilateral triangle pattern with characters
+Code -
+
+print("Print equilateral triangle Pyramid with characters ")
+s = 5
+asciiValue = 65
+m = (2 * s) - 2
+for i in range(0, s):
+    for j in range(0, m):
+        print(end=" ")
+    # Decreased the value of after each iteration
+    m = m - 1
+    for j in range(0, i + 1):
+        alphabate = chr(asciiValue)
+        print(alphabate, end=' ')
+        # Increase the ASCII number after each iteration
+        asciiValue += 1
+    print()
+
+Output:
+Print equilateral triangle Pyramid with characters 
+        A 
+       B C 
+      D E F 
+     G H I J 
+    K L M N O
+
+In this article, we have discussed all basic pattern programs. These patterns are commonly asked during the interview and it is also helpful to understand the concept of Python for loop. Once we get the logic of the program, we can print the any pattern using the Python loops.
+
+
+Next TopicHow to remove an element from a list in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,182 @@
+
+
+
+
+next →
+← prev
+
+Amazing hacks of Python
+In this tutorial, we will learn how awesome a Python language is for coding. We will discuss some of its amazing hacks, making Python the best among other languages.
+Hacks of Python
+Following are some amazingly cool hacks of Python that can make work easy for users and developers:
+1. List Comprehensions: It is the best and efficient technique for getting rid of writing pointless lines of program.
+List comprehension consists of the following parts:
+
+Output expression
+Input sequence
+A member of the input sequence represented by a variable
+The optional predicate parts.
+
+Example:
+
+import functools as FT
+  
+# First, filter odd numbers
+list_1 = filter(lambda K : K % 2 == 1, range(10, 30))
+print ("List: ", list(list_1))
+   
+# Then we will filter the odd square which is divisible by 5
+list_1 = filter(lambda K : K % 5 == 0, 
+      [K ** 2 for K in range(1, 11) if K % 2 == 1])
+print ("ODD SQUARE WHICH IS DIVISIBLE BY 5: ", list(list_1))
+   
+# Here, we will filter negative numbers
+list_1 = filter((lambda K : K < 0), range(-10, 10))
+print ("Filter negative numbers: ", list(list_1))
+   
+# Now, implement by using the max() function
+print ("Maximum Number in the List: ")
+print (FT.reduce(lambda S, T: S if (S > T) else T, [14, 11, 65, 110, 105]))
+
+Output:
+List:  [11, 13, 15, 17, 19, 21, 23, 25, 27, 29]
+ODD SQUARE WHICH IS DIVISIBLE BY 5:  [25]
+Filter negative numbers:  [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1]
+Maximum Number in the List: 
+110
+
+2. Printing a List: Lists are not printed according to our requirements; they are always printed in unnecessary square brackets and single quotes. But in Python, we have a solution for printing lists efficiently by using the join method of string. The "join method" can turn the list into a string by classifying every item into a string and connecting them with the string on which the join method is used.
+Example:
+
+# First declare the list:
+ABC = ['LPG', 'WWF', 'XYZ', 'MPG']
+  
+# Then, we will print the list:
+print ("The Simple List: ", ABC)
+  
+# HEre, we will Print the list by using join method
+print ('The List by using join method: %s' % ', ' .join(ABC))
+  
+# we can directly apply Join Function on the List:
+print ('Directly applying the join method: ', (", " .join(ABC)))
+
+Output:
+The Simple List:  ['LPG', 'WWF', 'XYZ', 'MPG']
+The List by using join method: LPG, WWF, XYZ, MPG
+Directly applying the join method:  LPG, WWF, XYZ, MPG
+
+3. Transpose a Matrix: In Python, a user can implement the matrix as a nested list, which means a list inside a list. Every element of the list is treated as a row of the matrix.
+Example:
+
+M_1 = [[5, 3], [1, 2], [9, 8]]
+print ("Matrix 1: ")
+for row in M_1 :
+    
+    print (row)
+rez_1 = [[M_1[K][L] for K in range(len(M_1))] for L in range(len(M_1[0]))]
+print ("\n")
+print ("Matrix 2: ")
+for row in rez_1:
+    
+    print (row)
+
+Output:
+Matrix 1: 
+[5, 3]
+[1, 2]
+[9, 8]
+
+
+Matrix 2: 
+[5, 1, 9]
+[3, 2, 8]
+
+4. artition of List into "N" Groups: The users can use the iter() function as an iterator over the sequence.
+Example: 
+
+# First, we will Declare the list:
+LIST_1 = ['E_1', 'E_2', 'E_3', 'E_4', 'E_5', 'E_6']
+  
+partition_1 = list(zip (*[iter(LIST_1)] * 2))
+print ("List after partitioning into different of groups of two elements: ", partition_1)
+
+Output:
+List after partitioning into different of groups of two elements:  [('E_1', 'E_2'), ('E_3', 'E_4'), ('E_5', 'E_6')]
+
+Explanation:
+In the above code, we used "[iter(LIST_1)] * 2" which produced different groups containing two elements of the 'LIST_1[]' list. That is, the lists of length two will be generated using the elements from the first list.
+5. Print more than One Item of List simultaneously
+Example:
+
+list_1 = [11, 13, 15, 17]
+list_2 = [12, 14, 16, 18]
+  
+# Here, we will use zip() function which will take 2 equal length list 
+# and then merge them together into pairs
+for K, L in zip(list_1, list_2):
+    print (K, L)
+
+Output:
+11 12
+13 14
+15 16
+17 18
+
+6. Take the String as Input and Convert it into List:
+Example:
+
+# Reading a string from input as int format 
+# after splitting it's elements by white-spaces
+print ("Input: ")
+formatted_list_1 = list(map (int, input().split()))
+print ("Output as Formatted list: ", formatted_list_1)
+
+Output:
+Input: 
+ 10 12 14 16 18 20 22
+Output as Formatted list:  [10, 12, 14, 16, 18, 20, 22]
+
+7. Convert List of Lists into Single List:
+Example:
+
+# importing the itertools 
+import itertools as IT
+  
+# Declaring the list geek 
+LIST_1 = [[1, 2], [3, 4], [5, 6]] 
+  
+# chain.from_iterable() function will return the
+# elements of nested list 
+# and iterate it from first list 
+# of iterable till the last 
+# end of the list 
+  
+list_2 = list(IT.chain.from_iterable(LIST_1)) 
+print ("Iterated list of 'LIST_1': ", list_2)
+
+Output:
+Iterated list of 'LIST_1':  [1, 2, 3, 4, 5, 6]
+
+8. Print the Repeated Characters: Suppose our task is to print the patterns like "122333444455555666666". We can easily print this pattern in Python without using for loop.
+Example:
+
+print ("1" + "2" * 2 + "3" * 3 + "4" * 4 + "5" * 5 + "6" * 6)
+
+Output:
+122333444455555666666
+
+Conclusion
+In this tutorial, we have discussed 8 different amazing and cool hacks of Python, which makes it easy to work with for developers as well as beginners.
+
+
+Next TopicAverage of list in Python
+
+
+
+
+← prev
+next →
+
+
+
+

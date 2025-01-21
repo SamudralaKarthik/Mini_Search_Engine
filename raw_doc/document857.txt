@@ -1,0 +1,58 @@
+
+
+
+
+next →
+← prev
+
+Legb Rule in Python
+A so LEGB rule, which would be named just after Python scope for names, is used by Python to resolve names. Here's a brief explanation of what each of these phrases means:
+
+The code block and body of the any Python function and lambda expression falls under the local (or function) scope. The names which we provide inside the function are contained in this Python scope. Only the function's code will allow we to see these names. we will have as many separate local scopes as there are function calls because it is formed at the function call, not the function definition. Each call would result in the creation of a fresh local scope.
+Only nested functions have enclosing (or nonlocal) scope, a unique scope. The variables that we specify in the enclosing procedure are contained in this scope. The code of an inner and enclosing functions shows the names inside the enclosing scope.
+The top-most scope of a Python program, script, or module is the global (or module) scope. Every one of the variables that we specify at the top level of a program or module are contained in this Python scope. All parts of our code can see names in this Python scope.
+A unique Python scope called "built-in scope" is produced or loaded each time we run a script or start an interactive session. This scope includes names for built-in Python terms like keywords, functions, exceptions, as well as other properties. Names in this Python scope are accessible across our code as well. Python loads it automatically whenever we launch a program or script.
+
+The LEGB rule controls the manner wherein Python looks up names as a type of name lookup operation.
+In conclusion, names are resolved when we utilize nested functions by first verifying the local scope or the local scope of the innermost function. Then, from the deepest scope to the outermost scope, Python examines all surrounding scopes of outer functions. Python then checks the global as well as built-in scopes if there isn't a match. We will receive a warning if the name cannot be located.
+Depending on where we are within the code during execution, there will only ever be a maximum of four active Python scopes: local, enclosing, global, the built-in. The global as well as built-in scopes, in contrast hand, will always be at least two of the active scopes. These two scopes are constantly at our disposal.
+Example 1:
+
+a = 2
+def f(a):
+  print(f'The value of a is {a}')
+f(8)
+
+Output:
+The value of x is 8
+
+Explanation:
+In the global namespace, variable x will be defined with the value 2, and function f will be defined with one parameter that prints out a string and the parameter's value. When f is called, the local namespace of the function initializes the parameter a with the value 8. On line 4, Python starts by looking for a in the local namespace. It then moves on to the innermost namespace and finds a term a that maps to an integer with the value 8. Python then stops looking there and8outputs "The value of a is," followed by the value of the a that it discovered, "8."
+Example 2:
+
+a = 2
+def f(b):
+  def g(c):
+    print(f'The value of a is {a}')
+  g(b)
+f(3)
+
+Output:
+The value of a is 2
+
+Explanation:
+Line 1 defines the global namespace variable a, which has the value 2. In the global namespace, we define the function f on line 3. We call f on line 8. This generates a function g and a parameter y with the value 3 in a local namespace (inside the global namespace). Line 6 calls g, which creates a new local namespace with the parameter c having the value 3. The local namespace that was previously created by invoking f is now an enclosing namespace.
+We have now arrived at the print statement! Python now looks for an object with the name an in the namespaces already in use. Python tries an enclosing namespace because there isn't a similar variable in the local namespace. Python looks in the global namespace because a is not declared there either. We discover a name a that corresponds to an object with the value 2 there. Python thus outputs "The value of a is," then "2," which is the value of a in the global namespace.
+
+
+Next TopicPython Discord Bot
+
+
+
+
+← prev
+next →
+
+
+
+

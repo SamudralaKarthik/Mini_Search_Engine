@@ -1,0 +1,114 @@
+
+
+
+
+next →
+← prev
+
+Tuple to String in Python
+We know that lists, tuples, and dictionaries are the data structures available in Python that enable us to build long codes in a precise manner.
+Let's have a quick recap of tuples.
+Tuples are a type of data structure in Python which are immutable and the elements of the tuple are enclosed within parentheses.
+For Example -
+tup = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+tup1 = (2.3, 4.6, 9.7)
+tup3 = ('C', 'C++', 'JAVA', 'Python', 'R')
+In this article, we will discuss the methods of converting a tuple to a string in Python-
+
+Using for loop
+Using join
+Using reduce
+
+Let us have a look at each one of them-
+Method - 1: Using for loop
+In the first method, we will use for loop to convert Python tuple to string.
+In this program, for loop will help us to take each iterator from the tuple and apply a function to it.
+The following program shows how it can be done.
+Example -
+
+def convert_tuple(c_tuple):
+  str=''
+  for i in c_tuple:
+    str=str+i
+  return str
+
+c_tuple=('P','y','t','h','o','n','a','t','J','T','P')
+c_string=convert_tuple(c_tuple)
+print(c_string)
+
+Output:
+PythonatJTP
+
+Let us understand what happened in the above program-
+
+We have created a function that will convert an element from a tuple to a string.
+In the definition of the program, we have mentioned that each iterator will take an element and merge it with the declared empty string. This function will finally return the resultant string.
+Outside the function, we have declared our tuple with the name 'c_tuple' and then passed it into our function.
+On executing this program, the expected output is displayed.
+
+Method - 2: Using join() method
+In the next program, we shall see how the join() method help us to do the same-
+The join() method takes the items and combines them to form a string.
+The following program shows how it can be done-
+Example -
+
+def convert_tuple(c_tuple):
+  str=''.join(c_tuple)
+  return str
+
+c_tuple=('P','y','t','h','o','n','a','t','J','T','P')
+c_string=convert_tuple(c_tuple)
+print(c_string)
+
+Output:
+PythonatJTP
+
+Let us understand what happened in the above program-
+
+We have created a function that will convert an element from a tuple to a string.
+In the definition of the program, we have mentioned that the join() method will take the elements from c_tuple and merge them with the empty string. This function will finally return the resultant string.
+Outside the function, we have declared our tuple with the name 'c_tuple' and then passed it into our function.
+On executing this program, the expected output is displayed.
+
+Method - 3: Using reduce()
+Here we will make use of reduce for the conversion.The following program illustrates how it can be done in Python-
+Example -
+
+import functools
+import operator
+ 
+ 
+def convert_tuple(c_tuple):
+    res_str = functools.reduce(operator.add, (c_tuple))
+    return res_str
+ 
+
+c_tuple = ('P', 'y', 't', 'h', 'o', 'n', 'a', 't', 'J', 'T', 'P')
+c_string = convertTuple(c_tuple)
+print(c_string)
+
+Output:
+PythonatJTP
+
+Explanation -
+
+The first step here is to import functools and operators.
+After this, we have created a function that will convert an element from a tuple to a string.
+In the definition of the program, we have specified the parameters operator.add (this will add each element from a tuple to a string) inside the functools.reduce method. +This function will finally return the resultant string.
+Outside the function, we have declared our tuple with the name 'c_tuple' and then passed it into our function.
+On executing this program, the expected output is displayed.
+
+So, in this tutorial, we learned the various ways of converting a tuple to a string in Python.
+
+
+Next TopicKadane's Algorithm in Python
+
+
+
+
+← prev
+next →
+
+
+
+

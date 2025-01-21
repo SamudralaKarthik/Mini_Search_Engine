@@ -1,0 +1,96 @@
+
+
+
+
+next →
+← prev
+
+Write a Python Program to Sort an Odd-Even sort or Odd even transposition Sort
+In this tutorial, we will learn about the transposition sort, also known as the brick sort or parity sort. It is a relatively simple sorting algorithm, developed originally for use on parallel processors with local interconnections. This algorithm is similar to the bubble sort and shares many feature characteristics. It is designed to compare all odd/even indexed pairs of adjacent elements in the list, and if a pair is in the wrong order, the elements are swapped. This step is repeated for even/odd indexed. Then it alternates between odd/even and even/odd steps until the list is sorted.
+Let's have an example to understand it in a better way.
+Suppose we have a list of some integers. We need to arrange the numbers as even then odd. So we need to place the even number first and then the odd numbers.
+If the given list is a [3, 7, 8, 2, 1, 9, 4, 6], the result will be like [2, 4, 6, 8, 3, 7, 9]. We will use the following steps to solve this problem -
+set i := 0 and j := 0
+while j < size of list
+o if list[j] is even, then swap list[i] and list[j], and increase i by 1
+o increase j by 1
+return list
+Let's implement the above solution into Python code -
+Example -
+
+def parity_sort(list1: list) -> list:
+    list1_size = len(list1)
+    for _ in range(list1_size):
+        for i in range(_ % 2, list1_size - 1, 2):
+            if list1[i + 1] < list1[i]:
+                list1[i], list1[i + 1] = list1[i + 1], list1[i]
+
+    return list1
+            
+nums = [4, 3, 5, 1, 2]
+print("\nOriginal list:")
+print(nums)
+parity_sort(nums)
+print("Sorted order is:", nums)
+nums = [15, 29, 100, 23, -14, 45, 178, 192, 246, -118, 0, 7]
+print("\nOriginal list:")
+print(nums)
+parity_sort(nums)
+print("Sorted order is:", nums)
+
+Output -
+Original list:
+[4, 3, 5, 1, 2]
+Sorted order is: [1, 2, 3, 4, 5]
+
+Original list:
+[15, 29, 100, 23, -14, 45, 178, 192, 246, -118, 0, 7]
+Sorted order is: [-118, -14, 0, 7, 15, 23, 29, 45, 100, 178, 192, 246]
+
+Explanation -
+In the above code, we have created a function named parity sort, which takes a list as an argument. Into the function, we initialized the length of the list, and we used the nested for loop. The outer for loop will run to the length of the list, and the inner loop will run from modulus 2 to the end of the list and jump two elements of the list. If the next element is smaller than the previous element, then swap the element. Once the list is sorted, the function returns the sorted list.
+We can also solve this problem using the while loop. Let's understand the following example.
+Example -
+
+def parity_sort(list1: list) -> list:
+    i = 0
+    j =0
+    while j < len(list1):
+        if list1[j]%2==0:
+            list1[i],list1[j] = list1[j],list1[i]
+            i+=1
+        j+=1
+    return list1
+            
+nums = [4, 3, 5, 1, 2]
+print("\nOriginal list:")
+print(nums)
+parity_sort(nums)
+print("Sorted order is:", nums)
+nums = [15, 29, 100, 23, -14, 45, 178, 192, 246, -118, 0, 7]
+print("\nOriginal list:")
+print(nums)
+parity_sort(nums)
+print("Sorted order is:", nums)
+
+Output -
+Original list: [4, 3, 5, 1, 2]
+Sorted order is: [4, 2, 5, 1, 3]
+Original list: [15, 29, 100, 23, -14, 45, 178, 192, 246, -118, 0, 7]
+Sorted order is: [100, -14, 178, 192, 246, -118, 0, 23, 29, 45, 15, 7]
+
+Conclusion
+In this tutorial, we have implemented the parity sort or even-odd sort. We can use for loop or while loop to solve this problem. This problem can be asked in the technical interviews.
+
+
+Next TopicWrite the Python Program to Print the Doubly Linked List in Reverse Order
+
+
+
+
+← prev
+next →
+
+
+
+

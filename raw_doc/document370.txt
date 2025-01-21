@@ -1,0 +1,157 @@
+
+
+
+
+next →
+← prev
+
+Reverse a tuple in Python
+We know that tuples are the data structures present in Python in which elements of different data types can be enclosed in parenthesis.
+In this tutorial, we will learn how we can reverse a tuple in Python.
+Consider the following examples to understand our objective-
+
+Input - (21, 54, 1, 'apple', 'fruits', 11.7)
+Output - (11.7, 'fruits', 'apple', 1, 54, 21)
+
+Explanation -
+We can observe here that since we have reversed the elements of the tuple, the float value present at the last comes in the first place.
+Let's see one more example-
+
+Input - (20, 30, 50, 19.3, 41, 'comic books')
+Output - ('comic books', 41, 19.3, 50, 30, 20)
+
+Explanation -
+We can observe here that since we have reversed the elements of the tuple, the string value present at the last comes in the first place.
+We will use the following methods to reverse a tuple in Python,
+
+Using Slicing
+Using reversed() method
+Using Generator in Python
+Using the indexing technique
+
+So, let's get started with the first one:
+Using Slicing
+The slicing technique used in Python to slice the elements that lie in a specific range.
+The following program illustrates how they can be used.
+
+#initializing the tuple
+tuple_values = (1, 2, 'Python', 'Java', 23.4, 77, 10)
+#displaying the original tuple
+print("The original tuple is: ", tuple_values)
+#using slicing
+tuple_values = tuple_values[::-1]
+#displaying the tuple
+print("The reversed tuple is: ", tuple_values)
+
+Output:
+The original tuple is:  (1, 2, 'Python', 'Java', 23.4, 77, 10)
+The reversed tuple is:  (10, 77, 23.4, 'Java', 'Python', 2, 1)
+
+Explanation-
+It's time to have a look at the explanation of the above program-
+
+In the first step, we have initialized our tuple with different values.
+After this, we have displayed our tuple and then used slicing to print the elements of our tuple in reverse order by specifying the step as -1.
+Finally, we have displayed the reversed tuple.
+
+In the second program, we will learn how method can be used.
+Using reversed() method
+Consider the program given below,
+
+#initializing the tuple
+tuple_values = (1, 2, 'Python', 'Java', 23.4, 77, 10)
+#displaying the original tuple
+print("The original tuple is: ", tuple_values)
+#using slicing
+tuple_values = tuple(reversed(tuple_values))
+#displaying the tuple
+print("The reversed tuple is: ", tuple_values)
+
+Output:
+The original tuple is:  (1, 2, 'Python', 'Java', 23.4, 77, 10)
+The reversed tuple is:  (10, 77, 23.4, 'Java', 'Python', 2, 1)
+
+Explanation-
+Let's understand what happened in the above program,
+
+In the first step, we have initialized our tuple with different values.
+After this, we have displayed our tuple and then used the reversed() to print the elements of our tuple in reverse order.
+Finally, we have displayed the reversed tuple.
+
+In the third program, we will see how generators can be used for the same.
+Using Generator in Python
+The program given below demonstrates how generators can be used in our Python program.
+
+#initializing the tuple
+tuple_values = (1, 2, 'Python', 'Java', 23.4, 77, 10)
+#displaying the original tuple
+print("The original tuple is: ", tuple_values)
+#creating a function
+def reverse_tup(tuple_values):
+    for i in reversed(range(len(tuple_values))):
+        yield tuple_values[i]
+#displaying the items in reverse order
+for i in reverse_tup(tuple_values):
+    print("The element of a reversed tuple are: ", i)
+
+Output:
+The original tuple is:  (1, 2, 'Python', 'Java', 23.4, 77, 10)
+The elements of a reversed tuple are:  10
+The elements of a reversed tuple are:  77
+The elements of a reversed tuple are:  23.4
+The elements of a reversed tuple are:  Java
+The elements of a reversed tuple are:  Python
+The elements of a reversed tuple are:  2
+The elements of a reversed tuple are:  1
+
+Explanation-
+It's time to have a glance at the explanation,
+
+In the first step, we have initialized our tuple with different values.
+After this, we have displayed our tuple and then created a function that takes a tuple as its parameter and helps us to obtain the tuple in reversed order using the concept of generators.
+Finally, we have displayed the reversed tuple.
+
+Finally, we will see how indexing can help us to meet our objective.
+Using the indexing technique
+The following program illustrates how it can be done
+
+#initializing the tuple
+tuple_values=(1, 2, 'Python', 'Java', 23.4, 77, 10)
+#displaying the original tuple
+print("The original tuple is: ", tuple_values)
+#displaying the items in reverse order
+for i in range(len(tuple_values)):
+    print("The element of a reversed tuple is: ", tuple_values[-(i+1)])
+
+Output:
+The original tuple is:  (1, 2, 'Python', 'Java', 23.4, 77, 10)
+The element of a reversed tuple is:  10
+The element of a reversed tuple is:  77
+The element of a reversed tuple is:  23.4
+The element of a reversed tuple is:  Java
+The element of a reversed tuple is:  Python
+The element of a reversed tuple is:  2
+The element of a reversed tuple is:  1
+
+Explanation-
+It's time to have a look at the explanation of the above program-
+
+In the first step, we have initialized our tuple with different values.
+After this, we have displayed our tuple and then created a function that takes the elements of our tuple, uses for loop to traverse the tuple, and then print the elements in reverse order by specifying the index as -1.
+Finally, we have displayed the reversed tuple.
+
+Conclusion
+In this tutorial, we discussed the different approaches of reversing a tuple in Python.
+
+
+Next TopicTuple to Dictionary in Python
+
+
+
+
+← prev
+next →
+
+
+
+

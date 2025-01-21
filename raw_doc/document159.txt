@@ -1,0 +1,308 @@
+
+
+
+
+next →
+← prev
+
+How to get the current date in Python?
+In this section, we will understand how we can retrieve Python's current date using various methods. A date is an important part of an application or website, or database server that indicates the day and time the software has been created, stored website records, app version, etc. For example, when a user uses the applications or website for certain work, the software stores the user's information with a certain date and time. Furthermore, we can say when we visit any social media site such as Twitter, Facebook, WhatsApp, etc. they store the user's information on which date the particular user's post, share or send the message, etc. So, we can define the importance of the date and time in the software application.
+
+In the Python programming language, the datetime module contains a datetime class used to access the computer's current date and time.
+Using the datetime.now() Method
+Python datetime.now() method used to display the system's current date and time. It defines the function inside the datetime module of the Python library.
+Syntax:
+
+datetime.now()
+
+Consider a program to access the current date and time of the system using the datetime.now() method in Python.
+program.py
+
+import datetime 
+dt = datetime.datetime.now() # use now() method in datetime
+print( "Display the current date of the system: ") # current date 
+print (str (dt) ) # call the dt variable to print the system date.
+
+Output:
+Display the current date of the system:
+2021-02-28 18:56:52.799555
+
+Using the now() Method
+now() method: Python now() method is used to display the current date of the system.
+Syntax:
+
+now() # fetch the current date 
+
+Consider a program to access the current date and time of the system using the now() method in Python.
+Program.py
+
+# import the datetime class or module from the datetime module.
+from datetime import datetime
+now = datetime.now() # Use now() to access the current date and time 
+print("Current date and time is ", now)
+
+Output:
+Current date and time is 2021-02-28 18:58:33.237779
+
+Note: It returns the current date of the system in string format by importing the datetime module in Python programming.
+Attributes of the now() Method
+Python now() method has various attributes similar to the time attributes such as year, month, date, hour, minute, and second.
+Let's create a program to demonstrate the different attributes of the now() method to print the date in Python.
+Program2.py
+
+# importing the datetime module for now() method
+import datetime
+# Use datetime.now() method to get the current date into the variable current_date
+current_date = datetime.datetime.now()
+# print the message for now() attributes in Python
+print (" Following are the attributes of now() function are : ")
+
+# print the current year of the system
+print(" The current year is : ", end = "" )
+print (current_date.year)
+# print the current month of the system
+print( " The current month is : ", end = "" )
+print (current_date.month)
+# print the current date of the system
+print( " The current date is : ", end = "" )
+print (current_date.day)
+
+Output:
+Following are the attributes of now() function are :
+ The current year is: 2021
+ The current month is: 2
+ The current date is: 28
+
+Using date.today() Method
+A date module class present in the datetime module to return a date object that contains the value of today's date. Where a today() method is used to get the today date in the Python program.
+Syntax:
+
+date.today()
+
+Let's consider a program to display the system's current date using the today() method of date class.
+Prog.py
+
+from datetime import date
+td = date.today() # Use the today method and assign it to the td variable.
+print(" Get the today date in Python is: ", td)
+
+Output:
+Get the today date in Python is:  2021-02-28
+
+Using the now().date() Function
+A now().date() method used to access the local or current date of the system by importing the datetime module in Python.
+Syntax:
+
+Current_date = datetime.now().date()
+
+Lets' write a program to print the system's current date using the datetime.now().date() method in Python.
+Program3.py
+
+from datetime import datetime
+#  Return the current date of the system 
+Current_date = datetime. now(). date() 
+print("The current date is :", Current_date)
+
+Output:
+The current date is : 2021-02-28
+
+Using the now().time() Function
+A now().time() method used to access the local or current time of the system by importing the time() method from the datetime module in Python.
+Syntax:
+
+Current_date = datetime.now().time()
+
+Lets' write a program to print the system's current time using the datetime.now().time() method in Python.
+Prog2.py
+
+from datetime import datetime
+# Return the current date and time of the system 
+Current_time = datetime.now().time() 
+print("Current time is :", Current_time)
+
+Output:
+Current time is: 19:07:45.787512
+
+Date and Time Formats in Python
+Following are the various format of date and time to get the desired representation of datetime in Python by passing the parameters to the strftime () function.
+
+
+Directive
+Description
+Example
+
+
+%a
+Display the abbreviate weekday name.
+Sun, Mon, …
+
+
+%A
+Display the full weekday name.
+Sunday, Monday, ..
+
+
+%b
+Display the abbreviate month name.
+Jan, Feb, …, Dec
+
+
+%B
+Display the full month's name.
+January, February, … December
+
+
+%c
+It is used to position the appropriate date and time representation.
+Sun Feb 21 07:05: 28 2021
+
+
+%d
+Display the day of the month in the zero-padded decimal format.
+01, 02, …, 28, 30, 31
+
+
+%H
+Display the hour (24-hour clock) in the format of a zero-padded decimal number.
+00, 01, …, 23
+
+
+%I
+It represents the hour (12-hour clock) as a decimal number.
+01, 02, …, 12
+
+
+%j
+Display the day of the year in the form of a zero-padded decimal number.
+001, 002, …, 999
+
+
+%m
+Display the month in the form of a zero-padded decimal number.
+01, 02, …, 12
+
+
+%M
+Display the Minute in the form of a zero-padded decimal number.
+00, 01, .., 59
+
+
+%p
+It is used to position the equivalent of either AM or PM.
+AM, PM
+
+
+%S
+Display the second in the form of a zero-padded decimal number.
+00, 01, …, 59
+
+
+%U
+Count the Sunday as the first day of the week number in the year, and it displays the day in the decimal number.
+00, 01, …, 53
+
+
+%w
+It is used to locate the weekday as a decimal number where Sunday starts with 0.
+00, 01, …, 53
+
+
+%W
+Count the Monday as the first day of the week number in the year, and it displays the day in the decimal number.
+00, 01, …, 53
+
+
+%x
+It is used to locate the appropriate representation of the date.
+19- 02 - 2021
+
+
+%X
+It is used to locate the appropriate representation of the time.
+07 : 41: 29
+
+
+%y
+Display the year format without containing century in the form of a decimal number.
+0, 1, .., 99
+
+
+%Y
+Display the year containing century in the form of a decimal number.
+2014, 2019, etc.
+
+
+%z
+It represents the UTC offset in the form +HHMM or - HHMM.
+
+
+
+%Z
+It is basically used to represent the time zone name (It does not contain any characters if no time zone exists).
+
+
+
+%%
+It just represents a literal "%" character.
+%
+
+
+Let's create a Python program and use the above described formats.
+Prog1.py
+
+import datetime
+dt = datetime.datetime.now()
+print ("Current date and time is = %s" % dt)
+print ("Date and time in ISO Format = %s" % dt.isoformat())
+print ("Current year = %s" %dt.year)
+print ("Current month is = %s" %dt.month)
+print ("Current date (day) = %s" %dt.day )
+print ("represent Date in dd/mm/yyyy format = %s / %s/ %s" % (dt.day, dt.month, dt.year))
+print ("Current hour is = %s" %dt.hour)
+print (" Current minute is = %s" %dt.minute)
+print ("Current Second is = %s" %dt.second)
+print ("Representation of time in hh: mm: ss format = %s: %s: %s" % (dt.hour, dt.minute, dt.second))
+
+Output:
+Current date and time is = 2021-02-28 19:09:03.739466
+Date and time in ISO Format = 2021-02-28T19:09:03.739466
+Current year = 2021
+Current month is = 2
+Current date (day) = 28
+Represent Date in dd/mm/yyyy format = 28 / 2/ 2021
+Current hour is = 19
+ Current minute is = 9
+Current Second is = 3
+Representation of time in hh: mm: ss format = 19: 9: 3
+
+Using the strftime() Function
+Let's create a program to display current date and time using the strftime() function.
+Strftime.py
+
+import datetime
+dt  = datetime.datetime.now()
+print (dt.strftime ("%Y - %m - %d %H: %M: %S " )) # represents the date YYYY- MM - DD
+# HH: MM: SS
+print (dt.strftime ("%d / %m / %Y ")) # represents the date in DD/ MM/ YYYY
+print (dt.strftime (" %I: %M: %S %p ")) # represents the time in HH: MM: SS AM/ PM
+print (dt.strftime ("%a, %b %d, %Y ")) # represents the day, month date and year
+
+Output:
+2021 - 02 - 28 19: 12: 06
+28 / 02 / 2021
+ 07: 12: 06 PM
+Sun, Feb 28, 2021
+
+
+
+Next Topicargparse in Python
+
+
+
+
+← prev
+next →
+
+
+
+

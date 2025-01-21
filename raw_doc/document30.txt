@@ -1,0 +1,195 @@
+
+
+
+
+next →
+← prev
+
+Python Modules
+This tutorial will explain how to construct and import custom Python modules. Additionally, we may import or integrate Python's built-in modules via various methods.
+What is Modular Programming?
+Modular programming is the practice of segmenting a single, complicated coding task into multiple, simpler, easier-to-manage sub-tasks. We call these subtasks modules. Therefore, we can build a bigger program by assembling different modules that act like building blocks.
+Modularizing our code in a big application has a lot of benefits.
+Simplification: A module often concentrates on one comparatively small area of the overall problem instead of the full task. We will have a more manageable design problem to think about if we are only concentrating on one module. Program development is now simpler and much less vulnerable to mistakes.
+Flexibility: Modules are frequently used to establish conceptual separations between various problem areas. It is less likely that changes to one module would influence other portions of the program if modules are constructed in a fashion that reduces interconnectedness. (We might even be capable of editing a module despite being familiar with the program beyond it.) It increases the likelihood that a group of numerous developers will be able to collaborate on a big project.
+Reusability: Functions created in a particular module may be readily accessed by different sections of the assignment (through a suitably established api). As a result, duplicate code is no longer necessary.
+Scope: Modules often declare a distinct namespace to prevent identifier clashes in various parts of a program.
+In Python, modularization of the code is encouraged through the use of functions, modules, and packages.
+What are Modules in Python?
+A document with definitions of functions and various statements written in Python is called a Python module.
+In Python, we can define a module in one of 3 ways:
+
+Python itself allows for the creation of modules.
+Similar to the re (regular expression) module, a module can be primarily written in C programming language and then dynamically inserted at run-time.
+A built-in module, such as the itertools module, is inherently included in the interpreter.
+
+A module is a file containing Python code, definitions of functions, statements, or classes. An example_module.py file is a module we will create and whose name is example_module.
+We employ modules to divide complicated programs into smaller, more understandable pieces. Modules also allow for the reuse of code.
+Rather than duplicating their definitions into several applications, we may define our most frequently used functions in a separate module and then import the complete module.
+Let's construct a module. Save the file as example_module.py after entering the following.
+Code
+
+# Python program to show how to create a module.
+# defining a function in the module to reuse it
+def square( number ):
+    """This function will square the number passed to it"""
+
+    result = number ** 2
+    return result
+
+Here, a module called example_module contains the definition of the function square(). The function returns the square of a given number.
+How to Import Modules in Python?
+In Python, we may import functions from one module into our program, or as we say into, another module.
+For this, we make use of the import Python keyword. In the Python window, we add the next to import keyword, the name of the module we need to import. We will import the module we defined earlier example_module.
+Code
+
+import example_module
+
+The functions that we defined in the example_module are not immediately imported into the present program. Only the name of the module, i.e., example_ module, is imported here.
+We may use the dot operator to use the functions using the module name. For instance:
+Code
+
+result = example_module.square(  4  )
+print( "By using the module square of number is: ", result )
+
+Output:
+By using the module square of number is: 16
+
+There are several standard modules for Python. The complete list of Python standard modules is available. The list can be seen using the help command.
+Similar to how we imported our module, a user-defined module, we can use an import statement to import other standard modules.
+Importing a module can be done in a variety of ways. Below is a list of them.
+Python import Statement
+Using the import Python keyword and the dot operator, we may import a standard module and can access the defined functions within it. Here's an illustration.
+Code
+
+# Python program to show how to import a standard module
+# We will import the math module which is a standard module
+
+import math
+print( "The value of euler's number is", math.e )
+
+Output:
+The value of euler's number is 2.718281828459045
+
+Importing and also Renaming
+While importing a module, we can change its name too. Here is an example to show.
+Code
+
+# Python program to show how to import a module and rename it
+# We will import the math module and give a different name to it
+
+import math as mt
+print( "The value of euler's number is", mt.e )
+
+Output:
+The value of euler's number is 2.718281828459045
+
+The math module is now named mt in this program. In some circumstances, it might help us type faster in case of modules having long names.
+Please take note that now the scope of our program does not include the term math. Thus, mt.pi is the proper implementation of the module, whereas math.pi is invalid.
+Python from...import Statement
+We can import specific names from a module without importing the module as a whole. Here is an example.
+Code
+
+# Python program to show how to import specific objects from a module
+# We will import euler's number from the math module using the from keyword
+
+from math import e
+print( "The value of euler's number is", e )
+
+Output:
+The value of euler's number is 2.718281828459045
+
+Only the e constant from the math module was imported in this case.
+We avoid using the dot (.) operator in these scenarios. As follows, we may import many attributes at the same time:
+Code
+
+# Python program to show how to import multiple objects from a module
+from math import e, tau
+print( "The value of tau constant is: ", tau )
+print( "The value of the euler's number is: ", e )
+
+Output:
+The value of tau constant is:  6.283185307179586
+The value of the euler's number is:  2.718281828459045
+
+Import all Names - From import * Statement
+To import all the objects from a module within the present namespace, use the * symbol and the from and import keyword.
+Syntax:
+
+from name_of_module import *
+
+There are benefits and drawbacks to using the symbol *. It is not advised to use * unless we are certain of our particular requirements from the module; otherwise, do so.
+Here is an example of the same.
+Code
+
+# importing the complete math module using *
+from math import *
+  
+# accessing functions of math module without using the dot operator
+print( "Calculating square root: ", sqrt(25) )
+print( "Calculating tangent of an angle: ", tan(pi/6) ) # here pi is also imported from the math module
+
+Output:
+Calculating square root:  5.0
+Calculating tangent of an angle:  0.5773502691896257
+
+Locating Path of Modules
+The interpreter searches numerous places when importing a module in the Python program. Several directories are searched if the built-in module is not present. The list of directories can be accessed using sys.path. The Python interpreter looks for the module in the way described below:
+The module is initially looked for in the current working directory. Python then explores every directory in the shell parameter PYTHONPATH if the module cannot be located in the current directory. A list of folders makes up the environment variable known as PYTHONPATH. Python examines the installation-dependent set of folders set up when Python is downloaded if that also fails.
+Here is an example to print the path.
+Code
+
+# We will import the sys module
+import sys
+  
+# we will import sys.path
+print(sys.path)
+
+Output:
+['/home/pyodide', '/home/pyodide/lib/Python310.zip', '/lib/Python3.10', '/lib/Python3.10/lib-dynload', '', '/lib/Python3.10/site-packages']
+
+The dir() Built-in Function
+We may use the dir() method to identify names declared within a module.
+For instance, we have the following names in the standard module str. To print the names, we will use the dir() method in the following way:
+Code
+
+# Python program to print the directory of a module
+print( "List of functions:\n ", dir( str ), end=", " )
+
+Output:
+List of functions:
+  ['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'removeprefix', 'removesuffix', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+
+Namespaces and Scoping
+Objects are represented by names or identifiers called variables. A namespace is a dictionary containing the names of variables (keys) and the objects that go with them (values).
+Both local and global namespace variables can be accessed by a Python statement. When two variables with the same name are local and global, the local variable takes the role of the global variable. There is a separate local namespace for every function. The scoping rule for class methods is the same as for regular functions. Python determines if parameters are local or global based on reasonable predictions. Any variable that is allocated a value in a method is regarded as being local.
+Therefore, we must use the global statement before we may provide a value to a global variable inside of a function. Python is informed that Var_Name is a global variable by the line global Var_Name. Python stops looking for the variable inside the local namespace.
+We declare the variable Number, for instance, within the global namespace. Since we provide a Number a value inside the function, Python considers a Number to be a local variable. UnboundLocalError will be the outcome if we try to access the value of the local variable without or before declaring it global.
+Code
+
+Number = 204
+def AddNumber():
+    # accessing the global namespace
+    global Number
+    Number = Number + 200
+
+print( Number )
+AddNumber()
+print( Number )
+
+Output:
+204
+404
+
+
+
+Next TopicPython Exception Handling
+
+
+
+← prev
+next →
+
+
+
+

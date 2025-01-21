@@ -1,0 +1,102 @@
+
+
+
+
+next →
+← prev
+
+How to convert Bytes to string in Python
+In this tutorial, we will learn how we can convert Bytes to a String using Python script. We will also explore how to use these data types efficiently. We include Python 3 approaches in this tutorial because Python 2 is no longer in use. Before digging deep into this topic, first, we need to understand the basic introduction of Byte data type.
+Byte Data Type in Python
+If one is familiar with the Python, then he/she must already know about the byte data type. But if someone is no friendly with Python, then we will explain this concept. Let's understand the following example.
+Example -
+
+string1 = 'Welcome to JavaTpoint'
+print(type(string1))
+string2 = b'Welcome to JavaTpoint'
+print(type(string2))
+
+Output:
+<class 'str'>
+<class 'bytes'>
+
+Explanation
+We define two strings with the same value. Both values are looking similar, but the data types are not same. The first string1 variable is a string data type, and the other is a byte data type. The second string2 variable is prefixed with 'b,' which means it produces the byte data type instead of the str data type.
+The difference between these two data types is 
+Str - A string is a sequence of Unicode characters (encoded in UTF -16 or UTF-32 and entirely depends on Python's compilation).
+Bytes or byte - It represents an integer between 0 and 255, and we can denote it as 'b' or 'B.'
+We can convert any string to bytes by writing 'be literal in front of a regular string.
+Note - Python 2.x ignores the prefix 'b' or 'B.'
+Key Difference between String and Bytes
+Both str and bytes data types are used as Byte type objects in Python 2.x, but it is not true in the case of Python 3.x. The critical difference between bytes and string is that strings are easy to read or human-readable where a byte is eventually machine-readable, and the string is also converted into byte before processing.
+When we declare a byte data type in Python, it is directly stored in the disk and a string is converted into a byte and then stored on disk.
+Strings are used to signify the characters, words, or sentences, whereas Bytes represent low-level binary data structures.
+Convert Bytes to String in Python
+
+Using the decode() method
+
+Python provides the built-in decode() method, which is used to convert bytes to a string. Let's understand the following example.
+Example -
+
+byteData = b"Lets eat a \xf0\x9f\x8d\x95!"
+# Let's check the type
+print(type(byteData))
+str1 = byteData.decode('UTF-8')
+print(type(str1))
+print(str1)
+
+Output:
+<class 'bytes'>
+<class 'str'>
+Lets eat a 🍕!
+
+Explanation -
+We passed the encoding format in the above code, decoded the bytes object into a string, and printed it.
+
+Using Bytes to String with codecs
+
+We can also use the codec module to convert byte data type to string.
+Example -
+
+import codecs
+byteData = b'Lets eat a \xf0\x9f\x8d\x95!'
+codecs.decode(byteData, 'UTF-8')
+
+Output:
+Lets eat a 🍕
+
+
+Using str()
+
+It is the easiest method to convert the bytes to string. Let's understand the following example.
+Example -
+
+byteData = b'Lets eat a \xf0\x9f\x8d\x95!'
+b1 = str(byteData, 'UTF-8')
+print(b1)
+
+Output:
+Lets eat a 🍕&!
+
+It is necessary to pass the encoding argument to str() otherwise, we will get some unexpected results. Wrong encoding leads to incorrect output. For example - If we pass the str() method with UTF-16, we will get the following error.
+
+str(b, 'UTF-16') 
+
+Output:
+'敌❴\u2073牧扡愠\uf020趟↕'
+
+Conclusion
+This tutorial will help you to work with the byte data type. Thinks like charsets, encoding, and binary are used to encode and decode. We have defined the various methods to convert byte data type to string.
+
+
+Next TopicPython Program to Find Anagram
+
+
+
+
+← prev
+next →
+
+
+
+

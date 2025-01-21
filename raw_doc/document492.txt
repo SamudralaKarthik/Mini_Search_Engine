@@ -1,0 +1,402 @@
+
+
+
+
+next →
+← prev
+
+Basic Python for Java Developers
+Python is a general-purpose language for programming. It is easy to understand the growth of Python over the past few years by looking at its ease of use to learning as well as its ability to be used for machine learning data analysis in addition to web design. What type of programming language is it? What are the main differentiators in the case of Java against Python? What do we have to gain from it?
+In this tutorial, we will learn about Python from the Java viewpoint. After reading the tutorial, we'll be able to determine if Python is a solution to our problems and recognize how we can utilize Python along with Java for specific types of problems.
+Where Does Python Come From?
+Python is a programming language created through Guido van Rossum. He was in search of an interest-based programming project to keep him busy during the Christmas season in 1989. That's the time he began to develop Python interpreter.
+Python originates from several languages, including ABC, C, and Modula-3. It's an object-oriented, imperative programming language.
+Based on our personal preference and the functionality we want, it is possible to use a fully object-oriented style or a procedural programming style that includes functions. The object-oriented programming capabilities will be discussed in the next section of this tutorial.
+At the beginning of 2021, TIOBE announced Python as the "programming language of the year" for the fourth time. According to 2021's Octoverse report, Python ranks as the second most used programming language on GitHub by contributors to the repository.
+What is the Philosophy of Python?
+Soon, we will use Python in the sections that follow this one. In the beginning, however, we will examine why it's important to be familiar with Python more thoroughly by studying the features we can connect to the philosophy of Python.
+A few of the concepts about Java as well as Python can be compared; however, each software language comes with its distinctive characteristic. The core philosophy behind Python can be described in a set of 19 fundamental principles, which is known as Zen Python. Python is full of hidden Easter eggs, and one of them is known as the Zen of Python. Take a look at what happens when we run the following command within the Python read-eval-print loop (REPL):
+
+import this
+
+Output:
+
+While it's not advisable to take the above statements too seriously, a handful of them directly relates to the traits we will be examining in the next section.
+When we look at the principles of the Zen of Python, we will have an idea of the best way to work using the language.
+Python Code is Readable
+If we are from a Java background and are looking at an ordinary piece in Python software, we may believe that we are viewing pseudo-code. Several elements can contribute to this:
+
+Indentation is used to create grouping statements. This helps to make code blocks shorter and encourages a consistent style of coding. There will be more information on this issue later.
+A few high-level built-in data structures, paired with the smallest collection of operator symbols, make Python extremely expressive.
+The option of using the exceptions as the primary method to handle errors helps keep the code tidy.
+Python programmers favour an approach to programming that is influenced by the notion that it's Easier to Ask for Forgiveness than Permission (EAFP) instead of the "Look Before You Leap" (LBYL) concept. This style focuses on the usual, happy path of our program. We will be able to determine how irregularities are dealt with following.
+
+Python Comes with Libraries Included
+The goal of Python is to tackle the majority of our everyday issues using one distribution, which is the default version of Python. In order to achieve this, Python includes what's called the standard library. Like the Java Class Library, it's a large collection of useful features comprised of constants, functions frameworks, and classes.
+Python Promotes Code Reuse
+Python offers a variety of options that allow us to write code that we could reuse over and over again to implement the Don't Repeat Yourself (DRY) principle.
+It is important to note that the Python package and modules differ and are distinct from the Java package and modules. Another feature is that we can typically break down all of our program code in the module as well as a package inside Python. If we would like to know how these ideas work from the point of view of a Python developer, we can learn more about Python packages and modules.
+Another method we can employ within Python is object-oriented programming. We'll discuss this in another section of this tutorial.
+Additionally, we can make use of decorators to alter Python classes, functions, or methods. Another method is to decorate our Python code to allow us to program functionality just once. Then it is able to be utilized from any class, function, or method that we have decorated.
+Python is Easily Extensible
+The ability to support packages and modules is one element that makes it simple to add new features to Python by adding new functions. It's also possible to create different or modified behaviours to Python common functions and operators by overriding them. We can even influence the method by which classes are constructed.
+The easiest way to expand Python is by writing our program using pure Python. It is also possible to define modules making bindings in a simplified version of Python known as Cython or C as well as C++.
+How can We Start Discovering Python?
+In this tutorial, we will see examples that will encourage us to look into certain areas or test Python code fragments ourselves. As an experienced Java programmer, we could recall our initial steps to learning about Java as well as installing the first Java Development Kit. If we are looking to begin using Python, we will need to install it. Then, set up a sandbox in which we can play around with it.
+Installing Python
+The first step is to install a recent version of Python. In order to do that, follow this "How to install Python".
+Many Python programmers contribute their code to libraries that work with different Python versions. They typically prefer to test the pre-release version of Python without disrupting their normal Python work. In these situations, it's beneficial to access multiple different versions of Python on the same system. One tool that can provide that capability is pyenv, similar to Java's jEnv.
+Creating a Sandbox and Using It
+In the second step, we must establish a virtual machine to ensure that we are able to benefit from an open-source Python ecosystem. This section will explain what we need to do and why we should take this step.
+While Python is a comprehensive Standard Library with a wide range of functions, there are more features accessible through other packages that, among them, the majority of them are free. Python Package Index, also known as the Python Package Index , or PyPI, to shorten it, is the primary central repository that gathers and distributes the packages. It is possible to install the packages by using the pip command. Before we install them, we must first read the following two paragraphs.
+To avoid conflicts between versions of dependency, Sharing our personal or global Python installation with other projects is generally not recommended. In practice, we will be able to have to accompany each experimentation or project Sandbox with an online environment.
+So, our projects remain independent of each other. This method also avoids versions conflicting between different packages. If we would like to know more about this procedure, we can learn the entire article on "How to create a virtual environment in Python".
+Choosing an Editor or Integrated Development Environment
+In the final phase of making our setup, select the editor or IDE to choose to. If we are already familiar with IntelliJ and its IDEs, its PyCharm appears to be the most appropriate choice as it's part of a similar line of products. Another editor that is on the rise is Visual Studio Code. However, we are able to select from numerous other choices.
+Once we have installed Python and learned to install external programs into an environment that is virtual and have selected either an editor or an IDE, we can begin to play around with the language. While we read through the whole tutorial, there will be many opportunities to practice and test.
+How is Python Different from Java?
+It's easy to understand what type of program Python is by examining where the most notable differences are. In the sections below, we will discover the main ways in which Python differs from Java.
+Indentation for Code Block Grouping
+Perhaps the most striking aspect of Python can be found in its syntax. Particularly, the way we define its classes, functions, flow-control constructs, as well as code blocks is different from the way we are familiar with. In Java, we mark code blocks using the well-known curly braces ( ). In Python, it is different. We indicate codes blocks using the indentation level. Here's an example of how the indentation influences the code block's grouping
+
+def parity(number1):
+    result1 = "odd number"                              # Function body
+    if number1 % 2 == 0:
+        result1 = "even number"                         # Body of if-block
+    return result1                               # Not part of if-block
+ 
+for num1 in range(4):                           # Not part of functio
+    print("Number", num1, "is", parity(num1))     # Body of for-loop
+    print("This is not part of the loop")           # Not part of for-loop
+
+The code demonstrates the following new concepts:
+
+Line 1: This def statement is the first step in describing a brand new function called parity() that takes an argument known as a number. We should have used the def statement was in the class definition block. It would have initiated the method definition instead.
+Line 2: Inside parity(), the body of the function begins on an indented level. We assign the "odd number" string to the result variable in the first line.
+Line 3: This is the beginning of an if 
+Line 4: An extra line creates the new block. The block is executed when the conditional expression in the if expression, number % 2 == 0, evaluates to be true. In this example, it is comprised of one line, where the variable is assigned "even number" to the result variable.
+Line 5: A dedent line that precedes the return statement signifies the end of the if expression and its block.
+Line 7: Likewise, we notice the indentation that precedes the start of the for loop. This is the point at which we have reached the end of the block that defines functions. Therefore, it is evident that the for loop begins at the same indent at the beginning of the block for definitions of functions starting on the first line.
+Line 8: It is a similar thing happening in the for The initial print() function call is part of the for loop block.
+Line 9: The second, dedented print() function call isn't a part of the for loop block.
+
+It is possible that the user have observed that the addition of a colon ( :) at the end of the line starts an entirely new block of code. It is indented one step. This block of code is completed with the next sentence being dedented a second time.
+A code block should comprise at least one statement. An empty code block isn't possible. If there's no statement required, then you can make use of to use the "pass statement" that does nothing in any way.
+We may also have been aware that we can utilize the hash symbol ( #) to make comments.
+The example above will produce the following outputs:
+Number 0 is even number
+This is not part of the loop
+Number 1 is odd number
+This is not part of the loop
+Number 2 is even number
+This is not part of the loop
+Number 3 is odd number
+This is not part of the loop
+
+While this method of defining blocks might seem odd at first glance and could even turn you, the reality is that people become used to it much faster than you think today.
+There are great stylistic guidelines that can be used for Python code called PEP 8. It suggests using an indentation that is of four positions and by using spaces. The style guide does not recommend tabs in the sources code file. The reason is that various editors and terminals for system use could utilize different tab stop locations and render the code in different ways for different users or across different operating systems.
+A Read-Eval-Print Loop from the Beginning
+Since its beginning, Python has always had an inbuilt read-eval-print loop (REPL). The REPL examines the shortest complete expression, statement, or block, then compiles it into bytecode and evaluates it. If the code evaluated results in an object other than the None object, it produces a clear version of the object. The explanation for the None in the next section of this tutorial.
+Example:
+
+zero = int(0)
+zero
+
+Output:
+0
+
+
+
+float(zero)
+
+Output:
+0.0
+
+
+
+complex(zero)
+
+Output:
+0j
+
+
+
+bool(zero)
+
+Output:
+False
+
+
+
+str(zero)
+
+Output:
+'0'
+
+As we can observe, the interpreter strives to display the expressions clearly and concisely. In the above example, we can see that the integer floating-point complicated, Boolean as well as string values are presented in a different way.
+The main differentiator between Java and Python is the use of an assignment operator ( =). A standard Python assignment, which employs an equals sign that is a single character, is a declaration, not an expression, which could result in a value or an object.
+This is why REPL does not display the assignment to that variable zero statements are always evaluated as none. The line after the assignment includes the variable expression zero to instruct the REPL to print the resultant variable, regardless of the expression.
+In the REPL, the underscore variable (_) holds the value of the most recent expression, provided that it's not None. The following example shows how we can utilize this particular variable:
+Example:
+
+>>> 2 + 2
+
+Output:
+4
+
+
+
+>>> _
+
+Output:
+4
+
+
+
+>>> _ + 2
+
+Output:
+6
+
+
+
+>>> some_var = _ + 1
+>>> _
+
+Output:
+6
+
+
+
+>>> some_var
+
+Output:
+7
+
+When we have assigned the number 7 to some_var the variable _ remains with it's value 6. This is because the assignment statement is evaluated as None.
+Dynamically Typed and Strongly Typed
+A key characteristic of programming languages is how what, how, and in what way the compiler or interpreter does type verification.
+Python is one of the languages that is a dynamic typed language. It means the type of functions, variables, and the return values of functions are checked during runtime instead of at compile-time in contrast to Java.
+Python is simultaneously a very strongly written language:
+
+All objects have a specific type connected with them.
+A clear conversion is required between different types.
+
+In this tutorial, we will learn the ways that Python tests the compatibility of types during execution and the ways to create types that are compatible:
+Example:
+
+40 + "2"
+
+Output:
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+ in 
+----> 1 40 + "2"
+
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+Input:
+
+ 40 + int("2")  # Add two numbers
+
+Output:
+42
+
+Input:
+
+str(40) + "2"  # Concatenate strings
+
+Output:
+'402'
+
+Input:
+
+40 * "2"       # Repeat string "2" forty times
+
+Output:
+'2222222222222222222222222222222222222222'
+
+It's obvious that we cannot simply add an integer to an existing string value. This is guarded at the runtime. If the interpreter is able to detect an error in the runtime that causes an exception, it raises the alarm. The REPL detects the exception instances and displays a traceback that leads to the incorrect expression.
+To solve the issue, convert one type of object to another. If we wish to join the two objects in the form of numbers, then we convert the string that represents the number to a plain number employed in the int() constructor. If we would prefer to combine the two objects using strings, we convert the number to strings by employing str() constructor.
+The final sentence of the Python session above demonstrates a different characteristic. When we multiply the sequence with a number, we will get the concatenated version of the sequence that was originally multiplied by the number we specify.
+Even though Python is an open-source language that is dynamically typed, it is possible to supply our code using type annotations.
+At the runtime phase, Python does nothing with annotations except to make them accessible to introspection. However, static type-checker tools are available to detect contradictions between the declarations of types and the actual usage of annotations for type-annotated classes, functions, and variables.
+Type annotations allow us to spot issues at an early point in the development process. Particularly in big-scale projects in software, they aid in making the code manageable and help maintain it in top order. It is common to invoke the static type checker part of the verification process within the build pipeline. The majority of IDEs employ annotations for type types in addition.
+CPython vs the JIT Compiler
+Most likely, the most widely used Python implementer has been CPython. It's also the reference implementation. CPython can be described as an interpreter and compiler created using C and accessible on any platform. The Python reference implementation does not have a JIT compiler, unlike Java.
+CPython loads an initial source file, known as a module. Module and is loaded in two steps:
+
+Compilation: The first step is that CPython analyses the source code and then compiles it to "bytecode" which is a set of instructions that the CPython interpreter can run. In a limited way, we are able to examine the compilation process in relation to Java's javac compiles the .java file into a .class
+Execution: This is when the CPython bytecode interpreter, also known as the CPython's virtual machine (VM), executes the bytecode generated in the first step.
+
+Contrary to mainstream Java VM implementations, CPython does not convert the bytecode code into the native code of objects. However, there are different Python implementations that operate differently.
+
+There's a Python implementation that runs on the Java platform, dubbed Jython. It runs on the JVM and has direct interoperability among Java with Python.
+There's also an alternative known as IronPython, which uses the .NET
+An implementation uses the "Just-in-Time" (JIT) compiler called PyPy. In the average case, PyPy has a speed of 4.2 times more efficient than CPython.
+In the end, GraalVM is an extremely fast runtime that can be used with numerous programming languages. It offers an experimental version of support for a relatively current Python version.
+
+The above list isn't comprehensive. The Python website has an extensive list of alternatives for solutions as well as distributions.
+Built-in Function and Operator Overloading
+As a Java programmer, we could be familiar with what is overloading from method overloading. A dynamic version is available in Python, which provides a similar function. There is another overloading available in Python that we might find more efficient.
+We can design new behaviours of our custom-built classes any Python included functions or operators.
+Python offers a simple method of achieving the function and overloading of operators.
+We can test this by creating special procedures within our course. The name of a method begins with two underscores. For example, .__len__() or .__add__(). An identifier with the same name is known as the dunder, which is an abbreviation to mean two underscores ( __).
+If we call an appropriate built-in method using an object with the corresponding dunder methods are in place, Python delegates the behaviour to this method. Also, when we employ an operator with one or more operands with a corresponding dunder technique, Python delegates the behaviour to the method.
+For instance, we could use the expression .__len__() to implement a behaviour for the inbuilt function len() function. Additionally you could create .__add__() to give a behaviour to the operator for addition ( +).
+This feature allows us to apply the elegantly simple, expressive, and concise language of Python code not just to standard objects but also to custom objects as well.
+What Aspects of Java and Python are Similar?
+When we continue exploring Python, we will find numerous similarities to Java. However, we likely observed some similarities among Java with Python already despite these differences. It's since Python along with Java were both influenced by their counterparts in the C programming language.
+Class-Based Object Orientation
+Python is a type-based, object-oriented programming language. It is one of the major characteristics of Java. However, the list of object-oriented features differs between the two languages, and to explain them in sufficient detail requires an entire tutorial.
+It is a good thing that we can go deeper into object-oriented programming with Python compared to Java to understand the distinctions in Java and Python with regard to the object-oriented programming techniques. It is also possible to read an introduction to object-oriented programming within Python 3.0 to increase our understanding of this subject.
+Operators
+Operators are one way we can see the shared heritage of both languages. Many of them are the same in both languages.
+Let's start by comparing the well-known Python arithmetic operator to Java. The addition operator (+), multiplication operator (-), division operator, multiple operator, and the modulo operator (%) serve almost the same purpose in both languages, except for the division operator for integer-like operands.
+This is also for bitwise operators the bitwise OR operators, (|), the bitwise AND operator (&), the bitwise XOR operator (^), and the unary bitwise NOT operator (~), as well as the bitwise shift operators for left shift (<<) and right shift (>>).
+To access an element in a sequence, we can use the Python square bracket syntax ( []), just as we can with Java's array access.
+String Formatting
+Python initially offered string formatting functionality based on the printf() function family's handling of this issue in the C programming language. This is very similar to Java's string.format(). The % operator in Python performs this function. The operator's left-hand side includes the format string. The right-hand side can contain either a table of positional parameters or a dictionary with keyed parameters.
+The following session shows some examples:
+Input:
+
+"Hello, %s!" % "world"             # %-style, single argument
+
+Output:
+'Hello, world!'
+
+Input:
+
+"The %s is %d." % ("answer", 78)   # %-style, positional
+
+Output:
+'The answer is 78.'
+
+Input:
+
+ "The %(word)s is %(value)d." \
+... % dict(word = "answer", value = 78)    # %-style, key-based
+
+Output:
+'The answer is 78.'
+
+Python has recently adopted other methods of formatting strings. The .format() string method is one. In this case, the replacement fields are marked with curly braces ( and ). This is illustrated by "The word is value. ".format(word = "answer", value = 78).
+We can now use f string formatted literals since Python 3.6. Let's say we have two variables with scope value and word. In this case, the expression "f". The word equals value " returns the same as the string.format() example.
+Control Flow Constructs
+When comparing Java and Python, the control flow constructs look similar. Many of the control flow concepts are intuitively familiar. There are differences, however.
+A Python while loop is very similar to Java's.
+
+while (word2 := input("Please enter word: ")) != "END":
+    print(word)
+
+print("READY !")
+
+Line by line, the code fragment copies standard input to standard output until it equals "End". This line is not copied. Instead, the text "READY" is written, followed by a newline.
+We have probably seen the added value of the operator walrus in a construct such as this. This assignment operator has the lowest precedence among all operators. When the assignment expression is part of a larger expression, we will often need to put parentheses around it, much like Java.
+The Python for loop is very similar to the Java for each loop. We could use similar logic to code iterating over a list with the first five Roman numerals.
+Input:
+
+roman_numerals = "I II III IV V".split()
+roman_numerals
+
+Output:
+['I', 'II', 'III', 'IV', 'V']
+
+Input:
+
+ for numeral in roman_numerals:
+...     print(numeral)
+
+Output:
+I
+II
+III
+IV
+V
+
+It is possible to find how using str.split() is a great method of creating an alphabet of words.
+Sometimes, we may require the use of a counter that runs instead. In such a situation, we'll employ the following range():
+Input:
+
+for k in range(6):
+...     print(k)
+
+Output:
+0
+1
+2
+3
+4
+5
+
+In this case, "k" reference the value that is next in the requested range on each iteration. This value is later printed.
+In the event that you need to iterate over an array and at the same time need an ongoing counter using the enumerate():
+Input:
+
+for k, numeral in enumerate("I II III IV V".split(), start = 1):
+...     print(k, numeral)
+
+Output:
+1 I
+2 II
+3 III
+4 IV
+5 V
+
+The above example shows how the functionality of both the preceding examples is combined into one loop. The accompanying counter defaults to zero. However, with the optional keyword argument begins, we can specify a different value.
+Python can also understand the break and continue statements.
+Another control flow construct similar to Java's is the if statements.
+Input:
+
+for n in range(3):
+...     if n <= 0:
+...         adjective = "not enough"
+...     elif n == 1:
+...         adjective = "just enough"
+...     else:
+...         adjective = "more than enough"
+...     print(f"You have {adjective} items ({n:d})")
+
+Output:
+You have not enough items (0)
+You have just enough items (1)
+You have more than enough items (2)
+
+As shown above, the Python If... else construct supports an Elif keyword. This is useful because there is no plain switch... case statement.
+Although many code constructs appear similar, there are many differences. Python loops and exception catch constructs both support else_ parts. For context managers, Python also provides a that includes statements.
+When would Python be more useful than Java, and Why?
+Most of the time, we will want to select a programming language suitable to meet one specific use case and another programming language for a different scenario. When we are comparing Java with Python and other programming languages, consider the following factors into consideration:
+
+Each Java and Python are both used with success in the world's most popular web-based applications.
+Additionally, we can make use of Python for shell scripting tools.
+Python's beautiful syntax, accessibility to code, the large library, and a vast array of other tools allow for quick development. It's likely to require less than half the lines of code needed to achieve the same results than we can in Java.
+Since the standard Python doesn't require linking or compile steps, we can see the results immediately whenever we change the code. This also speeds up the development process.
+Normal Java execution speeds are higher for most general-purpose applications than in Python.
+It is possible to expand Python using C and C++ with relatively no effort. To a certain degree, this can reduce the variances in speed of execution.
+
+In certain applications like analytics, data modelling, machine learning, or artificial intelligence, the speed at which execution is performed is essential. The most popular third-party applications designed for this purpose are in a programming language translated into native code. In these cases, Python seems to be the best choice.
+Conclusion
+In this tutorial, we learned about Python and got an idea of the characteristics of this programming language. We have learned about the differences and similarities among Java in comparison to Python.
+Now we have a solid foundation to get started using Python quickly. Additionally, we have a solid base of understanding what scenarios and domains we can use in Python and an overview of sources we can use the next time.
+In this tutorial, we have learned about:
+
+The syntax of the Python programming language.
+There are a lot of standard types of data in Python
+What are the aspects that are the same in Java and Python
+Where can you find Python documents and specific tutorials for your topic?
+How do you start with Python?
+How can you see the results immediately through the Python REPL?
+
+
+
+Next TopicHow to Download YouTube Videos Using Python Scripts
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,309 @@
+
+
+
+
+next →
+← prev
+
+Statistic with Python
+In this tutorial, we will learn statistics and its component using the Python, solving statistic problems and also explore the concept behind it. Statistics is a key concept that every data science enthusiast should have the good understanding of it.
+Python provides some statistic libraries that are comprehensive, widely used, and powerful. These libraries help us to smooth working with the data
+Statistic is a way of collection of the data, tabulation, and interpolation of numeric data. It allows us to describe, summarize, and represent of data visually. Statistic is a field of applied mathematics concern with interpolation, visual representation of data, and data collection analysis. There are two types of statistic - Descriptive statistic and inferential statistic. We will cover descriptive statistic in this tutorial.
+Some Python Statistics Libraries
+Python provides many libraries that can be used in statistic but we will describe some most important and widely used libraries.
+
+Numpy - This library is widely used for numerical computing, and optimized for scientific calculation. It is a third-party library helpful to working with the single and multidimensional arrays. The ndarray is a primary array type. It comes with the many methods for statistical analysis.
+SciPy - It is a third-party library used for scientific computation based on Numpy. It extends the Numpy features including scipy.stats for statistical analysis.
+Pandas - It is based on the Numpy library. It is also used for the numerical computation. It outshines in handling labeled one-dimensional 1D data with the Series The two-dimensional (2D) is labeled with the DataFrame objects.
+Matplotlib - This library works more effectively in combination with the Scipy, NumPy, and Pandas.
+Python built-in statistics Library - It is Python's built-in library used for descriptive statistic. It performs effectively if the dataset is small or if we can't depend on importing other libraries.
+
+Measure of Central Tendency
+The measure of central tendency represents the single value that attempts to define the whole set of data. It consists of three main central tendencies.
+
+Mean
+Median - Median Low and Median High
+Mode
+
+How to Calculate Mean
+Mean represents the sum of the observations divided by the total number of observation. We can also refer as average which is sum divided by count. Python's statistic library provides the mode() method that returns the mean, it raises StatisticError, if the passed argument is empty.
+Let's understand the following example -
+Example - 1
+
+# Python example to check the working of mean() method
+# importing statistics module
+import statistics
+
+def find_mean(list1):
+    return statistics.mean(observation_list)
+
+# initializing the observation list
+observation_list = [7, 2, 3, 5, 8, 4, 2, 1]
+print ("The average of list values is : ",end="")
+print (find_mean(observation_list))
+
+Output:
+The mean value is : 2.5
+
+Explanation -
+In the above code, we have imported the statistic module and initialized the list that contains observation values. We passed the list into the mean() method that returned an average of list values.
+We can also calculate the mean using the built-in sum() which takes the iterable of numeric values and gives their total sum. The len() method returns length of an object of iterable (string, list, tuple, byte, dictionary, set or range).
+Example - 2
+
+list1 = [2, 8, 7, 1, 3, 2, 8, 9, 2, 5]
+mean = sum(list1)/len(list1)
+print("The mean is:", mean)
+
+Output:
+The mean is: 4.7
+
+How to Calculate Median
+Median represents the middle value of the dataset which splits the data into the two halves. Median is calculated by calculating the average of two central elements in case of even dataset otherwise the central element would be odd.
+For odd Numbers -
+N+1/2
+For Even Numbers -
+n/2, n/2+1
+The statistics library provides the median() method to calculate the median, or middle element of data. It raises StatisticError, if the passed argument is empty.
+Let's understand the following example.
+Example -
+
+# Python program to show the working of median() 
+# importing the statistics module
+from statistics import median
+# Importing fractions module
+from fractions import Fraction as fr
+def find_median(value):
+    return median(value)
+
+# integer value tuple
+value_set1 = (1, 3, 4, 5, 8, 9, 11)
+
+# floating point values tuple
+value_set2 = (4.4, 2.1, 6.8, 8.0)
+
+# tuple of fractional numbers
+value_set3 = (fr(1, 3), fr(40, 15),
+		fr(20, 6), fr(12, 30))
+
+#  set of positive and negative integers
+value_set4 = (-5, -1, -8, -2, 1, 9, 3, 2)
+
+# Printing the median of above datasets
+print("Median of data-set 1 is % s" % (find_median(value_set1)))
+print("Median of data-set 2 is % s" % (find_median(value_set2)))
+print("Median of data-set 3 is % s" % (find_median(value_set3)))
+print("Median of data-set 5 is % s" % (find_median(value_set4)))
+
+Output:
+Median of data-set 1 is 5
+Median of data-set 2 is 5.6
+Median of data-set 3 is 23/15
+Median of data-set 4 is 0.0	
+
+How to Calculate Median Low
+The median_low() method is used to get the median of data if the data set is odd. If the data set is even, it returns the lower of two middle elements. It raises StatisticError, if the passed argument is empty.
+Let's understand the following example.
+Example - 
+
+# importing the statistics module
+import statistics
+ 
+data_set1 = [1, 2, 3, 4, 5, 6]
+data_set2 = [1, 2, 3, 4, 5, 6, 7]
+# Print median of the data-set
+# Median value may or may not
+print("Median of the set is % s" % (statistics.median(data_set1)))
+ 
+# Print low median of the data-set
+print("Low Median of the even data set is % s "% statistics.median_low(data_set1))
+print("Low Median of the odd data set is % s "% statistics.median_low(data_set2))
+
+Output:
+Median of the set is 3.5
+Low Median of the even data set is 3 
+Low Median of the odd data set is 4
+
+How to Calculate Median High
+The median_high() method is used to get the median of data if the data set is odd. If the data set is even, it returns the lower of two middle elements. It raises StatisticError, if the passed argument is empty.
+Let's understand the following example.
+Example -
+
+# importing the statistics module
+import statistics
+ 
+data_set1 = [1, 2, 3, 4, 5, 6]
+
+data_set2 = [1, 2, 3, 4, 5, 6, 7]
+ 
+# Print median of the data-set
+# Median value may or may not
+print("Median of the set is % s" % statistics.median(data_set1))
+ 
+# Print low median of the data-set
+print("Low Median of the even data set is % s "% statistics.median_low(data_set1))
+print("Low Median of the odd data set is % s "% statistics.median_low(data_set2))
+
+Output:
+Median of the set is 3.5
+Low Median of the even data set is 4 
+Low Median of the odd data set is 4
+
+Measure of Variability
+We have learned about the measure of the central tendency but it is not to describe the data. We also need to know about the measure of variability. Measure of variability states how well our data is distributed. Below is the most common variability measure.
+
+Range
+Variance
+Standard deviation
+
+How to Calculate Range
+The range is known as the difference between the largest and smallest data point. The range is bigger more the spread of data or vice versa.
+range = Largest data value - smallest data value
+Let's understand the following example -
+Example -
+
+# Sample List
+list1 = [20, 10, 30, 40, 50]
+
+# getting Max
+maximum = max(list1)
+# getting Min
+minimum = min(list1)
+
+# Difference Of Max and Min
+range = maximum-minimum	
+print("Maximum is = {}, Minimum is = {} and Range is = {}".format(
+	maximum, minimum, range))
+
+Output:
+Maximum is = 50, Minimum is = 10 and Range is = 40
+
+Explanation -
+In the above code, we assigned a list with some data and calculated max using built-in max() method and min using the min() method.
+How to Calculate Variance
+The variance is a statistical measure of the spread between numbers in a data set. To calculate the variance, we use the following formula.
+
+Where -
+
+σ2 = population variance
+Σ = sum of…
+Χ = each value
+μ = population mean
+Ν = number of values in the population
+
+Python's statistics module provides the varience() method. Let's understand the following example.
+Example - 
+
+# Python code to calculate variance using variance()
+
+# importing statistics module
+from statistics import variance
+
+# importing fractions as parameter values
+from fractions import Fraction as fr
+
+# tuple of a set of positive integers
+data1 = (3, 4, 6, 7, 8, 11, 12)
+
+# tuple of a set of negative integers
+data2 = (-3, -5, -2, -1, -8, -9)
+
+# tuple of a set of positive and negative numbers
+data3 = (10, -9, 0, -2, 1, 3, 4, 19)
+
+# tuple of a set of fractional numbers
+data4 = (fr(2, 5), fr(2, 3), fr(3, 4),
+		fr(5, 6), fr(7, 8))
+
+
+# Print the variance of each samples
+print("Variance of data1 is: % s " % (variance(data1)))
+print("Variance of data2 is: % s " % (variance(data2)))
+print("Variance of data3 is: % s " % (variance(data3)))
+print("Variance of data4 is: % s " % (variance(data4)))
+
+Output:
+Variance of data1 is: 11.238095238095237 
+Variance of data2 is: 10.666666666666666 
+Variance of data3 is: 69.64285714285714 
+Variance of data4 is: 1277/36000
+
+How to Calculate Standard Deviation
+It is a square root of the variance. To calculate the standard deviation, we can use the following example.
+Where -
+
+σ = standard deviation
+Σ = sum of…
+Χ = each value
+μ = mean
+Ν = number of values in the population
+
+Python's statistics module provides the stdev() method. Let's understand the following example.
+Example -
+
+# Python code to calculate variance using variance()
+
+# importing statistics module
+from statistics import stdev
+
+# importing fractions as parameter values
+from fractions import Fraction as fr
+
+# tuple of a set of positive integers
+data1 = (3, 4, 6, 7, 8, 11, 12)
+
+# tuple of a set of negative integers
+data2 = (-3, -5, -2, -1, -8, -9)
+
+# tuple of a set of positive and negative numbers
+data3 = (10, -9, 0, -2, 1, 3, 4, 19)
+
+# tuple of a set of fractional numbers
+data4 = (fr(2, 5), fr(2, 3), fr(3, 4),
+		fr(5, 6), fr(7, 8))
+
+# Print the variance of each samples
+print("Standard Deviation of data1 is: % s " % (stdev(data1)))
+print("Standard Deviation of data2 is: % s " % (stdev(data2)))
+print("Standard Deviation of data3 is: % s " % (stdev(data3)))
+print("Standard Deviation of data4 is: % s " % (stdev(data4)))
+
+Output:
+Standard Deviation of data1 is: 3.352326839390103 
+Standard Deviation of data2 is: 3.265986323710904 
+Standard Deviation of data3 is: 8.345229603962801 
+Standard Deviation of data4 is: 0.18834070782022197
+
+The multimode() Method
+This method returns the most frequently occurring values. It returns the values in the order of first occurrence in the data. It may return multiple results if there are multiple modes.
+Let's understand the following example.
+Example -
+
+import statistics
+a = statistics.multimode('aaaaaabbbbccdddddddddddeeffffgg')
+print(a)
+
+Output:
+['d']
+
+Now we will cover some important statistics topics for data science that will help us to understand this topic in most precisely.
+Python Statistics & Probability Theory
+So far we have discussed how to perform the basic operations using the statistics library and Python. Probability theory is a highly valuable to learning statistics with python. It's analysis of random phenomena means any random event can produce the non-predictive. There can be any of the various possible outcomes and the eventual outcome is resolute by chance. Probability theory consists of the conceptual origins of statistics.
+Statistical Modeling and Fitting in Python
+Statistical models represent what produces our data and how can be used in data analysis. It helps us to summarize data, to simulate, and to predict the data. In the other words, we can used the generate data and used for summaries, predictions or simulations.
+However, it is essential that you should also be able to ascertain whether your data fits that model.
+Data estimation is a suitable way to provide the best fit between the model and the estimation.
+Conclusion
+This tutorial is included how we can learn statistics using the Python programing language. We have covered the basic operations including types of statistics, how to find mean, median, and mode using the statistics library. We have also explored the measure of the central tendency including how to calculate standard deviation, variance, and range. This tutorial gives the idea about the descriptive statistics using Python.
+
+
+Next TopicWhat is GIL in Python? Global Interpreter Lock
+
+
+
+
+← prev
+next →
+
+
+
+

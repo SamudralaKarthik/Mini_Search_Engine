@@ -1,0 +1,133 @@
+
+
+
+
+next →
+← prev
+
+Matplotlib legend in subplot
+In this tutorial, we will learn how Matplotlib can be used to include legends in subplots. The legend can be added after creating the plot using the legend() function.
+Syntax:
+The syntax for legend in subplot is:
+
+axes[position].legend(loc = '')
+
+where, loc is used for location.
+Approaches:
+Following are the approaches we will use for displaying legend in the subplot in Matplotlib:
+
+First, we will use the subplots() function for creating subplots in a bigger plot.
+Then, we will use the legend() function for adding a label to the curves.
+At last, we will show the plots by using the show()
+
+Example 1:
+In this example, we will plot the scatter graph using subplot of log10 and exponential:
+
+# First, we will import the required modules
+from matplotlib import pyplot as PPlt
+import numpy as nmp
+  
+# here we will assign the value to x axis
+x_axis1 = nmp.arange(2, 22, 1.5)
+  
+# Now, we will get the value of log10
+y_axis_log10_1 = nmp.log10(x_axis)
+  
+# then, we will get the value of exponential
+y_axix_exp1 = nmp.exp(x_axis)
+  
+# Here, we will create subplots by using subplot() function
+fig, axes = PPlt.subplots(2)
+  
+# now, we will depicte the visualization
+axes[0].plot(x_axis1, y_axis_log10_1, color = 'Red', label = "log10")
+axes[1].plot(x_axis1, y_axix_exp1, color = 'Pink', label = "exponential")
+  
+# Here, we will select the position at which legend to be added
+axes[0].legend(loc = 'best')
+axes[1].legend(loc = 'best')
+  
+# At last, we will display the plot
+
+PPlt.show()
+
+Output
+
+Example 2:
+In this example, we will plot the scatter graph using subplot of sine and cos:
+
+# First, we will import the required modules
+from matplotlib import pyplot as PPlt
+import numpy as nmp
+  
+# here we will assign the value to x axis
+x_axis1 = nmp.arange(-2, 3, 0.5)
+  
+# Now, we will get the value of sine
+y_axis_sine1 = nmp.sin(x_axis)
+  
+# Now, we will get the value of cos
+y_axix_cose1 = nmp.cos(x_axis)
+  
+# Here, we will create subplots by using subplot() function
+fig, axes = PPlt.subplots(2)
+  
+# now, we will depicte the visualization
+axes[0].scatter(x_axis1, y_axis_sine1, color = 'Red', marker = '*', label = "sine")
+axes[1].scatter(x_axis1, y_axix_cose1, color = 'Black', marker = '*', label = "cos")
+  
+# Here, we will select the position at which legend to be added
+axes[0].legend(loc = 'best')
+axes[1].legend(loc = 'best')
+  
+# At last, we will display the plot
+PPlt.show()
+
+Output
+
+Example 3:
+In this example, we will plot the scatter graph using subplot of (y = x^2) and (y = x^3):
+
+# First, we will import the required modules
+from matplotlib import pyplot as PPlt
+  
+# here we will assign value to x axis
+x_axis = list(range(-15, 15))
+  
+# here, we will get the value of x * x
+y_axis_1 = [x * x for x in x_axis]
+  
+# here, we will get the value of x * x * x
+y_axix_2 = [x * x * x for x in x_axis]
+  
+# Now, we will create subplots by using subplot() function
+fig, axes = PPlt.subplots(2)
+  
+# Now, we will depicte the visualization
+axes[0].scatter(x_axis, y_axis_1, color = 'Blue', marker = '*', label = "y = x ^ 2")
+axes[1].scatter(x_axis, y_axix_2, color = 'Brown', marker = '*', label = "y = x ^ 3")
+  
+# Here, we will select the position at which legend to be added
+axes[0].legend(loc = 'upper center')
+axes[1].legend(loc = 'upper left')
+  
+# At last, we will display the plot
+PPlt.show()
+
+Output
+
+Conclusion
+In this tutorial, we have discussed how to use legend in the subplot of matplotlib graphs using different methods.
+
+
+Next TopicMorphological Operations in Image Processing in Python
+
+
+
+
+← prev
+next →
+
+
+
+

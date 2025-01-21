@@ -1,0 +1,89 @@
+
+
+
+
+next →
+← prev
+
+Database Connection
+In this section of the tutorial, we will discuss the steps to connect the python application to the database. 
+There are the following steps to connect a python application to our database.
+
+Import mysql.connector module
+Create the connection object. 
+Create the cursor object
+Execute the query
+
+
+Creating the connection
+To create a connection between the MySQL database and the python application, the connect() method of mysql.connector module is used. 
+Pass the database details like HostName, username, and the database password in the method call. The method returns the connection object. 
+The syntax to use the connect() is given below.
+
+Connection-Object= mysql.connector.connect(host = <host-name> , user = <username> , passwd = <password> )
+
+Consider the following example.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google")
+
+#printing the connection object 
+print(myconn)
+
+Output:
+<mysql.connector.connection.MySQLConnection object at 0x7fb142edd780> 
+
+Here, we must notice that we can specify the database name in the connect() method if we want to connect to a specific database.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google", database = "mydb")
+
+#printing the connection object 
+print(myconn) 
+
+Output:
+<mysql.connector.connection.MySQLConnection object at 0x7ff64aa3d7b8> 
+
+
+Creating a cursor object
+The cursor object can be defined as an abstraction specified in the Python DB-API 2.0. It facilitates us to have multiple separate working environments through the same connection to the database. We can create the cursor object by calling the 'cursor' function of the connection object. The cursor object is an important aspect of executing queries to the databases. 
+The syntax to create the cursor object is given below.
+
+<my_cur>  = conn.cursor()
+
+Example
+
+import mysql.connector
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google", database = "mydb")
+
+#printing the connection object 
+print(myconn) 
+
+#creating the cursor object
+cur = myconn.cursor()
+
+print(cur)
+
+Output:
+<mysql.connector.connection.MySQLConnection object at 0x7faa17a15748> 
+MySQLCursor: (Nothing executed yet)
+
+
+Next TopicCreating New Database
+
+
+
+
+← prev
+next →
+
+
+
+

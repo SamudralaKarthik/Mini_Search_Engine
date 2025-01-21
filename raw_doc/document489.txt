@@ -1,0 +1,689 @@
+
+
+
+
+next →
+← prev
+
+Creating an MCQ Quiz Game in Python
+Python programming language offers a standard Graphical User Interface (GUI) framework called Tkinter, which is utilized to develop fast and easy GUI applications. In the following tutorial, we will develop a simple Multiple-Choice Quiz game in Python with the help of GUI. We will be using the Tkinter GUI framework to create a quiz.
+So, let's get started.
+Steps to create MCQ Quiz Game in Python
+The following are the steps to create a Multiple-Choice Quiz Game in Python:
+Step 1: We will create the JSON file to store the data
+Step 2: We will create the GUI using the Tkinter framework
+Let us now understand the above steps.
+Creating the JSON file
+In order to create the Multiple-Choice Quiz Game, we will need some data. We can define this data in a JSON file, called data.json, with JSON data which are name/value pairs and consist of an array of values. This data will represent the questions with their answers along with multiple choices.
+Let us consider the following sample data for the quiz as shown below:
+File: data.json
+
+{
+    "ques" : [
+        "Q1. Which language is directly executable by a computer's CPU?",
+        "Q2. Which has been standardized in the IEEE 802.3 specification?",
+        "Q3. ___ is a storage device with effectively independent access time of the data location?",
+        "Q4. Which of the following Key is not found in normal computers/laptops?",
+        "Q5. What is used in most programs as their part guiding the user through certain steps?"
+    ],
+    "ans" : [
+        1,
+        2,
+        4,
+        3,
+        2
+    ],
+    "choices" : [
+        [
+        "Machine Language",
+        "High Language",
+        "Assembly Language",
+        "Second generation Language"
+        ],
+        [
+        "Bluetooth",
+        "Ethernet",
+        "WiMAX",
+        "All of the above"
+        ],
+        [
+        "Primary Storage Device",
+        "Secondary Storage Device",
+        "Gateway Device",
+        "Direct Access Storage Device"
+        ],
+        [
+        "Del key",
+        "Alt key",
+        "Turn key",
+        "Shift key"
+        ],
+        [
+        "Software",
+        "Wizard",
+        "Wiki",
+        "None of the above"
+        ]
+    ]
+}
+
+Explanation:
+In the above JSON file, we have stored data in the form of the name/value pair along with the array of values. As we can observe, we have included the questions with their answers and different options to select from.
+Now, let us create the Graphical User Interface (GUI) in the next step.
+Creating the GUI using Tkinter
+We will now create the GUI using the Tkinter framework in Python. These are some steps that we will follow:
+Step 1: Importing the module: Tkinter and JSON
+Step 2: Creating the main window (container) of the application
+Step 3: Adding widgets to display data
+Step 4: Adding the functionalities to the button
+Step 5: Using the data in the quiz
+Note: Both the Python and JSON files will be created in the same directory defined above.
+Now that we have created the JSON file for storing the data, we are about to create a python file that will contain the program for the quiz.
+Importing the modules
+We will start by importing the required modules for the project. In this case, we are importing the Tkinter framework and the JSON module.
+Let us consider the following snippet of code demonstrating the same:
+File: myQuiz.py
+
+# importing everything from tkinter
+from tkinter import *
+# importing messagebox as mb from tkinter
+from tkinter import messagebox as mb
+# importing json to utilize json file for data
+import json
+
+Explanation:
+In the above snippet of code, we have imported everything from the tkinter along with the json module.
+Creating the main Window of the application
+Now that we imported the required modules, we will create the main Window of the application using the Tk class.
+Let us consider the following snippet of code demonstrating the same:
+File: myQuiz.py
+
+# Creating a GUI Window
+guiWindow = Tk()
+ 
+# setting the size of the GUI Window
+guiWindow.geometry("800x450")
+
+# setting the title of the Window
+guiWindow.title("Javatpoint.com Quiz")
+
+Explanation:
+In the above snippet of code, we have instantiated the Tk class of the tkinter module to create a GUI window. We have also set the size and title of this GUI window using the geometry() and title() functions.
+Creating the components of the GUI
+We will now define a class where we can create the components of the GUI and add functionalities to them.
+We will start by defining the __init__() method, which we will use to initialize a new object of the class. Within this method, we will set the question count to zero and initialize all the methods that are required to display the content and make the functionalities available.
+Let us now consider the following snippet of code to understand the same:
+File: myQuiz.py
+
+# defining the class to define the GUI components
+class myQuiz:
+    """
+    defining an initializing method which is called when
+    we will initialize a new object of the class. This method
+    will set the question count to 0. and initialize all the
+    other methods in order to display the content and make all the
+    functionalities available
+    """
+    def __init__(self):     
+        # setting the question number to 0
+        self.quesNumber = 0
+
+        # assigning the question to the displayQuestion function to update later.
+        self.displayTitle()
+        self.displayQuestion()
+         
+        # the optSelected attribute holds an integer value
+        # which is used for selected option in a question.
+        self.optSelected = IntVar()
+         
+        # displaying radio button for the current question
+        self.options = self.radioButtons()
+         
+        # displaying the options for the current question
+        self.displayOptions()
+         
+        # displaying the button for next and exit.
+        self.buttons()
+         
+        # number of questions
+        self.dataSize = len(question)
+         
+        # keeping a counter of right answers
+        self.rightAnswer = 0
+
+Explanation:
+In the following snippet of code, we have defined a class as myQuiz. Within this class, we have defined the __init__() method to initialize the functions and attributes for the project. We have started by setting the value of the question number to zero and assigning the question the displayQuestion() function in order to update it later. We have then initialized the optSelected attribute that holds an integer value used for the selected option in a question. We have then displayed the radio button and options for the current question and the button for next and exit. We have then defined the attribute to store the number of questions. At last, we have initialized the attribute to keep a counter of right answers.
+Let us now define another method that allows us to display the result. This method will count the number of right and wrong answers and then show them at the end as a message box.
+Here is the snippet of code that demonstrates the same:
+File: myQuiz.py
+
+    """
+    This method is utilized to display the result
+    It counts the number of right and wrong answers
+    and then display them at the end as a message box
+    """    
+    def displayResult(self):
+         
+        # calculating the wrong count
+        wrongCount = self.dataSize - self.rightAnswer
+        rightAnswer = f"Correct: {self.rightAnswer}"
+        wrongAnswer = f"Wrong: {wrongCount}"
+         
+        # calculating the percentage of right answers
+        the_score = int(self.rightAnswer / self.dataSize * 100)
+        the_result = f"Score: {the_score}%"
+         
+        # showing a message box to display the result
+        mb.showinfo("Result", f"{the_result} \n{rightAnswer} \n{wrongAnswer}")
+
+Explanation:
+In the above snippet of code, we have defined the method as displayResult(). We have then calculated the value for the wrong count. We have then calculated the percentage of right answers and, at last, shown a message box to display the result.
+We will define a method that helps us check the answer once we click on Next. Let us consider the following snippet of code demonstrating the same:
+File: myQuiz.py
+
+    """
+    This method checks the Answer after we click on Next.
+    """
+    def checkAnswer(self, quesNumber):
+         
+        # checking for whether the selected option is right
+        if self.optSelected.get() == answer[quesNumber]:
+            # if the option is right it return true
+            return True
+
+Explanation:
+In the following snippet of code, we have defined a method as checkAnswer() that helps us check whether the selected option is correct. For this, we have used the if conditional statement that returns True if the value of the selected option matches the answer.
+Now, we will define the method for the next button.
+File: myQuiz.py
+
+    """
+    This method is utilized to check the answer of the
+    current question by calling the checkAnswer and quesNumber.
+    if the question is right it increments the count by 1
+    and then increase the question number by 1. If it is last
+    question then it calls displayResult to show the message box.
+    else shows next question.
+    """
+    def nextButton(self):
+        # Checking whether the answer is correct
+        if self.checkAnswer(self.quesNumber):
+            # if the answer is correct it increments the correct by 1
+            self.rightAnswer += 1
+         
+        # Moving to next Question by incrementing the quesNumber counter
+        self.quesNumber += 1
+         
+        # checking whether the quesNumber size is equal to the data size
+        if self.quesNumber == self.dataSize: 
+            # if it is correct then it displays the score
+            self.displayResult()
+            
+            # destroying the GUI window
+            guiWindow.destroy()
+        else:
+            # showing the next question
+            self.displayQuestion()
+            self.displayOptions()
+
+Explanation:
+In the above snippet of code, we have defined a method as nextButton(). Within this method, we have used the if conditional statement to check whether the answer is correct and increment the total correct answer count by 1. We have then used the if-else statement to check whether we reached the end of the questions or not and displayed the output accordingly.
+Now we will define the method that stores the properties of the button that we will be using in this project. Specifically, there are two buttons that we will be needing - the first one is the next button, and another one is the exit button.
+Let us consider the following snippet of code demonstrating the same:
+File: myQuiz.py
+
+    """
+    This method displays the two buttons on the screen.
+    The first button is the next_button which moves to next question
+    It has properties like what text it shows the functionality,
+    size, color, and property of text displayed on button. Then it
+    mentions where to place the button on the screen. The second
+    button is the exit button which we will use to close the GUI without
+    completing the quiz.
+    """
+    def buttons(self):
+        
+        # The first button is the Next button
+        # to move to the next Question
+        next_button = Button(
+            guiWindow,
+            text = "Next",
+            command = self.nextButton,
+            width = 10,
+            bg = "blue",
+            fg = "white",
+            font = ("ariel", 16, "bold")
+            )
+         
+        # placing the button on the screen
+        next_button.place(x = 350, y = 380)
+         
+        # The second button is the quit button
+        # which is used to Quit the GUI
+        quit_button = Button(
+            guiWindow,
+            text = "Quit",
+            command = guiWindow.destroy,
+            width = 5,
+            bg = "black",
+            fg = "white",
+            font = ("ariel", 16, " bold")
+            )
+         
+        # placing the Quit button on the screen
+        quit_button.place(x = 700, y = 50)
+
+Explanation:
+In the above snippet of code, we have defined the method as buttons(). We have created two objects of the Button() class of the Tkinter library within this method. We have specified different attributes for the buttons and used the place() function to place them in position within the GUI.
+We will now define a method that will allow us to deselect the radio button on the screen. This method will display the options available for the current question, which we get through the question numbers. Moreover, this method helps update each of the options for the current question of the radio button.
+Let us consider the following snippet of code to understand the same:
+File: myQuiz.py
+
+    """
+    This method deselects the radio button on the screen.
+    Then it is used to show the options available for
+    the current question which we get through the
+    question number and Updates each of the options for
+    the current question of the radio button.   
+    """
+    def displayOptions(self):
+        val = 0
+         
+        # deselecting the options
+        self.optSelected.set(0)
+        # looping over the options to be displayed
+        # for the text of the radio buttons.
+        for opt in opts[self.quesNumber]:
+            self.options[val]['text'] = opt
+            val += 1
+
+Explanation:
+In the above snippet of code, we have defined the method as displayOptions(). Within this method, we have set the value to zero. We have then deselected the options using the set() function, specifying its parameter to zero. We have then used the for-loop to iterate through the options available for each question and increased the value by 1.
+We will now define the method to display the current question on the screen. Let us consider the following snippet of code demonstrating the same:
+File: myQuiz.py
+
+    """
+    This method shows the current Question on the screen
+    """
+    def displayQuestion(self):
+         
+        # setting the Question properties
+        quesNumber = Label(
+            guiWindow,
+            text = question[self.quesNumber],
+            width = 60,
+            font = ('ariel', 16, 'bold'),
+            anchor = 'w'
+            )
+         
+        # placing the option on the screen
+        quesNumber.place(x = 70, y = 100)
+
+Explanation:
+In the above snippet of code, we have defined the method as displayQuestion(). Within this method, we have used the Label() class of the Tkinter library to create an instance, specifying different attributes to it. We have then used the place() function to set the location of the label on the screen.
+Now, let us define the method to display the title to the screen. Here is the following snippet of code that demonstrates the same:
+File: myQuiz.py
+
+    """
+    This method is used to Display Title
+    """
+    def displayTitle(self):         
+        # The title to be shown
+        myTitle = Label(
+            guiWindow,
+            text = "Javatpoint.com QUIZ",
+            width = 50,
+            bg = "red",
+            fg = "white",
+            font = ("ariel", 20, "bold")
+            )
+        
+        # placing the title
+        myTitle.place(x = 0, y = 2)
+
+Explanation:
+In the above snippet of code, we have defined a method as displayTitle(). Within this method, we have defined the label for the title using the Tkinter's Label() class and placed it using the place() function.
+At last, we will create the radio buttons to select the Question on the screen at a particular position. This method also returns a list of the radio button, which we will use later to add the options to them.
+File: myQuiz.py
+
+    """
+    This method shows the radio buttons to select the Question
+    on the screen at the specified position. It also returns a
+    list of radio button which are later used to add the options to
+    them.    
+    """
+    def radioButtons(self):
+         
+        # initializing the list with an empty list of options
+        qList = []
+         
+        # position of the first option
+        y_pos = 150
+         
+        # adding the options to the list
+        while len(qList) < 4:
+             
+            # setting the radio button properties
+            radio_button = Radiobutton(
+                guiWindow,
+                text = " ",
+                variable = self.optSelected,
+                value = len(qList) + 1,
+                font = ("ariel", 14)
+                )
+            
+            # adding the button to the list
+            qList.append(radio_button)
+             
+            # placing the button
+            radio_button.place(x = 100, y = y_pos)
+             
+            # incrementing the y-axis position by 40
+            y_pos += 40
+         
+        # returning the radio buttons
+        return qList
+
+Explanation:
+In the above snippet of code, we have defined the method as radioButton(). Within this method, we have initialized an empty list and set the position of the first option. We have then used the while loop to add options to the list. We have created an object of the Tkinter's RadioButton() class, used the append() function, set the button's position, and incremented the position of the y-axis by 40 inside this loop. At last, we have returned the radio button.
+Using the data in the Quiz
+Since we have added the required widgets and their functionalities to the program, let us use the data stored in JSON. Here is the following snippet of code, demonstrating the same:
+File: myQuiz.py
+
+# getting the data from the json file
+with open('data.json') as json_file:
+    data = json.load(json_file)
+ 
+# setting the question, options, and answer
+question = (data['ques'])
+opts = (data['choices'])
+answer = (data[ 'ans'])
+
+Explanation:
+In the above snippet of code, we have used the open() function to open the JSON file and load its data to the main program. We have then created different variables to store the data from the JSON file in the form of the question, its options, and its answer.
+We have successfully built our project. We will instantiate the myQuiz() class and use the Tkinter's mainloop() function before executing the program.
+Let us consider the following snippet of code demonstrating the same:
+File: myQuiz.py
+
+# creating an object of the myQuiz Class.
+quiz = myQuiz()
+
+# using the mainloop() function
+guiWindow.mainloop()
+
+Explanation:
+We have instantiated the myQuiz() class in the above snippet of code. At last, we have used the Tkinter's mainloop() function to display the GUI window.
+The complete project code can be found below.
+Complete Project Code
+File: myQuiz.py
+
+# importing everything from tkinter
+from tkinter import *
+# importing messagebox as mb from tkinter
+from tkinter import messagebox as mb
+# importing json to utilize json file for data
+import json
+
+# Creating a GUI Window
+guiWindow = Tk()
+ 
+# setting the size of the GUI Window
+guiWindow.geometry("1000x450")
+
+# setting the title of the Window
+guiWindow.title("Javatpoint.com - Quiz")
+
+# defining the class to define the GUI components
+class myQuiz:
+    """
+    defining an initializing method which is called when
+    we will initialize a new object of the class. This method
+    will set the question count to 0. and initialize all the
+    other methods in order to display the content and make all the
+    functionalities available
+    """
+    def __init__(self):     
+        # setting the question number to 0
+        self.quesNumber = 0
+
+        # assigning the question to the displayQuestion function to update later.
+        self.displayTitle()
+        self.displayQuestion()
+         
+        # the opt_selected attributes holds an integer value
+        # which is used for selected option in a question.
+        self.optSelected = IntVar()
+         
+        # displaying radio button for the current question and
+        # used to display options for the current question
+        self.options = self.radioButtons()
+         
+        # displaying the options for the current question
+        self.displayOptions()
+         
+        # displaying the button for next and exit.
+        self.buttons()
+         
+        # number of questions
+        self.dataSize = len(question)
+         
+        # keeping a counter of right answers
+        self.rightAnswer = 0
+
+    """
+    This method is utilized to display the result
+    It counts the number of right and wrong answers
+    and then display them at the end as a message box
+    """    
+    def displayResult(self):
+        # calculating the wrong count
+        wrongCount = self.dataSize - self.rightAnswer
+        rightAnswer = f"Correct: {self.rightAnswer}"
+        wrongAnswer = f"Wrong: {wrongCount}"
+         
+        # calculating the percentage of right answers
+        the_score = int(self.rightAnswer / self.dataSize * 100)
+        the_result = f"Score: {the_score}%"
+         
+        # showing a message box to display the result
+        mb.showinfo("Result", f"{the_result} \n{rightAnswer} \n{wrongAnswer}")
+
+    """
+    This method checks the Answer after we click on Next.
+    """
+    def checkAnswer(self, quesNumber):
+        # checking for if the selected option is right
+        if self.optSelected.get() == answer[quesNumber]:
+            # if the option is right it return true
+            return True
+
+    """
+    This method is utilized to check the answer of the
+    current question by calling the checkAnswer and quesNumber.
+    if the question is right it increments the count by 1
+    and then increase the question number by 1. If it is last
+    question then it calls displayResult to show the message box.
+    else shows next question.
+    """
+    def nextButton(self):
+        # Checking whether the answer is correct
+        if self.checkAnswer(self.quesNumber):
+            # if the answer is correct it increments the correct by 1
+            self.rightAnswer += 1
+         
+        # Moving to next Question by incrementing the quesNumber counter
+        self.quesNumber += 1
+         
+        # checking whether the quesNumber size is equal to the data size
+        if self.quesNumber == self.dataSize: 
+            # if it is correct then it displays the score
+            self.displayResult()
+            
+            # destroying the GUI
+            guiWindow.destroy()
+        else:
+            # showing the next question
+            self.displayQuestion()
+            self.displayOptions()
+
+    """
+    This method displays the two buttons on the screen.
+    The first button is the next_button which moves to next question
+    It has properties like what text it shows the functionality,
+    size, color, and property of text displayed on button. Then it
+    mentions where to place the button on the screen. The second
+    button is the exit button which we will use to close the GUI without
+    completing the quiz.
+    """
+    def buttons(self):
+        
+        # The first button is the Next button
+        # to move to the next Question
+        next_button = Button(
+            guiWindow,
+            text = "Next",
+            command = self.nextButton,
+            width = 10,
+            bg = "blue",
+            fg = "white",
+            font = ("ariel", 16, "bold")
+            )
+         
+        # placing the button on the screen
+        next_button.place(x = 350, y = 380)
+         
+        # The second button is the quit button
+        # which is used to Quit the GUI
+        quit_button = Button(
+            guiWindow,
+            text = "Quit",
+            command = guiWindow.destroy,
+            width = 5,
+            bg = "black",
+            fg = "white",
+            font = ("ariel", 16, " bold")
+            )
+         
+        # placing the Quit button on the screen
+        quit_button.place(x = 700, y = 50)
+
+    """
+    This method deselects the radio button on the screen.
+    Then it is used to show the options available for
+    the current question which we get through the
+    question number and Updates each of the options for
+    the current question of the radio button.   
+    """
+    def displayOptions(self):
+        val = 0
+        # deselecting the options
+        self.optSelected.set(0)
+        # looping over the options to be displayed
+        # for the text of the radio buttons.
+        for opt in opts[self.quesNumber]:
+            self.options[val]['text'] = opt
+            val += 1
+
+    """
+    This method shows the current Question on the screen
+    """
+    def displayQuestion(self):
+         
+        # setting the Question properties
+        quesNumber = Label(
+            guiWindow,
+            text = question[self.quesNumber],
+            width = 60,
+            font = ('ariel', 16, 'bold'),
+            anchor = 'w'
+            )
+         
+        # placing the option on the screen
+        quesNumber.place(x = 70, y = 100)
+    
+    """
+    This method is used to Display Title
+    """
+    def displayTitle(self):         
+        # The title to be shown
+        myTitle = Label(
+            guiWindow,
+            text = "Javatpoint.com QUIZ",
+            width = 50,
+            bg = "red",
+            fg = "white",
+            font = ("ariel", 20, "bold")
+            )
+        
+        # placing the title
+        myTitle.place(x = 0, y = 2)
+ 
+    """
+    This method shows the radio buttons to select the Question
+    on the screen at the specified position. It also returns a
+    list of radio button which are later used to add the options to
+    them.    
+    """
+    def radioButtons(self):
+         
+        # initializing the list with an empty list of options
+        qList = []
+         
+        # position of the first option
+        y_pos = 150
+         
+        # adding the options to the list
+        while len(qList) < 4:
+             
+            # setting the radio button properties
+            radio_button = Radiobutton(
+                guiWindow,
+                text = " ",
+                variable = self.optSelected,
+                value = len(qList) + 1,
+                font = ("ariel", 14)
+                )
+            
+            # adding the button to the list
+            qList.append(radio_button)
+             
+            # placing the button
+            radio_button.place(x = 100, y = y_pos)
+             
+            # incrementing the y-axis position by 40
+            y_pos += 40
+         
+        # returning the radio buttons
+        return qList
+
+# getting the data from the json file
+with open('data.json') as json_file:
+    data = json.load(json_file)
+ 
+# setting the question, options, and answer
+question = (data['ques'])
+opts = (data['choices'])
+answer = (data[ 'ans'])
+ 
+# creating an object of the myQuiz Class.
+quiz = myQuiz()
+
+# using the mainloop() function
+guiWindow.mainloop()
+
+Output:
+
+
+
+
+
+Next TopicStatistic with Python
+
+
+
+
+← prev
+next →
+
+
+
+

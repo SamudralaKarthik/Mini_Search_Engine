@@ -1,0 +1,131 @@
+
+
+
+
+next →
+← prev
+
+Generate HTML using tinyhtml Module in Python
+In this tutorial, we will learn how we can generate HTML using Python code. We will learn about the tinyhtml module and generate some HTML. Creating HTML can be very hectic and challenging, and sometimes it takes lots of time to debug and is error-prone. While creating an HTML page, we forget to close the div tag or many other silly mistakes, but we can avoid chances for errors using the tinyhtml module.
+This module provides advanced methods and classes that help render html5 using Python code. It allows us to group several HTML tags. Using this module, we can also publish raw unescaped HTML, providing the functionality of looping or type conversion using builders.
+Installation
+To use this library, we need to install it using the below command.
+
+pip install tinyhtml
+
+We will use the following functions -
+
+html() :It marks beginning of html code.
+h(): It is the most utility function and allows to render of attributes, standard elements, and void/self-closing elements.
+raw(): It is used to print unescaped html strings.
+frag(): It groups several HTML tags together.
+render(): It processes and converts the input html.
+
+Let's understand the following example -
+Example -
+
+from tinyhtml import html, h
+  
+html_content = html(lang="en")(
+    h("head")(
+        (h("h1")("hello Learners!!")),
+    ),
+).render()
+print(html_content)
+
+Output:
+<!DOCTYPE html><html lang="en"><head><h1>hello Learners!!</h1></head></html>
+
+In the above code, we have constructed the HTML using html() and h(). We can also use h() is also supported.
+Let's understand another example -
+Example -
+
+from tinyhtml import html, h, frag, raw
+  
+# using frag() to group to h fncs.
+print("Working of frag() function : ")
+html_content = html(lang="en")(
+    frag(h("h1")("Welcome to Javatpoint"), h("p")("You\
+    will found here best tutorials on the latest technology\
+"))).render()
+  
+print(html_content)
+  
+print("\n")
+  
+# prints raw unescaped HTML.
+print("The unescaped HTML raw content : ")
+print(raw('<h1>Printing Raw HTML</h1><p> Don?t escape <<>>>> </p>'))
+
+Output:
+Working of frag() function : 
+<!DOCTYPE html><html lang="en"><h1>Welcome to Javatpoint</h1><p>You    will found here best tutorials on the latest technology</p></html>
+
+
+The unescaped HTML raw content :
+<h1>Printing Raw HTML</h1><p> Don?t escape <<>>>> </p>
+
+Using Classes and Labels as HTML
+In this section, we use the "klass" operator to initialize a class. And for other labels which can coincide with the naming of Python reserved keywords, a trailing underscore is appended.
+Let's understand the following code.
+Example -
+
+from tinyhtml import h
+  
+# using klass to initialize class
+print("Working with klass operator : ")
+class_inp = h("div", klass="jtp")()
+print(class_inp)
+  
+# using _ to escape for loop operator
+print("Working with label and escaping keyword : ")
+label_inp = h("label", for_="Javatpoint")("JTP")
+print(label_inp)
+
+Output -
+Working with klass operator : 
+<div class="jtp"></div>
+Working with label and escaping keyword :
+<label for="Javatpoint">JTP</label>
+
+Working with Loop and Conditional
+We can use Python loops and conditional statements to generate HTML content. Let's understand the following example.
+Example -
+
+from tinyhtml import h
+
+# initializing loop elements
+print("Using loop elements : ")
+loop_ele = h("ul")(h("li")(idx) for idx in range(10))
+print(loop_ele)
+
+print("\n")
+
+# using conditionals
+print("Using conditional elements : ")
+conditional_element = h("ul")(
+    h("li")("jtp") if False else "JTP", h("li")("java"))
+print(conditional_element)
+
+Output -
+Using loop elements : 
+<ul><li>0</li><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li></ul>
+
+Using conditional elements :
+<ul>JTP<li>java</li></ul>
+
+Conclusion
+In this tutorial, we have used tinyhtml to generate HTML tags. We have shown some simple tags, you can modify according to the need. You can also check its official documentation.
+
+
+Next TopicGoogle Search Packages using Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,259 @@
+
+
+
+
+next →
+← prev
+
+Counters in Python | How to Initialize and Update
+In this tutorial, we will discuss the Counter that included in the collection module. We will also explain how we can use it to solve problems. First, let's have a brief introduction of Counter.
+What is Counter?
+Counters are referred to as the container that holds the count of each of the elements that are available in the container. They allow us to access the stored object. The dictionary class holds the Counter as the sub-class. Counter helps us to count the key-value pairs in an object. They are also known as hash table objects. The list, tuple, dictionary are examples of the built-in container, and many are included in the collection module. It can be considered as a bag or multiset of other languages. Below is the syntax of the Counter.
+Syntax:
+
+class collections.Counter([iterable-or-mapping])
+
+Initialization
+We can call the constructor of the counter can be called in any one of the following ways:
+
+We can call it with the sequence of items.
+With the dictionary containing keys and counts.
+With the string.
+With keyword arguments mapping string names to counts.
+
+Why do we use Counter?
+Following are the main reasons for using Counter in the Python program.
+
+The counter is used to store the data in the unordered collection, the same as hashtable objects. The elements are represented as the key, and counts are values.
+It provides the facility to count the items in an iterable list.
+We can perform the basic arithmetic operations such as addition, subtraction, interaction, and union one the Counter.
+A counter is also capable of counting elements from another counter.
+
+Implementation of Counters
+Python takes iterable objects like list, dictionary, tuple, string as an argument and returns the count of each element.
+Consider the following list that contains several elements.
+List1 = [a, b, a, a, c, d, e, c, d, f]
+The list has a duplicate element. We will use the count values that show how many times these elements are present. Let's see the below example.
+Example - 1:
+
+from collections import Counter
+List1 = ['a', 'b', 'a', 'a', 'c', 'd', 'e', 'c', 'd', 'f']
+# Print count of the variable
+print(Counter(List1))
+
+Output:
+Counter({'a': 3, 'c': 2, 'd': 2, 'b': 1, 'e': 1, 'f': 1})
+
+So we have the count of a as 3, b as 1, e as 1, c as 2, f as 1.
+Example - 2:
+
+from collections import Counter
+# With the list
+print(Counter(['X','Y','X','Y','Z','X','Y','Y','X','Z']))
+
+# with the dictionary
+print(Counter({'X':5, 'Y':2, 'Z':4}))
+
+# with keyword arguments
+print(Counter(A=3, B=5, C=2))
+
+Output:
+Counter({'X': 4, 'Y': 4, 'Z': 2})
+Counter({'X': 5, 'Z': 4, 'Y': 2})
+Counter({'B': 5, 'A': 3, 'C': 2})
+
+Updating Counter
+The collection module provides the update() method which allows us to update or add value. The syntax is following -
+
+_count.update('Welcome to JavaTpoint Tutorials!')
+
+Let's understand the following example.
+Example -
+
+from collections import Counter
+count_num = Counter()
+count_num.update('Welcome to JavaTpoint Tutorials!')
+print(count_num)
+
+Output:
+Counter({'o': 4, ' ': 3, 't': 3, 'a': 3, 'e': 2, 'l': 2, 'T': 2, 'i': 2, 'W': 1, 'c': 1, 'm': 1, 'J': 1, 'v': 1, 'p': 1, 'n': 1, 'u': 1, 'r': 1, 's': 1, '!': 1})
+
+Accessing Counter
+We can access the values from the Counter. Let's understand the following example.
+Example -
+
+from collections import Counter
+count_num = Counter()
+count_num.update('Welcome to JavaTpoint Tutorials!')
+print('%s : %d' % ('u', count_num['T']))
+print('\n')
+for char in 'Tutorials':
+    print('%s : %d' % (char, count_num[char]))
+
+Output:
+u : 2
+
+
+T : 2
+u : 1
+t : 3
+o : 4
+r : 1
+i : 2
+a : 3
+l : 2
+s : 1
+
+Deleting an Element from Counter
+The del keyword is used to delete the element from the counter. Let's understand the following example.
+Example -
+
+from collections import Counter
+dict1 =  {'a': 3, 'b': 1, 'c': 8}
+del dict1["c"]
+print("Dictionary After Deletion:", Counter(dict1))
+
+Output:
+Dictionary After Deletion: Counter({'a': 3, 'b': 1})
+
+How to Perform Arithmetic Operation on Python Counter
+As we mentioned above, we can perform various arithmetic operations such as addition, subtraction, interaction and union. Let's understand the following example.
+Example -
+
+from collections import Counter
+counter_1 =  Counter({'a': 5, 'b': 1, 'c': -3, 'd': 7})
+
+counter_2 = Counter({'a1': -10, 'b': 10, 'c':14 })
+
+#Addition
+counter_3 = counter_1 + counter_2 
+
+print(counter_3)
+
+#Subtraction
+counter_4 = counter_1 - counter_2 
+
+print(counter_4)
+
+#Intersection
+counter_5 = counter_1 & counter_2 
+print(counter_5)
+
+#Union
+counter_6 = counter_1 | counter_2 
+print(counter_6)
+
+Output:
+Counter({'b': 11, 'c': 11, 'd': 7, 'a': 5})
+Counter({'a1': 10, 'd': 7, 'a': 5})
+Counter({'b': 1})
+Counter({'c': 14, 'b': 10, 'd': 7, 'a': 5})
+
+Counter with String
+As we know, everything in Python is an object, so the string is an object as well. Strings are enclosed character in characters in the double quotes. Python doesn't have a character type.
+In the following example, we will pass the string to the Counter, which will return the character dictionary with key/value pair. The key is the element, and value is the count.
+Example -
+
+from collections import Counter
+str1 = "Welcome to JavaTpoint Tutorial"
+print(Counter(str1))
+
+Output:
+Counter({'o': 4, ' ': 3, 't': 3, 'a': 3, 'e': 2, 'l': 2, 'T': 2, 'i': 2, 'W': 1, 'c': 1, 'm': 1, 'J': 1, 'v': 1, 'p': 1, 'n': 1, 'u': 1, 'r': 1})
+
+Counter with Dictionary
+A dictionary stores the elements in the key-value pair define inside the curly brackets. When we pass the dictionary into the Counter, it will return to a hashtable object element. The element will become keys, and the vale will be counted as the element from the dictionary given.
+Let's understand the following example.
+Example -
+
+from collections import Counter
+dict1 =  {'a': 5, 'b': 6, 'c': 7, 'c': 2}
+print(Counter(dict1))
+
+Output:
+Counter({'b': 6, 'a': 5, 'c': 2})
+
+Counter with Tuple
+Tuples are immutable data-structure where elements are stored separated by commas inside round brackets. A tuple is converted into a hashtable object. A counter will provide the count of each element in the tuple given. The element will become keys, and the vale will be counted as the element from the dictionary given.
+Let's understand the following example.
+Example -
+
+from collections import Counter
+tup1 = ('x','y','z','x','x','x','y','z')
+print(Counter(tup1))
+
+Output:
+Counter({'x': 4, 'y': 2, 'z': 2})
+
+Some Important Methods in Python Counter
+The following are some commonly used methods in Counter.
+
+elements() method - This method returns the count element which are greater than 0. The elements with 0 or -1 will be completely omitted.
+
+Example -
+
+from collections import Counter
+counter1 =  Counter({'a': 5, 'b': 2, 'c': -2, 'd':0})
+
+new_elements = counter1.elements()
+for i in new_elements:
+    print(i)
+
+Output:
+a
+a
+a
+a
+a
+b
+b
+
+
+most_common(value) - It returns the most common elements from Counter list. It sorts the dictionary as per the most common element first followed by the next element. If we won't pass the value to the most_common() method, it sorts the first element as the most commonly used and last element as the least commonly used element. Let's see the following example.
+
+Example -
+
+from collections import Counter
+counter1 =  Counter({'a': 5, 'b': 2, 'c': -2, 'd':0})
+new_elements = counter1.most_common(2)
+
+new_elements1 = counter1.most_common()
+
+print(new_elements)
+
+print(new_elements1)
+
+Output:
+[('a', 5), ('b', 2)]
+[('a', 5), ('b', 2), ('d', 0), ('c', -2)]
+
+
+subtract() method - It returns the new Counter object after performing subtraction. Let's understand the following example.
+
+Example -
+
+from collections import Counter
+counter1 =  Counter({'x': 4, 'y': 3, 'z': 8})
+counter2 = Counter({'x': 2, 'y':5, 'z': 1})
+
+counter1.subtract(counter2)
+print(counter1)
+
+Output:
+Counter({'z': 7, 'x': 2, 'y': -2})
+
+Conclusion
+In this tutorial, we have covered almost every important concept of the Python Counter. The counter is a kind of container that stores the count of each of the elements available in the container. Counters allow us to count the items in an iterable list, and we can use it the other iterable.
+
+
+Next TopicPython pyautogui Library | Automation Testing Using
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,140 @@
+
+
+
+
+next →
+← prev
+
+Tuple to Dictionary in Python
+In this tutorial, we will discuss how we can convert a tuple to a dictionary in Python.
+We know that the elements of tuples are enclosed within parentheses and the elements of a dictionary are present in the form of a key-value pair and are enclosed within curly brackets.
+We will use the following techniques to convert a tuple to a dictionary in Python-
+
+Using setdefault()
+Using dict()
+Using Dictionary Comprehension
+Using zip() and dict()
+
+Let's get started with the first one,
+Using setdefault()
+The function of setdefault() is to return the value associated with a key and if the key is not present it is inserted with a default value.
+The following program illustrates how it can be used in a Python program.
+
+#creating a function 
+def convert_dict(tup, dic):
+	for i, j in tup:
+		dic.setdefault(i, []).append(j)
+	return dic
+#initialising the tuple values	
+tuple_values = [("English", 2001), ("Hindi", 2002), ("Mathematics", 2003),
+	("Computer Science", 2004), ("Physics", 2005), ("Chemistry", 2006)]
+res_dictionary = {}
+#displaying the resultant dictionary
+print ("The converted dictionary is: ", convert_dict(tuple_values,res_dictionary))
+
+Output:
+The converted dictionary is: {'English': [2001], 'Hindi': [2002], 'Mathematics': [2003], 'Computer Science': [2004], 'Physics': [2005], 'Chemistry': [2006]}
+
+Explanation-
+
+In the first step, we have created a function that takes tuple and dictionary as an input.
+After this, we have used for loop to use the setdefault() and append the subject name and the subject code.
+Now we have initialized the values of our tuple and declared the resultant dictionary as {}.
+On executing the above program, the expected output is displayed.
+
+In the second program, we will learn how dict() can be used for the same.
+Using dict()
+The dict() is used to create a dictionary in Python, let's see how it can add meaning to our program.
+Consider the program given below,
+
+#creating a function 
+def convert_dict(tup, dic):
+#use of dict()
+    dic = dict(tup)
+    return dic	
+#initialising the tuple values	
+tuple_values = [("English", 2001), ("Hindi", 2002), ("Mathematics", 2003),
+	("Computer Science", 2004), ("Physics", 2005), ("Chemistry", 2006)]
+res_dictionary = {}
+#displaying the resultant dictionary
+print ("The converted dictionary is: ", convert_dict(tuple_values,res_dictionary))
+
+Output:
+The converted dictionary is: {'English': 2001, 'Hindi': 2002, 'Mathematics': 2003, 'Computer Science': 2004, 'Physics': 2005, 'Chemistry': 2006}
+
+Explanation-
+
+In the first step, we have created a function that takes tuple and dictionary as an input.
+After this, we have used for loop to use the dict() that takes tuple as a parameter and returns a dictionary.
+Now we have initialized the values of our tuple and declared the resultant dictionary as {}.
+On executing the above program, the expected output is displayed.
+
+In the third program, we will see how dictionary comprehension can help us.
+Using Dictionary Comprehension
+The program below shows the same,
+
+#initialising the tuple values
+sub_names = ('English', 'Hindi', 'Mathematics', 'Computer Science', 'Physics', 'Chemistry')
+sub_codes = (2001, 2002, 2003, 2004, 2005, 2006)
+#displaying the tuples
+print("The values in sub_names are: ", sub_names)
+print("The values in sub_codes are: ", sub_codes)
+if len(sub_names) == len(sub_codes):
+    res_dict = {sub_names[i]: sub_codes[i] for i, _ in enumerate(sub_codes)}
+#displaying the resultant dictionary
+    print("The resultant dictionary is: ", res_dict)
+
+Output:
+The values in sub_names are: ('English', 'Hindi', 'Mathematics', 'Computer Science', 'Physics', 'Chemistry')
+The values in sub_codes are: (2001, 2002, 2003, 2004, 2005, 2006)
+The resultant dictionary is: {'English': 2001, 'Hindi': 2002, 'Mathematics': 2003, 'Computer Science': 2004, 'Physics': 2005, 'Chemistry': 2006}
+
+Explanation-
+
+Firstly, we have initialized the two tuples, sub_names, and sub_codes, and displayed them.
+After this, the decision-making keyword, if is used to check whether the length of both the tuples is the same or not, if it is the same then the functionality defined in the dictionary comprehension is performed.
+On executing the given program, the desired output is displayed.
+
+In the last program, we will learn how zip() and dict() can be used in the Python program.
+Using zip() and dict()
+We have understood how the dict() works, here we will be applying both dict() and zip(), the zip() method takes the iterable items and appends them to form a single tuple.
+The following program illustrates the same-
+
+#initialising the tuple values
+sub_names = ('English', 'Hindi', 'Mathematics', 'Computer Science', 'Physics', 'Chemistry')
+sub_codes = (2001, 2002, 2003, 2004, 2005, 2006)
+#displaying the tuples
+print("The values in sub_names are: ", sub_names)
+print("The values in sub_codes are: ", sub_codes)
+if len(sub_names) == len(sub_codes):
+#using zip() and dict()
+    res_dict = dict(zip(sub_names, sub_codes))
+#displaying the resultant dictionary
+    print("The resultant dictionary is: ", res_dict)
+
+Output:
+The values in sub_names are: ('English', 'Hindi', 'Mathematics', 'Computer Science', 'Physics', 'Chemistry')
+The values in sub_codes are: (2001, 2002, 2003, 2004, 2005, 2006)
+The resultant dictionary is: {'English': 2001, 'Hindi': 2002, 'Mathematics': 2003, 'Computer Science': 2004, 'Physics': 2005, 'Chemistry': 2006}
+
+Explanation-
+
+Firstly, we have initialized the two tuples, sub_names, and sub_codes, and displayed them.
+After this, the decision-making keyword, if is used to check whether the length of both the tuples is the same or not, if it is the same then the functionality involving zip() and dict() is performed.
+On executing the given program, the desired output is displayed.
+
+Conclusion
+In this tutorial, we learned the different methods of converting a tuple to a dictionary in Python.
+
+
+Next Topicdatetime.timedelta() Function of Python
+
+
+
+
+← prev
+next →
+
+
+
+

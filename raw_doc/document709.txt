@@ -1,0 +1,544 @@
+
+
+
+
+next →
+← prev
+
+Sklearn Tutorial
+What is Sklearn?
+An open-source Python package to implement machine learning models in Python is called Scikit-learn. This library supports modern algorithms like KNN, random forest, XGBoost, and SVC. It is constructed over NumPy. Both well-known software companies and the Kaggle competition frequently employ Scikit-learn. It aids in various processes of model building, like model selection, regression, classification, clustering, and dimensionality reduction (parameter selection).
+Scikit-learn is simple to work with and delivers successful performance. Scikit Learn, though, does not enable parallel processing. We can implement deep learning algorithms in sklearn, though it is not a wise choice, especially if using TensorFlow is an available option.
+Installation of Sklearn on our System
+We need to first install the following libraries before installing sklearn as its dependencies:
+
+NumPy
+SciPy
+
+Before installing the sklearn library, verify that NumPy and SciPy are already installed on the computer. Using pip after NumPy and SciPy have already been installed correctly is the easiest way to install scikit-learn:
+
+pip install -U scikit-learn
+
+Importing the Dataset
+The Iris Plants Dataset is the one we'll be using in this sklearn tutorial, as we discussed previously. We don't require getting this data set from an external server because Scikit Learn Python already includes it. We will immediately import the dataset, but first, we must import Scikit-Learn and Pandas libraries using the commands below:
+Code
+
+# Importing the required libraries
+import sklearn
+import pandas as pd
+
+After importing sklearn, using the following command, we can quickly import the iris plant dataset from sklearn:
+Code
+
+# Importing the dataset from the datasets module of sklearn
+from sklearn.datasets import load_iris
+
+# Loading the dataset
+iris = load_iris()
+
+# Creating the dataframe of the dataset
+df = pd.DataFrame(iris.data, columns = iris.feature_names)
+
+Splitting the Dataset
+We can divide the complete dataset into two parts-a training dataset and a testing dataset-to spare some unseen data to check the model's accuracy. Use the testing dataset to test or validate the model once it has been trained using the training set. Then, we can assess how well the trained model performed.
+This example will divide the data into a 70:30 ratio, meaning that 70% of the data will be used for training the model, and 30% will be used for testing the model. The dataset used in the example is the same as above.
+Code
+
+# Importing the class to perform train test split from model_selection module
+from sklearn.model_selection import train_test_split
+
+# Separating the dependent and independent features
+X = df.iloc[:, :-1].values
+y = df.iloc[:, -1].values
+
+# Creating a testing dataset of size 0.3 times the whole dataset
+X_train, X_test, y_train, y_test = train_test_split(
+   X, y, test_size = 0.3, random_state = 1
+)
+
+# Printing the shape of the training and testing dataset
+print(X_train.shape)
+print(X_test.shape)
+
+print(y_train.shape)
+print(y_test.shape)
+
+Output:
+(105, 3)
+(45, 3)
+(105,)
+(45,)
+
+Train the Model
+We can then train a predicting model using our dataset. As previously mentioned, scikit-learn offers an extensive collection of modern Machine Learning algorithms with a standardised user interface for fitting, predicting the accuracy score for the predictions, recall, etc.
+We'll use the KNN (K nearest neighbours) classifier in the example we were working on. KNN classifier will make clusters of the dataset based on their similarities. We will see how to implement this machine learning algorithm in the code below.
+Code
+
+# Importing the required modules
+import sklearn
+import pandas as pd
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import metrics
+
+# Loading the dataset
+iris = load_iris()
+
+# Creating the dataframe of the dataset
+df = pd.DataFrame(iris.data, columns = iris.feature_names)
+df['Targets'] = iris.target
+
+# Separating the dependent and independent features
+X = df.iloc[:, :-1].values
+y = df.iloc[:, -1].values
+
+# Importing the class to perform train test split from model_selection module
+from sklearn.model_selection import train_test_split
+
+# Creating a testing dataset of size 0.3 times the whole dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1)
+
+
+classifier_knn = KNeighborsClassifier(n_neighbors = 4)
+classifier_knn.fit(X_train, y_train)
+y_pred = classifier_knn.predict(X_test)
+# Finding accuracy by comparing actual response values(y_test) with predicted response value(y_pred)
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+# Providing sample data and the model will make predictions out of that data
+
+sample = [[5, 5, 3, 2], [1, 10, 3, 5]]
+preds = classifier_knn.predict(sample)
+pred_species = [iris.target_names[p] for p in preds] 
+print("Predictions:", pred_species)
+
+Output:
+Accuracy: 0.9777777777777777
+Predictions: ['versicolor', 'setosa']
+
+Linear Modelling
+These are the regression algorithms that Sklearn provides to perform linear regression analysis.
+
+
+Sr.No
+Model & Description
+
+
+1
+Linear Regression
+The association between a dependent variable (Y) and a specific collection of independent variables is studied using one of the best statistical models (X).
+
+
+2
+Logistic Regression
+Contrary to what its name suggests, logistic regression is a classification algorithm. It estimates discrete values (0 or 1, yes/no, true/false) using a set of independent variables.
+
+
+3
+Ridge Regression
+The regularisation method that carries out L2 regularisation is ridge regression or Tikhonov regularisation. Adding the penalty (shrinkage amount) equal to the square of the coefficients' magnitude alters the loss function.
+
+
+4
+Bayesian Ridge Regression
+Using probability distributors rather than point estimates when designing linear regression, Bayesian regression enables a natural process to survive the absence of sufficient data or data with an uneven distribution.
+
+
+5
+LASSO
+L1 regularisation is carried out using the regularisation method LASSO. Adding the penalty (shrinkage quantity) equal to the tally of the absolute values of the coefficients it alters the loss function.
+
+
+6
+Multi-task LASSO
+It enables the joint fitting of numerous regression problems while requiring that the characteristics chosen for each regression issue, also known as a task, be the same. Sklearn offers a linear model called MultiTaskLasso that simultaneously estimates sparse coefficients for multiple regression problems. It was trained using a mixed L1 and L2-norm for regularisation.
+
+
+7
+Elastic-Net
+The Lasso and Ridge regression methods' L1 and L2 penalties are combined linearly by the Elastic-Net regularised regression method. When there are several connected traits, it is helpful.
+
+
+8
+Multi-task Elastic-Net
+It is an Elastic-Net model that allows fitting multiple regression problems jointly, enforcing the selected features to be the same for all the regression problems, also called tasks.
+
+
+Clustering Methods
+Clustering is one of the best-unsupervised ML techniques for finding patterns of similarity and relationships between data sets. After that, they divide those samples into groups based on features that are similar to one another. The intrinsic grouping of the available unlabeled data is determined by clustering, which is why it is significant.
+Sklearn.cluster, a component of the Scikit-Learn package, is used to cluster unlabeled data. Scikit-learn offers the following clustering techniques under this module:
+KMeans
+This algorithm calculates the centroids, which then identifies the ideal centroid through iteration. It assumes there are already known clusters because it needs the number of clusters to be given. The fundamental idea behind this approach is to cluster the data by splitting samples into n groups with identical variances while reducing the inertia criterion. Scikit-learn has sklearn.cluster, which represents how many clusters the algorithm found. K-Means clustering is done using the KMeans package of Sklearn. The sample weight argument allows sklearn.cluster to compute the cluster centres and inertia value and the KMeans module to give some samples additional weight.
+Code
+
+# Python program to perform spectral clustering using sklearn
+
+# Importing the required libraries
+from sklearn.cluster import KMeans
+import numpy as np
+from sklearn.datasets import load_diabetes
+
+# Loading the dataset
+X, Y = load_diabetes(return_X_y = True)
+
+# Performing Spectral clustering
+cluster =  KMeans(n_clusters = 10)
+cluster.fit(X[:50, :])
+
+print("The number of clusters are: ", cluster.labels_)
+
+Output:
+The number of clusters are:  [6 0 6 2 0 8 8 5 6 2 8 6 0 6 0 5 3 5 2 2 8 8 2 7 2 6 8 2 4 3 2 4 1 4 4 9 3
+ 2 5 6 5 8 6 9 1 6 2 8 0 1]
+
+Spectral Clustering
+Before clustering, this approach essentially performs dimensionality reduction in fewer dimensions by using the eigenvalues, or spectrum, of the similarity matrix of the data. When there are many clusters, it is not desirable to apply this approach.
+Code
+
+# Python program to perform spectral clustering using sklearn
+
+# Importing the required libraries
+from sklearn.cluster import SpectralClustering
+import numpy as np
+from sklearn.datasets import load_diabetes
+
+# Loading the dataset
+X, Y = load_diabetes(return_X_y = True)
+
+# Performing Spectral clustering
+cluster =  SpectralClustering(n_clusters = 10)
+cluster.fit(X[:50, :])
+
+print("The number of clusters are: ", cluster.labels_)
+
+Output:
+The number of clusters are:  [0 2 0 8 4 3 6 4 9 1 3 0 4 6 2 8 5 4 7 1 7 6 9 5 2 8 3 9 1 3 9 5 0 5 4 5 1
+ 5 8 1 7 3 6 5 0 6 1 3 6 8]
+
+Hierarchical Clustering
+By successively merging or breaking the clusters, this algorithm creates nested clusters. This cluster hierarchy is shown as a dendrogram, often called a tree, and it fits into the two groups listed below.
+Hierarchical aggregative algorithms: Every data point is regarded as a single cluster in this type of hierarchical algorithm. The two clusters are then aggregated one after the other, following a bottom-up methodology.
+Hierarchical algorithms that divide all data points are considered a single large cluster in this hierarchical approach. In this case, the clustering procedure entails breaking a single large cluster into numerous minor clusters using a top-down technique.
+Code
+
+# Python program to perform hierarchical clustering using sklearn
+
+# Importing the required libraries
+from sklearn.cluster import AgglomerativeClustering
+import numpy as np
+from sklearn.datasets import load_diabetes
+
+# Loading the dataset
+X, Y = load_diabetes(return_X_y = True)
+
+# Performing Agglomerative clustering
+cluster = AgglomerativeClustering(n_clusters = 10, compute_distances = True)
+cluster.fit(X[:50, :])
+
+print("The number of clusters are: ", cluster.labels_)
+
+Output:
+The number of clusters are:  [3 6 3 5 6 0 0 1 3 5 0 2 6 3 6 1 4 1 5 6 0 0 5 9 5 2 0 5 6 4 5 0 8 7 6 7 4
+ 5 1 3 1 0 2 7 8 3 0 0 3 2]
+
+Decision Tree Algorithm
+A node represents a feature (or property), a branch indicates a decision function, and every leaf node indicates the conclusion in a decision tree, which resembles a flowchart. The root node in a decision tree is the first node from the top. It gains the ability to divide data according to attribute values. Recursive partitioning is the process of repeatedly dividing a tree. This framework, which resembles a flowchart, aids in decision-making. It is a flowchart-like representation that perfectly replicates how people think. Decision trees are simple to grasp and interpret because of this.
+Code
+
+# Python program to perform classification using Decision Trees
+
+# Importing the required libraries
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import cross_val_score, train_test_split
+
+# Loading the dataset
+X, Y = load_iris( return_X_y = True )
+
+# Splitting the dataset in training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.4, random_state=0)
+
+# Creating an instance of the Decision Tree Classifier class
+dtc = DecisionTreeClassifier(random_state = 0)
+dtc.fit(X_train, Y_train)
+
+# Calculating the accuracy score of the model using cross_val_score 
+score = cross_val_score(dtc, X, Y, cv = 10)
+
+# Printing the scores
+print("Accuracy scores: ", score)
+print("Mean accuracy score: ", np.mean(score))
+
+Output:
+Accuracy scores:  [1.         0.93333333 1.         0.93333333 0.93333333 0.86666667
+ 0.93333333 1.         1.         1.        ]
+Mean accuracy score:  0.96
+
+Gradient Boosting
+We might use a gradient boosting method when there are problems with regression and classification. It creates a predictive model based on many lesser prediction models, typically decision trees.
+To work, the Gradient Boosting Classifier needs a loss function. In addition to handling custom loss functions, gradient boosting classifiers may take many standardised loss functions, and the loss function must, however, be differentiable.
+Squared errors may be used in regression techniques, although logarithmic loss is typically used in classification algorithms. In gradient boosting systems, we don't need to explicitly derive a loss function for each incremental boosting step; instead, we can use any differentiable loss function.
+Code
+
+# Python program to perform classification using Gradient Boosting
+
+# Importing the required libraries
+from sklearn.datasets import make_hastie_10_2
+from sklearn.ensemble import GradientBoostingClassifier
+
+# Loading the dataset
+X, Y = make_hastie_10_2(random_state = 10)
+
+# Splitting the dataset in training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.4, random_state=0)
+
+# Creating an instance of the Gradient Boosting Classifier class
+gbc = GradientBoostingClassifier(n_estimators = 100, learning_rate = 1.0, max_depth = 1, random_state = 0)
+gbc.fit(X_train, Y_train)
+
+# Calculating the accuracy score of the model using cross_val_score 
+score = gbc.score(X_test, Y_test)
+
+# Printing the scores
+print("Accuracy scores: ", score)
+
+Output:
+Accuracy scores:  0.9185416666666667
+Dimensionality Reduction using PCA in Sklearn
+
+Exact PCA
+The information's Singular Value Decomposition (SVD) is utilized to perform the linear dimensionality reduction using Principal Component Analysis (PCA) to cast the data to a reduced dimensional feature space. Before utilizing the SVD during PCA reduction, input data is centred but not adjusted for each feature.
+The sklearn.decomposition module is part of the Scikit-learn ML toolkit.
+In its fit() method, the PCA module, which is applied as a transformer object, learns n number of components. It can also be employed to cast new data onto these elements.
+Code
+
+# Python program to show how to perform PCA using sklearn
+
+# Importing all the required libraries
+import pandas as pd
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+
+# Loading the breast cancer dataset
+dataset = load_breast_cancer()
+print(dataset.keys())
+ 
+# Checking the target classes
+print(dataset['target_names'])
+ 
+# Checking the independent attributes
+print(dataset['feature_names'])
+
+# constructing a data frame of the dataset using pandas
+df = pd.DataFrame(data = dataset['data'], columns = dataset['feature_names'])
+ 
+# Performing feature engineering by performing standard scaling
+scaler = StandardScaler()
+ 
+# Using the fit_transform method
+df_scaled = scaler.fit_transform(df)
+ 
+# Setting the n_components = 3
+pca = PCA(n_components = 3)
+pca.fit(df_scaled)
+X = pca.transform(df_scaled)
+ 
+# Checking the dimensions of data
+print("Shape of data after PCA: ", X.shape)
+
+# Checking the values of eigenvectors
+print("Components: ", pca.components_)
+
+# checking how much variance pca can explain
+print("Explained variance ratio: ", pca.explained_variance_ratio_)
+
+Output:
+dict_keys(['data', 'target', 'frame', 'target_names', 'DESCR', 'feature_names', 'filename', 'data_module'])
+['malignant' 'benign']
+['mean radius' 'mean texture' 'mean perimeter' 'mean area'
+ 'mean smoothness' 'mean compactness' 'mean concavity'
+ 'mean concave points' 'mean symmetry' 'mean fractal dimension'
+ 'radius error' 'texture error' 'perimeter error' 'area error'
+ 'smoothness error' 'compactness error' 'concavity error'
+ 'concave points error' 'symmetry error' 'fractal dimension error'
+ 'worst radius' 'worst texture' 'worst perimeter' 'worst area'
+ 'worst smoothness' 'worst compactness' 'worst concavity'
+ 'worst concave points' 'worst symmetry' 'worst fractal dimension']
+Shape of data after PCA:  (569, 3)
+Components:  [[ 0.21890244  0.10372458  0.22753729  0.22099499  0.14258969  0.23928535
+   0.25840048  0.26085376  0.13816696  0.06436335  0.20597878  0.01742803
+   0.21132592  0.20286964  0.01453145  0.17039345  0.15358979  0.1834174
+   0.04249842  0.10256832  0.22799663  0.10446933  0.23663968  0.22487053
+   0.12795256  0.21009588  0.22876753  0.25088597  0.12290456  0.13178394]
+ [-0.23385713 -0.05970609 -0.21518136 -0.23107671  0.18611304  0.15189161
+   0.06016537 -0.03476751  0.19034877  0.36657546 -0.10555215  0.08997968
+  -0.08945724 -0.15229262  0.20443045  0.23271591  0.1972073   0.13032154
+   0.183848    0.28009203 -0.21986638 -0.0454673  -0.19987843 -0.21935186
+   0.17230436  0.14359318  0.09796412 -0.00825725  0.14188335  0.27533946]
+ [-0.00853123  0.0645499  -0.00931421  0.02869954 -0.10429182 -0.07409158
+   0.00273384 -0.02556359 -0.04023992 -0.02257415  0.26848138  0.37463367
+   0.26664534  0.21600656  0.30883896  0.15477979  0.17646382  0.22465746
+   0.28858428  0.21150377 -0.04750699 -0.04229782 -0.04854651 -0.01190231
+  -0.25979759 -0.2360756  -0.1730573  -0.17034416 -0.27131265 -0.23279135]]
+Explained variance ratio:  [0.44272026 0.18971182 0.09393163]
+
+Incremental PCA
+Principal Component Analysis (PCA) primarily permits batch computing, which implies that all of the independent features to be analysed must fit in the storage. Incremental Principal Component Analysis (IPCA) is utilised to overcome this constraint.
+The sklearn.decomposition module is part of the Scikit-learn ML toolkit. IPCA package that provides the use np.memmap, a memory-mapped document, avoids loading the complete file into ram, permitting the use of its partial fit function on progressively fetched portions of data, or both.
+Parallel to PCA, input data is centred but not normalized for every feature prior to performing the SVD when decomposing data with IPCA.
+Example
+The sample below uses the Sklearn digit dataset to use sklearn.decomposition.IPCA module.
+Code
+
+# Python program to show how to perform decomposition using incremental PCA method
+
+# Importing the required libraries
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_digits
+from sklearn.decomposition import IncrementalPCA
+
+# Loading the digits dataset
+dataset = load_digits()
+print(dataset.keys())
+
+# constructing a data frame of the dataset using pandas
+df = pd.DataFrame(data = dataset['data'], columns = dataset['feature_names'])
+
+# Checking the shape of the dataset before decomposition
+print("Shape of the dataset before decomposition: ", df.shape)
+ 
+# Performing feature engineering by performing standard scaling
+scaler = StandardScaler()
+ 
+# Using the fit_transform method
+df_scaled = scaler.fit_transform(df)
+
+# Performing the incremental PCA
+ipca = IncrementalPCA(n_components = 15, batch_size = 200)
+ipca.partial_fit(df.iloc[:200, :-1])
+df_transformed = ipca.fit_transform(df.iloc[:, :-1])
+
+# Checking the shape of the dataset after decomposition
+print("Shape of the dataset after decomposition: ", df_transformed.shape)
+
+Output:
+dict_keys(['data', 'target', 'frame', 'feature_names', 'target_names', 'images', 'DESCR'])
+Shape of the dataset before decomposition:  (1797, 64)
+Shape of the dataset after decomposition:  (1797, 15)
+
+In this case, we can use the fit() method to split the information into batches, or we can partly fit on smaller lots of data (like we did on 200 per batch).
+Kernel PCA
+Using kernels, PCA's Kernel Principal Component Analysis modification reduces non-linear dimensionality. Both transform() and inverse_transform() methods are supported.
+We can use KernelIPCA class of the sklearn.decomposition module
+Example
+We will use the digit dataset of sklearn to show the use of KernelIPCA. The kernel we are using is sigmoid.
+Code
+
+# Python program to show how to perform decomposition using kernel IPCA method
+
+# Importing the required libraries
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_digits
+from sklearn.decomposition import KernelPCA
+
+# Loading the digits dataset
+dataset = load_digits()
+print(dataset.keys())
+
+# constructing a data frame of the dataset using pandas
+df = pd.DataFrame(data = dataset['data'], columns = dataset['feature_names'])
+
+# Checking the shape of the dataset before decomposition
+print("Shape of the dataset before decomposition: ", df.shape)
+ 
+# Performing feature engineering by performing standard scaling
+scaler = StandardScaler()
+ 
+# Using the fit_transform method
+df_scaled = scaler.fit_transform(df)
+
+# Performing the incremental PCA
+kpca = KernelPCA(n_components = 15, kernel = 'sigmoid')
+df_transformed = kpca.fit_transform(df.iloc[:, :-1])
+
+# Checking the shape of the dataset after decomposition
+print("Shape of the dataset after decomposition: ", df_transformed.shape)
+
+Output:
+dict_keys(['data', 'target', 'frame', 'feature_names', 'target_names', 'images', 'DESCR'])
+Shape of the dataset before decomposition:  (1797, 64)
+Shape of the dataset after decomposition:  (1797, 15)
+
+PCA using Randomized SVD
+Projecting variables to a lower-dimensional feature space through Principal Component Analysis (PCA) with randomised SVD preserves most variation by removing the singular vector of features linked to lower singular values. The sklearn.decomposition.PCA class with the additional svd_solver = 'randomized' argument will be quite helpful in this situation.
+Example
+The example below will utilise the sklearn.decomposition.PCA class and the svd_solver = 'randomized' auxiliary parameter to identify the top 10 principal components from the sklearn's breast cancer dataset.
+Code
+
+# Python program to show how to perform PCA through randomized solver using sklearn
+
+# Importing all the required libraries
+import pandas as pd
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.datasets import load_breast_cancer
+from sklearn.preprocessing import StandardScaler
+
+# Loading the breast cancer dataset
+dataset = load_breast_cancer()
+
+# Checking the shape of the dataset before decomposition
+print("Shape of the dataset before decomposition: ", df.shape)
+
+# constructing a data frame of the dataset using pandas
+df = pd.DataFrame(data = dataset['data'], columns = dataset['feature_names'])
+
+# Sepaating the dependent and independent features
+X = df.iloc[:, :-1].values
+Y = df.iloc[:, -1].values
+
+# Performing feature engineering by implementing standard scaling
+scaler = StandardScaler()
+ 
+# Transforming the dependent and independent features
+scaler.fit(X)
+X = scaler.transform(X)
+Y = scaler.fit(Y.reshape(-1,1))
+
+# Implementing PCA using randomized solver
+pca = PCA(n_components = 10, svd_solver = 'randomized')
+pca.fit(X)
+X = pca.transform(X)
+ 
+# Checking the dimensions of data
+print("Shape of data after PCA: ", X.shape)
+
+# checking how much variance PCA can explain
+print("Explained variance ratio: ", pca.explained_variance_ratio_)
+
+Output:
+Shape of the dataset before decomposition:  (569, 30)
+Shape of data after PCA:  (569, 10)
+Explained variance ratio:  [0.45067848 0.18239963 0.09159257 0.06781847 0.05626861 0.04135939
+ 0.01989181 0.01637191 0.01397121 0.01209004]
+
+
+
+Next TopicWhat Is Sleeping Time in Python
+
+
+
+
+← prev
+next →
+
+
+
+

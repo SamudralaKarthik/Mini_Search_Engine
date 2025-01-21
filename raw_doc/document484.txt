@@ -1,0 +1,171 @@
+
+
+
+
+next →
+← prev
+
+Bisect Algorithm Functions in Python
+In the following tutorial, we will learn about the Bisect algorithms with the help of the bisect module in the Python programming language.
+Understanding the Python bisect module
+The purpose of the Bisect algorithm is to find a position in the list where a data element must be inserted to keep the list sorted.
+Bisect Algorithm enables us to keep the list in sorted order after inserting each data element. This is necessary as this reduces the overhead time required to sort the list repeatedly after inserting each data element. Python, in its definition, offers the bisect algorithms with the help of the bisect module.
+Some Significant Bisection Functions
+Now, let us see some of the significant functions of the bisect module that helps in the Bisect algorithm:
+
+bisect(list, num, begin, end)
+bisect_left(list, num, begin, end)
+bisect_right(list, num, begin, end)
+insort(list, num, begin, end)
+insort_left(list, num, begin, end)
+insort_right(list, num, begin, end)
+
+Let us understand the working of these functions with some examples.
+Understanding the bisect() function
+The bisect() function is used to return the position in the sorted list, where the number passed in parameter can be placed to keep the resultant list in sorted order. The bisect() function accepts four parameters - list which needs to be worked with, the number that needs to be inserted, starting position in the list to consider, ending position which requires to be considered. If the data element is already present in the list, the rightmost position where the data element must be included is returned.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required library
+import bisect
+
+# creating a list
+myList = [1, 2, 3, 3, 3, 3, 6, 7, 8, 9]
+
+# printing some statement
+print("The rightmost index to insert, so list remains sorted is: ", end = "")
+# using the bisect() function
+print(bisect.bisect(myList, 3))
+
+Output:
+The rightmost index to insert, so list remains sorted is: 6
+
+Explanation:
+In the above snippet of code, we have imported the required library. We have then created a list and printed some statements. We have then used the bisect() function specifying the list and number to insert and print the value.
+Understanding the bisect_left() function
+The bisect_left() function is used to return the position in the sorted list, where the number passed in parameter can be placed to sustain the resultant list in sorted order. The bisect_left() accepts four parameters - list which needs to be worked with, the number that requires to be inserted, the starting point in the list to consider, ending point which needs to be considered. If the data element is already present in the list, the leftmost position where the data element needs to be included is returned.
+Let us consider the following snippet of code demonstrating the same:
+Example:
+
+# importing the required library
+import bisect
+
+# creating a list
+myList = [1, 2, 3, 3, 3, 3, 5, 7, 8, 9]
+
+# printing some statement
+print("The leftmost index to insert, so list remains sorted is: ", end = "")
+# using the bisect_left() function
+print(bisect.bisect_left(myList, 3))
+
+Output:
+The leftmost index to insert, so list remains sorted is: 2
+
+Explanation:
+In the above snippet of code, we have imported the required library. We have then created a list and printed some statements. We have then used the bisect_left() function specifying the list and number to insert and print the value.
+Understanding the bisect_right() function
+The bisect_right() function works similar to the bisect() function. If the data element is already present in the list, the rightmost position where the data element must be included is returned.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required library
+import bisect
+
+# creating a list
+myList = [1, 2, 3, 3, 3, 3, 5, 7, 8, 9]
+
+# printing some statement
+print("The rightmost index to insert, so list remains sorted is: ", end = "")
+# using the bisect_right() function
+print(bisect.bisect_right(myList, 3))
+
+Output:
+The rightmost index to insert, so list remains sorted is: 6
+
+Explanation:
+In the above snippet of code, we have imported the required library. We have then created a list and printed some statements. We have then used the bisect_right() function specifying the list and number to insert and print the value.
+Understanding the insort() function
+The insort() function is used to return the sorted list after the insertion of the number in the appropriate position. The insort() function accepts four parameters - list which needs to be worked with, the number that has to be inserted, the starting position in the list to consider, and the ending position that requires consideration. If the data element already exists in the list, the data element is inserted at the rightmost possible position.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required library
+import bisect
+
+# initializing a list
+myList = [1, 2, 3, 3, 3, 3, 5, 7, 8, 9]
+
+# using the insort() function to insert 4 at appropriate position
+bisect.insort(myList, 4)
+
+print ("The list after insertion of a new data element using the insort() function is: ")
+for i in range(0, 10):
+    print(myList[i], end = " ")
+
+Output:
+The list after insertion of a new data element using the insort() function is: 
+1 2 3 3 3 3 4 5 7 8
+
+Explanation:
+We have imported the required library and initialized the list in the above snippet of code. We have then used the insort() function to insert 4 at the appropriate position. We printed some statements, used the for-loop to iterate through the list, and printed the elements for the users.
+Understanding the insort_left() function
+The insort_left() function is used to return the sorted list after the insertion of the number in the appropriate position. The insort_left() function accepts four parameters - list which needs to be worked with, the number that has to be inserted, the starting position in the list to consider, and the ending position that requires consideration. If the data element already exists in the list, the data element is inserted at the leftmost possible position.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required library
+import bisect
+
+# initializing a list
+myList = [1, 2, 3, 3, 3, 3, 5, 7, 8, 9]
+
+# using the insort_left() function to insert 4 at appropriate position
+bisect.insort_left(myList, 4)
+
+print ("The list after insertion of a new data element using the insort_left() function is: ")
+for i in range(0, 10):
+    print(myList[i], end = " ")
+
+Output:
+The list after insertion of a new data element using the insort_left() function is: 
+1 2 3 3 3 3 4 5 7 8
+
+Explanation:
+We have imported the required library and initialized the list in the above snippet of code. We have then used the insort_left() function to insert 4 at the appropriate position. We printed some statements, used the for-loop to iterate through the list, and printed the elements for the users.
+Understanding the insort_right() function
+The insort_right() function works similar to the insort() function. If the data element already exists in the list, the data element is inserted at the rightmost possible position.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required library
+import bisect
+
+# initializing a list
+myList = [1, 2, 3, 3, 3, 3, 5, 7, 8, 9]
+
+# using the insort_right() function to insert 4 at appropriate position
+bisect.insort_right(myList, 4, 0, 5)
+
+print ("The list after insertion of a new data element using the insort_right() function is: ")
+for i in range(0, 10):
+    print(myList[i], end = " ")
+
+Output:
+The list after insertion of a new data element using the insort_right() function is: 
+1 2 3 3 3 4 3 5 7 8
+
+Explanation:
+We have imported the required library and initialized the list in the above snippet of code. We have then used the insort_right() function to insert 4 at the appropriate position. We printed some statements, used the for-loop to iterate through the list, and printed the elements for the users.
+
+
+Next TopicCreating and Updating PowerPoint Presentation using Python
+
+
+
+
+← prev
+next →
+
+
+
+

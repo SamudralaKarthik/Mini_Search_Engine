@@ -1,0 +1,285 @@
+
+
+
+
+next →
+← prev
+
+Draw Great Indian Flag using Python Code
+In this tutorial, we will draw the Indian National Flag using Python's turtle library. Turtle library is a Python library used to create unique graphics, pictures and games in Python. 
+Python turtle library was developed by Wally Feurzeig, Seymour Parpet and Cynthia Solomon in 1967. It was an original part of the original Logo programming language. This library was initially designed for the children to make some attractive graphics and games. With the help of this library, the developers can create unique shapes, pretty pictures and various games. We can also design the mini-games and animation. We have a complete tutorial on the turtle library. If you want to learn about the turtle library, you can visit our Python turtle library tutorial.
+Draw Indian Flag
+Let's understand the following steps to create a national flag using turtle library.
+Step - 1: Import Turtle library and its Functions
+In the first step, we import the turtle library and its built-in function, which will be used in the further program. Here * means importing all the methods that come in the turtle module to create the Flag. Let's see the example -
+Example -
+
+#import turtle
+import turtle
+from turtle import *
+
+Step - 2: Setup the turtle screen
+We initialize the turtle screen, first we create the screen instance and then turtle instance. We define the pen speed using the speed() function which takes integer as an argument.
+Example -
+
+# screen for output
+screen = turtle.Screen()
+# Defining a turtle Instance
+t = turtle.Turtle()
+speed(1)
+
+The speed can be increased if we increase the number.
+Step - 3: Create Function of Draw Orange
+We create a function to draw an orange rectangle. This function includes the initial object and pen location. We set the position to goto(200, -125). We define the color name as orange. The begin_fill() method will fill the orange color. When the pen is done with the rectangle just move forward to 84 steps which automatically encompasses the whole part of the Flag. 
+Example -
+
+def draw_orange_rectangle():
+    # initially penup()
+    t.penup()
+    t.goto(-200, 125)
+    t.pendown()
+
+    t.color("orange")
+    t.begin_fill()
+    t.forward(400)
+    t.right(90)
+    t.forward(84)
+    t.right(90)
+    t.forward(400)
+    t.end_fill()
+    t.left(90)
+    t.forward(84)
+
+Step - 4: Create Function to Draw Green Rectangle
+Now we draw the green rectangle of the Indian Flag same as the orange rectangle.
+Example -
+
+# Draw Green Rectangle
+def draw_green_rectangle():
+    t.color("green")
+    t.begin_fill()
+    t.forward(84)
+    t.left(90)
+    t.forward(400)
+    t.left(90)
+    t.forward(84)
+    t.end_fill()
+
+Step - 5: Draw Big Blue Circle
+Now we draw the big blue circle in navy color. We set the turtle position to goto(35, 0). The circle radius is kept at 35, and the color is kept navy blue.
+Example -
+
+# Big Blue Circle
+def big_blue_circle():
+    t.penup()
+    t.goto(35, 0)
+    t.pendown()
+    t.color("navy")
+    t.begin_fill()
+    t.circle(35)
+    t.end_fill()
+
+Step - 6: Draw Big White Circle Inside Blue Circle
+We set the turtle position at goto(30, 0) and kept a radius of 30, and a white circle is drawn. 
+Example -
+
+def big_white_circle():
+    t.penup()
+    t.goto(30, 0)
+    t.pendown()
+    t.color("white")
+    t.begin_fill()
+    t.circle(30)
+    t.end_fill()
+
+Step - 7: Draw 24 Minicircles
+Now we set the turtle position at (-27, -4) and color is navy. We run for loop 24 times to draw 24 minicircles of the Ashok Chakra.
+Example -
+
+def mini_blue():
+    t.penup()
+    t.goto(-27, -4)
+    t.pendown()
+    t.color("navy")
+    for i in range(24):
+        t.begin_fill()
+        t.circle(2)
+        t.end_fill()
+        t.penup()
+        t.forward(7)
+        t.right(15)
+        t.pendown()
+
+Step - 8: Draw the Middle Blue Circle
+We write the function to draw the innermost navy blue circle of the Indian Flag.
+Example -
+
+t.color("navy")
+t.penup()
+t.goto(10, 0)
+t.pendown()
+t.begin_fill()
+t.circle(10)
+t.end_fill()
+
+Step - 9: Drawing the Spokes
+
+def flag_spokes():
+    t.penup()
+    t.goto(0, 0)
+    t.pendown()
+    t.pensize(1)
+    for i in range(24):
+        t.forward(30)
+        t.backward(30)
+        t.left(15)
+
+Step - 10: Draw the Stick of the Indian Flag
+Here we come to the final step; in this set turtle, we have set the turtle position to goto(-200, 125). We increase the pen size to 10 and draw a straight line of the 800 steps, a stick of the Flag.
+Example -
+
+#for stick of the flag
+def flag_stick():
+    t.color("Brown")
+    t.pensize(10)
+    t.penup()
+    t.goto(-200,125)
+    t.right(180)
+    t.pendown()
+    t.forward(800)
+
+Now let's arrange all the created functions and draw the India flag.
+Complete Code to Draw Flag
+Python Code -
+
+#import turtle
+import turtle
+from turtle import *
+
+screen = turtle.Screen()
+# Defining a turtle Instance
+t = turtle.Turtle()
+speed(5)
+# Orange Rectangle
+#white rectangle
+def draw_orange_rectangle():
+    # initially penup()
+    t.penup()
+    t.goto(-200, 125)
+    t.pendown()
+
+    t.color("orange")
+    t.begin_fill()
+    t.forward(400)
+    t.right(90)
+    t.forward(84)
+    t.right(90)
+    t.forward(400)
+    t.end_fill()
+    t.left(90)
+    t.forward(84)
+
+# Draw Green Rectangle
+def draw_green_rectangle():
+    t.color("green")
+    t.begin_fill()
+    t.forward(84)
+    t.left(90)
+    t.forward(400)
+    t.left(90)
+    t.forward(84)
+    t.end_fill()
+
+# Big Blue Circle
+def big_blue_circle():
+    t.penup()
+    t.goto(35, 0)
+    t.pendown()
+    t.color("navy")
+    t.begin_fill()
+    t.circle(35)
+    t.end_fill()
+
+# Big White Circle
+def big_white_circle():
+    t.penup()
+    t.goto(30, 0)
+    t.pendown()
+    t.color("white")
+    t.begin_fill()
+    t.circle(30)
+    t.end_fill()
+
+#Mini Blue Circles of Flag
+def mini_blue():
+    t.penup()
+    t.goto(-27, -4)
+    t.pendown()
+    t.color("navy")
+    for i in range(24):
+        t.begin_fill()
+        t.circle(2)
+        t.end_fill()
+        t.penup()
+        t.forward(7)
+        t.right(15)
+        t.pendown()
+
+# Small Blue Circle
+def draw_small_blue_circle():
+    t.color("navy")
+    t.penup()
+    t.goto(10, 0)
+    t.pendown()
+    t.begin_fill()
+    t.circle(10)
+    t.end_fill()
+
+#The spokes of India Flag
+def flag_spokes():
+    t.penup()
+    t.goto(0, 0)
+    t.pendown()
+    t.pensize(1)
+    for i in range(24):
+        t.forward(30)
+        t.backward(30)
+        t.left(15)
+
+#for stick of the flag
+def flag_stick():
+    t.color("Brown")
+    t.pensize(10)
+    t.penup()
+    t.goto(-200,125)
+    t.right(180)
+    t.pendown()
+    t.forward(800)
+
+draw_orange_rectangle()
+draw_green_rectangle()
+big_blue_circle()
+big_white_circle()
+mini_blue()
+draw_small_blue_circle()
+flag_spokes()
+flag_stick()
+
+turtle.done()
+
+Output:
+
+We call all the created functions at the end of the program. It will then draw the Flag according to the speed we have set in the speed() function. You can set the speed as your choice. So finally, we successfully completed the Great Indian Flag drawing using the Python turtle library.
+
+
+Next TopicFind all triplets with Zero Sum in Python
+
+
+
+
+← prev
+next →
+
+
+
+

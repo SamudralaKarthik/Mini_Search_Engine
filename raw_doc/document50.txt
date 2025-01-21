@@ -1,0 +1,239 @@
+
+
+
+
+next →
+← prev
+
+Python Magic Methods
+To add "magic" to the class we create, we can define special methods called "magic methods." For example, the magic methods __init__ and __str__are always wrapped by double underscores from both sides. By granting us accessibility to Python's built-in syntax tools, magic methods can improve the structure of our classes.
+We can integrate Python's built-in classes with our classes. The class which has inherited from the built-in class is known as a child class. A child class has access to all of the attributes of the parent class, including its methods. By utilizing the essential built-in features, we can customize some of the tasks of our class by using magic methods.
+__init__ Method
+After we have constructed an instance of the class, but before that instance is returned to the caller of the class, the _init_ method is executed. When we create an instance of the class, it is called automatically, just like constructors in various programming languages like the popular ones C++, Java, C#, PHP, etc. These methods are invoked after _new_ and therefore are referred to as initialising. We should define the instance parameters here.
+Code
+
+# Python program to show how __init__ method works
+
+# Creating a class
+class methods():
+    def __init__(self, *args):
+        print ("Now called __init__ magic method, after tha initialised parameters")
+        self.name = args[0]
+        self.std = args[1]
+        self.marks = args[2]
+
+Student = methods("Itika", 11, 98)
+print(Student)
+print(f"Name, standard, and marks of the student is: \n", Student.name, "\n", Student.std, "\n", Student.marks)
+
+Output:
+Now called __init__ magic method, after tha initialised parameters
+<__main__.methods object at 0x3701290>
+Name, standard, and marks of the student is: 
+ Itika 
+ 11 
+ 98
+
+__new__() Method
+The magic method __new__() is called implicitly by the __init__() method. The new instance returned by the __new__() method is initialised. To modify the creation of objects in a user-defined class, we must supply a modified implementation of the __new__() magic method. We need to provide the first argument as the reference to the class whose object is to be created for this static function.
+Code
+
+# Python program to show how __new__ method works
+  
+# Creating a class
+class Method(object):
+    def __new__( cls ):
+        print( "Creating an instance by __new__ method")
+        return super(Method, cls).__new__(cls)
+    # Calling the init method
+    def __init__( self ):
+        print( "Init method is called here" )
+
+Method()
+
+Output:
+Creating an instance by __new__ method
+Init method is called here
+<__main__.Method at 0x30dfb88>
+
+__add__ Method
+We use the magic method __add__to add the class instance's attributes. Consider the scenario where object1 belongs to class Method and object2 belongs to class Method 1, both of which have the same attribute called "attribute" that stores any value passed to the class while creating the instance. If specified to add the attributes, the __add__ function implicitly adds the instances' same attributes, such as object1.attribute + object2.attribute, when the action object1 + object2 is completed.
+Below is the code to show how we add two attributes of two instances of different classes without using the __add__ magic method.
+Code
+
+# Python program to show how to add two attributes
+
+# Creating a class
+class Method:
+    def __init__(self, argument):
+        self.attribute = argument
+
+# Creating a second class
+class Method_2:
+    def __init__(self, argument):
+        self.attribute = argument
+# creating the instances
+instance_1 = Method(" Attribute")
+print(instance_1.attribute)
+instance_2 = Method_2(" 27")
+print(instance_2.attribute)
+
+# Adding two attributes of the instances
+print(instance_2.attribute + instance_1.attribute)
+
+Output:
+Attribute
+ 27
+ 27 Attribute
+By using __add__ magic method the code changes to this.
+
+Code
+
+# Python program to show how __add__ method works
+
+# Creating a class
+class Method:
+    def __init__(self, argument):
+        self.attribute = argument
+    def __add__(self, object1):
+        return self.attribute + object1.attribute
+
+# Creating a second class
+class Method_2:
+    def __init__(self, argument):
+        self.attribute = argument
+    def __add__(self, object1):
+        return self.attribute + object1.attribute
+instance_1 = Method(" Attribute")
+print(instance_1)
+instance_2 = Method_2(" 27")
+print(instance_2)
+print(instance_2 + instance_1)
+
+Output:
+<__main__.Method object at 0x37470f0>
+<__main__.Method_2 object at 0x376beb8>
+ 27 Attribute
+
+Classes, Method and Method_1 in the script above have a property called "attribute" that stores a string. We create two instances, instance_1 and instances_2, with corresponding attributes of " Attribute" and " 27" values. The __add__ method is used to translate the action instance_1 + instance_2 into instance_1 + instance_2.attribute, which produces output ( 27 Attribute).
+__repr__ Method
+The class instance is represented as a string using the magic method __repr__. The __repr__ method, which produces a string in the output, is automatically called whenever we attempt to print an object of that class.
+Code
+
+# Python program to show how __repr__ magic method works
+
+# Creating a class
+class Method:
+    # Calling __init__ method and initializing the attributes of the class
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+    # Calling the __repr__ method and providing the string to be printed each time instance is printe
+    def __repr__(self):
+        return f"Following are the values of the attributes of the class Method:\nx = {self.x}\ny = {self.y}\nz = {self.z}"
+instance = Method(4, 6, 2)
+print(instance)
+
+Output:
+Following are the values of the attributes of the class Method:
+x = 4
+y = 6
+z = 2
+
+__contains__ Method
+The 'in' membership operator of Python implicitly calls the __contains__ method. We can use the __contains__ method to determine if an element is contained in an object's attributes. We can use this method for attributes that are containers ( such as lists, tuples, etc.).
+Code
+
+# Python code to show how the __contains__ magic method works
+
+# Creating a class
+class Method:
+    # Calling the __init__ method and initializing the attributes
+    def __init__(self, attribute):
+        self.attribute = attribute
+        
+    # Calling the __contains__ method
+    def __contains__(self, attribute):
+        return attribute in self.attribute
+# Creating an instance of the class
+instance = Method([4, 6, 8, 9, 1, 6])
+
+# Checking if a value is present in the container attribute
+print("4 is contained in ""attribute"": ", 4 in instance)
+print("5 is contained in ""attribute"": ", 5 in instance)
+
+Output:
+4 is contained in attribute:  True
+5 is contained in attribute:  False
+
+We have used the __contanis__ magic method in the program above to determine if a given integer is contained in the attribute "attribute". In this case, "attribute" is a list of integers. The integer 4 is present in the given list of integers passed to the class Method as an attribute. While 5 is not present in the list.
+__call__ Method
+When a class instance is called, the Python interpreter calls the magic method __call__. We can utilise the __call__ method to explicitly call an operation using the instance name rather than creating an additional method to carry out specific activities.
+Code
+
+# Python program to show how the __call__ magic method works
+
+# Creating a class
+class Method:
+    # Calling the __init__ method and initializing the attributes
+    def __init__(self, a):
+        self.a = a
+    # Calling the __call__ method to multiply a number to the attribute value
+    def __call__(self, number):
+        return self.a * number
+
+# Creating an instance and proving the value to the attribute a
+instance = Method(7)
+print(instance.a) # Printing the value of the attribute a
+# Calling the instance while passing a value which will call the __call__ method
+print(instance(5))
+
+Output:
+7
+35
+
+__iter__ Method
+For the given instance, a generator object is supplied using the __iter__ method. To benefit from the __iter__ method, we can leverage the iter() and next() methods.
+Code
+
+# Python program to show how the __iter__ method works
+
+# Creating a class
+class Method:
+    def __init__(self, start_value, stop_value):
+        self.start = start_value
+        self.stop = stop_value
+    def __iter__(self):
+        for num in range(self.start, self.stop + 1):
+            yield num ** 2
+# Creating an instance
+instance = iter(Method(3, 8))
+print( next(instance) )
+print( next(instance) )
+print( next(instance) )
+print( next(instance) )
+print( next(instance) )
+print( next(instance) )
+
+Output:
+9
+16
+25
+36
+49
+64
+
+We have calculated the squares of the numbers in the code. For the numbers in the specified range, squares are calculated in the program above (start and stop). The __iter__ method, which generates squares of the numbers between the given range, is called when we call the function iter(Method(3, 8)). In our example, we're using the range of 3 to 8; therefore, calling the next() method will produce the results 9, 16, 25, 36, 49, 64.
+
+
+Next TopicPython Tutorial
+
+
+
+← prev
+next →
+
+
+
+

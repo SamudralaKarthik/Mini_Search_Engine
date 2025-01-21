@@ -1,0 +1,109 @@
+
+
+
+
+next →
+← prev
+
+Amicable Numbers in Python
+In this tutorial, we will learn how to get amicable numbers in Python. First, we will understand what amicable numbers are and how they can be used.
+Amicable numbers are two different numbers so related that the sum of the proper divisor of each is equal to the other number.
+In other words, the sum of the all proper divisor of x and the sum of all proper divisor y should be equal to the opposite number.
+
+sum_x = y and sum_y = x
+
+Suppose we have two numbers, 123 and 426, we need to find all the proper divisors of 123 and 426; then we do the sum of the proper divisor of 123 and the same with the 426.
+The sum of the proper divisor of 123 should equal 426, and the proper divisor of 426 should equal 123.
+How to check if two numbers are amicable in Python
+Following are the steps to find whether two numbers are amicable or not.
+
+First, take the two integer number as an input from the user.
+Get the proper divisor of the both numbers and do the sum of them.
+Now check whether the given number is equal to opposite numbers.
+If they are equal then they are Amicable else not.
+And we get the output.
+
+Program
+
+x=int(input('Enter first number : '))
+y=int(input('Enter second number : '))
+sum1=0
+sum2=0
+for i in range(1,x):
+    if x%i==0:
+        sum1+=i
+for j in range(1,y):
+    if y%j==0:
+        sum2+=j
+if(sum1==y and sum2==x):
+    print('Given numbers are Amicable!')
+else:
+    print('Given numbers are not Amicable!')
+
+Output:
+Enter first number : 220
+Enter second number : 284
+Given numbers are Amicable!    
+
+Let's see another output.
+Enter first number : 365
+Enter second number : 456
+Given numbers are not Amicable! 
+
+Explanation -
+In the above example, we take the user input and store it in separate variables. We used for loop and if statement to find the proper divisor of both the numbers. Then we find the sum of the proper divisors of both the numbers. Using the if statement, we checked if the sum of the proper divisor of the numbers equals the other number and vice-versa.
+How to get count of pair of amicable pairs from the list
+We have two lists of integer number, where we will pick each number from both lists and compare them. If the numbers are amicable, increment the count and return. Let's understand the following example.
+Example -
+
+# Python3 program to count
+# amicable pairs in an array
+# Calculate the sum
+# of proper divisors
+def sumOfDiv(x):
+    sum = 1
+    for i in range(2, x):
+        if x % i == 0:
+            sum += i
+    return sum
+# Check if pair is amicable
+def CheckAmicable(a, b):
+    if sumOfDiv(a) == b and sumOfDiv(b) == a:
+        return True
+    else:
+        return False
+def countPairs(arr, n):
+    count = 0
+    for i in range(0, n):
+        for j in range(i + 1, n):
+            if CheckAmicable(arr[i], arr[j]):
+                count = count + 1
+    return count
+list1 = [220, 284, 1184,
+        1210, 2, 5]
+n1 = len(list1)
+print(countPairs(list1, n1))
+
+list2 = [2620, 2924, 5020,
+        5564, 6232, 6368]
+n2 = len(list2)
+print(countPairs(list2, n2))
+
+Output:
+2
+3 
+
+This is a simple way to get the count of amicable number pair. We traverse each pair and check if they form an amicable pair.
+
+
+Next TopicContext Manager in Python
+
+
+
+
+← prev
+next →
+
+
+
+

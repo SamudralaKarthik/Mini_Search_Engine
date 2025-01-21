@@ -1,0 +1,195 @@
+
+
+
+
+next →
+← prev
+
+How to Parse JSON in Python
+Foundation/ A brief on the pre-requisite knowledge:
+JSON stands for "JavaScript Object Notation". It is a standard syntactic style used to store in the form of files and exchange data (Interchange) over networks. The syntax of JSON is just simple text, which makes it more high-level. It is derived from JavaScript, but it is language-independent for usage. Data storage is achieved with the use of two types of data structures used in almost all programming languages in one or the other form:
+
+Key: value pairs are also referred to as objects, records, structures, hash tables, keyed lists, or a dictionary.
+An ordered collection of data values like an array, vector, or list.
+
+JSON files have an extension.json, and network transfers have a wide range of electronics and digital systems applications. The programmer has to parse the data into some programming language to work with the human-readable data inside the JSON files. There are inbuilt software's/modules in almost all programming languages to interact with these files.
+Example of JSON Data Representation:
+
+{
+		"StudentName": "Raghav",
+		"Course": "Electronics",
+		"isAlive": true,
+		"Year": 3,
+	 	"Place": "Chennai",
+	 	"Grades": 
+	 	[
+	   	     {"1-1": "9.2"},
+		     {"1-2": "9.1"},
+	         	     {"2-1": "8.9"},
+   	     {"2-2": "9.0"}
+		]
+  }	
+
+As shown in the above sample, JSON files store the data in the form of key: value pairs and sequences like lists, arrays, etc.
+This tutorial explains Python's way of parsing a JSON file.
+Package: json
+Python has an inbuilt package built to interact with these files called "json". the programmer must import this package into the code to work with the data from json files.
+So, the very first line of code a programmer has to start with is:
+
+import json
+
+Equivalent Data Types in Python with json Files:
+
+
+Python
+JSON
+
+
+dictionary
+Object
+
+
+string
+string
+
+
+Lists and tuples
+Arrays
+
+
+Int, long, float, double
+Numbers
+
+
+True
+true
+
+
+False
+false
+
+
+None
+null
+
+
+In the above representation of student information as a json file, numbers, strings, and arrays are used. Working with json files in Python, there are 2 possible mechanisms:
+
+Serialization or Encoding
+De-serialization or Decoding
+
+
+Serialization refers to encoding Python objects into their equivalent json series of bytes for transferring the data via networks.
+De-serialization, on the other hand, refers to decoding the json bytes into equivalent Python objects.
+In the JSON package, there are two methods to simplify the processes:
+
+
+For encoding: json.dump() and json.dumps()
+For decoding: json.load() and json.loads()
+
+This article discusses the parsing concept for which de-serialization is the concept.
+
+Parsing means breaking the file components into parts and decoding the JSON data into respective programming languages, which in this case is Python.
+
+load() and loads()
+1. The purpose of the load() method is to read a given JSON file.
+Syntax:
+
+json.load(file_object)
+
+2. The purpose of the loads() method is to convert the data in the JSON file into a Python dictionary, thus decoding the data.
+Syntax: 
+
+json.loads(string/byte/byte array in a JSON file)
+
+Example:
+
+import json
+json_string = """{
+"StudentName": "Raghav",
+"Course": "Electronics",
+"isAlive": true,
+"Year": 3,
+"Place": "Chennai",
+"Grades": 
+    [
+	   	   {"1-1": "9.2"},
+		   {"1-2": "9.1"},
+    	              {"2-1": "8.9"},
+   	              {"2-2": "9.0"}
+    ]
+}	
+"""
+python = json.loads(json_string)
+	print(Python)
+
+Output:
+
+Point to Remember:
+The JSON object we provide to loads() can be a string, bytes, or a byte array but not a dictionary. In the above code, a multi-line string is given using """.
+
+Check if the JSON representation is correct using online JSON validation websites.
+
+Difference between load() and loads():
+Both load() and loads() de-serializes JSON data into a Python dictionary. The difference is that the load() method takes a file as input, reads it, and converts it to a Python dictionary. In contrast, the loads() method takes JSON data as input in the form of native JSON string/bytes or byte array and converts it into a Python dictionary.
+To Read a JSON File in Python:
+Suppose some JSON data is stored in a file, say "samplefile.json". To parse the file's data, we need to read the file using the load() method.
+
+Code:
+
+import json
+with open ('samplefile.json', 'r') as jsonfile:
+    data = json. load (jsonfile)
+print (data)
+
+Output:
+
+Extended Syntax of load() and loads():
+load():
+
+json. load (fp, cls = None, object_hook = None, parse_float = None, parse_int = None, parse_constant = None, object_pairs_hook = None, **kw)
+
+
+fp: File pointer that reads the JSON data from the file.
+object_hook: Specifying this parameter with a type decodes the JSON data into the specified type. It is by default set to None. It is mostly invoked for creating custom decoders for different needs.
+parse_float, parse_int, and parse_constant: These three parameters are called whenever a JSON float, int, and constants are to be decoded in the file. All three parameters are by default set to None.
+object_pairs_hook: This is also similar to the object_hook parameter. It is invoked for creating customized decoders, but the difference is that, here, the JSON string will be parsed as a list of tuples, while in object_hook, it is parsed as a dictionary. By using this parameter, duplicate keys can be avoided.
+
+loads():
+
+json. loads (s, encoding = None,  cls = None, object_hook = None, parse_float = None, parse_int = None, parse_constant = None, object_pairs_hook = None, **kw)
+
+s: The JSON data to be parsed
+
+All the other parameters are the same as in the load () method.
+
+object_hook and object_pairs_hook Parameters:
+
+import json
+json_string = """{
+	"StudentName": "Raghav",
+"Course": "Electronics",
+"isAlive": true,
+"Year": 3,
+"Place": "Chennai"
+}"""	
+json. loads (json_string, object_pairs_hook = print)
+json. loads (json_string, object_hook=print)
+
+Output:
+
+Understanding:
+The JSON data is parsed as a dictionary when the object_pairs_hook parameter is printed and parsed as a list of tuples when the object_hook parameter is printed.
+
+
+Next TopicHow to Make the First Column an Index in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,155 @@
+
+
+
+
+next →
+← prev
+
+How to Send Push Notification in Python
+In this tutorial, we will learn how to send or push notifications; implement the functionality of push notifications and why we use the user notification.
+Push notifications are a beneficial method of communication with the user. These are used to send or notify the user of a significant event or display a symbol and brief details of the text that the user may click on to access the website. Push notifications can include the action button in the notice so that users can get direct access to the site or application without returning. Push notifications are essential in increasing user engagement with the application or website. Let's have a brief introduction to push notifications.
+What are Push Notifications?
+Push notifications are clickable pop-up messages that generally include a call to action (CTA). These are beneficial from both customer and company perspectives, and the companies can increase their conversion rate. These text-based messages may appear as browser notifications on your desktop/laptop. We can customize any system, whether a window desktop Mozilla Firefox browser or Windows mobile opera browser.
+Below are some use cases of the push notification -
+Behavioral Characteristics
+Have you ever noticed that you have been looking for a pair of shoes over the website for a long time and don't add to the cart yet? Or you want to have it in the near future. Once the website notices such users, it sends a push notification to the user with social media proof claiming that shoes are popular. We can determine if they are interested in other items by analyzing the user's choice or behavior.
+Location
+Gift vouchers are the perfect example of increasing user interaction based on location. This hyper-personalized method analyses visitor movement on the internet. If potential buyers are near your location, sending a push notification with a gift certificate only redeemable at a physical location is a solid strategy.
+Previous Purchases
+Every business's growth depends on the repeat customer. The websites are not meant to be someone who visited the website and completed a purchase; we break the communication with them. For example, many businesses send regular users to push notifications to inform them that the brand's most popular goods are on sale. Suppose the user has booked a flight to New York on our website. We can send the customize push Message to any blog or website in the New York area. We can also mention the city's service's expertise to increase customer engagement.
+Reminder to the Inactive Users
+Today's average applications have dismally poor retention rates. Popular apps have the high retention and they often leads to the uninstallation of scarcely used application. To avoid a situation, where there is possibility of inactive user can uninstall our application, we can send regular push notifications reminding them how useful our application is to them and how many new features we have added in our application that can enhance the user application.
+Multi-Channel Push Notification
+In the current digital era, notifications are the essential attributes of many software products like Instagram and e-commerce shops. Many businesses would not be able to survive without push notifications. They are using push notifications to alert users about the new feature or piece of information they need to know to keep them engaged and excited.
+However, multi-channel notifications are a bit tricky. For example - an email works asynchronously; the user may prefer a summary of a hotel room booking activity via email. However, an action requires quick attention, such as a change in room availability status. A website would like to prefer email notification in favor of a push notification.
+How to Send Push Notification
+Now we will implement the push notification using Python, which is the motive of this tutorial. We will follow the below steps to implement each type of notification.
+Web Push Notification
+Web push notification enables user engagement to the website and timely updates users about the new update on the web. To send the push notification to the users, we must perform an API request to a push notification. This API is used to specify the data to be transmitted, who will receive the Message, and any other scenario to send the Message.
+A push service takes a network request, validates it, and sends a push message to the corresponding browser. If the browser is unavailable, the Message waits until the browser becomes available. 
+The developer can control the browser to send the push notification. This tutorial will use the Pushbullet module to send push notifications. The Pushbullet can also be used to send push notifications on mobile devices.
+Prerequisite
+Your system must have the following libraries - 
+
+Pushbullet
+Pywebio
+Python
+
+Implementation
+Let's implement the web push notification -
+Step - 1: Install the Pushbullet library using the following command.
+
+pip install Pushbullet.py
+
+Step - 2: Create an account on Pushbullet if you don't have and get the access token.
+Step - 3: Add the Pushbullet extension to preferred browser.
+Step - 4: Navigate to Account in the setting tab and copy your access token.
+Let's understand the following code.
+Example -
+
+# Import the following modules
+from pushbullet import PushBullet
+from pywebio.input import *
+from pywebio.output import *
+from pywebio.session import *
+import time
+# Get the access token from Pushbullet.com
+access_token = "access_token "
+# Taking input from the user
+data = input('Enter the title: ')
+# Taking large text input from the user
+
+text = textarea(
+
+"Text", rows=3, placeholder="Write some text...",
+
+required=True)
+
+# Get the instance using the access token
+
+pb = PushBullet(access_token)
+
+# Send the data by passing the main title
+
+# and text to be send
+
+push = pb.push_note(data, text)
+
+# Put a success message after sending
+
+# the notification
+put_success("Message sent successfully...")
+# Sleep for 3 seconds
+time.sleep(3)
+# Clear the screen
+clear()
+# Give the pop at last
+toast("Thanks for Using :)")
+# hold the session until the whole work finishes
+hold()
+
+After running the code, the browser will open the new tab and ask to write a notification message. Now, we can enter the notification subject and click on Submit to send. Once submitted, we should get the push notification message from the browser. 
+Multi-Channel Push Notification
+In this section, we will learn how we can send the multi-channel notification using Python.
+Prerequisites
+Following requirements must be in fulfilled your system.
+
+Python
+An AWS SNS Account
+trycourier - (Python package)
+
+Implementation
+In this section, we will learn how to send multi-channel notifications using Python.
+Prerequisites
+The following requirements must be fulfilled in your system.
+
+Python
+An AWS SNS Account
+trycourier - (Python package)
+
+Implementation
+Step - 1: Create an account on Courier.
+Step - 2: Now navigate to the integrated tab on the page; here, you will find all notification channel providers, then select AWS SNS. 
+Step - 3: Provide the AWS SNS account and SNS topic and click on Install Provider.
+Step - 4: Navigate the designer tab and click the Create Notification button.
+Step - 5: Click on the Publish Changes button.
+Step - 6: Enter a message for AWS SNS and Gmail in the Design tab for the notification you just created; click on the Publish Changes button to save each message.
+Step - 7: Now, create a subscription on your amazon SNS account for the topic you used to create the notification. 
+Step - 8: Copy the following code and replace the token in the code. 
+Example -
+
+from trycourier import Courier
+
+client = Courier(auth_token="your auth token")
+
+resp = client.send(
+
+  event="notification_id",
+
+  recipient="recepient_email",
+
+  profile={
+
+    "email": "your_profile_email"
+
+  }
+
+)
+
+When we run the above code, you should get the notification.
+Conclusion
+This tutorial taught us about push notification, their use cases, and their advantages. We have also implemented the push notification on the web and multi-channel push notification and how to implement it using Courier.
+This tutorial will give you a brief idea of push notifications using the Push bullet module and the courier. It also has analytics tools that give you helpful information and metrics about how users engage your notification.
+
+
+Next TopicHow to Use Redis with Python
+
+
+
+
+← prev
+next →
+
+
+
+

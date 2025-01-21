@@ -1,0 +1,228 @@
+
+
+
+
+next →
+← prev
+
+Python Program for Word Guessing Game
+Python is an extremely versatile programming language employed by many large companies. It is a simple and easy-to-understand syntax, which makes it perfect for those trying to master computer programming for the first time. It is a high-level programming language. Its fundamental design principle is about understanding code and the syntax that lets programmers communicate concepts within a few lines of code.
+In this tutorial, we'll use the "random module" to play an interactive game of word guessing. This game is intended for those who are just beginning to learn to code in Python and will give them an overview of strings, loops, and conditional (If, otherwise) statements.
+Random Module:
+Sometimes, we need the computer to choose the random number from the specified range, choose an element randomly from a set, choose the random card from an assortment of decks, flip a coin, and so on. The random module allows the ability to access functions that can support these kinds of operations. One of these operations is the random.choice() technique (returns an unspecified item from a tuple, list, or string.) which we'll make use of to choose the random words from a set of terms we've generated.
+Word Guessing Game:
+The game involves an array of words from which our interpreter will select one random word. The player must first input their names and is challenged to guess the alphabet of their choice after that. If the random word is comprised of the alphabet, it will be displayed in the output (with proper placement); otherwise, the program will prompt you to choose an alternative alphabet. Users will be given 12 turns (can be modified according to) to determine the full word. Below is an example of the Python implementation:
+Code:
+
+# First, we will import the library that we will be using to choose
+# any random words from a list of words
+import random as rdm
+
+# Here the user will be asked to enter their name first
+name1 = input("What is your NAME ? ")
+
+print("Best of Luck! ", name1)
+ 
+words1 = ['Donkey', 'Aeroplane', 'America', 'Program',
+         'Python', 'language', 'Cricket', 'Football',
+         'Hockey', 'Spaceship', 'bus', 'flight']
+ 
+# rdm.choice() function will choose one random word from the gven list of words
+word1 = rdm.choice(words1)
+ 
+ 
+print ("Please guess the characters: ")
+ 
+guesses1 = ''
+ 
+# we can use any number of turns here
+turns1 = 10
+ 
+ 
+while turns1 > 0:
+     
+    # counting the number of times a user is failed to guess the right character
+    failed1 = 0
+     
+    # all the characters from the input word will be taken one at a time.
+    for char in word1:
+         
+        # here, we will comparing that input character with the character in guesses1
+        if char in guesses1:
+            print(char)
+             
+        else:
+            print("_")
+             
+            # for every failure of the user 1 will be incremented in failed1
+            failed1 += 1
+             
+ 
+    if failed1 == 0:
+        # user will win the game if failure is 0 and 'User Win' will be given as output
+        print("User Win")
+         
+        # this will print the correct word
+        print("The correct word is: ", word1)
+        break
+     
+    # if the user has input the wrong alphabet then
+    # it will ask user to enter another alphabet
+    guess1 = input("Guess another character:")
+     
+    # every input character will be stored in guesses
+    guesses1 += guess1
+     
+    # here, it will check input with the character in word
+    if guess1 not in word1:
+         
+        turns1 -= 1
+         
+        # if the input character doesnot match the word
+        # then "Wrong Guess" will be given as output
+        print("Wrong Guess")
+         
+        # this will print the number of turns left for the user
+        print("You have ", + turns1, 'more guesses ')
+         
+         
+        if turns1 == 0:
+            print("User Loose")
+
+Output:
+What is your NAME ?  JavaTpoint
+Best of Luck!  JavaTpoint
+Please guess the characters: 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: D
+Wrong Guess
+You have  9 more guesses 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: C
+Wrong Guess
+You have  8 more guesses 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: H
+Wrong Guess
+You have  7 more guesses 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: F
+Wrong Guess
+You have  6 more guesses 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: f
+Wrong Guess
+You have  5 more guesses 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: b
+Wrong Guess
+You have  4 more guesses 
+_
+_
+_
+_
+_
+_
+_
+Guess another character: P
+P
+_
+_
+_
+_
+_
+_
+Guess another character: r
+P
+r
+_
+_
+r
+_
+_
+Guess another character: o
+P
+r
+o
+_
+r
+_
+_
+Guess another character: g
+P
+r
+o
+g
+r
+_
+_
+Guess another character: a
+P
+r
+o
+g
+r
+a
+_
+Guess another character: m
+P
+r
+o
+g
+r
+a
+m
+User Win
+The correct word is:  Program
+
+Conclusion
+In this tutorial, we have discussed how we can use random module, for developing a word guessing game in Python.
+
+
+Next TopicBlockchain in Healthcare: Innovations & Opportunities
+
+
+
+
+← prev
+next →
+
+
+
+

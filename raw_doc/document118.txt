@@ -1,0 +1,145 @@
+
+
+
+
+next →
+← prev
+
+How to Remove an Element from a List in Python
+We can store items of several data types in an ordered sequence using the Python List data structure. Square brackets ([]) are used to encapsulate the data, while commas are used to separate the entries (,).
+Python provides numerous methods to help us remove a specific item from a list. The three methods are remove(), pop(), and clear().
+Along with the approaches outlined above, we can use the del keyword to remove items from a list.
+Python remove() method
+A built-in method in Python that we can use with the list data type is remove(). It helps to eliminate the first item from the list that matches the given item.
+Syntax:
+
+list.remove(element)
+
+element:- The item of the list we would like to remove.
+When there are duplicate elements in a list, the first item that matches the provided item is eliminated. If the supplied element does not exist in the list, an exception will be thrown stating that the element does not exist in the list. There is no value returned by the delete () function. The value is passed as a parameter to delete(). Therefore it must be of the right datatype.
+Code
+
+# Python program to remove an element from a list using the remove() function
+  
+my_list = ['Javatpoint', 'Python', 'Tutorial', 'List',
+       'Element', 'Removal']
+print("Initial List is :", my_list)
+  
+# through remove() deleting 'Python' from the my_list
+my_list.remove('Python')
+print( "After using the function :", my_list )
+
+Output:
+Initial List is : ['Javatpoint', 'Python', 'Tutorial', 'List', 'Element', 'Removal']
+After using the function : ['Javatpoint', 'Tutorial', 'List', 'Element', 'Removal']
+
+Python pop() method
+Based on the provided index, the pop() function eliminates the element present at that index from the list.
+Syntax
+
+list.pop( index )
+
+index: There is only one argument, named index, for the pop() method.
+We must pass the item's index to eliminate that entry from the list. The index begins at zero. Give the index as 0 to fetch the first item from the list. We can give the index as -1 to remove the last item. The index parameter is optional. In the absence of a value, the last item from the list is delivered from the list, and the parameter's default value is taken to be -1. The pop() function returns an error with the message IndexError: pop index if the supplied index is not valid or out of limits.
+Code
+
+# Python program to show how to use the pop() function
+  
+lst = ["Python", "Remove", "Elements", "List", "Tutorial"]
+print("Initial List is :", lst)
+  
+# using pop() function to remove element at index 2 of the list
+element = lst.pop(2)
+print("Element that is popped :", element)
+print("List after deleting the element", lst)
+
+Output:
+Initial List is : ['Python', 'Remove', 'Elements', 'List', 'Tutorial']
+Element that is popped : Elements
+List after deleting the element ['Python', 'Remove', 'List', 'Tutorial']
+
+Python clear() method
+No value is returned by this method. The clear() function is used to empty the list().
+Syntax:
+
+list.clear()
+
+No parameters.
+There is no return value. The list() is emptied using clear() method.
+Code
+
+# Python program to clear all the elements from the list
+
+lst = ["Python", "Remove", "Elements", "List", "Tutorial"]
+print("Initial List is :", lst)
+
+# Using the clear() function
+element = lst.clear()
+print(element)
+print(lst)
+
+Output:
+Initial List is : ['Python', 'Remove', 'Elements', 'List', 'Tutorial']
+None
+[]
+
+Using del Keyword
+We can apply the del keyword of Python followed by the list's name to remove an item from the list. The item's index must be supplied to the list. The indexing in Python begins at zero.
+Syntax:
+
+del list[index]
+
+We can also delete a part of the list using the del keyword. We can do this by using slicing. The keyword will erase the components within that range if the del keyword is provided with appropriate start and stop indices from the list. The syntax is as follows:
+Syntax:
+
+del list[start : stop]
+
+Here is an illustration of how to use del to delete the elements from the list created.
+Code
+
+# Python program to show how to use del keyword
+
+lst = ["Python", "Remove", "Elements", "List", "Tutorial", "Clear", "Pop", "Remove", "Delete"]
+print("The Initial list is ", lst)
+
+# Removing the first element of the list
+del lst[0]
+print("After removing the first element new list is", lst)
+
+# Removing the last element from the list
+del lst[-1]
+print("After removing the last element new list is", lst)
+
+# To remove the elements between a range
+del lst[:3]
+print("After removing element from index:5", lst)
+
+# Removing the last two elements from the list
+del lst[-2]
+print("After removing the last 2 elements from the list", lst)
+
+# Removing the elements between a range having the start and stop indices
+del lst[1:5]
+print("After removing elements present in the range 1:5", lst)
+
+Output:
+The Initial list is  ['Python', 'Remove', 'Elements', 'List', 'Tutorial', 'Clear', 'Pop', 'Remove', 'Delete']
+After removing the first element new list is ['Remove', 'Elements', 'List', 'Tutorial', 'Clear', 'Pop', 'Remove', 'Delete']
+After removing the last element new list is ['Remove', 'Elements', 'List', 'Tutorial', 'Clear', 'Pop', 'Remove']
+After removing element from index:5 ['Tutorial', 'Clear', 'Pop', 'Remove']
+After removing the last 2 elements from the list ['Tutorial', 'Clear', 'Remove']
+After removing elements present in the range 1:5 ['Tutorial']
+
+
+
+Next TopicHow to Round number in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,298 @@
+
+
+
+
+next →
+← prev
+
+Read Operation
+The SELECT statement is used to read the values from the databases. We can restrict the output of a select query by using various clause in SQL like where, limit, etc. 
+Python provides the fetchall() method returns the data stored inside the table in the form of rows. We can iterate the result to get the individual rows.
+In this section of the tutorial, we will extract the data from the database by using the python script. We will also format the output to print it on the console.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #Reading the Employee data    
+    cur.execute("select * from Employee")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+    #printing the result
+    
+    for x in result:
+        print(x);
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+('John', 101, 25000.0, 201, 'Newyork')
+('John', 102, 25000.0, 201, 'Newyork')
+('David', 103, 25000.0, 202, 'Port of spain')
+('Nick', 104, 90000.0, 201, 'Newyork')
+('Mike', 105, 28000.0, 202, 'Guyana')
+
+
+Reading specific columns
+We can read the specific columns by mentioning their names instead of using star (*).
+In the following example, we will read the name, id, and salary from the Employee table and print it on the console.
+Example
+
+import mysql.connector
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+#creating the cursor object
+cur = myconn.cursor()
+try:
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+    #printing the result
+    for x in result:
+        print(x);
+except:
+    myconn.rollback()
+myconn.close()
+
+Output:
+('John', 101, 25000.0)
+('John', 102, 25000.0)
+('David', 103, 25000.0)
+('Nick', 104, 90000.0)
+('Mike', 105, 28000.0)
+
+
+The fetchone() method
+The fetchone() method is used to fetch only one row from the table. The fetchone() method returns the next row of the result-set. 
+Consider the following example.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee")
+
+    #fetching the first row from the cursor object
+    result = cur.fetchone()
+
+    #printing the result
+    print(result)
+
+except:
+    myconn.rollback()
+    
+myconn.close()
+
+Output:
+('John', 101, 25000.0)
+
+
+Formatting the result
+We can format the result by iterating over the result produced by the fetchall() or fetchone() method of cursor object since the result exists as the tuple object which is not readable.
+Consider the following example.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+
+    print("Name    id    Salary");
+    for row in result:
+        print("%s    %d    %d"%(row[0],row[1],row[2]))
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+Name    id    Salary
+John    101    25000
+John    102    25000
+David    103    25000
+Nick    104    90000
+Mike    105    28000
+
+
+Using where clause
+We can restrict the result produced by the select statement by using the where clause. This will extract only those columns which satisfy the where condition. 
+Consider the following example.
+Example: printing the names that start with j
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee where name like 'J%'")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+
+    print("Name    id    Salary");
+
+    for row in result:
+        print("%s    %d    %d"%(row[0],row[1],row[2]))
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+Name    id    Salary
+John    101    25000
+John    102    25000
+
+Example: printing the names with id = 101, 102, and 103
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee where id in (101,102,103)")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+
+    print("Name    id    Salary");
+
+    for row in result:
+        print("%s    %d    %d"%(row[0],row[1],row[2]))
+except:
+    myconn.rollback()
+    
+myconn.close()
+
+Output:
+Name    id    Salary
+John    101    25000
+John    102    25000
+David    103    2500
+
+
+Ordering the result
+The ORDER BY clause is used to order the result. Consider the following example.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee order by name")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+
+    print("Name    id    Salary");
+
+    for row in result:
+        print("%s    %d    %d"%(row[0],row[1],row[2]))
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+Name    id    Salary
+David   103    25000
+John    101    25000
+John    102    25000
+Mike    105    28000
+Nick    104    90000
+
+
+Order by DESC
+This orders the result in the decreasing order of a particular column.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #Reading the Employee data    
+    cur.execute("select name, id, salary from Employee order by name desc")
+
+    #fetching the rows from the cursor object
+    result = cur.fetchall()
+
+    #printing the result
+    print("Name    id    Salary");
+    for row in result:
+        print("%s    %d    %d"%(row[0],row[1],row[2]))
+
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+Name    id    Salary
+Nick    104    90000
+Mike    105    28000
+John    101    25000
+John    102    25000
+David    103    25000
+
+
+Next TopicUpdate Operation
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,161 @@
+
+
+
+
+next →
+← prev
+
+Packages of Data Visualization in Python
+It can be hard to fully comprehend what users see in a tabular format when handling a huge amount of data sets. We must visualize or represent our data in pictorial form to better understand what it conveys and make better it systematic and select appropriate models for it. This allows us to see trends, correlations, and dynamics that we wouldn't see in a chart or CSV file.
+Data Visualization
+Data visualization is a branch of data analysis that focuses on visualizing data. It plots data graphically and is a good way to communicate data inferences.
+The human brain has an easy and fast processing time and understanding of data when presented in pictures, maps, and graphs. We can always get a visual description of our data by using data visualization. Data visualization is important in representing both big and small data sets. However, it is especially useful when dealing with large data sets where it is impossible to see all our records, process, and understand them.
+Data Visualization in Python
+In today's world, data visualization in Python is probably one of the most widely used functionalities for data science with Python. Python libraries include various features that allow users to create highly customized, classy, and interactive plots. Python includes several plotting libraries, such as Matplotlib, Seaborn, and other data visualization packages. Each has its own set of features for constructing informative, customized, and intriguing plots to present information most simply and effectively possible.
+Python has several libraries for visualizing data, each with its features. Four of these libraries will be discussed in this tutorial. Each of these libraries has its own set of functionalities and can support a variety of graph types.
+
+Matplotlib
+Seaborn
+Bokeh
+Plotly
+
+We'll go over each of these libraries one after another.
+Useful Python Packages for Visualizations
+Matplotlib
+Matplotlib is a Python visualization library for 2D array plots. Matplotlib is a Python library that uses the NumPy library. It works with Python and IPython shells, as well as Jupyter notebooks and web application server software. Matplotlib includes a wide range of plots, such as scatter, line, bar, histogram, and others, that can assist us in delving deeper into trends, behavioral patterns, and correlations. John Hunter first launched it in 2002.
+Scatter Plot
+Scatter plots can be used to visualize relationships among variables, with dots representing the relation. A scatter plot is created using the matplotlib library's scatter() method.
+Input
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# reading the csv data set
+dataset = pd.read_csv("tips.csv")
+
+# Plotting Scatter plot of total_bill vs tip
+plt.scatter(dataset['total_bill'], dataset['tip'])
+
+# Giving our plot a title
+plt.title("This is Scatter Plot")
+
+# GIving x and y labels names
+plt.xlabel('Total_bill')
+plt.ylabel('Tip')
+
+plt.show()
+
+Output:
+
+Bar Chart
+A bar plot or a bar chart is just a graph that uses rectangular bars which have lengths and heights proportional to the data values they represent to represent a category of data.
+Input
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# reading the csv data set
+dataset = pd.read_csv("tips.csv")
+
+# Plotting Scatter plot of total_bill vs tip
+plt.bar(dataset['total_bill'], dataset['tip'])
+# Giving our plot a title
+plt.title("Bar Chart")
+
+# GIving x and y labels names
+plt.xlabel('Total Bill')
+plt.ylabel('Tip')
+
+plt.show()
+
+Output:
+
+Seaborn
+Seaborn is a Python library for creating statistical representations based on datasets. It is built on top of matplotlib and is used to create various visualizations. It's built on top of pandas' data structures. The library conducts the necessary modeling and aggregation internally to create insightful visuals.
+Line Plot
+The lineplot() method was used to plot a line plot in Seaborn. We can also pass just the data argument in this case.
+Input
+
+# importing the required packages
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# reading the csv data set using pandas
+dataset = pd.read_csv("tips.csv")
+
+sns.lineplot(x='total_bill', y='tip', data=dataset)
+plt.show()
+
+Output:
+
+Bokeh
+Bokeh is a modern web browser-based interactive visualization library. It can create engaging plots and dynamic dashboards with huge or streaming data assets. The library contains many intuitive graphs that can be used to create solutions. It has a close relationship with the PyData tools. The library is ideal for creating customized visuals based on specific use cases. The visual effects can also be crafted interactive to support a what-if scenario model.
+Line Chart
+The plotting and scheming module's line() method can also be used to create a line plot.
+Input
+
+# importing the required modules
+import bokeh.plotting
+import pandas as pd
+
+# creating an object for the figure
+chart = bokeh.plotting.figure(title="Bokeh Bar Chart")
+
+# reading the csv dataset through pandas
+dataset = pd.read_csv("tips.csv")
+
+# Counting unique columns of thwe tips file
+count = dataset['tip'].value_counts()
+
+# plotting the graph
+chart.line(count, dataset['tip'])
+
+# showing the figure
+bokeh.plotting.show(chart)
+
+Output:
+
+Adding Widgets
+
+Buttons, sliders, checkboxes, and other GUI elements similar to those found in HTML forms are available in Bokeh. These include an interactive user interface to the graph that enables us to change plot parameters, modify plot data, etc. Let's look at how to utilize and add some of the most common widgets.
+Buttons: Adds a normal button item to the plot with this widget. The CustomJS() function of the models class must be passed a custom JavaScript function.
+CheckboxGroup: A conventional check box is added to the plot. Similarly to buttons, we must pass the custom JavaScript method to the models class's CustomJS() method.
+RadioGroup: This component adds a basic radio button as well as allows us to use a personalized JavaScript function.
+
+plotly
+plotly.py is a Python visualization library that is interactive, accessible, high-level, declarative, and browser-based. Scientific graphs, 3D charts, statistical plots, and financial charts are just a few visualizations available. Plotly charts can be construed in Jupyter notebooks, as standalone Html documents, or as live web pages. Interaction and editing options are available in the Plotly library. Both locally and in a web browser, the robust API performs admirably.
+Scatter Plot
+The scatter() function of plotly.express can be used to create a scatter plot in Plotly. An additional data argument too is necessary here, as it is for Seaborn.
+Input
+
+# importing the required modules
+import pandas as pd
+import plotly.express
+
+
+# reading the csv dataset through pandas
+dataset = pd.read_csv("tips.csv")
+
+# plotting our scatter plot
+graph = plotly.express.scatter(dataset, x="total_bill", y="tip", color='smoker')
+
+# displaying the plot created
+graph.show()
+
+Output:
+
+
+
+Next TopicPython pympler library
+
+
+
+
+← prev
+next →
+
+
+
+

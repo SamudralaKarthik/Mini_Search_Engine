@@ -1,0 +1,99 @@
+
+
+
+
+next →
+← prev
+
+Part of Speech Tagging using TextBlob
+TextBlob module is utilized for creating programs to analyse text. One of the most powerful features that are included in the TextBlob module can be its Part of Speech tagging.
+First, we will install TextBlob and run these commands:
+
+!pip3 install textblob
+from textblob import download_corpora
+
+It will then run TextBlob in addition to downloading the needed NLTK corpora. The installation process above can take a long time because of the huge number of chunkers, tokenizers, other algorithms, as well as all of the corpora that need to be downloaded.
+In corpus linguistics, part-of-speech tag (POS tagging, also known as PoS tagging or POST) is also known as Grammatical Tagging or Disambiguation of the word category.
+
+Input: Life is all about believing.
+Output: [('Life', 'NN'), ('is', 'VBZ'), 
+              ('all', 'DT'), ('about', 'IN'), 
+                             ('believing', 'NN')] 
+
+Here's a list of the tags, with their meaning, and some examples: 
+CC : it is a coordinating conjunction
+CD : it is a cardinal digit
+DT : it is the determiner
+EX : it is existential there (For example: "there is" … think of it like "there exists")
+FW : it is a foreign word
+IN : it is a preposition/subordinating conjunction
+JJ : this is an adjective for example: 'big'
+JJR : this is an adjective, for example: comparative 'bigger'
+JJS : this is an adjective, for example: superlative 'biggest'
+LS : it is a list marker for example: 1)
+2)
+MD : it is a modal for example: could, will
+NN : it is a noun, for example: singular 'desk'
+NNS : it is a noun, for example: plural 'desks'
+NNP : it is a proper noun, for example: singular 'Harrison'
+NNPS : it is a proper noun, for example: plural 'Americans'
+PDT : it is a predeterminer for example: 'all the kids'
+POS : it is a possessive ending parent's
+PRP : it is a personal pronoun, for example: I, he, she
+PRP$ : it is a possessive pronoun, for example: my, his, hers
+RB : it is a adverb for example: very, silently,
+RBR : it is a adverb, for example: comparative better
+RBS : it is a adverb, for example: superlative best
+RP : it is a particle give up
+TO : to go, for example: 'to' the store.
+UH : it is a interjection for example: errrrrrrrm
+VB : it is a verb, for example: base form take
+VBD : it is a verb, for example: past tense took
+VBG : it is a verb, for example: gerund/present participle taking
+VBN : it is a verb, for example: past participle taken
+VBP : it is a verb, for example: sing. present, non-3d take
+VBZ : it is a verb, for example: 3rd person sing. present takes
+WDT : it is a wh-determiner for example: which
+WP : it is a wh-pronoun, for example: who, what
+WP$ : it is a possessive wh-pronoun for example: whose
+WRB : it is a wh-adverb for example: where, when
+Code:
+
+# First, we will import TextBlob method from textblob library
+from textblob import TextBlob as Txb
+
+text1 = ("Jack, Jill and Bill are living in America. " +
+	"Jack use to go for running every morning " +
+	"but he got fever last night therefore her will not be going for running tomorrow" +
+	" this would be his first time of breaking his running streak. " +
+	"jill is a school teacher." +
+	"he believes in meditation. " +
+	"he practice mediating daily for an hour. " +
+	"bill is a fun guy, for him laughing is the best medicine.")
+
+# here, we will create a textblob object
+blob_object1 = Txb(text1)
+
+# Part-of-speech tags can be accessed through 
+# the tags property of blob object.'
+
+# Now, we will print word with pos tag.
+print(blob_object1.tags)
+
+Output:
+[('Jack', 'NNP'), ('Jill', 'NNP'), ('and', 'CC'), ('Bill', 'NNP'), ('are', 'VBP'), ('living', 'VBG'), ('in', 'IN'), ('America', 'NNP'), ('Jack', 'NNP'), ('use', 'NN'), ('to', 'TO'), ('go', 'VB'), ('for', 'IN'), ('running', 'VBG'), ('every', 'DT'), ('morning', 'NN'), ('but', 'CC'), ('he', 'PRP'), ('got', 'VBD'), ('fever', 'RB'), ('last', 'JJ'), ('night', 'NN'), ('therefore', 'VBD'), ('her', 'PRP$'), ('will', 'MD'), ('not', 'RB'), ('be', 'VB'), ('going', 'VBG'), ('for', 'IN'), ('running', 'VBG'), ('tomorrow', 'NN'), ('this', 'DT'), ('would', 'MD'), ('be', 'VB'), ('his', 'PRP$'), ('first', 'JJ'), ('time', 'NN'), ('of', 'IN'), ('breaking', 'VBG'), ('his', 'PRP$'), ('running', 'VBG'), ('streak', 'NN'), ('jill', 'NN'), ('is', 'VBZ'), ('a', 'DT'), ('school', 'NN'), ('teacher.he', 'NN'), ('believes', 'VBZ'), ('in', 'IN'), ('meditation', 'NN'), ('he', 'PRP'), ('practice', 'NN'), ('mediating', 'VBG'), ('daily', 'RB'), ('for', 'IN'), ('an', 'DT'), ('hour', 'NN'), ('bill', 'NN'), ('is', 'VBZ'), ('a', 'DT'), ('fun', 'NN'), ('guy', 'NN'), ('for', 'IN'), ('him', 'PRP'), ('laughing', 'VBG'), ('is', 'VBZ'), ('the', 'DT'), ('best', 'JJS'), ('medicine', 'NN')]
+
+In essence, the purpose of the POS tagger is to assign the linguistic (mostly grammar-related) details to the sub-sentential unit. They are also known as tokens, and, the majority of times, they correspond to symbols and words (e.g., punctuation).
+
+
+Next TopicPython for Kids: Resources for Python Learning Path
+
+
+
+
+← prev
+next →
+
+
+
+

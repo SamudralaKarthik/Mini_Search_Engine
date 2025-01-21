@@ -1,0 +1,187 @@
+
+
+
+
+next →
+← prev
+
+Digital clock using PyQt5 in Python
+In this post, we'll see at how to make a digital clock using PyQt5, which essentially displays the time in 24-hour format. We will be focussing on making a GUI that will show the current time in HH:MM:SS format by opening a window.
+The following must be done in order to make a digital clock :
+
+Make a vertical arrangement
+Create a label to display the current time, place it in the layout, and centre it.
+Make a QTimer object.
+Include an action such that the QTimer object's action function is invoked once every 1 second.
+Obtain the current time and display it using a label inside the action function.
+
+Walking through the code :
+Firstly, we will import all the libraries required by our program, that include QtWidgets, QtGui, QtCore and sys.
+
+# import all the required modules
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QVBoxLayout, QLabel
+from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QTimer, QTime, Qt
+
+Next, we will create a new class to initialize our GUI window and start setting the geometry, adding fonts, creating labels, setting alignment and displaying widgets.
+
+class Window(QWidget):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the geometry of the main window created
+		self.setGeometry(100, 100, 800, 400)
+
+		# create an open vertical layout /display
+		outline = QVBoxLayout()
+
+		# create an object for the font of display
+		fonts = QFont('Arial', 120, QFont.Bold)
+
+		# create a new label object
+		self.label = QLabel()
+
+		# set the alignment of the label to centre
+		self.label.setAlignment(Qt.AlignCenter)
+
+		# set the font of display
+		self.label.setFont(fonts)
+
+		# inserting the label to our created layout
+		outline.addWidget(self.label)
+
+Next, we will create the layout of our window. Then, we will create a timer clock timer, add a functionality to it for getting updated after every second and call the function linked to it.
+
+# set the layout for the window created
+		self.setLayout(layout)
+
+		# create a timer clock object
+		timerClock = QTimer(self)
+
+		# add action to the timer clock
+		timerClock.timeout.connect(self.displayTime)
+
+		# updating the timer clock after every second
+		timerClock.start(1000)
+
+Next, we will create a function that contains the present time to be displayed, the time label to be updated and the text display field.
+
+# func to be called by the timer
+	def displayTime(self):
+
+		# get the present time
+		present_time = QTime.currentTime()
+
+		# convert the QTime object into a string
+		time_label = present_time.toString('hh:mm:ss')
+
+		# display text to the label
+		self.label.setText(time_label)
+
+Finally, we will create the application and the instance of the window. Then, the instance created will be displayed and the program will be called to execute and start the application.
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the created Window
+window = Window()
+
+# displaying all the present widgets
+window.show()
+
+# starting the application
+App.exit(Base.exec_())
+
+Complete code :
+
+# Python program to create a digital clock using PyQt5 
+# import all the required modules
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QVBoxLayout, QLabel
+from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QTimer, QTime, Qt
+
+
+class Window(QWidget):
+
+	def __init__(self):
+		super().__init__()
+
+		# set the geometry of the main window created
+		self.setGeometry(100, 100, 800, 400)
+
+		# create an open vertical layout /display
+		outline = QVBoxLayout()
+
+		# create an object for the font of display
+		fonts = QFont('Arial', 120, QFont.Bold)
+
+		# create a new label object
+		self.label = QLabel()
+
+		# set the alignment of the label to centre
+		self.label.setAlignment(Qt.AlignCenter)
+
+		# set the font of display
+		self.label.setFont(fonts)
+
+		# inserting the label to our created layout
+		outline.addWidget(self.label)
+
+		# set the layout for the window created
+		self.setLayout(layout)
+
+		# create a timer clock object
+		timerClock = QTimer(self)
+
+		# add action to the timer clock
+		timerClock.timeout.connect(self.displayTime)
+
+		# updating the timer clock after every second
+		timerClock.start(1000)
+
+	# func to be called by the timer
+	def displayTime(self):
+
+		# get the present time
+		present_time = QTime.currentTime()
+
+		# convert the QTime object into a string
+		time_label = present_time.toString('hh:mm:ss')
+
+		# display text to the label
+		self.label.setText(time_label)
+
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the created Window
+window = Window()
+
+# displaying all the present widgets
+window.show()
+
+# starting the application
+App.exit(Base.exec_())
+
+Output:
+The output of the above mentioned code is attached below in the for of screenshot,
+
+
+
+Next TopicCountdown Timer using PyQt5 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

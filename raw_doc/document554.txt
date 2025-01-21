@@ -1,0 +1,167 @@
+
+
+
+
+next →
+← prev
+
+Convert Roman Number to Decimal (Integer) | Write Python Program to Convert Roman to Integer
+In this tutorial, we will write the Python program to convert the Roman numbers into the integer. It is a popular problem was asked by the tech giant Amazon, Facebook in the interview. Let's see the problem statement and implementation of the solution.
+Problem Statement
+A roman number is given as a string; the task is to convert the corresponding integer value. The symbols are given below for reference.
+
+
+Symbols
+Values
+
+
+I
+1
+
+
+IV
+4
+
+
+V
+5
+
+
+IX
+9
+
+
+X
+10
+
+
+XL
+40
+
+
+L
+50
+
+
+XC
+90
+
+
+C
+100
+
+
+CD
+400
+
+
+D
+500
+
+
+CM
+900
+
+
+M
+1000
+
+
+Example 1:
+Input:s = VI
+Output: 6
+Example 2:
+Input: XOutput: 10XL is a Roman symbol which represents 40
+Solution Approach
+Algorithm
+
+First, split the Roman numeral string into roman symbols.
+We can the separate symbol now convert each symbol of Roman Numerals into the value it represents.
+Picking up a value starting from index 0.
+
+
+If the current value of the symbol is greater than or equal to the next symbol, then add this value to the returning total.
+Else subtract this value by adding the value of the next symbol to the running total.
+
+Let's implement the algorithm to the Python program.
+Program
+
+def rom_value(r):
+    if (r == 'I'):
+        return 1
+    if (r == 'V'):
+        return 5
+    if (r == 'X'):
+        return 10
+    if (r == 'L'):
+        return 50
+    if (r == 'C'):
+        return 100
+    if (r == 'D'):
+        return 500
+    if (r == 'M'):
+        return 1000
+    return -1
+def romanToDecimal(str):
+    res = 0
+    i = 0
+
+    while (i < len(str)):
+
+     
+        n1 = rom_value(str[i])
+
+        if (i + 1 < len(str)):
+
+       
+            n2 = rom_value(str[i + 1])
+
+            # Comparing both rom_values
+            if (n1 >= n2):
+
+                res = res + str1
+                i = i + 1
+            else:
+
+                # rom_value of current symbol is greater
+                # or equal to the next symbol
+                res = res + str2 - str1
+                i = i + 2
+        else:
+            res = res + str1
+            i = i + 1
+
+    return res
+
+print(romanToDecimal("VII"))
+
+Output:
+7
+
+Explanation 
+In the above code, we define a rom_value() function which returns corresponding to the symbol. Next we define the romanTointeger() method which converts the value roman value to integer. In the romanToInteger() method,
+
+We have defined the res and i variable with 0.
+The while iterated till i is smaller than the length of the string.
+We converted the first character into an integer and stored it into n1. Then, use the condition to check the i+1th element smaller than the length of the string.
+If it returns true, it converts into an integer and is stored in n2.
+Compare n1 and n2; if n1 is greater than the n2, add it to the res and increase the ith value by one.
+If it returns false, then subtract the n2 to n1 and make the increment of 2 in i.
+If first if condition returns false add into the res and make increment to i
+
+Complexity Analysis
+Time Complexity: O(n), where n is the length of the string. Only one traversal of the string is required.
+Space Complexity: O(1). As no extra space is required
+
+
+Next TopicCreate REST API using Django REST Framework | Django REST Framework Tutorial
+
+
+
+
+← prev
+next →
+
+
+
+

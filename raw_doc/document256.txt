@@ -1,0 +1,150 @@
+
+
+
+
+next →
+← prev
+
+Python %s - String Formatting
+In this tutorial, we will learn about how we can implement and use %s in our Python program. We will also learn the uses of %s in the strings.
+%s in a string format in Python
+Basically, the % symbol is used with a large variety of data having many data types and configurations in Python.
+Talking about %s, it is specifically used to perform concatenation of two or more strings together in Python. The %s allow us to format or place a string or numerical value within a given string. In simple language, the %s in Python is used to incorporate a given string within another string. This operator automatically provides type conversion of a given value to string data type.
+We put the % operator, where we have to specify the string. The numbers of values that we want to append into the given string should be equal to the numbers of %s operators that have been specified in the parentheses between the strings.
+The following Python code will explain the way by which we perform string formatting using %s operator:
+Example -
+
+# Define a string value 
+str = "JavaTpoint!"
+# using %s to appending string
+print("Hello Python developers! Welcome to, %s!" % str)
+
+Output:
+Hello Python developers! Welcome to, JavaTpoint!
+
+As we can see in the above code, we have declared a string variable, i.e., str, and appended it inside the given string in parenthesis. We appended the str string value using the %s operator.
+Uses of %s operator in Python
+In this section, we will discuss the highlighted uses of the %s operator. We will also learn the implementation of the %s operator by multiple approaches and how it is helpful to us.
+We will discuss the following approaches of implementing %s:
+
+Multiple %s in a string
+Using %s for mapping string
+Using %s for a list as a string
+Order Dictionary with %s
+
+1. Multiple %s in a string:
+We can use the %s operator to append the given string variable inside a string by putting it where we want to add the value. Python will simply add the string variables where we have used the %s operator in the string. Let's go through an example to understand it.
+Example: Look at the following code:
+
+# Declaring multiple string values
+mkr1 = "developers"
+mkr2 = "JavaTpoint"
+mkr3 = "day"
+# Appending multiple string values inside a single string
+print("Hello Python %s, Welcome to the %s! We hope you are having a good %s." % (mkr1, mkr2, mkr3))
+
+Output:
+Hello Python developers, Welcome to the JavaTpoint! We hope you are having a good day.
+
+Explanation -
+We have appended multiple string variables (mkr1, mkr2, mkr3) inside a single string and printed the string. We have appended these variables by simply using the %s operator multiple times within the string.
+2. Using %s for mapping string:
+We can also use the %s operator for mapping the string within the given program. We can map multiple string variables into a single string by simply using %s operators multiple times. However, when we want to add multiple string variables in a single string, we have to match the number of occurrences of %s in the string with the number of strings to replace it. We have to add that number of strings after the % operator.
+Example: 1
+
+# Declaring multiple string variables
+mkr1 = "Hey"
+mkr2 = "Python"
+mkr3 = "Developers"
+mkr4 = "Welcome"
+mkr5 = "to"
+mkr6 = "JavaTpoint"
+# Mapping multiple string variables into a single string
+ResultantStr = "%s %s %s %s %s %s" % (mkr1, mkr2, mkr3, mkr4, mkr5, mkr6)
+# Printing result in output
+print("Resultant mapped string using '%s' operator: ") 
+print(ResultantStr)
+
+Output:
+Resultant mapped string using '%s' operator:
+Hey Python Developers Welcome to JavaTpoint
+
+Note: But, if we don't give the same number of string variables after % operator, as the %s operator we have used, then the code will through a TypeError in the output like the following program:
+Example - 2
+
+# Declaring multiple string variables
+mkr1 = "Hey"
+mkr2 = "Python"
+mkr3 = "Developers"
+mkr4 = "Welcome"
+mkr5 = "to"
+mkr6 = "JavaTpoint"
+# Not giving equal number of variables after % operator
+ResultantStr = "%s %s %s %s %s %s" % (mkr1, mkr2, mkr4, mkr5, mkr6)
+# Printing result in output
+print("Resultant mapped string using '%s' operator: ") 
+print(ResultantStr)
+
+Output:
+Traceback (most recent call last):
+  File "C:\Users\Manish\Downloads\code.py", line 9, in 
+    ResultantStr = "%s %s %s %s %s %s" % (mkr1, mkr2, mkr4, mkr5, mkr6)
+TypeError: not enough arguments for format string
+
+3. Using %s for a list as a string:
+With the help of the %s operator, we can also map a given list data type variable with the string variables to form a single string. We have to follow the same set of instructions that we follow while mapping string variables. Let's go through an example to understand it.
+Example: 
+
+# Declaring multiple string variables
+mkr1 = "Hey"
+mkr2 = "Python"
+mkr3 = "Developers"
+mkr4 = "Welcome"
+mkr5 = "to"
+mkr6 = "JavaTpoint"
+# Declaring a list variable also
+AList = ["Java", "Python", "C++", "HTML", "JavaScript"]
+# Mapping string variables with list variable into a single string
+ResultantStr = "%s %s %s %s %s %s, %s" % (mkr1, mkr2, mkr3, mkr4, mkr5, mkr6, AList)
+# Printing result in output
+print("Resultant mapped string with list variable in it: ") 
+print(ResultantStr)
+
+Output:
+Resultant mapped string with list variable in it:
+Hey Python Developers Welcome to JavaTpoint, ['Java', 'Python', 'C++', 'HTML', 'JavaScript']
+
+4. Order dictionary with %s:
+We can define multiple string variables inside a dictionary data type variable. Then, we can call out these string variables by the order we want to, just by using the %s operator with the string variable name.
+Example:
+
+# Declaring a dict variable with multiple string variable in it
+ADict = {'mkr1': 'at',
+               'mkr2': 'JavaTpoint', 
+               'mkr3': 'Learning',
+               'mkr4':'operator',
+               'mkr5':'concept',
+               'mkr6': '%s'}
+# Mapping a string with string variables in dictionary
+ResultantStr = "%(mkr3)s %(mkr6)s %(mkr4)s %(mkr5)s %(mkr1)s %(mkr2)s" % ADict
+# Printing result in output
+print("Resultant mapped string with ordered variable from dictionary: ") 
+print(ResultantStr)
+
+Output:
+Resultant mapped string with ordered variable from dictionary: 
+Learning %s operator concept at JavaTpoint
+
+
+
+Next TopicPython seaborn Library
+
+
+
+
+← prev
+next →
+
+
+
+

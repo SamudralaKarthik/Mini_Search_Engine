@@ -1,0 +1,79 @@
+
+
+
+
+next →
+← prev
+
+GET and POST Requests using Python
+What is HTTP?
+HTTP stands for HyperText Transfer Protocol which has some set of rules which determines the communication or data transfer into client-server architecture. The client is generally a browser, and the Server is the source where information is available already, and the Client requests the Server for the information. A server is a computer where the website is hosted. A client or the browser sends a request to the server, and the server responds to the request of the client. There are a lot of methods used by HTTP for data transfer or establishing the communication between client and server, like GET, POST, PUT, HEAD, DELETE, PATCH, OPTIONS, TRACE, etc.
+There are generally two methods used for the information transfer between client-server:
+
+GET method or request
+POST method or request
+
+1. GET Method
+The GET method is used to request the server to GET the data or information. It should not be used with the requesting sensitive data, and there are certain limits to the requesting data. GET requests to remain in the browser history, and it can also be bookmarked. GET requests can be cached.
+To use the GET method, we should have installed the library which supports the GET request like urllib,httplib, or requests.
+We can install the requests library using the following command in the command prompt:
+
+pip install requests
+
+In the same way, we can install the urllib library by the following command:
+
+pip install urllib3
+
+We will discuss some examples of the GET request in python:
+Example1:
+
+import urllib3
+http = urllib3.PoolManager()
+url = 'https://www.javatpoint.com/sonoo-jaiswal'
+
+response = http.request('GET', url)
+print(response.data.decode('utf-8'))
+
+Output:
+
+Explanation:
+In the above code, we have first imported the urllib3 library in our file to use the GET function. Then we used the PoolManager() function to GET the http attribute, and in the http attribute, we have the GET method, which takes the argument as the url from which we are requesting the data. We can also pass the parameter we want from the url source, and we can request only specific data by passing the parameter as the argument.
+When we got the response from the request, we decoded it into utf-8 and printed the HTML code of the given web page.
+2. POST method
+The POST method is used to send the data to the server. It is generally used when we want to upload data or any file to the server, like filling out a form, etc.POST requests cannot be bookmarked, and it does not remain in the browser history. It cannot be cached.
+It can be used with the sensitive and private data, and it has no limit for data length.
+Example2:
+
+import urllib3
+import certifi
+http = urllib3.PoolManager(ca_certs=certifi.where())
+url = 'https://httpbin.org/POST'
+request = http.request('POST', url, fields={'name': 'Ayush Gupta from iiit kota 2023', 
+    'occupation': 'software engineer'})
+print(request.data.decode('utf-8'))
+
+Output:
+
+Explanation:
+In the above code, we have used the POST method to upload some data to the server of a website. First of all, we have imported the urllib library in the code to use the request module and POST function. Then we took one url where we wanted to POST our data. Then we use the request module with the POST method to send the data of some certain fields.
+Then we printed the data received by the POST request and printed.
+Some important points about GET and POST methods:
+
+In terms of security and safety, the GET method is not considered as a safe method because we send the data as part of the URL, so there is a high chance of data insecurity. So, it is not considered for sensitive data like passwords etc.
+We can only send the ASCII character in the GET method, whereas there is no such restriction about the data in the POST method.
+Since we send the data in the URL section in the GET method, there is a limitation of the data which is being sent, whereas there is no data size limitation in the POST method because we send the data in the message section.
+As we know, we send the data as part of the URL in the GET method, so the data becomes part of the query string and is appended to the requesting URL.
+
+
+
+Next TopicAttributeError in Python
+
+
+
+
+← prev
+next →
+
+
+
+

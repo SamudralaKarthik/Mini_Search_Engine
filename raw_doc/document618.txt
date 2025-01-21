@@ -1,0 +1,458 @@
+
+
+
+
+next →
+← prev
+
+URL shortner in Python
+First of all, let us understand what is a URL shortener. Users have relied on connections as their primary form of transit since the internet's inception. URL shortening is a Web method for making a Uniform Resource Locator (URL) significantly shorter while still directing to the desired website. This is accomplished by the use of a redirect, which points to a web page with a lengthy URL. They let users navigate from one website to another in a matter of seconds by just clicking on a URL. Unfortunately, connections typically become lengthy and complex when tracking parameters are added and site structures expand to handle hundreds of pages. Long URLs became a concern as social media grew in popularity. Twitter used to limit messages to a maximum of 140 characters, and every character in a link was tallied. As a result, a long URL may take up the entirety of your tweet. URL shortener programs have evolved as a response to this difficulty of sharing.
+The benefits of URL shorteners:
+
+The importance of content in any marketing plan cannot be overstated. You'll need the correct URLs to distribute that material. An URL shortener guarantees that the relevant messages reach your target audience without taking up too much room in your social media postings.
+Make it simpler for people to share your material by doing the following: Customers may learn everything they need to know about your site by using simple and branded URLs. Reduced URLs with random letter and number combinations are no longer necessary.
+Make your URLs more attractive: Shorter URLs are more appealing from an aesthetic standpoint. Although it may not appear to be significant, a shorter URL may be the deciding factor in encouraging someone to click on your links.
+Allows for traffic monitoring: Bit.ly includes tracking monitors that track your tweet or post's sharing activity over time.
+
+When you connect your own custom domain to a URL shortener that functions as a basis for all the short links you make, it's called a custom or branded URL shortener. You may choose your own domain instead of selecting a generic one like bit.ly or rebrand.ly.
+Operations a Link Shortner performs:
+
+Link Masking: Shortening a URL, obviously, allows you to hide the original site address. This is terrible for consumers because it allows spammers and hackers to conceal dangerous links from us. Thankfully, security features in Chrome and other browsers (do you use Chrome, by the way? We no longer have to be concerned about malicious link masking. When you use proper link masking, you can take a URL from a powerful piece of information that you want to share and simplify it to convey a vital point in your social message. Don't mistake link masking with link cloaking, which involves providing fake information to search engines (also known as spiders or bots) while sending people to a URL that has nothing to do with the falsified material. This is a form of black hat SEO that might result in your website being removed from Google's search results.
+Link Shortening: Sharing a short and memorable URL is significantly easier than sharing a long one, especially when the latter contains random integers. Which URL are you going to yell out to a crowded audience while making a presentation? When you run out of business cards, which URL would you tell folks at a networking event? Derric. link/card is what I use for myself. That is all there is to it. Which URL would you want to use on a forum while you're discussing fresh ideas? When sharing a link in a public situation, you should use a link shortening tool to assist you to make it seem nicer and measure how many people have clicked on it.
+Link Tracking: The most compelling argument to shorten a URL has to be link tracking. As digital marketers and social media managers, we must be aware of the results of our efforts. The firm ClickMeter has to have the greatest technology for tracking links from click to conversion. You can examine how many genuine people clicked on a link vs how many bots or spiders clicked on it. This offers you a more realistic picture of the number of genuine visitors to your site as well as the conversion rate. You may receive a daily or even a geographical breakdown (not shown). There is a slew of additional things worth exploring as well.
+Link Tracking: The most compelling argument to shorten a URL has to be link tracking. As digital marketers and social media managers, we must be aware of the results of our efforts. We'll very certainly have to provide monthly updates on our efforts as well. We have very little job security if we can't show our clicks - and hopefully conversions.
+Link Rotating: Have you ever wanted to do an A/B test but weren't sure how? Advanced linking features allow you to divide traffic 50/50 - or 75/25, or whatever - form within the link, thereby performing a small landing page test. Now, this isn't essential for advertising because you can just run two advertisements, and there are other tools, such as Optimizely, that allow you to handle this on the page rather than within the link, but there are some options for split traffic testing for your links. You could also conduct a contest and direct the first click to a "winning" page, while the rest of the clicks go to a "try again" page.
+Link Swapping or Changing: Even though it's so simple, most link shortening providers won't allow you to do it. You make a shortened link and distribute it on 12 various social media platforms, but the page to which your link refers gets taken down one day. Good luck locating and replacing all of those broken links. Not any longer. You own your links with Rebrandly. You have the option of changing the destination URL. It only takes a few seconds for those 12 links you shared months ago to be automatically updated. The crisis was averted.
+
+Now let us have a look at the code to create a URL shortener in python, we will be needing an API that will actually perform the operation of reducing the URL, so for that, we will be using two different API providers and will be writing two different python code, both of them doing the same task of URL shortening just using different APIs to perform the task. The two API providers we are going to use are Bitly URL Shortener and Cuttly URL Shortener.
+Let us have a look at the code of the Cuttly URL Shortener.
+Another amazing URL shortener we may utilize is Cuttly URL Shortener. It is likewise rather straightforward to use, albeit it does necessitate 2-3 additional lines of code. However, it does not require installation, making it overall easier. First and foremost, go to Cuttly and create a new account. After that, go to Edit Profile and Generate New API Keys. We'd get a new set of API keys as a result of this. Take a note of the API keys. As a result, we can get right into programming without having to install anything. Though we only require one easy installation, I believe most of us already have it. Still, if you don't have the required library the command to install is:
+
+pip install requests
+
+Now since our required library is in place, let us start writing code for it.
+Code:
+
+import requests
+import sys
+
+#A sample python code to shorten a URL with the use of cutt.ly APIs with different options.
+class URLHandler:
+
+	#constructor to initialize the class variables that will be used for the initializing the class variables of the above-written class
+    def __init__(self):
+        self.api_key = None
+        self.shortened_url = None
+        self.exception_encountered  = None
+
+# A sample function that will be sued to Set the  API value  which we will use to shorten the input URL that will be provided by the user
+    def set_api_url(self):
+        print("enter the api key of the service account::")
+        input_api_key = input()
+        self.api_url = input_api_key
+
+#  this function is a written explicitly  to take an input URL from the user that will be used to short
+    def get_input_url(self):
+        print("Enter the URL that you want to shorten.")
+        url_to_shorten = input()
+        return url_to_shorten
+
+#  this function is written to perform the shorter operation on the input URL there is one parameter that is specified for this particular function and this parameter is the URL  parameter that is representing the input URL provided by the user.  try-catch block is implemented in this function so that if some exception is encountered while shortening the input URL which is provided by the user that  exception is handled  and the value of the shortened URL variable is set to none which represents that there is some error exception which is encountered while performing the shortening operation of the specified URL,  and if the operation is successful and no error exception is encountering while shortening the input URL provided by the user the shorten URL variable is set with the actual shorten URL which is returned by the API call that we have given in this function If the exception or errors encountered while shortening the input URL there are a couple of steps that are performed first of all the shortened URL variable is set to none representing there is an exception and along with that the message associated with the exception or error which is encounter is also printed to the user representing the root cause of the exception that is encounter 
+    def shorten_url(self,url):
+        api_url = f"https://cutt.ly/api/api.php?key={self.api_key}&short={url}"
+        request_return_obj = requests.get(self.api_url).json()["url"]
+        
+        try:
+            if request_return_obj["status"] == 7:
+                self.shortened_url = request_return_obj["shortLink"]
+            else:
+                self.shortened_url = None    
+        except Exception as e:
+            self.exception_encountered  = e
+            
+        
+
+
+# This function is written to print the result of the above Return function,  the printing of the shortened URL is done with the logic,  we have an if else block checking whether the shortening of URL operation is performed successfully or not,  for that, we are checking the value of the shortened URL variable if the value is not set to null then that means the operation is performed successfully and that particular URL is printed which is shortened on the other hand if the value is set to none that means there is some exception which is encountered during the shortening operation so in that case the associated exception or error message which is encountered during that operation is presented to the user 
+    def print_shortened_url(self):
+
+        if self.shortened_url:
+            print("Shortened URL: {}".format(self.shortened_url))
+        else :
+            print("URL shortening got an exception {}.".format(self.exception_encountered))
+
+
+
+# And this is the main function in this function the object of the above-written class is created and that object is used to call all the above-written functions inside that class,  the user is given multiple options like to enter the API key of the service account,  to enter the URL which the user wants to shorten,  to perform the actual shortening operation of the specified input URL,   once the sorting operation is performed successfully the user can print the URL which is shortened,  and in the last option user can accept the code execution by opting the last and final option,  appropriate input is taken from the user and appropriate output is given according to the option which is selected by the user to perform the operation.
+def main():
+    
+    shortner =  URLHandler()
+    url = None
+    while(True):
+        print("Please choose any one of the operations from the listed below the list of operations::")
+        print("1. To enter the API key for the service account.")
+        print("2. To enter the URL which you want to shorten.")
+        print("3. To perform the operation of shortening the URL.")
+        print("4. To print the URL which is shortened.")
+        print("5. To exit from the code execution.")
+        
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            shortner.set_api_url()
+        elif menu_choice == 2:
+            url = shortner.get_input_url()
+        elif menu_choice == 3:
+            # shortner.shorten_url(url)
+            print("URL shortned successfully.")
+        elif menu_choice == 4:
+            shortner.print_shortened_url()
+        elif menu_choice == 5:
+            sys.exit()
+        
+        print("To keep on going with code execution, type [y] otherwise [n].")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+if __name__ == '__main__':
+    main()
+
+Output:
+Now let us have a look at the output of the written code, all the output generated by the code at the time of execution is shown below with all the standard outputs along with errors and exceptions if any.
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+1
+enter the API key of the service account::
+UIWN56645G#YW
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+2
+Enter the URL that you want to shorten.
+https://www.mywebsite.com/dashboard/stats/barchart
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+3
+URL shortened successfully.
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+4
+Shortened URL:https://cut.ly/i4tdxaE 
+To keep on going with code execution, type [y] otherwise [n].
+Y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+2
+Enter the URL that you want to shorten.
+https://website.
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+3
+URL shortened successfully.
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+4
+URL shortening got an exception None.
+
+
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API key for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To exit from the code execution.
+5
+
+In the above-written code the object of the above-written class is created and that object is used to call all the above-written functions inside that class, the user is given multiple options like to enter the API key of the service account, to enter the URL which the user wants to shorten, to perform the actual shortening operation of the specified input URL, once the sorting operation is performed successfully the user can print the URL which is shortened, and in the last option user can accept the code execution by opting the last and final option, appropriate input is taken from the user and appropriate output is given according to the option which is selected by the user to perform the operation.
+Let us have a look at the code of the Bitly URL Shortener.
+The Bitly URL Shortener is really easy to use. All you have to do is create a Bitly account. Then go to Group Settings and select Advanced Settings from the drop-down menu. The API option may be found there. Because API is no longer supported, choose OAuth instead. After that, create the OAuth Token. Make a copy of the token. Bitly is a URL shortening service and a link management platform that was founded in 2008 by Bitly, Inc. It is situated in New York City and is privately held. Bitly shortens 600 million URLs every month[4] for social media, text messaging, and email. Bitly earns money by charging for access to aggregate data generated by a large number of users utilizing abbreviated URLs.
+Code:
+
+import sys
+from pyshorteners import Shortener 
+
+class URLShortner:
+
+	#constructor to initialize the class variables that will be used for the initializing the class variables of the above-written class
+    def __init__(self):
+        self.bitly_api_token = None
+        self.shortened_url = None
+        self.long_url = None
+        self.exception_encountered  = None
+#A sample function that will be sued to Set the  API value  which we will use to shorten the input URL that will be provided by the user
+    def set_api_url(self):
+        print("enter the api token for the bitly service account::")
+        input_api_key = input()
+        self.api_url = input_api_key
+
+#this function is a written explicitly  to take an input URL from the user that will be used to short
+    def get_input_url(self):
+        print("Enter the URL that you want to shorten.")
+        url_to_shorten = input()
+        return url_to_shorten
+
+#this function is written to perform the shorter operation on the input URL there is one parameter that is specified for this particular function and this parameter is the URL  parameter that is representing the input URL provided by the user.  try-catch block is implemented in this function so that if some exception is encountered while shortening the input URL which is provided by the user that  exception is handled  and the value of the shortened URL variable is set to none which represents that there is some error exception which is encountered while performing the shortening operation of the specified URL,  and if the operation is successful and no error exception is encountering while shortening the input URL provided by the user the shorten URL variable is set with the actual shorten URL which is returned by the API call that we have given in this function If the exception or errors encountered while shortening the input URL there are a couple of steps that are performed first of all the shortened URL variable is set to none representing there is an exception and along with that the message associated with the exception or error which is encounter is also printed to the user representing the root cause of the exception that is encounter 
+    def shorten_url(self,url):
+        url_shortener = Shortener('Bitly', bitly_token = self.bitly_api_token)
+        shortened_url = url_shortener.short(url)
+
+        try:
+            self.shortened_url = shortened_url
+        except Exception as e:
+            self.shortened_url = None
+            self.exception_encountered = e
+    
+    def get_input_url_to_expand(self):
+        print("Enter the URL that you want to expand.")
+        url_to_shorten = input()
+        return url_to_shorten
+
+#this function is written to perform the expansion operation on the input URL there is one parameter that is specified for this particular function and this parameter is the URL  parameter that is representing the input URL provided by the user.  try-catch block is implemented in this function so that if some exception is encountered while expanding the input URL which is provided by the user that  exception is handled  and the value of the expanded URL variable is set to none which represents that there is some error exception which is encountered while performing the expansion operation of the specified URL,  and if the operation is successful and no error exception is encountering while expanding the input URL provided by the user the shorten URL variable is set with the actual expanded URL which is returned by the API call that we have given in this function If the exception or errors encountered while expanding the input URL there are a couple of steps that are performed first of all the expanded URL variable is set to none representing there is an exception and along with that the message associated with the exception or error which is encounter is also printed to the user representing the root cause of the exception that is encounter 
+    def expand_url(self):
+        url_expander = Shortener('Bitly', bitly_token = self.bitly_api_token)
+        long_url = url_expander.short(url)
+        self.long_url = long_url
+
+# This function is written to print the result of the above Return function,  the printing of the shortened URL is done with the logic,  we have an if-else block checking whether the shortening of URL operation is performed successfully or not,  for that, we are checking the value of the shortened URL variable if the value is not set to null then that means the operation is performed successfully and that particular URL is printed which is shortened on the other hand if the value is set to none that means there is some exception which is encountered during the shortening operation so in that case the associated exception or error message which is encountered during that operation is presented to the user 
+    def print_shortened_url(self):
+
+        if self.shortened_url:
+            print("Shortened URL: {}".format(self.shortened_url))
+        else :
+            print("URL shortening got an exception {}.".format(self.exception_encountered))
+
+# This function is written to print the result of the above-written function,  the printing of the expanded URL is done with the logic,  we have an if-else block checking whether the expansion of URL operation is performed successfully or not,  for that, we are checking the value of the expanded URL variable if the value is not set to null then that means the operation is performed successfully and that particular URL is printed which is expanded on the other hand if the value is set to none that means there is some exception which is encountered during the expansion operation so in that case the associated exception or error message which is encountered during that operation is presented to the user 
+
+    def print_long_url(self):
+        if self.long_url:
+            print("Expanded URL: {}".format(self.long_url))
+        else :
+            print("URL expansion got an exception {}.".format(self.exception_encountered))
+
+
+
+#And this is the main function in this function the object of the above-written class is created and that object is used to call all the above-written functions inside that class,  the user is given multiple options like to enter the API key of the service account,  to enter the URL which the user wants to shorten,  to perform the actual shortening operation of the specified input URL,   once the sorting operation is performed successfully the user can print the URL which is shortened,  and in the last option user can accept the code execution by opting the last and final option,  appropriate input is taken from the user and appropriate output is given according to the option which is selected by the user to perform the operation.
+
+def main():
+    
+    shortner =  URLShortner()
+    url = None
+    while(True):
+        print("Please choose any one of the operations from the listed below the list of operations::")
+        print("1. To enter the API token for the service account.")
+        print("2. To enter the URL which you want to shorten.")
+        print("3. To perform the operation of shortening the URL.")
+        print("4. To print the URL which is shortened.")
+        print("5. To enter the URL which you want to expand.")
+        print("6. To perform the expansion operation of the URL.")
+        print("7. To print the URL which is expanded.")
+        print("8. To exit from the code execution.")
+        
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 1:
+            shortner.set_api_url()
+        elif menu_choice == 2:
+            url = shortner.get_input_url()
+        elif menu_choice == 3:
+            # shortner.shorten_url(url)
+            print("URL shortned successfully.")
+        elif menu_choice == 4:
+            shortner.print_shortened_url()
+        elif menu_choice == 5:
+            url = shortner.get_input_url_to_expand()
+        elif menu_choice == 6:
+            # shortner.expand_url(url)
+            print("URL expanded successfully.")
+        elif menu_choice == 7:
+            shortner.print_long_url()
+        elif menu_choice == 8:
+            sys.exit()
+        
+        print("To keep on going with code execution, type [y] otherwise [n].")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output:
+Now let us have a look at the output of the written code, all the output generated by the code at the time of execution is shown below with all the standard outputs along with errors and exceptions if any.
+
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+1
+enter the api token for the bitly service account::
+CJX5E9OLE$H6
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+2
+Enter the URL that you want to shorten.
+https://www.mywebsite.com/dashboard/stats/barchart
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+3
+URL shortened successfully.
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+4
+Shortened URL:https://cut.ly/i4tdxaE 
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+5
+Enter the URL that you want to expand.
+https://cut.ly/i4tdxaE
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+6
+URL expanded successfully.
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+7
+Expanded URL:https://www.mywebsite.com/dashboard/stats/barchart.
+To keep on going with code execution, type [y] otherwise [n].
+y
+please choose any one of the operations from the listed below the list of operations::
+1. To enter the API token for the service account.
+2. To enter the URL which you want to shorten.
+3. To perform the operation of shortening the URL.
+4. To print the URL which is shortened.
+5. To enter the URL which you want to expand.
+6. To perform the expansion operation of the URL.
+7. To print the URL which is expanded.
+8. To exit from the code execution.
+8
+
+In the above-written code the object of the above-written class is created and that object is used to call all the above-written functions inside that class, the user is given multiple options like to enter the API key of the service account, to enter the URL which the user wants to shorten, to perform the actual shortening operation of the specified input URL, once the sorting operation is performed successfully the user can print the URL which is shortened, and in the last option user can accept the code execution by opting the last and final option, appropriate input is taken from the user and appropriate output is given according to the option which is selected by the user to perform the operation.
+Advantages:
+
+Insight: The ability to measure clicks on each link you publish is one of the most crucial features of a URL shortener. You can get a breakdown of visitors by demographics, such as nation or gender, depending on the service you're using to compress web links. You may also see which of your social media channels or postings is generating the most interest.
+Increased sharing: Your viewers will find it simpler to click, copy, and share a shortened link in their own post, which will help your material acquire organic social media exposure.
+Professionalism: Your audience is probably accustomed to seeing material shared in the form of shortened links. They may detect if you share a URL that hasn't been compressed because this method is so frequent. Audience members who are used to neater, abbreviated links may see long-form URLs as sloppy or messy.
+Convenience: Sharing a small link is considerably easier than sharing a large, convoluted one. This is especially important if your audience is unable to physically click your link or if you're marketing your website one-on-one. A URL shortener can help you produce a concise, memorable link that can be put immediately into a smartphone or web browser whether you're giving a PowerPoint presentation or sharing a link with a prospective customer.
+Stronger engagement: A shortened URL is more likely to be remembered by your audience, especially if it's related to your brand. According to Rebrandly, shorter URLs can improve interaction by 39 percent.
+Higher Click-Through Rate: On social media, people are accustomed to seeing abbreviated URLs. As a result, shortening your links will enhance your click-through rate. It's one of the most straightforward modifications you can make to your posting strategy to improve its efficacy. Are you still not convinced? Check out the analytical data for yourself! Having the ability to track the progress of your shortened URL is already useful.
+
+So, in this article, we understood how to implement a URL shortener in python.
+
+
+Next TopicAutomate Instagram Messages using Python
+
+
+
+
+← prev
+next →
+
+
+
+

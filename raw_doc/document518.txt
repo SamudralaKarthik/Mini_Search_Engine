@@ -1,0 +1,296 @@
+
+
+
+
+next →
+← prev
+
+Essential Recursion Programs in Python
+Recursion is one of an important concept of programming to solve problems. Every beginner encounters with the recursion even the experience developers' use recursion. If you are not familiar with recursion, it is function that is called itself. For example - Place two parallel mirrors facing each other, if any object appear in between them, it would reflected recursively. To learn more about recursion, follow www.javatpoint.com/recursion-in-python.
+In this tutorial, we will solve some important Python problem using recursion. It will help to make the good understanding of recursion and how to take approach to solve problems.
+Let's see these problems as following.
+Find of a Number
+It is an introductory or famous problem of recursion. The factorial of a number is calculated by multiply number itself and n-1 until we get one. Suppose we want to want factorial of 5, then it will goes as below.
+
+0! = 1
+1! = 1x0! = 1x1 = 1
+2! = 2x1! = 2
+3! = 3x2! = 3x2 = 6
+4! = 4x3! = 4x6 = 24
+5! = 5x4! = 5x24 = 120
+
+As we can see that, it is calculating n*(n-1) repeatedly. Hence we can use recursion. Here the factorial of 0 is 1. The recursion's base case as below -
+
+if n==0 return 1
+fact(n) = n * f(n-1)  n<1
+
+The code will be as below.
+Example -
+
+def factorial(n):
+	    if n==0:
+	        return 1
+	    else:
+	        return n*factorial(n-1)
+
+num = int(input("Enter a number: "))
+print("The factorial of a {0} is: ".format(num), factorial(num))
+
+Output:
+Enter a number: 6
+The factorial of a 6 is:  720
+
+Fibonacci Sequence
+It is a most famous mathematical problem and sometime also asked in interview at entry level jobs. In this sequence, each number in the sequence is the sum of the two numbers that precede it. The series will be 0, 1, 1, 2, 3, 5, 8,.…so on. The first element is 0 and second is 1; hence the third element is sum of first and third element. Suppose we want 6th element of Fibonacci series, the preceding two elements will be 5 and 4 -
+
+fib(6) = fib(5) + fib(4) => 5 + 3 = 8
+fib(5) = fib(4) + fib(3) => 2 +  3 = 5
+fib(4) = fib(3) + fib(2) => 2 + 1 = 3
+fib(3) = fib(2) + fib(1) => 1 + 1 = 2
+
+The sequence Fn is defined by the recurrence relation as below.
+
+Fn = Fn-1 + Fn-2
+
+With the seed values -
+
+F0 = 0 and F1 = 1
+
+Let's implement the recurrence relation using the Python code.
+Example -
+
+def fib(n) :
+    if n==0:
+        return 0
+    elif n ==1 :
+        return 1
+    else :
+        return fib(n-1) +fib(n-2)
+num = int(input("Enter a number: "))
+print("The {num} element of fibonacci series is: ".format(num), fib(7))
+
+Output:
+Enter a number: 7
+The 7 element of fibonacci series is:  13
+
+Sum of the First n Natural Numbers
+It is simple problem, where we find the sum of the n natural number using recursion.
+Example -
+
+def sumnums(n):
+    if n == 1:
+        return 1
+    return n + sumnums(n - 1)
+num = int(input("Enter a number: "))print(sumnums(3))
+print(sumnums(6))
+print(sumnums(9))
+
+Output:
+Enter a number: 6
+21
+
+Power of Number
+To find a power of number, there is a Base number and an Exponent. The product of multiplying a number by itself the same number of times as the exponent's value. The exponent is written above and to the right of the base number. It is decreased every time when the base number is multiplied.
+Example -
+
+def power_of_num(num, topwr):
+    if topwr == 0:
+        return 1
+    else:
+        return num * power_of_num(num, topwr - 1)
+
+print('{} to the power of {} is: {} '.format(4, 7, power_of_num(3, 7)))
+print('{} to the power of {} is: {} '.format(2, 8, power_of_num(4, 3)))
+
+Output:
+4 to the power of 7 is: 2187 
+2 to the power of 8 is: 64
+
+Least Common Multiple (LCM) of 2 Numbers
+In the mathematics, LCM is a smallest common factor of the two or more numbers. For example - We want to find the common factor of 2 and 5 then -
+Multiples of 2 → 2, 4, 6, 8, 10
+Multiples of 5 → 5, 10, 15, 20, 25
+Least Common Factor is → 10
+Let's see the following example -
+Example -
+
+def LCM(x, y):
+  z = x % y
+  if z == 0:
+        return x
+  return x * LCM(y, z) / z
+print("The least common factor is: ", LCM(4, 16))
+
+Output:
+The least common factor is:  16.0
+
+Greatest Common Divisor (GCD) of 2 Numbers
+It is also known as Highest Common Factor (HCF), it is a highest common factor that divides both the given numbers. For example - Suppose we want to find the HCF of a = 98, and b = 56.
+Here a>b so we change the value of a by subtracting by b, and b remain same
+a = a - b =98 - 56 = 42 and b = 56. Now b>a so b = b - a = 56 - 42 = 14 and a = 42. 42 is 3 times of 14 so HCF is 14.
+Let's implement it using the Python code.
+Example -
+
+def gcd(a,b):
+	
+	if (a == 0):
+		return b
+	if (b == 0):
+		return a
+
+	# base case of recursion
+	if (a == b):
+		return a
+
+	# when a is greater
+	if (a > b):
+		return gcd(a-b, b)
+	# when b is greater
+	return gcd(a, b-a)
+a = 24
+b = 48
+if(gcd(a, b)):
+	print('GCD of', a, 'and', b, 'is', gcd(a, b))
+else:
+	print('not found')
+
+Output:
+GCD of 24 and 48 is 24
+
+Tower of Hanoi
+It is a famous mathematical puzzle where three rods have three disks. The main task is to move the entire stack to another rod that should follow the given rules -
+
+Only one disk can be moved at a time.
+The most upper disk from one of the rod can be stimulated in move.
+The smaller disk cannot be placed at the lower of the largest disk
+
+Let's solve the code using the following example.
+Example -
+
+# Creating a recursive function  
+def tower_of_hanoi(disks, source, auxiliary, target):  
+    if(disks == 1):  
+        print('Move disk 1 from rod {} to rod {}.'.format(source, target))  
+        return  
+    # function call itself  
+    tower_of_hanoi(disks - 1, source, target, auxiliary)  
+    print('Move disk {} from rod {} to rod {}.'.format(disks, source, target))  
+    tower_of_hanoi(disks - 1, auxiliary, source, target)  
+  
+  
+disks = int(input('Enter the number of disks: '))  
+# We are referring source as A, auxiliary as B, and target as C  
+tower_of_hanoi(disks, 'A', 'B', 'C')  # Calling the function  
+
+Output:
+Enter number of disks: 2  
+Move disk 1 from rod A to rod B.  
+Move disk 2 from rod A to rod C.  
+Move disk 1 from rod B to rod C.  
+
+Sum of Digits of a Number
+We can also use the recursion to solve such problems. Suppose the user enters 143, the sum of the digits will be 1+4+3 = 8. Let's understand the following example.
+Example -
+
+def sumDigits(no):
+    if no == 0:
+        return 0
+    else :
+        return int(no % 10) + sumDigits(int(no / 10))
+nums = int(input("Enter a number: "))
+print("The sum is:", sumDigits(nums))
+
+Output:
+Enter a number: 143
+The sum is: 8
+
+Merge Sort
+The merge sort algorithm works of the Divide and conquers and it is a most efficient algorithm. In a merge sort algorithm, the given array breaks down in several arrays until each array consists of a single element. After that, the sorting is performed and merged into the single array. Visit our merge sort algorithm in Python to get the detailed explanations.
+Example -
+
+def merge_sort(list1):
+    length = len(list1)
+    if length > 1:
+        middle = length // 2
+        left_arr = list1[:middle]
+        right_arr = list1[middle:]
+
+        merge_sort(left_arr)
+        merge_sort(right_arr)
+
+        p = 0
+        q = 0
+        r = 0
+
+        left_length = len(left_arr)
+        right_length = len(right_arr)
+        while p < left_length and q < right_length:
+            if left_arr[p] < right_arr[q]:
+                list1[r] = left_arr[p]
+                p += 1
+            else:
+                list1[r] = right_arr[q]
+                q += 1
+
+            r += 1
+
+        while p < left_length:
+            list1[r] = left_arr[p]
+            p += 1
+            r += 1
+
+        while q < right_length:
+            list1[r] = right_arr[q]
+            q += 1
+            r += 1
+
+list1 = [24, 11, 50, 27, 16, 36, 60, 91]
+print("Input Array: ")
+print(list1)
+merge_sort(list1)
+print("Sorted Array :")
+print(list1)
+
+Output:
+Input Array: 
+[24, 11, 50, 27, 16, 36, 60, 91]
+Sorted Array :
+[11, 16, 24, 27, 36, 50, 60, 91]
+
+Pascals Triangle
+Pascals triangle is a different kind of triangle where each number is the sum of the above two apart from the edges, which are all '1'.
+Let's understand the following code.
+Example -
+
+def pascal(n):
+    if n == 1:
+        return [1]
+    else:
+        line = [1]
+        previous_line = pascal(n-1)
+        for i in range(len(previous_line)-1):
+            line.append(previous_line[i] + previous_line[i+1])
+        line += [1]
+    return line
+num = int(input("Enter a number: "))
+print(pascal(num))
+
+Output:
+Enter a number: 6
+[1, 5, 10, 10, 5, 1]
+
+Conclusion
+Recursion allows us to reduce the number of lines from the code but it uses more memory. In this tutorial, we have discussed some simple problem that can be solved using recursion. These common problems can be asked in the programming interviews.
+
+
+Next TopicHow to Design Hashset in Python
+
+
+
+
+← prev
+next →
+
+
+
+

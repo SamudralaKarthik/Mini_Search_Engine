@@ -1,0 +1,215 @@
+
+
+
+
+next →
+← prev
+
+Python Program to generate a Random String
+A random refers to the collection of data or information that can be available in any order. The random module in python is used to generate random strings. The random string is consisting of numbers, characters and punctuation series that can contain any pattern. The random module contains two methods random.choice() and secrets.choice(), to generate a secure string. Let's understand how to generate a random string using the random.choice() and secrets.choice() method in python.
+
+Using random.choice()
+The random.choice() function is used in the python string to generate the sequence of characters and digits that can repeat the string in any order.
+Create a program to generate a random string using the random.choices() function.
+Random_str.py
+
+import string  
+import random # define the random module
+S = 10  # number of characters in the string.
+# call random.choices() string module to find the string in Uppercase + numeric data.
+ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))  
+print("The randomly generated string is : " + str(ran)) # print the random data
+
+Output:
+
+Following are the method used in the random module to generate the random string.
+
+
+Methods
+Description
+
+
+String.ascii_letters
+It returns a random string that contains both uppercase and lowercase characters.
+
+
+String_ascii_uppercase
+It is a random string method that only returns a string in uppercase characters.
+
+
+String.ascii_lowercase
+It is a random string method that returns a string only in lowercase characters.
+
+
+String.digits
+It is a random string method that returns a string with numeric characters.
+
+
+String.punctuation
+It is a random string method that returns a string with punctuation characters.
+
+
+Generate a random string of upper case and lower-case letters
+UprLwr.py
+
+# write a program to generate the random string in upper and lower case letters.
+import random
+import string
+def Upper_Lower_string(length): # define the function and pass the length as argument
+    # Print the string in Lowercase
+    result = ''.join((random.choice(string.ascii_lowercase) for x in range(length))) # run loop until the define length
+    print(" Random string generated in Lowercase: ", result)
+
+    # Print the string in Uppercase
+    result1 = ''.join((random.choice(string.ascii_uppercase) for x in range(length))) # run the loop until the define length
+    print(" Random string generated in Uppercase: ", result1)
+
+Upper_Lower_string(10) # define the length
+
+Output:
+
+Random String of Specified Characters
+Specific.py
+
+# create a program to generate the random string of given letters.
+import random
+import string
+def specific_string(length):
+    sample_string = 'pqrstuvwxy' # define the specific string
+    # define the condition for random string
+    result = ''.join((random.choice(sample_string)) for x in range(length))
+    print(" Randomly generated string is: ", result)
+
+specific_string(8) # define the length
+specific_string(10)
+
+Output:
+
+Note: The random.choice() method is used in the python program to repeat the same characters strings. If we don't want to display repetitive characters, we should use random.sample() function.
+Generate a random string without repeating the same characters
+WithoutRepeat.py
+
+# create a program to generate a string with or without repeating the characters.
+import random
+import string
+print("Use of random.choice() method")
+def specific_string(length):
+   
+    letters = string.ascii_lowercase # define the lower case string
+     # define the condition for random.choice() method
+    result = ''.join((random.choice(letters)) for x in range(length))
+    print(" Random generated string with repetition: ", result)
+
+specific_string(8) # define the length
+specific_string(10)
+
+
+print("") # print the space
+print("Use of random.sample() method")
+def WithoutRepeat(length):
+    letters = string.ascii_lowercase # define the specific string
+    # define the condition for random.sample() method
+    result1 = ''.join((random.sample(letters, length))) 
+    print(" Random generated string without repetition: ", result1)
+
+WithoutRepeat(8) # define the length
+WithoutRepeat(10) 
+
+Output:
+
+As we can see in the above output, the random.sample() method returns a string in which all characters are unique and non-repeating. Whereas, the random.choice() method returns a string that may contain repetitive characters. So, we can say that if we want to generate a unique random string, use random.sample() method.
+Generate a random alphanumeric string consisting of fixed letters and digits
+For example, suppose we want a randomly generated alphanumeric string that contains five letters and four digits. We need to define these parameters into the function.
+Let's write a program to generate an alphanumeric string that contains a fixed number of letters and digits.
+fixedString.py
+
+import random
+import string
+def random_string(letter_count, digit_count):
+    str1 = ''.join((random.choice(string.ascii_letters) for x in range(letter_count)))
+    str1 += ''.join((random.choice(string.digits) for x in range(digit_count)))
+
+    sam_list = list(str1) # it converts the string to list.
+    random.shuffle(sam_list) # It uses a random.shuffle() function to shuffle the string.
+    final_string = ''.join(sam_list)
+    return final_string
+
+# define the length of the letter is eight and digits is four
+print("Generated random string of first string is:", random_string(8, 4))
+
+# define the length of the letter is seven and digits is five
+print("Generated random string of second string is:", random_string(7, 5))
+
+Output:
+
+Using secrets.choice()
+A secrets.choice() method is used to generate a more secure random string than random.choice(). It is a cryptographically random string generator that ensures no two processes can obtain the same results simultaneously using secrets.choice() method.
+Let's write a program to print a secure random string using the secrets.choice method.
+Secret_str.py
+
+import random 
+import string
+import secrets # import package
+num = 10 # define the length of the string
+# define the secrets.choice() method and pass the string.ascii_letters + string.digits as an parameters.
+res = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(num))
+
+# print the Secure string 
+print("Secure random string is :"+ str(res))
+
+Output:
+
+Use the different method of the random module to generate a safe random string.
+Let's write a program to print secure random strings using different methods of secrets.choice().
+Secret.py
+
+# write a program to display the different random string method using the secrets.choice().
+# imports necessary packages
+import random 
+import string
+import secrets
+num = 10 # define the length of the string
+# define the secrets.choice() method and pass the string.ascii_letters + string.digits as an parameters.
+res = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(num))
+# Print the Secure string with the combination of ascii letters and digits
+print("Secure random string is :"+ str(res))
+
+res = ''.join(secrets.choice(string.ascii_letters) for x in range(num))
+# Print the Secure string with the combination of ascii letters 
+print("Secure random string is :"+ str(res))
+
+res = ''.join(secrets.choice(string.ascii_uppercase) for x in range(num))
+# Print the Secure string in Uppercase
+print("Secure random string is :"+ str(res))
+
+res = ''.join(secrets.choice(string.ascii_lowercase) for x in range(num))
+# Print the Secure string in Lowercase
+print("Secure random string is :"+ str(res))
+
+res = ''.join(secrets.choice(string.ascii_letters + string.punctuation) for x in range(num))
+# Print the Secure string with the combination of letters and punctuation
+print("Secure random string is :"+ str(res))
+
+res = ''.join(secrets.choice(string.digits) for x in range(num))
+# Print the Secure string using string.digits
+print("Secure random string is :"+ str(res))
+
+res = ''.join(secrets.choice(string.ascii_letters + string.digits + string.punctuation) for x in range(num))
+# Print the Secure string with the combonation of letters, digits and punctuation 
+print("Secure random string is :"+ str(res))
+
+Output:
+
+
+
+Next TopicYield Keyword in Python
+
+
+
+
+← prev
+next →
+
+
+
+

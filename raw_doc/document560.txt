@@ -1,0 +1,417 @@
+
+
+
+
+next →
+← prev
+
+Hangman Game in Python
+Python is a formidable multi-purpose programming language utilized by many huge industries. It offers simple and easy-to-use syntax making it the ideal language for someone trying to learn computer programming for the first time. Python is a high-level programming language. The core design philosophy of this language is all about readability or code and a syntax that enables programmers or developers to express concepts in a few lines of code.
+In the following tutorial, we will learn how to create a Hangman game or 'Guess the Word' Game using the Python programming language.
+But before we get started, let us understand this Game and some rules. We will also learn the stepwise implementation of the Game in Python.
+Understanding the Hangman game
+One of those classic word guessing games played between two or more players. One player sets or defines a word or list of words, and the other player(s) have to guess correctly, given a specific number of trials. It is quick, easy, educational, and requires only a piece of paper and the ability to spell correctly. We can play this Game with a computer as well. A life or trial in the Game is lost for every wrong guess, and a "hanging man" begins to appear, piece by piece. The aim is to solve the puzzle and guess the correct word(s)/phrase before the hangman dies.
+
+This classic game has gained so much popularity that some tips, tricks, and strategies are utilized to win, just like most games.
+This classic game has gained so much popularity that some tips, tricks, and strategies are utilized to win, just like most games.
+Understanding the rules of the Game
+Before we start deploying this Game into a code-based solution, we must understand the rules around it - How does this game work? Then we can efficiently translate this Game into a snippet of code.
+Game Rules:
+Rule 1: An individual sets a word or list of words.
+Rule 2: A player takes an initial guess at a letter that might start or be contained in the word or list of words.
+Rule 3: If the letter is present in the word/list of words, the player gains a point and takes another turn guessing a letter.
+Rule 4: If the letter is not present in the word, the player losses an attempt(s)/point, and a part of the hangman appears.
+Rule 5: The hangman appears bit after bit for every wrongly guessed letter until the entire image is drawn.
+Rule 6: Similarly, for every correctly guessed letter, the letters are placed on the screen until the word is completed and the player wins.
+Let us now understand the stepwise implementation of the Hangman game in Python.
+Implementation of Hangman in Python
+The concept we are using for this project is quite simple. We are not creating any physical on-screen drawings in Python, so this version of the Hangman game will count down how many lives have remained.
+Let us now understand the implementation with the help of the steps described below:
+STEP 1: Importing the random module
+STEP 2: Defining a function to welcome the user/player.
+STEP 3: Creating a variable to get the user's/player's name within this function and using a string method to capture the user's name in a sentence case.
+STEP 4: Creating a decision-making process to check that the user only enters alphabets and not the numbers as a name.
+Let us now consider the following snippet of code demonstrating the implementation of the above steps.
+File: hangmanGame.py
+
+# importing the random module
+import random
+
+# defining the greetings() function
+def greetings():
+    # defining the username variable
+    username = input("""
+                    ==================================================
+                    > Welcome to the Hangman Game! Enter your name:  <
+                    """).capitalize()
+    
+    # using a decision making process to accept only alphabets as name
+    if username.isalpha() == True:
+        print("""
+                >> Hello,""", username + """!""", """We are glad to have you here! <<
+                You will be playing against the computer today. The computer will 
+                randomly choose a word and you will try to guess the correct word
+                You can always invite the friends for a fun time together
+                ==================================================================
+                Good Luck! Have fun playing
+            """)
+    
+    else:
+        print('Please enter a valid name using alphabets only')
+        username = input('Enter a game name here:   ')
+        print('Hello, ' + username + '! Please go through the rules of the game below:')
+
+Explanation:
+In the above snippet of code, we have imported the random module. We have then defined the greetings() function. We have defined a variable as the username that accepts a string as an input from the user containing their name within this function. We have then used the if-else conditional statement to accept only alphabets as a name.
+STEP 5: Defining another function "playAgain()".
+STEP 6: Adding a decision-making process.
+Let us consider the following snippet of code demonstrating the implementation of these above steps.
+File: hangmanGame.py
+
+# defining the playAgain() function
+def playAgain(): 
+    """
+    This function asks user/player if they wish to replay the hangman game
+    """
+    userResponse = input('Would you like to play again? Y or N').lower()
+
+    # creating a decision making process
+    if userResponse == 'y':
+        gameRun()
+    else:
+        print('Hope you had fun playing this game. See you next time!')
+
+Explanation:
+In the above snippet of code, we have defined a function as playAgain(). We have asked the user if they want to play again within this function and stored their answer in the userResponse variable. We have then used the if-else conditional statement to create a decision-making process.
+STEP 7: Defining another function, "getWord()", for generating random words for the user to guess.
+Let us consider the following snippet of code demonstrating the implementation of the above step.
+File: hangman.py
+
+# defining the getWord() function
+def getWord():
+    """
+    This function produces the word the user will attempt guessing
+    """
+    listOfWords = ['Apple', 'Banana', 'Papaya', 'Mango', 'Kiwi', 'Orange', 'Pineapple', 'Grapes', 'Cherry', 'Watermelon']
+
+    return random.choice(listOfWords).lower()
+
+Explanation:
+In the above snippet of code, we have defined a function as getWord(). Within this function, we have defined a list consisting of some words. We then used the random module to select a random word from the list and returned it.
+STEP 8: Defining another function "gameRun()".
+STEP 9: Calling the greetings() function inside the gameRun() function to order to commence the game.
+STEP 10: Defining an 'alphabet' variable within the function.
+STEP 11: Setting a 'randomWord' variable (for guessed word) to the getWord() function for a random word to be chosen.
+STEP 12: Initiating an empty list of the guessed letter.
+STEP 13: Initiating the 'attempts' variable to store the value for the number of attempts made by the user.
+STEP 14: Setting initial guess to 'False'.
+STEP 15: Printing an empty line.
+STEP 16: Printing a guess hint for the user for the number of letters contained in the word.
+Let us consider the following snippet of code demonstrating the implementation of steps 8 - 16.
+File: hangmanGame.py
+
+# defining the gameRun() function
+def gameRun():
+    # calling the greeting() function
+    greetings()
+
+    # defining the 'alphabet' variable
+    alphabet = ('abcdefghijklmnopqrstuvwxyz')
+
+    # getting a random word from the getWord() function
+    randomWord = getWord()
+
+    # initiating an empty list for guessed letter
+    guessedLetters = []
+
+    # initiating the 'attempts' variable for the number of attempts by the user
+    attempts = 6
+
+    # setting initial guess to False
+    guess = False
+
+    # empty line
+    print()
+
+    # printing a guess hint for the user for number of letters consisted in the word
+    print('The Word consists of', len(randomWord), 'letters.')
+    print(len(randomWord) * '_')
+
+Explanation:
+In the above snippet of code, we have defined a function as gameRun(). We have called the greetings() function within this function. We have then defined a variable as the alphabet. We called the getWord() function and stored a returned value in a variable as randomWord. We have then initiated an empty list for guessed letters and a variable set to the total number of attempts. We have then set the initial value of the guess to False. At last, we have printed a guess hint for the user for the number of letters contained in the word.
+STEP 17: Initiating a while loop within the gameRun() function and creating decisions, taking into consideration if the player decides to input just a single letter or the full word.
+STEP 18: Also, creating decisions to check if the input value by the user is wrong and if the user inputs letters and it is not equal to the total number of letters in the word to guess.
+STEP 19: Deducting attempts each time user fails to guess correctly.
+STEP 20: Initiating the playAgain() function if the player wishes to continue at the end of the gameRun() function.
+Let us now consider the following snippet of code demonstrating the implementation of these above steps 17 - 20.
+File: hangmanGame.py
+
+    while guess == False and attempts > 0:
+        print('You have ' + str(attempts) + ' attempts')
+        userGuess = input('Guess a letter in the word or enter the full word: ').lower()
+        # user inputs a letter
+        if len(userGuess) == 1:
+            if userGuess not in alphabet:
+                print('You are yet to enter a letter. Consider checking your entry and make sure you enter an alphabet not a number.')
+            elif userGuess in guessedLetters:
+                print('You have already guessed that letter before. Try again!')
+            elif userGuess not in randomWord:
+                print('Oops! that letter is not a part of a word.')
+                guessedLetters.append(userGuess)
+                attempts -= 1
+            elif userGuess in randomWord:
+                print('Awesome! This letter is present in the word!')
+                guessedLetters.append(userGuess)
+            else:
+                print('Invalid Input! You might have entered the wrong entry.')
+            
+        # user inputs the full word
+        elif len(userGuess) == len(randomWord):
+            if userGuess == randomWord:
+                print('Awesome! You guessed the word correctly!')
+                guess = True
+            else:
+                print('Oops! that was not the word we were looking for.')
+                attempts -= 1
+        
+        # user inputs letter and it is not equal to the total
+        # number of letters in the word to guess
+        else:
+            print('The length of the guess is not the same as the length of the word.')
+            attempts -= 1
+
+        the_status = ''
+        if guess == False:
+            for letter in randomWord:
+                if letter in guessedLetters:
+                    the_status += letter
+                else:
+                    the_status += '_'
+            print(the_status)
+
+        if the_status == randomWord:
+            print('Awesome! You guessed the word correctly!')
+            guess = True
+        elif attempts == 0:
+            print('Unfortunately! You ran out of guesses and you couldn\'t guessed the word.')
+    
+    # initiating the playAgain() function if user wishes to continue
+    playAgain()
+
+Explanation:
+In the above snippet of code, we have used the while loop. Within this loop, we have used if-elif-else conditional statements to check whether the guess input by the player is a single letter or the full word. We have also checked whether the value input by the player is wrong or not. We have also checked if the input of the letter by the user is equal to the total number of letters in the word to guess. We have then deducted the attempts each time user fails to guess correctly. At last, we have initiated the playAgain() function if the player would like to continue at the gameRun() function.
+STEP 21: Calling the gameRun() function to execute the program.
+Let us consider the following snippet of code demonstrating the implementation of the above step.
+File: hangmanGame.py
+
+# executing the program
+gameRun()
+
+Explanation:
+In the above snippet of code, we have called the gameRun() function in order to execute the program.
+The coding of the 'Hangman Game' program is finally completed. We can now save the file and run the program to see if it is working.
+In order to run the program, we can type the following command in the command-line shell or terminal:
+Command:
+
+$ python hangmanGame.py
+
+But before we see the output, here is a complete project code.
+The Complete Project Code
+The following program file is a complete code for the 'Hangman Game' project.
+File: hangmanGame.py
+
+# importing the random module
+import random
+
+# defining the greetings() function
+def greetings():
+    # defining the username variable
+    username = input("""
+                    ==================================================
+                    > Welcome to the Hangman Game! Enter your name:  <
+                    """).capitalize()
+    
+    # using a decision making process to accept only alphabets as name
+    if username.isalpha() == True:
+        print("""
+                >> Hello,""", username + """!""", """We are glad to have you here! <<
+                You will be playing against the computer today. The computer will 
+                randomly choose a word and you will try to guess the correct word
+                You can always invite the friends for a fun time together
+                ==================================================================
+                Good Luck! Have fun playing
+            """)
+    
+    else:
+        print('Please enter a valid name using alphabets only')
+        username = input('Enter a game name here:   ')
+        print('Hello, ' + username + '! Please go through the rules of the game below:')
+
+# defining the playAgain() function
+def playAgain(): 
+    """
+    This function asks user/player if they wish to replay the hangman game
+    """
+    userResponse = input('Would you like to play again? Y or N: ').lower()
+
+    # creating a decision making process
+    if userResponse == 'y':
+        gameRun()
+    else:
+        print('Hope you had fun playing this game. See you next time!')
+
+# defining the getWord() function
+def getWord():
+    """
+    This function produces the word the user will attempt guessing
+    """
+    listOfWords = ['Apple', 'Banana', 'Papaya', 'Mango', 'Kiwi', 'Orange', 'Pineapple', 'Grapes', 'Cherry', 'Watermelon']
+
+    return random.choice(listOfWords).lower()
+
+# defining the gameRun() function
+def gameRun():
+    # calling the greeting() function
+    greetings()
+
+    # defining the 'alphabet' variable
+    alphabet = ('abcdefghijklmnopqrstuvwxyz')
+
+    # getting a random word from the getWord() function
+    randomWord = getWord()
+
+    # initiating an empty list for guessed letter
+    guessedLetters = []
+
+    # initiating the 'attempts' variable for the number of attempts by the user
+    attempts = 6
+
+    # setting initial guess to False
+    guess = False
+
+    # empty line
+    print()
+
+    # printing a guess hint for the user for number of letters consisted in the word
+    print('The Word consists of', len(randomWord), 'letters.')
+    print(len(randomWord) * '_')
+
+    while guess == False and attempts > 0:
+        print('You have ' + str(attempts) + ' attempts')
+        userGuess = input('Guess a letter in the word or enter the full word: ').lower()
+        # user inputs a letter
+        if len(userGuess) == 1:
+            if userGuess not in alphabet:
+                print('You are yet to enter a letter. Consider checking your entry and make sure you enter an alphabet not a number.')
+            elif userGuess in guessedLetters:
+                print('You have already guessed that letter before. Try again!')
+            elif userGuess not in randomWord:
+                print('Oops! that letter is not a part of a word.')
+                guessedLetters.append(userGuess)
+                attempts -= 1
+            elif userGuess in randomWord:
+                print('Awesome! This letter is present in the word!')
+                guessedLetters.append(userGuess)
+            else:
+                print('Invalid Input! You might have entered the wrong entry.')
+            
+        # user inputs the full word
+        elif len(userGuess) == len(randomWord):
+            if userGuess == randomWord:
+                print('Awesome! You guessed the word correctly!')
+                guess = True
+            else:
+                print('Oops! that was not the word we were looking for.')
+                attempts -= 1
+        
+        # user inputs letter and it is not equal to the total
+        # number of letters in the word to guess
+        else:
+            print('The length of the guess is not the same as the length of the word.')
+            attempts -= 1
+
+        the_status = ''
+        if guess == False:
+            for letter in randomWord:
+                if letter in guessedLetters:
+                    the_status += letter
+                else:
+                    the_status += '_'
+            print(the_status)
+
+        if the_status == randomWord:
+            print('Awesome! You guessed the word correctly!')
+            guess = True
+        elif attempts == 0:
+            print('Unfortunately! You ran out of guesses and you couldn\'t guessed the word.')
+    
+    # initiating the playAgain() function if user wishes to continue
+    playAgain()
+
+# executing the program
+gameRun()
+
+Output:
+                    ==================================================
+                    > Welcome to the Hangman Game! Enter your name:  <
+                    Tyler
+
+                >> Hello, Tyler! We are glad to have you here! <<
+                You will be playing against the computer today. The computer will
+                randomly choose a word and you will try to guess the correct word
+                You can always invite the friends for a fun time together
+                ==================================================================
+                Good Luck! Have fun playing
+
+
+The Word consists of 6 letters.
+______
+You have 6 attempts
+Guess a letter in the word or enter the full word: e
+Awesome! This letter is present in the word!
+____e_
+You have 6 attempts
+Guess a letter in the word or enter the full word: l
+Oops! that letter is not a part of a word.
+____e_
+You have 5 attempts
+Guess a letter in the word or enter the full word: p
+Awesome! This letter is present in the word!
+___pe_
+You have 5 attempts
+Guess a letter in the word or enter the full word: c
+Oops! that letter is not a part of a word.
+___pe_
+You have 4 attempts
+Guess a letter in the word or enter the full word: a
+Awesome! This letter is present in the word!
+__ape_
+You have 4 attempts
+Guess a letter in the word or enter the full word: g 
+Awesome! This letter is present in the word!
+g_ape_
+You have 4 attempts
+Guess a letter in the word or enter the full word: r
+Awesome! This letter is present in the word!
+grape_
+You have 4 attempts
+Guess a letter in the word or enter the full word: s
+Awesome! This letter is present in the word!
+grapes
+Awesome! You guessed the word correctly!
+Would you like to play again? Y or N: n
+Hope you had fun playing this game. See you next time!
+
+
+
+Next TopicImplementation of Linear Regression using Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,263 @@
+
+
+
+
+next →
+← prev
+
+StringIO Module in Python
+It is the StringIO module is an in-memory, file-like object. It can be used to input or output the majority of functions users can expect from an ordinary file object. Once the user creates the StringIO objects, it is initially created by providing a string to the constructor. If there is no string, the StringIO will be empty. In both instances, the initially displayed cursor on the file will start at zero.
+The module is not available in the most recent version of Python; thus, to be able to use this module, we need to transfer it into the Io module in Python in the form of io.StringIO.
+Example:
+
+# First, we will import the required module.
+from io import StringIO as SIO
+
+
+# The arbitrary string.
+string_1 = 'This is the initialized string.'
+
+# Here, we will use the StringIO method for setting as the file object. 
+# Now, we have an object-file that we can treat as a file.
+file_1 = SIO(string_1)
+
+# Now, we will be reading the file by using read()
+print (file_1.read())
+
+# Here, We can also write in this file.
+file_1.write(" Welcome to Javatpoint.com.")
+
+# by using the following command,  we can make the cursor at index 0.
+file_1.seek(0)
+
+# by using the following command, the user is able to print the file after writing #in the initialized string (string_1).
+print ('The file of the string after writing in it is:', file_1.read())
+
+Output:
+This is the initialized string.
+The file of the string after writing in it is: This is the initialized string. Welcome to Javatpoint.com.
+
+Important Methods of StringIO:
+Following are some methods of StringIO:
+1. StringIO.getvalue(): This function is used for returning the entire content of the file.
+Syntax:
+Syntax of the above method is:
+
+File_name.getvalue()
+
+Example:
+
+# First, we will import the StringIO module.
+from io import StringIO as SIO
+
+# The arbitrary string.
+string_1 = 'Hello and thank you for visiting to Javatpoint.com.'
+
+# Here, we will use the StringIO method for setting as the file object.
+file_1 = SIO(string_1)
+
+# Retrieving the complete contents of the above file.
+print(file_1.getvalue())
+
+Output:
+Hello and thank you for visiting to Javatpoint.com
+
+2. In this, we look at some of the functions of StringIO that return a Boolean value, i.e., either false or true:
+
+isatty(): This function of StringIO is used for returning False if the stream is not interactive and True if the stream is interactive.
+readable(): This function of StringIO is used for returning False if the file is not readable and True if the file is readable.
+writable(): This function of StringIO is used for returning False if the file does not support writing and True if the file supports writing.
+seekable(): This function of StringIO is used for returning False if the file does not support random access and True if the file supports random access.
+closed: This function of StringIO is used for returning False in case the file is open and it returns True if the file is closed.
+
+Syntax:
+Syntaxes of the above method is:
+
+1. File_name.isatty()
+2. File_name.readable()
+3. File_name.writable()
+4. File_name.seekable()
+5. File_name.closed
+
+Example:
+
+# First, we will import the StringIO module.
+from io import StringIO as SIO
+
+# The arbitrary string.
+string_1 = 'Hello and thank you for visiting to Javatpoint.com.'
+
+# Here, we will use the StringIO method for setting
+# as the file object.
+file_1 = SIO(string_1)
+
+# by using the following command,  the user will be able to return is the file #interactive or not.
+print ("Is the file stream above interactive?", file_1.isatty())
+
+# by using the following command, 
+# the user will be able to return is the file readable or not.
+print ("Is the file stream above readable?", file_1.readable())
+
+# by using the following command, 
+#  the user will be able to return does the file support writing or not.
+print ("Is the file stream above writable?", file_1.writable())
+
+# by using the following command, ,  the user will be able to return is the file #seekable or not.
+print ("Is the file stream above seekable?", file_1.seekable())
+
+# by using the following command,  the user will be able to return is the file #closed or not.
+print ("Is the file above closed?", file_1.closed)
+
+Output:
+Is the file stream above interactive? False
+Is the file stream above readable? True
+Is the file stream above writable True
+Is the file stream above seekable? True
+Is the file above closed? False
+
+3. StringIO.seek(): The seek() function is used to set the cursor's position within the file. If we execute any write or read operation on a document, the cursor is placed on the index that was last used so that we can move the cursor from the beginning position of the file seek() is employed.
+Syntax:
+Syntax of the above method is:
+
+File_name.seek(argument) 
+#This argument tells the function where to place the cursor.
+
+Example:
+
+# First, we will import the StringIO module.
+from io import StringIO as SIO
+
+# The arbitrary string.
+string_1 ='Hello and thank you for visiting to Javatpoint.com.'
+
+# Here, we will use the StringIO method for setting as the file object.
+file_1 = SIO(string_1)
+
+# here, the user will be able to Read the file:
+print (file_1.read())
+
+#If the user wishes to view the file again, it will display empty file since the #cursor has been set to the last index. It will also not print anything because #the function returns an empty string.
+print (file_1.read())
+
+#  So, to set the cursor position for reading or writing the file again
+# we can use seek() function. 
+#We can pass any index here form(0 to len(file))
+file_1.seek(0)
+
+# Now the user can read the file again
+print (file_1.read())S
+
+Output:
+Hello and thank you for visiting to Javatpoint.com.
+
+Hello and thank you for visiting to Javatpoint.com.
+
+4. StringIO.truncate(): This function is used for resizing the size of the file stream. This method saves the file and drops it after the given index.
+Syntax: 
+Syntaxes of the above method is:
+
+File_name.truncate(size = None)
+# The user can provide the size from where to truncate the file.
+
+Example:
+
+# First, we will import the StringIO module.
+from io import StringIO as SIO
+
+# The arbitrary string.
+string_1 ='Hello and welcome to Javatpoint.com.'
+
+# Here, we will use the StringIO method for setting as the file object.
+file_1 = SIO(string_1)
+# here, we can read the initial file:
+print(file_1.read())
+
+# for setting the cursor at 0.
+file_1.seek(0)
+
+
+# for dropping the file after the given index, i.e., 14.
+file_1.truncate(14)
+
+# here, it will print the File after truncate.
+print(file_1.read())
+
+Output:
+Hello and welcome to Javatpoint.com.
+Hello and welc
+
+5. StringIO.tell(): This method is used for telling the file's current stream and cursor position.
+Syntax:
+Syntaxes of the above method is:
+
+File_name.tell()
+
+Example:
+
+# First, we will import the StringIO module.
+from io import StringIO as SIO
+
+# The arbitrary string.
+string_1 ='Hello and welcome to Javatpoint.com.'
+
+# Here, we will use the StringIO method for setting as the file object.
+file_1 = SIO(string_1)
+
+# Here the cursor is set at index '0'.
+print(file_1.tell())
+
+# now, we are setting the Cursor to index '23'.
+file_1.seek(23)
+
+# here, we will be printing the index of cursor
+print(file_1.tell())
+
+Output:
+0
+23
+
+6. StringIO.close() This is used for closing the file. This function is called on a file, and we can't perform any operations on it. Any operation that is done will result in a ValueError.
+Syntax: =
+Syntaxes of the above method is:
+
+File_name.close(
+
+Example:
+
+# First, we will import the StringIO module.
+from io import StringIO as SIO
+
+# The arbitrary string.
+string_1 ='Hello and welcome to Javatpoint.com.'
+
+# Here, we will use the StringIO method for setting as the file object.
+file_1 = SIO(string_1)
+
+# here, we can read the initial file:
+print(file_1.read())
+
+# for closing the current file.
+file_1.close()
+
+# If the user would perform any operation on the above file now, it will raise an #ValueError.
+
+# here, we will be using the closed function to know whether the file is closed #or not.
+print("Is the file closed?", file_1.closed)
+
+Output:
+Hello and welcome to Javatpoint.com.
+Is the file closed? True
+
+
+
+Next Topic10 Python Image Manipulation Tools
+
+
+
+
+← prev
+next →
+
+
+
+

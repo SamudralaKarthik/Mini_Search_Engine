@@ -1,0 +1,167 @@
+
+
+
+
+next →
+← prev
+
+Some Cryptocurrency Libraries for Python
+As we all know, without a doubt that the popularity of Cryptocurrency has risen steeply in the last few years, and trying to understand the working of the blockchain and what Bitcoin can be annoying and puzzling. There are blockchains, contracts, ledgers, and even more buzzwords than the 'Big Data' revolution.
+Suppose any of us want to dip our toes into the world of Cryptocurrency and have some experience in development. In that case, this tutorial is the best choice as we are about to some of the publicly available libraries that we can use for Cryptocurrency. This is an easy method to jump-start the experience with Cryptocurrency and get involved in the community and learn a bit about the technical side of things.
+In the following tutorial, we will explore some excellent Python libraries that allow us to perform various activities in the cryptocurrency world. We will be able to get live price quotes for different coins, connect to various exchanges, place trades and even build a live algorithmic trading bot of our very own. Let us understand some of the best libraries for Cryptocurrency offered by the Python programming language.
+We will be discovering about the following Python libraries:
+
+CryptoCompare
+Cryptofeed
+FreqTrade
+CCXT
+
+We will discuss the above libraries in brief.
+Understanding the CryptoCompare library
+CryptoCompare is among the leading websites for live cryptocurrency price quotations and information. This website has been around since 2015 and offers users the latest crypto news, detailed coin information, and market statistics. CryptoCompare also reviews various cryptocurrency exchanges, wallets, and services to arm buyers with the possible latest information.
+CryptoCompare also offers a ton of data services and a fully functional API. This is where the cryptocompare library comes in. This Python library offers a convenient wrapper for the CryptoCompare API.
+We can install the cryptocurrency library using the pip installer as shown below:
+Syntax:
+
+$ pip3 install cryptocompare
+
+Once the installation is done, let us consider the following usage of this library to get the current price of Bitcoin against USD:
+Example:
+
+# importing the required library
+import cryptocompare
+# using the get_price() function
+the_price = cryptocompare.get_price('BTC', 'USD')
+# printing the price
+print(the_price)
+
+Output:
+{'BTC': {'USD': 48146.45}} 
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then used the get_price() function to return the current price of Bitcoin against USD. At last, we have printed the price for the users.
+The above example only scratches the surface of what the CryptoCompare API is capable of. We can also submit orders to an exchange, look at historical prices, and present market information.
+One can also visit the official website of CryptoCompare for even more live statistics and data.
+The link for the same is as follows:
+https://www.cryptocompare.com/
+Understanding the Cryptofeed library
+The Cryptofeed library is more complicated than a simple API wrapper like cryptocompare. Cryptofeed allows programmers to stream market data from various exchanges to the application directly. We can set up custom functions to handle each update, store the data in one of the supported backends or utilize the data to construct a live trading application.
+This library has a high level of complexity and can be hard to understand initially; however, it is extremely powerful. In order to get started, we can install the cryptofeed library using the pip installer as shown below:
+Syntax:
+
+$ pip3 install cryptofeed
+
+There are a variety of examples to implement Cryptofeed offered in the repository; however, we will be looking at a simplified version of obtaining the National Best Bid and Offer (NBBO) example:
+Example:
+
+from cryptofeed import FeedHandler
+from cryptofeed.exchanges import Coinbase
+def nbboUpdate(symbol, bid, bid_size, ask, ask_size, bid_feed, ask_feed):
+    print(
+        f'Pair: {symbol} ' +
+        f'Bid Price: {bid : .2f} ' +
+        f'Bid Size: {bid_size : .6f} ' +
+        f'Bid Feed: {bid_feed} ' +
+        f'Ask Price: {ask : .2f} ' +
+        f'Ask Size: {ask_size : .6f} ' +
+        f'Ask Feed: {ask_feed}'
+    )
+def main():
+    the_feed = FeedHandler()
+    the_feed.add_nbbo([Coinbase], ['BTC-USD'], nbboUpdate)
+    the_feed.run()
+if __name__ == "__main__":
+    main()
+
+Explanation:
+In the above snippet of code, we have imported the required modules from the library. We have then defined a function as nbboUpdate() where we have included some parameters like symbol, bid, bid_size, ask, ask_size, bid_feed, and ask_feed and print their values altogether. We have then defined the main() function where we have assigned the variable to the FeedHandler method. We have then used the add_nbbo() function specifying the exchange and the symbol. We have then used the run() function to execute the operation. At last, we have called the main() function.
+If we execute the above program, the handler will stream the current NBBO information offered by the Coinbase exchange. The output will be printed to the console to be able to view what is going on. There is a lot of volumes, so we must be prepared for lots of information. This snippet of code will run in a loop, updating with the most recent data until we exit.
+The Cryptofeed library is a fantastic resource to build high-quality applications for cryptocurrency trading.
+One can check out the detailed documentation for more useful examples and updated exchange info.
+https://github.com/bmoscon/cryptofeed
+Understanding the Freqtrade library
+This is not specifically a single Python library; however, it is an excellent example of a Python trading application. This application is entirely written in the Python programming language. It enables us to set up a custom trading bot, complete with a large range of trading strategies and responding to various commands. Freqtrade provides supports to multiple exchanges and offers simple integration with Telegram.
+Another amazing fact about Freqtrade is that the trading strategies are also written in Python. We do not have to mess around with another unfamiliar language or download big configuration files in order to set up a simple strategy.
+In order to get begin with Freqtrade, head over to the installation section of the official documentation using the following link:
+https://www.freqtrade.io/en/latest/installation/
+We can also get up an even running quacking with the help of Docker.
+Understanding the CCXT library
+CCXT is considered a truly monolithic trading library. This library has a plethora of features and a very supportive community. This library is provided in JavaScript, PHP, and Python as simple, easy-to-utilize modules. CCXT is quite like Cryptofeed; however, it must be easier to get started with. We do not have to be content with a run loop and a constant stream of data. We can simply make calls to CCXT to get orders, exchange info, and many more.
+We can install the CCXT module using the pip installer as shown below:
+Syntax:
+
+$ pip3 install ccxt
+
+Once the installation is complete, let us consider the following example demonstrating the operation of obtaining the latest trade data from the Kraken exchange.
+Example:
+
+# importing the required module
+import ccxt
+# using the kraken() function
+the_kraken = ccxt.kraken()
+# using the for-loop to iterate through trades in kraken
+for trade in the_kraken.fetch_trades('BTC/USD'):
+    print(
+        f"date: {trade['datetime']} | " +
+        f"symbol: {trade['symbol']} | " +
+        f"price: {trade['price']} | " +
+        f"amount: {trade['amount']} | " +
+        f"cost: {trade['cost']} | " +
+        f"side: {trade['side']} | " +
+        f"type: {trade['type']}"
+    )
+
+Output:
+date: 2021-12-16T10:00:43.897Z | symbol: BTC/USD | price: 48936.7 | amount: 0.00096371 | cost: 47.160787157 | side: buy | type: limit
+date: 2021-12-16T10:00:47.152Z | symbol: BTC/USD | price: 48936.5 | amount: 0.03011824 | cost: 1473.88125176 | side: buy | type: limit
+date: 2021-12-16T10:01:06.050Z | symbol: BTC/USD | price: 48963.6 | amount: 0.00012934 | cost: 6.332952024 | side: buy | type: market
+date: 2021-12-16T10:01:11.162Z | symbol: BTC/USD | price: 48961.1 | amount: 0.02751697 | cost: 1347.261119867 | side: buy | type: market
+date: 2021-12-16T10:01:24.230Z | symbol: BTC/USD | price: 48971.3 | amount: 0.02043248 | cost: 1000.605107824 | side: sell | type: limit
+date: 2021-12-16T10:01:25.279Z | symbol: BTC/USD | price: 48971.3 | amount: 0.02043248 | cost: 1000.605107824 | side: sell | type: limit
+date: 2021-12-16T10:01:26.483Z | symbol: BTC/USD | price: 48971.3 | amount: 0.00634731 | cost: 310.836022203 | side: sell | type: limit
+date: 2021-12-16T10:01:27.653Z | symbol: BTC/USD | price: 48971.4 | amount: 0.00160946 | cost: 78.817509444 | side: buy | type: limit
+date: 2021-12-16T10:01:28.176Z | symbol: BTC/USD | price: 48971.4 | amount: 0.00013384 | cost: 6.554332176 | side: buy | type: market
+date: 2021-12-16T10:01:28.177Z | symbol: BTC/USD | price: 48977.2 | amount: 0.00204177 | cost: 100.000177644 | side: buy | type: market
+date: 2021-12-16T10:01:28.178Z | symbol: BTC/USD | price: 48978.0 | amount: 0.00082439 | cost: 40.37697342 | side: buy | type: market
+date: 2021-12-16T10:01:28.434Z | symbol: BTC/USD | price: 48978.4 | amount: 0.0204306 | cost: 1000.65809904 | side: sell | type: limit
+date: 2021-12-16T10:01:29.471Z | symbol: BTC/USD | price: 48978.4 | amount: 0.020432 | cost: 1000.7266688 | side: sell | type: limit
+date: 2021-12-16T10:01:30.524Z | symbol: BTC/USD | price: 48978.4 | amount: 0.02043201 | cost: 1000.727158584 | side: sell | type: limit
+date: 2021-12-16T10:01:31.592Z | symbol: BTC/USD | price: 48978.5 | amount: 0.020432 | cost: 1000.728712 | side: sell | type: limit
+date: 2021-12-16T10:01:31.788Z | symbol: BTC/USD | price: 48978.6 | amount: 0.003 | cost: 146.9358 | side: buy | type: market
+date: 2021-12-16T10:01:32.644Z | symbol: BTC/USD | price: 48978.5 | amount: 0.020432 | cost: 1000.728712 | side: sell | type: limit
+date: 2021-12-16T10:01:33.157Z | symbol: BTC/USD | price: 48978.6 | amount: 0.013 | cost: 636.7218 | side: buy | type: market
+date: 2021-12-16T10:01:33.752Z | symbol: BTC/USD | price: 48978.5 | amount: 0.00640702 | cost: 313.80622907 | side: sell | type: limit
+date: 2021-12-16T10:01:36.476Z | symbol: BTC/USD | price: 48984.2 | amount: 0.02042724 | cost: 1000.612009608 | side: sell | type: limit
+date: 2021-12-16T10:01:36.564Z | symbol: BTC/USD | price: 48985.8 | amount: 0.004 | cost: 195.9432 | side: buy | type: market
+.
+.
+.
+.
+date: 2021-12-16T11:03:23.696Z | symbol: BTC/USD | price: 49169.3 | amount: 0.0002 | cost: 9.83386 | side: buy | type: market
+date: 2021-12-16T11:03:23.697Z | symbol: BTC/USD | price: 49169.4 | amount: 0.0002 | cost: 9.83388 | side: buy | type: market
+date: 2021-12-16T11:03:23.698Z | symbol: BTC/USD | price: 49169.5 | amount: 0.04488859 | cost: 2207.149526005 | side: buy | type: market
+date: 2021-12-16T11:03:24.363Z | symbol: BTC/USD | price: 49169.4 | amount: 0.00057311 | cost: 28.179474834 | side: sell | type: limit
+date: 2021-12-16T11:03:24.364Z | symbol: BTC/USD | price: 49169.2 | amount: 0.0010087 | cost: 49.59697204 | side: sell | type: limit
+date: 2021-12-16T11:03:33.278Z | symbol: BTC/USD | price: 49169.3 | amount: 0.0002 | cost: 9.83386 | side: buy | type: market
+date: 2021-12-16T11:03:33.280Z | symbol: BTC/USD | price: 49169.4 | amount: 0.0001 | cost: 4.91694 | side: buy | type: market
+date: 2021-12-16T11:03:33.281Z | symbol: BTC/USD | price: 49169.4 | amount: 0.0001 | cost: 4.91694 | side: buy | type: market
+date: 2021-12-16T11:03:33.282Z | symbol: BTC/USD | price: 49169.4 | amount: 0.002006 | cost: 98.6338164 | side: buy | type: market 
+
+Explanation:
+In the above snippet of code, we have imported the required library and assigned a variable to the kraken() function. We have then used the fetch_trade() to extract the details about various prices, amounts, timestamps, etc., and print them all using the for-loop and print function.
+Once we execute the above code, we should view a long list of trade executions with details about the price, amount, timestamp, and many more. The data is fetched as one list consisting of all the trade information versus a stream of data. The CCXT library also offers asynchronous concurrency mode support. Anyone interested can read more about the implementation from the official documentation using the following link:
+https://github.com/ccxt/ccxt/wiki/Manual#synchronous-vs-asynchronous-calls
+CCXT offers a flexible utility with compatibility across different languages, exchanges, and platforms. This well-thought-out, well-supported platform allows programmers to construct pragmatic trading applications.
+
+
+Next TopicBuilding a Blockchain using Python
+
+
+
+
+← prev
+next →
+
+
+
+

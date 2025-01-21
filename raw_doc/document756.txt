@@ -1,0 +1,395 @@
+
+
+
+
+next →
+← prev
+
+Python Packing and Unpacking Arguments in Python
+In this tutorial, we will learn about the packing and unpacking of the arguments. Python provides a unique feature to pack or unpack the arguments. Suppose we have a function that takes five arguments; we create a list of five elements and pass it to the function, which will throw an error because elements are packed within the list. We need to pass five separate arguments to the function.
+In the past, Python developers referred to this feature as tuple unpacking, but it became quite useful and popular among them. Hence, this feature generalized to all kinds of iterables; nowadays, it is referred to as iterable unpacking. 
+We will discuss how we can use iterable unpacking to make our code more readable. 
+In Addition, we will also explore some practical examples for loops, function definition, and function calls.
+Packing and Unpacking in Python
+Python provides the facility to declare the variables on the left side of assignment operation. These variables can be in the same number of tuple element. Each variable in the tuple can have one value (or more if use the * operator) from iterable on the right side of the assignment. Python developers called this process a tuple unpacking. Below is the definition of the packing and unpacking arguments.
+Packing - As its name suggests, it wraps all the arguments into a single variable, and this function call gets into a tuple called args. We can use any other name in place of args.
+
+Example: def func( *args ) 
+
+Unpacking - Unpacking is the term which refers to an operation list or tuple assigned to a single variable.
+
+Example - (a, b, c) = List/tuple
+
+Unpacking makes the code more readable that why it got popularity among Python developers. Let's have an example to understand how unpacking works in Python.
+Unpacking Tuples
+Python allows us to assign tuples of the variable on the left side of the assignment operator and tuple values on the right side. If the variables are the same in number as the tuple value, then the value is automatically assigned to the left according to their position on the left. Let's understand the following example.
+Example -
+
+(a, b, c, d, e, f) = (1, 2, 3, 4, 5, 6)
+print(a)
+print(b)
+print(c)
+print(d)
+print(e)
+print(f)
+
+Output:
+1
+2
+3
+4
+5
+6
+
+As we can see, we have put the tuple on both sides of an assignment operator. The values of the tuple are assigned to the variables according to their relative position. Such as a will be 1, b will be 2 and so on.
+We don't need to create the tuple on both sides; we can simply use the following ways.
+Example -
+
+(a, b, c, d, e, f) = (1, 2, 3, 4, 5, 6)
+a, b, c, d, e, f = (1, 2, 3, 4, 5, 6)
+(a, b, c, d, e, f) = 1, 2, 3, 4, 5, 6
+
+Note - The number of variables on the left side must equal the number of elements of the tuple on the right side of the assignment operator. Otherwise, it will throw a ValueError.
+In the example below, we use the four variables on the left and five values on the right. It will through a ValueError as there are too many values to unpack.
+Example -
+
+(a, b, c, d) = (1, 2, 3, 4, 5)
+
+Output:
+ValueError: too many values to unpack (expected 4)
+
+Unpacking Iterables
+Tuple unpacking operation extended to other iterables of Python. The only requirement is that item yields the same one item per variable in the receiving in the tuple (or list).
+Let's understand the following example -
+Example -
+
+a, b, c = '123'
+print(a)
+print(b)
+print(c)
+print("Unpacking lists")
+a, b, c = [1, 2, 3]
+print(a)
+print(b)
+print(c)
+print("Unpacking generators")
+gen = (i ** 2 for i in range(3))
+a, b, c = gen
+print(a)
+print(b)
+print(c)
+print("Unpacking dictionaries (keys, values, and items")
+my_dict = {'one': 1, 'two':2, 'three': 3}
+a, b, c = my_dict  # Unpack keys
+print(a)
+print(b)
+print(c)
+print("Unpack values")
+a, b, c = my_dict.values()  
+print(a)
+print(b)
+print(c)
+print("Unpacking key-value pairs")
+a, b, c = my_dict.items()  
+print(a)
+print(b)
+print(c)
+
+Output:
+1
+2
+3
+Unpacking lists
+1
+2
+3
+Unpacking generators
+0
+1
+4
+Unpacking dictionaries (keys, values, and items
+one
+two
+three
+Unpack values
+1
+2
+3
+Unpacking key-value pairs
+('one', 1)
+('two', 2)
+('three', 3)
+
+On the other hand, we can use the following way to unpack the argument where the list/tuple defines on the left of the assignment operator and values on the right side.
+Example -
+
+[a, b, c] = 1, 2, 3
+print(a)
+print(b)
+print(c)
+
+Output:
+1
+2
+3
+
+However, it is not recommended in the actual code because it may be a little bit confusing for beginner Python developers.
+We can also use the set unpacking operations since sets are unordered collections. So the order of assignments can throw subtle bugs. Let's understand the following example.
+Example -
+
+a, b, c = {'x', 'y', 'z'}
+print(a)
+print(b)
+print(c)
+
+Output:
+y
+z
+x
+
+The set returns the unordered elements, so it will also happen to the unpacking argument. So it is recommended to avoid the set unpacking operation.
+Packing with * Operators
+The * operator is the tuple (or iterables) unpacking operator. It allows packing multiple values into a single variable. We pack a tuple of values into a single variable using the * operators in the following example.
+Example -
+
+*a, = ('x', 'y', 'z')
+print(a)
+
+Output:
+['x', 'y', 'z']
+
+The left side of the assignment must be a tuple (or a list). That's we use a trailing comma.
+Let's see another way of packing arguments.
+Example -
+
+a, b, *c= 1, 2, 'x', 'y', 'z'
+print(a)
+print(b)
+print(c)
+
+Output:
+1
+2
+['x', 'y', 'z']
+
+In the above code, we pack the trailing values in b.
+
+*a, b, c = 1, 2, 3
+print(a)
+print(b)
+print(c)
+
+Output:
+[1]
+2
+3
+
+Packing no values in a (a defaults to []) because b, c, and d are mandatory.
+Example -
+
+*a, b, c, d = 1, 2, 3
+print(a)
+print(b)
+print(c)
+print(d)
+
+Output:
+[]
+1
+2
+3
+
+If we don't pass the value for the required variable, it will throw an error.
+Example -
+
+*a, b, c, d, e = 1, 2, 3
+
+Output:
+ValueError: not enough values to unpack (expected at least 4, got 3)
+
+Packing the value in the single variable with the * operator can be handy when we want to access the elements from the generator in a single variable without using the list() function. Let's understand the following example.
+Example -
+
+gen = (2 ** x for x in range(15))
+print(gen)
+*g, = gen
+print(g)
+range = range(10)
+*r, = range
+print(r)
+
+Output:
+ at 0x7fcc4aec0ac0>
+[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Explanation -
+In the above code, we packed the element in gen into g and ran into r, respectively. Using this, we can omit the list() function to create a list of values from the range object. 
+Working of Packing and Unpacking Simultaneously
+We have discussed packing and unpacking individually and now we will implement both concepts in practice. Packing and unpacking allows the programmer to write more readable, clean, and Pythonic code. Let's see some example of packing and unpacking.
+Assigning in Parallel
+Assignment in parallel is the most common use-cases of unpacking in Python. As discussed earlier, we can assign multiple variables according to an iterable (tuple or list).
+Let's understand the following example.
+Example - 
+
+emp = ["Mathew Wade", "400000$", "Software Engineer"]
+name = emp[0]
+age = emp[1]
+profile = emp[2]
+print("The name is: ", name)
+print("The age is: ", age)
+print("The profile is: ", profile)
+
+Output:
+The name is:  Mathew Wade
+The age is:  400000$
+The profile is:  Software Engineer
+
+The above code is quite traditional and quite clumsy, hard to type. We can make it easier and more readable as below.
+Example -
+
+name, age, profile = ["Mathew Wade", "400000$", "Software Engineer"]
+print("The name is: ", name)
+print("The age is: ", age)
+print("The profile is: ", profile)
+
+Output:
+The name is:  Mathew Wade
+The age is:  400000$
+The profile is:  Software Engineer
+
+As we can see, using the unpacking, we reduced the number of lines and made it simple and elegant.
+Swapping values Between Variables
+We can swap the values in Python without using a temporary or auxiliary variable. Let's understand the following example of swapping.
+Example - Without Swapping
+
+a = 10
+b = 20
+temp = a
+b = temp
+print(a)
+print(b)
+print(temp)
+Output:
+
+Output:
+10
+10
+10
+
+Example -
+
+a = 100
+b = 200
+a, b = b, a
+print(a)
+print(b)
+
+Output:
+200
+100
+
+In statement a, b = b, a, we're reassigning a to b and b to a in one line of code. It is a lot more readable and straightforward. Also, notice that with this technique, there is no need for a new temporary variable.
+Dropping Unnecessary Values With *
+We can use the * to drop the unneeded values. Let's understand the following example.
+Example -
+
+a, b, *_ = 6, 8, 0, 0, 0, 0
+print(a)
+print(b)
+
+Output:
+6
+8
+
+Returning Tuple in the Functions
+We can return the multiple values separate by the commas from Python function. Since we can define the tuple object without using parentheses, this kind of operation can be interpreted as returning a tuple of values. If we code a function that returns multiple values, then we can perform iterable packing and unpacking operations with the returned values.
+Let's understand the following example.
+Example -
+
+def powers(number):
+    return number, number ** 2, number ** 3
+# Packing returned values in a tuple
+result = powers(8)
+print(result)
+# Unpacking returned values to multiple variables
+number, square, cube = powers(8)
+print(number)
+print(square)
+print(cube)
+*_, cube = powers(2)
+print(cube)
+
+Output:
+(8, 64, 512)
+8
+64
+512
+8
+
+Merging Iterables With the * Operators
+Another interesting use case for the unpacking operator * is the ability to merge several iterables into a final sequence. This functionality works for lists, tuples, and sets. Take a look at the following examples:
+Example -
+
+tup = (1, 2, 3)
+print((0, *tup, 4))
+list1 = [1, 2, 3]
+print([0, *list1, 4])
+my_set = {1, 2, 3}
+print({0, *my_set, 4})
+print([*my_set, *list1, *tup, *range(1, 4)])
+my_str = "123"
+print([*my_set, *list1, *tup, *range(1, 4), *my_str])
+
+Output:
+(0, 1, 2, 3, 4)
+[0, 1, 2, 3, 4]
+{0, 1, 2, 3, 4}
+[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, '1', '2', '3']
+
+We can use the iterable unpacking operator * when defining sequences to unpack the elements of a subsequence (or iterable) into the final sequence. It will allow us to create sequences on the fly from existing sequences without calling methods like append() and insert(), and so on.
+Unpacking Dictionaries With the * Operator
+Python provides the ** operator to unpack the dictionary. This operator is also known as the dictionary unpacking operator. The use of this operator was extended by the PEP 448. Now, we can use it in function calls and list comprehension.
+Example -
+
+numbers = {"one": 1, "two": 2, "three": 3}
+letters = {"a": "Apple", "b": "Bat", "c": "Cat"}
+combine = {**numbers, **letters}
+print(combine)
+
+Output:
+{'one': 1, 'two': 2, 'three': 3, 'a': 'Apple', 'b': 'Bat', 'c': 'Cat'}
+
+Explanation -
+In the above code, we created two dictionaries; we unpacked both the dictionary and created a combined new dictionary that includes elements of both dictionaries.
+Unpacking the For loops
+We can also use iterable unpacking in the context of for loops. When we run a for loop, the loop assigns one item of its iterable to the target variable in every iteration. If the item to be assigned is an iterable, then we can use a tuple of target variables. 
+Let's understand the following example -
+Example -
+
+students = [("Mathew", 45, 90), ("Warner", 67, 88), ("Kapil", 75, 100)]
+for mark in students:
+    print(f"Marks of {mark[0]} is: {mark[1] + mark[2]}")
+
+Output:
+Marks of Mathew is: 135
+Marks of Warner is: 155
+Marks of Kapil is: 175
+
+Conclusion
+Iterable unpacking is an essential and pretty useful feature in Python. This feature allows us to unpack an iterable into several variables. In this tutorial, we have discussed some crucial concepts of iterable unpacking and packing. We have seen some valuable examples and how to write more readable, maintainable, and Pythonic code.
+This knowledge can solve common problems like parallel assignment and swapping values between variables. We can also use this feature in other Python concepts like loops.
+
+
+Next TopicPython pdb Tutorial - Python pdb
+
+
+
+
+← prev
+next →
+
+
+
+

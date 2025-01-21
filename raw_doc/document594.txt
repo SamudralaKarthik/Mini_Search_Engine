@@ -1,0 +1,131 @@
+
+
+
+
+next →
+← prev
+
+How to Use Cbind in Python?
+cbind function is one of the easiest ways to accomplish this. The cbind method (standing for column bind) is a fusion function that combines two data frames having an equal number of different rows into a unified data frame. It's a little more difficult than it appears to connect two Pandas DataFrames having the same count of rows. We employ the cbind function in R. We'll cover how to bind columns of two data frames in Python Pandas using the function known as concat() in this tutorial.
+Data Frames with Equal Number of Indices
+First, we will create two data frames using the DataFrame function of Pandas. 
+Creating Dataframe 1:
+Code
+
+import pandas as pd
+
+#Creating the Data Frame
+ 
+data = {
+'Name':['Itika','Arshia','Aditi','Peter','Parker','Harry','Naill',
+'Zayn','Louis'],
+'Eng_Marks':[9, 74, 57, 28, 93, 46, 24, 86, 42],
+'Math_Marks':[65, 24, 6, 34, 86, 74, 34, 65, 45]}
+ 
+dataframe1 = pd.DataFrame(data)
+print(dataframe1)
+
+Output:
+
+Creating Dataframe 2:
+Code
+
+import pandas as pd
+
+#Creating the Data Frame
+ 
+data = {
+'Sci_Marks':[65, 23, 76, 84, 23, 75, 35, 65, 86],
+'Hindi_Marks':[63, 98, 75, 76, 23, 54, 65, 24, 53]}
+ 
+dataframe2 = pd.DataFrame(data)
+print(dataframe2)
+
+Output:
+
+Let's join or column bind the 2 data frames, dataframe1 and dataframe2. The combination of two data frames is done by using the concat() function, which accepts two data frames as a parameter and conducts the process column by column.
+Code
+
+import pandas as pd
+print(pd.concat([dataframe1, dataframe2], axis=1))
+
+Output:
+
+argument axis=1 binds specifies that binding of a data frame is to be done column wise, so the final column bound data frame will be as shown.
+Data Frames with Equal Number of Indices
+First, we will create two data frames using the DataFrame function of Pandas.
+Creating dataframe 1:
+Code
+
+import pandas as pd
+
+#Creating the Data Frame
+ 
+data = {
+'Fruit':['Mango','Pomegranate','Orange','Litchi','Kiwi','Melon','Apple',
+'Banana','Guava'],
+'Kgs':[54, 75, 34, 87, 65, 87, 65, 67, 58],
+'Boxes':[12, 43, 12, 32, 34, 23, 12, 32, 21]}
+ 
+dataframe1 = pd.DataFrame(data)
+print(dataframe1)
+
+Output:
+
+Creating Dataframe 2:
+Code
+
+import pandas as pd
+
+#Creating the Data Frame
+ 
+data = {
+'dilivery_days':[12, 21, 10, 9, 7, 5, 10, 9, 7]}
+
+dataframe2 = pd.DataFrame(data)
+dataframe2.index = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+print(dataframe2)
+
+Output:
+
+Notice that the two DataFrames do not have the same index values.
+When we try to cbind these dataframes together with the concat() function, we will get the final dataframe as shown:
+Code
+
+#performing column bind on the two DataFrames
+dataframe3 = pd.concat([dataframe1, dataframe2], axis=1)
+
+#view resulting DataFrame
+print(dataframe3)
+
+Output:
+
+This is not the result we wanted.
+To correct this, we must manually reset every DataFrame's index prior to concatenating them next to each other:
+Code
+
+#reseting indices of each of the DataFrame
+dataframe1.reset_index(drop = True, inplace = True)
+dataframe2.reset_index(drop = True, inplace = True)
+
+#performing column-bind on two DataFrames
+dataframe3 = pd.concat([dataframe1, dataframe2], axis=1)
+
+print (dataframe3)
+
+Output:
+
+We have learned how to perform column bind in Python using the concat() function. Though the actual column bind function, i.e., cbind() of R, is much more convenient than Pandas's concat() function, with some extra lines of code, they two can perform the same operations.
+
+
+Next TopicPython Asserts
+
+
+
+
+← prev
+next →
+
+
+
+

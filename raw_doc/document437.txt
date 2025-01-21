@@ -1,0 +1,99 @@
+
+
+
+
+next →
+← prev
+
+Morphological Operations in Image Processing in Python
+Morphological operations can be used for extracting image components that are helpful for the description and representation of the shape of a region. Morphological operations are the fundamental tasks that are dependent on the image shape. It typically takes place on binary images. It requires two sources of data, the first of which is an input image, and the second is known as the structuring component.
+Morphological operators are able to take an input image as well as the structuring component as input. The two elements are then combined with set operators. The objects of the image input are treated based on the characteristics of the shape of the image. These can be encoded by the structuring part.
+The Opening is similar to erosion, as it removes bright foreground pixels from the edges of the foreground pixels. The result of this operation is to secure the foreground region, which is similar to the structuring component or even completely contains the structuring component while taking away all other regions in the foreground of pixels. The opening operation is utilized for the removal of internal noise within an image.
+The Opening is an erosion operation that is followed by dilation.
+
+Required modules and libraries:
+To perform the morphological operation in the image processing, we will need the following module:
+1. cv2
+Install: !pip3 install cv2
+2. NumPy
+Install: !pip3 install numpy
+Syntax:
+Syntax of cv2morphology is:
+
+cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+
+Parameters:
+
+image: It takes input Image array.
+MORPH_OPEN: It is used for applying the Morphological Opening operation.
+kernel: It is used for structuring element.
+
+Here below is the Python code for explaining Opening Morphological Operation -
+Code:
+
+# First, we will import the required libraries:
+import cv2 as CV
+import numpy as nmp 
+ 
+# here, it will return video from the first webcam on our computer. 
+screenRead1 = CV.VideoCapture(0)
+# now, it will loop runs if capturing has been initialized.
+while(1):
+    # now, it is reading frames from a camera
+    _, image = screenRead1.read()
+     
+    # Converting to HSV color space because OCV only reads colors as BGR 
+    # and the frame is converted to hsv
+    hsv = CV.cvtColor(image, CV.COLOR_BGR2HSV)
+     
+    # here, we will define the range of masking
+    blue_1 = nmp.array([111, 52, 52])
+    blue_2 = n,p.array([131, 257, 257])
+     
+    # Now, we will initialize the mask forconvoluting over input image
+    mask = CV.inRange(hsv, blue_1, blue_2)
+ 
+    # then, we will pass the bitwise_and over each pixel convoluted
+    res = CV.bitwise_and(image, image, mask = mask)
+     
+    # Here, we will define the kernel that is Structuring element
+    kernel = nmp.ones((5, 5), nmp.uint8)
+     
+    # Now, we will define the opening function over the image and structuring   # element
+    opening = CV.morphologyEx(mask, CV.MORPH_OPEN, kernel)
+    
+    # The mask and opening operation is shown in the window
+    CV.imshow('Mask', mask)
+    CV.imshow('Opening', opening)
+     
+    # Now, it will wait for 'a' key to stop the program
+    if CV.waitKey(1) & 0xFF == ord('a'):
+        break
+ 
+# De-allocate any associated memory usage 
+CV.destroyAllWindows()
+ 
+# At last, we will close the window and Release webcam
+screenRead.release()
+
+Output
+Input image
+
+Mask:
+
+Output Frame
+
+The system recognizes the designated blue book as the input and removes and eliminates the noise inside the area of interest with the aid of the Opening function.
+
+
+Next TopicRole of Python in Artificial Intelligence
+
+
+
+
+← prev
+next →
+
+
+
+

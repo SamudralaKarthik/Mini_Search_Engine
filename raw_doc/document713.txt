@@ -1,0 +1,275 @@
+
+
+
+
+next →
+← prev
+
+A Colour game using Tkinter in Python
+For creating GUIs, Python provides a variety of choices (Graphical User Interface). Tkinter is the most widely used way of all the GUI techniques. It is the Tk GUI toolkit's standard Python interface, which comes preinstalled with Python. The quickest and most straightforward method for developing GUI apps is using Python with Tkinter. It's simple to build a GUI with Tkinter.
+We'll make use of the Tkinter module for this. Widgets like Label,Frame, Entry, Canvas, Text, Button, Checkbutton, Scale, Radiobutton, Scrollbar, Listbox, Spinbox LabelFrame, OptionMenu, and PanedWindow may be shown, positioned, and controlled using Tkinter's classes.
+A complete GUI (Graphical User Interface) system can be found in this Colour Game made using Tkinter In Python. The player of this Colour Game must enter the colour of the word that appears on the screen in order to gain one point. The entire duration of this game is 25 seconds. The colours utilised in this game are Blue, Red, Yellow, Green, Black, Pink, Yellow, Pink, white, Orange, and Brown. Colour names will appear on the interface in a variety of shades. A player must choose out the colour and enter the right colour's name to win the game. This system is quite helpful, and the project's idea and logic are easy to understand.
+The Colour Game :
+Finding a set of colours that the computer randomly selected is the aim of the colour game. The game of colours which we can play in Python where we have to guess the colour of a random phrase. In this instance, you must type the word colour, not the word text. The user won't have any trouble operating this system because of its simple design.
+Before continuing, we must set the colour that appears on the screen as words. The user sees the word, guesses the colour that is displayed on the screen, types the right colour into the entry box, and receives credit for the accurate guess. They receive one point for each accurate guess, and these points are added to the scr displayed on the screen. Before the time runs out, the user can play this game. If the time runs out, the user can put anything in the entry box, but it won't be accepted.
+Walking through the code :
+We first imported the two modules to produce arbitrary widgets and colours.
+
+# Importing the modules into our code
+import tkinter
+import random
+
+Next, a list of clrs that we've developed will be entered into the input field.
+
+# List of the various clrs as input
+clrs = ['Blue', 'Pink', 'Orange', 'Green', 'Yellow', 'Black', 'Purple', 'Brown', 'White']
+
+The scrn was then set to 0, and the remaining time was set to 25 seconds.
+
+# Initialising the scrn to 0
+scrn = 0
+
+# Initially the time left will be 25 sec
+time_left = 25
+
+Next, the cntdwn() function will begin and the nxtClr() function will also be called if the remaining time equals 25 seconds. Currently, we are utilising the startGame() function.
+
+# This function will begin the game
+def strtGame(event):
+
+if time_left == 25:
+
+# If the aforemnetioned statement is satisfied, we will begin the cntdwn
+
+cntdwn()
+
+# Here, we will call method to choose the next colour
+nxtClr()
+
+Following this, we create the nxtClr() with its text using the nxtClr() method. This function lowercases the supplied text before checking to see whether the colour matches. And, the scrn will go up by 5 if the colour name matches the text's colour; otherwise, it won't.
+
+# This method will choose the next color
+def nxtClr():
+
+global scrn
+global time_left
+
+# If-statement
+if time_left > 0:
+
+# If the aforementioned statement is satisfied, we will make the text entry box activated
+i.focus_set()
+
+# If the input clr name and clr of the text are matching,
+
+if i.get().lower() == clrs[1].lower():
+
+# we will increase the scrn by 5
+scrn += 5
+
+The input box is cleared using the delete() function, and the list of colours is shuffled using the shuffle() function.
+
+# Using, the delete method, we will be deleting the text of the box
+i.delete(0, tkinter.END)
+
+# The random generates a random colour using shuffle method
+random.shuffle(clrs)
+
+# Here, we will change the text colour to a random colour value
+label.config(fg = str(clrs[1]), text = str(clrs[0]))
+
+# Here, we will update the scrn
+scrnLabel.config(text = "Scrn : " + str(scrn))
+
+The after function is used in the cntdwn function to run the cntdwn() function once per second, subtracting one from the remaining time.
+
+# This is the cntdwn method
+def cntdwn():
+global time_left
+if time_left > 0:
+
+# If the aforementioned statement is satisfied, we will decrement the time left by 1 sec
+time_left -= 1
+
+# Here, we will update the time left label
+time_lbl.config(text = "Remaining time : " + str(time_left))
+
+# after method calls function once after the given time in ms.
+time_lbl.after(1000, cntdwn)
+
+Finally, we are designing the GUI, where we specify the geometry, scrn label, time lbl, instruction, and input box along with the title and colour text fonts. In the geometry() function, don't leave any blank space between the height and width. Only use lowercase lettering when writing the module names. And lastly, will call the mainloop() method to execute the program and start the GUI.
+
+# creating GUI window
+root = tkinter.Tk()
+
+# setting the title
+root.title("COLOR GAME")
+
+# setting the size
+root.geometry("900x600")
+
+# adding of an instruction label
+
+instruction = tkinter.Label(root, text = "\n Type the colour of the words, and not the word text! \n", font = ('TimesNewRoman', 20))
+
+instruction.pack()
+
+scrnLabel = tkinter.Label(root, text = "Press Enter to Play \n", font = ('TimesNewRoman', 20))
+
+scrnLabel.pack()
+
+# time left label
+
+time_lbl = tkinter.Label(root, text = "Remaining time: " + str(time_left), font = ('TimesNewRoman', 20))
+
+time_lbl.pack()
+
+# Clr text font and size specifications
+label = tkinter.Label(root, font = ('TimesNewRoman', 80))
+
+label.pack()
+
+# Input text box
+i = tkinter.Entry(root)
+
+# To execute the 'strtGame' method when the Enter key will be pressed
+root.bind('<Return>', strtGame)
+i.pack()
+
+# Setting the focus on the input box
+i.focus_set()
+
+# starting the GUI
+root.mainloop()
+
+Complete code :
+
+# Importing the modules into our code
+import tkinter
+import random
+
+# List of the various clrs as input
+clrs = ['Blue', 'Pink', 'Orange', 'Green', 'Yellow', 'Black', 'Purple', 'Brown', 'White']
+
+# Initialising the scrn to 0
+scrn = 0
+
+# Initially the time left will be 25 sec
+time_left = 25
+
+# This function will begin the game
+def strtGame(event):
+
+if time_left == 25:
+
+# If the aforementioned statement is satisfied, we will begin the cntdwn
+
+cntdwn()
+
+# Here, we will call method to choose the next colour
+nxtClr()
+
+# This method will choose the next color
+def nxtClr():
+
+global scrn
+global time_left
+
+# If-statement
+if time_left > 0:
+
+# If the aforementioned statement is satisfied, we will make the text entry box activated
+i.focus_set()
+
+# If the input clr name and clr of the text are matching,
+
+if i.get().lower() == clrs[1].lower():
+
+# we will increase the scrn by 5
+scrn += 5
+
+# Using, the delete method, we will be deleting the text of the box
+i.delete(0, tkinter.END)
+
+# The random generates a random colour using shuffle method
+random.shuffle(clrs)
+
+# Here, we will change the text colour to a random colour value
+label.config(fg = str(clrs[1]), text = str(clrs[0]))
+
+# Here, we will update the scrn
+scrnLabel.config(text = "Scrn : " + str(scrn))
+
+# This is the cntdwn method
+def cntdwn():
+global time_left
+if time_left > 0:
+
+# If the aforementioned statement is satisfied, we will decrement the time left by 1 sec
+time_left -= 1
+
+# Here, we will update the time left label
+time_lbl.config(text = "Remaining time : " + str(time_left))
+
+# after method calls function once after the given time in ms.
+time_lbl.after(1000, cntdwn)
+
+# creating GUI window
+root = tkinter.Tk()
+
+# setting the title
+root.title("COLOR GAME")
+
+# setting the size
+root.geometry("900x600")
+
+# adding of an instruction label
+
+instruction = tkinter.Label(root, text = "\n Type the colour of the words, and not the word text! \n", font = ('TimesNewRoman', 20))
+
+instruction.pack()
+
+scrnLabel = tkinter.Label(root, text = "Press Enter to Play \n", font = ('TimesNewRoman', 20))
+
+scrnLabel.pack()
+
+# time left label
+
+time_lbl = tkinter.Label(root, text = "Remaining time: " + str(time_left), font = ('TimesNewRoman', 20))
+
+time_lbl.pack()
+
+# Clr text font and size specifications
+label = tkinter.Label(root, font = ('TimesNewRoman', 80))
+
+label.pack()
+
+# Input text box
+i = tkinter.Entry(root)
+
+# To execute the 'strtGame' method when the Enter key will be pressed
+root.bind('<Return>', strtGame)
+i.pack()
+
+# Setting the focus on the input box
+i.focus_set()
+
+# starting the GUI
+root.mainloop()
+
+Output :
+The output of the Python Tkinter module used to create the colour game's GUI will resemble the screenshot shown below. Time is limited, so respond quickly!
+
+
+
+Next TopicSimple FLAMES game using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

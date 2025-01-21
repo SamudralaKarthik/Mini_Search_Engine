@@ -1,0 +1,261 @@
+
+
+
+
+next →
+← prev
+
+Profiling the Python code
+Serious Software Development calls for performance optimization. When optimizing the application performance, we cannot escape looking at profilers. Profilers run the gamut by monitoring production servers or tracking the frequency and duration of method calls. The following tutorial will cover the fundamentals of using a Python profiler, breaking down the chief concepts, and introducing the different libraries and utilities for each chief concept in Python profiling.
+First of all, we will list all the chief concepts in Python profiling. We will then break each chief concept into three chief segments:
+
+Definition and Explanation
+Tools that work for generic Python Applications
+Application Performance Monitoring (APM) utilities that fit
+
+APM utilities are perfect for profiling the complete life cycle of transactions for web applications. Most of the APM utilities probably are not written in the Python programming language; however, they work well regardless of the language the web application is written in.
+Before we begin, note that we will mainly focus on examples based on Python 3.
+Thus, let's get started.
+Understanding Tracing
+Officially, tracing is considered a special use case of logging in order to record information associated with the execution of the program. Since this use case is quite similar to event logging, the differences between event logging and tracing are not definite. Event logging appears ideal for systems administrators, whereas software developers are more concerned with tracing to debug software programs. Let us consider a one-liner for thinking about tracing - it is when software developers utilize logging in order to record data related to the execution of software. In the open-source Standard Library of Python, the trace and faulthandler modules allow us to use basic tracing.
+Let us now understand the working of these two modules in detail.
+Understanding the Python trace module
+The Python trace module aims to "examine which statements and functions are executed as a program runs to generate analytic and call-graph information". The Python documentation for the trace module does not provide much information; however, the Python Module of the Week (PyMOTW) has a succinct description related to the module. The trace will "follow Python statements as they are executed".
+Let us now consider an example to understand the execution of the trace module.
+Example:
+
+def main():
+    print('This is the main function')
+    recurse(2)
+
+def recurse(lvl):
+    print('recurse({})'.format(lvl))
+    if lvl:
+        recurse(lvl - 1)
+
+def notCalled():
+    print('This function is never called')
+
+if __name__ == '__main__':
+    main()
+
+Output:
+This is the main function
+recurse(2)
+recurse(1)
+recurse(0)
+
+Explanation:
+In the above snippet of code, we have defined the main() function within which the recurse() function invokes itself until the lvl parameter reaches zero. We have then defined the recurse() function with lvl argument. At last, we have defined a function as notCalled() as it will never be called in the program.
+Let us now see the tracing execution for the above program.
+Execution of Tracing:
+
+$ python3 -m trace --ignore-dir=.../lib/python3.9 --trace trace_example.py
+--- modulename: trace_example, funcname: <module>
+trace_example.py(1): def main():
+trace_example.py(5): def recurse(lvl):
+trace_example.py(10): def notCalled():
+trace_example.py(13): if __name__ == '__main__':
+trace_example.py(14):     main()
+ --- modulename: trace_example, funcname: main
+trace_example.py(2):     print('This is the main function')
+This is the main function
+trace_example.py(3):     recurse(2)
+ --- modulename: trace_example, funcname: recurse
+trace_example.py(6):     print('recurse({})'.format(lvl))
+recurse(2)
+trace_example.py(7):     if lvl:
+trace_example.py(8):         recurse(lvl - 1)
+ --- modulename: trace_example, funcname: recurse
+trace_example.py(6):     print('recurse({})'.format(lvl))
+recurse(1)
+trace_example.py(7):     if lvl:
+trace_example.py(8):         recurse(lvl - 1)
+ --- modulename: trace_example, funcname: recurse
+trace_example.py(6):     print('recurse({})'.format(lvl))
+recurse(0)
+trace_example.py(7):     if lvl:
+
+Explanation:
+It is easy to use the trace module directly from the command line. The statements being executed as the program runs are printed when the --trace option is provided. This example also ignores the location of the standard library of Python in order to avoid tracing into importlib and other modules.
+We can also perform several things using the Python trace module. Some of them are as follows:
+
+We can generate a code coverage report in order to see which lines are executed or skipped over with the help of the --count
+We can also report on the relationships between functions that call one other with the help of the --listfuncs
+We can also track which function the caller is, using the --trackcalls
+
+Understanding the Python faulthandler module
+In terms of comparison, the faulthandler module has slightly better Python documentation. It states that the purpose of the faulthandler module is to dump Python tracebacks explicitly on a fault, after a timeout, or on a user signal. It also works well with other system fault handlers such as Apport or the Windows fault handler. Both the faulthandler and trace modules offer more tracing abilities and can help us debug the Python code. We will see more profiling statistics in the next section.
+If one of us is a beginner at tracing, it is recommended to start simply using the trace module.
+Open source APM options
+There are different tools available for APM options, such as Jaeger and Zipkin. Although they are not written in the Python programming language, they work efficiently for web and distributed applications. Jaeger officially supports Python and is part of the Cloud Native Computing Foundation. It has more extensive deployment documentation. Due to these reasons, it is also recommended to begin with Jaeger if one wants to trace requests in a distributed web architecture. If it is not suitable for their tracing requirement, one can go for Zipkin.
+What part of the code should we profile?
+Now, let us delve into the particulars of profiling. The term "profiling" is mainly used for testing the performance, and the objective of performance testing is to find bottlenecks by performing deep analysis. Thus, we can utilize tracing tools to support us with profiling. Remember that tracing is the information logged by the software developers about the execution of software. Therefore, logging performance metrics is also a method to perform profiling analysis.
+However, we are not restricted to tracing. As profiling gains mindshare in the mainstream, we now have utilities that perform profiling directly. Now the question is, what segments of the software do we profile (measure its performance metrics)?
+Typically, we profile:
+
+Methods or Functions (most common)
+Lines (similar to method profiling; however, performing it line by line)
+Memory (memory usage)
+
+Before we go into each of these and offer the generic Python and APM options, let us explore the type of metrics to utilize for profiling and the profiling techniques themselves.
+What metrics should we profile?
+Speed (time)
+Typically, we need to measure while profiling the time spent on executing each method. Whenever we utilize a method profiling utility such as cProfile (which is available in the Python language), the timing metrics for methods can display us statistics, like the number of calls (shown as ncalls), total time spent in the function (tottime), time per call (tottime/ncalls and shown as percall), cumulative time spent in a function (cumtime), and cumulative time per call (quotient of cumtime over the number of primitive calls and shown as percall after cumtime). The particular timing metrics may vary from utility to utility; however, in a general case, we can expect something similar to the choice of timing metrics of cProfile in similar tools.
+Calls (frequency)
+Another metric to consider while profiling is the number of calls made on the method. For instance, cProfile highlights the number of function calls and how many of those are native calls. However, if a method has an acceptable speed, it is so frequently called that it becomes a huge time sink. We would like to know this from the profiler.
+Understanding the Method and Line Profiling
+In general, most profiling tutorials are based on tracking the timing metrics of a method for beginners to understand profiling.
+As the name suggests, line profiling signifies to profile the Python code line by line. We can consider it the method profiling; however, it is more granular. The most common metrics utilized for line profiling are timing metrics. It is also recommended to start with profiling methods first as a beginner and proceed further as we start getting comfortable with them.
+Understanding the Python cProfile and profile modules
+The modules, cProfile, and profile, are available in Python version 3. The numbers generated by these modules can be formatted into reports using the pstats module.
+Let us consider the following example of the cProfile module displaying the numbers for a script.
+Example:
+
+import cProfile
+import re
+
+cProfile.run('re.compile("foo|bar")')
+
+Output:
+         253 function calls (246 primitive calls) in 0.002 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    0.001    0.001 :1()
+        1    0.000    0.000    0.000    0.000 enum.py:1017(_decompose)
+        2    0.000    0.000    0.000    0.000 enum.py:358(__call__)
+        1    0.000    0.000    0.000    0.000 enum.py:434(__iter__)
+       10    0.000    0.000    0.000    0.000 enum.py:438()
+        2    0.000    0.000    0.000    0.000 enum.py:670(__new__)
+        9    0.000    0.000    0.000    0.000 enum.py:792(value)
+        1    0.000    0.000    0.000    0.000 enum.py:928(_missing_)
+        1    0.000    0.000    0.000    0.000 enum.py:938(_create_pseudo_member_)
+        1    0.000    0.000    0.000    0.000 enum.py:977(__and__)
+        1    0.000    0.000    0.001    0.001 re.py:250(compile)
+        1    0.000    0.000    0.001    0.001 re.py:289(_compile)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:249(_compile_charset)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:276(_optimize_charset)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:453(_get_iscased)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:461(_get_literal_prefix)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:492(_get_charset_prefix)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:536(_compile_info)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:595(isstring)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:598(_code)
+      3/1    0.000    0.000    0.000    0.000 sre_compile.py:71(_compile)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:759(compile)
+        3    0.000    0.000    0.000    0.000 sre_parse.py:111(__init__)
+        7    0.000    0.000    0.000    0.000 sre_parse.py:160(__len__)
+       18    0.000    0.000    0.000    0.000 sre_parse.py:164(__getitem__)
+        7    0.000    0.000    0.000    0.000 sre_parse.py:172(append)
+      3/1    0.000    0.000    0.000    0.000 sre_parse.py:174(getwidth)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:224(__init__)
+        8    0.000    0.000    0.000    0.000 sre_parse.py:233(__next)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:249(match)
+        6    0.000    0.000    0.000    0.000 sre_parse.py:254(get)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:286(tell)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:435(_parse_sub)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:493(_parse)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:76(__init__)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:81(groups)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:921(fix_flags)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:937(parse)
+        9    0.000    0.000    0.000    0.000 types.py:171(__get__)
+        1    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x00007FFF032D3C60}
+        1    0.000    0.000    0.000    0.000 {built-in method _sre.compile}
+        1    0.001    0.001    0.002    0.002 {built-in method builtins.exec}
+       27    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+    30/27    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        9    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
+       48    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        5    0.000    0.000    0.000    0.000 {method 'find' of 'bytearray' objects}
+        1    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'setdefault' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'sort' of 'list' objects}
+
+Explanation:
+In the above example, we have imported the cProfile and re modules. We have then used the run() function of the cProfile module. We have specified the compile() function of the re module within this function. Once we execute the above, we can observe the different time metrics covered under Profile by Speed (Time) (like ncalls and tottime) in this example of cProfile. The profile module provides a similar output with similar commands. In a typical way, we switch to profile if cProfile is unavailable.
+APM options
+Most of the APM tools are quite fully-fledged tools used for monitoring purposes. They will typically offer line and method profiling. Timing metrics are first-class citizens in these tools. We won't be listing out the tools here as almost all will have these features.
+Understanding the Memory profiling
+Memory usage is another common component that we can profile. The objective of memory profiling is to find memory leaks and optimize memory usage in Python programs. In terms of generic Python options, the most recommended tools for memory profiling for Python 3 are the pympler and the objgraph libraries.
+Understanding the Python Pympler library
+The official documentation of the Python Pympler library provides more details. We can utilize the Pympler library in different ways, as shown below:
+
+It can be used to determine the consumption of the amount of memory-specific Python objects.
+It can also identify whether the objects got leaked out of scope.
+It can also track the lifetime of objects of specific classes.
+
+Let us consider the following example used to track the lifetime of objects for classes.
+Example:
+
+from pympler import classtracker
+import numpy as np
+
+class RandomNumbers:
+    def __init__(self, size):
+        self.randomInts = np.random.randint(1, 100, size)
+
+ctracker = classtracker.ClassTracker()
+ctracker.track_class(RandomNumbers, name = RandomNumbers.__name__)
+
+ctracker.create_snapshot(description = "Random Numbers - Begin")
+rand_1 = RandomNumbers((1000, 1000))
+rand_2 = RandomNumbers((1000, 1000))
+rand_3 = RandomNumbers((1000, 1000))
+
+ctracker.create_snapshot(description = "End")
+ctracker.stats.print_summary()
+
+Output:
+---- SUMMARY ------------------------------------------------------------------
+Random Numbers - Begin                   active      0     B      average   pct
+  RandomNumbers                               0    192     B      0     B    0%
+End                                      active      0     B      average   pct
+  RandomNumbers                               3     11.44 MB      3.81 MB    0%
+-------------------------------------------------------------------------------
+
+Explanation:
+In the above snippet of code, we imported the classtracker module from the pympler and NumPy libraries. We have then created a class as RandomNumbers, where we have defined a function to generate random numbers using the randint() function. We created an object of the ClassTracker() class and used the track_class() function to track the object of the RandomNumbers class. We have then used the create_snapshot() function to gather current per-instance statistics and save the total amount of memory related to the Python process. We instantiated the RandomNumbers class and again used the create_snapshot() function. At last, we have printed the summary using the stats.print_summary() function.
+Understanding the Python objgraph library
+As per the creator of the objgraph library, the purpose of this library was to help find memory leaks. As Marius Gedminas said, "The objective was to select an object in memory that should not be there and then see what references are keeping it alive."
+We can say that Marius emphasized making the visualization better in the objgraph library than in other memory profiling tools, which is its strength. Marius once illustrates the working of the objgraph library in finding memory leaks; however, we won't be looking into it here because of the space constraints.
+APM options
+There are no APM tools available for memory profiling.
+Understanding the difference between Deterministic profiling and statistical profiling
+While performing profiling, it means we require to monitor the execution. That may affect the underlying software being monitored. Either we monitor all the calls of the function and exception events, or we utilize random sampling and deduce the numbers. The former is called deterministic profiling, and the latter is called statistical profiling. Of course, every method has its advantages and disadvantages. Deterministic profiling can be highly precise; however, its extra overhead may affect its accuracy. Statistical profiling has less overhead compared, with the drawback being lower precision.
+The cProfile library that we covered earlier utilizes deterministic profiling. Let us look at another open-source Python profiler that utilizes statistical profiling. This profiler is known as the pyinstrument library.
+Understanding the Python pyinstrument library
+The pyinstrument library differentiates itself from other typical profilers in two ways. First, it emphasizes that it utilizes statistical profiling instead of deterministic profiling. It argues that while deterministic profiling can provide us more precision than statistical profiling, the extra precision needs more overhead. The extra overhead may affect the accuracy and lead to the optimization of the wrong segment of the program. Especially, it states that utilizing deterministic profiling means that "code that makes a lot of Python function calls invokes the profiler a lot, making it slower." This is how results get distorted, and the wrong part of the program gets optimized.
+Second, the pyinstrument library differentiates itself by being a "full-stack recording". Let us compare it using the cProfile library. The cProfile library typically measures a list of functions and then orders them by the time spent in each function. By contrast, the pyinstrument library is designed in such a way that it will track, for instance, the reason every single function gets called during a web request - hence, the full-stack recording feature. This makes this library ideal for famous web frameworks like Django and Flask based on Python. And full-stack recording is exactly the last concept we will cover in this tutorial.
+Understanding the Full-stack recording
+All the different APM utilities available in the market can be considered a full-stack recording feature. The concept behind the full-stack recording is that, as a request progresses through each layer in the stack, we need to see in which layer of the stack the bottleneck in the performance appears. Sometimes the slowness can occur outside the script written in Python.
+Now, let us understand the well-known APM options available for us.
+APM Options
+We can categorize the APM options into two types:
+
+Open-source APM and Python-specific
+Hosted APM and Python-specific
+
+For a Python-specific open-source APM, we can go for the Elastic APM. Examples of a Python-specific hosted APM option are New Relic, Scout, and AppDynamics. The hosted APM options are quite similar to Retrace, owned by Stackify. However, retrace is a one-stop-shop, replacing some other tools and only charges by utilization. On top of profiling the application code, these tools also help us trace the web request. We can understand the consumption of the wall-clock time by the web request using the technology stack, including the database queries and requests from the webserver. This makes these options prominent as profiling tools if we have a web or distributed application.
+Bonus Section: Profile viewers
+In case one gets confused, profile viewers are not profilers. However, they can support turning the profiling statistics into a more visually pleasing display. One example is SnakeViz, a browser-based graphical viewer for the output of the Python cProfile module. Moreover, SnakeViz is that it offers a sunburst diagram.
+Another option to better show statistics from the cProfile statistics is tuna. Tuna allows us to handle runtime and import profiles, and it utilizes D3 and Bootstrap as the underlying technologies for display.
+
+
+Next TopicBuild a Dice-Rolling Application with Python
+
+
+
+
+← prev
+next →
+
+
+
+

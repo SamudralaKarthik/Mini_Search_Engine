@@ -1,0 +1,121 @@
+
+
+
+
+next →
+← prev
+
+**args and **kwargs in Python
+What are Arguments?
+In Python or any other programming language, we pass some variables or parameters to some function. In this case, these variables are called arguments for the function. In the function definition, we must define the type of arguments and the number of arguments we will pass.
+But if we do not know the number of arguments we want to pass for any function, we can use the *args and **kwargs keywords.
+In other language, there is no flexibility to pass the variable number of arguments, but in Python, we can pass the variable number of arguments in a function with the help of *args and **kwargs keywords.
+There are two types of arguments we can pass to a function:
+
+Keyword arguments
+Non-keyword arguments
+
+If we want to pass the non-keyword arguments, we will use the *args keyword, and if we want to pass the keyword arguments, we will use the **kwargs keyword.
+Here * is termed as a wildcard where we can replace it with any number which signifies any number of arguments in the function. The value of * can be zero, which means there will be no argument in the function.
+*args in Python
+With this keyword, we can pass any variable length argument list to a function, and it is called 'args'. Since * represent variable number arguments so, it becomes iterable, which means we can apply a loop on it or iterate it with any other function like map or filter.
+Example1:
+
+def multipleFunction(*argv):
+	for eachArg in argv:
+		print(eachArg)
+
+
+multipleFunction('Hello', 'Welcome', 'to', 'Javatpoint')
+
+Output:
+
+Explanation:
+In the above code, we have one function which takes an argument as *argv, which simply means we can pass any number of arguments as we want. Now in the function, we have applied for each loop, we are printing every element of the loop.
+So, we passed the four string arguments in the function, and we successfully printed it.
+Example2:
+We can pass the string as well as an integer data type with this keyword. So, there can be arguments for different data types.
+
+def multipleFunction(*argv):
+	for eachArg in argv:
+		print(eachArg)
+
+
+multipleFunction('Hello', 'Welcome', 'to', 'Javatpoint',56,32)
+
+Output:
+
+Explanation:
+In the above code, we have passed string and integer arguments and used the *argv keyword, and we printed it using a for loop.
+Example 3:
+With the variable length arguments, we can also add any normal augments to the function.
+
+def multipleFunction(arg1, *args):
+	print("First argument is  :", arg1)
+	for eachArg in args:
+		print("Next argument through *args :", eachArg)
+
+
+multipleFunction('Ayush Gupta','Hello', 'Welcome', 'to', 'JavatPoint')
+
+Output:
+
+Explanation:
+In the function call, the first argument will be as normal argument, and further arguments will be taken as part of the variable arguments list.
+Note: If we pass the extra normal argument after the *args, then it will give the error.
+
+def multipleFunction(firstArg,*args,lastArg):
+        print(firstArg)
+        print(args)
+        print(lastArg)
+        
+
+
+multipleFunction('hi','helo','welcome','to','javatpoint')
+
+Output:
+
+Explanation:
+In the above code, it is giving an error for not finding the last argument, as the last argument has already been included in the *args keyword.
+**kwargs in Python
+This keyword is used when we pass the keyword arguments as the parameters for the function. The keyword argument means that we pass the name to each variable, and this list is stored as a dictionary of key-value pairs. The name of the variable is the key, and the value of the variable is the value of the key.
+Example1:
+
+def multipleFunction(**kwargs):
+	for key, value in kwargs.items():
+		print("%s == %s" % (key, value))
+
+
+multipleFunction(firstArg='Javat', Second='Point', Third='Ayush',Fourth = 6000)
+
+Output:
+
+Explanation:
+In the above code, we have a function which takes arguments in the form **kwargs. The arguments are stored as pairs of keys and values, so we passed four arguments with their name. Now, if we iterate using the items() function of the keyword, we can print the key->value pair of the variables.
+Note: We can pass the keyworded and non-keyworded argument simultaneously in a function.
+Example 2:
+
+def multipleFunction(*args,**kwargs):
+	print(args)
+	print(kwargs)
+
+
+multipleFunction('helo','welcome','to',firstArg='Javat', Second='Point', Third='Ayush',Fourth = 6000)
+
+Output:
+
+Explanation:
+In the above code, we have used both *args and **kwargs keywords in a function, and we have printed the whole argument. In the function call, we have passed some non-keyword and then some keyword arguments. When we print the non-keyword argument, it is printed as a list, and if we print the keyword argument, it is printed in the dictionary format of the key-value pair.
+
+
+Next Topic__file__ (A Special Variable) in Python
+
+
+
+
+← prev
+next →
+
+
+
+

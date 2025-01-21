@@ -1,0 +1,536 @@
+
+
+
+
+next →
+← prev
+
+Python YAML Parser
+In this tutorial, we will learn how to read, write or perform various operations on YAML files using Python. We will discuss the YAML file format, its usage, and how we can manipulate it using Python.
+Let's have a brief introduction of YAML.
+What is YAML?
+YAML is an abbreviation of Yet Another Markup Language. It stores the configuration file data in a serialized manner; it has gained much popularity in recent years since it is a human-readable data format and is often used in data storage or transmission.
+YAML supports the three data types - scalars (strings, integers, and floats), lists, and associative arrays.
+The YAML files are saved with the .yaml or .yml extension. We can use the comment in YAML using the # symbol. A hyphen precedes each subitem inside. The values can be nested using the indentation.
+Advantages of YAML
+Some important advantages of YAML are as follows.
+
+All programming languages support YAML - We need to write YAML in one language and can be used with almost every programming language without any modification.
+Object Serialization - We can serialize the YAML data format.
+Easy to Read - There is no hard-written rule to create a YAML file. A simple indentation is used to define the individual block and documents.
+
+Before starting further, we assume that you have a basic understanding of Python or beginner-level programming experience with the Python programming language.
+PyYAML Module
+PyYAML is a Python module that provides a range of methods to perform several operations on the YAML file. We can easily convert the YAML file into the Dictionary and read its content. With the help of the YAML module, we can read write complex configuration YAML files, serializing and persisting YAML data.
+To use the PyYAML, we need to install it in our system. Below are the installation steps of the PyYAML module.
+Installing PyYAML
+We can install it using the below method.
+
+Install using the pip command
+Install via source code
+
+Using pip command
+We can install it using the pip command. Type the following command in the terminal to install PyYAML module.
+
+pip install pyyaml
+
+Install via source code
+We can use the alternative way of installation in case of facing error using the pip command. Follow the below instructions.
+
+Open the PyYAML Github repository, click on the code section and download the ZIP file.
+Extract the downloaded zip file.
+Now open the terminal and change the directory where the zip file is extracted.
+Now run a python setup.py command and hit enter button. It will install the PyYAML module in your machine.
+
+Reading YAML File
+First, we create a new YAML file named sample.yaml file that will use to read using the PyYAML module.
+sample.py
+
+# YAML Document starts with ---
+# Comments start with #
+UserName: Antonio
+Password: fire123 * 
+phone: 9879098
+Skills:
+      -Python
+      -SQL
+      -Django
+      -Rest Framework
+      -JavaScript 
+
+The yaml.load() method is used to read the YAML file. This method parses and converts the YAML object to a Python dictionary so that we can read the content easily. This process is called the Deserialization of YAML files into Python.
+The load() method takes one argument, which can be either a byte string, an open binary file object, a Unicode string, or an open YAML file object.
+If we pass the file or byte-string as an argument, it should be encoded in utf-8, utf-16-be, or utf-16-le.
+Let's understand the following example.
+Example -
+
+import yaml
+
+from yaml.loader import SafeLoader
+#open yaml file in read mode
+with open('sample.yaml', 'r') as f:
+    data = list(yaml.load(f, Loader=SafeLoader))
+    print(data)
+
+Output:
+[{'UserName': 'Antonio', 'Password': 'fire123 *', 'phone': 9879098, 'Skills': '-Python -SQL -Django -Rest Framework -JavaScript'}]
+
+Explanation -
+We have imported the yaml and its Loader to the reader the YAML file in the above code. The load() function comes with the four types of Loader.
+
+SafeLoader - We used this Loader in the above example. It loads a subset of the YAML safely. It is mostly used when input is from an untrusted source.
+BaseLoader - It loads all the basic YAML scalars as Strings.
+FullLoader - It works the same as BaseLoader but avoids arbitrary code execution. If the input is from an untrusted source, it can pose a security threat.
+UnsaeLoader - It is recommended Loader for untrusted source inputs and is generally used for backward compatibility.
+
+The load() method returned the generator object that we type cased into the list and could access any element.
+We can also get the same values in the form of a dictionary. Let's understand the following example.
+We can also get the yaml values in the form of dictionary. Let's understand the following example.
+Example - 2
+
+import yaml
+
+from yaml.loader import FullLoader
+#open yaml file in read
+with open('sample.yaml', 'r') as f:
+    yaml_data = yaml.load(f, Loader=FullLoader)
+    print(yaml_data)
+
+Output:
+{'UserName': 'Antonio', 'Password': 'fire123 *', 'phone': 9879098, 'Skills': '-Python -SQL -Django -Rest Framework -JavaScript'}
+
+We changed the scalar argument SafeLoader to FullLoader that converted the YAML data into the Dictionary. The advantage of this loader is that, we don't need to type cast the loaded data into list.
+Read Multiple YAML Document
+We can read the multiple yaml document using the yaml.load_all() method. A single YAML file can have multiple documents. Below is the example of multiple documents in single file.
+sample.yaml
+
+---
+UserName: Antonio
+Password: fire123 * 
+phone: 9879098
+Skills:
+      -Python
+      -SQL
+      -Django
+      -Rest Framework
+      -JavaScript 
+...
+
+---
+  UserName: Maino
+  Password: fire123 * 
+  phone: 9879098
+  Skills:
+      -Python
+      -SQL
+      -Django
+      -Rest Framework
+      -JavaScript 
+...
+
+---
+  UserName: George
+  Password: fire123 * 
+  phone: 9879098
+  Skills:
+      -Python
+      -SQL
+      -Django
+      -Rest Framework
+      -JavaScript 
+...
+
+The document starts with three dashes (---) and ends with three dots (…). Let's understand the following example.
+Example -
+
+import yaml
+
+from yaml.loader import SafeLoader
+#open yaml file in read
+with open('sample.yaml', 'r') as f:
+    yaml_data = list(yaml.load_all(f, Loader=SafeLoader))
+    print(yaml_data)
+
+Output:
+[{'UserName': 'Antonio', 'Password': 'fire123 *', 'phone': 9879098, 'Skills': '-Python -SQL -Django -Rest Framework -JavaScript'}, {'UserName': 'Maino', 'Password': 'fire123 *', 'phone': 9879098, 'Skills': '-Python -SQL -Django -Rest Framework -JavaScript'}, {'UserName': 'George', 'Password': 'fire123 *', 'phone': 9879098, 'Skills': '-Python -SQL -Django -Rest Framework -JavaScript'}]
+
+Explanation - 
+The load() method returned the generator object that we typed cased into the list so we could access any element. In the previous examples, we learned how to read the YAML file. Now we will learn how we can dump data into a YAML file.
+Write YAML File Using PyYAML Module
+Writing the Python data into YAML is known as serialization. To dump data into yaml file, we will use the yaml.dump() method. Let's understand the following example.
+Example -
+
+import yaml
+
+# dict object
+members = [{'User': 'Zoey', 'Password': 'Xavier@123', 'Phone': 345464, 'Skills': ['Python', 'SQL', 'Django', 'Rest Framework', 'JavaScript']},
+           {'name': 'Zaara', 'occupation': 'Dentist'}]
+
+# Convert Python dictionary into a YAML document
+print(yaml.dump(members))
+
+Output:
+Password: [email protected]
+  Phone: 345464
+  Skills:
+  - Python
+  - SQL
+  - Django
+  - Rest Framework
+  - JavaScript
+  User: Zoey
+- name: Zaara
+  occupation: Dentist
+
+Explanation -
+The dump() method transforms the Python objects into the YAML format and writes them into the YAML file. We have done same in the above example. The dump() method takes the two arguments - data and stream.
+The data argument represents the Python object that will transform into a YAML stream. The second parameter is a file that must be a text or binary file. The YAML stream data be written in the given file name; otherwise, dump() will return the produced document.
+Let's understand the example of writing Python data in the file.
+Example - 2:
+
+import yaml
+
+# dict object
+python_data = [{'User': 'Zoey', 'Password': 'Xavier@123', 'Phone': 345464, 'Skills': ['Python', 'SQL', 'Django', 'Rest Framework', 'JavaScript']},
+           {'name': 'Zaara', 'occupation': 'Dentist'}]
+
+with open('NewDetails.yaml', 'w') as f:
+    data = yaml.dump(python_data, f, sort_keys=False, default_flow_style=False)
+
+Output:
+NewDetails.yaml
+- User: Zoey
+  Password: [email protected]
+  Phone: 345464
+  Skills:
+  - Python
+  - SQL
+  - Django
+  - Rest Framework
+  - JavaScript
+- name: Zaara
+  occupation: Dentist
+
+Explanation
+In the above example, First, we defined the Python dictionary to be written in the file. Then, we opened the new details.YAML file in write mode. We used the dump() method and passed Python dict object with the two other tags. These tags are -
+
+default_flow_style - It is used to display the contents of the nested block with the proper indentation. By default, it is True. If we set its value as false and the value inside the nested lists is shown in the flow style, it will display the block style's content with the proper indentation.
+sort_keys - It is used to sort the keys in alphabetical order. By default, it is True. If we set its value as false, it will maintain the insertion order.
+
+Dump Multiple YAML Documents
+The yaml.dump_all() method is used to dump multiple YAML documents to a single stream. This method takes a list or generator producing Python objects to be serialized into YAML document and second optional argument as an open file.
+Let's understand the following example.
+Example -
+
+import yaml
+
+# dict object
+python_data = [{'User': 'Zoey', 'Password': 'Xavier@123', 'Phone': 345464, 'Skills': ['Python', 'SQL', 'Django', 'Rest Framework', 'JavaScript']},
+           {'name': 'Zaara', 'occupation': 'Software Engineer'}]
+
+data1 = yaml.dump(python_data)
+print("Using dump() method")
+print(data1)
+
+data2 = yaml.dump_all(python_data)
+print("Using dump_all() method")
+print(data2)
+
+Output:
+Using dump() method
+- Password: [email protected]
+  Phone: 345464
+  Skills:
+  - Python
+  - SQL
+  - Django
+  - Rest Framework
+  - JavaScript
+  User: Zoey
+- name: Zaara
+  occupation: Dentist
+
+Using dump_all() method
+Password: [email protected]
+Phone: 345464
+Skills:
+- Python
+- SQL
+- Django
+- Rest Framework
+- JavaScript
+User: Zoey
+---
+name: Zaara
+occupation: Dentist
+
+Python YAML sorting keys
+The sort_keys is an optional tag used while dumping the Python data into file. If we set it as True, It will sort all keys of YAML documents alphabetically. Let's understand the following example.
+Example -
+
+import yaml
+
+from yaml.loader import FullLoader
+#open yaml file in read
+with open('sample.yaml', 'r') as f:
+    
+    print("Before Sorting?..")
+    yaml_data = yaml.load(f, Loader=FullLoader)
+    print(yaml_data)
+
+    print("After Sorting......")
+    sorted_data = yaml.dump(yaml_data, sort_keys=True)
+    print(sorted_data)
+
+Output:
+import yaml
+
+from yaml.loader import FullLoader
+#open yaml file in read
+with open('sample.yaml', 'r') as f:
+    
+    print("Before Sorting?..")
+    yaml_data = yaml.load(f, Loader=FullLoader)
+    print(yaml_data)
+
+    print("After Sorting......")
+    sorted_data = yaml.dump(yaml_data, sort_keys=True)
+    print(sorted_data)
+
+Format YAML File
+PyYaml module provides the facility to format the YAML file while writing YAML document in it. The dump() method supports various formatting arguments. Below are the formatting arguments.
+Parameter -
+
+indent - It helps to set the preferred indentation.
+width - It helps to set the preferred width.
+canonical=True - It forces the preferred style for scalars and collections.
+
+Let's understand the following example -
+Example - 
+
+import yaml
+
+from yaml.loader import FullLoader
+#open yaml file in read
+with open('sample.yaml', 'r') as f:
+    
+    yaml_data = yaml.load(f, Loader=FullLoader)
+    sorted_data = yaml.dump(yaml_data, indent=10, default_flow_style=False)
+    print(sorted_data)
+
+Output:
+Password: fire123 *
+Skills: -Python -SQL -Django -Rest Framework -JavaScript
+UserName: Antonio
+phone: 9879098
+
+Custom Python Class YAML Serializable
+We can create the custom Python class that can convert the YAML into a custom Python object instead of list, or built in types.
+Let's understand the following example -
+Example -
+
+import yaml
+from yaml.loader import UnsafeLoader
+
+class Person:
+    def __init__(self, user, password):
+        self.user = user
+        self.password = password
+
+    def __repr__(self):
+        return "%s(user=%r, password=%r)" % (
+            self.__class__.__name__, self.user, self.password)
+
+# Make Python Class YAML Serializable
+person = Person('Jessa', 'queue@123')
+yaml_obj = yaml.dump(person)
+
+# Deserialize YAML into a Custom Python Class
+new_person = yaml.load(yaml_obj, Loader=UnsafeLoader)
+print(new_person.user, new_person.password)
+
+
+Output:
+Jessa [email protected]
+
+Custom Tags with PyYAML
+We can create the custom tags according to application requirements and assign a default value to custom tags while parsing the YAML file. To do so, it involves certain steps that are given below.
+
+In the first step, we define a constructor function that takes loader and the YAML node.
+We call the constuct_mapping() method in the created constructor, that will return a Python dictionary corresponding to YAML node. It will return a constructor with the dictionary.
+The returned constructor will be passed to add_constructor() that transforms a YAML representation graph to a native Python object. A constructor takes an instance of Loader and a node returns Python objects.
+Now, the load() method can accept many fields as required with the same custom tag defined in the add_constructor(). The fields without values will be allotted default values defined in the __init__() method.
+
+Let's understand the following example.
+Example -
+
+import yaml
+
+def custom_constructor(loader, node) :
+    fields = loader.construct_mapping(node)
+    return Test(**fields)
+
+yaml.add_constructor('!Custom Tags', custom_constructor)
+
+class Test(object) :
+
+    def __init__(self, user, password, phone=11000) :
+        self.user = user
+        self.password = password
+        self.phone = phone
+
+    def __repr__(self):
+        return "%s(user=%s, password=%r,phone=%r)" % (self.__class__.__name__, self.user, self.password, self.phone)
+
+print (yaml.load("""
+- !Custom Tags { user: 'Sam' }
+- !Custom Tags { user: 'Gaby', password: 'admin@123',phone: 5656}"""))
+
+Output:
+[Custom Tags(user=Sam, [email protected],phone=1100), Test(name=Gaby, password= [email protected], phone=5656)]
+
+Conversion Table in PyYAML Module
+Below is the table that the PyYAML module uses to convert Python objects into YAML equivalent. The dump() method uses translation while encoding.
+
+
+YAML Tag
+Python Type
+
+
+!!null
+None
+
+
+!!bool
+Bool
+
+
+!!float
+Float
+
+
+!!int
+Int
+
+
+!!binary
+str (bytes in Python3)
+
+
+!!timestamp
+Datetime.datetime
+
+
+!!omap, !!pairs
+Lists of pairs
+
+
+!!set
+Set
+
+
+!!seq
+list
+
+
+!!str
+str or unicode (str in Python)
+
+
+!!map
+dict
+
+
+YAML Errors
+YAML parser raises an exception called YAMLError in case of any error. With the help of this error, we can debug the problem. So it is recommended to use the YAML serialization code in the try-expect block. Let's understand the following example.
+Example -
+
+import yaml
+
+try:
+    config = yaml.load('Userdetails.yaml')
+except yaml.YAMLError:
+    print("Error in configuration file:")
+
+Tokens
+Tokens are generally used in low level application applications such as syntax highlighting. We can produce scan() method to produce a set of tokens. Let's understand the following example.
+Example -
+
+import yaml
+
+with open('sample.yaml') as f:
+    data = yaml.scan(f, Loader=yaml.FullLoader)
+
+    for token in data:
+        print(token)
+
+Output:
+StreamStartToken(encoding=None)
+DocumentStartToken()
+BlockMappingStartToken()
+KeyToken()
+ScalarToken(plain=True, style=None, value='UserName')
+ValueToken()
+ScalarToken(plain=True, style=None, value='Antonio')
+KeyToken()
+ScalarToken(plain=True, style=None, value='Password')
+ValueToken()
+ScalarToken(plain=True, style=None, value='fire123 *')
+KeyToken()
+ScalarToken(plain=True, style=None, value='phone')
+ValueToken()
+ScalarToken(plain=True, style=None, value='9879098')
+KeyToken()
+ScalarToken(plain=True, style=None, value='Skills')
+ValueToken()
+ScalarToken(plain=True, style=None, value='-Python -SQL -Django -Rest Framework -JavaScript')
+BlockEndToken()
+DocumentEndToken()
+StreamEndToken()
+
+Python YAML to XML
+The YAML data can be converted into the XML format using the XMLPlain module. XML is an abbreviation name of eXtensible Markup Language which uses HTML tags to define tags.
+The obj_from_yaml() method is used generate the XML plain obj from the YAML stream or string. To keep the XML plain object element in order, YAML streams are stored as the OrderDict.
+Let's take the sample YAML file with the employee details and convert it into the XML file.
+Example -
+
+StudentRecord:
+-Student:
+    'rollno': st01
+    name: Alexa
+    class: 10
+    subject: python, Java
+-Student:
+    'rollno': st02
+    name: Prince
+    class: 11
+    subject: Webservices, REST API
+
+Let's understand the code implementation.
+Example -
+
+import xmlplain
+
+# Read the YAML file
+with open("student.yaml") as inf:
+    root = xmlplain.obj_from_yaml(inf)
+
+# Output back XML
+with open("student.xml", "w") as outf:
+    xmlplain.xml_from_obj(root, outf, pretty=True)
+
+Conclusion
+In this tutorial, we have learned some important concepts of the YAML and PyYAML modules. We covered how to create custom tags, loading the contents of a YAML file into our Python program as dictionaries. We have also discussed how to manipulate YAML formatted files. This tutorial is included quite a brief and basic functionality of the library.
+
+
+Next TopicEffective Root Searching Algorithms in Python
+
+
+
+
+← prev
+next →
+
+
+
+

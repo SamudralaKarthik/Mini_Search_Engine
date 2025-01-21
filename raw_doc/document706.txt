@@ -1,0 +1,197 @@
+
+
+
+
+next →
+← prev
+
+Gaussian Elimination in Python
+Almost all areas of numerical simulation use linear and polynomial equations. But the field of analysis of linear systems of equations is where they are most naturally used in engineering. Structures, elastic substances, heat fluxes, electromagnetism, electrical circuits, and many more things fall under the general category of linear systems.
+When modelling linear systems, mathematical equations of the type Ax = b are generated, wherein x is the input matrix, and b is the response vector of the system. The system's intrinsic properties are reflected in A, called the matrix of coefficients, independent of the input vector. If the input is changed, the linear equation system we want to evaluate will still contain the exact coefficients matrix A but a distinct response vector b.
+Methods of Solving Systems of Linear Equations
+There are also so-called straightforward approaches along with the iterative procedures, which we won't discuss here. Their attempt to convert the source equations into a system equivalent in properties to the original system that is simpler to solve unites them.
+We can use three primary operations to achieve this transformation:
+
+The numeric value of A's determinant flips sign when two lines of the matrix A are swapped;
+The numeric value of the determinant of A gets multiplied by the same scalar by which the row of the matrix A is multiplied;
+A's determinant is left unaltered if we change a row of A by the one produced by appending that row to some other row scaled by a scalar;
+
+These procedures, of course, have no impact on the system's solutions, which stay unchanged, but they may have an effect on the coefficient matrix A and its determinant.
+The three primary direct ways of solutions are compiled in the following table:
+
+
+Method
+Initial form
+Final form
+
+
+Gauss elimination
+Ax = b
+Ux = c
+
+
+LU decomposition
+Ax = b
+LUx = b
+
+
+Gauss-Jordan elimination
+Ax = b
+Ix = c
+
+
+Gauss Elimination Method
+Row reduction is yet another name for Gaussian elimination. It is a linear algebraic method to resolve a linear system of equations. In essence, a coefficients matrix is subjected to a series of processes. These are the actions that are involved:
+
+We can swap two rows
+Scaling a row by multiplying it with a scaler
+Adding a row to another row of the matrix
+
+These procedures are carried out as long as necessary to fill the lower left side of the coefficient matrix with zeros.
+Gauss Elimination Algorithm in Python
+Regarding the manual process, there are two possible approaches: one is that the rows are converted by subtraction rather than by summation, and the other is that the converted rows aren't substituted by the initial rows of the matrix A, only the components specific to an upper triangular matrix. In actuality, the computation of solutions is unaffected by elements that do not belong to U (the modified matrix).
+Code
+
+# Python program to find a solution to a set of linear equations using the Gaussian Elimination method
+
+# Creating a function to print the augmented matrix with the given set of linear equations
+def print_aug(mat):
+    no = len(mat)
+    for i in range(0, no):
+        l = ""
+        for k in range(0, n + 1):
+            l += str(mat[i][k]) + "\t"
+            if j == no - 1:
+                l += "| "
+        print(l)
+    print("")
+
+# Creating a function to perform gaussian elimination on the given matrix mat
+def gauss_elem(mat):
+    num = len(mat)
+
+    for i in range(0, num):
+        # Searching the maximum value of a particular column
+        max_el = abs(mat[i][i])
+        # Row having the element of maximum value
+        max_row = i
+        for k in range(i + 1, num):
+            if abs(mat[k][i]) > max_el:
+                max_el = abs(mat[k][i])
+                max_row = k
+
+        # Swapping the maximum row with the current row 
+        for k in range(i, n + 1):
+            temp = mat[max_row][k]
+            mat[max_row][k] = mat[i][k]
+            mat[i][k] = temp
+
+        # Chaning the value of the rows below the current row to 0 
+        for k in range(i + 1, n):
+            curr = -mat[k][i] / mat[i][i]
+            for j in range(i, n + 1):
+                if i == j:
+                    mat[k][j] = 0
+                else:
+                    mat[k][j] += curr * mat[i][j]
+
+    # Solving the equation Ax = b for the created upper triangular matrix mat
+    l = [0 for i in range(n)]
+    for j in range(n - 1, -1, -1):
+        l[j] = mat[j][n] / mat[j][j]
+        for k in range(j - 1, -1, -1):
+            mat[k][n] -= mat[k][j] * l[j]
+    return l
+
+
+if __name__ == "__main__":
+    from fractions import Fraction
+
+    n = int(input())
+
+    A_mat = [[0 for j in range(n + 1)] for i in range(n)]
+
+    # Reading the input coefficients of the linear equations
+    for j in range(0, n):
+        l = map(Fraction, input().split(" "))
+        for i, elem in enumerate(l):
+            A_mat[j][i] = elem
+    
+
+    l = input().split(" ")
+    print(l)
+    last = list(map(Fraction, l))
+    for j in range(0, n):
+        A_mat[j][n] = last[j]
+
+    # Printing the augmented matrix from the input data 
+    print_aug(A_mat)
+
+    # Calculating the solution of the matrix
+    x = gauss_elem(A_mat)
+
+    # Printing the result 
+    l = "Result:\t"
+    for j in range(0, n):
+        l += str(x[j]) + "\t"
+    print(l) 
+
+Output:
+3
+3 4 -1
+5 -2 1
+2 -2 1
+8 4 1
+['8', '4', '1']
+3	| 4	| -1	| 8	| 
+5	| -2	| 1	| 4	| 
+2	| -2	| 1	| 1	| 
+
+Result:	1	2	3
+
+If we give a set of equations having no solution, the output will be as follows:
+Output
+3
+1 1 1
+0 1 -3
+2 1 5
+2 1 0
+['2', '1', '0']
+1	| 1	| 1	| 2	| 
+0	| 1	| -3	| 1	| 
+2	| 1	| 5	| 0	| 
+
+---------------------------------------------------------------------------
+ZeroDivisionError                         Traceback (most recent call last)
+ in 
+     75 
+     76     # Calculating the solution of the matrix
+---> 77     x = gauss_elem(A_mat)
+     78 
+     79     # Printing the result
+
+________________________________________
+3 frames
+________________________________________
+/usr/lib/Python3.7/fractions.py in __new__(cls, numerator, denominator, _normalize)
+    176 
+    177         if denominator == 0:
+--> 178             raise ZeroDivisionError('Fraction(%s, 0)' % numerator)
+    179         if _normalize:
+    180             if type(numerator) is int is type(denominator):
+
+ZeroDivisionError: Fraction(3, 0)
+
+
+
+Next TopicLearn Python from Best YouTube Channels in 2022
+
+
+
+
+← prev
+next →
+
+
+
+

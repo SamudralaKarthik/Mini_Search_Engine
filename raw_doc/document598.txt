@@ -1,0 +1,172 @@
+
+
+
+
+next →
+← prev
+
+Q-Learning in Python
+Reinforcement learning is a model in the Learning Process in which a learning agent develops, over time and in the best way possible within a particular environment, by engaging continuously with the surroundings. During the journey of learning, the agent will encounter different scenarios in the surroundings it's in. They are known as states. The agent in the state can select from a variety of permissible actions, which can result in various rewards (or punishments). The agent who is learning over time develops the ability to maximize these rewards to perform optimally in any condition it is in.
+Q-Learning is a fundamental type of reinforcement learning that utilizes Q-values (also known as action values) to improve the learner's behaviour continuously.
+
+Q-Values, also known as Action-Values:Q-values are defined for actions and states. Q(S A, S) is an estimate of the probability of performing the action at the time of S. The estimation of Q(S A, S) is computed iteratively by using the TD-Update rule that we will learn about in the coming sections.
+Episodes and Rewards:An agent, throughout his life, begins in a state of beginning and makes numerous shifts between its present state and the next state, according to the type of actions and the environment it interacts with. Every step in the transition, an agent in the state of transition takes action, is rewarded by the surrounding environment then goes to a new state. In the event that, at some point in time, the agent lands at one of the ending states, it means that there are no more transitions that are feasible. This is referred to as the end of an episode.
+Temporal Difference or TD-Update: A temporal Difference (TD) Update rule could be expressed in the following manner:
+Q(S,A)←Q(S,A)+ α(R+ γQ(S`,A`)-Q(S,A))
+The update rule used to calculate Quantity is used each time stage of the Agent's interaction with their environment. The terminology used is explained below:
+
+S: The current state of the Agent.
+A: The current Action is selected by a policy.
+S`: Next State where the Agent will end up.
+A`: The next most effective option to choose based on the most current Q-value estimation, i.e., select the Action that has the highest Q-value in the following state.
+R: Current Reward was seen by the environment in response to current actions.
+γ(>0 and <=1): Discounting Factor for Future Rewards. Future rewards are of lesser value than present rewards. Therefore they should be discounted. Because the Q-value estimates anticipated rewards from a specific state, the discounting rules are also applicable in this case.
+α: The length of a step to revise Q(S, A).
+
+
+
+
+Making the Action to undertake using the ϵ-gracious policy: The ϵ-greedy strategy is a simple method of selecting actions based on the most current estimations of Q-values. The policy is according to the following:
+
+With a probability (1 - ϵ), pick the option with the most Q-value.
+With a high probability (ϵ), pick any choice at random.
+
+
+
+With all the knowledge needed, let's use an example. We will utilize the gym environment created by OpenAI to build the Q-Learning algorithm.
+Install gym:
+We can install gym, by using the following command:
+
+!pip3 install gym
+
+Before beginning with this example, we will need an helper code to see the process algorithm. Two helper files need to be downloaded from our working directory.
+Step 1: Import all the required libraries and modules.
+
+import gym as GYM
+import itertools as IT
+import matplotlib as MPLOT
+import matplotlib.style as MPLOTS
+import numpy as nmp
+import pandas as pnd
+import sys
+from collections import defaultdict as DD
+
+Step 2: We will instantiate our environment.
+
+env = gym.make("FrozenLake-v1")
+n_observations1 = env.observation_space.n
+n_actions1 = env.action_space.n
+
+Step 3: We have to create and initialize the Q-table to 0.
+
+def createEpsilonGreedyPolicy1(Q1, epsilon1, num_actions1):
+	"""
+	Here, we will create an epsilon-greedy policy 
+          which is based on a given Q-function and epsilon.
+	
+	It will return the function which will takes the state
+	as an input and then it will return the probabilities
+	for each and every action in the form of the 
+numpy array of length of the action space
+(Set of possible actions).
+	"""
+	def policyFunction1(state):
+
+		Action_probabilities1 = nmp.ones(num_actions1,
+				dtype = float) * epsilon1 / num_actions1
+				
+		best_action = nmp.argmax(Q1[state])
+		Action_probabilities[best_action] += (1.0 - epsilon1)
+		return Action_probabilities1
+
+	return policyFunction1
+
+Step 4: We will build the Q-Learning Model.
+
+def qLearning1(env, num_episodes1, discount_factor = 1.0,
+							alpha = 0.6, epsilon1 = 0.1):
+	"""
+	The Q-Learning algorithm: is the Off-policy TD control.
+	It is used for finding the optimal greedy policy 
+while improving an epsilon-greedy policy"""
+	
+	# This will be the Action value function, which is the nested dictionary 
+# that maps state -> (action -> action-value).
+	Q1 = DD(lambda: nmp.zeros(env.action_space.n))
+
+	# Keeps track of useful statistics
+	stats = PLOTT.EpisodeStats(
+		episode_lengths = nmp.zeros(num_episodes1),
+		episode_rewards = nmp.zeros(num_episodes1))	
+	
+# Here, we will be creating an epsilon greedy policy function which would be #appropriate for environment action space
+	policy = createEpsilonGreedyPolicy1(Q1, epsilon1, env.action_space.n)
+	
+	# For each and every episode
+	for Kth_episode in range(num_episodes1):
+		
+		# Here, we will be resetting the environment and 
+        #then we will be picking the first action
+		state = env.reset()
+		
+		for J in itertools.count():
+			
+	# here, we will be getting probabilities of all actions from our current #state
+			action_probabilities1 = policy(state)
+
+# Now, we will be choosing the action according to the probability distribution
+			action = nmp.random.choice(nmp.arange(
+					len(action_probabilities1)),
+					p = action_probabilities1)
+
+			# Now, we will be taking the action and getting reward 
+        # transit to next state
+			next_state, reward, done, _ = env.step(action)
+
+			# Now, we will be updating statistics
+			stats.episode_rewards[Kth_episode] += reward
+			stats.episode_lengths[Kth_episode] = J
+			
+			# TD Update
+			best_next_action = nmp.argmax(Q1[next_state])	
+			td_target = reward + discount_factor * Q1[next_state][best_next_action]
+			td_delta = td_target - Q1[state][action]
+			Q1[state][action] += alpha * td_delta
+
+			# Now, here if done is True if episode terminated
+			if done:
+				break
+				
+			state = next_state
+	
+	return Q1, stats
+
+Step 5: We will train the model.
+
+Q1, stats = qLearning(env, 1000)
+
+Step 6: At last, we will Plot important statistics.
+
+PLOTT.plot_episode_stats(stats)
+
+Output:
+
+
+
+
+
+Conclusion
+We can see in the Episode Reward Over Time plot that the rewards for each episode are gradually increasing in time until it gets to a point at a high reward per episode, which suggests that this agent learned to maximize the total reward in each episode by exhibiting optimal behaviour in each and every level.
+
+
+Next TopicCombinatoric Iterators in Python
+
+
+
+
+← prev
+next →
+
+
+
+

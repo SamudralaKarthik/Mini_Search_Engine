@@ -1,0 +1,292 @@
+
+
+
+
+next →
+← prev
+
+Prettytable in Python
+In this tutorial, we will learn to create a relational table using the Python Prettytable module. We will create tables without using external libraries.
+What is Pretty Table?
+Pretty tables are the visual representation of the data in tabular forms. These are ASCII tables and easy to use. The prettytable library consists of the PrettyTable class, which is used to create relational tables. To work with this library, we need to install it using the below command.
+Installation
+
+pip install prettytable
+
+Create Table using Pretty Table
+Here, we will create the row-wise table using the pretty table module. Let's understand the following example.
+Example - 1: Creating table row wise
+
+from prettytable import PrettyTable
+
+# Creating a new table 
+newTable = PrettyTable(["Student Name", "Class", "Subject", "Makrs"])
+
+# Add rows
+newTable.add_row(["Camron", "X", "English", "91"])
+newTable.add_row(["Haris", "X", "Math", "63"])
+newTable.add_row(["Jenny", "X", "Science", "90"])
+newTable.add_row(["Bernald", "X", "Art", "92"])
+newTable.add_row(["Jackson", "X", "Science", "98"])
+newTable.add_row(["Samual", "X", "English", "88"])
+newTable.add_row(["Stark", "X", "English", "95"])
+
+print(newTable)
+
+Output
++--------------+-------+---------+-------+
+| Student Name | Class | Subject | Makrs |
++--------------+-------+---------+-------+
+|    Camron    |   X   | English |   91  |
+|    Haris     |   X   |   Math  |   63  |
+|    Jenny     |   X   | Science |   90  |
+|   Bernald    |   X   |   Art   |   92  |
+|   Jackson    |   X   | Science |   98  |
+|    Samual    |   X   | English |   88  |
+|    Stark     |   X   | English |   95  |
++--------------+-------+---------+-------+
+
+Example - 2: Column Wise Table
+
+from prettytable import PrettyTable
+
+columns = ["Student Name", "Class", "Subject", "Marks"]
+
+newTable = PrettyTable()
+
+# Add Columns
+newTable.add_column(columns[0], ["Jacob", "Peter", "Grenger",
+                    "Stark", "Falcon", "Matthew", "Jackson"])
+newTable.add_column(columns[1], ["X", "X", "X", "X", "X", "X", "X"])
+newTable.add_column(columns[2], ["English", "Art", "Science", "Math", "Science", "English", "English"])
+newTable.add_column(columns[3], ["91", "63", "90", "92",
+                                        "98", "83", "95"])
+
+print(newTable)
+
+Output
++--------------+-------+---------+-------------------+
+| Student Name | Class | Subject | Marks |
++--------------+-------+---------+-------------------+
+|    Jacob             |   X     | English |   91    |
+|    Peter             |   X     |   Art   |   63    |
+|   Grenger            |   X     | Science |   90    |
+|    Stark             |   X     |   Math  |   92    |
+|    Falcon            |   X     | Science |   98    |
+|   Matthew            |   X     | English |   83    |
+|   Jackson            |   X     | English |   95    |
++--------------+-------+---------+------------------+
+
+We have used the add_column() method of pretty table module.
+Example - 2: Add Rows in Once
+
+from prettytable import PrettyTable
+
+# Creating a new table
+newTable = PrettyTable(["Student Name", "Class", "Subject", "Makrs"])
+
+# # Add rows
+newTable.add_rows( 
+    [
+        ["Camron", "X", "English", "91"],
+        ["Haris", "X", "Math", "63"],
+        ["Jenny", "X", "Science", "90"],
+        ["Bernald", "X", "Art", "92"],
+        ["Jackson", "X", "Science", "98"],
+        ["Samual", "X", "English", "88"],
+        ["Stark", "X", "English", "95"],
+
+    ]
+)
+
+print(newTable)
+
+Output
++--------------+-------+---------+-------+
+|    Camron    |   X   | English |   91  |
+|    Haris     |   X   |   Math  |   63  |
+|    Jenny     |   X   | Science |   90  |
+|   Bernald    |   X   |   Art   |   92  |
+|   Jackson    |   X   | Science |   98  |
+|    Samual    |   X   | English |   88  |
+|    Stark     |   X   | English |   95  |
++--------------+-------+---------+-------+
+
+PrettyTable Deleting Rows
+This module provides the del_row() method which allows us to removes rows. It takes the index value that to be deleted and remove the rows. The indexing starts from zero. Let's understand the following code.
+Example -
+ 
+from prettytable import PrettyTable
+
+# Creating a new table
+newTable = PrettyTable(["Student Name", "Class", "Subject", "Makrs"])
+
+# # Add rows
+newTable.add_row(["Camron", "X", "English", "91"])
+newTable.add_row(["Haris", "X", "Math", "63"])
+newTable.add_row(["Jenny", "X", "Science", "90"])
+newTable.add_row(["Bernald", "X", "Art", "92"])
+newTable.add_row(["Jackson", "X", "Science", "98"])
+newTable.add_row(["Samual", "X", "English", "88"])
+newTable.add_row(["Stark", "X", "English", "95"])
+
+newTable.del_row(1)
+newTable.del_row(2)
+newTable.del_row(3)
+
+print(newTable)
+
+Output
++--------------+-------+---------+-------+
+| Student Name | Class | Subject | Makrs |
++--------------+-------+---------+-------+
+|    Camron          |   X   | English |   91   |
+|    Jenny               |   X   | Science |   90  |
+|   Jackson            |   X   | Science |   98  |
+|    Stark                |   X   | English |   95  |
++--------------+-------+---------+-------+
+
+It will remove the specific rows from the table. To clear the entire table, we use the following method.
+
+myTable.clear_rows()
+
+Example - 2
+
+from prettytable import PrettyTable
+
+# Creating a new table
+newTable = PrettyTable(["Student Name", "Class", "Subject", "Makrs"])
+
+# # Add rows
+newTable.add_row(["Camron", "X", "English", "91"])
+newTable.add_row(["Haris", "X", "Math", "63"])
+newTable.add_row(["Jenny", "X", "Science", "90"])
+newTable.add_row(["Bernald", "X", "Art", "92"])
+newTable.add_row(["Jackson", "X", "Science", "98"])
+newTable.add_row(["Samual", "X", "English", "88"])
+newTable.add_row(["Stark", "X", "English", "95"])
+
+newTable.clear_rows()
+
+print(newTable)
+
+Output
++--------------+-------+---------+------------------+
+| Student Name | Class | Subject | Makrs |
++--------------+-------+---------+--------------------+
++--------------+-------+---------+--------------------+
+
+As we can see in the above code, all the rows have been deleted. We can only see the column names.
+Getting Particular Rows and Columns
+The main aim of prettytable is to get the tables in ASCII form. We can restrict the output of the table using the following method.
+
+get_string(fields=["Column 1", "Column2", .............., ColumnN]
+
+Let's understand the following example.
+Example:
+
+from prettytable import PrettyTable
+
+# Creating a new table
+newTable = PrettyTable(["Student Name", "Class", "Subject", "Makrs"])
+
+# # Add rows
+newTable.add_rows( 
+    [
+        ["Camron", "X", "English", "91"],
+        ["Haris", "X", "Math", "63"],
+        ["Jenny", "X", "Science", "90"],
+        ["Bernald", "X", "Art", "92"],
+        ["Jackson", "X", "Science", "98"],
+        ["Samual", "X", "English", "88"],
+        ["Stark", "X", "English", "95"],
+
+    ]
+)
+
+print(newTable.get_string(fields=["Student Name", "Class"]))
+
+Output
++--------------+--------------+
+| Student Name | Class |
++--------------+--------------+
+|    Camron          |   X   |
+|    Haris               |   X   |
+|    Jenny               |   X   |
+|   Bernald            |   X   |
+|   Jackson            |   X   |
+|    Samual            |   X   |
+|    Stark                |   X   |
++--------------+---------------+
+
+The field argument takes the list of the field names to be printed.
+We can also use the following method to control the result.
+
+print(newTable.get_string(start=1, end=4)
+
+Output
++--------------+-------+---------+-------------------+
+| Student Name | Class | Subject | Makrs |
++--------------+-------+---------+-------------------+
+|    Camron          |   X   | English |   91  |
+|    Haris               |   X   |   Math  |   63  |
+|    Jenny             |   X   | Science |   90  |
++--------------+-------+---------+------------------+
+
+Changing the Alignment of Column
+We can observe that all the columns in the Table are aligned center. We can change it according to the requirement by assigning one character to align the attribute. There are three strings - 'l' (for left), 'r' (for right) and 'c'(for center) alignment, respectively.
+Let's see the following example.
+Example -
+
+newTable.align = 'r'
+print(newTable)
+
+Output
++--------------+-------+---------+-------------------+
+| Student Name | Class | Subject | Makrs |
++--------------+-------+---------+------------------+
+|           Camron |     X | English |    91  |
+|             Haris  |     X |    Math |    63 |
+|             Jenny |     X | Science |    90 |
+|            Bernald |     X |     Art |    92 |
+|           Jackson |     X | Science |    98 |
+|           Samual  |     X | English |    88 |
+|            Stark     |     X | English |    95 |
++--------------+-------+---------+------------------+
+
+Changing the Appearance of Table
+The default table looks like an SQL database shell. However, we can modify the table appearance in the other format. The pretty table module provides the set_style() method, transforming the Table in the MSWord friendly.
+Let's see the following example.
+Example - Add the following code in the create table code.
+
+from prettytable import MSWORD_FRIENDLY
+
+newTable.set_style(MSWORD_FRIENDLY)
+print(newTable)
+
+Output
+| Student Name | Class | Subject | Makrs |
+|    Camron         |   X   | English   |       91  |
+|    Haris              |   X   |   Math     |   63  |
+|    Jenny              |   X   | Science   |   90  |
+|   Bernald           |   X   |   Art         |   92  |
+|   Jackson           |   X   | Science   |   98  |
+|    Samual           |   X   | English   |   88  |
+|    Stark               |   X   | English   |   95  |
+
+We can clearly see the difference between the default table and MSWord friendly table.
+Conclusion
+We have discussed some important operations in table using the prettytable module. This is a very effective module to work with table using the Python script.
+
+
+Next TopicConvert Python List to NumPy Arrays
+
+
+
+
+← prev
+next →
+
+
+
+

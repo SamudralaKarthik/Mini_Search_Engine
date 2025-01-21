@@ -1,0 +1,120 @@
+
+
+
+
+next →
+← prev
+
+Python Program for Calculating the Sum of Squares of First n Natural Numbers
+In this tutorial, we will learn how to calculate the sum of squares of first n natural numbers using Python.
+We have a positive integer "N", and our task is to calculate (12 + 22 + 32 + 42 + 52 +… + N2)
+Example:
+
+Input: N = 6
+Output: 91 
+12 + 22 + 32 + 42 + 52 + 62 
+= 1 + 4 + 9 + 16 + 25 +36
+= 91
+
+Input:  N = 2
+Output: 5
+12 + 22
+= 1 + 4
+= 5
+
+Method 1: O(N)
+In this method, a user has to run the loop from 1 to "N" natural number, and for each K, 1 <= K <= N. The user has to find the K2 to calculate the sum.
+Example:
+
+# First, we will create a function 
+# which will return the sum of
+# squares of first "NN"
+# natural numbers
+def square_sum(NN) :
+  
+    # here, we will iterate K from 1 
+    # and NN for finding 
+    # the square numbers from K to NN and
+    # then add to sum.
+    sum_1 = 0
+    for K in range(1, NN + 1) :
+        sum_1 = sum_1 + (K * K)
+      
+    return sum_1
+  
+# Driven Program
+NN = int (input ("Please enter the 'N' natural number: "))
+print (square_sum(NN)
+
+Output:
+Please enter the 'N' natural number:  56
+60116
+
+Method 2: O(1)
+In this method, the user can calculate the sum of the square of the first "N" natural numbers by using the following formula:
+
+(NN * (NN + 1) * (2 * NN + 1)) / 6
+
+For Example:
+
+For NN = 6, sum_1 = (6 * (6 + 1) * (2 * 6 + 1)) / 6
+			= (6 * (7) * (13)) / 6
+			= (546) / 6
+			= 91
+For NN = 56, sum_1 = (56 * (56 + 1) * (2 * 56 + 1)) / 6
+			  = (56 * (57) * (113)) / 6
+			  = (3,60,696) / 6
+			  = 60116
+
+Code:
+
+# First, we will create a function 
+# which will return the sum of
+# squares of first "NN"
+# natural numbers
+def square_sum(NN) :
+    return (NN * (NN + 1) * (2 * NN + 1)) // 6
+  
+# Driven Program
+NN = int( input("Please enter the 'N' natural number: "))
+print (square_sum(NN))
+
+Output:
+Please enter the 'N' natural number:  87
+223300
+
+How to Avoid Early Overflow:
+For the large "NN" natural number, the value of [(NN * (NN + 1) * (2 * NN + 1)) / 6] would probably overflow. The users can avoid this situation by using the fact that (NN * (NN + 1)) must be divisible by 2.
+Example:
+
+# First, we will create a function 
+# which will return the sum of
+# squares of first "NN"
+# natural numbers
+  
+def square_sum(NN):
+    return (NN * (NN + 1) * (2 * NN + 1)) // 3
+  
+# Driven Program
+NN = int( input("Please enter the 'N' natural number: "))
+print (square_sum(NN))
+
+Output:
+Please enter the 'N' natural number:  567
+121844520
+
+Conclusion
+In this tutorial, we have explained two methods for calculating the sum of squares of "N" natural numbers using python and avoiding the code's overflow.
+
+
+Next TopicPython Program for How to Check if a Given Number is Fibonacci Number or Not
+
+
+
+
+← prev
+next →
+
+
+
+

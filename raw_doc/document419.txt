@@ -1,0 +1,111 @@
+
+
+
+
+next →
+← prev
+
+How to Make an Area Plot in Python using Bokeh
+Bokeh is an Interactive Data visualization library of Python. It creates its plots by using HTML and JavaScript languages. Its basic targets are modern website browsers for presenting provided elegance, concise construction of novel graphics with high-performance interactivity.
+In this tutorial, we will learn how to create an area plot on a graph using the bokeh library.
+Plotting the Area Plots
+Area Plots can be defined as the filled regions between two series that share a common area. The Bokeh figure class has two functions, namely:
+
+varea()
+harea()
+
+1. varea() Function:
+The varea() function is used for vertically directed areas. It has one "X" coordinate array and two "Y" coordinate arrays, "Y1" and "Y2", which would be filled between.
+Syntax:
+Syntax for varea() function is:
+
+varea(x, y1, y2, **kwargs)
+
+Parameter:
+The varea() function accepts the following parameters:
+
+x: It is the "x-coordinates" for the points of the area plot.
+y1: It is the "y-coordinates" for the points of one side of the area plot.
+y2: It is the "y-coordinates" for the points of the other side of the area plot.
+
+Code:
+
+# First, we will import all the required libraries
+    
+import numpy as nmp 
+from bokeh.plotting import figure as fig
+from bokeh.plotting import output_file as OF
+from bokeh.plotting import show
+
+x_1 = [2, 5, 1, 7, 3, 4, 6]
+Y_1 = [1, 7, 6, 2, 3, 4, 5]
+Y_2 = [3, 2, 1, 7, 5, 6, 4]
+   
+# here, we will create an Output file for saving the Output
+OF("JavaTpoint.html")
+# Now, we will instantiate the figure object 
+
+PLOT1 = fig(plot_width = 400, plot_height = 400, title = "Area Plot on Graph using Bokeh's varea() Function")
+   
+# Creating the area plot
+PLOT1.varea(x = x_1, y1 = Y_1, y2 = Y_2, fill_color = "BLUE")
+# Displaying the Plot    
+show(PLOT1)
+
+Output:
+
+2. harea() Function:
+The harea() function of the Bokeh library is used for horizontally directed areas on a Graph. It has one "Y" coordinate array and two "X" coordinate arrays, "X1" and "X2", which would be filled between.
+Syntax:
+Syntax for harea() function is:
+
+harea(x1, x2, y, **kwargs)
+
+Parameter:
+The harea() function accepts the following parameters:
+
+x1: It is the "x-coordinates" for the points of one side of the area plot.
+x2: It is the "x-coordinates" for the points of the other side of the area plot.
+y: It is the "y-coordinates" for the points of the area plot.
+
+Code:
+
+# First, we will import all the required libraries
+    
+import numpy as nmp 
+from bokeh.plotting import figure as fig
+from bokeh.plotting import output_file as OF
+from bokeh.plotting import show
+
+x_1 = [2, 5, 1, 7, 3, 4, 6]
+x_2 = [1, 7, 6, 2, 3, 4, 5]
+Y_1 = [3, 2, 1, 7, 5, 6, 4]
+   
+# here, we will create an Output file for saving the Output
+OF("JavaTpoint.html")
+# Now, we will instantiate the figure object 
+
+PLOT1 = fig(plot_width = 400, plot_height = 400, title = "Area Plot on Graph using Bokeh's harea() Function")
+   
+# Creating the area plot
+PLOT1.harea(x1 = x_1, x2 = x_2, y = Y_1, fill_color = "BLUE")
+# Displaying the Plot   
+show(PLOT1)
+
+Output:
+
+Conclusion
+In this tutorial, we discussed how we could create area plots in vertical and horizontal directions using the varea() and harea() function of the bokeh library in Python.
+
+
+Next TopicPython ChemPy Module
+
+
+
+
+← prev
+next →
+
+
+
+

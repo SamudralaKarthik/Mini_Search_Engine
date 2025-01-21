@@ -1,0 +1,313 @@
+
+
+
+
+next →
+← prev
+
+What is Sklearn in Python?
+We will learn about the sklearn library and how to use it to implement machine learning algorithms. In the real world, we don't want to construct a challenging algorithm each time we need to utilise it. Although creating an algorithm from the beginning is a terrific approach to grasping the underlying concepts behind how it operates, we might not achieve the efficiency or dependability we require.
+A Python module called Scikit-learn offers a variety of supervised and unsupervised learning techniques. It is based on several technologies you may already be acquainted with, including NumPy, pandas, and Matplotlib.
+What is Sklearn?
+French research scientist David Cournapeau's scikits.learn is a Google Summer of Code venture where the scikit-learn project first began. Its name refers to the idea that it's a modification to SciPy called "SciKit" (SciPy Toolkit), which was independently created and published. Later, other programmers rewrote the core codebase.
+The French Institute for Research in Computer Science and Automation at Rocquencourt, France, led the work in 2010 under the direction of Alexandre Gramfort, Gael Varoquaux, Vincent Michel, and Fabian Pedregosa. On February 1st of that year, the institution issued the project's first official release. In November 2012, scikit-learn and scikit-image were cited as examples of scikits that were "well-maintained and popular". One of the most widely used machine learning packages on GitHub is Python's scikit-learn.
+Implementation of Sklearn
+Scikit-learn is mainly coded in Python and heavily utilizes the NumPy library for highly efficient array and linear algebra computations. Some fundamental algorithms are also built in Cython to enhance the efficiency of this library. Support vector machines, logistic regression, and linear SVMs are performed using wrappers coded in Cython for LIBSVM and LIBLINEAR, respectively. Expanding these routines with Python might not be viable in such circumstances.
+Scikit-learn works nicely with numerous other Python packages, including SciPy, Pandas data frames, NumPy for array vectorization, Matplotlib, seaborn and plotly for plotting graphs, and many more.
+Key concepts and features include:
+
+Algorithms for making decisions, such as:
+
+Data are identified and categorised by classification as per the patterns.
+Regression is the process of forecasting or predicting data values using the historical and anticipated data average.
+Clustering is the automatic collection of datasets with related data.
+
+Predictive analysis is supported by various algorithms, including neural networks for pattern recognition and straightforward linear regression.
+Compatibility with the libraries of NumPy, pandas, and matplotlib
+
+A predictive model can be built or trained on input data by computers using machine learning (ML), eliminating the need for explicit programming. A subset of AI is machine learning (AI). 
+Let's examine its revision history-
+
+May 2019: scikit-learn 0.21.0
+March 2019: scikit-learn 0.20.3
+December 2018: scikit-learn 0.20.2
+November 2018: scikit-learn 0.20.1
+September 2018: scikit-learn 0.20.0
+July 2018: scikit-learn 0.19.2
+July 2017: scikit-learn 0.19.0
+September 2016. scikit-learn 0.18.0
+November 2015. scikit-learn 0.17.0
+March 2015. scikit-learn 0.16.0
+July 2014. scikit-learn 0.15.0
+August 2013. scikit-learn 0.14
+
+The extensive community of open-source programs is one of the key justifications for using them, and Sklearn is comparable in this regard. There have been roughly 35 contributors to Python's scikit-learn library, with Andreas Mueller being the most noteworthy.
+On the scikit learn the main page, many Organizations, including Evernote, Inria, and AWeber, are listed as customers. But the actual utilization is much higher than that.
+Along with these groups, there are communities all around the world.
+Scikit-learn's salient characteristics are:
+
+The package provides the functions for data mining and machine learning algorithms for data analysis that are easy to use and effective. Support vector machines, gradient boosting, random forests, k-means, and other regression, classification, and clustering algorithms are included.
+The package is open source, accessible to everyone and reusable in several contexts.
+It is built on top of SciPy, Matplotlib, and NumPy.
+The package has a commercially usable - BSD license.
+
+Benefits of Using Scikit-Learn for Implementing Machine Learning Algorithms
+You will discover that scikit-learn is well-documented and straightforward to understand, regardless of if you are seeking an overview of ML, wish to get up to speed quickly or seek the most recent ML learning tool. With the help of this high-level toolkit, you can quickly construct a predictive data analysis model and use it to fit the collected data. It is adaptable and works well alongside other Python libraries.
+Installation of Sklearn on your System
+Requirements to install Sklearn: 
+
+NumPy
+SciPy as its dependencies.
+
+Make sure NumPy and SciPy libraries are installed in the system before installing the scikit-learn library. The simplest method for installing scikit-learn once NumPy and SciPy have been successfully installed is by using pip: 
+pip install -U scikit-learn
+Essential Elements of Machine Learning
+Let us first go through the basic terminology used in ML projects to use scikit-learn. 
+
+Accuracy Score- The accuracy score tells the ratio of the predictions correctly predicted over the total sample size.
+
+In a classification problem involving multiple classes, the accuracy score is defined as follows:  Accuracy Score = Correctly Predicted Classes / Total Number of Samples Given for Prediction
+In a classification problem involving only two classes, the accuracy score is defined as follows: Accuracy Score = (True Positive Samples + True Negative Samples) / Total Number of Samples Given for Prediction
+
+Example Data- These are the specific examples (features) of the data. Two types of data examples are available:
+
+Labelled Data- This type of data includes the labels or the target values for the samples of the independent features. This is defined as:
+{independent features, label}: (X, Y)
+Unlabelled Data- This type of data only contains independent features and not labels or target values. This is defined as:
+{independent features, Null}: (x, Null)
+
+Feature- These serve as input parameters, also called independent features. A feature is a quantifiable quality or attribute of the object under observation. Each ML project has a minimum of one feature. 
+Clustering- Data points are grouped using a technique called clustering based on various metrics measuring similarity in samples. Each group is referred to as a Cluster.
+
+K-Means Clustering- It is an unsupervised machine learning strategy that locates the means (centroids) of a given number (k) clusters made out of the provided data points by placing them in the closest cluster.
+
+Model- A model defines the association between the independent features and the target label. For instance, a model for detecting rumours links specific characteristics to rumours.
+
+Regression vs Classification- Both regression and classification models let you construct forecasts that provide answers to questions like which party will dominate a particular election.
+The output of regression models is a number or continuum value.
+A discrete or categorical value as a prediction is provided by classification models.
+
+Supervised Learning- The system "learns" how to identify correct responses using a labelled dataset, which it may then deploy to the training dataset. The accuracy of the algorithm can then be assessed and improved. Supervised learning is used in the majority of machine learning projects.
+Unsupervised Learning- By "learning" traits and patterns entirely on its own, the algorithm seeks to interpret unlabelled data.
+
+Steps to Build a Model in Sklearn
+Let us now learn the modelling process.
+Step 1: Loading a Dataset
+Simply put, a dataset is a collection of sample data points. A dataset typically consists of two primary parts: 
+Features: Features are essentially the variables in our dataset, often called predictors, data inputs, or attributes. A feature matrix, which is frequently symbolised by the letter "X," can be used to represent them since many of them may exist. The term "feature names" refers to a list of names of all the features.
+Response: (sometimes referred to as the target feature, label, or output) Based on the variables feature, this variable is the output. In most cases, we only have one response column, which is depicted by a response column or vector (the letter 'y' is frequently used to denote a response vector). Target names refer to all the various values a response vector could take.
+Step 2: Splitting the Dataset
+The correctness of each machine learning model is a crucial consideration. Now, one may train a model with the provided dataset and then use that model to predict the target values for another set of the dataset to ascertain the correctness of the model.
+To sum it up:
+
+Make a training dataset and a testing dataset out of the given dataset.
+On the practise set, train the model.
+Test the model using the testing dataset and assess its performance.
+
+Step 3: Training the Model
+It's time to use the training dataset to train the model, which will make predictions. A variety of machine learning techniques with an easy-to-use interface for fitting, prediction accuracy, etc., are offered by Scikit-learn.
+Our classifier must now be tested using the testing dataset. For this, we can use the .predict() model class method, giving back the predicted values.
+By comparing the actual values of the testing dataset and the predicted values, we can assess the model's performance with the help of sklearn methods. The accuracy_score function of the metrics package is used for this. 
+ML Algorithms
+Algorithms are necessary for machines to learn without specific programming. Simply put, algorithms are just rules used in the calculation.
+ML algorithm Fundamental Ideas
+Representation - Data can be set up in a form to allow it to be analyzed. Examples include rules, model ensembles, decision trees, neural networks, SVM, graphical models, and more.
+Evaluation - Evaluation is a method of determining the legitimacy of a hypothesis. Examples include accuracy score, squared error, prediction and recall, probability, cost, margin, and likelihood.
+Optimization - By applying methods like combinatorial optimization, grid search, constrained optimization, etc., optimization is tuning an estimator's hyperparameters to reduce model errors. 
+Scikit-Learn ML Algorithms
+Here is a list of several typical Scikit-learn algorithms and techniques, given in decreasing order of complexity:
+Linear Regression Algorithm Example
+The slope of a straight line is the projected output of the supervised machine learning process known as linear regression. It is only used to forecast values within a specific data point range.
+Code
+
+# Python program to show how to use sklearn to perform linear regression
+
+# Importing the required modules and classes
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import load_iris
+
+# Loading our load_iris dataset
+X, Y = load_iris( return_X_y=True )
+
+# Printing the shape of the complete dataset
+print(X.shape)
+
+# Splitting the dataset into the training and validating datasets
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.4, random_state = 10)
+
+# Printing the shape of training and validation data
+print(X_train.shape, Y_train.shape)
+print(X_test.shape, Y_test.shape)
+
+# Training the model using the training dataset
+lreg = LinearRegression()
+lreg.fit(X_train, Y_train)
+
+# Printing the Coefficients of the linear Regression model
+print("Coefficients of each feature: ", lreg.coef_)
+
+# Printing the accuracy score of the trained model
+score = lreg.score(X_test, Y_test)
+print("Accuracy Score: ", score)
+
+Output
+(150, 4)
+(90, 4) (90,)
+(60, 4) (60,)
+Coefficients of each feature: [-0.12949807  0.03421679  0.23781661  0.60472254]
+Accuracy Score:  0.8885645804630061
+
+Logistic Regression Algorithm Example
+Logistic regression is the preferred approach for binary classification questions (such as the target values are 0 or 1). The results can then be evaluated using an equation resembling linear regression (e.g., how probable is it that a particular target value is 0 or 1?).
+Code
+
+# Python code to see how to perform Logistic Regression using sklearn.linear_model
+
+# Importing the required modules and classes
+from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Loading our dataset
+data = load_iris()
+
+# Splitting the independent and dependent variables
+X = data.data
+Y = data.target
+print("The size of the complete dataset is: ", len(X))
+
+# Creating an instance of the LogisticRegression class for implementing logistic regression 
+log_reg = LogisticRegression()
+
+# Segregating the training and testing dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state = 10)
+
+# Performing the logistic regression on train dataset
+log_reg.fit(X_train, Y_train)
+
+# Printing the accuracy score
+print("Accuracy score of the predictions made by the model: ", accuracy_score(log_reg.predict(X_test), Y_test))
+
+Output
+The size of the complete dataset is:  150
+Accuracy score of the predictions made by the model:  1.0
+
+Advanced Machine Learning Algorithms
+Random Forest
+A Random Forest algorithm is used in machine learning to perform ensemble learning. The ensemble learning system uses several Decision Trees and other machine learning algorithms to produce more outstanding predictive analyses than any one learning algorithm.
+Code
+
+# Python program to show how to Random Forest Algorithm
+
+# importing the required libraries
+from sklearn import datasets 
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score 
+from sklearn.ensemble import RandomForestClassifier
+ 
+# Loading the dataset
+X, Y = load_iris(return_X_y = True)   
+
+# Segregating the dataset into training and testing dataset
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.4)
+
+# creating an object of the RF classifier class
+rf = RandomForestClassifier(n_estimators = 100) 
+ 
+# Training the classifier model on the training dataset
+rf.fit(X_train, Y_train)
+ 
+# Predicting the values for the test dataset
+Y_pred = rf.predict(X_test)
+ 
+# using metrics module to calculate accuracy score
+print("Accuracy score for the model is: ", accuracy_score(Y_test, Y_pred))
+
+# predicting the type of flower
+rf.predict([[5, 7, 3, 4]])
+
+Output
+Accuracy score for the model is:  0.95
+array([1])
+
+Decision Tree Algorithm
+A node represents a feature (or property), a branch indicates a decision function, and every leaf node indicates the conclusion in a decision tree, which resembles a flowchart. The root node in a decision tree is the first node from the top. It gains the ability to divide data according to attribute values. Recursive partitioning is the process of repeatedly dividing a tree. This framework, which resembles a flowchart, aids in decision-making. It is a flowchart-like representation that perfectly replicates how people think. Decision trees are simple to grasp and interpret because of this.
+Code
+
+# Python program to perform classification using Decision Trees
+
+# Importing the required libraries
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import cross_val_score, train_test_split
+
+# Loading the dataset
+X, Y = load_iris( return_X_y = True )
+
+# Splitting the dataset in training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.4, random_state=0)
+
+# Creating an instance of the Decision Tree Classifier class
+dtc = DecisionTreeClassifier(random_state = 0)
+dtc.fit(X_train, Y_train)
+
+# Calculating the accuracy score of the model using cross_val_score 
+score = cross_val_score(dtc, X, Y, cv = 10)
+
+# Printing the scores
+print("Accuracy scores: ", score)
+print("Mean accuracy score: ", np.mean(score))
+
+Output
+Accuracy scores:  [1.         0.93333333 1.         0.93333333 0.93333333 0.86666667
+ 0.93333333 1.         1.         1.        ]
+Mean accuracy score:  0.96
+
+Gradient Boosting
+We might use a gradient boosting method when there are problems with regression and classification. It creates a predictive model based on many lesser prediction models, typically decision trees.
+To work, the Gradient Boosting Classifier needs a loss function. In addition to handling custom loss functions, gradient boosting classifiers may take many standardised loss functions, and the loss function must, however, be differentiable.
+Squared errors may be used in regression techniques, although logarithmic loss is typically used in classification algorithms. In gradient boosting systems, we don't need to explicitly derive a loss function for each incremental boosting step; instead, we can use any differentiable loss function.
+Code
+
+# Python program to perform classification using Gradient Boosting
+
+# Importing the required libraries
+from sklearn.datasets import make_hastie_10_2
+from sklearn.ensemble import GradientBoostingClassifier
+
+# Loading the dataset
+X, Y = make_hastie_10_2(random_state = 10)
+
+# Splitting the dataset in training and test data
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.4, random_state=0)
+
+# Creating an instance of the Gradient Boosting Classifier class
+gbc = GradientBoostingClassifier(n_estimators = 100, learning_rate = 1.0, max_depth = 1, random_state = 0)
+gbc.fit(X_train, Y_train)
+
+# Calculating the accuracy score of the model using cross_val_score 
+score = gbc.score(X_test, Y_test)
+
+# Printing the scores
+print("Accuracy scores: ", score)
+
+Output
+Accuracy scores:  0.9185416666666667
+
+
+
+Next TopicTkinter Application to Switch Between Different Page Frames in Python
+
+
+
+
+← prev
+next →
+
+
+
+

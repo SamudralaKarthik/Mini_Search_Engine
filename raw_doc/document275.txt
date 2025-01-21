@@ -1,0 +1,84 @@
+
+
+
+
+next →
+← prev
+
+Perfect Number in Python
+Playing with numbers is something that we are doing since our childhood. The basic arithmetic operations performed on numbers generate valuable results. In the voyage of learning, we must give more emphasis to the logic develop in mathematics as they become the foundation of programming.
+In this article, let us discuss what is a perfect number, what are the steps to determine whether a number is perfect or not, and finally, we shall see how its program can be written in Python.
+So, let's get started…
+First, let us understand what is a perfect number?
+A perfect number is a number in which the sum of the divisors of a number is equal to the number.
+Make sure that we have to exclude the number when we are calculating the sum of divisors.
+Now, we will see what are the steps involved in determining the perfect number.
+
+First of all, we will ask the user to input an integer which will be stored in a variable.
+Now, we will declare a variable called 'sum', where we will store the sum of the divisors of the given number.
+The next task is, to use a for loop where we will divide our number with the number initialized for the variable i, then we'll increment the value of I and check what are the numbers give us the remainder as zero. These numbers will be our divisors.
+Now we will take each of the divisors of that number and add it with the variable 'sum'.
+Finally, we will use the decision statement keyword 'if' to compare the number given by user with the value of the sum.
+If the values are equal, we will display the result as 'It's a perfect number', else we will display, 'It's not a perfect number'.
+
+It's time to have a look at the Python program-
+Example -
+
+num=int(input("Enter the number: "))
+sum_v=0
+for i in range(1,num):
+    if (num%i==0):
+        sum_v=sum_v+i
+if(sum_v==num):
+    print("The entered number is a perfect number")
+else:
+    print("The entered number is not a perfect number")
+
+Output:
+Enter the number: 6
+The entered number is a perfect number
+Enter the number: 25
+The entered number is not a perfect number
+
+Explanation - 
+In the program given above, we have-
+
+We have a variable 'num' and asked the user to provide its value.
+As discussed earlier, we have declared the variable sum_v as zero.
+Now, we have used the for loop whose range is from 1 to the number provided by the user.
+The next step is to check whether the number when divided with all the numbers provided in the range gives the remainder as zero.
+Those values will be added and then stored in the variable sum_v.
+Finally, we will make use of 'if' to compare the sum of divisors with the number and display the required result.
+In this program, the user has given the values 6 and 25 and the desired output is displayed.
+
+Let us have a look at another program where we will implement the same with the help of a function.
+Example - 2:
+
+def num_perfect(num):
+    sum_n = 0
+    for i in range(1, num):
+        if num % i == 0:
+            sum_n=sum_n+i
+    return sum_n == num
+print(num_perfect(25))
+
+Output:
+False
+
+Explanation -
+In this program, we have used steps similar to the ones we discussed in the previous example, the only difference is here we have defined a function and called it by providing a value.
+Because the return statement is present at the end of a function definition, it gives the value as True and False.
+So, in this tutorial, we learned about perfect numbers, the process that we must follow to determine whether the given number is perfect or not, and at the end discussed its implementation in Python.
+
+
+Next TopicEOL in Python
+
+
+
+
+← prev
+next →
+
+
+
+

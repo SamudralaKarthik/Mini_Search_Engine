@@ -1,0 +1,124 @@
+
+
+
+
+next →
+← prev
+
+Python Closure
+A language like Python has abundant concepts that are interesting and are meant to ease the work of programmers.
+In this tutorial, we will learn about python closures. But before that let us revise nested functions and see how they can act as a pre-requisite to understand this topic.
+So, let's get started:
+Program 1:
+The program given below illustrates the concept of nested functions and non local variables.
+
+#outer function
+def function_1(txt):
+    
+    #inner function
+    def function_2():
+        print(txt)
+        
+    function_2()
+    
+function_1('Python at JavaTpoint')
+
+Output:
+Python at JavaTpoint
+
+Explanation:
+Let us understand what we have done in this program-
+
+We have created function_1 that takes the parameter txt and inside this, we have made another function that prints the value of txt.
+As we can see 'function_2' is called in the above program and then we have passed a string value in function_1.
+On executing this program, it displays the desired output.
+
+Program 2:
+Now, let's see how closure can help in making our work simpler and enhancing our program.
+The following program illustrates the same-
+
+#outer function
+def function_1(txt):
+    
+    #inner function
+    def function_2():
+        print(txt)
+        
+    return function_2()
+    
+function_3=function_1('Let us learn a programming language.')
+function_3()
+
+Output:
+Let us learn a programming language.
+
+Explanation:
+Let us understand what we have done in this program-
+
+We have created function_1 that takes the parameter txt and inside this, we have made another function that prints the value of txt.
+As we can see the value of 'function_2' is returned in the above program and then we have passed a string value in function_1 and allotted that to function_3.
+On executing this program, it displays the desired output.
+
+Observation:
+Based on the above observation, we can conclude that-
+
+With the help of closure, we can invoke functions that are outside the scope in Python.
+We can say that closure is a function object that remembers the values present in the enclosed scope.
+It is a record in which each variable of a function is mapped with the value or a reference to the name when the closure was created.
+It acts as an aid to fetch or access the variables with the help of closure copies.
+
+When We can use a Closure
+We can use the closure in the following conditions:
+
+A program must have a nested function.
+The function should refer to a value in the enclosed function.
+The enclosing function should return the nested function.
+
+Some More Features-
+Features of the Closures are:
+
+Closures provide a kind of data hiding in our program and so we can avoid using global variables.
+It is an efficient option when we don't have too many functions in our program.
+
+Program 3:
+Finally, let's have a look at one more interesting program that uses closure.
+The program shows the situation when we can use a closure instead of class.
+
+def add_num(n):
+    def addition(x):
+        return x+n
+    return addition
+add_2=add_num(2)
+add_8=add_num(8)
+print(add_2(4))
+print(add_2(8))
+print(add_8(add_2(7)))
+
+Output:
+6
+10
+17
+
+Explanation:
+Let us understand what we have done in the above program-
+
+The function that we created is add_num and inside this, there is another function called addition.
+This function is supposed to return the x+n value.
+In the next set of statements, we have used different ways of adding two numbers.
+On executing the program, it displays the required result.
+
+Conclusion
+So, in this tutorial, we learned what are closures and when we can use them to make our program more effective.
+
+
+Next TopicPython Glob Module
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,196 @@
+
+
+
+
+next →
+← prev
+
+Reverse the Linked List in Python
+In this tutorial, we will write the program of reverse the linked list in Python. The linked list is used to store the elements dynamically. The linked list is a linear data structure like the array, but it stores the element dynamically. Each element connects with its previous Node using the specific address and stores value along with the address of the next element. The whole element is known as the Node.
+Here we will reverse the given linked using the Python program. Let's understand the problem statement.
+Problem Statement -
+We need to provide the linked list and return its reverse as below.
+
+Input :  1-> 2-> 3-> 4-> NULL
+Output : 4-> 3-> 2-> 1-> NULL
+
+Input :  1-> 2-> 3-> 4-> 5-> NULL
+Output : 5-> 4-> 3-> 2-> 1->NULL
+
+Input : NULL
+Output : NULL
+
+Let's implement the solution of the given problem.
+Method - 1
+First, we will create the linked list and solve this problem using the iterative approach.
+Code - Creating Linked List
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def add_node(self, data):
+        newNode = Node(data)
+        if self.head != None:
+            current = self.head
+            while (current.next):
+                current = current.next
+            current.next = newNode
+        else:
+            return None
+
+    def reverse_Llist(self):
+        
+
+    def print_list(self):
+        if self.head is not None:
+            current = self.head
+            while current:
+                print(current.data, "->", end = '')
+                current = current.next
+
+n = LinkedList()
+n.head = Node(1)
+n1 = Node(2)
+n.head.next = n1
+n2 = Node(3)
+n1.next = n2
+n3 = Node(4)
+n2.next = n3
+
+n.print_list()
+
+Output:
+1  -> 2  -> 3  -> 4  ->
+
+In the above code, we have initialized the linked list and added some elements to it. Now, we will implement the iterative method of reversing the linked list.
+Reverse the Linked List
+We want to implement the reverse() method which does the following operations.
+
+All the links start pointing in the opposite direction.
+The head starts pointing to the last element of the list.
+
+We will define the three pointers -
+
+previous - It is an initial pointer which points None at starting, this pointer points to the previous element so the next link can be reversed using it.
+current - It points initially head, the node being pointed to by this variable gets its node.next set to the previous item in the list.
+after - It points the second node. We move this to one element head until it gets the next==None.
+
+Let's implement the reverse_Llist() function.
+Example -
+
+def reverse_Llist(Llist):
+    if Llist.head == Node:
+        return None
+
+    previous = None
+    current = Llist.head
+    after = current.next 
+
+    while current:
+        # Reverse the link
+        current.next = previous
+        # Moving previous element to one ahead
+        previous = current
+        # Moving current one element ahead
+        current = after
+        # Moving one element ahead
+        if after:
+            after = after.next
+
+    Llist.head = previous
+
+n = LinkedList()
+n.head = Node(1)
+n1 = Node(2)
+n.head.next = n1
+n2 = Node(3)
+n1.next = n2
+n3 = Node(4)
+n2.next = n3
+print("The reverse linked list is: ")
+reverse_Llist(n)
+n.print_list()
+
+Output:
+The reverse linked list is: 
+4  -> 3  -> 2  -> 1  ->
+
+Explanation - 
+In the above code, we have initialized the linked list instance and created the linked list. The reverse_Llist() function is called over the linked to reverse the list.
+Method -2 - Recursive Method
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def add_node(self, data):
+        newNode = Node(data)
+        if self.head != None:
+            current = self.head
+            while (current.next):
+                current = current.next
+            current.next = newNode
+        else:
+            return None
+    def recusive_reverse(self, current, previous):
+     
+        # If last node mark it head
+        if current.next is None:
+            self.head = current
+ 
+            # Update next to prev node
+            current.next = previous
+            return
+ 
+        # Save curr.next node for recursive call
+        after = current.next
+ 
+        # And update next
+        current.next = previous
+
+        self.recusive_reverse(after, current)
+
+    def reverse(self):
+        if self.head is None:
+            return
+        self.recusive_reverse(self.head, None)
+    
+    def print_list(self):
+        if self.head is not None:
+            current = self.head
+            while current:
+                print(current.data, " -> ", end = '')
+                current = current.next
+
+Output:
+The reverse linked list is: 
+4  -> 3  -> 2  -> 1  ->
+
+Time Complexity: O(N)
+Auxiliary Space: O(1)
+Conclusion
+In the above tutorial, we have implemented the solution to reverse the linked list problem. It is an essential concept of the linked list and can be asked in the interview question. We have solved this problem using Iterative and Recursive methods, and the time complexity will be the same in both methods.
+
+
+Next TopicDifferences between Flatten() and Ravel() Numpy Functions
+
+
+
+
+← prev
+next →
+
+
+
+

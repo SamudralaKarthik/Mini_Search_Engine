@@ -1,0 +1,241 @@
+
+
+
+
+next →
+← prev
+
+NamedTuple in Python
+In Python, a "special" sort of tuple is named "named tuple." Python beginners are frequently perplexed by it, particularly when & why we must implement it.
+Because a NamedTuple is a tuple, it can perform all of the functions that a tuple can. It is, though, more than a simple Python tuple. In other computer languages, just as with C++, it is much more similar to a "class." It's a subtype of tuple with specified fields and a defined length built programmatically to our specifications. This tutorial will explain Python NamedTuples and show how to use them and when and why we must utilize them.
+What is a Python Tuple?
+We believe we should revisit tuples in Python before proceeding.
+A tuple in Python is a container that can store many values. Consider the following case.
+Code
+
+numbers = (34, 32, 56, 24, 75, 24)
+
+As we can see, we use parenthesis to define it. Indexes are used to access elements. (Keep in mind that indexing in Python begins at zero.)
+Code
+
+numbers[1]
+
+Output:
+32
+
+A numbers[1] Python tuple is separated by the fact that we cannot modify its elements, i.e., elements of the tuple are immutable.
+Python NamedTuple Syntax
+We must first import a NamedTuple from Python's built-in module called collections, as shown:
+
+from collections import namedtuple
+
+The following is the basic syntax for constructing a NamedTuple:
+
+namedtuple(Name,[Names of Values])
+
+Name it is the parameter for the title we want to give our NamedTuple, and
+[Names of Values] is a placeholder for the list containing the names of the different values or attributes.
+Python NamedTuple Example
+The first step, as previously said, is to import NamedTuple.
+
+from collections import namedtuple
+
+Now we can use the syntax from the preceding part to build a NamedTuple:
+
+Student = namedtuple("Student",["Name","Class","Age","Subject","Marks"])
+
+In this example,
+We choose to call the NamedTuple Student and mention the names of the values, "Name", "Class", "Age", "Subject", and "Marks" in a list. And we have created our first NamedTuple - Student.
+Now, we can create a house Student1 with the required specifications using Student as follows:
+
+Studnet1 = Student("Itika", 11, 15, "English", 79)
+
+Only the specific values or content that the labels or fields in our [Names of Values] must take are required.
+To make an entry of a new student, say Student2, copy its values and paste them into the fields of the new variable.
+
+Studnet2 = Student("Arshia", 12, 17, "Maths", 93)
+
+We will see that we can use Student as a blueprint to take a record of new students as we want without having to call out the labels of the fields each time.
+How to Get the Values of a NamedTuple Using Dot Notation
+We can use the dot method to obtain the values of the NamedTuple instances Student1 and Student2. The following is the syntax:
+
+<name of object>.<name of field>
+
+The following code sample demonstrates this:
+Code
+
+print (Student1.Age)
+print (Student1.Class)
+print (Student1.Subject)
+print (Student1.Marks)
+print (Student1.Name)
+
+Output:
+15
+11
+"English"
+79
+"Itika"
+
+Likewise, we may retrieve the variables related to the NamedTuple Student2 using Student2.Age, Student2.Class, and so on.
+The Accessing Methods of NamedTuple
+We may retrieve the values from NamedTuple using indices, keywords, and the getattr() function. NamedTuple's field values are strictly ordered. As a result, we may use the indices to find them.
+The field names are converted to attributes by the NamedTuple. As a result, getattr() can be used to retrieve data from that field.
+Code
+
+import collections
+#create employee NamedTuple
+Participant = collections.namedtuple('Participant', ['Name', 'Age', 'Country'])
+#Adding two participants
+p1 = Participant('Itika', '21', 'India')
+p2 = Participant('Arshia', '19', 'Australia')
+#Accessing the items using index
+print( 'The name and country of the first participant are: ' + p1[0] + ' and ' + p1[2])
+#Accessing the items using name of the field
+print( 'The name and country of the second participant are: ' + p2.Name + ' and ' + p2.Country)
+#Accessing the items using the method: getattr()
+print( 'The Age of participant 1 and 2 are: ' + getattr(p1, 'Age') + ' and ' + getattr(p2, 'Age'))
+
+Output:
+The name and country of the first participant are: Itika and India
+The name and country of the second participant are: Arshia and Australia
+The Age of participant 1 and 2 are: 21 and 19
+
+Conversion Procedures of NamedTuple
+Different collections can be converted to NamedTuple using a few techniques. We can also use the _make() function to transform a list, tuple, or other iterable objects into a NamedTuple instance.
+We can also convert a dictionary data type object to a NamedTuple collection. The ** operative is required for this transformation.
+As an OrderedDict datatype item, NamedTuple can yield items with its keys. We can call the _asdict() function to convert it to an OrderedDict.
+Code
+
+import collections
+#create employee NamedTuple
+Participant = collections.namedtuple('Participant', ['Name', 'Age', 'Country'])
+#List to Participants
+list_ = ['Itika', '21', 'India']
+p1 = Participant._make(list_)
+print(p1)
+#Dict to convert Employee
+dict_ = {'Name':'Arshia', 'Age' : '19', 'Country' : 'Australia'}
+p2 = Participant(**dict_)
+print(p2)
+#Displaying the namedtuple as dictionary
+participant_dict = p1._asdict()
+print(participant_dict)
+
+Output:
+Participant(Name='Itika', Age='21', Country='India')
+Participant(Name='Arshia', Age='19', Country='Australia')
+{'Name': 'Itika', 'Age': '21', 'Country': 'India'}
+
+More Operations on NamedTuple
+Other methods, such as _fields() and _replace, are available. We may determine which fields a NamedTuple has by calling the _fields() function. The _replace() function is used to swap out one value for another.
+Code
+
+import collections
+#create employee NamedTuple
+Participant = collections.namedtuple('Participant', ['Name', 'Age', 'Country'])
+#List to Participants
+p1 = Participant('Itika', '21', 'India')
+print(p1)
+print('The fields of Participant: ' + str(p1._fields))
+#updating the country of participant p1
+p1 = p1._replace(Country = 'Germany')
+print(p1)
+
+Output:
+Participant(Name='Itika', Age='21', Country='India')
+The fields of Participant: ('Name', 'Age', 'Country')
+Participant(Name='Itika', Age='21', Country='Germany')
+
+How Does Python's NamedTuple Work?
+Let's look at what extra we can accomplish with a NamedTuple in Python.
+1. A NamedTuple in Python is Immutable.
+A NamedTuple in Python cannot be modified, much like its ordinary version. We are unable to alter its characteristics.
+We'll attempt modifying one of the characteristics of a tuple of the name 'Student' to demonstrate this.
+Code
+
+from collections import namedtuple
+Student = namedtuple("Student",["Name","Class","Age","Subject","Marks"])
+Student1 = Student("Arshia", 12, 17, "Maths", 93)
+Student1.Class = 11
+
+Output:
+AttributeError                            Traceback (most recent call last)
+Input In [41], in ()
+      2 Student = namedtuple("Student",["Name","Class","Age","Subject","Marks"])
+      3 Student1 = Student("Arshia", 12, 17, "Maths", 93)
+----> 4 Student1.Class = 11
+
+AttributeError: can't set attribute
+
+As can be seen, it throws an AttributeError. As a result, we can infer that a NamedTuple is immutable.
+2. Creating a Python Dictionary from a Python NamedTuple
+In Python, a NamedTuple is similar to a dictionary, and we can transform it into one by:
+Code
+
+from collections import namedtuple
+Student = namedtuple("Student",["Name","Class","Age","Subject","Marks"])
+Student1 = Student("Arshia", 12, 17, "Maths", 93)
+print ( Student1._asdict() )
+
+Output:
+{'Name': 'Arshia', 'Class': 12, 'Age': 17, 'Subject': 'Maths', 'Marks': 93}
+
+We utilize the. asdict() method for this. This also produces a Python OrderedDict.
+3. NamedTuple with Default Values
+A named tuple class can be configured with default parameters in the same way that we can set initial values for attributes in a regular class. The defaults are assigned to the rightmost attributes since fields having a default value should appear after every field without a default.
+Let's redefine the Student class with just 1 default entry.
+Code
+
+from collections import namedtuple
+Student = namedtuple("Student", ["Name","Class","Age","Subject","Marks"], defaults = [100])
+Student1 = Student("Arshia", 12, 17, "Maths")
+print ( Student1 )
+
+Output:
+Student(Name='Arshia', Class=12, Age=17, Subject='Maths', Marks=100)
+
+The default figure 100 will be applied for the marks, which is the rightmost field in our declaration if we create the NamedTuple with just one value.
+Will the default value for the Age be applied if we expressly specify the field to be the Age?
+Code
+
+from collections import namedtuple
+Student = namedtuple("Student", ["Name","Class","Age","Subject","Marks"], defaults = [100])
+Student1 = Student("Arshia", 12, 17, "Maths")
+Student1 = Student(Age = 18)
+print ( Student1 )
+
+Output:
+TypeError: Student.__new__() missing 3 required positional arguments: 'Name', 'Class', and 'Subject'
+
+The answer is no. In a NamedTuple, the ordering of the fields is very rigid. Even if we expressly declare anything, the default values must be the rightmost to prevent ambiguity and potential difficulties.
+Benefits of Python Namedtuple
+Of course, no one will use NamedTuple if they don't see any advantages. So, here's what we've got:
+1. Unlike a standard tuple, a NamedTuple in Python can retrieve variables by their titles.
+Code
+
+from collections import namedtuple
+Student = namedtuple("Student", ["Name","Class","Age","Subject","Marks"], defaults = [100])
+Student1 = Student("Arshia", 12, 17, "Maths")
+print ( Student1.Age )
+
+Output:
+17
+
+2. Because it doesn't include per-instance dictionaries, Python NamedTuple is efficient in memory just as a conventional tuple. It is also quicker than a dictionary because of this.
+Conclusion
+We learned how NamedTuples allow us to combine the benefits of both tuples and dictionaries, how to build NamedTuples, and how to use them in this tutorial. How to retrieve the values of NamedTuples using dot notation in Python, how they operate
+If the reader is acquainted with Python's OOP, they will see that this is identical to how Python classes function. A class and its attributes act as a blueprint for creating many more objects or instances, each with its own set of attribute values.
+To increase the clarity of our code, however, defining a class and providing the essential characteristics is typically excessive, and it's much faster to construct NamedTuples instead.
+
+
+Next TopicOrderedDict in Python
+
+
+
+← prev
+next →
+
+
+
+

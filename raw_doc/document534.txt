@@ -1,0 +1,210 @@
+
+
+
+
+next →
+← prev
+
+SnakeViz library in Python
+Profiling is a significant form of analysis that we can utilize to analyze the time or space complexity of the code. Programming language like Python offers various libraries to serve the purpose of profiling. Some examples of the profiling libraries to analyze time complexity can be cProfile, profile, line_profiler, and more. And some examples of the profiling libraries to analyze space complexity are memory_profiler, memprof, guppy/hpy, and more. The outputs produced by profiling libraries like cProfile usually log files with multiple lines, explaining the utilization time of different function calls. If the function is very deep and has multiple lines of code, then analyzing such log files can be tiresome work.
+Data visualization is a process where we can represent a lot of data. This data consists of different patterns that can be caught by the human eye and allow us to understand the data in a better way. Python has a library known as SnakeViz, which can accept profiling files produced by the cProfile library and generate the visualization.
+Understanding the Python SnakeViz library
+The SnakeViz library is a browser-based graphical viewer of the output of the cProfile module in the Python programming language. It is an alternative to utilizing the standard library pstats module. The SnakeViz library was originally inspired by RunSnakeRun. This library can work on Python 2.7 as well as Python 3. The SnakeViz library is still likely to work on Python 2.6; however, official support has been dropped now that Tornado no longer supports Python 2.6.
+The SnakeViz library consists of two visualization styles for visualizing profiling results.
+
+Icicle Chart
+Sunburst Chart
+
+The icicle chart utilizes the breadth of the rectangle in order to represent the time taken by a function, and the sunburst chart utilizes an angular extent of arc in order to represent the time taken by a function. The function that calls other functions will have a special child, representing the time taken by that function outside of other functions that it calls. The only function which calls other functions will have such a child.
+How to Install the Python SnakeViz library?
+In order to install the Python library, we need 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the snakeviz library using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ python.exe -m pip install snakeviz
+
+We will now understand the usage of the SnakeViz library through different examples.
+Some Examples based on SnakeViz
+Let us now consider some examples based on the SnakeViz library.
+Example 1: SnakeViz from Command Line/Shell
+The following example demonstrates the use of the SnakeViz library. In this example, we will call the mainFunction(), which will call three functions and prints results returned by all one by one. All three functions are similar where each produces 150000 random numbers between 1-150 and returns the mean of that number. The only difference is the time taken by each function. We will manually introduce a timer that will pause each function for a different time. We will profile this script with the help of the cProfile library and then utilize SnakeViz to visualize outputs.
+File: exampleOne.py
+
+import time
+import random
+
+def verySlowRandomGenerator():
+    time.sleep(5)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def slowRandomGenerator():
+    time.sleep(2)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def fastRandomGenerator():
+    time.sleep(1)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def mainFunction():
+    res = fastRandomGenerator()
+    print(res)
+
+    res = slowRandomGenerator()
+    print(res)
+
+    res = verySlowRandomGenerator()
+    print(res)
+
+mainFunction()
+
+Output:
+# we will utilize the following command to profile exampleOne.py
+$ python -m cProfile -o exampleOne.prof exampleOne.py
+75.36921333333333
+75.40457333333333
+75.51178
+
+# we can then call the below command to launch SnakeViz
+# visualization in the browser
+$ snakeviz exampleOne.prof
+# Once we execute the above command, the SnakeViz library will launch
+# visualization on a browser
+
+Explanation:
+In the above snippet of code, we have imported the required modules. We have then defined some functions like verySlowRandomGenerator, slowRandomGenerator, and fastRandomGenerator in order to generate similar output. Within these functions, we have also included the sleep() method of the time module with different values that helps us create a difference in time taken by each function. We have then defined the mainFunction() function, where we have printed the values of the above-defined functions. At last, we have called the mainFunction() function.
+In the above screencast, we can observe that the SnakeViz library produced two charts by default, and we can alter the chart from the dropdown. All individual lines of profiling will be displayed in the table below for the visualization.
+
+Icicle Chart: The icicle chart utilizes rectangles in order to represent the time taken by functions. The rectangles for the functions like fastRandomGenerator, slowRandomGenerator, and verySlowRandomGenerator are displayed within the rectangle of mainFunction(). We can further click on a rectangle of any of those functions, and it will be set as a root rectangle, and all sub-functions called inside it will be as rectangles below it. The rectangles are organized like a tree structure in such a way where they were called, and the width of the rectangle represents the time taken by that function in the caller function of that function. We can observe that the total time consumed by the script is ~8.38 seconds.
+Sunburst Chart: The sunburst chart utilizes the angular extent of the arc in order to represent the time taken by functions. We can observe the same way as the icicle chart that the arc of fastRandomGenerator, slowRandomGenerator, and verySlowRandomGenerator is displayed within the extent of the arc mainFunction(). We can click on any arc, and that arc will become a root arc, and functions called inside it will be displayed as an arc around it.
+
+We will now look into the different components of visualization, which can help us understand the visualization in a better way.
+
+Function Information: We can hover over the rectangle in the icicle chart or arc in the sunburst chart, and it will display the information of the function that it signifies on the left side. It will display the function name, cumulative time, the file where the function is present, the line number it gets called, and the file directory.
+Call Stack: The Call Stack button is available in the top right corner. It is used to represent the call stack. If we click on any rectangle or arc, the chart will make that node the root node, and all sub-nodes will display functions called inside it. It will take us deep into that function. If we have gone deep into functions, analyzing them one after one, and want to know the stack path, we can click on the Call Stack button, displaying us the call stack. We can also click on any entry in it, and it will take us to that level.
+Stats Table: The stats table appears the same as that of the output produced by the cProfile It will be shown in the chart. Each of the lines of the state table is clickable depicting the function calls and whenever we click on any line that line will be made root node of the chart and all functions called within it will be displayed as sub-nodes.
+Reset Root: If we have changed the chart root by clicking on the row of the stats table, then we can click on this button to reset the root to the original.
+Reset Zoom: If we have zoomed into profiling by clicking in on any rectangle or arc, then we can reset it by clicking this button.
+Style: The style has two options for two chart types
+
+Icicle
+Sunburst
+
+
+Depth: The Depth dropdown allows us to select how deep into the call stack SnakeViz goes while creating a visualization. We can increase the profile depth, and many levels will be displayed in the chart at once. The calls present below this depth won't be displayed in the chart until we click on one of the top functions.
+CutOff: The CutOff dropdown can allow us to decide whether to display calls of the function, which takes up considerably a very short amount of time of the cumulative time of their parent. If we set the CutOff dropdown to some value, then for each function, we can check for the ratio of its cumulative time and the cumulative time of its parent. If we set a high cutoff value, the chart will be produced faster as many sub-charts won't be produced. If the ratio is less than the cutoff value, that function will be shown; however, the chart won't be constructed for sub-functions within that function, which implies that we cannot click on that function anymore to see the time consumed on sub-functions within it.
+
+Example 2: SnakeViz inside Jupyter Notebook
+We can easily utilize the SnakeViz library within the Jupyter notebook as well. Firstly, we are required to load the SnakeViz library as an extension within the notebook, and then we can call snakeviz as a line or cell magic command.
+Let us consider the following syntax to load the SnakeViz library as an extension.
+Syntax:
+
+%load_ext snakeviz
+
+Let us now use the same code as the previous example; however, we will use the %snakeviz line command while calling the mainFunction() in order to generate the SnakeViz visualization for it. It will generate visualization within the notebook.
+File: exampleTwo.py
+
+%load_ext snakeviz
+
+import time
+import random
+
+def verySlowRandomGenerator():
+    time.sleep(5)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def slowRandomGenerator():
+    time.sleep(2)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def fastRandomGenerator():
+    time.sleep(1)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def mainFunction():
+    res = fastRandomGenerator()
+    print(res)
+
+    res = slowRandomGenerator()
+    print(res)
+
+    res = verySlowRandomGenerator()
+    print(res)
+
+%snakeviz mainFunction()
+
+Output:
+75.41503333333333
+75.59046666666667
+75.37472
+ 
+*** Profile stats marshalled to file '/tmp/tmps5uyxuux'. 
+Embedding SnakeViz in this document...
+# this will return the SnakeViz visualization
+
+Explanation:
+In the above snippet of code, we have used the code from the previous example. We have then used the %snakeviz mainFunction() statement in order to call the function and generate the SnakeViz visualization for it.
+Example 3:
+Let us now consider the following example where we will generate the SnakeViz visualization again with the help of the same code; however, this time, we will be using the %%snakeviz cell magic command in order to explain its usage of it.
+File: exampleThree.py
+
+%%snakeviz
+
+import time
+import random
+
+def verySlowRandomGenerator():
+    time.sleep(5)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def slowRandomGenerator():
+    time.sleep(2)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def fastRandomGenerator():
+    time.sleep(1)
+    myArray = [random.randint(1, 150) for i in range(150000)]
+    return sum(myArray) / len(myArray)
+
+def mainFunction():
+    res = fastRandomGenerator()
+    print(res)
+
+    res = slowRandomGenerator()
+    print(res)
+
+    res = verySlowRandomGenerator()
+    print(res)
+
+mainFunction()
+
+Output:
+75.67562666666667
+75.38932
+75.47096666666667
+ 
+*** Profile stats marshalled to file '/tmp/tmphty5rhzv'. 
+Embedding SnakeViz in this document...
+# this will return the SnakeViz visualization
+
+Explanation:
+In the above snippet of code, we used the %%snakeviz cell magic command and repeated the code snippet from the previous example.
+
+
+Next TopicDifference between Materialized View and View
+
+
+
+
+← prev
+next →
+
+
+
+

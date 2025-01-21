@@ -1,0 +1,176 @@
+
+
+
+
+next →
+← prev
+
+How to Plot Multiple Linear Regression in Python
+A strategy of modeling the relationship between a dependent feature (the target variable) and a single independent feature (simple regression) or multiple independent features (multiple regression) is called linear regression. The linear regression algorithm works on the assumption that both types of variables have a linear relationship. If this relationship exists, we can calculate the model's necessary coefficients to make forecasts based on new or unseen data.
+Descriptive Analysis of Variables
+It's usually a good idea to plot visualization charts of the data to comprehend it better and check if there are relationships between each feature before stepping further into applying multi-linear regression. We'll utilize the pairplot() method from the Seaborn package to plot the relationships between the features. The function will produce a figure with a histogram and a scatter plot connecting each feature.
+Using a variety of libraries, including Numpy, Pandas, Scikit-Learn, and Scipy, we will learn how to apply and visualize the linear regression process in Python from scratch in this tutorial.
+Importing The Libraries
+We will import some of the Python libraries we need, such as NumPy, Pandas, sklearn, matplotlib, etc., in our first step. Additionally, we'll use the Pandas library to load the dataset from the GitHub repositories and convert the dataset into a dataframe called df.
+Code
+
+# Importing the required methods and modules
+
+# Basic libraries 
+import pandas as pd
+import numpy as np
+import warnings
+
+# For building the model
+from sklearn import linear_model
+
+# For data visualization
+import seaborn as sns
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+%matplotlib inline
+
+Output:
+(545, 4)
+      price  area  bedrooms  stories
+0  13300000  7420         4        3
+1  12250000  8960         4        4
+2  12250000  9960         3        2
+3  12215000  7500         4        2
+4  11410000  7420         4        2
+
+Feature Selection
+We will see the relationships between the features using a pair plot.
+Code
+
+# Visualizing the relationships between features using pair plots
+sns.pairplot(data = housing, height = 2)
+
+Output:
+
+We can see in the first row of the figure that there is a linear relationship between price and area features of the dataset. We can see that the scatter plots of the rest of the variables are random and show no relationship among them. We should take only one of the multiple independent features having a relationship between them. While here, prices are the target variable, so there is no need to drop and feature.
+Multicollinearity
+The multiple linear regression model assumes no correlation exists between the predictors or the independent variables employed in the regression. Using the corr() method from the Pandas dataframe, we can compute the Pearson correlation coefficient value between every two features of our data and build a matrix to see whether there is any correlation between any predictors. After that, we can use Seaborn's heatmap() plot to display the matrix as a heatmap.
+Code
+
+# Visualizing multicollinearity between independent features using a heatmap
+
+corr = housing[['area', 'bedrooms', 'stories']].corr()
+print('Pearson correlation coefficient matrix for each independent variable: \n', corr)
+
+# Masking the diagonal cells 
+masking = np.zeros_like(corr, dtype = np.bool)
+np.fill_diagonal(masking, val = True)
+
+# Initializing a matplotlib figure
+figure, axis = plt.subplots(figsize = (4, 3))
+
+# Generating a custom colormap
+c_map = sns.diverging_palette(223, 14, as_cmap = True, sep = 100)
+c_map.set_bad('grey')
+
+# Displaying the heatmap with the masking and the correct aspect ratio
+sns.heatmap(corr, mask = masking, cmap = c_map, vmin = -1, vmax = 1, center = 1, linewidths = 1)
+figure.suptitle('Heatmap visualizing Pearson Correlation Coefficient Matrix', fontsize = 14)
+axis.tick_params(axis = 'both', which = 'major', labelsize = 10)
+
+Output:
+Pearson correlation coefficient matrix for each independent variable: 
+               area  bedrooms   stories
+area      1.000000  0.151858  0.083996
+bedrooms  0.151858  1.000000  0.408564
+stories   0.083996  0.408564  1.000000
+
+
+
+Building a Multiple Linear Regression Model
+Let's move forward toward developing our regression model. Now that we have already seen no relationship and collinearity between the features, we can use all the features to build the model. We'll use the LinearRegression() class of Sklearn's linear_model library to create our models.
+Code
+
+# Building the Multiple Linear Regression Model
+
+# Setting the independent and dependent features
+X = housing.iloc[:, 1:].values
+y = housing.iloc[:, 0].values
+
+
+# Initializing the model class from the sklearn package and fitting our data into it
+reg = linear_model.LinearRegression()
+reg.fit(X, y)
+
+# Printing the intercept and the coefficients of the regression equation
+print('Intercept: ', reg.intercept_)
+print('Coefficients array: ', reg.coef_)
+
+Output:
+Intercept:  157155.2578429943
+Coefficients array:  [4.17726303e+02 4.18703502e+05 6.73797188e+05]
+
+We will attempt to convert our model into a three-dimensional graph using the code cell below. Our data point will be shown on the chart as grey dots, and the linear model will be represented as the blue plane.
+Code
+
+# Plotting a 3-D plot for visualizing the Multiple Linear Regression Model
+
+# Preparing the data
+independent = housing[['area', 'bedrooms']].values.reshape(-1,2)
+dependent = housing['price']
+
+# Creating a variable for each dimension
+x = independent[:, 0]
+y = independent[:, 1]
+z = dependent
+
+x_range = np.linspace(5, 10, 35)  
+y_range = np.linspace(3, 6, 35) 
+x1_range = np.linspace(3, 6, 35)
+x_range, y_range, x1_range = np.meshgrid(x_range, y_range, x1_range)
+viz = np.array([x_range.flatten(), y_range.flatten(), x1_range.flatten()]).T
+
+# Predicting price values using the linear regression model built above
+predictions = reg.predict(viz)
+
+# Evaluating the model using the R2 square of the model
+r2 = reg.score(X, y)
+
+# Ploting the model for visualization
+plt.style.use('fivethirtyeight')
+
+# Initializing a matplotlib figure
+fig = plt.figure(figsize = (15, 6))
+
+axis1 = fig.add_subplot(131, projection = '3d')
+axis2 = fig.add_subplot(132, projection = '3d')
+axis3 = fig.add_subplot(133, projection = '3d')
+
+axes = [axis1, axis2, axis3]
+
+for ax in axes:
+    ax.plot(x, y, z, color='k', zorder = 10, linestyle = 'none', marker = 'o', alpha = 0.1)
+    ax.scatter(x_range.flatten(), y_range.flatten(), predictions, facecolor = (0,0,0,0), s = 20, edgecolor = '#70b3f0')
+    ax.set_xlabel('Area', fontsize = 10, labelpad = 10)
+    ax.set_ylabel('Bedrooms', fontsize = 10, labelpad = 10)
+    ax.set_zlabel('Prices', fontsize = 10, labelpad = 10)
+    ax.locator_params(nbins = 3, axis = 'x')
+    ax.locator_params(nbins = 3, axis = 'x')
+
+axis1.view_init(elev=25, azim=-60)
+axis2.view_init(elev=15, azim=15)
+axis3.view_init(elev=25, azim=60)
+
+fig.suptitle(f'Multi-Linear Regression Model Visualization (R2 = {r2})', fontsize = 15, color = 'k')
+
+Output:
+
+
+
+Next TopicPhysics Calculations in Python: Introduction to Python Function
+
+
+
+
+← prev
+next →
+
+
+
+

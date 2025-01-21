@@ -1,0 +1,493 @@
+
+
+
+
+next →
+← prev
+
+Floor Division in Python
+In the following tutorial, we will learn about the Floor Division operation using the Python programming language.
+But before we get started, let us briefly understand what Floor division is.
+Understanding the Floor division
+Floor division is a normal division operation, except it returns the largest possible integer. This integer can either be less than the normal division output or equal to it.
+The floor function is signified by the ⌊ ⌋ symbol in mathematical terms.
+Let us now understand the working of the Floor division operation. For example,
+⌊36/5⌋
+Step 1: Performing the division first. We will divide 36 by 5.
+36 ÷ 5 = 7.2
+Step 2: Now, we will perform the floor function on the value we get after division, i.e., 7.2.
+⌊7.2⌋=7
+As a result, we get 7 which is the floor value of 7.2. Hence, floor division means dividing and rounding down to the nearest integer.
+Different programming languages offer a particular built-in function or operator to calculate floor division. Some examples can be:
+
+We can use the floor() method in the C++ programming language.
+We can use the floor() method in the Java programming language.
+We can use the // operator in the Python programming language.
+
+However, we will only be discussing the use of the floor division operation in Python with the help of the double-backslash (//) operator.
+Understanding Floor Division using Python
+In the Python programming language, floor division is used to divide two numbers and rounds the outcome down to the nearest integer.
+Before diving deeper into the concept of floor division, let us briefly remind ourselves of the meaning of division and the working of the math.floor() function in Python.
+Performing Regular Division in Python
+We can divide two numbers using the backslash (/) division operator in Python. Let us consider the following example demonstrating the same:
+Example 1:
+
+# declaring variables
+a = 13
+b = 4
+
+# performing regular division
+c = a / b
+
+# printing the result
+print(a, "/", b, "=", c)
+
+Output:
+13 / 4 = 3.25
+
+Explanation:
+In the above snippet of code, we have defined two variables as a = 13 and b = 4. We have then performed a division operation using the backslash (/) division operator and stored the resultant value in a new variable, c. At last, we have printed the value of c.
+As we can see, division in Python works the same way as division works in mathematics.
+Understanding the math.floor() function in Python
+There is a built-in math module in Python that consists of different useful mathematical utilities for calculations.
+One such built-in function of the math module is the math.floor() function. This function accepts a numeric input and returns the floor value by rounding down it to the nearest integer.
+Let us consider the following example demonstrating the same:
+Example 2:
+
+# importing the floor() function from the math module
+from math import floor
+
+# declaring the variables
+a = 5.34
+b = -5.34
+# using the floor() function
+c = floor(a)
+d = floor(b)
+# printing the values
+print("Floor value of", a, "=", c)
+print("Floor value of", b, "=", d)
+
+Output:
+Floor value of 5.34 = 5
+Floor value of -5.34 = 6
+
+Explanation:
+In the above snippet of code, we have imported the floor() function from the math module. We have then declared two variables as a = 5.34 and b = -5.34. We have then used the floor() function to calculate the floor values of both the variables and stored them in new variables, c and d. At last, we have printed the results for the users.
+Now that we have understood the concepts of dividing and flooring numbers in Python. Let us head onto the details associated with the floor division in Python.
+Performing Floor Division in Python
+Floor division is an operation in Python that allows us to divide two numbers and rounds the resultant value down to the nearest integer. The floor division occurs through the double-backslash (//) operator. The syntax for the same is shown below:
+Syntax:
+
+res = var_1 // var_2
+
+Where:
+
+res is the resultant value of the floor division
+var_1 is the dividend
+var_2 is the divisor
+
+We can think of floor division as the regular division combined with the math.floor() function call.
+Note: The floor division can round any number down to the nearest integer. For instance, 3.99 will still be rounded down to 3.
+Let us now consider an example demonstrating the working of floor division.
+Example 3:
+
+# declaring the variables
+a = 13
+b = 5
+
+# using the // operator
+c = a // b
+# comparing the floor value with regular division
+d = a / b
+
+# printing the values
+print("Floor Division:", a, "//", b, "=", c)
+print("Regular Division:", a, "/", b, "=", d)
+
+Output:
+Floor Division: 13 // 5 = 2
+Regular Division: 13 / 5 = 2.6
+
+Explanation:
+In the above snippet of code, we have declared two variables as a = 13 and b = 5. We have then used the // operator to calculate the floor division value and stored the floor value in a new variable, c. We have then performed the regular division using the / operator and stored the value in another variable, d. At last, we have printed both the results and compared them.
+Now, let us consider another example using the math.floor() function.
+Example 4:
+
+# importing the floor() function from the math module
+from math import floor
+
+# declaring the variables
+a = 17
+b = 5
+
+# using the floor() function
+c = floor(a / b)
+# comparing the floor() function with // operator
+d = a // b
+
+# printing the values
+print("Floor Division using floor() function:", c)
+print("Floor Division using // operator:", d)
+
+Output:
+Floor Division using floor() function: 3
+Floor Division using // operator: 3
+
+Explanation:
+We have imported the floor() function from the math module in the above snippet of code. We have then declared two variables as a = 17 and b = 5. We then used the floor() function, divided a by b, and stored it in variable c. We have then calculated the floor value using the // operator and stored the value in a new variable, d. At last, we have printed both values and compared them.
+Performing Floor Division with Negative Numbers
+We can also perform floor division using negative numbers.
+In the case of negative numbers, the resultant value is still rounded down to the nearest integer. Some might get confused by rounding down a negative number implies going away from zero. For instance, -2.3 is floored down to -3.
+Let us consider an example demonstrating the floor division with negative numbers.
+Example 5:
+
+# declaring the variables
+a = -10
+b = 4
+
+# calculating floor value using // operator
+c = a // b
+
+# printing the value
+print("Floor Division:", a, "//", b, "=", c)
+
+Output:
+Floor Division: -10 // 4 = -3
+
+Explanation:
+In the above snippet of code, we have declared two variables as a = -10 and b = 4. We have then used the // operator to calculate the floor value and stored it in a new variable, c. At last, we have printed the value for the user.
+With a regular division, -10 / 4 would return -2.5; however, with a floor division, this number is round down to the nearest negative integer, i.e., to -3.
+Performing Floor Division with Floats
+We can also perform Floor division with floats in Python. When floor-dividing floats, the outcome is a float representing the nearest integer.
+Let us consider the following example demonstrating the floor division using floats.
+Example 6:
+
+# initializing the lists
+a = [17.5, 10, 13.4]
+b = [3.3, 2.5, 3]
+
+# using for-loop to iterate through the list
+for i in range(0, 3):
+    # calculating the floor division value
+    c = a[i] // b[i]
+    # printing the result
+    print(a[i], "//", b[i], "=", c)
+
+Output:
+17.5 // 3.3 = 5.0
+10 // 2.5 = 4.0
+13.4 // 3 = 4.0
+
+Explanation:
+In the above snippet of code, we have initialized two lists. We have then used the for-loop to iterate through the elements of these lists, calculated the values for each floor division operation, and printed the results for the users.
+As a result, we can observe that the floor division operation is performed using floats and float with integer returns the value rounding down to the nearest integer represented as the floats.
+Floor Division and Modulo in Python
+In Mathematics, modulo is a concept mainly associated with floor division. We can also say that modulo means the remainder in the division between two numbers. In other words, we can count the number of leftovers with it.
+We can calculate modulo in Python using the percentage (%) operator.
+Let us consider an example illustrating the relationship between the floor division and modulo in Python.
+Example 7.1:
+Given 13 candies and 4 eaters, we can calculate the number of candies each eater gets with the help of the floor division.
+Code:
+
+# declaring variables
+numberOfCandies = 13
+numberOfEaters = 4
+
+# using floor division to calculate the number of candies each eater gets
+candiesPerEater = numberOfCandies // numberOfEaters
+
+# printing values
+print("Number of Candies:", numberOfCandies)
+print("Number of Eaters:", numberOfEaters)
+print("The number of candies each eater gets:", candiesPerEater)
+
+Output:
+Number of Candies: 13
+Number of Eaters: 4
+The number of candies each eater gets: 3
+
+Explanation:
+In the above snippet of code, we have declared some variables signifying the number of candies and eaters. We have then used the // operator to perform floor division in order to calculate the number of candies each eater gets. We have then printed these values for the user.
+Let us now calculate the total number of candies shared among the group. This isn't very important.
+Example 7.2:
+We will multiply the number of candies per person by the number of eaters.
+Code:
+
+# calculating the total number of candies being shared among the group
+totalCandiesShared = candiesPerEater * numberOfEaters
+
+# printing values
+print("The total number of candies being shared among the group:", totalCandiesShared)
+
+Output:
+The total number of candies being shared among the group: 12
+
+Explanation:
+In the above snippet of code, we have calculated the total number of candies being shared among the group by multiplying the number of candies per person by the number of eaters and printed the resultant value for the users.
+The total number of full candies shared is 12. However, the total number of candies is 13. This statement implies that one candy will be leftover and is not going to be eaten.
+The above example describes one way to calculate the number of leftovers. However, if we are only interested in the number of leftovers, we can directly calculate it with the help of modulo.
+Example 7.3:
+Given 13 candies and 4 eaters, what is the number of leftover candies?
+Code:
+
+# declaring variables
+numberOfCandies = 13
+numberOfEaters = 4
+
+# using modulo to calculate the leftover candies
+leftoverCandies = numberOfCandies % numberOfEaters
+
+# printing values
+print("Number of Candies:", numberOfCandies)
+print("Number of Eaters:", numberOfEaters)
+print("Total number of Leftover Candies:", leftoverCandies)
+
+Output:
+Number of Candies: 13
+Number of Eaters: 4
+Total number of Leftover Candies: 1
+
+Explanation:
+In the above snippet of code, we have declared the variables storing the value candies and eaters. We have then calculated the number of leftover candies using the % operator signifying the modulo operation. At last, we have printed some statements and resultant values for the users. As a result, we can see that the leftover candy is 1.
+a = b * (a // b) + (a % b)
+In Python, the floor division and the modulo are related by the following equation:
+Where:
+
+a is the dividend.
+b is the divisor.
+
+For instance, let us verify the above equation holds with the 13 candies and 4 eaters.
+13 = 4 * (13 // 4) + (13 % 4)
+13 = 4 * 3 + 1
+13 = 13
+Thus, we have understood the concepts of floor division and modulo in Python. Now, we will look at some built-in function that calculates both.
+Understanding the divmod() Function in Python
+Python offers a built-in function called divmod() that allows us to calculate both the floor division and the modulo between two numeric values.
+The syntax for the divmod() function is shown below:
+Syntax:
+
+res = divmod(var_1, var_2)
+
+Where:
+
+res is the result as a tuple. This tuple has the floor division result and the remainder given by the modulo.
+var_1 is the dividend.
+var_2 is the divisor.
+
+Let us now consider the following example demonstrating the divmod() function.
+Example 8:
+Given 13 candies and 4 eaters, how many full candies does each eater get, and how many candies left?
+Code:
+
+# declaring variables
+numberOfCandies = 13
+numberOfEaters = 4
+
+# using the divmod() function
+nCandies, nLeftovers = divmod(numberOfCandies, numberOfEaters)
+
+# printing values
+print("Number of Candies:", numberOfCandies)
+print("Number of Eaters:", numberOfEaters)
+print("Number of Candies per eater:", nCandies)
+print("Total number of Leftover Candies:", nLeftovers)
+
+Output:
+Number of Candies: 13
+Number of Eaters: 4
+Number of Candies per eater: 3
+Total number of Leftover Candies: 1
+
+Explanation:
+In the above snippet of code, we have declared some variables. We have used the divmod() function to calculate the floor division value and the modulo for the given variables. We have then printed these values for the users.
+Understanding the Floor Division Precedence
+In Python, the floor division operator // has the similar precedence level as multiplication (*), division (/), and modulo (%).
+This statement implies that if we multiply, and then floor-divide, the multiplication is achieved first, and then the floor division and vice versa.
+However, if we for instance subtract two numbers and then perform floor division, the floor division operation will pave the way.
+Let us consider an example demonstrating the same.
+Example 9.1:
+
+# declaring some variables
+a = 3
+b = 5
+c = 6
+d = 7
+
+# performing an operation
+e = a * b // c - d
+
+# printing the result
+print(a, "*", b, "//", c, "-", d, "=", e)
+
+Output:
+3 * 5 // 6 - 7 = -5
+
+Explanation:
+In the above snippet of code, we have declared some variables as a = 3, b = 5, c = 6, and d = 7. We have then performed an operation and stored the resultant value in a new variable, e. At last, we have printed this value for the users.
+In order to understand how this result is calculated, we can insert parenthesis around the terms in the correct precedence order.
+The example shown below depicts the same:
+Example 9.2:
+
+# declaring some variables
+a = 3
+b = 5
+c = 6
+d = 7
+
+# performing an operation
+e = ((a * b) // c) - d
+
+# printing the result
+print("((", a, "*", b, ") //", c, ") -", d, "=", e)
+
+Output:
+(( 3 * 5 ) // 6 ) - 7 = -5
+
+Explanation:
+In the above snippet of code, we have declared some variables as a = 3, b = 5, c = 6, and d = 7. We have then performed the same operation but with parenthesis and stored the resultant value in a new variable, e. At last, we have printed this value for the users.
+As we can observe that we get the similar result as from the previous example, which means the order of calculation is:
+Multiplication → Floor Division → Subtraction
+Here is the stepwise calculation of the above:
+3 * 5 // 6 - 7
+((3 * 5) // 6) - 7
+(15 // 6) - 7
+2 - 7
+-5
+We have understood the floor division properly and its use in the Python programming language.
+At last, we will look at an advanced use case for the floor division. In the following case, advanced does not imply hard; however, it is rather unusual.
+Understanding the Advance Use of Floor Division
+Some of us might be aware that we can also make custom objects supporting the floor division operation in Python. This can be possible through a special method known as __floordiv__().
+The __floordiv__() method in Python
+The floor division operation in Python is used to divide two numbers and rounds the result down to the nearest integer.
+It works under the hood because a numeric type implements a special method called __floordiv__(). Then, whenever we call the // operator between two objects, the __floordiv__() method gets called.
+In Python, we can also directly call the __floordiv__() method. Let us consider the following example demonstrating the same:
+Example 10:
+
+# declaring some variables
+a = 31
+b = 7
+
+# performing floor division using the // operator
+c = a // b
+# performing floor division using the __floordiv__() method
+d = (a).__floordiv__(b)
+
+# printing the results of both operations
+print("Using the // operator:\n", a, "//", b, "=", c)
+print("Using the __floordiv__() method:\n (", a, ").__floordiv__(", b, ") =", c)
+
+Output:
+Using the // operator:
+ 31 // 7 = 4
+Using the __floordiv__() method:
+ ( 31 ).__floordiv__( 7 ) = 4
+
+Explanation:
+In the above snippet of code, we have declared two variables as a = 31 and b = 7. We then performed floor division using the // operator and __floordiv__() method and stored their resultant values in two variables, c and d. At last, we have printed the results for the users.
+From the output shown above, we can observe that both the expressions have yielded the same result. This is because the first expression gets converted into the second expression. In other words, these calls are equivalent to one another.
+Now, things will get interesting. Let us consider the following example.
+Example 11.1:
+We will create a custom class representing the integer values as strings in the following example. We will then create two objects of this custom class and perform floor division operation on them.
+Code:
+
+# creating a class representing integer values as string
+class IntStr:
+    def __init__(self, val):
+        self.val = val
+
+# instantiating the class with two objects
+intOne = IntStr("17")
+intTwo = IntStr("4")
+
+# printing the result of the floor division operation
+print(intOne // intTwo)
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python_programs\pycase.py", line 11, in 
+    print(intOne // intTwo)
+TypeError: unsupported operand type(s) for //: 'IntStr' and 'IntStr'
+
+Explanation:
+In the above snippet of code, we have defined a class as IntStr that represents the integer values as strings. We have then created two objects of the IntStr class. At last, we have floor-divide the intOne object by the intTwo object and tried printing the result.
+However, the above output indicates a TypeError. This error message reveals that IntStr objects do not support floor division. This error makes sense. How would the custom type have any clue of floor dividing strings objects?
+However, as it turns out, we can make the IntStr object support floor division.
+Previously, we learned whenever we call the // operator, we call the __floordiv__() method. This method is executed somewhere in the class of the object. For instance, int objects support floor division because the int class has applied the __floordiv__() method.
+These special methods, like __floordiv__(), have something amazing in common that we can implement these methods into the custom class. In other words, we can make the custom objects support floor division in the Python programming language.
+Let us now consider the following example demonstrating the same.
+Example 11.2:
+In the following example, we will implement the __floordiv__() method into the IntStr class. We will then create two objects of this custom class and perform floor division operation on them.
+Code:
+
+# creating a class representing integer values as string
+class IntStr:
+    def __init__(self, val):
+        self.val = val
+    def __floordiv__(self, other):
+        intOne = int(self.val)
+        intTwo = int(other.val)
+        res = intOne // intTwo
+        
+        return IntStr(str(res))
+
+# instantiating the class with two objects
+intOne = IntStr("17")
+intTwo = IntStr("4")
+
+# performing floor division operation
+res = intOne // intTwo
+
+# printing the result of the floor division operation
+print(intOne.val, "//", intTwo.val, "=", res.val)
+
+Output:
+17 // 4 = 4
+
+Explanation:
+In the above snippet of code, we have defined a class as IntStr that represents the integer values as strings. We have also implemented the __floordiv__() method within this class. This method accepts the numeric string value from itself and another object. We converted these string values to integers and performed a floor division between them. We have then converted the result back into a string and created a new IntStr object. We instantiated the IntStr class with two objects and performed a floor division operation between them. At last, we have printed the resultant value for the users.
+Now that we successfully understand the method of making a custom class to support floor division.
+If we do not like the fact that we have to call object.val to see the result, we can implement the __str__() method that directly returns the value while printing.
+Let us consider the following example demonstrating the same.
+Example 11.3:
+
+# creating a class representing integer values as string
+class IntStr:
+    def __init__(self, val):
+        self.val = val
+    def __floordiv__(self, other):
+        intOne = int(self.val)
+        intTwo = int(other.val)
+        res = intOne // intTwo
+        
+        return IntStr(str(res))
+    def __str__(self):
+        return self.val
+
+# instantiating the class with two objects
+intOne = IntStr("17")
+intTwo = IntStr("4")
+
+# performing floor division operation
+res = intOne // intTwo
+
+# printing the result of the floor division operation
+print(intOne, "//", intTwo, "=", res)
+
+Output:
+17 // 4 = 4
+
+Explanation:
+In the above snippet of code, we have defined a class as IntStr that represents the integer values as strings. We have also implemented the __floordiv__() method within this class. We have then defined the __str__() method that directly returns the string values while printing. We instantiated the IntStr class with two objects and performed a floor division operation between them. At last, we have printed the resultant value for the users.
+
+
+Next TopicTop 10 Best Coursera Python Courses
+
+
+
+
+← prev
+next →
+
+
+
+

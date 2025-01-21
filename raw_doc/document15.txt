@@ -1,0 +1,131 @@
+
+
+
+
+next →
+← prev
+
+Python for loop
+Python is a powerful, general-purpose scripting language intended to be simple to understand and implement. It is free to access because it is open-source. This tutorial will teach us how to use Python for loops, one of the most basic looping instructions in Python programming.
+Introduction to for Loop in Python
+In Python, the for loop is often used to iterate over iterable objects such as lists, tuples, or strings. Traversal is the process of iterating across a series. If we have a section of code that we would like to repeat a certain number of times, we employ for loops. The for-loop is usually used on an iterable object such as a list or the in-built range function. The for statement in Python traverses through the elements of a series, running the block of code each time. The for statement is in opposition to the "while" loop, which is employed whenever a condition requires to be verified each repetition or when a piece of code is to be repeated indefinitely.
+Syntax of for Loop
+
+for value in sequence:
+    {loop body} 
+
+On each iteration, the value is the parameter that gets the element's value within the iterable sequence. If an expression statement is present in a sequence, it is processed first. The iterating variable iterating_variable is then allocated to the first element in the sequence. After that, the intended block is run. The statement block is performed until the whole sequence is completed, and each element in the sequence is allocated to iterating_variable. The for loop's material is distinguished from the rest of the program using indentation.
+Example of Python for Loop
+Code
+
+# Code to find the sum of squares of each element of the list using for loop
+
+# creating the list of numbers
+numbers = [3, 5, 23, 6, 5, 1, 2, 9, 8]
+
+# initializing a variable that will store the sum
+sum_ = 0
+
+# using for loop to iterate over the list
+for num in numbers:
+   
+sum_ = sum_ + num ** 2 
+
+print("The sum of squares is: ", sum_)
+
+Output:
+The sum of squares is:  774
+
+The range() Function
+Because the "range" function appears so frequently in for loops, we might mistakenly believe the range is a component of the syntax of for loop. It isn't: it's a Python built-in method that provides a series that follows a specified pattern (usually serial integers), fulfilling the criteria of giving a series for the for expression to run over. There is no necessity to count because for can act straight on sequences most of the time. If they're coming from some other language with distinctive loop syntax, this is a frequent novice construct:
+Code
+
+my_list = [3, 5, 6, 8, 4]
+for iter_var in range( len( my_list ) ):
+    my_list.append(my_list[iter_var] + 2)
+print( my_list )
+
+Output:
+[3, 5, 6, 8, 4, 5, 7, 8, 10, 6]
+
+Iterating by Using Index of Sequence
+Another method of iterating through every item is to use an index offset within the sequence. Here's a simple illustration:
+Code
+
+# Code to find the sum of squares of each element of the list using for loop
+
+# creating the list of numbers
+numbers = [3, 5, 23, 6, 5, 1, 2, 9, 8]
+
+# initializing a variable that will store the sum
+sum_ = 0
+
+# using for loop to iterate over list
+for num in range( len(numbers) ):
+   
+sum_ = sum_ + numbers[num] ** 2 
+
+print("The sum of squares is: ", sum_)
+
+Output:
+The sum of squares is:  774
+
+The len() built-in method that returns the total number of items in the list or tuple and the built-in function range(), which returns the exact sequence to iterate over, came in handy here.
+Using else Statement with for Loop
+Python allows you to connect an else expression with a loop expression.
+When the else clause is combined with a for loop, it is performed after the circuit has finished iterating over the list.
+The following instance shows how to use an otherwise statement in conjunction with a for expression to find students' marks from the record.
+Code
+
+# code to print marks of a student from the record
+student_name_1 = 'Itika'
+student_name_2 = 'Parker'
+
+
+# Creating a dictionary of records of the students
+records = {'Itika': 90, 'Arshia': 92, 'Peter': 46}
+def marks( student_name ):
+    for a_student in record: # for loop will iterate over the keys of the dictionary
+        if a_student == student_name:
+            return records[ a_student ]
+            break
+    else:
+        return f'There is no student of name {student_name} in the records' 
+        
+# giving the function marks() name of two students
+print( f"Marks of {student_name_1} are: ", marks( student_name_1 ) )
+print( f"Marks of {student_name_2} are: ", marks( student_name_2 ) )
+
+Output:
+Marks of Itika are:  90
+Marks of Parker are:  There is no student of name Parker in the records
+
+Nested Loops
+If we have a piece of script that we want to run a number of times and then another piece of script inside that script that we want to run B number of times, we employ a "nested loop." When working with an iterable in the lists, these are widely utilized in Python.
+Code
+
+import random
+numbers = [ ]
+for val in range(0, 11):
+    numbers.append( random.randint( 0, 11 ) )
+for num in range( 0, 11 ):
+    for i in numbers:
+        if num == i:
+            print( num, end = " " )
+
+Output:
+0 2 4 5 6 7 8 8 9 10
+
+
+
+
+Next TopicPython while loop 
+
+
+
+← prev
+next →
+
+
+
+

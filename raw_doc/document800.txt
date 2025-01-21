@@ -1,0 +1,120 @@
+
+
+
+
+next →
+← prev
+
+AES CTR Python
+You don't need to decrypt every byte to get some information in the middle. When using AES CTR mode, we generate some random bits using the supplied encryption key and the IV. We XOR them with our string using these random bits. This generates a text that is random.
+Before understanding AES CTR mode in python, firstly, we should understand Python Pycrypto's use of AES for decryption and encryption.
+
+Producing a Key.
+Vector of initialization.
+AES encryption is used.
+Using AES to decrypt.
+AES-based file encryption. Write the File Size in Section 6.1. The Initialization Vector should be saved. 6.3. Modify the final block.
+AES-based file decryption.
+
+CTR Mode
+A common AES block cypher mode known as CTR (short for counter) allows all operations to be carried out concurrently. Because CTR also includes XORing a series of pad vectors with the plaintext and ciphertext blocks, it is comparable to OFB. The primary distinction is in how these pad vectors are produced.
+As we know, AES cypher is a library that uses AES256-CBC to encrypt and decrypt data.
+When it comes to computer security, encryption is one of the best techniques for securing data. Additionally, there are numerous types of encryption.
+CTR AES
+AES encryption has a counter mode called CTR. It also goes by the names ICM and SIC.
+You have what is known as an Initializing Vector or IV for short, in AES encryption. This is often a randomized 128-bit input. The IV has two components in CTR mode. The regular randomized IV is present in the first 8 bytes. There is a counter in the final 8 bytes. This counter is a 0 index that indicates how many 128-bit blocks of the encrypted data you have access to. When 512 bits of data (64 bytes) are being encrypted, the start position at 0 bytes into the data would have a counter of 0; at 16 bytes, a counter of 1; and at 32 bytes, a counter of up to 2.
+Continue in this manner until you have exhausted all of your information. This encryption can be searched through the information, unlike standard AES encryption. You don't need to decrypt every byte to get some information in the middle.
+When using AES CTR mode, we generate some random bits using the supplied encryption key and the IV. We XOR them with our string using these random bits. This generates a text that is random. We just XOR the text with the identical random bits we generated using the encryption key and the IV to decrypt them.
+Constants for the AES supported modes of operation in the module:
+
+var MODE_ECB: Electronic Code Book (ECB)
+var MODE_CBC: Cipher-Block Chaining (CBC)
+var MODE_CCM: Counter with CBC-MAC (CCM) Mode
+var MODE_OCB: Offset Code Book (OCB)
+var MODE_CFB: Cipher FeedBack (CFB)
+var MODE_OFB: Output FeedBack (OFB)
+var MODE_CTR: CounTer Mode (CTR)
+var MODE_OPENPGP: OpenPGP Mode
+var MODE_EAX: EAX Mode
+var MODE_GCM: Galois Counter Mode (GCM)
+var MODE_SIV: Syntethic Initialization Vector (SIV)
+
+Syntax for Creating a New AES Cipher
+
+Crypto.Cipher.AES.new(key, mode, *args, **kwargs)
+
+Parameters
+1. Key: The value of the key argument is the type of bytes, bytesarray, or memory view.
+Used in the symmetric cipher as the secret key.
+16, 24, or 32 bytes must be used (respectively for AES-128, AES-192 or AES-256).
+It doubles to 32, 48, or 64 bytes only when MODE_SIV is used.
+2. Mode: The encryption or decryption chaining mode to use.
+Keyword Arguments
+1. iv: The expected value type of argument: bytes, bytearray, or memoryview.
+Applicable for only modes: MODE_OPENPGP, MODE_OFB, MODE_CFB, and MODE_CBC.
+It must be 16 bytes long for encryption and 18 bytes long for decryption in the MODE_OPENPGP mode only (in the latter case, it is actually the encrypted IV that was prefixed to the ciphertext).
+It must be16 bytes long for MODE_CBC, MODE_CFB, and MODE_OFB.
+If nothing is entered, a random byte string is constructed (you must then read its value with the iv attribute).
+2. nonce: The expected value type of argument: bytes, bytearray, or memoryview.
+Applicable for only modes: MODE_EAX, MODE_CCM, MODE_GCM, MODE_OCB, MODE_SIV, and MODE_CTR a value that cannot be used again for this key's encryption in any other context.
+There are no length limits for MODE_EAX, MODE_GCM, and MODE_SIV (recommended: 16 bytes).
+Its length has to fall between [7..13] to be compatible with MODE_CCM. A trade-off exists between nonce length and maximum message size using CCM, so keep that in mind. 11 bytes are recommended.
+Its length must fall between the range [1..15] for MODE_OCB (recommended: 15).
+Its length must fall between the range [0..15] for MODE_CTR (recommended: 8).
+The nonce is optional for MODE_SIV; if it is not supplied, no nonce is used, making the encryption deterministic.
+For modes other than MODE SIV, a random byte string of the advised length is used if it is not provided (After that, you must use the nonce attribute to read its value).
+3. segment_size: The expected value type of argument: integer
+Applicable for only modes: MODE_CFB the number of bits that separate plaintext and ciphertext. A multiple of eight is required. It will be taken to be 8 if not stated otherwise.
+4. mac_len: The expected value type of argument: integer
+Applicable for only modes: MODE_EAX, MODE_GCM, MODE_OCB, and MODE_CCM the authentication tag's length in bytes.
+It must fall within the range [4..16] and be even. The suggested value is 16 (which also serves as the default if not given).
+5. msg_len: The expected value type of argument: integer
+Applicable for only modes: MODE_CCM length of the message that must be (de)cipher. If not supplied, the complete message must be passed when calling encrypt. Like encrypting, decrypting can only be used once.
+6. assoc_len: The expected value type of argument: integer
+Applicable for only modes: MODE_CCM length of the related information. If nothing is supplied, all connected data is internally buffered, which could be problematic for particularly big messages.
+7. initial_value: The expected value type of argument: integer, bytes, bytearray, or memoryview.
+Applicable for only modes: MODE_CTR the counter's starting point value. The cipher will begin counting from 0 if it is absent. For each block, the value is increased by one. Big endian mode is used to encode the counter number.
+8. counter: A counter block that may be completely customised thanks to an instance of Crypto.Util.Counter.
+The parameters nonce and initial_value cannot both be used with this one.
+9. use_aesni: The Intel AES-NI hardware extensions use this (Default is used if available).
+Return
+It returns an AES object with the necessary mode.
+Syntax for Creating a New CTR Cipher
+The length of a counter block equals the size of a cipher block (e.g., 16 bytes for AES). It is made up of the joining of two parts:
+
+A fixed nonce that is set at startup.
+A variable counter that goes up by 1 for each additional counter block. The counter is encoded in big-endian.
+
+A new CTR cipher object is created for the appropriate base algorithm using the new() function at the component level under Crypto.Cipher. The algorithm inside the following definition could be AES:
+
+Crypto.Cipher.<algorithm>.new(key, mode, *, nonce=None, initial_value=None, counter=None)
+
+It makes a new CTR object with the basic cryptographic <algorithm>.
+Parameters
+Following are the Parameters of the CTR cipher.
+
+Key: The secret to cryptography
+Mode: Constant is Crypto.Cipher.<algorithm>.MODE_CTR
+Nonce: The fixed nonce's value. For the combination message/key, it must be distinct. Its length ranges from zero to one less than the block size. In the absence of one, the library generates a random nonce with length block size/2.
+Initial_value: The counter's value in the first counter block. It may be an integer or a set of bytes (which is the same integer, just big-endian encoded). Unless otherwise indicated, the counter begins at 0.
+Counter: Using Crypto.Util.Counter.new to create a unique counter object (). This makes it possible to define a counter block with additional complexity.
+
+Returns
+It returns the objects of a CTR Cipher.
+A CTR cypher object's encrypt() and decrypt() functions accept data of arbitrary length (i.e. padding is not needed). As soon as the counter completes a full rotation and repeats the initial value, both throw an OverflowError exception.
+An attribute called nonce is read-only on the CTR cipher object (bytes).
+Conclusion
+In this article, we discussed AES CTR mode in python, but first, we have to understand Python Pycrypto's use of AES for decryption and encryption. And also we discussed the syntax and parameters for creating a new AES cipher and a new CTR cipher.
+
+
+Next TopicCurdir Python
+
+
+
+
+← prev
+next →
+
+
+
+

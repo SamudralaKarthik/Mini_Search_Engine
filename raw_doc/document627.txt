@@ -1,0 +1,307 @@
+
+
+
+
+next →
+← prev
+
+Python's Module Configparser
+Python's in-built ConfigParser library is part of the base module. The library provides a console parser for easy file configuration consisting of pairs of name-key values.
+The popular worldwide accepted convention supported by this library is the "INI" syntax, utilized on the Microsoft platform most commonly. The library was initially made to help with a different language structure in which the items in each segment looked like RFC 822 headers.
+The execution permits named values to be determined utilizing either grammar. This verifiable mishap and absence of an unmistakable determination of the "INI" design have made this module extremely monotonous to keep up with, so the execution has been changed in pretty much every Python discharge, and the way of behaving of the module has demonstrated exceptionally dreary to portray.
+Important points
+
+The ongoing way of behaving of the defaults has forever been planned.
+The module was intended to help a set-up of projects that could give some data either utilized straightforwardly or to frame portions of different qualities (for example, way names that incorporated the host name of the PC running a program).
+At the time, there was a compelling reason to recognize various purposes of "default" values, as MartinManey proposes beneath. (Not satisfactory to me presently, there's a genuine need to do as such since the API given by ConfigParser is so extra.)
+The utilization of an "enchantment segment name" for the current "defaults" in the ongoing execution is something I think about sad; the default word reference ought to be different from the word reference of areas.
+Ought to extra name gap ("sorts of defaults") at any point be thought of, I'd trust they don't turn out to be essential for arranging segment names by idiotic mishap.
+Incorporating the defaults by the compose() technique is sad; these were expected to be a way for an application to supply processed values that would be utilized on the off chance that a particular set-up didn't supersede them.
+From Python's standard library, the configparser module characterizes usefulness for perusing and composing set-up documents as utilized by Windows OS Microsoft.
+Such documents typically have .INI expansion.
+The INI document comprises segments driven by a [section] header. Between square sections, we can put the part's name.
+The segment is trailed by key/esteem passages isolated by = or: character. It might incorporate remarks prefixed by # or; image.
+
+An example INI record is displayed underneath:
+
+[Settings]
+# Setting log detailed for extra debugging information
+DetailedLog=1
+RunStatus=1
+StatusPort=6090
+StatusRefresh=10
+Archive=1
+# Setting the location of the log file MV_FTP 
+LogFile=/opt/ecs/mvuser/MV_IPTel/log/MV_IPTel.log
+Version=0.9 Build 4
+ServerName=Unknown
+[FTP]
+# Setting the server active FTP
+RunFTP=1
+# defining the control port FTP
+FTPPort=21
+# Setting the locations of the data directory FTP
+FTPDir=/opt/ecs/mvuser/MV_IPTel/data/FTPdata
+# Setting the Name of admin
+UserName=admin
+# Setting the protected Password
+Password=admin
+
+The ConfigParser class belongs to the configparser module. It must manage the parsed content database and parse all configuration documents.
+Any Object of class ConfigParser is created by the below line -
+
+Parser_name = configparser.ConfigParser()
+
+Following are the methods used with the objects of class ConfigParser:
+
+
+write() method
+To know the state of configuration in .ini format.
+
+
+read_dict() method
+Reading configuration from a dictionary. Key concepts are important for the segment names, and values are word references with keys and values that ought to be available in the segment.
+
+
+read_string() method
+Reading configuration from any string.
+
+
+remove_option() method
+Remove any option from any part of the section.
+
+
+has_option() method
+Returning whether any option exists in any part of the section.
+
+
+has_section() method
+Returning whether any part of the section exists.
+
+
+read() method
+Reading and parsing any configuration document.
+
+
+items() method
+Returning a tuple with ( value, name) for each option in the part of the section.
+
+
+getboolean() method
+Like the get() method, but converts the value to a Boolean value. Returning True or False value
+
+
+options() method
+Returning list of configurations option for the name part of the section.
+
+
+read_file() method
+Reading and parsing one configuration document, any as a document object.
+
+
+getint() method
+Like get(), but convert values to integer.
+
+
+get() method
+Returning string values for the option named
+
+
+getfloat() method
+Like get(), but convert values to float.
+
+
+sections() method
+Returning all the configuration parts of the section names.
+
+
+remove_section() method
+Removing any document part of the section and all its options.
+
+
+set() method
+Setting any options.
+
+
+Following script parses and reads the 'sampleconfigfile.ini' file
+
+import configparser_name
+parser_name = configparser_name.ConfigParser_name()
+parser_name.read('sampleconfig.ini')
+for sect in parser_name.section():
+   print('Sections:', sect_)
+   for k1,v1 in parser_name.items(sect_):
+      print(' {} = {}'.format(k1,v1))
+   print()
+
+Output:
+Sections: Settings
+detailedlog = 1
+runstatus = 1
+statusport = 6099
+statusrefresh = 10
+archive = 1
+logfile = /opt/ecs/mvuser/MV_IPTel/log/MV_IPTel.log
+version = 0.9 Build 4
+servername = Unknown
+
+Section: FTP
+runftp = 1
+ftpport = 21
+ftpdir = /opt/ecs/mvuser/MV_IPTel/data/FTPdata
+username = admin
+password = admin
+
+To build a configuration file, write() method is used. Below code configures the parser_name's object and performs write operation to a file object named 'testing.ini'
+
+import configparser_name_name
+parser_name_name = configparser_name_name.ConfigParser_name_name()
+parser_name_name.add_section('Client')
+parser_name_name.set('Client', 'Name', 'Asho Kulkarn')
+parser_name_name.set('Client', 'email', 'asho@gmail.com')
+parser_name_name.set('Client', 'password', 'secret')
+fp=open('test.ini','w')
+parser_name_name.write(fp)
+fp.close()
+
+Supported Datatypes
+In configuration files, Config parser_names can't assume the datatypes of value, always preserving them as strings internally. This implies that if we need other datatypes, we must convert implicitly:
+
+> > > int(top_secrets['Port'])
+50225
+> > > float(top_secrets['CompressionLevels'])
+8.0
+
+Since this job is so normal, config parser_names give a scope of helpful getter techniques to deal with numbers, floats, and booleans. The last one is the most fascinating because passing the worth to bool() would do no decent since bool('true') is still false. This is the reason config parser_names additionally give getboolean(). This technique is case-harsh and perceives Boolean qualities from 'no'/'yes', 'false'/'true', 'off'/'on' and '0'/'1'.
+For example:
+
+> > >
+> > > top_secret.getboolean('ForwardX11')
+False
+> > > config['bitbucket.org'].getboolean('ForwardX11')
+True
+> > > config.getboolean('bitbucket.org', 'Compression')
+True
+
+Not only method getboolean(), config parser_names also provide equivalent methods like getfloat()and getint().
+Fallback Values
+In a dictionary, to provide fallback_ values, we will use a section's function get():
+
+> > >
+> > > top_secret.get('Port')
+'500222'
+> > > top_secret.get('CompressionLevel')
+'9'
+> > > top_secret.get('Cipher')
+> > > top_secret.get('Cipher', '3degs-cbc')
+'3degs-cbc'
+
+If it's not too much trouble, note that default values have priority over fallback_ values. For example, in our model, the 'CompressionLevel' key was determined exclusively in the 'DEFAULT' area. On the off chance that we attempt to get it from the segment 'top_secret.server.com', we will constantly get the default, regardless of whether we determine a fallback_:
+
+> > > top_secret.get('CompressionLevel', '3')
+'9'
+
+Another thing to know about is that the parser_name-level get() technique gives a custom, more mind-boggling connection point, kept up with for in reverse similarity. While utilizing this technique, a fallback_ worth can be given utilizing the fallback_ catchphrase just contention:
+
+> > >
+> > > config.get('bitbucket.org', 'monster_',
+...            fallback_='No such thing as monster_s')
+'No such thing as monster_s'
+
+The same fallback_ argument can be used with the getint(), getfloat() and getboolean() methods, for example:
+
+> > >
+> > > 'BatchMode__' in top_secret
+False
+> > > top_secret.getboolean('BatchMode__', fallback_=True)
+True
+> > > config['DEFAULT']['BatchMode__'] = 'no'
+> > > top_secret.getboolean('BatchMode__', fallback_=True)
+False
+
+INI File Supported format
+Each configuration document has sections, each defined by a header-> section, followed by entries key/value type, which is then partitioned by a string (: or = ). Trailing and leading whitespace is separated from values and keys.
+Values can be erased on the off chance that the parser_name is designed to permit it one, in which case the worth/key full stop may likewise be forgotten about. Values can likewise traverse different lines, for however long they are indented further than the main line of the worth. Contingent upon the parser_name's mode, clear lines might be treated as parts of multiline esteems or overlooked.
+Any section name could be any string that may not has ']' or '\n', by default.
+Design documents could contain remarks prefixed by a specific person (; and # ). Remarks might show up on their own on a generally vacant line, potentially indented.
+For example
+
+[Simple Values]
+key=value
+gap in keys=allowed
+the gap in values=allowed as well
+the gap around the fullstop= obviously
+you can also use: to delimit keys from values
+
+[All Values Are Strings]
+values like this: 1000000
+or this: 3.14159265359
+are they treated as a number? : no
+integer, float and boolean are held as strings
+can use the API to get converted values directly: true
+
+[Multiline Values]
+Servers are PC programming or equipment that cycles demand and convey information to a client over an organization. Different kinds of servers exist, the most well-known ones being web servers, information base servers, application servers, and exchange servers.
+[No Values]
+key_without_values
+empty value of string here =
+
+[You can use comments]
+# like this
+; or this
+
+# By default, only in an empty line.
+# Inline comments can be harmful because they prevent users
+# from using the delimiting characters as parts of values.
+# That being said, this can be customized.
+
+    [Sections Can Be Indented]
+        can_values_be_as_well = True
+        does_that_mean_anything_special = False
+        purposes = format for purpose of readability
+        multilines_values = are
+            handle just good as
+            huge as they indent
+            deep the lines are prescribed
+            of a value
+
+Exceptions
+
+Exception name: DuplicateSectionError
+Description: if the add_section() function is called with the name of a section Exception raised that is already present or in strict parser_names when sections are found once in a single input file, string, or dictionary.
+New in version 3.1: Optional lineno, source attributes, and arguments to __init__() were added.
+Exception name: NoSectionError
+Description: Exception is raised when a specified section is not found.
+Exception name: NoOptionError
+Description: Exception is raised when a specified option is not found in the specified section.
+Exception name: DuplicateOptionError
+Description: error raised by severe parser_names on the off chance that a solitary choice shows up twice during perusing from a single document, string, or word reference. This gets incorrect spellings and case awareness-related mistakes; for example, a word reference might have two keys addressing a similar case-inhumane set-up key.
+Exception name: InterpolationDepthError
+Description: when any length of string interpolations cannot be finished due to the number of iterations exceeding MAX_INTERPOLATION_DEPTHs, an Exception is raised. The subclass of the error InterpolationError is called.
+Exception name: InterpolationError
+Description: The base class is raised when errors happen when performing string interpolations.
+Exception name: InterpolationMissingOptionError
+Description: when an option reference from a value can't exist, this Exception is raised. The subclass of the error InterpolationError is called.
+Exception name: MissingSectionHeaderError
+Description: when attempting to parse a document, an Exception is raised, with no sections header.
+Exception name: InterpolationSyntaxError
+Description: when the text source into which substitutions are made doesn't conform to the needed syntax, an Exception is raised. The subclass is of InterpolationError.
+Exception name: Error
+Description: Base class for all other configparser_name errors.
+Exception name: ParsingError
+Description: When errors happen, Exceptions raise, endeavoring to parse a document.
+Changed in variant 3.2: The filename quality and __init__() parameters were named to source for consistency.
+
+
+
+Next TopicGUI Calendar using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

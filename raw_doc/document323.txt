@@ -1,0 +1,207 @@
+
+
+
+
+next →
+← prev
+
+Number Plate Recognition using Python
+In the following tutorial, we will understand how to recognize License number plates using the Python programming language. We will utilize OpenCV for this project in order to identify the license number plates and the python pytesseract for the characters and digits extraction from the plate. We will build a Python program that automatically recognizes the License Number Plate by the end of this tutorial.
+Understanding the Automatic License Number Plate Recognition System
+Automatic License Number Plate Recognition Systems are available in all shapes and sizes:
+
+ANPR executed in measured lighting situations with predictable number plate types can utilize basic techniques for image processing.
+More advanced ANPR systems use dedicated object detectors, like HOG + Linear SVM, SSDs, YOLO, and Faster R-CNN to localize license number plates in images.
+State-of-the-art ANPR software uses Recurrent Neural Networks (RNNs) and Long Short-Term Memory networks (LSTMs) in order to aid in better OCRing of the text from the number plates themselves.
+Even more advanced ANPR systems utilize specialized neural network architectures in order to preprocess and clean images before they are OCRed, thereby developing the accuracy of ANPR.
+
+The fact that makes Automatic License Number Plate Recognition more complicated may require operating in real-time.
+For instance, let us consider an ANPR system that is mounted on a toll road. It has to be able to detect the number plate of each vehicle passing by, OCR the characters on the plate, and then store this data in a database so the vehicle's owner can be billed for the toll.
+Few compounding factors make ANPR extremely challenging, involving finding a set of data we can utilize in order to train a custom model for ANPR. Large, robust datasets of ANPR that are utilized to train state-of-the-art models are tightly guarded and hardly (if ever) released publicly:
+
+These datasets consist of sensitive identifying details associated with the vehicle, driver, and location.
+The datasets of ANPR are tedious to curate, needing an unbelievable time investment and staff hours to interpret.
+The contracts of ANPR with local and federal governments tend to be extremely reasonable. It is often not the trained model that is valuable; however, instead of the dataset that a specified company has curated.
+For the same cause, we will observe ANPR industries acquired not for their ANPR system but for the data itself.
+
+Pre-requisites of the project
+We will use the Python OpenCV library. It is an open-source library for machine learning and offers a common infrastructure for computer vision. We will also use Pytesseract for the project. Pytesseract is a Tesseract-OCR Engine to read images type and extract the details available in the image.
+Installation
+We can install the OpenCV library using the pip installer with the help of the following syntax:
+Syntax:
+
+$ pip install opencv-python
+
+The same procedure will be followed in order to install the Pytesseract engine. The syntax for the same is shown below:
+Syntax:
+
+$ pip install pytesseract
+
+Features of OpenCV
+
+In the following Python project, we will utilize the following features of OpenCV in order to identify the number plate in the input image:
+Gaussian Blur: Here, we will use a Gaussian Kernel for image smoothening. This technique is quite efficient for the removal of Gaussian noise. OpenCV offers a function called the GaussianBlur() function for this task.
+Morphological Transformation: These are the operations grounded on image shapes and are processed on binary images. The fundamental morphological operations include Opening, Closing, Erosion, Dilation and many more. Some of the functions offered in OpenCV are as follows:
+
+cv2.erode()
+cv2.dilate()
+cv2.morphologyEx()
+
+Sobel: Here, we will calculate the derivatives from the image. This feature is significant for various tasks based on the vision of the computer. With the help of these derivatives, we can calculate the gradients and a higher alteration in gradient denotes a noteworthy change in the image. OpenCV offers a Sobel() function in order to calculate Sobel operators.
+Contours: Contours are the curves that consist of all the continuous points of the same intensity. These curves are quite useful utilities for the recognition of the object. OpenCV offers the findContours() function for this feature.
+
+Understanding the Python code
+Since we have covered the theory part for the project, let us get into the coding part. We have divided the whole source code of the project into different steps for better understanding and clarity.
+Step 1: Importing the required modules
+First of all, we have to import the OpenCV and pytessaract along with matplotlib, glob and OS.
+File: anpr.py
+
+# importing the required modules
+import pytesseract
+import matplotlib.pyplot as plt
+import cv2
+import glob
+import os
+
+Note: The name of the file must be the exact number in the respective image of the license plate. For instance, if the number of the license plate is "FTY348U", then the name of the image file will be "FTY348U.jpg".
+Step 2: Performing OCR using the Tesseract Engine on Number Plates
+For the following step, we have to perform OCR with the help of the Tesseract Engine on License Number plates. The same can be observed in the following snippet of code.
+File: anpr.py
+
+# specifying the path to the number plate images folder as shown below
+file_path = os.getcwd() + "/license_plates/**/*.jpg"
+NP_list = []
+predicted_NP = []
+
+for file_path in glob.glob(file_path, recursive = True):
+    
+    NP_file = file_path.split("/")[-1]
+    number_plate, _ = os.path.splitext(NP_file)
+    '''
+    Here we will append the actual number plate to a list
+    '''
+    NP_list.append(number_plate)
+    
+    '''
+    Reading each number plate image file using openCV
+    '''
+    NP_img = cv2.imread(file_path)
+    
+    '''
+    We will then pass each number plate image file
+    to the Tesseract OCR engine utilizing the Python library
+    wrapper for it. We get back predicted_res for
+    number plate. We append the predicted_res in a
+    list and compare it with the original number plate
+    '''
+    predicted_res = pytesseract.image_to_string(NP_img, lang ='eng',
+    config ='--oem 3 --psm 6 -c tessedit_char_whitelist = ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+    
+    filter_predicted_res = "".join(predicted_res.split()).replace(":", "").replace("-", "")
+    predicted_NP.append(filter_predicted_res)
+
+Explanation:
+In the above snippet of code, we have specified the path to the image files of the License number plate using the OS module. We have also defined two empty lists as NP_list and predicted_NP. We have then appended the actual number plate to the list using the append() function. We then used the OpenCV module to read each number plate image file and stored them in the NP_img variable. We have then passed each number plate image file to the Tesseract OCR engine with the help of the Python library wrapper. We have then got back predicted_res for the number plate and append it in a list and compare it with the genuine one.
+Now, since we have the plates predicted but we don"t know the prediction. So, in order to view the data and prediction, we will perform a bit of visualization, as shown below. We will also be estimating the accuracy of the prediction without the help of any core function.
+File: anpr.py
+
+print("Original Number Plate", "\t", "Predicted Number Plate", "\t", "Accuracy")
+print("--------------------", "\t", "-----------------------", "\t", "--------")
+
+def estimate_predicted_accuracy(ori_list, pre_list):
+    for ori_plate, pre_plate in zip(ori_list, pre_list):
+        acc = "0 %"
+        number_matches = 0
+        if ori_plate == pre_plate:
+            acc = "100 %"
+        else:
+            if len(ori_plate) == len(pre_plate):
+                for o, p in zip(ori_plate, pre_plate):
+                    if o == p:
+                        number_matches += 1
+                acc = str(round((number_matches / len(ori_plate)), 2) * 100)
+                acc += "%"
+        print(ori_plate, "\t", pre_plate, "\t", acc)
+
+estimate_predicted_accuracy(NP_list, predicted_NP)
+
+Output:
+Original Number Plate    Predicted Number Plate      Accuracy
+--------------------     -----------------------     --------
+DL3CAM0857               DL3CAM0857                  100 %
+MD06NYW                  MDOGNNS                     40 %
+TN21TC706                TN21TC706                   100 %
+TN63DB5481               TN63DB5481                  100 %
+UP14DR4070               UP14DR4070                  100 %
+W5KHN                    WSKHN                       80 %
+
+Explanation:
+In the above snippet of code, we have defined a function calculating the predicted accuracy. Within the function, we used the for-loop to iterate through the list of original number plates and the predicted ones and checked if they matched. We have also checked the accuracy on the basis of the number's length for getting better and appropriate results.
+We can observe that the Tesseract OCR engine mostly predicts all of the license plates correctly with a rate of 100% accuracy. The Tesseract OCR engine predicted incorrectly for the number plates, and we will apply the image processing technique on those number plate files and pass them to the Tesseract OCR again. We can increase the accuracy rate of the Tesseract Engine for the number plates of the incorrectly predicted number plates by applying the techniques of image processing.
+Step 3: Techniques for Image Processing
+Let us consider the following snippet of code to understand the technique of Image Processing.
+File: anpr.py
+
+import matplotlib.image as mpimg
+for img in os.listdir("D://Python//License_Plate"): 
+    test_NP = mpimg.imread("W5KHN.jpg")
+
+plt.imshow(test_NP)
+plt.axis('off')
+plt.title('W5KHN license plate')
+plt.show()
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the image module from the matplotlib library and used the for-loop to extract the image from the designated folder. We have then used the imread() function to read the extracted image. We have then used the plot module of the matplotlib library to display the image for the users.
+
+Image Resizing: We can resize the image file by a factor of 2x in both the horizontal and vertical directions with the help of resize.
+Converting to Gray-scale: Then, we can convert the resized image file to grayscale in order to optimize the detection and reduce the number of colours available in the image drastically, which will allow us to detect the number plates easily.
+Denoising the Image: We can use the Gaussian Blur technique to denoise the images. It makes the edges of the image clearer and smoother, making the characters more readable.
+
+Let us consider the following example to understand the same.
+File: anpr.py
+
+    # image resizing
+    resize_test_NP = cv2.resize(
+        test_NP, None, fx = 2, fy = 2, 
+        interpolation = cv2.INTER_CUBIC)
+
+    # converting image to grayscale
+    grayscale_resize_test_NP = cv2.cvtColor(
+        resize_test_NP, cv2.COLOR_BGR2GRAY)
+
+    # denoising the image
+    gaussian_blur_NP = cv2.GaussianBlur(
+        grayscale_resize_test_NP, (5, 5), 0)
+
+Explanation:
+In the above snippet of code, we have some tools of the OpenCV module to resize the image, convert it into grayscale, and denoise the image.
+Once the above steps are complete, we can pass the transformed license plate file to the Tesseract OCR engine and view the predicted result.
+The same can be observed in the following snippet of code.
+File: anpy.py
+
+new_pre_res_W5KHN = pytesseract.image_to_string(gaussian_blur_NP, lang ='eng')
+filter_new_pre_res_W5KHN = "".join(new_pre_res_W5KHN.split()).replace(":", "").replace("-", "")
+print(filter_new_pre_res_W5KHN)
+
+Output:
+W5KHN
+
+Explanation:
+In the above snippet of code, we passed the final processed image to the Tesseract OCR engine to extract the number from the license number plate.
+Similarly, we can perform this image process for all other license number plates with not 100% accuracy. Thus, the number plate recognition model is ready.
+
+
+Next TopicObfuscating a Python program
+
+
+
+
+← prev
+next →
+
+
+
+

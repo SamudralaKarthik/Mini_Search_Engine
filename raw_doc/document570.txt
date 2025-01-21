@@ -1,0 +1,334 @@
+
+
+
+
+next →
+← prev
+
+Top Python for Network Engineering Libraries
+Network engineering has become progressively famous, and a wide scope of instruments for automating network setup is available to network engineers and change the game. Assuming we are as yet a beginner in the field, the accompanying tutorial will work on things for us by showing us the right libraries you should know about in Python.
+Netmiko Library
+This Python library was planned considering organizing Network devices. It gives a deliberation layer over the Paramiko Python execution of the SSHv2 convention and keeps lower-level elements stowed away from the computerization engineer.
+Netmiko Library Purpose
+The motivations behind this library are the accompanying:
+
+Effectively layout an SSH association with the Network devices.
+Work on the execution, recovery, and arranging of show orders.
+Improve the execution of design orders.
+it has a unique way of interfacing with Network gadgets.
+Gives a uniform API for cooperating with Network gadgets.
+Do the above across an expansive arrangement of systems administration merchants and platforms.
+
+Platforms Supported
+
+Netmiko, as of now, supports around eighty distinct platforms.
+For a generally complete rundown of supported platforms, see PLATFORMS.md documents.
+Notwithstanding SSH support, Netmiko likewise upholds Secure Copy, telnet associations, and sequential associations.
+The platform support is more restricted than SSH.
+Also, refer to the PLATFORMS.md document for additional functions on the platform for these utilization cases.
+
+Implementation of Netmiko library
+Example: We are establishing the connection to a remote server using Netmiko Library.
+
+fom netmiko, import ConnectHandler
+net_connects = ConnectHandler(
+    device_types="cisco_xe",
+    host1="cisco5.domain.com",
+    username1="admin",
+    password1="password",
+)
+
+Output:
+>>> net_connects
+
+>>> net_connect.find_prompt()
+'cisco5#'
+
+Explanation:
+Import module "ConnectHandler" from the library Netmiko. You can consider this module ConnectHandler as your first entry point into the Netmiko library. It picks the right class for you, makes a Netmiko object because of that class, and lays out an SSH association with the system.
+Use ConnectHandler to pick the class and start the SSH connection.
+This requires us to send arguments like:
+
+passwords
+host (hostname or IP)
+device_types
+usernames
+
+The variable 'net_connects' be a usable SSH connections to the NY TYPE OF remote devices.
+Execution of Show Command
+To retrieve show command output from our device. This is done by using the 'send_command()' function.
+Source code:
+
+>>> output_obtained = net_connect.send_command("show ip arp")
+>>> print(output_obtained)
+
+Output:
+Protocol  Addresses    Age (minimum)  H/w Addr   Type   Interface
+Internet  10.0.2.2         57   5255.0a000.0202  ARPA   GigabitEthernet
+Internet  10.0.2.3        116   5255.0a000.0203  ARPA   GigabitEthernet
+Internet  10.0.2.15         -   5254.00012.3456  ARPA   GigabitEthernet
+
+Explanation:
+Netmiko library automatically gets the output, strips the echo command, and strips the router trailing prompt. It tries to attempts to leave only the show command output. The output shows us the Protocol Addresses like Internet 10.0.2.2, Internet 10.0.2.3 , Internet 10.0.2.1
+Our Complete Script is the following:
+Source code:
+
+from netmiko, import ConnectHandler
+net_connects = ConnectHandler(
+    device_types="cisco_xe",
+    host1="cisco5.domain.com",
+    username1 =1 "admin",
+    password1 = "password",
+)
+Output_ obtained = net_connect.send_command(
+    "show ip arp"
+)
+Print(output_obtained)
+
+Output: The execution of the above script is the following:
+$ Python show_command.py 
+Protocol  Address    Age (min)  Hardware Addr   Type   Interface
+Internet  10.0.2.2         57   5255.0a000.0202  ARPA   GigabitEthernet
+Internet  10.0.2.3        116   5255.0a000.0203  ARPA   GigabitEthernet
+Internet  10.0.2.15         -   5254.00012.3456  ARPAGigabitEthernet
+
+Making Configuration Changes
+To make a few configuration changes using library Netmiko. You can do this utilizing Netmiko's send_config_set() function.
+
+cfg_lists = [
+    "ip access-list extended TEST1",
+    "permits ip any host 1.1.1.1",
+    "permits ip any host 1.1.1.2",
+    "permits ip any host 1.1.1.3",
+    "permits ip any host 1.1.1.4",
+    "permits ip any host 1.1.1.5",
+]
+cfg_outputs = net_connect.send_config_set(cfg_lists)
+
+print(cfg_outputs)
+
+Explanation:
+At first, we are setting all the parameters required for establishing the connection for net_connects object. Then we create configuration lists commands and then give that list to the method 'send_config_set()'.
+The 'cfg_outputs' variable will show us what happened during that SSH session. Netmiko will do a few things automatically, like entering and exit configuration modes.
+Save your running-config to startup-config by executing the method 'save_config()'.
+
+net_connect.save_config()
+
+NAPALM
+NAPALM, or Network Automation and Programmability Abstraction Layer with Multivendor support, is a Python library that utilizes a bound together API to improve computerized communications with systems administration Network gadgets.
+What is NAPALM?
+NAPALM (Network Automation and Programmability Abstraction Layer with Multivendor support) is a Python library made and created in 2015 by David Barroso and Elisa Jasinska. The objective was to bring together network gadget access, information assortment, and arrangement control from numerous network gadget sellers.
+NAPALM supports to connect to various devices by using several methods, to change configurations or to fetch information/ data.
+Library Purpose
+Abound together, API NAPALM permits information or control design utilizing similar functions, no matter the how the working framework might be.
+The authority group that keeps up with NAPALM, otherwise called the " Core Developers ", has made improvements and worked on frameworks for quite a long time. They right now support:
+
+Arista EOS
+Cisco IOS-XR
+Cisco IOS
+Juniper Junos
+Cisco NX-OS
+
+How does NAPALM function?
+If we needed to get to various Network gadgets with various working frameworks through Python, we would presumably need to utilize libraries created for each working framework. It would be a great assignment to use Network Programmability in such conditions. To work with programming, NAPALM adds abstraction layer. This layer permits us to utilize a similar capacity to play out similar activities on various working frameworks.
+How can it get the job done?
+What NAPALM does is conceal this abstraction layer by bringing together how we access network system.
+This is conceivable because of the presentation of the Network Driver idea. Each time we need to connect with a Network gadget, we need to indicate what working framework we will converse with, and NAPALM will choose the right Network Driver. Select a library with every one of the capacities connected with that working framework.
+Assuming we see it according to one more perspective, it is fundamentally similar to having an API on top of other APIs.
+NAPALM installation
+To install NAPALM requirements are as follows:
+
+PVM- Python Virtual Environment
+Linux Operating System or Ubuntu console for Windows 10.
+Python 3 installed is necessary
+Python Library Package Manager- PIP
+
+Now proceed to install NAPALM with the help of the following command:
+
+pip install napalm
+
+Functionality Test
+
+import napalm
+def main():
+    driver_ios_ = napalm.get_network_driver("ios")
+    ios_router_ = driver_ios(
+    hostname_ = "192.168.56.11",
+    username_ = "jtp",
+    password_ = "jtpNetwork"
+    )
+    print("Connecting to IOS Router. . . . . . . . . . . . . . . . . . . . . . . . ")
+    ios_router_.open()
+    print("Checking IOS Router Connection Status:")
+    print(ios_router.is_alive())
+    ios_router.close()
+    print("Testing Completed ! ! !")
+if __name__ == "__main__":
+    main()
+
+Explanation:
+At first, we are setting all the parameters required for establishing the connection for ios_router object. The object "ios_router" was called, which invokes the open() method to start the connections to the router.
+To validate the connection, the is_alive() method is used; as we see in the output, that is True. Therefore the connection to the router is done.
+Output while running:
+Connecting to IOS Router. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+Checking ios router connection status:
+{ 'is_alive': True }
+Testing completed ! ! !
+
+Genie
+This is a Python module made to test computerized networks. It is not difficult to use and give the engineer quick analysis of abundant data on the given the network.
+Genie is a Python library that contains every one of the methods required for Networking Test Automation. Genie is the library answer for pyATS. The principal objectives of Genie are to work with the fast turn of events, empower re-usable libraries, and improve on composing test computerization.
+Library Purpose
+Genie uses each of Python's advantages in an item situated style:
+
+Empower specialists to foster libraries and content prepared to deal with the different OS/stage/highlight/delivery and Management Interfaces without growing new content/library each time;
+Enable group driven-improvement and advance proficiency by permitting engineers to impart their work to different groups; and
+Encourage groups to re-utilize existing libraries in their robotization.
+
+Genie decisively utilizes reflection tokens and query calculations to accomplish these new, inventive outcomes.
+Genie libraries are open source and facilitated at:
+
+genie.libs.(conf/operations)
+genie.libs.parser
+genie.libs.telemetry
+
+The Motivation behind Genie
+
+Deeply yet, what might be said about the libraries to
+
+Parse Network gadget
+Configure Network gadget
+Action on the Network gadget
+Regroup testcases into sharable re-usable testcases
+
+pyATS gives you every one of the devices to compose your robotization and rules like Writing script which are future verification is hard
+Don't bother to re-create the wheel. Have 1 library which contains every one of the functionalities.
+Genie tackle header and make package, libraries and show on the most proficient method to compose these and share them!
+
+Design restrictions are a repetitive issue for engineers working in robotization improvement. For example, scripts with installed static designs or explicit TGN points of interaction are hard to create and almost difficult to use on some other working framework, stage, delivery, or branch, other than those they were initially expected.
+These structural constraints likewise frustrate joint effort among groups by keeping them from imparting their libraries to each other.
+Engineers have generally given critical investment to re-foster their current libraries to beat these building restrictions. This conventional methodology commonly depends on obsolete namespaces, capacities, and contention-driven coding procedures.
+Genie has Four Fundamental Functionalities:
+
+Design Network gadgets in an OS execution rationalist way
+Recover Network gadget activity state in an OS execution freethinker way
+Pool of libraries to re-use, which incorporates Testcases.
+Test Harness, which integrates everything.
+
+Library - ncclient
+Python library "ncclient" designed to develop NETCONF scripts and automation easily.
+Requirements:
+
+Python 3.4+ or Python 2.7
+lxml 3.3.0+
+Paramiko 1.7
+libxml2
+setuptools 0.6
+libxslt
+
+If you are on Debian/Ubuntu, install the following libs (via aptitude or apt-get):
+
+libxslt1-dev
+libxml2-dev
+
+Installation of Python library "ncclient":
+
+[ncclient] $ sudo python setup.py install
+
+or via pip command:
+
+pip install ncclient
+
+Examples of Python library "ncclient":
+
+[ncclient] $ python examples/juniper/*.py
+
+Supported device handlers of Python library "ncclient"
+When instantiating a connection to a known type of NETCONF server:
+
+Juniper: device_params_ = {'name_':'junos'}
+HP Comware: device_params_ = {'name_':'hpcomware'}
+Cisco:
+
+CSR: device_params_ = {'name_':'csr'}
+Nexus: device_params_ = {'name_':'nexus'}
+IOS XR: device_params_ = {'name_':'iosxr'}
+IOS XE: device_params_ = {'name_':'iosxe'}
+
+Nokia SR OS: device_params_ = {'name_':'sros'}
+Huawei:
+
+device_params_ = {'name_':'huawei'}
+device_params_ = {'name_':'huaweiyang'}
+
+H3C: device_params_ = {'name_':'h3c'}
+Server or anything not in above: device_params_ = {'name_':'default'}
+
+Key Features are of the ncclient Library:
+
+Supports all tasks and abilities characterized in RFC 4741.
+Demand pipelining.
+Nonconcurrent RPC demands work on the execution, recovery, and arranging of show orders
+Keeping XML far removed except if truly required.
+Extensible. New vehicle mappings and abilities/tasks can be effectively added.
+
+Request library
+Requests library is one of the vital pieces of Python for making Requests in HTTP to a predetermined URL. At the point when one makes a request to a URI, it returns responses. Python Requests gives inbuilt functionalities to overseeing both the response and request. Whether Web Scrapping or REST APIs, Requests must be learned to continue further with these advances.
+Why Learn the Python Requests Module?
+
+Requests is an Apache2 Licensed HTTP library that permits sending HTTP/1.1 responses utilizing Python.
+To play with the internet, Python Requests is a must. Whether it be downloading whole Facebook pages, hitting APIs, and considerably more internet stuff, one should make a request to the URL.
+Requests assume a significant part is managing REST APIs and Web Scrapping.
+Checkout an Example Python Script utilizing Requests and Web Scrapping - Implementing Web Scraping in Python with BeautifulSoup
+
+Implementation of Requests Library by Utilizing GET Parameters
+We utilize the GET Method to pass data in a key-value pair configuration to a web server through a URL.
+Source code:
+
+url = 'http://httpbin.org/get'
+url = 'http://httpbin.org/get'
+payload = {
+    'website':'dataquest.io',
+    'courses':['Python','SQL']
+    }
+r = requests.get(url, params = payload)
+print('Response Content:\n',r.text)
+
+Output: Run the code above. 
+Response Content:
+ {
+  "arg" : {
+    "course" : [
+      "Python",
+      "SQL"
+    ],
+    "websites": "dataquest.io"
+  },
+  "header": {
+    "Accept" : " */* ",
+    "Accept--Encoding": "gzip, deflate",
+    "Hosts": "httpbin.org",
+    "User-Agents": "python-requests/2.27.1",
+    "X-Amzn-Trace-Ids": "Root=1-61e7e066-5d0cacfb49c3c1c3465bbfb2"
+  },
+  "origin": "121.122.65.155",
+  "url": "http://httpbin.org/get?website=dataquest.io&courses=Python&course=SQL"
+}
+
+Explanation:
+The GET Method permits us to pass a word reference of key-value matches utilizing the params contention. We should attempt it. The response content is in JSON design, and the key-value matches that we went through the param contention show up in the arguments segment of the reaction.
+Header part of response content has the host name, user agents, encoding type and so on.
+Likewise, the url area that is http://httpbin.org/get?website=dataquest.io&courses=Python&course=SQL contains the encoded URL alongside the parameters passed to the server.
+
+
+Next TopicHow does Tokenizing Text, Sentence, Words Works
+
+
+
+
+← prev
+next →
+
+
+
+

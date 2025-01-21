@@ -1,0 +1,99 @@
+
+
+
+
+next →
+← prev
+
+Write the Python Program to Combine Two Dictionary Values for Common Keys
+This tutorial will write a Python program to combine the two dictionaries with the common keys. Dictionary is a Python data structure that stores the data in the key-value pair. Each key should be immutable and unique in the dictionary. Let's understand the above problem statement.
+Problem Statement
+We need to merge the given dictionary and create the new dictionaries based on the common keys. Let's see the following example.
+Example -
+
+dict1 = {'a': 100, 'b': 200, 'c':300}
+dict2 = {'a': 300, 'b': 200, 'd':400}
+Sample output: Counter({'a': 400, 'b': 400, 'd': 400, 'c': 300})
+
+Let's understand the following solutions.
+Solution
+We will solve this problem using the Counter Module. Let's see the following code.
+Example -
+
+from collections import Counter
+dict1 = {'a': 100, 'b': 200, 'c':300}
+dict2 = {'a': 300, 'b': 200, 'd':400}
+new_dict = Counter(dict1) + Counter(dict2)
+print("The new  dict is:", new_dict)
+
+Output:
+The new dict is: Counter({'a': 400, 'b': 400, 'd': 400, 'c': 300})
+
+Explanation -
+We have imported the Counter function from the collections module in the above code. Then, we assigned the two dictionaries and called the Counter() function on dict1 and dict2. This method finds the common keys and sums their values. In the dict1, the key a has a value of 100, and in dict2, a has a value of 200. So the Counter() method added both values and returned a new value of 400. Hence we created a new dictionary.
+Example - 2:
+
+dict1 = {'a': 100, 'b': 200, 'c':300}
+dict2 = {'a': 300, 'b': 200, 'd':400}
+new_dict = dict2
+for i, j in dict1.items():
+    if i in dict2:
+        new_dict[i] = j + dict2[i]
+    else: 
+        new_dict[i] = j
+print("The new dict is:", new_dict)
+
+Output:
+The new dict is: {'a': 400, 'b': 400, 'd': 400, 'c': 300}
+
+Explanation -
+In the above code, we initialized the dictionaries and the dict2 in the new_dict. Then, we run for loop using the items() method to the dict2. Then, we checked if the key exists in dict1; if true, then add it with the value to the dict1; else assign as a key of new_dict. 
+Example - 3:
+
+dict1 = {'a': 100, 'b': 200, 'c':300}
+dict2 = {'a': 300, 'b': 200, 'd':400}
+dict3= {}
+dict3.update(dict1)
+dict3.update(dict2)
+for i,j in dict1.items():
+    for x,y in dict2.items():
+        if i ==x:
+            dict3[i] = j+y
+print(dict3)
+
+Output:
+{'a': 400, 'b': 400, 'c': 300,  'd': 400}
+
+Example - 4
+
+dict1 = {'a': 100, 'b': 200, 'c':300}
+dict2 = {'a': 300, 'b': 200, 'd':400}
+dict3= {}
+dict3.update(dict1)
+dict3.update(dict2)
+if x in dict2.keys():
+    dict1[x]=dict1[x]+dict2[x]
+    dict2.pop(x)
+
+for d in (dict1,dict2):
+    dict3.update(d)
+print(dict3)
+
+Output:
+{'a': 400, 'b': 400, 'c': 300,  'd': 400}
+
+Conclusion
+This programming question can be asked in the technical interview round. This tutorial included the solution of the problem along with the explanation.
+
+
+Next TopicApache Airflow in Python | Airflow Python Operator
+
+
+
+
+← prev
+next →
+
+
+
+

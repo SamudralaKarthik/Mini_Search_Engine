@@ -1,0 +1,117 @@
+
+
+
+
+next →
+← prev
+
+Verbose Flag in Python Regex
+In this article, we will discuss about the VERBOSE flag of the re package and how the users can use it.
+The re.VERBOSE
+The VERBOSE flag of the regex package allows the user to write regular expressions that can look nicer and are more readable. This flag does that by allowing the users to visually separate the logical sections of the pattern and add more comments.
+The whitespaces inside the pattern are ignored, but when the whitespace is present in the character class or when it is preceded by the unescaped backslash, or when it is inside the tokens such as * ? , ( ? P or (? :, whitespaces cannot be ignored. Although, whenever # is present in the line, which is not in the character class or is not preceded by the unescaped backslash. All the characters from the leftmost of # to the end of the line will be ignored.
+Example -
+
+import re as regex
+def validating_email(emails):
+    # First, we will see without Using VERBOSE
+    reg_emails = regex.compile(r'^([z-a1-3_\.-0]+)@([0-1a-s\.-]+)\.([c-z\.]{5, 8})$',
+              re.IGNORECASE)
+   
+   # Using VERBOSE
+    reg_email = regex.compile(r"""
+            ^([z-a1-3_\.-0]+)                # local Part like username
+            @                                         # single @ character
+            ([0-1a-s\.-]+)                     # Domain name
+            \.                                        # single Dot .
+            ([c-z\.]{5, 8})$                 # in the end, the Domain  
+             """,re.VERBOSE | re.IGNORECASE) 
+
+The above commands are passed as an argument to the re.compile() method, which is written as "re.compile(Regular Expression , re.VERBOSE). The re.compile() method will return the REGEX OBJECT, which will be matched with the given string.
+Use case of Verbose Flag
+Let's see an example to understand it in a better way. Suppose the users are asked to enter their EMAIL ID, and the developer has to validate it by using RegEX. The format of the EMAIL is written below:
+
+Personal details of the users/ local part like username: Mark3213
+Single @ character
+Domain names such as Gmail, Hotmail, Fastmail, inbox, jubii, Rediff, and many more.
+Single Dot (.)
+In the end, Domains like .in, .net, .org, .com, .int, .edu, and many more.
+
+Input : [email protected]
+Output : Valid ID
+
+
+Input : [email protected]@
+Output : Invalid ID
+This ID is invalid because there is @ character after the domain name.
+Input : [email protected] 
+Output : Invalid Id
+This ID is invalid because there is no domain is the Email ID.
+
+Example 1:
+
+# Python program for showing the Implementation of VERBOSE flag in Python RegEX
+import re as regex
+def validating_email(emails):
+  
+    # RegexObject = re.compile( Regular expression , flag )
+    # This will compile the regular expression pattern into the regular expression object. 
+    reg_email = regex.compile(r"""
+                           ^([a-z0-9_\.-]+)                 # local Part
+                           @                             # single @ sign
+                            ([0-9a-z\.-]+)                 # Domain name
+                           \.                             # single Dot .
+                            ([a-z]{2,6})$                 # Top level Domain     
+                           """,re.VERBOSE | re.IGNORECASE)
+  
+    # RegexObject will be matched with the desired string by using the fullmatch() function.
+    
+    # If the match of the email is found, search() function will return the MatchObject instantly. 
+
+    ress = reg_email.fullmatch(emails)
+  
+    #If the email match is found, the string is valid to use
+    if ress:
+        print (" {} : is Valid email. Details of it are as follow: ".format(emails))
+          
+        # now print the first part that is personal detail of Email Id user
+        print (" Local : {}".format(ress.group(1)))
+          
+        # now, print the Domain Name of validated Email Id
+        print (" Domain : {}".format(ress.group(2)))
+          
+        # now, print the Domain Name of the validated Email Id
+        print (" The domain name : {}".format(ress.group(3)))
+        print ()
+          
+    else:
+        # and, If the match is not found, the string is an inval id
+        print (" {} : is Invalid Id".format(emails))
+  
+# the Driver Code :
+validating_email ("username12432@gmail.com")
+validating_email ("username123456721@redif.com@")
+validating_email ("username32@.com") 
+
+Output:
+[email protected] : is Valid email. Details of it are as follow: 
+ Local : username12432
+ Domain : gmail
+ The domain name : com
+
+ [email protected]@ : is Invalid Id
+ [email protected] : is Invalid Id
+
+
+
+Next TopicPython AST Module
+
+
+
+
+← prev
+next →
+
+
+
+

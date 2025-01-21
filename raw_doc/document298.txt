@@ -1,0 +1,139 @@
+
+
+
+
+next →
+← prev
+
+Python Program for accepting the strings which contains all vowels
+In this tutorial, we will discuss how a Python program can accept only the string which contains every vowel.
+In the following example, we pass a string to check whether all the vowels are present or not. We have considered that both upper case and lowercase vowels are acceptable. That is "A", "E", "I", "O", "U" or "a", "e", "i", "o", "u".
+Example:
+
+Input string1: AEIaeiytstwI
+Output: Not Accepted
+Reason: All vowels except 'o' and 'u' are not present in the Input string1
+Input string2: AbCdEfHiMnOtUv
+Output: Accepted
+Reason: All vowels are present.
+
+Solution Approach
+At first, we will create a set of vowels by using the set() function. Then we will check whether each character of the string is a vowel or not. If the character is a vowel, we will add it into the set "string_1". After coming out of the loop, we will check the length of the set "string_1". The string will only be accepted if the length "string_1" set is equal to the length of the "vowel_1" string; otherwise, it will not accept the string.
+Method 1:
+
+def check(string):
+ 
+    string = string.lower()
+ 
+    # The set() function will be used for converting "aeiou" string into set of
+    #characters
+    vowel_1 = set("aeiou")
+ 
+    # The set() function will convert the empty dictionary into an empty set
+    string_1 = set({})
+ 
+    # The we will loop through each character of the string
+    for character_1 in string:
+ 
+    # Now, it will check if the character is present inside the "vowel_1" set or
+    #not. 
+        # If the characters are present, then it will add into the "string_1" set by
+        #using "add" method
+        if character_1 in vowel_1 :
+            string_1.add(character_1)
+        else:
+            pass
+             
+    # Then, it will check if the length of "string_1" set is equal to the length of
+    # "vowel_1" set or not. 
+    if len(string_1) == len(vowel_1) :
+        print ("The string is Accepted")
+    else :
+        print ("The string is Not Accepted")
+ 
+ 
+# Driver code
+if __name__ == "__main__" :
+     
+    string = str (input ("Enter the String of characters: "))
+ 
+    # Calling function
+    check(string)
+
+Output:
+#1
+Enter the String of characters:  aideiofguhs
+The string is Accepted
+#2
+Enter the String of characters:  aideiofghs
+The string is Not Accepted
+
+Explanation:
+The above program will check the inserted string characters, and if the character matches the vowel character, it will add it to the string_1 set, and if the character is not a vowel, it will pass to the next.
+Then we have put the condition that if the length of string_1 is not equal to the length of vowel_1, the string will not be accepted. But if the length of string_1 is equal to the length of vowel_1, it will accept the string.
+Method 2:
+
+def check(string):
+    string = string.replace(' ', " ")
+    string = string.lower()
+    vowel_1 = [string.count('a'), string.count('e'), string.count(
+        'i'), string.count('o'), string.count('u')]
+ 
+    # If 0 is present in vowel count array
+    if vowel_1.count(0) > 0:
+        return('The string is Not Accepted')
+    else:
+        return('The string is Accepted')
+ 
+ 
+# Driver code
+if __name__ == "__main__":
+ 
+    string = str (input ("Enter the String of characters: "))
+ 
+    print (check(string))
+
+Output:
+Enter the String of characters: "aiD" 'OeiUo' fg "FGu" hs
+The string is Accepted
+Enter the String of characters: 'aidE' "I" 'eiIOo' "fgHYK" 'hs'
+The string is Not Accepted
+
+Explanation:
+In the above code, we have use the condition that if the 0 is present in the vowel count array, the string will not be accepted. But if 0 is not present and the string contains all the vowels, the string will be accepted.
+Method 3:
+
+def check(string):
+    if len (set (string.lower()).intersection("aeiou")) >= 5:
+        return ("The string is Accepted")
+    else:
+        return ("The string is Not Accepted")
+ 
+ 
+# Driver code
+if __name__ == "__main__":
+    string = str (input ("Enter the String of characters: "))
+    print (check(string))
+
+Output:
+Enter the String of characters: gIrwi aTheDy uKmtR wmsof
+The string is Accepted
+
+Enter the String of characters:  aidc Eie iIOof gH YKhs
+The string is Not Accepted
+
+Explanation:
+In the above code, we have use the condition that if the string's length is greater or equal to the length of the vowel_1, that is, 5, and contains all the vowels. Then it will accept the string; otherwise, it will not accept the string.
+Conclusion
+In this tutorial, we have shown how to write a Python program for accepting the string which contains all the vowel characters. The users can also use the same code for different types of conditions for particular characters. We have explained different methods for the same.
+
+
+Next TopicBasic Python programs
+
+
+
+← prev
+next →
+
+
+

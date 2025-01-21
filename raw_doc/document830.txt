@@ -1,0 +1,135 @@
+
+
+
+
+next →
+← prev
+
+How to Get Index of Element in List Python
+Finding the index of an item makes sense since, in Python, lists' indexes are utilized to retrieve their elements. This could appear simple when working with a short list, but it might get tiresome as the list gets longer.
+Python includes a built-in method called index that makes this possible. The element is sent as an argument to the function, and the index is returned by it. We may also get all the indexes of an item in the given list in Python. We will see how to do this.
+Syntax of the index() Function:
+
+List_name.index(element, start, end)
+
+The title of the list you want to search is indicated by the term "list name" in this case.
+Parameters:
+
+Element - The element for whose index search is to be done.
+Start - The index of the list from where the interpreter will begin the search. This parameter is optional.
+End - The list index at which the interpreter will stop the search. This parameter is optional.
+
+Return Values:
+This function returns the given element's index.
+If the provided element is not found in the list, ValueError is returned.
+Code
+
+# Python program to find the index of an element using the index() function
+
+# Creating a list
+data_structures = ["Heap r", "Stack", "Queue", "Linked List"]
+
+# Searching for the element- "Queue"
+print("The element 'Queue' is present at the index: ", data_structures.index("Queue"))
+
+# If the element is not present in the list
+# Searching for 'Trees'
+print("The element 'Trees' is present at the index: ", data_structures.index("Trees"))
+
+Output:
+The element 'Queue' is present at the index:  2
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In [3], line 11
+      7 print("The element 'Queue' is present at the index: ", data_structures.index("Queue"))
+      9 # If the element is not present in the list
+     10 # Searching for 'Trees'
+---> 11 print("The element 'Queue' is present at the index: ", data_structures.index("Trees"))
+
+ValueError: 'Trees' is not in list
+
+As one can see, we used the index() function in the code above to get an element's index within a given list. Let's now examine the cases of using the other parameters also.
+Code
+
+# Python program to find the index of an element given the starting and ending indexes
+
+# Creating a list
+data_structures = ["Heap", "Stack", "Queue", "Linked List", "Binary Trees", "Arrays"]
+
+# Searching when the element is in the given range
+print("The element 'Linked List' is present at the index: ", data_structures.index("Linked List",2,5))
+
+# Searching when the element is not in the given range
+print("The element 'Linked List' is present at the index: ", data_structures.index("Linked List",0,3))
+
+Output:
+The element 'Linked List' is present at the index:  3
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In [5], line 10
+      7 print("The element 'Linked List' is present at the index: ", data_structures.index("Linked List",2,5))
+      9 # Searching when the element is not in the given range
+---> 10 print("The element 'Linked List' is present at the index: ", data_structures.index("Linked List",0,3))
+
+ValueError: 'Linked List' is not in list
+
+In the program above, the element "Linked List" is initially looked for between the second and fifth index, and if it is found, its index in the list is returned.
+The second case, on the other hand, looks for "Linked List" between the list's 0th and 3rd index, but since "Linked List" is located at the 3rd index, the function returned ValueError because "Linked List" wasn't found in the specified range.
+This is how you determine the index of a particular element in a list using the index() method.
+Get the Index of Every Occurrence of a Given Item
+Using this technique, you can find the indexes of each occurrence of the element in a list. We will go through each item in the initial list using a for-loop.
+Code
+
+# Python program to find all the indexes of an element using for-loop
+
+# Creating a list
+data_structures = ["Heap", "Stack", "Heap", "Linked List", "Binary Trees", "Heap"]
+ 
+# finding the length of the list
+size = len(data_structures)
+
+print("Indices are: ")
+
+# Creating a for loop
+for i in range(size):
+    # checking the condition
+    if(data_structures[i] == "Heap"):
+        # printing the indices
+        print(i)
+
+Output:
+Indices are: 
+0
+2
+5
+
+This task can also be performed using list comprehension.
+Code
+
+# Python program to find all the indexes of an element using list comprehension
+
+# Creating a list
+data_structures = ["Heap", "Stack", "Heap", "Linked List", "Binary Trees", "Heap"]
+item = "Heap"
+ 
+indices = [ind for ind in range(len(data_structures)) if data_structures[ind] == item]
+ 
+# printing the indices
+print(indices)
+
+Output:
+[0, 2, 5]
+
+
+
+Next TopicNested Tuples in Python
+
+
+
+
+← prev
+next →
+
+
+
+

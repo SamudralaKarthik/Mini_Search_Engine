@@ -1,0 +1,284 @@
+
+
+
+
+next →
+← prev
+
+Precedence and Associativity of Operators in Python
+We will gain knowledge about both Python operator precedence and associativity in this tutorial. Understanding the mechanics of Python operators is critical for developers.
+It would be best if the reader understood how Python assesses the ordering of its operators after checking it. Some operators prioritize others; for example, the division operator takes precedence over the multiplication operator; therefore, division comes first.
+The Python interpreter executes operations of higher precedence operators first in any given logical or arithmetic expression. Except for the exponent operator (**), all other operators are executed from left to right.
+Precedence of Python Operators
+An expression is a collection of numbers, variables, operations, and built-in or user-defined function calls. The Python interpreter can evaluate a valid expression.
+Code
+
+2 - 7
+
+Output:
+-5
+
+The expression 2 - 7 is used as an example here. In an expression, we can add multiple operators. There is a principle of precedence in Python for evaluating these types of expressions. It directs the sequence in which certain tasks are completed.
+Division, for instance, takes precedence over addition.
+Code
+
+# Division has higher precedence than addition
+16 + 16 / 2
+
+Output:
+24.0
+
+However, we can reverse this sequence by employing parenthesis (), which takes precedence over division.
+Code
+
+# Parentheses () holds higher precedence
+(16 + 16) / 2
+
+Output:
+16.0
+
+The following table shows the precedence of Python operators. It's in reverse order (the upper operator holds higher precedence than the lower operator).
+
+
+Operators
+Meaning
+
+
+()
+Parentheses
+
+
+**
+Exponent
+
+
++x, -x, ~x
+Unary plus, Unary minus, Bitwise NOT
+
+
+*, /, //, %
+Multiplication, Division, Floor division, Modulus
+
+
++, -
+Addition, Subtraction
+
+
+<<, >>
+Bitwise shift operators
+
+
+&
+Bitwise AND
+
+
+^
+Bitwise XOR
+
+
+|
+Bitwise OR
+
+
+==, !=, >, >=, <, <=, is, is not, in, not in
+Comparisons, Identity, Membership operators
+
+
+not
+Logical NOT
+
+
+and
+Logical AND
+
+
+or
+Logical OR
+
+
+Consider the following examples:
+Assume we're building an if...else block that only executes if the color is red or green and quantity is greater than or equal to 5.
+Code
+
+# Precedence of and and or operators
+colour = "red"
+
+quantity = 0
+
+if colour == "red" or colour == "green" and quantity >= 5:
+    print("Your parcel is dispatched")
+else:
+    print("your parcel cannot be dispatched")
+
+Output:
+Your parcel is dispatched
+
+Even though quantity is 0, this program runs if block. Because and takes precedence over or does not produce the anticipated result.
+Appropriately employing parenthesis (), we may get the required result:
+Code
+
+# Precedence of and and or operators
+colour = "red"
+
+quantity = 0
+
+if (colour == "red" or colour == "green") and quantity >= 5:
+    print("Your parcel is dispatched")
+else:
+    print("Your parcel cannot be dispatched")
+
+Output:
+Your parcel cannot be dispatched
+
+Associativity of Python Operators
+We can observe that a given category contains many operators in the list above. The order of these operators is identical.
+Associativity aids in determining the sequence of operations when two operators share the same priority.
+The direction in which any given expression with more than one operator having the same precedence is assessed is associativity. Almost every operator is associative from left to right.
+Code
+
+# This shows Left to right associativity
+print(4 * 9 // 3)
+# Using parenthesis this time to show left to right associativity
+print(4 * (9 // 3))
+
+Output:
+12
+12
+
+Note: In Python, the exponent operation ** possesses the right to left associativity.
+Code
+
+# This example demonstrates the right to left associativity of exponent operator **
+print (3 ** 2 ** 3)
+
+# If we want to first solve 5 ** 7 then we can use ()
+print ((3 ** 2) ** 3)
+
+Output:
+6561
+729
+
+Non Associative Operators
+Several operators, such as comparison or assignment operators, don't have such associativity rules in Python. Patterns of this type of operator have their own rules that can not be represented as associativity. For instance, a < b < c is not the same as (a < b) < c or a < (b < c). a < b < c is assessed from left to right and is similar to a < b and b < c.
+Additionally, while linking assignment operators such as a = b = c = 3 is entirely acceptable, a = b = c += 2 is not acceptable.
+Code
+
+# Defining the variables a, b, and, c
+a = b = c = 3
+
+#If the operator += follows associativity answer will shown otherwise error will be raised
+a = b = c += 2
+
+Output:
+a = b = c += 2
+              ^
+SyntaxError: invalid syntax
+
+Hence, this operator does not follow left-to-right associativity.
+The table below is showing associativity of various Python operators.
+
+
+Operator
+Description
+Associativity
+
+
+( )
+Parentheses
+left to right
+
+
+**
+Exponent
+right to left
+
+
+* / %
+Multiplication / division / modulus
+left to right
+
+
++ -
+Addition / subtraction
+left to right
+
+
+<< >>
+Bitwise left shift / Bitwise right shift
+left to right
+
+
+< <=> >=
+Relational operators: less than / less than or equal to / greater than / greater than or equal to
+left to right
+
+
+== !=
+Relational operators: is equal to / is not equal to
+left to right
+
+
+is, is notin, not in
+Identity operatorsMembership operators
+left to right
+
+
+&
+Bitwise AND operator
+left to right
+
+
+^
+Bitwise exclusive OR operator
+left to right
+
+
+|
+Bitwise inclusive OR operator
+left to right
+
+
+not
+Logical NOT
+right to left
+
+
+and
+Logical AND
+left to right
+
+
+or
+Logical OR
+left to right
+
+
+=+= -=*= /=%= &=^= |=<<= >>=
+Assignment operators:Addition / subtraction Multiplication / division Modulus / bitwise AND Bitwise exclusive / inclusive OR Bitwise shift left / right shift
+right to left
+
+
+In Python, How do we Retain Operator Precedence?
+Have you ever read about the BODMAS rule in arithmetic?
+It'll undoubtedly be YES!
+Bracket, Order, Division, Multiplication, Addition, and Subtraction are all acronyms for BODMAS. When various arithmetic operations are present in an equation, this rule specifies the sequence they should be computed.
+If we peek at the precedence chart given above, we'll notice that the order of operators is in the following manner:
+Parentheses - Exponentiation - Multiplication - Division - Addition - Subtraction
+PEMDAS is the acronym for this rule, which parallels BODMAS.
+Conclusion
+In this tutorial, we have learned that:-
+Precedence rules determine the priority in which various operators are implemented in an equation.
+The way several operations of the identical level, or operators having the same precedence, are used in an equation is determined by the rules of associativity.
+
+
+Next TopicPython unofficial libraries
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,123 @@
+
+
+
+
+next →
+← prev
+
+Find Key from Value in Dictionary
+Python dictionary is a type of data structure that makes it simple to write highly effective code. Since we can hash its keys, a dictionary data structure is a type of hash table in several other languages. A data structure called a hash table uses associative coding to store data. Each item of the dictionary is kept in a hash table in an array format with a distinct index value. If we get to know the index for the desired data, accessing it becomes pretty quick.
+The keys and their corresponding are arranged in pairs in Python dictionaries. We can compare them to words and their interpretations from an ordinary dictionary. The interpreter maps the keys and values to each other. For example, the key "Data Science" is linked to the description of science that uses computer tools to look for patterns in large amounts of data in an actual dictionary.
+We can use Python's dict_name[key_name] syntax to retrieve the values contained in a dictionary using its keys. But even if we have values, there is no direct way to retrieve the key that goes with them. In this post, we'll examine the strategies for obtaining the key through the value of that key.
+Methods
+Let's examine the Python Dictionary's key-by-value retrieval method.
+Identify A Key Using Its Value by Searching the Dictionary Items
+The easiest way to exchange a key for its value is in this way. We will use this approach to examine each key-value combination to identify the key corresponding to the present value. We shall employ the items() function of the Python dictionary for this operation. Using the items() method, we can get a list of tuples with key-value pairs in the dictionary. We will find the key linked to our value by searching each tuple in the manner described below.
+Code
+
+# Python program to get a key by its value by searching for the value in the dictionary
+
+# Creating a dictionary
+Dict = {"Name": "Javatpoint", "Language": "Python", "Data Structure": "Dictionary"}
+# Printing the dictionary
+print("Our dictionary is:", Dict)
+
+# Getting the tuples of key:value pairs present in the dictionary using the items() function
+items = Dict.items()
+
+# Storing the value whose key is to be retrieved
+print("Value whose key is to be retrieved:")
+Value = "Python"
+print(Value)
+
+# Getting the key of the stored value
+for key, value in items:
+    if value == Value:
+       
+print(f"The key of {Value} in the dictionary is: ", key)
+
+Output:
+Our dictionary is: {'Name': 'Javatpoint', 'Language': 'Python', 'Data Structure': 'Dictionary'}
+Value whose key is to be retrieved:
+Python
+The key of Python in the dictionary is:  Language
+
+Using Python Lists, Obtain The Key from A Value
+We can make a separate Python list of keys and values and then use the index() function to get the keys from the supplied value. For this assignment, we will first use the keys() function to generate a Python list of the keys contained in the given dictionary, after which we will use the values() function to make a Python list of the values included in the dictionary.
+Using the index() function, we will retrieve the supplied value's index from the list of values. The index of the dictionary's values in a Python list of values will match the index of the related key in the Python list of keys because we know that the ordering of the keys in the Python list of keys corresponds to the order of the values added in the Python list of values.
+Therefore, after locating the value's index inside the Python list of values, one can identify the key's index in the list of keys in the exact location. The next is how to accomplish this.
+Code
+
+# Python program to get a key by its value using lists of keys and values of the dictionary and index() method
+
+# Creating a dictionary
+Dict = {"Name": "Javatpoint", "Language": "Python", "Data Structure": "Dictionary"}
+
+# Printing the dictionary
+print("Our dictionary is:", Dict)
+
+# Storing the keys and the values of the dictionary in separate Python lists
+keys = list(Dict.keys())
+values = list(Dict.values())
+
+# Storing the value whose key is to be retrieved
+print("Value whose key is to be retrieved:")
+Value = "Python"
+print(Value)
+
+# Getting the index of the stored value from the list of values
+index = values.index(Value)
+
+# Getting the key of the value
+Key = keys[index]
+print(f"The key of {Value} in the dictionary is: ", Key)
+
+Output:
+Our dictionary is: {'Name': 'Javatpoint', 'Language': 'Python', 'Data Structure': 'Dictionary'}
+Value whose key is to be retrieved:
+Python
+The key of Python in the dictionary is:  Language
+
+Using List Comprehension to Determine the Key from A Value
+We can use list comprehension to obtain the keys connected to the supplied value in place of the index() method. We will use list comprehension to generate a list of keys with associated values identical to the given value to find the key.
+Code
+
+# Python program to get a key by its value using list comprehension
+
+# Creating a dictionary
+Dict = {"Name": "Javatpoint", "Language": "Python", "Data Structure": "Dictionary"}
+
+# Printing the dictionary
+print("Our dictionary is:", Dict)
+
+# Getting the key:value pairs present in the dictionary
+items = Dict.items()
+
+# Storing the value whose key is to be retrieved
+print("Value whose key is to be retrieved:")
+Value = "Python"
+print(Value)
+
+# Getting the key of the value
+Key = [key for key, value in items if value == Value]
+print(f"The key of {Value} in the dictionary is: ", Key)
+
+Output:
+Our dictionary is: {'Name': 'Javatpoint', 'Language': 'Python', 'Data Structure': 'Dictionary'}
+Value whose key is to be retrieved:
+Python
+The key of Python in the dictionary is: ['Language']
+
+
+
+Next TopicSklearn Regression Models
+
+
+
+
+← prev
+next →
+
+
+
+

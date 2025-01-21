@@ -1,0 +1,196 @@
+
+
+
+
+next →
+← prev
+
+How to add two lists in Python
+In this topic, we will learn how we can add two lists in Python. But before going through the topic, we need to understand the term List in Python. Python list is used to store multiple items in a variable. Items in the list can be any ordered, changeable, and allow to store duplicate values. Each item of the list has an appropriate indexed value where the first index of the list starts with {0}, and the length index of the list must be n-1. Each item of the list is separated by a comma (,) symbol and enclosed within square brackets [].
+
+Syntax
+
+L1 = ["Apple", 10, "NEW York"] # different data type elements
+L2 = [1, 2, 4, 5] # same data type elements
+
+Here L1 and L2 are the two lists containing the same or different data type elements in a list. The List L1 contains the int and string data type elements, whereas the List L2 contains only int data type elements.
+Let's consider a program to print the list in Python.
+programList.py
+
+List1 = ["Rose", "Lotus", 24, "Gold", "USA" ] # define the list
+# define the Department Dept2 list
+Dept2 = ["Web Designing", 40, 20]
+# define the HR_CS
+HR_CS = [58, "Ms Wiley"]
+List2 = [1, 2, 4, 5, 6] # integer list
+print (" Display the List1", List1)
+print (" Display the List2", List2)
+print (" Display the Department List", Dept2)
+print (" Display the CS Department ", HR_CS)
+
+Output:
+Display the List1 ['Rose', 'Lotus', 24, 'Gold', 'USA']
+Display the List2 [1, 2, 4, 5, 6]
+Display the Department List ['Web Designing', 40, 20]
+Display the CS Department [58, 'Ms Wiley']
+
+Let's discuss the various method to add two lists in Python Program.
+Method 1: Add two lists using the Naive Method:
+It is a simple method that adds the two lists in Python using the loop and appends method to add the sum of lists into the third list. A for loop performs the addition of both lists with the same index number and continuously iterates the elements until the end of the list. After that append method, insert the added elements to the third list.
+Let's consider a program to add the two list in Python using the Naïve Method.
+naivePro.py
+
+# initialize the Python lists
+lt1 = [5, 10, 15, 20, 25, 30]
+lt2 = [2, 4, 6, 8, 10, 12]
+
+# print the original list element
+print ( " Python Original list 1: " + str (lt1))
+print ( "Python Original list 2: " + str (lt2))
+
+# use naive method to add two list.
+res_lt = [] # declaration of the list
+for x in range (0, len (lt1)):
+    res_lt.append( lt1[x] + lt2[x])
+
+# Display the sum of two list in Python
+print ( " Addition of the list lt1 and lt2 is: " + str (res_lt))
+
+Output:
+Python Original list 1: [5, 10, 15, 20, 25, 30]
+Python Original list 2: [2, 4, 6, 8, 10, 12]
+ Addition of the list lt1 and lt2 is: [7, 14, 21, 28, 35, 42]
+
+Method 2: Add two list using the Comprehension List
+It is a shorthand technique of the Naive method in Python. The comprehension technique is much faster to type and retrieve the addition of the two lists. Therefore, it is used in Python programming to perform these types of tasks.
+Let's consider a program to add the two list in Python using the Naïve Method.
+comprehension.py
+
+# initialize the Python lists
+lt1 = [2, 4, 6, 8, 10, 30]
+lt2 = [2, 4, 6, 8, 10, 12]
+
+# print the original list element
+print ( " Python list 1 : " + str (lt1))
+print ( "Python list 2 : " + str (lt2))
+
+# use list comprehension to add two lists.
+res_lt = [ lt1[x] + lt2[x] for x in range (len (lt1))]
+
+
+# Display the sum of two list in Python
+print ( " Addition of the list lt1 and lt2 is: " + str (res_lt))    
+
+Output:
+Python list 1 : [2, 4, 6, 8, 10, 30]
+Python list 2 : [2, 4, 6, 8, 10, 12]
+ Addition of the list lt1 and lt2 is: [4, 8, 12, 16, 20, 42]
+
+Method 3: Add two list in Python using the map() function with add operator:
+In Python, a map() function is used to add two lists bypassing the list variables (lt1, lt2) and add as parameters. Inside the map() function, an added parameter acts like an additional operator to add lists and returns the sum.
+Consider a program to add two lists in Python using the map() function with the add operator.
+AddMap.py
+
+from operator import add # import the add operator from the operator module
+# initialize the lt1 and lt2 as the Python list' element
+lt1 = [4, 8, 12, 16, 20, 24]
+lt2 = [2, 4, 6, 8, 10, 12]
+
+# display the original items of the lists lt1 and lt2
+print ("Display the elements of List 1 " + str(lt1))
+print ("Display the elements of List 2 " + str(lt2))
+
+# use map() function with add operator to add the elements of the lists lt1 and lt2
+res_lt = list( map (add, lt1, lt2)) # pass the lt1, lt2 and add as the parameters
+
+# Display the sum of the two list
+print (" Sum of the list 1 and list 2 is : " + str(res_lt))
+
+Output:
+Display the elements of List 1 [4, 8, 12, 16, 20, 24]
+Display the elements of List 2 [2, 4, 6, 8, 10, 12]
+ Sum of the list 1 and list 2 is: [6, 12, 18, 24, 30, 36]
+
+Method 4: Accepts the list element from the user and joins the two lists.
+In this program, we input the user's list elements and insert them into the list using For loop. After that, perform the addition of the two lists in the Python program.
+Let's consider a program to take the input list element from the user and add them.
+Accept.py
+
+# Declaration of the lt1, lt 2 and lt3 lists
+lt1 = []
+lt2 = []
+lt3 = []
+
+# Takes a numeric number from the user to define the total size of the list
+items = int (input (" Enter the total number of the list elements: "))
+
+# Enter the list elements from the user one by one.
+print (" Enter the items into List 1 : ")
+for i in range(1, items + 1):
+    num = int ( input (" Enter the value of %d index is :" %i))
+    lt1.append(num) # insert the items into the list1
+
+# Enter the list elements from the user one by one.
+print (" Enter the items into the List 2 : ")
+for i in range(1, items + 1):
+    num = int ( input (" Enter the value of %d index is :" %i))
+    lt2.append(num) # insert the items into the list2
+    
+for j in range(items):
+    lt3.append (lt1[j] + lt2[j]) # add the list items of both list lt1 and lt2 into the lt3   
+print ("\n Addition of the two lists is ", lt3)
+
+Output:
+Enter the total number of the list elements: 5
+ Enter the items into the List 1:
+ Enter the value of 1 index is: 3
+ Enter the value of 2 index is: 6
+ Enter the value of 3 index is: 9
+ Enter the value of 4 index is: 12
+ Enter the value of 5 index is: 15
+ Enter the items into the List 2:
+ Enter the value of 1 index is: 2
+ Enter the value of 2 index is: 4
+ Enter the value of 3 index is: 6
+ Enter the value of 4 index is: 8
+ Enter the value of 5 index is: 10
+
+ The addition of the two list is [5, 10, 15, 20, 25]
+
+Method 5: Add two list using the zip() function with sum() function:
+The sum() function is used to add two lists using the index number of the list elements grouped by the zip() function. A zip() function is used in the sum() function to group list elements using index-wise lists.
+Let's consider a program to add the list elements using the zip function and sum function in Python.
+zipSum.py
+
+# initializing of the lists lt1 and lt2
+lt1 = [6, 12, 18, 3, 6, 9]
+lt2 = [4, 8, 12, 2, 4, 6]
+
+# display the original items of the lists lt1 and lt2
+print ("Display the elements of List 1 " + str(lt1))
+print ("Display the elements of List 2 " + str(lt2))
+
+# use the zip() function and sum() function to group the lists add the lists' lt1 and lt2 with index #wise. 
+result_lt = [sum(i) for i in zip(lt1, lt2 )]
+
+# Display the sum of the two list
+print (" Sum of the list 1 and list 2 is : " + str(result_lt))
+
+Output:
+Display the elements of List 1 [6, 12, 18, 3, 6, 9]
+Display the elements of List 2 [4, 8, 12, 2, 4, 6]
+ Sum of the list 1 and list 2 is : [10, 20, 30, 5, 10, 15]
+
+
+
+Next TopicShallow Copy and Deep Copy in Python
+
+
+
+
+← prev
+next →
+
+
+
+

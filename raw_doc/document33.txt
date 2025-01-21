@@ -1,0 +1,120 @@
+
+
+
+
+next →
+← prev
+
+Python Regex
+A regular expression is a set of characters with highly specialized syntax that we can use to find or match other characters or groups of characters. In short, regular expressions, or Regex, are widely used in the UNIX world.
+ The re-module in Python gives full support for regular expressions of Pearl style. The re module raises the re.error exception whenever an error occurs while implementing or using a regular expression.
+We'll go over two crucial functions utilized to deal with regular expressions. But first, a minor point: many letters have a particular meaning when utilized in a regular expression.
+re.match()
+Python's re.match() function finds and delivers the very first appearance of a regular expression pattern. In Python, the RegEx Match function solely searches for a matching string at the beginning of the provided text to be searched. The matching object is produced if one match is found in the first line. If a match is found in a subsequent line, the Python RegEx Match function gives output as null.
+Examine the implementation for the re.match() method in Python. The expressions ".w*" and ".w*?" will match words that have the letter "w," and anything that does not has the letter "w" will be ignored. The for loop is used in this Python re.match() illustration to inspect for matches for every element in the list of words.
+Matching Characters
+The majority of symbols and characters will easily match. (A case-insensitive feature can be enabled, allowing this RE to match Python or PYTHON.) The regular expression check, for instance, will match exactly the string check.
+There are some exceptions to this general rule; certain symbols are special metacharacters that don't match. Rather, they indicate that they must compare something unusual, or they have an effect on other parts of the RE by recurring or modifying their meaning.
+Here's the list of the metacharacters;
+
+. ^ $ * + ? { } [ ] \ | ( )
+
+Repeating Things
+The ability to match different sets of symbols will be the first feature regular expressions can achieve that's not previously achievable with string techniques. On the other hand, Regexes isn't much of an improvement if that had been their only extra capacity. We can also define that some sections of the RE must be reiterated a specified number of times.
+The first metacharacter we'll examine for recurring occurrences is *. Instead of matching the actual character '*,' * signals that the preceding letter can be matched 0 or even more times, rather than exactly one.
+Ba*t, for example, matches 'bt' (zero 'a' characters), 'bat' (one 'a' character), 'baaat' (three 'a' characters), etc.
+Greedy repetitions, such as *, cause the matching algorithm to attempt to replicate the RE as many times as feasible. If later elements of the sequence fail to match, the matching algorithm will retry with lesser repetitions.
+This is the syntax of re.match() function -
+
+re.match(pattern, string, flags=0)
+
+Parameters
+pattern:- this is the expression that is to be matched. It must be a regular expression
+string:- This is the string that will be compared to the pattern at the start of the string.
+flags:- Bitwise OR (|) can be used to express multiple flags. These are modifications, and the table below lists them.
+Code
+
+import re
+line = "Learn Python through tutorials on javatpoint"
+match_object = re.match( r'.w* (.w?) (.w*?)', line, re.M|re.I)
+
+if match_object:
+    print ("match object group : ", match_object.group())
+    print ("match object 1 group : ", match_object.group(1))
+    print ("match object 2 group : ", match_object.group(2))
+else:
+    print ( "There isn't any match!!" )
+
+Output:
+There isn't any match!!
+
+re.search()
+The re.search() function will look for the first occurrence of a regular expression sequence and deliver it. It will verify all rows of the supplied string, unlike Python's re.match(). If the pattern is matched, the re.search() function produces a match object; otherwise, it returns "null."
+To execute the search() function, we must first import the Python re-module and afterward run the program. The "sequence" and "content" to check from our primary string are passed to the Python re.search() call.
+This is the syntax of re.search() function -
+
+re.search(pattern, string, flags=0)
+
+Here is the description of the parameters -
+pattern:- this is the expression that is to be matched. It must be a regular expression
+string:- The string provided is the one that will be searched for the pattern wherever within it.
+flags:- Bitwise OR (|) can be used to express multiple flags. These are modifications, and the table below lists them.
+Code
+
+import re
+
+line = "Learn Python through tutorials on javatpoint";
+
+search_object = re.search( r' .*t? (.*t?) (.*t?)', line)
+if search_object:
+    print("search object group : ", search_object.group())
+    print("search object group 1 : ", search_object.group(1))
+    print("search object group 2 : ", search_object.group(2))
+else:
+    print("Nothing found!!")
+
+Output:
+search object group :   Python through tutorials on javatpoint
+search object group 1 :  on
+search object group 2 :  javatpoint
+
+Matching Versus Searching
+Python has two primary regular expression functions: match and search. Match looks for a match only where the string commencements, whereas search looks for a match everywhere in the string (this is the default function of Perl).
+Code
+
+import re
+
+line = "Learn Python through tutorials on javatpoint"
+
+match_object = re.match( r'through', line, re.M|re.I)
+if match_object:
+    print("match object group : ", match_object.group())
+else:
+    print( "There isn't any match!!")
+
+search_object = re.search( r' .*t? ', line, re.M|re.I)
+if searchObj:
+    print("search object group : ", search_object.group())
+else:
+    print("Nothing found!!")
+
+Output:
+There isn't any match!!
+search object group :   Python through tutorials on 
+
+re.findall()
+The findall() function is often used to look for "all" appearances of a pattern. The search() module, on the other hand, will only provide the earliest occurrence that matches the description. In a single operation, findall() will loop over all the rows of the document and provide all non-overlapping regular matches.
+We have a line of text, and we want to get all of the occurrences from the content, so we use Python's re.findall() function. It will search the entire content provided to it.
+Using the re-package isn't always a good idea. If we're only searching a fixed string or a specific character class, and we're not leveraging any re features like the IGNORECASE flag, regular expressions' full capability would not be needed. Strings offer various ways for doing tasks with fixed strings, and they're generally considerably faster than the larger, more generalized regular expression solver because the execution is a simple short C loop that has been optimized for the job.
+
+
+Next TopicPython OOPs Concepts
+
+
+
+← prev
+next →
+
+
+
+

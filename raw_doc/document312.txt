@@ -1,0 +1,87 @@
+
+
+
+
+next →
+← prev
+
+Python program to calculate the best time to buy and sell stock
+We will create a Python program for estimating the best time to buy and sell stock in the following tutorial.
+So, let's get started.
+Understanding the Python Project
+Suppose that we have an array X, here X[i] signifies the price of a provided stock on day n. We need to calculate the maximum profit. We can perform one transaction at most. (Transaction is considered to buy and sell stocks). However, it becomes a necessity for us to keep in mind that we may not engage in more than one transaction at one time. Thus, we must have to sell the stock before buying the new one.
+Let us consider an array as X = [7, 1, 5, 3, 6, 4]; then the output will be 5. As we can observe, if we buy on day 2 (index 1), then it will take 1 as a buying price. Then if we sell on day 5, we will get a profit of 6 - 1 = 5.
+Let us solve this problem using the following steps
+Step 1: Creating two arrays Lmin and Rmax, of the same size as Array X, and fill them with 0s
+Step 2: Lmin[0] = A[0]
+Step 3: for n in range 1 to length of X - 1, Lmin[n] = minimum of Lmin[n - 1] and X[n]
+Step 4: Rmax[i - 1] = X[i - 1]
+Step 5: for n in range length of X - 1 down to 1, Rmax[n] = maximum of Rmax[n + 1] and X[n]
+Step 6: Setting result = 0
+Step 7: for n in range 0 to length of X - 1, result = maximum of result and Rmax[n + 1] - Lmin[n]
+Step 8: Returning result
+Now, let us understand the implementation of these steps in the coding part shown below:
+The Project Code
+Let us now consider the following Python program in order to calculate the best time for buying and selling stocks.
+File: stocksProgram.py
+
+# defining a class
+class Soln(object):
+    # defining the function to calculate the maximum profit
+    def max_Profit(self, price):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        # using the if conditional
+        if not price:
+            return 0
+        # creating two arrays
+        Lmin, Rmax = [0 for n in range(len(price))], [0 for n in range(len(price))]
+        Lmin[0] = price[0]
+        # using the for-loop
+        for n in range(1, len(price)):
+            Lmin[n] = min(Lmin[n - 1], price[n])
+        # printing the Lmin elements
+        print(Lmin)
+        Rmax[-1] = price[-1]
+        # using the for-loop
+        for n in range(len(price) - 2, -1, -1):
+            Rmax[n] = max(Rmax[n + 1], price[n])
+        # printing the Rmax elements
+        print(Rmax)
+        # assigning initial value of result
+        res = 0
+        # using the for-loop
+        for n in range(len(price) - 1):
+            res = max(res, Rmax[n + 1] - Lmin[n])
+        return res
+# instantiating the class
+obj_1 = Soln()
+# printing the maximum profit for the provided Array
+print(obj_1.max_Profit([7, 2, 5, 8, 6, 3, 1, 4, 5, 4, 7]))
+
+Input:
+
+price = [7, 2, 5, 8, 6, 3, 1, 4, 5, 4, 7]
+
+Output:
+[7, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1]
+[8, 8, 8, 8, 7, 7, 7, 7, 7, 7, 7]
+6
+
+Explanation 
+In the above snippet of code, we have defined a class. We then defined a function as max_profit within the class to calculate the maximum profit for a given array. We have created two arrays as Lmin and Rmax of the same size of the given array with 0 as their elements. We have then assigned the value of the first element of the Lmin array to the first element of the given array. We have used the for-loop to iterate the array's values to the Lmin array and print them for the users. We have then followed a similar for the Rmax array and print its elements for the users. We have then assigned the initial value of the res variable as 0. We have then used the for-loop again to estimate the maximum profit. At last, we instantiated the class and printed the maximum profit for the given array for the users. And in the above program, it is 6.
+
+
+Next TopicTuple to String in Python
+
+
+
+
+← prev
+next →
+
+
+
+

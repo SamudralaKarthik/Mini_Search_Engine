@@ -1,0 +1,397 @@
+
+
+
+
+next →
+← prev
+
+__dict__ in Python
+In Python, a dictionary is an unordered set of data values that could be used to store data values similarly to a map. Unlike other data types, which can only include a single value per element, dictionaries can also contain a key:value pair. To make the dictionary more efficient, Key-Value is offered.
+When it pertains to attribute access, the dot "." (as in x.any_attribute) is all that the majority of users are familiar with. Simply said, attribute access is the process of obtaining an object that is connected to one you already have. It may look very simple to somebody who uses Python without going too far into the specifics. However, there is a lot going on behind the scenes for this relatively simple process.
+What is _dict_ ?
+Every module has a unique property called __dict__. This dictionary contains the symbol table for the module. The (writable) characteristics of an item are stored in a dictionary or the other mapping object.
+To put it simply, every object in Python has a property that is indicated by the symbol __dict__. Furthermore, this object has every property that has been specified for it. Another name for __dict__ is mappingproxy object. We can use the dictionary via applying the __dict__ property to a class object.
+Syntax :
+
+object.__dict__
+
+Example :
+
+class AnimalClass:
+    def __init__(self,identity,age):
+        self.identity = identity
+        self.age = age
+    
+    def feature(self):
+        if self.age == "10":
+            return True
+        else:
+            return False
+ac = AnimalClass('Lion','10')
+print(ac.__dict__)
+
+Output:
+{'identity': 'Lion', 'age': '10'}
+
+Example 2 :
+This example will demonstrate that by the means of the __dict__ attribute, one could create a dictionary out of any object :
+
+# class Flowers is defined
+class Flowers:
+	
+	# constructor
+	def __init__(self):
+		
+		# keys are being initialized with
+		# their corresponding values
+		self.Rose = 'red'
+		self.Lily = 'white'
+		self.Lotus = 'pink'
+
+	def displayit(self):
+		print("The Dictionary from object fields belongs to the class Flowers :")
+
+
+# object animal of class Animals
+flower = Flowers()
+
+# calling displayit function
+flower.displayit()
+# calling the attribute __dict__ on flower
+# object and making it print it
+print(flower.__dict__)
+
+Output:
+The Dictionary from object fields belongs to the class Flowers :
+{'Rose': 'red', 'Lily': 'white', 'Lotus': 'pink'}
+
+Example 3 :
+
+def funct():
+
+    pass
+
+funct.practice = 1
+
+print(funct.__dict__)
+
+class PracticeClass:
+
+    x = 1
+
+    def practice_function(self):
+
+        pass
+
+print(PracticeClass.__dict__)
+
+Output:
+{'practice': 1}
+{'__module__': '__main__', 'x': 1, 'practice_function': , '__dict__': , '__weakref__': , '__doc__': None}
+
+Using Dictionary without the use of __dict__ in Python :
+Creating a Dictionary :
+In Python, a dictionary may be made by enclosing a list of entries inside curly brackets and separating them with a comma. Dictionary stores pairs of values, where one pair element is the Key and another one is its Key:value. In contrast to keys, which cannot be repeated and must be immutable, values in dictionaries can be of any type of data and can be duplicated.
+The elements are separated by commas, each key is distinguished from its value by a colon (:), and the entire structure is contained in curly brackets. A dictionary that is completely devoid of all words is written as follows: {}.
+The keys of the dictionary must be immutable, such as integers, tuples, or strings, although the values can be of any type. In Python dictionaries, the same key name spelled differently is considered as a distinct key. Please take note that dictionary keys are case-sensitive; keys with the similar name but distinct case will be handled differently.
+Example :
+
+# Creating a Dictionary
+# using Integer Keys only
+Dict = {1: 'JAVA', 2: 'T', 3: 'POINT'}
+print("\nCreating a Dictionary by using Integer Keys : ")
+print(Dict)
+
+# Creating a Dictionary
+# using various Mixed keys
+Dict = {'Company': 'JavaTpoint', 7: [22, 35, 46, 97]}
+print("\nCreating a Dictionary by using Mixed Keys : ")
+print(Dict)
+
+Output:
+Creating a Dictionary by using Integer Keys : 
+{1: 'JAVA', 2: 'T', 3: 'POINT'}
+
+Creating a Dictionary by using Mixed Keys : 
+{'Company': 'JavaTpoint', 7: [22, 35, 46, 97]}
+
+The built-in method dict() also allows for the creation of dictionaries. Simply putting two curly braces {} together will result in an empty dictionary.
+Example :
+
+# Creating an empty Dictionary
+myDict = {}
+print("This is an Empty Dictionary: ")
+print(myDict)
+
+# Creating a Dictionary
+# using the dict() method
+myDict = dict({1: 'JAVA', 2: 'T', 3: 'POINT'})
+print("\nCreating a Dictionary by using the dict() method : ")
+print(myDict)
+
+# Creating a Dictionary
+# using each item as a different Pair
+myDict = dict([(1, 'JavaTpoint'), (2, 'Great')])
+print("\nCreating a Dictionary by using each item as a different pair : ")
+print(myDict)
+
+Output:
+This is an Empty Dictionary: 
+{}
+
+Creating a Dictionary by using the dict() method : 
+{1: 'JAVA', 2: 'T', 3: 'POINT'}
+
+Creating a Dictionary by using each item as a different pair : 
+{1: 'JavaTpoint', 2: 'Great'}
+
+Complexities for creating a Dictionary :
+
+Time complexity : O(length(dict))
+Space Complexity : O(n)
+
+Nested dictionaries :
+It is a form of dictionary where one or more than one keys has a dictionary attached to it as a value of the key.
+Example :
+
+# Creating a Nested Dictionary
+# as mentioned above using a dictionary as a value to a key in 
+# a dictionary
+myDict = dict({1: 'JAVA', 2: 'T', 3: 'POINT', 4: {1: 'JavaTpoint', 2: 'Great'}})
+print("\nCreating a Nested Dictionary : ")
+print(myDict)
+
+Output:
+Creating a Nested Dictionary : {1: 'JAVA', 2: 'T', 3: 'POINT', 4: {1: 'JavaTpoint', 2: 'Great'}}
+
+Addition of elements to a dictionary :
+There are several methods for adding elements to a Python dictionary. By specifying the value and the key together, for example, Dict[Key] = "Value", one value may be added to a dictionary at a time. Using the built-in update() function, one can modify an existing value in a Dictionary. An existing Dictionary may also be expanded with nested key values.
+Note : When adding a value, the value is updated if the key-value combination already exists. If not, a new key and value are added to the dictionary.
+Example :
+
+# Creating Empty Dictionary
+myDict = {}
+print("Empty Dictionary: ")
+print(myDict)
+
+# Adding elements only one at a time
+myDict[0] = 'Java'
+myDict[3] = 'T'
+myDict[6] = 41
+print("\nDictionary after the addition of 3 elements: ")
+print(myDict)
+
+# Adding a set of values
+# to a particular Key
+myDict['settingValues'] = 7, 8, 9
+print("\nDictionary after the adding a set of values to a key : ")
+print(myDict)
+
+# Updating the existing Key's Value
+myDict[3] = 'tPoint'
+print("\nDictionary after Updated key value: ")
+print(myDict)
+
+# Adding Nested Key value to Dictionary
+myDict[8] = {'Nested' :{'A' : 'boy', 'B' : 'Girl'}}
+print("\nDictionary after Addition of a Nested Key: ")
+print(myDict)
+
+Output:
+Empty Dictionary: 
+{}
+
+Dictionary after the addition of 3 elements: 
+{0: 'Java', 3: 'T', 6: 41}
+
+Dictionary after the adding a set of values to a key : 
+{0: 'Java', 3: 'T', 6: 41, 'settingValues': (7, 8, 9)}
+Dictionary after Updated key value: 
+{0: 'Java', 3: 'tPoint', 6: 41, 'settingValues': (7, 8, 9)}
+
+Dictionary after Addition of a Nested Key: 
+{0: 'Java', 3: 'tPoint', 6: 41, 'settingValues': (7, 8, 9), 8: {'Nested': {'A': 'boy', 'B': 'Girl'}}}
+
+Complexities for adding elements to a Dictionary :
+
+Time Complexity : O(1)/O(n)
+Space Complexity : O(1)
+
+Accessing Dictionary Elements :
+A dictionary employs keys, whereas other data types require indexing to retrieve values. Keys can be utilised with the get() function or inside square brackets [].
+In the event that a key cannot be found in the dictionary, KeyError is produced if we use square brackets []. On the other hand, if the key cannot be located, the get() function returns None.
+Example :
+
+# Python program to demonstrate the
+# accessing of an element, from a Dictionary
+
+# Creating a Dictionary
+myDict = {1: 'Java', 'name': 'T', 2: 'Point', 4: 'Website'}
+
+# accessing an element using key
+print("Accessing an element using the key:")
+print(myDict['name'])
+
+print("Accessing another element using the key:")
+print(myDict[4])
+
+# accessing an element using the get() method
+print("Accessing an using the get() method:")
+print(myDict.get(2))
+
+print("Accessing another using the get() method:")
+print(myDict.get(1))
+
+Output:
+Accessing an element using the key:
+T
+Accessing another element using the key:
+Website
+
+Accessing an using the get() method:
+Point
+Accessing another using the get() method:
+Java
+
+Complexities for accessing elements in a Dictionary :
+
+Time Complexity : O(1)
+Space Complexity : O(1)
+
+Accessing a nested dictionary's element :
+We can take the help of the indexing [] technique to get the value of an existing key in the nested dictionary.
+Example :
+
+# Creating a Dictionary
+myDict = {'myDict1': {3: 'JavatPoint'},
+		'myDict2': {'Info.': 'Website'}}
+
+# Accessing the elements using the key
+print(myDict['myDict1'])
+print(myDict['myDict1'][3])
+print(myDict['myDict2']['Info.'])
+
+Output:
+{3: 'JavatPoint'}
+JavatPoint
+Website
+
+Built-in Dictionary methods :
+clear() :
+The function dict.clear() eliminates every key-value pair from the dictionary.
+copy() :
+A shallower copy of the dictionary is returned by the dict.copy() method.
+fromkeys() :
+Using the supplied iterable (string, list, set, or tuple) as keys and the specified value, the function dict.fromkeys() creates a new dictionary.
+get() :
+This gives the value associated with the given key.
+items() :
+A dictionary view object, that offers a dynamic presentation of the dictionary items as a list of key-value pairs is returned by the function dict.items(). When the dictionary is updated, this view object is also updated.
+dict.keys() :
+The function dict.keys() returns a dictionary view object with the dictionary's list of keys.
+pop() :
+This returns the value of the key after removing it. If a key is missing from the dictionary, it either throws a KeyError or returns the default value if one was provided.
+popitem() :
+This removes one item from the dictionary and returns a tuple of (key, value) pairs. The Last In First Out (LIFO) sequence is used for returning pairs.
+setdefault() :
+This returns the dictionary's value for the given key. If the key cannot be discovered, the key with the supplied defaultvalue is added. It sets None as the defaultvalue if it is not supplied.
+values() :
+The dictionary view object that offers a dynamic view of each value which is present in the dictionary, is returned by the function dict.values(). When the dictionary is updated, this view object is also updated.
+update() :
+A dictionary or any iterable with key-value pairs, such as a tuple, can be updated using the dict.update() function.
+Example :
+
+# Example to demonstrate all dictionary methods
+#Creating a Dictionary
+mydict1={1:"HTML",2:"CSS",3:"Javascript",4:"Python"}
+
+#copy method
+mydict2=mydict1.copy()
+print(mydict2)
+
+#clear method
+mydict1.clear()
+print(mydict1)
+
+#get method
+print(mydict2.get(1))
+
+#items method
+print(mydict2.items())
+
+#keys method
+print(mydict2.keys())
+
+#pop method
+mydict2.pop(4)
+print(mydict2)
+
+#popitem method
+mydict2.popitem()
+print(mydict2)
+
+#update method
+mydict2.update({2:"C++"})
+print(mydict2)
+
+#values method
+print(mydict2.values())
+
+Output:
+{1: 'HTML', 2: 'CSS', 3: 'Javascript', 4: 'Python'}
+{}
+HTML
+dict_items([(1, 'HTML'), (2, 'CSS'), (3, 'Javascript'), (4, 'Python')])
+dict_keys([1, 2, 3, 4])
+{1: 'HTML', 2: 'CSS', 3: 'Javascript'}
+{1: 'HTML', 2: 'CSS'}
+{1: 'HTML', 2: 'C++'}
+dict_values(['HTML', 'C++'])
+
+Differenciating between a dictionary and a list :
+Data structures such as a list and a dictionary are fundamentally dissimilar. An ordered series of items can be stored in a list so that we can index into it or iterate over it. Lists can also be changed even after they have already been generated since they are a changeable type. The Python dictionary is a key-value storage and an implementation of a hash table. It does not follow any particular sequence and requires hashable keys. Additionally, it is quick for key lookups.
+A list's elements contain the following features :
+
+Unless specifically reordered, they keep their current order (for instance, by sorting the list).
+They might be of whatever type, or even a combination of sorts.
+Through numerical (zero based) indexes, we may access them.
+
+The characteristics of dictionary elements are as follows :
+
+Each entry has a value and a key.
+Orders are not warranted.
+Key values are used to access elements.
+Any hashtable type (other than a dict) may be used for key values, and types may be combined.
+Any kind of value, including other dicts, is allowed, and types can be combined.
+
+Usage :
+We use a dictionary if we have a set of distinct keys that correspond to values, but a list when we have an ordered group of things.
+Conclusion :
+
+In a computer language, dictionaries are a sort of data structure used to hold information that is somehow related.
+Every module has a unique property called __dict__.
+__dict__ contains the symbol table for the module.
+The properties of an element are stored in a mapping object.
+Every object in Python has a property that is indicated by the symbol __dict__.
+Another name for __dict__ is also known as mappingproxy object. 
+The two components of a Python dictionary are called Keys and Values.
+You might not receive your data back in the similar order that you input it since dictionaries do not keep their data in any specific order.
+Keys will consist of just one thing.
+Values can be integers, lists, lists inside lists, etc.
+There can be no more than one entry per key ( no duplicate key is allowed)
+The keys of the dictionary must be immutable, such as integers, tuples, or strings, although the values can be of any type.
+Dictionary keys are case-sensitive; in Python dictionaries, the same key name spelled differently is considered as a distinct key.
+
+
+
+Next TopicSimple To-Do List GUI Application in Python
+
+
+
+
+← prev
+next →
+
+
+
+

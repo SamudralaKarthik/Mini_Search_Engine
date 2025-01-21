@@ -1,0 +1,188 @@
+
+
+
+
+next →
+← prev
+
+Looping Through DataFrame in Python
+This tutorial will discuss how to loop through rows in a Pandas DataFrame.
+How to Use Pandas to Cycle Through Rows in a Pandas DataFrame?
+Python has a great environment of data-centric Python modules, which makes it a great tool for performing data analysis. One such tool, Pandas, greatly simplifies collecting and analyzing data. 
+Using the Index Attribute of the DataFrame
+Code
+
+# Python program to loop over the rows of a DataFrame using index attribute
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the DataFrame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+print("Given DataFrame:\n", df_pd)
+  
+print("\nIterating over the rows using the index attribute:\n")
+
+# iterating through each row and selecting 1 and 2 columns
+for ind in df_pd.index:
+    print(df_pd['1'][ind], df_pd['2'][ind])
+
+Output:
+Given DataFrame:
+    1   2   3
+0  a  a1  a2
+1  b  b1  b2
+2  c  c1  c2
+3  d  d1  d2
+4  e  e1  e2
+
+Iterating over the rows using the index attribute:
+
+a a1
+b b1
+c c1
+d d1
+e e1
+
+Using loc[] Function of the DataFrame.
+Code
+
+# Python program to loop over the rows of a DataFrame using the loc function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the DataFrame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+print("Given DataFrame:\n", df_pd)
+  
+print("\nIterating over the rows using the index attribute:\n")
+
+# iterating through each row and selecting 1 and 2 columns
+for ind in range(len(df_pd)):
+    print(df_pd.loc[ind, "1"], df_pd.loc[ind, "2"])
+
+Output:
+Given DataFrame:
+    1   2   3
+0  a  a1  a2
+1  b  b1  b2
+2  c  c1  c2
+3  d  d1  d2
+4  e  e1  e2
+
+Iterating over the rows using the index attribute:
+
+a a1
+b b1
+c c1
+d d1
+e e1
+
+Using iloc[] Method of the Pandas DataFrame
+Code
+
+# Python program to loop over the rows of a DataFrame using the iloc function
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the DataFrame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+print("Given DataFrame:\n", df_pd)
+  
+print("\nIterating over the rows using the index attribute:\n")
+
+# iterating through each row and selecting 1 and 2 columns
+for ind in range(len(df_pd)):
+    print(df_pd.iloc[ind, 0], df_pd.iloc[ind, 2])
+
+Output:
+Given DataFrame:
+    1   2   3
+0  a  a1  a2
+1  b  b1  b2
+2  c  c1  c2
+3  d  d1  d2
+4  e  e1  e2
+
+Iterating over the rows using the index attribute:
+
+a a2
+b b2
+c c2
+d d2
+e e2
+
+Using iterrows() Method of the DataFrame
+Code
+
+# Python program to loop over the rows of a DataFrame using the iterrows method
+
+# Importing the pandas package
+import pandas as pd
+  
+# Defining a dictionary containing our data for the DataFrame
+dictt = {'1': ['a', 'b', 'c', 'd', 'e'],
+         '2': ['a1', 'b1', 'c1', 'd1', 'e1'],
+         '3': ['a2', 'b2', 'c2', 'd2', 'e2']}
+  
+# Converting our dictionary into a Pandas DataFrame
+df_pd = pd.DataFrame(dictt)
+  
+print("Given DataFrame:\n", df_pd)
+  
+print("\nIterating over the rows using the iterrows() method:\n")
+  
+# iterating through each row and selecting 1 and 2 columns
+for ind, row in df_pd.iterrows():
+    print(row["1"], row["2"])
+
+Output:
+Given DataFrame:
+    1   2   3
+0  a  a1  a2
+1  b  b1  b2
+2  c  c1  c2
+3  d  d1  d2
+4  e  e1  e2
+
+Iterating over the rows using the iterrows() method:
+
+a a1
+b b1
+c c1
+d d1
+e e1
+
+
+
+Next TopicMusic Recommendation System Python Project with Source Code
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,272 @@
+
+
+
+
+next →
+← prev
+
+OrderedDict in Python
+The OrderedDict is the subclass of the dict object in Python. The difference between dict and OrderedDict is that the OrderedDict itself maintains the orders of the keys as inserted, whereas in the dict, the order of the keys is not an important part.
+The OrderedDict is the standard library class. It is located in the collections module.
+For using it, the user has to import the collections standard library module.
+Example:
+
+import collections
+
+In this article, we will discuss some of the operations on OrderedDict and how Dict is different from OrderedDict.
+The user can put some keys and a lot of them with values in the Dict class and OrderedDict class. In the following example, we will show how the ordering of the Dict class can vary, but for the OrderedDict class, it will remain fixed.
+Example:
+
+import collections
+# we will first create normal dict
+print('Dict:')
+user_dict = {}
+user_dict['PP'] = 10
+user_dict['QQ'] = 20
+user_dict['RR'] = 30
+user_dict['SS'] = 40
+user_dict['TT'] = 50
+user_dict['UU'] = 60
+for item in user_dict.items():
+   print(item)
+print()
+# now, we will create ordered dict
+print('OrderedDict:')
+user_ordered_dict = collections.OrderedDict()
+user_ordered_dict['PP'] = 10
+user_ordered_dict['QQ'] = 20
+user_ordered_dict['RR'] = 30
+user_ordered_dict['SS'] = 40
+user_ordered_dict['TT'] = 50
+user_ordered_dict['UU'] = 60
+for item in user_ordered_dict.items():
+   print(item)
+
+Output:
+Dict:
+('PP', 10)
+('QQ', 20)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+
+OrderedDict:
+('PP', 10)
+('QQ', 20)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+
+Changing the Value of the Specific Key
+The order of the keys will not be changed for the OrderedDict class after changing the value of the specific key, but in Dict class, the ordering may or may not change.
+Example:
+
+import collections
+# we will first create normal dict
+print('Dict:')
+user_dict = {}
+user_dict['PP'] = 10
+user_dict['QQ'] = 20
+user_dict['RR'] = 30
+user_dict['SS'] = 40
+user_dict['TT'] = 50
+user_dict['UU'] = 60
+for item in user_dict.items():
+   print(item)
+#now, we will change the value for key QQ
+user_dict['QQ'] = 111
+print('After changing value of specific key in Dict')
+for item in user_dict.items():
+   print(item)
+print()
+#we will create ordered dict
+print('OrderedDict:')
+user_ordered_dict = collections.OrderedDict()
+user_ordered_dict['PP'] = 10
+user_ordered_dict['QQ'] = 20
+user_ordered_dict['RR'] = 30
+user_ordered_dict['SS'] = 40
+user_ordered_dict['TT'] = 50
+user_ordered_dict['UU'] = 60
+for item in user_ordered_dict.items():
+   print(item)
+# now, we will change the value for specific key QQ
+user_ordered_dict['QQ'] = 111
+print('After changing value of specific key in Ordered Dict')
+for item in user_ordered_dict.items():
+   print(item)
+
+Output:
+Dict:
+('PP', 10)
+('QQ', 20)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+After changing value of specific key in Dict
+('PP', 10)
+('QQ', 111)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+
+OrderedDict:
+('PP', 10)
+('QQ', 20)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+After changing value of specific key in Ordered Dict
+('PP', 10)
+('QQ', 111)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+
+Deleting and Reinserting the Elements in the OrderedDict class
+When we delete one element from the OrderedDict class and then perform the reinserting operation of that particular key and value, it will push that to the back. Although, OrderedDict class maintains the order during the process of insertion, but when the deletion process is performed, it removes the information of the ordering and treats the reinserted element as the new entry.
+Example:
+
+import collections
+#we will create ordered dict
+print('OrderedDict:')
+user_ordered_dict = collections.OrderedDict()
+user_ordered_dict['PP'] = 10
+user_ordered_dict['QQ'] = 20
+user_ordered_dict['RR'] = 30
+user_ordered_dict['SS'] = 40
+user_ordered_dict['TT'] = 50
+user_ordered_dict['UU'] = 60
+for item in user_ordered_dict.items():
+   print(item)
+#First we will delete item in key RR
+user_ordered_dict.pop('RR')
+print('After Deleting the key')
+for item in user_ordered_dict.items():
+   print(item)
+#now, we will re-inserte the item 
+user_ordered_dict['RR'] = 30
+print('After Re-inserting the key and value')
+for item in user_ordered_dict.items():
+   print(item)   
+
+Output:
+OrderedDict:
+('PP', 10)
+('QQ', 20)
+('RR', 30)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+After Deleting the key
+('PP', 10)
+('QQ', 20)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+After Re-inserting the key and value
+('PP', 10)
+('QQ', 20)
+('SS', 40)
+('TT', 50)
+('UU', 60)
+('RR', 30)
+
+How to Insert at the Beginning of the OrderedDict
+When the user wants to insert some element at the beginning of the OrderedDict class, he/she can use the 'update' method.
+Example:
+
+from collections import OrderedDict
+user_ordered_dict = OrderedDict([('Jake', '10'), ('John', '20'), ('Ross', '40')])
+print("The current dictionary values are :")
+print(user_ordered_dict)
+user_ordered_dict.update({'Ryan':'70'})
+user_ordered_dict.move_to_end('Ryan', last = False)
+print("The updated dictionary values are : ")
+print(user_ordered_dict)
+
+In the above code:
+
+First, we have imported the required packages.
+Then, we have created the Ordered Dictionary by using OrdereDict.
+We used the 'update' method for specifying the key and its value.
+Then, we used the 'move_to_end' function for moving the key and its value to the end.
+The required output is displayed.
+
+Output:
+The current dictionary values are :
+OrderedDict([('Jake', '10'), ('John', '20'), ('Ross', '40')])
+The updated dictionary values are : 
+OrderedDict([('Ryan', '70'), ('Jake', '10'), ('John', '20'), ('Ross', '40')])
+
+How to Check the Order of Character in String by Using OrderedDict
+If the user wants to check the order of the character in the string, they can use the 'OrderedDict' method. Let's understand the following example.
+Example:
+
+from collections import OrderedDict
+def check_order(user_input, user_pattern):
+   user_dict = OrderedDict.fromkeys(user_input)
+   pattern_length = 0
+   for key,value in user_dict.items():
+      if (key == user_pattern[pattern_length]):
+         pattern_length = pattern_length + 1
+      if (pattern_length == (len(user_pattern))):
+         return 'The order of pattern is correct'
+   return 'The order of pattern is incorrect'
+user_input = 'Hello Jake'
+input_pattern = 'Ja'
+print("The string is ")
+print(user_input)
+print("The input pattern is ")
+print(input_pattern)
+print(check_order(user_input,input_pattern))
+user_input = 'Hello Jake'
+input_pattern = 'ke'
+print("The string is ")
+print(user_input)
+print("The input pattern is ")
+print(input_pattern)
+print(check_order(user_input,input_pattern))
+
+In the above code:
+
+First, we imported the required packages.
+Then, we defined the 'check_order' method, which will take two parameters.
+We have then created the ordered dictionary by using the 'fromkeys' method.
+We have initialized the length of the pattern to 0.
+If the key is equal to the pattern, then the length of the pattern will be incremented.
+But, if the length of the pattern is the same as the current length, this means the order is correct. Otherwise, the order is incorrect.
+
+Output:
+The string is 
+Hello Jake
+The input pattern is 
+Ja
+The order of pattern is correct
+The string is 
+Hello Jake
+The input pattern is 
+ke
+The order of pattern is incorrect
+
+Conclusion
+In this tutorial, we have discussed OrderedDict and how it is different from an ordinary dictionary. We have also explained how the users can delete and insert the elements in the OrderedDict and rearrange them at the beginning of the dictionary order.
+
+
+Next TopicT-Test in Python
+
+
+
+
+← prev
+next →
+
+
+
+

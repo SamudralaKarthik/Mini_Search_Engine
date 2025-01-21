@@ -1,0 +1,185 @@
+
+
+
+
+next →
+← prev
+
+Enum class in Python
+Enum is the class in Python used for developing the enumerations. Enumeration is the set of symbolic members or names which are bounded to the constant and unique values. The members of the enumeration can be equated by using these symbolic names. The enumeration can be repeated by itself over them.
+The characteristics of the Enum class are:
+
+The users can check the types of Enum by using the type() method.
+By using the 'name' keyword, the users can display the name of the Enum.
+The Enum is the evaluable string representation of the object known as repr().
+
+Example:
+
+import enum
+# we will use enum class for creating enumerations
+class Weekdays(enum.Enum):
+   Sunday = 1
+   Monday = 2
+   Tuesday = 3
+   Wednesday = 4
+   Thursday = 5
+   Friday = 6
+   Saturday = 7
+# we will print the enum member as the string
+print (" The member of Enum class as the string is : ",end = " ")
+print (Weekdays.Monday)
+
+# we will print the enum member as a repr object
+print (" The member of Enum class as a repr is : ",end = " ")
+print (repr(Weekdays.Sunday))
+
+# now we will check the type of enum member
+print (" The type of the member of Enum class is : ",end = " ")
+print (type(Weekdays.Saturday))
+
+# we will print name of enum member
+print (" The name of the member of Enum class is : ",end = " ")
+print (Weekdays.Friday.name)
+
+Output:
+The member of Enum class as the string is :  Weekdays.Monday
+The member of Enum class as a repr is :  
+The type of the member of Enum class is :  
+The name of the member of Enum class is :  Friday
+
+How to print Enum as an Iterable list
+The users can print the Enum class as an iterable list.
+In the following example, we will use for loop to print all the members of the Enum class.
+Example:
+
+import enum
+# we will user enum class for creating enumerations
+class Weekdays(enum.Enum):
+   Sunday = 1
+   Monday = 2
+   Tuesday = 3
+   Wednesday = 4
+   Thursday = 5
+   Friday = 6
+   Saturday = 7
+# now we will print all enum members by using for loop
+print (" The member of Enum class are : ")
+for weekday in (Weekdays):
+   print(weekday)
+
+Output:
+The member of Enum class are : 
+Weekdays.Sunday
+Weekdays.Monday
+Weekdays.Tuesday
+Weekdays.Wednesday
+Weekdays.Thursday
+Weekdays.Friday
+Weekdays.Saturday
+
+How to Hash Enum Class
+The members of the Enum class are called Enumeration, and also hashable. Therefore, these members can be used for sets and dictionaries. 
+In the following example, we will show how users can hash the Enum class.
+Example:
+
+import enum
+# we will use enum class for creating enumerations
+class Days(enum.Enum):
+   Sunday = 1
+   Monday = 2
+# we will Hash for creating a dictionary
+Daytype = {}
+Daytype[Days.Sunday] = 'Sun God'
+Daytype[Days.Monday] = 'Mon God'
+# now we will Check if the hashing is successful
+if Daytype =={Days.Sunday:'Sun God',Days.Monday:'Mon God'}:
+ print (" Enum class is hashed ")
+else: print (" Enum class is not hashed ")
+
+Output:
+Enum class is hashed
+
+How to access Enum members
+The users can access the members of the Enum class by using the value or the name of the member items.
+In the following example, we will show how the users can access the value by name where we have used the name of the Enum as an index.
+Example:
+
+import enum
+# we will use enum class for creating enumerations
+class Days(enum.Enum):
+  Sunday = 1
+  Monday = 2
+  Tuesday = 3
+  Wednesday = 4
+  Thursday = 5 
+  Friday = 6
+  Saturday = 7
+print('The member of Enum class accessed by name: ')
+print (Days['Monday'])
+print('The member of Enum class accessed by name: ')
+print (Days['Friday'])
+print('The member of Enum class accessed by Value: ')
+print (Days(1))
+print('The member of Enum class accessed by Value: ')
+print (Days(5)) 
+
+Output:
+The member of Enum class accessed by name: 
+Days.Monday
+The member of Enum class accessed by name: 
+Days.Friday
+The member of Enum class accessed by Value: 
+Days.Sunday
+The member of Enum class accessed by Value: 
+Days.Thursday
+
+How to Compare the Enums
+The users can compare the Enums simply by using the comparison operator.
+For example:
+
+import enum
+# we will use enum class for creating enumerations
+class Days(enum.Enum):
+  Sunday = 1
+  Monday = 2
+  Tuesday = 1
+  Wednesday = 4
+  Thursday = 5 
+  Friday = 4
+  Saturday = 7
+if Days.Sunday == Days.Tuesday:
+   print('Match')
+else: print ('Do not Match')
+if Days.Monday != Days.Tuesday:
+    print('Do not Match')
+else: print ('Match')
+if Days.Wednesday == Days.Friday:
+   print('Match')
+else: 
+print ('Do not Match')
+if Days.Thursday != Days.Friday:
+    print('Do not Match')
+else: 
+print ('Match')
+
+Output:
+Match
+Do not Match
+Match
+Do not Match
+
+Conclusion
+In this article, we have discussed the Enum class of Python and its characteristics. We also showed how the user could print the Enum class as an iterable list. How the users can hash and access the members of the Enum class.
+
+
+Next TopicDestructors in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,154 @@
+
+
+
+
+next →
+← prev
+
+How to Convert Python List to String
+There are instances when we need to convert the data elements gathered from one Python data type to another. Using any of the 4 methods, we can convert a list to a string in Python. These methods lead to shorter programs to perform the conversion. Iteration, comprehension, join(), and map() are all methods for converting a list into a string. Let's first define lists and strings before going into depth about all these methods and see an example of each method converting lists to strings.
+What is a List?
+The list is one of the most significant data types in the Python programming language. Python lists are collections of data elements that are ordered and mutable. The list is iterable objects expressed in Python as values separated by a comma and enclosed in square brackets []. Python lists support negative indexing and can contain duplicate elements, unlike sets that do not. The fact that the elements of the list do not have to be of just one data type in a list is a key benefit of the list. Like string operations, list operations include cutting, concatenating, and other operations. We may also make nested lists, which are lists within lists.
+What is a String?
+A string is described as a group of characters, each of which is a basic symbol. For instance, there are 26 characters in the English language. The computer system only works with binary numbers because it cannot read letters. Although we may see characters we typed on our monitor screens, they are a collection of 0s and 1s that are saved and processed within. An assortment of Unicode characters is a string in the Python programming language. It is a single- or double-quoted immutable iterable data type. This implies that when a string has been defined, we cannot change it.
+Methods to Convert List to String in Python
+As was already described, there are four methods of converting a list to a string in Python. Let's examine each one carefully, supported by an example program and its output.
+Using join() Method
+The join() method is perhaps the most Pythonic approach to converting a list to a string. join() method is designed to serve this exact purpose.
+It accepts an input parameter. This parameter must be iterable. This method then joins the elements of that iterable and returns the result as a string. The iterable's values should be of the string data type.
+join() method removes the elements separator of the iterable and combines them as a single string.
+Syntax of join() method:
+
+string.join( iterable )
+
+Code
+
+# Python program to convert a list to a string by using the join() method
+
+# Creating a list with elements of string data type
+a_list = ["Python", "Convert", "List", "String", "Method"]
+
+# Converting to string
+string = " ".join( a_list ) # this is read as join elements of a_list with a separator (" ")
+
+# Printing the string
+print (string)
+print (type(string))
+
+Output:
+Python Convert List String Method
+<class 'str'>
+
+We specified (" ") to be the separator for the elements of the list by placing it before the join() method. Therefore, a string containing the list's elements separated by a space is produced.
+As stated earlier, let's try using join() by passing an iterable that contains some elements of the int data type. The result would be a typeerror.
+Code
+
+# Python program to convert a list to a string by using the join() method
+
+# Creating a list with some elements of int data type
+a_list = ["Python", "Convert", 11, "List", 12, "String", "Method"]
+
+# Converting to string
+string = " ".join( a_list )
+
+# Printing the string
+print (string)
+print (type(string))
+
+Output:
+TypeError Traceback (most recent call last)
+Input In [57], in ()
+      4 a_list = ["Python", "Convert", 11, "List", 12, "String", "Method"]
+      6 # Converting to string
+----> 7 string = " ".join( a_list )
+      9 # Printing the string
+     10 print (string)
+
+TypeError: sequence item 2: expected str instance, int found
+
+Using join() Method and map() Method
+Using the combination of the map() and join() methods in Python gives a method for converting lists into strings. Unlike the join() method, we can use this method if the list has elements of int data type. See the example below.
+We did use the map() method to convert the integer elements into a string before converting the whole list to a string because the join() method can only accept string elements.
+For each value in the iterable, a given function is executed via the map() method. And in this instance, we have used it to convert every int element in the list to a string. In this example, too, we have used (" "), a space, as the separator for the string elements.
+Syntax of the map() method:
+
+map(function, iterable)
+
+Code
+
+# Python program to convert a list to a string by using the join() method and map method
+
+# Creating a list with some elements of int data type
+iterable = ["Python", "Convert", 11, "List", 12, "String", "Method"]
+
+# Converting to string
+string = " ".join (map (str, iterable))
+
+
+# Printing the string
+print (string)
+print (type(string))
+
+Output:
+Python Convert 11 List 12 String Method
+<class 'str'>
+
+Using List Comprehension
+As was previously noted, if our example list contains integer elements, we cannot use the join() method. However, we can use the List comprehension and join() method together to handle this problem. In our case, we can construct an iterable list of elements using the example list that is already present with the help of list comprehension. Afterwards, a for loop is used to iterate through the components using element-wise rules. Using list comprehension, we can use the join() method to concatenate the list's elements to a blank string after the elements have been visited. 
+Code
+
+# Python program to convert a list to string using the list comprehension and the join() method
+   
+# Creating a list with some elements of int data type
+iterable = ["Python", "Convert", 11, "List", 12, "String", "Method"]
+  
+# Converting to string using list comprehension
+string = " ".join ([str( elements ) for elements in iterable])
+
+# Printing the string
+print (string) 
+print (type(string))
+
+Output:
+Python Convert 11 List 12 String Method
+<class 'str'>
+
+Iteration
+The final method to convert a given list of elements into a string in Python is to loop through each element and concatenate it to the end of the string. This method is not advised because Python generates a new string whenever we append an element.
+This approach is slow and should only be employed to learn how we can convert lists in Python to strings.
+Code
+
+# Python program to convert a list to string using the iteration method
+   
+# Creating a list with all elements of string data type
+iterable = ["Python", "Convert", "List", "String", "Method"]
+
+# Creating a blank string
+string = "" 
+
+# Starting a for loop to traverse through the list elements
+for element in iterable : 
+    string = string + " " + element # Using " " as a separator for the elements of the string. However, it will add an extra space at the beginning of the string
+
+# printing the string
+print ( string )
+
+Output:
+Python Convert List String Method
+
+The ideal approach would be to write a function that returns the results because it is very likely that converting lists to strings in Python will not be a one-time task.
+Additionally, as was already noted, there aren't any big drawbacks that can be exploited to compare them. They do, however, accommodate many use situations.
+If we are certain that we won't be working with any numeric numbers, we can use Methods 1 and 4. If we're unsure or our list contains integer values, use Methods 2 and 3 instead. The final method is just for us to comprehend how lists can be converted to strings in Python.
+
+
+Next TopicHow to append element in the list
+
+
+
+
+← prev
+next →
+
+
+
+

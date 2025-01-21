@@ -1,0 +1,142 @@
+
+
+
+
+next →
+← prev
+
+max() function in Python
+In this tutorial, we will discuss the max() function and how to use it in the Python programming language. We will also consider various examples for better understanding.
+So, let's get started.
+Understanding the Python max() function
+The max() function in Python returns the most significant data element in an iterable. We can also use this function in order to find the largest data element between more than one parameter.
+The Python max() function has two different forms:
+
+max() function using iterable as arguments
+max() function using objects as arguments
+
+The max() function with iterable arguments
+We can use the following syntax to find the largest data element in an iterable:
+Syntax:
+
+max(iterable, *iterables, key, default)
+
+Parameters:
+
+iterable: This parameter is iterable. For example, tuple, list, dictionary, set, and a lot more.
+*iterables (optional): This is an optional parameter indicating multiple iterables.
+key (optional): This is also an optional parameter. This parameter works when the iterables are passed, and the comparison is made on the basis of its return value.
+default (optional): This is another optional parameter providing the default value to the function if the specified iterable is void.
+
+Let us consider an example based on this method in order to find the largest element in a list.
+Example: 1
+
+# creating a list
+my_digits = [12, 3, 8, 4, 15, 13, 10, 2, 9, 11]
+
+# using the max() function
+large = max(my_digits)
+
+# printing the result
+print("The largest number in the list:", large)
+
+Output:
+The largest number in the list: 15
+
+Explanation:
+In the above snippet of code, we have created a list as my_digits. We have then used the max() function on the list in order to obtain the largest element in the list. At last, we have printed the resultant element for the users.
+If the data elements in an iterable are strings, the max() function will return the largest element (ordered alphabetically).
+Let us consider an example based on the largest string in a list.
+Example: 2
+
+# creating a list
+my_strings = ["Apple", "Mango", "Banana", "Papaya", "Orange"]
+
+# using the max() function
+large_str = max(my_strings)
+
+# printing the result
+print("The largest string in the list:", large_str)
+
+Output:
+The largest string in the list: Papaya
+
+Explanation:
+In the above snippet of code, we have defined a list as my_strings consisting of various strings. We have then used the max() function on the list to find the largest element as a string. At last, we have printed the element for the users.
+Generally, the max() function returns the largest key in the case of dictionaries. We can also use the key parameter in order to find the key of the dictionary having the largest value.
+Let us consider an example demonstrating the use of the max() function in dictionaries.
+Example: 3
+
+# creating a list
+my_dict = {1 : 1, -3 : 9, 2 : 4, -5 : 25, 4 : 16}
+
+# using the max() function to find largest key
+key_1 = max(my_dict)
+
+# printing the resultant key
+print("The largest key in the dictionary:", key_1)
+
+# using the key() function to find the key with largest value
+key_2 = max(my_dict, key = lambda x : my_dict[x])
+
+# printing the resultant key
+print("The Key of the largest value in the dictionary:", key_2)
+
+# printing the largest value
+print("The largest value in the dictionary:", my_dict[key_2])
+
+Output:
+The largest key in the dictionary: 4
+The Key of the largest value in the dictionary: -5
+The largest value in the dictionary: 25
+
+Explanation:
+In the above snippet of code, we have created a dictionary with some values respected to their keys. We have then used the max() function in order to find the largest key within the dictionary. We have then used the max() function to find the key with the largest value and print that value for the users.
+Moreover, we can observe that in the second statement of the max() function in the above example, we have passed a lambda function to the key parameter.
+
+key = lambda x : my_dict[x]
+
+This function will return the values of dictionaries. Based on the returned values, the max() function will return the key having the largest value.
+Points to Remember:
+If a void iterator is passed to the function, a ValueError exception is raised. In order to avoid this exception, we can include the default parameter in the function.
+In the case of multiple iterators, the largest element from the specified iterators will be returned.
+The max() function with object arguments
+We can use the following syntax in order to find the largest object between more than one parameter.
+Syntax:
+
+max(arg1, arg2, *args, key)
+
+Parameters:
+
+arg1: This parameter is an object. For example, numbers, strings, and a lot more.
+arg2: This parameter is also an object. For example, numbers, strings, and a lot more.
+*args (optional): This parameter is an optional parameter for more objects.
+key (optional): This parameter is also an optional parameter that works when each parameter is passed, and comparison is made on the basis of its return value.
+
+Thus, the max() function helps us in finding the largest element between multiple objects. Let us consider an example in order to find the maximum number among the given numbers.
+Example:
+
+# using the max() function with objects as numbers
+large_num = max(10, -4, 5, -3, 13)
+
+# printing the result
+print("The largest number:", large_num)
+
+Output:
+The largest number: 13
+
+Explanation:
+In the above snippet of code, we have used the max() function to find the largest element among the specified objects as the parameters and printed the result for the users.
+
+
+Next TopicFraction Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

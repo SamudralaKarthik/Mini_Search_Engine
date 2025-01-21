@@ -1,0 +1,183 @@
+
+
+
+
+next →
+← prev
+
+Python pysftp module
+SFTP, abbreviated for SSH File Transfer Protocol and known as Secure File Transfer Protocol, is a network protocol that allows us to access files, transfer them and manage them over any dependable data stream. The program works on a secure channel, like SSH, that the server has already authenticated the client and that the client user's identity is available to the protocol.
+Handling things using SFTP with the scripts can always be supportable if we work with programming languages like Python. Python offers the pysftp module that allows us to deal with this technology easily and efficiently.
+In the following tutorial, we will understand the pysftp module and its use in the Python programming language with some examples.
+So, let's get begun.
+Understanding the Python pysftp module
+Python pysftp module is a simple interface to SFTP. The module provides high-level abstractions and task-based schedules in order to handle SFTP requirements. The SFTP protocol does not support security and authentication; it expects the fundamental protocol to protect it. The SFTP is most widely utilized as a sub-system implementation of SSH protocol version 2, designed by the same working group.
+The pysftp module works as a wrapper around Paramiko with a much more Python-influenced interface. The Paramiko library is one of the great python libraries and is considered the backbone of pysftp. The methods created by pysftp are abstractions that serve the productivity of a programmer by encapsulating various higher function use cases of interacting with SFTP. Instead of writing the script to walk directories and call get and put, dealing with not only Paramiko but OS and stat modules of Python and writing test (many snippets of code on the internet are incomplete and do not account for edge cases). The pysftp module supplies an entire library to deal with all three. Leaving us to focus on other primary tasks.
+Now, let us install the Python SFTP module or pysftp.
+How to install the pysftp module?
+The pysftp interface doesn't expose most of the features of Paramiko; however, it abstracts pretty much features using a single method. In contrast, the pysftp module implements more high-level features on top of Paramiko, notably recursive file transfers.
+We can install the pysftp module with the help of the pip installer using the following command:
+Syntax:
+
+$ pip install pysftp
+# or
+$ python3 -m pip install pysftp
+
+The module will be installed in the system as the version of Python and pip.
+Verifying the Installation
+In order to check whether the module has been installed in the system properly or not, we can try importing the module and execute the program.
+Once the installation is complete, create a new Python file and type the following syntax in it.
+Example:
+
+# importing the required module
+import pysftp
+
+Now, save the file and run the file using the following command in the command prompt.
+Syntax:
+
+$ python <file-name>.py
+
+If the program runs without raising any import error, the module is installed properly. Else it is recommended to reinstall the module and refer to its official documentation.
+Accessing SFTP Server using pysftp
+We can list the content of the direction with the help of the pysftp module in Python. In order to accomplish the goal, we need the hostname, username, and password.
+Then we have to switch from direction using either the chdir or cwd method and provide the first argument as the remote directory.
+Let us consider the following example for the same.
+Example:
+
+# importing the required module
+import pysftp
+# defining the host, username, and password
+my_Hostname = "welcomeblog.com"
+my_Username = "root"
+my_Password = "root"
+# using the python with statement
+with pysftp.Connection(
+    host = my_Hostname,
+    username = my_Username,
+    password = my_Password
+    ) as sftp:
+    print("Connection succesfully established ... ")
+    # Switching to a remote directory
+    sftp.cwd('/var/www/vhosts/')
+    # Obtaining structure of the remote directory '/var/www/vhosts'
+    dir_struct = sftp.listdir_attr()
+    # Printing data
+    for attr in dir_struct:
+        print(attr.filename, attr)
+# connection closed automatically at the end of the with statement
+
+Explanation:
+The above snippet of code is a dummy server that doesn't exist. Still, in real life, we have to utilize the environment variables to fetch the original credentials in any file for security purposes and not pull all the credentials in individual files. It is recommended to put it inside the environment variables file. For instance, the .env file.
+Now, let us understand the above code. The above snippet of code is the same for anyone as we have to provide the credentials, and the program will start working.
+First, we have imported the pysftp module and then provided the variables to store the value of hostname, username and password. We have then used Python with statement to open the secure connection to the remote server by providing hostname, username, and password. If it is successful, we will switch the remote directory, fetch the listing and print one by one in the console.
+The list is in arbitrary order, and it doesn't involve the unique entries '.' and '..'. The returned SFTPAttributes objects will have the additional field: longname, which may consist of the formatted string of the attributes of a file in UNIX format. The string's content will rely on the SFTP server.
+Uploading a file using pysftp in Python
+We can upload a file in the remote server through SFTP with the help of pysftp using the sftp.put() function of the SFTP client. The put method expects the relative or absolute local path of the file we need to upload as the first argument and the remote path where the file should be uploaded as the second one.
+Let us consider the following snippet of code for better understanding.
+Example:
+
+# importing the required module
+import pysftp
+# defining the host, username, and password
+my_Hostname = "welcomeblog.com"
+my_Username = "root"
+my_Password = "root"
+# using the python with statement
+with pysftp.Connection(
+    host = my_Hostname,
+    username = my_Username,
+    password = my_Password
+    ) as sftp:
+    print("Connection succesfully established ... ")
+    # Defining a file that we want to upload from the local directorty
+    # or absolute "/Users/krunal/Desktop/code/pyt/app.txt"
+    local_File_Path = './app.txt'
+    # Defining the remote path where the file will be uploaded
+    remote_File_Path = '/var/backups/app.txt'
+    # Using the put method to upload a file
+    sftp.put(local_File_Path, remote_File_Path)
+# connection closed automatically at the end of the with statement
+
+Explanation:
+In the above snippet of code, we have established a secure connection and then defined two file paths - local_File_Path and remote_File_Path.
+
+local_File_Path: This file path is the path to the local file.
+remote_File_Path: This file path is the path to the remote file.
+
+Then, we have used the sftp.put() function in order to upload a file to the server.
+Downloading a remote file using pysftp in Python
+In the previous section, we have discussed the method of uploading a file using pysftp. Let us understand the method of downloading a file.
+We can download a remote file from the server with the help of pysftp by opening a connection and from the sftp instance and utilizing the get method expecting the path of a remote file that will be downloaded. The second parameter is a local path where we should store the file.
+Let us consider the following example demonstrating the same.
+Example:
+
+# importing the required module
+import pysftp
+# defining the host, username, and password
+my_Hostname = "welcomeblog.com"
+my_Username = "root"
+my_Password = "root"
+# using the python with statement
+with pysftp.Connection(
+    host = my_Hostname,
+    username = my_Username,
+    password = my_Password)
+    as sftp:
+    print("Connection succesfully established ... ")
+    # Defining the remote path file path
+    remote_File_Path = '/var/backups/app.txt'
+    # Defining a directory in which we have to save the file.
+    # or absolute "/Users/krunal/Desktop/code/pyt/app.txt"
+    local_File_Path = './app.txt'
+    # Using the get method to download a file
+    sftp.get(remote_File_Path, local_File_Path)
+# connection closed automatically at the end of the with statement
+
+Explanation:
+In the above snippet of code, we have defined a connection and then defined two file paths - remote_File_Path and local_File_Path
+
+remote_File_Path: This file path is a path where the file is located.
+local_File_Path: This file path is a path where the file will be downloaded.
+
+We have then utilized the sftp.get() function in order to download the file.
+Deleting a file using pysftp in Python
+We can remove a file with the help of pysftp using the sftp.remove() function. The remove() function expects the absolute path to the remote file as the first parameter.
+Let us consider the following example demonstrating the same.
+Example:
+
+# importing the required module
+import pysftp
+# defining the host, username, and password
+my_Hostname = "welcomeblog.com"
+my_Username = "root"
+my_Password = "root"
+# using the python with statement
+with pysftp.Connection(
+    host = my_Hostname,
+    username = my_Username,
+    password = my_Password)
+    as sftp:
+    print("Connection succesfully established ... ")
+    # Defining the remote path file path
+    remote_File_Path = '/var/backups/app.txt'
+    # Using the get method to download a file
+    sftp.remove(remote_File_Path)
+# connection closed automatically at the end of the with statement
+
+Explanation:
+In the above snippet of code, we have opened a connection and then defined a remove_File_Path variable, which consists of the path of a file that requires to be deleted.
+We have then utilized the sftp.remove() function in order to delete a file from the remote server.
+The pysftp module has a large variety of functions that we can utilize to perform various activities, such as handling permissions and a lot more. One can also refer to the official documentation of the Python pysftp module.
+
+
+Next TopicAmazing hacks of Python
+
+
+
+
+← prev
+next →
+
+
+
+

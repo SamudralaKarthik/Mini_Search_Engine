@@ -1,0 +1,149 @@
+
+
+
+
+next →
+← prev
+
+Python Comprehensions
+In this article, we shall see how comprehension can be done in the data structures of Python like lists, dictionaries, set, and generators.
+Comprehension provides a precise way of writing a program in Python. It reduces the code size without affecting its easy readability.
+So, here we will discuss the following comprehensions -
+
+List Comprehension
+Dictionary Comprehension
+Set Comprehension
+Generator Comprehension
+
+List Comprehension
+We know that the elements of a list are enclosed in square brackets and it can hold values of multiple data types.
+In the program given below, we will take out the even numbers from the list.
+Let's see the below example of list.
+Example -
+
+list1= [20,25,24,30,35,40,44]
+list2=[]
+for i in list1:
+    if i%2==0:
+        list2.append(i)
+print("The elements of list2 are :" ,list2)
+
+Output-
+The elements of list2 are : [20, 24, 30, 40, 44]
+
+Here we have specified the elements of list1, and then used for loop to take each element and checked using modulus operator that it is divisible by 2 or not.
+In the program given below, we performed the same using list comprehension.
+Example - 2-Using List Comprehension
+
+list1=[20,25,24,30,35,40,44]
+list2=[i for i in list1 if i%2==0]
+print("The elements obtained using list comprehension are :" ,list2)
+
+Output-
+The elements obtained using list comprehension are : [20, 24, 30, 40, 44]
+
+Here, we can observe that we provided the comprehension in list2 where we used for loop and decision making in a single line.
+The next program is based on obtaining the cube of all elements present in list1.
+Example - 3
+
+list1=[2,3,4,5,6,7,8,9,10]
+list2=[]
+for i in list1:
+    list2.append(i**3)
+print("The cube of the elements present in list1 is: ",list2)
+
+Output-
+The cube of the elements present in list1 is:  [8, 27, 64, 125, 216, 343, 512, 729, 1000]
+
+We used the append() method and stored the cube of each element in list2 and then displayed it.
+We co do the same thing using list comprehension-
+Example - 4-Using List Comprehension
+
+list1=[2,3,4,5,6,7,8,9,10]
+list2=[i**3 for i in list1 ]
+print("The cube of the elements obtained by list comprehension is: ",list2)
+
+Output-
+The cube of the elements obtained by list comprehension is:  [8, 27, 64, 125, 216, 343, 512, 729, 1000]
+
+Dictionary Comprehension
+We all know that dictionary uses key-value pairs, let us have a look at the program of displaying these pairs.
+Example -
+
+fruits=['Apple','Bananas','Custard Apple','Pineapple','Blueberries']
+color=['Red','Yellow','Green','Brown','Violet']
+result_dict={}
+for key,value in zip(fruits,color):
+    result_dict[key]=value
+print("The resultant dictionary would be: ",result_dict)
+
+Output-
+The resultant dictionary would be:  {'Apple': 'Red', 'Bananas': 'Yellow', 'Custard Apple': 'Green', 'Pineapple': 'Brown', 'Blueberries': 'Violet'}
+
+In the next program, the same thing is implemented using comprehension
+Example - 2-Usind Dictionary Comprehension
+
+fruits=['Apple','Bananas','Custard Apple','Pineapple','Blueberries']
+color=['Red','Yellow','Green','Brown','Violet']
+result_dict={key:value for (key,value) in zip(fruits,color)}
+print("The resultant dictionary using comprehension would be: ",result_dict)
+
+Output-
+The resultant dictionary using comprehension would be:  {'Apple': 'Red', 'Bananas': 'Yellow', 'Custard Apple': 'Green', 'Pineapple': 'Brown', 'Blueberries': 'Violet'}
+
+Here, we can observe that we provided the comprehension in result_dict where we have given the expression for displaying the key-value pairs from the lists fruits and color.
+Set Comprehension
+Set is used to display the unique elements from a given collection. Let's obtain the square of all elements of list using set.
+Example - 1
+
+list1=[2,3,4,5,6,7,8,9,10]
+result_set=set()
+for i in list1:
+    result_set.add(i**2)
+print("The square of the numbers present in list1 is: ",result_set)
+
+Output-
+The square of the numbers present in list1 is:  {64, 4, 36, 100, 9, 16, 49, 81, 25}
+
+In the program given below, we have done the same thing using comprehension.
+Example - 2- Using set comprehension
+
+list1=[2,3,4,5,6,7,8,9,10]
+result_set={i**2 for i in list1}
+print("The square of the numbers obtained through set comprehension: ",result_set)
+
+Output-
+The square of the numbers obtained through set comprehension:  {64, 4, 36, 100, 9, 16, 49, 81, 25}
+
+We have taken each element from list1 and provided the expression in result_set for calculating the square of these elements.
+Generator Comprehension
+The generators are the quite similar to functions. It uses the yield keyword to generate a value. Let us see how comprehension can be used here.
+Example -
+
+list1=[12,16,17,20,21,24,28,30,31]
+result_gen=(i for i in list1 if i%2==0)
+for i in result_gen:
+    print("The element which is even in list1 is: ",i)
+
+Output-
+The element which is even in list1 is:  12
+The element which is even in list1 is:  16
+The element which is even in list1 is:  20
+The element which is even in list1 is:  24
+The element which is even in list1 is:  28
+The element which is even in list1 is:  30
+
+On executing the program, it displays the even elements from list1.
+
+
+Next TopicInfluxDB in Python
+
+
+
+
+← prev
+next →
+
+
+
+

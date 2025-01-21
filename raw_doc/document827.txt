@@ -1,0 +1,117 @@
+
+
+
+
+next →
+← prev
+
+Python bit functions on int(bit_length,to_bytes and from_bytes)
+What are Bit functions?
+Functions which are applied to each individual bit instead of a complete number are called bit functions. We can represent each number in terms of binary bits, which are 0 and 1.
+If we represent any number in the binary format, we can apply bit functions on it, but there are some bit functions which can be applied to integer data types.
+The integer or int data type implements the Integral sub-class of numbers class in Python.
+The main bit functions are:
+
+bit_length
+to_bytes
+from_bytes
+
+1. bit_length()
+bit_length function returns the number of bits required to represent the number in binary format. Although we can represent any number with as the maximum number of bits as we want by adding leading zeros, it returns the number after excluding the leading zeros.
+It also ignores the bit used for sign representation.
+Example1:
+
+#bit function bit_length examples on integer variables 
+
+var1 = 5
+print(var1.bit_length())
+var2 = 16
+print(var2.bit_length())
+var3 = 32
+print(var3.bit_length())
+
+Output:
+
+Explanation:
+In the above code, we have used three integer variables. For each variable, we have applied the bit function bit_length(), which will return the number of bits required to represent that particular number.
+We have the first number as five, which can be represented as 0000000 00000000 00000000 00000101 in 32 bits. But this function removes the leading zeros, so it represents a number as 101, which means we will require only 3 bits to represent 5.
+We have a second number as, 16, which can be represented as 0000000 00000000 00000000 00010000
+In 32 bits, we can represent it as 10000, and it requires only 5 bits. In the same way, we can represent 32 using 1000000, and it requires only 6 bits.
+Example2:
+bit_length() function for negative numbers:
+
+#bit function bit_length examples on negative integer variables 
+var1 = 5
+print(var1.bit_length())
+var2 = -5
+print(var2.bit_length())
+
+Output:
+
+Explanation:
+In the above code, we have taken two integers one is positive, and the second is negative. The first number is five, which can be represented as 101, so the function will return 3.
+The second number is -5, which can be represented in 2's complement form as 11111111 11111111 11111111 11111011 in 32 bits. Here the initial 33 bits represent the sign of the number or called the sign bit and the next 3 bits represent the number. So, this function removes the signed bit and will return three as the answer for 011.
+2. to_bytes()
+This function returns the array of bytes representing the given integer number:
+Syntax:
+
+integerVariable.to_bytes(length,byteorder,signed=False)
+
+length: It represents the length of bytes returned by this function.
+byteorder: This defines which type of representation we want. If it is set to 'big', then the most significant byte will be at the beginning of the array, and if it is 'little', then the most significant byte will be at the end of the array.
+signed: This is a Boolean parameter, and if it is set to true, it represents the number using 2's complement form.
+Example 3:
+
+# Returns byte representation of 69 in big-endian form
+print((69).to_bytes(10, byteorder ='big'))
+
+Output:
+
+Explanation:
+In the above code, we have used the number 69 as an integer, and we applied the to_bytes() function to it. We use the big-endian representation for this, and the size of the byte array we took is 10.
+Example 4:
+
+# Returns byte representation of 18 in little-endian form
+print((18).to_bytes(4, byteorder ='little'))
+
+Output:
+
+Explanation:
+In the above code, we took the number 18 and represented it in a little-endian machine with a byte array of size 4.
+3. from_bytes()
+This function is just the reverse of the to_bytes() function, which takes the array of bytes as input and returns the equivalent integer number.
+Syntax:
+
+integerVariable.to_bytes(byteArray,byteorder,signed=False)
+
+Example 5:
+
+# Represent the integer value of '\x00\x11' in a big-endian machine.
+print(int.from_bytes(b'\x00\x11', byteorder ='big'))
+
+Output:
+
+Explanation:
+In the above code, we have used the from_bytes() function, and we put an array of bytes as a parameter and the representation big-endian. Hence, it returns 17 as the answer because, in hexadecimal, X11 represents 17.
+Example 6:
+For negative numbers, we have to make the signed parameter as true.
+
+print(int.from_bytes(b'\xf0\xff', byteorder = 'big', signed = True))
+
+Output:
+
+Explanation:
+In the above code, we have set true to the signed parameter so that the byte array will be considered a signed number, and it returns the negative number -3841.
+
+
+Next TopicCheck if String has Character in Python
+
+
+
+
+← prev
+next →
+
+
+
+

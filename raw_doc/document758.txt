@@ -1,0 +1,95 @@
+
+
+
+
+next →
+← prev
+
+Python Program to Move all the zeros to the end of Array
+In this tutorial, we will write the Python program to move all the zero at the end of the array. The problem statement is a given array of the random number consists of some zero at the random place at zero, but we need to maintain the order of the given array. For example - 
+If the given array is [2, 7, 6, 0, 9, 0, 1, 0, 0, 8, 0], it should be transform to [2, 7, 6. 9, 1, 8, 0, 0, 0, 0, 0]. The array has maintained the relative order of items in the array. The expected time complexity is O(n) and extra space O(1).
+Example -
+
+Input :  [8, 0, 7, 4, 2, 0, 1, 0]
+Output : [8, 7, 4, 2, 1, 0, 0, 0]
+
+Input :   [4, 5, 0, 0, 0, 9, 8]
+Output :  [4, 5, 9, 8, 0, 0, 0]
+
+There are several ways to solve this problem, and we will use some methods to solve this excitingly.
+Solution Implementation
+In this method, we traverse the given array left to right and place the element at the next available position in the array. Once all the non-zero elements are placed, we fill all the remaining indices with zeros.
+Let's implement this approach through the Python program.
+Example -
+
+def move_zeros(num_list):
+    # variable `k` manage the index of the next available position
+    k = 0
+ 
+    # iterate the given list
+    for i in num_list:
+        # check whether a current element is non-zero
+        # if not then store next free position in the list
+        if i:
+            num_list[k] = i
+            k = k + 1
+ 
+    # move all 0's to the end of the list (remaining indices)
+    for i in range(k, len(num_list)):
+        num_list[i] = 0
+        
+    return num_list
+num_list = [8, 0, 7, 4, 2, 0, 1, 0]
+
+order_list = move_zeros(num_list)
+print(order_list)
+
+Output:
+[8, 7, 4, 2, 1, 0, 0, 0]
+
+Explanation -
+In the above code, we defined the move_zero() function that takes a list as an argument. Inside the function, we initialized the variable with zero, which keeps track of the next available index position. Then, we traverse the list and check whether a current element is non-zero; if true, then put it at the next position and increase the counter of k. Once all the non-zero elements are stored in the list, we run another for loop from k to the given list's length. At the remaining indices, we put the zero at the end of the list.
+Time Complexity - The time complexity is 0(n), where n is the size of the input.
+The above solution is easy to implement. Let's understand another solution.
+Method - 2: Using the partitioning logic of Quicksort
+We can also solve this problem by the partitioning of the Quicksort's portioning logic. In this approach, we make a 0 as a pivot and make one pass of the partitioning process. The partitioning logic reads all elements and swaps every non-pivot element with the first occurrence of the pivot.
+Let's understand the following example.
+Example -
+
+def swap(num_list, i, j):
+    temp = num_list[i]
+    num_list[i] = num_list[j]
+    num_list[j] = temp
+def list_partition(num_list):
+    j = 0
+ 
+    for i in range(len(num_list)):
+        if num_list[i]:            # pivot is 0
+            swap(num_list, i, j)
+            j = j + 1
+num_list = [6, 0, 8, 2, 3, 0, 4, 0, 1]
+
+list_partition(num_list)
+print(num_list)
+
+Output:
+[6, 8, 2, 3, 4, 1, 0, 0, 0]
+
+Explanation -
+In the above code, we created a swap function to swap the elements. Then, we created the partition() method, which calls the swap method and each time we encounter a non-zero ''j'' is increased. The element is placed before the pivot. 
+The time complexity of the above code is 0(n), where n is the size of the input. 
+Conclusion
+In this tutorial, we have discussed some solutions to the above problem. It is an introductory Python list-related problem, and this problem can be asked in the technical interviews.
+
+
+Next TopicRegular Dictionary vs Ordered Dictionary in Python
+
+
+
+
+← prev
+next →
+
+
+
+

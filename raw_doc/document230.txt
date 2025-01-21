@@ -1,0 +1,247 @@
+
+
+
+
+next →
+← prev
+
+Python epoch to Datetime
+In the following tutorial, we will understand the conversion of epoch to DateTime in the Python programming language using some examples. We will use Python epoch in order to convert epoch to date and time, respectively. We will also cover the following topics:
+
+Converting DateTime into epoch time
+Converting epoch into DateTime string
+Converting epoch into DateTime milliseconds
+Converting epoch into DateTime timezone
+Converting Unix epoch into DateTime
+Converting DateTime into epoch time in milliseconds
+Converting epoch timestamp to DateTime
+Python epoch DateTime year is out of range
+
+But before we get started, let us understand epoch time in Python in brief.
+What is epoch time in Python?
+The epoch time, also known as POSIX time, Unix time, and Unix timestamp, indicates the number of seconds passed since 1st January 1970, excluding the leap seconds. The Unix time contains ten digits and can represent the all-time zone at once.
+Converting epoch time into DateTime using Python
+We can use the Python datetime.fromtimestamp() function in order to convert the epoch time into DateTime. Let us consider the following example demonstrating the conversion of the Python epoch into DateTime.
+Example:
+
+# importing the datetime package
+import datetime
+
+# given epoch time
+epoch_time = 40246871
+
+# using the datetime.fromtimestamp() function
+date_time = datetime.datetime.fromtimestamp( epoch_time )
+
+# printing the value
+print("Given epoch time:", epoch_time)
+print("Converted Datetime:", date_time )
+
+Output:
+Given epoch time: 40246871
+Converted Datetime: 1971-04-12 01:11:11
+
+Explanation:
+In the above example, we have imported the datetime library. We have then defined a variable storing the value of epoch time in terms of seconds. We have then used the datetime.fromtimestamp() function in order to convert the epoch time into DateTime; and later printed the output for the users. As a result, the provided variable is successfully converted into DateTime.
+Converting DateTime into epoch time using Python
+In order to convert DateTime into epoch time, we will use the timestamp() function. First, let us consider the following example illustrating the conversion of DateTime into epoch time.
+Example:
+
+# importing the datetime package
+import datetime
+
+# using the timestamp() function to convert datetime into epoch time
+epoch_time = datetime.datetime(2021, 6, 9, 2, 0).timestamp()
+
+# printing the values
+print("Converted epoch time:", epoch_time)
+
+Output:
+Converted epoch time: 1623184200.0
+
+Explanation:
+In the above example, we have again imported the datetime package. We have then defined a variable that stores the value of epoch time, which is calculated using the timestamp() function for a given datetime and printed the calculated value for the users. As a result, the given datetime has been converted into epoch time successfully.
+Converting epoch time into DateTime string using Python
+In order to convert the epoch time into datetime string, we need to convert the epoch time into datetime and then pass the resultant datetime variable to the strftime() function to convert it into datetime string successfully.
+Example:
+
+# importing the datetime package
+import datetime
+
+# given epoch time
+epoch_time = 700024
+
+# using datetime.fromtimestamp() function to convert epoch time into datetime object
+mytimestamp = datetime.datetime.fromtimestamp( epoch_time )
+
+# using strftime() function to convert
+datetime_str = mytimestamp.strftime( "%Y - %m - %d  %H : %M : %S")
+
+# printing the values
+print("Given epoch time:", epoch_time)
+print("Converted datetime string:", datetime_str)
+
+Output:
+Given epoch time: 700024
+Converted datetime string: 1970 - 01 - 09  07 : 57 : 04
+
+Explanation:
+In the above example, we have again imported the datetime library. We have then used the datetime.fromtimestamp() function in order to convert a given epoch time into datetime and then pass it to the strftime() function to convert the datetime object into a datetime string. The strftime() function parameters are the format codes in which we wanted to customize the string.
+
+%Y designates the year
+%m designates the month
+%d designates the day
+%H designates an hour
+%M designates the minute
+%S designates seconds
+
+Converting the epoch time into DateTime milliseconds using Python
+We can get the DateTime along with milliseconds from the epoch time using the method we did for the conversion of epoch time into DateTime. Let us consider the following example demonstrating the same.
+Example:
+
+# importing the datetime package
+import datetime
+
+# given epoch time
+epoch_time = 402471.238201
+
+# using the datetime.fromtimestamp() function
+date_time = datetime.datetime.fromtimestamp( epoch_time )
+
+# printing the value
+print("Given epoch time:", epoch_time)
+print("Converted Datetime:", date_time )
+
+Output:
+Given epoch time: 402471.238201
+Converted Datetime: 1970-01-05 21:17:51.238201
+
+Explanation:
+In the above example, we have imported the datetime package and defined a variable storing the value of epoch time in decimals. We have then used the datetime.fromtimestamp() function in order to convert this decimal value into the datetime millisecond format.
+Converting epoch time into DateTime time zone using Python
+We can use the timezone() function of the pytz package in order to convert epoch time into the DateTime time zone. Let us consider the following example demonstrating the conversion of same.
+Example:
+
+# importing the required package(s) and module(s)
+from datetime import datetime
+import pytz
+
+# using the timezone() function
+my_timezone = pytz.timezone('CST6CDT')
+
+# using the localize() function
+date_timezone = my_timezone.localize( datetime( 2021, 6, 10, 9, 34, 32 ), is_dst = None )
+
+# printing the values
+print( "DateTime Time zone:", date_timezone )
+
+Output:
+DateTime Time zone: 2021-06-10 09:34:32-05:00
+
+Explanation:
+In the above example, we have imported the datetime module from the datetime package in addition to the pytz library. We have then used the timezone() function of the pytz library specifying the parameter as "CST6CDT". This function returns the current date for the specified time zone. We have then used the localize() function in order to localize the result.
+Converting Unix epoch time into DateTime using Python
+This process of converting the Unix epoch time into DateTime is similar to what we did earlier. This process involves the datetime.fromtimestamp() function to convert the Unix epoch time into DateTime object and uses the strftime() function to transform the object into the suitable DateTime format.
+Let us consider the following example demonstrating the same.
+Example:
+
+# importing the datetime library
+import datetime
+
+# given epoch time
+epoch_time = 252384207
+
+# using the datetime.fromtimestamp() function
+datetime_obj = datetime.datetime.fromtimestamp( epoch_time )
+
+# using the strftime() function
+datetime_str = datetime_obj.strftime( "%Y - %m - %d  %H : %M : %S" )
+
+# printing the values
+print( "Unix epoch time:", epoch_time )
+print( "DateTime:", datetime_str )
+
+Output:
+Unix epoch time: 252384207
+DateTime: 1977 - 12 - 31  08 : 13 : 27
+
+Explanation:
+In the above example, we have again imported the datetime library and defined a variable containing the value of Unix epoch time. We have then used the datetime.fromtimestamp() function to convert the Unix epoch time into a DateTime object. We have then used the strftime() function to convert the object into a suitable format string and printed it for the users.
+Converting DateTime into epoch time in milliseconds using Python
+In order to convert the epoch DateTime into milliseconds, we can use the strptime() function to return the datetime object from the specified string and use the timestamp() function to convert the object into seconds. Moreover, we need to multiply the resultant value by a thousand in order to produce the epoch DateTime in milliseconds.
+Let us consider an example demonstrating the same.
+Example:
+
+# importing the datetime module
+from datetime import datetime
+
+# using the strptime() function
+dt_obj = datetime.strptime( '10-6-2021 10:33:35,72', '%d-%m-%Y %H:%M:%S,%f')
+epoch_msec = dt_obj.timestamp() * 1000
+
+print("epoch time in milliseconds:", epoch_msec)
+
+Output:
+epoch time in milliseconds: 1623301415720.0
+
+Explanation:
+In the above example, we have imported the datetime module from the datetime library. We have then used the strptime() function to convert the DateTime string into the DateTime object. We have then used the timestamp() function to convert the object into the epoch time format. Finally, we have also multiplied the epoch time by a thousand in order to convert it into milliseconds.
+Converting epoch timestamp into DateTime using Python
+We can use the datetime.fromtimestamp() function to convert the epoch timestamp into DateTime. Here is an example shown below:
+Example:
+
+# importing the datetime module
+import datetime
+
+# given epoch timestamp
+epoch_time = 33456871
+
+# using the datetime.fromtimestamp() function
+the_datetime = datetime.datetime.fromtimestamp( epoch_time )
+
+# printing the values
+print( "epoch timestamp:", epoch_time )
+print( "DateTime:", the_datetime )
+
+Output:
+epoch timestamp: 33456871
+DateTime: 1971-01-23 11:04:31
+
+Explanation:
+In the above example, we have imported the datetime library and defined a variable storing the value of epoch timestamp. We have then used the datetime.fromtimestamp() function to convert the epoch timestamp into datetime and printed it for the users.
+Understanding errors related to epoch datetime in Python
+While working with the epoch datetime in the Python programming language, we might encounter an error saying Python epoch datetime year is out of range or Python Invalid Argument.
+Let us consider an example in order to understand the problem.
+Example:
+
+# importing the datetime module
+import datetime
+
+# using the timestamp() function
+epoch_time = datetime.datetime(1960, 6, 10, 0, 0).timestamp()
+
+# printing the values
+print( epoch_time )
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\epochpython.py", line 5, in 
+    epoch_time = datetime.datetime(1960, 6, 10, 0, 0).timestamp()
+OSError: [Errno 22] Invalid argument
+
+Explanation:
+In the above example, we have provided the datetime with the year 1960, which is before the year 1970 and out of the timestamp range. Thus, as a result, the program will return an error as an Invalid Argument.
+We can fix this Invalid Argument error by replacing the date from 1950 with anything after 1970.
+
+
+Next TopicPython del Statement
+
+
+
+
+← prev
+next →
+
+
+
+

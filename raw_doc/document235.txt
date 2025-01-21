@@ -1,0 +1,273 @@
+
+
+
+
+next →
+← prev
+
+Python Join List
+In this topic, we will discuss how we can join two or more lists with different functions of Python. Before going through the concepts, let's take a brief introduction to the Python List. A Python List is the collection of multiples items that are grouped in the same name. It can store different data types (integer, string, float, etc.) items inside a square bracket [], which is separated by a (,) comma.
+
+Program to print the Python list
+List.py
+
+# list of characters
+List1 = ['A', 'B', 'C', 'D', 'E']
+
+# list of integers
+List2 = [1, 2, 3, 4, 5,]
+
+# mixed lists
+List3 = ['A', 1, 'C', 'E', 5, 8]
+
+print (" Display the List1 ", List1)
+print (" Display the List2 ", List2)
+print (" Display the List3 ", List3)
+
+Output
+Display the List1  ['A', 'B', 'C', 'D', 'E']
+ Display the List2  [1, 2, 3, 4, 5]
+ Display the List3  ['A', 1, 'C', 'E', 5, 8]
+
+When we join two or more lists together in a Python program, it gives a joined lists. And this process is called composition or joining of lists.
+Let's discuss the different ways to join two or more lists in Python:
+
+Join lists in Python using the join() function and delimiters
+Join a list in Python using the join() function without delimiters
+Join two integers list in Python using map() function
+Join two lists in Python using for loop and append() function
+Join multiple lists in Python using itertools.chain() method
+Join two lists in Python using (+) plus operator
+Join two lists in Python using (*) multiply or asterisk operator
+Join two lists in Python using extend() function
+
+Join lists in Python using the join() function
+A join() function is used to join an iterable list to another list, separated by specified delimiters such as comma, symbols, a hyphen, etc.
+Syntax
+
+str_name.join( iterable)
+
+str_name: It is the name of the delimiter that separates an iterable list.
+iterable: It is the list that contains a set of elements and joins with a delimiter.
+Return Value: It returns a concatenated list that is separated by specified delimiters.
+Note: If the iterable list contains any non-string values or items, it throws a TypeError exception.
+Program to join two lists using the join() function and delimiter
+Join.py
+
+List1 = [ "Apple", "Orange", "Banana", "Mango", "Grapes" ]
+Str2 = ", " # It is the comma delimiter
+# use join() function to join List1 with the " . " delimiter 
+Str2 = Str2.join( List1)
+
+# print the join list 
+print (" Display the concatenated List1 using join() function and delimiter", Str2)
+
+List2 = [  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" ]
+Str3 = " - " # It is the hyphen delimiter
+# use join() function to join List2 with the " - " delimiters 
+Str3 = Str3.join( List2)
+
+# print the join list 
+print (" Display the concatenated List2 using join() function and delimiter", Str3)
+
+Output
+Display the concatenated List1 using join() function and delimiter Apple, Orange, Banana, Mango, Grapes
+ Display the concatenated List2 using join() function and delimiter Sunday - Monday - Tuesday - Wednesday - Thursday
+
+Program to join a list without using delimiter
+Prog.py
+
+# declare a python list 
+Lt1 = [ 'j', 'a', 'v', 'a', 't', 'p', 'o', 'i', 'n', 't' ]
+print ( " Display the elements of the List L1 " , Lt1)
+L2 = '  '  # declare any empty string without defining any delimiter
+Ret = L2.join( Lt1) # use join method to join L1 list with L2
+print ( " Display the List without using delimiters", Ret)  
+
+Output
+Display the elements of the List L1  ['j', 'a', 'v', 'a', 't', 'p', 'o', 'i', 'n', 't']
+ Display the List without using delimiters j  a  v  a  t  p  o  i  n  t
+
+Join two integers list using map() function
+Integer list: It collects all integers in a list called the integer list, and we cannot join two integer lists in Python using the join() function. Therefore, we use a map() function that converts an integer list into a string. After that, we use a join() function to join map() function results with appropriate delimiters.
+Syntax:
+
+map(str, list_name)
+
+In the above syntax, a map() function has two parameters, list_name, and str. Where list_name is the name of integers list and str represents the string. A map() function converts the list_name into the string (str).
+Program to use a map() function and join() function in list
+Let's create a program to convert the given integers list into a string using the map() function and then join() function to join the list.
+Convert.py
+
+lt = [1, 2, 3, 4, 5]
+# use map() function to convert integer list into string 
+list_map = map(str, lt)
+lt2 = ', '
+
+# use join() function to join lists and delimiter comma (,) 
+res = lt2.join (list_map)
+print (" Display the concatenated integers list using map() and join() function ", res)
+
+Output
+Display the concatenated integers list using map() and join() function  1, 2, 3, 4, 5
+
+Program to join two lists in Python using for loop and append() function
+An append() function is used to sequentially add or join each element of an iterable list at the end of another list using for loop. Let's create a simple program to add elements of a list at the end of another list using the append() function.
+Append.py
+
+List1 = [1, 2, 3, 4, 5] # declare List1
+List2 = [5, 6, 7, 8, 9, 10] # declare List2
+
+print (" Given List1 ", List1)	
+print (" Given List2 ", List2)
+
+# use for loop to iterate each element of Lt1 to l2
+for i in List2:
+    List1.append(i) # use append() function to insert each elements at the end of Lt1
+print (" Display concatenation list using append() function ", List1)    
+
+Output
+Given List1  [1, 2, 3, 4, 5]
+ Given List2  [5, 6, 7, 8, 9, 10]
+ Display concatenation list using append() function  [1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10]
+
+Program to join multiple lists using itertools.chain() method
+Let's create a simple program in Python to concatenate multiple lists using the chain() method by importing the itertools package.
+New.py
+
+# use Python itertools.chain() method to join two list
+import itertools
+
+# declare different lists
+a = [1, 2, 3, 4, 5]
+b = [6, 7, 8, 9, 10]
+c = [11, 12, 13, 14, 15]
+print (" Display the first list ", a)
+print (" Display the second list ", b)
+print (" Display the third list ", c)
+
+# use itertools.chain() method to join the list
+result = list (itertools.chain (a, b, c))
+
+# pass the result variable in str() function to return the concatenated lists
+print (" Concatenated list in python using itertools.chain() method ", str (result))
+
+Output
+Display the first list  [1, 2, 3, 4, 5]
+ Display the second list  [6, 7, 8, 9, 10]
+ Display the third list  [11, 12, 13, 14, 15]
+ Concatenated list in python using itertools.chain() method  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+Program to join two lists using + operator
+Let's consider an example to join two lists in Python using the (+) plus operator.
+Mypro.py
+
+# Create a program to join two lists in Python using the '+' operator
+	
+# declare two lists of characters
+list1 = [ 'A', 'B', 'C', 'D', 'E']
+list2 = [ 'F', 'G', 'H', 'I', 'J']
+
+# join two characters lists using '+' operator
+lt_sum1 = list1 + list2
+
+
+# declares two lists of integers
+list3 = [ '1', '2', '3', '4', '5']
+list4 = [ '6', '7', '8', '9', '10']
+
+# join two integers lists using '+' operator
+lt_sum2 = list3 + list4
+
+# display the concatenation list
+print (" Join two list of characters in Python using + operator: ", str(lt_sum1))
+
+# display the concatenation list
+print (" Join two list of integers in Python using + operator: ", str(lt_sum2))
+
+Output
+Join two list of characters in Python using + operator:  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+ Join two list of integers in Python using + operator:  ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+Program to join two list using (*) multiply operator
+Consider an example to join two lists of in Python using * operator.
+Mypro2.py
+
+# declare two lists of characters
+List1 = [ 'A', 'B', 'C', 'D', 'E']
+List2 = [ 'F', 'G', 'H', 'I', 'J']
+print (" Display character List1 ", List1)
+print (" Display character List2 ", List2)
+
+# join two characters lists using '*' operator
+lt_sum1 = [*List1, *List2]
+
+
+# declares two lists of integers
+List3 = [ 1, 2, 3, 4, 5]
+List4 = [ 6, 7, 8, 9, 10]
+print (" Display integer List3 ", List3)
+print (" Display integer List4 ", List4)
+# join two integers lists using '*' operator
+lt_sum2 = [*List3, *List4]
+
+# display the concatenation list
+print (" Join two characters list in Python using * operator: "+ str(lt_sum1))
+
+# display the concatenation list
+print (" Join two integers list in Python using * operator: "+ str(lt_sum2))
+
+Output
+Display integer List3  [1, 2, 3, 4, 5]
+ Display integer List4  [6, 7, 8, 9, 10]
+ Join two characters list in Python using * operator: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+ Join two integers list in Python using * operator: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+Program to join two lists in Python using extend() method
+Let's write a simple program to join two lists using extend() method in Python.
+Prog.py
+
+# takes two integers lists
+List1 = [5, 10, 5]
+List2 = [ 2, 4, 6, 8]
+print (" Display the List1 ", List1)
+print (" Display the List1 ", List2)
+
+# takes two string lists
+List3 = [ 'RED', 'BLUE', 'BLACK']
+List4 = [ 'BROWN', 'PURPLE', 'GREY' ]
+print (" Display the List3 ", List3)
+print (" Display the List4 ", List4)
+
+
+# use extend() method to join two lists
+List1.extend(List2)
+List3.extend(List4) 
+
+# print concatenation lists
+print( "\n Adding two lists of integers in Python using the extend() function: ", str(List1))
+print( "\n Adding two lists of strings in Python using the extend() function: ", str(List3))
+
+Output
+Display the List1  [5, 10, 5]
+ Display the List1  [2, 4, 6, 8]
+ Display the List3  ['RED', 'BLUE', 'BLACK']
+ Display the List4  ['BROWN', 'PURPLE', 'GREY']
+
+ Adding two lists of integers in Python using the extend() function:  [5, 10, 5, 2, 4, 6, 8]
+
+ Adding two lists of strings in Python using the extend() function:  ['RED', 'BLUE', 'BLACK', 'BROWN', 'PURPLE', 'GREY']
+
+
+
+Next Topicstrip() function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

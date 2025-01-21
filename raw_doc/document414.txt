@@ -1,0 +1,112 @@
+
+
+
+
+next →
+← prev
+
+bokeh.plotting.figure.diamond_cross() Function in Python
+Bokeh is a library of Python which is used for data visualization by plotting graphs and charts. The output can be obtained on different platforms such as Notebook, HTML, JavaScript, and browser. The Figure Class is used for creating a new figure on the graph, and it is a subclass of bokeh.plotting that simplifies plot creation with default axes, grids, tools, etc.
+bokeh.plotting.figure.diamond_cross() Function
+We can use the diamond_cross() method of bokeh.plotting module of bokeh library for Configuring and adding DiamondCross glyphs to this Graphs.
+Syntax:
+The syntax of diamond_cross() function is:
+
+diamond_cross(x, y, size = 4, angle = 0.0, *, angle_units = 'rad', fill_alpha = 1.0, fill_color = 'gray', line_alpha = 1.0, line_cap = 'butt', line_color = 'black', line_dash = [], line_dash_offset = 0, line_join = 'bevel', line_width = 1, name = None, tags = [], **kwargs)
+
+Parameters:
+
+xs: This is an x-coordinates of the lines.
+ys: This is a y-coordinates of the lines.
+line_alpha: It takes the percentage value of line alpha; Its default value is 1.
+line_cap: It takes the value of line cap for the line; Its default value is butt.
+line_color: It takes the color of the line as input; Its default value is black.
+line_dash: It takes the value of line dash such as solid, dashed, dotted, dot-dash, dash-dot [Its default value is solid].
+line_dash_offset: It takes the value of line dash offset as input; Its default value is 0.
+line_join: It takes the value of line join as input; Its default value is in bevel.
+line_width: It takes the value of the width of the line as input; Its default value is 1.
+mode: It takes one of three values of mode as input: ["before", "after", "centre"].
+name: It takes a user-supplied name for the model as input.
+tags: It takes user-supplied values for the model as input.
+
+Other Parameters:
+
+alpha: It is used for setting all alpha keyword arguments at once.
+color: It is used for setting all color keyword arguments at once.
+legend_field: It takes the name of a column as input in the data source that should be used.
+legend_group: It takes the name of a column as input in the data source that should be used.
+legend_label: It is used for labeling the legend entry.
+muted: It is used for determining whether the glyph should be rendered as muted or not; Its default value is False.
+name: It is used as an optional user-supplied name for attaching to the renderer.
+source: It is a user-supplying data source.
+view: It is used to view for filtering the data source.
+visible: It is used for determining whether the glyph should be rendered or not; Its default value is True.
+x_range_name: It is used as the name of an extra range to use for mapping x-coordinates.
+y_range_name: It is used as the name of an extra range to use for mapping y-coordinates.
+level: It is used for specifying the render level order for this glyph.
+
+Return:
+The return of diamond_cross() function is:
+An object of class GlyphRenderer.
+Below examples illustrate the bokeh.plotting.figure.diamond_cross() function in bokeh.plotting:
+Example 1:
+
+# First, we will import all the required modules
+import numpy as nmp 
+from bokeh.plotting import figure as fig
+from bokeh.plotting import output_file as OF
+from bokeh.plotting import show 
+# Here, we will create a file for saving the model 
+OF("javaTpoint.html") 
+       
+# Now, we will instantiate the figure object 
+plot_1 = fig(plot_width = 300, plot_height = 300, title = "Diamond figure on Graph using Bokeh") 
+plot_1.diamond_cross(x = [3, 1, 6, 2, 8], y = [1, 6, 3, 4, 7],  
+            size = 20, fill_color = "Blue",
+            line_color = "Yellow", alpha = 1.0) 
+
+# To display the model 
+show(plot_1)
+
+Output:
+
+Example 2:
+
+# First, we will import all the required modules
+import numpy as nmp 
+from bokeh.plotting import figure as fig
+from bokeh.plotting import output_file as OF
+from bokeh.plotting import show 
+
+x = [4, 1, 7, 2, 6]
+y = [5, 1, 4, 6, 2]
+
+# Here, we will create a file for saving the model 
+OF("javaTpoint.html") 
+       
+# Now, we will instantiate the figure object 
+plot_1 = fig(plot_width = 300, plot_height = 300, title = "Diamond figure on Graph using Bokeh") 
+  
+plot_1.line(x, y, line_width = 2) 
+plot_1.diamond_cross(x, y, fill_color = "Orange",  
+         line_color = "Black", size = 28) 
+    
+show(plot_1)
+
+Output:
+
+Conclusion
+In this tutorial, we discussed, with the help of examples, the use of bokeh.plotting.figure.diamond_cross() Function in Python.
+
+
+Next TopicHow to Plot Rays on a Graph using Bokeh in Python
+
+
+
+
+← prev
+next →
+
+
+
+

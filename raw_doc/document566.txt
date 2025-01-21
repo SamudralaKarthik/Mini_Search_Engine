@@ -1,0 +1,328 @@
+
+
+
+
+next →
+← prev
+
+Firebase module in python
+Firebase is one of the libraries that is provided by python to use the various set of services that are offered by the Firebase, so to have a better understanding of the Firebase library we need to first understand the firebase and the different services offered by the Firebase. Google's Firebase technology allows developers to create mobile and online applications. It started off as a stand-alone business in 2011. Google bought the platform in 2014, and it is currently their main product for app creation.
+As you may be aware, Firebase is a Google tool for accelerating app development. It provides BaaS, or backend as a service, which means Firebase handles cloud infrastructure and all of your backend requirements. This allows you to design and deploy applications more quickly. Realtime Database, Cloud Firestore, and Authentication are just a few of Firebase's great offerings. It also enables hosting and provides APIs for machine learning tasks like word recognition, picture labeling, and more! Firebase is a set of tools that allows you to "build, improve, and grow your app," and the tools it provides cover a lot of the services that developers would normally have to build themselves but don't want to because they'd rather focus on the app experience. Analytics, authentication, databases, configuration, file storage, push messaging, and so on are all part of this. The services are cloud-based and scalable with little to no work on the developer's behalf.
+When I say, "hosted on the cloud," I'm referring to Google's backend components, which are completely maintained and administered. Firebase's client SDKs interface directly with these backend services, eliminating the need for any middleware between your app and the service. If you're utilizing one of the Firebase database choices, you'll normally write code in your client app to query the database. Traditional app development, on the other hand, often entails writing both frontend and backend code. The frontend code simply calls API endpoints accessible by the backend, leaving the backend code to handle the heavy lifting. The conventional backend is bypassed with Firebase products, putting the job on the client. The Firebase console provides administrative access to each of these products.
+On top of those SDKs, there's a library called FirebaseUI (Android, iOS, web) that includes a number of useful tools to make Firebase programming even easier. There are additional projects that encapsulate web SDKs for usage with Angular, such as AngularFire. These are free to use. Firebase is a big fan of open source.
+Firebase allows developers to concentrate on creating amazing user experiences. You do not need to manage any servers. There's no need to develop APIs. Firebase is your server, API, and datastore, all designed in a way that allows you to customize it to fit your specific needs. Yes, you'll need to leverage other parts of the Google Cloud for complex applications on occasion. It's impossible for Firebase to be everything to everyone. However, it comes close.
+Now let us have a look at the different services or products which are offered by the Firebase suite, all these services or products are part of the Firebase suite offered by Google. The various services are:
+
+Realtime Database: The Firebase Realtime Database is a database that is hosted in the cloud. Data is saved in JSON format and synced in real-time across all connected clients. To get and sync your data, most databases need HTTP requests. Most databases only provide information when you specifically request it. When you connect your app to Firebase, you're not using standard HTTP to do so. You're using a WebSocket to connect. HTTP is considerably much slower than WebSockets. You don't need to perform many WebSocket calls because a single socket connection suffices. All of your data syncs automatically as quickly as your client's network can handle it across that single WebSocket. As soon as fresh data is available, Firebase provides it to you. When your client saves a modification to the data, the revised data is sent to all linked clients nearly quickly.
+File Storage: Firebase Storage allows you to save binary files most commonly photos, but anything goes straight to Google Cloud Storage from the client!!! To safeguard your GCloud bucket from the masses, Firebase Storage has its own set of security restrictions, while allowing comprehensive write capabilities to your authorized customers. The Firebase SDKs for Cloud Storage is used by developers to upload and get files directly from clients. If the network connection is bad, the client can resume the process from where it left off, saving time and bandwidth for your consumers. Cloud Storage for Firebase saves your files in a Google Cloud Storage bucket, allowing you to access them from both Firebase and Google Cloud. The Firebase SDKs for Cloud Storage provides you the freedom to upload and download files from mobile clients. You may also use the Google Cloud Storage APIs to do server-side processing such as image filtering and video transcoding. Because Cloud Storage scales automatically, there's no need to switch to another provider. Learn more about the advantages of our Google Cloud integration.
+Authentication: A built-in email/password authentication system is included with Firebase auth. It also works with Google, Facebook, Twitter, and GitHub via OAuth2. For the most part, we'll concentrate on email/password authentication. The OAuth2 protocol in Firebase is well-documented and largely copy-and-paste. Let's lament for a bit if you've ever created an authentication system. Custom authentication is a complete disaster. For the rest of my life, I will never write another authentication system. Firebase Auth was love at first sight for me, and that love has never faded. I feel frustrated from time to time. We have disagreements from time to time. But the cold, black pit of a bespoke auth system is something I'll never forget. I take stock of my blessings. You may use Firebase Auth to manage access to your data since it connects directly with Firebase Database. As if it were an afterthought, I'm writing this. It's not the case. The second reason you'll like Firebase Auth is because of this.
+Hosting: Firebase Hosting is a developer-friendly online content hosting service. You can swiftly deploy web apps and serve both static and dynamic content to a global CDN with a single command (content delivery network). To develop and host microservices on Firebase, use Firebase Hosting with Cloud Functions or Cloud Run. For all of your static files, Firebase features an easy-to-use hosting solution. It uses HTTP/2 to deliver them from a worldwide CDN. Firebase Hosting is designed specifically for today's web developers. With the emergence of front-end JavaScript frameworks like Angular and static generation tools like Jekyll, websites and applications are more powerful than ever. Hosting provides you the infrastructure, tools, and tools you need to launch and manage websites and applications, whether it's a basic app landing page or a large Progressive Web App (PWA). You may deploy files from local folders on your PC to our Hosting servers using the Firebase CLI. You may use Cloud Functions for Firebase or Cloud Run to serve dynamic content and host microservices on your sites in addition to delivering static information. Our global CDN's closest edge server serves all material through an SSL connection.
+Cloud Firestore: Cloud Firestore is a versatile, scalable database from Firebase and Google Cloud for mobile, web, and server development. It, like Firebase Realtime Database, uses real-time listeners to keep your data synchronized across client apps and provides offline support for mobile and web, allowing you to create responsive apps that run regardless of network latency or Internet access. Cloud Firestore also integrates with other Firebase and Google Cloud technologies, such as Cloud Functions, in a seamless manner. Cloud Firestore is a NoSQL database stored in the cloud that your iOS, Android, and web apps can access directly using native SDKs. In addition to REST and RPC APIs, Cloud Firestore is accessible in native Node.js, Java, Python, Unity, C++, and Go SDKs. You store data in documents that have fields that map to values, as per Cloud Firestore's NoSQL data paradigm. These documents are kept in collections, which are document containers that you can use to arrange your data and construct queries. From basic characters and integers to complicated, nested structures, documents enable a wide range of data types. You may also design hierarchical data structures that expand as your database develops by creating sub-collections within documents. The Cloud Firestore data model accepts any data structure that your app requires.
+
+Code:
+
+# A sample python code to display the usage of the firebase module in the python code.
+
+# All the required libraries are imported so that we can use different functions which are made available by these libraries 
+from firebase import firebase
+import sys
+from pprint import pprint
+
+# Sample class is written which will have different functions representing the different operations that we perform on the firebase database,  for each different functionality we have one separate function of this class which will perform that particular functionality gracefully
+class MyFirebaseConnection:
+
+#  a constructor is written which is used to initialize various class variables of this class,  the various variables which are initialized in the constructor are the firebase connector,  record name,  and the child record name.  the firebase connector variable holds the URL of the firebase shared relational database on which we are going to perform different operations like storing the data reading the data deleting the data and modifying the auditing existing date 
+	def __init__(self):
+		self.firebase_connector = None
+		self.root_record_name = "student_records"
+		self.child_record_name = "student_details"
+
+
+# A function is written which will be used to connect to the firebase database,  in this function the user is asked for the firebase database access link or URL,  which is passed as a parameter to the firebase application method and with the help of this method establish a secure connection with the cloud database,  so once the connection is established successfully we are using this object to perform various operations across the code
+	def connect_to_firebase_database(self):
+		print("Enter the Firebase Database Access link::")
+		db_url = input()
+		db_connection = firebase.FirebaseApplication(db_url, None)
+		self.firebase_connector = db_connection
+		print("Connection to the Database established successfully.")
+
+#  a function is written to write data to the cloud database in this function the user is asked to enter the data for a particular object which is going to be stored as a single entity in the cloud database,  first of all, the user is asked for details and then the details entered by the user are encoded into a dictionary format and that dictionary is written to the firebase cloud database with the help of post function. The inner function is written to take input from the user. On successful writing of data to the firebase cloud database, a success message is prompted to the user.
+	def write_data_to_the_firebase_database(self):
+		print("Enter the data you want to add to the Firebase Database::")
+		
+
+	#  this is an inner function that is used to take various details of a student's records which we are going to store in our relational database,  the user is asked for various details of a student like the name of the student,  the roll number of the student and the marks of the student,  on entering this particular details please details and code into a Python dictionary format and that dictionary object is returned as a return type of this in a function,  and that the return dictionary object is going to be stored in the firebase cloud database. 
+		def get_data():
+			print("Enter the name of the student:")
+			student_name = input()
+			print("Enter the rollno of the student:")
+			student_rollno = input()
+			print("Enter the marks of the student:")
+			student_marks = input()
+
+			student_data_dict = dict({
+				'student_name' : student_name,
+				'student_rollno' : student_rollno,
+				'student_marks' : student_marks
+				})
+			pprint(student_data_dict)
+			return student_data_dict
+
+		data_to_write_to_firebase_db = get_data()
+		self.firebase_connector.post("/{}/{}".format(self.root_record_name,self.child_record_name),data_to_write_to_firebase_db)
+		print("Data added sucessfully to the Firebase Database.")
+
+
+#  this function is used to read the data which is stored in the firebase cloud database,  in this function all the records all data that we have stored in the cloud database are printed, the point to be noted here is that along with the EA dictionary object which we are storing in the cloud database there is a particular Hash ID that is getting mapped to a particular record and while printing we can see that ID which is associated with those records.  the get function is used to retrieve the data from the firebase cloud database.
+	def read_data_from_the_firebase_database(self):
+		print("Data present in the Firebase Database::")
+		records_obtained = self.firebase_connector.get("/{}/{}".format(self.root_record_name,self.child_record_name),'')
+		for record in records_obtained:
+			pprint(record)
+
+
+# This function is used to delete a particular record from the firebase cloud database,  in this function the user is asked for the IT ID of the record that the user wants to delete from the firebase cloud database,  on entering that particular ID off the record which user want to delete that particular record is deleted from the firebase cloud database with the help of the delete function provided by firebase library of the python,  on the successful deletion of the desired record specified by the user is prompted with the success message indicating the successful deletion of the desired record. 
+	def delete_data_from_the_firebase_database(self):
+		print("Enter the ID of the record that you want to delete from Firebase Database::")
+		record_id = input()
+		self.firebase_connector.delete("/{}/{}".format(self.root_record_name,self.child_record_name),record_id)
+		print("Record deleted successfully from the Firebase Database.")
+
+# This function is used to update an already existing record from the firebase cloud database, In this method the user asked for a particular set of inputs that are required for this function to work properly,  these inputs are the idea off the record for which we want to update something,  and then the user is asked for the parameter of that record which the user want to update the parameter, in this case, could be anything like the name of the student roll number of the student or the marks of the student and then the user is asked for the new value of that particular record,  on entering all these above-mentioned entries the record is updated with the new value by using the update function of the library. 
+	def update_data_in_the_firebase_database(self):
+		print("Enter the ID of the record that you want to update in the Firebase Database::")
+		record_id = input()
+		print("Enter the what parameter of the record you want to update?")
+		parameter_to_update = input()
+		print("Enter the new value of the {},you want to update?".format(parameter_to_update))
+		new_value_of_parameter = input()
+		self.firebase_connector.put("/{}/{}/{}".format(self.root_record_name,self.child_record_name,record_id),parameter_to_update,new_value_of_parameter)
+		print("Record updated successfully from the Firebase Database.")
+
+
+# The main function is written which will be used to create an object of the above-written clause and with the help of this creation, we can call the various methods which are written inside that class each of these methods depicting a particular functionality of the firebase cloud database.  the different options or operations which are supported by the firebase cloud database are creating a new record in the cloud database, deleting an already existing record from the cloud database, reading and displaying all the records that are stored in that particular database, and updating a particular parameter of the already present record in the firebase cloud database for all these functionalities there are different functions provided by the firebase library of the python and we have written different functions in the above-written class for all this functionality to understand them better. 
+def main():
+ 
+	firebase_db_obj = MyFirebaseConnection()
+	while(True):
+		print("These are the possibilities given below; choose any one of them.::")
+		print("1. To establish a connection to the Firebase Database using the Firebase module of python.")
+		print("2. To write data to the Firebase Database using the Firebase module of python.")
+		print("3. To read data from the Firebase Database using the Firebase module of python.")
+		print("4. To delete data from the Firebase Database using the Firebase module of python.")
+		print("5. To update a data/record in the Firebase Database using the Firebase module of python.")
+		print("6. To terminate the code and stop the choices from being displayed.")
+		menu_choice = input()
+		menu_choice = int(menu_choice)
+		if menu_choice == 1:
+			firebase_db_obj.connect_to_firebase_database()
+		elif menu_choice == 2:
+			firebase_db_obj.write_data_to_the_firebase_database()
+		elif menu_choice == 3:
+			firebase_db_obj.read_data_from_the_firebase_database()
+		elif menu_choice == 4:
+			firebase_db_obj.delete_data_from_the_firebase_database()
+		elif menu_choice == 5:
+			firebase_db_obj.update_data_in_the_firebase_database()
+		elif menu_choice == 6:
+			sys.exit()
+		
+		print("To continue with code execution, type [y] otherwise [n].")
+		continue_or_exit = input()
+ 
+		if continue_or_exit == 'y' or continue_or_exit == 'Y':
+			pass
+		elif continue_or_exit == 'n' or continue_or_exit == 'N':
+			sys.exit()
+
+if __name__ == '__main__':
+	main()
+
+Output:
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+1
+Enter the Firebase Database Access link::
+https://xxxxxx-yyyyy.firebaseio.com
+A connection to the Database was established successfully.
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+2
+Enter the data you want to add to the Firebase Database::
+Enter the name of the student:
+Nirnay
+Enter the roll no of the student:
+35
+Enter the marks of the student:
+92
+{'student_marks': '92', 'student_name': 'Nirnay', 'student_rollno': '35'}
+Data added sucessfully to the Firebase Database.
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+2
+Enter the data you want to add to the Firebase Database::
+Enter the name of the student:
+Rahul
+Enter the roll no of the student:
+21
+Enter the marks of the student:
+97
+{'student_marks': '97', 'student_name': 'Rahul', 'student_rollno': '21'}
+Data added sucessfully to the Firebase Database.
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+2
+Enter the data you want to add to the Firebase Database::
+Enter the name of the student:
+Priyanka
+Enter the roll no of the student:
+15
+Enter the marks of the student:
+89
+{'student_marks': '89', 'student_name': 'Priyanka', 'student_rollno': '15'}
+Data added sucessfully to the Firebase Database.
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+3
+
+Data present in the Firebase Database::
+'8e606c6eca3711ec' : {'student_marks': '92', 'student_name': 'Nirnay', 'student_rollno': '35'}
+'8e606c6eca3711fr' : {'student_marks': '97', 'student_name': 'Rahul', 'student_rollno': '21'}
+'8e606c6eca3712gq' : {'student_marks': '89', 'student_name': 'Priyanka', 'student_rollno': '15'}
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+5
+Enter the ID of the record that you want to update in the Firebase Database::
+8e606c6eca3711fr
+Enter the what parameter of the record you want to update?
+student_marks
+Enter the new value of the student_marks, you want to update?
+96
+Record updated successfully from the Firebase Database.
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+3
+Data present in the Firebase Database::
+'8e606c6eca3711ec' : {'student_marks': '92', 'student_name': 'Nirnay', 'student_rollno': '35'}
+'8e606c6eca3711fr' : {'student_marks': '96', 'student_name': 'Rahul', 'student_rollno': '21'}
+'8e606c6eca3712gq' : {'student_marks': '89', 'student_name': 'Priyanka', 'student_rollno': '15'}
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+4
+Enter the ID of the record that you want to delete from the Firebase Database::
+8e606c6eca3712gq
+Record deleted successfully from the Firebase Database.
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+3
+Data present in the Firebase Database::
+'8e606c6eca3711ec' : {'student_marks': '92', 'student_name': 'Nirnay', 'student_rollno': '35'}
+'8e606c6eca3711fr' : {'student_marks': '96', 'student_name': 'Rahul', 'student_rollno': '21'}
+To continue with code execution, type [y] otherwise [n].
+y
+These are the possibilities given below; choose any one of them.::
+1. To establish a connection to the Firebase Database using the Firebase module of python.
+2. To write data to the Firebase Database using the Firebase module of python.
+3. To read data from the Firebase Database using the Firebase module of python.
+4. To delete data from the Firebase Database using the Firebase module of python.
+5. To update a data/record in the Firebase Database using the Firebase module of python.
+6. To terminate the code and stop the choices from being displayed.
+6
+
+Explanation:
+In the code written above the usage of the different functions of the firebase, the module is explained. In this code, we have created a database in the firebase cloud with the help of the firebase library of python. There are various operations performed in this code, the operations are connecting to the firebase cloud database, and after a successful connection to the firebase cloud database the next step is to take the input data from the user and convert them into a Python dictionary object and then writing that particular dictionary object to the firebase cloud database, and then reading all the data which is stored in the firebase cloud database, apart from reading and writing, we can also delete the already existing record from the firebase cloud database and we can also update an already existing record which is already there in the firebase cloud database. And then the main function is written which will be used to create an object of the above-written clause and with the help of this creation, we can call the various methods which are written inside that class each of these methods depicting a particular functionality of the firebase cloud database. the different options or operations which are supported by the firebase cloud database are creating a new record in the cloud database, deleting an already existing record from the cloud database, reading and displaying all the records that are stored in that particular database, and updating a particular parameter of the already present record in the firebase cloud database for all these functionalities there are different functions provided by the firebase library of the python and we have written different functions in the above-written class for all this functionality to understand them better.
+There is a reason the firebase has become so much popular among the developers, the main reason behind that much popularity this particular product or library has received is because of the vast amount of the advantages it provides to the developers that help them to save the time that they can simply invest some other task rather than just reinventing the wheel again and again. So now let us have a quick glance at some of the major advantages of the Firebase library:
+
+Development Speed: Firebase is a good app development alternative that may assist developers in substantially cutting app development time to market. For database and backend service setup and maintenance, most developers require access to the server and host. To construct apps, you'll need a backend developer and a frontend developer. Even for smaller systems where the backend and frontend must work together at various phases, this is true. Having both frontend and backend developers can lead to mistakes and difficulties, which can create application problems and increase development costs and complexity. Using Firebase, on the other hand, allows frontend developers to keep track of all tasks and cut down on the time it takes to complete them. All of this is possible because of ready-to-use data storage, authentication, alerts, analytics, and other services. Furthermore, Firebase offers a number of ready-to-use services that eliminate the need for a developer to write boilerplate code, reinvent the wheel, or create a backend from scratch. Firebase's high-quality SDKs, extensive documentation, and dynamic community will make it easy for frontend developers to integrate it into their codebase.
+Powered by Google: Google, one of the most well-known and trustworthy names in technology, is behind Firebase. Firebase has undergone a number of adjustments and advances since its purchase, and has evolved into the dependable platform it is today. It makes use of the Google Cloud and a number of Google services. Firebase is now part of the Google Cloud Platform, where it connects with a variety of third-party services and operates in perfect harmony with other Google Cloud services. Google has been significantly investing in Firebase since its acquisition, resulting in a more robust offering.
+Free to begin with: Firebase is a free service that allows users to log in using their Google account. The Spark plan is free and includes a variety of features to assist developers in getting started. They can then choose the Blaze Plan based on their changing needs. Firebase's ability to get started for free is a great feature, and it's one of the reasons it's so popular. The database read and write restrictions on the Spark plan are rather generous. Another benefit is that the Blaze Plan takes the initial free restrictions into account. Consider the case where you'll be hosting 20GB of storage on the Blaze Plan. Because the free limit is 10GB, Firebase will only charge you for the additional 10GB.
+Variety of Services: Firebase also provides a broad array of products to help developers with their work. Firestore and Firebase's Realtime Database are two database alternatives. Similarly, Firebase's integrated Cloud Functions enable serverless application development and allow for easy cloud media storage. The Firebase platform includes functionality to build, release, and monitor apps, and it covers the whole application development cycle. It also gives methods to engage consumers and keep them using the app as the last phase in the development cycle.
+Serverless Architecture: It's not easy to scale up and down servers! Scaling up a database cluster, in particular, is difficult, and improving performance for large workloads necessitates the expertise of experienced experts. This difficulty is solved by Firebase, which provides a completely serverless environment. Firebase is a serverless design, which means customers just pay for requests and don't have to maintain or worry about server infrastructure. It differs from a traditional server, which must be operational at all times. Because Firebase is a serverless platform, users are only charged when the server is in use. As a result of the increased efficiency, there are fewer concerns about scalability. Taking a hands-on approach to DevOps, setup, infrastructure, and capacity planning give developers more freedom.
+Front-end Friendly: Firebase is preferred by developers all around the world because it allows them to concentrate on writing front-end code for mobile apps. Firebase minimizes the need for boilerplate backend code, allowing apps to be developed more quickly. Firebase simplifies application development while also lowering expenses. Developers and businesses may also use Firebase to standardize the backend environment by using a single, easy-to-learn technology. A backend pattern reduces the amount of training necessary to support it and allows frontend developers to handle the majority of the work.
+Used for Machine Learning: Machine learning is on the verge of revolutionizing the field of information technology. It's already begun in a variety of ways. According to Gartner, 30% of firms will employ machine learning in at least one component of their operations. Firebase is also beneficial since it allows developers to use machine learning. Both iOS and Android developers, regardless of their degree of experience, may use machine learning. Firebase comes with an ML kit that includes APIs for text recognition, face detection, picture labeling, barcode scanning, and other mobile platform functionalities. Developers may choose between Cloud and on-device APIs, depending on their application development needs.
+Easy Bug Monitoring: Crashlytics, a component of Firebase, is a terrific tool for quickly identifying and resolving issues. Firebase can track both non-fatal and fatal mistakes, and provide reports depending on how failures affect users' experience.
+Better SEO: By offering app links on Google Search, Firebase promotes app indexing, allowing consumers to reengage with Google Search. By indexing an application, your app's rating on Search can be improved, allowing it to be discovered by new people who can install it. The Android Instant App, which may be used to access program content, is a good option for developers.
+Unchallenging Backups: With the aid of frequent backups, Firebase provides the highest level of data protection and availability. By depending on this platform's automated backup feature, the apps are safeguarded against any potential data loss. The Realtime Database may be simply configured for automatic backups for Blaze plan users. The auto-backup settings may be accessed by clicking the Backups tab of Firebase Database.
+
+Demerits of Firebase:
+
+Complex Queries: The implementation of sophisticated queries is another issue that users confront with NoSQL databases. Although Firebase's Cloud Firestore has improved significantly over the RTDB, performing sophisticated queries remains a barrier for certain customers.
+Only NoSQL: There is no possibility to utilize a relational database with any of Firebase's database choices, Firestore or Firebase Realtime Database.
+Country Restrictions: The official website of Google's Firebase is https://firebase.google.com, and it is restricted in several countries. Because China has prohibited the URIs with *.google.com and *.googleapis.com, Google, along with other Google services, is blocked and unavailable in China.
+No Community: Because Firebase is not an open-source platform for mobile app development, it is a poor choice for many developers. Because Firebase is closed-source, users are unable to edit its source code. Because of this limitation, many developers who like Firebase's features end up using other platforms. Despite the fact that the platform is not open-source, several libraries and SDKs are accessible on GitHub. This might be Firebase's most significant constraint, preventing the community from developing the product, boosting flexibility levels, and providing self-hosting choices for developers who cannot pay Firebase's price.
+
+So, in this article, we understood the usage of the firebase module in python.
+
+
+Next TopicPython For Kids
+
+
+
+
+← prev
+next →
+
+
+
+

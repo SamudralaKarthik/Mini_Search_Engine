@@ -1,0 +1,261 @@
+
+
+
+
+next →
+← prev
+
+How to One Hot Encode Sequence Data in Python
+In this tutorial, we will learn to convert our input or output sequence data to a one-hot encoding for use in sequence classification.
+One Hot Encoding is a useful feature of machine learning because few Machine learning algorithms cannot work with categorical data directly. While working with the datasets, we come across the column that holds no specific order of preference.
+If we are working with a sequence classification type problem, the categorical data must be converted to numbers. This technique is also used when we work with deep learning methods such as Long Short-term Memory recurrent neural networks.
+First, we will discuss the Categorical Data.
+What is Categorical Data?
+Categorical Data are the types of variables that have the label value rather than numerical values. These types of variables are also called nominal. Let's see the following example of categorical data.
+
+A "car" variable with the values: "Maruti" and "Jaguar".
+A "food" variable with the values: "Veg", and "Non-Veg".
+A "place" variable with the values: "first", "second", and "third".
+
+As we can see in the above code, some categories may have a natural relationship such as natural ordering. In the third example, the "place" variable has a natural ordering of values.
+Problem with Categorical Data
+Some machine learning algorithms have the ability to work with categorical data directly. A few algorithms cannot operate on the label data directly because they require all the data variables and output variables to be numeric.
+
+Therefore, we have to convert hierarchical data into numerical form. Suppose the categorical variable is an output variable. In that case, you may also want to change forecasts by the model back into a categorical form to represent them or use them in some application.
+How to Convert Categorical Data to Numeric Data
+There are two methods that use to convert categorical data into numerical data.
+
+Integer Encoding
+One-Hot Encoding
+
+In the next section, we will discuss One-Hot Encoding.
+What is One Hot Encoding?
+A one hot encoding is used to convert the categorical variables into numeric values. Before doing further data analysis, the categorical values are mapped to integer values. Each column contains "0" or "1" corresponding to which column it has been placed. In this process, each integer value is represented as a binary vector that is all zero expect the index of the integer, which is marked with a 1.
+Example of a One Hot Encoding
+Let's understand it by using the following simple example.
+Suppose we have a sequence of labels with the value 'yellow' and 'red.' To convert them into the numerical value, we assign 'yellow' an integer value 1 to corresponding to its number of categories present in column and 'red' as 0. When we encounter these labels, we will assign same integer value. It is called an integer encoding.
+Let's see another example - Suppose there is a category called animal and it has fours values - Cat, Dog, Cow and Camel. Consider the following table which consists of animals and their corresponding categorical values.
+Input Table -
+
+
+Animal
+Categorical Value of Animal
+
+
+Cat
+5
+
+
+Dog
+10
+
+
+Cow
+15
+
+
+Camel
+11
+
+
+The output will be shown below after one hot encoding.
+
+
+Cat
+Dog
+Cow
+Camel
+
+
+1
+0
+0
+0
+
+
+0
+1
+0
+0
+
+
+0
+0
+1
+0
+
+
+0
+0
+0
+1
+
+
+If we represent the above output in a vector form then it will look like as below.
+Cat - > [1, 0, 0, 0]
+Dog - > [0, 1, 0, 0]
+Cow - > [0, 0, 1, 0]
+Camel - > [0, 0, 0, 1]
+Why use a One Hot Encoding?
+One of the best advantages of One Hot encoding is that it represents categorical data to be more expressive. As we discussed earlier, many machine learning algorithms cannot be able to work with the categorical data directly, so that it needs to be converted into integer.
+We can use the integer value directly or where it is needed. It can solve the problem where the natural ordinal has a relationship between the categories. For example - We can assign the integer values to "weather" label, such as 'winter', 'summer' and 'Monsoon'.
+But there may be problems if no ordinal relationship find. If we allow the representation to lean or any such relationship, it might be damaged the learning to solve problems.
+Manual One Hot Encoding
+In the following example, we will consider an example string of alphabet letters that will be converted into integer value.
+
+hello world
+
+Now, we will implement one hot coding to the above given string value. Let's see the following example.
+Example -
+
+from numpy import argmax
+# Here we are define input string
+str_data = 'hello python'
+print(str_data)
+# Here we are defining possible input values of english alphabate
+eng_alphabet = 'abcdefghijklmnopqrstuvwxyz '
+# define a mapping of chars to integers
+char_to_int = dict((c, i) for i, c in enumerate(eng_alphabet))
+int_to_char = dict((i, c) for i, c in enumerate(eng_alphabet))
+# input data is encoding in integer
+int_encoded = [char_to_int[char] for char in data]
+print(int_encoded)
+# one hot encode
+onehot_encoded = list()
+for value in int_encoded:
+  letter = [0 for _ in range(len(eng_alphabet))]
+  letter[value] = 1
+  onehot_encoded.append(letter)
+print(onehot_encoded)
+# invert encoding
+inverted = int_to_char[argmax(onehot_encoded[0])]
+print(inverted)
+
+Output:
+hello python
+
+[7, 4, 11, 11, 14, 26, 15, 24, 19, 7, 14, 13]
+
+[[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+Explanation:
+In the above code, we have declared the input string and printed it. Next, we defined the universe of the possible input value. Then, a mapping of all possible inputs is created from the char values to integer values. We used this mapping to encode the input string.
+As we can see in the above output, first letter h is encoded as 7. Then, this integer coding is converted to the one hot encoding. One integer encodes character at a time.
+Each character has the specific index value; we marked that index of a specific character as 1. The first character is represented as a 7 in the binary vector of 27. We marked the 7th index as 1 for h.
+Now, we will learn to implement one hot coding using the scikit-learn library.
+One Hot Encode using Scikit-learn
+In this example, let's assume the following output sequence of the 3 labels.
+
+"apple"
+"mango"
+"banana"
+
+An example sequence of 10 time step may be.
+
+apple, apple, mango, apple, banana, banana, mango, apple.
+
+We encode with the integer value to the above labels, such as 1, 2, 3. In the one hot encoding, we will use the binary vector with 3 values, such as [1, 0, 0]. The sequence includes the at least one example of one possible value in the sequence.
+We will use the scikit-learn library. We will use the LabelEncoder module from it for creating an integer encoding of labels and OneHotEncoder for creating a one hot encoding of integer encode value.
+Let's understand the following example.
+Example -
+
+from numpy import array
+from numpy import argmax
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+# defining sequence example
+data_1 = ['apple', 'apple', 'mango', 'apple', 'banana', 'banana', 'mango', 'apple']
+values_of_seq = array(data_1)
+print(values_of_seq)
+# first appling integer encode
+label_encoder = LabelEncoder()
+integer_encoded = label_encoder.fit_transform(values_of_seq)
+print(integer_encoded)
+# Now doing binary encode
+onehot_encoder = OneHotEncoder(sparse=False)
+integer_encoded = integer_encoded.reshape(len(integer_encoded), 1)
+onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
+print(onehot_encoded)
+
+Output:
+['apple' 'apple' 'mango' 'apple' 'banana' 'banana' 'mango' 'apple']
+[0 0 2 0 1 1 2 0]
+[[1. 0. 0.]
+ [1. 0. 0.]
+ [0. 0. 1.]
+ [1. 0. 0.]
+ [0. 1. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]
+ [1. 0. 0.]]
+
+Explanation - 
+In the above code, first, we have printed the sequence of labels. Then, we performed integer encoding and finally the one hot encoding. The OneHotEncoder class returns well-organized sparse encoding. But this is not efficient for the some application such as use with keras library.
+One Hot Encoding with Keras
+Let's suppose we have a sequence that is already integer encoded. We can work with the integer encoding directly or map the integer encoding on the label values. We can use the to_categorical() function to one hot encodes integer data.
+In this example, we have five integer values [0, 1, 2, 3, 4] and we have an input sequence of the following 15 numbers.
+
+data_1 = [1, 4, 3, 3, 0, 3, 2, 2, 4, 0, 1, 2, 1, 4, 3]
+
+Let's understand the following example.
+Example -
+
+from numpy import array
+from numpy import argmax
+from keras.utils import to_categorical
+# define example
+data_1 = [1, 4, 3, 3, 0, 3, 2, 2, 4, 0, 1, 2, 1, 4, 3]
+data = array(data_1)
+print(data)
+# one hot encoding using the to_categorical() method
+encoded = to_categorical(data)
+print(encoded)
+# invert encoding
+inverted = argmax(encoded[0])
+print(inverted)
+
+Output:
+[1 4 3 3 0 3 2 2 4 0 1 2 1 4 3]
+[[0. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 1.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 1. 0.]
+ [1. 0. 0. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 0. 1.]
+ [1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 0. 0. 1.]
+ [0. 0. 0. 1. 0.]]
+1
+
+Explanation -
+In the above code, we have encoded the integer encoded as the binary vectors and printed. Then, we used the Numpy argmax() function to invert the encoding on the first value in the sequence.
+
+
+Next TopicHow to write square root in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,86 @@
+
+
+
+
+next →
+← prev
+
+Binary Search using Recursion in Python
+We split a collection of items into two halves in Binary Search to decrease the number of direct comparisons needed to discover an element. However, there's one requirement: the array's items must be sorted beforehand.
+Binary Search
+The Binary Search Method locates the index of a certain list member. It is among the most popular and quickest algorithms. For the Binary Search procedure to operate, the entries in the list should be sorted.
+Binary Search is a more efficient search technique for locating an element's index than Linear Search since we don't have to examine every list index.
+The Binary Search Algorithm's whole operation may be summarized in the following steps:
+
+Locate the middle element in the sorted array.
+Make a comparison between the element to be located and the middle element.
+If that element is equal to the middle element of the given list, then the index of the middle element is returned. Otherwise, the algorithm will compare the element with the item in the middle.
+Now, if the element to be located is greater than the middle item of the list, it will be compared to the right half of the list, i.e., elements after the middle index.
+Or if the element is less than the element at the middle of the list, then it will be compared to only the left half of the list, i.e., elements before the middle index.
+
+Recursive Binary Search
+Binary Search implies continually dividing the searching interval into 2 equal parts to discover an element in a sorted array, and recurrent binary Search entails breaking down the complete binary search procedure into smaller issues. A recursive binary search is the recursion answer to a binary search.
+The following are the characteristics that all-recursive solutions must meet:
+
+A base case is required for a recursive approach.
+There must be a recursive test case in a recursive approach.
+A recursive approach has to get nearer to the base case.
+
+The lowest subdivision of a complicated problem is represented by a base case, which is a final case. So, to perform the binary Search by recursive method, our algorithm must contain a base case and a recursive case, with the recursive case progressing to the base case. Else the process would never finish and result in an endless loop.
+The binary search technique reduces the time it takes to find a specific element inside a sorted array. The binary search method is often implemented iteratively, but we may also implement it recursively by breaking it down into smaller pieces.
+Code
+
+#defining a function to execute Binary Search on any given sorted list L.
+#start is the lowest index of the list being checked at any given time.
+#end is the highest index of the list being checked at any given time.
+#item is the item to be searched in the list.
+
+def binary_search(L, start, end, item):
+    if end >= start:
+        middle = (start + end) // 2
+        if L[middle] == item:
+            return middle #middle element is the item to be located
+        #if middle item is greater than the item to be searched, left side of the list will be searched
+        elif L[middle] > item: 
+            #starting index will be same but ending index will be the middle of the main list i.e. left half of the list is given in function.
+            return binary_search(L, start, middle - 1, item)
+        else:
+            #if middle item is smaller than the item to be searched, new starting index will be middle of the list i.e. right half of the list.
+            return binary_search(L, middle + 1, end, item)
+    else:
+        #if element is not present in the list
+        return -1
+
+#Drivers code
+     
+my_list = [ 2, 4, 6, 9, 12, 16, 18, 19, 20, 21, 22 ]
+element_to_search = 6
+print("The given list is")
+print(my_list)
+
+index_of_element = binary_search(my_list, 0, len(my_list)-1, element_to_search)
+
+if index_of_element != -1:
+    print("Element searched is found at the index ", str(index_of_element), "of given list")
+else:
+    print("Element searched is not found in the given list!")
+
+Output:
+The given list is
+[2, 4, 6, 9, 12, 16, 18, 19, 20, 21, 22]
+Element searched is found at the index 2 of given list
+
+Recursion is an extremely powerful programming and problem-solving technique. We may use it to evaluate and execute a variety of algorithms, ranging from simple iterative issues to complicated backtracking problems. In this tutorial, we looked at using the Python language to create the recursive binary search method.
+
+
+Next TopicC vs. C++ vs. Python vs. Java
+
+
+
+
+← prev
+next →
+
+
+
+

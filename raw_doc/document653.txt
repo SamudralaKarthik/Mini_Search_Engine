@@ -1,0 +1,75 @@
+
+
+
+
+next →
+← prev
+
+_name_ _main_ in Python
+The main() function is required in programmes developed in the C family of languages (C, C++, Java, C#, etc.) to designate where the execution should begin.
+However, because Python is an interpreter-based language that can also be used in an interactive shell, there is no such thing as a main() method in it. Multiple statements can be found in the .py extension Python programme file. The first statement of the Python programme file is where the execution begins.
+Python interpreter analyses source file and defines some special variables/global variables before running code. The Python interpreter set the special __name__ variable to have the value "__main__" if that module (the source file) is being executed as the main application. __name__ will be set to the name of the module if the same file is being fetched from another module. The __name__ global variable accepts the module name as a value.
+A file containing definitions and statements in Python is known as a module. The module name with the .py extension becomes the file name.
+Example :
+
+# Python program to demonstrate the execution of
+# main directly
+print ("Executed Always")
+
+if __name__ == "__main__":
+	print ("It is executed when it's invoked directly")
+else:
+	print ("It is Executed when it's imported")
+
+Output:
+Executed Always
+It is executed when it's invoked directly
+
+Explanation :
+This whole block of code indented at level 0 [Block 1] is run. Although specified functions and classes are well defined, none of their code actually executes.
+As we followed the instructions here. The __main__ variable will be used directly by Python. As a result, the code in this if block [Block 2] will only be executed if that module serves as your program's entry point.
+So, by checking the __name__ variable, you may determine if your script is getting executed manually or whether it is being imported by another programme.
+If script is imported by another module at that moment, the module name will be __name__.
+Why is it required?
+It is usually required when we want to execute a function directly. For instance, we are creating a script that will be utilised as a module:
+Example :
+
+# Python program to demonstrate the execution of a
+# function directly
+def this_function():
+	print ("I'm inside this function")
+
+# We can test this function by calling it.
+this_function()
+
+Output:
+I'm inside this function
+
+Advantages of using _name_ _main_ :
+
+Every Python module has a specified __name__ and if this is '__main__', it indicates that the module is being executed independently by the user, allowing us to take the necessary action.
+The __name__ is assigned to the name of the script/module if you acquire this script as a module in another script.
+Python files can function as independent applications or as reusable modules.
+If the file was executed directly, without being imported, then the statement "if __name__ == "main" is used to run some code.
+
+Why was this designed this way?
+Naturally, we might ponder the rationale behind the design. Well, there are instances when we wish to create a .py file that can be used as both a module by other programmes and/or modules and the main application itself.
+This behaviour helps us test and improve our code more quickly. Since it enables us to run unit tests directly in script mode, it also aids in debugging.
+Additionally, the fact that setting up a single variable is all it takes to launch a module in Python directly is elegant.
+Conclusion :
+The __name__ variable has a particularly excellent use case, whether you need a file that can be imported by the other modules or launched as the primary programme. When the modules are imported, we can allow or disallow running specific sections of code by using an if __name__ == "__main__" block.
+The __name__ variable is set to the name of the imported module or __main__ if the module is being launched whenever the Python interpreter reads any file. All top-level code is executed when reading the file, but functions and classes are not (as they will only be imported).
+By employing the top-level scope __main__ and the special variable __name__, the reusability is increased. Both independently and when imported as a module, the Python script file can be run from the command line or terminal.
+
+
+Next Topic8 Puzzle problem in Python
+
+
+
+
+← prev
+next →
+
+
+
+

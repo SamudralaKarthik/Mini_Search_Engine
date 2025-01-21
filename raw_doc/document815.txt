@@ -1,0 +1,149 @@
+
+
+
+
+next →
+← prev
+
+Find Key with Maximum Value in Dictionary
+In this tutorial, we'll discover how to work with Python functions to find the dictionary key associated with the highest value in the given dictionary, even if there are nested dictionaries. Additionally, we'll discover how to obtain a dictionary's key from a list of dictionaries. We'll discover how to accomplish this using Python's list comprehensions, the max() method, and the built-in operator library. 
+Using max() Function
+The max() method is the easiest way to determine a Python dictionary's maximum value. We may obtain any iterable's highest value using the function.
+Before moving on to a more challenging case using a Python dictionary, let's first examine how it functions with a list.
+Code
+
+# Python program to show how to use the max() function to get the maximum value of a list
+
+# Creating a list
+listt = [23, 14, 53, 27, 73, 24]
+
+# Getting the maximum value
+maximum_value = max(listt) 
+print(maximum_value)
+
+Output:
+73
+
+The in-built .values() function of Python dictionaries pulls the values from the given dictionary. We will get a list containing all the dictionary values using this method. Similarly, using the .keys() method, we will get all the keys. Using the zip() function, we can map each value to the key. We have to supply the max() function with the result of the above operations.
+Code
+
+# Python program to show how to use the max() function to get the key with the maximum value from a dictionary
+  
+# Creating a dictionary
+dictt = {'1': 100, '2': 1292, '3': 88}
+
+# Getting the key with maximum value
+Key_max = max(zip(dictt.values(), dictt.keys()))[1]
+print("The key with the maximum value is: ", Key_max)
+
+Output:
+The key with the maximum value is:  2
+
+The ability to obtain the dictionary key that coincides with the greatest value is useful when dealing with Python dictionaries.
+The Python max() method supports a parameter: the key = parameter, which takes a function that returns a value for each iterable data type given to it. This method simplifies the process of retrieving the key of the max value. To evaluate it with a function, we may just send it in.
+Code
+
+# Python program to show how to use the max() function and the key parameter to get the key with the maximum value from a dictionary
+  
+# Creating a dictionary
+dictt = {'1': 100, '2': 1292, '3': 88}
+
+# Getting the key with maximum value
+Key_max = max(dictt, key = lambda x: dictt[x])
+print("The key with the maximum value is: ", Key_max)
+
+Output:
+The key with the maximum value is:  2
+
+The .get() method, which is also a built-in function of a Python dictionary, may be used to obtain the maximum value of a Python dictionary. W may remember that the .get() function is utilized to return a key's value. See what happens when we apply this method to our key = parameter.
+Code
+
+# Python program to show how to use the max() function and the key parameter to get the key with the maximum value from a dictionary
+  
+# Creating a dictionary
+dictt = {'1': 100, '2': 1292, '3': 88}
+
+# Getting the key with maximum value
+Key_max = max(dictt, key = dictt.get)
+print("The key with the maximum value is: ", Key_max)
+
+Output:
+The key with the maximum value is:  2
+
+Getting the Key of Max Value from a List of Dictionaries
+You might discover that you use lists of dictionaries frequently while working. In these situations, knowing how to obtain the maximum value for each dictionary in the list of dictionaries will be helpful.
+Making this is quite simple! We will use a for-loop method initially, then a list comprehension. First, let's check the for-loop approach:
+Code
+
+# Python program to find the key with maximum value from a list of dictionaries
+
+# Creating a list of dictionaries
+listt = [{'1': 30, '2': 29}, {'3': 31, '4': 43,}, {'5': 32, '6': 38}]
+
+max_val = int()
+key = ''
+
+for dictt in listt:
+    if max(dictt.values()) > max_val:
+        max_val = max(dictt.values())
+        key = max(dictt, key = lambda x: dictt[x])
+
+print('The key with the maximum value is: ', key)
+
+Output:
+The key with the maximum value is:  4
+
+We can also re-write this as a list comprehension:
+Code
+
+# Python program to find the key with maximum value from a list of dictionaries using list comprehension
+
+# Creating a list of dictionaries
+listt = [{'1': 30, '2': 29}, {'3': 31, '4': 43,}, {'5': 32, '6': 38}]
+
+# Using list comprehension
+max_val = max([[max(dictt.values()), max(dictt, key = lambda x: dictt[x])] for dictt in listt])
+
+print('The key with the maximum value is: ', max_val[1])
+
+Output:
+The key with the maximum value is:  4
+
+Finding the Key of Max Value in a Nested Dictionary
+To do this specific task, we can use the for loop idea to go through each key of the dictionary and get the nested key having the maximum value from the given nested dictionary.
+The outer for-loop will loop over the keys of the primary dictionary, and the inner loop will loop over all the keys of the nested dictionaries to get the key with the maximum value. Lastly, we will give our output as the primary key and the nested key having the maximum value.
+Code
+
+# Python program to find the key with maximum value from a nested dictionary
+
+# Creating a nested dictionary
+dictt = {'1': {'a': 30, 'b': 29}, '2': {'c': 31, 'd': 43}, '3': {'e': 32, 'f': 38}}
+
+
+max_key = list()
+max_val = 0 
+
+for key, dictt in dictt.items(): 
+    for ele in dictt.items():
+        if ele[1] > max_val: 
+            max_val = ele[1]
+            max_key = [key, ele[0]]
+
+print('The keys of nested dictionary with maximum value are: ', max_key)
+
+Output:
+The keys of nested dictionary with maximum value are: ['2', 'd']
+
+
+
+Next TopicProject in Python - Breast Cancer Classification with Deep Learning
+
+
+
+
+← prev
+next →
+
+
+
+

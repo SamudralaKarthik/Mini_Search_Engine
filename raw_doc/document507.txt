@@ -1,0 +1,562 @@
+
+
+
+
+next →
+← prev
+
+How to Prettify Data Structures with Pretty Print in Python
+The Python pprint module can be useful in a variety of situations. It is useful in making API requests, working using JSON file formats, and handling complex and data that is nested. When we employ the print() function with the help of dictionaries or lists, the output does not have any newlines. It's likely that the typical print() function doesn't allow us to analyse our data and test our program effectively.
+Before we begin exploring the possibilities of pprint, we will need to use the urllib to send an inquiry to obtain some information. The first step is to create an HTTP request. It will make a request to the JSON Placeholder to get some fake details about the user. Request, and then put the results into a dictionary.
+Example:
+
+from urllib import request
+response = request.urlopen("https://jsonplaceholder.typicode.com/users")
+json_response = response.read()
+import json
+users = json.loads(json_response)
+
+This is where we will create an initial request using a GET request and then translate the result into a dictionary using json.loads(). The dictionary is now an array. The next step is printing the contents using print().
+Code:
+
+print(users) 
+
+Output:
+
+If our console's settings are set, it could appear as one huge line. Also, our console's output may have a word-wrapping setting activated, which is the most common scenario. Unfortunately, this does not make our output friendly!
+If we look at the first and the last characters, we will observe that it appears to be an inventory. It is possible to begin writing an endless loop in order to print the items.
+Code:
+
+for user in users:
+    print(user)
+
+Output:
+
+
+
+A for loop prints every object on a separate line. However, even every object will take up much more space than can be accommodated on one line. Printing this way may help make things more efficient; however, it's not the best solution. This example is a very basic data structure, but what happens with a deeply nested dictionary 100 times bigger?
+Sure, we can write a program using the recursion technique to figure out a way for printing everything. We could end up writing a whole suite of functions in order to understand the nature of the data! However, we will probably come across some cases that won't let us use this method.
+How to Work with pprint Module
+The pprint is a Python module that pleasingly prints the data structure. It's been around for a long time as included in the Python standard library; therefore, installing it as a separate program is not required. All we have to do is install its function pprint() function.
+Code:
+
+from pprint import pprint
+
+Instead of using the standard print(users) approach like it was in the case above, we could call our favourite new function to produce output that looks nice.
+Code:
+
+pprint(users)
+
+This function produces its users--but in a modernized and attractive manner.
+Output:
+{'address': {'city': 'North Christy',
+              'geo': {'lat': '-71.42297', 'lng': '71.743278'},
+              'street': 'Norberto ReCrossing',
+              'suite': 'Apttt. 952',
+              'zipcode': '23515-1437'},
+  'company': {'bs': 'e-unable innovative applications',
+              'catchPhrase': 'UnSynchronised bottom-line interface',
+              'name': 'ManLock-Lockman'},
+  'email': '[email protected]',
+  'id': 7,
+  'name': 'Mrs. Dennishh Schuulist',
+  'phone': '1-471-945-8578 x6530',
+  'username': 'Leopole_Corkery',
+  'website': 'ola.s.org'},
+ {'address': {'city': 'Howenmouth',
+              'geo': {'lat': '24.8318', 'lng': '21.8184'},
+              'street': 'Rexy Trail',
+              'suite': 'Suite 283',
+              'zipcode': '52804-1099'},
+  'company': {'bs': 'generating enterprise e-tailers',
+              'catchPhrase': 'Configurable multi-media task-force',
+              'name': 'Johnys Group'},
+  'email': '[email protected]',
+  'id': 7,
+  'name': 'Kurties Weissnat',
+  'phone': '210.077.6132',
+  'username': 'Elwvyn.Skiles',
+  'website': 'elvwis.io'},
+ {'address': {'city': 'Aliyawview',
+              'geo': {'lat': '-14.39190', 'lng': '-120.71677'},
+              'street': 'Ellswortth Summit',
+              'suite': 'Suite 7219',
+              'zipcode': '451619'},
+  'company': {'bs': 'e-enable extensible e-tailers',
+              'catchPhrase': 'Implemente secondary concept',
+              'name': 'Abernathty Group'},
+  'email': '[email protected]',
+  'id': 8,
+  'name': 'Nicholaas Runolfsdottir V',
+  'phone': '586.4933.69243 x140',
+  'username': 'Maximey_Nienow',
+  'website': 'jacynnthe.com'},
+.
+.
+.
+.
+.
+ {'address': {'city': 'Bartolomeu',
+              'geo': {'lat': '24.64613', 'lng': '-168.88489'},
+              'street': 'Dayina Park',
+              'suite': 'Suite 4249',
+              'zipcode': '76492-3109'},
+  'company': {'bs': 'aggregating real-time technologies',
+              'catchPhrase': 'Switchable contextually-based project',
+              'name': 'Yoste and Sons'},
+  'email': '[email protected]',
+  'id': 9,
+  'name': 'Glenna Reicchert',
+  'phone': '(775)976-6494 x41206',
+  'username': 'Dellphine',
+  'website': 'conradd.com'},
+ {'address': {'city': 'Lebbsackbury',
+              'geo': {'lat': '-38.211386', 'lng': '57.22132'},
+              'street': 'Kattiey Turnpike',
+              'suite': 'Suite 1928',
+              'zipcode': '31428-2161'},
+  'company': {'bs': 'target end-to-end models',
+              'catchPhrase': 'Centralize empowering task-force',
+              'name': 'Hoeger LLC'},
+  'email': '[email protected]',
+  'id': 10,
+  'name': 'Clementinna DuBuque',
+  'phone': '024-648-3804',
+  'username': 'Moriaah.Stanton',
+  'website': 'ambrose.net'}]
+
+Visually indented keys are available for dictionaries. This makes it much easier to scan data structures and visually analyse them.
+The users will love pprint()'s alias pp() if they like to type as little as possible.
+Code:
+
+from pprint import pp
+pp(user)
+
+Output:
+{'id': 10,
+ 'name': 'Clementina DuBuuque',
+ 'username': 'Moriah.Stanton',
+ 'email': '[email protected]',
+ 'address': {'street': 'Kattie Turnpike',
+             'suite': 'Suite 1928',
+             'city': 'Lebsackbbury',
+             'zipcode': '31428-21261',
+             'geo': {'lat': '-38.238256', 'lng': '57.25232'}},
+ 'phone': '024-648-3854',
+ 'website': 'ambrosee.net',
+ 'company': {'name': 'Hoeger LLC',
+             'catchPhrase': 'Centralize empowering task-force',
+             'bs': 'target end-to-end models'}}
+
+The pp() acts as a wrapper for pprint() as it behaves the same.
+Even the default output might be too large for us to read first. Perhaps all we want is to confirm that we are dealing with a list containing plain objects. We can tweak the output to do this.
+These situations can be handled by pprint() with a variety of parameters. This allows us to make even the most basic data structures look beautiful.
+How to Explore Optional Parameters of pprint()
+This section will explain all parameters that pprint() allows. We have seven options to configure our Pythonic pretty printer. They don't all have to be used, but some will prove more helpful than others. The depth will be the one we find most useful.
+How to Summarize Our Data: depth
+The depth is one of the most useful parameters. This Python command will print the user's full contents if the specified depth is reached. It will also keep things pretty. Three dots replace the contents of deeper data structures.
+Code:
+
+pprint(users, depth = 1) 
+
+Output:
+[{...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}]
+
+This will immediately show that it is indeed a list of dictionaries. We can expand the depth to explore the data structure more. This will print all of the top-level keys for the dictionaries in the user.
+Code:
+
+pprint(users, depth = 3) 
+
+Output:
+[{'address': {'city': 'McKenzieyhaven',
+              'geo': {...},
+              'street': 'Douglas Extension',
+              'suite': 'Suite 8417',
+              'zipcode': '59590-41157'},
+  'company': {'bs': 'e-enable strategic applications',
+              'catchPhrase': 'Face to face bifurcate interface',
+              'name': 'Romagueera-Jacobson'},
+  'email': '[email protected]',
+  'id': 3,
+  'name': 'Clementinee Bauch',
+  'phone': '1-463-123-41447',
+  'username': 'Samanttha',
+  'website': 'ramirro.info'},
+
+  ...
+
+ {'address': {'city': 'Bartholomebury',
+              'geo': {...},
+              'street': 'Daynna Park',
+              'suite': 'Suite 4409',
+              'zipcode': '764915-310109'},
+  'company': {'bs': 'aggregate real-time technologies',
+              'catchPhrase': 'Switchable contextually-based project',
+              'name': 'Yosts and Sons'},
+  'email': '[email protected]',
+  'id': 9,
+  'name': 'Gleenna Reicchert',
+  'phone': '(775)976-67194 x41206',
+  'username': 'Dellphine',
+  'website': 'conraad.com'},
+ {'address': {'city': 'Lebsackbbury',
+              'geo': {...},
+              'street': 'Kattie Turnpike',
+              'suite': 'Suite 1198',
+              'zipcode': '31438-2261'},
+  'company': {'bs': 'targets end-to-end models',
+              'catchPhrase': 'Centralizing empowering task-force',
+              'name': 'Hoegerr LLC'},
+  'email': '[email protected]',
+  'id': 10,
+  'name': 'Clementinna DuBuque',
+  'phone': '024-648-3804',
+  'username': 'Morianh.Stanton',
+  'website': 'ambrosse.net'}]
+
+We can now quickly verify whether all dictionaries have the same top-level keys. This is an important observation, especially if our task is to develop an application that uses data like this.
+How to Give Our Data Space: indent
+The indent parameter determines how indented each level will appear in the output. The default indent for 1 is one space character.
+Code:
+
+pprint(users[0], depth = 1)
+
+Output:
+{'address': {...},
+ 'company': {...},
+ 'email': '[email protected]',
+ 'id': 1,
+ 'name': 'Leaanne Graham',
+ 'phone': '1-770-336-8031 x56442',
+ 'username': 'Brett',
+ 'website': 'hildeggard.org'}
+
+Code:
+
+pprint(users[0], depth = 1, indent = 4)
+
+Output:
+{   'address': {...},
+    'company': {...},
+    'email': '[email protected]',
+    'id': 1,
+    'name': 'Leannee Graham',
+    'phone': '1-770-726-8031 x56442',
+    'username': 'Brett',
+    'website': 'hildeggard.org'}
+
+The most important aspect of pprint()'s indenting behaviour is to keep all keys aligned visually. The indent parameter, as well as the location of the key, will determine how much indentation is applied.
+The indent parameter is used to determine the amount of indentation. There's no nesting as a result. In both examples, we can note how the opening curly bracket in the beginning ({) counts as a unit of indentation for a first key. In the first example, the single opening quote for the first key comes right after { without any spaces between because the indent has been set to 1.
+Nesting is when the indentation applies to the first element in line and pprint() then aligns all subsequent elements with the first. If we set our 4 for users, then the first element will have four characters indentation and the nested elements by eight characters. This is because the indentation begins at the end of the first key.
+Code:
+
+pprint(users[0], depth = 2, indent = 4)
+
+Output:
+{   'address': {   'city': 'Gwenborough',
+                   'geo': {...},
+                   'street': 'Kulass Light',
+                   'suite': 'Apt. 5516',
+                   'zipcode': '92998-3574'},
+    'company': {   'bs': 'harn real-time e-markets',
+                   'catchPhrase': 'Multi-layer client-server neural-net',
+                   'name': 'Romaguera-Crona'},
+    'email': '[email protected]',
+    'id': 1,
+    'name': 'Leanne Graham',
+    'phone': '1-770-736-8031 x56442',
+    'username': 'Bret',
+    'website': 'hildeggard.org'}
+
+How to Limit Our Line Lengths: width
+The pprint() defaults to only output eighty characters per line. This value can be customized by passing in a width argument. pprint() will try to fit the contents onto one line. If the data structure's contents exceed this limit, it will print all elements on a new line.
+
+pprint(users[0])
+
+Output:
+{'address': {'city': 'Gwenborough',
+             'geo': {'lat': '-37.31259', 'lng': '81.1496'},
+             'street': 'Kulaas Light',
+             'suite': 'Apt. 5156',
+             'zipcode': '92938-3874'},
+ 'company': {'bs': 'harn real-time e-markets',
+             'catchPhrase': 'Multi-layer client-server neural-net',
+             'name': 'Romaguera-Crona'},
+ 'email': '[email protected]',
+ 'id': 1,
+ 'name': 'Leanne Graham',
+ 'phone': '1-770-736-80312 x56442',
+ 'username': 'Brett',
+ 'website': 'hildeggard.org'}
+
+When we leave the width at the default of eighty characters, the dictionary at users[0]['address']['geo'] only contains a 'lat' and an 'lng' attribute. This means that the sum of the indent plus the number of characters required to print the dictionary, including any spaces between, is less than eighty characters, so pprint() makes it all one line.
+The user's [0]['company'] dictionary would be too large, so print() places each key on a separate line. This applies to dictionaries, sets, tuples, and lists.
+Code:
+
+pprint(users[0], width = 160)
+
+Output:
+{'address': {'city': 'Gwenborough', 'geo': {'lat': '-37.3159', 'lng': '81.1496'}, 'street': 'Kulas Light', 'suite': 'Apt. 556', 'zipcode': '92998-3874'},
+ 'company': {'bs': 'harness real-time e-markets', 'catchPhrase': 'Multi-layered client-server neural-net', 'name': 'Romaguera-Crona'},
+ 'email': '[email protected]',
+ 'id': 1,
+ 'name': 'Leanne Graham',
+ 'phone': '1-770-736-8031 x56442',
+ 'username': 'Bret',
+ 'website': 'hildegard.org'}
+
+We can fit all the nested dictionary entries on one line by setting the width value to 160. We can go even further and set the width to 500. This will print the entire dictionary in one line.
+Code:
+
+pprint(users[0], width = 500)
+
+Output:
+{'address': {'city': 'Gwenborough', 'geo': {'lat': '-37.3159', 'lng': '81.1496'}, 'street': 'Kulas Light', 'suite': 'Apt. 556', 'zipcode': '92998-3874'}, 'company': {'bs': 'harness real-time e-markets', 'catchPhrase': 'Multi-layered client-server neural-net', 'name': 'Romaguera-Crona'}, 'email': '[email protected]', 'id': 1, 'name': 'Leanne Graham', 'phone': '1-770-736-8031 x56442', 'username': 'Bret', 'website': 'hildegard.org'}
+
+This will show us the results of setting width at a large value. Alternately, we can set the width at a lower value like 1. This will ensure that every data structure displays its components on separate lines. The visual indentation will still be there to line up the components.
+Code:
+
+pprint(users[0], width = 5)
+
+Output:
+{'address': {'city': 'Gwenborough',
+             'geo': {'lat': '-37.3159',
+                     'lng': '81.1496'},
+             'street': 'Kulas '
+                       'Light',
+             'suite': 'Apt. '
+                      '556',
+             'zipcode': '92998-3874'},
+ 'company': {'bs': 'harness '
+                   'real-time '
+                   'e-markets',
+             'catchPhrase': 'Multi-layered '
+                            'client-server '
+                            'neural-net',
+             'name': 'Romaguera-Crona'},
+ 'email': '[email protected]',
+ 'id': 1,
+ 'name': 'Leanne '
+         'Graham',
+ 'phone': '1-770-736-8031 '
+          'x56442',
+ 'username': 'Bret',
+ 'website': 'hildegard.org'}
+
+It is difficult to get Python's pprint() function to print ugly. It will do all it can to look pretty!
+This example shows us how the printer breaks up long lines of text. Note how users[0]["company"]["catchPhrase"], which was initially 'Multi-layered client-server neural-net, has been split on each space. Because it would be difficult to read, the printer does not divide this string entirely.
+How to Squeeze Our Long Sequences: compact
+It is possible to think that compress refers only to the behaviour described in the section about Width. Compact determines whether data structures are displayed on one or two lines. Compact affects only the output if a line is longer than.
+If compact is True, the output will wrap onto the next line. If the data structure is larger than the Width, the default behaviour is that each element appears on its line.
+Code:
+
+pprint(users, depth = 1)
+
+Output:
+[{...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}, {...}]
+
+Code:
+
+pprint(users, depth = 1, width = 40) 
+
+Output:
+[{...},
+ {...},
+ {...},
+ {...},
+ {...},
+ {...},
+ {...},
+ {...},
+ {...},
+ {...}]
+
+Code:
+
+pprint(users, depth = 1, width = 20, compact = True) 
+
+Output:
+[{...}, {...},
+ {...}, {...},
+ {...}, {...},
+ {...}, {...},
+ {...}, {...}]
+
+Pretty-printing this list using default settings prints the abbreviated version of the list on one line. By restricting the width to the size of 20 characters. This will force the pprint() to output each of the list elements in separate lines. If we select the value to true for compact, the list will be wrapped at 20 characters and much smaller than it is normally formatted.
+A compact is a great option for long sequences that contain short elements that otherwise would consume a lot of lines and render the output less clear.
+How to Direct Our Output: stream
+The stream parameter refers to the output from the pprint() function. In default, it is sent to the exact location the print() goes to. In particular, it is sys.stdout, which is an actual file object in Python. However, we can forward this information to any other file object the same way we could with the print() function:
+
+with open("output.txt", mode="w") as file_object:
+    pprint(users, stream=file_object)
+
+In this case, we create a file object by calling open(), and then we assign the stream parameter of the pprint() to that object in the file. When we browse output.txt, we will see that it's been printed.
+Python does come with its log-logging module. We can, however, make use of the pprint() to send gorgeous outputs to files and then use them as logs if we want.
+How to Prevent Dictionary Sorting: sort_dicts
+While dictionaries are typically classified as data structures that are not ordinarily ordered, as of Python 3.6, dictionaries are ordered using insert.
+The pprint() orders the keys alphabetically to print.
+Code:
+
+pprint(users[0], depth = 1)
+
+Output:
+{'address': {...},
+ 'company': {...},
+ 'email': '[email protected]',
+ 'id': 1,
+ 'name': 'Leanne Graham',
+ 'phone': '1-770-736-8031 x56442',
+ 'username': 'Bret',
+ 'website': 'hildegard.org'}
+
+Code:
+
+pprint(users[0], depth = 1, sort_dicts = False)
+
+Output:
+{'id': 1,
+ 'name': 'Leanne Graham',
+ 'username': 'Bret',
+ 'email': '[email protected]',
+ 'address': {...},
+ 'phone': '1-770-736-8031 x56442',
+ 'website': 'hildegard.org',
+ 'company': {...}}
+
+If we don't have set the sort_dicts option is False, the Python's pprint() sorts the keys alphabetically. It makes the output for the dictionaries in a consistent and readable manner and beautiful!
+When the pprint() was first introduced, dictionaries were ordered. Without the alphabetical ordering of keys, keys in a dictionary could have been different for every print.
+How to Make Our Numbers More Discernible: underscore_numbers
+Its underscore_numbers parameter is a new feature implemented by Python 3.10 that helps make long numbers more understandable. If the example that we have used so far does not contain the long number, then we will require an entirely new scenario to test this feature out.
+Example:
+
+number_list = [12345678321, 10000011000000]
+pprint(number_list, underscore_numbers = True) 
+
+Output:
+[123_456_789_321, 10_000_011_000_000]
+
+In the event that underscore_numbers isn't working when the user use the pprint() directly, and they are looking for beautiful numbers, here's an alternative: If they make their PrettyPrinter object, the parameter will work as it did in the above example.
+How to Create a Custom PrettyPrinter Object
+It is possible to create a new instance of PrettyPrinter with defaults that we have set. Once we have got this instance of our customized PrettyPrinter object, we are able to utilize this by using the .pprint() method on the PrettyPrinter instance.
+Code:
+
+from pprint import PrettyPrinter
+custom_printer = PrettyPrinter(
+     indent=4,
+     width=100,
+     depth=2,
+     compact=True,
+     sort_dicts=False,
+     underscore_numbers=True
+ )
+
+custom_printer.pprint(users[0])
+
+Output:
+{   'id': 1,
+    'name': 'Leanne Graham',
+    'username': 'Bret',
+    'email': '[email protected]',
+    'address': {   'street': 'Kulas Light',
+                   'suite': 'Apt. 556',
+                   'city': 'Gwenborough',
+                   'zipcode': '92998-3874',
+                   'geo': {...}},
+    'phone': '1-770-736-8031 x56442',
+    'website': 'hildegard.org',
+    'company': {   'name': 'Romaguera-Crona',
+                   'catchPhrase': 'Multi-layered client-server neural-net',
+                   'bs': 'harness real-time e-markets'}}
+
+Code:
+
+number_list = [123456789321, 10000011000000]
+custom_printer.pprint(number_list)
+
+Output:
+[123_456_789_321, 10_000_011_000_000]
+
+By following these instructions, We can:
+
+Import PrettyPrinter, this is an example of a class definition
+Create a fresh instance of the class using certain parameters
+print as the initial user users
+Define as a set of two long numbers
+Printe number_list, which also demonstrates underscore_numbers in action.
+
+The user must be aware that the arguments given the PrettyPrinter are identical to those used in the standard print() arguments, except that they did not pass one parameter. In the pprint(), this is the object they wish to print.
+This way, we will be able to have a variety of printer presets, perhaps one that is going to different streams, and use them whenever we require them.
+How to Get a Pretty String With pformat()
+What if we do not want to transfer the gorgeous output of the pprint() to a stream? Perhaps we would like to do some regex match-ups and then replace specific keys. For simple dictionaries, it is possible to want to get rid of those brackets or quotes in order to make them appear more human-friendly.
+Whatever we would like to do with the output of the string, we can access the desired string using the format pformat().
+Code:
+
+from pprint import pformat
+address = pformat(users[0]["address"])
+chars_to_remove = ["{", "}", "'"]
+for char in chars_to_remove:
+    address = address.replace(char, "")
+
+print(address)
+
+Output:
+city: Gwenborough,
+ geo: lat: -37.3159, lng: 81.1496,
+ street: Kulas Light,
+ suite: Apt. 556,
+ zipcode: 92998-3874
+
+The pformat() is a tool we can utilize to connect the attractive printing machine and output streams.
+Another possible use for this is if we are developing an API and we want to provide a nice text representation for JSON. JSON string. Our users will likely be happy!
+How to Handle Recursive Data Structures
+The Python function pprint() is recursive, which means it'll print all details of the dictionary, including the contents of the child dictionary, and the list goes on.
+Think about how it works when a recursive program encounters a recursive information structure. Imagine we have a dictionary A and dictionary B:
+
+A contains one characteristic, .link, which identifies the B.
+B contains one property, .link, that points towards the A.
+
+If our recursive code isn't able to deal with this reference in a circular fashion and it's never finished printing! It's going to create the letter A followed by its child B. However, B also is the A as a child, so it would continue to be infinite.
+Luckily, both the regular print() function and the pprint() function handle this with ease.
+Code:
+
+P = {}
+Q = {"link": P}
+P["link"] = Q
+print(P)
+
+Output:
+{'link': {'link': {...}}}
+
+Code:
+
+from pprint import pprint
+pprint(P)
+
+Output:
+{'link': {'link': }}
+
+While Python's standard print() abbreviates the output, pprint() explicitly alerts us to repetition and adds to the dictionary's ID.
+Conclusion
+We have learned about the principal use of the pprint module in Python and a few ways to utilize the pprint() module and PrettyPrinter. W will discover that the pprint() is especially useful when creating something that requires complex data structures. Perhaps we are creating applications that use an inexperienced API. Maybe we have an enormous data warehouse containing deep-nested JSON files. All of these are situations in which pprint is a great tool.
+Through this course, we have learned to:
+
+Import pprint to be used in our applications.
+Make use of the print function pprint() in place of print().
+Know all options we will need to tailor our printed output.
+Make sure we save the output formatted as a text string before printing it.
+Create a customized instance of PrettyPrinter.
+Recognize the recursive structure of data and understand how Pprint() handles them.
+
+
+
+Next TopicEncrypt a Password in Python Using bcrypt
+
+
+
+
+← prev
+next →
+
+
+
+

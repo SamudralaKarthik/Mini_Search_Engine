@@ -1,0 +1,128 @@
+
+
+
+
+next →
+← prev
+
+AssertionError in Python
+After evaluating the software, we may set an assertion on or off as a testing strategy.
+Comparing an assertion to a raise-if clause is the simplest way to understand it (or, more precisely, a raise-if-not clause). When a phrase is tested, an exception is triggered if the result is negative. The assert clause, the latest term added to Python in version 1.5, executes assertions.
+Programmers frequently use assertions to verify if the given input is valid at the beginning of a function and to check if the output is valid at the end of a method call.
+The assert Statement in Python
+Python analyses the preceding statement when it comes across an assert clause, presumably correct. Python raises an AssertionError exception if the statement is incorrect.
+The syntax for the assert statement is −
+assert Expression[, Arguments]
+Python utilizes ArgumentExpression as the parameter for the AssertionError if the result of the assertion is false. We may use the try-except clause to catch and resolve AssertionError errors similar to any other exception, however, if they are not handled, the program will crash, and the Python will generate a traceback to the error.
+Assertion Error
+When developing code, the assert clause is a programming construct that allows the user to specify a precondition to be confirmed before starting the module. The control advances to the following line of code if the criterion is met. If the answer is False, the application terminates and throws an AssertionErrorException.
+The assert phrase serves the same purpose regardless of the coding language in which it has been written; only the syntax differs depending on the computer language. 
+Examples to Use Assert Statement
+Assertion error with an error message
+Here is a method that changes a temperature from Kelvin to Fahrenheit. The program terminates if it detects a negative temperature because 0 degrees Kelvin is the coldest possible value.
+Code
+
+# Python program to see how to use an assert statement
+
+# Ceating a function 
+def KelvinToFahrenheit(Temp):
+    assert (Temp >= 0), "Given temperature is colder than absolute zero"
+    return ((Temp - 273) * 1.8) + 32
+
+print(KelvinToFahrenheit(270))
+print(int(KelvinToFahrenheit(510.78)))
+print(KelvinToFahrenheit(-10))
+
+Output:
+AssertionError                            Traceback (most recent call last)
+Cell In [2], line 10
+      8 print(KelvinToFahrenheit(270))
+      9 print(int(KelvinToFahrenheit(510.78)))
+---> 10 print(KelvinToFahrenheit(-10))
+
+Cell In [2], line 5, in KelvinToFahrenheit(Temp)
+      4 def KelvinToFahrenheit(Temp):
+----> 5     assert (Temp >= 0), "Given temperature is colder than absolute zero"
+      6     return ((Temp - 273) * 1.8) + 32
+
+AssertionError: Given temperature is colder than absolute zero
+
+Python's built-in default exception handlers will either just handle the issue without printing the programmer-written error message or both.
+Both approaches are legitimate.
+Handling AssertionError Exception in Python
+Since AssertionError is an inheritance class of the Exception class, there are two potential ways to handle this error. First, the user handles the error manually, or second, the default exception handler handles the error.
+We are now familiar with how Python's default exception handler functions in Example 1.
+Let's now go into manually managing it.
+Code
+
+# Python program to handle the Assertion Error manually
+
+# Using the try clause
+try:
+    x = 10
+    y = 0
+    assert y != 0, "Dividing by Zero: Invalid input is given."
+    print(x // y)
+
+
+# Interpreter will print the error message given by the user
+except AssertionError as e:
+    print(e)
+
+Output:
+Dividing by Zero: Invalid input is given.
+
+Testing our Program
+Code
+
+# Python program to show how to use assertion error to test the program to find the roots of a quadratic equation
+
+# Importing the libraries
+import math
+
+# Creating a function
+def roots(a1, a2, a3):
+    try:
+        assert a1 != 0, "The coefficient of the quadratic term is zero. Hence given equation is not quadratic."
+        Disc = (a2 ** 2 - 4 * a1 * a3)
+        assert Disc >= 0, "Roots of the given equation are imaginary."
+        root1 = (-a2 + math.sqrt(Disc)) / (2 * a1)
+        root2 = (-a2 - math.sqrt(Disc)) / (2 * a2)
+        print("Roots of the given quadratic equation are:", root1, "", root2)
+    except AssertionError as e:
+        print(e)
+        
+# Calling the function
+roots(0, 3, 5)
+roots(-2, 4, -6)
+roots(2, 7, 6)
+roots(2, 23, 18)
+
+Output:
+The coefficient of the quadratic term is zero. Hence given equation is not quadratic.
+Roots of the given equation are imaginary.
+Roots of the given quadratic equation are: -1.5  -0.5714285714285714
+Roots of the given quadratic equation are: -0.8446457824128544  -0.9265525406597518
+
+This illustrates how this exception suspends program execution as soon as the assert condition is False.
+Other Use Cases
+Other beneficial uses include:
+
+Verifying if parameter values are provided correctly.
+Verifying the proper input type required.
+Spotting if another coder is abusing an interface.
+Verifying a function's output type.
+
+
+
+Next TopicFind Key with Maximum Value in Dictionary
+
+
+
+
+← prev
+next →
+
+
+
+

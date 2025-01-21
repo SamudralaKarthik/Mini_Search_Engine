@@ -1,0 +1,397 @@
+
+
+
+
+next →
+← prev
+
+Python Algorithms
+An algorithm goes further than computational thinking. It is a step-by-step process that specifies a list of commands to be carried out in a specific order to get the intended result. We can execute a single algorithm in many programming languages because algorithms are typically constructed irrespective of the supporting languages.
+What are Algorithms?
+Algorithms are finite sets of rules developed to be executed in the defined sequence to solve problems and produce the desired outcomes, a. They provide problem-solving pseudocode before writing the main code and are not written in support of any particular language, so we can use them with many different languages.
+How do you Write Algorithms?
+Typically, user-friendly language and a few popular coding languages are used to write algorithms. Although they are frequently documented in steps, it is not necessarily required to do so. There are no set guidelines for creating algorithms, but you should bear the following things in mind:
+
+Determine what the question is precisely.
+Choose where you should begin.
+Identify the necessary stopping point.
+Create the stepping stones in between.
+Examine your actions.
+
+Binary Search
+In short, this search method utilizes a set of components that have already been sorted by dismissing half after only one comparison.
+
+X and the middle element are compared.
+We return the middle element's index if x matches the middle element.
+Otherwise, if x does not match with the middle element and it is bigger than the middle element, it can only be located in the right half (where elements are greater) subarray. The method is then used once more for the right side.
+The x must be located in the left half (where elements are smaller) if x is smaller. The method is then used for the left side.
+
+Code
+
+# Python program for the execution of binary search algorithm
+# The function will return the index of the element if it is present,
+# otherwise, it will return -1
+
+# Defining the function
+def binary_search(array, x):
+    lower = 0
+    higher = len(array) - 1
+    middle = 0
+
+    while lower <= higher:
+
+        middle = (higher + lower) // 2
+
+        # If x is greater than the middle element, ignoring the left half
+        if array[middle] < x:
+            lower = middle + 1
+
+        # If x is smaller than the middle element, ignoring the right half
+        elif array[middle] > x:
+            higher = middle - 1
+
+        # This means x is present in the middle
+        else:
+            return middle
+
+    # If the loop ends without returning, then the element is not present in the list
+    return -1
+
+
+# Implementing the code
+array = [5, 8, 16, 37, 59, 80]
+
+# Case - 1:- Element is present in the list
+x = 59
+
+# Calling the function
+index = binary_search(array, x)
+
+if index != -1:
+    print(f"The given element {x} is present at the index", str(index))
+else:
+    print(f"The given element {x} is not present in the array")
+    
+# Case - 2:- Element is not present in the array
+x = 35
+
+# Calling the function
+index = binary_search(array, x)
+
+if index != -1:
+    print(f"The given element {x} is present at the index", str(index))
+else:
+    print(f"The given element {x} is not present in the array")
+
+Output:
+The given element 59 is present at the index 4
+The given element 35 is not present in the array
+
+Linear Search
+A straightforward method is to perform a linear search, that is, to compare every member of the array[] one at a time to x.
+Return the position if x matches any element of the array.
+Returning -1 if x does not match any one of the array's elements.
+Code
+
+# Python program for the execution of linear search algorithm
+# The function will loop over every element and return the index if it matches.
+# otherwise, it will return -1
+
+# Defining the function
+def linear_search(array, x):
+    
+    # looping over every element
+    for i in range(len(array)):
+        # Comparing the element
+        if array[i] == x:
+            return i
+    # If not found, any index returning -1
+    return -1
+
+
+
+# Implementing the code
+array = [5, 8, 16, 37, 59, 80]
+
+# Case - 1:- Element is present in the list
+x = 59
+
+# Calling the function
+index = linear_search(array, x)
+
+if index != -1:
+    print(f"The given element {x} is present at the index", str(index))
+else:
+    print(f"The given element {x} is not present in the array")
+    
+# Case - 2:- Element is not present in the array
+x = 35
+
+# Calling the function
+index = linear_search(array, x)
+
+if index != -1:
+    print(f"The given element {x} is present at the index", str(index))
+else:
+    print(f"The given element {x} is not present in the array")
+
+Output:
+The given element 59 is present at the index 4
+The given element 35 is not present in the array
+
+Insertion Sort
+A straightforward sorting algorithm called insertion sort operates similarly to how we arrange playing cards.
+Code
+
+# Python program for the execution of insertion sort algorithm
+
+# Defining the function
+def insertion_sort(array):
+
+    # Traversing through 1 to the length of the array
+    for i in range(1, len(array)):
+
+        key = array[i]
+
+        # Moving elements of array[0..i-1], that are
+        # bigger than the key, to one index ahead
+        # of their current index
+        c = i-1
+        while c >= 0 and key < array[c] :
+               
+array[c + 1] = array[c]
+                c -= 1
+        array[c + 1] = key
+
+
+# Implementing the code
+#sorting the array using insertion_sort
+array = [23, 42, 3, 83, 36, 49, 19]
+
+# Calling the function
+insertion_sort(array)
+
+# Creating an empty list to store the sorted elements
+l = []
+print("The sorted array is: ")
+for i in range(len(array)):
+    # Adding the elements in sorted order
+   
+l.append(array[i])    
+print(l)
+
+Output:
+The sorted array is:
+[3, 19, 23, 36, 42, 49, 83]
+
+Selection Sort
+The selection sort technique sorts any given array by repeatedly picking the element with the lowest value out of the unsorted segment and placing it at the beginning (while making an ascending order). The lowest element from the unsorted subarray is always selected and moved to the arranged subarray during a selection sort (while making an ascending order).
+Code 
+
+# Python code to show how to implement the selection sort
+
+# Defining the function
+def selection_sort(array):
+    # Looping through every element of the array
+    for i in range(len(array)):
+
+        # Searching the minimum element in the remaining subarray
+        min_ind = i
+        for j in range(i + 1, len(array)):
+            if array[min_ind] > array[j]:
+                min_ind = j
+
+        # Swaping the minimum element and the first element   
+        array[i], array[min_ind] = array[min_ind], array[i]
+
+# Implementing the above code
+array = [23, 42, 3, 83, 36, 49, 19]
+
+# Calling the function
+selection_sort(array)
+
+print("The sorted array is: ")
+print(array)
+
+Output:
+The sorted array is:
+[3, 19, 23, 36, 42, 49, 83]
+
+Bubble Sort
+If the items are in the wrong order, the simplest sorting method, Bubble Sort, repeatedly swaps nearby components.
+Code
+
+# Python code to implement the bubble sort
+
+# Defining the function 
+def bubble_sort(array):
+    length = len(array)
+  
+    # Looping through every element of the given array
+    for i in range(length):
+  
+        # Last i elements of the array are sorted first
+        for k in range(0, length - i - 1):
+  
+            # looping through the array from 0 to length-i-1
+            # Swapping the elements which are in unsorted order
+            if array[k] > array[k + 1] :
+                array[k], array[k + 1] = array[k + 1], array[k]
+
+# Implementing the above code
+array = [23, 42, 3, 83, 36, 49, 19]
+
+# Calling the function
+bubble_sort(array)
+  
+print("The sorted array is: ")
+print(array)
+
+Output:
+The sorted array is:
+[3, 19, 23, 36, 42, 49, 83]
+
+Merge Sort
+A Divide-and-Conquer technique is Merge Sort. The original array is split in half, recursive calls are made for each half, and the two ordered halves are combined. To combine two portions, we will use the for a loop.
+Code
+
+# Python code for implementing the Merge Sort
+
+# Defining the function
+def mergeSort(array):
+    if len(array) > 1:
+  
+        # Determining the middle of the array
+        middle = len(array)//2
+  
+        # Dividing the elements into two halves
+        left = array[:middle]
+        right = array[middle:]
+  
+        # Sorting the given array's first half
+       
+mergeSort(left)
+  
+        # Sorting the given array's second half
+       
+mergeSort(right)
+  
+        a = b = c = 0
+  
+        # Coping the elements to the temporary arrays left and right
+        while a < len(left) and b < len(right):
+            if left[a] < right[b]:
+               
+array[c] = left[a]
+                a += 1
+            else:
+               
+array[c] = right[b]
+                b += 1
+            c += 1
+  
+        # Checking if any element is remaining
+        while a < len(left):
+            array[c] = left[a]
+            a += 1
+            c += 1
+  
+        while b < len(right):
+            array[c] = right[b]
+            b += 1
+            c += 1
+
+# Implementing the code
+
+array = [23, 42, 3, 83, 36, 49, 19]
+print("The given array is", end = "\n")
+print(array)
+
+# Calling the sorting function
+mergeSort(array)
+print("The sorted array is: ", end = "\n")
+print(array)
+
+Output:
+The given array is
+[23, 42, 3, 83, 36, 49, 19]
+The sorted array is:
+[3, 19, 23, 36, 42, 49, 83]
+
+Quick Sort
+Quick Sort is a Divide-and-conquer algorithm, just like Merge Sort. It chooses an element to act as the hinge and divides the supplied array from the chosen hinge. There are numerous variations of quickSort that select hinges in various ways.
+Code
+
+# Python code for the implementation of Quick Sort
+  
+# Defining the function to give the partition of the array
+# It takes the start and end points of the array
+def partition_function(s, e, array):
+      
+    # To start, initializing the pivot's index
+    p_index = s
+    p = array[p_index]
+      
+    # This loop executes till the start is less than the ending pointer
+    # Once completed, it will swap the elements of the pivot index and the end pointer
+    while s < e:
+          
+        # Incrementing the start pointer until it finds an element greater than the pivot
+        while s < len(array) and array[s] <= p:
+            s += 1
+              
+        # Decrementing the end pointer until it finds an element lesser than the pivot
+        while array[e] > p:
+            e -= 1
+          
+        # If starting and ending pointers have not overpassed each other,
+        # swapping the elements on the start and end pointer
+        if(s < e):
+            array[s], array[e] = array[e], array[s]
+      
+    # Swapping the pivot element with the element on the end pointer.
+    # This will put the pivot in its correct place.
+    array[e], array[p_index] = array[p_index], array[e]
+      
+    # Returning the end pointer to divide the given array into 2
+    return e
+      
+# Defining the function to implement Quick Sort
+def quick_sort(s, e, array):
+      
+    if (s < e):
+          
+        # part is the partitioning index
+        # array[part] is in the right position
+        part = partition_function(s, e, array)
+          
+        # Sorting the elements before the partition
+        # and after the partition
+        quick_sort(s, part - 1, array)
+       
+quick_sort(part + 1, e, array)
+          
+# Implementing the code
+array = [23, 42, 3, 83, 36, 49, 19]
+
+# Calling the function
+quick_sort(0, len(array)-1, array)
+  
+print(f'The sorted array is: {array}')
+
+Output:
+The sorted array is: [3, 19, 23, 36, 42, 49, 83]
+
+
+
+Next TopicPython descriptors
+
+
+
+
+← prev
+next →
+
+
+
+

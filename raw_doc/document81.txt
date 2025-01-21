@@ -1,0 +1,144 @@
+
+
+
+
+next →
+← prev
+
+Join Operation
+We can combine the columns from two or more tables by using some common column among them by using the join statement. 
+We have only one table in our database, let's create one more table Departments with two columns department_id and department_name.
+
+create table Departments (Dept_id int(20) primary key not null, Dept_Name varchar(20) not null);
+
+
+As we have created a new table Departments as shown in the above image. However, we haven't yet inserted any value inside it. 
+Let's insert some Departments ids and departments names so that we can map this to our Employee table.
+
+insert into Departments values (201, "CS");
+insert into Departments values (202, "IT");
+
+Let's look at the values inserted in each of the tables. Consider the following image.
+
+Now, let's create a python script that joins the two tables on the common column, i.e., dept_id. 
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #joining the two tables on departments_id
+    cur.execute("select Employee.id, Employee.name, Employee.salary, Departments.Dept_id, Departments.Dept_Name from Departments join Employee on Departments.Dept_id = Employee.Dept_id")
+    print("ID    Name    Salary    Dept_Id    Dept_Name")
+    for row in cur:
+        print("%d    %s    %d    %d    %s"%(row[0], row[1],row[2],row[3],row[4]))
+        
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+ID    Name    Salary    Dept_Id    Dept_Name
+101   John    25000    	201    		CS
+102   John    25000    	201    		CS
+103   David   25000       202    		IT
+104   Nick    90000   	201    		CS
+105   Mike    28000   	202   		IT
+
+
+Right Join
+Right join shows all the columns of the right-hand side table as we have two tables in the database PythonDB, i.e., Departments and Employee. We do not have any Employee in the table who is not working for any department (Employee for which department id is null). However, to understand the concept of right join let's create the one. 
+Execute the following query on the MySQL server.
+
+insert into Employee(name, id, salary, branch_name) values ("Alex",108,29900,"Mumbai"); 
+
+This will insert an employee Alex who doesn't work for any department (department id is null). 
+Now, we have an employee in the Employee table whose department id is not present in the Departments table. Let's perform the right join on the two tables now.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #joining the two tables on departments_id
+    result = cur.execute("select Employee.id, Employee.name, Employee.salary, Departments.Dept_id, Departments.Dept_Name from Departments right join Employee on Departments.Dept_id = Employee.Dept_id")
+    
+	print("ID    Name    Salary    Dept_Id    Dept_Name")
+    
+	for row in cur:
+        print(row[0],"    ", row[1],"    ",row[2],"    ",row[3],"    ",row[4])
+    
+    
+        
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+ID    Name    Salary    Dept_Id    Dept_Name
+101      John      25000.0      201      CS
+102      John      25000.0      201      CS
+103      David      25000.0      202      IT
+104      Nick      90000.0      201      CS
+105      Mike      28000.0      202      IT
+108      Alex      29900.0      None      None
+
+
+Left Join
+The left join covers all the data from the left-hand side table. It has just opposite effect to the right join. Consider the following example.
+Example
+
+import mysql.connector
+
+#Create the connection object 
+myconn = mysql.connector.connect(host = "localhost", user = "root",passwd = "google",database = "PythonDB")
+
+#creating the cursor object
+cur = myconn.cursor()
+
+try:
+    #joining the two tables on departments_id
+    result = cur.execute("select Employee.id, Employee.name, Employee.salary, Departments.Dept_id, Departments.Dept_Name from Departments left join Employee on Departments.Dept_id = Employee.Dept_id")
+    print("ID    Name    Salary    Dept_Id    Dept_Name")
+    for row in cur:
+        print(row[0],"    ", row[1],"    ",row[2],"    ",row[3],"    ",row[4])
+    
+    
+        
+except:
+    myconn.rollback()
+
+myconn.close()
+
+Output:
+ID    Name    Salary    Dept_Id    Dept_Name
+101      John      25000.0      201      CS
+102      John      25000.0      201      CS
+103      David      25000.0      202      IT
+104      Nick      90000.0      201      CS
+105      Mike      28000.0      202      IT
+
+
+Next TopicPerforming Transactions
+
+
+
+
+← prev
+next →
+
+
+
+

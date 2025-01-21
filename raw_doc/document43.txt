@@ -1,0 +1,183 @@
+
+
+
+
+next →
+← prev
+
+Python OS Module
+Python OS module provides the facility to establish the interaction between the user and the operating system. It offers many useful OS functions that are used to perform OS-based tasks and get related information about operating system.
+The OS comes under Python's standard utility modules. This module offers a portable way of using operating system dependent functionality.
+The Python OS module lets us work with the files and directories.
+
+To work with the OS module, we need to import the OS module.
+import os
+
+There are some functions in the OS module which are given below:
+os.name()
+This function provides the name of the operating system module that it imports.
+Currently, it registers 'posix', 'nt', 'os2', 'ce', 'java' and 'riscos'.
+Example
+
+import os 
+print(os.name) 
+
+Output:
+nt
+
+os.mkdir()
+The os.mkdir() function is used to create new directory. Consider the following example.
+
+import os
+os.mkdir("d:\\newdir")
+
+It will create the new directory to the path in the string argument of the function in the D drive named folder newdir.
+os.getcwd()
+It returns the current working directory(CWD) of the file.
+Example
+
+import os   
+print(os.getcwd())   
+
+Output:
+C:\Users\Python\Desktop\ModuleOS
+
+os.chdir()
+The os module provides the chdir() function to change the current working directory.
+
+import os
+os.chdir("d:\\")
+
+Output:
+d:\\
+
+os.rmdir()
+The rmdir() function removes the specified directory with an absolute or related path. First, we have to change the current working directory and remove the folder.
+Example
+
+import os
+# It will throw a Permission error; that's why we have to change the current working directory.
+os.rmdir("d:\\newdir")
+os.chdir("..")
+os.rmdir("newdir")
+
+os.error()
+The os.error() function defines the OS level errors. It raises OSError in case of invalid or inaccessible file names and path etc.
+Example
+
+import os
+
+try:
+    # If file does not exist,
+    # then it throw an IOError
+    filename = 'Python.txt'
+    f = open(filename, 'rU')
+    text = f.read()
+    f.close()
+
+# The Control jumps directly to here if
+# any lines throws IOError.
+except IOError:
+
+    # print(os.error) will <class 'OSError'>
+    print('Problem reading: ' + filename)   
+
+Output:
+Problem reading: Python.txt
+
+os.popen()
+This function opens a file or from the command specified, and it returns a file object which is connected to a pipe.
+Example
+
+import os   
+fd = "python.txt"    
+  
+# popen() is similar to open()   
+file = open(fd, 'w')   
+file.write("This is awesome")   
+file.close()   
+file = open(fd, 'r')   
+text = file.read()   
+print(text)   
+    
+# popen() provides gateway and accesses the file directly   
+file = os.popen(fd, 'w')   
+file.write("This is awesome")   
+# File not closed, shown in next function.    
+
+Output:
+This is awesome
+
+os.close()
+This function closes the associated file with descriptor fr.
+Example
+
+import os   
+fr = "Python1.txt"  
+file = open(fr, 'r')   
+text = file.read()   
+print(text)   
+os.close(file)     
+
+Output:
+Traceback (most recent call last):
+  File "main.py", line 3, in 
+    file = open(fr, 'r')
+FileNotFoundError: [Errno 2] No such file or directory: 'Python1.txt'
+
+os.rename()
+A file or directory can be renamed by using the function os.rename(). A user can rename the file if it has privilege to change the file.
+Example
+
+import os   
+fd = "python.txt"  
+os.rename(fd,'Python1.txt')   
+os.rename(fd,'Python1.txt')   
+
+Output:
+Traceback (most recent call last):
+  File "main.py", line 3, in 
+    os.rename(fd,'Python1.txt')
+FileNotFoundError: [Errno 2] No such file or directory: 'python.txt' -> 'Python1.txt'
+
+os.access()
+This function uses real uid/gid to test if the invoking user has access to the path.
+Example
+
+import os   
+import sys  
+  
+path1 = os.access("Python.txt", os.F_OK)   
+print("Exist path:", path1)   
+    
+# Checking access with os.R_OK   
+path2 = os.access("Python.txt", os.R_OK)   
+print("It access to read the file:", path2)   
+    
+# Checking access with os.W_OK   
+path3 = os.access("Python.txt", os.W_OK)   
+print("It access to write the file:", path3)   
+    
+# Checking access with os.X_OK   
+path4 = os.access("Python.txt", os.X_OK)   
+print("Check if path can be executed:", path4)  
+
+Output:
+Exist path: False
+It access to read the file: False
+It access to write the file: False
+Check if path can be executed: False
+
+
+
+Next TopicPython Random module
+
+
+
+
+← prev
+next →
+
+
+
+

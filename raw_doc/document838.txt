@@ -1,0 +1,275 @@
+
+
+
+
+next →
+← prev
+
+Simple Registration form using PyQt5 in Python
+In this tutorial, we'll look at how to utilise PyQt5 to develop a user form. A user form is essentially a dialogue box that gives the user additional control and ease of use while entering user data. It is occasionally necessary to create user forms while developing a big user interface application in order to gather crucial data.
+The Python programming language and the Qt library were combined to create the toolkit known as PyQt. As one of the most popular GUI Frameworks for Python, PyQt has a strong community and a tonne of excellent documentation. The fundamental components of user interfaces and GUI components are widgets. A label, button, menu, combo box, scroller, toolbar, file dialogue, etc. are examples of widgets.
+The PyQt framework must first be installed using the pip package manager before it can be used. To install the most recent version of PyQt, run the command below if pip is already installed on your computer :
+
+$pip install pyqt5
+
+This particular form will mainly have 3 fields :
+
+Name
+Degree
+Age
+
+All these fields will have separate labels and text fields grouped together as a whole in the form. The degree component will also have a dropdown section in order to chose the degree that the user wants to pursue.
+Steps for implementation :
+
+Make a window class that is descended from QDialog.
+Create the window's title and geometry.
+Make an object called a QGroupBox.
+Create a combo box to choose the degree, a spin box to obtain the age, and a line edit to retrieve the name.
+Create a method called creatingForm that will generate a form.
+In the form's create method, make a form layout and include rows.
+Each row should include a label and the input method, such as a name label and a line edit for input. Labels for age and degree should also have combo boxes and spin boxes for input.
+Construct a QDialogButtonBox with ok and cancel buttons.
+Make the acceptance and rejection buttons active.
+If the OK button is pushed, the entire page will print; if the cancel button is pressed, the window will close.
+
+Walking through the code :
+
+# import the required libraries
+from PyQt5.QtWidgets import *
+import sys
+
+Firstly, we will import all the modules that are required by our program in the starting only, from the standard Python library. These modules include QtWidgets and sys.
+
+# create a new class
+# that will inherit the class QDialog
+class Window(QDialog):
+
+	# defining the constructor
+	def __init__(self):
+		super(Window, self).__init__()
+
+		# set the title of the window
+		self.setWindowTitle("Python")
+
+		# set the geometry for the window
+		self.setGeometry(100, 100, 300, 400)
+
+Then, we will create a new window called window with an inherited class and will initialize by defining the constructor. Followed by setting the title of the window along with its geometry too.
+
+# create a new group box
+		self.formGrpBox = QGroupBox("Form 1")
+
+		# create a new spin box for selecting the age
+		self.spinAgeBar = QSpinBox()
+
+		# create a new combo box for selecting the degree
+		self.ComboBoxDeg = QComboBox()
+
+		# add the items into the combo box
+		self.ComboBoxDeg.addItems(["BTech", "MTech", "PhD"])
+
+Next, we will create a new group box which will be used to contain all the elements or the widgets all together in a group. Then, we will create a spin box for the selection of age by the user followed by creating a combo box to select the degree they want to pursue. And then, we will add the dropdown items to the combo box to display on getting clicked.
+
+	# create the line edit
+	self.lineEditName = QLineEdit()
+
+	# call the function which will be helping to create the form
+	self.creatingForm()
+
+	# creating a new dialog button for the actions ok and cancel
+	self.btnBox = QDialogBtnBox(QDialogBtnBox.Ok | QDialogBtnBox.Cancel)
+
+	# add the action to the buttons, when the form gets accepted
+	self.btnBox.accepted.connect(self.getInfo)
+
+	# add the action to the button, when the form gets rejected
+	self.btnBox.rejected.connect(self.reject)
+
+Next, we will create a line edit to enter editable text and will call the creatingForm() method to create a new form. Then, we will create a button box that will contains for two functions namely OK and Cancel. Then, we will add the respective actions for both the buttons of the group that needs to be performed on being clicked.
+
+	# create a new vertical layout
+	layoutMain = QVBoxLayout()
+
+	# add the form group box to the main layout
+	layoutMain.addWidget(self.formGrpBox)
+
+	# add the button box to the main layout
+	layoutMain.addWidget(self.btnBox)
+
+	# set the layout
+	self.setLayout(layoutMain)
+
+Then, we will introduce a new main layout and form group box to it first, followed by adding the button box to the main layout.
+
+# getting the info method which is called when the form gets accepted
+def getInfo(self):
+
+	# print the information on the form
+	print("Person Name : {0}".format(self.lineEditName.text()))
+	print("Degree : {0}".format(self.ComboBoxDeg.currentText()))
+	print("Age : {0}".format(self.spinAgeBar.text()))
+
+	# close the window
+	self.close()
+
+Next, we will create a new method called getInfo() in order to get the information that the form has already accepted from the user. Then, we will print the three components namely the name, degree and the age entered by the user and closing the window after that.
+
+# creating the form function
+def creatingForm(self):
+
+	# create a new form layout
+	layout = QFormLayout()
+
+	# add some rows
+	# for the names and add the input text
+	layout.addRow(QLabel("Name"), self.lineEditName)
+
+	# for the degree and add the combo box
+	layout.addRow(QLabel("Degree"), self.ComboBoxDeg)
+
+	# for the age and add the spin box
+	layout.addRow(QLabel("Age"), self.spinAgeBar)
+
+	# set the layout
+	self.formGrpBox.setLayout(layout)
+
+Next, we will create another method called creatingForm() to create the main form in the window. For this form, we will create another layout and will start to add some rows for the three sections name, degree and the age of the user. Finally, we will st its layout and properties.
+
+# main function
+if __name__ == '__main__':
+
+	# creating the pyqt5 application
+	Base = QApplication(sys.argv)
+
+	# creating an instance of the Window
+	window = Window()
+
+	# displaying the window
+	window.show()
+
+	# starting the application
+	sys.exit(Base.exec())
+
+Finally, we will introduce the main function and will create the PyQt5 application. We will then create an instance of the window and will display it on the screen using the show() method. Ultimately, we will start the application by executing the code.
+Complete code :
+
+# Python program to create a simple registration form using PyQt5
+# import the required libraries
+from PyQt5.QtWidgets import *
+import sys
+
+# create a new class
+# that will inherit the class QDialog
+class Window(QDialog):
+
+	# defining the constructor
+	def __init__(self):
+		super(Window, self).__init__()
+
+		# set the title of the window
+		self.setWindowTitle("Python")
+
+		# set the geometry for the window
+		self.setGeometry(100, 100, 300, 400)
+
+		# create a new group box
+		self.formGrpBox = QGroupBox("Form 1")
+
+		# create a new spin box for selecting the age
+		self.spinAgeBar = QSpinBox()
+
+		# create a new combo box for selecting the degree
+		self.ComboBoxDeg = QComboBox()
+
+		# add the items into the combo box
+		self.ComboBoxDeg.addItems(["BTech", "MTech", "PhD"])
+
+		# create the line edit
+		self.lineEditName = QLineEdit()
+
+		# call the function which will be helping to create the form
+		self.creatingForm()
+
+		# creating a new dialog button for the actions ok and cancel
+		self.btnBox = QDialogBtnBox(QDialogBtnBox.Ok | QDialogBtnBox.Cancel)
+
+		# add the action to the buttons, when the form gets accepted
+		self.btnBox.accepted.connect(self.getInfo)
+
+		# add the action to the button, when the form gets rejected
+		self.btnBox.rejected.connect(self.reject)
+
+		# create a new vertical layout
+		layoutMain = QVBoxLayout()
+
+		# add the form group box to the main layout
+		layoutMain.addWidget(self.formGrpBox)
+
+		# add the button box to the main layout
+		layoutMain.addWidget(self.btnBox)
+
+		# set the layout
+		self.setLayout(layoutMain)
+
+	# getting the info method which is called when the form gets accepted
+	def getInfo(self):
+
+		# print the information on the form
+		print("Person Name : {0}".format(self.lineEditName.text()))
+		print("Degree : {0}".format(self.ComboBoxDeg.currentText()))
+		print("Age : {0}".format(self.spinAgeBar.text()))
+
+		# close the window
+		self.close()
+
+	# creating the form function
+	def creatingForm(self):
+
+		# create a new form layout
+		layout = QFormLayout()
+
+		# add some rows
+		# for the names and add the input text
+		layout.addRow(QLabel("Name"), self.lineEditName)
+
+		# for the degree and add the combo box
+		layout.addRow(QLabel("Degree"), self.ComboBoxDeg)
+
+		# for the age and add the spin box
+		layout.addRow(QLabel("Age"), self.spinAgeBar)
+
+		# set the layout
+		self.formGrpBox.setLayout(layout)
+
+
+# main function
+if __name__ == '__main__':
+
+	# creating the pyqt5 application
+	Base = QApplication(sys.argv)
+
+	# creating an instance of the Window
+	window = Window()
+
+	# displaying the window
+	window.show()
+
+	# starting the application
+	sys.exit(Base.exec())
+
+Output :
+The output for the code of "Simple Registration Form using PyQt5 in Python" after implementation of the program is given below.
+
+
+
+Next TopicConditional Expressions in Python
+
+
+
+
+← prev
+next →
+
+
+
+

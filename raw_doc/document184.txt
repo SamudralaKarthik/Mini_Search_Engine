@@ -1,0 +1,117 @@
+
+
+
+
+next →
+← prev
+
+What is duck typing in Python?
+In this tutorial, we will learn about duck typing. It is a popular term in Python, and it comes from saying, "If it walks like duck, swims like duck, looks like a duck, then it probably should be a duck." 
+The above statement gives an idea to identify a duck. Here we don't need to have a genomic sequence of the duck. We draw our conclusion by its behavior and external appearances.
+We will discuss what is exactly mean of duck typing in Python programming. 
+Python follows the EAFP (Easier to Ask Forgiveness than Permission) rather than the LBLY (Look Before You Leap) philosophy. The EAFP is somewhat linked to the "duck typing" style.
+Dynamic vs. Static Typing
+The main reason for using duck typing is to provide support for dynamic typing in Python programming. In Python, we don't need to specify the variable's data type and we can reassign the different data type values to same variable in further code. Let's see the following example.
+Example -
+
+x = 12000
+print(type(x))
+
+x = 'Dynamic Typing'
+print(type(x))
+
+x = [1, 2, 3, 4]
+print(type(x))
+
+Output:
+<class 'int'>
+<class 'str'>
+<class 'list'>
+
+As we can see in the above code, we assigned an integer to a variable x, making it of the int type. Then, we assigned a string and a list to the same variable. Python interpreter accepts the changes of data types of the same variable. This is a dynamic typing behavior.
+Many other programming languages such as Java, swift are the static type. We need to declare variable with the data types. In the below example, we try to do the same thing using the Swift instead of Python.
+Example -
+
+# integer value assigning in JavaScript
+var a = 10
+
+# Assinging string in swift
+a = 'Swift language'
+
+Above code cannot be compiled, because we couldn't assign a string in Swift language. Because variable a was declared as an integer.
+Concept of Duck Typing
+Earlier, we have discussed that Python is a dynamic typed language. However, we can use the dynamic approach with custom data types. Let's understand the following example.
+Example -
+
+class VisualStudio:
+     def execute(self):
+         print('Compiling')
+         print('Running')
+         print('Spell Check')
+         print('Convention Check')
+         
+class Desktop:
+    def code(self, ide):
+        ide.execute()
+
+
+ide  = VisualStudio()      
+desk = Desktop()
+desk.code(ide)
+
+Output:
+Compiling
+Running
+Spell Check
+Convention Check
+
+In the above code, we have created a VisualStudio class that has to execute() method. In the desktop-class, we have passed the ide as an argument in the code(). An ide is an object of VisualStudio class. With the help of ide, we called the execute() method of VisualStudio class.
+Let's see another example.
+Example - 2
+
+class Duck:
+   def swim(self):
+         print("I'm a duck, and I can swim.")
+ 
+class Sparrow:
+     def swim(self):
+         print("I'm a sparrow, and I can swim.")
+ 
+class Crocodile:
+     def swim_walk(self):
+         print("I'm a Crocodile, and I can swim, but not quack.")
+ 
+def duck_testing(animal):
+     animal.swim()
+     
+     
+duck_testing(Duck())
+duck_testing(Sparrow())
+duck_testing(Crocodile())
+
+Output:
+I'm a duck, and I can swim.
+I'm a sparrow, and I can swim.
+Traceback (most recent call last):
+  File "<string>", line 24, in <module>
+  File "<string>", line 19, in duck_testing
+AttributeError: 'Crocodile' object has no attribute 'swim'
+
+In the above code, the Duck class's instance is reflected by calling the duck_testing function. It also happens with the Sparrow class, which implements the swim() function. But in the case of the Crocodile class, it fails the duck testing evaluation because it doesn't implement the swim() function.
+How duck typing supports EAFP
+The duck typing is the most appropriate style for the EAFP because we don't need to focus on the "type" of the object. We only need to take care of its behavior and capability. Let's see the following statements.
+When we see a lot of if-else blocks, then it is an LBYL coding style.
+But if we see a lot of try-except blocks, then it is a probability an EAFP coder.
+
+
+Next TopicPEP 8 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

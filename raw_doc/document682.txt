@@ -1,0 +1,147 @@
+
+
+
+
+next →
+← prev
+
+How to Make the First Column an Index in Python
+Foundation/ A brief on the pre-requisite knowledge:
+'Pandas' is one of Python's most prominent libraries. It is used widely in different applications of machine learning and data analysis. Using Pandas, the programmer can create, read and manipulate huge amounts of data and work with any file. 'Pandas' has many ML tools to apply to huge chunks of data and get the required result.
+The data can be arranged in two forms in Pandas:
+
+Series
+DataFrames
+
+
+The Series can represent the data in a one-dimensional arrangement like an array or a list.
+A DataFrame, on the other hand, is a multi-dimensional representation of data like a table. It is simply an array of Series.
+
+Here is a simple example program:
+
+import pandas as p
+name = p. Series (["Raghav", "Charan", "Santhosh"])
+roll = p. Series ([301, 202, 103])
+branch = p. Series (["ECE", "EEE", "CSE"])
+age = p. Series ([19, 18, 19])
+dataframe = p. DataFrame ({'name': name, 'roll': roll, 'branch': branch, 'age': age})
+print (dataframe)
+
+Output:
+             name     roll   branch   age
+0       Raghav      301        ECE     19
+1       Charan      202        EEE      18
+2    Santhosh     103        CSE      19
+
+Understanding:
+Three separate Series are created-name, age, roll, and branch. All are then combined into a data frame to represent a table.
+
+The entry into a data frame is taken as a key: value pair.
+The key represents the column name, and the value represents the data in the column.
+It creates an index by default from 0 to the number of rows-1 to represent the rows in the tabular representation.
+The programmer can set any column as an index rather than just 0 to n. This tutorial explains how to do that.
+
+set_index Method:
+Given the simplicity and abundance of methods and tools, we can set any column we want as an index using a simple method, "set_index()."
+Syntax:
+
+DataFrame. set_index (columns, drop = True, append = False, in place = False, verify_integrity = False)lass="codeblock"><textarea name="code" class="python">
+
+
+
+columns: List of columns we want to set as the index.
+drop: If set False, after it is used as an index, the column is specified again inside the table like a regular column. Hence, it is set to True by default.
+append: If set True, the column will be appended to the existing index rather than being the only index of the table. It is set False by default.
+inplace: If set True, it determines whether to use a new data frame or to update the current data frame. It is set False by default.
+verify_integrity: If set True, it will check for duplicates in the index and returns a ValueError, if any. It is set False by default.
+
+Example:
+
+import pandas as p
+Studentdata = {
+        "Names": ["Raghav", "Charan", "Santosh"],
+        "Branch": ["ECE", "B-Arch", "AIML"],
+        "Age": [19, 18, 19],
+        "CGPA": [9.1, 9.4, 9.6]
+        }
+dataframe = p. DataFrame (Student data, index = ["Student1", "Student2", "Student3"])
+print ("original dataframe: ")
+print (dataframe)
+dataframe = dataframe. set_index (['Branch'])
+print ("\nBranch column as index to the data frame: ")
+print (dataframe)
+print ("\nNames and Age columns as an index to the data frame: ")
+dataframe = dataframe. set_index (['Names', 'Age'])
+print (dataframe)
+
+Output:
+Original dataframe: 
+                          Names     Branch    Age   CGPA
+Student1        Raghav           ECE      19        9.1
+Student2        Charan      B-Arch      18       9.4
+Student3       Santosh        AIML      19       9.6
+
+Branch column as the index to the data frame: 
+                   Names    Age    CGPA
+Branch                    
+ECE           Raghav       19        9.1
+B-Arch     Charan      18        9.4
+AIML      Santosh      19        9.6
+Names and Age columns as the index to the data frame: 
+                             CGPA
+Names     Age      
+Raghav      19         9.1
+Charan      18         9.4
+Santosh    19         9.6
+
+Understanding:
+In the above code, the column 'Branch' is made into the index in the first part. Once it is made index, it is dropped from the table as, by default, drop is set to True. Hence, in the next part, when the columns 'Names' and 'Age' are made indices, the 'Branch' column is absent.
+
+For working with .csv files:
+
+Using pandas, the programmer can work with any files. For instance, to work with CSV files:
+
+A CSV file is a text file that stores the data in the form of tables with values separated by commas.
+
+Program:
+
+import pandas as p
+Employeedata = {
+        "Names": ["Sudha", "Harini", "Venkat"],
+        "Branch": ["HR", "Developer", "Sales"],
+        "Age": [44, 23, 44],
+        "Salary": [112000, 94000, 122000],
+        "Experience (yrs)": [8, 2, 8]
+        }
+dataframe = p. DataFrame (Employeedata)
+print (dataframe)
+dataframe. to_csv  ('samplefile.csv', index = False)
+dataframe = p. read_csv ('samplefile.csv', index_col = 0)
+dataframe. head ()
+
+Output:
+        Names         Branch   Age      Salary    Experience (yrs)
+0       Sudha                HR      44    112000                           8
+1       Harini   Developer      23      94000                           2
+2     Venkat             Sales     44     122000                          8
+
+Understanding:
+Using .tocsv (), the data frame is converted into a CSV file and using .read_csv (), the file is read. On this dataframe, we can change the index into any column we want, like a normal dataframe:
+
+dataframe. set_index ('Names')
+
+Like a normal data frame, the data frame in the CSV file will be modified, and the index becomes the 'Names' column. The file can be found in the python directory and checked:
+
+
+
+Next TopicHow to Make an App in Python
+
+
+
+
+← prev
+next →
+
+
+
+

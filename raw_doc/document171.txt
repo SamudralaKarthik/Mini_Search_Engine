@@ -1,0 +1,270 @@
+
+
+
+
+next →
+← prev
+
+How to create a vector in Python using NumPy
+In this tutorial, we will learn how we can create a vector using Numpy library. We will also explore basic operation of vector such as performing addition of two vectors, subtraction of two vectors, division of two vectors, multiplication of two vectors, vector dot product and vector scalar product.
+What is Vector?
+A vector is known as a single dimension-array. In Python, vector is a single one-dimension array of lists and behaves same as a Python list. According to a Google, vector represents direction as well as magnitude; especially it determines the position one point in a space relative to another.
+Vectors are very important in the Machine learning because they have magnitude and also the direction features. Let's understand how we can create the vector in Python.
+Creating Vector in Python
+Python Numpy module provides the numpy.array() method which creates a one dimensional array i.e. a vector. A vector can be horizontal or vertical.
+Syntax:
+
+np.array(list)
+
+The above method accepts a list as an argument and returns numpy.ndarray.
+Let's understand the following example -
+Example - 1: Horizontal Vector
+
+# Importing numpy
+import numpy as np
+# creating list
+list1 = [10, 20, 30, 40, 50]
+# Creating 1-D Horizontal Array
+vtr = np.array(list1)
+
+vtr = np.array(list1)
+
+print("We create a vector from a list:")
+print(vtr)
+
+Output:
+We create a vector from a list:
+[10 20 30 40 50]
+
+Example - 2: Vertical Vector
+
+# Importing numpy
+import numpy as np
+# defining list
+list1 = [[12],
+       [40],
+       [6],
+       [10]]
+
+# Creating 1-D Vertical Array
+vtr = np.array(list1)
+
+vtr = np.array(list1)
+
+print("We create a vector from a list:")
+print(vtr)
+
+Output:
+We create a vector from a list:
+[[12]
+ [40]
+ [ 6]
+ [10]]
+
+Basic Operation of Python vector
+After creating a vector, now we will perform the arithmetic operations on vectors.
+Below is the list of basic operations that we can perform in vector.
+
+Arithmetic
+Subtraction
+Multiplication
+Division
+Dot Product
+Scalar Multiplications
+
+Addition of Two Vectors
+In the vector addition, it takes place element-wise manner which means addition will happen element by element and the length would same as of the two additive vectors.
+Syntax:
+
+vector + vector
+
+Let's understand the following example.
+Example -
+
+import numpy as np 
+ 
+list1 = [10,20,30,40,50] 
+list2 = [11,12,13,14,15]
+ 
+ 
+vtr1 = np.array(list1) 
+ 
+vtr2= np.array(list2) 
+
+print("We create vector from a list 1:") 
+print(vtr1) 
+print("We create vector from a list 2:") 
+print(vtr2) 
+ 
+vctr_add = vctr1+vctr2
+print("Addition of two vectors: ",vtr_add)
+
+Output:
+We create vector from a list 1:
+[10 20 30 40 50]
+We create vector from a list 2:
+[11 12 13 14 15]
+Addition of two vectors:  [21 32 43 54 65]
+
+Subtraction of Two Vectors
+The subtraction performs same as the addition, it follows the element-wise approach and vector 2 elements will get subtracted from the vector 1. Let's understand the following example.
+Example -
+
+import numpy as np 
+ 
+list1 = [10,20,30,40,50] 
+list2 = [5,2,4,3,1]
+ 
+vtr1 = np.array(list1) 
+ 
+vtr2= np.array(list2) 
+ 
+print("We create vector from a list 1:") 
+print(vtr1) 
+print("We create a vector from a list 2:") 
+print(vtr2) 
+
+vtr_sub = vtr1-vtr2
+print("Subtraction of two vectors: ",vtr_sub)
+
+Output:
+We create vector from a list 1:
+[10 20 30 40 50]
+We create vector from a list 2:
+[5 2 4 3 1]
+Subtraction of two vectors:  [5 18 26 37 49]
+
+Multiplication of Two Vectors
+The vector 1 elements are multiplied by the vector 2 and return the same length vectors as the multiplying vectors. Let's understand the following example.
+Example -
+
+import numpy as np 
+ 
+list1 = [10,20,30,40,50] 
+list2 = [5,2,4,3,1]
+ 
+vtr1 = np.array(list1) 
+ 
+vtr2= np.array(list2) 
+ 
+print("We create vector from a list 1:") 
+print(vtr1) 
+print("We create a vector from a list 2:") 
+print(vtr2) 
+
+vtr_mul = vtr1*vtr2
+print("Multiplication of two vectors: ",vtr_mul)
+
+Output:
+We create vector from a list 1:
+[10 20 30 40 50]
+We create vector from a list 2:
+[5 2 4 3 1]
+Multiplication of two vectors:  [ 50  40 120 120  50]
+
+The multiplication is performed as follows.
+vct[0] = x[0] * y[0]
+vct[1] = x[1] * y[1]
+
+The first element of the vector 1 is multiplied by corresponding vector's 2 first element and so on.
+Division Operation of Two vectors
+In the division operation, the resultant vector contains the quotient value that is get from the division of two vector's elements.
+Let's understand the following example.
+Example - 
+
+import numpy as np 
+ 
+list1 = [10,20,30,40,50] 
+list2 = [5,2,4,3,1]
+ 
+vtr1 = np.array(list1) 
+ 
+vtr2= np.array(list2) 
+ 
+print("We create vector from a list 1:") 
+print(vtr1) 
+print("We create a vector from a list 2:") 
+print(vtr2) 
+
+vtr_div = vtr1/vtr2
+print("Division of two vectors: ",vtr_div)
+
+Output:
+We create vector from a list 1:
+[10 20 30 40 50]
+We create vector from a list 2:
+[5 2 4 3 1]
+Division of two vectors:  [ 2.   10.          7.5        13.33333333        50.        ]
+
+As we can see in the above output, the division operation returned the quotient value of elements.
+Vector Dot Product
+The vector dot product performs between the two same-length sequential vectors and returns the single dot product. We will use the .dot() method to perform the dot product. It will happen as below.
+
+vector c = x . y = (x1 * y1 + x2 * y2)
+
+Let's understand the following example.
+Example -
+
+import numpy as np 
+ 
+list1 = [10,20,30,40,50] 
+list2 = [5,2,4,3,1]
+ 
+vtr1 = np.array(list1) 
+ 
+vtr2= np.array(list2) 
+ 
+print("We create vector from a list 1:") 
+print(vtr1) 
+print("We create a vector from a list 2:") 
+print(vtr2) 
+
+vtr_product = vtr1.dot(vtr2)
+print("Dot product of two vectors: ",vtr_product)
+
+Output:
+We create vector from a list 1:
+[10 20 30 40 50]
+We create vector from a list 2:
+[5 2 4 3 1]
+Dot product of two vectors:  380
+
+Vector-Scalar Multiplication
+In the scalar multiply operation; we multiply the scalar with the each component of the vector. Let's understand the following example.
+Example -
+
+import numpy as np 
+list1 = [10,20,30,40,50] 
+vtr1 = np.array(list1) 
+ 
+scalar_value = 5
+ 
+print("We create vector from a list 1:") 
+print(vtr1) 
+
+# printing scalar value 
+print("Scalar Value  : " + str(scalar_value)) 
+ 
+vtr_scalar = vtr1 * scalar_value
+print("Multiplication of two vectors: ",vtr_scalar)
+
+Output:
+We create vector from a list 1:
+[10 20 30 40 50]
+Scalar Value : 5
+Multiplication of two vectors:  [ 50 100 150 200 250]
+
+In the above code, the scalar value multiplied by the each element of the vector in s * v = (s * v1, s * v2, s * v3) manner.
+
+
+Next TopicPickle Module of Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,82 @@
+
+
+
+
+next →
+← prev
+
+Python Pyperclip Module
+It is obvious that many times in the past, we had required to copy or paste something, some text or message, from one place to another. Copy-paste is considered the simplest process, easiest, and time-saving process. It is very hard for us to imagine how much time we have to spend on our daily life if we have to write everything again & again instead of using the copy & paste option. Yes, it seems very difficult and irritating to not have copy & paste and write the same thing manually over and over again like many times. But thankfully, we have this option, thus saving lots of our time & energy, which we can optimize for performing other important tasks. Now, many of us here would start thinking that do we have more options for copy-paste other than the traditional copy-paste option. The answer to this question is a mixed response, and yes, we have other options available which we can use for copy-pasting something paperclip from one place to another. Many programming languages offer us packages and libraries that come in-built with the copy and paste options which we can use for copying and pasting a message or text from one place (application) to another. If we don't have the option to copy or paste a message traditionally, we can use these functions to carry out this task.
+Talking specifically about Python, it has a very rich library, and it comes with many modules and packages that have functions that can be used for carrying out the copy and paste task. Using these modules and their functions is very simple, and we can easily use the functions of these Python modules to perform the tasks that require copy-paste. One such Python module is the pyperclip module which is also very helpful for carrying out tasks that require the functioning of copy and paste. To understand more about this module, we will study and learn about this module in this tutorial. We will learn about its functions, installation, and working in this tutorial by importing this module into the example programs.
+Introduction to Pyperclip Module of Python
+The Pyperclip is a cross-platform module of Python that comes with a lot of built-in functions, and we can use all these functions of the pyperclip module to carry out tasks that require copy-paste functioning. One great thing about this module is that it works perfectly with both versions of Python (Python 2 & Python 3). This is one of the biggest advantages of this module because many Python modules are not compatible with both versions of Python and work perfectly only with either one of these Python versions. The Pyperclip module of Python was created with the aim to provide the option of cross-platform copying and pasting of messages or texts. When we copy or send the program's output into the clipboard, it becomes very easy for us to paste it on multiple platforms like we can paste the output of the program on emails, multiple applications, word processors, and many other places using functions of this module. This increases the importance of this module in today's time when we are required to send the output of a given Python program to multiple applications. We will now move forward with this module and understand how this module works by using the functions of this module in the example programs of this tutorial.
+Pyperclip Module in Python: Installation
+In this part, we will learn about the installation process of the pyperclip module. The pyperclip module is not an in-built package of Python, and therefore, if we want to use functions of this module in the example programs, we have to perform the installation process of this module and install this module in our system. We have multiple options and methods which we can use to install the pyperclip module in our machine, but the pip installer method for installing this module is the easiest and simplest module. Therefore, we will use the pip installer method in this part to install the pyperclip module in our system, and only after this can we use functions of this module in example programs. First, we have to write the following pip command into the command prompt shell of our system to use the pip installation method:
+
+pip install pyperclip
+
+After writing the pip command given above, we have to press the 'enter' to initiate the installation process of the pyperclip module. Once the installation process starts, it will take a while to install all the dependencies of this module in our system.
+
+As we can see, the successfully installed message is now displayed on the screen, which means that the pyperclip module is successfully installed in our system. That's how we can install the pyperclip module of Python in our system using the pip installer method.
+Pyperclip Module in Python: Implementation
+Since we have done with the installation part of the pyperclip module, it's time we should move forward with the implementation part of this module so we all can have a basic idea of how this module works and how we can use functions of this module in a Python program. The pyperclip module basically comes with two built-in functions: copy () and paste() functions. We can use both these functions to carry out all those tasks that require the copy & paste functioning by using them in the Python programs. Now, we will understand the functioning of this module by copying a user-input text into another variable using both these functions of the pyperclip module.
+Look at the following example program to understand the implementation of the pyperclip module:
+Example 1: Look at the following Python program where we have used the copy() and paste() function of the pyperclip module:
+
+# Importing the pyperclip module
+import pyperclip as ppr
+# Taking an input text from the user
+inputText = input("Please provide an input text that will be copied into second variable: ")
+# Copying the input text to the program's clipboard 
+ppr.copy(inputText) 
+# Pasting the copied text into the second variable
+secVar = ppr.paste() 
+# Printing the pasted text from clipboard in the output
+print("The text which is provided by you in the input variable: ", secVar)
+
+Output:
+Please provide an input text that will be copied into second variable: A Sample Text
+The text which is provided by you in the input variable: A Sample Text
+
+As we can see, the input given text in the program is successfully copied into the program, and the same text is printed in the output. That's how we can use the copy() and paste() function of the pyperclip module in any Python program to copy texts or messages from one place to another.
+Explanation: We have first imported the pyperclip module as ppr in the example program to use the functions of this module in the program. After that, we have taken an input text from the user, which we will copy into the second variable of the program. We have then used the copy() function of the pyperclip module and provided the input text variable as an argument in the function. By providing this variable as an argument in the copy() function, the text present in this variable will be copied to the program's clipboard. Then, we have used the paste() function of this module to paste the copied text present in the clipboard into the second variable of the program. After the text from the input variable is successfully copied into the second variable, we have printed the text from the second variable to verify the same.
+We have now learned how we can use the functions of this module to copy any text or message from one place or application to another. One thing which is more fascinated about this module is that irrespective of the data type of what we are copying, it will be converted into the string data type when we paste the copied message. This holds true for every data-type text that we will copy using the copy() and paste() function of this module.
+We can illustrate this feature of the pyperclip module by looking at the following example program:
+Example 2: Look at the following Python program where we have copied an input int data-type text:
+
+# Importing the pyperclip module
+import pyperclip as ppr
+# Taking an input int data-type text from user
+inputText = int(input("Please provide an integer type input text that will be copied into second variable: "))
+# Copying the input text to program's clipboard 
+ppr.copy(inputText) 
+# Pasting the copied text into second variable
+secVar = ppr.paste() 
+# Printing the pasted text from clipboard in the output
+print("The text which is provided by you in the input variable: ", secVar)
+# Illustrating the data-type change by printing data-type of both variable
+type1 = type(inputText)
+print("The data-type of input text provided by user: ", type1)
+type2 = type(secVar)
+print("The data-type of text that is copied into second variable: ", type2)
+
+Output:
+Please provide an integer type input text that will be copied into second variable: 524
+The text which is provided by you in the input variable: 524
+The data-type of input text provided by user: <class 'int'>
+The data-type of text that is copied into the second variable: <class 'str'>
+
+As we can see, the input integer text is copied into the second variable, and the data type of this text is changed to the string data type. That's how we have illustrated the change in the data type of copied text using functions of the pyperclip module.
+
+
+Next TopicHow to Generate UUID in Python
+
+
+
+
+← prev
+next →
+
+
+
+

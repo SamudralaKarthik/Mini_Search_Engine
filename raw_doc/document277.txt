@@ -1,0 +1,122 @@
+
+
+
+
+next →
+← prev
+
+Python Program to convert Hexadecimal String to Decimal String
+In Python, it is very easy to convert elements comparing with other programming languages. In this tutorial, we will discuss different methods for converting hexadecimal string to decimal string.
+Method 1: By using int() function
+The int() function is used for performing these types of tasks, the user can add an argument (16) in this function for converting the hexadecimal string to the base 16, and it will convert the string into an integer at the same time.
+Example:
+
+# First, initialize the string 
+testing_string = 'F'
+  
+# then, Print the original string 
+print ("The Hexadecimal string is: " + str(testing_string))
+  
+# now, use the int() function to convert the hexadecimal string to decimal string
+convertion = int(testing_string, 16)
+  
+# At last, print result
+print ("The converted hexadecimal string into decimal string is: " + str(convertion))
+
+Output:
+The Hexadecimal string is: F
+The converted hexadecimal string into decimal string is: 15
+
+Method 2: by using ast.literal_eval() method
+The user can use the literal evaluation function for converting hexadecimal string to decimal string. The literal evaluation function can predict the base and convert the number string into the decimal string.
+Example:
+
+from ast import literal_eval
+  
+# First, initialize the string 
+testing_string = '0xF'
+  
+# then, Print the original string 
+print ("The Hexadecimal string is: " + str(testing_string))
+  
+# now, use the ast.literal_eval() function to convert the hexadecimal string to decimal string
+convertion = literal_eval(testing_string)
+  
+# At last, print result
+print ("The converted hexadecimal string into decimal string is: " + str(convertion))
+
+Output:
+The Hexadecimal string is: 0xF
+The converted hexadecimal string into decimal string is: 15
+
+Method 3: By using dictionary
+The user can use the dictionary for converting hexadecimal string to decimal string. They can create a dictionary that contains all the predefined values of the hexadecimal table. After this, the user can apply the "for" loop and convert the hexadecimal string value into the decimal string format.
+Example:
+
+# Creating the Dictionary
+dictionary_hexa_to_decimal = {'0': 0, '1' : 1, '2' : 2, '3' : 3, '4' : 4, '5' : 5, '6' : 6, '7' : 7, '8' : 8, '9' : 9, 'A' : 10 , 'B' : 11, 'C' : 12, 'D' : 13, 'E' : 14, 'F' : 15}
+hexadecimal_string = input("Please enter the hexadecimal value: ").strip().upper()
+decimal = 0
+
+length = len(hexadecimal_string) -1
+ 
+for digit in hexadecimal_string:
+    decimal += dictionary_hexa_to_decimal[digit]*16**length
+    length -= 1
+ 
+print ("The converted hexadecimal string into decimal string is: ", decimal)
+
+Input:
+
+Please enter the hexadecimal value:  AE
+
+Output:
+The converted hexadecimal string into decimal string is:  174
+
+Method 4: By using while Loop
+The user can use the while loop for converting the hexadecimal string into a decimal string. First, the user has to import the hexadecimal string value. Then, they have to take 3 variables: "k", "counts," and "j" and all equal to "0". After that, they have to apply the "while" loop containing all the conditions. And at last, the user can check the value of "k". If the value of "k" is equal to "0", the user can print the value of "counts"; otherwise, it will be an invalid input.
+Example:
+
+hexadecimal_string = input("Please enter the hexadecimal value: ")
+ 
+k = counts = j = 0
+length = len(hexadecimal_string) - 1
+while length >= 0:
+    if hexadecimal_string[length] >= '0' and hexadecimal_string[length] <= '9':
+        rem_1 = int(hexadecimal_string[length])
+    elif hexadecimal_string[length] >= 'A' and hexadecimal_string[length] <= 'F':
+        rem_1 = ord(hexadecimal_string[length]) - 55
+    elif hexadecimal_string[len]>='a' and hexadecimal_string[len]<='f':
+        rem_1 = ord(hexadecimal_string[length]) - 87
+    else:
+        k = 1
+        break
+    counts = counts + (rem * (16 ** j))
+    length = length - 1
+    j = j + 1
+ 
+if k == 0:
+    print ("\nThe converted hexadecimal string into decimal string is: ", counts)
+else:
+    print ("\nInvalid Input!")
+
+Input:
+
+Please enter the hexadecimal value:  AF
+
+Output:
+The converted hexadecimal string into decimal string is:  255
+
+
+
+Next TopicDifferent Methods in Python for Swapping Two Numbers without using third variable
+
+
+
+
+← prev
+next →
+
+
+
+

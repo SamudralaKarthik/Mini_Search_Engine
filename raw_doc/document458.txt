@@ -1,0 +1,524 @@
+
+
+
+
+next →
+← prev
+
+rarfile module in Python
+In the following tutorial, we will discuss the rarfile module of the Python programming language. We will understand the different classes of the rarfile module along with some examples.
+So, let's get started.
+Understanding the Python rarfile module
+The rarfile module in Python is used to read the RAR archive. The interface is built as zipfile-like as possible.
+The basic functionalities of the rarfile module:
+
+This module parses archive structure with the Python programming language.
+It extracts non-compressed files using Python.
+It also extracts files that are compressed using unrar.
+Optionally, we can also write compressed data to a temp file in order to speed up unrar; otherwise, it requires scanning the entire archive on every execution.
+
+Now, before we start working with the module, let us install it.
+How to install the rarfile module in Python?
+In order to install the rarfile module, we will be using the pip installer following the command shown below:
+Syntax:
+
+$ pip3 install rarfile
+
+In order to verify the module is installed properly, we can create a new file and add the import statement to see if it returns any errors or not.
+File: verify.py
+
+import rarfile
+
+Now, save the Python file and run the execution command using the command prompt:
+Syntax:
+
+$ python verify.py
+
+If the above Python file does not raise any import error, we are good to go and head onto the Facebook messenger bot building procedure. However, if it does raise an exception, it is recommended to reinstall the module and refer to its official documentation.
+Now, let us understand the basics of the rarfile module.
+Classes of the rarfile module
+The rarfile module provides multiple classes that we can use as per the requirements. These classes are:
+
+RarFile class
+RarInfo class
+RarExtFile class
+nsdatetime class
+
+We will discuss these classes in brief.
+Understanding the RarFile class
+The RarFile class of the rarfile module is used to parse the RAR structure, providing access to the files in the archive.
+The syntax of the execution of the RarFile class is shown below:
+Syntax:
+
+class rarfile.RarFile(file, mode='r', charset=None, info_callback=None, crc_check=True, errors='stop', part_only=False)
+
+Some of the methods and attributes of the RarFile class is shown below:
+1. comment= None
+This attribute is used to state the archive comment. The value can either be a Unicode string or None.
+2. filename= None
+This attribute is used the provide the name of the file, if available. The value can either be a Unicode string or None.
+3. __enter__()
+This method is used to open context.
+4. __exit__(type, value, traceback)
+This method is used to exit context.
+5. __iter__()
+This method is used to iterate over members.
+6. setpassword(pwd)
+This method is used to set the password used during extraction.
+7. needs_password()
+This method returns True in case any archive entries need a password for extraction.
+8. namelist()
+This method returns a list containing the names of the file in the archive.
+9. infolist()
+This method returns the RarInfo objects for all files/directories in the archive.
+10. volumelist()
+This method returns the filenames of the archive volumes.
+If the archive is of only a single volume, the list consists of the name of the main archive file.
+11. getinfo(name)
+This method returns RarInfo for file.
+12. open(name, mode = 'r', pwd = None)
+This method returns the file-like object (RarExtFile) from where the data can be read.
+The object implements io.RawIOBase interface, so we can further wrap it with io.BufferReader and io.TextIOWrapper.
+In the previous versions of Python, where the io module is not available, it implements only read(), seek(), tell(), and close() methods.
+The object is seek-able, although the seeking is quick only on uncompressed files. On compressed files, the seeking is implemented by reading ahead and restarting the decompression.
+Parameters:
+
+name - This parameter is a name of the file or an instance of RarInfo.
+mode - This parameter is the mode in which the file is to be opened. It must be 'r'.
+pwd - This parameter includes the password that is used for extraction.
+
+13. read(name, pwd = None)
+This method returns the uncompressed data for archive entry.
+It is recommended to use the open() method for larger files.
+Parameters:
+
+name - This parameter is a name of the file or an instance of RarInfo.
+pwd - This parameter includes the password that is used for extraction.
+
+14. close()
+This method is used to release open resources.
+15. printdir(file = None)
+This method is used to print a list of the files in the archive to stdout or a given file.
+16. extract(member, path = None, pwd = None)
+This method is used to extract a single file into the current directory.
+Parameters:
+
+member - This parameter is a name of the file or an instance of RarInfo.
+path - This is an optional parameter that includes the destination path.
+pwd - This is another optional parameter that includes the password to utilize.
+
+17. extractall(path = None, members = None, pwd = None)
+This method is used to extract all files into the current directory.
+Parameters:
+
+path - This is an optional parameter that includes the destination path.
+members - This is another optional parameter that includes a name of the file or an instance of RarInfo.
+
+
+pwd - This is another optional parameter that includes the password to utilize.
+
+18. testrar(pwd = None)
+This method is used to read all files and test CRC.
+19. strerror()
+This method returns an error string if parsing fails or None if no exception has occurred.
+Understanding the RarInfo class
+The RarInfo class of the rarfile module is used as an entry in the RAR archive.
+Timestamps as datetime are without time zone in RAR3, with UTC zone in RAR5 archives
+The syntax of the execution of the RarInfo class is shown below:
+Syntax:
+
+class rarfile.RarInfo
+
+Some of the methods and attributes of the RarInfo class is shown below:
+1. filename
+This attribute contains the name of the file with a relative path. The value of this attribute is always a Unicode string specifying the path separated by a Path separator as '/'.
+2. date_time
+This attribute consists of the timestamp of File modification. It can be used as a tuple of (year, month, day, hour, minute, second). RAR5 allows archives where it is missing, and it's None then.
+3. comment
+This attribute includes the optional file comment field. The value consists of a Unicode string. (RAR3-only)
+4. file_size
+This attribute is used to specify the uncompressed size.
+5. compress_size
+This attribute is used to specify the compressed size.
+6. compress_type
+This attribute is used to specify the method of the compression: One of the RAR_M0, …, RAR_M5 constants.
+7. extract_version
+This attribute consists of the minimal version of RAR that is required for decompression. As (major*10 + minor), so 2.9 is 29.
+RAR3: 10, 20, 29
+RAR5 does not have such a field in the archive, and it is set to 50.
+8. host_os
+This attribute specifies the Host OS type, one of RAR_OS_* constants.
+RAR3: RAR_OS_WIN32, RAR_OS_UNIX, RAR_OS_MSDOS, RAR_OS_OS2, RAR_OS_BEOS
+RAR5: RAR_OS_WIN32, RAR_OS_UNIX
+9. mode
+This attribute is used to specify the file attributes. It may be either dos-style or unix-style, depending on host_os.
+10. mtime
+This attribute is used to specify the time of the file modification. The value can be the same as the date_time attribute; however, as a datetime object with extended precision.
+11. ctime
+This attribute is an optional time field specifying the time of creation. It also acts as a datetime object.
+12. atime
+This attribute is also an optional time field specifying the time of last access. It also acts as a datetime object.
+13. arctime
+This attribute is also an optional time field specifying the archival time. It also acts as a datetime object. (RAR3-only)
+14. CRC
+This attribute is used to specify the CRC-32 of the uncompressed file. The value of this attribute is an unsigned int.
+RAR5: may be None.
+15. blake2sp_hash
+This attribute is used to specify the Blake2SP hash over decompressed data. (RAR5-only)
+16. volume
+This attribute is used to specify the volume nr, beginning from 0.
+17. volume_file
+This attribute is used to specify the volume file name where the file begins.
+18. file_redir
+This attribute consists of a tuple of (type, flags, target). (RAR5-only). If not None, the file is the link of some sort. (RAR5-only)
+Type is one of the constants:
+
+RAR5_XREDIR_UNIX_SYMLINK: Unix symlink
+RAR5_XREDIR_WINDOWS_SYMLINK: Windows symlink
+RAR5_XREDIR_WINDOWS_JUNCTION: Windows junction
+RAR5_XREDIR_HARD_LINK: A hard link to the target
+RAR5_XREDIR_FILE_COPY: The current file is a copy of another archive entry
+
+Flags may contain bits:
+
+RAR5_XREDIR_ISDIR: Symlink points to a directory
+
+19. is_dir()
+This method is used to return True if the entry is a directory.
+New in version 4.0.
+20. is_symlink()
+This method is used to return True if the entry is a symlink.
+New in version 4.0.
+21. is_file()
+This method is used to return True if the entry is a normal file.
+New in version 4.0.
+22. needs_password()
+This method is used to return True if data is stored password protected.
+23. isdir()
+This method is used to return True if the entry is a directory.
+Deprecated since version 4.0.
+Understanding the RarExtFile class
+The RarExtFile class of the rarfile module works as a base class for objects similar to the file that RarFile.open() returns.
+Bases: io.RawIOBase
+The syntax for the RarExtFile class is shown below:
+Syntax:
+
+class rarfile.RarExtFile
+
+This class provides public methods and common CRC checking
+Behavior:
+
+No short reads - read(), and readinfo() read as much as requested.
+No internal buffer; we have to use BufferedReader for that.
+
+Some attributes and methods of the RarExtFile class are shown below:
+1. name= None
+This attribute is used to specify the file name of the archive entry
+2. read(n=-1)
+This method is used to read all or a specified amount of data from archive entry.
+3. close()
+This method is used to close open resources.
+4. readinto(buf)
+This method is used to define zero-copy read directly into the buffer. It Returns bytes read.
+5. tell()
+This method returns the current reading position in uncompressed data.
+6. seek(offset, whence = 0)
+This method is used to seek data. On uncompressed files, the seeking works by actual seek, so it is fast. On compressed files, it is slow - forward seeking happens by reading ahead, backward by re-opening and decompressing from the start.
+7. readable()
+This method returns True
+8. writable()
+This method returns False as writing is not supported.
+9. seekable()
+This method returns True as seeking is supported, although it's slow on compressed files.
+10. readall()
+This method is used to read all the remaining data
+11. fileno()
+This method returns the underlying file descriptor if one exists. OSError is raised if the IO object does not utilize a file descriptor.
+12. isatty()
+This method returns if this is an 'interactive' stream. It also returns False if it can't be determined.
+13. readline()
+This method is used to read and return a line from the stream. The line terminator is always b'n' for binary files; for text files, we can use the newlines argument to open in order to select the line terminator(s) recognized. If the size is given, size bytes will be read at most.
+14. readlines()
+This method is used to return a list of lines from the stream. We can specify the hint to control the number of lines read: no more lines will be read if the total size (in bytes/characters) of all lines so far exceeds the hint.
+Understanding the nsdatetime class
+The nsdatetime class of the rarfile module represents the Datetime that carries nanoseconds. This class does not support Arithmetic and will lose nanoseconds.
+Bases: datetime.datetime
+New in version 4.0
+The syntax of the nsdatetime class is shown below:
+Syntax:
+
+class rarfile.nsdatetime
+
+Some attributes and methods of the nsdatetime class are shown below:
+1. nanosecond
+This attribute consists of the number of nanoseconds ranging from 0 to 999999999.
+2. isoformat(sep = 'T', timespec = 'auto')
+This method is used to format with nanosecond precision by default.
+3. astimezone(tz=None)
+This method is used to convert to new time zone.
+4. replace(year = None, month = None, day = None, hour = None, minute = None, second = None, microsecond = None, tzinfo = None, *, fold = None, nanosecond = None)
+This method is used to return new timestamp with given fields replaced.
+Functions of the rarfile module
+Some of the functions of the rarfile module are as follows:
+
+
+S. No.
+Functions
+Descriptions
+
+
+1
+rarfile.is_rarfile(xfile)
+This function is used to check if the file is a RAR archive.
+
+
+2
+Rarfile.is_rarfile_sfx(xfile)
+This function is used to check if the file is a RAR archive with support for SFX.It will read 2M from file.
+
+
+Constants of the rarfile module
+Some of the constants of the rarfile module are as follows
+
+
+S. No.
+Constants
+Descriptions
+
+
+1
+rarfile.RAR_M0 = 48
+This constant represents no compression.
+
+
+2
+rarfile.RAR_M1 = 49
+This constant represents compression level - m1, the Fastest compression.
+
+
+3
+rarfile.RAR_M2 = 50
+This constant represents compression level - m2.
+
+
+4
+rarfile.RAR_M3 = 51
+This constant represents compression level - m3.
+
+
+5
+rarfile.RAR_M4 = 52
+This constant represents compression level - m4.
+
+
+6
+rarfile.RAR_M5 = 53
+This constant represents compression level - m5, which is also the maximum compression.
+
+
+7
+rarfile.RAR_OS_WIN32 = 2
+This constant represents the type of Operating System, i.e., Windows.
+
+
+8
+rarfile.RAR_OS_UNIX = 3
+This constant represents the type of Operating System, i.e., UNIX.
+
+
+9
+rarfile.RAR_OS_MACOS = 4
+This constant represents the type of Operating System, i.e., MacOS (Only in RAR3).
+
+
+10
+rarfile.RAR_OS_BEOS = 5
+This constant represents the type of Operating System, i.e., BeOS (Only in RAR3).
+
+
+11
+rarfile.RAR_OS_OS2 = 1
+This constant represents the type of Operating System, i.e., OS2 (Only in RAR3).
+
+
+12
+rarfile.RAR_OS_MSDOS = 0
+This constant represents the type of Operating System, i.e., MS-DOS (Only in RAR3).
+
+
+Warnings and Exceptions of the rarfile module
+Some of the Warnings and Exceptions of the rarfile module are as follows:
+
+
+S. No.
+Warnings & Exceptions
+Descriptions
+
+
+1
+class rarfile.UnsupportedWarning
+This warning occurs when the archive uses a feature that is not supported by the rarfile module.New in Version 4.0.
+
+
+2
+class rarfile.Error
+This exception is the base class for rarfile errors.
+
+
+3
+class rarfile.BadRarFile
+This exception raises when there is incorrect data present in the archive.
+
+
+4
+class rarfile.NotRarFile
+This exception raises when the file is not a RAR archive.
+
+
+5
+class rarfile.BadRarName
+This exception raises when the system cannot guess multipart name components.
+
+
+6
+class rarfile.NoRarEntry
+This exception raises when the file is not found in RAR.
+
+
+7
+class rarfile.PasswordRequired
+This exception raises when the file requires a password.
+
+
+8
+class rarfile.NeedFirstVolume(msg, volume)
+This exception raises when we have to start from the first volume.
+
+
+9
+class rarfile.NoCrypto
+This exception raises when we cannot parse encrypted headers - no crypto available.
+
+
+10
+class rarfile.RarExecError
+This exception raises when the problem is reported by unrar/rar.
+
+
+11
+class rarfile.RarWarning
+This exception raises when there is a non-fatal error.
+
+
+12
+class rarfile.RarFatalError
+This exception raises when there is a fatal error.
+
+
+13
+class rarfile.RarCRCError
+This exception raises when there is a CRC error during unpacking.
+
+
+14
+class rarfile.RarLockedArchiveError
+This exception raises when we try to modify the locked archive.
+
+
+15
+class rarfile.RarWriteError
+This exception raises when we try writing a RAR file.
+
+
+16
+class rarfile.RarOpenError
+This exception raises when we try opening a RAR file.
+
+
+17
+class rarfile.RarUserError
+This exception represents user error.
+
+
+18
+class rarfile.RarMemoryError
+This exception represents memory error.
+
+
+19
+class rarfile.RarCreateError
+This exception represents a creation error.
+
+
+20
+class rarfile.RarNoFilesError
+This exception raises when there are no files that match patterns were found.
+
+
+21
+class rarfile.RarUserBreak
+This exception raises when the user stops.
+
+
+22
+class rarfile.RarWrongPassword
+This exception raises incorrect passwords.
+
+
+23
+class rarfile.RarUnknownError
+This exception represents an unknown exit code.
+
+
+24
+class rarfile.RarSignalExit
+This exception raises when unrar exited with a signal.
+
+
+25
+class rarfile.RarCannotExec
+This exception raises when there is no executable found.
+
+
+Working of the rarfile module
+Let us now consider the following example demonstrating the working of the rarfile module.
+Example:
+
+# importing the required module
+import rarfile
+
+# using the RarFile class
+myRarFile = rarfile.RarFile("myfolder.rar")
+
+# iterating through the files in the archive
+for file in myRarFile.infolist():
+    # printing the filenames and file sizes
+    print(file.filename, file.file_size)
+    
+    # checking the readme file
+    if file.filename == "myfolder/readme.txt":
+        # reading the file
+        print(myRarFile.read(file))
+
+Output:
+myfolder/helloWorld.py 101
+myfolder/image.jpg 281466
+myfolder/readme.txt 49
+b'Hello Python learners!\r\nWelcome to Javatpoint.com'
+myfolder/ 0
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then used the RarFile class to select the RAR archive. We have then used the for-loop to iterate through the files present in the archive and print the filenames along with their sizes. We have then used the if conditional statement to check if the RAR archive contains a readme.txt file. At last, we have read the file using the read() method.
+
+
+Next TopicStemming Words using Python
+
+
+
+
+← prev
+next →
+
+
+
+

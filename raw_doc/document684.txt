@@ -1,0 +1,324 @@
+
+
+
+
+next →
+← prev
+
+Morse Code Translator In Python
+Text messages can be communicated using the Morse code method by entering a series of electrical pulses, often shown as a short pulse (referred to as a "dot") and a long pulse (a "dash"). Samuel F. B. Morse created the code in the 1840s to be used with his telegraph innovation, the first device to successfully use electromagnetic for long-distance communication. The early telegrapher would press a key up and down to convey a series of characters that the receiving telegrapher could read from tape. This telegrapher was frequently at a railroad station connected to others over miles of telegraph pole lines (later operators learned to read the transmissions simply by listening). The old form used a dot (or, as it sounded to the telegrapher, a "dit") for the key down followed by the following letter, and a dash for the key down fast twice in succession (a "dah" or "dit-dit"). A dash, dot, or any other combination served as the text equivalent of each character.
+In what became known as the International Morse Code or Continental Code in the late 1800s, certain letters were represented by dots and dashes in a slightly different way as new keying technology became commonplace. But even into the 1960s, the American Morse code was still in use in the United States. The origins of the Morse code are the subject of several legends. A printer's business is where Samuel Morse allegedly went to count the quantity of printer type the printer had for each letter of the alphabet. Following that, he explained these figures as rough estimates of each letter's relative frequency in ordinary English text. He set up the Morse code so that the shortest symbols corresponded to the letters that were used the most. Thus, the most frequently used letters in the English language, E and T, were each represented by a single dot or dash. Numbers, punctuation symbols, and the least common letters, such as J and Y, were given lengthier and more intricate representations.
+Morse code provides a slow but dependable way to send and receive wireless text messages when there is interference, noise, or fading. This is mainly due to the fact that its straightforward binary coding (key down or key up) enables very little bandwidth. The human ear and brain also function amazingly well as digital receiving devices. Amateur radio operators, landline telegraphers, and military radio operators still occasionally employ Morse code in modern times.
+Despite being specifically created for the telegraph, humans discovered additional uses for Morse Code. Coded communications may now be transmitted across radio waves thanks to the invention of radiotelegraph equipment in the 1890s. The International Morse Code has a lengthy history with some purely visual mediums as well. Ships started flashing signals at one another with their onboard blinker lights starting in 1867. Jeremiah Denton Jr.'s case is another. He was a captured pilot for the American military (and future senator) in Vietnam. Denton was pressured into declaring that his captors were treating him nicely behind enemy lines during an appearance on North Vietnamese television. His eyes, though, revealed a different tale. He blinked in a pattern that represented the word "torture" in Morse code. The code was mainly phased out in the latter part of the 20th century. Since 1995, the U.S. Coast Guard hasn't utilized it for official purposes, and contemporary ships rely far more heavily on satellite communications equipment. To learn the code, however, intelligence professionals are still being trained by Uncle Sam's Navy. The International Morse Code Preservation Society, a global alliance of amateur radio operators with thousands of members, is another organization that supports it. Therefore, even if the era of dots and dashes may be ended, Morse code is still in use. No emergency signal is necessary.
+It is activated by tapping the necessary number of dots and dashes, followed by the appropriate amount of pause. Between words, there are larger pauses than within a word. What words or numbers are being sent using Morse code depends on the length of the gaps and the quantity of dots and dashes employed. Learning Morse Code requires that you get familiar with these signs as well as the spaces between each dot and dash. The dashes are lengthy horizontal lines that resemble hyphens, but the dots are plain periods.
+Morse code, in its simplest form, was a system of early communication that used dots, dashes, or long and short noises that corresponded to each letter of the Latin alphabet. Typically, these messages were transmitted through light signals or electric telegraph, also known as a straight key.
+There are now many different types of Morse code, including the International Morse code for languages that also use the Latin alphabet, the Japanese version, the Wabun Code, and the SKATS, which is the Korean Morse code. Over large distances, messages were transmitted using Morse code. Light or pulses can be used to transmit Morse code messages. A telegraph was used most often to convey pulse messages during Samuel Morse's period. The straight key sometimes referred to as a telegraph, delivers electrical pulses based on the message that was "tapped out" using the telegraph key. Following that, telegraph operators would key messages using a series of clicks dependent on how the messages' words were spelled. The clicks would be heard by an operator on the other end, who would then convert them back into speech.
+Each letter of the alphabet was converted into short and long signals using Morse Code (also known as dots and dashes). A dash has a pulse length that is equivalent to three dots. The dots and dashes eventually came to be known as "dits" and "dahs" based on the sound of the radio pulses when Morse Code was translated for use on radio.
+Civilizations from all around the world have tried to create long-distance communication techniques throughout history. They used flags, lights, music, and smoke signals to communicate. Semaphore systems are the name given to these communication techniques.
+Code:
+
+# A sample python script representing how to use the morse code encoder and decoder in python, we have written separate functions for the encoding and decoding operations, along with the supporting functions for those operating functions.
+
+class cipher_decoder_encoder:
+
+# A constructor is written to initialize the class variables which are getting used across the various other functions which are written inside this class. All the class variables are initialized with None in the constructor.
+    def __init__(self):
+        self.morse_code_dictionary = None
+        self.message_to_encode = None
+        self.message_to_decode = None
+        self.encoded_message = None
+        self.decoded_message = None
+
+
+# A function is written to initialize the morse code dictionary, this fucntions initializes the morse code dict which is getting used to encode or decode the various input strings across the rest of the functions of this class.
+    def initialize_morse_code_dict(self):
+        # Dictionary representing the morse code chart
+        self.morse_code_dictionary = MORSE_CODE_DICT = {'A': '.-', 'B': '-...',
+                                                        'C': '-.-.', 'D': '-..', 'E': '.',
+                                                        'F': '..-.', 'G': '--.', 'H': '....',
+                                                        'I': '..', 'J': '.---', 'K': '-.-',
+                                                        'L': '.-..', 'M': '--', 'N': '-.',
+                                                        'O': '---', 'P': '.--.', 'Q': '--.-',
+                                                        'R': '.-.', 'S': '...', 'T': '-',
+                                                        'U': '..-', 'V': '...-', 'W': '.--',
+                                                        'X': '-..-', 'Y': '-.--', 'Z': '--..',
+                                                        '1': '.----', '2': '..---', '3': '...--',
+                                                        '4': '....-', '5': '.....', '6': '-....',
+                                                        '7': '--...', '8': '---..', '9': '----.',
+                                                        '0': '-----', ', ': '--..--', '.': '.-.-.-',
+                                                        '?': '..--..', '/': '-..-.', '-': '-....-',
+                                                        '(': '-.--.', ')': '-.--.-'}
+
+# This function is written to get the encoding message from the user which will be encoded using the encrypt function of this class.
+    def get_message_to_encode(self):
+        print("Enter the message that you want to encode using Morse code cipher::")
+        data = input("")
+        self.message_to_encode = data
+
+   
+
+# This is the actual function that will actually perform the encoding or encrypting operation on the input string which is taken as input in the previous function. This function reads the input string char by char and then goes on converting each char to the equivalent morse code char, this conversion of the ordinary char to the morse code char is done with the help of the morse code dictionary which was initialized at the beginning of the program, this conversion of the normal to the equivalent morse code char goes on until the chars in the input string are exhausted, once all the chars in the input string are converted to the equivalent morse code chars, then those converted morse code chars are attached together and a final morse code string is formed and in the end, this string is stored in the relevant class variable.
+ # Function to encrypt the string
+    # according to the morse code chart
+    def encrypt(self):
+        message = self.message_to_encode
+        cipher = ''
+        for letter in the message:
+            if letter != ' ':
+                # Looks up the dictionary and adds the
+                # corresponding morse code
+                # along with a space to separate
+                # morse codes for different characters
+                cipher += self.morse_code_dictionary[letter] + ' '
+            else:
+                # 1 space indicates different characters
+                # and 2 indicate different words
+                cipher += ' '
+
+        self.encoded_message = cipher
+
+# This function is used to print the string encoded in the previous step. After the successful conversion of the input string to the morse code string this fucntion prints the converted morse code string.
+    def print_encoded_message(self):
+        print("Encoded message is: {}".format(self.encoded_message))
+
+
+
+
+# This function is written to take input from the user the morse code which the user wants to decode or decrypt using the morse code dictionary. The input string is stored in the relevant class variable which is later used to get the string that needs to be decrypted or decoded.
+    def get_message_to_decode(self):
+        print("Enter the message that you want to decode using Morse code cipher::")
+        data = input("")
+        self.message_to_decode = data
+
+
+
+
+# This is the actual function that will actually perform the decoding or decrypting operation on the input string which is taken as input in the previous function. This function reads the morse string char by char and then goes on converting each char to the equivalent normal char, this conversion of the morse char to the ordinary char is done with the help of the morse code dictionary which was initialized at the beginning of the program, this conversion of the morse code char to the equivalent standard char goes on until the chars in the morse string are exhausted, once all the chars in the input morse string are converted to the equivalent normal chars, then those converted chars are attached together and a final decoded string is formed and in the end, this string is stored in the relevant class variable.
+    # Function to decrypt the string
+    # from morse to English
+    def decrypt(self):
+
+        message = self.message_to_decode
+        # extra space added at the end to access the
+        # last morse code
+        message += ' '
+
+        decipher = ''
+        citext = ''
+        for letter in the message:
+
+            # checks for space
+            if (letter != ' '):
+
+                # counter to keep track of space
+                i = 0
+
+                # storing morse code of a single character
+                citext += letter
+
+            # in case of space
+            else:
+                # if i = 1 that indicates a new character
+                i += 1
+
+                # if i = 2 that indicates a new word
+                if i == 2:
+
+                    # adding space to separate words
+                    decipher += ' '
+                else:
+
+                    # accessing the keys using their values (reverse of encryption)
+                    decipher += list(self.morse_code_dictionary.keys())[list(self.morse_code_dictionary
+                                                                  .values()).index(citext)]
+                    citext = ''
+
+        self.decoded_message = decipher
+
+    
+# This function is used to print the string decoded in the previous step. After the successful conversion of the input morse string to the normal string this fucntion prints the converted string.
+def print_decoded_message(self):
+        print("Decoded message is: {}".format(self.decoded_message))
+
+
+#Now in the main function,  an object of the above-written class is created and that object is used to call the various functions which are written inside the class. The main functions provide the user with a menu that consists of various options from which the user can select, the various options that are shown to the user from which you can select one option are, to initialize the morse code dictionary, to enter the string you want to encode/cipher using the morse code technique, To encode the input string, To print the encoded string, To enter the string you want to decode/decipher using the morse code technique, To decode the input string, To print the decoded string after printing all these options the user can select from the any of it and depending upon the choice selected by the user the relevant function is called and the steps inside that function are performed if the called function required some of the input then the code asks the user for that particular input and continues the execution of the code. This displaying of the menu goes on until the user selects the last or the final option which is the exit from the code option. Another option or condition that can cause the code execution to be halted or stopped is that any exception is faced in the code execution.
+def main():
+
+    morse_handler = cipher_decoder_encoder()
+
+    while(True):
+
+        # from the listed below the list of operations select any one of the operations
+        print("Go on selecting any one of the options")
+        print("0. To initialize the morse code dictionary.")
+        print("1. To enter the string you want to encode/cipher using the morse code technique.")
+        print("2. To encode the input string.")
+        print("3. To print the encoded string.")
+        print("4. To enter the string you want to decode/decipher using the morse code technique.")
+        print("5. To decode the input string.")
+        print("6. To print the decoded string.")
+        print("7. To exit from the code execution.")
+
+        menu_choice = input()
+        menu_choice = int(menu_choice)
+
+        if menu_choice == 0:
+            morse_handler.initialize_morse_code_dict()
+        elif menu_choice == 1:
+            morse_handler.get_message_to_encode()
+        elif menu_choice == 2:
+            morse_handler.encrypt()
+            print("Input string encoded successfully")
+        elif menu_choice == 3:
+            morse_handler.print_encoded_message()
+        elif menu_choice == 4:
+            morse_handler.get_message_to_decode()
+        elif menu_choice == 5:
+            morse_handler.decrypt()
+            print("Input string decoded successfully")
+        elif menu_choice == 6:
+            morse_handler.print_decoded_message()
+        elif menu_choice == 7:
+            sys.exit()
+
+        print(
+            "For printing again the choice menu enter y if want to halt enter [n]")
+        continue_or_exit = input()
+
+        if continue_or_exit == 'y' or continue_or_exit == 'Y':
+            pass
+        elif continue_or_exit == 'n' or continue_or_exit == 'N':
+            sys.exit()
+
+
+if __name__ == '__main__':
+    main()
+
+Output:
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+0
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+1
+Enter the message that you want to encode using Morse code cipher::
+HELLO MY NAME IS SAMUEL
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+2
+Input string encoded successfully
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+3
+Encoded message is: .... . .-.. .-.. ---  -- -.--  -. .- -- .  .. ...  ... .- -- ..- . .-..
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+4
+Enter the message that you want to decode using Morse code cipher::
+.... . .-.. .-.. ---  -- -.--  -. .- -- .  .. ...  ... .- -- ..- . .-..
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+5
+Input string decoded successfully
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+6
+The decoded message is: HELLO MY NAME IS SAMUEL
+For printing again the choice menu enter y if want to halt enter [n]
+y
+Go on selecting any one of the options
+0. To initialize the morse code dictionary.
+1. To enter the string you want to encode/cipher using the morse code technique.
+2. To encode the input string.
+3. To print the encoded string.
+4. To enter the string you want to decode/decipher using the morse code technique.
+5. To decode the input string.
+6. To print the decoded string.
+7. To exit from the code execution.
+7
+
+Output Explanation:
+In the code that we have written in the main function, an object of the above-written class is created and that object is used to call the various functions which are written inside the class. The main functions provide the user with a menu that consists of various options from which the user can select, the various options that are shown to the user from which you can select one option are, to initialize the morse code dictionary, to enter the string you want to encode/cipher using the morse code technique, To encode the input string, To print the encoded string, To enter the string you want to decode/decipher using the morse code technique, To decode the input string, To print the decoded string after printing all these options the user can select from the any of it and depending upon the choice selected by the user the relevant function is called and the steps inside that function are performed if the called function required some of the input then the code asks the user for that particular input and continues the execution of the code. This displaying of the menu goes on until the user selects the last or the final option which is the exit from the code option. Another option or condition that can cause the code execution to be halted or stopped is that any exception is faced in the code execution.
+Merits of the Morse Code:
+
+Morse code may be sent via ham radio transmitters with less power and bandwidth than other traditional speech communication tools, making it an effective method of communicating in emergency situations. Additionally, it is a useful instrument for secret conversations as only those who are proficient in the code can understand these messages.
+Learning Morse code may provide you with a great degree of intellectual enrichment, even if it no longer has as many professional uses as it previously did. You can engage in a mental exercise that could improve your ability to learn other useful abilities by challenging yourself to crack the code.
+Personal achievement: Learning new things, regardless of their importance, may raise your self-confidence and give you a feeling of success. As a result, knowing Morse code might boost your general self-confidence, which might be useful for other aspects of your life.
+In light of modern technological advancements, the Morse code is no longer a trustworthy solution since it is simple to decipher. Better technology can offer better avenues for transmitting the information. The usage of morse code has historically been used in a variety of settings, including amateur radio and the aviation sector. Morse code is assisting persons with impairments including hearing and motion problems to communicate using assistive technology.
+
+Conclusion:
+So, in this article, we have understood how we can implement a morse code encoder and decoder in python. In this article, we have written a python code that acts as both encoder and decoder for the morse code. And that code provides an array of options from which we can select the appropriate option as the input and then the code will perform that particular operation.
+
+
+Next TopicPython Locust Module
+
+
+
+
+← prev
+next →
+
+
+
+

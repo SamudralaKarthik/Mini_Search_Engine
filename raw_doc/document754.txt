@@ -1,0 +1,104 @@
+
+
+
+
+next →
+← prev
+
+Mirror Character of a String in Python
+In this tutorial, we will learn about mirror characters in Python. Mirror characters problem can be asked in the technical interview. First, we understand the mirror characters in the string.
+If the two strings are the same in the alphabetical position, one from the front and the other from the back. For example - z is a mirror character of a, y is a mirror character of b, and so on. Let's write the Python program to find the mirror character of the strings.
+Find Mirror Characters in Python
+In the alphanumeric character, we have to mirror the characters from the Nth position up to the length of the string. Let's understand the problem statement.
+Example -
+
+Input : N = 3
+        paradox
+Output : paizwlc
+We mirror characters from position 3 to end.
+
+Input : N = 6
+        pneumonia
+Output : pnefnlmrz
+
+Following are the different characters and their mirror characters.
+
+a b c d e f g h i j k l m || n o p q r s t u v w x y z
+
+Mirroring refers to alphabetical order corresponds to z, b corresponds to y. The first character becomes the last character; the second character becomes the second last character, and so on. To write the program, we will create a string (or a character array) which contains the English alphabet in lower case. Now we take the pivot point up to the length and reverse the alphabetical order of the character by using the ASCII value as the index. Let's understand the following example.
+Example -
+
+def mirror_compute(st, n):
+    # Creating a string having reversed
+    # alphabetical order
+    reverse_string = "zyxwvutsrqponmlkjihgfedcba"
+    l = len(st)
+    
+    result = ""
+    for i in range(0, n):
+        result = result + st[i];
+             
+    for i in range(n, l):
+        result = (result +
+        reverse_string[ord(st[i]) - ord('a')]);
+         
+    return result;
+ 
+st = "javaTpoint"
+n = 4
+answer = mirror_compute(st, n - 1)
+print(answer)
+
+Output:
+javzmklrmg
+
+Explanation
+In the above code, we created a function mirror_compute() that takes two arguments - string and its length. Then we created the string that has reversed alphabetical order. We initialized a result as an empty string that stores the result of the given string. A given string remains unchanged up to a point specified, and from point up to the length to the string, we reverse the alphabetical order. 
+Time Complexity
+Time complexity is O(n), where n represents the size of the given string.
+Auxiliary Space: O(1), no extra space is required, so it is a constant.
+Method - 2
+In this method, we will use the dict() and zip() method to create the dictionary where characters in alphabetical order are the key and the character in the reverse order will be the value. Let's understand the following example.
+Example - 
+
+def mirror_compute(st, n):
+    # create dictionary
+    order = 'abcdefghijklmnopqrstuvwxyz'
+    reverse = 'zyxwvutsrqponmlkjihgfedcba'
+    dictChars = dict(zip(order,reverse))
+ 
+    # divide string at k    
+    pre = string[0:k-1]
+    suffix = string[k-1:]
+    mirror = ''
+ 
+    # change suffix into mirror char
+    for i in range( len(suffix)):
+         mirror = mirror + dictChars[suffix[i]]
+ 
+    # join prefix and mirrored part
+    return pre+mirror
+ 
+st = "javaTpoint"
+n = 4
+answer = mirror_compute(st, n - 1)
+print(answer)
+
+Output:
+javzmklrmg
+
+Conclusion
+This tutorial introduced the mirror characters for a given string and how to mirror the character present in the possible k. We have written the python program to find the mirror characters.
+
+
+Next TopicPython IMDbPY - A library for Movies
+
+
+
+
+← prev
+next →
+
+
+
+

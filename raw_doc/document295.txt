@@ -1,0 +1,60 @@
+
+
+
+
+next →
+← prev
+
+Python sorted reverse
+We have sorted() function in Python, and we can use it to sort strings given in input. But what if we have to do reverse sorting of the input string. Can we use this sorted() function to sort in reverse? The answer is Yes. In this tutorial, we will learn how we can use the sorted() function to do reverse sorting of the input string.
+The sorted() function for reverse sorting of string
+In Python, strings are immutable data types, and that's why it becomes very difficult for us to do reverse sorting of strings. But, with the help of the sorted() function, we can easily perform the task of reverse sorting of strings. For doing reverse sorting with the sorted() function, we can use the following methods:
+
+With the help of sorted() + reduce() + lambda
+With the help of join() + sorted() + reverse key
+
+In both the methods mentioned above, we will go through an example program to understand the implementation of these methods.
+Method 1: With the help of sorted() + reduce() + lambda:
+We can perform the reverse sorting of strings by using a combination of reduce() and lambda function with sorted() function. In this method, after operating the input string in reverse order, we will join the resultant reverse sorted characters list using the lambda function.
+Note: We can use this function in Python 2.x versions only. This is because reduce() function is removed from the Python 3.x versions and will throw an error if we run on Python having 3.x versions.
+Example:
+
+# Taking an input string
+inputString = input("Give an input string for reverse sorting: ")
+# Reverse Sorting the input string 
+resultantString = reduce(lambda x, y: x + y, sorted(inputString, reverse = True)) # reverse sorting with using sorted() + reduce() + lambda function
+# printing reverse sorted string in output as result
+print("The input string after reverse sorting is: " + str(resultantString)) 
+
+Output
+Give an input string for reverse sorting: JAVATPOINT
+The input string after reverse sorting is: VTTPONJIAA
+
+Method 2: With the help of join() + sorted() + reverse key:
+By using the combination of join() function and reverse key with sorted() function, we can do the task of reverse sorting very easily in two steps. In the first step of operation, we will get the list of reverse sorted characters, and in the second step, we join these characters to get the reverse sorted string as a result.
+Example:
+
+# Taking an input string
+inputString = input("Give an input string for reverse sorting: ")
+# Reverse Sorting the input string 
+resultantString = ''.join(sorted(inputString, reverse = True)) # reverse sorting with using sorted() + join() function with reverse key
+# printing reverse sorted string in output as result
+print("The input string after reverse sorting is: " + str(resultantString)) 
+
+Output
+Give an input string for reverse sorting: JAVATPOINT
+The input string after reverse sorting is: VTTPONJIAA
+
+
+
+Next TopicAutomorphic Number in Python
+
+
+
+
+← prev
+next →
+
+
+
+

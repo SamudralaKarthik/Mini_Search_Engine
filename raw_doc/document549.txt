@@ -1,0 +1,107 @@
+
+
+
+
+next →
+← prev
+
+Webbrowser module in Python
+In the following tutorial, we will learn about the webbrowser module in the Python programming language with some examples.
+So, let's get started.
+Understanding the Python webbrowser module
+The webbrowser module is a convenient web browser controller in the Python programming language. This module offers a high-level interface that enables showing the documents based on the web. Under most circumstances, we can call the open() function from the webbrowser module to perform the right thing.
+Under the Unix operating system, the graphical browsers are preferred under X11; however, the text-mode browsers will be utilized if graphical browsers are unavailable or an X11 display is unavailable. If the text-mode browsers are utilized, the calling process will block until the user exits the browser.
+If the environment variable BROWSER exists, it is interpreted as the os.pathsep - separated list of browsers to try ahead of the platform defaults. When the value of a list part consists of the string %s, then it is interpreted as a literal browser command line to be utilized with the parameter URL substituted for %s; if the part does not consist of %s, it is interpreted as the name of the browser to launch.
+For non-Unix platforms, or when a remote browser is available on Unix, the controlling process will not wait for the user to finish with the browser; however, it allows the remote browser to maintain its Windows display. If the remote browsers are unavailable on Unix, the controlling process will launch a new browser and wait.
+Working with the webbrowser module
+We can use the webbrowser module as a Command-Line Interface (CLI) tool. This module accepts a URL as the parameter. It accepts the following optional parameters:
+
+-n: This parameter allows us to open the URL in a new browser window, if possible.
+-t: This parameter allows us to open the URL in a new browser page ("tab").
+
+The options are, naturally, mutually exclusive.
+The syntax for the same is shown below:
+Syntax:
+
+$ python -m webbrowser <parameter> "<URL>"
+
+Let us consider the following example demonstrating the usage of the webbrowser module as a CLI tool.
+Example 1:
+
+$ python -m webbrowser -t "https://www.javatpoint.com/python-pympler-library"
+
+Output:
+
+Explanation:
+The above syntax has been scripted in a terminal or command-line shell. This syntax starts with python followed by the module name, i.e., webbrowser specifying the parameter -t and the URL to the website.
+Note: The webbrowser module is a part of the Python standard library. Thus, there is no requirement to install a separate package to utilize it.
+We can also utilize the webbrowser module to launch a browser in a platform-independent way.
+Let us consider the following examples demonstrating the same:
+Example 2:
+
+# importing the webbrowser module
+import webbrowser
+
+# opening an URL using the open() method
+webbrowser.open("https://www.javatpoint.com/traffic-flow-simulation-in-python")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the webbrowser module. We have then used the open() method of the webbrowser module. The open() method is used to open the requested page with the help of the default browser.
+To have a bit more control over how the page gets opened, use the following functions given below in the code:
+Example 3: Open the page in a new browser window
+
+# importing the webbrowser module
+import webbrowser
+
+# opening an URL in new browser window using the open_new() method
+webbrowser.open_new("https://www.javatpoint.com/pyqt-library-in-python")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then used the open_new() method to open the requested URL in a new browser window.
+Example 4: Open the page in a new browser tab
+
+# importing the webbrowser module
+import webbrowser
+
+# opening an URL in new browser tab using the open_new_tab() method
+webbrowser.open_new_tab("https://www.javatpoint.com/pyqt-library-in-python")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required module and used the open_new_tab() method to open the page in a new browser tab.
+To open a page in a specific browser, use the webbrowser.get() function to specify a particular browser.
+Example 5:
+
+# importing the webbrowser module
+import webbrowser
+
+# opening an URL in different web browser
+chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chromePath))
+
+web = webbrowser.get('chrome')
+web.open("https://www.javatpoint.com/snmp-module-in-python")
+web.open_new_tab("https://www.javatpoint.com/speech-recognition-python")
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required module. We have then defined the path to the web browser and used the register() method to register the browser in the module. We have then used the get() method to access the web browser. We have then used the open() and open_new_tab() methods to open the requested URLs.
+
+
+Next TopicBinary Search using Recursion in Python
+
+
+
+
+← prev
+next →
+
+
+
+

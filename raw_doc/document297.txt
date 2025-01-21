@@ -1,0 +1,71 @@
+
+
+
+
+next →
+← prev
+
+sizeof in Python
+When we are writing large scripts or code of many lines, memory management should be our utmost priority. Therefore, we should have good knowledge of handling memory efficiently in addition to good programming knowledge. We have many functions given in Python to get the size in memory of a particular object present in the program, and one of such functions is __sizeof__(). In this tutorial, we will learn about __sizeof__() function and its working inside a Python program.
+Python __sizeof__() function
+The __sizeof__() function in Python doesn't exactly tell us the size of the object. It doesn't return the size of a generator object as Python cannot tell us beforehand that how much size of a generator is. Still, in actuality, it returns the internal size for a particular object (in bytes) occupying the memory.
+To understand this, let us look at the following example program with an endless generator object.
+Example 1: Look at the following Python program:
+
+# A default function with endless generator object in it
+def endlessGenerator():
+    # A counting variable to initialize the generator
+    counting = 0
+    # Using while loop to create an endless generator
+    while True:
+             yield counting
+             counting += 1 # Creating infinite loop
+# Printing memory size of a generator object
+print("Internal memory size of endless generator object: ", endlessGenerator.__sizeof__())
+
+Output
+Internal memory size of endless generator object:  120
+
+Explanation:
+We have used a default function, i.e., endlessGenerator(), to create an endless generator object in the program. In the function, we have initialized a variable, i.e., counting = 0. We have used a while loop on the counting variable without giving a breakpoint on the loop. By creating an infinite loop in the function, we have made the default function as an endless generator object. Finally, we have printed the internal memory size of the endless generator object by using the __sizeof__() function.
+Now, we can clearly understand the functioning of __sizeof__() function. As the endless generator object in the above program doesn't have any end or breakpoint, Python can't tell us the size of the generator beforehand. But at the same time, we can check the internal memory size allotted to the generator object by __sizeof__() function as it must be occupying some internal memory in Python.
+Let's look at one more example where we use the __sizeof__() function to get the internal memory size without any overhead.
+Example 2:
+
+# Define an empty list in the program
+emptyList = []
+# Printing size of empty list
+print("Internal memory size of an empty list: ", emptyList.__sizeof__())
+# Define some lists with elements
+a = [24]
+b = [24, 26, 31, 6]
+c = [1, 2, 6, 5, 415, 9, 23, 29]
+d = [4, 5, 12, 3, 2, 9, 20, 40, 32, 64]
+# Printing internal memory size of lists
+print("Memory size of first list: ", a.__sizeof__())
+print("Memory size of second list: ", b.__sizeof__())
+print("Memory size of third list: ", c.__sizeof__())
+print("Memory size of fourth list: ", d.__sizeof__())
+
+Output
+Internal memory size of an empty list:  40
+Memory size of first list:  48
+Memory size of second list:  104
+Memory size of third list:  104
+Memory size of fourth list:  136
+
+Explanation:
+Using the __sizeof__() function, we can clearly see that the internal memory size of an empty list is 40 bytes and every element present in the list adds 8 bytes size to the total memory size of the list.
+
+
+Next TopicClass-based views vs Function-Based Views
+
+
+
+
+← prev
+next →
+
+
+
+

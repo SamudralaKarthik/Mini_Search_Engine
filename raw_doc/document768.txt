@@ -1,0 +1,137 @@
+
+
+
+
+next →
+← prev
+
+Google Search Packages using Python
+In this tutorial, we will learn about Python's current Google search packages. We will discover the usage of the libraries of the most used Google search libraries. We will also learn about search queries over Google using Python code. Python provides many libraries for Google search, but their documentation is quite complex and poorly written. This tutorial will guide how to use the Google search libraries in a simple way.
+Let's have an introduction to libraries.
+Google Search
+Google is the most popular and widely used search engine across the world. It unlocks the information from all corners of the internet within just a few milliseconds. Last 20 years, we have relied on the standard method to query information ranging from news articles to research topics. There are two big reasons to search the internet are -
+
+Solving problems with the stack overflow
+Data Mining
+
+Data mining is examining large data sets to extract new information or insights. The method of mining data from the internet is known as web mining. Web mining can be divided into three parts - Web Content Mining, Web Usage Mining and Web Structure Mining.
+The web mining preferred method of retrieving data was using a Google search to retrieve URLs for scraping purposes. For this article's purpose, we will focus only on the URL retrieval process for now.
+To work with the google library, we need to install the google library. We will use the following example -
+
+pip install google
+
+Now we will perform the essential search operation. For example, the company "Apple" and the topic "iPhone" retrieve news articles.
+
+from googlesearch import search
+query = "Matrix"
+
+my_results_list = []
+for i in search(query,        # The query you want to run
+                tld = 'com',  # The top level domain
+                lang = 'en',  # The language
+                num = 10,     # Number of results per page
+                start = 0,    # First result to retrieve
+                stop = None,  # Last result to retrieve
+                pause = 2.0,  # Lapse between HTTP requests
+               ):
+    my_results_list.append(i)
+    print(i)
+
+Output:
+https://en.wikipedia.org/wiki/The_Matrix_(franchise)
+https://en.wikipedia.org/wiki/The_Matrix
+https://en.wikipedia.org/wiki/The_Matrix_Resurrections
+https://en.wikipedia.org/wiki/The_Matrix_Revolutions
+https://en.wikipedia.org/wiki/Neo_(The_Matrix)
+https://en.wikipedia.org/wiki/The_Matrix_(franchise)#Films
+https://en.wikipedia.org/wiki/The_Matrix_(franchise)#Cast_and_crew
+https://en.wikipedia.org/wiki/The_Matrix_(franchise)#Reception
+https://en.wikipedia.org/wiki/The_Matrix_(franchise)#Influences_and_interpretations
+https://www.warnerbros.com/movies/matrix
+https://www.imdb.com/title/tt0133093/
+https://www.youtube.com/watch?v=vKQi3bBA1y8
+https://www.youtube.com/watch?v=9ix7TUGVYIo
+https://www.matrixcomsec.com/
+https://www.britannica.com/science/matrix-mathematics
+https://www.amazon.com/Matrix-Keanu-Reeves/dp/B000GJPL1S
+https://www.matrix-globalservices.com/
+https://www.matrix.in/
+https://matrix.org/
+https://www.matrixres.com/
+https://dictionary.cambridge.org/dictionary/english/matrix
+https://www.matrixpartners.in/
+https://en.wiktionary.org/wiki/matrix
+https://www.merriam-webster.com/dictionary/matrix
+https://www.rottentomatoes.com/m/matrix
+https://www.matrixaccesscontrol.com/
+https://mathworld.wolfram.com/Matrix.html
+https://www.dictionary.com/browse/matrix
+https://www.netflix.com/in/title/20557937
+
+The above code will display all the URLs over Google related to Matrix. You can do the google search and verify the result manually. The above function takes the following arguments -
+
+query - It is a string that we want to search over Google.
+tld - It stands for the top-level domain, which means we want to search our result on google.com or google, in or some other domain.
+lang - It represents the language.
+num - It displays the number of results we want.
+start - The first result to retrieve.
+stop - The last result to retrieve. If we pass None it will search forever.
+pause - It shows the lapse to wait between HTTP requests. If the lapse is too short, Google can block the IP. Keeping significant lapses will slow your program, but it is a safe and better option.
+Return - It iterates the found URLs. If the stop parameter is none the iterator will loop forever.
+
+To understand the source code and more details of googlesearch library, you can visit the official repository.
+Google API
+Google API is a Python library used to perform google searches efficiently. It works similarly to the other google libraries; it scraps the data from Google.
+Note - It is not recommended not to run multiple times since it involves scraping.
+To install this library use the following command in the terminal.
+
+pip install git+https://github.com/abenassi/Google-Search-API
+
+Now, let's do some simple search using googlesearchapi.
+Example -
+
+from googleapi import google
+search_results = google.search("Taylor Swift")
+print(search_results)
+
+Output -
+[GoogleResult(name=Taylor Swift | Homewww.taylorswift.com description=taylor swift - willow (official music video) RsEZ.., GoogleResult(name=Taylor Swift - Wikipediaen.wikipedia.org > wiki > Taylo.. 
+description=Taylor Alison Swift (born December 13, 1989) is a.., 
+GoogleResult(name=Taylor Swift (@taylorswift) * Instagram photos and vide.. 
+description=142.1m Followers, 0 Following, 486 Posts - See In.., 
+GoogleResult(name=Taylor Swift - Home | Facebookwww.facebook.com > ... > .. 
+description=Taylor Swift. 70978350 likes * 788642 talking abo.., 
+GoogleResult(name=Taylor Swift | Billboardwww.billboard.com > music > tay.. 
+description=Not content to merely be a country superstar, Tay.., 
+GoogleResult(name=Taylor Swift: Evermore review - a songwriter for the ag.. 
+description=10 hours ago -- Swift is a songwriter for the ages.., 
+GoogleResult(name=Taylor Swift on Spotifyopen.spotify.com > artist description=Taylor Swift, Category: Artist, Albums: evermore,..]
+
+The googleapi prompts not only the source link but also appends the result with name and description as well. According to the developers, this library is in a development phase; more features are yet to come.
+Currency Conversion
+The googlesearchapi also allows us to convert the currency. It means, we can use the currency converter through the Python code. Let's understand the following example -
+Example -
+
+from googleapi import google
+rupees = google.convert_currency(5.0, "USD", "RS")
+print("5.0 USD = {0} RS".format(rupees))
+
+Output:
+5.0 USD = 397.55 rupees
+
+You can try with the other currencies.
+Conclusion
+This tutorial includes the two essential libraries for the google search APIs. Using these API, we can search the query using the Python code. You are free to explore these libraries and use them according to the requirements. This tutorial's motive is to familiarize you with the google search library.
+
+
+Next TopicKMP Algorithm - Implementation of KMP Algorithm using Python
+
+
+
+
+← prev
+next →
+
+
+
+

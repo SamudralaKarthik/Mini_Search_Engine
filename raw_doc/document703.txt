@@ -1,0 +1,231 @@
+
+
+
+
+next →
+← prev
+
+Arguments and Parameters in Python
+Be it any programming language, Arguments and Parameters are the two words that cause a lot of confusion to programmers. Sometimes, these two words are used interchangeably, but actually, they have two different yet similar meanings. This tutorial explains the differences between these two words and dives deep into the concepts with examples.
+Both arguments and parameters are variables/ constants passed into a function. The difference is that:
+
+Arguments are the variables passed to the function in the function call.
+Parameters are the variables used in the function definition.
+The number of arguments and parameters should always be equal except for the variable length argument list.
+
+Example:
+
+def add_func(a,b):
+    sum = a + b
+    return sum
+num1 = int(input("Enter the value of the first number: "))
+num2 = int(input("Enter the value of the second number: "))
+print("Sum of two numbers: ",add_func(num1, num2))
+
+Output:
+Enter the value of the first number: 5
+Enter the value of the second number: 2
+Sum of two numbers:  7
+
+Points to grasp from the Example:
+
+(num1, num2) are in the function call, and (a, b) are in the function definition.
+(num1, num2) are arguments and (a, b) are parameters.
+
+Mechanism:
+Observe that in the above example, num1 and num2 are the values in the function call with which we called the function. When the function is invoked, a and b are replaced with num1 and num2, the operation is performed on the arguments, and the result is returned.
+Functions are written to avoid writing frequently used logic again and again. To write a general logic, we use some variables, which are parameters. They belong to the function definition. When we need the function while writing our program, we need to apply the function logic on the variables we used in our program, called the arguments. We then call the function with the arguments.
+Types of Arguments:
+Based on how we pass arguments to parameters, arguments are of two types:
+
+Positional arguments
+Keyword arguments
+
+
+Given some parameters, if the respective arguments are passed in order one after the other, those arguments are called the "Positional arguments."
+If the arguments are passed by assigning them to their respective parameters in the function call with no significance to the passing order, they are called "Keyword arguments".
+
+Example:
+
+def details(name, age, grade):
+    print("Details of student:", name)
+    print("age: ", age)
+    print("grade: ", grade)
+details("Raghav", 12, 6)
+details("Santhosh", grade = 6, age = 12)
+
+Output:
+Details of student:  Raghav
+age:  12
+grade:  6
+Details of student:  Santhosh
+age:  12
+grade:  6
+
+Points to grasp from the Example:
+First Function Call:
+
+The function has three parameters-name, age and grade. So, it accepts three arguments.
+In the first function call:
+
+
+details("Raghav", 12, 6)
+
+The arguments are passed position-wise to the parameters, which mean according to the passed order:
+
+name is replaced with "Raghav."
+age is replaced with 12 and
+grade is replaced with 6
+In the first function call, the order of passing the arguments matter. The parameters accept the arguments in the given order only.
+In the Second Function Call:
+
+
+details("Santhosh", grade = 6, age = 12)
+
+Here, the first argument, "Santhosh", is passed based on its position to name, and the next two arguments are passed by assignment to their respective parameters. As you can observe, here, the position didn't matter.
+Important Point:
+
+Keyword arguments must always follow positional arguments. If not, Python will raise a syntax error:
+
+If we write: details("Santhosh", age = 6, 12)
+
+details("Santhosh", age = 6, 12)
+                                 ^
+SyntaxError: positional argument follows keyword argument
+
+Call by Value and Call by Reference:
+This is the most important concept on arguments and parameters. Based on the type of arguments passed to the parameters, there are two methods of invoking/ calling functions-Call by value and Call by reference.
+When the values of arguments are passed into parameters in the function, the values are copied into parameters. This method is called "Call by value".
+In this method, arguments and parameters are different and are stored in different memory locations.
+
+Changes done on parameters inside the function do not affect the arguments in the program and vice versa.
+Java functions/ methods follow only Call by value.
+
+When the addresses of the arguments are passed into parameters instead of values, this method of invoking a function is called "Call by Reference".
+
+Both the arguments and parameters refer to the same memory location.
+Changes to the parameters (pointers) will affect the values of the arguments in the program.
+By default, C language follows Call by value, but using the indirection operator and pointers; we can simulate Call by reference.
+
+Which Method does Python Follow?
+Python doesn't use Call by value or Call by reference. It follows a method called "Call by assignment". In Python, every single entity is an object. Objects are divided into Mutable and Immutable objects. What happens in Python when we assign a value to a variable is different from other low-level languages like C or Java.
+Suppose, in the statement:
+a = 20
+a is the variable, and 20 is the value assigned. Here in a memory location, 20 is saved, and a is the name we're giving to the reference we're making to the memory location. Now, if we say:
+a = 21
+The name stops referring to the memory location with 20 and starts to refer to another memory location with 21.
+In other languages like C, variables are the memory locations that store the values.
+Example:
+In C:
+
+#include<stdio.h>
+int main()
+{
+ 	int a;
+ 	a = 20;
+ 	printf("%p", (void*)&a);
+ 	a = 22;
+ 	printf("\n%p", (void*)&a);
+}
+
+Output:
+000000000062FE1C
+000000000062FE1C
+
+In Python:
+
+a = 20
+print(id(a))
+a = 21
+print(id(a))
+
+Output:
+140714950863232
+140714950863264
+
+
+As you can observe: In C, after reassigning the value, the variable is still in the same memory location, while in Python, it refers to a different memory location. (id -> address in Python).
+But that's not all. There are other types of objects too.
+
+Now comes the concept of Mutable and Immutable objects in Python.
+Mutable and Immutable Objects in Python:
+
+Mutable objects are those objects/ data types in Python that we can modify after creating them Ex: Lists, Dictionaries, Sets
+Immutable objects, on the other hand, are objects that can't be modified once created. Ex: int, float, strings, tuples
+
+Example:
+Mutable Objects:
+
+a = [23, 45, 89]
+print(id(a))
+a.append(49)
+print(id(a))
+
+Output:
+2253724439168
+2253724439168
+
+Understanding:
+A list is immutable, which means we can alter or modify it after creating it. As you can observe, when created with the name a, it is saved in the address "2253724439168". Using append(), we altered it by appending another value. It is still in the same memory location, meaning the same object is modified.
+Immutable Objects:
+
+a = 20
+print(id(a))
+a += 23
+print(id(a))
+
+Output:
+140714950863232
+140714950863968
+
+Understanding:
+This is the case we discussed before in the tutorial. An int object is immutable, meaning we can't modify it once created. You might wonder we still added 23 in the above code. Observe that the object when created is not the same object after adding. Both are in different memory locations which means they are different objects.
+So, how are arguments passed to the parameters when a function is invoked?
+With all the knowledge about assignment operation in Python:
+
+The passing is like a "Call by Reference" if the arguments are mutable.
+The passing is like "Call by Value" if the arguments are immutable.
+
+Example:
+
+def details(name, age, grade, marks):
+    marks.append(26)
+    name += " Styles"
+    print("Details of the student: ")
+    print("name: ",name)
+    print("age: ",age)
+    print("grade: ", grade)
+    print("marks: ", marks)
+name = "Harry"
+age = 15
+grade = 10
+marks = [25, 29, 21, 30]
+details (name, age, grade, marks)
+print(grade)
+print(marks)
+
+Output:
+Details of the student: 
+name:  Harry Styles
+age:  15
+grade:  10
+marks:  [25, 29, 2F1, 30, 26]
+10
+[25, 29, 21, 30, 26]
+
+Understanding:
+The function accepts 4 arguments. Notice the arguments grade and marks. grade is an integer value which means it is immutable. Hence, once created, we can't modify it. It follows "Call by Value". As we discussed earlier in the tutorial, when following Call by reference, "Changes done on the parameters (pointers) will not affect the values of the arguments in the program". Hence, the original value of grade in the program is not modified after concatenating the string in the function definition.
+In the case of marks, it is a list and is mutable. So, it follows "Call by Reference," which means, "Changes done on the parameters (pointers) will affect the values of the arguments in the program". Hence, the change is reflected in the original program after appending the list in the function definition.
+
+
+Next TopicAttributes Meaning in Python
+
+
+
+
+← prev
+next →
+
+
+
+

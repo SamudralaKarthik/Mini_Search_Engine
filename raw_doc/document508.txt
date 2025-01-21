@@ -1,0 +1,215 @@
+
+
+
+
+next →
+← prev
+
+Encrypt a Password in Python Using bcrypt
+Encryption is essential as it allows you to securely safeguard data that you don't want others to see. Businesses use it to safeguard business secrets, governments use it to safeguard confidential information, and many people use it to safeguard personal information to avoid identity theft. To keep user credentials in a database safely, password encryption is required. Anyone with access to a user database on a company's servers (including hackers) might simply examine any stored passwords if the passwords were not encrypted. Without password encryption, even a strong 32-character password generated with a secure password generator is meaningless! If your password is read on a server, anyone may use it by copying and pasting it-no matter how long or hard the password is!
+Before storing your password on the server, encryption scrambles it. So, instead of password123, if someone hacks the server, they will find a random string of letters and numbers.
+Understanding Password Encryption
+To successfully describe password encryption, we must first understand the language. A few concepts may be new, so here is a brief rundown of password encryption jargon.
+
+A random string of bits is used to lock and unlock passwords. You will receive private and public keys, which encrypt and decode data in different ways, but we won't get too technical with keys!
+Bits: A logical state that can have one of two values, such as 1/0, true/false, yes/no, or on/off.
+Block (also known as a block cipher): A deterministic algorithm that operates on blocks of fixed length bits.
+Hash function: The algorithm that encrypts and decrypts passwords using the key. A hash function is a piece of code that is executed whenever a user saves a password or login into an application.
+The hash function is the algorithm that utilizes the key to encrypt and decode passwords. When someone saves a password or logs into an application, a hash function is simply a piece of code that executes.
+Hash: Your password is represented by a random series of numbers and characters. For authentication, the hash function utilizes your hash rather than the raw password.
+Salt is a combination of letters and numbers that are added to the hash.
+
+A hash function produces a hash version of a new password and saves it on the server when you save it. The hash function recreates the hash every time you log in with your password to determine if it matches what's saved. The algorithm passes authentication and logs you in if the hashes match.
+For example:
+
+Original password: [email protected])RD
+Hashed password: 6AF1CE202340FE71BDB914AD5357E33A6982A63B
+
+Simple hashed passwords are not hack-proof, despite their appearance. The hash algorithm generates a distinct hash for each password, not for each user. As a result, if numerous users have the same password, Pa$$w0rd123, the hash will be identical. Engineers use salt passwords to bypass this encryption flaw, ensuring that each hash is unique even if the passwords are similar.
+Password encryption hides user passwords, making them difficult to guess or decode. It's a crucial step in creating user-base software that's safe. You cannot skip this step, whether you are using Flask or another lightweight Python framework. This is where bcrypt is useful.
+How bcrypt Works
+Niels Provos and David Mazières created the bcrypt password hashing algorithm, which is based on the Blowfish cipher. The bcrypt function is OpenBSD's default password hashing algorithm. Bcrypt is available in C, C++, C#, Java, JavaScript, PHP, Python, and more programming languages. Bcrypt is a multi-language hashing library that provides one-of-a-kind password encryption. By default, it creates additional random characters (salt) when encrypting your string to improve the security of your password. You may also indicate how many extra characters you wish to add to an incoming string as an option. The bcrypt library only reads byte code, not raw strings. To begin, you'll encode an incoming password string before handing it to bcrypt to be encrypted. Encryption is not the same as encoding. It merely assures that a text is machine-readable before being masked by an encryption technique.
+Encrypting a Password in Python With bcrypt:
+Python makes bcrypt password-encryption simple. We'll concentrate on how to achieve it without a framework. However, if you understand how to save and read your users' inputs from the database, it follows the same procedure in frameworks.
+Code:
+
+#Sample python code that depicts the usage of bcrypt function  for hashing of the specified input text 
+
+# Importing the required libraries that will be used across the code.
+import bcrypt
+import sys
+
+#We have written a class that will be used for the encryption of the specified input text there are two functions in this class one is the Constructor and another is the actual function that will perform the actual hashing of the specified input string 
+class NirnayEncryptor:
+	
+	# This is the constructor function in which we have initialized the class variables with the input string taken from the users and this input string is used for hashing 
+	def __init__(self,string_to_encrypt):
+		self.string_to_encrypt = "{}".format(string_to_encrypt)
+		self.string_to_encrypt = self.string_to_encrypt.encode('utf-8')
+
+	#This is the actual function which is going to perform the hashing operation on the specified input string taken as input in the previous step there is one parameter to this function that is number of rounds this variable represents the number of rounds that we want to use while hashing our input string by default the value of number of rounds variable is 16 but we can change this value by passing the actual value as parameters while calling this function 
+	def encrypt_the_string(self,number_of_rounds=16):
+		salt_object = bcrypt.gensalt(rounds=number_of_rounds)
+		resultant_hashed_str = bcrypt.hashpw(self.string_to_encrypt, salt_object)
+		print("The encrypted text or password is: {}".format(resultant_hashed_str))
+		return resultant_hashed_str
+
+
+#We have written a class that will be used for the decryption of the specified input text there are two functions in this class one is the Constructor and another is the actual function that will perform the actual hashing of the specified input string 
+class NirnayDecryptor:
+
+		# This is the constructor function in which we have initialized the class variables with the input string taken from the users and this input string is used for hashing 
+	def __init__(self,str_to_decrypt):
+		self.str_to_decrypt = "{}".format(str_to_decrypt)
+		self.str_to_decrypt = self.str_to_decrypt.encode('utf-8')
+
+	# This is a function that actually decrypts the hashed string and compares the value of the decrypted string with the actual string and Returns a Boolean value  if the match is successful and both the encrypted and the decrypted strings are matching then the return type of this function is true on the other hand if the encrypt and decrypt strings are not matching the return type of this function will be false  there is one parameter to this function that is the number of rounds this variable represents the number of rounds that we want to use while hashing our input string by default the value of the number of rounds variable is 16 but we can change this value bypassing the actual value as parameters while calling this function
+	def decrypt_the_string(self,number_of_rounds=16):
+		salt_object = bcrypt.gensalt(rounds=number_of_rounds)
+		resultant_hashed_str = bcrypt.hashpw(self.str_to_decrypt, salt_object)
+		if bcrypt.checkpw(self.str_to_decrypt, resultant_hashed_str):
+			return True
+		else:
+			return False
+
+#This is the main function which is called to create the objects of both the above-written classes to perform the encryption and decryption on the specified input string 
+def main():
+
+	while(True):
+		print("Please choose one of the appropriate option::")
+		print("1. To enter a string and print the resultant hashed string for it using bcrypt.")
+		print("2. To enter a string and check is it matching with the hashed password or not using bcrypt.")
+		print("3. To exit from the code execution.")
+		menu_choice = input()
+		menu_choice = int(menu_choice)
+
+		
+		# For the encryption of the string first of all the string to be encrypted is taken as input from the user once we have the input string we create the the object of the encryption class and call the encrypt_the_string fucntion with the help of this created object of the NirnayEncryptor class
+		if menu_choice == 1:
+			print(">Enter the string that you want to convert to the hashed string::")
+			input_str = input()
+			encryptor = NirnayEncryptor(input_str)
+			encryptor.encrypt_the_string()
+
+                      ## For the encryption of the string first of all the string to be decrypted is taken as input from the user once we have the input string we create the the object of the encryption class and call the decrypt_the_stringfucntion with the help of this created object of the NirnayDecryptor class
+ 		elif menu_choice == 2:
+			print(">Enter the string that you want to check against hashed string::")
+			input_str = input()
+			decryptor = NirnayDecryptor(input_str)
+			comparison_result = decryptor.decrypt_the_string()
+			if comparison_result == True:
+				print("The entered string has matched successfully with the hashed password/string.")
+			else:
+				print("The entered string has not matched with the hashed password/string.")
+		
+		print("Do you want to continue or exit the code execution?[y/n]")
+		continue_or_exit = input()
+
+		#After the completion of one round a question is prompted to the user asking whether you want to continue the code execution or you want to exit the code depending upon the input provided by the user further actions are taken if the user wants to continue the code execution and perform further operations related to encryption and decryption of the string the code is continued whereas on the other hand if the user wants to exit the code execution the exit function is called and the program is ended
+		
+                      if continue_or_exit == 'y' or continue_or_exit == 'Y':
+			pass
+		elif continue_or_exit == 'n' or continue_or_exit == 'N':
+			sys.exit()
+
+#In the end for the execution of program the main function is called that has the steps for the encryption and decryption on the specified input string 
+if __name__ == '__main__':
+	main()
+
+<So, in the above-written code, we have created two classes that will be used for the encryption and decryption of the specified input string we have different functions that are created for the specified encryption and decryption of the string parameters which are the input values taken from the use. in the main function we have created the object of these encryption and decryption classes and called This functions with the help of the respective class objects. the user is provided with the menu-driven approach from where he can choose different operations like encryption of a particular input string or decryption of the input string or he can choose to exit from the current execution of the code depending upon the choice provided by the user the further steps are taken and the execution is continued until the user exit the code execution.
+After successfully running the above code now let's have a look at the output generated by this code.
+Output:
+[email protected]:~$ python3 code.py 
+Please choose one of the appropriate options::
+1. To enter a string and print the resultant hashed string for it using bcrypt.
+2. To enter a string and check if it matches with the hashed password or not using bcrypt.
+3. To exit from the code execution.
+1
+>Enter the string that you want to convert to the hashed string::
+mystrongpassword
+The encrypted text or password is: b'$2b$16$mnqcnXcqeJedkgwmZ431JeLcvqo60BwHW/Fw6pVRG8iamUYWl7qYK'
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To enter a string and print the resultant hashed string for it using bcrypt.
+2. To enter a string and check if it matches with the hashed password or not using bcrypt.
+3. To exit from the code execution.
+2
+>Enter the string that you want to check against hashed string::
+mystrongpassword
+The entered string has matched successfully with the hashed password/string.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To enter a string and print the resultant hashed string for it using bcrypt.
+2. To enter a string and check if it matches with the hashed password or not using bcrypt.
+3. To exit from the code execution.
+1
+>Enter the string that you want to convert to the hashed string::
+newpassword
+The encrypted text or password is: b'$2b$16$Uaer9zR3U5zbSmNsvZjsFOwlOXjWsLz0MaWNatZ/wptXW5/hwCsxK'
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To enter a string and print the resultant hashed string for it using bcrypt.
+2. To enter a string and check if it matches with the hashed password or not using bcrypt.
+3. To exit from the code execution.
+2
+>Enter the string that you want to check against hashed string::
+NewPassword
+The entered string has not matched with the hashed password/string.
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To enter a string and print the resultant hashed string for it using bcrypt.
+2. To enter a string and check if it matches with the hashed password or not using bcrypt.
+3. To exit from the code execution.
+1
+>Enter the string that you want to convert to the hashed string::
+salted_string
+The encrypted text or password is: b'$2b$16$jEyiUoWtN.TCnKlVDeEXxO9VJz4mWzEGr/ZifkjHCTy.PWnvm8Txy'
+Do you want to continue or exit the code execution?[y/n]
+y
+Please choose one of the appropriate options::
+1. To enter a string and print the resultant hashed string for it using bcrypt.
+2. To enter a string and check if it matches with the hashed password or not using bcrypt.
+3. To exit from the code execution.
+2
+>Enter the string that you want to check against hashed string::
+salted_string
+The entered string has matched successfully with the hashed password/string.
+Do you want to continue or exit the code execution?[y/n]
+n
+
+As we can see that after the successful running of the above code the user is prompted with three options listed as the first one to enter a string and print the resultant hashed string for it the second option is the option for the decryption of the input string and in the last third option is the option which the user can opt if the user wants to exit the code execution. we have provided different inputs for both the encryption as well as the decryption functions to be called and have verified the results of both these encryption and decryption functions by printing the different encrypted and decrypted strings. and in the last, the user has exited the code execution by opting for option number 3.
+Advantages of Encryption
+Everyone is concerned about moving sensitive data to the cloud since many firms believe the cloud is not as secure as their own data center. Outsiders can access the data while it is on the cloud, but data from clients and competitors are stored in the same location. Companies require the cloud's benefits due to its tremendous affordability and versatility. This feature includes the ability to spin up or decommission servers as market demands change. So, what if the service provider requests to leave? Multi-tenancy, as well as improved flexibility and cost savings, are possible with virtualized contexts.
+If the data is encrypted and the keys used for encryption are both present, the service providers will be able to access it. To get around this problem, it makes sense to perform data encryption on the cloud and keep the encryption keys on the users' end. Regardless of how basic a key security solution is, certain companies refuse to handle encryption keys. They have concerns regarding backup, pricing, and catastrophe recovery.
+Payment cards are used for a variety of transactions, and the card and its associated data must be protected. The majority of cardholders are aware that their personal information and data are safe and secure. As a result, encryption is one of the PCI DSS's most effective strategies (Payment Card Industry Data Security Standard).
+If a data breach occurs and personal information is deleted, the affected individuals must be contacted. If the intercepted data is secure and the security keys are not broken, any jurisdiction has public notification with a safe harbor clause. As a result, in the event of a breach, implementing encryption and thorough key protection might save a lot of money.
+Many organizations now offer virtual offices as part of their internet services, which are not protected by their very existence. Machine and storage robbery is a very real danger. On the servers of many of these companies is insecure confidential data. Data encryption safeguards against data modification or unintended destruction, and today's security technologies have expanded possibilities.
+Consider delivering cryptographic keys to remote data only during business hours, rendering the code useless if the power goes out.
+Furthermore, unlike file or folder encryption, Full Disk Encryption (FDE) encrypts data while it is stored on the hard disc. To put it another way, the encryption procedure is carried out automatically. As a result, encrypting files or folders is significantly easier, but you must manually select the files or directories you want to encrypt.
+Some of the demerits of Encryption
+
+Data Encryption Keys: Data encryption is, without a question, a tremendous effort for an IT specialist. The more data encryption keys there are, the further challenging it is for IT administrators to keep track of them all. You destroy the data connected with the encryption if you lose the key to the encryption.
+Expense: Data encryption can be fairly costly because the systems that keep it up to date must have the capacity and improvements to do so. The lowering of system operations can be jeopardized if you don't have capable systems.
+Unrealistic Requirements: If a company doesn't grasp some of the constraints imposed by data encryption technology, it's possible to set excessive rules and guidelines, putting encrypting data security at risk.
+Compatibility: Integrating data encryption technologies with current programs might be difficult. This could have a negative influence on the system's normal operations.
+Recovery of complex data: The recovery of data on drives is complicated with whole disc encryption, as it is with all other types of encryption. Consider this: encryption would be pointless if encrypted data could be easily restored. As a result, data recovery for PST files, such as single file recovery, is challenging.
+The computer is running slow: Furthermore, when whole disc encryption is used, all discs are encrypted. In this situation, you must use a verification code to decrypt the disc anytime you try to read its information. Clearly, this procedure will cause your machine to slow down.
+
+Thus, in this article, we have seen how we can use the bcrypt library provided by Python as a module to encrypt and decrypt the input string we have also gone through the various use case in areas of this function and various merits and demerits of this bcrypt library.
+
+
+Next TopicPyramid Framework in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,203 @@
+
+
+
+
+next →
+← prev
+
+Simple FLAMES game in Python
+Python is a programming language that serves multiple purposes for programmers to perform any activity easily. Python can also be utilized for game development. In the following tutorial, let us build a simple FLAMES game without using any external game libraries such as PyGame.
+But before we get started, let us briefly understand what the FLAMES game is.
+What is the FLAMES game?
+FLAMES is a game named after the abbreviation: Friends, Lovers, Affectionate, Marriage, Enemies, Siblings. It is a famous game among young girls at sleepovers, specifically with pre-teens and teens who are starting to explore the world of crushes. This game does not precisely predict whether an individual is perfect for someone or not; however, it can be fun to play with friends.
+How to Play the FLAMES game?
+The FLAMES game is originally played on paper. Thus, the general requirement for this game is a pen/pencil and paper. However, we will be playing this game on Computer. So, the method of playing involves the following steps:
+STEP 1: Take two names
+We will start by writing two names. For example, we will use "LOID FORGER" and "YOR FORGER".
+STEP 2: Cancel out the common letters in both names
+We will now cancel out the common letters in both the names irrespectively of the case in which the letters are written. Note that we only have to cancel out an instance of the letter in both names, not all instances of the letter.
+In the above example, we will get "LID" & "YR" from "LOID FORGER" & "YOR FORGER". As we can observe, we have eliminated the common letters - O, F, O, R, G, E, and R from both the words.
+STEP 3: Count the number of remaining letters
+Once we eliminate all the common letters, we will count the remaining letters in both names.
+In the above example, we will combine the uncancelled letters and get - "LIDYR" and count the total letters in the word. As a result, we get 5.
+Step 4: Compare the number to the acronym FLAMES and remove letters accordingly.
+We will now start assigning each number to each letter in the acronym, like 1 to F, 2 to L, 3 to A..., till we get to that number. Counting is done in anti-clockwise circular fashion. If we get to the end of the acronym, we restart the counter till we get to the number. For example, 6 to S, so 7 will begin at F again until we get to the end of the number.
+Once we get to the end, we will remove that letter and restart the counting until we get only one letter left. We will then compare the result with the following table:
+
+
+S. No.
+Letter
+Meaning
+
+
+1
+F
+Friends
+
+
+2
+L
+Lovers
+
+
+3
+A
+Affectionate
+
+
+4
+M
+Marriage
+
+
+5
+E
+Enemies
+
+
+6
+S
+Siblings
+
+
+Let us now consider implementing the above example and compare the number we got to the acronym FLAMES.
+
+
+F
+L
+A
+M
+E
+S
+
+
+There is a total of 5 letters present in the word. We will start the counting from F; E is at the fifth count, so we will eliminate E and begin the counting again; however, at this time, we will start from S.
+
+
+F
+L
+A
+M
+S
+
+
+Now, M is at the fifth count, so we will eliminate M and begin counting from S.
+
+
+F
+L
+A
+S
+
+
+S is at the fifth count, so we will eliminate S and begin counting from F.
+
+
+F
+L
+A
+
+
+L is at the fifth count, so we will eliminate L and begin counting from A.
+
+
+F
+A
+
+
+A is at the fifth count so we will eliminate A. We have only one letter remaining; thus, this is the final answer.
+
+
+F
+
+
+Hence, the relationship is F, i.e., Friends.
+Implementation of FLAMES game in Python
+We will accept two names as input and then remove the common characters with their respective common occurrences. To remove, we will create a user-defined function that will store a list of characters of two players' names respectively and return a list of concatenated lists. Once we remove all the common characters, we will count the total number of remaining characters and create a result list with FLAMES acronyms, i.e., ["Friends", "Lovers", "Affectionate", "Marriage", "Enemies", "Siblings"]. We will then begin removing word after word until the list is left with only one word, with the help of the count we got. The word which remains in the list will be the result.
+Let us now consider the following snippet of code demonstrating the same:
+File: flames.py
+
+# function for removing common characters
+def eliminateCommonChars(listOne, listTwo) :
+    for i in range(len(listOne)) :
+        for j in range(len(listTwo)) :
+            if listOne[i] == listTwo[j] :
+                c = listOne[i]
+                listOne.remove(c)
+                listTwo.remove(c)
+                listThree = listOne + ["*"] + listTwo
+                return [listThree, True]
+
+    listThree = listOne + ["*"] + listTwo
+    return [listThree, False]
+
+# Driver code
+if __name__ == "__main__" :
+    playerOne = input("First Player Name : ")
+    playerOne = playerOne.lower()
+    playerOne.replace(" ", "")
+    playerOneList = list(playerOne)
+
+    playerTwo = input("Second Player Name : ")
+    playerTwo = playerTwo.lower()
+    playerTwo.replace(" ", "")
+    playerTwoList = list(playerTwo)
+
+    proceed = True
+    
+    while proceed :
+        retList = eliminateCommonChars(playerOneList, playerTwoList)
+        conList = retList[0]
+        proceed = retList[1]
+        starIndex = conList.index("*")
+
+        playerOneList = conList[ : starIndex]
+        playerTwoList = conList[starIndex + 1 : ]
+
+    theCount = len(playerOneList) + len(playerTwoList)
+
+    # list of FLAMES acronym
+    res = ["Friends", "Lovers", "Affectionate", "Marriage", "Enemies", "Siblings"]
+
+    while len(res) > 1 :
+        splitIndex = (theCount % len(res) - 1)
+        if splitIndex >= 0 :
+            right = res[splitIndex + 1 : ]
+            left = res[ : splitIndex]
+            res = right + left
+        else :
+            res = res[ : len(res) - 1]
+
+    # print final result
+    print("Relationship Status :", res[0])
+
+Explanation:
+In the above snippet of code, we have defined a function as eliminateCommonChars() to remove common characters with their respective occurrences. This function accepts two lists as its arguments. We have used two for-loops within this function to iterate through these lists. We have then checked if any common character is found. We have then removed that character and returned the list of concatenated lists with True Flag. If no common characters are found, another concatenated list is returned with a False Flag. We have then defined the main function that accepts users' names and converts them into lower case, replacing any space with an empty string and making a list of letters or characters. We have then assigned an initial flag as True. We have then used the while loop and called the eliminateCommonChars() function until common characters are found or keep looping until proceed flag is True. We then counted the total remaining letters in the list and created another list as res consisting of the FLAMES acronym. We used the while loop again and kept looping until only one item was left in the res list. We have also stored the index value from where we have to perform slicing. To perform anti-clockwise circular fashion counting, we have to check if the split index is greater than or equal to zero. At last, we have done list slicing and list concatenation and printed the result.
+Let us now save this Python file and execute the following command in the command shell or terminal and see the output:
+Command:
+
+$ python flames.py
+
+Output 1:
+First Player Name : LOID FORGER
+Second Player Name : YOR FORGER
+Relationship status : Friends
+
+Output 2:
+First Player Name : STEVE ROGERS
+Second Player Name : PEGGY CARTER
+Relationship status : Lovers
+
+
+
+Next TopicAlarm Clock with GUI in Python
+
+
+
+
+← prev
+next →
+
+
+
+

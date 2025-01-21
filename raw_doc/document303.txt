@@ -1,0 +1,157 @@
+
+
+
+
+next →
+← prev
+
+Context Manager in Python
+In this tutorial, we will learn about "Context Manager" in Python and how it is helpful in managing resources, files descriptors, and database connections.
+Managing Resources:
+The users use resources like file operations, or database connections are very common in any programming language.
+But all these resources have a limit. Therefore, the main problem is to make sure these resources will release after usage.
+Because if they are not released, this could lead to resources leakage, which may cause either slow down the system or crash. If the machine is set up in the system of users, which can automatically teardown the resources, it can be very helpful. In Python, the users can achieve this by using context managers, which are used for facilitating the proper handling of the resources. The most popular way of performing file operations is by using the "with" keyword in Python.
+Example 1:
+
+with open("text_file.txt") as file:   
+    data = file.read()
+
+Let's see an example of file management. When a file is opened, the file descriptors will be consumed, which is a limited resource. The process can open only a limited number of files at a time.
+Example 2:
+
+file_descriptors = []
+for Y in range(10000):
+    file_descriptors.append( open ('test_file.txt', 'w'))
+
+Output:
+OSError                                   Traceback (most recent call last)
+ in 
+      1 file_descriptors = []
+      2 for Y in range(10000):
+----> 3 file_descriptors.append( open ('test_file.txt', 'w'))
+OSError: [Errno 24] Too many open files: 'test_file.txt'
+
+The above example is the case of the file descriptors leakage. An error occurred saying, "Too many open files". This has happened because there are so many open files, and they are not closed. There may be a chance where the users may have forgot to close the open files.
+How to Manage Resources using Context Manager
+It is tough to close a file in all the places if the block of the program raises an exception or has any complex algorithm with numerous return paths.
+Most of the time, the users use "try-except-finally" in other programming languages while working with the file to make sure that the file resource is closed after usage, even if there is an exception. But in Python, they can use "Context Manager" for managing resources. The users can use the "with" keyword. When it gets evaluated, it will result in an object that can perform context management. We can write context managers by using classes or functions with decorators.
+How to Create a Context Manager:
+When the user creates a context manager, they need to make sure that the class has the following methods: __enter__() and __exit__().
+The __enter__() method will return the resource that has to be managed.
+The __exit__() method will not return anything but perform the clean-up operations.
+Let's see an example:
+
+First, we will create a simple class named "context_manager" for understanding the basic structure of creating a context manager by using the class method.
+
+Example:
+
+class context_manager():
+    def __init__(self):
+        print ("The 'init' method is called")          
+    def __enter__(self):
+        print ("The 'enter' method is called")
+        return self      
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        print ("The 'exit' method is called")
+with context_manager() as manager:
+    print ("The 'with' statement is block")
+
+Output
+The 'init' method is called
+The 'enter' method is called
+The 'with' statement is block
+The 'exit' method is called
+
+Example -
+In the above code we have created the "context_manager" object. That is assigned to the variable after the "as" keyword, that is, manager. After running the program, the following methods got executed in the sequence:
+
+__int__() 
+__enter__()
+Body of statement, which is the code inside the "with" statement block.
+__exit__(), In this method, the parameters are used for managing the exceptions. 
+
+File Management by using Context Manager:
+Now, we will apply the above concept for creating the class, which can help in file resource management. The "file_manager" class will help open the file, read or write content, and then close the file.
+Example:
+
+class file_manager():
+    def __init__(self, file_name, mode):
+        self.filename = file_name
+        self.mode = mode
+        self.file = None          
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
+        return self.file      
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        self.file.close()  
+# At last, load the file 
+with file_manager('test_file.txt', 'w') as file:
+    file.write('JavaTpoint')  
+print (file.closed)
+
+Output:
+True
+
+How to perform File Management by using Context Manager and "with" Statement
+After the user execute the "with" statement block, the operations will get executed in the following sequence:
+
+A "file_manager" object will be created with "text_file.txt" as the file name, and "w" (write) as the mode when the __init__() method will be executed.
+The __enter__() method will open the "text_file.txt" in the write mode and returns the "file_manager" object to the variable "file".
+The text "JavaTpoint" will be written into the file. 
+
+The __exit__() method will take care of closing the file after exiting the "with" statement block, which is a teardown operation.
+When the "print (file.closed)" statement runs, the users will get the output "True" as the "file_manager" would have already closed the file, which otherwise would be needed to be explicitly done.
+
+
+How to Manage the Database Connection by using Context Manger
+Now, we will show how to create a simple database connection management system. There is a limit in opening the number of database connections at a time, sane as File descriptors. Therefore, we use context manager, as it is helpful in managing the connections to the database as the user might have forgotten to close the collection.
+Install pymongo:
+To manage the database connection through the content manager, the user first has to install the "pymongo" library by using the following command:
+
+!pip3 instal pymongo
+
+Example:
+
+from pymongo import MongoClient as moc
+class mongo_db_connection_manager():
+    def __init__(self, host_name, port = '27017'):
+        self.hostname = host_name
+        self.port = port
+        self.connection = None 
+    def __enter__(self):
+        self.connection = moc(self.hostname, self.port)
+        return self  
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        self.connection.close() 
+# Now, connect with a localhost
+with mongo_db_connection_manager('localhost', 27017) as mongo:
+    collection_1 = mongo.connection.SampleDb.test
+    data_1 = collection_1.find({'_id': 142})
+    print (data_1.get(name))
+
+Output:
+Test
+
+Explanation:
+In the above code, after executing the "with" statement block, the following operations will happen in the sequence.
+
+The "mongo_db_connection_manager" object will be created with "localhost" as the "host_name" and port is equal to "27017", when the __init__() method executed.
+The __enter__() method will open the "mongodb" connection, and it will return the "mongo_db_connection_manager" object to the variable "mongo".
+The "SampleDB" database will access the "test" connection, and the document with the "_id = 147" will be retrieved. It will print the name filed of the document.
+The __exit__() method will take care of closing the file after exiting the "with" statement block, which is a teardown operation.
+
+Conclusion
+In this tutorial, we have discussed content manager in Python, how to create Content Manager, and how it can help in Resources Management, File management, and managing Database connections.
+
+
+Next TopicCreate BMI Calculator using Python
+
+
+
+
+← prev
+next →
+
+
+
+

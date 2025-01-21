@@ -1,0 +1,193 @@
+
+
+
+
+next →
+← prev
+
+Find all triplets with Zero Sum in Python
+In this tutorial, we will write the Python program to find all the triplets in the given list whose sum equals zero. We will solve this problem using various methods. First, let's understand the problem statement.
+Problem Statement -
+A list of the distinct element is given; we need to find the triplets in the list whose sum is zero.
+Example -
+
+Input: list1 = [0, -1, 2, -3, 1]
+Output: (0 -1 1), (2 -3 1)
+
+Explanation: The triplets with zero sum are
+0 + -1 + 1 = 0 and 2 + -3 + 1 = 0  
+
+Input: list2= [1, -2, 1, 0, 5}
+Output: 1 -2  1
+Explanation: The triplets with zero sum is
+1 + -2 + 1 = 0 
+
+Let's understand the first method to solve this problem -
+Method - 1: Brute-force Algorithm
+This simple method takes O(n3) times to solve this problem. In this method, we will follow the below approach -
+We will run the three for loops and check one by one whether the sum of the three elements is zero or not. If the sum of the three elements is zero, then print element; otherwise, print not found.
+Let's understand the following code.
+Example -
+
+def find_triplets(list1, n):
+    triplets = []
+    flag = False
+    for i in range(0, n-2):
+      
+        for j in range(i+1, n-1):
+          
+            for k in range(j+1, n):
+              
+                if (list1[i] + list1[j] + list1[k] == 0):
+                    triplets.append([list1[i], list1[j], list1[k]])
+                    flag = True
+      
+              
+    # If no triplet with 0 sum 
+    # flag in list1ay
+    if (flag == False):
+        print(" not exist ")
+        
+    return triplets
+  
+
+list1 = [-20, 0, 20, 40, -20, -40, 80]
+n = len(list1)
+print(find_triplets(list1, n))
+
+Output:
+[[-20, 0, 20], [-20, 40, -20], [0, 20, -20], [0, 40, -40]]
+
+Explanation - 
+In the above code, we run the three for loop i, j, and k. The first loop run to zero to n-2, the second for loop will run from i+1 to n - 1, and third loop run to j+1 to n. The loop counter specifies the three elements of triplets. Then, we checked the sum of elements at i'th, j'th, k'th is equal to zero or not. If the condition is true, print the sum else continue.
+Complexity Analysis:
+
+Time Complexity:The time complexity is O(n3).
+As three nested loops are required, so the time complexity is O(n3).
+Auxiliary Space:The auxiliary space is O(1).
+Since no extra space is required, so the space complexity is constant.
+
+Method - 2: Using Hashing
+In this method, we will use hashing to get the desired result. This method is more efficient than the previous one as it gives the result at a lesser time of O(N2). We will follow the below approach -
+It involves traversing through the array. For every element list1[i], find a pair with sum "-list1[i]". This problem reduces to a pair sum and can be solved using hashing in O(n) time.
+Let's understand the following code -
+Example -
+
+def find_triplets(list1, n):
+    
+    triplets = []
+    flag = False
+    for i in range(0, n-2):
+        
+        s = set()
+        for j in range(i + 1, n):
+            x = -(list1[i] + list1[j])
+            if x in s:
+                
+                triplets.append([x, list1[i], list1[j]])
+                flag = True
+            else:
+                s.add(list1[j])
+      
+              
+    # If no triplet with 0 sum 
+    # flag in list1ay
+    if (flag == False):
+        print(" not exist ")
+        
+    return triplets
+  
+
+list1 = [-20, 0, 20, 40, -20, -40, 80]
+n = len(list1)
+print(find_triplets(list1, n))
+
+Output:
+[[0, -20, 20], [40, -20, -20], [20, 0, -20], [40, 0, -40]]
+
+Explanation -
+In the above code, we created the hashmap to store the key-value pair. Then, we run the two nested loops; the outer loop runs from 0 to n-2 and the inner loop from i+1 to n-1. Then, we check the sum of i'th and j'th elements multiplied by -1 is present in the hashmap or not.
+If the element is present in the hashmap, print the triplets; insert the jth component of the hashmap. 
+Complexity Analysis: 
+
+Time Complexity:The time complexity is O(n2) because there are only two nested loops required, so the time complexity is O(n2).
+Auxiliary Space:The auxiliary space is O(n) because a hashmap is required, so the space complexity is linear.
+
+Method - 3: Using Sorting
+In this method, we will use sorting to get the appropriate result in O(n2) times. Let's understand the following code.
+Example -
+
+def find_triplets(list1, n):
+    
+    triplets = []
+    flag = False
+    for i in range(0, n-2):
+        
+        list1.sort()
+  
+    for i in range(0, n-1):
+      
+        # initialize left and right
+        l = i + 1
+        r = n - 1
+        x = list1[i]
+        while (l < r):
+          
+            if (x + list1[l] + list1[r] == 0):
+                # print elements if it's sum is zero
+                triplets.append([x, list1[l], list1[r]])
+                l+=1
+                r-=1
+                flag = True
+              
+  
+            # If sum of three elements is less
+            # than zero then increment in left
+            elif (x + list1[l] + list1[r] < 0):
+                l+=1
+  
+            # if sum is greater than zero then
+            # decrement in right side
+            else:
+                r-=1
+      
+              
+    # If no triplet with 0 sum 
+    # flag in list1ay
+    if (flag == False):
+        print(" not exist ")
+        
+    return triplets
+  
+
+list1 = [1, 2, 3, 4, 5, -6]
+n = len(list1)
+print(find_triplets(list1, n))
+
+Output:
+[[-6, 1, 5], [-6, 2, 4]]
+
+Explanation -
+In the above code, first, we sort the array in ascending order and traverse the array from start to end. For every index i, create two variable l = l + 1 and r = n - 1. Then, we run a loop until i is less than r; if the sum of list1[i], list1[j], and array[r] is equal to zero, then print the triplets and break the loop.
+Now, we check if the sum is less than increment the value of l; by increasing the value of the l, the sum will increase as the list is sorted, so list1[i+1]>list1[l].
+If the sum is more significant than zero, then decrement the value of r; by decreasing the value of r the sum will decrease as the array is sorted, so list1[r-1] < list1[r].
+Complexity Analysis:
+
+Time Complexity:The time complexity is O(n2) because there are only two nested loops required, so the time complexity is O(n2).
+Auxiliary Space:The auxiliary space is O(1) because a hashmap is required, so the space complexity is linear.
+
+Conclusion
+This tutorial includes the various methods to find the triplets. We have also implemented the code, explained its working and the corresponding time complexities.
+
+
+Next TopicGenerate HTML using tinyhtml Module in Python
+
+
+
+
+← prev
+next →
+
+
+
+

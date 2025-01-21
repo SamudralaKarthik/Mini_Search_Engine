@@ -1,0 +1,103 @@
+
+
+
+
+next →
+← prev
+
+Write a Python Program to Check a List Contains Duplicate Element
+In this tutorial, we will learn how to verify a list consists of duplicate elements or not. It is a basic list program that can be asked in the coding interview. We will solve this problem using various methods. Let's see the problem statement.
+Problem Statement
+An integer array list1 is given, return true if any value appears at least twice in the list, and return false if every element is distinct.
+Example - 1
+
+Input: list = [1, 2, 3, 1]
+Output: true
+
+Example - 2
+
+Input: list = [1, 2, 3, 4]
+Output: false
+
+Let's understand the following solutions.
+Approach - 1: Using set() function
+Example - 
+
+class Solution:
+    def duplicate(self, list1):
+        new_value = set(list1)
+        
+        if len(new_value) == len(list1):
+            return 'false'
+        else:
+            return 'true'
+            
+nums = [1, 2, 3, 1]
+obj = Solution()
+print(obj.duplicate(nums))
+
+Output:
+true
+
+Explanation - 
+In the above code, we have defined a class named Solution and duplicate() function inside it. The duplicate() function takes the one argument as list. First, we have type casted the given list into the set. As we know that set doesn't contain or remove the duplicate values. Then we checked the length of the new_value and list1. If the length of new_value and list1 is equal, it means there are no duplicate elements in the list so return false, otherwise true.
+Approach - 2: Check Duplicate Element after Sorting
+In this method, first, we will sort the given list (which will takes the 0(N(LogN)), we will use for loop to check the two consecutive elements to find out if they are duplicates. Using this method, the time complexity will improve to 0(N(LogN)) and we are still using the 0(1) constant space.
+Let's see the below code implementation -
+Example - 2
+
+class Solution:
+    def solution(self, list1):
+        list1.sort()
+        for i in range(1, len(list1)):
+            for j in range(0, i):
+                if list1[i] == list1[i-1]:
+                    return 'true'
+            return 'false'
+
+obj = Solution()               
+list1 = [1, 2, 3, 1]
+print(obj.solution(list1))    
+
+Output:
+true
+
+Explanation - 
+In the above code, we have sorted the given list using the built-in sort() method which will place the duplicate values corresponding to each other if exist. Then we run first for loop to store the index value and second loop to compare the corresponding values. In the first iteration, the value of i is 1 and the inner loop will be executed (0, 1) times. The value of list[i] is 1 and the value of list[i-1] is 1. Hence there are duplicated elements so we have returned the 'true'.
+Approach -3: Using Brute-force Method
+In this approach, we simple use the two for loops and matches the values with each other. If duplicate elements found return true otherwise false. This is a brute-force method so the time complexity is O(n2) at the cost of a constant space.
+Let's understand the following code implementation -
+Example - 
+
+class Solution:
+    def solution(self, list1):
+        for i in range(len(list1)):
+            for j in range(0, i):
+                if list1[i] == list1[j]:
+                    return 'true'
+        return 'false'
+
+obj = Solution()               
+list1 = [1, 2, 3, 4, 8, 2]
+print(obj.solution(list1))    
+
+Output:
+true
+
+Explanation -
+We have visited each value in the above code and compared them if the value matched returned true.
+Conclusion
+We have covered the three approaches to solve the given problem. You can also try to solve it using the other method or test the code with multiple test cases.
+
+
+Next TopicWrite Python Program to Search an Element in Sorted Array
+
+
+
+
+← prev
+next →
+
+
+
+

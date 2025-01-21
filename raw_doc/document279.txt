@@ -1,0 +1,135 @@
+
+
+
+
+next →
+← prev
+
+How to Change Plot Size in Matplotlib
+In Data visualization, plots are the most effective ways of representing the data visually. If it is not plotted in a detailed form it can appear complicated. Python has Matplotlib, which is used for representing data in the plotting form.
+The user should optimize the size of the plot while creating it. In this tutorial, we will discuss various methods for changing the default plot size as per the required dimensions of the user or resize the given plot.
+Method 1: By using set_figheight() and set_figwidth()
+The user can use set_figheight() for changing the height and set_figwidth() for changing the width of the plot.
+Example:
+
+# first, import the matplotlib library
+import matplotlib.pyplot as plot
+  
+# The values on x-axis
+x_axis = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+# The values on y-axis
+y_axis = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+  
+# Now, name the x and y axis
+plot.xlabel('X - AXIS')
+plot.ylabel('Y - AXIS')
+  
+#Then, plot the line plot with its default size
+print ("The plot is plotted in its default size: ")
+plot.plot(x_axis, y_axis)
+plot.show()
+  
+# Now, plot the line plot after changing the size of its width and height
+K = plot.figure()
+K.set_figwidth(5)
+K.set_figheight(2)
+  
+print ("The plot is plotted after changing its size: ")
+plot.plot(x_axis, y_axis)
+plot.show()
+
+Output:
+The plot is plotted in its default size: 
+
+
+The plot is plotted after changing its size: 
+
+
+Method 2: By using figsize() function
+The figsize() function takes two parameters, that is, width and height in inches. By default, the values of width = 6.4 inch and height = 4.8 inch.
+Syntax:
+
+Plot.figure(figsize = (x_axis, y_axis)
+
+Where x_axis is the width and y_axis is the height in inches.
+Example:
+
+# First, import the matplotlib library
+import matplotlib.pyplot as plot
+  
+# The values on x-axis
+x_axis = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+# The values on y-axis
+y_axis = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+#Then, plot the line plot with its default size
+print ("The plot is plotted in its default size: ")
+plot.plot(x_axis, y_axis)
+plot.show()
+  
+# Now, plot the line plot after changing the size of figure to 3 X 3
+plot.figure(figsize = (3, 3))
+print ("The plot is plotted after changing its size: ")
+plot.plot(x_axis, y_axis)
+plot.show()
+
+Output:
+The plot is plotted in its default size: 
+
+
+The plot is plotted after changing its size: 
+
+
+Method 3: By changing the default rcParams
+The user can change the default size permanently of the figure as per their needs by setting the figure.figsize.
+Example:
+
+# First, import the matplotlib library
+import matplotlib.pyplot as plot
+  
+# The values on x-axis
+x_axis = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+# The values on y-axis
+y_axis = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+  
+# now, name the x axis
+plot.xlabel('X - AXIS')
+# name the y axis
+plot.ylabel('Y - AXIS')
+  
+#Then, plot the line plot with its default size
+print ("The plot is plotted in its default size: ")
+plot.plot(x_axis, y_axis)
+plot.show()
+  
+# Now, change the rc parameters and plot the line plot after changing the size.
+plot.rcParams['figure.figsize'] = [3, 3]
+  
+print ("The plot is plotted after changing its size: ")
+plot.plot(x_axis, y_axis)
+plot.show()
+  
+plot.scatter(x_axis, y_axis)
+plot.show()
+
+Output:
+The plot is plotted in its default size: 
+
+
+The plot is plotted after changing its size: 
+
+
+
+
+
+Next TopicHow to Get the Zip Code in Python
+
+
+
+
+← prev
+next →
+
+
+
+

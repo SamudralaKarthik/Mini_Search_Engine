@@ -1,0 +1,168 @@
+
+
+
+
+next →
+← prev
+
+How to make a Python auto clicker
+What is Auto clicker?
+Auto clicker is a program where some code script is written, and based on the code, if some user defines a key is pressed, then the mouse will be clicked automatically. In Python, we can make an auto clicker project using a pynput module which can be installed by pip command.
+We can divide the auto clicker code into the following steps:
+1. Importing required modules
+We will import the time and thread module, and we will import the Button, Controller module from the mouse submodule of pynput. In the same way, we will import the Listener and Keycode modules from pynput's keyboard submodule.
+Example:
+
+import time
+import threading
+from pynput.mouse import Button, Controller
+from pynput.keyboard import Listener, KeyCode
+
+2. Initializing the variables
+In this section, we will initialize four variables which are very useful for the execution of the program.
+
+buttonDirection: This variable will decide which button side we want to click (right, left or middle).
+delayTime: This variable defines the time between two successive clicks.
+startStopButton: This variable defines which key or button will be used to start and stop the auto clicker project.
+terminateButton: This variable defines the button which will be used to terminate the program.
+
+Example:
+
+buttonDirection= Button.right
+delayTime= 0.001
+startStopButton = KeyCode(char='s')
+terminateButton= KeyCode(char='x')
+
+3. Creating the class
+In this section, we will create the class which extends the thread class to check whether the mouse click has been executed or not.
+Example:
+
+class ClickTheMouse(threading.Thread):
+	def __init__(self, delayTime, buttonDirection):
+		super(ClickTheMouse, self).__init__()
+		self.delayTime = delayTime
+		self.buttonDirection = buttonDirection
+		self.running = False
+		self.program_running = True
+
+4. In this section, we will define some methods to control the mouse clicks using threads externally.
+Example:
+
+def startMouseClick(self):
+		self.running = True
+
+def stopMouseClick(self):
+		self.running = False
+
+def exitScript(self):
+		self.stopMouseClick()
+		self.program_running = False
+
+5. In this section, we have defined the method which will be executing the complete code using two nested loops. These loops will be terminated when variables are set to false. Otherwise, they will keep continuing the program.
+Example:
+
+def run(self):
+	while self.program_running:
+		while self.running:
+			mouse.click(self.buttonDirection)
+			time.sleep(self.delayTime)
+		time.sleep(0.1)
+
+6. In this section, we will create the thread for mouse click and then we will start the thread.
+Example:
+
+mouse = Controller()
+clickThread = ClickTheMouse(delayTime, buttonDirection)
+clickThread.start()
+
+7. It is the last section where we define the function for keyboard click. If any key is pressed, it passes as an argument in this function and checks with different cases.
+If it is the startStop key, then the program will be started or stopped. If it is the terminating key, then the program will be terminated.
+Example:
+
+def on_press(key):
+	if key == startStopButton:
+		if clickThread.running:
+			clickThread.stopMouseclick()
+		else:
+			clickThread.startMouseclick()
+	elif key == terminateButton:
+		clickThread.exitScript()
+		listener.stop()
+
+with Listener(on_press=on_press) as listener:
+	listener.join()
+
+Complete Example:
+
+import time
+import threading
+from pynput.mouse import Button, Controller
+
+from pynput.keyboard import Listener, KeyCode
+
+
+delayTime = 0.001
+buttonDirection = Button.right
+startStopButton = KeyCode(char='s')
+terminateButton = KeyCode(char='x')
+
+class ClickTheMouse(threading.Thread):
+	def __init__(self, delayTime, buttonDirection):
+		super(ClickTheMouse, self).__init__()
+		self.delayTime = delayTime
+		self.buttonDirection = buttonDirection
+		self.running = False
+		self.program_running = True
+
+	def startMouseclick(self):
+		self.running = True
+
+	def stopMouseClick(self):
+		self.running = False
+
+	def exitScript(self):
+		self.stopMouseClick()
+		self.program_running = False
+		
+	def run(self):
+		while self.program_running:
+			while self.running:
+				mouse.click(self.buttonDirection)
+				time.sleep(self.delayTime)
+			time.sleep(0.1)
+
+mouse = Controller()
+clickThread = ClickTheMouse(delayTime, buttonDirection)
+clickThread.start()
+
+def on_press(key):
+	if key == startStopButton:
+		if clickThread.running:
+			clickThread.stopMouseClick()
+		else:
+			clickThread.startMouseclick()
+	elif key == terminateButton:
+		clickThread.exitScript()
+		listener.stop()
+
+
+with Listener(on_press=on_press) as listener:
+	listener.join()
+
+Explanation:
+In the above code, we have initialized the start and stop keys as 's' and the terminate key as 'x'. When we run the python script and if we enter 's', then automatically, whenever we move our mouse on the screen, it will be right-clicked with a delay of 0.001 seconds or one millisecond.
+We can change the functionality of mouse click in section 2, where we can use either Button.left or Button.center attribute to change the click direction of the mouse.
+If we want to see the mouse click easily, then we can change the delayTime to higher to see the actual click. In this code, when we do not move the mouse cursor on the screen, then it will not click. It will work only when we move the cursor on the screen.
+
+
+Next TopicAge Calculator using PyQt5 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

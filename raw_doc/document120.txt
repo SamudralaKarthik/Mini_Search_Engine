@@ -1,0 +1,84 @@
+
+
+
+
+next →
+← prev
+
+How to sort a dictionary in Python
+Python dictionary is the collection of data which stored in the key-value form. Each key is associated with its value. It is mutable in nature, which means we can change data after its creation.
+It is the unordered collection of the data and allows storing duplicate values, but the key must be unique.
+Dictionary is declared using the curly braces {}, and the key-value pair is separated by a comma.
+
+dict1 = {'name': 'Devansh', 'age': 22, 'Rollno':90014}
+print(dict1)
+
+Output:
+Why need to sort the dictionary
+
+The search time complexity of the list is O(n), and the dictionary has search time complexity 0(1), which makes that the dictionary is faster than the list. The dictionary can be used in place for list whenever it needs.
+The sorting allows us to analyze the data efficiently when we are working with the data-structure.
+A sorted dictionary provides a better understanding to handle the complex operations.
+
+Let's understand the various ways to sort the dictionary.
+
+Sorting by keys
+Sorting by values
+Sorting Algorithm
+Reversing the sorted order
+
+Sorting By Keys and Values
+Python offers the built-in keys functions keys() and values() functions to sort the dictionary. It takes any iterable as an argument and returns the sorted list of keys. We can use the keys to sort the dictionary in the ascending order. Let's understand the following example.
+Example -
+
+names = {1:'Alice' ,2:'John' ,4:'Peter' ,3:'Andrew' ,6:'Ruffalo' ,5:'Chris' }
+#print a sorted list of the keys
+print(sorted(names.keys()))
+#print the sorted list with items.
+print(sorted(names.items()))
+
+Output:
+[1, 2, 3, 4, 5, 6]
+[(1, 'Alice'), (2, 'John'), (3, 'Andrew'), (4, 'Peter'), (5, 'Chris'), (6, 'Ruffalo')]
+
+Explanation -
+In the above code, we have declared a dictionary names. We used the built-in function along with the sorted() function that returned the list of the sorted keys. Next, we used the items() function to get the dictionary in the sorted order.
+Sorting Algorithm
+There are various sorting algorithm to sort a dictionary; we can use other arguments in the sorted method. Let's understand the following example.
+Example -
+
+daynames = { 'one' : 'Monday' ,  'six' : 'Saturday' ,'three' : 'Wednesday' ,  'two' : 'Tuesday' , 'five': 'Friday' ,  'seven': 'Sunday' }
+print(daynames)
+number = { 'one' : 1 , 'two' : 2 , 'three' : 3 , 'four' : 4 , 'five' : 5 , 'six' : 6 , 'seven' : 7}
+print(sorted(daynames , key=number.__getitem__))
+print([daynames[i] for i in sorted(daynames , key=number.__getitem__)])
+
+Output:
+{'one': 'Monday', 'six': 'Saturday', 'three': 'Wednesday', 'two': 'Tuesday', 'five': 'Friday', 'seven': 'Sunday'}
+['one', 'two', 'three', 'five', 'six', 'seven']
+['Monday', 'Tuesday', 'Wednesday', 'Friday', 'Saturday', 'Sunday']
+
+Reverse the sorted Order
+The dictionary can be reversed using the reverse argument. Let's understand the following example.
+Example -
+
+a = {'a':2 ,'b':1 ,'c':3 ,'d':4 ,'e':5 ,'f':6 }
+print(sorted(a.values() ,  reverse= True))
+
+Output:
+[6, 5, 4, 3, 2, 1]
+
+In this tutorial, we have discussed how to sort the dictionary in Python. A sorted dictionary is easy to handle the large amount of data and gives us a fast search result.
+
+
+Next TopicStrong Number in Python
+
+
+
+
+← prev
+next →
+
+
+
+

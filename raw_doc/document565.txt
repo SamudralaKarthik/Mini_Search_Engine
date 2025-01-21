@@ -1,0 +1,196 @@
+
+
+
+
+next →
+← prev
+
+Fiona module in Python
+Fiona lets Python developers to interface geographic information systems with other computer systems by reading and writing geographic data files. Fiona includes extension modules that connect the Geospatial Data Abstraction Library to other applications (GDAL). Fiona is made to be easy to use and dependable. It focuses on reading and writing data in the usual Python IO paradigm, and instead of OGR-specific classes, it employs basic Python types and protocols like files, dictionaries, mappings, and iterators. Fiona can read and write real-world data in multi-layered GIS formats and zipped virtual file systems, and it's easy to use with other Python GIS tools like pyproj, Rtree, and Shapely.
+Fiona is the OGR API. It can read and write data in a variety of formats. The key rationale for choosing it instead of OGR is that it is more Python-like, more trustworthy, and less prone to errors. It uses the WKT and WKB markup languages to convey spatial information in relation to vector data. As a result, it works nicely with other Python libraries like Shapely. You'd use Fiona for input and output, and Shapely for geospatial data creation and manipulation.
+Need for Fiona Module:
+Geographic information systems (GIS) assist us in anticipating, responding to, and comprehending changes in our physical, political, economic, and cultural landscapes. GIS used to be something only huge institutions like nations and cities did, but thanks to accurate and inexpensive global positioning systems, commoditization of satellite data, and open-source software, it's now commonplace. In GIS, rasters represent continuous scalar fields (for example, land surface temperature or elevation) while vectors represent discrete features such as roads and administrative borders. Fiona is solely concerned with this. It's a Python wrapper for the OGR library's vector data access methods. For minimalists, a very basic wrapper. It reads GeoJSON-like mappings from files and publishes the same kind of mappings back to files as records. This concludes the discussion. Layers, cursors, geometric operations, coordinate system transformations, and remote method calls are all handled by other Python packages like Shapely and pyproj, as well as Python language protocols.
+Please keep this in mind: Fiona is built to succeed at a specific set of duties while failing miserably at others. Fiona sacrifices memory and speed in favor of simplicity and consistency. Fiona converts vector data from the data source to Python objects, unlike OGR's Python bindings, which utilize C pointers. These are easier to operate and safer, but they take up more memory. Fiona's performance is slower if you only require access to a single record field - and nothing tops the ogr2ogr program for reprojecting or filtering data files - but Fiona's performance is substantially better than OGR's Python bindings if you need all of a record's fields and coordinates. Although copying is a limitation, it makes programs easier to understand. Fiona eliminates the need to manage references to C objects in order to avoid crashes, and it allows you to interact with vector data using Python mapping accessors. Records are used to represent discrete geographic characteristics in geographic information systems. The semantic implications of record features are well recognized [Kent1978]. Records have a single type, all records of that type have the same fields, and a record's fields concern a single geographic attribute, among the most important for geographic data. Different systems describe records differently, yet enough similarities exist between them that programmers have been able to develop effective abstract data models. One is the OGR model. Data Sources, Layers, and Features are the three main components. Features contain characteristics and a Geometry rather than fields. An OGR Layer comprises just one kind of feature (for example, "roads" or "wells"). The GeoJSON paradigm is a little more straightforward, with Features replacing OGR Data Sources and Layers and Feature Collections replacing OGR Data Sources and Layers. In GIS modeling, the term "Feature" is therefore overused, as it refers to entities in both our conceptual and data models. Record files come in a variety of formats. Up until roughly 2005, the ESRI Shapefile [ESRI1998] was the most important of these, at least in the United States, and it is still popular today. It's a binary file type. The shape fields are saved in the a.shapefile, whereas the other fields are saved in the a.dbf file
+Now let us have a look at the code of the Fiona module in Python.
+Code:
+
+# A sample To understand the usage of the Fiona  module in Python with the help of this module we can easily read the file which stores the geographical positioning data There are different functions that we have written that are used to perform different operations some of the functions requires some input in case of these functions the user is prompted with the message to give the required input and then the processing of the input data is done according to the functionality of that function 
+
+# All the models which are required for the writing of the code which is written below are important at the beginning of the program
+import fiona
+import sys
+
+
+#  a sample class is written that will consist of functions that are used to perform different operations some of the functions require some input in the case of these functions the user is prompted with the message to give the required input and then the processing of the input data is done according to the functionality of that function 
+class FionaClass:
+
+# Sample constructor is written that can be used to initialize the class variables of the above Britain class so we can use this class variable across different functions,  the name of the file from where we want to read data and get various information  out of it is stored in the  fname variable
+	def __init__(self):
+		self.fname = None
+		pass
+
+# This function is used to read the geographical data that is stored in a file with the help of the open function of this module which is provided by Python we have read a shapefile in which the geographical data is stored first of all this function asks the user for the name of the file from which we want to read the geographical data once the user has added the name of the file from which we want to read the geographical data that file is opened with the help of open function of this module in Python and then the  data which is read from the specified file is presented to the user as the output of this function 
+	def read_geo_data_from_the_file(self):
+		print("Enter the name of the file(.shp file)::")
+		filename = input()
+		self.fname = filename
+
+		opne_handler = fiona.open(filename, 'r')
+		opne_handler.closed
+		print("First data in the file is::")
+		# print(next(opne_handler))
+
+		print("Total length of the file openned is {}".format(len(list(opne_handler))))
+
+# This is another function which we have returned in this function the schema of the data which is read from the file which is specified in the previous function is calculated and as a result of this function the schema of the file which was mentioned in the previous function from which we are reading the geographical data is printed to the user 
+	def get_schema_of_file(self):
+		filename = self.fname
+		opne_handler = fiona.open(filename, 'r')
+		print("schema ::", opne_handler.schema)
+
+
+# This is another function which we have returned in this function the bounds of the data which is read from the file which is specified in the previous function is calculated and as a result of this function the bounds of the file which was mentioned in the previous function from which we are reading the geographical data is printed to the user 
+	def get_bounds_of_file(self):
+		filename = self.fname
+		opne_handler = fiona.open(filename, 'r')
+		print("bounds ::", opne_handler.bounds)
+
+
+# This is another function which we have returned in this function the crs of the data which is read from the file which is specified in the previous function is calculated and as a result of this function the crs of the file which was mentioned in the previous function from which we are reading the geographical data is printed to the user 
+	def get_crs_of_file(self):
+		filename = self.fname
+		opne_handler = fiona.open(filename, 'r')
+		print("crs ::", opne_handler.crs)
+
+
+ # This is the last function of this class that we have written this function is used to check whether the specified file which is opened to read the geographical data stored in that file is currently open or not other words we can say that this function helps us to get the state of the file from which we are reading our geographical data the return type of this function is of the Boolean type that means the return value of this function will be true if the file is  closed and if the file is open the return type of this function will be changed to false 
+	def check_is_file_closed(self):
+		filename = self.fname
+		opne_handler = fiona.open(filename, 'r')
+		print("Is closed ? ::", opne_handler.closed)		
+
+def main():
+
+	my_geological_object = FionaClass()
+	while(True):
+		print("These are the below-listed options, select any one of them::")
+		print("1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.")
+		print("2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.")
+		print("3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.")
+		print("4. To get the crs of the specified shapefile(.shp / .shx file) using the Fiona module of python.")
+		print("5. To check whether the specified shapefile(.shp / .shx file) is closed or not.")
+		print("6. To stop displaying options and exit from the code.")
+		menu_choice = input()
+		menu_choice = int(menu_choice)
+		if menu_choice == 1:
+			my_geological_object.read_geo_data_from_the_file()
+		elif menu_choice == 2:
+			my_geological_object.get_schema_of_file()
+		elif menu_choice == 3:
+			my_geological_object.get_bounds_of_file()
+		elif menu_choice == 4:
+			my_geological_object.get_crs_of_file()
+		elif menu_choice == 5:
+			my_geological_object.check_is_file_closed()
+		elif menu_choice == 6:
+			sys.exit()
+		
+		print("Enter [y] else [n], to move ahead with code execution ")
+		continue_or_exit = input()
+
+		if continue_or_exit == 'y' or continue_or_exit == 'Y':
+			pass
+		elif continue_or_exit == 'n' or continue_or_exit == 'N':
+			sys.exit()
+
+if __name__ == '__main__':
+	main()
+
+Output:
+These are the below-listed options, select any one of them::
+1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.
+2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+4. To get the CRS of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+5. To check whether the specified shapefile(.shp / .shx file) is closed or not.
+6. To stop displaying options and exit from the code.
+1
+Enter the name of the file(.shp file)::
+IND_adm0.shx
+First data in the file is::
+code1.py:18: FionaDeprecationWarning: Collection.__next__() is buggy and will be removed in Fiona 2.0. Switch to `next(iter(collection))`.
+  print(next(opne_handler))
+{'type': 'Feature', 'id': '0', 'properties': OrderedDict(), 'geometry': {'type': 'MultiPolygon', 'coordinates': [[[(93.78772735595709, 6.852640151977823), (93.78849029541021, 6.8525710105896), (93.78904724121094, 6.8525710105896), (93.78904724121094, 6.852291107178019), (93.78967285156256, 6.852291107178019), (93.78987884521513, 6.852013111114502), (93.79015350341814, 6.851944923400879), (93.79064178466825, 6.851666927337931), (93.79077911376959, 6.851388931274414), (93.79091644287126, 6.851041793823185), (93.79050445556635, 6.8506250381472), (93.79029083251964, 6.850347042083854), (93.79000091552734, 6.85027885437006), (93.78948211669928, 6.849903106689453), (93.78900146484392, 6.849484920501936), (93.78837585449247, 6.849136829376391), (93.78801727294933, 6.848720073700008), (93.78778076171903, 6.848055839538688), (93.78750610351562, 6.848061084747542), (93.78721618652372, 6.847781181335449), (93.78639221191412, 6.847781181335449), (93.78610992431652, 6.848061084747542), (93.78527832031273, 6.848061084747542), (93.78443908691423, 6.848899841308821), (93.7844467163086, 6.849165916442814), (93.78549194335966, 6.849929809570426), (93.78625488281278, 6.8506250381472), (93.78676605224615, 6.851171970367432), (93.78694152832031, 6.8516712188723545), (93.78737640380882, 6.851666927337931), (93.78737640380882, 6.852084159851358), (93.78730773925781, 6.852358818054199), (93.78737640380882, 6.8525710105896), (93.78772735595709, 6.852640151977823)]], [[(93.71958160400408, 7.2075009346010575), (93.71958160400408, 7.206870079040755), (93.71930694580107, 7.206459999084416), (93.93312072753935, 6.970485210418644), (93.93327331542974, 6.969860076904467), (93.93333435058622, 6.96944284439104), (93.933891296387, 6.968889236450195), (93.933891296387, 6.968610763550032), (93.93444824218756, 6.96805477142334), (93.93444824218756, 6.967776775360392), (93.9347229003908, 6.967501163482893), (93.9347229003908, 6.967223167419377), (93.93499755859398, 6.9669451713564285), (93.93499755859398, 6.966111183166618), (93.9347229003908, 6.965833187103499), (93.9347229003908, 6.965001106262264), (93.93497467041021, 6.964021205902327), (93.93497467041021, 6.963535785675276), (93.9352493286134, 6.963325977325724), (93.935600280762, 6.963187217712687), (93.93601226806652, 6.962841033935774), (93.93622589111322, 6.962562084197941), (93.93656921386747, 6.962355136871281), (93.93722534179688, 6.962223052978686), (93.93805694580101, 6.962223052978686), (93.9388885498048, 6.961389064788875), (93.93945312500011, 6.961390972137451), (93.9397201538086, 6.961111068725586), (93.94000244140653, 6.961111068725586), (93.94027709960938, 6.960833072662581), (93.94110870361351, 6.960833072662581), (93.94139099121111, 6.960555076599064), (93.94167327880882, 6.9605607986450195), (93.94194793701166, 6.9602899551393875), (93.94246673584013, 6.959929943084887), (93.94288635253918, 6.95979118347185), 
+The total length of the file opened is 1
+Enter [y] else [n], to move ahead with code execution 
+y
+These are the below-listed options, select any one of them::
+1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.
+2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+4. To get the crs of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+5. To check whether the specified shapefile(.shp / .shx file) is closed or not.
+6. To stop displaying options and exit from the code.
+2
+schema :: {'properties': OrderedDict(), 'geometry': 'Polygon'}
+Enter [y] else [n], to move ahead with code execution 
+y
+These are the below-listed options, select any one of them::
+1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.
+2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+4. To get the CRS of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+5. To check whether the specified shapefile(.shp / .shx file) is closed or not.
+6. To stop displaying options and exit from the code.
+3
+bounds :: (68.18624877929699, 6.754255771636906, 97.41516113281256, 35.5013313293457)
+Enter [y] else [n], to move ahead with code execution 
+y
+These are the below-listed options, select any one of them::
+1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.
+2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+4. To get the CRS of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+5. To check whether the specified shapefile(.shp / .shx file) is closed or not.
+6. To stop displaying options and exit from the code.
+4
+CRS :: {}
+Enter [y] else [n], to move ahead with code execution 
+y
+These are the below-listed options, select any one of them::
+1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.
+2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+4. To get the CRS of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+5. To check whether the specified shapefile(.shp / .shx file) is closed or not.
+6. To stop displaying options and exit from the code.
+5
+Is closed ? :: False
+Enter [y] else [n], to move ahead with code execution 
+y
+These are the below-listed options, select any one of them::
+1. To read data from a shapefile(.shp / .shx file) using the Fiona module of python.
+2. To get the schema of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+3. To get the bounds of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+4. To get the CRS of the specified shapefile(.shp / .shx file) using the Fiona module of python.
+5. To check whether the specified shapefile(.shp / .shx file) is closed or not.
+6. To stop displaying options and exit from the code.
+6
+
+Explanation:
+In the above-written code, we have shown the usage of the Fiona module in Python. In this program we have written different functions which will be used to perform various different functionalities such as reading a data from a shapefile using this module of the python, and to get the various parameters of the shapefile with the help of different functions so the various parameters which we have taken from the shapefile R the scheme of the shapefile, bound of the shapefile, and to check whether the specified shapefile is currently opened or not all of these functions are provided as options to the user and the user can choose from any one of these options and perform that particular operation these options are presented to the user in a recursive manner until the user to stop displaying the options and exit from the code
+Conclusion:
+In this article, we have understood the usage of the Fiona module in python and what are the different functionalities provided by this module.
+
+
+Next TopicFirebase module in python
+
+
+
+
+← prev
+next →
+
+
+
+

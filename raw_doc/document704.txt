@@ -1,0 +1,200 @@
+
+
+
+
+next →
+← prev
+
+Attributes Meaning in Python
+If we have been working with OOPS paradigm languages, we should've heard the word "attributes" quite often. There are two types of attributes-class attributes and instance attributes. This tutorial explains what attributes are and their types, along with examples.
+As Python is a huge supporter of the OOPS paradigm, everything is regarded as an object. We create classes and objects. Before understanding attributes, understanding classes and objects is the foundation. In a simple sentence, a class is like a blueprint and to use that blueprint, we create objects for that class.
+Example:
+
+class student:
+    sch_name = "Delhi public school"
+    place = "Delhi"
+    grade = 5
+    def display(self):
+        print("School:", self.sch_name)
+        print("Place:", self.place)
+        print("Grade:", self.grade)
+s1 = student()
+s2 = student()
+print(s1.sch_name)
+s1.display()
+print(s2.sch_name)
+s2.display()
+
+Output:
+Delhi public school
+School: Delhi public school
+Place: Delhi
+grade: 5
+Delhi public school
+School: Delhi public school
+Place: Delhi
+grade: 5
+
+Understanding:
+In the above example, we created a class called "student" with three variables and a function that prints the values of the three variables. Every object we create for the class has access to the variables in the class. These variables are called the "Attributes", and the functions are called methods (also referred to as functions). In the above program, we created the class's two objects, s1 and s2, and accessed the attribute sch_name and the method display() printed the values of the attributes.
+Types of Attributes:
+Class Attributes:
+
+In the previous example, we declared attributes that don't change, which means that for any object we create for the class, the values of the attributes remain the same.
+Such attributes are called the "Class attributes".
+
+Example:
+
+class Address:
+   University = "Harvard"
+   City = "Cambridge"
+   State = "Massachusetts"
+   Capital = "Boston"
+   Country = "United States"
+student1 = Address()
+print("Student1: Ryan")
+print(student1.University,"",student1.City,"",student1.State,"",student1.Capital,"",student1.Country)
+student2 = Address()
+print("Student2: Tony")
+print(student2.University,"",student2.City,"",student2.State,"",student2.Capital,"",student2.Country)
+
+Output:
+Student1: Ryan
+Harvard  Cambridge  Massachusetts  Boston  United States
+Student2: Tony
+Harvard  Cambridge  Massachusetts  Boston  United States
+
+
+Observe that the information in the class is storing the same values representing the address of the university and we used the same information for all the objects-students.
+
+Instance Attributes:
+
+What if we wanted to create a class that allows every object to have its attributes? It is possible too. For example, every object should hold information about an individual student.
+Such class attributes that can let objects hold different values for the same attribute are called the "Instance attributes".
+We need to use the __init__ method and self variable to declare these attributes.
+__init__ method: It is a constructor that allows objects to have different values for the same attribute. It is executed as soon as an object is created for the class without any manual call.
+self variable: It is like a placeholder for the object created for the class inside the __init__ method:
+
+Example:
+
+class Student_info:
+   def __init__(self, name, age, college):
+       self.name = name;
+       self.age = age;
+       self.college = college;
+student1 = Student_info("Ryan", 18, "NYU")
+student2 = Student_info("Roy", 18, "Duke")
+print("Student1: ")
+print(student1.name, student1.age, student1.college)
+print("Student2: ")
+print(student2.name, student2.age, student2.college)
+
+Output:
+Student1: 
+Ryan 18 NYU
+Student1: 
+Roy 18 Duke
+
+
+We created two objects, student1 and student2, and the two objects hold different information about two individuals.
+What happens here is that once an object is created, __init__ method is invoked, and the object will replace the self variable in the method:
+
+When we created student1:
+
+   def __init__(student1, "Ryan", 18, "NYU"):
+       student1.name = "Ryan";
+       student1.age = 18;
+       student1.college = "NYU";
+
+When we created student2:
+
+def __init__(student2, "Roy", 18, "Duke"):
+       student2.name = "Roy";
+       student2.age = 18;
+       student2.college = "Duke";
+
+Both Instance attributes and Class attributes play a prominent role in creating a sound class. Here is an example using both class variables and instance variables to create a class:
+
+class Address:
+   University = "Harvard"
+   City = "Cambridge"
+   State = "Massachusetts"
+   Capital = "Boston"
+   Country = "United States"
+   def __init__(self, name, age, CGPA):
+       self.name = name
+       self.age = age
+       self.CGPA = CGPA
+student1 = Address("Ryan", 18, 9.2)
+print("Student1:")
+print(student1.name, student1.age, student1.CGPA)
+print(student1.University, student1.City, student1.State, student1.Capital, student1.Country)
+print("\nStudent2:")
+student2 = Address("Roy", 18, 9.1)
+print(student2.name, student2.age, student2.CGPA)
+print(student2.University, student2.City, student2.State, student2.Capital, student2.Country)
+
+Output:
+Student1:
+Ryan 18 9.2
+Harvard Cambridge Massachusetts Boston United States
+
+Student2:
+Roy 18 9.1
+Harvard Cambridge Massachusetts Boston United States
+
+
+We used class attributes to store the data common to all the objects and instance attributes for storing distinct data of every single object.
+Also, observe that:
+
+
+Class attributes will always be outside the __init__ method.
+Instance attributes are defined inside the __init__ method.
+
+
+In the Above Code:
+
+Class attributes:
+
+University
+City
+State
+Capital
+Country
+
+Instance attributes:
+
+name
+age
+CGPA
+
+Function to display the attributes in a program:
+Python provides two built-in functions that can print the attributes of a particular object:
+
+dir() -> It returns both class attributes and instance attributes of the object along with the attributes of the ancestor classes of the object.
+vars() -> It returns the instance attributes of an object in the form of a dictionary.
+
+Example:
+
+print(vars(student1))
+print()
+print(dir(student1))
+
+Output:
+{'name': 'Ryan', 'age': 18, 'CGPA': 9.2}
+
+['CGPA', 'Capital', 'City', 'Country', 'State', 'University', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'age', 'name']
+
+
+
+Next TopicData Structures and Algorithms in Python | Set 1
+
+
+
+
+← prev
+next →
+
+
+
+

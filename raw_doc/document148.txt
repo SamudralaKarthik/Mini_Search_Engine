@@ -1,0 +1,162 @@
+
+
+
+
+next →
+← prev
+
+How to call a function in Python?
+As we know, functions are the block of statements used to perform some specific tasks in programming. It also helps to break the large group of code into smaller chunks or modules. Functions can be called anywhere and the number of times in a program. It allows us to reuse the code by simply calling the particular function or block in a program. Thus, it avoids the repetition of the same code. We can define functions inside the class, modules, nested functions, etc.
+Features of Functions
+Following are the features of Python Functions:
+
+It is used to avoid repetitions of code.
+Using the function, we can divide a group of code into smaller modules.
+It helps to hide the code and create clarity to understand the modules.
+It allows code to be reusable, thus saving memory.
+Statements written inside a function can only be executed with a function name.
+Python function starts with def and then a colon (:) followed by the function name.
+
+Rules for defining a function
+
+The def keyword is used in the Python function to declare and define a function.
+The function name must begin with the following identifiers such as: A-Z, a- z, and underscore (_).
+Every function must follow colon (:) and then indention to write the program.
+In a Python function, the reserved word cannot be used as a function name or identifier.
+In Python, the function parameter can be empty or multiples.
+
+Create a function in Python
+To create a function, we need to use a def keyword to declare or write a function in Python. Here is the syntax for creating a function:
+Syntax
+
+def function_name(): # use def keyword to define the function
+Statement to be executed
+return statement # return a single value.
+
+Let's create a function program in Python.
+Myfun.py
+
+def myFun(): # define function name
+	print(" Welcome to JavaTpoint")
+myFun() # call to print the statement
+
+Output:
+Welcome to JavaTpoint
+
+Function Calling in Python
+Once a function is created in Python, we can call it by writing function_name() itself or another function/ nested function. Following is the syntax for calling a function.
+Syntax:
+
+def function_name():
+       Statement1
+function_name() # directly call the function
+
+# calling function using built-in function 
+def function_name(): 
+str = function_name('john') # assign the function to call the function
+print(str) # print the statement
+
+Consider the following example to print the Welcome Message using a function in Python.
+CallFun.py
+
+def MyFun():
+    print("Hello World")
+    print(" Welcome to the JavaTpoint")
+
+MyFun() # Call Function to print the message.
+
+Output:
+Hello World
+ Welcome to the JavaTpoint
+
+In the above example, we call the MyFun() function that prints the statements.
+Calling Nested Function in Python
+When we construct one function inside another, it is called a nested function. We can create nested functions using the def keyword. After creating the function, we have to call the outer and the inner function to execute the statement. Lets' create a program to understand the concept of nested functions and how we can call these functions.
+Nest.py
+
+def OutFun(): # outer function
+    print("Hello, it is the outer function")
+    
+    def InFun(): # inner function
+        print("Hello, It is the inner function")
+    InFun() # call inner 
+
+OutFun() # call outer function    
+
+Output:
+Hello, it is the outer function
+Hello, it is the inner function
+
+As we can see in the above example, the InFun() function is defined inside the OutFun() function. To call the InFun() function, we first call the OutFun() function in the program. After that, the OutFun() function will start executing and then call InFun() as the above output.
+Note: To call an inner function, we must first call the outer function. If the external function is not invoked, the inner function will not be executed.
+Program to print the multiplication of two numbers using the nested function in Python.
+Nest_arg.py
+
+def fun1(): # outer function
+    a = 6 # define variable 
+    def fun2(b): # inner function
+        a = 4 # inner variable 
+        print ("Display the sum of inner function", a + b) # sum of inner function
+    print ("Display the value of outer variable", a) # it displays the value of outer function    fun2(4)  # Inner function 
+
+Output:
+Display the value of outer variable 6
+Display the sum of inner function 8
+
+Functions as First-Class Objects
+In Python, the functions as First-Class Objects. Because it treats the same as the object, and it has the same properties and method as an object. A function can be assigned to a variable, pass them as an argument, store them in data structures and return a value from other functions. It can be manipulated, such as other objects in Python. Furthermore, all the data in the Python program is represented in the objects or relations. Hence it is also called first-class citizens of Python function.
+Properties of First-Class functions
+
+Functions can be assigned to a variable
+A function is an example of an object type.
+We also return the function from a function.
+Functions have the same properties and methods as objects
+The function is treated as an object to pass as an argument to another function.
+
+Create a program to understand Python functions as an object.
+Obj.py
+
+def MyObject(text): # Pass an argument.
+    return text.upper()
+
+# Call the function inside the print() function.
+print (MyObject("Welcome to JavaTpoint"))
+
+str = MyObject # assign the function to a variable
+
+# call the function using the str variable.
+print (str("Hello, Welcome to JavaTpoint"))
+
+Output:
+WELCOME TO JAVATPOINT
+HELLO, WELCOME TO JAVATPOINT
+
+Write a program to call a function inside the class.
+Student.py
+
+class Student:
+    Roll_no = 101
+    name = "Johnson"
+    def show(self):
+        print(" Roll no. is %d\nName of student is %s" % (self.Roll_no, self.name))
+
+stud = Student() # Create the stud object of Student class
+stud.show()   # call the function using stud object.   
+
+Output:
+Roll no. is 101
+Name of student is Johnson
+
+
+
+Next TopicGit Modules in Python
+
+
+
+
+← prev
+next →
+
+
+
+

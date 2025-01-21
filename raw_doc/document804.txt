@@ -1,0 +1,472 @@
+
+
+
+
+next →
+← prev
+
+Python Win32 Process
+In this article, we will discuss Python win32 process. And also we will discuss its methods one by one.
+Basically, the Win32 process is a method in Python. Extended Win32 process creation and management capabilities are accessible through this module. The Create method creates process objects (the constructor). It is possible to kill, suspend, resume, and set the priority of processes on objects using additional methods.
+Windows Management Instrumentation (WMI; formerly WBEM) and WMI extensions for the Windows Driver Model serve as the foundations for manageability in Windows 2019/2016/2012/2008 and Windows 10/7/XP (WDM).
+The ability to create monitor check procedures based on WMI is offered by ActiveXperts Network Monitor. There are more than a hundred WMI samples that ActiveXperts has gathered. These examples might serve as a starting point for brand-new check routines that you create on your own.
+Many WMI samples are available on this website.
+ActiveXperts Network Monitor uses the Win32_Process WMI class to monitor your servers.
+A series of events on a Windows operating system is represented by the Win32_Process WMI class. A sequence that involves the interaction of one or more processors or interpreters, some executable code, and a set of inputs, such as a client program running on a Windows system, is a descendent or member of this class.
+Now the question arises what is Python win32?
+So the Python win32 and Win32 application programming interface (API) capabilities can be used with Python by using the PyWin32 library of extensions for Windows.
+Let's take a small introduction to the win32api Module.
+The win32api module offers various extra methods for controlling processes. These give you the ability to carry out many of the usual steps needed to launch new processes, but they still fall short of offering the highest level of low-level control.
+In contrast to the os.system function, which was previously explained, the WinExec function makes various accommodations for GUI programs. For example, no console is established, and the function doesn't wait until the new process has finished.
+The function requires these two inputs:
+
+The order to carry out
+Alternatively, the application's window's initial state
+
+Let's take a small introduction to the win32api.ShellExecute.
+In addition, the win32api module offers another beneficial feature for starting new processes. In contrast to starting random processes, opening documents is the main purpose of the ShellExecute function. You may instruct ShellExecute to "open MyDocument.doc," for instance. Windows chooses which process to launch on your behalf in order to open.doc files. The click (or double-click) on an a.doc file causes Windows Explorer to perform the same action.
+A program that is being run is referred to as a process (processed). A process need not be one that the user runs manually; it could instead be a system process that the operating system spawns. Any program that runs on an operating system must first generate a separate process before it can begin to operate. The majority of processes in a typical OS installation are background programs and operating system services that are used to keep the hardware, software, and operating system in good working order.
+This post will look at a few alternative Python methods for getting a list of a Windows OS's currently active processes.
+To get the desired outcome, we will first describe a Python method. We will then examine a command from the Windows Command Processor to accomplish the same thing.
+pip install wmi
+Copy this above code in the terminal.
+Example
+
+#import wmi module
+import wmi
+ 
+# Initializise  the wmi constructor
+f = wmi.WMI()
+ 
+# Print the header 
+print("Printing the pid   Process name")
+ 
+# all the running processes
+for process in f.Win32_Process():
+print(f"{process.ProcessId:<5} {process.Name}")
+
+Output:
+
+
+
+The WMI() function of the wmi library is first initialized. This enables us to access its internal functions, such as WMI.Win32_Service, WMI.Win32_Process, and WMI.Win32_Printjob, each of which is intended to carry out a certain duty. To obtain a list of the system's active processes, we would use the WMI.Win32_Process function. After that, we iterated through all the running processes and placed them in the variable process by calling the function WMI.Win32_Process(). The corresponding attributes were then used to derive the process's ProcessID (pid) and ProcessName (name). To add padding to the output and properly align it, we used F-strings for the output.
+Now let's go through different methods of module Win32process.
+1. STARTUPINFO
+In this method, we create a new STARTUPINFO object.
+Let's understand how to create this, which is given below:
+win32process.STARTUPINFO
+PySTARTUPINFO = STARTUPINFO()
+2. beginthreadex
+In this method, we create a new thread.
+Let's understand how to create this, which is given below:
+win32process.beginthreadex
+PyHANDLE, int = beginthreadex(sa, stackSize , entryPoint , args , flags )
+Let's understand its parameters is given below
+Parameters
+
+sa: PySECURITY_ATTRIBUTES(The security attributes, or None)
+stackSize : int (The new thread's stack size, or 0 for the default size.)
+entryPoint : function (It is a thread function)
+args : tuple
+flags : int
+
+CREATE_SUSPENDED is an option for delaying the start of a thread.
+The thread handle and thread ID are returned as a tuple as the outcome.
+3. CreateProcess
+win32process.CreateProcess PyHANDLE, PyHANDLE, int, int = CreateProcess(appName, commandLine , processAttributes , threadAttributes , bInheritHandles , dwCreationFlags , newEnvironment , currentDirectory , startupinfo ) establishes a new process and the main thread for it. The newly created process runs the designated executable file.
+Parameters
+
+appName: string (executable module's name, or None)
+Commandline: string (command-line argument, or Nothing)
+processAttributes: PySECURITY_ATTRIBUTES (attributes of process security, or None)
+threadAttributes: PySECURITY_ATTRIBUTES (aspects of thread security, or None)
+bInheritHandles: int
+dwCreationFlags: int
+
+4. CreateRemoteThread
+win32process.CreateRemoteThread PyHANDLE, int = CreateRemoteThread(hprocess, sa , stackSize , entryPoint , Parameter , flags ) establishes a thread that executes in another process's virtual address space.
+Parameters
+
+hprocess : PyHANDLE (the remote process's handle)
+sa : PySECURITY_ATTRIBUTES (Security characteristics, or None)
+stackSize : int (The new thread's stack size, or 0 for the default size.)
+entryPoint : function (The address of the thread function.)
+Parameter : int (a void pointer that served as the argument given to the function)
+flags : int
+
+The thread handle and thread ID are returned as a tuple as the outcome.
+5. CreateProcessAsUser
+win32process.CreateProcessAsUser creates a new process with the provided user as its context.
+PyHANDLE, PyHANDLE, int, int = CreateProcessAsUser(hToken, appName , commandLine , processAttributes , threadAttributes , bInheritHandles , dwCreationFlags , newEnvironment , currentDirectory , startupinfo )
+Parameters
+
+hToken: PyHANDLE (Handle to a token that indicates a user who is currently logged in)
+appName: string (executable module's name, or None)
+commandLine: string (command-line argument, or Nothing)
+processAttributes: PySECURITY_ATTRIBUTES (attributes of process security, or None)
+threadAttributes: PySECURITY_ATTRIBUTES (aspects of thread security, or None)
+bInheritHandles: int (the inheritance flag handle)
+dwCreationFlags: int (creating of flags)
+newEnvironment: None (A dictionary of stringor Unicode pair definitions to specify the process environment, or None to use the default environment.)
+currentDirectory: string (name of the current directory, or None)
+startupinfo: PySTARTUPINFO (a STARTUPINFO object that describes the appearance of the new process's main window.)
+
+Consequently, a tuple of (hProcess, hThread, dwProcessId, dwThreadId)
+6. GetCurrentProcess
+win32process.GetCurrentProcess obtains a fictitious handle for the active process.
+int = GetCurrentProcess()
+7. GetCurrentProcessId
+win32process.GetCurrentProcessId reveals the caller process's unique process identification.
+int = GetCurrentProcessId()
+8. GetProcessVersion
+win32process.GetProcessVersion reveals the system's main and minor version numbers, which are needed to conduct a specific process.
+int = GetProcessVersion(processId)
+Parameters
+
+processId: int (a designation for the desired process.)
+
+9. GetCurrentProcessId
+win32process.GetCurrentProcessId reveals the caller process's unique process identification.
+int = GetCurrentProcessId()
+10. GetStartupInfo
+win32process.GetStartupInfo reveals the STARTUPINFO structure's contents, which were supplied when the caller process was established.
+PySTARTUPINFO = GetStartupInfo()
+11. GetPriorityClass
+win32process.GetPriorityClass
+int = GetPriorityClass(handle)
+Parameters
+
+handle: PyHANDLE (to the thread's handle)
+
+12. GetExitCodeThread
+win32process.GetExitCodeThread
+int = GetExitCodeThread(handle)
+Parameters
+
+handle: PyHANDLE (to the thread's handle)
+
+13. GetExitCodeProcess
+win32process.GetExitCodeProcess
+int = GetExitCodeProcess(handle)
+Parameters
+
+handle: PyHANDLE (to the thread's handle)
+
+14. GetWindowThreadProcessId
+win32process.GetWindowThreadProcessId returns the thread and process IDs that were responsible for the provided window's creation.
+int, int = GetWindowThreadProcessId(hwnd)
+Parameters
+
+hwnd: int (this parameter handles the window)
+
+Consequently, a tuple of (threadId, processId)
+15. SetThreadPriority
+win32process.SetThreadPriority
+SetThreadPriority(handle, nPriority)
+Parameters
+
+handle: PyHANDLE (This parameter handles the thread)
+nPriority: int (This parameter thread the priority level)
+
+16. GetThreadPriority
+win32process.GetThreadPriority
+int = GetThreadPriority(handle)
+Parameters
+
+handle: PyHANDLE (this parameter handles the threads)
+
+17. GetProcessPriorityBoost
+win32process.GetProcessPriorityBoost determines whether a process's dynamic priority adjustment is enabled.
+bool = GetProcessPriorityBoost(Process)
+Parameters
+
+Process: PyHANDLE (This parameter handles to a process)
+
+18. SetProcessPriorityBoost
+win32process.SetProcessPriorityBoost enables or disables a process's dynamic priority adjustment.
+SetProcessPriorityBoost(Process, DisablePriorityBoost)
+Parameters
+
+Process: PyHANDLE (This parameter handles a process)
+DisablePriorityBoost: boolean (This parameter indicates True to disable and False to enable)
+
+19. GetThreadPriorityBoost
+win32process.GetThreadPriorityBoost
+determines whether a thread's dynamic priority adjustment is enabled.
+bool = GetThreadPriorityBoost(Thread)
+Parameters
+
+Thread: PyHANDLE (This parameter handles to a thread)
+
+20. SetThreadPriorityBoost
+win32process.SetThreadPriorityBoost enables or disables a thread's dynamic priority adjustment.
+SetThreadPriorityBoost(Thread, DisablePriorityBoost)
+Parameters
+
+Thread: PyHANDLE (This parameter handles to a thread)
+DisablePriorityBoost: boolean ((This parameter indicates True to disable and False to enable)
+
+21. GetThreadIOPendingFlag
+win32process.GetThreadIOPendingFlag determines whether a thread has any open IO requests.
+bool = GetThreadIOPendingFlag(Thread)
+Parameters
+
+Thread: PyHANDLE (This parameter handles to a thread)
+
+22. GetThreadTimes
+win32process.GetThreadTimes
+It returns the time statistics for a thread.
+dict = GetThreadTimes(Thread)
+Parameters
+
+Thread: PyHANDLE (This parameter handles to a thread)
+
+23. GetProcessId
+int = GetProcessId(Process)
+It returns the Pid for a process handle.
+Parameters
+
+Process: PyHANDLE (This parameter handles to a thread)
+
+24. SetPriorityClass
+win32process.SetPriorityClass
+SetPriorityClass(handle, dwPriorityClass)
+Parameters
+
+handle: PyHANDLE (This parameter handles to the process)
+dwPriorityClass: int (This parameter gives priority class value)
+
+25. AttachThreadInput
+win32process.AttachThreadInput connects and disconnects the input of two threads.
+AttachThreadInput(idAttach, idAttachTo, Attach)
+Parameters
+
+idAttach: int (This parameter shows id of a thread)
+idAttachTo: int (This parameter shows the id of the thread)
+Attach: bool (determines whether a thread should be joined or disconnected.)
+
+26. SetThreadIdealProcessor
+win32process.SetThreadIdealProcessor
+Syntax
+win32process.SetThreadIdealProcessor( handle, dwIdealProcessor )
+Parameters
+
+handle: PyHANDLE ( handle to the thread of interest )
+dwIdealProcessor: int ( ideal processor number )
+
+Return type 
+This method return the int value
+27. GetProcessAffinityMask
+win32process.GetProcessAffinityMask
+Syntax
+win32process.GetProcessAffinityMask( hProcess )
+Parameters
+
+hProcess: PyHANDLE ( handle to the process of interest )
+
+Return type 
+This method returns a tuple of ( process affinity mask, system affinity mask ).
+28. SetProcessAffinityMask
+win32process.SetProcessAffinityMask
+Syntax
+win32process.SetProcessAffinityMask( hProcess, mask )
+Sets a processor affinity mask for a specified process.
+Parameters
+
+hProcess: PyHANDLE ( handle to the process of interest )
+mask: int ( a processor affinity mask )
+
+Note: Some platforms do not have this feature.
+29. SetThreadAffinityMask
+win32process.SetThreadAffinityMask
+Syntax
+win32process.SetThreadAffinityMask( hThread, ThreadAffinityMask )
+Parameters
+
+hThread: PyHANDLE ( handle to the thread of interest )
+ThreadAffinityMask: int ( a processor affinity mask )
+
+Return type 
+This method returns an int value.
+30. SuspendThread
+win32process.SuspendThread
+Syntax
+int = SuspendThread( handle )
+Suspends the specified thread.
+Parameters
+
+handle: PyHANDLE ( handle to the thread )
+
+Return value
+The return value is the thread's previous suspend count
+31. ResumeThread
+win32process.ResumeThread
+Syntax 
+int = ResumeThread( handle )
+Resumes the specified thread. When the suspend count is decremented to zero, the execution of the thread is resumed.
+Parameters
+
+handle: PyHANDLE ( handle to the thread )
+
+Return value
+The return value is the thread's previous suspend count
+32. TerminateProcess
+win32process.TerminateProcess
+Syntax 
+TerminateProcess( handle, exitCode )
+Parameters
+
+handle: PyHANDLE ( handle to the process )
+exitCode: int ( The exit code for the process )
+
+33. xitProcess
+win32process.ExitProcess
+
+ExitProcess: The process's end and all of its threads
+
+Parameters
+
+exitCode: int (Exit code information is provided for the process, and all threads that are terminated as a result of this call.)
+
+The best way to stop a process is with ExitProcess. A clean process shutdown is provided by this function. This includes contacting each associated dynamic-link library's (DLL) entry-point function with a value indicating that the process is separating from the DLL. The DLLs associated with the process are not informed of the process termination if a process terminates by invoking win32process::TerminateProcess.
+34. EnumProcesses
+win32process.EnumProcesses
+Syntax
+( long,.... ) = EnumProcesses()
+Provides Pids for activities that are actually running.
+35. EnumProcessModules
+win32process.EnumProcessModules
+Syntax
+( long,.... ) = EnumProcessModules( hProcess )
+Lists loaded modules for a process handle
+Parameters
+
+hProcess: PyHANDLE ( Process handle as returned by OpenProcess )
+
+36. EnumProcessModulesEx
+win32process.EnumProcessModulesEx
+Syntax
+( long,.... ) = EnumProcessModulesEx( hProcess, FilterFlag )
+lists the 32- or 64-bit modules that a process has loaded.
+Parameters
+
+hProcess : PyHANDLE ( The process handle that OpenProcess returned ) FilterFlag=LIST_MODULES_DEFAULT : int ( choose whether to return 32-bit or 64-bit modules. ) needs Windows Vista or later.
+
+37. GetModuleFileNameEx
+win32process.GetModuleFileNameEx
+Syntax
+PyUNICODE = GetModuleFileNameEx( hProcess, hModule )
+Parameters
+
+hProcess: PyHANDLE ( The process handle that OpenProcess returned )
+hModule: PyHANDLE ( This parameter handles the modules )
+
+38. GetProcessMemoryInfo
+win32process.GetProcessMemoryInfo
+Syntax 
+dict = GetProcessMemoryInfo( hProcess )
+A dict representing a PROCESS_MEMORY_COUNTERS struct is returned as the process memory statistics.
+Parameters
+
+hProcess: PyHANDLE ( Process handle as returned by OpenProcess )
+
+39. GetProcessTimes
+win32process.GetProcessTimes
+Syntax 
+dict = GetProcessTimes( hProcess )
+Obtain time statistics for a process using its handle. (In 100 nanosecond units for UserTime and KernelTime)
+Parameters
+
+hProcess: PyHANDLE ( Process handle as returned by OpenProcess )
+
+40. GetProcessIoCounters
+win32process.GetProcessIoCounters
+Syntax 
+dict = GetProcessIoCounters( hProcess )
+I/O statistics for a process are returned as a dictionary corresponding to an IO_COUNTERS struct.
+Parameters
+
+hProcess: PyHANDLE ( Process handle as returned by OpenProcess )
+
+41. GetProcessWindowStation
+win32process.GetProcessWindowStation
+Syntax 
+GetProcessWindowStation()
+Returns a handle to the window station for the calling process.
+42. GetProcessWorkingSetSize
+win32process.GetProcessWorkingSetSize
+Syntax 
+int,int = GetProcessWorkingSetSize( hProcess )
+A process's minimum and maximum working set sizes are returned.
+Parameters
+
+hProcess: PyHANDLE ( Process handle as returned by win32api::OpenProcess )
+
+43. SetProcessWorkingSetSize
+win32process.SetProcessWorkingSetSize
+Syntax 
+SetProcessWorkingSetSize( hProcess, MinimumWorkingSetSize, MaximumWorkingSetSize )
+Sets minimum and maximum working set sizes for a process.
+Parameters
+
+hProcess : PyHANDLE ( Process handle as returned by OpenProcess )
+MinimumWorkingSetSize : int ( Minimum number of bytes to keep in physical memory )
+MaximumWorkingSetSize : int ( Maximum number of bytes to keep in physical memory )
+
+NOTE: To entirely swap out the procedure, set both min and max to -1.
+44. GetProcessShutdownParameters
+win32process.GetProcessShutdownParameters
+Syntax
+int,int = GetProcessShutdownParameters()
+Reveals the process's current termination level and triggers.
+The range is 000-0FF. windows reserved, Last, 200-2FF Middle, First, 300-3FF, and Fourth, 400-4FF Windows reserves.
+45. SetProcessShutdownParameters
+win32process.SetProcessShutdownParameters
+Syntax
+SetProcessShutdownParameters(Level, Flags)
+Sets the process's flags and termination priority.
+Parameters
+
+Level: int (This parameter shows higher priority equals earlier)
+Flags: int (This parameter shows only SHUTDOWN NORETRY is valid at the moment).
+
+The range is 000-0FF. 100-1FF Last, 200-2FF Middle, 300-3FF First, 400-4FF, and reserved by windows window reserved.
+46. GetGuiResources
+win32process.GetGuiResources
+Syntax
+int = GetGuiResources(Process, Flags )
+Gives the amount of GDI or user object handles that a process is holding.
+Parameters
+
+Process: PyHANDLE (This parameter Win32api::OpenProcess's returned handle to a process)
+Flags: int (This parameter shows either GR USEROBJECTS or GR GDIOBJECTS (from win32con))
+
+47. IsWow64Process
+win32process.IsWow64Process
+Syntax
+bool = IsWow64Process(Process)
+Identifies whether WOW64 is currently running the specified process.
+Parameters
+
+Process=None: PyHANDLE (Process handle returned by win32api::OpenProcess, win32api::GetCurrentProcess, etc.; if None (the default) is given, the current process handle will be used.)
+
+Let's see its Return Value.
+The return value is False if the operating system does not provide this function (ie,
+a NotImplemented exception will never be thrown). However, a
+win32process.error exception to this is normally thrown if the function is available
+but ineffective.
+Conclusion
+In this article, we have discussed Python win32 process. And also, we have discussed the different types of methods and their parameters and return values one by one.
+
+
+Next TopicData Science Projects in Python with Proper Project Description
+
+
+
+
+← prev
+next →
+
+
+
+

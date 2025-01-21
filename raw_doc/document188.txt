@@ -1,0 +1,254 @@
+
+
+
+
+next →
+← prev
+
+F String in Python
+In this tutorial, we will learn about the string formatting mechanism. The f-string is the best way to format the string. The string's formatting style makes the string more readable, more concise, and less prone to error. It is also faster than the other.
+Before diving deep into this topic, we will first discuss the techniques were used before the f string.
+Old String Formatting in Python
+There are two main ways for formatting the string: % - formatting and str.format(). But both methods have some limitations. Let's have a brief introduction of these given methods.
+1.% - formatting
+It is a traditional way of formatting the string, but the docs recommend this method, which contains the following statement.
+"The formatting operations described here exhibit a variety of quirks that lead to several common errors (such as failing to display tuples and dictionaries correctly).
+Using the newer formatted string literals or the str.format() interface helps avoid these errors." - Official Documentation.
+How to use % - formatting
+We can perform built-in operation using the %-operator. Let's understand the following example.
+
+student = "Michel"
+"Hello, %s." % student
+
+Output:
+Hello Michel
+
+We can also use the tuple to store the multiple variables. Let's see the following example.
+
+name = "Sharma"
+age = 24
+"Hello, %s. You are %s." % (name, age)
+
+Output:
+Hello Sharma You are 24.
+
+Why %-formatting is not recommended
+Because as the variable is increased and a longer string, our code becomes much less easily readable. The code looks messy. Let's see the following example.
+Example -
+
+first_name = "Steve"
+last_name = "Rogers"
+age = 70
+profession = "Superhero"
+group = "Marvel?
+print(""Hello, %s %s. Your age is %s. You are a %s. You were a member of %s." %(first_name, last_name, age, profession)")
+
+Output:
+Hello, Steve Rogers. Your age is 70. You are a Superhero. You were a member of Marvel.
+
+As we can see in the above code, the code became hard to read and more prone to the error. That's why this way of formatting string isn't good.
+2.str.format() method
+It is another popular way to format the string introduced in Python 2.6. Let's see how we can use it.
+How to Use str.format()
+It is an improvement on %-formatting. It is like a normal built-in function called on the object and that object being converted to a string.
+Let's see the following example.
+Example -
+
+first_name = "Mathew"
+last_name = "Zukerburg"
+age = 45 
+print("Hello, {}. You are {}.".format(name, age)")
+
+To access the dictionary element inside the format method, we can pass the key in the format() method.
+
+person = {'name': 'Peter', 'age': 17}
+"Hello, {name}. You are {age}.".format(name=person['name'], age=person['age'])
+
+Output:
+Hello Peter, You are 17
+
+Why str.format() method is not recommended?
+The str.format() is much efficient than the %-format method but it can be still be quite verbose when we deal with the multiple parameters.
+F-string Method
+It is a new string formatting mechanism introduced by the PEP 498. It is also known as Literal String Interpolation or more commonly as F-strings (f character preceding the string literal). The primary focus of this mechanism is to make the interpolation easier.
+When we prefix the string with the letter 'F, the string becomes the f-string itself. The f-string can be formatted in much same as the str.format() method. The F-string offers a convenient way to embed Python expression inside string literals for formatting.
+Example -
+
+# Python3 program introducing f-string
+val = 'Geeks'
+print(f"{val}for{val} is a portal for {val}.")
+name = 'Tushar'
+age = 23
+print(f"Hello, My name is {name} and I'm {age} years old.")
+
+Output:
+Hello, My name is Tushar and I'm 28 years old.
+
+In the above code, we have used the f-string to format the string. It evaluates at runtime; we can put all valid Python expressions in them.
+We can use it in a single statement.
+
+print(f"{2 * 30})"
+
+Output:
+60
+
+However, we could use in function.
+
+def upercase(input):
+    return input.uper()
+
+name = "Sachin Tendulkar"
+f"{upercase(name)} is great."
+
+Output:
+Sachin Tendulkar is great
+
+The f-string could also be used with the class object. Let's understand the following example.
+Example - 
+
+class Actor:
+    def __init__(self, first_name, last_name, movie):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.movie = movie
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}'s superhit movie is {self.movie}."
+
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name}  {self.movie}. Superhi!"
+        
+ac = Actor('Keenu', 'Reevs', 'Matrix')
+print(f"{ac}")
+
+Output:
+Keenu Reevs's superhit movie is Matrix.
+
+Explanation -
+In the above code, we have used the __str__() and __repr__(), representing an object as a string. So we need to include at least one of those methods in the class definition. The f-string will use the __str__() method; we can also use the __repr__() by including the conversion flag ! r.
+
+print(f"{ac}")
+print(f"{ac}"!r)
+
+Output:
+Keenu Reevs's superhit movie is Matrix.
+Keenu Reevs Matrix Superhit
+
+F-string in Dictionary
+We have to take care while working with dictionary keys inside the f-string. There is a different quotation to use dictionary keys and f-string. Let's understand the following example.
+Example - 
+
+detail = {"name": "John", "age": 19}
+print(f"{detail['name']} is {detail['age']} years old.")
+
+Output:
+John is 19 years old.
+
+Below method is not allowed in case of dictionary.
+Example - 
+
+detail = {"name": "John", "age": 19}
+print(f'{detail['name']} is {detail['age']} years old.')
+
+Output:
+File "", line 2
+    print(f'{detail['name']} is {detail['age']} years old.')
+                     ^
+SyntaxError: invalid syntax
+
+As we can see in the above code, we change a double quotation to single quotes, and it has thrown an error.
+Speed
+The reason for adapting this formatting style is its speed. The f-string evaluates at runtime rather than constant values. It embeds expression inside string literals, using minimal syntax. It is fast because it evaluates at runtime, not a constant value.
+Let's see the following string comparison.
+Example - 1:
+
+import timeit
+print(timeit.timeit("""name = "Sachin"
+age = 74
+'%s is %s.' % (name, age)""", number = 10000))
+
+Output:
+0.0022497819736599922
+
+Example - 2:
+
+import timeit
+print(timeit.timeit("""name = "Mathew"
+age = 40
+'{} is {}.'.format(name, age)""", number = 10000))
+
+Output:
+0.0025783719611354172
+
+Example - 3:
+
+import timeit
+print(timeit.timeit("""name = "Rockey"
+age = 74
+f'{name} is {age}.'""", number = 10000))
+
+Output:
+0.0019360429723747075
+
+As we can observe, the f-string is on the top of list.
+Braces
+To make appear braces in the code, you should use the double quotes as follows. Let's understand the following example.
+Example - 
+
+f"{{70 + 40}}"
+
+Output:
+{70 + 40}
+
+If we use the triple braces, it will display single braces in our string. Let's understand the following example.
+Example - 
+
+f"{{{90 + 4}}}"
+
+Output:
+{94}
+
+We can display the more braces if we use more than triple braces.
+Example - 
+
+f"{{{{70 + 4}}}}"
+
+Output:
+{{70 + 4}}
+
+Backslashes
+We can use the backslash escapes in the string portion of an f-string. However, we can't use backslashes to escape in the expression part of an f-string. Let's understand the following example.
+Example - 
+
+f"{\"Medric Pacalo\"}"
+  File "<stdin>", line 1
+    f"{\"Medric Pacalo\"}"
+
+Output:
+SyntaxError: f-string expression part cannot include a backslash
+
+Inline comments
+We cannot include the # symbol in the expression. It will throw a syntax error. Let's understand the following example.
+Example - 
+
+f"Tony is {10 * 73 #Hate this!}."
+f"Tonyr is {2 * 37 #Hate this!}."
+
+Output:
+SyntaxError: f-string expression part cannot include '#'
+
+Conclusion
+We can use any one method out of three, but the f-string method provides a more concise, readable, and convenient way. It is faster and less prone to error. We have explained almost every possible scenario off-string and why one should consider this approach in programming.
+
+
+Next TopicHow Brython Works
+
+
+
+
+← prev
+next →
+
+
+
+

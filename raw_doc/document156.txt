@@ -1,0 +1,331 @@
+
+
+
+
+next →
+← prev
+
+Merge two Dictionaries in Python
+Python Dictionary is a data structure that contains all elements in key-value pairs. Each key-value pair maps the keys with their associative value. Hence it is also known as the associative array of Python Dictionary. All the elements of the dictionary are enclosed within curly braces {}. Furthermore, we use a colon (:) symbol in between the key-value pairs that separate each key from its associative value. Dictionary elements can be arranged in any order and changed dynamically in the Python program. In this topic, we will learn how to merge two dictionaries using various methods of Python dictionaries.
+
+Merge two dictionaries using for loop
+Here we use a For loop that iterates the first dictionary and simultaneously adds entries to another dictionary to merge them.
+Let's consider a program to merge the given dictionaries using the For loop.
+forDict.py
+
+dict1 = { 'Alexandra' : 27,      # given the first dictionary in key-value pairs
+            'Shelina Gomez' : 22,
+            'James' : 29,
+            'Peterson' : 30
+                        } 
+dict2 = {
+            'Jasmine' : 19,      # given the second dictionary in key-value pairs
+            'Maria' : 26,
+            'Helena' : 30
+}                        
+print("Before merging the two dictionary ")
+print("Dictionary No. 1 is : ", dict1) # print the dict1
+print("Dictionary No. 1 is : ", dict2)  # print the dict2
+
+dict3 = dict1.copy()  # Copy the dict1 into the dict3 using copy() method
+
+for key, value in dict2.items():  # use for loop to iterate dict2 into the dict3 dictionary
+    dict3[key] = value
+
+print("After merging of the two Dictionary ")
+print(dict3)    # print the merge dictionary
+
+Output:
+Before merging the two dictionary
+Dictionary No. 1 is :  {'Alexandra': 27, 'Selina Gomez': 22, 'James': 29, 'Peterson': 30}
+Dictionary No. 1 is :  {'Jasmine': 19, 'Maria': 26, 'Helena': 30}
+After merging of the two Dictionary
+{'Alexandra': 27, 'Selina Gomez': 22, 'James': 29, 'Peterson': 30, 'Jasmine': 19, 'Maria': 26, 'Helena': 30}
+
+Merge two dictionaries using the update() method
+The update() method is used in the Python Dictionary to update the current dictionary with the second dictionary's content. Using the update() method, we can avoid creating a third dictionary to store the first dictionary element and then update the second dictionary element.
+Let's consider a program to merge the given dictionaries in Python without creating the third dictionary.
+Update1.py
+
+d1 = {'Actress ' : 'Jasmine Wiley',     
+    'Cricketer' : 'Nicholas Pooran',
+    'Basketball': 'Jordan',
+    'Football' : 'Zindane'
+}
+
+# Defines the d2 dictionary 
+d2 = {'Tennis ' : 'Maria',
+    'Stadium  ' : 'Amsterdam',
+    'Basketball' : 'Washington',
+    'Actress' : 'Elizabeth'}
+
+d1.update(d2) # append the d2 dictionary items into the d1 dictionary.
+print( "Merge two dictionaries :")
+print(d1) # print the merge dictionary 
+
+Output:
+{'Actress ': 'Jasmine Wiley', 'Cricketer': 'Nicholas Pooran', 'Basketball': 'Washington', 'Football': 'Zindane', 'Tennis ': 'Maria', 'Stadium  ': 'Amsterdam', 'Actress': 'Elizabeth'}
+
+Merge two dictionaries in Python using the Function
+Let's consider a program to merge the given dictionaries in Python using the update() method in function.
+proFun.py
+
+def merge_twoDict(a, b): # define the merge_twoDict() function
+    return (a.update(b)) # append the second dictionary (b) to the first dictionary (a) 
+
+a = {'USA' : 'New York',
+      'Jermany' : 'Jakarta',
+      'England' : 'London' }
+b = {
+    'India' : 'Delhi',
+    'Russia' : 'Russian',
+    'Australia' : 'Sydney'
+}          
+merge_twoDict(a, b) # pass two dictionaries to merge_twoDict() function
+print("Merged Dictionaries is : ")
+print(a) # print the merge dictionaries 
+
+Output:
+Merged Dictionaries is :
+{'USA': 'New York', 'Germany': 'Jakarta', 'England': 'London', 'India': 'Delhi', 'Russia': 'Russian', 'Australia': 'Sydney'}
+
+Merge two dictionaries using update() method when both dictionaries having same keys
+Let's consider a program to merge the given dictionaries in Python using the update() method when both dictionaries contains same keys.
+sameDict.py
+
+# Defines the d1 dictionary in key- value pairs
+d1 = {    
+    'Cricketer' : 'Nicholas Pooran',
+    'Basketball': 'Jordan',
+    'Football' : 'Zindane',
+    'Actress' : 'Jasmine Wiley' 
+    }
+
+# Defines the d2 dictionary in key- value pairs
+d2 = { 'Tennis' : 'Maria',
+    'Stadium' : 'Amsterdam',
+    'Basketball' : 'Washington',
+    'Actress' : 'Elizabeth' }
+
+d1.update(d2) # append the d2 dictionary items into the d1 dictionary.
+print( "Merge two dictionaries :")
+print(d1) # print the merge dictionary
+
+Output:
+Merge two dictionaries :
+{'Cricketer': 'Nicholas Pooran', 'Basketball': 'Washington', 'Football': 'Zindane', 'Actress': 'Elizabeth', 'Tennis': 'Maria', 'Stadium': 'Amsterdam'}
+
+We have the two same keys (Actress and Basketball) in both the dictionaries. When we perform the update method, the latest value of the second dictionary overrides the first dictionary's old values. When the d1 dictionary is executed, it prints Washington and Elizabeth values for the key Actress and Basketball instead of Jasmine Wiley and Jordan.
+Merge two dictionaries using Copy() and Update() Method
+In this method, we copy all the elements of the first dictionary (d1) elements using the copy() function and then assign the copied data into the other dictionary (d3). After that, we update the dictionary d3 with the d2 dictionary using the update() function.
+Let's consider a program to merge the given dictionaries using the copy and update() method in Python.
+CopyUpdate.py
+
+dict1 = {           
+    'Student' : 'Butler',
+    'Course' : 'Computer Science',
+    'Address' : 'Los Angeles'
+}
+
+
+dict2 = {
+    'Teacher' : 'Rosy',
+    'Subject' : 'Computer Science'
+}
+
+# Use Copy() function to copy the dict1 into the dict3
+dict3 = dict1.copy()
+print("Before Merge")
+print(dict3) # print dict3 dictionary
+
+# use update() dictionary function to update the dict3 using the dict2.
+dict3.update(dict2)
+
+print("After Merge of the two Dictionary is : ", dict3)
+
+Output:
+Before Merge
+{'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles'}
+After Merge of the two Dictionary is :  {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles', 'Teacher': 'Rosy', 'Subject': 'Computer Science'}
+
+Merge two dictionaries using the ** operator - Unpacking Operator
+The unpacking operator used to combine two or more dictionaries within a single expression and stored them in a third dictionary.
+Syntax:
+
+Res = { **dictF1, ** dictF2 }
+
+Let's consider a program to merge the given dictionaries using the ** operator in Python.
+Unpack.py
+
+dict1 = {           
+    'Student' : 'Butler',
+    'Course' : 'Computer Science',
+    'Address' : 'Los Angeles'
+}
+
+dict2 = {
+    'Teacher' : 'Rosy',
+    'Subject' : 'Computer Science'
+}
+
+dict3 = {
+    'Country' : 'England',
+    'State' : 'California',
+    'mob' : +3487434    
+}
+
+# Use ** operator or Unpack Operator
+d5 = {**dict1, **dict2}
+print("Merge two dictionaries", d5) # Merge two dictionaries
+
+d4 = {
+    **dict1, **dict2, **dict3 
+    }
+print("Merge more than two dictionaries", d4) # Merge multiples dictionaries
+
+Output:
+Merge two dictionaries {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles', 'Teacher': 'Rosy', 'Subject': 'Computer Science'}
+Merge more than two dictionaries {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles', 'Teacher': 'Rosy', 'Subject': 'Computer Science', 'Country': 'England', 'State': 'California', 'mob': 3487434}
+
+Merge two dictionaries using the dict() constructor
+A dict() constructor method is similar to the copy() and update() in Python Dictionary. A dict() constructor copies the first dictionary elements to the new dictionary and then followed an update() method to update the new dictionary by the second dictionary's element.
+Let's consider a program to merge the given dictionaries using the dict() method in Python.
+Dict.py
+
+dict1 = {           
+    'Student' : 'Butler',
+    'Course' : 'Computer Science',
+    'Address' : 'Los Angeles'
+}
+
+dict2 = {
+    'Teacher' : 'Rosy',
+    'Subject' : 'Computer Science'
+}
+
+# Use dict() constructor
+d3 = dict(dict1)
+print("Before Merge", d3)
+d3.update(dict2)
+print("Merge two dictionaries", d3) # Merge two dictionaries  
+
+Output:
+Before Merge {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles'}
+Merge two dictionaries {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles', 'Teacher': 'Rosy', 'Subject': 'Computer Science'}
+
+Merge two dictionaries using the dict() constructor and **kwargs
+It is a shortcut method of dict () constructor that uses a kwargs (**) operator to map one dictionary to another with the help of dict () method.
+Syntax:
+
+D3 = dict(dict1, **dict)
+
+Let's consider a program to merge two dictionaries using the dict() constructor and **kwargs operator in Python.
+Kwarg.py
+
+dict1 = {           
+    'Student' : 'Butler',
+    'Course' : 'Computer Science',
+    'Address' : 'Los Angeles'
+}
+
+# Second dictionary is:
+dict2 = {
+    'Teacher' : 'Rosy',
+    'Subject' : 'Computer Science'
+}
+
+
+# Use dict() constructor
+d3 = dict(dict1, **dict2)
+
+print("Merge two dictionaries", d3) # Merge two dictionaries
+
+Output:
+Merge two dictionaries {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles', 'Teacher': 'Rosy', 'Subject': 'Computer Science'}
+
+Merge two dictionaries using the Collections - ChainMap function
+ChainMap is a collection of multiple dictionaries that return a single dictionary. It is a faster method to create a new dictionary and run multiple files compared to the update () method. To merge the two dictionaries in Python, we need to import the ChainMap from collections. In ChainMap() function, we pass two dictionaries as an argument that returns the ChainMap instances to map the dictionaries using the dict() constructor to merge the dictionaries.
+Let's consider a program to merge two dictionaries using the ChainMap function in Python.
+Chain_map.py
+
+dict1 = {           
+    'Student' : 'Butler',
+    'Course' : 'Computer Science',
+    'Address' : 'Los Angeles'
+}
+dict2 = {
+    'Teacher' : 'Rosy',
+    'Subject' : 'Computer Science'
+}
+from collections import ChainMap  # import the ChainMap from collections
+
+# Use ChainMap() constructor
+d3 = dict(ChainMap(dict1, dict2)) # passes two parameters as an argument
+
+print("Merge two dictionaries", d3) # Merge two dictionaries
+
+Output:
+Merge two dictionaries {'Teacher': 'Rosy', 'Subject': 'Computer Science', 'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles'}
+
+Merge two dictionaries using the itertools - chain() method
+It makes an iterative dictionary that returns an element from the first iterable dictionary until it's finished. And then, it proceeds to the next iterable for further execution in a dictionary. Hence, it represents the consecutive sequences as a single sequence.
+Syntax:
+
+itertools.chain( *iterables )
+
+Let's consider a program to merge two dictionaries using the chain function in Python.
+Chain.py
+
+dict1 = {           
+    'Student' : 'Butler',
+    'Course' : 'Computer Science',
+    'Address' : 'Los Angeles'
+}
+dict2 = {
+    'Teacher' : 'Rosy',
+    'Subject' : 'Computer Science'
+}
+from itertools import chain  # import the chain() function from itertools
+
+# Use ChainMap() constructor
+d3 = dict(chain(dict1.items(), dict2.items())) # passes two parameters as an argument
+
+print("Merge two dictionaries", d3) # Merge two dictionaries
+
+Output:
+Merge two dictionaries {'Student': 'Butler', 'Course': 'Computer Science', 'Address': 'Los Angeles', 'Teacher': 'Rosy', 'Subject': 'Computer Science'}
+
+Merge two dictionaries using the merge ( | ) operator
+It is a merge (|) operator used to merge two dictionaries in Python. Python 3.9 has introduced the merge ( | ) operator in the dict class.
+Syntax:
+
+dict1 |= dict2
+
+Let's write a program to merge the two dictionaries in Python using the merge operator (|).
+merge.py
+
+def merge(dict1, dict):
+    result = dict1 | dict2 # use merge operator (|)
+    return result
+
+dict1 = {'A' : 'Apple', 'B' : 'Ball', 'C' : 'Cat' } # define dict1
+dict2 = {'D' : 'Dog', 'E' : 'Elephant', 'F' : 'Fish' } # define dict2
+dict3 = merge(dict1, dict2) # call merge() function
+print (dict3)    # print dict3
+
+Output:
+{'A': 'Apple', 'B': 'Ball', 'C': 'Cat', 'D': 'Dog', 'E': 'Elephant', 'F': 'Fish'}
+
+
+
+Next TopicMultithreading in Python 3
+
+
+
+
+← prev
+next →
+
+
+
+

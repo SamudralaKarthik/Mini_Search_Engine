@@ -1,0 +1,124 @@
+
+
+
+
+next →
+← prev
+
+Python seaborn Library
+Seaborn is one of an amazing library for visualization of the graphical statistical plotting in Python. Seaborn provides many color palettes and defaults beautiful styles to make the creation of many statistical plots in Python more attractive.
+Objective of Python Seaborn library
+Seaborn library aims to make a more attractive visualization of the central part of understanding and exploring data. It is built on the core of the matplotlib library and also provides dataset-oriented APIs.
+Seaborn is also closely integrated with the Panda's data structures, and with this, we can easily jump between the various different visual representations for a given variable to better understand the provided dataset.
+Categories of Plots in Python's seaborn library
+Plots are generally used to make visualization of the relationships between the given variables. These variables can either be a category like a group, division, or class or can be completely numerical variables. There are various different categories of plots that we can create using the seaborn library.
+In the seaborn library, the plot that we create is divided into the following various categories:
+
+Distribution plots: This type of plot is used for examining both types of distributions, i.e., univariate and bivariate distribution.
+Relational plots: This type of plot is used to understand the relation between the two given variables.
+Regression plots: Regression plots in the seaborn library are primarily intended to add an additional visual guide that will help to emphasize dataset patterns during the analysis of exploratory data.
+Categorical plots: The categorical plots are used to deals with categories of variables and how we can visualize them.
+Multi-plot grids: The multi-plot grids are also a type of plot that is a useful approach is to draw multiple instances for the same plot with different subsets of a single dataset.
+Matrix plots: The matrix plots are a type of arrays of the scatterplots.
+
+Installation of seaborn library for Python
+Here, we will learn how we can install the seaborn library for Python. After installing the seaborn library, we can import it into our Python program and use it in Python.
+
+pip install seaborn
+
+Required dependencies or prerequisites for the seaborn library:
+We must have,
+
+Python installed with the latest version (3.6+).
+Numpy must be installed with version 1.13.3 or higher.
+SciPy must be installed with 1.0.1 or higher versions.
+Must have panda library with 0.22.0 or higher versions.
+statsmodel library must be installed with version 0.8.0 or higher.
+And should have matplotlib installed with 2.1.2 or higher versions.
+
+Now, we will learn about some basic plots examples that we can plot in Python using the seaborn library.
+Plotting Chart Using seaborn Library
+1. Line plot:
+The seaborn line plot is one of the most basic plots presents in the seaborn library. We use the seaborn line plot mainly to visualize the given data in some time-series form, i.e., in a continuous manner with respect to time.
+Example -
+
+# Importing seaborn library in program
+import seaborn as sns
+# Importing mataplotlib library to show graph in output
+import matplotlib.pyplot as plt
+# Setting style with set() function
+sns.set(style="dark")
+# Using dataset() function to declare data type
+FMR = sns.load_dataset("fmri")
+# Plotting various responses for different\
+# Regions and events
+sns.lineplot(x="timepoint",
+             y="signal",
+             hue="region",
+             style="event",
+             data=FMR) # using lineplot() function to create line plot
+plt.show() # using show() function
+
+Output:
+
+Explanation: In the above code, after setting the dataset as fmri type and setting style of a line plot, we use the lineplot() function to draw the line plot in the output.
+2. Dist plot:
+We use the seaborn dist plots to plot histograms with the given variables and data as a result. We can plot histograms with some other variations such as rugplot and kdeplot using a dist plot.
+Example -
+
+# importing numpy as np library module
+import numpy as np
+# Importing seaborn library in program
+import seaborn as sns
+# Importing mataplotlib library to show graph in output
+import matplotlib.pyplot as plt
+# Selecting style for boxplot with set() function
+sns.set(style="white")
+# Generate a random univariate type distribution
+ru = np.random.RandomState(10)
+d = ru.normal(size=100)
+# Plotting a simple histogram with kdeplot variation
+sns.histplot(d, kde=True, color="m")
+plot = sns.histplot(d, kde=True, color="m")
+print(plot)
+plt.show() # using show() function
+
+Output:
+
+3. Lmplot:
+The Lmplot is another one of the basic plots in the seaborn library. The Lmplot shows a line that represents a linear regression model with the data points on the given two-dimensional (2-D) space. In this 2-D space, we can set x and y variables as the vertical and horizontal labels, respectively.
+Example -
+
+# Importing seaborn library in program
+import seaborn as sns
+# Importing matplotlib library to show graph in output
+import matplotlib.pyplot as plt
+# Using set() function to set style
+sns.set(style="ticks")
+# Using dataset() function
+ds = sns.load_dataset("anscombe")
+# Showing results in the form of linear regression
+sns.lmplot(x="x", y="y", data=ds)
+
+plot = sns.lmplot(x="x", y="y", data=ds)
+print(plot)
+plt.show() # using show() function
+
+Output:
+<seaborn.axisgrid.FacetGrid object at 0x000002182DC89070>
+
+
+
+
+
+Next TopicCountplot in Python
+
+
+
+
+← prev
+next →
+
+
+
+

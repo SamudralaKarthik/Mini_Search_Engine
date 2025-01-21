@@ -1,0 +1,187 @@
+
+
+
+
+next →
+← prev
+
+How to take Multiple Input from User in Python
+It is a common problem for the beginners. It may ask in the interview. Sometimes, the developers also need to take the multiple inputs in a single line. It can be easily done in the C/C++ using the scanf() method. However, Python provides the two methods that help us to take multiple values or input in one line.
+
+Using split() method
+Using List Comprehension
+
+In this tutorial, we will learn how to take multiple inputs in one line using various methods.
+Using split() Method
+The split() method is useful for getting multiple inputs from users. The syntax is given below.
+Syntax -
+
+input().split(separator, maxsplit)
+
+Parameters -
+
+The separator parameter breaks the input by the specified separator. By default, whitespace is the specified separator.
+
+The split() method is used to split the Python string, but we can use it to get the multiple values.
+Let's understand the following example.
+Example -
+
+# taking two inputs at a time
+a, b, c = input("Enter three values: ").split()
+print("Enter Your First Name: ", a)
+print("Enter Your Last Name: ", b)
+print("Enter Your Class: ", c)
+print()
+ 
+# taking three inputs at a time
+x, y, z = input("Enter three values: ").split()
+print("Total number of students: ", x)
+print("Number of passed student : ", y)
+print("Number of failed student : ", z)
+print()
+ 
+# taking four inputs at a time
+a, b, c, d = input("Enter four values: ").split()
+print("First number is {}, second number is {} third is {} and fourth is {}".format(a, b, c, d))
+print()
+
+Output:
+Enter three values: David Warner MCA
+Enter Your First Name:  David
+Enter Your Last Name:  Warner
+Enter Your Class:  Warner
+
+Enter three values: 100 67 33
+Total number of students:  100
+Number of passed students :  67
+Number of failed students :  33
+
+Enter four values: 1 2 3 4
+First number is 1, second number is 2 third is 3 and fourth is 4
+Enter multiple values: 4 6 7 2 4
+List of students:  [4, 6, 7, 2, 4]
+
+Explanation - 
+In the above code, we take the multiple inputs in a single line. The values are separated by the whitespace, you can use comma (,) or anything.
+Using List Comprehension
+We can also take values and convert them into the list using the map() method along with the split() method. Let's understand the following example.
+Example -2:
+
+# Taking multiple inputs in a single line
+# and type casting using list() function
+x = list(map(int, input("Enter multiple values: ").split()))
+print("List of students: ", x)
+
+Output:
+Enter multiple values: 4 6 7 2 4
+List of values:  [4, 6, 7, 2, 4]
+
+Explanation -
+We used whitespace as a separator in the above code and taken the input in one line and type casted it into a list.
+Take Matrix Input from User
+Matrix is a rectangular array, or we can say rectangular arrangement of data or numbers. The matrix can take any value such as integer values, floating values, string, complex numbers, etc. The values are placed horizontally called rows, while vertical values are called 'columns'. If the matrix consists of r number of rows and c number of columns, the order of the matrix will be r x c.
+Example -
+
+row = int(input("Enter the number of rows:"))
+column = int(input("Enter the number of columns:"))
+
+# Initialize matrix
+matrix = []
+print("Enter the entries row-wise:")
+
+# For user input
+for i in range(row):         # A for loop for row entries
+    a =[]
+    for j in range(column):  # A for loop for column entries
+        a.append(int(input()))
+    matrix.append(a)
+
+# For printing the matrix
+for i in range(row):
+    for j in range(column):
+        print(matrix[i][j], end = " ")
+    print()
+
+Output:
+Enter the number of rows:3
+Enter the number of columns:3
+Enter the entries row-wise:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+1 2 3 
+4 5 6
+7 8 9
+
+The above can be implemented in the one line as below.
+Example -
+
+row = int(input("Enter the number of rows:"))
+column = int(input("Enter the number of columns:"))
+matrix = [[int(input()) for x in range (column)] for y in range(row)]
+print(matrix)
+
+Output:
+Enter the number of rows:3
+Enter the number of columns:3
+1
+2
+3
+4
+5
+6
+7
+8
+9
+1 2 3 
+4 5 6
+7 8 9
+
+Using map() function and numpy Library
+There is a popular library called Numpy which can use for any scientific computation. It provides the extensive support for multidimensional arrays. We will use this library for input matrix. Let's understand the following example.
+Example -
+
+import numpy as np
+  
+row = int(input("Enter the number of rows:"))
+column = int(input("Enter the number of columns:"))
+  
+  
+print("Enter the entries in a single line (separated by space): ")
+  
+# User input of entries in a 
+# single line separated by space
+entries = list(map(int, input().split()))
+  
+# For printing the matrix
+matrix = np.array(entries).reshape(row, column)
+print(matrix)
+
+Output:
+Enter the number of rows:2
+Enter the number of columns:2
+Enter the entries in a single line separated by space: 1 2 3 1 
+[[1 2]
+ [3 1]]
+
+Conclusion
+In this tutorial, we have shown the different ways to take multiple values from the user. It saves the number of code lines and is quite easy to use. We have also described the same as a matrix where we can create a user-define matrix.
+
+
+Next TopicPython zlib Library
+
+
+
+
+← prev
+next →
+
+
+
+

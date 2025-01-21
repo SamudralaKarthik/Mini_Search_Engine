@@ -1,0 +1,304 @@
+
+
+
+
+next →
+← prev
+
+Metacharacters in Python
+Metacharacters are a very important concept of the regular expression that helps us to solve programming tasks using the Python regex module. In this tutorial, we will learn about the metacharacters in Python or how we can use them. We will explain each metacharacter along with their short and simple example. The prerequisite of learning metacharacters is that you should be familiar with the Python regular expression. If not, visit our Python regular expression tutorial.
+What are Metacharacters in Python?
+Metacharacters are part of regular expression and are the special characters that symbolize regex patterns or formats. Every character is either a metacharacter or a regular character in a regular expression. However, metacharacters have a special meaning. They are not used to match any patterns but to define some rules to find the specific pattern in the statement. Metacharacters are also known as operators, signs, or symbols.
+Below is the list of regex metacharacters that we can use in Python.
+
+
+Metacharacter
+Description
+Example
+
+
+[]
+It represents the set of characters.
+"[a-z]"
+
+
+\
+It represents the special sequence.
+"\r"
+
+
+.
+It signals that any character is present at some specific place.
+"Ja.v."
+
+
+^
+It represents the pattern present at the beginning of the string.
+"^Java"
+
+
+$
+It represents the pattern present at the end of the string.
+"point"
+
+
+*
+It represents zero or more occurrences of a pattern in the string.
+"hello*"
+
+
++
+It represents one or more occurrences of a pattern in the string.
+"hello+"
+
+
+{}
+The specified number of occurrences of a pattern the string.
+"java{2}"
+
+
+|
+It represents either this or that character is present.
+"java|point"
+
+
+()
+Capture and group
+(javatpoint)
+
+
+Below are the explanation of each metacharacter along with its code.
+[] Square Brackets Metacharacters
+The [] square brackets represent the set of the characters. For example - Suppose we want to get any occurrence of abc letters inside the target string. Or, we want to match the words that are inside the square bracket to the target string. We can use the [abc] to match such pattern. The [abc] will match contains any of a, b or c.
+We can also specify the range of the characters using the - dash.
+
+[0-5] - It is same as the [012345].
+[A-E] - It is same as the [ABCDE].
+[a-d] - It is same as the [abcd].
+
+Let's understand the following example.
+Example -
+
+import re
+str1 = "Python is a most popular programming language. Javatpoint is best resource to learn it."
+res = re.findall(r"[jtp]", str1)
+print(res)
+
+Output:
+['t', 't', 'p', 'p', 'p', 'J', 't', 'p', 't', 't', 't', 't']
+
+Explanation -
+The above program returned the list containing all the occurrences of the given pattern in the square bracket.
+This metacharacter can be beneficial in the case of searching several characters at the same time in the target string.
+The \ Backslash Metacharacter
+The backslash is used to escape the various characters including the metacharacters. It can also use to represent the special sequence. For example - \d is used to find the any digit from 0-9.
+Let's see another example - Suppose we want to search the match #a, where a is a characters followed by the # special character.
+Below is the table of some special characters which is used with the \.
+
+
+Characters
+Description
+
+
+\s
+It is used to match a one white space character.
+
+
+\S
+It is used to match one non-white space character.
+
+
+\0
+It is used to match a NULL character.
+
+
+\a
+It is used to match a bell or alarm.
+
+
+\d
+It is used to match one decimal digit, which means from 0 to 9.
+
+
+\D
+It is used to match any non-decimal digit.
+
+
+\n
+It helps a user to match a new line.
+
+
+\w
+It is used to match the alphanumeric [0-9a-zA-Z] characters.
+
+
+\W
+It is used to match one non-word character
+
+
+\b
+It is used to match a word boundary.
+
+
+Let's see the following example.
+Example - Take the previous string using the / backslash.
+
+import re
+str1 = "Python is a most popular programming language. Javatpoint is best resource to learn it."
+res = re.findall(r"\.", str1)
+print(res)
+
+Output:
+['.', '.']
+
+As we can that, it returned the list containing the two (.) dot.
+The . Dot Metacharacter
+The . dot metacharacter represents any string character apart from the newline character (\n). It can consist of any letters of uppercase or lowercase, symbols such as dollar ($), pound (#), mark (!), question mark (?) or colons (:), digits 0 to 9, including whitespace.
+Let's understand the following example.
+Example -
+
+import re
+
+given_string = "Peter likes to \n roam on the road at night"
+# dot(.) metacharacter to match any character
+result_match = re.search(r'.', given_string)
+print(result_match.group())
+
+# .+ to match any string except newline
+result_match = re.search(r'.*', given_string )
+print(result_match.group())
+
+given_string1 = "Peter's mobile number is - 4564\n67"
+result_match1 = re.search(r'.+', given_string1 )
+print(result_match1.group())
+
+Output:
+P 
+Peter likes to 
+Peter's mobile number is - 4564
+
+The ^ Carrot Character
+The carrot character returns the matching characters from beginning. For example - We want first five words from the string, we would use the caret (^) metacharacter. Let's understand the following example.
+Example -
+
+import re
+
+given_string = "Peter likes to \n roam on the road at night"
+# dot(.) metacharacter to match any character
+result_match = re.search(r'^\w{5}', given_string)
+print(result_match.group())
+
+Output:
+Peter
+
+In the above code, we used the \w special sequence which matches any lowercase or uppercase, numbers, and underscore character. The five inside curly braces specify the alphanumeric character should be occurring precisely five times.
+The caret ( ^ ) to match a pattern at the beginning of each new line
+We can use the caret metacharacter only at the beginning of a string in a single line as it is not used in multiline matching.
+However, with the help of the re.M flag, we can use caret with each new line. Let's understand the following example.
+Example -
+
+import re
+
+given_string = "Peter likes to \nroam on the road at night \nalso likes to eat ice-creame"
+# dot(.) metacharacter to match any character
+result_match = re.search(r"^\w{5}", given_string, re.M)
+print(result_match.group())
+
+The $ Dollor Metacharacter
+This metacharacter is just opposite to the dollor ($) metacharacter. It matches at the end of the string. In the following example, we will match the ice-cream, which is a present at the last of the string.
+Example -
+
+import re
+
+given_string = "Peter likes to \nroam on the road at night \nalso likes to eat ice-cream"
+# dot(.) metacharacter to match any character
+result_match = re.search(r"\w{6}$", given_string, re.M)
+print(result_match.group())
+
+Output:
+cream
+
+The * asterisk/star Metacharacter
+It is one of the most popular and widely used metacharacters in regular expression patterns. The * asterisk represents the repetition 0 or more times as possible, meaning it is a greedy repetition. The following example demonstrates the match of all the numbers using the asterisk (*) metacharacter.
+
+given_string = "Numbers are 1234, 8061,14567, 70453"
+
+The pattern to be match is \d\d*
+Observe that we need to match the two consecutive \d (represent any digit). The thing should be remembered that at the end of the pattern means zero or more repetitions of the preceding expression. In this case, we are preceding expression with last \d, not all two of them. We can set the upper limit as we want. However, the lower limit is zero.
+Let's understand the following example.
+Example -
+
+import re
+
+given_string = "Numbers are 1234, 8061,14567, 70453"
+# dot(.) metacharacter to match any character
+result_match = re.findall(r"\d\d*", given_string)
+print(result_match)
+
+Output:
+['1234', '8061', '14567', '70453']
+
+The + Plus Metacharacter
+It is another popular and widely used metacharacter in regular expression patterns. It represents the repetition of one or more times with as many repetitions. It means it is a greedy repetition. In other words, there are 1 or more repetitions of the preceding expression.
+Here the pattern to be matched is \d\d+.
+We can get the following possible pattern match.
+
+We may get the one repetition or two-digit number.
+We may get the three-digit number or two repetition of the last \d.
+We may have the four-digit number as well.
+
+Let's understand the following example.
+Example -
+
+import re
+
+given_string = "Numbers are 5, 34, 1234, 8061,14567, 70453"
+# dot(.) metacharacter to match any character
+result_match = re.findall(r"\d\d+", given_string)
+print(result_match)
+
+Output:
+['34', '1234', '8061', '14567', '70453']
+
+We get the list of the match result.
+The ? Question mark Metacharacter
+The question mark ? metacharacter shows preceding character or expression to repeat either zero or one time only. The repetition is restricted to both ends. In the following example, we will compare the ? with the * and + metacharacter.
+The pattern to be matched is /d/d/d/d?. We include the four which means the match should be having at least four digits.
+Let's understand the following example.
+Example -
+
+import re
+
+given_string = "Numbers are 5, 34, 1234, 8061,14567, 70453"
+# dot(.) metacharacter to match any character
+result_match = re.findall(r"\d\d\d\d?", given_string)
+print(result_match)
+
+Output:
+['1234', '8061', '1456', '7045']
+
+The Pipe (|) Metacharacter
+The pipe (|) metacharacter represents the alternative option of matching characters. Let's understand the following example.
+Example -
+
+given_string = "This is my number."
+# dot(.) metacharacter to match any character
+result_match = re.search(r"i|n", given_string)
+print(result_match)
+
+The utility of alternation groups stems from their ability to be used as units of repetitions.
+Conclusion
+Metacharacters plays a significant role in solving Python regex real-world problem, and they come in a wide range. In this tutorial, we have included almost every metacharacters with the proper explanation and the coding example.
+
+
+Next TopicWrite the Python Program to Print All Possible Combination of Integers
+
+
+
+
+← prev
+next →
+
+
+
+

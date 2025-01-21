@@ -1,0 +1,257 @@
+
+
+
+
+next →
+← prev
+
+How to Implement Protobuf in Python
+In this tutorial, we will learn about the Google's protobuf and how we can implement using Python programming language.
+Suppose, there is a group number of people of different origin and they speak different languages. To communicate effectively, they try to use a language that everyone can understand. So here everyone in the group will try to translate their idea into the language they have decided to use. This method of communication will be successful in conveying its message to the whole group. However, this will result in loss of efficiency, speed and accuracy.
+The same situation occurs with the computer system and their components. When we interchange the information one end to another, we need to transform the data into the XML, JSON, or any human readable format that takes much time. Why don't we encode the data in such way where we minimize the data loss and increase the speed?
+Google came with the solution in the form of the Protobuf. We will use the protobuf and learn how it is different from the regular data encoding. Let's start with the introduction of Protobuf.
+Introduction of Protobuf
+Protobuf was developed by the tech giant Google, and it is a way of data transfer. It proficiently shrinks the data blocks and therefore enhances the speed of sending data. It is a technique of serialize the data into Binary stream in fast and efficient manner. It is designed as platform-nuetral format and abstract data into a language. It is used for the inter-machine communication and RPC (Remote Procedure calls).
+To get started with the protobuf, we should have the knowledge of at-least one programming language to describe the shape of the data. However the best thing about the protobuf is that it supports many programming languages such as Python, Java, C++, JavaScript, C, etc.
+What are Protocol Buffers and how they work?
+Protocol buffers are a defined interface for the serialization of structure data. It establishes the communication to data. It is platform and language independent. According the Google official definition -
+"Protocol buffers are Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data - think XML, but smaller, faster, and simpler. You define how you want your data to be structured once …"
+So here is the question, when there are other methods available to encode the data like pickling, JSON, and XML why we need protocol buffer.
+
+Python provides the pickling that is built-in approach to serialize the data but it doesn't work well with the schema evolution. It also doesn't perform properly when we need to share data with cross language applications (written in Java or C++).
+Serialize the data to XML - The XML way become very attractive since it is sort of human-readable and there are binding libraries for lots of languages. It is also work well data interchange with the cross language applications. However, XML can be huge space intensive and in encoding/decoding it can huge speed issue in application.
+
+Protocol buffer overcome all these limitations. In the protocol buffer, we create the .proto file including the data structure we want to store. After creating proto file, the protobuf compiler comes into the play. The protobuf compiler generates a class that implements automate encoding and parsing data with an efficient binary format. We need to specify the language through the command to create a class. The generated class allows us to create the element by instantiating new message according to a .proto file. We will understand all this process in detail in the next section.
+Python Protobuf Buffer
+Protobuf is developed for data sharing across the cross language applications. Let's have an example of how to create protobuf. First we need to specify our data structure in the .proto file. Let's take the example of following student.proto file.
+
+syntax = "proto3";
+
+package studentblog;
+
+message StudentList {
+   // Elements of the Student list will be defined here
+   ...
+}
+
+As we can see that, the syntax is quite similar to C++ or Java. Let's understand the structure of the above file.
+
+Every proto file is started with the proto_version It may be proto2 or proto3. We are using proto3 because it supports all the major version of programming languages.
+The second line is a package declaration that reduces the chances of the naming conflicts between different projects.
+Next we have defined the message definitions. It is just an aggregate holding the message's fields. There are many standard type fields available like bool, string, double, int32, float, and double.
+
+Before creating the proto file, we need to install the proto compiler known as protoc. To install it, visit Github and download the python protoc compiler. We have installed the 64 bit version window.
+
+It will download the protoc compiler in the system.
+Note - To run the protoc compiler from anywhere, it would be good idea to its path into the system environment variable. You can add its C:\Users\User\Desktop\protoc-3.19.4-win64\bin to the system path.
+Let's add some data into our student.proto file.
+
+syntax = "proto3";
+
+package stdeuntInformation;
+
+enum StudentResult {
+    PASS = 0;
+    FAIL   = 1;
+    NOT_APPEARED = 2;
+    RESULT_UNDECLARE= 3;
+    PASS_WITH_GRASE = 4;
+}
+
+message StduentList {
+    int32 student_id = 1;
+    string student_name = 2;
+
+    message StudentDetails {
+        StudentResult result = 1 [RESULT_UNDECLARE];
+        int32 total_marks = 2;
+        int32 marks_obtain = 3;
+    }
+    repeated StudentList student = 3;
+}
+
+Let's understand the detailed structure of the above file.
+In the first line we define the proto version as proto3 and second line consist of the package name.
+As you can observe, we have defined the =1 or =2 or =3 makers on each elements which is used to identify as the unique "tag" that fields uses in the binary encoding. We should remember that values 1-15 are encoded with the one less byte than the higher numbers. So we can use the commonly or repeated elements within 1-15 and higher for the less-commonly used optional elements.
+We have defined the Enum type which is an Enumeration used to listing of possible value for a given variable.
+We require to attach any one of following modifiers.
+
+optional - It means we don't need to pass the value. It we don't provide the value, it will use default one. The default value can define by own as we done in the result field.
+repeated - It is similar as the dynamically sized arrays. The field with repeated annotation can be repeated zero or any number of times. The ordered or repeated values will be conserved in the protocol buffer.
+required - Such fields must acquire some value otherwise the field will be uninitialized and will raise an error while serialization.
+
+Compiling the Protobuf Buffers
+Now we will generate the integration code using the protobuf compiler (protoc) into the language-specific integration. We use the below command.
+
+protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/student.proto
+
+In the above command, there are three parameters.
+
+-I :- It defines the source directory where our proto file exists. We can use dot (.) for current directory.
+--python-out - It specifies the language to generate code. We can use any supported language. We are working in Python, so use --python-out.
+$SRC_DIR and $DST_DIR - The $SRC represents the source directory and $DST represents the destination directory.
+
+We run the protoc -I=. --python_out=. student.proto command and it generated the corresponding code.
+Note - If you face google_protobuf module not found error, simply install the google_protobuf library using the below command.
+
+pip install google_protobuf
+
+student_pb2.py file
+
+# -*- coding: utf-8 -*-
+# Generated by the protocol buffer compiler.  DO NOT EDIT!
+# source: student.proto
+"""Generated protocol buffer code."""
+from google.protobuf.internal import enum_type_wrapper
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
+from google.protobuf import message as _message
+from google.protobuf import reflection as _reflection
+from google.protobuf import symbol_database as _symbol_database
+# @@protoc_insertion_point(imports)
+
+_sym_db = _symbol_database.Default()
+
+
+
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rstudent.proto\x12\x12stdeuntInformation\"\xe8\x01\n\x0bStduentList\x12\x12\n\nstudent_id\x18\x01 \x01(\x05\x12\x14\n\x0cstudent_name\x18\x02 \x01(\t\x12?\n\x07student\x18\x03 \x03(\x0b\x32..stdeuntInformation.StduentList.StudentDetails\x1an\n\x0eStudentDetails\x12\x31\n\x06result\x18\x01 \x01(\x0e\x32!.stdeuntInformation.StudentResult\x12\x13\n\x0btotal_marks\x18\x02 \x01(\x05\x12\x14\n\x0cmarks_obtain\x18\x03 \x01(\x05*`\n\rStudentResult\x12\x08\n\x04PASS\x10\x00\x12\x08\n\x04\x46\x41IL\x10\x01\x12\x10\n\x0cNOT_APPEARED\x10\x02\x12\x14\n\x10RESULT_UNDECLARE\x10\x03\x12\x13\n\x0fPASS_WITH_GRASE\x10\x04\x62\x06proto3')
+
+_STUDENTRESULT = DESCRIPTOR.enum_types_by_name['StudentResult']
+StudentResult = enum_type_wrapper.EnumTypeWrapper(_STUDENTRESULT)
+PASS = 0
+FAIL = 1
+NOT_APPEARED = 2
+RESULT_UNDECLARE = 3
+PASS_WITH_GRASE = 4
+
+_STDUENTLIST = DESCRIPTOR.message_types_by_name['StduentList']
+_STDUENTLIST_STUDENTDETAILS = _STDUENTLIST.nested_types_by_name['StudentDetails']
+StduentList = _reflection.GeneratedProtocolMessageType('StduentList', (_message.Message,), {
+
+  'StudentDetails' : _reflection.GeneratedProtocolMessageType('StudentDetails', (_message.Message,), {
+    'DESCRIPTOR' : _STDUENTLIST_STUDENTDETAILS,
+    '__module__' : 'student_pb2'
+    # @@protoc_insertion_point(class_scope:stdeuntInformation.StduentList.StudentDetails)
+    })
+  ,
+  'DESCRIPTOR' : _STDUENTLIST,
+  '__module__' : 'student_pb2'
+  # @@protoc_insertion_point(class_scope:stdeuntInformation.StduentList)
+  })
+_sym_db.RegisterMessage(StduentList)
+_sym_db.RegisterMessage(StduentList.StudentDetails)
+
+if _descriptor._USE_C_DESCRIPTORS == False:
+
+  DESCRIPTOR._options = None
+  _STUDENTRESULT._serialized_start=272
+  _STUDENTRESULT._serialized_end=368
+  _STDUENTLIST._serialized_start=38
+  _STDUENTLIST._serialized_end=270
+  _STDUENTLIST_STUDENTDETAILS._serialized_start=160
+  _STDUENTLIST_STUDENTDETAILS._serialized_end=270
+# @@protoc_insertion_point(module_scope)
+
+The structure of file is looking quite messy and we won't able to understand immediately.
+The most interesting part is to create, build, and serialize the data using the Generated code. Let's see the following integration part of creating serialize data.
+Create new file and copy the below code.
+
+import student_pb2 as StudentList
+
+my_list = StudentList.StduentList()
+my_list.student_id = 101
+my_list.student_name = "Megha"
+
+first_item = my_list.student.add()
+first_item.result = StudentList.StudentResult.Value("PASS")
+first_item.total_marks = 500
+first_item.marks_obtain = 425
+
+Output:
+student_id: 101
+student_name: "Megha"
+student {
+  total_marks: 500
+  marks_obtain: 425
+}
+
+student_id: 102
+student_name: "Peter"
+student {
+  result: FAIL
+  total_marks: 500
+  marks_obtain: 136
+}
+
+We create the student list and add the elements one by one. Then, we print the student list element. It returns non-binary, non-serialized version. We can encode messages into binary format using SerializeToString() and ParseFromString().
+
+import student_pb2 as StudentList
+
+my_list = StudentList.StduentList()
+my_list.student_id = 101
+my_list.student_name = "Megha"
+
+first_item = my_list.student.add()
+first_item.result = StudentList.StudentResult.Value("PASS")
+first_item.total_marks = 500
+first_item.marks_obtain = 425
+
+with open("./serializedFile", "wb") as fd:
+    fd.write(my_list.SerializeToString())
+
+print(my_list)
+
+In the above code, we have serialized data of bytes and write into to file using the wb flags.
+We can read this file binary file and parse it using ParseFromString() method. It will return bytes representation of string. It will look-a-like as below.
+
+b'\x08\xd2\t\x12\x0Megha\x1a(\x08\x04\x12\x18Pass 500\x1a\n425'
+
+The b in-front of the quotes represents the following string composed of bytes octets in Python. The XML representation of data is given below.
+
+<studentlist>
+	<student_id>101</student_id>
+	<student_name>Megha</studet_name>
+	<student>
+		<student>
+			<result>pass</state>
+			<totel_marks>500 </total_marks>
+			<marks_obtain>425</marks_obtain>
+		</student>
+	</student>
+</studentlist>
+
+And the JSON version is as below.
+{
+student_id: 101
+student_name: "Megha" {
+student {
+  total_marks: 500
+  marks_obtain: 425
+}
+}
+}
+
+When we observe the memory obtain by these different formats, we can easily find that binary part uses less than any file. In our case, it takes only 17 bytes which is quite less as compare to other formats. Think about the transferring thousands of message that can make huge difference in terms of memory.
+Note - We have defined the default value of result value as FAIL. If the attributes are not assigned or changed they will use the default value. In our case, if we won't modify the StudentResult of a StudentList. The non-set values are not serialized saving additional memory space. If we change it PASS to FAIL, it will look like as below.
+student_id: 101
+student_name: "Mathew"
+student {
+  total_marks: 500
+  marks_obtain: 136
+}
+
+Conclusion
+Protocol buffer plays essential when we talk about speed and efficiency while transferring data. It can take some time to get handy with it; however defining new messages is pretty straightforward. In this tutorial, we have covered how to implement the Protobuf using the Python language and serialize the data. This tutorial also included a simple application creation but it can go beyond simple accessors and serialization.
+
+
+Next TopicPyQt library in Python
+
+
+
+
+← prev
+next →
+
+
+
+

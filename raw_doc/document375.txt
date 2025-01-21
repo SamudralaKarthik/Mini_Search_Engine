@@ -1,0 +1,400 @@
+
+
+
+
+next →
+← prev
+
+How to Select rows in Pandas DataFrame Based on Conditions
+In this tutorial, we will learn how a user can select rows in Pandas DataFrame based on conditions using Python.
+Users can select rows based on a particular column value using '>', '=', '<=', '>=', '!=' operators.
+Conditions:
+We will discuss different conditions that can be applied to the Pandas DataFrame.
+Condition 1:
+Select all the rows from the DataFrame in which 'Percentage' is greater than 70 using the basic method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 24, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 62, 85, 71, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subject_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+  
+# Then we will select rows based on condition
+result_DataFrame = Data_Frame[Data_Frame['Percentage_1'] > 70]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     24          ADS            62
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+5    John     24          ADS            78
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Condition 2:
+Select all the rows from the DataFrame in which 'Percentage' is greater than 70 by using the "loc[]" method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 24, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 62, 85, 71, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+  
+# Then we will select rows based on condition, That is, Using loc[] method
+result_DataFrame = Data_Frame.loc[Data_Frame['Percentage_1'] > 70]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     24          ADS            62
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+5    John     24          ADS            78
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Condition 3:
+Select all the rows from the DataFrame in which 'Percentage' is not equal to 71 using the "loc[]" method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 24, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 62, 85, 71, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+  
+# Then we will select rows based on condition, That is, Using loc[] method
+result_DataFrame = Data_Frame.loc[Data_Frame['Percentage_1'] != 71]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     24          ADS            62
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+    Name_1  Age_1 Subjects_1  Percentage_1
+0    Anuj     23       DBMS            88
+1    Ashu     24        ADS            62
+2   Yashi     21       ASPM            85
+4  Joshua     21       MFCS            55
+5    John     24        ADS            78
+6     Ray     25       ASPM            70
+7   Lilly     22        TOC            66
+9  Rachel     22       OOPS            89
+
+Now, we will learn how to select those rows whose column value is present in the list by using the "isin()" function of the DataFrame.
+Condition 4:
+Select all the rows from the given DataFrame in which column value of "Subjects_1" is present in the "Subjects_2" list by using the basic method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 24, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 62, 85, 71, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+
+Subjects_2 = ['ASPM', 'ADS', 'TOC']
+  
+# Then we will select rows based on condition, That is, Using isin[] method
+result_DataFrame = Data_Frame[Data_Frame['Subjects_1'].isin(Subjects_2)]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     24          ADS            62
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+   Name_1  Age_1 Subjects_1  Percentage_1
+1   Ashu     24        ADS            62
+2  Yashi     21       ASPM            85
+5   John     24        ADS            78
+6    Ray     25       ASPM            70
+7  Lilly     22        TOC            66
+
+Condition 5:
+Select all the rows from the given DataFrame in which column value of "Subjects_1" is present in the "Subjects_2" list by using the "loc[]" method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 24, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 62, 85, 71, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+
+Subjects_2 = ['ASPM', 'ADS', 'TOC']
+  
+# Then we will select rows based on condition, That is, Using isin[] method
+result_DataFrame = Data_Frame.loc[Data_Frame['Subjects_1'].isin(Subjects_2)]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     24          ADS            62
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+   Name_1  Age_1 Subjects_1  Percentage_1
+1   Ashu     24        ADS            62
+2  Yashi     21       ASPM            85
+5   John     24        ADS            78
+6    Ray     25       ASPM            70
+7  Lilly     22        TOC            66
+
+Condition 6:
+Select all the rows from the given DataFrame in which column value of "Subjects_1" is not present in the "Subjects_2" list by using the "loc[]" method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 24, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 62, 85, 71, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+
+Subjects_2 = ['ASPM', 'ADS', 'TOC']
+  
+# Then we will select rows based on condition, That is, Using isin[] method
+result_DataFrame = Data_Frame.loc[~Data_Frame['Subjects_1'].isin(Subjects_2)]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     24          ADS            62
+2   Yashi     21         ASPM            85
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+3    Mark     19          BCM            71
+4  Joshua     21         MFCS            55
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Now, we will learn how to select rows based on multiple column conditions by using the "&" operator.
+Condition 7:
+Select all the rows from the given DataFrame in which "Percentage_1" is equal to "71" and "Subject_1" is present in the "Subject_2" list by using the basic method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+  
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 21, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 71, 71, 82, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+
+Subjects_2 = ['ASPM', 'ADS', 'TOC']
+  
+# Then we will select rows based on condition, That is, Using isin[] method
+result_DataFrame = Data_Frame[(Data_Frame['Percentage_1'] == 71) &
+                              Data_Frame['Subjects_1'].isin(Subjects_2)]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     21          ADS            71
+2   Yashi     21         ASPM            71
+3    Mark     19          BCM            82
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+   Name_1  Age_1 Subjects_1  Percentage_1
+1   Ashu     21        ADS            71
+2  Yashi     21       ASPM            71
+
+Condition 8:
+Select all the rows from the given DataFrame in which "Percentage_1" is equal to "71" and "Subject_1" is present in the "Subject_2" list by using the "loc[]" method.
+Code:
+
+# First, import pandas
+import pandas as pnd
+record_1 = {
+   
+ 'Name_1': ['Anuj', 'Ashu', 'Yashi', 'Mark', 'Joshua', 'John', 'Ray', 'Lilly', 'Rose', 'Rachel' ],
+ 'Age_1': [23, 21, 21, 19, 21, 24, 25, 22, 23, 22],
+ 'Subjects_1': ['DBMS', 'ADS', 'ASPM', 'BCM', 'MFCS', 'ADS', 'ASPM', 'TOC', 'Data Mining', 'OOPS'],
+ 'Percentage_1': [88, 71, 71, 82, 55, 78, 70, 66, 71, 89] }
+  
+# Now, we are creating a dataframe
+Data_Frame = pnd.DataFrame(record_1, columns = ['Name_1', 'Age_1', 'Subjects_1', 'Percentage_1'])
+  
+print("Given DataFrame: \n", Data_Frame) 
+
+Subjects_2 = ['ASPM', 'ADS', 'TOC']
+  
+# Then we will select rows based on condition, That is, Using isin[] method
+result_DataFrame = Data_Frame.loc[(Data_Frame['Percentage_1'] == 71) &
+                              Data_Frame['Subjects_1'].isin(Subjects_2)]
+  
+print('\nFollowing is the Result DataFrame: \n', result_DataFrame)
+
+Output:
+Given DataFrame: 
+    Name_1  Age_1   Subjects_1  Percentage_1
+0    Anuj     23         DBMS            88
+1    Ashu     21          ADS            71
+2   Yashi     21         ASPM            71
+3    Mark     19          BCM            82
+4  Joshua     21         MFCS            55
+5    John     24          ADS            78
+6     Ray     25         ASPM            70
+7   Lilly     22          TOC            66
+8    Rose     23  Data Mining            71
+9  Rachel     22         OOPS            89
+
+Following is the Result DataFrame: 
+   Name_1  Age_1 Subjects_1  Percentage_1
+1   Ashu     21        ADS            71
+2  Yashi     21       ASPM            71
+
+Conclusion
+In this tutorial, we have discussed how to select different rows of Pandas DataFrame based on various conditions.
+
+
+Next TopicTypecasting in Python
+
+
+
+
+← prev
+next →
+
+
+
+

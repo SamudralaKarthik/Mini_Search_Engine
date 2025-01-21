@@ -1,0 +1,669 @@
+
+
+
+
+next →
+← prev
+
+Python Peewee Library
+Peewee is a Python library based on ORM (Object-Relational Mapping), which supports SQLite, MySQL, PostgreSQL, and Cockroach databases. In the following tutorial, we will be learning how to insert a new record, delete a record, create an index, and a lot more using the Peewee library in the Python programming language. Moreover, we will also understand connection management, text and binary fields, subqueries, filters, and more with respect to Peewee.
+So, let's get started.
+Understanding the Peewee library in Python
+
+Peewee is a Python Object Relational Mapping (also known as ORM) library developed by a US-based software engineer Charles Leifer in October 2010.
+The latest version of this library is 3.14.8. This library supports the databases of SQLite, MySQL, PostgreSQL, and Cockroach.
+Object Relational Mapping is a programming method that allows programmers to convert data between incompatible type systems in Object-Oriented Programming languages.
+Classes are considered non-scalar as they are defined in an Object-Oriented Programming language (OOPs) such as Python. It can't be expressed as Primitive data types like Integers and Strings.
+In contrast, the databases such as SQLite, MySQL, Oracle, and others can only store and manipulate scalar values like Integers and Strings arranged within tables.
+The programmer should either transform the values of the objects into collections of scalar data types for storing in the database or transform them back upon retrieval or only utilize simple scalar values inside the program.
+In an ORM system, each class maps to a table in the underlying database. As a replacement for writing tedious database interfacing code on our own, an ORM takes care of these problems while we can focus on programming the logic of the system.
+
+Setting Up the Environment
+We can install the latest version of Peewee as hosted on PyPI (short for Python Package Index), using the pip installer as shown below:
+Syntax:
+
+$ pip3 install Peewee
+
+There are no other dependencies for this library to work. It works with SQLite without installing any other package since the sqlite3 module is bundled with the standard library.
+However, in order to work with MySQL and PostgreSQL, we may have to install DB-API compatible driver modules - pymysql and pyscopg2, respectively. The cockroach database is handled through a playhouse extension that is installed by default together with the Peewee library.
+Understanding the mapping using Peewee
+A Model maps to the database table, a Field to the table column, and an instance to the table row.
+Peewee utilizes MySQLDatabase for MySQL, PostgresqlDatabase for PostgreSQL, and SqliteDatabase for SQLite. For the following tutorial, we will be working with the SQLite database.
+Understanding the Field Types in Peewee
+Field types in a Peewee model define the storage type of the model. They are translated to the corresponding database column types.
+
+
+S.NO
+Field Type
+SQLite
+PostgreSQL
+MySQL
+
+
+1
+CharField
+Varchar
+Varchar
+Varchar
+
+
+2
+TextField
+Text
+Text
+Longtext
+
+
+3
+DateTimeField
+Datetime
+Timestamp
+Datetime
+
+
+4
+IntegerField
+Integer
+Integer
+Integer
+
+
+5
+BooleanField
+Smallint
+Boolean
+Bool
+
+
+6
+FloatField
+Real
+Real
+Real
+
+
+7
+DoubleField
+Real
+Double Precision
+Double Precision
+
+
+8
+BigIntegerField
+Integer
+Bigint
+Bigint
+
+
+9
+DecimalField
+Decimal
+Numeric
+Numeric
+
+
+10
+PrimaryKeyField
+Integer
+Serial
+Integer
+
+
+11
+ForeignKeyField
+Integer
+Integer
+Integer
+
+
+12
+DateField
+Date
+Date
+Date
+
+
+13
+TimeField
+Time
+Time
+Time
+
+
+The above table lists the Peewee field types and the corresponding SQLite, PostgreSQL, and MySQL column types.
+Defining the model using Peewee
+In the first example, we will be creating a simple database table.
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+db = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = db
+        db_table = 'notes'
+
+# creating table
+Notes.create_table()
+noteOne = Notes.create(text = 'Went to the Gym')
+noteOne.save()
+noteTwo = Notes.create(text = 'Went to the Cinema', created = datetime.date(2021, 12, 8))
+noteTwo.save()
+noteThree = Notes.create(text = 'Watered the plants', created = datetime.date(2021, 12, 8))
+noteThree.save()
+noteFour = Notes.create(text = 'Listened to music')
+noteFour.save()
+
+Output:
+sqlite> select * from notes;
+1|Went to the Gym|2021-12-09
+2|Went to the Cinema|2021-12-08
+3|Watered the plants|2021-12-08
+4|Listened to music|2021-12-09   
+
+Explanation:
+In the above snippet of code, we have imported the required library. We have then created a database as 'testSpace.db'. We have then created a class of the Peewee model and added some fields to it. We created the database table for the database and created the table. At last, we have inserted the entries in the table and saved the database.
+Dropping table using Peewee
+We can drop the table using the drop_table() function. Let us consider the following example demonstrating the same.
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining the class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# using the drop_table() function to drop the table
+Notes.drop_table()
+
+Explanation:
+In the above snippet of code, we have imported the required libraries. We have then created a database as 'testSpace.db'. We have then defined a class as 'Notes' for the Peewee model and created a table. We have then used the drop_table() function to drop the table.
+Peewee insert_many() method
+The insert_many() method of the Peewee library is used to perform bulk creates operation.
+Let us consider the following example demonstrating the same.
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+
+    class Meta:
+
+        database = dBase
+        db_table = 'notes'
+# creating table
+Notes.create_table()
+# defining the data
+the_data = [
+    { 'text': 'Visited friends in the morning', 'created': datetime.date(2021, 12, 7) },
+    { 'text': 'Worked on a Project', 'created': datetime.date(2021, 12, 10) },
+    { 'text': 'Went to Shopping mall', 'created': datetime.date(2021, 12, 6) },
+    { 'text': 'Listened to songs', 'created': datetime.date(2021, 12, 2) },
+    { 'text': 'Watched Web series all day', 'created': datetime.date(2021, 12, 4) },
+    { 'text': 'Watered the plants', 'created': datetime.date(2021, 12, 2) },
+    { 'text': 'Walked for half an hour', 'created': datetime.date(2021, 12, 8) }
+]
+with dBase.atomic():
+    # using the insert_many() function to add entries in bulk
+    the_query = Notes.insert_many(the_data)
+    the_query.execute()
+
+Output:
+sqlite> select * from notes;
+1|Went to the Gym|2021-12-10
+2|Went to the Cinema|2021-12-08
+3|Watered the plants|2021-12-08
+4|Listened to music|2021-12-10
+5|Visited friends in the morning|2021-12-07
+6|Worked on a Project|2021-12-10
+7|Went to Shopping mall|2021-12-06
+8|Listened to songs|2021-12-02
+9|Watched Web series all day|2021-12-04
+10|Watered the plants|2021-12-02
+11|Walked for half an hour|2021-12-08  
+
+Explanation:
+In the above snippet of code, we have imported the required libraries. We have then created the database and the table. Later, we defined the data in a list of dictionaries that need to be filled in the table. We have then executed the bulk operation and used the atomic method to put the bulk operation in a transaction.
+Selecting all instances using Peewee
+The select method of Peewee is used to retrieve instances of the defined models. Let us consider the following example illustrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating the database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining the class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# using the select() function
+notes = Notes.select()
+print(notes)
+# iterating through each row in the table
+for note in notes:
+    print('{} on {}'.format(note.text, note.created))
+
+Output:
+$ python fetch_data.py
+SELECT "t1"."id", "t1"."text", "t1"."created" FROM "notes" AS "t1"
+Went to the Gym on 2021-12-10
+Went to the Cinema on 2021-12-08
+Watered the plants on 2021-12-08
+Listened to music on 2021-12-10
+Visited friends in the morning on 2021-12-07
+Worked on a Project on 2021-12-10
+Went to Shopping mall on 2021-12-06
+Listened to songs on 2021-12-02
+Watched Web series all day on 2021-12-04
+Watered the plants on 2021-12-02
+Walked for half an hour on 2021-12-08
+
+Explanation:
+In the above snippet of code, we have imported the required libraries. We have then created the database and the table. We have then used the select() function to select columns from the tables. We have then used the for-loop to iterate through each row in the table and print them for the users. As a result, the program returned the entries for the users.
+Filtering data using Peewee where method
+The where method of Peewee allows programmers to filter data based on a specified condition. Let us consider the following example to understand the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+
+        database = dBase
+        db_table = 'notes'
+# using the where method to filter data
+notes = Notes.select().where(Notes.id > 4)
+# iterating through each row of the table
+for note in notes:
+    print('{} {} on {}'.format(note.id, note.text, note.created))
+
+Output:
+5 Visited friends in the morning on 2021-12-07
+6 Worked on a Project on 2021-12-10
+7 Went to Shopping mall on 2021-12-06
+8 Listened to songs on 2021-12-02
+9 Watched Web series all day on 2021-12-04
+10 Watered the plants on 2021-12-02
+11 Walked for half an hour on 2021-12-08   
+
+Explanation:
+In the above snippet of code, we have imported the required libraries and created a database and the table. We have then used the where method along with the select() function to filter the data in the table. We have then used the for-loop to iterate through each row of the table and print the data for the users.
+Peewee multiple where expressions
+We can use the where method multiple times and combine them to produce a new expression and precise the filtration process. Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# using the where method to filter data
+notes = Notes.select().where((Notes.id > 3) & (Notes.id < 10))
+# iterating through each rows of the table
+for note in notes:
+    print('{} {} on {}'.format(note.id, note.text, note.created))
+
+Output:
+4 Listened to music on 2021-12-10
+5 Visited friends in the morning on 2021-12-07
+6 Worked on a Project on 2021-12-10
+7 Went to Shopping mall on 2021-12-06
+8 Listened to songs on 2021-12-02
+9 Watched Web series all day on 2021-12-04   
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We have now used the where method specifying the limits in order to filter the data in a specific manner. We have then used the for-loop to iterate through the rows and print them for the users.
+Retrieving Single instance using Peewee
+There are two methods that we can use to select a single instance; each of them utilizes a get() function.
+Let us consider the following example to understand the working of the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# first method
+noteOne = Notes.select().where(Notes.text == 'Went to the Gym').get()
+print(noteOne.id)
+print(noteOne.text)
+print(noteOne.created)
+# second method
+noteTwo = Notes.get(Notes.text == 'Worked on a Project')
+print(noteTwo.id)
+print(noteTwo.text)
+print(noteTwo.created)
+
+Output:
+1
+Went to the Gym
+2021-12-10
+6
+Worked on a Project
+2021-12-10
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. In order to retrieve a single instance, we can either the first way, where we can use the where method along with the get() function, or the second way using the get() function. Both methods are shown in the above example.
+Selecting column using Peewee
+We can specify the names of the columns inside the select method that has to be included within the query.
+Here is the example that demonstrates the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# using the select() function
+notes = Notes.select(Notes.text, Notes.created).limit(3)
+output = [e for e in notes.tuples()]
+print(output)
+
+Output:
+[('Went to the Gym', datetime.date(2021, 12, 10)), ('Went to the Cinema', datetime.date(2021, 12, 8)), ('Watered the plants', datetime.date(2021, 12, 8))]
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We have then used the select() function specifying the names of the columns that have to be selected. We have also included the limit function to limit the number of entries to be printed.
+Counting Instances using Peewee
+We can use the count method in order to calculate the number of model instances in the table. Let us consider the following example that illustrates the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# using the count() function
+count1 = Notes.select().count()
+print(count1)
+count2 = Notes.select().where(Notes.created >= datetime.date(2021, 12, 7)).count()
+print(count2)
+
+Output:
+11
+7  
+
+Explanation:
+In the above snippet of code, we have imported the required libraries and created the database and the table. We have then used the count() function to count the total number of entries. We have then used the where() function specifying the limits of the selection of the entries and used the count() function again to print the number of selected entries only.
+Displaying SQL statements using Peewee
+The Peewee library offers the sql method that allows programmers to generate SQL statements.
+Let us consider the following example that illustrates the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# selecting the specific entry
+noteFour = Notes.select().where(Notes.id == 4)
+# using the sql function
+print(noteFour.sql())
+
+Output:
+('SELECT "t1"."id", "t1"."text", "t1"."created" FROM "notes" AS "t1" WHERE ("t1"."id" = ?)', [4]) 
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We then used the select() function and the where() to select the entry with id = 4. We have then used the sql function to print the SQL statement for that selection operation.
+Peewee offset and limit attributes
+Peewee also provides several attributes like offset and limit that allow programmers to define the initial skip of instances and the number of instances to be included in the select function.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# using the offset and limit attributes
+the_notes = Notes.select().offset(3).limit(4)
+# iterating through the entries in the table
+for note in the_notes:
+    print(note.id, note.text, note.created)
+
+Output:
+4 Listened to music 2021-12-10
+5 Visited friends in the morning 2021-12-07
+6 Worked on a Project 2021-12-10
+7 Went to Shopping mall 2021-12-06   
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We have then used the offset and limit attributes with the select() function in order to select the entries ranging from the 4th entry to the next three entries.
+Ordering using Peewee
+We can use the Peewee order_by function in order to retrieve instances. Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+print('Ascending order')
+print('********************************')
+# using the order_by function. By default Ascending order
+the_notes = Notes.select(Notes.text, Notes.created).order_by(Notes.created)
+for note in the_notes:
+    print(note.text, note.created)
+print()
+print('Descending order')
+print('********************************')
+# using the order_by function along with desc() function for descending order
+the_notes = Notes.select(Notes.text, Notes.created).order_by(Notes.created.desc())
+for note in the_notes:
+    print(note.text, note.created)
+
+Output:
+Ascending order
+********************************
+Listened to songs 2021-12-02
+Watered the plants 2021-12-02
+Watched Web series all day 2021-12-04
+Went to Shopping mall 2021-12-06
+Visited friends in the morning 2021-12-07
+Went to the Cinema 2021-12-08
+Watered the plants 2021-12-08
+Walked for half an hour 2021-12-08
+Went to the Gym 2021-12-10
+Listened to music 2021-12-10
+Worked on a Project 2021-12-10
+
+Descending order
+********************************
+Went to the Gym 2021-12-10
+Listened to music 2021-12-10
+Worked on a Project 2021-12-10
+Went to the Cinema 2021-12-08
+Watered the plants 2021-12-08
+Walked for half an hour 2021-12-08
+Visited friends in the morning 2021-12-07
+Went to Shopping mall 2021-12-06
+Watched Web series all day 2021-12-04
+Listened to songs 2021-12-02
+Watered the plants 2021-12-02    
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We then used the select function and the order_by method to select the entries in the table and arrange them in ascending order. We have then used the for-loop to iterate through each row and print them. We have then used the select function along with the order_by method again. However, we have added the desc() function in order to arrange the entries in descending order and print them for the users with the help of the for-loop.
+Deleting instance using Peewee
+The Peewee library provides the delete_by_id method that allows programmers to delete an instance identified by its ID. This function returns the number of deleted instances.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# deleting the entry using ID
+noteThree = Notes.delete_by_id(3)
+# using the select() function
+notes = Notes.select()
+# iterating through each row in the table
+for note in notes:
+    print('{} - {} on {}'.format(note.id, note.text, note.created))
+
+Output:
+1 - Went to the Gym on 2021-12-10
+2 - Went to the Cinema on 2021-12-08
+4 - Listened to music on 2021-12-10
+5 - Visited friends in the morning on 2021-12-07
+6 - Worked on a Project on 2021-12-10
+7 - Went to Shopping mall on 2021-12-06
+8 - Listened to songs on 2021-12-02
+9 - Watched Web series all day on 2021-12-04
+10 - Watered the plants on 2021-12-02
+11 - Walked for half an hour on 2021-12-08
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We have then used the delete_by_id() function to delete the entry at the ID = 3. We have then printed the entire table for the users. As a result, the entry at ID = 3 has been deleted from the table successfully.
+Deleting multiple instances using Peewee
+In order to delete more than one instance, we can call the Peewee delete method. This method will return the number of successfully deleted instances.
+Let us consider the following example illustrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# deleting multiple instances
+the_query = Notes.delete().where(Notes.id > 3)
+num = the_query.execute()
+print('{} instances deleted'.format(num))
+
+Output:
+7 instances deleted
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We have then used the delete() method and the where() method to delete the instances with the IDs above 3. As a result, seven instances are deleted from the table.
+Updating instance using Peewee
+We can use the Peewee update method in order to update an instance. It returns the number of successfully updated instances.
+Here is the example demonstrating the same:
+Example:
+
+# importing the required libraries
+import peewee
+import datetime
+# creating a database
+dBase = peewee.SqliteDatabase('testSpace.db')
+# defining a class as Notes
+class Notes(peewee.Model):
+    text = peewee.CharField()
+    created = peewee.DateField(default = datetime.date.today)
+    class Meta:
+        database = dBase
+        db_table = 'notes'
+# updating an instance
+the_query = Notes.update(created=datetime.date(2021, 10, 27)).where(Notes.id == 2)
+num = the_query.execute()
+print('No. of rows updated: {}'.format(num))
+
+Output:
+No. of rows updated: 1
+
+Explanation:
+We have imported the required libraries and created the database and the table in the above snippet of code. We have then used the update() function to update the date of the instance at ID = 2.
+
+
+Next TopicSome Cryptocurrency Libraries for Python
+
+
+
+
+← prev
+next →
+
+
+
+

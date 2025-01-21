@@ -1,0 +1,142 @@
+
+
+
+
+next →
+← prev
+
+How to Plot the Google Map using folium package in Python
+The folium package is built on the data wrangling strengths of the Python ecosystem and the mapping strengths of the Leaflet.js library of JavaScript language. The user can manipulate their data by using Python and then visualize it by using Leaflet.js map through folium package. Folium package is an easy approach of visualizing the data on Leaflet.js map, which has been manipulated by using Python.
+Required Module and Libraries
+Folium: The user can install the Folium package by using the following command.
+
+pip install folium
+
+Geopy: The geopy module of Python makes it easy for Python users to locate the coordinates of landmarks, cities, countries on the earth's surface. For installing the geopy module, the user can use the following command:
+
+pip install geopy
+
+After successful installation of the both libraries, we follow the below steps to plot Google map.
+Step 1: Create the Base map
+The user can create the base map by using the following program:
+
+import os
+# First, import folium package
+import folium
+from geopy.geocoders import Nominatim as NT
+# Initialize Nominatim API
+geo_locator = NT(user_agent = "geoapiExercises")
+# write the place
+place_1 = "Yemen"
+
+location_1 = geo_locator.geocode(place_1)
+# now, it will search for the location by using the latitude and longitude, with zoom_start = 15
+user_map1 = folium.Map(location = [location_1.longitude, location_1.latitude],
+                                        zoom_start = 15 )
+# At last, open the base map
+user_map1
+
+Output:
+
+Step 2: Add a Circular Marker
+The user can mark the area with the circle and popup text by using the following code:
+
+import folium
+ 
+from geopy.geocoders import Nominatim as NT
+
+geo_locator = NT(user_agent = "geoapiExercises")
+
+place_1 = "Yemen"
+
+location_1 = geo_locator.geocode(place_1)
+
+user_map1 = folium.Map(location = [location_1.longitude, location_1.latitude],
+                                        zoom_start = 15 )
+ 
+# CircleMarker with radius
+folium.CircleMarker(location = [location_1.longitude, location_1.latitude],
+                    radius = 45, popup = ' YEMEN ').add_to(user_map1)
+ 
+# Now, open the Map with circular Mark
+user_map1
+
+Output:
+
+Step 3: Add the simple marker for the parachute style marker with the popup text
+The user can use the following code.
+Example -
+
+import os
+import folium
+ 
+from geopy.geocoders import Nominatim as NT
+
+geo_locator = NT(user_agent = "geoapiExercises")
+
+place_1 = "Yemen"
+
+location_1 = geo_locator.geocode(place_1)
+
+user_map1 = folium.Map(location = [location_1.longitude, location_1.latitude],
+                                        zoom_start = 15)
+#Now, we will pass the string in popup parameter
+folium.Marker([location_1.longitude, location_1.latitude],
+               popup = ['YEMEN']).add_to(user_map1)
+# now, open the map 
+user_map1
+
+Output:
+
+Step 4: Add the line on the map
+The user can use the following code for adding the line on the map to join the two coordinates.
+Example -
+
+# First, import folium package
+import folium
+import os 
+from geopy.geocoders import Nominatim as NT
+
+geo_locator = NT(user_agent = "geoapiExercises")
+
+place_1 = "Aden"
+place_2 = "Yemen"
+location_1 = geo_locator.geocode(place_1)
+location_2 = geo_locator.geocode(place_2)
+user_map1 = folium.Map(location = [location_1.longitude, location_1.latitude],
+                                        zoom_start = 6)
+ 
+folium.Marker([location_1.longitude, location_1.latitude],
+               popup = ['Aden']).add_to(user_map1)
+ 
+folium.Marker([location_2.longitude, location_2.latitude],
+              popup = 'Yemen').add_to(user_map1)
+ 
+# Now, we will add the line on the map by using Polyline method .
+# it will connect both coordinates by the line
+ 
+folium.PolyLine(locations = [[location_1.longitude, location_1.latitude], [location_2.longitude, location_2.latitude]],
+                line_opacity = 0.5).add_to(user_map1)
+# now, open the map
+user_map1
+
+Output:
+
+Explanation
+We used the geopy library to get the latitude and longitude of the location. Then we used the "folium.map" method of the folium package for creating the base of Google Maps.
+In step 2, we used "folium.CircleMarker" for marking the circular mark on the location with the pop-up text. In step 3, we used "folium.Marker" to add a parachute style mark on the mentioned location. In the last step, we used "folium.PolyLine" for joining two marks on two different locations on the map.
+Conclusion
+In this tutorial, we have shown how the user can Plot the Google map and add different required functionalities on the map like a circular mark, parachute mark, pop-up text, and the line joining the two coordinates on the map.
+
+
+Next TopicGrid Search in Python
+
+
+
+
+← prev
+next →
+
+
+
+

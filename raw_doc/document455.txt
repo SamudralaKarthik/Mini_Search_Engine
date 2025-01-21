@@ -1,0 +1,87 @@
+
+
+
+
+next →
+← prev
+
+Python Program for How to Check if a Given Number is Fibonacci Number or Not
+In this tutorial, we will learn how to check if the given number is a Fibonacci number or not.
+Here, we have a number "n", and we have to check if it is a Fibonacci number. Starting number of Fibonacci series are: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, and so on.
+Example:
+
+Input number: 5
+Output: Yes, the given number is a Fibonacci_Number.
+
+Input number:  22
+Output: No, the given number is not a Fibonacci_Number.
+
+Input number: 55
+Output: Yes, the given number is a Fibonacci_Number.
+
+We can also use the following property of the Fibonacci number for checking if the given number is a Fibonacci number or not:
+
+A number is Fibonacci number only if one of (5 * R * R + 4) or ( 5 * R * R - 4) or both of them are the perfect square.
+
+Python Program to Check if Given Number if Fibonacci or Not:
+
+import math as m
+ 
+# Here, we will create a utility function that will return true if K is a perfect square
+def is_Perfect_Square(K):
+    s = int(m.sqrt(K))
+    return s * s == K
+ 
+# Now, we will create a function which will return "true" if R is a Fibinacci Number, 
+# else it will return "false"
+def is_Fibonacci(R):
+ 
+    # R is a Fibinacci number only if one of (5 * R * R + 4) or (5 * R * R - 4) or both 
+   # of them are perferct square
+    return is_Perfect_Square(5 * R * R + 4) or is_Perfect_Square(5 * R * R - 4)
+    
+# Now, we will create a utility function for testing the above functions
+for J in range(1, 22):
+     if (is_Fibonacci(J) == True):
+         print ("Number:", J, ": Yes, the given number is a Fibonacci_Number")
+     else:
+         print ("Number:", J, ": No, the given number is not a Fibonacci_Number")
+
+Output:
+Number: 1 : Yes, the given number is a Fibonacci_Number
+Number: 2 : Yes, the given number is a Fibonacci_Number
+Number: 3 : Yes, the given number is a Fibonacci_Number
+Number: 4 : No, the given number is not a Fibonacci_Number
+Number: 5 : Yes, the given number is a Fibonacci_Number
+Number: 6 : No, the given number is not a Fibonacci_Number
+Number: 7 : No, the given number is not a Fibonacci_Number
+Number: 8 : Yes, the given number is a Fibonacci_Number
+Number: 9 : No, the given number is not a Fibonacci_Number
+Number: 10 : No, the given number is not a Fibonacci_Number
+Number: 11 : No, the given number is not a Fibonacci_Number
+Number: 12 : No, the given number is not a Fibonacci_Number
+Number: 13 : Yes, the given number is a Fibonacci_Number
+Number: 14 : No, the given number is not a Fibonacci_Number
+Number: 15 : No, the given number is not a Fibonacci_Number
+Number: 16 : No, the given number is not a Fibonacci_Number
+Number: 17 : No, the given number is not a Fibonacci_Number
+Number: 18 : No, the given number is not a Fibonacci_Number
+Number: 19 : No, the given number is not a Fibonacci_Number
+Number: 20 : No, the given number is not a Fibonacci_Number
+Number: 21 : Yes, the given number is a Fibonacci_Number
+
+Conclusion
+In this tutorial, we have discussed how a user can check if the given number is a Fibonacci number or not by using Python.
+
+
+Next Topicrandint() Function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

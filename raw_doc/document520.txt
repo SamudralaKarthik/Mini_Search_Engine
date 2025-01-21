@@ -1,0 +1,241 @@
+
+
+
+
+next →
+← prev
+
+How to Extract YouTube Data in Python (Data Scraping using BeautifulSoup)
+Web scraping is a way to extract the data from websites. It helps us to gather or copy the specific data and we can store the date into the database or spreadsheet for the later analysis or retrieval.
+Python comes with the BeautifulSoup library which is widely used to scrap data from other websites. If you don't familiar with the BeautifulSoup library, you can learn from our Web Scraping Using Python tutorial. Here, you will get the idea about the BeautifulSoup library in detail.
+In this tutorial, we will discuss how to extract data from YouTube and get the useful insights from it. We will use the BeautifulSoup library and HTML parser.
+Since YouTube is a largest video-sharing platform has billions users across the world. Many creators are making million. It would be good idea to fetch the information of popular channels. We can keep track some popular channels, subscribers, views on videos, likes and dislikes.
+Note - YouTube changes its source code time to time. So, in some case it won't work. You can also prefer YouTube API for extracting data instead.
+Installation of Dependencies
+To accomplish this task, we need to do some installation. First, install the BeautifulSoup library using the below command.
+
+pip install bs4
+
+Now, install the request html parser in the command line terminal.
+
+pip install request_html
+
+Now we are ready to move forward to fetch data from YouTube.
+Get Started with YouTube Data Scraping
+We are going to get our hand dirty with the quick experimental script that will help us to extract such data. Create a new Python file or shell type the following code.
+Example -
+
+# Install dependencies
+from requests_html import HTMLSession 
+from bs4 import BeautifulSoup as bs # importing BeautifulSoup
+
+# copy youtube url from YouTube website
+video_url = "https://youtu.be/u4N45v8f7cY"
+# init an HTML Session
+session = HTMLSession()
+# get the html content
+response = session.get(video_url)
+# execute Java-script, timeout is necessary pass otherwise it will through error
+response.html.render(timeout=20)
+# create bs object to parse HTML
+soup = bs(response.html.html, "html.parser")
+
+print(soup.find_all("meta"))
+
+Output:
+[<meta content="IE=edge" http-equiv="X-UA-Compatible"/>, 
+<meta content="rgba(255,255,255,0.98)" name="theme-color"/>, 
+<meta content="What If You Lived on Uranus?" name="title"/>, 
+<meta content="Freezing cold, dark and with an atmosphere that smells like farts and rotten eggs?  Uranus doesn?t sound like somewhere you?d want to call home. But let?s sa..." name="description"/>, 
+<meta content="what if, what happens if, scifi, science documentary, what if scenario, mysteries, what if cosmos, cosmos, hypothetical, hypothetical scenario, hypothetical scenarios, cold, dark, atmosphere, fart, farts, rotten eggs, rotten egg, uranus, home, settlement, home settlement, solar system, planet, temperature, gas, gas giants, cold planet, methane, uranus planet, uranus facts, rings of uranus, facts about uranus, space, nasa, earth vs uranus, space photography, space exploration, universe, solar" name="keywords"/>, 
+<meta content="YouTube" property="og:site_name"/>, 
+<meta content="https://www.youtube.com/watch?v=u4N45v8f7cY" property="og:url"/>,
+ <meta content="What If You Lived on Uranus?" property="og:title"/>, <meta content="https://i.ytimg.com/vi/u4N45v8f7cY/maxresdefault.jpg" property="og:image"/>, 
+<meta content="1280" property="og:image:width"/>, <meta content="720" property="og:image:height"/>,
+ <meta content="Freezing cold, dark and with an atmosphere that smells like farts and rotten eggs?  Uranus doesn?t sound like somewhere you?d want to call home. But let?s sa..." property="og:description"/>, 
+<meta content="544007664" property="al:ios:app_store_id"/>, 
+<meta content="YouTube" property="al:ios:app_name"/>, 
+<meta content="vnd.youtube://www.youtube.com/watch?v=u4N45v8f7cY&feature=youtu.be&feature=applinks" property="al:ios:url"/>, 
+<meta content="vnd.youtube://www.youtube.com/watch?v=u4N45v8f7cY&feature=youtu.be&feature=applinks" property="al:android:url"/>, 
+<meta content="http://www.youtube.com/watch?v=u4N45v8f7cY&feature=youtu.be&feature=applinks" property="al:web:url"/>, 
+<meta content="video.other" property="og:type"/>,
+ <meta content="https://www.youtube.com/embed/u4N45v8f7cY" property="og:video:url"/>, 
+<meta content="https://www.youtube.com/embed/u4N45v8f7cY" property="og:video:secure_url"/>, 
+<meta content="text/html" property="og:video:type"/>,
+<meta content="1280" property="og:video:width"/>, 
+<meta content="720" property="og:video:height"/>, 
+<meta content="YouTube" property="al:android:app_name"/>, 
+<meta content="com.google.android.youtube" property="al:android:package"/>, <meta content="what if" property="og:video:tag"/>,
+<meta content="what happens if" property="og:video:tag"/>, 
+<meta content="scifi" property="og:video:tag"/>, 
+<meta content="science documentary" property="og:video:tag"/>, 
+<meta content="what if scenario" property="og:video:tag"/>,
+ <meta content="mysteries" property="og:video:tag"/>,
+ <meta content="what if cosmos" property="og:video:tag"/>, 
+<meta content="cosmos" property="og:video:tag"/>, 
+<meta content="hypothetical" property="og:video:tag"/>, 
+<meta content="hypothetical scenario" property="og:video:tag"/>, 
+<meta content="hypothetical scenarios" property="og:video:tag"/>, 
+<meta content="cold" property="og:video:tag"/>, 
+<meta content="dark" property="og:video:tag"/>, 
+<meta content="atmosphere" property="og:video:tag"/>, 
+<meta content="fart" property="og:video:tag"/>,
+<meta content="farts" property="og:video:tag"/>, 
+<meta content="rotten eggs" property="og:video:tag"/>, 
+<meta content="rotten egg" property="og:video:tag"/>, 
+<meta content="uranus" property="og:video:tag"/>,
+ <meta content="home" property="og:video:tag"/>, 
+<meta content="settlement" property="og:video:tag"/>,
+ <meta content="home settlement" property="og:video:tag"/>, 
+<meta content="solar system" property="og:video:tag"/>, 
+<meta content="planet" property="og:video:tag"/>, 
+<meta content="temperature" property="og:video:tag"/>, 
+<meta content="gas" property="og:video:tag"/>,
+ <meta content="gas giants" property="og:video:tag"/>, 
+<meta content="cold planet" property="og:video:tag"/>,
+ <meta content="methane" property="og:video:tag"/>, 
+<meta content="uranus planet" property="og:video:tag"/>, 
+<meta content="uranus facts" property="og:video:tag"/>, 
+<meta content="rings of uranus" property="og:video:tag"/>, 
+<meta content="facts about uranus" property="og:video:tag"/>, <meta content="space" property="og:video:tag"/>, <meta content="nasa" property="og:video:tag"/>, <meta content="earth vs uranus" property="og:video:tag"/>, <meta content="space photography" property="og:video:tag"/>, <meta content="space exploration" property="og:video:tag"/>, <meta content="universe" property="og:video:tag"/>, <meta content="solar" property="og:video:tag"/>, <meta content="87741124305" property="fb:app_id"/>, <meta content="player" name="twitter:card"/>, <meta content="@youtube" name="twitter:site"/>, <meta content="https://www.youtube.com/watch?v=u4N45v8f7cY" name="twitter:url"/>, <meta content="What If You Lived on Uranus?" name="twitter:title"/>, <meta content="Freezing cold, dark and with an atmosphere that smells like farts and rotten eggs?  Uranus doesn?t sound like somewhere you?d want to call home. But let?s sa..." name="twitter:description"/>, <meta content="https://i.ytimg.com/vi/u4N45v8f7cY/maxresdefault.jpg" name="twitter:image"/>, <meta content="YouTube" name="twitter:app:name:iphone"/>, <meta content="544007664" name="twitter:app:id:iphone"/>, <meta content="YouTube" name="twitter:app:name:ipad"/>, <meta content="544007664" name="twitter:app:id:ipad"/>, <meta content="vnd.youtube://www.youtube.com/watch?v=u4N45v8f7cY&feature=youtu.be&feature=applinks" name="twitter:app:url:iphone"/>, <meta content="vnd.youtube://www.youtube.com/watch?v=u4N45v8f7cY&feature=youtu.be&feature=applinks" name="twitter:app:url:ipad"/>, <meta content="YouTube" name="twitter:app:name:googleplay"/>, <meta content="com.google.android.youtube" name="twitter:app:id:googleplay"/>, <meta content="https://www.youtube.com/watch?v=u4N45v8f7cY" name="twitter:app:url:googleplay"/>,
+ <meta content="https://www.youtube.com/embed/u4N45v8f7cY" name="twitter:player"/>,
+ <meta content="1280" name="twitter:player:width"/>, <meta content="720" name="twitter:player:height"/>,
+<meta content="What If You Lived on Uranus?" itemprop="name"/>, 
+<meta content="Freezing cold, dark and with an atmosphere that smells like farts and rotten eggs?  Uranus doesn?t sound like somewhere you?d want to call home. But let?s sa..." itemprop="description"/>, 
+<meta content="False" itemprop="paid"/>,
+ <meta content="UCphTF9wHwhCt-BzIq-s4V-g" itemprop="channelId"/>, 
+<meta content="u4N45v8f7cY" itemprop="videoId"/>, 
+<meta content="PT6M50S" itemprop="duration"/>, 
+<meta content="False" itemprop="unlisted"/>, <meta 
+content="1280" itemprop="width"/>, <meta content="720" itemprop="height"/>, <meta content="HTML5 Flash" itemprop="playerType"/>, <meta content="1280" itemprop="width"/>, 
+<meta content="720" itemprop="height"/>, <meta content="true" itemprop="isFamilyFriendly"/>, 
+<meta content="AD,AE,AF,AG,AI,AL,AM,AO,AQ,AR,AS,AT,AU,AW,AX,AZ,BA,BB,BD,BE,BF,BG,BH,BI,BJ,BL,BM,BN,BO,BQ,BR,BS,BT,BV,BW,BY,BZ,CA,CC,CD,CF,CG,CH,CI,CK,CL,CM,CN,CO,CR,CU,CV,CW,CX,CY,CZ,DE,DJ,DK,DM,DO,DZ,EC,EE,EG,EH,ER,ES,ET,FI,FJ,FK,FM,FO,FR,GA,GB,GD,GE,GF,GG,GH,GI,GL,GM,GN,GP,GQ,GR,GS,GT,GU,GW,GY,HK,HM,HN,HR,HT,HU,ID,IE,IL,IM,IN,IO,IQ,IR,IS,IT,JE,JM,JO,JP,KE,KG,KH,KI,KM,KN,KP,KR,KW,KY,KZ,LA,LB,LC,LI,LK,LR,LS,LT,LU,LV,LY,MA,MC,MD,ME,MF,MG,MH,MK,ML,MM,MN,MO,MP,MQ,MR,MS,MT,MU,MV,MW,MX,MY,MZ,NA,NC,NE,NF,NG,NI,NL,NO,NP,NR,NU,NZ,OM,PA,PE,PF,PG,PH,PK,PL,PM,PN,PR,PS,PT,PW,PY,QA,RE,RO,RS,RU,RW,SA,SB,SC,SD,SE,SG,SH,SI,SJ,SK,SL,SM,SN,SO,SR,SS,ST,SV,SX,SY,SZ,TC,TD,TF,TG,TH,TJ,TK,TL,TM,TN,TO,TR,TT,TV,TW,TZ,UA,UG,UM,US,UY,UZ,VA,VC,VE,VG,VI,VN,VU,WF,WS,YE,YT,ZA,ZM,ZW" itemprop="regionsAllowed"/>,
+ <meta content="153196" itemprop="interactionCount"/>, 
+<meta content="2022-02-26" itemprop="datePublished"/>, 
+<meta content="2022-02-26" itemprop="uploadDate"/>, 
+<meta content="Science & Technology" itemprop="genre"/>]
+
+It seems too much data here but it will help us to get some useful data. Now, let's get the video title and videos on it.
+
+print("Title of the Video: ", soup.find("meta", itemprop="name")["content"])
+print("Views on the Video: ", soup.find("meta", itemprop="interactionCount")["content"])
+
+Output:
+Title of the Video:  What If You Lived on Uranus?
+Views on the Video:  153544
+
+So this is a basic example of extracting video metadata and extracts the video information. Now's we will create a Python script to get some information from YouTube.
+Python Script to Get Information from YouTube
+First, we import the required libraries.
+
+from requests_html import HTMLSession 
+from bs4 import BeautifulSoup as bs
+
+To move further, we create the HTTP session.
+
+# init an HTML Session
+session = HTMLSession()
+
+Now, we create a function that will return all the data in a dictionary. 
+
+def extract_video_informations(url):
+    # It will download HTML code
+    resp = session.get(url)
+    # execute Javascript
+    resp.html.render()
+    # create beautiful soup object to parse HTML
+    soup = bs(resp.html.html, "html.parser")
+    # initialize the result dictionary to store data
+    result = {}
+
+In the above method, we download the HTML code of the web page. The render() method execute JavaScript which rendered data in HTML.
+Note - The default value of rendering web page is 8 sec. If the code throws timeout error, simply add the timeout parameter and set it to 60 sec.
+
+resp.html.render(timezone=60)
+
+Now, we can get the video title, description, likes, etc.
+
+result["title"] = soup.find("meta", itemprop="name")['content']
+result["views"] = soup.find("meta",itemprop="interactionCount")['content']
+result["description"] = soup.find("meta"itemprop="description")['content']
+
+To get the number of likes we need to import the re and json module. We find the pattern in the webpage using the re. Once we done with, we load the serialize into json using the loads() method.
+
+data = re.search(r"var ytInitialData = ({.*?});", soup.prettify()).group(1)
+data_json = json.loads(data)
+
+Complete Code
+Below is the complete code to extract the video details.
+
+# Install dependencies
+from requests_html import HTMLSession 
+from bs4 import BeautifulSoup as bs # importing BeautifulSoup
+import re
+import json as json
+# copy youtube url from YouTube website
+video_url = "https://youtu.be/u4N45v8f7cY"
+
+# init an HTML Session
+session = HTMLSession()
+
+def extract_video_informations(url):
+    # It will download HTML code
+    resp = session.get(url)
+    # execute Javascript
+    resp.html.render(timeout=60)
+    # create beautiful soup object to parse HTML
+    soup = bs(resp.html.html, "html.parser")
+    # initialize the result dictionary to store data
+    result = {}
+
+    result["title"] = soup.find("meta", itemprop="name")['content']
+    result["views"] = soup.find("meta",itemprop="interactionCount")['content']
+    result["description"] = soup.find("meta",itemprop="description")['content']
+
+    result["date_published"] = soup.find("meta", itemprop="datePublished")['content']
+
+    result["duration"] = soup.find("span", {"class": "ytp-time-duration"}).text
+    result["tags"] = ', '.join([ meta.attrs.get("content") for meta in soup.find_all("meta", {"property": "og:video:tag"}) ])
+
+    data = re.search(r"var ytInitialData = ({.*?});", soup.prettify()).group(1)
+    data_json = json.loads(data)
+    videoPrimaryInfoRenderer = data_json['contents']['twoColumnWatchNextResults']['results']['results']['contents'][0]['videoPrimaryInfoRenderer']
+    videoSecondaryInfoRenderer = data_json['contents']['twoColumnWatchNextResults']['results']['results']['contents'][1]['videoSecondaryInfoRenderer']
+    # number of likes
+    likes_label = videoPrimaryInfoRenderer['videoActions']['menuRenderer']['topLevelButtons'][0]['toggleButtonRenderer']['defaultText']['accessibility']['accessibilityData']['label'] # "No likes" or "###,### likes"
+    likes_str = likes_label.split(' ')[0].replace(',','')
+    result["likes"] = '0' if likes_str == 'No' else likes_str
+
+    channel_tag = soup.find("meta", itemprop="channelId")['content']
+    # channel name
+    channel_name = soup.find("span", itemprop="author").next.next['content']
+  
+    channel_url = f"https://www.youtube.com/{channel_tag}"
+    # number of subscribers as str
+    channel_subscribers = videoSecondaryInfoRenderer['owner']['videoOwnerRenderer']['subscriberCountText']['accessibility']['accessibilityData']['label']
+
+    result['channel'] = {'name': channel_name, 'url': channel_url, 'subscribers': channel_subscribers}
+    return result
+
+print(extract_video_informations(video_url))
+
+Output:
+{'title': 'What If You Lived on Uranus?', 'views': '153838', 'description': 'Freezing cold, dark and with an atmosphere that smells like farts and 
+rotten eggs?  Uranus doesn't sound like somewhere you'd want to call home. But let's sa...', 'date_published': '2022-02-26', 'duration': '6:49', 'tags': 'what if, what happens if, scifi, science documentary, what if scenario, mysteries, what if cosmos, cosmos, hypothetical, hypothetical scenario, hypothetical scenarios, cold, dark, atmosphere, fart, farts, rotten eggs, rotten egg, uranus, home, settlement, home settlement, solar system, 
+planet, temperature, gas, gas giants, cold planet, methane, uranus planet, uranus facts, rings of uranus, facts about uranus, space, nasa, earth vs uranus, space photography, space exploration, universe, solar', 'likes': '6246', 'channel': {'name': 'What If', 'url': 'https://www.youtube.com/UCphTF9wHwhCt-BzIq-s4V-g', 'subscribers': '6.08 million subscribers'}}
+
+Conclusion
+This tutorial has covered extract the information of YouTube videos. Using the above script, we can pass any URL in the function and get the data of it. We can also save into the spreadsheet.
+
+
+Next TopicHow to Solve Stock Span Problem Using Python
+
+
+
+
+← prev
+next →
+
+
+
+

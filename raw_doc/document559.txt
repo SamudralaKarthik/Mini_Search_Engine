@@ -1,0 +1,158 @@
+
+
+
+
+next →
+← prev
+
+Cryptography package in Python
+In the following tutorial, we will learn about the cryptography package with the help of different examples in the Python programming language.
+So, let's get begun.
+Understanding the cryptography package
+Cryptography is the practice of securing useful information during the transmission of data from one computer to another or storing data on a computer. Cryptography deals with the encryption of plain text into ciphertext and decryption of ciphertext into plain text. Python provides support to the cryptography package that allows us to encrypt and decrypt data. The fernet module of the cryptography package has core functions for the generation of the key, encryption of the plain text into ciphertext, and decryption of the ciphertext into plain text with the help of the encrypt() and decrypt() methods, respectively.
+How to Install the Python cryptography package?
+In order to install the Python package, we need 'pip', a framework to manage packages required to install the modules from the trusted public repositories. Once we have 'pip', we can install the cryptography library using the command from a Windows command prompt (CMD) or terminal as shown below:
+Syntax:
+
+$ pip install cryptography
+
+Verifying the Installation
+Once the module is installed, we can verify it by creating an empty Python program file and writing an import statement as follows:
+File: verify.py
+
+import cryptography
+
+Now, save the above file and execute it using the following command in a terminal:
+Syntax:
+
+$ python verify.py
+
+If the above Python program file does not return any error, the module is installed properly. However, in the case where an exception is raised, try reinstalling the library, and it is also recommended to refer to the official documentation of the library.
+Understanding Fernet (symmetric encryption)
+Fernet is an implementation of symmetric (also called "secret key") authenticated cryptography. Fernet guarantees that we cannot manipulate or read the data encrypted using it any further without the key. Fernet also provides support for the implementation of key rotation through MultiFernet.
+Let us now see the Fernet class and some methods in order to understand the concept of Cryptography in detail.
+class cryptography.fernet.Fernet(key)
+This class offers facilities for encryption as well as decryption. This class accepts the key as an input parameter. This key parameter is a URL-safe base64-encoded 32-byte key. This must be kept secret. Anyone with this key is able to create and read messages.
+Now, before we see some of the methods of the Fernet class, let us consider a simple example demonstrating its use of it.
+Example 1:
+
+# importing the Fernet class from the fernet module of the cryptography package
+from cryptography.fernet import Fernet
+
+# generating the key
+theKey = Fernet.generate_key()
+
+# variable holding the value of key
+first = Fernet(theKey)
+
+# the plain text is converted into cipher text using the encrypt() method
+theToken = first.encrypt(b"Hello, Students! Welcome to Python tutorial at Javatpoint.com")
+
+# printing the encrypted message
+print("Encrypted Message: ", theToken)
+
+# the cipher text is converted back into plain text using the decrpyt() method
+decryptMsg = first.decrypt(theToken)
+
+# printing the decrypted message
+print("\nDecrypted Message: ", decryptMsg)
+
+Output:
+Encrypted Message:  b'gAAAAABiZAj1lcmLXPbRJng9wxgowFB731MLUFu-nstC8Sdnzn24y_lhu_h1QmR5N68d_DdpH8mIGNF6Y-7PgSmgUYkxwouw7R80lWk1k9IPp7MiKtv5O3OWmG6gk4rK4k5iNzE5sPd-L_ns0Zn8nmG2Zr--QDUi2Q=='
+
+Decrypted Message:  b'Hello, Students! Welcome to Python tutorial at Javatpoint.com'
+
+Explanation:
+In the above snippet of code, we have imported the Fernet class from the fernet module of the cryptography package. We have then used the class method called generate_key() in order to generate a key. We then used this key to convert the plain text into ciphertext with the help of the encrypt() method and printed the encrypted message. We then again used this key to convert the ciphertext into plain text with the help of the decrypt() method and printed the decrypted message for the user.
+We can observe that the decrypted output has a 'b' in front of the original message, which signifies the byte format. However, we can remove this with the help of the decode() method while printing the original message. Let us consider the following example demonstrating the implementation of the decode() method.
+Example 2:
+
+# importing the Fernet class from the fernet module of the cryptography package
+from cryptography.fernet import Fernet
+
+# generating the key
+theKey = Fernet.generate_key()
+
+# variable holding the value of key
+first = Fernet(theKey)
+
+# the plain text is converted into cipher text using the encrypt() method
+theToken = first.encrypt(b"This example demonstrates the implementation of the decode() method.")
+
+# printing the encrypted message
+print("Encrypted Message: ", theToken)
+
+# the cipher text is converted back into plain text using the decrpyt() method
+decryptMsg = first.decrypt(theToken)
+
+# printing the plain text using the decode() method
+# this method converts the message from byte to string
+print("\nDecrypted Message: ", decryptMsg.decode())
+
+Output:
+Encrypted Message:  b'gAAAAABiZrxrUg61HeVbOke04ftXTKnl17z3e8LjHfLMiCPQ2ZQ4Hz43bL1twbcS4cXcsclsUZKT-q3oyWVecKH39hgEgh1GQaB4E1gkMJr1Q6LbC93N97yeFq0kME_ttc-BVrXCGZBzNPRdW1zl45v7ow-d893kkMiab-y1OSMjbVFL9nK_iZE='
+
+Decrypted Message:  This example demonstrates the implementation of the decode() method.
+
+Explanation:
+In the above snippet of code, we have imported the Fernet class from the fernet module of the cryptography package. We have then used the class method called generate_key() in order to generate a key. We then used this key to convert the plain text into ciphertext with the help of the encrypt() method and printed the encrypted message. We then again used this key to convert the ciphertext into plain text with the help of the decrypt() method. At last, we have used the decode() method to convert the message from byte to string and printed it for the users.
+Let us now understand the working of the method that we used earlier.
+
+generate_key(): This method belongs to the Fernet class and is used to generate a fresh fernet key. It is necessary to keep the key safe as it is a significant component in decrypting the ciphertext. If the key is lost, the user can no longer decrypt the message. Moreover, if an intruder or hacker gets access to the key, they can read the data and forge the data.
+encrypt(data): This method allows us to encrypt the data passed to it as a parameter. The output of this encryption is known as a "Fernet token", which is fundamentally the ciphertext. The encrypted token also consists of the current timestamp when it was produced in plain text. The encrypt method throws an exception if the data is not in bytes.
+Parameter(s):
+
+data (bytes)- This parameter contains the message we would like to encrypt.
+
+Return Value(s): A secure message or ciphertext cannot be read or altered without the key. This is considered a "Fernet token". It is URL-safe base64-encoded.
+Raise(s): TypeError - This exception is raised in case the data is not in bytes.
+encrypt_at_time(data, current_time): This method is used to encrypt the data passed to it with the help of explicitly passed current time. The working of this method is similar to the encrypt() method that we saw earlier.
+The idea behind this method is for the client code to be able to text token expiration. Since we can utilize this method in an insecure manner, we must ensure that the time passed as current_time outside testing is correct, i.e., int(time.time()).
+Parameter(s):
+
+current_time (int)- This parameter represents the current time
+
+Note: Similarly to encrypt(), and the encrypted message consists of the timestamp in plain text; in this case, the timestamp is the value of the current_time parameter.
+decrypt(token, ttl = None): This method is used to decrypt a Fernet token passed to it as a parameter. If the token is successfully decrypted, we will get the original plain text. Else an exception will be raised. It is safe to utilize this data immediately as Fernet verifies that the data has not been tampered with before returning it.
+Parameter(s):
+
+token (bytes) - This parameter is the Fernet token. This is the outcome of calling the encrypt()
+ttl (int) - This is an optional parameter consisting of the number of seconds old a message may be valid. If the message is older than ttl seconds (from when it was created), an exception will be raised. If the ttl parameter is not provided (or is None), the age of the message is not considered.
+
+Return Value(s): The original plain text.
+Raise(s): This method raises the following exceptions:
+
+cryptography.fernet.InvalidToken - If the token is just in case invalid, this exception is raised. A token may be invalid for several reasons: it is older than the ttl, malformed, or does not contain a valid signature.
+TypeError - This exception is raised if token is not in bytes.
+
+decrypt_at_time(token, ttl, current_time): This method is used to decrypt a token with the help of the explicitly passed current time. The working of this method is similar to the decrypt() method that we saw earlier.
+The idea behind this method is for the client code to be able to test token expiration. Since we can use this method in an insecure way, we must ensure that the time we passed to it as the current_time parameter outside testing is correct, i.e., int(time.time()).
+Parameter(s):
+
+current_time (int) - This parameter represents the current time.
+
+extract_timestamp(token): This method is used for the timestamp for the token we passed to it as the parameter. The caller can then decide if the token is about to expire and, for instance, issue a new token.
+Parameter(s):
+
+token (bytes) - This parameter is the fernet token. This is the outcome of calling the encrypt()
+
+Return Value(s): The UNIX timestamp of the token.
+Raise(s): This method raises the following exceptions:
+
+cryptography.fernet.InvalidToken - If the token's signature is invalid, this exception is raised.
+TypeError - This exception is raised if the token is not in bytes.
+
+
+
+
+Next TopicHangman Game in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,116 @@
+
+
+
+
+next →
+← prev
+
+Automorphic Number in Python
+A number is said to be an automorphic number if the last digits of the square of this number give the same number.
+The following are the examples of automorphic numbers-
+1. Input: 25
+Output - Yes, it is an automorphic number.
+Reason - The square of 25 gives 625, since the last digits are 25 it is an automorphic number.
+2. Input: 14
+Output - No, it is not an automorphic number.
+Reason - The square of 14 gives 196, since the last digits are 96 it is not an automorphic number.
+3. Input: 76
+Output - Yes, it is an automorphic number.
+Reason - The square of 76 gives 6776, since the last digits are 76 it is an automorphic number.
+Since the concept is clear to us now, let us see how we can build the logic to check whether a number is automorphic or not.
+We know that the modulus operator can be used to perform functions on the digits of a number.
+The following illustrates how it can be done in Python.
+Example -
+
+num = int(input("Enter a number you want to check: \n"))
+
+#calculating the number of digits
+num_of_digits = len(str(num))
+
+#computing the square of a number
+square = num**2
+
+#obtaining the last digits 
+last_digits = square%pow(10,num_of_digits)
+
+#comparing the digits of number with input
+if last_digits == num:
+  print("Yes, {} is an automorphic number".format(num))
+else:
+  print("No, {} is not an automorphic number".format(num))
+
+Output
+Enter a number you want to check: 
+76
+Yes, 76 is an automorphic number
+
+So, let's have a glance at the step-by-step approach of the same-
+
+The first step will be to take the number from the user and calculate its square.
+We can calculate the number of digits by using the len function.
+The next thing is to calculate the square of a number.
+Now, we will make use of the power function and modulus operator to obtain the last digits.
+Finally, we will compare the last digit with the input number.
+On executing the program, the desired output will be displayed.
+
+Let us see what happens when we pass the numbers that we discussed in the example.
+Since 25 is an automorphic number, it displays the required message.
+Output - 2
+Enter a number you want to check: 
+25
+Yes, 25 is an automorphic number
+
+Since 14 is not an automorphic number, it displays the required message.
+Output - 3
+Enter a number you want to check: 
+14
+No, 14 is not an automorphic number
+
+Using While loop
+The next approach to do the same is as follows-
+Example -
+
+print("Enter the number you want to check:")
+num=int(input())
+square=num*num  
+flag=0 
+while(num>0): 
+    if(num%10!=square%10):
+        print("No, it is not an automorphic number.")
+        flag=1
+        break                     
+     
+    num=num//10                      
+    square=square//10 
+
+if(flag==0):
+    print("Yes, it is an automorphic number.")
+
+Output
+Enter the number you want to check:
+
+25
+Yes, it is an automorphic number.
+
+Let us understand the steps we have followed in this program-
+
+The first step remains the same, that is, to take the number from the user and calculate its square.
+We have declared a while loop which will execute till the number becomes zero.
+Now we will compare whether the units digit of a number is equal to the unit place of the number obtained after computing the square.
+If the above condition is satisfied, then we will go for the floor division of the number and the squared number.
+On executing the program, it displays whether the number is an automorphic number or not.
+
+So, in this article, we learned what an automorphic number is and how we can check whether a given number is automorphic or not using Python.
+
+
+Next Topicsizeof in Python
+
+
+
+
+← prev
+next →
+
+
+
+

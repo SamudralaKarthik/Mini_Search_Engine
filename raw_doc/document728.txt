@@ -1,0 +1,232 @@
+
+
+
+
+next →
+← prev
+
+Application to Search Installed Applications using Tkinter in Python
+In this tutorial, we'll develop Python scripts to look for installed Windows applications and connect them to GUI applications. Winapps modules are used to manage installed programmes in the Windows.
+Running the following command in your terminal will help you install the module in your system :
+
+pip install winapps
+
+Functions from the winapps module :
+There are several functions that exist in the winapps module out of which we will be using a few of them like the list_installed or the search_installed functions. So lets begin.
+The winapps module's winapps.list_installed() method allows printing installed applications. When this method will be called, all the apps
+Code :
+
+# importing the winapps module
+import winapps
+
+# Showing all the applications present in the system using list_installed()
+for element in winapps.list_installed():
+ print(element)
+
+Output:
+InstalledApplication(name = 'Asus Smart Care', version = '2.1.1.639?, install_date = None, install_location = None, install_source = None, modify_path = None, publisher = 'Asus Inc.', uninstall_string = 'C:\\Program Files\\Asus\\ASC\\MSamrt Care\\2.1.1.639\\Uninstall.exe')
+ 
+
+InstalledApplication(name = 'VS Code version 5,6,20?, version = '5.6.20?, install_date = datetime.date(2021, 10, 21), install_location = WindowsPath('D:/Installation_bulk/Git'), install_source = None, modify_path = None, publisher = 'Visual Studios Inc.', uninstall_string = '"D:\\Installation_bulk\\VS code\\unins0.exe"')
+ 
+
+InstalledApplication(name = 'Microsoft Office - en-us', version = '16.2.95481.90001?, install_date = None, install_location = WindowsPath('C:/Program Files/Ms Office'), install_source = None, modify_path = '"C:\\Program Files\\Important Files\\Microsoft apps\\ClickToRun\\OfficeClickToRun.exe" scenario = repair platform = x64 culture = en-us', publisher = 'Microsoft Corp.', uninstall_string = '"C:\\Program Files\\Important Files\\Microsoft apps\\ClickToRun\\OfficeClickToRun.exe" scenario = install scenariosubtype = ARP sourcetype = None productstoremove = OHome&StudentPremRetail.22_en-us_x-none culture = en-us version.22 = 22.0?)
+ 
+
+InstalledApplication(name = 'Microsoft edge - en-us', version = '22.0.131415.20306?, install_date = None, install_location = WindowsPath('C:/Program Files/Microsoft edge'), install_source = None, modify_path = '"C:\\Program Files\\Important Files\\Microsoft apps\\ClickToRun\\OfficeClickToRun.exe" scenario = repair platform = x64 culture = en-us', publisher = 'Microsoft Corporation', uninstall_string = '"C:\\Program Files\\Important Files\\Microsoft apps\\ClickToRun\\OfficeClickToRun.exe" scenario = install scenariosubtype = ARP sourcetype = None productstoremove = OHome&StudentPremRetail.22_en-us_x-none culture = en-us version.22 = 22.0?)
+
+
+InstalledApplication(name = Mozilla Firefox', version = '95.1.5294.213?, install_date = datetime.date(2021, 10, 21),
+install_location = WindowsPath( 'C:/Program Files (x64)/Mozilla Files/Firefox/Application' ),  install_source = None, 
+modify_path = None, publisher = 'Firefox LLC', uninstall_string = '
+"C:\\Program Files (x64)\\Mozilla Files\\Firefox\\Application\\95.1.5294.213\\Installer\\setup.exe"  
+-uninstall -system-level -verbose-logging')
+
+
+InstalledApplication(name = 'Screen Viewer Utility', version = '1.7.2.490?, install_date = None, install_location = None, install_source = None, modify_path = None, publisher = 'Asus Inc.', uninstall_string='C:\\Program Files\\Asus\\SV Utility\\1.7.2.490\\Uninstall.exe')
+ 
+
+InstalledApplication(name = 'Intel(R) Core i7 Components', version = '1202.17.0.2021?, install_date = None, install_location = WindowsPath('C:/Program Files (x64)/Intel/Intel(R) Core i7 Components'), install_source = None, modify_path = None, publisher = 'Intel Corp.', uninstall_string = '"C:\\ProgramData\\Intel\\Pkg Cache\\{1YIAS88J-9310-2464-200E-7SQ9H04P5021}\\Setup.exe" -uninstall')
+
+
+InstalledApplication(name = 'Intel(Xe) Graphics Card (1)', version = '192.104.10.1212?, install_date = None, install_location = WindowsPath('C:/Program Files (x64)/Intel/Intel(Xe) Graphics Card (1)'), install_source = None, modify_path = None, publisher = 'Intel Graphics', uninstall_string = '"C:\\Program_Data\\Intel\\Package Cache\\{1WIES76H-5487-8112-900G-5ED8F19E7030}\\Setup.exe" -uninstall')
+
+. . . . . 
+
+This module also offers a search_installed('App name') function for searching a particular app among the installed apps. When this method will be used, we will be asked to enter the name of application we want to find and the results which will match a particular existing app will appear on the screen.
+Code :
+
+for element in winapps.search_installed('chrome'):
+ print(element)
+
+Output:
+InstalledApplication(name = Mozilla Firefox', version = '95.1.5294.213?, install_date = datetime.date(2021, 10, 21),
+install_location = WindowsPath( 'C:/Program Files (x64)/Mozilla Files/Firefox/Application' ),  install_source = None, 
+modify_path = None, publisher = 'Firefox LLC', uninstall_string = '
+"C:\\Program Files (x64)\\Mozilla Files\\Firefox\\Application\\95.1.5294.213\\Installer\\setup.exe"  
+-uninstall -system-level -verbose-logging')
+
+Walking through the code for building an app to search an installed application :
+
+# importing the required modules
+from tkinter import *
+import winapps
+
+Firstly, we imported the required modules into our program. The modules imported were Tkinter and winapps.
+
+# Creating a new method in order to the attach the output received
+def apps():
+
+ for element in winapps.search_installed(e.get()):
+  name.set(element.name)
+  vrsn.set(element.vrsn)
+  Install_dt.set(element.Install_dt)
+  publishr.set(element.publishr)
+  uninstall_str.set(element.uninstall_str)
+
+Then, we defined an apps() method to provide the data related to the searched app as an output. In this method, we also included the various methods to attain data from the winapps module. We used set() method to set the data like the name of the application, version of the application, installation date of the application, publisher of the application and the uninstalling string required for the application.
+
+# creating an instance of the tkinter object
+# and setting the background colour to grey
+base = Tk()
+base.configure(bg = 'light grey')
+
+# Defining the Variable Classes in the tkinter module
+name = StringVar()
+vrsn = StringVar()
+Install_dt = StringVar()
+publishr = StringVar()
+uninstall_str = StringVar()
+
+Then, we created the object of the Tkinter module and set the background colour of the screen using configure() method. Next, we created various variables to store the details of the application searched.
+
+# Inserting the label boxes for every info. or
+# names by the help of Label widget
+Label(base, text = "Enter App name : ",
+ bg = "grey").grid(row = 0, sticky = W)
+Label(base, text = "Name : ",
+ bg = "grey").grid(row = 2, sticky = W)
+Label(base, text = "Version :",
+ bg = "grey").grid(row = 3, sticky = W)
+Label(base, text = "Install date :",
+ bg = "grey").grid(row = 4, sticky = W)
+Label(base, text = "publisher :",
+ bg = "grey").grid(row = 5, sticky = W)
+Label(base, text = "Uninstall string :",
+ bg = "grey").grid(row = 6, sticky = W)
+
+Then, we created Labels for each of the detail to be entered or received, using the label() method. These labels were positioned by using the grid() method.
+
+# Defining labels for the various class variables
+# name by the help of the Entry widget
+Label(base, text="", textvariable = name,
+ bg = "grey").grid(row = 2, column = 1, sticky = W)
+Label(base, text="", textvariable = vrsn,
+ bg = "grey").grid(row = 3, column = 1, sticky = W)
+Label(base, text = "", textvariable = Install_dt,
+ bg = "grey").grid(row = 4, column = 1, sticky = W)
+Label(base, text = "", textvariable = publishr,
+ Bg = "grey").grid(row = 5, column = 1, sticky = W)
+Label(base, text = "", textvariable = uninstall_str,
+ Bg = "grey").grid(row = 6, column = 1, sticky = W)
+
+
+ent = Entry(base, width = 30)
+ent.grid(row = 0, column = 1)
+
+Then we created the labels for the details of various variables to be displayed using the label() method. We also created an entry box using the entry() method to enter the app name.
+
+# Inserting a new button by the help of the button widget
+btn = Button(base, text = "Show", command = apps, bg = "Blue")
+btn.grid(row = 0, column = 2, columnspan = 2, rowspan = 2, padx = 5, pady = 5)
+
+Lastly, we created a show button to search for the required application.
+Complete code :
+
+# Python program to build an application to search installed 
+# application using Tkinter
+
+# importing the required modules
+from tkinter import *
+import winapps
+
+# Creating a new method in order to the attach the output recieved
+def apps():
+
+ for element in winapps.search_installed(e.get()):
+  name.set(element.name)
+  vrsn.set(element.vrsn)
+  Install_dt.set(element.Install_dt)
+  publishr.set(element.publishr)
+  uninstall_str.set(element.uninstall_str)
+
+
+# creating an instance of the tkinter object
+# and setting the background colour to grey
+base = Tk()
+base.configure(bg = 'light grey')
+
+# Defining the Variable Classes in the tkinter module
+name = StringVar()
+vrsn = StringVar()
+Install_dt = StringVar()
+publishr = StringVar()
+uninstall_str = StringVar()
+
+
+# Inserting the label boxes for every info. or
+# names by the help of Label widget
+Label(base, text = "Enter App name : ",
+ bg = "grey").grid(row = 0, sticky = W)
+Label(base, text = "Name : ",
+ bg = "grey").grid(row = 2, sticky = W)
+Label(base, text = "Version :",
+ bg = "grey").grid(row = 3, sticky = W)
+Label(base, text = "Install date :",
+ bg = "grey").grid(row = 4, sticky = W)
+Label(base, text = "publisher :",
+ bg = "grey").grid(row = 5, sticky = W)
+Label(base, text = "Uninstall string :",
+ bg = "grey").grid(row = 6, sticky = W)
+
+
+# Defining labels for the various class variables
+# name by the help of the Entry widget
+Label(base, text="", textvariable = name,
+ bg = "grey").grid(row = 2, column = 1, sticky = W)
+Label(base, text="", textvariable = vrsn,
+ bg = "grey").grid(row = 3, column = 1, sticky = W)
+Label(base, text = "", textvariable = Install_dt,
+ bg = "grey").grid(row = 4, column = 1, sticky = W)
+Label(base, text = "", textvariable = publishr,
+ Bg = "grey").grid(row = 5, column = 1, sticky = W)
+Label(base, text = "", textvariable = uninstall_str,
+ Bg = "grey").grid(row = 6, column = 1, sticky = W)
+
+
+ent = Entry(base, width = 30)
+ent.grid(row = 0, column = 1)
+
+# Inserting a new button by the help of the button widget
+btn = Button(base, text = "Show", command = apps, bg = "Blue")
+btn.grid(row = 0, column = 2, columnspan = 2, rowspan = 2, padx = 5, pady = 5)
+
+mainloop()
+
+Output:
+
+
+
+
+
+Next TopicSpell Corrector GUI using Tkinter in Python
+
+
+
+
+← prev
+next →
+
+
+
+

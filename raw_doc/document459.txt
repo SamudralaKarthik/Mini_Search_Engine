@@ -1,0 +1,150 @@
+
+
+
+
+next →
+← prev
+
+Stemming Words using Python
+In the following tutorial, we will understand the process of stemming words using the NLTK (Natural Language Toolkit) package in the Python programming language.
+An Introduction to Stemming
+Stemming is a significant part of the pipelining procedure in Natural Language Processing. Stemming is the process of generating morphological modifications of a root/base word. Stemming programs are generally considered as stemming algorithms or stemmers. A stemming algorithm reduces the words like "retrieves", "retrieved", "retrieval" to the root word, "retrieve" and "Choco", "Chocolatey", "Chocolates" reduce to the stem "chocolate". The input to the stemmer is tokenized words. But where do these tokenized words come from? Well, tokenization includes breaking down the document into distinct words. To know more about tokenization, one can refer to the tutorial on "Tokenization in Python".
+Let us now understand the errors in Stemming.
+Understanding the Errors in Stemming
+The Errors in Stemming are mainly classified into two categories:
+
+Over-stemming: This error arises when two words stem from the same root of different stems. Over-stemming can also be regarded as False positives.
+Under-stemming: This error raises when two words are stemmed from the same root that is not of different stems. Under-stemming can also be considered as False negatives.
+
+Let us now look at some of the applications of Stemming.
+Understanding the applications of Stemming
+Some applications of Stemming are as follows:
+
+We can use Stemming as the search engine in Information Recovery Systems.
+We can also use Stemming in order to determine domain vocabularies in Domain Analysis.
+An Interesting fact is that Google searched adopted the word stemming in the year 2003. Previously a search for "fish" would not have returned "fishes" or "fishing".
+
+Understanding the Stemming Algorithms
+Some of the Stemming Algorithms are as follows:
+
+Porter's Stemmer Algorithm
+Lovins Stemmer
+Dawson Stemmer
+Krovetz Stemmer
+Xerox Stemmer
+N-Gram Stemmer
+Snowball Stemmer
+Lancaster Stemmer
+
+Let us now discuss these Stemming Algorithms in brief.
+Porter's Stemmer Algorithm
+Porter's Stemmer Algorithm is among the famous stemming method proposed in the year 1980. The concept is based on the principle that the suffixes in the English language are made up of a combination of smaller and simpler suffixes. This stemmer is popular for its speed and simplicity. The chief applications of Porter Stemmer involve data mining and data recovery. However, these applications are only limited to English words. Moreover, the group of stems is mapped onto the same stem, and the output stem is not necessarily a meaningful word. The algorithms are quite lengthy and are called to be the oldest stemmer.
+Suppose that EED -> EE means "if the word has at least one vowel and consonant plus EED ending, change the ending to EE" as 'agreed' becomes 'agree'.
+Advantage: It produces the best output compared to other stemmers with less error rate.
+Limitation: Morphological modifications produced are not always real words.
+Lovins Stemmer
+It is proposed by Lovins in the year 1968 that removes the longest suffix from a word, and then the word is recorded in order to convert this stem into valid words.
+For example, sitting -> sitt -> sit
+Advantage: Lovins Stemmer is fast and manages irregular plurals. For example, 'teeth' and 'tooth', etc.
+Limitation: The process is time-consuming and frequently fails to form words from the stem.
+Dawson Stemmer
+It is an extension of Lovins stemmer in which suffixes are accumulated in the inverted order indexed by their length and last letter.
+Advantage: The execution of Dawson Stemmer is fast and covers more suffices.
+Limitation: The implementation is very complex.
+Krovetz Stemmer
+Krovetz Stemmer was proposed in the year 1993 by Robert Krovetz. This stemming algorithm follows some steps shown below:
+
+Converting the plural form of a word to its singular form.
+Converting the past tense of a word to its present tense and removing the suffix 'ing'.
+
+For example, 'children' -> 'child'
+Advantage: Krovetz Stemmer is light, and we can use it as a pre-stemmer for other stemmers.
+Limitation: This stemming algorithm is inefficient in the case of large documents.
+Xerox Stemmer
+Xerox Stemmer is equipped to manage large data and can generate valid words. However, over stemming is high as its dependence on lexicon makes it language-dependent. Thus, the main limitation of this stemming algorithm is that it is language-specific.
+For example:
+children -> child
+understood -> understand
+whom -> who
+best -> good
+N-Gram Stemmer
+An N-Gram is a set of n consecutive characters extracted from a word in which similar words will have a high proportion of n-grams in general.
+For example, 'INTRODUCTIONS' for n = 2 becomes: *I, IN, NT, TR, RO, OD, DU, UC, CT, TI, IO, ON, NS, S*
+Advantage: This stemming algorithm is based on string comparisons and is language-dependent.
+Limitation: It needs space to create and index the n-grams, which is not time efficient.
+Snowball Stemmer
+Unlike the Porter Stemmer, the Snowball Stemmer can map non-English words too. Since this stemming algorithm supports multiple languages, we can call the Snowball Stemmer a multi-lingual stemmer. The Snowball stemmer is also imported from the NLTK package. This algorithm is based on a programming language known as 'Snowball' that processes small strings and is the most widely utilized Stemmer. This Stemming algorithm is way more aggressive than Porter Stemmer and is also considered Porter2 Stemmer. Due to the improvements included when compared to the Porter Stemmer, the Snowball stemmer has great computational speed.
+Lancaster Stemmer
+The Lancaster stemmers are more aggressive, and dynamic compared to the other two algorithms. This stemming algorithm is fast; however, it is confusing when dealing with small words. However, there are not as efficient as Snowball Stemmers. The Lancaster stemmers save the rules externally and fundamentally utilize an iterative algorithm.
+Now, let us see the implementation of the Stemming using the NLTK package in the Python programming language.
+Implementation of Stemming in Python
+Let us consider the following example demonstrating the implementation of the Stemming using the NLTK package in Python.
+Example:
+
+# importing the required modules
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+# creating an object of the PorterStemmer class
+pStemmer = PorterStemmer()
+
+# selecting some words to be stemmed
+list_of_words = ["consult", "consultant", "consulting", "consultantative", "consultants", "consulting"]
+
+for words in list_of_words:
+    print(words + ": " + pStemmer.stem(words))
+
+Output:
+consult: consult
+consultant: consult
+consulting: consult
+consultantative: consult
+consultants: consult
+consulting: consult
+
+Explanation:
+In the above snippet of code, we have imported the required modules. We have then created an object of the PorterStemmer class of the NLTK package. We have then created a list of words that has to be stemmed. We have, at last, used the for-loop to iterate through the words in the list and stemmed them using the stem() function.
+As we can observe, we have not used the word_tokenize() function in the above example. Let us consider another example demonstrating the stemming along with the word_tokenize() function.
+Example:
+
+# importing the required modules
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+# creating an object of the PorterStemmer class
+pStemmer = PorterStemmer()
+
+# given sentence
+sentence = "People comes to consultants office to consult the consultant"
+# tokenizing the sentence
+list_of_words = word_tokenize(sentence)
+
+for words in list_of_words:
+    print(words, " : ", pStemmer.stem(words))
+
+Output:
+People  :  peopl
+comes  :  come
+to  :  to
+consultants  :  consult
+office  :  offic
+to  :  to
+consult  :  consult
+the  :  the
+consultant  :  consult
+
+Explanation:
+In the above snippet of code, we have imported the required modules and created an object of the PorterStemmer class. We have then defined a string that has to be stemmed. We have then used the word_tokenize() function to tokenize the sentence. At last, we have used the for-loop to iterate through the list of words and stemmed them using the stem() function.
+
+
+Next TopicPython Program for Word Guessing Game
+
+
+
+
+← prev
+next →
+
+
+
+

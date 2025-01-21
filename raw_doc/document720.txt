@@ -1,0 +1,290 @@
+
+
+
+
+next →
+← prev
+
+Simple registration form using Tkinter in Python
+This tutorial will show you how to use Python's tkinter to make a simple registration form.
+We need to know a little bit about tkinter before we start. Therefore, we will first examine this tkinter module before making a basic registration form.
+Introducing Tkinter :
+Although there are other GUI development alternatives in Python, Tkinter is the most popular.
+An ordinary Python library is Tkinter. The quickest and simplest approach to create an object-oriented GUI application is with Python and the tkinter package.
+It offers us a number of standard GUI (graphical user interface) building blocks, such as buttons, menus, and other types of entry fields and display regions, that we may utilise to create our user interfaces.
+Some of the common widgets used in Tkinter are :
+
+Frame : serves as a holding area for other widgets and serves as a container.
+Text : It enables us to display and alter text in a variety of styles and offers a prepared text display.
+Label : Used to display text and images, but we are unable to interact with it.
+Button : Often used add buttons and we may add functions and methods to it.
+Entry : One-line string text can be entered into this widget.
+Labelframe : For intricate window layouts, this widget serves as a separator or container.
+Listbox : It just has text elements, all of which are the same colour and font.
+Scrollbar: This gives a sliding controller.
+Canvas : Custom widgets can be implemented using the canvas widget.
+Scale : This widget offers graphical slider items that let us choose different scale values.
+Radiobutton : Use a radio button to carry out one of several choices.
+Checkbox : Use a checkbox to implement on-off choices.
+Listbox : It just has text elements, all of which are the same colour and font.
+
+How to start making a simple registration form using Tkinter :
+
+Step 1 : The first step is to import the tkinter module (using either tkinter import * or just import tkinter).
+Step 2 : The primary window of the GUI programme was created.
+Step 3 : Include one or more widgets in the GUI programme (controls such as buttons, labels, and text boxes, etc.).
+Step 4 : Enter the primary events to react to each event that the user has triggered.
+
+Making a registration form using the Tkinter in Python :
+This section will discuss the tkinter-based registration form written in Python. At that time, we will talk about widgets and how to use them. The registration page's interface is the only part of the code that is published here. The entire application code is published at the bottom.
+So, let's begin by building a simple registration form now, one that requires no backend effort. It can be utilised for database connectivity in the future.
+Firstly, we will import the Tkinter module into the Python program.
+
+from tkinter import*
+base = Tk()
+
+Now, we will draw a window using the geometry method to specify the dimensions of the window and the title method to give title to the window drawn.
+
+base.geometry('500x500')
+base.title("Registration Form")
+
+Next, we will use various methods to create the variable entry boxes. First, we will create labl_0 label for registration form and using the place method it will be placed at certain a dimension. Next, we will create labl_1 label for Full name and using the place method it will be placed at certain a dimension along with an entry box using Entry method with another place method. Next, we will create labl_2 label for Email and using the place method it will be placed at certain a dimension along with an entry box using Entry method with another place method. Next, we will create labl_3 label for Gender and using the place method it will be placed at certain a dimension along with an entry box using Entry method with another place method. And later, we will create labl_4 label for Age and using the place method it will be placed at certain a dimension along with an entry box using Entry method with another place method. We will also use a Radiobutton method to add two buttons for male or female options.
+
+labl_0 = Label(base, text="Registration form",width=20,font=("bold", 20))
+labl_0.place(x=90,y=53)
+
+
+labl_1 = Label(base, text="FullName",width=20,font=("bold", 10))
+labl_1.place(x=80,y=130)
+
+entry_1 = Entry(base)
+entry_1.place(x=240,y=130)
+
+labl_2 = Label(base, text="Email",width=20,font=("bold", 10))
+labl_2.place(x=68,y=180)
+
+entry_02 = Entry(base)
+entry_02.place(x=240,y=180)
+
+labl_3 = Label(base, text="Gender",width=20,font=("bold", 10))
+labl_3.place(x=70,y=230)
+varblbl = IntVarblbl()
+Radiobutton(base, text="Male",padx = 5, varblbliable=varblbl, value=1).place(x=235,y=230)
+Radiobutton(base, text="Female",padx = 20, varblbliable=varblbl, value=2).place(x=290,y=230)
+
+labl_4 = Label(base, text="Age:",width=20,font=("bold", 10))
+labl_4.place(x=70,y=280)
+
+
+entry_02 = Entry(base)
+entry_02.place(x=240,y=280)
+
+Finally, a submit button has to be included so that people may submit their information.
+
+Button(base, text='Submit',width=20,bg='brown',fg='white').place(x=180,y=380)
+
+Complete code :
+
+from tkinter import*
+base = Tk()
+base.geometry('500x500')
+base.title("Registration Form")
+
+labl_0 = Label(base, text="Registration form",width=20,font=("bold", 20))
+labl_0.place(x=90,y=53)
+
+
+labl_1 = Label(base, text="FullName",width=20,font=("bold", 10))
+labl_1.place(x=80,y=130)
+
+entry_1 = Entry(base)
+entry_1.place(x=240,y=130)
+
+labl_2 = Label(base, text="Email",width=20,font=("bold", 10))
+labl_2.place(x=68,y=180)
+
+entry_02 = Entry(base)
+entry_02.place(x=240,y=180)
+
+labl_3 = Label(base, text="Gender",width=20,font=("bold", 10))
+labl_3.place(x=70,y=230)
+varblbl = IntVarblbl()
+Radiobutton(base, text="Male",padx = 5, varblbliable=varblbl, value=1).place(x=235,y=230)
+Radiobutton(base, text="Female",padx = 20, varblbliable=varblbl, value=2).place(x=290,y=230)
+
+labl_4 = Label(base, text="Age:",width=20,font=("bold", 10))
+labl_4.place(x=70,y=280)
+
+
+entry_02 = Entry(base)
+entry_02.place(x=240,y=280)
+
+Button(base, text='Submit',width=20,bg='brown',fg='white').place(x=180,y=380)
+# it will be used for displaying the registration form onto the window
+base.mainloop()
+print("Registration form is created seccussfully...")
+
+Output:
+Registration form is created successfully... 
+
+
+
+Example 1 :
+Let us consider an example of a registration Form using Tkinter in Python. This example includes the Dropdown list feature in addition to previously used features.
+Code :
+
+from tkinter import *
+base = Tk()
+base.geometry("500x500")
+base.title("registration form")
+
+lb1= Label(base, text="Enter Name", width=10, font=("arial",12))
+lb1.place(x=20, y=120)
+en1= Entry(base)
+en1.place(x=200, y=120)
+
+lb3= Label(base, text="Enter Email", width=10, font=("arial",12))
+lb3.place(x=19, y=160)
+en3= Entry(base)
+en3.place(x=200, y=160)
+
+lb4= Label(base, text="Contact Number", width=13,font=("arial",12))
+lb4.place(x=19, y=200)
+en4= Entry(base)
+en4.place(x=200, y=200)
+
+lb5= Label(base, text="Select Gender", width=15, font=("arial",12))
+lb5.place(x=5, y=240)
+vars = IntVar()
+Radiobutton(base, text="Male", padx=5,variable=vars, value=1).place(x=180, y=240)
+Radiobutton(base, text="Female", padx =10,variable=vars, value=2).place(x=240,y=240)
+Radiobutton(base, text="others", padx=15, variable=vars, value=3).place(x=310,y=240)
+
+list_of_cntry = ("United States", "India", "Nepal", "Germany")
+cv = StringVar()
+drplist= OptionMenu(base, cv, *list_of_cntry)
+drplist.config(width=15)
+cv.set("United States")
+lb2= Label(base, text="Select Country", width=13,font=("arial",12))
+lb2.place(x=14,y=280)
+drplist.place(x=200, y=275)
+
+lb6= Label(base, text="Enter Password", width=13,font=("arial",12))
+lb6.place(x=19, y=320)
+en6= Entry(base, show='*')
+en6.place(x=200, y=320)
+
+lb7= Label(base, text="Re-Enter Password", width=15,font=("arial",12))
+lb7.place(x=21, y=360)
+en7 =Entry(base, show='*')
+en7.place(x=200, y=360)
+
+Button(base, text="Register", width=10).place(x=200,y=400)
+base.mainloop()
+
+Output:
+
+Example 2 :
+Let us consider one more example of a registration Form using Tkinter in Python, for better understanding purposes. This example also includes the Checkbox widget feature in addition to previously used features.
+Complete Code :
+
+#Creating a simple GUI registration form using Tkinter in Python
+#import the tkinter module into our code
+from tkinter import *
+
+#Creating the object 'base' of the Tk()
+base = Tk()
+
+#Using the Geometry method to the form certain dimensions
+base.geometry("550x550")
+
+#Using title method to give the title to the window
+base.title('Registration form')
+
+#Now, we will use 'Label' method to add widget in the Registration Form and also use place() method to set their positions.
+lbl_0 = Label(base, text="Registration form", width=20,font=("bold",20))
+
+#the place method in tkinter module helps user to set the geometry, that is, the dimensions of a certain widget by placing them at a certain position
+lbl_0.place(x=90,y=60)
+
+#Using 'Label' widget to create Full name label and using place() method to set its position.
+lbl_1 =Label(base, text= "FullName", width=20,font=("bold",10))
+lbl_1.place(x=80,y=130)
+
+#Using Enrty widget to make a text entry box for accepting the input string in text from user.
+enter_1 = Entry(base)
+enter_1.place(x=240,y=130)
+
+#Using 'Label' widget to create Email label and using place() method to set its position.
+lbl_3 = Label(base, text="Email", width=20,font=("bold",10))
+lbl_3.place(x=68,y=180)
+
+#Using Enrty widget to make a text entry box for accepting the input string in text from user.
+enter_3 = Entry(base)
+enter_3.place(x=240,y=180)
+
+#Using 'Label' widget to create Gender label and using place() method to set its position.
+lbl_4 = Label(base, text="Gender", width=20,font=("bold",10))
+lbl_4.place(x=70,y=230)
+
+
+#Using variable 'vars' to store the integer value, which by deault is 0
+vars = IntVar()
+
+#Using Radio button widget to create an option choosing button and using place() method to set its position.
+Radiobutton(base, text="Male", padx= 5, variable= vars, value=1).place(x=235, y=230)
+Radiobutton(base, text="Female", padx= 20, variable= vars, value=2).place(x=290,y=230)
+
+
+#Using 'Label' widget to create Countries label and using place() method, set its position.
+lbl_5=Label(base, text ="Country", width=20,font=("bold",11))
+lbl_5.place(x=70,y=280)
+
+#this creates list of countries available in the dropdown list.
+list_of_cntry=[ 'India' ,'Canada' , 'US' ,'Germany' ,'UK']
+
+#the variable 'cv' is introduced to store the String Value, which by default is (empty) ""
+cv = StringVar()
+drplist = OptionMenu(base, cv, *list_of_cntry)
+drplist.config(width=15)
+cv.set('Select your Country')
+drplist.place(x=240, y=280)
+
+#Using 'Label' widget to create Language label and using place() method, set its position.
+lbl_6=Label(base, text="Language", width=20,font=('bold',10))
+lbl_6.place(x=75,y=330)
+
+
+#the new variable 'vars1' is created to store Integer Value, which by default is 0.
+vars1=IntVar()
+#Using the Checkbutton widget to create a button and using place() method to set its position.
+Checkbutton(base,text="English", variable = vars1).place(x=230,y=330)
+
+#the new variable 'vars1' is created to store Integer Value, which by default is 0.
+vars2=IntVar()
+#Using the Checkbutton widget to create a button and using place() method to set its position.
+Checkbutton(basetext="German", variable=vars2).place(x=290, y=330)
+
+#Using the Button widget, we get to create a button for submitting all the data that has been entered in the entry boxes of the form by the user.
+Button(base, text='Submit' , width=20, bg="black",fg='white').place(x=180,y=380)
+
+
+#Calling the mainloop method to execute the entire program.
+base.mainloop()
+
+Output:
+The output for the aforementioned Simple registration form's code, using Tkinter in Python is attached below in the form of a screenshot.
+
+
+
+Next TopicPython String equals
+
+
+
+
+← prev
+next →
+
+
+
+

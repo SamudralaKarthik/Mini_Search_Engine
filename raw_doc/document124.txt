@@ -1,0 +1,364 @@
+
+
+
+
+next →
+← prev
+
+Logging in Python
+In this tutorial, we will learn the fundamentals of the standard logging module.
+What is logging?
+Logging is a Python module in the standard library that provides the facility to work with the framework for releasing log messages from the Python programs. Logging is used to tracking events that occur when the software runs.
+This module is widely used by the developers when they work to logging. It is very important tool which used in software development, running, and debugging.
+Logging is beneficial to store the logging records. Suppose there is no logging record, and the program is interrupted during its execution, we will be unable to find the actual cause of the problem.
+Somehow, we detect the cause of the crash but it will consume a lot of time to resolve this. Using the logging, we can leave a trace of breadcrumbs so that if the problem happens in the program, we can find the cause of the problem easily.
+We can face many problems while running applications such as we suppose an integer, and we have been given a float, the service is under maintenance and many more. These problems are hard to determine and time-consuming.
+How Logging Works
+The logging is a powerful module used by the beginners as well as enterprises. This module provides a proficiency to organize different control handlers and a transfer log messages to these handlers.
+To releasing a log message, we need to import the logging module as follows.
+
+import logging 
+
+Now, we will call the logger to log messages that we want to see. The logging module offers the five levels that specify the severity of events. Each event contains the parallel methods that can be used to log events at the level of severity. Let's understand the following events and their working.
+
+DEBUG - It is used to provide detailed information and only use it when there is diagnosing problems.
+INFO - It provides the information regarding that things are working as we want.
+WARNING - It is used to warn that something happened unexpectedly, or we will face the problem in the upcoming time.
+ERROR - It is used to inform when we are in some serious trouble, the software hasn't executed some programs.
+CRITICAL - It specifies the serious error, the program itself may be incapable of remaining executing.
+
+The above levels are sufficient to handle any types of problems. These corresponding numerical values of the levels are given below.
+
+
+Level
+Numeric Values
+
+
+NOTSET
+0
+
+
+DEBUG
+10
+
+
+INFO
+20
+
+
+WARNING
+30
+
+
+ERROR
+40
+
+
+CRITICAL
+50
+
+
+The logging module offers many features. It consists of several constants, classes, and methods. The constants are represented by the all caps latter; the classes are represented by capital letters. The items with lowercase represent methods.
+Let's have a look at the several logger objects offered by the module itself.
+
+Logger.info(msg) : It is used to log a message with level INFO on this logger.
+Logger.warning(msg) : It is used to log a message with level WARNING on this logger.
+Logger.error(msg) : It is used to log a message with level ERROR on this logger.
+Logger.critical(msg) : It is used to log a message with level CRITICAL on this logger.
+Logger.log(lvl,msg) : It is used to logs a message with integer level lvl on this logger.
+Logger.exception(msg) : It is used to log a message with level ERROR on this logger.
+Logger.setLevel(lvl) : It is used to sets the beginning of this logger to lvl. It will ignore all the messages which are written below.
+Logger.addFilter(filt) : It is used to add a specific filter filt to the to this logger.
+Logger.removeFilter(filt) : It is used to eliminates a specific filter filt to the to this logger.
+Logger.filter(record) : It put on the filter of logger to the record. If the record available and to be handled then returns True. Otherwise, it will return False.
+Logger.addHandler(hdlr) : It is used to add a particular handler hdlr to the to this logger.
+Logger.removeHandler(hdlr) : It is used to eliminate a particular handler hdlr to this logger.
+Logger.hasHandlers() : It is used to verify if the logger contains any handler configured or not.
+
+Let's understand the following example.
+Example -
+
+import logging
+
+logging.debug('The debug message is displaying')
+logging.info('The info message is displaying')
+logging.warning('The warning message is displaying')
+logging.error('The error message is displaying')
+logging.critical('The critical message is displaying')
+
+Output:
+WARNING:root:The warning message is displaying
+ERROR:root:The error message is displaying
+CRITICAL:root:The critical message is displaying 
+
+Explanation:
+As we can see in the above output, each message is displayed along with the root, which is the logging module name given to its default logger. The message and the level name are separated by a colon (:) and print the messages in default output format.
+We can notice that the debug() and info() message didn't display messages because, by default, the log module logs the messages with a severity level of WARNING, ERROR and CRITICAL.
+Basic Configurations
+The main task of logging is to store the records events in a file. The logging module provides the basicConfig(**kwarg), used to configure the logging.
+It accepts some of the commonly used argument as follows.
+
+level - The specified severity level is set by the root level.
+filename - It specifies a file.
+filemode - It opens a file in a specific mode. The default mode of the opening file is a, which means we can append the content.
+format - The format defines the format of the log message.
+
+We can set the level of log messages by using the level parameter as we want to record. We need to pass the one constant in the class, which would permit all logging calls.
+Let's understand the following example.
+Example -
+
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logging.debug('The dubug message is logged')
+
+Output:
+
+DEBUG:root: The debug will be get logged
+
+Similarly, we can log the message to a file instead of display on console, filename and filemode can be used in the basicConfig() function, and we can decide the format of the message using format attributes. Let's understand the following example.
+Example -
+
+import logging
+
+logging.basicConfig(filename='msg.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+logging.warning('This will get logged to a file')
+
+Output:
+
+root - WARNING - This will get logged to a file
+
+Explanation:
+The above output will be displayed in the msg.log file instead of console. We opened the file in w, which means the file is opened in the "write mode". If the basicConfig() is called multiple times, then each run of the program will rewrite the log file's output. The basicConfig() function can be modified by passing the additional arguments (https://docs.python.org/3/library/logging.html#logging.basicConfig).
+Let's understand the following example.
+Example -
+
+import logging
+
+#Create and configure logger using the basicConfig() function
+logging.basicConfig(filename="newfile.log",
+               format='%(asctime)s %(message)s',
+               filemode='w')
+
+#Creating an object of the logging
+logger=logging.getLogger()
+
+#Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
+
+#Test messages
+logger.debug("This is a harmless debug Message")
+logger.info("This is just an information")
+logger.warning("It is a Warning. Please make changes")
+logger.error("You are trying to divide by zero")
+logger.critical("Internet is down") 
+
+Output:
+2020-09-05 13:17:39,204 This is a harmless debug Message
+2020-09-05 13:17:39,205 This is just an information
+2020-09-05 13:17:39,205 It is a Warning. Please make changes
+2020-09-05 13:17:39,205 You are trying to divide by zero
+2020-09-05 13:17:39,205 Internet is down
+
+Explanation:
+The above code will generate a file, and we can see the output while opening a file.
+Formatting the Output
+A string passed in the program as a message to log can be modified according to our requirements. There are some basic elements in the given string and part of the Logrecord. Let's understand the following example.
+Example -
+
+import logging
+
+logging.basicConfig(format='%(process)d-%(levelname)s-%(message)s')
+logging.warning('This is a Warning Message')
+
+Output:
+18472-WARNING-This is a Warning Message
+
+The format argument can accept a string with Logrecord attributes in any form as we require.
+Let's understand the following example -
+Example -
+
+import logging
+
+logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
+logging.info('Admin logged in')
+
+Output:
+2020-09-02 20:12:06,288 - Admin logged in
+
+The %(asctime) attributes adds the time creation of the Logrecord. We can also customize the format using datefmt attributes, which provides the same function as the datetime module.
+Example -
+
+import logging
+
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logging.warning('Admin logged out')
+
+Output:
+02-Sep-20 13:29:05 - Admin logged out
+
+Logging Variable Data
+Sometimes, we want to include the dynamic information from the application in the log. The logging methods are accepted a string as an argument, and it is good practice to format a string with the variable data and passed to a log method.
+But instead of that, we can also use a format string for the message and appending the variable data as an argument.
+Let's understand the following example -
+
+import logging
+
+name = 'Peter Decosta'
+
+logging.error('%s raised an error', name)
+
+Output:
+ERROR:root: Peter Decosta raised an error
+
+Explanation:
+The arguments passed to the method would be convoluted as variable data in the message.
+We can use the f{string} to format the given string. It provides a short and easy way to handle the string.
+Example -
+
+import logging
+
+name = 'Antonio Mino'
+
+logging.error(f'{name} raised an error')
+
+Output:
+ERROR:root: Antonio Mino raised an error
+
+Capturing Stack Traces
+We can capture the full stacks of traces in an application using the logging module. There is an exc_info parameter in the logging function; if we set it as True, it can capture the Exception information.
+Let's understand the following example -
+Example -
+
+import logging
+
+a = 10
+b = 0
+
+try:
+  c = a / b
+except Exception as e:
+  logging.error("Exception occurred", exc_info=True)
+
+Output:
+ERROR:root:Exception occurred
+Traceback (most recent call last):
+  File "C:/Users/DEVANSH SHARMA/PycharmProjects/Hello/loggingFile.py", line 224, in <module>
+    c = a / b
+ZeroDivisionError: division by zero
+
+Explanation:
+If we don't set true to exc_info, the output will not inform us about the exception. It would be hard to debug an error in thousand lines of code, if it displays only the following output.
+
+ERROR:root:Exception occurred
+
+There is also other option to get complete information about the exception. The logging module provides the exception() method, which logs a message with ERROR and attaches the exception information. To use it, call the logging.exception() method same as calling logging.error(exc_info = True).
+Let's understand the following example.
+Example -
+
+import logging
+
+a = 10
+b = 0
+
+try:
+  c = a / b
+except Exception as e:
+  logging.exception("Exception occurred", exc_info=True)
+
+Output:
+ERROR:root:Exception occurred
+Traceback (most recent call last):
+  File "C:/Users/DEVANSH SHARMA/PycharmProjects/Hello/loggingFile.py", line 224, in <module>
+    c = a / b
+ZeroDivisionError: division by zero
+
+We can use any of one option in error(), debug(), or critical() methods to get information about the exception.
+Classes and Functions
+We have seen so far the default logger called root. The logging module is used it whenever its functions are called such as logging.debug(), logging.error(), etc. We can also define own logger by creating an object of the Logger class. Here, we are defining the commonly used classes and functions.
+Below are the classes and functions defined in the logging module.
+
+Logger - The logger object is used to call the functions directly.
+LogRecord - It creates automatically log record file which consists the information related to all event of being logged such as the logger's name, the function, the line number, the message, and more.
+Handler - The handlers are used to dispatch the LogRecord to the output endpoint. The FileHandler, StreamHandler, HTTPHandler, SMTTPHandler are the subclasses of a Handler.
+Formatters - The formatters are used to define the structure of the output. It is used the string formatting methods to specify the format of the log messages.
+
+If we don't have the message to format, the default is to use the raw message. The default format date format is.
+
+%Y-%m-%d %H:%M:%S
+
+The following format is used to make the log message in the human -readable format.
+
+'%(asctime)s - %(levelname)s - %(message)s'
+
+We generally work with the objects of the Logger class, which are created using the logging.getLogger(name) function. If the getLogger() method is called multiple times with the same name, it will return the reference of the same logger object.
+Let's understand the following example:
+Example -
+
+import logging
+
+logger = logging.getLogger('first_logger')
+logger.warning('This is a warning message')
+
+Output:
+This is a warning message
+
+Explanation:
+We have created the own logger name first_logger, but unlike the root logger, the first_logger is not part of the output format. To display it, pass it into the configuration function. Then the output will look like as follows.
+
+WARNING:first_logger:This is a warning message
+
+Work With Handlers
+Handlers are generally used to configure logger and transmit the logs to the many places at a time. It sends the log messages to the standard output stream or a file over HTTP or on email.
+Let's understand the following example of creating handlers.
+Example:
+
+import logging
+
+# Create a custom logger_obj
+logger_obj = logging.getLogger(__name__)
+
+# Create handlers
+w_handler = logging.StreamHandler()
+e_handler = logging.FileHandler('file.log')
+w_handler.setLevel(logging.WARNING)
+e_handler.setLevel(logging.ERROR)
+
+# Create formatters and add it to handlers
+c_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+w_handler.setFormatter(c_format)
+e_handler.setFormatter(f_format)
+
+# Add handlers to the logger_obj
+logger_obj.addHandler(w_handler)
+logger_obj.addHandler(e_handler)
+
+logger_obj.warning('This is a warning message')
+logger_obj.error('This is an error message')
+
+Output:
+__main__ - WARNING - This is a warning message
+__main__ - ERROR - This is an error message
+
+Explanation:
+In the following program, we have created a custom logger named the logger_obj and created a LogRecord that stores the all record of the logging events and passed it to all the Handlers that it has: w_handlers and e_handlers.
+The w_handlers is a stream handler with the level WARNING. It accepts the log from the LogRecord to generate the output in the format string and print it to the screen.
+The e_handler is a file handler with the level ERROR. It disregards the LogRecord as its level WARNING.
+Conclusion
+The logging module is flexible and easy to use. It is very useful for keeping track of the logging records and displaying the appropriate message to the user. It provides the flexibility to create custom log levels, handler classes, and many other useful methods.
+It also provides basic logging for small projects.
+In this tutorial, we have discussed all the essential concepts of the logging module. We have covered generate messages with different levels.
+
+
+Next TopicInsertion Sort in Python
+
+
+
+
+← prev
+next →
+
+
+
+

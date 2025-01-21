@@ -1,0 +1,97 @@
+
+
+
+
+next →
+← prev
+
+How to Get the Zip Code in Python
+In this tutorial, we will discuss how to get the Zip code of a particular location by using the geopy module in Python. The geopy makes it easy for Python users to locate the coordinates of the address, cities, and countries across the whole world.
+For installing the Geopy module, the user can run the following command:
+
+pip3 install geopy
+
+How to get Zip Code
+We are going to follow the following steps:
+
+Step 1: Import the geopy module
+Step 2: Initialize the Nominatim API for getting the location from the input string.
+Step 3: We will get the location by using a geo_locator.geocode() function.
+Step 4: Get the information from the given list and parse it into the dictionary by using ray function()
+Step 5: Extract the Zip data from the location instance.
+
+Step 1: Import the geopy module
+
+from geopy.geocoders import Nominatim
+
+Step 2: Create the Nominatim object and initialize the Nominatim API by using the geoapiExercises parameter.
+
+geo_locator = Nominatim(user_agent = "geoapiExercises")
+
+Step 3: Get the complete address by using geocode() function
+
+place_1 = "RidgePoint Irving, Texas, USA"
+location = geo_locator.geocode(place_1)
+print(location)
+
+Output:
+Ridgepoint Drive, Irving, Dallas County, Texas, 75063, United States
+
+Step 4: Get the information from the given list and parse it into the dictionary by using raw.
+
+data_1 = location.raw
+print (data_1)
+
+Output:
+{' place_id ': 209975995, ' licence ': ' Data � OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright ', ' osm_type ': ' way ', ' osm_id ': 567473012, ' boundingbox ': [' 32.908872 ', ' 32.9091407 ', ' -96.9887504 ', ' -96.9883353 '], ' lat ': ' 32.9088978 ', ' lon ': ' -96.9886835 ', ' display_name ':       ' Ridgepoint Drive, Irving, Dallas County, Texas, 75063, United States ', ' class ': 'highway ', ' type ': ' tertiary ', ' importance ': 0.42000000000000004}
+
+Step 5: Extract the Zip data from the location instance.
+
+location_data = data_1['display_name'].split()
+print ("The Full Location is: ")
+print (location_data)
+print ("The Zip code of the location is: ", location_data[-3])
+
+Output:
+The Full Location is: 
+['Ridgepoint', 'Drive,', 'Irving,', 'Dallas', 'County,', 'Texas,', '75063,', 'United', 'States']
+The Zip code of the location is:  75063,
+
+Full Implementation of the Python Code
+Example -
+
+from geopy.geocoders import Nominatim
+geo_locator = Nominatim(user_agent = "geoapiExercises")
+place_1 = "Disneyland Dr, Anaheim, USA"
+location = geo_locator.geocode(place_1)
+print(location)
+data_1 = location.raw
+print (data_1)
+location_data = data_1['display_name'].split()
+print ("\nThe Full Location is: ")
+print (location_data)
+print ("The Zip code of the location is: ", location_data[-3])
+
+Output:
+Disneyland Drive, Anaheim, Orange County, California, 92812-9998, United States
+{' place_id ': 211571693, ' licence ': ' Data � OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright ', ' osm_type ': ' way ', ' osm_id ': 568143583, ' boundingbox ': [' 33.8184966 ', ' 33.8200236 ', ' -117.9229381 ', ' -117.9224363 '], ' lat ': ' 33.819073 ', ' lon ': ' -117.9226168 ', ' display_name ': 'Disneyland Drive, Anaheim, Orange County, California, 92812-9998, United States ', ' class ': ' highway ', ' type ': ' secondary ', ' importance ': 0.41000000000000003}
+
+The Full Location is: 
+['Disneyland', 'Drive,', 'Anaheim,', 'Orange', 'County,', 'California,', '92812-9998,', 'United', 'States']
+The Zip code of the location is:  92812-9998,
+
+Conclusion
+In this tutorial, we have discussed how the user can get the zip code of the given location by using the geopy module in Python. We have also shown the example for better understanding.
+
+
+Next TopicEel in Python
+
+
+
+
+← prev
+next →
+
+
+
+

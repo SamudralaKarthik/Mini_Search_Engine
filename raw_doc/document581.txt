@@ -1,0 +1,117 @@
+
+
+
+
+next →
+← prev
+
+Differences between Flatten() and Ravel() Numpy Functions
+There are two kinds of methods to convert a Ndarray into a 1D array flatten() as well as Ravel()
+
+import numpy as nmp
+P = nmp.array( [ (1,8,4,5),(4,3,5,1) ] )
+#OUTPUT:
+print( P.flatten() )
+# [ 1,8,4,5,4,3,5,1 ] 
+print ( P.ravel() )
+# [ 1,8,4,5,4,3,5,1 ] 
+
+The question here is, what is the reason there are two distinct roles to perform the same job?
+Differences between Flatten() and Ravel()
+P.ravel():
+
+Returns only the reference/view of the original array
+In the event that we alter the array, we will be able to see that the value of the original array changes too.
+Ravel is faster than flatten() because it doesn't take up any memory.
+Ravel is a library-level function at the library level.
+
+P.flatten():
+
+Return a duplicate of the initial array
+When you alter the value of this array, the original array's value is not changed.
+Flatten() is considerably faster that ravel() because it takes up memory.
+Flatten is a method used by a ndarray.
+
+Let's see the difference between flatter() and ravel() function using this code.
+Code:
+
+import numpy as nmp
+
+# Here, we will create a numpy array
+P = nmp.array([(3,4,5,6),(5,3,6,7)])
+
+# Now, we will print the array a
+print ("Original array:\n ")
+print(P)
+
+# For checking the dimension of array (dimension = 2 and type is numpy.ndarray )
+print ("Dimension of array: " , (P.ndim))
+
+
+print("\n The output for RAVEL \n")
+# Here, we will convert ndarray to 1D array
+Q = P.ravel()
+
+# As the ravel() only passes a view of the original array to array 'Q'
+print(Q)
+Q[0]=1000
+print(Q)
+
+# We can note here that value of the original array 'P' at also P[0][0] becomes 1000
+print(P)
+
+# Just for checking the dimension i.e. 1 and type is same numpy.ndarray )
+print ("Dimension of array" ,(Q.ndim))
+
+print("\n The output for FLATTEN \n")
+
+# Here, we will convert ndarray to 1D array
+R = P.flatten()
+
+# Flatten passes copy of original array to 'R'
+print(R)
+R[0] = 0
+print(R)
+
+# Here, we can note that by changing the value of R 
+# there is no affect on value of original array 'P'
+print(P)
+
+print ("Dimension of array " , (R.ndim))
+
+Output:
+Original array:
+ 
+[[3 4 5 6]
+ [5 3 6 7]]
+Dimension of array:  2
+
+ The output for RAVEL 
+
+[3 4 5 6 5 3 6 7]
+[1000    4    5    6    5    3    6    7]
+[[1000    4    5    6]
+ [   5    3    6    7]]
+Dimension of array 1
+
+ The output for FLATTEN 
+
+[1000    4    5    6    5    3    6    7]
+[0 4 5 6 5 3 6 7]
+[[1000    4    5    6]
+ [   5    3    6    7]]
+Dimension of array  1
+
+
+
+Next TopicLearning Vector Quantization
+
+
+
+
+← prev
+next →
+
+
+
+

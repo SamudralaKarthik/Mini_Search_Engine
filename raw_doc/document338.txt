@@ -1,0 +1,108 @@
+
+
+
+
+next →
+← prev
+
+Average of list in Python
+In this tutorial, we will discuss how we can compute the average of the list in Python.
+The average of a list is defined as the sum of elements present in the list divided by the number of elements present in the list.
+Here, we will make use of three different approaches to calculate the average of the elements present in the list using Python.
+
+Using sum()
+Using reduce()
+Using mean()
+
+So, let's get started…
+Using sum()
+In the first method, we have used the sum() and len() to calculate the average.
+The following program illustrates the same-
+
+# Python program to get average of a list
+def calc_average(lst):
+	return sum(lst) / len(lst)
+lst = [24, 19, 35, 46, 75, 29, 30, 18]
+average = calc_average(lst)
+# Printing the average value of the list
+print("The average of the list is ", round(average, 3))
+
+Output:
+The average of the list is  34.5
+
+Explanation-
+It's time to have a look at what we have done in the above program-
+
+In the first step, we have created a function that takes a list as its parameter and then returns the average using sum() and len(). We know that sum() is used to calculate the sum of elements and len() tells us about the length of the list.
+After this, we have initialized the list whose average, we would like to calculate.
+In the next step, we have passed this list as a parameter in our function.
+Finally, we printed the resultant value.
+
+In the next program, we will see how reduce() can help us to do the same.
+Using reduce()
+The program given below shows how it can be done-
+
+# Python program to obtain the average of a list
+# Using reduce() and lambda
+from functools import reduce
+def calc_average(lst):
+	return reduce(lambda a, b: a + b, lst) / len(lst)
+#initializing the list
+lst = [24, 19, 35, 46, 75, 29, 30, 18]
+average = calc_average(lst)
+# Printing average of the list
+print("The Average of the list is ", round(average, 2))
+
+Output:
+The average of the list is  34.5
+
+Explanation
+Let's understand what we have done here-
+
+In the first step, we have imported reduce from functools so that we can use it in our program to compute the average of elements.
+Now, we have created a function calc_average that takes a list as its parameter and uses lambda(a precise way of writing functions in python) inside reduce to calculate the average.
+After this we have initialized whose average, we would like to calculate.
+In the next step, we have passed this list as a parameter in our function.
+Finally, we printed the resultant value.
+
+In the last program, we will learn how mean() can be used to calculate the average of list
+Using mean()
+The following program shows how it can be done-
+
+# Python program to obtain the average of a list
+# Using mean()
+from statistics import mean
+def calc_average(lst):
+	return mean(lst)
+lst = [24, 19, 35, 46, 75, 29, 30, 18]
+average = calc_average(lst)
+# Printing the average of the list
+print("The average of the list is ", round(average, 2))
+
+Output:
+The average of the list is  34.5
+
+Explanation-
+It's time to have a look at what we have done in the above program-
+
+In the first step, we have imported mean from statistics so that we can use it in our program to compute the average of elements.
+Now, we have created a function calc_average that takes a list as its parameter and uses mean() to calculate the average.
+After this we have initialized whose average, we would like to calculate.
+In the next step, we have passed this list as a parameter in our function.
+Finally, we printed the resultant value.
+
+Conclusion
+In this tutorial, we learned the different methods of calculating the average of elements present in the list using Python.
+
+
+Next TopicAppend vs Extend vs Insert in Python
+
+
+
+
+← prev
+next →
+
+
+
+

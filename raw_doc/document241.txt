@@ -1,0 +1,303 @@
+
+
+
+
+next →
+← prev
+
+Traceback in Python
+An Introduction to Traceback in Python
+Python returns a Traceback when there is an exception raised within the code. The output of Traceback can be pretty irresistible if we view it for the first time or do not know what message it conveys to us. However, the Traceback in the Python programming language has a wealth of data that can support us diagnose and fix the reason for the exception being raised in the code. Depending on what data a traceback in Python delivers is vital in order to become a better Python programmer.
+In the following tutorial, we will discuss Traceback in the Python programming language. But at the end of the tutorial, we will be able to recognize a few of the most frequent tracebacks.
+So, let's get started.
+Understanding the Traceback in the Python programming language
+A Traceback is a report having the calls made to the function in the lines of code at a particular point. Tracebacks are identified by multiply names, such as stack trace, stack traceback, backtrace, and a lot more. However, we use the term "Traceback" in the Python programming language.
+Whenever the program raises an exception, Python returns the current Traceback in order to help us acknowledge what went wrong. Let us consider the following example illustrating one such scenario.
+Example:
+
+# File name: pytrace.py
+# defining a custom function
+def welcome( name ):
+    # printing some message
+    print( "Hello, " + nam ) # using 'nam' instead of 'name'
+    print( "Welcome to the Python program!")
+# calling the function
+welcome( "James" )
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 10, in 
+    welcome( "James" )
+  File "D:\Python\pytrace.py", line 6, in welcome
+    print( "Hello, " + nam ) # using 'nam' instead of 'name'
+NameError: name 'nam' is not defined
+
+Explanation:
+In the above snippet of code, we have defined a custom function named welcome which takes a parameter as "name". However, while printing some messages within the function, we have misspelled the "name" parameter to the "nam". As a result, Python printed a traceback message when the exception is raised while calling the function.
+As we can observe in the output, the traceback message contains all the information that we will require in order to diagnose the problem. The last line of the traceback message expresses the type of exception raised in addition to some appropriate data related to that exception. The earlier lines of the traceback message indicate the code resulting in the raised exception.
+In the above traceback, the exception was a NameError, which implies a reference to some name (such as a variable, class, function) that has not been defined. In the following case, the name referred to "nam".
+The last line in the above case has enough data in order to help us fix the issue. Search the code for the name nam, which is misspelled and will indicate us correctly. Generally, the code is a lot more complicated.
+Reading a Traceback in Python
+The Traceback in Python has so much valuable data regarding the exception being raised in the lines of code. In the following section, we will understand how to read different tracebacks in order to acknowledge different bits of data stored in a traceback.
+The Python traceback is divided into different sections. Each section has its importance. Let us consider the following Traceback shown below:
+Traceback:
+
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 10, in <module>
+    welcome( "James" )
+  File "D:\Python\pytrace.py", line 6, in welcome
+    print( "Hello, " + nam ) # using 'nam' instead of 'name'
+NameError: name 'nam' is not defined
+
+It is a good practice to read the traceback message from the bottom to the top in the Python programming language. Now, let us understand the above traceback in detail:
+
+Blue block: The last line highlighted with blue signifies the error message line. This line consists of the name of raised exception.
+Green block: After the name of the exception is the message related to the error. This message generally consists of valuable data to understand the reason behind the raised exception.
+Yellow block: The yellow block contains different calls of the function moving from bottom to top, most recent to least recent. These calls are denoted using the entries of two-line for each call. The first line of each call consists of data such as the name of the file, line number, and the name of the module, all indicating where the code can be found.
+Bold lines: These bold lines are the second line for these calls consisting of the actual snippet of the processed code.
+
+There are some differences between the output of the traceback when the code is executed in the command-line and the REPL. Let us consider executing the same example in REPL and understand the traceback output.
+REPL:
+
+>>> def welcome( name ):
+...     print( "Hello, " + nam )                                
+...     print( "Welcome to the Python program!") 
+... 
+>>> welcome( "James" )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 2, in welcome
+NameError: name 'nam' is not defined
+
+As we can observe in the above snippet of the code of REPL, the traceback message returns "" in the place of the name(s) of the file because we have typed the code in through standard input. Moreover, the lines of code that are executed are not shown in the traceback message.
+Note: If some of us are fond of viewing stack traces in different programming languages, then it is a pretty noticeable difference in the way a traceback looks in the Python programming language for comparison. Most of the languages return the exception at the top and then go from top to bottom, most recent calls to least recent.
+Whereas in Python, a traceback should be read from bottom to top. This is pretty helpful as when the traceback is returned, the terminal usually ends up at the bottom of the output, providing us the perfect place to begin reading the traceback.
+Understanding Some Common Tracebacks in Python
+Once we have understood how to read a Traceback in Python whenever an exception is raised, let us understand some of the common tracebacks that can be seen while coding.
+Here are some standard exceptions we might encounter, along with their meaning, the reason for them to get raised, and the data we can find in their tracebacks.
+AttributeError
+The exception known as AttributeError is raised while trying to access an attribute on an object that does not have that defined attribute. The documentation of Python describes when the AttributeError exception is raised:
+This exception is raised when the reference or assignment of attribute fails.
+Let us consider the following example where the AttributeError exception has been raised.
+Example:
+
+# defining a variable
+my_int = 10
+print(my_int.an_attribute)
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 2, in 
+    print(my_int.an_attribute)
+AttributeError: 'int' object has no attribute 'an_attribute'
+
+Explanation:
+In the above snippet of code, we have defined an integer and tried accessing its attribute. However, when we executed the program, it raised an AttributeError exception saying that the specific object type, int in the above case, does not have the attribute accessed, i.e., an_attribute for this case. Viewing the AttributeError exception in the message line of error can assist us convenient in order to identify the attribute we were trying to access and how we can fix it.
+Generally, whenever an exception like such is raised, it signifies that we are probably dealing with an instance that is not the type we were looking for.
+Let us consider another example for better clarification:
+Example:
+
+# defining a list
+my_list = ( 10, 20 )
+# using the 'append()' method in the list
+my_list.append( 30 )
+# printing the final list
+print( my_list )
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 5, in 
+    my_list.append( 30 )
+AttributeError: 'tuple' object has no attribute 'append'
+
+Explanation:
+In the above snippet of code, we have defined a list and used the append() method to add another element to the list. However, as a result, we might be expecting my_list to be of type list, which contains a method known as append(). When we received the AttributeError exception, we observed that it was raise while calling the append() function that expressed to us that we are probably are not working with the object type we were looking for.
+Generally, this happens when we are looking for an object to be returned from a method or function call to be a particular type, but in the end, we are left with the None type object. In the above scenario, the message line of error will show, AttributeError: 'NoneType' object has no attribute 'append'.
+ImportError
+The exception, also known as ImportError, is raised whenever something goes wide of the mark with an import statement. We will obtain this exception, or its subclass is known as ModuleNotFoundError, if the module or library we are attempting to import cannot be found or importing something from a library or module does not happen to be in it. The documentation of Python signifies when the ImportError exception is raised:
+This exception is raised whenever the import statement finds it difficult to load a library or module. Moreover, it is raised whenever the 'from list' in from ... import contains a name that can't be located.
+Let us consider an example demonstrating how the ImportError and ModuleNotFoundError are raised.
+Example:
+
+# importing a library or module
+import xyz
+from collections import xyz
+
+Output:
+# Output for the first line
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 2, in 
+    import xyz
+ModuleNotFoundError: No module named 'xyz'
+# Output for the second line
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 3, in 
+    from collections import xyz
+ImportError: cannot import name 'xyz' from 'collections' (D:\Python39\lib\collections\__init__.py)
+
+Explanation:
+In the above snippet of code, we have tried importing a library or module that does not exist, xyz, resulting in the case of the ModuleNotFoundError exception. On the other hand, when we tried importing the module xyz that does not exist from the collections library that does exist, the program raised the ImportError exception. The message lines of the error at the bottom of the tracebacks display us which specific thing could not be imported, and in both the above cases, it is xyz.
+IndexError
+The exception, also known as IndexError, is generally raised whenever we try to retrieve an index from a series or sequence, such as a tuple or a list, and the index is not found in the series or sequence. The documentation of Python signifies when the Index exception is raised:
+This exception is raised whenever the subscript of a series or sequence is out of range.
+Let us consider the following example demonstrating how the IndexError exception is raised.
+Example:
+
+# defining a list
+my_list = [ "Apple", "Peaches", "Mango", "Banana" ]
+# printing the element of the list
+print( my_list[ 4 ] )
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 5, in 
+    print( my_list[ 4 ] )
+IndexError: list index out of range
+
+Explanation:
+In the above snippet of code, we have defined a list as my_list containing four elements. However, when we attempted to print the element at index number 5, the program raised an IndexError exception. The message stated in error for an IndexError exception does not provide us proper knowledge. We can observe that we have a sequence reference, i.e., out of range in addition to the type of the sequence, a list in the following scenario. Together with the rest of the traceback, that data is generally enough to help us rapidly recognize how to fix the problem.
+KeyError
+The exception, also known as KeyError, is similar to the IndexError exception and raised whenever we try to access a key that is not in the mapping, generally observed in a data structure like the dictionary. The documentation of Python signifies when the KeyError exception is raised:
+This exception is raised whenever a dictionary (mapping) key is not found in the set of existing keys.
+Let us consider the following example to understand how the KeyError exceptions are raised.
+Example:
+
+# defining a dictionary
+mydict = {'Mike' : 40, 'James' : 25, 'Drake' : 32, 'Jenny' : 28}
+# accessing a key out of the dictionary
+print( mydict['Sam'] )
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 5, in 
+    print( mydict['Sam'] )
+KeyError: 'Sam'
+
+Explanation:
+In the above snippet of code, we have defined a dictionary with some keys and values assigned to each key. We have then tried to access the value of the key, which is not available in the dictionary. As a result, the program raised the KeyError exception saying that the key we are looking for could not be found.
+NameError
+The exception, also known as NameError, is raised whenever we have referenced a variable, class, function, module, or other names that has not been defined within the lines of code. The documentation of Python signifies when the NameError exception is raised.
+This exception is raised whenever a local or global name is not found.
+Let us consider the following example in order to understand how the NameError exception is raised.
+Example:
+
+# defining a function
+def myself( name ):
+    print("My name is", nam)
+# Calling the function
+myself( "Robin" )
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 6, in 
+    myself( "Robin" )
+  File "D:\Python\pytrace.py", line 3, in myself
+    print("My name is", nam)
+NameError: name 'nam' is not defined
+
+Explanation:
+In the above example, we have defined a function as myself(), which takes an argument as the name. However, we have misspelled the name with nam in the following line while printing some statements. We have then called the function. As a result, the program raised the NameError exception as the name 'nam' is not defined in the program.
+SyntaxError
+The exception, also known as SyntaxError, is generally raised whenever the syntax of the Python program is incorrect. The document of Python signifies when the SyntaxError exception is raised:
+This exception is raised whenever the parser encounters an error in Python syntax.
+Let us consider an example illustrating how the SyntaxError exception is raised.
+Example:
+
+# defining a function
+def myself( name )
+    print("My name is", nam)
+# Calling the function
+myself( "Robin" )
+
+Output:
+File "D:\Python\pytrace.py", line 2
+    def myself( name )
+                      ^
+SyntaxError: invalid syntax
+
+Explanation:
+In the above syntax, we have defined a function as myself(), but forget to include a colon ":" mark after the function definition. As a result, when we executed the function, the program raised the SyntaxError exception, saying an issue with the program's syntax. The ^ (caret) mark below the line of code indicates the location of the problem.
+Moreover, we can observe that the SyntaxError traceback message does not display the regular first-line saying "Traceback (most recent call last):". This is because the SyntaxError exception is raised when Python tries to analyze the line of code, and the lines of code are not being processed in a literal way.
+TypeError
+The exception, also known as TypeError, is raised whenever the syntax tries to perform some function with an instance that cannot perform that function, like attempting to add an integer to a string or calling the len() function on an object where its length is not specified. The documentation of Python signifies when the TypeError exception is raised:
+This exception is raised whenever a function or an operation is applied to an object of the wrong type.
+Let us consider the following example demonstrating how the TypeError exception is raised.
+Example:
+
+# defining some variables
+myint = 10
+mystr = '10'
+# performing addition on objects of different types
+myadd = myint + mystr
+# printing the result
+print("Result:", myadd)
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 4, in 
+    myadd = myint + mystr
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+Explanation:
+In the above example, we have defined two variables as one integer and one string. We have then performed the addition operation on these variables and tried printing the result. However, the program returned the TypeError exception as we attempted to add the integer value with the string value.
+Similarly, this exception is raised when we used the len() function on the 'int' data type.
+Let us consider the following example illustrating the same.
+Example:
+
+# defining the variable
+myint = 10
+# finding length of the object of type 'int' 
+print("Length:", len(myint))
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 5, in 
+    print("Length:", len(myint))
+TypeError: object of type 'int' has no len()
+
+Explanation:
+In the above example, we have defined a variable of data type 'int' and attempted to perform the len() function on the variable. However, the program raised the TypeError, saying that we cannot perform the len() function with an object of data type 'int'.
+ValueError
+The exception, also known as the ValueError, is raised whenever the object's value is not correct. This exception is similar to the IndexError exception as the index value is out of the range of the sequence in the case of the IndexError exception. In contrast, the ValueError exception is for a more general scenario. The documentation of Python signifies when the ValueError exception is raised:
+This exception is raised whenever a function or operation receives a parameter with the correct type; however, an unfitting value and the state are not defined by a more specific exception like IndexError.
+Let us consider an example based on the ValueError exception.
+Example:
+
+# defining the variables
+var1, var2, var3 = [10, 20, 30, 40]
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 2, in 
+    var1, var2, var3 = [10, 20, 30, 40]
+ValueError: too many values to unpack (expected 3)
+
+Explanation:
+In the above example, we have tried to unpack four values but got only three. Thus, as a result, the program raised the ValueError exception.
+Let us consider another example based on the ValueError exception.
+Example:
+
+# defining the variable
+var1, var2, var3, var4 = [10, 20, 30]
+
+Output:
+Traceback (most recent call last):
+  File "D:\Python\pytrace.py", line 2, in 
+    var1, var2, var3, var4 = [10, 20, 30]
+ValueError: not enough values to unpack (expected 4, got 3)
+
+Explanation:
+In the above syntax, we have tried to unpack way too many values. As a result, the program returns the ValueError exception, saying there are not enough values to unpack (expected 4, got 3).
+
+
+Next TopicTime clock() Method in Python
+
+
+
+
+← prev
+next →
+
+
+
+

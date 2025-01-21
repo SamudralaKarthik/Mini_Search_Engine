@@ -1,0 +1,113 @@
+
+
+
+
+next →
+← prev
+
+Python os.listdir() method
+It is quite possible that we have come across so many instances in our life where we want to know how many and what files are present in a directory (folder). Or, sometimes we have to look for a file, and we know its name, but we don't know in which folder it is present. In that case, the only option left for us is to look for the file in the destination directory.
+Now, it would seem so easy for many of us to think; we just have to go to the directory and look there. This is a possible option, but this option will only work when we only have a smaller number of files present in that directory. Only then can we visit that directory manually and look for the files present there. But, what in the case where a large number of files, let's just say thousands of files present in the destination directory. In that case, this option will not work because it is going to take very long (even many days) to search if a specific file is present in the destination directory where thousands of files are present. It seems like what we should do if we have to find a file with its name within a directory having thousands of files.
+We can search for the name through file explorer, but if we do that, it is also going to take a lot of time, not as in the previous option but yes, a lot of time. This is because file explorer will scan through every file present in the directory, and we have to wait so much until complete scanning of the disk is done.
+But what if we say that we have already provided the names of all the files present in the destination directory or path. Then, it will be going to be very easy for us to check if that specified file is present in the targeted path, and it also shows where we need to get the names of all the files present in the destination directory.
+If we are given a list of names of all the files present in a directory in text form, we just have to type the name of that specific file in the search bar. And, then, it will hardly take a second to find out if the file is present in the list of names or not. Thus, we can understand that how much it is important to have a method where we can print the list of names of all files present in a directory or path.
+Python provides us with such methods where we can print the list of names, and one such method is the listdir() function of the 'os' module. We are going to learn this listdir() method in this tutorial and use this in a Python program to print a list of names of all files present in the specified path.
+os.listdir() Method in Python
+The listdir() function is a function provided by the os module, and by using this function, we can print a list of names of all the files present in the specified path. listdir() method can also be used if we want to print the list of files present in the current working directory (where the program is present). We can use the listdir() method whenever we are required to get the names of all files present in a specified directory.
+Syntax for os.listdir() function:
+Following is the syntax for using the listdir() function from the os module:
+
+>> os.listdir(pathSpecified)
+
+Parameters:
+As we can see in the above-given syntax, we have only given an argument inside the listdir() method. listdir() function takes the following path parameter:
+
+pathSpecified: Here, the pathSpecified variable represents the path of the targeted directory from where we want to know the name of all files. This is an optional argument in the listdir() function, and if we don't provide a specified path inside the function, then it will print all the file names from the current working directory.
+
+Return type:
+The return type for the listdir() function is 'list' as it returns a list of names of all the files present in the specified directory.
+os.listdir() Method: Implementation:
+To understand the working and implementation of the listdir() function, we will use it in an example program and print the list of filenames from it. We have divided the implementation part of the listdir() function into the following two parts:
+
+Printing file names from the current working directory
+Printing file names from the specified path
+
+We will use an example program for each category and get the file names in each method.
+Method 1: Printing File Names from Current Working Directory:
+In this method, we will print the list of file names from the current working directory by using another function of the os module, i.e., the getcwd() function. Look at the following example program to understand the implementation of this method:
+Example 1: 
+Look at the following Python program where we used os.listdir() method with path argument:
+
+# Import os module
+import os
+# Use getcwd() function
+pathSpecified = os.getcwd()
+# Using listdir() function
+listOfFileNames = os.listdir(pathSpecified)
+# Print the name of all files in the current working directory
+print("Following is the list of names of all the files present in the current working directory: ")
+print(listOfFileNames)
+
+Output:
+Following is the list of names of all the files present in the current working directory: 
+['.ipynb_checkpoints', '1510981730952-33afef2b-eb41-4592-8d3f-bd3e19932d36_.pdf', '1510981730952-33afef2b-eb41-4592-8d3f-bd3e19932d36__19.jpg', '1527589430558.jpg', '1605467180870.png', '1605467180879.png', '160591-fruit-template-16x9.pptx', '1613034967066.jpg', '1613034967083.jpg', '1613035079325.jpg', '1613035270313.jpg', '1616159417742.jpg', '1616159417758.jpg', ???., Windows11InstallationAssistant.exe', 'WindowsPCHealthCheckSetup.msi', 'Word frequency Python.edited.docx', 'wrong.jpg', 'X-ray image.png', 'XML-data.xml', 'yemen500.png', 'zambia-500.png', 'zimbabwe-500.png', 'ZoomInstaller (1).exe', 'ZoomInstaller.exe', '__pycache__', '~$EOC CERTIFICATE.pptx']
+
+As we can see, the names of all the files present in our current working directory are printed in the program's output.
+Explanation:
+After importing the os module in the program, we have used the getcwd() function to get the path of the current working directory. We have initialized a variable with the name 'pathSpecified' and stored the path of the current working directory in this variable. After that, we have used the listdir() function in another initialized variable, i.e., listOfFileNames, to store the name of all files in this variable. We have provided initialized variable for the current working path as an argument in the listdir() function, and lastly, we printed the list of all names in the output using a print statement.
+If we don't want to use any other function in our program, then we can also get all the file names from the current directory in which the program is present. We just have to leave the listdir() function instead of providing any directory's path as an argument, and after that, the program, when executed, will give the list of all the names present in the current directory as a result in the output. Look at the following example program to understand the implementation of this method:
+Example 2:
+Look at the following Python program where we used the os.listdir() method without any argument:
+
+# Import os module
+import os
+# Using listdir() function
+listOfFileNames = os.listdir()
+# Print the name of all files in the current working directory
+print("Following is the list of names of all the files present in the current working directory: ")
+print(listOfFileNames)
+
+Output:
+Following is the list of names of all the files present in the current working directory: 
+['.ipynb_checkpoints', '1510981730952-33afef2b-eb41-4592-8d3f-bd3e19932d36_.pdf', '1510981730952-33afef2b-eb41-4592-8d3f-bd3e19932d36__19.jpg', '1527589430558.jpg', '1605467180870.png', '1605467180879.png', '160591-fruit-template-16x9.pptx', '1613034967066.jpg', '1613034967083.jpg', '1613035079325.jpg', '1613035270313.jpg', '1616159417742.jpg', '1616159417758.jpg', ???., Windows11InstallationAssistant.exe', 'WindowsPCHealthCheckSetup.msi', 'Word frequency Python.edited.docx', 'wrong.jpg', 'X-ray image.png', 'XML-data.xml', 'yemen500.png', 'zambia-500.png', 'zimbabwe-500.png', 'ZoomInstaller (1).exe', 'ZoomInstaller.exe', '__pycache__', '~$EOC CERTIFICATE.pptx']
+
+As we can see, a list of names of all the files present in the current file where Python is installed is printed in the output after the program is executed.
+Explanation:
+In this program, we have omitted the path parameter and still get the list of names of all the files present in the current working directory. We will prefer to use this method if we want to get the list of all the files ' names from the current working directory. Because in this method, we don't have to use any argument or define any path variable, and thus it saves any extra line of code in our program and saves our time.
+Method 2: Printing File Names from Specified Path:
+In this method, we can get the list of names of all the files present in a specified directory by providing the specified path of the directory inside the listdir() function. We can get the path of the directory from the file's properties option, and then we can use the same file in the program. Look at the following example program to understand the implementation of this method:
+Example 3:
+Look at the following Python program where we used os.listdir() method with path argument:
+
+# Import os module
+import os
+# Define the specified path
+pathSpecified = " C:\Users\Manish\Downloads"
+# Using listdir() function
+listOfFileNames = os.listdir(pathSpecified)
+# Print the name of all files in directory
+print("Following is the list of names of all the files present in the specified directory: ")
+print(listOfFileNames)
+
+Output:
+Following is the list of names of all the files present in the specified directory: 
+['.ipynb_checkpoints', '1510981730952-33afef2b-eb41-4592-8d3f-bd3e19932d36_.pdf', '1510981730952-33afef2b-eb41-4592-8d3f-bd3e19932d36__19.jpg', '1527589430558.jpg', '1605467180870.png', '1605467180879.png', '160591-fruit-template-16x9.pptx', '1613034967066.jpg', '1613034967083.jpg', '1613035079325.jpg', '1613035270313.jpg', '1616159417742.jpg', '1616159417758.jpg', ........, Windows11InstallationAssistant.exe', 'WindowsPCHealthCheckSetup.msi', 'Word frequency Python.edited.docx', 'wrong.jpg', 'X-ray image.png', 'XML-data.xml', 'yemen500.png', 'zambia-500.png', 'zimbabwe-500.png', 'ZoomInstaller (1).exe', 'ZoomInstaller.exe', '__pycache__', '~$EOC CERTIFICATE.pptx']
+
+As we can see, the names of all the files present in the specified directory are printed in the program's output.
+Explanation:
+After importing the os module in the program, we have first defined the path of the directory from where we want to print the list of all file names by initializing a path variable. After that, we used the initialized path variable inside the listdir() method to use the path as an argument in the function. Lastly, we used another initialized variable (listOfFileNames) inside the print statement to print the result in the output.
+Conclusion
+We learned about the listdir() method of the os module in this tutorial and understood the importance of this function. We learn about the syntax of this function, and after that, we learn the methods to use this function. In last, we used the Python program with the listdir() function to understand the implementation of each method.
+
+
+Next TopicPython Modules for Automation
+
+
+
+
+← prev
+next →
+
+
+
+

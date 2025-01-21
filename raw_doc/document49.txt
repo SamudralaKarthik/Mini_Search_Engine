@@ -1,0 +1,180 @@
+
+
+
+
+next →
+← prev
+
+Python Command line arguments
+The Python supports the programs that can be run on the command line, complete with command line arguments. It is the input parameter that needs to be passed to the script when executing them.
+It means to interact with a command-line interface for the scripts.
+It provides a getopt module, in which command line arguments and options can be parsed.
+What is argument passing?
+The command ls is often used to get a summary of files and folders present in a particular directory.
+Why to use argparse?
+It means to communicate between the writer of a program and user which does not require going into the code and making changes to the script. It provides the ability to a user to enter into the command-line arguments.
+Access command line arguments
+The Python sys module provides access to command-line arguments via sys.argv. It solves the two purposes:
+Python sys module
+It is a basic module that was shipped with Python distribution from the early days on. It is a similar approach as C library using argc/argv to access the arguments. The sys module implements command-line arguments in a simple list structure named sys.argv.
+Each list element represents a single argument. The first one -- sys.argv[0] -- is the name of Python script. The other list elements are sys.argv[1] to sys.argv[n]- are the command line arguments 2 to n. As a delimiter between arguments, space is used. Argument values that contain space in it have to be quoted, accordingly.
+It stores command-line arguments into a list; we can access it using sys.argv. This is very useful and a simple way to read command-line arguments as String.
+
+import sys
+print(type(sys.argv))
+print('The command line arguments are:')
+for i in sys.argv:
+print(i)
+
+Python getopt module
+The Python getopt module extends the separation of the input string by parameter validation. Based on getopt C function, it allows both short and long options, including a value assignment.
+It is very similar to C getopt() function for parsing command line parameters.
+It is useful in parsing command line arguments where we want the user to enter some options.
+Code
+
+import getopt
+import sys
+argv = sys.argv[1:]
+try:
+    opts, args = getopt.getopt(argv, 'hm:d', ['help', 'my_file='])
+    print(opts)
+    print(args)
+except getopt.GetoptError:
+    # Print a message or do something useful
+    print('Something went wrong!')
+    sys.exit(2)
+
+Python argparse module
+It offers a command-line interface with standardized output, whereas the former two solutions leave most of the work in your hands. argparse allows verification of fixed and optional arguments with a name checking as either UNIX or GNU style. It is the preferred way to parse command-line arguments. It provides a lot of option such as positional arguments, the default value for arguments, helps message, specifying the data type of argument etc.
+It makes it easy to write the user-friendly command-line interfaces. It automatically generates help and usage messages and issues errors when a user gives invalid arguments to the program.
+getopt.getopt method
+This method is used for parsing the command line options and parameter list.
+Syntax:
+
+getopt.getopt(args, options, [long_options])
+
+args- It is an argument list that needs to be parsed.
+options- A string of option letters that the script wants to recognize, with options that require an argument which should be followed by a colon(:).
+long_options(optional)- It must be a string with names of the long options, which should be supported.
+
+This method returns a value consisting of two elements, i.e. list of (option, value) pairs, list of program arguments left after option list was stripped.
+Each option-and-value pair are returned as an option as its first element, prefixed with a hyphen for short options (e.g.,'-x') or two hyphens for long options (e.g., '--long-option').
+
+Exception getopt.GetoptError
+This exception arises when an unrecognized option is found in the argument list or when any option requiring an argument is given none.
+The argument to the exception is a string that indicates the cause of the error. The attributes msg and opt to give the error message and related option. 
+Code
+
+#!/usr/bin/python
+import sys, getopt
+def main(argv):
+   inputfile = ''
+   outputfile = ''
+   try:
+      opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+   except getopt.GetoptError:
+      print 'test.py -i <inputfile> -o <outputfile>'
+      sys.exit(2)
+   for opt, arg in opts:
+      if opt == '-h':
+         print 'test.py -i <inputfile> -o <outputfile>'
+         sys.exit()
+      elif opt in ("-i", "--ifile"):
+         inputfile = arg
+      elif opt in ("-o", "--ofile"):
+         outputfile = arg
+   print 'Input file is "', inputfile
+   print 'Output file is "', outputfile
+
+if __name__ == "__main__":
+   main(sys.argv[1:])
+
+Output:
+$ test.py -h
+usage: test.py -i <inputfile> -o <outputfile>
+
+$ test.py -i BMP -o
+usage: test.py -i <inputfile> -o <outputfile>
+
+$ test.py -i inputfile
+Input file is " inputfile
+Output file is "
+
+How to use command line arguments in python?
+
+
+
+Module
+Use
+Python version
+
+
+sys
+All arguments in sys.argv (basic)
+All
+
+
+argparse
+Build a command line interface
+>= 2.3
+
+
+docopt
+Created command line interfaces
+>= 2.5
+
+
+fire
+Automatically generate command line interfaces (CLIs)
+All
+
+
+optparse
+Deprecated
+< 2.7
+
+
+Docopt
+Docopt is used to create command line interfaces.
+from docopt import docopt
+if __name__ == '__main__':
+arguments = docopt(__doc__, version='Example 1')
+print(arguments) 
+
+Fire
+Python Fire automatically generates a command line interface; you only need one line of code. Unlike the other modules, it works instantly.
+You don't need to define any arguments; all the methods are linked by default.
+To install it type:
+
+pip install fire
+
+Define or use a class:
+
+import fire
+class Python(object):
+    def hello(self):
+    print("Hello")
+       def openfile(self, filename):
+        print("Open file '" + filename + "'")
+
+if __name__ == '__main__':
+    fire.Fire(Python) 
+
+You have the options matching to the class methods:
+
+python example.py hello
+python example.py openfile filename.txt
+
+
+
+Next TopicPython Tutorial
+
+
+
+
+← prev
+next →
+
+
+
+

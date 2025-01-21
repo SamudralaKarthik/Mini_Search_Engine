@@ -1,0 +1,417 @@
+
+
+
+
+next →
+← prev
+
+Creating Interactive PDF forms using Python
+Python provides different functionalities that one can perform in order to manipulate PDF files, and we have already discussed a lot of things in the previous two tutorials on handling PDF files using Python. In this tutorial, we will understand how to create Interactive forms in a PDF file using the Python programming language.
+But before we get started, we will also discuss a Python toolkit that provides us accessibility to create one interactive form known as the ReportLab toolkit.
+Understanding the ReportLab toolkit in Python
+The Python ReportLab toolkit allows the programmers to create forms that are interactive and fillable. The PDF standard usually consists of a rich set of interactive elements. The ReportLab toolkit does not support all of these elements; however, it does cover most of them. In the following section, we will look at the following widgets:
+
+Checkbox
+Radio
+Choice
+Listbox
+Textfield
+
+All of the stated widgets are developed by calling different methods on the canvas.acroform property. Note that we can only have one form per document. Let us understand these widgets of the ReportLab toolkit.
+Understanding the Checkbox widget
+The checkbox widget is exactly what it sounds like. It is a little box that we can use to check entities shown in a form. Reportlab supports different styles of checks for the checkboxes, so when the checkbox is checked, it can look distinctive as per the style that we set.
+Now, let us understand a simple example that illustrates how few of these parameters behave:
+Example:
+
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfform
+from reportlab.lib.colors import magenta, pink, blue, green
+def createSimpleCheckboxes():
+    my_Canvas = canvas.Canvas('checkboxes.pdf')    
+    my_Canvas.setFont("Courier", 24)
+    my_Canvas.drawCentredString(300, 700, 'Programming Languages')
+    my_Canvas.setFont("Courier", 16)
+    form = my_Canvas.acroForm    
+    my_Canvas.drawString(10, 650, 'Python:')
+    form.checkbox(
+        name = 'cb1',
+        tooltip = 'Field cb1',
+        x = 110,
+        y = 645,
+        buttonStyle = 'check',
+        borderColor = magenta,
+        fillColor = pink, 
+        textColor = blue,
+        forceBorder = True
+        )    
+    my_Canvas.drawString(10, 600, 'Java:')
+    form.checkbox(
+        name = 'cb2',
+        tooltip = 'Field cb2',
+        x = 110,
+        y = 595,
+        buttonStyle = 'cross',
+        borderWidth = 2,
+        forceBorder = True
+        )    
+    my_Canvas.drawString(10, 550, 'C++:')
+    form.checkbox(
+        name = 'cb3',
+        tooltip = 'Field cb3',
+        x = 110,
+        y = 545,
+        buttonStyle = 'star',
+        borderWidth = 1,
+        forceBorder = True
+        )    
+    my_Canvas.drawString(10, 500, 'C:')
+    form.checkbox(
+        name = 'cb4',
+        tooltip = 'Field cb4',
+        x = 110,
+        y = 495,
+        buttonStyle = 'circle',
+        borderWidth = 3,
+        forceBorder = True
+        )   
+    my_Canvas.drawString(10, 450, 'JavaScript:')
+    form.checkbox(
+        name = 'cb5',
+        tooltip = 'Field cb5',
+        x = 110,
+        y = 445,
+        buttonStyle = 'diamond',
+        borderWidth = None,
+        checked = True,
+        forceBorder = True
+        )    
+    my_Canvas.save()    
+if __name__ == '__main__':
+    createSimpleCheckboxes()
+
+Output:
+
+Explanation:
+As we can observe in the above snippet of code, we have imported different functions from different modules of the ReportLab library. We have then set up the name and set the tooltip in order to match the widget's name. We have then set its position and some of the other things. We can play around with the width of the checkbox's border or turn the border off. If we turn it off, though, the checkbox may become invisible, so we might want to set its background color via fillColor if we do that. We have set the buttonStyle to something distinctive for each of the checkboxes.
+Understanding the Radio widget
+The radio widgets are similar to the checkboxes, despite the fact that radio buttons lie within the group where we can select only one radio button at a time. Checkboxes are rarely restricted to allowing one checkbox per group. The ReportLab toolkit does not offer a method to explicitly group a set of radio boxes altogether. The toolkit only provides the implicit way of grouping it. This statement implies that if we create a series of radio one after the other, they will be grouped together.
+Now, let us understand the same using a simple example as shown below:
+Example:
+
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfform
+from reportlab.lib.colors import magenta, pink, blue, green
+def createSimpleRadios():
+    my_canvas = canvas.Canvas('radiosFile.pdf')    
+    my_canvas.setFont("Courier", 22)
+    my_canvas.drawCentredString(300, 700, 'Radio demo')
+    my_canvas.setFont("Courier", 16)
+    form = my_canvas.acroForm    
+    my_canvas.drawString(10, 650, 'Python:')
+    form.radio(
+        name = 'radio1',
+        tooltip = 'Field radio1',
+        value = 'value1',
+        selected = False,
+        x = 110,
+        y = 645,
+        buttonStyle = 'check',
+        borderStyle = 'solid',
+        shape = 'square',
+        borderColor = magenta,
+        fillColor = pink, 
+        textColor = blue,
+        forceBorder = True
+        )
+    form.radio(
+        name = 'radio1',
+        tooltip = 'Field radio1',
+        value = 'value2',
+        selected = True,
+        x = 110,
+        y = 645,
+        buttonStyle = 'check',
+        borderStyle = 'solid',
+        shape = 'square',
+        borderColor = magenta,
+        fillColor = pink, 
+        textColor = blue,
+        forceBorder = True)        
+    my_canvas.drawString(10, 600, 'Java:')
+    form.radio(
+        name = 'radio2',
+        tooltip = 'Field radio2',
+        value = 'value1',
+        selected = True,
+        x = 110,
+        y = 595,
+        buttonStyle = 'cross',
+        borderStyle = 'solid',
+        shape = 'circle',
+        borderColor = green,
+        fillColor = blue, 
+        borderWidth = 2,
+        textColor = pink,
+        forceBorder = True
+        )
+    form.radio(
+        name = 'radio2',
+        tooltip = 'Field radio2',
+        value = 'value2',
+        selected = False,
+        x = 110,
+        y = 595,
+        buttonStyle = 'cross',
+        borderStyle = 'solid',
+        shape = 'circle',
+        borderColor = green,
+        fillColor=blue, 
+        borderWidth=2,
+        textColor = pink,
+        forceBorder=True
+        )    
+    my_canvas.drawString(10, 550, 'C++:')
+    form.radio(
+        name = 'radio3',
+        tooltip = 'Field radio3',
+        value = 'value1',
+        selected = False,
+        x = 110,
+        y = 545,
+        buttonStyle = 'star',
+        borderStyle = 'bevelled',
+        shape = 'square',
+        borderColor = blue,
+        fillColor = green, 
+        borderWidth = 2,
+        textColor = magenta,
+        forceBorder = False
+        )
+    form.radio(
+        name = 'radio3',
+        tooltip = 'Field radio3',
+        value = 'value2',
+        selected = True,
+        x = 110,
+        y = 545,
+        buttonStyle = 'star',
+        borderStyle = 'bevelled',
+        shape = 'circle',
+        borderColor = blue,
+        fillColor = green, 
+        borderWidth = 2,
+        textColor = magenta,
+        forceBorder = True
+        )  
+    my_canvas.save()   
+if __name__ == '__main__':
+    createSimpleRadios()
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required functions from the different modules of the ReportLab toolkit. We have then defined a function and created a new PDF file. We have then defined different radio buttons for the PDF file and saved the file. At last, we have called the function.
+Once we execute the above snippet of code, we can observe that the program only returns three radios. This is because we are required to create two objects of each radio button with identical names but with different values and sections. The documentation does not state the reason behind it, but we can assume this is done to support the ReportLab toolkit tracking the widget's "selected" state. This also allows us to alter the appearance of the radio when it is selected or deselected.
+Understanding the Choice widget
+The choice widget is fundamentally a combo box that shows a drop-down when the user clicks on it. This enables the user to pick one or more options from the drop-down list, relying on the fieldFlags we have set. If we insert edit to the fieldFlags, then the user can edit the element in the choice widget.
+Let us understand the following example demonstrating the use of choice widgets in a PDF document:
+Example:
+
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfform
+from reportlab.lib.colors import magenta, pink, blue, green, red
+def createSimpleChoices():
+    my_canvas = canvas.Canvas('choicesFile.pdf')    
+    my_canvas.setFont("Courier", 24)
+    my_canvas.drawCentredString(300, 700, 'Sample Choices')
+    my_canvas.setFont("Courier", 16)
+    form = my_canvas.acroForm   
+    my_canvas.drawString(10, 650, 'Choose a Letter:')
+    my_options = [('A', 'Av'), 'B', ('C', 'Cv'), ('D', 'Dv'), 'E',('F', ), ('G', 'Gv')]
+    form.choice(
+        name = 'choice1',
+        tooltip = 'Field choice1',
+        value = 'A',
+        x = 165,
+        y = 645,
+        width = 72,
+        height = 20,
+        borderColor = magenta,
+        fillColor = pink, 
+        textColor = blue,
+        forceBorder = True,
+        options = my_options)  
+    my_canvas.drawString(10, 600, 'Choose a Programming language:')
+    my_options = [('Python', 'python'), ('Java', 'java'), ('C++', 'C++')]
+    form.choice(
+        name = 'choice2',
+        tooltip = 'Field choice2',
+        value = 'Python',
+        options = my_options, 
+        x = 305,
+        y = 595,
+        width = 72,
+        height = 20,
+        borderStyle = 'solid',
+        borderWidth = 1,
+        forceBorder = True
+        )   
+    my_canvas.save()    
+if __name__ == '__main__':
+    createSimpleChoices()
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required functions from the different modules of the ReportLab toolkit. We have then defined a function and created a new PDF file. We have then created two choice widgets with slightly distinct styles applied and saved the file. Remember to include the value parameter to the function; else, the program will return a bizarre error that does not say anything associated with the parameter being missing. At last, we have called the function.
+Understanding the Listbox widget
+The listbox widget is somewhat similar to the choice widget, except that a listbox is considered a scrollable box rather than a combo box. We can use the fieldFlags parameter that supports the user to select one or multiple elements from the list box.
+Now, let us consider the following example illustrating the use of the listbox widget in making interactive PDF forms:
+Example:
+
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfform
+from reportlab.lib.colors import magenta, pink, blue, green, red
+def createSimpleListboxes():
+    my_canvas = canvas.Canvas('listboxesFile.pdf')   
+    my_canvas.setFont("Courier", 24)
+    my_canvas.drawCentredString(300, 700, 'Sample Listboxes')
+    my_canvas.setFont("Courier", 16)
+    form = my_canvas.acroForm    
+    my_canvas.drawString(10, 650, 'Choose a letter:')
+    my_options = [('A','Av'),'B',('C','Cv'),('D','Dv'),'E',('F',),('G','Gv')]
+    form.listbox(
+        name = 'listbox1',
+        value = 'A',
+        x = 165,
+        y = 590,
+        width = 72,
+        height = 72,
+        borderColor = magenta,
+        fillColor = pink, 
+        textColor = blue,
+        forceBorder = True,
+        options = my_options,
+        fieldFlags = 'multiSelect'
+        ) 
+    my_canvas.drawString(10, 500, 'Choose a Programming language:')
+    my_options = [('Python', 'python'), ('Java', 'java'), ('C++', 'C++')]
+    form.listbox(
+        name = 'choice2',
+        tooltip = 'Field choice2',
+        value = 'Python',
+        options = my_options, 
+        x = 165,
+        y = 440,
+        width = 72,
+        height = 72,
+        borderStyle = 'solid',
+        borderWidth = 1,
+        forceBorder = True
+        )    
+    my_canvas.save()   
+if __name__ == '__main__':
+    createSimpleListboxes()
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required functions from the different modules of the ReportLab toolkit. We have then defined a function and created a new PDF file. We have then created the listbox widgets with slightly distinct styles applied and saved the file. The above example is quite similar to the previous one where we created the choice widget. The main difference here is the appearance of the listbox widget versus the choice widget; else, both the widgets are pretty much the same.
+Understanding the Textfield widget
+The textfield is a text entry widget. We can see these textfield widgets in forms to fill up the entries like name, address, and more. Most of the parameters of the textfield are the same as the ones we have observed in the earlier widgets.
+Let us consider the following example to understand the same:
+Example:
+
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfform
+from reportlab.lib.colors import magenta, pink, blue, green
+def createSimpleForm():
+    my_canvas = canvas.Canvas('PDFform.pdf')    
+    my_canvas.setFont("Courier", 24)
+    my_canvas.drawCentredString(300, 700, 'Application Form')
+    my_canvas.setFont("Courier", 16)
+    form = my_canvas.acroForm    
+    my_canvas.drawString(10, 650, 'First Name:')
+    form.textfield(
+        name = 'fname',
+        tooltip = 'First Name',
+        x = 110,
+        y = 635,
+        borderStyle = 'inset',
+        borderColor = magenta,
+        fillColor = pink, 
+        width = 300,
+        textColor = blue,
+        forceBorder = True
+        )    
+    my_canvas.drawString(10, 600, 'Last Name:')
+    form.textfield(
+        name = 'lname',
+        tooltip = 'Last Name',
+        x = 110,
+        y = 585,
+        borderStyle = 'inset',
+        borderColor = green,
+        fillColor = magenta, 
+        width = 300,
+        textColor = blue,
+        forceBorder = True
+        )   
+    my_canvas.drawString(10, 550, 'Address:')
+    form.textfield(
+        name = 'address',
+        tooltip = 'Address',
+        x = 110,
+        y = 535,
+        borderStyle = 'inset',
+        width = 400,
+        forceBorder = True
+        )    
+    my_canvas.drawString(10, 500, 'City:')
+    form.textfield(
+        name = 'city',
+        tooltip = 'City',
+        x = 110,
+        y = 485,
+        borderStyle = 'inset',
+        forceBorder = True
+        )    
+    my_canvas.drawString(250, 500, 'State:')
+    form.textfield(
+        name = 'state',
+        tooltip = 'State',
+        x = 350,
+        y = 485,
+        borderStyle = 'inset',
+        forceBorder = True
+        )    
+    my_canvas.drawString(10, 450, 'Zip Code:')
+    form.textfield(
+        name = 'zip_code',
+        tooltip = 'Zip Code',
+        x = 110,
+        y = 435,
+        borderStyle = 'inset',
+        forceBorder = True
+        )    
+    my_canvas.save()   
+if __name__ == '__main__':
+    createSimpleForm()
+
+Output:
+
+Explanation:
+In the above snippet of code, we have imported the required functions from the different modules of the ReportLab toolkit. We have then defined a function and created a new PDF file. We have then created the textfield widgets with slightly distinct styles applied and saved the file. As we can observe, we have created a series of text fields with different settings applied to them. Moreover, we have changed the border and background color on several of the fields. We have then included some quite standard ones. We have also utilized the width argument in order to change the width of the text field.
+
+
+Next TopicPython Newspaper Module
+
+
+
+
+← prev
+next →
+
+
+
+

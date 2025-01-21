@@ -1,0 +1,199 @@
+
+
+
+
+next →
+← prev
+
+Python Queue Module
+We all have heard about data structures in Python and how they help us in the programming and development work. In simple words, we can say that data structure is a particular way in which data can be organized in a device or system to use it effectively later on. Therefore, data structures become very important for us while doing programming and development-related work. And, if we want to work with the data structures, we must first understand the concepts of data structures & how they work. It should also be noted that all data structures present are not the same, and they can be of different types. Therefore, if we are working with two, three, or more data structures, it can be possible that they all can be of different types. These different types of data structures arrange data in a different format, and it can be helpful for us to handle different types of data. We can implement these different types of data structures for arranging different data types according to our convenience and the system we are working on. We can arrange data in many forms, such as linear form data structures and others. The most common examples of linear data structures that we study in programming & development are stack & queue. These are the two most famous linear types of data structures that we can use to arrange our data in linear form. It can be said that both stack & queue are linear data structures, but actually, they follow different approaches in which data is inserted or removed from them. This approach of inserting & removing data from the given data structure makes stack & queue different from each other.
+There are many approaches, programs, libraries, and packages that we can use to deal with these linear data structures. Many programming languages have different methods to work with these data structures for arranging data, but the basic approach of these data structures is the same throughout different methods. If we talk specifically about Python only, which is also one of the strongest programming languages, it provides us with multiple packages & modules which we can use in the Python programs to work with these two types of data structures. We can use these data structure approaches using Python's in-built or module-based functions in a program to handle the given data. The queue module is one of such Python modules, which we can use to implement stack & queue data structure approaches in the programs. Python's queue module helps us use both Queue, and Stack data structure approaches in the Python programs by providing many useful functions. Therefore, we will study this queue module of Python in this tutorial and work with it to learn how we can use this module's functions to use queue & stack data structure approaches.
+Introduction to Queue Module in Python
+Python provides us the queue class functions in the form of a package or a module named the queue module. The queue is a Python module that provides us multiple in-built functions that we can use for performing queue and stack data structures operations in a Python program. We can have access or use all these functions of the Queue module of Python simply by importing the queue module in the given Python program. We can use all these functions of the queue module to perform multiple operations related to the queue or stack data structure. We can also store elements in the data structure and take them out in the FIFO (First In First Out) or LIFO (Last in First Out) manner.
+These queue data structure functions of Python were originally created as the class functions of many other object-oriented programming languages such as C, C++, C#, or Java, but later these functions were also introduced in Python in the form of a module. This queue class module was created for Python so that we all can work with the queue data structures in Python using the functions of this module. Therefore, it becomes very important for us to understand this module and how we can use this module's functions in a Python program to work with the queue and stack data structures. We will understand the implementation of this module by creating queue and stack data structure objects and then inserting and taking out elements from these data structures.
+Queue Module in Python: Installation
+In the latest versions of Python, the queue module comes as an in-built module, which means this module comes pre-installed with the installation of Python. Therefore, if we are using the latest versions of Python, we don't need to perform any kind of installation process for installing this queue module, and we can directly start working with this module. We are using the latest version of Python in this tutorial, and therefore, we will not perform any installation process of this module and directly start working with functions of this module to understand their working. We only have to use the following import statement to use the functions of the queue module in a given Python program:
+
+# Importing the queue module
+import queue
+
+Therefore, we can directly proceed with the implementation part of this module and understand the implementation of functions of this module.
+Queue Module in Python: Implementation
+We will understand the implementation of the queue module and understand the working of functions of this module by using them in the example programs of this part. We will perform multiple operations using the functions of this module, but we will categorize them under the following three categories so that it will become easy for us to understand the implementation part of this module:
+
+Creating a FIFO queue
+Understanding Overflow and Underflow
+Working with Stack data structure
+
+Now, we will use an example program under each category to understand the working and functioning of different functions of this module. We will perform multiple operations under each category using different functions of the queue module.
+Look at the following category-wise operational implementation of the queue module:
+1) Creating a Queue of FIFO Pattern:
+In this category, we will perform the following three types of functions that are associated with the creation of the FIFO queue using the functions of the queue module:
+a) Creating a Queue Object: If we want to create a FIFO queue using the queue module function, we can use Queue() function of this module. Following is the syntax for using the Queue() function of this module to create a FIFO queue object in the example program:
+
+>> queue.Queue(SizeOfQueue)
+
+As we can see, the queue module's queue () function takes only one argument, which is the maximum size of the queue. This is the mandatory argument of this function so that the created queue object has a fixed size. If we provide '0' or no argument inside this function, the function will create a queue object of infinite size.
+(b) Putting elements in the queue: After creating a queue object (representing the queue data structure), the next operation we can perform is inserting the elements inside the queue object. The queue module provides us with the put() function, which we can use to put elements inside the program's created queue object. Following is the syntax for using the put() function of the queue module for inserting elements in the queue object:
+
+>> QueueObject.put('element')
+
+As we can see, the put() function of the queue module also takes only one argument, and this argument is the element we want to insert in the queue object.
+(c) Getting elements from the queue: We will also perform the operation of getting elements from the queue object in this category. We will use the get() function of the queue module to get the elements from the created queue in the FIFO manner, but we should also note that this function also removes the element from the queue, along with getting elements in the result. Following is the syntax for using this get() function of the queue module in the example programs:
+
+>> QueueObject.get()
+
+As we can see, the get() function of the queue module doesn't take any mandatory argument and returns the elements from the queue object in the FIFO pattern.
+To understand implementation of all three Operations under this category as mentioned above, we will use these functions in an example program. Look at the following example program to understand the implementation of these operations that we can do using the functions of the queue module:
+Example 1: Look at the following Python program where we have created and worked with a queue object:
+
+# Importing the in-built queue module
+import queue as qu
+# Creating a queue object with maxsize argument
+queueObject = qu.Queue(maxsize = 6)
+# Inserting five elements in the queue of integer data type
+queueObject.put(6)
+queueObject.put(31)
+queueObject.put(26)
+queueObject.put(18)
+queueObject.put(24)
+# Now getting elements in the output
+print('The first element inserted in the queue object created: ', queueObject.get())
+print('The second element inserted in the queue object: ', queueObject.get())
+print('The third element inserted in the queue object: ', queueObject.get())
+print('The fourth element inserted in the queue object: ', queueObject.get())
+print('The fifth element inserted in the queue object: ', queueObject.get())
+
+Output:
+The first element inserted in the queue object created:  6
+The second element inserted in the queue object:  31
+The third element inserted in the queue object:  26
+The fourth element inserted in the queue object:  18
+The fifth element inserted in the queue object:  24
+
+As we can see, the elements from the queue object are printed in the output in the order in which they are inserted into the queue object. That's how we can use these three functions of the queue module to create a queue object and work with it in the Python program.
+Explanation: First, we have imported the in-built queue module of Python as 'qu' in the example program given above so that we can access and work with the functions of this module. After that, we used the Queue() module to create a queue object with the name 'queueObject', and we can insert and remove elements from this queue object. We have defined the maximum size of the queue as 6 means this queue object can only take 6 elements. After that, we used the put() function to insert elements inside the queue object we created. Lastly, we get the elements of the queue object in the output in the FIFO pattern using the get() function. Along with getting elements from the queue object, the get() function also removes elements from the queue object.
+2) Understanding Overflow and Underflow
+In this implementation category, we will understand the overflow and Underflow terms related to the queue data structure in Python. As the name suggests, the overflow term is referred to the condition when the queue object has maximum elements, and still, we are trying to insert one more element in the queue. And the term underflow is referred to the condition when the queue object is empty and still we are trying to remove an element from it. In both cases, an error will be displayed in the output, and therefore, we have to be careful while getting and inserting elements into the given queue object. Apart from these operations, we will also learn how to get the maximum size of the queue object in the output. To understand all these operations, we will use the functions of the queue module in an example program.
+Look at the following example program to understand the implementation of these operations that we can do using the functions of the queue module:
+Example 2: Look at the following Python program where we checked both underflow and overflow condition of queue object:
+
+# Importing the in-built queue module
+import queue as qu
+# Creating a queue object with maxsize argument
+quObject = qu.Queue(maxsize = 5)
+# Inserting elements in the queue of integer data type
+quObject.put(6)
+quObject.put(31)
+quObject.put(26)
+quObject.put(18)
+# Checking if the queue is full or not
+print('Is the given queue object is full according to the maximum size of it?: ', quObject.full())
+# Inserting one more element
+quObject.put(24)
+# Again, checking that queue is full
+print('Is the given queue object is now full as its maximum size?: ', quObject.full())
+# Checking size of the queue object
+quSize = quObject.qsize()
+print('The maximum size of the created queue object is: ', quSize)
+# Now getting elements out from the queue object
+print('The first element inserted in the queue object created: ', quObject.get())
+print('The second element inserted in the queue object: ', quObject.get())
+print('The third element inserted in the queue object: ', quObject.get())
+# Checking for empty queue object 
+print('Is the given queue object is empty?: ', quObject.empty())
+# Getting more elements out from the queue
+print('The fourth element inserted in the queue object: ', quObject.get())
+print('The fifth element inserted in the queue object: ', quObject.get())
+# Again, Checking for empty queue object 
+print('Is the given queue object is empty now?: ', quObject.empty())
+
+Output:
+Is the given queue object is full according to the maximum size of it?:  False
+The maximum size of the created queue object is:  5
+Is the given queue object is now full as its maximum size?:  True
+The first element inserted in the queue object created:  6
+The second element inserted in the queue object:  31
+The third element inserted in the queue object:  26
+Is the given queue object is empty?:  False
+The fourth element inserted in the queue object:  18
+The fifth element inserted in the queue object:  24
+Is the given queue object is empty now?:  True
+
+As we can see, we have checked for both Underflow and overflow conditions in the queue object we have created in the program so that we don't have to face any error during the execution of this program. That's how we can use these functions of the queue module to work with queue data structures in the Python programs without having any errors.
+Explanation: After importing the queue module as 'qu' in the program, we have created a queue object with a maximum size of 5. After that, we added three elements in the queue object and verified using the full() function whether the queue object was full or not. This will help us in preventing the overflow condition. After that, we entered two more elements in the queue object using the put() function, and again we checked if the queue object is now full or not. Then, we used the size() function of the queue module to print the maximum size of the queue object. The size() function will return the total number of elements present in the queue object. After that, we removed elements from the queue and printed them in the output using the get() function. We also checked if the queue object is empty or not, using the empty() function of the queue class. This function helps us check for and prevent us from the Underflow condition.
+3) Working with Stack Data Structure:
+Till now, we have worked with the queue data structure that works on the FIFO pattern, but now we will work with queue data structures that follow the LIFO (Last in First Out) pattern for storing the elements. The LIFO pattern queue data structure is commonly known as the stack data structure. All things remain the same in the stack data structure as we have worked in the FIFO queue data structure. First, we have to create a stack object (LIFO queue object) using the lifoqueue() function of the queue module.
+Following is the syntax for using the lifoqueue() function of the queue module for defining a stack data structure object:
+
+>> queue.LifoQueue('Size of data structure object')
+
+We use the LifoQueue() function in the program with an argument inside the function. This function works very similarly to the Queue() function, which we use to define the queue data structure. The argument we have to provide inside this function is the maximum size of the stack data structure object. And, if we don't define the size of the data structure object or set it equal to '0', then the program will define a stack data structure object of infinite.
+We will work in the same manner with the stack data structure as we have worked with the FIFO data structure using the functions of the queue module. Using the functions of this module in an example program, we will perform all the operations on the stack data structure object that we have performed on the FIFO queue object. We will also check for the overflow and Underflow conditions in the stack object using the same functions of the queue module. Look at the following example program to understand the functions with respect to the stack data structure object:
+Example 3: Look at the following Python program where we have performed all the queue object operations on the stack data structure:
+
+# Importing the in-built queue module
+import queue as qu
+# Creating a stack data structure object with maxsize argument equal to 8
+stackObj = qu.LifoQueue(maxsize = 8)
+# Inserting elements of integer data type in the stack object
+stackObj.put(12)
+stackObj.put(5)
+stackObj.put(23)
+stackObj.put(6)
+stackObj.put(31)
+# Checking if the stack object is full or not for overflow condition prevention
+print('Is the given queue object is full according to the maximum size of it?: ', stackObj.full())
+# Inserting some more elements inside the stack object
+stackObj.put(26)
+stackObj.put(18)
+stackObj.put(24)
+# Again, checking that if the stack object is full or not
+print('Is the given stack object is now full according to its maximum size?: ', stackObj.full())
+# Checking the maximum size of the stack object after Inserting all elements
+stackSize = stackObj.qsize()
+print('The maximum size of the stack object created in the program is: ', stackSize)
+# Now getting elements out from the stack object in the LIFO manner
+print('The last element inserted in the stack object: ', stackObj.get())
+print('The last second element inserted in the stack object: ', stackObj.get())
+print('The sixth element inserted in the stack object: ', stackObj.get())
+print('The fifth element inserted in the stack object: ', stackObj.get())
+# Checking that if stack object has become empty
+print('Is the given stack object have become empty?: ', stackObj.empty())
+# Getting more elements out from the stack object
+print('The fourth element inserted in the stack object: ', stackObj.get())
+print('The third element inserted in the stack object: ', stackObj.get())
+print('The second element inserted in the stack object: ', stackObj.get())
+print('The first element inserted in the stack object created: ', stackObj.get())
+# Again Checking for the empty stack object 
+print('Is the given stack object in the program is empty now?: ', stackObj.empty())
+
+Output:
+Is the given queue object is full according to the maximum size of it?:  False
+Is the given stack object is now full according to its maximum size?:  True
+The maximum size of the stack object created in the program is:  8
+The last element inserted in the stack object:  24
+The last-second element inserted in the stack object:  18
+The sixth element inserted in the stack object:  26
+The fifth element inserted in the stack object:  31
+Is the given stack object have become empty?:  False
+The fourth element inserted in the stack object:  6
+The third element inserted in the stack object:  23
+The second element inserted in the stack object:  5
+The first element inserted in the stack object created:  12
+Is the given stack object in the program is empty now?:  True
+
+As we can see, all the operations we performed on the queue object are successfully performed on the stack object, which we have also performed in the example program given above. We have performed all these operations using the same functions that we have used in examples 1 & 2. That's how we can work with the queue and stack data structures in a Python program using the functions of the module class queue.
+
+
+Next TopicPython YAML Parser
+
+
+
+
+← prev
+next →
+
+
+
+

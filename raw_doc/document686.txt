@@ -1,0 +1,387 @@
+
+
+
+
+next →
+← prev
+
+Python Time Module
+With the help of practical examples, we will study the Python time module and the different functions supplied by this module in this tutorial.
+As its name suggests, the Python time module enables working with time in Python. It provides features like obtaining the current datetime and the functionality to delay the programme's execution. We must import this module before we can begin using its functionality.
+Importing time module
+It is not necessary to install the Python time module outside because it is included in the standard utility module of Python. Using the import command, we can import it quickly.
+
+import time
+
+Python Time in Seconds as a Floating Point Number
+The first thing that the time.time() function returns are the number of passed seconds since the epoch. The time returned by this function is a floating data type to account for the fractional seconds.
+Code
+
+# Python program using the time() function of the time module to return the seconds passed after the epoch
+
+# Importing the time module
+from time import time
+print(time())
+
+Output:
+1659877305.6220002
+
+The reference point to determine the epoch may vary considerably on your machine. Therefore, you might get a different answer.
+There are several benefits to measuring time in seconds:
+
+We can use a floating point to compute the time separation between two points.
+A float can be kept for data transfer and readily serialised, which means it will stay unchanged on the other side.
+
+However, there are situations when you would wish to view the current time displayed as a string object. You can achieve this by feeding the number of seconds returned by the time() function into the time.ctime() function.
+The time.ctime() functionality of the time module accepts time in seconds as an input and calculates time up to those seconds before returning a 24-character time string object. Time is computed up until the current moment if there is no argument.
+Code
+
+# Python program to Get the time as a string object from the seconds passed to the function
+
+# Importing the module
+import time
+ 
+# getting the current time by using ctime function passed with the number of seconds since epoch
+current = time.ctime(1659877305.6220002)
+print("Current time: ", current)
+
+Output:
+Current time:  Sun Aug  7 18:31:45 2022
+
+The Epoch
+We discovered in the last section that we could get datetime in Python as a floating point object that indicates the amount of time that has passed from the start of an epoch.
+We describe an epoch as:
+
+A specific moment in time acts as a reference point to calculate time in future.
+A method of chronological notation that uses a specific date as its foundation
+
+Here, it's crucial to understand that, while working with Python datetime, you're thinking about a time period denoted by a reference point. This reference point is referred to as the epoch in computing.
+Therefore, the epoch serves as the baseline for gauging the progression of time.
+For instance, we can depict the midnight of April 2, 2022, IST as the epoch. Then 86400 seconds must have passed since the epoch if we find time on midnight of April 3 2022
+There are 60 seconds in one minute, 60 minutes in one hour, and 24 hours in one day. Therefore, we can manually calculate the seconds passed between two times.
+Code
+
+print(60 * 60 * 24)
+
+Output:
+86400
+
+Remembering that we can still depict time before the epoch is crucial, and the result will be negative in this case.
+Using an epoch of April 2, 2022, we might depict midnight of April 1, 2022, IST as -86400 seconds.
+Generally, on January 1, 1970, UTC is a frequently used epoch, but it is not the only one. Various filesystems, operating systems, and APIs occasionally employ various epochs.
+UNIX systems specify its epoch as January 1, 1970. On the other hand, the Win32 API defines its epoch as January 1, 1601.
+To determine the epoch on your system, we can use the time.gmtime() function of the time module:
+Code
+
+# Python program to know the epoch of your system 
+
+# Importing the module
+import time
+from datetime import datetime
+
+epoch = time.gmtime(0)
+print(epoch)
+
+# Converting the struct_time object to standard datetime 
+print(datetime.fromtimestamp(time.mktime(epoch)))
+
+Output:
+time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=1, tm_isdst=0)
+1970-01-01 00:00:00
+
+We can see from the above program that the epoch displayed using the gmtime() function is 1 January 1970 for the system we ran it on. As there are 86400 seconds in a day, this implies that the date 2 January 1970 can be represented as 86400 seconds since the system's epoch.
+Note: Although it will be negative, we may still express the time before the epoch in seconds. For instance, we will use -86400 seconds to represent 31 December 1969.
+Delaying Execution of Programs
+Execution can be delayed using time.sleep() method. We use this function to halt the execution of the program for the time specified in the arguments.
+Code
+
+# Python program to Delay the execution time of the program using the sleep() function of the Python time module.
+
+# Importing the time module
+import time
+b = time.ctime()
+print(b)
+for i in range(5):
+    
+    # using the sleep() function to halt the execution
+    time.sleep(6) 
+    print(i*2)
+e = time.ctime()
+print(e, flush = True)
+
+Output:
+Fri Aug 12 07:32:46 2022
+0
+2
+4
+6
+8
+Fri Aug 12 07:33:16 2022
+
+time.struct_time Class
+According to the description of the struct time class of the time module of Python, it aids in accessing local time, mostly non-epochal timestamps. The output is often a namedtuple object, where the values are determined by the name and index of the attributes.
+The following list includes the many characteristics linked to the struct_time object:
+
+
+Index
+Attribute Name
+Values of the Attributes
+
+
+0
+tm_year
+0000, ..., 9999
+
+
+1
+tm_mon
+1, 2, 3, ..., 11, 12
+
+
+2
+tm_mday
+1, 2, 3, ..., 30, 31
+
+
+3
+tm_hour
+0, 1, 2, 3, ..., 22, 23
+
+
+4
+tm_min
+0, 1, 2, 3, ..., 57, 58, 59
+
+
+5
+tm_sec
+0, 1, 2, 3, ..., 59, 60
+
+
+6
+tm_wday
+0, 1, ..., 6; where 0 is Monday
+
+
+7
+tm_yday
+1, 2, 3, 4, ..., 364, 365, 366
+
+
+8
+tm_isdst
+0, 1 or -1
+
+
+This class provides many functions; let us look at some of them.
+time.localtime() Method
+The struct time object is returned by the localtime() function representing the local time. It accepts as a parameter the number of seconds that have passed since the epoch. We got the current time in seconds using the time() function, which we passed to the localtime() function. It gave a struct_time object which we converted into standard datetime.
+Code
+
+# Python program to get the local time 
+# importing the time module
+import time
+from datetime import datetime
+ 
+# This function will convert the current time represented in seconds that have passed since the epoch to a struct_time object in Local time
+current = time.localtime( time.time() )
+ 
+print(current)
+
+# Converting the struct_time object to standard datetime 
+print(datetime.fromtimestamp(time.mktime(current)))
+
+Output:
+time.struct_time(tm_year=2022, tm_mon=8, tm_mday=7, tm_hour=23, tm_min=0, tm_sec=57, tm_wday=6, tm_yday=219, tm_isdst=0)
+2022-08-07 23:00:57
+
+time.mktime() Method
+The inverse of the time.localtime() function is the time.mktime() function. The time is represented as a time.struct_time object by the localtime() function is converted into the number of seconds passed since the epoch using the time.mktime() function. OverflowError or ValueError will be generated if the input time cannot be interpreted as a valid time (this depends on whether the invalid time value is passed to the function or the underlying C libraries). Platform-specific limitations apply to the oldest date up to which the function can produce a time.
+Code
+
+# Python program to convert the struct_time object into numbers of seconds passed since the epoch using the time module
+
+# Importing the time module
+import time
+
+# Constructing a struct_time object
+struct_time = time.gmtime( time.time() )
+print("Struct_time object: \n", struct_time)
+ 
+# Converting the struct_time object into the local time will be expressed in the number of seconds passed since the epoch using the time.mktime() function
+time_seconds = time.mktime(struct_time)
+ 
+# Printing the local time in the number of seconds passed since the epoch
+print("Local time (in seconds): \n", time_seconds)
+
+Output:
+Struct_time object: 
+ time.struct_time(tm_year=2022, tm_mon=8, tm_mday=7, tm_hour=17, tm_min=38, tm_sec=29, tm_wday=6, tm_yday=219, tm_isdst=0)
+Local time (in seconds): 
+ 1659874109.
+
+time.strftime() Method
+The function time.strftime() converts a namedtuple or struct time object representing the time provided by the gmtime() or localtime() function into a string object in the format specified as an argument. If t is not specified, the localtime() value for the current time is used. The format argument must be a string. If any element in t is outside the acceptable range, ValueError is raised.
+Code
+
+# Python program to convert the time.struct_time object into a string object using the strftime() function
+
+# Importing the time module
+from time import strftime, gmtime, time
+ 
+# using the standard format of showing time
+string = strftime("%a, %b %d %y %H:%M:%S",gmtime(time()))
+print(string)
+
+Output:
+Sun, Aug 07 22 17:48:21s
+
+The format string can contain the following commands. The strftime() output replaces them with the specified characters and displays them.
+
+
+Directive
+Meaning
+
+
+%a
+This directive will return locale weekday in its abbreviated form.
+
+
+%A
+This directive will return locale weekday in its complete form.
+
+
+%b
+This directive will return the locale month in its shortened form.
+
+
+%B
+This directive will return the locale month in its full form.
+
+
+%c
+This format will return the appropriate locale date and time.
+
+
+%d
+This format represents the day of the month in the form of a corresponding decimal number [0, 31].
+
+
+%H
+This format represents the time in the form of a 24-hour format decimal number [01, 24].
+
+
+%I
+This format means the time in the 12-hour format decimal number [01, 12].
+
+
+%j
+This format represents the year's day in decimal numbers [01, 366].
+
+
+%m
+This will represent the month as a decimal number [01, 12].
+
+
+%M
+This will represent the minutes as a decimal number [00, 59].
+
+
+%p
+This format will give the corresponding locale AM or PM.
+
+
+%S
+This represents the seconds as a decimal number [00, 61].
+
+
+%U
+This format will return the year's week as a decimal number ranging from [00, 53]. The convention uses Sunday as the first day of the week, and every day of a new year that comes before the first Sunday is regarded as being in week 0.
+
+
+%w
+This format returns the locale day of the week as a decimal number ranging from [0, 6]. The convention uses Sunday as the 0th day of the week.
+
+
+%W
+This format returns the year's week number as a decimal number ranging from [00, 53]. The convention uses Monday as the first of the week, and week 0 of a new year is defined as all days before the first Monday.
+
+
+%x
+This will return the correct date representation according to the locale date.
+
+
+%X
+This will return the proper time representation according to the locale used.
+
+
+%y
+This format will return the year as a decimal number ranging from [00,99].
+
+
+%Y
+This format returns the year as a decimal century.
+
+
+%z
+This format represents the time zone offset, where H stands for hour digits as a decimal number and M stands for minutes as a decimal number [-23:59, +23:59]. The range signifies the positive or negative difference in time from UTC/GMT.
+
+
+%Z
+This format returns the name of the time zone. 
+
+
+%%
+It will return an actual "%" symbol.
+
+
+time.asctime() Method
+To convert a tuple or a struct time object expressing the time returned by the functions time.gmtime() or time.localtime() to a string object of the following format, we can use the time.asctime() function:
+Day Month Date Hour:Mid:Second Year
+Code
+
+# Python program to convert the tuple or a time.struct_time object into a string object representing time in standard form
+
+# importing the time module
+import time
+
+seconds = time.time()
+
+# Getting the epoch in the form of a struct_time object
+object_ = time.gmtime(seconds)
+print("Struct_time object: ", object_)
+
+# Converting the struct_time object into a string object 
+# Function will represent time in the form 'Day Month Date Hour:Min:Sec Year' using time.asctime() function
+time_string = time.asctime(object_)
+print("Time in string: ", time_string)
+
+# Getting the local time in the struct_time object using localtime() function
+object_ = time.localtime(seconds)
+print("Struct_time object: ", object_)
+
+# Converting the struct_time object into string object
+time_string = time.asctime(object_)
+
+print("Time in string: ", time_string)
+
+Output:
+Struct_time object:  time.struct_time(tm_year=2022, tm_mon=8, tm_mday=8, tm_hour=12, tm_min=24, tm_sec=37, tm_wday=0, tm_yday=220, tm_isdst=0)
+Time in string:  Mon Aug  8 12:24:37 2022
+Struct_time object:  time.struct_time(tm_year=2022, tm_mon=8, tm_mday=8, tm_hour=17, tm_min=54, tm_sec=37, tm_wday=0, tm_yday=220, tm_isdst=0)
+Time in string:  Mon Aug  8 17:54:37 2022
+
+In this tutorial, we learned all the functions the time module of Python provides. We need to remember to use these functionalities. We need to first import the library into our program. More information about the module can be obtained from the documentation of the module.
+
+
+Next TopicSklearn Linear Regression Example
+
+
+
+
+← prev
+next →
+
+
+
+

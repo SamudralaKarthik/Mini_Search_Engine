@@ -1,0 +1,135 @@
+
+
+
+
+next →
+← prev
+
+Dynamic Typing in Python
+In this tutorial, we will understand what's dynamic typing in python.
+Whenever we write a program in python, we come across a different set of statements, one of them is an assignment statement where we initialize a variable with a value.
+Let us see how the assignment is different in the case of Python.
+When we talk about languages like C, C++, and Java the memory is allocated based on the data type of variable and is accessed accordingly whereas python being a dynamically typed language it stores the value at some location and then combines the respective variable name with a container.
+The data type is determined at the run time.
+Consider the program given below-
+
+a = 12.0
+print(type(a))
+b = 24
+print(type(b))
+c = 'data'
+print(type(c))
+print (a * 3)
+print (b * 3)
+print (c * 3)
+
+Output:
+<class 'float'>
+<class 'int'>
+<class 'str'>
+36.0
+72
+datadatadata
+
+Explanation:
+Let's have a look at the explanation of this program-
+
+In the first step, we have initialized the variables a, b, and c with different types.
+After this, we have checked their type that comes out to be float, integer, and string respectively.
+In the next step, three of them are multiplied by three.
+Since the data type is known at the run time, the operations are performed based on the type.
+We can observe that the first value in the output is a float value, the next value is an integer, and a string is multiplied three times.
+On executing the program, the expected output is displayed.
+
+Relationship Between Objects, Variables and References.
+The following sequence of steps happens when we assign a variable in Python-
+
+We create an object in the memory that contains a value.
+If the variable name doesn't exist already, we can create it.
+The reference is assigned to the object to the variable.
+
+Consider the program given below-
+
+a = 12.0
+print (type(a))
+a = 24
+print(type(a))
+a = 'data'
+print (type(a))
+a = 2+3j
+print (type(a))
+
+Output:
+<class 'float'>
+<class 'int'>
+<class 'str'>
+<class 'complex'>
+
+Explanation:
+Let's understand what happened in the above program.
+
+We have initialized the variable 'a' with values of different data types.
+After this, we have checked the type of 'a' in each case.
+From this, we can infer that-
+
+In the first case, a is a reference to a float object.
+In the second case, a is a reference to an integer object.
+In the third case, a is a reference to a string object.
+In the fourth case, a is a reference to a complex object.
+
+
+Shared References
+Before starting with this, let's have a look at the program-
+
+a = 12.0
+b = a
+print(a)
+print(b)
+
+Output:
+12.0
+12.0
+
+Explanation:
+It's time to understand what exactly happened here-
+
+We have initialized the value of a as 12.0 and b as a.
+After this, we have printed the values of both a and b that comes out to be 12.0
+
+This is nothing but the concept of shared references which says that "Two variables can have the same reference."
+One more example would make it clearer.
+
+a = 12.0
+b = a
+a = a * 7
+print(a)
+print(b)
+
+Output:
+84.0
+12.0
+
+Explanation:
+Let's have a look at the explanation of this program-
+
+We have initialized the value of a as 12.0, b as a, and then again assigned 'a' with a * 7
+After this, we have printed the values of both a and b that come out to be 84.0 for a but 12.0 in the case of b because it is still referencing the first value of a.
+
+The Disadvantage of Dynamically Typed Languages
+The feature that makes a language like Java more convenient is that it is statically typed and so the bugs and the errors are reported at compile-time instead of run-time.
+Therefore, it's a major concern for the python developers that the errors are shown during the run-time and therefore they have to develop strategies to rectify them.
+Conclusion
+Culminating the tutorial, we can say that python is a dynamically typed language and here we understood what are the distinct characteristics that can be observed while working on it.
+
+
+Next TopicFabs in Python
+
+
+
+
+← prev
+next →
+
+
+
+

@@ -1,0 +1,92 @@
+
+
+
+
+next →
+← prev
+
+How to Check Version of Python
+One of the most widely used programming languages is Python. We can use Python for anything with its easily understandable syntax, high efficiency, and top-notch open-source libraries.
+However, we may have noticed that some individuals favor Python 2, whereas others favor Python 3. The difference between the two versions is enormous - it's not simply about a few bug fixes and new features. It's possible that we won't be able to execute the program in Python 3 if it was created in Python 2.
+The interpreter is the component that receives the code and aids in its execution. Because older versions of the interpreter may cause commands to fail, and because Python is a dynamic language with regular updates and new features, the user should update the interpreter to the most recent version.
+As a result, we should know the Python version installed on our machine. Let's look at how to determine the Python version. We'll begin with the command prompt.
+To obtain details of the Python Interpreter, use the methods listed below:
+
+The python -V command
+Using the sys.version method
+And, the python_version() function
+
+Using Command Line
+We may simply verify our Python version on the command line/terminal/shell. Let's go over how to go to the command line in various operating systems.
+Linux
+Open the terminal window
+Windows
+Follow these steps to open the command line in windows.
+
+Type Powershell
+Press Win+R
+Press OK or Enter
+
+macOS
+Follow these steps to open the command line in macOS.
+
+Click on Applications
+Go to Finder
+Choose Utilities -> Terminal
+
+This approach is one of the easiest ways since it uses one of the built-in commands in Python to acquire the current Python version.
+The following are some steps that a user must do to obtain the Python interpreter's most recent version:
+
+Launch cmd/terminal/Powershell in Windows
+Write the following command in the command line and run it.
+
+
+python -V
+
+Command
+
+PS C:\Users\HP> python -V
+
+Output:
+Python 3.10.0
+
+Using sys.version Method
+When coding an application, we might wish to confirm the Python version (i.e., in the IDE we are using). This is especially beneficial if our machine has many Python versions installed. We can use the sys or platform modules to determine which Python version is currently active. For Linux, Windows, and macOS, the script will be the same.
+The five components of the version number are represented as a tuple: major, minor, micro, releaselevel, and serial. All values are integers except releaselevel, which might be 'alpha', 'beta', 'candidate', or 'final'. (2, 0, 0, 'final', 0) is the version_info value relating to Python version 2.0. sys.version_info[0] is similar to sys.version_info.major, and so on.
+Code
+
+import sys
+print("Version")
+print(sys.version) 
+print("Version info.")
+print(sys.version_info)
+
+Output:
+Version
+3.10.2 (main, Apr  9 2022, 20:52:01) [Clang 14.0.0 (https://github.com/llvm/llvm-project 78e87970af888bbbd5652c31f3a8
+Version info.
+sys.version_info(major=3, minor=10, micro=2, releaselevel='final', serial=0)
+
+Using python_version() Function
+Importing the library platform will give the user access to this method, which always returns a string containing the current user's Python version.
+Code
+
+from platform import python_version
+print("Active Version of Python Interpreter", python_version())
+
+Output:
+Active Version of Python Interpreter 3.10.2
+
+
+
+Next TopicPython List Comprehension
+
+
+
+
+← prev
+next →
+
+
+
+

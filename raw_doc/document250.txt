@@ -1,0 +1,137 @@
+
+
+
+
+next →
+← prev
+
+Python KeyError
+A map is a data structure in Python that maps one set into another set of values. The Python dictionary is the most widely used in the mapping. A key is assigned to each value, which may be used to see the value. A keyerror happens when the key does not exist in the mapping that is used to look up the value.
+In this article, we are going to discuss Python keyerror and keyerror handling with their examples. But before discussing the Python keyerror, we will know about the dictionary in Python.
+Dictionary in Python
+A dictionary (dict) in Python is a discrete collection of values containing stored data values equivalent to a map. It differs from other data types in that it only has one element, which is a single value. It contains the key and value pair. It is more efficient because of the key value. A colon denotes the separation of a key and value pair, and a comma denotes the separation of each key. This Python dictionary works in the same way as a regular dictionary. The keys must be unique and made up of unchangeable data types, including strings, integers, and tuples.
+For example:
+Let's take an example to understand how we may use the dictionary (dict) in python.
+
+# A null Dictionary 
+Dict = {} 
+print("Null dict: ") 
+print(Dict) 
+ 
+# A Dictionary using Integers 
+Dict = {1: 'Hill', 2: 'And', 3: 'Mountin'} 
+print("nDictionary with the use of Integers: ") 
+print(Dict) 
+ 
+# A Dictionary using Mixed keys 
+Dict = {'Name': 'John', 1: [17, 43, 22, 51]} 
+print("nDictionary with the use of Mixed Keys: ") 
+print(Dict) 
+ 
+# A Dictionary using the dict() method 
+Dict = dict({1: 'London', 2: 'America', 3:'France'}) 
+print("nDictionary with the use of dict(): ") 
+print(Dict) 
+ 
+# A Dictionary having each item as a Pair 
+Dict = dict([(1, 'Hello'), (2, 'World')]) 
+print("nDictionary with each item as a pair: ") 
+print(Dict)
+
+Output: After executing this above code, we will get the output as shown below:
+Null dict: 
+{}
+nDictionary with the use of Integers: 
+{1: 'Hill', 2: 'And', 3: 'Mountin'}
+nDictionary with the use of Mixed Keys: 
+{'Name': 'John', 1: [17, 43, 22, 51]}
+nDictionary with the use of dict(): 
+{1: 'London', 2: 'America', 3: 'France'}
+nDictionary with each item as a pair: 
+{1: 'Hello', 2: 'World'}
+
+Keyerror in Python
+When we try to access a key from a dict that does not exist, Python raises a Keyerror. It's a built-in exception class raised by several modules that interact with dicts or objects containing key-value pairs. Now, we know that what is a Python dictionary and how it works. Let us look at what defines a Keyerror. Python raises a Keyerror whenever we want to access a key that isn't in the Python dictionary.
+Mapping logic is a data structure that connects one piece of data to other significant data. As a result, when the mapping is accessed but not found, an error is raised. It's similar to a lookup error, where the semantic fault is that the key we're seeking isn't in its memory. It is better represented in the below example.
+For example: 
+Let's take an example to understand how we may see the Keyerror in Python. We take the keys A, B, C, and D, in which D is not present in the python dictionary. Although, the remaining keys present in the dictionary show the output correctly, and D shows the keyerror.
+
+# Check the Keyerror
+ages={'A':45,'B':51,'C':67}
+print(ages['A'])
+print(ages['B'])
+print(ages['C'])
+print(ages['D'])
+
+Output: After executing this above code, we will get the output as shown below:
+45
+51
+67
+Traceback (most recent call last):
+File "", line 6, in 
+KeyError: 'D'
+
+Handling Mechanism for a keyerror in Python
+Anyone who comes across a Keyerror can deal with it responsibly. It may examine all possible inputs to a specific program and correctly manage any risky entries. When we get a KeyError, there are a few conventional methods for dealing with it. In addition, some methods may use to handling the mechanism for a keyerror.
+The usual solution: .get() method
+Some of these options may be better or may not be the exact solution we are searching for, depending on our use case. However, the ultimate goal is to prevent unexpected key error exceptions from occurring. For example, if we obtain an error from a dictionary in our own code, we may use the .get() method to get either the specified key or a default value.
+For Example:
+Let's take an example to understand how we may handle the mechanism for a keyerror in Python.
+
+# List of vehicles and their prices. 
+vehicles = {"Car=": 300000, "Byke": 115000, "Bus": 250000}
+vehicle = input("Get price for: ")
+vehicle1 = vehicles.get(vehicle)
+if vehicle1:
+    print("{vehicle} is {vehicle1} rupees.")
+else:
+    print("{vehicle}'s cost is unknown.")
+
+Output: After executing this above code, we will get the output as shown below:
+Get price for: Car
+Car is 300000 rupees.
+
+The generic solution for keyerror: try-except method
+The common approach is to utilize the try-except block to address such issues by raising the relevant code and providing a backup solution.
+For example:
+Let's take an example to understand how we may apply the generic solution for keyerror.
+
+# Creating a dictionary to store items and prices
+items = {"Pen" : "12", "Book" : "45", "Pencil" : "10"}
+try:
+  print (items["Book"])
+except:
+  print ("The items does not contain a record for this key.")  
+
+Output: After executing this code, we will get the output as shown below:
+45
+
+Here we see that we are getting the value of the book from the items. Therefore, if we want to print any other key-value which is not in the items, it will print this output.
+
+# Creating a dictionary to store items and prices
+items = {"Pen" : "12", "Book" : "45", "Pencil" : "10"}
+try:
+  print (items["Notebook"])
+except:
+  print ("The items does not contain a record for this key.") 
+
+Output: After executing this code, we will get the output as shown below:
+The items does not contain a record for this key.
+
+Conclusion
+Now, we understand some common scenarios in which Python's Keyerror exception may be thrown, as well as several excellent strategies for preventing them from terminating our program. The next time we encounter a Keyerror, we'll know it's most likely due to a faulty dictionary key lookup. By looking at the last few lines of the traceback, we may get all of the information we would need to figure out where the problem comes from.
+If the issue is a dictionary key lookup in our own code, we may use the safer .get() function with a default return value instead of querying the key directly on the dictionary. If our code doesn't cause the issue, the try-except block is our best bet for regulating the flow of our code.
+Exceptions do not have to be scary. We can utilize these methods to make our programs flow more predictably if we comprehend the information presented to us in their tracebacks and the root cause of the error.
+
+
+Next TopicPython super() Function
+
+
+
+
+← prev
+next →
+
+
+
+

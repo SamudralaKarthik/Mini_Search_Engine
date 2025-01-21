@@ -1,0 +1,188 @@
+
+
+
+
+next →
+← prev
+
+How to handle cookies in Django - The way to set cookies
+Handling cookies are the importance concept of the web application. Django provides a straightforward way to interact with cookies. Cookies allow us to store and retrieving the data that is saved in the session. Session and Cookies are different from each other, which we will discuss in the further tutorial. These cookies are defined with the time limit; these will automatically delete after a specified time.
+When we visit any website and log in to that page, it asks for the storage of our user id and password and the auto-filling of a few details based on our previous logged-in session. These all process is accomplished by the cookies. In Addition, we can store the cookie on the client computer to make user interaction easier.
+This tutorial will discuss how we can manage the cookie in Django and why they are useful on the internet. We will also discuss how to create cookies using the server.
+Let's have an introduction to the cookies.
+What are the cookies in Django?
+Cookies are also known as HTTP cookies. It is a small text file created by the web browser and maintains in response to a specific Web-Server request. The text file saves locally on the computer, and most browsers will show the cookies generated under the Privacy and Security settings.
+The request is sent by the user using the HTTP protocol, but this is stateless. It won't help to recognize whether the user is new or has previously visited the site.
+The cookie contains the unique session id used to identify the user and other relevant information to the website context. The website sends the cookie with the unique user identity when we log in to a website.
+Cookies provide many facilities that are not possible with HTTP.
+How to Django Cookies Work?
+Let's understand how the cookie works on the internet.
+
+The browser sends request to the server.
+The server sends a response to the browser along with one or more cookies.
+The browser or client received the cookies and saved them as a text file. Every time the user sends requests, the browser will send this cookie to the server until the cookies expire.
+The cookie is removed from the browser when it expires.
+
+Cookies are used for various purposes, such as login to a website or online shopping. Many companies use as to track user preference. Cookies are used differently by various websites depending on their needs.
+Why we need cookies in Django?
+When we log in to an eCommerce site or Facebook without signing out, it remains signed for the next time we visit our account. Cookies are used to accomplish this (which contains user-session information).
+Cookies are also used for product recommendations on several eCommerce websites.
+Cookies Attributes in Django
+A cookie attribute can perform two tasks - it can set cookies to the user computer and access those cookies. Let's understand these concepts in detail.
+Set cookies in Django
+This attributes is used to set cookies that the server sends to the user's browser to save the data. Below is the syntax of cookie() method.
+
+set_cookie(cookie_name, value, max_age = None, expires = None)
+
+name - It specifies the cookie name.
+value - It is used to the specifies the specific value that we want to store in the user computer.
+max_age - It is used to define the time limit of the cookie. If time limit is not specified, it will active until the browser is closed.
+Expires - It is a string in the format "Wdy DD-Mon-YY HH:MM:SS GMT or a datetime. The max_age will be determined if expires is a datetime object.
+Get cookies in Django
+The server uses the get cookies to read the previously delivered cookies data. We can use the following syntax.
+
+request.COOKIES['cookie_name']
+
+Let's see how we can set the Django cookies manually.
+Django Cookie Implementation
+In the following steps, we will set the cookie using Django. Create the all required configuration and include the following code in view.py.
+
+def setcookie(request):
+    html = HttpResponse("<h1>Welcome to Django Website</h1>")
+    html.set_cookie('Django', 'We are setting a cookie', max_age = None)
+    return html
+
+Now, map this view to urls.py.
+
+path('setcookie', views.setcookie)
+
+
+
+Here, we will write the view for the get cookies.
+view.py
+
+def getcookie(request):
+    show = request.COOKIES['Django?]
+    html = "<center> New Page <br>{0}</center>".format(show)
+    return HttpResponse(html)
+
+urls.py
+
+path('getcookie', views.showcookie),
+
+Output:
+
+Explanation of the above code -
+In the above view.py, we have used the HttpResponse method that displays any output to the screen.
+We define the cookie in the separate functions - The first function will set the cookies to the user's computer and second function with the variable in the COOKIE appended to it for displaying or receiving the cookie that has been set.
+Now, run the server using the following command.
+
+python manage.py runserver
+
+Updating Cookie
+We can modify a defined cookie. Let's see the following example.
+
+def updating_cookie(request):
+    html = HttpResponse("We are updating  the cookie which is set before")
+    html.set_cookie('JavaTpoint','Updated Successfully')
+    return html
+
+After the updating the cookie, we need to append it into the urls.py file.
+
+path('updating_cookie', views.updating_cookie),
+
+Now, we run the server and visit the below page.
+Output:
+
+Instead of using Httpresponse we can use the redirect function to update a cookie. Yet, here we will use the set cookies function.
+Now, we will add the update using the render function.
+Delete Cookie in Django
+Now, we will learn how to delete the cookies already placed in the user's computer.
+As we know that there is an optional parameter max_age that deleted the cookie session by default.
+To delete the cookie, we add the following code in views.py file.
+
+def deleting_cookie(request):
+    html = HttpResponse("Deleting the cookie which is set")
+    html.delete_cookie('JavaTpoint','Updated Successfully')
+    return html
+
+Now, we add this view to urls.py file.
+
+path('delete_cookie',views.deleting_cookie),
+
+Output:
+
+Difference Approach to Handle Cookie
+The 'expires' attribute can be used for handling the end of cookie session. We can modify the expire function and know how to delete a cookie. Let's see the following syntax.
+
+response.cookies['cookie_name']['expires'] = datetime.today() + timedelta(days= number_of_days)
+
+Read Cookie from Request
+Cookies are sent with the user request by the website. As a result, the server obtains a cookie with each request. Django provides the easy way to access the cookie.
+
+Using request.COOKIES[]
+
+We have discussed in above section.
+
+Using request.COOKIES.get()
+
+Using this method on the request object, we can easily get the particular value. Below is the syntax of this method.
+
+COOKIES.get('cookie_name', 'value')
+
+
+
+We will need to redirect(), so import it now.
+We will need to redirect(), so import it now.
+Code for cookies
+
+def setcookie(request):
+    if request.COOKIES.get('visits') is not None:
+        value = request.COOKIES.get('visits')
+        text = request.COOKIES.get('JavaTpoint')
+        html = HttpResponse("<center><h1>{0}<br>You have requested this page {1} times</h1></center>".format(text, value))
+        html.set_cookie('visits', int(value) + 1)
+        return html
+    else:
+        return redirect('/setcookie')
+
+Output
+
+Django Cookie Enable and Disable
+The settings Python file defines which cookies are enabled and disabled. The session variable is available in the settings that are used to handle session cookies. We can enable and disable the cookie manually by setting, updating, and deleting cookies. There are session-level cookies that can be set to true if necessary.
+By default, they are set to FALSE. Cookies are encrypted, so these are quite secure. The session cookie can be used to track how many times a user visits a specific website.
+Important Points of Cookies
+Below are some important points that you should keep in mind.
+
+Cookies are never used to store sensitive data such as passwords. The reason is that the cookies store in a plain text file, and anyone can read that sensitive data.
+Many browsers don't allow saving cookies more than 4kb of data.
+Let' suppose a website put 10 cookies of 4kb in size. Once the cookie is placed in the user's computer, it will be sent to the server with each request. Every time the user requests the server, it must send an additional 40kb of data.
+The user can disable the feature of accepting cookies or delete the cookie permanently altogether.
+
+An Issue with Django Cookie Security
+Along with the advantages of cookies, there are disadvantages of the cookies.
+
+Cookie data can be misused.
+We can easily track the user.
+The client may delete the cookies.
+
+Limitation of the Django Cookies
+
+The cookie can store the 4096 bytes of Data.
+Both the browser and server can store cookies.
+
+Conclusion
+We have discussed all the important concept of the Django cookies and how we can use them into our projects. We have defined how to set, get, update and delete the cookies. The cookies help to identify the user and quick retrieval of data. The system doesn't always go to the database, and search for it, return the result to the user.
+
+
+Next Topicagg() function in Python
+
+
+
+
+← prev
+next →
+
+
+
+

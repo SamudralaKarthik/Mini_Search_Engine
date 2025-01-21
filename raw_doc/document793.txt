@@ -1,0 +1,498 @@
+
+
+
+
+next →
+← prev
+
+Age Calculator using PyQt5 in Python
+In this post, we'll look at how PyQt5 may be used to develop an age calculator.
+A fantastic coding project idea for beginners is the age calculator. You should attempt creating an age calculator if you are new to programming. It is a programme that asks for the user's date of birth as an input and returns the user's age as an output. So, if you're interested in learning how to create an age calculator in Python, this post is for you. We'll introduce you to a Python tutorial for building an age calculator in this post.
+Python bindings for Qt v5 are part of the cross-platform PyQt5 GUI toolkit. The capabilities and simplicity offered by this toolkit make it quite simple to create an interactive desktop application. It must be installed using the following command.
+
+pip install PyQt5
+
+This project is to calculate the present age of a person, which can be used to determine the age by entering their certain details like date of birth and present date.
+Some basic PyQt5 requirements before starting the project :
+In Python, using a virtual environment to handle dependencies is the most effective method. Simply said, a virtual environment is a local directory that has the libraries needed for a particular project. In contrast, a system-wide installation of those libraries would have an impact on all of your projects.
+Every GUI programme must include precisely one instance of QApplication,this is a requirement of Qt. The import line must be run before several components of Qt will function. Therefore, it will be required in almost every PyQt programme you create.
+A PyQt app's buttons, labels, windows, dialogue boxes, progress bars, etc. are all examples of widgets. Widgets are frequently nested, just like HTML components. A button, for instance, may be found in a window, which itself may include a label.
+Support for custom styles is one of Qt's advantages. You may alter the appearance and feel of your application using a variety of ways.
+In addition to the aforementioned, style sheets allow you to alter the appearance of your application. This is the CSS equivalent in Qt.
+Steps for Implementing the GUI :
+
+Make a head label for the game's title and set its attributes
+Create a label for the date of birth and a QDateEdit object beneath it to receive the date and set its attributes.
+Build a label with a provided date underneath it, then create a QDateEdit object to accept the updated date and modify its attributes.
+Design a push button that, when pressed, calculates the date.
+Create a result label to display the outcome, such as the computed age.
+
+Implementation on the back end :
+
+When the date changes, add an action to the initial QDateEdit.
+Within the first date edit action, obtain the second date edit's date and set it as the first date edit's maximum date.
+When the date changes, add an action to the second date update.
+Within the second date edit action, obtain the first date edit's date and set it as the second date edit's minimum date.
+Alter the date adjustments such that the first date should be earlier than the second date.
+Make the push button do something.
+Using the result label, compute the difference between the dates from the two date modifications and display it on the screen to indicate the difference.
+
+Walking through the code :
+
+# importing all the required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+First of all, we will be importing all the required libraries into our program for efficacy. The libraries imported include QtWidgets, QtCore, QtGui and sys.
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# setting the title of our window
+		self.setWindowTitle("Age calculator")
+
+		# setting the geometry of our window
+		self.setGeometry(100, 100, 500, 400)
+
+		# call the UiComponents func
+		self.UiComponents()
+
+		# displaying the various widgets
+		self.show()
+
+Then, we will create a new class for the new window and initialize its properties. Then, we will set the title of the window to "Age Calculator" and after that we will set its geometry. After that, we will display all the widgets present in the window.
+
+# function for the components being defined
+	def UiComponents(self):
+
+		# defining the heading label
+		heading = QLabel("Age Calculator", self)
+
+		# set the geometry for the heading
+		heading.setGeometry(100, 10, 300, 60)
+
+		# selecting the font 
+		font = QFont('Times', 14)
+		font.setBold(True)
+		font.setItalic(True)
+		font.setUnderline(True)
+
+		# setting the font for the head
+		heading.setFont(font)
+
+		# adjusting the alignment for the head
+		heading.setAlignment(Qt.AlignCenter)
+		heading.setStyleSheet("color : green;")
+
+Next, we will create a function to introduce all the components in our window. Then, we will create a new heading label and will set its geometry. After this, we will introduce the font properties and set the font to the label respectively, concluding it by setting alignment and the colour for the heading label.
+
+# Date of the birth label
+		dateOfBirth = QLabel("Date of Birth", self)
+
+		# set the geometry for dateOfBirth label
+		dateOfBirth.setGeometry(0, 80, 250, 50)
+
+		# set the alignment and the font for the dateOfBirth label
+		dateOfBirth.setAlignment(Qt.AlignCenter)
+		dateOfBirth.setFont(QFont('Times', 10))
+
+Then, we will create a new dateOfBirth label for taking the date of birth of the user and will set its geometry. After this, we will introduce the font properties and set the font to the label respectively, concluding it by setting alignment for the dateOfBirth label.
+
+# label for the present date
+		present = QLabel("Given Date", self)
+
+		# setting the present label's geometry
+		present.setGeometry(300, 80, 250, 50)
+
+		# setting the alignment and font for the present label
+		present.setAlignment(Qt.AlignCenter)
+		present.setFont(QFont('Times', 10))
+
+Then, we will create a new present label for taking in the current date from the user and will set its geometry. After this, we conclude it by setting alignment and the font style for the present label.
+
+# Initializing a QDateEdit to get the date of birth
+		self.frst = QDateEdit(self)
+
+		# setting the geometry of frst
+		self.frst.setGeometry(25, 130, 200, 50)
+
+		# setting the font and the alignment for frst
+		self.frst.setAlignment(Qt.AlignCenter)
+		self.frst.setFont(QFont('Arial', 9))
+
+		# add actions in the frst
+		# with the change in date
+		self.frst.dateChanged.connect(self.frst_action)
+
+Next, we initialize the QDateEdit and will edit the first date. Then, we will create a new frst label for editing the first date by the user and will set its geometry. After this, we conclude it by setting its alignment, font style and will add action to the label to react according to the change in the date.
+
+# create a new QDateEdit to get the present date
+		self.scnd = QDateEdit(self)
+
+		# set the geometry of scnd
+		self.scnd.setGeometry(275, 130, 200, 50)
+
+		# set the font and the alignment of scnd
+		self.scnd.setAlignment(Qt.AlignCenter)
+		self.scnd.setFont(QFont('Arial', 9))
+
+		# add actions in the scnd
+		# with the change in date
+		self.scnd.dateChanged.connect(self.scnd_action)
+
+Next, we initialize the QDateEdit and will edit the date. Then, we will create a new scnd label for editing the date by the user and will set its geometry. After this, we conclude it by setting its alignment, font style and will add action to the label to react according to the change in the date.
+
+# creating a new push button for calculating age
+		calculates = QPushButton("Calculate", self)
+
+		# set the geometry for the push button
+		calculates.setGeometry(200, 210, 100, 40)
+
+		# set the color effect for the push button
+		clr = QGraphicsColorizeEffect()
+		clr.setColor(Qt.darkGreen)
+		calculates.setGraphicsEffect(clr)
+
+		# add action to the calculation button created
+		calculates.clicked.connect(self.find_age)
+
+Then, we will create a new push button for starting to calculate the age of the user. The push button will have the name calculate. Then, we will set its geometry and after that its colour will be along with the graphic effects. Lastly, we will also add the action that needs to be taken after the button will be pressed.
+
+# Adding a new result label to display the result
+		self.result = QLabel(self)
+
+		# set the geometry for result label
+		self.result.setGeometry(50, 280, 400, 80)
+
+		# set the style sheet and the font for result label
+		self.result.setAlignment(Qt.AlignCenter)
+		self.result.setFont(QFont('Times', 12))
+
+		# Updating the stylesheet details
+		self.result.setStyleSheet("QLabel"
+								"{"
+								"border : 2px solid black;"
+								"background : lightgrey;"
+								"}")
+
+		# converting label into a multi line label
+		self.result.setWordWrap(True)
+
+Then, we will create a new result label for displaying the result of calculated age to the user and will set its geometry. After this, we conclude it by setting its alignment and the font style for the result label. Next, we will update the style sheet for the same by mentioning all the properties and their values like border, background, etc. Lastly, we will convert the single line label to multi line label.
+
+# setting the default dates to the frst and scnd
+		self.frst.setDate(QDate(2000, 1, 1))
+		self.scnd.setDate(QDate(2020, 1, 1))
+
+
+	# func called with the frst date edit
+	def frst_action(self):
+
+		# getting the scnd date
+		date = self.scnd.date()
+
+		# setting the date to maximum in frst
+		self.frst.setMaximumDate(date)
+
+	# func called with the frst date edit
+	def scnd_action(self):
+
+		# getting the frst date
+		date = self.frst.date()
+
+		# setting the date to maximum in frst
+		self.scnd.setMinimumDate(date)
+
+After setting the default dates for frst and scnd labels, we will call a function for making changes to first date and setting maximum date for it. Then, we will call a function for making changes to second date and setting maximum date for it.
+
+# func to be called by the push button on being pressed
+	def find_age(self):
+
+		# getting the frst age
+		get_Qdate1 = self.frst.date()
+		brth_year = get_Qdate1.year()
+		brth_month = get_Qdate1.month()
+		brth_day = get_Qdate1.day()
+
+		# getting the scnd age
+		get_Qdate2 = self.scnd.date()
+		present_year = get_Qdate2.year()
+		present_month = get_Qdate2.month()
+		present_day = get_Qdate2.day()
+
+Next, we will create a function to be called when the push button that we created earlier will be pressed. First, we will take the first set date that is the birth date in the format day, month and year. Then, we will take the second set date that is the present date in the format day, month and year.
+
+# if the birth date is greater than the 
+           # present brth_month
+		# then don't count the current month and then 30 should                    
+           # be added to the date in order to subtract that date 
+           # and take the remaining days
+		month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+		if (brth_day > present_day):
+			present_month = present_month - 1
+			present_day = present_day + month[brth_month - 1]
+
+		# if the month of birth exceeds the present month, then
+		# don't count current year and addition of 12 should 
+           # be done to the month so that we can afterwards
+           # subtract and calculate the difference
+		if (brth_month > present_month):
+			present_year = present_year - 1
+			present_month = present_month + 12
+
+Then, we will use the if-else condition to calculate the accurate result. Don't count the current month if the birth date exceeds the specified brth_month, instead, add 30 to the date, deduct the birth date from that number, and then count the days that are left over. Otherwise, if the birth month is greater than the current month, don't count the current year and add 12 to the month instead so that we can later deduct and figure out the difference.
+
+calc_day = present_day - brth_day
+		calc_month = present_month - brth_month
+		calc_year = present_year - brth_year
+
+		# set the text got, to the result
+		self.result.setText(str(calc_day) + " Day(s), " + str(calc_month)
+							+ " Month(s), " + str(calc_year) + " Year(s)")
+
+Then, we will calculate the number of days, months and years between the birth and the present date. That will be done by subtracting the day of birth from the present day, subtracting the month of birth from the present month and subtracting the year of birth from the present year. Then, we will display this result in the result label in the form such as we get n day/days, n month/months and n year/years as the actual age of the user. 
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the created Window
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Finally, we will be creating the pyqt5 application by creating a base. Then, we will create an instance of that window where our application will be displayed or run. And finally, we will start the execution of our application by exiting the base.
+The complete code :
+The following is the complete code that will be used to create an age calculator:
+
+# Python program to create an Age Calculator using PyQt5
+# importing all the required libraries
+from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import sys
+
+
+class Window(QMainWindow):
+
+	def __init__(self):
+		super().__init__()
+
+		# setting the title of our window
+		self.setWindowTitle("Age calculator")
+
+		# setting the geometry of our window
+		self.setGeometry(100, 100, 500, 400)
+
+		# call the UiComponents func
+		self.UiComponents()
+
+		# displaying the various widgets
+		self.show()
+
+	# function for the components being defined
+	def UiComponents(self):
+
+		# defining the heading label
+		heading = QLabel("Age Calculator", self)
+
+		# set the geometry for the heading
+		heading.setGeometry(100, 10, 300, 60)
+
+		# selecting the font 
+		font = QFont('Times', 14)
+		font.setBold(True)
+		font.setItalic(True)
+		font.setUnderline(True)
+
+		# setting the font for the head
+		heading.setFont(font)
+
+		# adjusting the alignment for the head
+		heading.setAlignment(Qt.AlignCenter)
+		heading.setStyleSheet("color : green;")
+
+
+		# Date of the birth label
+		dateOfBirth = QLabel("Date of Birth", self)
+
+		# set the geometry for dateOfBirth label
+		dateOfBirth.setGeometry(0, 80, 250, 50)
+
+		# set the alignment and the font for the dateOfBirth label
+		dateOfBirth.setAlignment(Qt.AlignCenter)
+		dateOfBirth.setFont(QFont('Times', 10))
+
+		# label for the present date
+		present = QLabel("Given Date", self)
+
+		# setting the present label's geometry
+		present.setGeometry(300, 80, 250, 50)
+
+		# setting the alignment and font for the present label
+		present.setAlignment(Qt.AlignCenter)
+		present.setFont(QFont('Times', 10))
+
+		# Initializing a QDateEdit to get the date of birth
+		self.frst = QDateEdit(self)
+
+		# setting the geometry of frst
+		self.frst.setGeometry(25, 130, 200, 50)
+
+		# setting the font and the alignment for frst
+		self.frst.setAlignment(Qt.AlignCenter)
+		self.frst.setFont(QFont('Arial', 9))
+
+		# add actions in the frst
+		# with the change in date
+		self.frst.dateChanged.connect(self.frst_action)
+
+		# create a new QDateEdit to get the present date
+		self.scnd = QDateEdit(self)
+
+		# set the geometry of scnd
+		self.scnd.setGeometry(275, 130, 200, 50)
+
+		# set the font and the alignment of scnd
+		self.scnd.setAlignment(Qt.AlignCenter)
+		self.scnd.setFont(QFont('Arial', 9))
+
+		# add actions in the scnd
+		# with the change in date
+		self.scnd.dateChanged.connect(self.scnd_action)
+
+		# creating a new push button for calculating age
+		calculates = QPushButton("Calculate", self)
+
+		# set the geometry for the push button
+		calculates.setGeometry(200, 210, 100, 40)
+
+		# set the color effect for the push button
+		clr = QGraphicsColorizeEffect()
+		clr.setColor(Qt.darkGreen)
+		calculates.setGraphicsEffect(clr)
+
+		# add action to the calculation button created
+		calculates.clicked.connect(self.find_age)
+
+		# Adding a new result label to display the result
+		self.result = QLabel(self)
+
+		# set the geometry for result label
+		self.result.setGeometry(50, 280, 400, 80)
+
+		# set the style sheet and the font for result label
+		self.result.setAlignment(Qt.AlignCenter)
+		self.result.setFont(QFont('Times', 12))
+
+		# Updating the stylesheet details
+		self.result.setStyleSheet("QLabel"
+								"{"
+								"border : 2px solid black;"
+								"background : lightgrey;"
+								"}")
+
+		# converting label into a multi line label
+		self.result.setWordWrap(True)
+
+		# setting the dates to the frst and scnd
+		self.frst.setDate(QDate(2000, 1, 1))
+		self.scnd.setDate(QDate(2020, 1, 1))
+
+
+	# func called with the frst date edit
+	def frst_action(self):
+
+		# getting the scnd date
+		date = self.scnd.date()
+
+		# setting the date to maximum in frst
+		self.frst.setMaximumDate(date)
+
+	# func called with the frst date edit
+	def scnd_action(self):
+
+		# getting the frst date
+		date = self.frst.date()
+
+		# setting the date to maximum in frst
+		self.scnd.setMinimumDate(date)
+
+
+	# func to be called by the push button on being pressed
+	def find_age(self):
+
+		# getting the frst age
+		get_Qdate1 = self.frst.date()
+		brth_year = get_Qdate1.year()
+		brth_month = get_Qdate1.month()
+		brth_day = get_Qdate1.day()
+
+		# getting the scnd age
+		get_Qdate2 = self.scnd.date()
+		present_year = get_Qdate2.year()
+		present_month = get_Qdate2.month()
+		present_day = get_Qdate2.day()
+
+		# if the birth date is greater than the 
+           # present brth_month
+		# then don't count the current month and then 30 should                    
+           # be added to the date in order to subtract that date 
+           # and take the remaining days
+		month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+		if (brth_day > present_day):
+			present_month = present_month - 1
+			present_day = present_day + month[brth_month - 1]
+
+		# if the month of birth exceeds the present month, then
+		# don't count current year and addition of 12 should 
+           # be done to the month so that we can afterwards
+           # subtract and calculate the difference
+		if (brth_month > present_month):
+			present_year = present_year - 1
+			present_month = present_month + 12
+
+		# calculating the day, month and year
+		calc_day = present_day - brth_day
+		calc_month = present_month - brth_month
+		calc_year = present_year - brth_year
+
+		# set the text got, to the result
+		self.result.setText(str(calc_day) + " Day(s), " + str(calc_month)
+							+ " Month(s), " + str(calc_year) + " Year(s)")
+
+
+
+# creating the pyqt5 application
+Base = QApplication(sys.argv)
+
+# creating an instance of the created Window
+window = Window()
+
+# starting the application
+sys.exit(Base.exec())
+
+Output:
+The output of the above mentioned code is attached here in the form of a screenshot.
+
+
+
+Next TopicCreate a Table using PyQt5 in Python
+
+
+
+
+← prev
+next →
+
+
+
+

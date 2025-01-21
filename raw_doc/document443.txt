@@ -1,0 +1,430 @@
+
+
+
+
+next →
+← prev
+
+Python fbchat library
+The power of a programming language like Python comes because of the wide range of modules and libraries it offers to its users. This time we are going to explore one of those. There might be one time or another when every one of us has a wish of the message (or spamming) our Facebook friend. Being able to automate activities and making supporting bots in Facebook messenger appears to be interesting. In the following tutorial, we will understand how we can connect in Facebook messenger using the Python programming language and perform a variety of mind-blowing things.
+This statement implies we will perform the same GET/POST requests and trick Facebook into thinking it is accessing the website normally. We will need a Python library known as fbchat that allows programmers to emulate the browser for this operation. Therefore, this Application Programming Interface (API) is not official, and it does not require any API key. However, it requires the credentials of the Facebook account.
+So, let's get started.
+An Introduction to the Python fbchat library
+The fbchat library in the Python programming language utilizes the e-mail ID and password in order to communicate with the Facebook server. This statement means that we should always store the password in a separate file if someone is sneaking into it while writing the code. We should also make sure that the access control of the file is appropriately restrictive.
+In order to install the fbchat library, we will be using the pip installer following the command shown below:
+Syntax:
+
+$ pip3 install fbchat
+
+In order to verify the library is installed properly, we can create a new file and add the import statement to see if it returns any errors or not.
+File: verify.py
+
+import fbchat
+
+Now, save the Python file and run the execution command using the command prompt:
+Syntax:
+
+$ python verify.py
+
+If the above Python file does not raise any import error, we are good to go and head onto the Facebook messenger bot building procedure. However, if it does raise an exception, it is recommended to reinstall the library and refer to its official documentation.
+Now, let us understand the basics of the fbchat library.
+Logging In
+We can simply create an instance of the Client class of the fbchat library. If we have two-factor authentication enabled, we need to type the code in the terminal prompt (In case we want to supply the code in another fashion, we can overwrite the Client.on2FACode function.
+Let us now see the same in the following syntax:
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of the Facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of the Client class
+clientObj = Client(username, password)
+
+Explanation:
+In the above snippet of code, we have imported the Client class from the fbchat library along with the functions from fbchat.models. We have defined the username and password of the Facebook account. At last, we have created an object of the Client class specifying the username and password as its parameters which allows us to access the Facebook account.
+The username and password provided above only demonstrate the working of the Client class and do not serve the real purpose. However, replacing the variable strings with the actual e-mail ID and password is required, respectively.
+The incorrect username and password may lead to an exception while connecting to the Facebook account.
+Throughout the code, if we would like to check if we are still logged in, we can use the isLoggedIn() function of the Client class.
+We can use the login() function of the Client class in order to log in to the Facebook account.
+Let us consider the following example where we want to log in again if logged out.
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of the Facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of the Client class
+clientObj = Client(username, password)
+
+# checking if we are logged in or not
+if not clientObj.isLoggedIn():
+    # logging in using the login() function
+    clientObj.login(username, password)
+
+Explanation:
+In the above snippet of code, we have used the if statement to check if we are logged in to the Facebook account or not using the isLoggedIn() function. We have also used the login() function specifying the username and password to log in again if we are logged out.
+Once we are done utilizing the client and want to securely logout, we will use the logout() function.
+The syntax for the same is shown below:
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of the Facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of the Client class
+clientObj = Client(username, password)
+
+# logging out
+clientObj.logout()
+
+Explanation:
+In the above snippet of code, we have used the logout() function of the Client class along with the object of the Client in order to log out.
+Understanding Threads
+A Thread can be considered two things: A Messenger group chat or a single Facebook user.
+ThreadType is an enumerator with two values. The first value is USER, and the other is GROUP. These will specify whether the thread is a single-user or group chat. This is required for multiple functions of the fbchat library as Facebook can differentiate between these two internally.
+We can search for group chat and find their ID using the searchForGroups method of the Client class. We can also search for a user using the searchForUsers method. We will look into it later in this tutorial.
+We can retrieve our User ID with the help of the uid method of the Client class.
+We can also retrieve the Group chat ID. However, the procedure for the same is quite trivial. As we only have to navigate to https://www.facebook.com/messages/, we will then have to click on the group we want to find the ID of and then read ID from the address bar. The URL will appear something like this: https://www.facebook.com/messages/t/123456789, where 123456789 would be the ID of the group chat.
+We can apply the same method to several user accounts, though we will just see that URL if they have set a custom URL.
+Let us consider the following snippet of code demonstrating the utilization of the thread IDs and the thread types.
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of the Facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of the Client class
+clientObj = Client(username, password)
+
+# sending some message to user and group
+clientObj.send(Message(text = 'some message'), thread_id = '<user_ID>', thread_type = ThreadType.USER)
+clientObj.send(Message(text = 'some message'), thread_id = '<group_ID>', thread_type = ThreadType.GROUP)
+
+# logging out
+clientObj.logout()
+
+Explanation:
+In the above snippet of code, we have started importing the required library and providing the username and password. We have then created an object of the Client class. Later, we used the send() function specifying the text message along with the thread ID and the thread type as USER and GROUP. At last, we have logged out using the logout() function.
+We can observe that we have provided the thread ID and the thread type to initiate the function. However, there are some functions that do not require a thread type at all. One such function can be changeThreadColor. In such a case, we have to provide the thread ID.
+Let us consider the following example demonstrating the same:
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of the Facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of the Client class
+clientObj = Client(username, password)
+
+# changing the Thread Colors
+clientObj.changeThreadColor(ThreadColor.BRIGHT_TURQUOISE, thread_id = '<user_ID>')
+clientObj.changeThreadColor(ThreadColor.DARK_TANGERINE, thread_id = '<group_ID>')
+
+# logging out
+clientObj.logout()
+
+Explanation:
+In the above snippet of code, we have imported the required modules and provided the username and password. We have then created an object of the Client class. We have then used the changeThreadColor function of the Client class in order to change the colors of the thread. We have specified the Thread color and the thread ID within the function. At last, we have logged out using the logout() function.
+Understanding the Message IDs
+Every message we send on Facebook consists of a unique ID, and every activity we perform in a thread, such as changing a nickname or adding a person, has a unique ID.
+Some of the functions of the fbchat library need these IDs, like reactToMessage, and some of them provide this ID, like sendMessage.
+Let us consider the following example demonstrating the use of these functions.
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of the Facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of the Client class
+clientObj = Client(username, password)
+
+# getting the message ID
+messageID = clientObj.send(Message(text = 'message'), thread_id = clientObj.uid, thread_type = '<user_ID>')
+
+# using the message ID to react to message
+clientObj.reactToMessage(messageID, MessageReaction.LOVE)
+
+# logging out
+clientObj.logout()
+
+Explanation:
+In the above snippet of code, we have imported the required methods and provided the username and password. We have then created an object of the Client class. We have then retrieved the message ID using the send() function. We have then used the message ID in order to react to the message with the help of the reactToMessage(), where we have specified the messageID along with the MessageReaction as LOVE emoji.
+Interaction with Threads
+The fbchat library offers different functions in order for us to interact with threads.
+Most functionality works on all threads, though some things, such as adding users to and removing users from a group chat, logically work on the group chats only.
+Some of the functions used for interacting with threads are described in the following table:
+
+
+S. No.
+Function
+Description
+
+
+1
+send
+This function is used to send messages to a user or a group.
+
+
+2
+sendLocalImage
+This function is used to send an Image located locally.
+
+
+3
+sendRemoteImage
+This function is used to download an Image from URL and send it.
+
+
+4
+addUsersToGroup
+This function is used to add one or many users to the group.
+
+
+5
+removeUserFromGroup
+This function is used to remove a user from the group.
+
+
+6
+changeNickname
+This function is used to change the nickname of the user.
+
+
+7
+changeThreadTitle
+This function helps in changing the title of the Thread.
+
+
+8
+setTypingStatus
+This function helps in setting up the status of Typing either to TYPING or STOPPED.
+
+
+9
+changeThreadColor
+This function is used to change the color of the Thread.
+
+
+10
+changeThreadEmoji
+This function helps in changing the emoji in the Thread.
+
+
+11
+reactToMessage
+This function helps in reacting to a message.
+
+
+Let us consider the following example demonstrating the use of the above function in interacting with threads.
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of Client class
+clientObj = Client(username, password)
+
+# specifying the thread ID and type
+threadID = "1234567890"
+threadType = ThreadType.GROUP
+
+# sending a message to the thread
+clientObj.send(
+    Message(text = "some text message"),
+    thread_id = threadID,
+    thread_type = threadType
+    )
+
+# sending the emoji `👍`
+clientObj.send(
+    Message(text = "👍", emoji_size = EmojiSize.LARGE),
+    thread_id = threadID,
+    thread_type = threadType
+)
+
+# sending the sticker with ID `767334476626295`
+clientObj.send(
+    Message(sticker = Sticker("767334476626295")),
+    thread_id = threadID,
+    thread_type = threadType
+)
+
+# sending a message with a mention
+clientObj.send(
+    Message(
+        text = "An example of @mention",
+        mentions = [Mention(
+            threadID,
+            offset = 10,
+            length = 8
+            )]),
+    thread_id = threadID,
+    thread_type = threadType
+)
+
+# sending the image located at `<path_to_image_file>`
+clientObj.sendLocalImage(
+    "<path_to_image_file>",
+    message = Message(text = "This is a local image"),
+    thread_id = threadID,
+    thread_type = threadType
+)
+
+# downloading the image at the URL `<url_to_image_file>`, and then sending it
+clientObj.sendRemoteImage(
+    "<url_to_image_file>",
+    message = Message(text = "This is a remote image"),
+    thread_id = threadID,
+    thread_type = threadType
+)
+
+# Only do these actions if the thread is a group
+if threadType == ThreadType.GROUP:
+    # removing the user with ID `<user_id>` from the thread
+    clientObj.removeUserFromGroup("<user_id>", thread_id = threadID)
+
+    # adding the user with ID `<user_id>` to the thread
+    clientObj.addUsersToGroup("<user_id>", thread_id = threadID)
+
+    # adding the users with IDs `<First_user_id>`, `<Second_user_id>` and `<Third_user_id>` to the thread
+    clientObj.addUsersToGroup(
+        ["<First_user_id>", "<Second_user_id>", "<Third_user_id>"], thread_id = threadID
+    )
+
+# changing the nickname of the user `<user_id>` to `<new_nickname>`
+clientObj.changeNickname(
+    "<new_nickname>", "<user_id>", thread_id = threadID, thread_type = threadType
+)
+
+# changing the title of the thread to `<title>`
+clientObj.changeThreadTitle("<some_title>", thread_id = threadID, thread_type = threadType)
+
+# setting the typing status of the thread to `TYPING`
+clientObj.setTypingStatus(
+    TypingStatus.TYPING,
+    thread_id = threadID,
+    thread_type = threadType
+)
+
+# changing the thread color to `RADICAL_RED`
+clientObj.changeThreadColor(ThreadColor.RADICAL_RED, thread_id = threadID)
+
+# changing the thread emoji to `👍`
+clientObj.changeThreadEmoji("👍", thread_id = threadID)
+
+# reacting to a message with a 😍 emoji
+clientObj.reactToMessage("<messageID>", MessageReaction.LOVE)
+
+Explanation:
+In the above snippet of code, we have imported the required modules and provided the username and password. We created an instance of the Client class and specified the Thread ID and type. We have then used different functions in order to interact with the thread ranging from sending a text message and emoji to changing the Thread color and emoji. Since we are working on a GROUP chat, we have also used the operations involving adding and removing the Users from the group. We have also used the functions for sending the image available locally as well as on a specific URL.
+Now, let us understand how we can fetch information using the fbchat library.
+Fetching Information
+We can utilize the fbchat library in order to fetch basic information regarding the users, such as their usernames, profile pictures, thread names, and user IDs.
+We can retrieve a User's ID using the searchForUsers function of the Client class. Let us consider the following example that demonstrates the working of the functions that allows us to fetch information of the Users.
+Example:
+
+# importing the required modules
+from fbchat import Client
+from fbchat.models import *
+
+# input username and password of facebook account
+username = "example@website.com"
+password = "password2email"
+
+# creating an object of Client class
+clientObj = Client(username, password)
+
+# retrieving the User IDs
+the_users = clientObj.searchForUsers('<name_of_user>')
+the_user = the_users[0]
+# printing the information of the User
+print("User ID: {}".format(the_user.uid))
+print("Name of the User: {}".format(the_user.name))
+print("Profile picture URL of the User: {}".format(the_user.photo))
+print("Main URL of the URL: {}".format(the_user.url))
+
+Explanation:
+In the above snippet of code, we have imported the required modules and created an instance of the Client class. We have then used the searchForUsers function in order to retrieve the User ID. We have then stored the value of the first user in a variable. At last, we have printed the information of the user using the uid, name, photo, url functions.
+Since this example utilizes the search functions of Facebook, we do not have to specify the complete name; first names will usually be enough.
+Let us now understand the Sessions.
+Understanding Sessions
+The fbchat library offers the functions in order to retrieve and set the session cookies. This function will allow us to store the session cookies in a separate file so that we do not have to log in every time we begin the script.
+We can retrieve the cookies using the getSession function of the Client class. The syntax for the same is shown below:
+Syntax:
+
+sessionCookies = clientObj.getSession()
+
+Then we can use the setSession function of the Client class in order to set the session. The syntax for the same is shown below:
+Syntax:
+
+clientObj.setSession(sessionCookies)
+
+Or we can set the session_cookies on the initial login. (If the session cookies are invalid, the email and password will be used to log in instead):
+Syntax:
+
+clientObj = Client('<email_ID>', '<password>', session_cookies = sessionCookies)
+
+Warning: The session cookies can be as valuable as the password, so store them with equal care.
+Listening and Events
+The fbchat library also offers listening functions like the listen function of the Client class that we need to define what should be executed when certain events occur. By default, (most) events will just be a logging.info statement, meaning it will simply print details to the console when an event occurs.
+Note: We can identify the event methods by them on prefix. For example, onMessage.
+We can change the event actions by subclassing the Client and then overwriting the event methods as shown below:
+Syntax:
+
+# creating a subclass of the Client class
+class Custom_Client(Client):
+    def onMessage(self, mid, author_id, message_object, thread_id, thread_type, ts, metadata, msg, **kwargs):
+        # Perform something with message_object here
+        pass
+
+# creating an instance of Custom_Client class
+clientObj = Custom_Client('<email_ID>', '<password>')
+
+Explanation:
+We have defined a subclass of the Client class as Custom_Client in the above syntax. Within the class, we have defined a method as onMessage that accepts multiple parameters like self, mid, author_id, message_object, thread_id, thread_type, ts, metadata, msg, and **kwargs. One can write some functionalities within this method. At last, we have instantiated the Custom_Client class passing the username and password as its arguments.
+The onMessage method can work even when we alter the parameters of the method; however, we have to include **kwargs in it.
+Note: Hence, for both backward and forward compatibility, the API requires us to include **kwargs as the final parameter.
+Further information is provided in the official documentation available at:
+https://fbchat.readthedocs.io/en/stable/intro.html
+
+
+Next TopicArtificial Intelligence in Cybersecurity: Pitting Algorithms vs Algorithms
+
+
+
+
+← prev
+next →
+
+
+
+
